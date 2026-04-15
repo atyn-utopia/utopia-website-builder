@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { COMPANIES } from "@/lib/companies";
 import { isValidMyPhone } from "@/lib/phone";
+import LoadingScreen from "./loading-screen";
 import PhoneField from "./phone-field";
 
 type SubmitResult =
@@ -117,6 +118,8 @@ export default function RsvpForm() {
   }
 
   return (
+    <>
+      {loading && <LoadingScreen label="Sending your invitation" />}
     <form
       onSubmit={onSubmit}
       className="bg-ink-800 border border-gold-500/20 shadow-card p-8 md:p-10 space-y-6"
@@ -211,6 +214,7 @@ export default function RsvpForm() {
         {loading ? "Sending invitation" : "Confirm RSVP"}
       </button>
     </form>
+    </>
   );
 }
 
