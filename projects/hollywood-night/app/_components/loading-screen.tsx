@@ -1,6 +1,27 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+
 export default function LoadingScreen({ label }: { label?: string }) {
-  return (
-    <div className="fixed inset-0 z-[90] flex flex-col items-center justify-center bg-ink-black grain">
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const node = (
+    <div
+      className="z-[90] flex flex-col items-center justify-center bg-ink-black grain"
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        width: "100vw",
+        height: "100dvh",
+      }}
+    >
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -10,15 +31,9 @@ export default function LoadingScreen({ label }: { label?: string }) {
       />
       <div className="relative flex flex-col items-center gap-6">
         <div className="relative w-16 h-16">
-          <span
-            className="absolute inset-0 border-2 border-gold-500/30 rounded-full"
-          />
-          <span
-            className="absolute inset-0 border-2 border-transparent border-t-gold-400 rounded-full animate-[spin_1.2s_linear_infinite]"
-          />
-          <span
-            className="absolute inset-2 border border-gold-500/60 rounded-full"
-          />
+          <span className="absolute inset-0 border-2 border-gold-500/30 rounded-full" />
+          <span className="absolute inset-0 border-2 border-transparent border-t-gold-400 rounded-full animate-[spin_1.2s_linear_infinite]" />
+          <span className="absolute inset-2 border border-gold-500/60 rounded-full" />
           <span className="absolute inset-0 flex items-center justify-center text-gold-400 text-xs">
             ◆
           </span>
@@ -34,4 +49,10 @@ export default function LoadingScreen({ label }: { label?: string }) {
       </div>
     </div>
   );
+
+  // Render through a portal to document.body so ancestors with `transform`
+  // or `will-change: transform` (e.g. the .reveal container) don't become
+  // the containing block for our `position: fixed` overlay.
+  if (!mounted) return node;
+  return createPortal(node, document.body);
 }
