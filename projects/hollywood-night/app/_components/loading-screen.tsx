@@ -11,7 +11,7 @@ export default function LoadingScreen({ label }: { label?: string }) {
 
   const node = (
     <div
-      className="z-[90] flex flex-col items-center justify-center bg-ink-black grain"
+      className="bg-ink-black"
       style={{
         position: "fixed",
         top: 0,
@@ -20,16 +20,33 @@ export default function LoadingScreen({ label }: { label?: string }) {
         bottom: 0,
         width: "100vw",
         height: "100dvh",
+        display: "grid",
+        placeItems: "center",
+        zIndex: 90,
+        margin: 0,
+        padding: 0,
       }}
     >
       <div
-        className="absolute inset-0 pointer-events-none"
+        aria-hidden
         style={{
+          position: "absolute",
+          inset: 0,
+          pointerEvents: "none",
           background:
             "radial-gradient(ellipse 50% 40% at 50% 50%, rgba(212,175,55,0.18) 0%, transparent 70%)",
         }}
       />
-      <div className="relative flex flex-col items-center gap-6">
+      <div
+        style={{
+          position: "relative",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "1.5rem",
+          textAlign: "center",
+        }}
+      >
         <div className="relative w-16 h-16">
           <span className="absolute inset-0 border-2 border-gold-500/30 rounded-full" />
           <span className="absolute inset-0 border-2 border-transparent border-t-gold-400 rounded-full animate-[spin_1.2s_linear_infinite]" />
@@ -38,7 +55,7 @@ export default function LoadingScreen({ label }: { label?: string }) {
             ◆
           </span>
         </div>
-        <div className="text-center">
+        <div>
           <p className="font-display italic text-champagne text-xl md:text-2xl">
             Hollywood Night
           </p>
