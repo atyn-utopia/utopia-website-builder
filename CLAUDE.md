@@ -95,8 +95,11 @@ See `prompts/new-website.md` for the step-by-step new project workflow.
 4. Kagura + Kimmy — run in parallel (both need Nana's output)
    Kagura — propose unique design direction (reviews existing sites, researches inspiration)
    Kimmy — implement technical SEO + i18n + WhatsApp redirect
+   → run pre-review checklist (headings, mobile audit, orphaned text, images, colors)
    → user confirms design
 5. Layla — integration test → GitHub push → Vercel deploy
+6. Product details insertion — insert all products into Supabase (MANDATORY, post-deploy)
+7. Hanabi — generate blog posts + insert into Supabase (MANDATORY, post-deploy)
 
 
 # SEO Rules

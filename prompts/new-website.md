@@ -123,10 +123,50 @@ Layla will:
 3. Deploy to Vercel
 4. Report the live URL
 
+## Step 10 — Insert product details into database (MANDATORY)
+
+After deployment, insert all product/service details into Supabase so the website can pull dynamic product data.
+
+**Inputs needed:**
+- Product list with names, descriptions, prices, image URLs (from `reference-research.md` or `config/products.ts`)
+- Vercel domain (website column value)
+- Supabase service role key (for write access past RLS)
+
+**What to insert:**
+- All core products with: name (per locale), description (per locale), price, image URL, category, sort order
+- All additional/supplementary products/services
+- Follow `docs/PRODUCT-API-GUIDE.md` if available for the exact table schema and insert format
+
+**Verification:**
+- Query the products table filtered by website domain — confirm all products appear
+- Verify product images load from the stored URLs
+
+## Step 11 — Spawn Hanabi (Blog Writer)
+
+Run after deployment. Can be done independently at any time.
+
+**Hanabi** (Blog Writer):
+- Prompt: `agents/hanabi.md` + website domain + brand name + product niche + target languages + Supabase credentials
+
+Hanabi will:
+1. Generate 5-10 SEO-optimized blog article titles relevant to the product niche
+2. Write full articles (800-1500 words each) with proper heading hierarchy (H1→H2→H3→H4→p)
+3. Include real images (Pexels/Unsplash, Asian/Malaysian subjects only), internal backlinks, WhatsApp CTAs
+4. Insert into Supabase (`blog_posts` + `blog_translations` tables) for all supported locales
+5. Run quality checklist per article
+
+**Prerequisites:**
+- Blog route must exist: `app/[locale]/blog/page.tsx` (listing) + `app/[locale]/blog/[slug]/page.tsx` (post)
+- If blog routes don't exist yet, build them before running Hanabi
+- `blog_posts` and `blog_translations` tables must exist in Supabase
+
+**Output:** List of published blog URLs + Supabase row IDs
+
 ## Reusing this system for a new product
 
 To launch a second website (e.g. `wheelchairmalaysia.my`):
 1. Create `projects/wheelchair/` folder
-2. Follow Steps 0–9 with new inputs
+2. Follow Steps 0–11 with new inputs
 3. Cyclops reuses the same Supabase instance — add rows to `phone_numbers` with `website = 'wheelchairmalaysia.my'`
 4. All agent prompts are reusable as-is — just change the inputs
+5. Step 10 (product details) and Step 11 (blog posts) are mandatory — don't skip them
