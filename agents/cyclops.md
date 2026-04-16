@@ -114,3 +114,56 @@ The `lib/getPhoneNumber.ts` query columns MUST exactly match the actual Supabase
 - Query the actual `phone_numbers` table to see the real column names and values
 - Match the code constants to existing data exactly
 - Test the query with `curl` against the Supabase REST API to confirm it returns results
+
+---
+
+## Part 2: Product Details Insertion (MANDATORY — post-deploy)
+
+After the website is deployed, Cyclops must insert all product/service details into Supabase.
+
+### Inputs you will receive
+- Product list from `config/products.ts` or `reference-research.md` (names, descriptions, prices, image URLs, categories)
+- Vercel domain (website column value)
+- Supported locales (for translated product names/descriptions)
+- Supabase service role key (for write access past RLS)
+- `docs/PRODUCT-API-GUIDE.md` if available (for exact table schema)
+
+### Your task
+
+#### 1. Discover the product table schema
+Query the actual Supabase tables to find the product storage schema:
+```
+curl -s "$SUPA_URL/rest/v1/products?select=*&limit=1" -H "apikey: $SERVICE_KEY" -H "Authorization: Bearer $SERVICE_KEY"
+```
+If no `products` table exists, check for `product_details`, `services`, or similar. If none exist, create the table.
+
+#### 2. Insert all products
+For each product (core + additional), insert a row with:
+- `website` — the Vercel deployment domain
+- `name` — product name (per locale if the table supports translations)
+- `description` — product description (per locale)
+- `price` / `price_plain` / `price_with_cover` — pricing in MYR
+- `image_url` — real image URL (wixstatic or similar, never placeholder)
+- `category` — e.g. "chair", "table", "equipment", "additional"
+- `sort_order` — display order
+- `is_active` — true
+
+#### 3. Verify insertion
+After inserting, query back all rows for the website domain and confirm:
+- All products appear (count matches expected)
+- All image URLs are valid
+- All prices are correct
+- All locales have translations (if applicable)
+
+#### 4. Output
+Return:
+- Count of products inserted
+- SQL or curl commands used (for audit trail)
+- Verification query results
+
+### Rules
+- Always query the actual table schema before inserting — never assume column names
+- Use the service role key for writes (anon key is blocked by RLS)
+- If `docs/PRODUCT-API-GUIDE.md` exists, follow its exact format
+- Every product must have a real image URL — never use placeholders
+- Verify after insertion — never mark as complete without confirming rows exist

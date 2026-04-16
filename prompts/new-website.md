@@ -110,43 +110,30 @@ Present the website to the user. Do not proceed until the user confirms:
 - Layout matches expectations
 - Design and styling are approved
 
-## Step 9 — Spawn Layla (QA & Deploy)
+## Step 9 — Insert product details into database (MANDATORY — before deploy)
 
-Only run after user confirms the design in Step 8.
+Spawn **Cyclops** again for product insertion. Must complete BEFORE deployment so products are live on launch.
 
-**Layla** (QA & Deployment Specialist):
-- Prompt: `agents/layla.md` + completed project + Supabase credentials + GitHub repo URL + Vercel details
+**Cyclops** (Database Engineer — Part 2: Product Insertion):
+- Prompt: `agents/cyclops.md` (Part 2 section) + product list from `config/products.ts` or `reference-research.md` + Vercel domain + Supabase service role key
+- If `docs/PRODUCT-API-GUIDE.md` exists, follow its exact schema
 
-Layla will:
-1. Verify phone number system is connected and working
-2. Push code to GitHub
-3. Deploy to Vercel
-4. Report the live URL
+Cyclops will:
+1. Query existing product table schema in Supabase
+2. Insert all core + additional products with names (per locale), descriptions, prices, image URLs, categories
+3. Verify all rows exist and images load
 
-## Step 10 — Insert product details into database (MANDATORY)
+## Step 10 — Spawn Hanabi (Blog Writer) (MANDATORY — before deploy)
 
-After deployment, insert all product/service details into Supabase so the website can pull dynamic product data.
+Must complete BEFORE deployment so blog posts are live on launch.
 
-**Inputs needed:**
-- Product list with names, descriptions, prices, image URLs (from `reference-research.md` or `config/products.ts`)
-- Vercel domain (website column value)
-- Supabase service role key (for write access past RLS)
-
-**What to insert:**
-- All core products with: name (per locale), description (per locale), price, image URL, category, sort order
-- All additional/supplementary products/services
-- Follow `docs/PRODUCT-API-GUIDE.md` if available for the exact table schema and insert format
-
-**Verification:**
-- Query the products table filtered by website domain — confirm all products appear
-- Verify product images load from the stored URLs
-
-## Step 11 — Spawn Hanabi (Blog Writer)
-
-Run after deployment. Can be done independently at any time.
+**Prerequisites — build blog routes first (if not already present):**
+- `app/[locale]/blog/page.tsx` (listing page)
+- `app/[locale]/blog/[slug]/page.tsx` (individual post page)
+- `blog_posts` and `blog_translations` tables must exist in Supabase
 
 **Hanabi** (Blog Writer):
-- Prompt: `agents/hanabi.md` + website domain + brand name + product niche + target languages + Supabase credentials
+- Prompt: `agents/hanabi.md` + website domain + brand name + product niche + target languages + Supabase service role key
 
 Hanabi will:
 1. Generate 5-10 SEO-optimized blog article titles relevant to the product niche
@@ -155,18 +142,36 @@ Hanabi will:
 4. Insert into Supabase (`blog_posts` + `blog_translations` tables) for all supported locales
 5. Run quality checklist per article
 
-**Prerequisites:**
-- Blog route must exist: `app/[locale]/blog/page.tsx` (listing) + `app/[locale]/blog/[slug]/page.tsx` (post)
-- If blog routes don't exist yet, build them before running Hanabi
-- `blog_posts` and `blog_translations` tables must exist in Supabase
+**Output:** List of blog slugs + Supabase row IDs
 
-**Output:** List of published blog URLs + Supabase row IDs
+## Step 11 — User confirms design + content
+
+Present the website to the user. Do not proceed until the user confirms:
+- Website structure and layout are approved
+- Products are displaying correctly from the database
+- Blog posts are live and accessible
+- All 3 locales working (en/ms/zh)
+
+## Step 12 — Spawn Layla (QA & Deploy)
+
+Only run after user confirms in Step 11.
+
+**Layla** (QA & Deployment Specialist):
+- Prompt: `agents/layla.md` + completed project + Supabase credentials + GitHub repo URL + Vercel details
+
+Layla will:
+1. Verify phone number system is connected and working
+2. Verify products load from Supabase
+3. Verify blog posts load from Supabase
+4. Push code to GitHub
+5. Deploy to Vercel
+6. Report the live URL
 
 ## Reusing this system for a new product
 
 To launch a second website (e.g. `wheelchairmalaysia.my`):
 1. Create `projects/wheelchair/` folder
-2. Follow Steps 0–11 with new inputs
+2. Follow Steps 0–12 with new inputs
 3. Cyclops reuses the same Supabase instance — add rows to `phone_numbers` with `website = 'wheelchairmalaysia.my'`
 4. All agent prompts are reusable as-is — just change the inputs
-5. Step 10 (product details) and Step 11 (blog posts) are mandatory — don't skip them
+5. Steps 9 (product details) and 10 (blog posts) are mandatory BEFORE deploy — don't skip or defer them
