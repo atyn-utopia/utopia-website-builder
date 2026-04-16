@@ -18,8 +18,8 @@ export function Footer({ locale }: Props) {
       style={{
         background: 'var(--brand-charcoal)',
         color: 'rgba(255,255,255,0.75)',
-        paddingTop: 72,
-        paddingBottom: 40,
+        paddingTop: 56,
+        paddingBottom: 36,
       }}
     >
       <div
@@ -97,8 +97,8 @@ export function Footer({ locale }: Props) {
         className="container-p"
         style={{
           borderTop: '1px solid rgba(255,255,255,0.08)',
-          marginTop: 56,
-          paddingTop: 24,
+          marginTop: 40,
+          paddingTop: 20,
           fontSize: 12,
           color: 'rgba(255,255,255,0.5)',
           display: 'flex',

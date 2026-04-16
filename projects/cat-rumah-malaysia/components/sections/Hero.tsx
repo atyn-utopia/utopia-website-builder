@@ -105,7 +105,7 @@ export function Hero({ locale, locationSlug, cityOverride }: Props) {
         </div>
 
         {/* Right: hero photo — extends to screen edge, no container padding */}
-        <div style={{ position: 'relative', height: '100%', minHeight: 500 }}>
+        <div className="hero-photo-wrap" style={{ position: 'relative', height: '100%', minHeight: 500 }}>
           <div
             className="hero-photo-breakout"
             style={{
@@ -183,11 +183,15 @@ export function Hero({ locale, locationSlug, cityOverride }: Props) {
             max-width: 100% !important;
             margin-left: 0 !important;
           }
+          .hero-photo-wrap {
+            min-height: auto !important;
+            height: auto !important;
+          }
           .hero-photo-breakout {
             position: relative !important;
             border-radius: 24px !important;
-            margin: 32px clamp(20px, 4vw, 48px) 0 !important;
-            min-height: 320px !important;
+            margin: 28px clamp(20px, 4vw, 48px) 0 !important;
+            min-height: 300px !important;
           }
           .swatch-stack { display: none !important; }
         }
