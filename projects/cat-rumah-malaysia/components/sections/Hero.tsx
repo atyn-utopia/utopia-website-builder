@@ -24,17 +24,20 @@ export function Hero({ locale, locationSlug, cityOverride }: Props) {
           pointerEvents: 'none',
         }}
       />
+
+      {/* Content grid — text contained, photo breaks out */}
       <div
-        className="container-p hero-grid"
+        className="hero-grid"
         style={{
           position: 'relative',
           display: 'grid',
-          gridTemplateColumns: '1.15fr 0.95fr',
-          gap: 48,
+          gridTemplateColumns: '1fr 1fr',
           alignItems: 'center',
+          gap: 0,
         }}
       >
-        <div>
+        {/* Left: text content — stays in container */}
+        <div style={{ paddingLeft: 'clamp(20px, 4vw, 48px)', paddingRight: 32, maxWidth: 700, marginLeft: 'auto' }}>
           <span className="eyebrow">{t('eyebrow')}</span>
           <h1 className="t-display" style={{ marginTop: 20, color: 'var(--brand-charcoal)' }}>
             {t('h1Line1')}{' '}
@@ -61,7 +64,7 @@ export function Hero({ locale, locationSlug, cityOverride }: Props) {
             />
             <a href="#gallery" className="btn-secondary">{t('ctaSecondary')}</a>
           </div>
-          {/* Guarantee shield badge */}
+          {/* Guarantee badge */}
           <div
             style={{
               display: 'inline-flex',
@@ -85,7 +88,7 @@ export function Hero({ locale, locationSlug, cityOverride }: Props) {
             style={{
               listStyle: 'none',
               padding: 0,
-              margin: '36px 0 0 0',
+              margin: '28px 0 0 0',
               display: 'flex',
               flexWrap: 'wrap',
               gap: '14px 22px',
@@ -101,8 +104,20 @@ export function Hero({ locale, locationSlug, cityOverride }: Props) {
           </ul>
         </div>
 
-        <div style={{ position: 'relative', paddingLeft: 28 }}>
-          <div className="hero-photo" style={{ aspectRatio: '4 / 5', background: '#e6eae5' }}>
+        {/* Right: hero photo — extends to screen edge, no container padding */}
+        <div style={{ position: 'relative', height: '100%', minHeight: 500 }}>
+          <div
+            className="hero-photo-breakout"
+            style={{
+              position: 'absolute',
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              overflow: 'hidden',
+              borderRadius: '32px 0 0 32px',
+            }}
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={heroImg}
@@ -113,16 +128,25 @@ export function Hero({ locale, locationSlug, cityOverride }: Props) {
                   ? 'Professional house painting team — Cat Rumah Malaysia'
                   : 'Pasukan cat rumah profesional — Cat Rumah Malaysia'
               }
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
               loading="eager"
             />
+            <div
+              aria-hidden
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'linear-gradient(180deg, transparent 60%, rgba(30,36,48,0.18) 100%)',
+                pointerEvents: 'none',
+              }}
+            />
           </div>
-          {/* Paint swatch chip stack — signature motif */}
+          {/* Paint swatch chip stack */}
           <div
             aria-hidden
             style={{
               position: 'absolute',
-              left: 0,
+              left: -20,
               bottom: 40,
               display: 'flex',
               gap: 2,
@@ -130,6 +154,7 @@ export function Hero({ locale, locationSlug, cityOverride }: Props) {
               background: '#fff',
               borderRadius: 10,
               boxShadow: '0 16px 40px -18px rgba(30,36,48,0.24)',
+              zIndex: 2,
             }}
           >
             {swatchChips.map((c) => (
@@ -149,7 +174,20 @@ export function Hero({ locale, locationSlug, cityOverride }: Props) {
       </div>
       <style>{`
         @media (max-width: 880px) {
-          .hero-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
+          .hero-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .hero-grid > div:first-child {
+            padding: 0 clamp(20px, 4vw, 48px) !important;
+            max-width: 100% !important;
+            margin-left: 0 !important;
+          }
+          .hero-photo-breakout {
+            position: relative !important;
+            border-radius: 24px !important;
+            margin: 32px clamp(20px, 4vw, 48px) 0 !important;
+            min-height: 320px !important;
+          }
         }
       `}</style>
     </section>
