@@ -212,7 +212,9 @@
     "cta": {
       "heading": "准备策划您的活动？",
       "sub": "WhatsApp Kak Kenduri — 几分钟内回复，免费报价。"
-    }
+    },
+    "recentPosts": "最新文章",
+    "minRead": "{count} 分钟阅读"
   },
   "location": {
     "meta": {

@@ -212,7 +212,9 @@
     "cta": {
       "heading": "Sedia merancang majlis anda?",
       "sub": "WhatsApp Kak Kenduri — kami balas dalam beberapa minit dengan sebut harga percuma."
-    }
+    },
+    "recentPosts": "Artikel Terbaru",
+    "minRead": "{count} min baca"
   },
   "location": {
     "meta": {

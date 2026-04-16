@@ -212,7 +212,9 @@
     "cta": {
       "heading": "Ready to plan your event?",
       "sub": "WhatsApp Kak Kenduri — we reply in minutes with a free quote."
-    }
+    },
+    "recentPosts": "Recent Posts",
+    "minRead": "{count} min read"
   },
   "location": {
     "meta": {
