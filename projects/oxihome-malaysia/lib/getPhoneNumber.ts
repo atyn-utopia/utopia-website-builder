@@ -14,6 +14,8 @@ export async function getPhoneNumber(locationSlug: string): Promise<string> {
   try {
     const host = (await headers()).get('host') ?? siteConfig.domain
 
+    if (!supabase) return siteConfig.fallbackPhone
+
     const { data, error } = await supabase
       .from('phone_numbers')
       .select('phone_number, location_slug')

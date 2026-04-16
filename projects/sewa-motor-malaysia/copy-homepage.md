@@ -3,7 +3,7 @@
 **Brand:** Sewa Motor Malaysia
 **Domain:** sewamotor.my
 **Language:** English (en)
-**Author:** Nana (SEO Copywriter)
+**Author:** Nana (Copywriter)
 
 ---
 

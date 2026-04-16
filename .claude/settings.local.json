@@ -1,7 +1,22 @@
 {
   "permissions": {
     "allow": [
-      "Bash(node screenshot.mjs http://localhost:3001/cpap-machine/kuala-lumpur)"
+      "Bash(node screenshot.mjs http://localhost:3001/cpap-machine/kuala-lumpur)",
+      "Bash(brew install:*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "lsof -i :3001 -t >/dev/null 2>&1 || (cd /Users/intern/Documents/GitHub/utopia-website-system/utopia-fairy && nohup npm run dev >/dev/null 2>&1 &)",
+            "timeout": 10,
+            "statusMessage": "Ensuring Utopia Fairy is running..."
+          }
+        ]
+      }
     ]
   }
 }

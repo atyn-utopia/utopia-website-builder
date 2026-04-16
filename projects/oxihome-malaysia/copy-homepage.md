@@ -1,6 +1,6 @@
 # Oxihome Malaysia — Website Copy
 
-**Prepared by:** Nana (SEO Copywriter)
+**Prepared by:** Nana (Copywriter)
 **Brand:** Oxihome Malaysia
 **Domain:** oxihome.my
 **Language:** English (en)
@@ -154,7 +154,7 @@ Your family deserves reliable oxygen support without the hospital price tag. Ren
 
 ## 2. Location Page Template (English)
 
-Use `{city}` and `{primary_keyword}` as placeholders. Fanny will generate unique variations per location.
+Use `{city}` and `{primary_keyword}` as placeholders. Nana generates unique variations per location in `copy-locations.md`.
 
 ---
 

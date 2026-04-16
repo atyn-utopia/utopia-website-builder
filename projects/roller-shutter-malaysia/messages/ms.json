@@ -1,0 +1,746 @@
+{
+  "metadata": {
+    "title": "Roller Shutter Malaysia | Pasang & Baiki 24 Jam",
+    "description": "Pakar roller shutter #1 di Malaysia. Pemasangan, baiki & servis pintu besi gulung 24 jam. Mild steel, aluminium, polycarbonate. WhatsApp kami sekarang!"
+  },
+  "nav": {
+    "home": "Utama",
+    "products": "Produk",
+    "howItWorks": "Cara Kerja",
+    "reviews": "Ulasan",
+    "faq": "Soalan Lazim",
+    "locations": "Lokasi",
+    "contact": "Hubungi",
+    "brandName": "Roller Shutter Door Malaysia",
+    "ctaButton": "WhatsApp Sekarang"
+  },
+  "fomoBanner": {
+    "texts": [
+      "12 pelanggan di kawasan anda membuat tempahan minggu ini — slot pemasangan bulan ini hampir penuh!",
+      "Pasukan baiki kecemasan kami telah menyelesaikan 3 kerja hari ini — hubungi kami sebelum slot habis!",
+      "Lebih 15,000 premis dilindungi roller shutter kami di seluruh Malaysia"
+    ],
+    "slotsLeft": "Hanya {slots} slot lagi hari ini",
+    "bookNow": "Tempah Sekarang"
+  },
+  "hero": {
+    "badge": "Kecemasan 24 Jam",
+    "h1": "Pintu Roller Shutter Malaysia",
+    "h1Highlight": "Pakar #1 Pemasangan & Baiki 24 Jam",
+    "subtitle": "Pasang, baiki & selenggara semua jenis pintu roller shutter untuk kilang, kedai dan gudang. Perkhidmatan kecemasan 24 jam, 7 hari seminggu di seluruh Malaysia.",
+    "ctaPrimary": "WhatsApp Sekarang",
+    "ctaPrimarySubtext": "Dapatkan Sebut Harga Percuma",
+    "ctaSecondary": "Lihat Jenis Roller Shutter Kami",
+    "altText": "Pemasangan roller shutter untuk kilang di Malaysia"
+  },
+  "stats": {
+    "items": [
+      {
+        "value": "15,000+",
+        "label": "Pemasangan Berjaya"
+      },
+      {
+        "value": "24/7",
+        "label": "Perkhidmatan Kecemasan"
+      },
+      {
+        "value": "20+",
+        "label": "Tahun Pengalaman"
+      },
+      {
+        "value": "50+",
+        "label": "Kawasan Diliputi"
+      }
+    ]
+  },
+  "products": {
+    "heading": "Jenis Roller Shutter Kami",
+    "subheading": "Setiap premis ada keperluan berbeza. Kami sediakan 6 jenis roller shutter untuk perlindungan maksimum perniagaan anda.",
+    "items": {
+      "mildSteel": {
+        "name": "Roller Shutter Mild Steel",
+        "description": "Pilihan paling popular untuk kilang, gudang dan premis komersial. Diperbuat daripada keluli berkualiti tinggi untuk kekuatan dan ketahanan maksimum.",
+        "keyPoints": [
+          "Kekuatan industri untuk perlindungan maksimum",
+          "Kos efektif — pilihan terbaik untuk bajet sederhana",
+          "Sesuai untuk kilang, gudang & premis besar"
+        ],
+        "cta": "WhatsApp Untuk Sebut Harga",
+        "altText": "Roller shutter mild steel untuk kilang dan gudang"
+      },
+      "aluminium": {
+        "name": "Roller Shutter Aluminium",
+        "description": "Ringan, tahan karat dan sesuai untuk premis yang memerlukan rupa profesional. Pilihan ideal untuk pejabat, klinik dan premis komersial moden.",
+        "keyPoints": [
+          "Ringan — mudah dioperasi secara manual atau automatik",
+          "Tahan karat & cuaca tropika Malaysia",
+          "Rupa moden dan kemas untuk premis profesional"
+        ],
+        "cta": "WhatsApp Untuk Sebut Harga",
+        "altText": "Roller shutter aluminium untuk premis komersial"
+      },
+      "polycarbonate": {
+        "name": "Roller Shutter Polycarbonate (Transparent)",
+        "description": "Gabungan keselamatan dan penglihatan. Pelanggan boleh melihat produk paparan anda walaupun selepas waktu perniagaan.",
+        "keyPoints": [
+          "Paparan produk 24 jam walaupun kedai tutup",
+          "Keselamatan setanding roller shutter keluli",
+          "Kemasukan cahaya semula jadi — jimat elektrik"
+        ],
+        "cta": "WhatsApp Untuk Sebut Harga",
+        "altText": "Roller shutter polycarbonate transparent untuk kedai"
+      },
+      "fireRated": {
+        "name": "Roller Shutter Tahan Api (Fire-Rated)",
+        "description": "Memenuhi piawaian keselamatan kebakaran Malaysia. Wajib untuk bangunan tertentu mengikut undang-undang BOMBA.",
+        "keyPoints": [
+          "Sijil & pematuhan piawaian BOMBA Malaysia",
+          "Menghalang api & asap merebak antara zon",
+          "Wajib untuk kilang, gudang & bangunan komersial tertentu"
+        ],
+        "cta": "WhatsApp Untuk Sebut Harga",
+        "altText": "Roller shutter tahan api untuk pematuhan BOMBA"
+      },
+      "grille": {
+        "name": "Roller Shutter Gril",
+        "description": "Keselamatan dengan pengudaraan. Reka bentuk gril membenarkan aliran udara dan penglihatan sambil mengekalkan perlindungan.",
+        "keyPoints": [
+          "Pengudaraan optimum — sesuai untuk iklim panas Malaysia",
+          "Penglihatan ke dalam premis walaupun selepas waktu operasi",
+          "Popular untuk kedai runcit, pasaraya & food court"
+        ],
+        "cta": "WhatsApp Untuk Sebut Harga",
+        "altText": "Roller shutter gril untuk kedai runcit"
+      },
+      "motorised": {
+        "name": "Roller Shutter Automatik (Bermotor)",
+        "description": "Buka dan tutup dengan satu butang atau alat kawalan jauh. Sesuai untuk pintu besar yang kerap dibuka-tutup.",
+        "keyPoints": [
+          "Kawalan jauh atau suis — tanpa usaha fizikal",
+          "Sesuai untuk pintu besar kilang & gudang logistik",
+          "Naik taraf dari manual ke automatik tersedia"
+        ],
+        "cta": "WhatsApp Untuk Sebut Harga",
+        "altText": "Roller shutter automatik bermotor untuk gudang"
+      }
+    }
+  },
+  "howItWorks": {
+    "heading": "Cara Kami Bekerja",
+    "subheading": "Dari pertanyaan hingga pemasangan — proses mudah dalam 4 langkah sahaja.",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Hubungi Kami via WhatsApp",
+        "description": "Beritahu kami keperluan anda — pemasangan baru, baiki atau servis. Hantar gambar lokasi untuk penilaian pantas."
+      },
+      {
+        "number": "2",
+        "title": "Tinjauan Tapak & Sebut Harga",
+        "description": "Pasukan kami akan lawat premis anda untuk pengukuran tepat. Anda terima sebut harga terperinci tanpa sebarang caj tersembunyi."
+      },
+      {
+        "number": "3",
+        "title": "Pemasangan Profesional",
+        "description": "Juruteknik bertauliah kami siapkan pemasangan mengikut jadual yang dipersetujui. Kerja kemas, cepat dan mengikut piawaian keselamatan."
+      },
+      {
+        "number": "4",
+        "title": "Jaminan & Sokongan Selepas Jualan",
+        "description": "Setiap pemasangan disertai jaminan. Pasukan kecemasan 24 jam sentiasa sedia untuk sebarang isu selepas pemasangan."
+      }
+    ]
+  },
+  "riskProblem": {
+    "heading": "Jangan Biarkan Premis Anda Terdedah Kepada Risiko",
+    "subheading": "Roller shutter yang rosak atau tiada perlindungan boleh mengundang masalah besar.",
+    "problems": [
+      {
+        "title": "Kecurian & Pecah Masuk",
+        "description": "Premis tanpa roller shutter atau dengan pintu rosak adalah sasaran utama pencuri. Kerugian boleh mencecah puluhan ribu ringgit dalam satu malam."
+      },
+      {
+        "title": "Kerosakan Akibat Cuaca",
+        "description": "Hujan lebat, angin kuat dan ribut tropika boleh merosakkan stok dan peralatan anda jika premis tidak dilindungi dengan betul."
+      },
+      {
+        "title": "Kos Baiki Yang Membengkak",
+        "description": "Roller shutter yang tidak diselenggara akan rosak lebih cepat. Kos baiki kecemasan jauh lebih mahal daripada servis pencegahan berkala."
+      },
+      {
+        "title": "Gagal Pematuhan BOMBA",
+        "description": "Premis tertentu wajib ada roller shutter tahan api. Kegagalan mematuhi boleh mengakibatkan denda, penutupan dan risiko keselamatan."
+      }
+    ],
+    "solutionCta": "Jangan tunggu sehingga terlambat — WhatsApp kami sekarang untuk penilaian percuma."
+  },
+  "midCta": {
+    "heading": "Perlukan Roller Shutter Baru atau Baiki Segera?",
+    "subheading": "Pasukan kami sedia membantu 24 jam, 7 hari seminggu. Dapatkan sebut harga percuma dalam masa 30 minit.",
+    "ctaButton": "WhatsApp Kami Sekarang"
+  },
+  "reviews": {
+    "heading": "Apa Kata Pelanggan Kami",
+    "subheading": "Dipercayai oleh ribuan pemilik perniagaan di seluruh Malaysia.",
+    "ratingText": "4.9/5 di Google",
+    "items": [
+      {
+        "name": "Ahmad Faizal",
+        "location": "Klang, Selangor",
+        "rating": 5,
+        "text": "Roller shutter kilang saya rosak tengah malam. Hubungi mereka pukul 2 pagi dan juruteknik sampai dalam 45 minit. Kerja cepat dan profesional. Sangat rekomen!"
+      },
+      {
+        "name": "Lee Wei Keat",
+        "location": "Petaling Jaya, Selangor",
+        "rating": 5,
+        "text": "Pasang 8 unit roller shutter aluminium untuk kedai baru saya. Siap dalam 2 hari. Kualiti terbaik dan harga berpatutan. Pasukan mereka sangat teratur."
+      },
+      {
+        "name": "Siti Nurhaliza",
+        "location": "Johor Bahru, Johor",
+        "rating": 5,
+        "text": "Sudah 3 tahun guna servis mereka untuk maintenance berkala. Roller shutter gudang saya sentiasa dalam keadaan baik. Servis terbaik di JB!"
+      },
+      {
+        "name": "Rajesh Kumar",
+        "location": "Penang",
+        "rating": 5,
+        "text": "Tukar motor roller shutter lama kepada automatik. Sekarang buka tutup pintu gudang sangat mudah. Terima kasih atas kerja yang cemerlang!"
+      },
+      {
+        "name": "Tan Mei Ling",
+        "location": "Shah Alam, Selangor",
+        "rating": 5,
+        "text": "Pasang fire-rated roller shutter untuk pematuhan BOMBA. Proses smooth dari tinjauan sampai pemasangan. Harga kompetitif dan kerja berkualiti."
+      },
+      {
+        "name": "Mohd Hafiz",
+        "location": "Kuala Lumpur",
+        "rating": 5,
+        "text": "Emergency call pukul 11 malam sebab spring patah. Mereka datang cepat dan selesaikan masalah dalam masa sejam. Memang pakar roller shutter!"
+      }
+    ]
+  },
+  "whyChoose": {
+    "heading": "Kenapa Pilih Kami?",
+    "subheading": "Kami bukan sekadar kontraktor — kami pakar roller shutter yang anda boleh percayai.",
+    "items": [
+      {
+        "title": "Perkhidmatan Kecemasan 24 Jam",
+        "description": "Roller shutter rosak tak kenal waktu. Pasukan baiki kecemasan kami beroperasi 24/7, termasuk cuti umum dan hujung minggu."
+      },
+      {
+        "title": "20+ Tahun Pengalaman",
+        "description": "Lebih dua dekad pengalaman dalam industri roller shutter Malaysia. Kami telah menangani setiap jenis kerosakan dan pemasangan yang anda boleh bayangkan."
+      },
+      {
+        "title": "50+ Kawasan Liputan",
+        "description": "Dari Johor hingga Penang, Kuching hingga Kota Kinabalu — rangkaian pasukan kami meliputi seluruh Malaysia untuk perkhidmatan pantas."
+      },
+      {
+        "title": "Sebut Harga Telus — Tiada Caj Tersembunyi",
+        "description": "Anda tahu tepat berapa kosnya sebelum kerja bermula. Tiada surprise, tiada caj tambahan tanpa kebenaran anda."
+      },
+      {
+        "title": "Jaminan Kerja & Bahan",
+        "description": "Setiap pemasangan dan pembaikan disertai jaminan. Kami gunakan bahan berkualiti tinggi dari pembekal yang dipercayai."
+      },
+      {
+        "title": "Juruteknik Bertauliah & Berpengalaman",
+        "description": "Setiap juruteknik kami terlatih dan berpengalaman. Kerja kemas, selamat dan mengikut piawaian industri."
+      }
+    ]
+  },
+  "gallery": {
+    "heading": "Galeri Projek Kami",
+    "subheading": "Lihat hasil kerja pemasangan dan pembaikan roller shutter kami di seluruh Malaysia.",
+    "categories": [
+      "Pemasangan Baru",
+      "Pembaikan & Penyelenggaraan",
+      "Projek Kilang & Gudang",
+      "Projek Kedai & Komersial"
+    ],
+    "altTexts": {
+      "newInstallation": "Projek pemasangan roller shutter baru",
+      "repair": "Projek pembaikan dan penyelenggaraan roller shutter",
+      "factory": "Projek roller shutter kilang dan gudang",
+      "commercial": "Projek roller shutter kedai dan komersial"
+    }
+  },
+  "locations": {
+    "heading": "Kawasan Perkhidmatan Kami",
+    "subheading": "Perkhidmatan roller shutter profesional di lebih 50 lokasi seluruh Malaysia.",
+    "regions": {
+      "klangValley": "Klang Valley",
+      "southernSelangor": "Selangor Selatan",
+      "negeriSembilan": "Negeri Sembilan",
+      "northern": "Utara",
+      "southern": "Selatan",
+      "eastCoast": "Pantai Timur",
+      "eastMalaysia": "Malaysia Timur"
+    },
+    "citiesLabel": "kawasan",
+    "viewDetails": "Lihat Perkhidmatan di {city}"
+  },
+  "faq": {
+    "heading": "Soalan Lazim (FAQ)",
+    "items": [
+      {
+        "question": "Berapa kos pemasangan roller shutter baru?",
+        "answer": "Kos bergantung kepada jenis roller shutter, saiz pintu dan lokasi premis anda. Roller shutter mild steel bermula dari harga yang berpatutan untuk saiz standard. Hubungi kami via WhatsApp untuk mendapatkan sebut harga tepat berdasarkan keperluan spesifik anda — penilaian dan sebut harga adalah PERCUMA."
+      },
+      {
+        "question": "Berapa lama masa yang diperlukan untuk pemasangan?",
+        "answer": "Pemasangan standard untuk satu unit roller shutter biasanya mengambil masa 1-2 hari bekerja. Untuk projek yang melibatkan beberapa unit atau pemasangan khas seperti fire-rated, tempoh mungkin lebih panjang. Pasukan kami akan berikan jadual tepat selepas tinjauan tapak."
+      },
+      {
+        "question": "Adakah anda menyediakan perkhidmatan baiki kecemasan 24 jam?",
+        "answer": "Ya, kami beroperasi 24 jam, 7 hari seminggu termasuk cuti umum. Jika roller shutter anda rosak pada bila-bila masa — tengah malam, hujung minggu atau hari raya — juruteknik kami sedia untuk tiba di lokasi anda secepat mungkin. WhatsApp kami untuk respon segera."
+      },
+      {
+        "question": "Bolehkah roller shutter manual ditukar kepada automatik?",
+        "answer": "Boleh! Kami menawarkan perkhidmatan naik taraf motor untuk menukar roller shutter manual sedia ada kepada sistem bermotor. Ini meningkatkan kecekapan operasi terutama untuk pintu besar yang kerap dibuka-tutup. Proses naik taraf biasanya siap dalam sehari."
+      },
+      {
+        "question": "Apakah jenis roller shutter yang sesuai untuk premis saya?",
+        "answer": "Ia bergantung kepada keperluan anda. Untuk keselamatan maksimum — mild steel. Untuk rupa profesional dan tahan karat — aluminium. Untuk paparan produk — polycarbonate. Untuk pematuhan BOMBA — fire-rated. Hubungi kami via WhatsApp dan pakar kami akan cadangkan jenis terbaik untuk premis anda."
+      },
+      {
+        "question": "Adakah roller shutter anda disertai jaminan?",
+        "answer": "Ya, setiap pemasangan dan pembaikan disertai jaminan ke atas bahan dan kerja. Tempoh jaminan bergantung kepada jenis produk dan skop kerja. Kami juga menawarkan pakej servis berkala untuk memastikan roller shutter anda sentiasa dalam keadaan terbaik sepanjang jangka hayatnya."
+      }
+    ]
+  },
+  "finalCta": {
+    "heading": "Sedia Untuk Melindungi Premis Anda?",
+    "subheading": "Dapatkan sebut harga percuma dalam masa 30 minit. Pasukan pakar kami sedia membantu anda 24/7.",
+    "ctaButton": "WhatsApp Sekarang — Sebut Harga Percuma",
+    "supportingText": "Tiada komitmen. Tiada caj tersembunyi. Hanya perkhidmatan roller shutter terbaik di Malaysia."
+  },
+  "footer": {
+    "tagline": "Roller Shutter Door Malaysia — Pakar #1 Pemasangan & Baiki 24 Jam",
+    "services": {
+      "heading": "Perkhidmatan",
+      "items": [
+        "Pemasangan Baru",
+        "Baiki & Penyelesaian Masalah",
+        "Penyelenggaraan Berkala",
+        "Naik Taraf Motor",
+        "Penggantian Spring"
+      ]
+    },
+    "productTypes": {
+      "heading": "Jenis Roller Shutter",
+      "items": [
+        "Mild Steel",
+        "Aluminium",
+        "Polycarbonate / Transparent",
+        "Fire-Rated (Tahan Api)",
+        "Gril",
+        "Automatik / Bermotor"
+      ]
+    },
+    "areas": {
+      "heading": "Kawasan",
+      "items": [
+        "Klang Valley",
+        "Selangor",
+        "Johor",
+        "Penang",
+        "Negeri Sembilan",
+        "Lain-lain"
+      ]
+    },
+    "social": {
+      "heading": "Ikuti Kami",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "google": "Google Business"
+    },
+    "copyright": "© 2026 Roller Shutter Door Malaysia. Hak cipta terpelihara.",
+    "whatsappFloat": "WhatsApp Kami"
+  },
+  "breadcrumbs": {
+    "home": "Utama",
+    "rollerShutter": "Roller Shutter"
+  },
+  "nearbyLocations": {
+    "heading": "Kawasan Berdekatan",
+    "subheading": "Kami juga menyediakan perkhidmatan roller shutter di kawasan berikut:",
+    "viewService": "Lihat Perkhidmatan"
+  },
+  "common": {
+    "callNow": "Hubungi Sekarang",
+    "whatsappUs": "WhatsApp Kami",
+    "freeQuote": "Sebut Harga Percuma",
+    "learnMore": "Ketahui Lebih Lanjut",
+    "viewAll": "Lihat Semua",
+    "backToTop": "Kembali ke Atas",
+    "loading": "Memuatkan...",
+    "error": "Ralat berlaku"
+  },
+  "shared": {
+    "whatsappCta": "WhatsApp Sekarang",
+    "emergencyBadge": "Kecemasan 24 Jam",
+    "freeQuoteBadge": "Sebut Harga Percuma",
+    "trustedBadge": "Dipercayai 15,000+ Pelanggan",
+    "brandName": "Roller Shutter Door Malaysia",
+    "phoneLabel": "Hubungi Kami",
+    "allRightsReserved": "Hak cipta terpelihara",
+    "whatsappPrefilledMessage": "Hai, saya berminat dengan perkhidmatan roller shutter. Boleh saya dapatkan sebut harga?",
+    "whatsappPrefilledMessageLocation": "Hai, saya berminat dengan perkhidmatan roller shutter di {city}. Boleh saya dapatkan sebut harga?"
+  },
+  "locationPages": {
+    "kuala-lumpur": {
+      "metaTitle": "Roller Shutter Kuala Lumpur | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Pakar roller shutter di Kuala Lumpur. Pemasangan, baiki & servis pintu besi gulung 24 jam untuk kilang, kedai & gudang di KL. WhatsApp untuk sebut harga percuma.",
+      "h1": "Roller Shutter Kuala Lumpur — Pasang & Baiki 24 Jam",
+      "intro": "Kuala Lumpur sebagai ibu negara dan pusat perniagaan utama Malaysia mempunyai ribuan premis komersial dan industri yang memerlukan perlindungan roller shutter berkualiti. Dari kawasan perindustrian Segambut hingga ke deretan kedai di Bukit Bintang, kami melayani semua jenis premis di KL. Pasukan kami berpangkalan strategik di Kuala Lumpur untuk memastikan respons pantas kepada setiap panggilan kecemasan.",
+      "closingCta": "Perlukan pakar roller shutter di Kuala Lumpur? WhatsApp kami sekarang untuk sebut harga percuma dan respons dalam 30 minit."
+    },
+    "petaling-jaya": {
+      "metaTitle": "Roller Shutter Petaling Jaya | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Perkhidmatan roller shutter profesional di Petaling Jaya. Pasang, baiki & servis 24 jam untuk kedai, kilang & pejabat di PJ. Hubungi kami via WhatsApp!",
+      "h1": "Roller Shutter Petaling Jaya — Pasang & Baiki 24 Jam",
+      "intro": "Petaling Jaya merupakan hab komersial utama Selangor dengan kepesatan pembangunan dari Seksyen 13 hingga Damansara Perdana. Pemilik premis di PJ memerlukan roller shutter yang tahan lasak untuk melindungi pelaburan mereka di kawasan perniagaan yang sibuk ini.",
+      "closingCta": "Roller shutter di PJ rosak atau perlukan pemasangan baru? WhatsApp kami sekarang — pasukan kami sedia membantu 24/7."
+    },
+    "shah-alam": {
+      "metaTitle": "Roller Shutter Shah Alam | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Pakar roller shutter Shah Alam. Pemasangan & baiki 24 jam untuk kilang, gudang & premis komersial. Sebut harga percuma — WhatsApp kami sekarang!",
+      "h1": "Roller Shutter Shah Alam — Pasang & Baiki 24 Jam",
+      "intro": "Shah Alam, ibu negeri Selangor, terkenal dengan kawasan perindustrian besar seperti Seksyen 15, Seksyen 23 dan HICOM. Ribuan kilang dan gudang di sini bergantung kepada roller shutter berkualiti tinggi untuk operasi harian mereka.",
+      "closingCta": "Pemilik kilang atau gudang di Shah Alam? WhatsApp kami untuk penilaian tapak percuma dan sebut harga tanpa komitmen."
+    },
+    "subang-jaya": {
+      "metaTitle": "Roller Shutter Subang Jaya | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Perkhidmatan roller shutter di Subang Jaya. Pasang, baiki & selenggara 24 jam untuk premis perniagaan. WhatsApp untuk sebut harga percuma hari ini!",
+      "h1": "Roller Shutter Subang Jaya — Pasang & Baiki 24 Jam",
+      "intro": "Subang Jaya berkembang pesat sebagai pusat perniagaan dan komersial dengan kawasan seperti USJ, Sunway dan SS15 yang dipenuhi kedai, restoran dan premis komersial.",
+      "closingCta": "Premis anda di Subang Jaya perlukan roller shutter? WhatsApp kami sekarang untuk mendapatkan sebut harga percuma."
+    },
+    "cheras": {
+      "metaTitle": "Roller Shutter Cheras | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Cheras — pemasangan baru, baiki & servis 24 jam. Pakar pintu besi gulung untuk kedai, kilang & gudang di Cheras. WhatsApp kami!",
+      "h1": "Roller Shutter Cheras — Pasang & Baiki 24 Jam",
+      "intro": "Cheras merupakan salah satu kawasan paling padat di Lembah Klang dengan campuran premis komersial, perindustrian dan perniagaan kecil.",
+      "closingCta": "Pemilik perniagaan di Cheras? WhatsApp kami sekarang — dapatkan sebut harga roller shutter dalam 30 minit."
+    },
+    "ampang": {
+      "metaTitle": "Roller Shutter Ampang | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Perkhidmatan roller shutter di Ampang. Pasang, baiki & selenggara pintu besi gulung 24 jam. WhatsApp untuk sebut harga percuma!",
+      "h1": "Roller Shutter Ampang — Pasang & Baiki 24 Jam",
+      "intro": "Ampang membangun pesat dengan pelbagai premis komersial dan perindustrian yang memerlukan perlindungan roller shutter berkualiti.",
+      "closingCta": "Perlukan roller shutter di Ampang? WhatsApp kami sekarang untuk sebut harga percuma."
+    },
+    "puchong": {
+      "metaTitle": "Roller Shutter Puchong | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Pakar roller shutter Puchong. Pemasangan, baiki & servis 24 jam untuk kilang, kedai & gudang. WhatsApp kami sekarang!",
+      "h1": "Roller Shutter Puchong — Pasang & Baiki 24 Jam",
+      "intro": "Puchong merupakan kawasan perniagaan yang berkembang pesat dengan banyak premis komersial, kilang kecil dan gudang yang memerlukan roller shutter berkualiti.",
+      "closingCta": "Premis di Puchong perlukan roller shutter? WhatsApp kami untuk sebut harga percuma hari ini."
+    },
+    "bangsar": {
+      "metaTitle": "Roller Shutter Bangsar | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Bangsar — pemasangan & baiki 24 jam. Perkhidmatan profesional untuk kedai, pejabat & premis komersial. WhatsApp kami!",
+      "h1": "Roller Shutter Bangsar — Pasang & Baiki 24 Jam",
+      "intro": "Bangsar dikenali sebagai kawasan komersial premium dengan deretan kedai, restoran dan pejabat yang memerlukan roller shutter berkualiti tinggi untuk keselamatan dan estetika.",
+      "closingCta": "Premis di Bangsar perlukan roller shutter? WhatsApp kami sekarang untuk penilaian percuma."
+    },
+    "damansara": {
+      "metaTitle": "Roller Shutter Damansara | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Perkhidmatan roller shutter di Damansara. Pasang, baiki & selenggara 24 jam. WhatsApp untuk sebut harga percuma!",
+      "h1": "Roller Shutter Damansara — Pasang & Baiki 24 Jam",
+      "intro": "Damansara merangkumi kawasan perniagaan moden seperti Damansara Perdana, Damansara Jaya dan Damansara Utama yang penuh dengan premis komersial memerlukan perlindungan roller shutter.",
+      "closingCta": "Perlukan roller shutter di Damansara? WhatsApp kami sekarang — respons dalam 30 minit."
+    },
+    "cyberjaya": {
+      "metaTitle": "Roller Shutter Cyberjaya | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Cyberjaya — pemasangan & baiki 24 jam untuk premis teknologi & komersial. WhatsApp untuk sebut harga percuma!",
+      "h1": "Roller Shutter Cyberjaya — Pasang & Baiki 24 Jam",
+      "intro": "Cyberjaya sebagai hab teknologi Malaysia mempunyai banyak premis komersial dan pusat data yang memerlukan roller shutter berkualiti tinggi untuk keselamatan.",
+      "closingCta": "Premis di Cyberjaya perlukan roller shutter? WhatsApp kami sekarang."
+    },
+    "klang": {
+      "metaTitle": "Roller Shutter Klang | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Pakar roller shutter Klang. Pemasangan & baiki 24 jam untuk kilang, gudang & premis komersial di Klang. WhatsApp kami!",
+      "h1": "Roller Shutter Klang — Pasang & Baiki 24 Jam",
+      "intro": "Klang merupakan hab perindustrian utama dengan pelabuhan dan kawasan kilang yang memerlukan roller shutter heavy-duty untuk perlindungan maksimum.",
+      "closingCta": "Pemilik kilang di Klang? WhatsApp kami untuk sebut harga roller shutter percuma."
+    },
+    "putrajaya": {
+      "metaTitle": "Roller Shutter Putrajaya | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Perkhidmatan roller shutter Putrajaya untuk bangunan kerajaan, pejabat korporat & kedai sekitar Presinct 9–18. Hubungi kami via WhatsApp sekarang!",
+      "h1": "Roller Shutter Putrajaya — Pasang & Baiki 24 Jam",
+      "intro": "Putrajaya sebagai pusat pentadbiran persekutuan Malaysia menempatkan ratusan bangunan kerajaan, kompleks kementerian, dan pusat komersial di sepanjang Persiaran Perdana dan kawasan Precinct. Kedai-kedai runcit, restoran, dan pejabat swasta di sekitar Alamanda Putrajaya dan Dataran Putra memerlukan sistem roller shutter yang kukuh dan profesional. Kami menyediakan pemasangan dan penyelenggaraan roller shutter berkualiti tinggi untuk semua premis di Putrajaya.",
+      "closingCta": "Hubungi kami sekarang melalui WhatsApp untuk sebut harga percuma pemasangan roller shutter di Putrajaya!"
+    },
+    "kajang": {
+      "metaTitle": "Roller Shutter Kajang | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Pasang & baiki roller shutter di Kajang — kawasan Bandar Kajang, Sungai Chua & perindustrian Semenyih. Respons pantas, hubungi WhatsApp kami kini!",
+      "h1": "Roller Shutter Kajang — Pasang & Baiki 24 Jam",
+      "intro": "Kajang merupakan bandar yang berkembang pesat di selatan Lembah Klang, dengan kawasan perniagaan aktif di Bandar Kajang, Sungai Chua, dan sepanjang Jalan Semenyih. Pertumbuhan kawasan industri ringan di sekitar Kajang dan Semenyih telah meningkatkan permintaan untuk sistem keselamatan premis yang andal. Roller shutter kami sesuai untuk kedai, gudang, dan pusat komersial di seluruh Kajang dan sekitarnya.",
+      "closingCta": "WhatsApp kami sekarang untuk dapatkan sebut harga terbaik roller shutter di Kajang dan kawasan Semenyih!"
+    },
+    "bangi": {
+      "metaTitle": "Roller Shutter Bangi | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Bandar Baru Bangi untuk kawasan industri, kedai sekitar UKM & Seksyen 1–15. Pakar pasang & baiki 24 jam. WhatsApp kami sekarang!",
+      "h1": "Roller Shutter Bangi — Pasang & Baiki 24 Jam",
+      "intro": "Bandar Baru Bangi ialah bandar universiti yang juga menempatkan zon perindustrian besar di Seksyen 6, 7, dan 15, berhampiran kawasan UKM dan koridor teknologi Bangi-Kajang. Kombinasi premis runcit, kilang ringan, dan kompleks komersial di sekitar Seksyen 9 dan Seksyen 14 mewujudkan keperluan tinggi untuk roller shutter berkualiti. Kami melayani pemasangan dan pembaikan pantas bagi semua jenis premis di seluruh Bangi.",
+      "closingCta": "Hubungi kami via WhatsApp untuk sebut harga pemasangan roller shutter di Bangi dan kawasan sekitarnya hari ini!"
+    },
+    "rawang": {
+      "metaTitle": "Roller Shutter Rawang | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Perkhidmatan roller shutter Rawang untuk kawasan perindustrian Bukit Beruntung, Rawang Integrated & premis komersial. Hubungi WhatsApp 24 jam!",
+      "h1": "Roller Shutter Rawang — Pasang & Baiki 24 Jam",
+      "intro": "Rawang di utara Selangor merupakan hab perindustrian yang semakin berkembang, dengan kawasan perindustrian Rawang Integrated Industrial Park dan Bukit Beruntung Industrial Park menampung ratusan kilang dan gudang. Bandar Rawang sendiri mempunyai deretan kedai dan pusat perniagaan yang memerlukan sistem roller shutter yang selamat dan tahan lama. Kami sedia membantu semua pemain perniagaan di Rawang dengan perkhidmatan pemasangan dan pembaikan 24 jam.",
+      "closingCta": "WhatsApp kami sekarang untuk pasang atau baiki roller shutter di Rawang dan kawasan Bukit Beruntung!"
+    },
+    "kepong": {
+      "metaTitle": "Roller Shutter Kepong | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Kepong & Segambut untuk kilang, gudang & kedai di kawasan perindustrian Kepong Entrepreneur Park. Hubungi WhatsApp kami 24 jam!",
+      "h1": "Roller Shutter Kepong — Pasang & Baiki 24 Jam",
+      "intro": "Kepong dan kawasan Segambut di barat laut Kuala Lumpur merupakan salah satu zon perindustrian dan komersial tertua di ibu kota, menempatkan Kepong Entrepreneur Park, Taman Perindustrian Kepong, dan pasar raya besar seperti AEON Kepong. Deretan kedai di Jalan Kepong, Menjalara, dan Desa Jaya memerlukan roller shutter yang boleh dipercayai untuk keselamatan harian. Kami menyediakan solusi roller shutter menyeluruh untuk semua jenis premis di kawasan Kepong.",
+      "closingCta": "Hubungi kami melalui WhatsApp sekarang untuk perkhidmatan roller shutter terbaik di Kepong dan Segambut!"
+    },
+    "seri-kembangan": {
+      "metaTitle": "Roller Shutter Seri Kembangan | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Pasang & baiki roller shutter Seri Kembangan — Taman Equine, Mines Resort City & kawasan industri Serdang. Respons 24 jam. WhatsApp sekarang!",
+      "h1": "Roller Shutter Seri Kembangan — Pasang & Baiki 24 Jam",
+      "intro": "Seri Kembangan di selatan Kuala Lumpur ialah pusat komersial yang merangkumi kawasan Taman Equine, Mines Resort City, dan Taman Perindustrian Serdang yang dipenuhi kilang dan gudang perniagaan. Kawasan ini juga terkenal dengan aktiviti perdagangan borong di sekitar Jalan Serdang Lama dan Jalan Balakong. Kami menyediakan pemasangan dan pembaikan roller shutter profesional untuk memenuhi keperluan keselamatan premis di Seri Kembangan.",
+      "closingCta": "WhatsApp kami untuk sebut harga percuma pemasangan roller shutter di Seri Kembangan dan kawasan Mines!"
+    },
+    "balakong": {
+      "metaTitle": "Roller Shutter Balakong | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Balakong untuk kawasan industri Cheras Jaya, Taman Perindustrian Balakong & premis komersial. Hubungi WhatsApp 24 jam sekarang!",
+      "h1": "Roller Shutter Balakong — Pasang & Baiki 24 Jam",
+      "intro": "Balakong merupakan kawasan perindustrian utama di Cheras yang menempatkan Taman Perindustrian Balakong, Cheras Jaya Industrial Park, dan ratusan premis perniagaan sederhana dan besar. Kawasan ini terkenal dengan industri pembuatan, pemprosesan makanan, dan logistik yang memerlukan pintu roller shutter berkapasiti tinggi. Pasukan kami berpengalaman mengendalikan pemasangan dan pembaikan roller shutter untuk semua jenis premis industri di Balakong.",
+      "closingCta": "Hubungi kami via WhatsApp sekarang untuk perkhidmatan roller shutter pantas dan profesional di Balakong!"
+    },
+    "sungai-buloh": {
+      "metaTitle": "Roller Shutter Sungai Buloh | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Perkhidmatan roller shutter Sungai Buloh untuk kawasan industri Sungai Buloh, nurseri & premis komersial Kota Damansara. WhatsApp kami 24 jam!",
+      "h1": "Roller Shutter Sungai Buloh — Pasang & Baiki 24 Jam",
+      "intro": "Sungai Buloh di utara Selangor terkenal bukan sahaja sebagai hab nurseri dan landskap, tetapi juga sebagai kawasan perindustrian penting yang menempatkan Sungai Buloh Industrial Park dan kawasan perniagaan berdekatan lebuh raya NKVE. Pertumbuhan pesat kawasan Kota Damansara dan Paya Jaras telah memperluaskan keperluan untuk roller shutter di premis runcit, klinik, dan kedai-kedai baru. Kami hadir 24 jam untuk memenuhi semua keperluan roller shutter di Sungai Buloh.",
+      "closingCta": "WhatsApp kami sekarang untuk pasang atau baiki roller shutter di Sungai Buloh dengan cepat dan berpatutan!"
+    },
+    "batu-caves": {
+      "metaTitle": "Roller Shutter Batu Caves | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Batu Caves untuk kawasan industri Taman Perindustrian Batu Caves & premis komersial sekitar Gombak. Hubungi WhatsApp 24 jam!",
+      "h1": "Roller Shutter Batu Caves — Pasang & Baiki 24 Jam",
+      "intro": "Batu Caves di utara Kuala Lumpur ialah kawasan yang terkenal dengan tapak warisan Hindu tetapi juga merupakan hab perindustrian aktif dengan Taman Perindustrian Batu Caves dan Taman Industri Gombak yang menampung pelbagai kilang dan gudang. Deretan kedai di sepanjang Jalan Batu Caves dan kawasan perindustrian sekitarnya memerlukan sistem roller shutter yang selamat dan tahan lasak. Kami menyediakan perkhidmatan pemasangan dan pembaikan roller shutter untuk semua premis di kawasan ini.",
+      "closingCta": "Hubungi kami melalui WhatsApp untuk dapatkan perkhidmatan roller shutter terbaik di Batu Caves dan Gombak!"
+    },
+    "port-klang": {
+      "metaTitle": "Roller Shutter Port Klang | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Port Klang untuk gudang pelabuhan, premis industri Northport & Westport, dan kedai sekitar bandar. WhatsApp kami 24 jam sekarang!",
+      "h1": "Roller Shutter Port Klang — Pasang & Baiki 24 Jam",
+      "intro": "Port Klang ialah pelabuhan terbesar Malaysia, menempatkan Northport dan Westport yang mengendalikan jutaan kontena setiap tahun, diiringi oleh rangkaian gudang, zon logistik, dan kawasan perindustrian berskala besar. Premis penyimpanan, depot kontena, dan kedai-kedai di Bandar Diraja Klang dan Jalan Pelabuhan Utara memerlukan roller shutter yang kukuh dan tahan persekitaran pantai. Kami pakar dalam memasang dan menyelenggara roller shutter untuk premis industri dan komersial di Port Klang.",
+      "closingCta": "WhatsApp kami sekarang untuk sebut harga roller shutter di Port Klang — kami faham keperluan kawasan pelabuhan!"
+    },
+    "glenmarie": {
+      "metaTitle": "Roller Shutter Glenmarie | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Pasang & baiki roller shutter Glenmarie Shah Alam untuk kawasan industri, kereta mewah & pejabat korporat Glenmarie. WhatsApp kami 24 jam!",
+      "h1": "Roller Shutter Glenmarie — Pasang & Baiki 24 Jam",
+      "intro": "Glenmarie di Shah Alam ialah kawasan industri dan korporat premium yang menampung syarikat automotif besar termasuk Auto Bavaria dan pelbagai pengedar kereta mewah, bersama-sama dengan taman perindustrian dan kompleks pejabat kelas A. Showroom automotif, bengkel servis, dan premis industri ringan di sekitar Jalan Akuatik dan Persiaran Glenmarie memerlukan roller shutter berkualiti tinggi. Kami menyediakan solusi roller shutter yang sesuai dengan piawaian tinggi kawasan perniagaan Glenmarie.",
+      "closingCta": "Hubungi kami via WhatsApp untuk perkhidmatan roller shutter profesional di Glenmarie dan Shah Alam!"
+    },
+    "hicom-shah-alam": {
+      "metaTitle": "Roller Shutter HICOM Shah Alam | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter untuk kilang berat & sederhana di HICOM Shah Alam, Proton City dan kawasan perindustrian Bukit Raja. Hubungi WhatsApp 24 jam!",
+      "h1": "Roller Shutter HICOM Shah Alam — Pasang & Baiki 24 Jam",
+      "intro": "Kawasan perindustrian HICOM di Shah Alam merupakan salah satu zon pembuatan terbesar di Malaysia, menempatkan kilang-kilang besar termasuk loji pemasangan Proton, syarikat komponen automotif, dan industri berat lain di sepanjang Persiaran Jubli Perak dan Persiaran Kemajuan. Pintu roller shutter bersaiz industri dan berkapasiti berat adalah keperluan asas untuk semua premis di kawasan ini. Kami pakar dalam pemasangan roller shutter industri berat untuk memenuhi standard keselamatan kilang di HICOM.",
+      "closingCta": "WhatsApp kami sekarang untuk dapatkan roller shutter industri berkualiti di HICOM Shah Alam dan kawasan Bukit Raja!"
+    },
+    "pandan-indah": {
+      "metaTitle": "Roller Shutter Pandan Indah | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Pandan Indah & Pandan Jaya untuk kedai, pusat perniagaan & premis komersial Ampang. Respons pantas, hubungi WhatsApp 24 jam!",
+      "h1": "Roller Shutter Pandan Indah — Pasang & Baiki 24 Jam",
+      "intro": "Pandan Indah dan kawasan Pandan Jaya di timur Kuala Lumpur merupakan pusat komersial yang sibuk dengan deretan kedai di Jalan Pandan Indah, pasar raya, dan premis perniagaan yang beroperasi sehingga lewat malam. Kawasan ini juga bersempadan dengan Ampang Point dan koridor perniagaan Loke Yew yang padat. Kami menyediakan pemasangan dan pembaikan roller shutter untuk semua jenis premis komersial di Pandan Indah dan sekitarnya.",
+      "closingCta": "Hubungi kami melalui WhatsApp untuk sebut harga roller shutter di Pandan Indah dan kawasan Ampang sekarang!"
+    },
+    "sri-damansara": {
+      "metaTitle": "Roller Shutter Sri Damansara | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Pasang & baiki roller shutter Sri Damansara untuk kedai, pejabat & premis sekitar Bandar Sri Damansara & Kepong Baru. WhatsApp kami 24 jam!",
+      "h1": "Roller Shutter Sri Damansara — Pasang & Baiki 24 Jam",
+      "intro": "Sri Damansara di utara Petaling Jaya merupakan kawasan perumahan dan komersial yang berkembang pesat, dengan pusat perniagaan utama di Bandar Sri Damansara, Plaza Pandan, dan Kompleks Perniagaan Sri Damansara berdekatan Lebuhraya Damansara-Puchong (LDP). Kedai-kedai pakaian, restoran, dan outlet perkhidmatan di kawasan ini memerlukan sistem roller shutter yang boleh diandalkan untuk perlindungan semalaman. Kami menyediakan perkhidmatan pemasangan dan penyelenggaraan roller shutter yang cepat dan berpatutan.",
+      "closingCta": "WhatsApp kami sekarang untuk perkhidmatan roller shutter terpercaya di Sri Damansara dan Bandar Sri Damansara!"
+    },
+    "kota-damansara": {
+      "metaTitle": "Roller Shutter Kota Damansara | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Kota Damansara untuk premis teknologi, kedai di Empire Damansara & Strand Mall. Pasang & baiki 24 jam. WhatsApp kami sekarang!",
+      "h1": "Roller Shutter Kota Damansara — Pasang & Baiki 24 Jam",
+      "intro": "Kota Damansara ialah hab teknologi dan korporat moden di Petaling Jaya, menampung Cyberjaya-KL Corridor node, pusat perniagaan Empire Damansara, Strand Mall, dan pelbagai syarikat IT dan startup yang menduduki ruang pejabat moden. Kedai-kedai di seksyen komersial Kota Damansara dan premis F&B sepanjang Jalan Teknologi memerlukan roller shutter yang estetik namun selamat. Kami menawarkan pelbagai pilihan roller shutter moden untuk memenuhi imej kawasan perniagaan premium ini.",
+      "closingCta": "Hubungi kami via WhatsApp untuk roller shutter terbaik di Kota Damansara dan kawasan Empire Damansara!"
+    },
+    "seremban": {
+      "metaTitle": "Roller Shutter Seremban | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Perkhidmatan roller shutter Seremban untuk kedai di Seremban 2, Terminal Makmur & kawasan industri Negeri Sembilan. WhatsApp kami 24 jam sekarang!",
+      "h1": "Roller Shutter Seremban — Pasang & Baiki 24 Jam",
+      "intro": "Seremban sebagai ibu kota Negeri Sembilan merupakan pusat perdagangan dan perkhidmatan yang penting, dengan kawasan perniagaan utama di Seremban 2, Terminal Makmur, dan Jalan Tuanku Munawir yang sibuk dengan kedai-kedai runcit dan pejabat korporat. Kawasan perindustrian di sekitar Senawang dan Labu juga menjadikan Seremban hab industri yang memerlukan pintu roller shutter berkualiti. Kami menyediakan perkhidmatan roller shutter menyeluruh untuk seluruh daerah Seremban.",
+      "closingCta": "WhatsApp kami untuk sebut harga percuma pemasangan roller shutter di Seremban dan kawasan sekitarnya!"
+    },
+    "nilai": {
+      "metaTitle": "Roller Shutter Nilai | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Nilai untuk kawasan industri NIII, Nilai 3, premis pendidikan & komersial Negeri Sembilan. Hubungi WhatsApp 24 jam sekarang!",
+      "h1": "Roller Shutter Nilai — Pasang & Baiki 24 Jam",
+      "intro": "Nilai di Negeri Sembilan ialah kawasan yang unik menggabungkan zon pendidikan tinggi (USIM, INTI International University), kawasan perindustrian NIII, dan pusat borong Nilai 3 yang terkenal di seluruh Malaysia. Ribuan kedai borong dan runcit di Nilai 3 serta kilang-kilang di kawasan NIII memerlukan sistem roller shutter yang tahan lama dan mudah diselenggara. Kami menyediakan pemasangan dan pembaikan roller shutter yang cepat untuk semua premis di Nilai.",
+      "closingCta": "Hubungi kami melalui WhatsApp sekarang untuk perkhidmatan roller shutter di Nilai 3 dan kawasan perindustrian Nilai!"
+    },
+    "senawang": {
+      "metaTitle": "Roller Shutter Senawang | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Pasang & baiki roller shutter di Senawang untuk kilang, gudang & premis komersial kawasan perindustrian Negeri Sembilan. WhatsApp kami 24 jam!",
+      "h1": "Roller Shutter Senawang — Pasang & Baiki 24 Jam",
+      "intro": "Senawang merupakan zon perindustrian utama Negeri Sembilan yang menempatkan Kawasan Perindustrian Senawang dan pelbagai kilang dalam sektor pembuatan, elektronik, dan automotif di sepanjang Jalan Sungai Ujong. Kehadiran syarikat multinasional dan industri sederhana menjadikan Senawang kawasan yang memerlukan pintu roller shutter bersaiz industri yang kukuh dan boleh dipercayai. Pasukan kami berpengalaman dalam memasang roller shutter untuk keperluan industri berat di Senawang.",
+      "closingCta": "WhatsApp kami untuk dapatkan sebut harga roller shutter industri di Senawang dan kawasan perindustrian Negeri Sembilan!"
+    },
+    "penang": {
+      "metaTitle": "Roller Shutter Penang | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Penang untuk kilang di Bayan Lepas Free Industrial Zone, Butterworth & premis komersial Georgetown. Hubungi WhatsApp 24 jam!",
+      "h1": "Roller Shutter Penang — Pasang & Baiki 24 Jam",
+      "intro": "Pulau Pinang ialah salah satu negeri perindustrian terpenting di Malaysia, dengan Bayan Lepas Free Industrial Zone menampung gergasi teknologi seperti Intel, Motorola Solutions, dan Bosch, serta kawasan komersial Georgetown yang dipenuhi kedai warisan dan perniagaan moden. Kedua-dua premis industri berteknologi tinggi di Bayan Lepas dan kedai-kedai bersejarah di sekitar Lebuh Campbell memerlukan sistem roller shutter yang sesuai dengan keperluan masing-masing. Kami meliputi seluruh Pulau Pinang dengan perkhidmatan roller shutter 24 jam.",
+      "closingCta": "Hubungi kami via WhatsApp untuk perkhidmatan roller shutter profesional di seluruh Penang termasuk Bayan Lepas dan Georgetown!"
+    },
+    "ipoh": {
+      "metaTitle": "Roller Shutter Ipoh | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Ipoh untuk premis komersial di Ipoh Garden, Meru Raya & kawasan industri Perak. Pasang & baiki 24 jam. WhatsApp kami sekarang!",
+      "h1": "Roller Shutter Ipoh — Pasang & Baiki 24 Jam",
+      "intro": "Ipoh sebagai ibu kota Perak ialah bandar raya kedua terbesar di Malaysia Barat, terkenal dengan warisan bangunan kolonial di Old Town Ipoh, pusat perniagaan di Ipoh Garden, Meru Raya, dan Kinta City Shopping Centre yang menjadi nadi perdagangan tempatan. Kawasan perindustrian Jelapang dan Menglembu menjadikan Ipoh sebuah hab industri yang aktif di samping aktiviti komersial. Kami menyediakan perkhidmatan roller shutter yang meliputi seluruh kawasan bandar raya Ipoh.",
+      "closingCta": "WhatsApp kami sekarang untuk sebut harga roller shutter terbaik di Ipoh dan kawasan sekitar Meru Raya!"
+    },
+    "alor-setar": {
+      "metaTitle": "Roller Shutter Alor Setar | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Perkhidmatan roller shutter Alor Setar untuk kedai di Pekan Rabu, Mergong & kawasan perindustrian Kedah. Hubungi WhatsApp kami 24 jam sekarang!",
+      "h1": "Roller Shutter Alor Setar — Pasang & Baiki 24 Jam",
+      "intro": "Alor Setar sebagai ibu kota Kedah merupakan pusat pentadbiran dan perdagangan utama di utara Semenanjung Malaysia, dengan kawasan perniagaan aktif di sekitar Pekan Rabu, Jalan Putra, dan kompleks perniagaan Mergong. Pertumbuhan kawasan perindustrian Kepala Batas dan MIEL Industrial Park di sekitar Alor Setar telah meningkatkan permintaan untuk sistem keselamatan premis industri. Kami hadir untuk memenuhi keperluan roller shutter di seluruh kawasan Alor Setar.",
+      "closingCta": "Hubungi kami via WhatsApp untuk pasang atau baiki roller shutter di Alor Setar dan kawasan Mergong sekarang!"
+    },
+    "sungai-petani": {
+      "metaTitle": "Roller Shutter Sungai Petani | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Sungai Petani untuk kawasan industri Gurun, Kulim Hi-Tech Park & premis komersial SP. Hubungi WhatsApp 24 jam sekarang!",
+      "h1": "Roller Shutter Sungai Petani — Pasang & Baiki 24 Jam",
+      "intro": "Sungai Petani ialah bandar perindustrian terbesar di Kedah, berdekatan dengan Kulim Hi-Tech Park yang menempatkan syarikat semikonduktor bertaraf dunia, dan kawasan perindustrian Gurun yang aktif. Pusat bandar Sungai Petani yang sibuk di sekitar Jalan Ibrahim dan Kompleks SEESCO mempunyai ratusan premis perniagaan yang memerlukan roller shutter yang boleh diandalkan. Kami menyediakan perkhidmatan pemasangan dan pembaikan roller shutter untuk semua premis di Sungai Petani dan sekitarnya.",
+      "closingCta": "WhatsApp kami untuk sebut harga percuma roller shutter di Sungai Petani dan kawasan Kulim sekarang!"
+    },
+    "taiping": {
+      "metaTitle": "Roller Shutter Taiping | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Taiping untuk premis komersial sekitar Taman Tasik Taiping, Kamunting & kawasan industri Perak. WhatsApp kami 24 jam sekarang!",
+      "h1": "Roller Shutter Taiping — Pasang & Baiki 24 Jam",
+      "intro": "Taiping di Perak ialah bandar warisan yang terkenal dengan Taman Tasik Taiping dan Muzium Perak, tetapi juga merupakan pusat perniagaan aktif dengan deretan kedai di sekitar Jalan Kota dan kawasan perindustrian di Kamunting Industrial Estate yang menampung pelbagai kilang dan gudang. Premis perniagaan lama dan baru di bandar bersejarah ini memerlukan sistem roller shutter yang sesuai dengan karakter bangunan sekitar. Kami menyediakan solusi roller shutter untuk semua premis di Taiping.",
+      "closingCta": "Hubungi kami melalui WhatsApp sekarang untuk perkhidmatan roller shutter di Taiping dan Kamunting!"
+    },
+    "butterworth": {
+      "metaTitle": "Roller Shutter Butterworth | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Butterworth untuk kilang Prai Industrial Estate, gudang pelabuhan & premis komersial Seberang Perai. Hubungi WhatsApp 24 jam!",
+      "h1": "Roller Shutter Butterworth — Pasang & Baiki 24 Jam",
+      "intro": "Butterworth di Seberang Perai Utara merupakan hab industri dan logistik penting di bahagian daratan Penang, menempatkan Prai Industrial Estate yang menampung syarikat-syarikat pembuatan besar, pelabuhan Butterworth, dan kawasan perniagaan utama di sepanjang Jalan Bagan Luar. Kedekatan dengan Pelabuhan Butterworth menjadikan kawasan ini tumpuan gudang dan depot yang memerlukan roller shutter berkapasiti besar. Kami menyediakan perkhidmatan roller shutter industri dan komersial di seluruh Butterworth.",
+      "closingCta": "WhatsApp kami untuk perkhidmatan roller shutter terbaik di Butterworth dan Prai Industrial Estate sekarang!"
+    },
+    "johor-bahru": {
+      "metaTitle": "Roller Shutter Johor Bahru | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Johor Bahru untuk kilang Pasir Gudang, premis komersial di Danga Bay & kawasan perniagaan JB. Hubungi WhatsApp 24 jam sekarang!",
+      "h1": "Roller Shutter Johor Bahru — Pasang & Baiki 24 Jam",
+      "intro": "Johor Bahru sebagai ibu kota Johor dan pintu masuk selatan Malaysia ke Singapura merupakan pusat industri dan perdagangan yang sangat aktif, dengan kawasan perindustrian Pasir Gudang Port Industrial Complex, pusat perniagaan di Johor Bahru City Centre, dan resort tematik Danga Bay yang semuanya memerlukan sistem keselamatan roller shutter yang handal. Kedekatan dengan Singapura menjadikan standard keselamatan premis di JB setaraf antarabangsa. Kami menyediakan perkhidmatan roller shutter terpercaya untuk seluruh kawasan Johor Bahru.",
+      "closingCta": "Hubungi kami via WhatsApp untuk roller shutter profesional di Johor Bahru — meliputi Pasir Gudang hingga Danga Bay!"
+    },
+    "melaka": {
+      "metaTitle": "Roller Shutter Melaka | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Melaka untuk premis di Ayer Keroh, Cheng Industrial Estate & kedai warisan Bandar Hilir. Hubungi WhatsApp 24 jam sekarang!",
+      "h1": "Roller Shutter Melaka — Pasang & Baiki 24 Jam",
+      "intro": "Melaka merupakan negeri warisan UNESCO yang juga merupakan destinasi pelancongan utama dan pusat industri aktif, dengan kawasan perindustrian Cheng dan Ayer Keroh Industrial Estate menampung pelbagai kilang perintis, serta kawasan perniagaan di Bandar Hilir dan Jalan Hang Tuah yang dipenuhi kedai-kedai pelancongan dan restoran. Premis perniagaan di Melaka memerlukan roller shutter yang estetik untuk mengekalkan suasana warisan sambil memastikan keselamatan. Kami melayani seluruh kawasan Melaka dengan perkhidmatan roller shutter 24 jam.",
+      "closingCta": "WhatsApp kami sekarang untuk sebut harga roller shutter di Melaka — dari kawasan Ayer Keroh hingga Bandar Hilir!"
+    },
+    "batu-pahat": {
+      "metaTitle": "Roller Shutter Batu Pahat | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Pasang & baiki roller shutter Batu Pahat untuk kilang tekstil, premis industri & kedai di bandar BP Johor. Hubungi WhatsApp 24 jam sekarang!",
+      "h1": "Roller Shutter Batu Pahat — Pasang & Baiki 24 Jam",
+      "intro": "Batu Pahat di Johor terkenal sebagai pusat industri tekstil dan pakaian Malaysia, dengan ratusan kilang pengeluaran kain, pakaian siap, dan aksesori fesyen di kawasan perindustrian Tongkang Pecah dan Sri Gading. Bandar Batu Pahat juga mempunyai kawasan perniagaan aktif di sepanjang Jalan Zabedah dan kawasan perindustrian Pena yang memerlukan pintu roller shutter yang tahan lama. Kami menyediakan perkhidmatan roller shutter komprehensif untuk industri tekstil dan premis komersial di Batu Pahat.",
+      "closingCta": "Hubungi kami melalui WhatsApp untuk perkhidmatan roller shutter di Batu Pahat dan kawasan industri Tongkang Pecah!"
+    },
+    "muar": {
+      "metaTitle": "Roller Shutter Muar | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Muar untuk kilang perabot, premis industri & kedai di bandar raya Muar Johor. Respons pantas, hubungi WhatsApp 24 jam sekarang!",
+      "h1": "Roller Shutter Muar — Pasang & Baiki 24 Jam",
+      "intro": "Muar dikenali sebagai ibu kota industri perabot Malaysia, dengan ratusan kilang perabot bertaraf eksport terletak di Kawasan Perindustrian Bukit Pasir, Parit Raja, dan Sungai Abong yang menghasilkan perabot untuk pasaran tempatan dan antarabangsa. Showroom perabot, kilang, dan gudang di sekitar Jalan Bakri dan Jalan Haji Abdul Manan memerlukan roller shutter berkapasiti besar untuk operasi harian. Kami pakar dalam menyediakan roller shutter industri dan komersial untuk pemain industri perabot di Muar.",
+      "closingCta": "WhatsApp kami sekarang untuk perkhidmatan roller shutter terbaik di Muar dan kawasan industri perabot Bukit Pasir!"
+    },
+    "kluang": {
+      "metaTitle": "Roller Shutter Kluang | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Kluang untuk kilang, gudang & premis komersial di bandar perindustrian Kluang Johor. Hubungi WhatsApp 24 jam sekarang!",
+      "h1": "Roller Shutter Kluang — Pasang & Baiki 24 Jam",
+      "intro": "Kluang ialah bandar perindustrian penting di tengah Johor, terletak di persimpangan laluan utama yang menghubungkan JB ke Kuala Lumpur, dengan Kawasan Perindustrian Kluang dan Taman Industri Paloh menampung industri pembuatan, pemprosesan getah, dan logistik. Bandar Kluang yang terkenal dengan kafe legendari Kluang Rail Coffee juga mempunyai kawasan perniagaan yang aktif memerlukan perlindungan roller shutter. Kami menyediakan perkhidmatan roller shutter menyeluruh untuk Kluang dan kawasan sekitarnya.",
+      "closingCta": "Hubungi kami via WhatsApp untuk sebut harga roller shutter di Kluang dan kawasan perindustrian Paloh sekarang!"
+    },
+    "skudai": {
+      "metaTitle": "Roller Shutter Skudai | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Skudai untuk premis di Taman Universiti UTM, Taman Perindustrian Skudai & kawasan komersial Johor. Hubungi WhatsApp 24 jam!",
+      "h1": "Roller Shutter Skudai — Pasang & Baiki 24 Jam",
+      "intro": "Skudai di pinggir utara Johor Bahru menempatkan kampus UTM (Universiti Teknologi Malaysia) yang besar, kawasan perumahan Taman Universiti, Taman Skudai Baru, dan zon perindustrian di Larkin yang aktif. Kedai-kedai runcit, restoran, dan premis perkhidmatan di sekitar UTM dan kawasan komersial Skudai memerlukan sistem roller shutter yang selamat. Kami menyediakan pemasangan dan pembaikan roller shutter yang cepat dan berpatutan untuk seluruh kawasan Skudai.",
+      "closingCta": "WhatsApp kami untuk perkhidmatan roller shutter di Skudai dan Taman Universiti — respons pantas 24 jam!"
+    },
+    "iskandar-puteri": {
+      "metaTitle": "Roller Shutter Iskandar Puteri | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Iskandar Puteri untuk premis Medini, EduCity, Puteri Harbour & kawasan pembangunan Johor. Hubungi WhatsApp 24 jam sekarang!",
+      "h1": "Roller Shutter Iskandar Puteri — Pasang & Baiki 24 Jam",
+      "intro": "Iskandar Puteri (dahulu Nusajaya) merupakan zon pembangunan ekonomi terbesar di Iskandar Malaysia, menampung Medini Business District, EduCity, Puteri Harbour, Legoland Malaysia, dan pelbagai kawasan perumahan premium serta kawasan perniagaan moden. Premis perniagaan baru yang dibina mengikut standard antarabangsa di sepanjang Persiaran Puteri dan Jalan Medini memerlukan sistem roller shutter yang selamat dan moden. Kami menyediakan solusi roller shutter berkualiti tinggi untuk kawasan pembangunan premium Iskandar Puteri.",
+      "closingCta": "Hubungi kami melalui WhatsApp untuk roller shutter profesional di Iskandar Puteri dan kawasan Medini sekarang!"
+    },
+    "kuantan": {
+      "metaTitle": "Roller Shutter Kuantan | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Kuantan untuk kilang di GEBENG Industrial Estate, premis komersial Gambang & bandar Kuantan Pahang. Hubungi WhatsApp 24 jam!",
+      "h1": "Roller Shutter Kuantan — Pasang & Baiki 24 Jam",
+      "intro": "Kuantan sebagai ibu kota Pahang dan pusat pantai timur Malaysia menempatkan GEBENG Industrial Estate yang merupakan salah satu kawasan perindustrian kimia dan petroleum terbesar di negara, berdekatan dengan kawasan komersial utama di Pusat Bandar Kuantan dan Kompleks TERUNTUM. Aktiviti industri berat di Gebeng dan perdagangan aktif di Kuantan memerlukan sistem roller shutter yang pelbagai fungsi. Kami meliputi seluruh kawasan Kuantan dengan perkhidmatan roller shutter 24 jam.",
+      "closingCta": "WhatsApp kami sekarang untuk perkhidmatan roller shutter di Kuantan dan kawasan GEBENG Industrial Estate!"
+    },
+    "kota-bharu": {
+      "metaTitle": "Roller Shutter Kota Bharu | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Kota Bharu untuk kedai di Bazaar Buluh Kubu, Pasir Mas & kawasan komersial ibu kota Kelantan. Hubungi WhatsApp 24 jam sekarang!",
+      "h1": "Roller Shutter Kota Bharu — Pasang & Baiki 24 Jam",
+      "intro": "Kota Bharu sebagai ibu kota Kelantan ialah pusat budaya dan perdagangan di pantai timur, terkenal dengan Bazaar Buluh Kubu, pasar kraftangan, dan kawasan perniagaan utama di sekitar Jalan Hamzah dan KB Mall yang menjadi nadi aktiviti ekonomi tempatan. Kedai-kedai batik, kraftangan, dan perniagaan moden di bandar ini memerlukan sistem roller shutter yang sesuai dengan keperluan operasi harian. Kami menyediakan perkhidmatan pemasangan dan pembaikan roller shutter untuk semua premis di Kota Bharu.",
+      "closingCta": "Hubungi kami via WhatsApp untuk perkhidmatan roller shutter di Kota Bharu dan kawasan sekitar KB Mall sekarang!"
+    },
+    "kuala-terengganu": {
+      "metaTitle": "Roller Shutter Kuala Terengganu | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Kuala Terengganu untuk premis di Medan Selera, Chendering Industrial Estate & kawasan komersial Terengganu. WhatsApp kami 24 jam!",
+      "h1": "Roller Shutter Kuala Terengganu — Pasang & Baiki 24 Jam",
+      "intro": "Kuala Terengganu sebagai ibu kota Terengganu merupakan pusat pentadbiran, pelancongan, dan industri hiliran petroleum di pantai timur, menempatkan Kawasan Perindustrian Chendering dan kawasan perniagaan utama di Jalan Sultan Zainal Abidin bersebelahan Masjid Kristal yang ikonik. Industri perikanan, kraftangan, dan perniagaan minyak sawit di kawasan ini memerlukan roller shutter yang tahan iklim pantai. Kami menyediakan perkhidmatan roller shutter yang sesuai untuk semua premis di Kuala Terengganu.",
+      "closingCta": "WhatsApp kami sekarang untuk sebut harga roller shutter di Kuala Terengganu dan kawasan Chendering!"
+    },
+    "temerloh": {
+      "metaTitle": "Roller Shutter Temerloh | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Temerloh untuk kedai, gudang & premis komersial di bandar perbandaran Temerloh Pahang. Hubungi WhatsApp 24 jam sekarang!",
+      "h1": "Roller Shutter Temerloh — Pasang & Baiki 24 Jam",
+      "intro": "Temerloh ialah bandar utama di tengah Pahang yang terletak di persimpangan laluan utama menghubungkan pantai barat dan pantai timur Malaysia, terkenal sebagai pusat industri ikan patin dan kawasan perniagaan di sepanjang Jalan Tengku Bakar dan kompleks perniagaan sekitar Taman Sri Semantan. Kedudukan strategik Temerloh sebagai simpang jalan utama menjadikannya hab logistik dan perniagaan yang memerlukan sistem keselamatan premis yang andal. Kami menyediakan perkhidmatan roller shutter untuk semua premis di Temerloh.",
+      "closingCta": "Hubungi kami melalui WhatsApp untuk perkhidmatan roller shutter terpercaya di Temerloh dan kawasan sekitarnya!"
+    },
+    "kota-kinabalu": {
+      "metaTitle": "Roller Shutter Kota Kinabalu | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Kota Kinabalu untuk premis di Lintas, Karamunsing Complex & kawasan perindustrian Sabah. Hubungi WhatsApp 24 jam sekarang!",
+      "h1": "Roller Shutter Kota Kinabalu — Pasang & Baiki 24 Jam",
+      "intro": "Kota Kinabalu sebagai ibu kota Sabah dan bandar raya paling maju di Borneo Malaysia merupakan pusat pelancongan, perdagangan, dan industri makanan laut yang pesat, dengan kawasan perniagaan utama di Lintas Plaza, KK City Mall, dan kawasan perindustrian Kolombong yang menampung pelbagai kilang dan gudang. Premis perniagaan di KK memerlukan roller shutter yang tahan terhadap cuaca tropika Borneo yang lembap dan panas. Kami menyediakan perkhidmatan roller shutter untuk seluruh kawasan Kota Kinabalu.",
+      "closingCta": "WhatsApp kami untuk perkhidmatan roller shutter di Kota Kinabalu — meliputi dari Lintas hingga Kolombong Industrial!"
+    },
+    "kuching": {
+      "metaTitle": "Roller Shutter Kuching | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Kuching untuk premis di KTLD, Jalan Abell & kawasan perindustrian Sama Jaya Sarawak. Hubungi WhatsApp 24 jam sekarang!",
+      "h1": "Roller Shutter Kuching — Pasang & Baiki 24 Jam",
+      "intro": "Kuching sebagai ibu kota Sarawak ialah bandar raya terbesar di Borneo Malaysia yang menggabungkan warisan kolonial Brooke di kawasan Kuching Waterfront dengan pusat perniagaan moden di KTLD (Kuching Tun Abdul Razak Highway), Tabuan Jaya, dan kawasan perindustrian Sama Jaya Free Industrial Zone yang menampung syarikat teknologi bertaraf eksport. Premis perniagaan dan industri di Kuching memerlukan roller shutter yang tahan iklim tropika Borneo. Kami menyediakan perkhidmatan roller shutter menyeluruh di seluruh Kuching.",
+      "closingCta": "Hubungi kami via WhatsApp untuk sebut harga roller shutter di Kuching dan kawasan Sama Jaya Industrial sekarang!"
+    },
+    "miri": {
+      "metaTitle": "Roller Shutter Miri | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Miri untuk premis industri minyak, kilang Lutong & kawasan komersial Bintang Megamall Sarawak. Hubungi WhatsApp 24 jam!",
+      "h1": "Roller Shutter Miri — Pasang & Baiki 24 Jam",
+      "intro": "Miri di Sarawak terkenal sebagai bandar minyak Malaysia, menempatkan operasi PETRONAS dan SapuraKencana di kawasan industri petroleum Lutong dan Piasau Industrial Estate, bersama kawasan perniagaan moden di sekitar Bintang Megamall dan Marina Square yang sibuk. Premis industri sokongan minyak dan gas, gudang peralatan, serta kedai-kedai komersial di Miri memerlukan sistem roller shutter yang tahan lama. Kami menyediakan perkhidmatan roller shutter untuk seluruh kawasan Miri.",
+      "closingCta": "WhatsApp kami sekarang untuk perkhidmatan roller shutter profesional di Miri dan kawasan industri petroleum Lutong!"
+    },
+    "sandakan": {
+      "metaTitle": "Roller Shutter Sandakan | Pasang & Baiki 24 Jam | Roller Shutter Door Malaysia",
+      "metaDescription": "Roller shutter Sandakan untuk premis pelabuhan, kilang pemprosesan makanan laut & kawasan komersial Sabah. Hubungi WhatsApp 24 jam sekarang!",
+      "h1": "Roller Shutter Sandakan — Pasang & Baiki 24 Jam",
+      "intro": "Sandakan di pantai timur Sabah ialah pelabuhan industri yang terkenal dengan industri pemprosesan makanan laut terbesar di Malaysia, dengan kawasan industri di sepanjang Jalan Buli Sim Sim dan kawasan perindustrian Mile 4 yang menampung kilang-kilang pemprosesan udang, ikan, dan produk sawit untuk eksport. Bandar Sandakan juga mempunyai kawasan perniagaan aktif di sekitar Bandar Kim Fung dan Wisma Sandakan yang memerlukan roller shutter yang tahan iklim lembap pesisir pantai. Kami menyediakan perkhidmatan roller shutter untuk semua premis di Sandakan.",
+      "closingCta": "Hubungi kami melalui WhatsApp untuk perkhidmatan roller shutter di Sandakan dan kawasan industri perikanan Mile 4!"
+    }
+  }
+}

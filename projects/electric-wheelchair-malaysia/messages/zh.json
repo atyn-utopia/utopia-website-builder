@@ -1,0 +1,263 @@
+{
+  "metadata": {
+    "title": "马来西亚电动轮椅 | 租赁与销售 | electric-wheelchair.com.my",
+    "description": "在马来西亚租赁或购买电动轮椅。当日送达。KKM认证。月租RM400起或购买RM2,400起。立即WhatsApp联系我们。"
+  },
+  "nav": {
+    "brandName": "电动轮椅 MY",
+    "products": "产品",
+    "howItWorks": "订购流程",
+    "reviews": "评价",
+    "locations": "服务地区",
+    "faq": "常见问题",
+    "blog": "博客",
+    "ctaButton": "立即WhatsApp"
+  },
+  "fomoBanner": {
+    "texts": [
+      "🔥 库存有限 — 吉隆坡地区仅剩3台",
+      "⚡ 今日可享当日送达服务",
+      "✅ 本周马来西亚已租出15台轮椅"
+    ],
+    "bookNow": "立即预订"
+  },
+  "hero": {
+    "badge": "马来西亚最受欢迎",
+    "h1": "购买或租赁",
+    "h1Highlight": "电动轮椅",
+    "h1Suffix": "在马来西亚",
+    "subheadline": "轻便。可折叠。动力强劲。月租RM400起或购买RM2,400起。全马当日送达。",
+    "ctaPrimary": "立即WhatsApp",
+    "ctaSecondary": "查看产品",
+    "trustBadge": "KKM认证 • 6个月保修 • 2,300+客户"
+  },
+  "stats": {
+    "items": [
+      {
+        "value": "2,300+",
+        "label": "服务客户"
+      },
+      {
+        "value": "当日",
+        "label": "送达"
+      },
+      {
+        "value": "RM400",
+        "label": "月租金"
+      },
+      {
+        "value": "4.9★",
+        "label": "Google评分"
+      }
+    ]
+  },
+  "products": {
+    "heading": "我们的电动轮椅",
+    "subheading": "多合一可折叠、轻便、KKM认证电动轮椅",
+    "name": "多合一电动轮椅",
+    "description": "可折叠、轻便、可躺式电动轮椅，适用于居家、医院和旅行。我们的电动轮椅紧凑便携，老年人和康复期用户都能轻松操作。KKM认证，6个月保修。",
+    "rrp": "RM 3,399",
+    "price": "RM 2,400",
+    "rental": "月租RM400起",
+    "saveLabel": "省RM999！",
+    "features": [
+      "KKM认证",
+      "6个月保修",
+      "可折叠轻便",
+      "当日送达",
+      "98%舒适度"
+    ],
+    "cta": "立即WhatsApp"
+  },
+  "howItWorks": {
+    "heading": "订购流程",
+    "subheading": "3个简单步骤，获取您的电动轮椅",
+    "steps": [
+      {
+        "title": "联系我们",
+        "description": "通过WhatsApp告诉我们您的需求，我们会为您推荐最合适的轮椅。"
+      },
+      {
+        "title": "选择与付款",
+        "description": "选择租赁或购买。通过网上银行付款，无需信用卡。"
+      },
+      {
+        "title": "送达！",
+        "description": "当日送到您家门口。免费安装和使用演示。"
+      }
+    ]
+  },
+  "risk": {
+    "heading": "为什么您需要电动轮椅",
+    "subheading": "不要让行动不便限制您或家人的生活",
+    "points": [
+      "手动轮椅使用疲劳？",
+      "担心年迈父母的行动自主？",
+      "术后恢复需要轮椅？",
+      "寻找适合出行的代步工具？"
+    ],
+    "solution": "我们的电动轮椅让您重获自由 — 轻便易控，送货上门。",
+    "cta": "立即WhatsApp"
+  },
+  "midCta": {
+    "heading": "准备好恢复您的行动自由了吗？",
+    "subheading": "立即WhatsApp咨询价格和库存信息",
+    "cta": "立即WhatsApp"
+  },
+  "reviews": {
+    "heading": "马来西亚客户的评价",
+    "subheading": "基于230+条Google评价",
+    "rating": "4.9",
+    "items": [
+      {
+        "name": "Ahmad bin Ismail",
+        "location": "吉隆坡",
+        "text": "父亲髋关节手术后租了一台电动轮椅。当天就送到了，操作非常简单。强烈推荐！",
+        "rating": 5
+      },
+      {
+        "name": "Susan Tan",
+        "location": "八打灵再也",
+        "text": "为母亲买了轻便款。她非常喜欢——折叠起来放进车里很方便。电池续航一整天。非常满意的购买。",
+        "rating": 5
+      },
+      {
+        "name": "Rajesh Kumar",
+        "location": "新山",
+        "text": "租赁方案非常棒。每月RM400比购买划算多了。他们的团队还教我们怎么操作。服务非常专业。",
+        "rating": 5
+      },
+      {
+        "name": "Fatimah binti Yusof",
+        "location": "莎阿南",
+        "text": "丈夫中风后需要轮椅。这台电动轮椅改变了他的生活，他现在可以自己行动了。谢谢！",
+        "rating": 5
+      },
+      {
+        "name": "David Wong",
+        "location": "槟城",
+        "text": "为祖母订购的。可躺式型号非常舒适。送到槟城也很快。会推荐给朋友。",
+        "rating": 5
+      },
+      {
+        "name": "Siti Aminah",
+        "location": "怡保",
+        "text": "对服务非常满意。轮椅和描述的一模一样——轻便又有力。父亲每天都用它出去散步。价格也很合理。",
+        "rating": 5
+      }
+    ]
+  },
+  "whyChoose": {
+    "heading": "为什么选择马来西亚电动轮椅",
+    "items": [
+      {
+        "title": "KKM认证",
+        "description": "我们所有轮椅均获得马来西亚卫生部认证，确保安全和品质。"
+      },
+      {
+        "title": "当日送达",
+        "description": "下午2点前下单，西马当日送达。"
+      },
+      {
+        "title": "6个月保修",
+        "description": "每台轮椅均享6个月保修，涵盖电机、电池和车架。"
+      },
+      {
+        "title": "灵活租赁",
+        "description": "月租RM400起，无需长期合约。非常适合恢复期使用。"
+      },
+      {
+        "title": "免费安装",
+        "description": "我们负责送货、组装，并演示使用方法——全部免费。"
+      },
+      {
+        "title": "维修与零配件",
+        "description": "提供全面维修服务和正品零配件。我们维修所有品牌的电动轮椅。"
+      }
+    ]
+  },
+  "gallery": {
+    "heading": "客户展示",
+    "subheading": "马来西亚各地的真实客户正在使用我们的电动轮椅"
+  },
+  "locations": {
+    "heading": "全马送货服务",
+    "subheading": "全国80+城市当日送达",
+    "viewAll": "查看所有地区"
+  },
+  "faq": {
+    "heading": "常见问题",
+    "items": [
+      {
+        "question": "在马来西亚租赁电动轮椅需要多少钱？",
+        "answer": "我们的电动轮椅月租从RM400起。无需信用卡——可通过网上银行支付。租金包含送货、安装和使用演示。"
+      },
+      {
+        "question": "可以购买而不是租赁吗？",
+        "answer": "当然可以！我们的电动轮椅售价RM2,400起。所有购买均享6个月保修，涵盖电机、电池和车架。我们也提供分期付款方案，每月RM400，共12个月。"
+      },
+      {
+        "question": "送货速度如何？",
+        "answer": "西马地区下午2点前下单可享当日送达。东马（沙巴和砂拉越）需2-3个工作日。所有送货均包含免费安装和使用演示。"
+      },
+      {
+        "question": "你们的电动轮椅有KKM认证吗？",
+        "answer": "是的，我们所有电动轮椅均获马来西亚卫生部（KKM）认证，确保符合医疗代步设备的安全和品质标准。"
+      },
+      {
+        "question": "你们提供轮椅维修服务吗？",
+        "answer": "是的，我们为所有品牌的电动轮椅提供全面维修服务。我们备有正品零配件，包括电池、电机、操控杆和轮胎。请通过WhatsApp联系我们了解维修价格。"
+      },
+      {
+        "question": "电动轮椅的承重能力是多少？",
+        "answer": "我们的标准轻便款承重可达100公斤。对于体型较大的用户，我们的重型款承重可达120公斤，配有加固钢架。所有型号均可折叠，可放入大多数车尾箱。"
+      }
+    ]
+  },
+  "finalCta": {
+    "heading": "今天就获取您的电动轮椅",
+    "subheading": "月租RM400起或购买RM2,400起。全马当日送达。",
+    "cta": "立即WhatsApp",
+    "phone": "6010-888 9849"
+  },
+  "footer": {
+    "brandName": "马来西亚电动轮椅",
+    "tagline": "马来西亚值得信赖的电动轮椅租赁与销售服务商。",
+    "quickLinks": "快速链接",
+    "contact": "联系我们",
+    "copyright": "© 2026 Ibnu Sina Care Sdn. Bhd. 版权所有。",
+    "ssm": "Ibnu Sina Care Sdn. Bhd. — SSM注册企业"
+  },
+  "blog": {
+    "title": "博客",
+    "metaTitle": "博客 | 马来西亚电动轮椅",
+    "metaDescription": "阅读我们关于电动轮椅、移动出行技巧和轮椅指南的最新文章。",
+    "readMore": "阅读更多",
+    "recentPosts": "最新文章",
+    "publishedOn": "发布于",
+    "minRead": "分钟阅读",
+    "backToBlog": "← 返回博客",
+    "noPosts": "暂无博客文章，请稍后再来！",
+    "sharePre": "分享这篇文章",
+    "breadcrumbHome": "首页",
+    "breadcrumbBlog": "博客"
+  },
+  "location": {
+    "h1Prefix": "电动轮椅 -",
+    "metaTitleSuffix": "| 租赁与销售 | 马来西亚电动轮椅",
+    "metaDescPrefix": "在",
+    "metaDescSuffix": "租赁或购买电动轮椅。当日送达。KKM认证。月租RM400起。立即WhatsApp联系我们。",
+    "breadcrumbHome": "首页",
+    "breadcrumbProduct": "电动轮椅",
+    "nearbyTitle": "附近地区",
+    "nearbySubtitle": "我们也配送到这些附近城市"
+  },
+  "shared": {
+    "whatsappUs": "立即WhatsApp",
+    "learnMore": "了解更多",
+    "viewAll": "查看全部",
+    "freeDelivery": "免费送货",
+    "kkmCertified": "KKM认证",
+    "sixMonthWarranty": "6个月保修"
+  }
+}

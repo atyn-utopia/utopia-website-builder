@@ -1,0 +1,237 @@
+{
+  "nav": {
+    "services": "Perkhidmatan",
+    "reviews": "Ulasan",
+    "locations": "Lokasi",
+    "whatsapp": "WhatsApp"
+  },
+  "footer": {
+    "description": "Servis aircond profesional, pembaikan dan pemasangan di 38 bandar seluruh Malaysia. Tukang bertauliah, harga berpatutan, 7 hari seminggu.",
+    "whatsappUs": "WhatsApp Kami",
+    "servicesTitle": "Perkhidmatan",
+    "locationsTitle": "Lokasi",
+    "viewAll": "Lihat semua 38 bandar",
+    "phone": "012-345 6789",
+    "ssm": "SSM Reg: 202X0XXXXX (XXXXXX-X)",
+    "copyright": "© {year} Encik Beku · serviceaircond.my"
+  },
+  "home": {
+    "meta": {
+      "title": "Servis Aircond Malaysia | Pasang, Cuci & Baiki — Encik Beku",
+      "description": "Servis aircond profesional di seluruh Malaysia. Pemasangan, cucian, pembaikan dan cuci kimia yang cepat. Dipercayai 10,000+ pelanggan. WhatsApp Encik Beku sekarang."
+    },
+    "fomo": {
+      "promo": "Promosi Hari Ini — ",
+      "slotsLeft": "Hanya tinggal {slots} slot untuk servis hari ini!",
+      "bookNow": "Tempah Sekarang"
+    },
+    "hero": {
+      "badgeCertified": "Tukang Bertauliah",
+      "badgeCities": "38 Bandar",
+      "headline": "Servis Aircond Profesional",
+      "headlineHighlight": "Di Seluruh Malaysia",
+      "subheadline": "Dari Kuala Lumpur ke Kota Kinabalu — tukang bertauliah ke pintu anda. Respons pantas. Harga berpatutan. Kualiti dijamin.",
+      "cta": "WhatsApp Kami Sekarang",
+      "ctaSubtext": "Percuma untuk bertanya · Respons dalam 1 jam",
+      "heroAlt": "Tukang aircond memberi ibu jari",
+      "stampFrom": "Dari",
+      "stampPrice": "RM80",
+      "stampUnit": "Per Unit",
+      "sameDayTitle": "Servis Hari Sama",
+      "sameDaySub": "7 Hari Seminggu"
+    },
+    "stats": {
+      "customers": "10,000+",
+      "customersLabel": "Pelanggan Dilayan",
+      "response": "1-Jam",
+      "responseLabel": "Masa Respons",
+      "rating": "5-Bintang",
+      "ratingLabel": "Purata Rating",
+      "experience": "8+ Tahun",
+      "experienceLabel": "Dalam Perniagaan"
+    },
+    "brands": {
+      "label": "Jenama Yang Kami Servis"
+    },
+    "services": {
+      "tag": "Perkhidmatan & Harga",
+      "heading": "Semua Perkhidmatan & Harga",
+      "subheading": "Harga untuk unit dinding dan kaset siling.",
+      "wall": "Dinding",
+      "cassette": "Kaset",
+      "bookNow": "Tempah Sekarang",
+      "disclaimer": "* Harga mungkin berbeza mengikut lokasi dan keadaan unit.",
+      "servicing": "Servis Aircond",
+      "servicingDesc": "Cuci penapis, bersih gegelung, periksa gas dan komponen elektrik.",
+      "installation": "Pasang Aircond",
+      "installationDesc": "Pemasangan penuh — dinding, paip, pendawaian dan pentauliahan.",
+      "repair": "Baiki Aircond",
+      "repairDesc": "Diagnosis punca masalah dengan cepat dan baiki pada hari yang sama.",
+      "chemicalWash": "Cuci Kimia",
+      "chemicalWashDesc": "Cucian mendalam — buka unit, rendam dalam larutan kimia, bunuh bakteria dan kulat.",
+      "gasTopUp": "Tambah Gas",
+      "gasTopUpDesc": "Periksa kebocoran, tambah gas refrigerant dan pulihkan penyejukan optimum.",
+      "dismantling": "Buka Unit",
+      "dismantlingDesc": "Pembuangan unit lama dengan selamat — braket, paip dan pelupusan termasuk.",
+      "popular": "Popular",
+      "recommended": "Disyorkan",
+      "waServicing": "Hi, saya perlukan servis aircond. Mohon sebut harga.",
+      "waInstallation": "Hi, saya perlukan pemasangan aircond. Mohon sebut harga.",
+      "waRepair": "Hi, saya perlukan pembaikan aircond. Mohon sebut harga.",
+      "waChemicalWash": "Hi, saya perlukan cuci kimia aircond. Mohon sebut harga.",
+      "waGasTopUp": "Hi, saya perlukan tambah gas aircond. Mohon sebut harga.",
+      "waDismantling": "Hi, saya perlukan buka unit aircond. Mohon sebut harga."
+    },
+    "why": {
+      "tag": "Kenapa Encik Beku",
+      "heading": "Kenapa Pelanggan Percaya Kami",
+      "certified": "Tukang Bertauliah",
+      "certifiedDesc": "Setiap tukang terlatih SIRIM dan latar belakang disemak.",
+      "sameDay": "Servis Hari Sama",
+      "sameDayDesc": "Kami hantar tukang dalam masa 1 jam ke 38 bandar.",
+      "transparent": "Harga Telus",
+      "transparentDesc": "Sebut harga penuh di awal. Tiada caj tersembunyi.",
+      "allBrands": "Semua Jenama Utama",
+      "allBrandsDesc": "Daikin, Panasonic, Midea, York, Sharp, Hisense dan banyak lagi.",
+      "warranty": "Jaminan Kerja",
+      "warrantyDesc": "Jaminan mutu kerja 30 hari untuk setiap servis.",
+      "open7Days": "Buka 7 Hari",
+      "open7DaysDesc": "Termasuk hujung minggu dan cuti umum."
+    },
+    "reviews": {
+      "googleReviews": "Ulasan Google",
+      "heading": "Apa Kata Pelanggan",
+      "review1Text": "Servis yang sangat bagus! Technician datang tepat pada masa dan buat kerja dengan bersih. Aircond saya sejuk balik selepas chemical wash. Definitely will call again.",
+      "review1Name": "Hasmah Binti Rosli",
+      "review1Location": "Shah Alam",
+      "review2Text": "Hubungi pukul 10 pagi, tukang sampai pukul 11:30. Baiki kebocoran gas dan tambah refrigerant di tempat. Harga berpatutan dan dia terangkan semuanya.",
+      "review2Name": "Kevin Tan",
+      "review2Location": "Johor Bahru",
+      "review3Text": "Saya hubungi melalui WhatsApp dan dapat respons dalam masa 10 minit. Servis cepat, bersih dan profesional. Syorkan kepada semua orang di Penang!",
+      "review3Name": "Norizan Ahmad",
+      "review3Location": "Pulau Pinang",
+      "review4Text": "Aircond pejabat kami di PJ semua ada masalah. Encik Beku hantar dua tukang yang servis kesemua 6 unit dalam satu petang. Sangat teratur dan profesional. Kami dah sign kontrak penyelenggaraan tahunan.",
+      "review4Name": "Daniel Lim",
+      "review4Location": "Petaling Jaya",
+      "review5Text": "Aircond dah 3 hari tak sejuk, risau kena charge mahal. Tapi Encik Beku quote RM150 je untuk top-up gas, siap check semua. No hidden charges betul-betul. Sangat recommended!",
+      "review5Name": "Amirul Hakim",
+      "review5Location": "Kajang",
+      "review6Text": "Tempah cuci kimia untuk unit bilik tidur. Tukang sampai tepat masa, letak alas pelindung, dan buat kerja dengan teliti. Aircond saya sekarang bau segar dan sejuk sangat. Berbaloi!",
+      "review6Name": "Priya Nair",
+      "review6Location": "Bangsar",
+      "reviewCount": "Berdasarkan 230+ Ulasan Google"
+    },
+    "howItWorks": {
+      "tag": "Proses Mudah",
+      "heading": "Tiga Langkah ke Rumah Sejuk",
+      "step1Num": "01",
+      "step1Title": "WhatsApp Kami",
+      "step1Desc": "Hantar mesej dengan lokasi anda dan servis yang diperlukan. Kami balas dalam beberapa minit.",
+      "step2Num": "02",
+      "step2Title": "Kami Sahkan & Hantar",
+      "step2Desc": "Kami sahkan ketersediaan, beri anggaran harga, dan hantar tukang bertauliah.",
+      "step3Num": "03",
+      "step3Title": "Siap",
+      "step3Desc": "Aircond anda diservis, dibaiki, atau dipasang — dan kami kemas sebelum pergi.",
+      "cta": "Mula dengan Langkah 1 — WhatsApp Kami"
+    },
+    "gallery": {
+      "tag": "Hasil Sebenar",
+      "heading": "Kerja Kami Di Seluruh Malaysia",
+      "imageAlt": "Kerja servis aircond pelanggan {number}"
+    },
+    "faq": {
+      "tag": "Soalan Lazim",
+      "heading": "Soalan Yang Kerap Ditanya",
+      "q1": "Berapa kos servis aircond?",
+      "a1": "Servis standard bermula dari RM80 per unit dinding dan RM120 untuk kaset siling. Cuci kimia bermula dari RM180. Kami sentiasa beri sebut harga sebelum mula — tiada caj tersembunyi.",
+      "q2": "Berapa cepat tukang boleh sampai?",
+      "a2": "Kami sasarkan respons dalam 1 jam dari WhatsApp anda. Servis hari sama tersedia 7 hari seminggu di semua 38 bandar.",
+      "q3": "Jenama apa yang anda servis?",
+      "a3": "Semua jenama utama — Daikin, Panasonic, Midea, York, Samsung, Hisense, Sharp, Gree, Acson, Haier, LG, dan banyak lagi.",
+      "q4": "Ada jaminan untuk kerja anda?",
+      "a4": "Ya. Setiap servis datang dengan jaminan mutu kerja 30 hari. Jika ada masalah dalam tempoh tersebut, kami datang balik dan baiki tanpa kos tambahan.",
+      "q5": "Aircond tak sejuk, apa masalahnya?",
+      "a5": "Aircond yang tidak sejuk biasanya disebabkan gas refrigerant yang rendah, penapis kotor, atau masalah kompresor. Tukang kami boleh diagnose dan repair on the spot.",
+      "q6": "Berapa lama proses cuci aircond chemical wash?",
+      "a6": "Chemical wash biasanya mengambil masa 45 minit hingga 1 jam per unit. Kami akan buka unit, rendam dalam chemical solution, cuci bersih, dan pasang semula.",
+      "q7": "Aircond bunyi bising, kenapa?",
+      "a7": "Bunyi bising boleh disebabkan oleh kipas yang longgar, bearing yang rosak, atau bahagian dalaman yang kotor. Hubungi kami via WhatsApp untuk diagnosis percuma.",
+      "q8": "Boleh pasang aircond baru?",
+      "a8": "Sudah tentu. Kami uruskan pemasangan penuh — braket, paip, sambungan elektrik, dan pentauliahan untuk semua jenis unit termasuk split, kaset, dan ducted.",
+      "q9": "Ada servis aircond pejabat dan komersial?",
+      "a9": "Ya. Kami servis kedua-dua sistem aircond kediaman dan komersial termasuk kaset siling, sistem VRF, dan unit ducted yang biasa ada di pejabat dan kedai.",
+      "q10": "Kawasan mana yang anda liputi?",
+      "a10": "Kami liputi 38 bandar seluruh Malaysia — Lembah Klang, Pulau Pinang, Johor Bahru, Ipoh, Kuantan, Kota Kinabalu, Kuching, dan banyak lagi."
+    },
+    "locations": {
+      "tag": "Liputan Servis",
+      "heading": "Kami Liputi 38 Bandar Seluruh Malaysia",
+      "subheading": "Dari KL ke Sabah dan Sarawak — tukang kami dekat dengan anda.",
+      "cities": "bandar"
+    },
+    "midCta": {
+      "text": "Sedia untuk tempah? WhatsApp kami sekarang — respons dalam 1 jam.",
+      "button": "WhatsApp Encik Beku"
+    },
+    "guarantee": {
+      "text": "Jaminan Mutu Kerja 30 Hari — tak puas hati, kami datang balik percuma."
+    },
+    "cta": {
+      "headline": "Aircond Anda Layak Lebih Baik.",
+      "headlineHighlight": "Anda Juga.",
+      "subheadline": "Sertai 10,000+ pelanggan yang percayakan Encik Beku untuk servis aircond yang pantas dan profesional di seluruh Malaysia.",
+      "button": "WhatsApp Encik Beku Sekarang",
+      "fine": "Respons dalam 1 jam · Tiada caj tersembunyi · 7 hari seminggu"
+    }
+  },
+  "location": {
+    "meta": {
+      "title": "Servis Aircond {city} | Pasang & Baiki — Encik Beku",
+      "description": "Cari servis aircond di {city}? Encik Beku menyediakan pemasangan, pembaikan dan cuci kimia. Tukang berkelayakan, respons cepat. WhatsApp sekarang."
+    },
+    "hero": {
+      "headline": "Servis Aircond di {city}",
+      "cta": "WhatsApp Kami di {city}"
+    },
+    "services": {
+      "heading": "Perkhidmatan Kami di {city}",
+      "servicing": "Servis aircond di {city} — penyelenggaraan berkala untuk unit berjalan dengan cekap.",
+      "installation": "Pemasangan aircond di {city} — persediaan penuh untuk rumah, pejabat dan ruang komersial.",
+      "repair": "Pembaikan aircond di {city} — diagnosis pantas dan pembaikan di tempat untuk semua masalah.",
+      "chemicalWash": "Cuci kimia di {city} — cucian mendalam yang membuang kulat dan memulihkan aliran udara."
+    },
+    "why": {
+      "heading": "Kenapa Pilih Encik Beku di {city}",
+      "fast": "Respons hari sama di seluruh {city}",
+      "transparent": "Harga telus tanpa caj tersembunyi",
+      "brands": "Semua jenama aircond utama diservis",
+      "warranty": "Jaminan mutu kerja 30 hari untuk setiap servis"
+    },
+    "faq": {
+      "heading": "Soalan Lazim — Servis Aircond di {city}",
+      "q1": "Berapa cepat tukang boleh sampai di {city}?",
+      "a1": "Kami ada tukang yang berstesen berhampiran {city} dan sasarkan tiba dalam 1 jam untuk tempahan hari sama.",
+      "q2": "Berapa kos servis aircond di {city}?",
+      "a2": "Servis aircond standard di {city} bermula dari RM80 per unit. Cuci kimia dan pembaikan dihargai berasingan — WhatsApp kami untuk sebut harga percuma.",
+      "q3": "Adakah anda liputi semua kawasan dalam {city}?",
+      "a3": "Ya — kami liputi seluruh kawasan {city} dan poskod sekitar. WhatsApp kami untuk sahkan alamat anda.",
+      "q4": "Jenama aircond apa yang anda servis di {city}?",
+      "a4": "Kami servis semua jenama utama termasuk Daikin, Panasonic, Midea, Samsung, Hisense, York, Gree, dan Sharp."
+    },
+    "nearby": {
+      "heading": "Lokasi Berhampiran",
+      "viewService": "Servis aircond di {city}"
+    },
+    "cta": {
+      "heading": "Perlu Servis Aircond di {city}?",
+      "subheading": "WhatsApp Encik Beku sekarang dan kami akan aturkan tukang di {city} untuk anda hari ini.",
+      "button": "WhatsApp Encik Beku di {city}",
+      "fine": "Pantas, profesional, dan jujur — begitulah cara kami."
+    },
+    "breadcrumb": {
+      "home": "Utama",
+      "locations": "Lokasi"
+    }
+  }
+}

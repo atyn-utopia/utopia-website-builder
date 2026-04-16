@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-cream: #FFFEF8;
+  --color-cream-50: #FFF9C4;
+  --color-cream-100: #FFF176;
+  --color-gold: #FDD835;
+  --color-gold-600: #F9A825;
+  --color-gold-200: #FFEE58;
+  --color-sage: #F9A825;
+  --color-sage-600: #111111;
+  --color-sage-50: #FFFFFF;
+  --color-charcoal: #111111;
+  --color-wa: #25D366;
+  --color-wa-600: #1EB85A;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+html, body {
+  background: #FFFEF8;
+  color: #111111;
+  font-family: var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  font-family: var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.kk-masonry {
+  column-count: 2;
+  column-gap: 16px;
+}
+@media (min-width: 768px) {
+  .kk-masonry { column-count: 3; }
+}
+@media (min-width: 1024px) {
+  .kk-masonry { column-count: 4; }
+}
+.kk-masonry > * {
+  break-inside: avoid;
+  margin-bottom: 16px;
+}
+
+@keyframes kk-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.kk-marquee {
+  animation: kk-marquee 60s linear infinite;
+}
+.kk-marquee:hover {
+  animation-play-state: paused;
+}
+
+.kk-card-shadow {
+  box-shadow:
+    0 1px 0 rgba(232,181,71,0.08),
+    0 12px 24px -12px rgba(42,38,32,0.12),
+    0 28px 60px -28px rgba(156,184,111,0.18);
+}
+
+.kk-card-shadow-hover {
+  box-shadow:
+    0 1px 0 rgba(232,181,71,0.12),
+    0 16px 32px -12px rgba(42,38,32,0.18),
+    0 36px 72px -28px rgba(156,184,111,0.28);
+}

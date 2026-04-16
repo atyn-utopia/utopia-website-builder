@@ -762,8 +762,7 @@ All 128 locations with their display names for title/H1 generation:
 
 | Agent | Deliverable | Input Needed |
 |---|---|---|
-| **Nana** | Homepage copy (EN + ZH), 128 unique location page copies (EN + ZH), FAQ content | This SEO plan (Sections 3, 6) |
-| **Fanny** | 256 generated location pages using Nana's copy + location data | Nana's copy + location list (Section 9) |
+| **Nana** | Homepage copy (EN + ZH), all location page copies (EN + ZH), FAQ content | This SEO plan (Sections 3, 6) + location list (Section 9) |
 | **Kimmy** | Schema markup (5 types), meta tags, alt text, hreflang, OG tags, robots.txt, sitemap | This SEO plan (Sections 3, 5, 7, 8) |
 
 ---

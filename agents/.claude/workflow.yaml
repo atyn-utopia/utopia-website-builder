@@ -1,7 +1,102 @@
+# Full website build workflow
+# SINGLE SOURCE OF TRUTH: docs/full-website-setup.md
+# This file must match that doc exactly. If they conflict, update this file.
+
 workflow:
-  - Alpha
-  - Cyclops
-  - Sora
-  - Nana
-  - Fanny
-  - Kimmy
+  - step: 0
+    description: "Gather inputs — company (MANDATORY, pick from 16 options), product, domain, languages, phone number, leads mode, brand assets"
+    blocking: true
+
+  - step: 1
+    description: "Create project folder at projects/{slug}/ and save inputs.md"
+
+  - step: 2
+    agents: [Alpha]
+    description: "System architecture — confirm languages with user"
+    output: "projects/{slug}/architecture.md"
+    blocking: true
+
+  - step: 3
+    agents: [Cyclops, Sora]
+    parallel: true
+    description: "Database schema + SEO plan (both need Alpha's output)"
+    output: "projects/{slug}/database.md, projects/{slug}/seo-plan.md"
+    blocking: true
+
+  - step: 4
+    agents: [Nana]
+    description: "Homepage copy + all location page copy (needs Alpha + Sora)"
+    output: "projects/{slug}/copy-homepage.md, projects/{slug}/copy-locations.md"
+    blocking: true
+
+  - step: 5
+    agents: [Kagura, Kimmy]
+    parallel: true
+    description: "UI design direction + technical SEO/i18n/WhatsApp redirect (both need Nana)"
+    output: "projects/{slug}/design-direction.md, projects/{slug}/technical-seo-i18n.md"
+    blocking: true
+
+  - step: 6
+    description: "Apply all agent outputs to codebase"
+    tasks:
+      - "Cyclops SQL → run in Supabase (schema + seed)"
+      - "Alpha → scaffold Next.js folder structure"
+      - "Kagura → build frontend following design direction"
+      - "Nana → write copy into pages + message files"
+      - "Nana → populate location page copy"
+      - "Kimmy → add generateMetadata(), schema JSON-LD, sitemap, robots.txt"
+      - "Kimmy → write i18n routing, middleware, messages, LanguageSwitcher"
+      - "Kimmy → write WhatsApp redirect pages"
+      - "Tracking → add Utopia Webcore script + event tracking (see docs/tracking-guide.md)"
+    blocking: true
+
+  - step: 7
+    description: "Dev server + screenshot review (minimum 2 comparison rounds)"
+    blocking: true
+
+  - step: 8
+    gate: user-approval
+    description: "GATE 1 — User confirms design (structure, layout, styling, navigation, WhatsApp redirect)"
+
+  - step: 9
+    agents: [Cyclops]
+    description: "Insert products into Supabase (MANDATORY before deploy)"
+    blocking: true
+
+  - step: 10
+    agents: [Hanabi]
+    description: "Generate 10+ blog articles + insert into Supabase (MANDATORY before deploy). Blog layout MUST match electric-wheelchair-malaysia reference."
+    blocking: true
+
+  - step: 11
+    gate: user-approval
+    description: "GATE 2 — User confirms products + blog posts + all locales working"
+
+  - step: 12
+    description: "Seed phone number in phone_numbers table + register website in company_websites with correct company_id and leads_mode"
+    blocking: true
+
+  - step: 13
+    agents: [Layla]
+    description: "QA verification → GitHub push → Vercel deploy → report live URL"
+    blocking: true
+
+mandatory_checks:
+  - Company selected from 16 Utopia Group options (Step 0)
+  - product_slug column DOES NOT EXIST — never reference it
+  - Tracking script in layout <head> with correct data-website domain (Step 6)
+  - WhatsApp clicks, product impressions, blog clicks tracked (Step 6)
+  - Products in Supabase before deploy (Step 9)
+  - Blog posts (minimum 10) in Supabase before deploy (Step 10)
+  - Blog layout matches electric-wheelchair-malaysia reference (Step 10)
+  - Phone number seeded in phone_numbers table (Step 12)
+  - Website registered in company_websites with correct company_id (Step 12)
+  - Both GATE 1 and GATE 2 passed before deployment
+  - One H1 + one H2 per page (hero only), H3-H6 for sections
+  - No phone numbers or domain names as visible text
+  - Same rounded button shape site-wide
+  - Image backgrounds on some sections
+  - 3-point USP bar below hero
+  - Mobile-first, center-aligned on mobile
+  - Logo icon = favicon
+  - All images verified for correctness

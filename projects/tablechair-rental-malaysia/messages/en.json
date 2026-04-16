@@ -1,0 +1,243 @@
+{
+  "nav": {
+    "services": "Services",
+    "locations": "Locations",
+    "gallery": "Gallery",
+    "blog": "Blog",
+    "contact": "Contact",
+    "whatsapp": "WhatsApp Now"
+  },
+  "shared": {
+    "brand": "Kak Kenduri",
+    "tagline": "Malaysia's same-day table and chair rental",
+    "whatsappCta": "WhatsApp Now",
+    "whatsappCtaShort": "WhatsApp us now",
+    "whatsappMessageDefault": "Hi Kak Kenduri, I'd like to rent tables and chairs.",
+    "whatsappMessageLocation": "Hi Kak Kenduri, I'd like to rent tables and chairs in {city}.",
+    "priceFrom": "From RM3.60 per chair",
+    "deliveryWindow": "Same-day delivery",
+    "ratingBadge": "Google · 4.9★ · 380+ reviews",
+    "reviewsLabel": "From real Google reviews",
+    "seeAllReviews": "See all reviews on Google Business",
+    "gallery": {
+      "heading": "Real kenduri we've set up",
+      "subheading": "From real Google reviews",
+      "badge": "Google · 4.9★"
+    },
+    "alt": {
+      "heroHome": "Table and chair rental Malaysia — Kak Kenduri",
+      "heroLocation": "Table and chair rental in {city} — Kak Kenduri",
+      "standardChair": "Standard plastic chair rental — stackable kenduri seating",
+      "banquetChair": "Banquet chair rental — padded hotel-grade seating",
+      "chiavariChair": "Chiavari chair rental — elegant wedding seating",
+      "longTable": "Long buffet table rental — 6ft with pleated skirting",
+      "roundTable": "Round table rental — 10-seater for weddings and banquets",
+      "cocktailTable": "Cocktail table rental — high-top with white spandex cover",
+      "couchChair": "Couch chair rental — vintage pelamin sofa seating",
+      "tentCanopy": "Tent canopy rental — 20x20ft waterproof event canopy",
+      "transparentCanopy": "Transparent canopy rental — clear PVC evening tent",
+      "airCooler": "Industrial air cooler rental for outdoor tents",
+      "commercialFan": "Commercial fan rental — heavy-duty event cooling",
+      "paSystem": "PA system rental with microphone and speakers",
+      "cateringEquipment": "Catering equipment rental — chafing dish and buffet trays",
+      "popcornMachine": "Popcorn machine rental — retro red for parties",
+      "cottonCandy": "Cotton candy machine rental — pink and blue for events",
+      "gallery": "Kak Kenduri customer event {n} — table and chair setup",
+      "logoAria": "Kak Kenduri homepage"
+    },
+    "usp1Title": "Same-Day Delivery",
+    "usp1Sub": "Order by morning, set up by afternoon — across KL, Selangor & Johor.",
+    "usp2Title": "Trusted by 8,000+ Events",
+    "usp2Sub": "Weddings, kenduri, corporate dinners — we've seated them all.",
+    "usp3Title": "Setup & Pickup Included",
+    "usp3Sub": "Our team delivers, arranges, and collects — you don't lift a finger.",
+    "fomoText": "Weekend slots are filling up fast — confirm your date on WhatsApp today.",
+    "fomoCta": "WhatsApp Now",
+    "ctaTag1": "Same-day delivery",
+    "ctaTag2": "Free setup & pickup",
+    "ctaTag3": "No deposit needed"
+  },
+  "footer": {
+    "tagline": "Same-day table and chair rental across Malaysia.",
+    "quickLinks": "Quick links",
+    "topLocations": "Top locations",
+    "contact": "Contact",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "No. 3, Lot 156, Jalan Jurubina U1/18, 40150 Shah Alam, Selangor",
+    "hours": "8am – 10pm, every day",
+    "legal": "© {year} Kak Kenduri Sdn. Bhd. All rights reserved.",
+    "getInTouch": "Get in Touch",
+    "getInTouchSub": "Have a question or need a quote? We reply within minutes."
+  },
+  "home": {
+    "meta": {
+      "title": "Table & Chair Rental Malaysia | Same-Day | Kak Kenduri",
+      "description": "Rent banquet, chiavari & standard chairs, round tables, canopy, PA & catering gear across Malaysia. Same-day delivery from RM3.60. WhatsApp us now."
+    },
+    "hero": {
+      "h1": "Table & Chair Rental Malaysia — Same-Day Delivery From RM3.60",
+      "sub": "Kak Kenduri supplies chairs, tables, canopy and full kenduri equipment to homes, halls and event venues nationwide — delivered the same day you WhatsApp us.",
+      "priceBadge": "From RM3.60 per chair",
+      "primaryCta": "WhatsApp Now",
+      "secondaryCta": "See rentals",
+      "trust": "8,000+ kenduri served · KL · Selangor · Johor · Malaysia-wide"
+    },
+    "serviceArea": {
+      "heading": "38 service areas across 13 states",
+      "intro": "We deliver chairs, tables and kenduri equipment across Selangor, Kuala Lumpur, Johor, Negeri Sembilan, Perak, Penang, Melaka, Pahang, Kedah, Terengganu, Kelantan and Perlis — covering kenduri, majlis perkahwinan, corporate events, engagement ceremonies, birthdays and funerals. Pick your city below and we'll confirm same-day availability."
+    },
+    "products": {
+      "heading": "Core chairs & tables — rent by the piece or the full set",
+      "plainLabel": "Plain",
+      "withCoverLabel": "With Cover",
+      "standardChair": {
+        "name": "Standard Chair",
+        "tagline": "The workhorse plastic chair every kenduri needs.",
+        "blurb": "Stackable, lightweight standard chair rental for kenduri, tahlil and backyard majlis. Plain at RM3.60 or with fabric cover at RM9.60 — we deliver by the hundred, same day, across Malaysia.",
+        "cta": "WhatsApp to book standard chair"
+      },
+      "banquetChair": {
+        "name": "Banquet Chair",
+        "tagline": "Padded cushion, steel frame — hotel-grade comfort.",
+        "blurb": "Banquet chair rental for wedding receptions, dinner majlis and corporate dinners. Cushioned seat, cleaned before every delivery. Plain at RM14.40, with ribbon cover at RM21.60.",
+        "cta": "WhatsApp to book banquet chair"
+      },
+      "chiavariChair": {
+        "name": "Chiavari Chair",
+        "tagline": "The elegant wedding chair you see on Instagram.",
+        "blurb": "Solid Chiavari chair rental at RM21.60 or the transparent acrylic Chiavari at RM28.80 — perfect for pelamin photos, bridal tables and luxe engagement majlis. Available nationwide with same-day delivery.",
+        "cta": "WhatsApp to book chiavari chair"
+      },
+      "longTable": {
+        "name": "Long Table / Buffet 6ft",
+        "tagline": "The 6-foot workhorse for buffet lines and prep.",
+        "blurb": "Long table rental in standard 6ft size. Without cloth at RM72.00, with pleated skirting and cloth at RM86.40. Pair it with our catering gear for a full buffet setup.",
+        "cta": "WhatsApp to book long table"
+      },
+      "roundTable": {
+        "name": "Round Table (10-seater)",
+        "tagline": "Seats 10 guests comfortably — the kenduri standard.",
+        "blurb": "Round table rental that seats 10 guests — the go-to for Malay wedding receptions and Chinese banquet dinners. Plain at RM72.00, with cloth and overlay at RM86.40. Delivered stacked and ready.",
+        "cta": "WhatsApp to book round table"
+      },
+      "cocktailTable": {
+        "name": "Cocktail Table",
+        "tagline": "High-top standing table for mingling and welcome drinks.",
+        "blurb": "Cocktail table rental at RM86.40 including white spandex cover — perfect for reception foyers, corporate networking, and welcome areas. Delivered same day in KL, Selangor and Johor.",
+        "cta": "WhatsApp to book cocktail table"
+      }
+    },
+    "additional": {
+      "heading": "Everything else your kenduri needs under one roof",
+      "couch": {
+        "name": "Couch Chair",
+        "blurb": "Vintage-style sofa seating for the pelamin, photo corner and VIP area. Upholstered in cream or gold."
+      },
+      "tent": {
+        "name": "Tent / Canopy",
+        "blurb": "Standard 20ft × 20ft and 20ft × 40ft canopy rental for backyard kenduri. Waterproof top, steel frame, includes setup."
+      },
+      "transparentCanopy": {
+        "name": "Transparent Canopy",
+        "blurb": "Clear PVC transparent canopy rental for evening majlis with a view. Wind-rated, leak-proof."
+      },
+      "airCooler": {
+        "name": "Air Cooler",
+        "blurb": "Industrial air cooler rental that actually cools open kenduri tents. Each unit covers ~40 m²."
+      },
+      "fan": {
+        "name": "Commercial Fan",
+        "blurb": "Heavy-duty commercial fan rental for canopy events. Quiet, powerful, comfortable through the longest doa."
+      },
+      "pa": {
+        "name": "PA System",
+        "blurb": "Full PA system rental with microphone, mixer and 2 speakers — ideal for MC, nasyid and akad nikah."
+      },
+      "catering": {
+        "name": "Catering Equipment",
+        "blurb": "Chafing dishes, soup warmers, water dispensers and buffet trays by the set."
+      },
+      "popcorn": {
+        "name": "Popcorn Machine",
+        "blurb": "Red retro popcorn machine rental for birthdays and kids' corners."
+      },
+      "cottonCandy": {
+        "name": "Cotton Candy Machine",
+        "blurb": "Pink or blue cotton candy machine rental — an instant crowd-pleaser."
+      },
+      "eyebrow": "Beyond tables & chairs"
+    },
+    "howItWorks": {
+      "heading": "Book your rental in 3 steps",
+      "step1Title": "WhatsApp us your date & address",
+      "step1Body": "Tell us the event date, venue address, guest count and any add-ons. We confirm availability in minutes.",
+      "step2Title": "Confirm quote & pay deposit",
+      "step2Body": "We send a written quote with total and delivery window. Lock in your booking with a small refundable deposit.",
+      "step3Title": "We deliver, set up & pick up",
+      "step3Body": "Our crew arrives on the agreed time, unloads, stacks, and returns after the majlis to collect. You don't lift a single chair."
+    },
+    "reviews": {
+      "heading": "From real Google reviews",
+      "badge": "Google · 4.9★ · 380+ reviews",
+      "r1Name": "Farah Iskandar — Shah Alam",
+      "r1Body": "Booked 200 banquet chairs and 20 round tables for my sister's nikah last weekend. Lorry came at 8am sharp, boys stacked everything neatly, and pickup was just as smooth. Will use Kak Kenduri again for sure.",
+      "r2Name": "Daniel Tan — Petaling Jaya",
+      "r2Body": "Needed a last-minute chiavari chair setup for a corporate dinner in PJ and they actually delivered same day. The transparent chiavari chairs looked amazing on camera. Pricing was clear upfront.",
+      "r3Name": "Aisyah Roslan — Johor Bahru",
+      "r3Body": "From chairs to canopy, everything from Kak Kenduri for our kenduri rumah in JB. Easy to deal with on WhatsApp, no forms. Very reasonable pricing. Highly recommended."
+    },
+    "locationsCta": {
+      "heading": "Find Kak Kenduri in your city",
+      "sub": "We deliver same-day to 38 cities across Malaysia — tap your area for pricing, delivery windows and city-specific FAQs."
+    },
+    "finalCta": {
+      "heading": "Let's seat your next majlis — properly.",
+      "sub": "One WhatsApp message is all it takes. We'll confirm availability, send a quote, and lock in same-day delivery.",
+      "button": "WhatsApp Now"
+    }
+  },
+  "blog": {
+    "meta": {
+      "title": "Blog | Kak Kenduri",
+      "description": "Tips, guides and checklists for planning your kenduri, wedding or event in Malaysia. From Kak Kenduri."
+    },
+    "heading": "Kak Kenduri Blog",
+    "subheading": "Tips, checklists and guides to help you plan the perfect kenduri, wedding or event.",
+    "noPosts": "No articles yet — check back soon!",
+    "breadcrumbs": {
+      "home": "Home",
+      "blog": "Blog"
+    },
+    "cta": {
+      "heading": "Ready to plan your event?",
+      "sub": "WhatsApp Kak Kenduri — we reply in minutes with a free quote."
+    },
+    "recentPosts": "Recent Posts",
+    "minRead": "{count} min read"
+  },
+  "location": {
+    "meta": {
+      "title": "Table & Chair Rental {city} | From RM3.60 | Kak Kenduri",
+      "description": "Rent banquet chairs, chiavari chairs, round tables & canopy in {city}. Same-day delivery from RM3.60 per chair. WhatsApp Kak Kenduri for your {city} event today."
+    },
+    "h1": "Table & Chair Rental in {city} — Same-Day Delivery",
+    "breadcrumbs": {
+      "home": "Home",
+      "locations": "Locations",
+      "city": "{city}"
+    },
+    "banner": "Serving {city} and the surrounding area — same-day delivery from Shah Alam HQ.",
+    "whyHeading": "Why choose Kak Kenduri for {city}",
+    "faqHeading": "Frequently asked questions — {city}",
+    "nearby": {
+      "heading": "Nearby areas we also serve",
+      "sub": "Tap a city to see its dedicated page."
+    },
+    "cta": {
+      "heading": "Planning a kenduri in {city}?",
+      "sub": "WhatsApp Kak Kenduri now — we'll confirm availability, send a quote and lock in same-day delivery.",
+      "button": "WhatsApp Now"
+    }
+  }
+}

@@ -1,8 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 
-const WEBSITE_SLUG = 'sewamotor-my'
-const PRODUCT_SLUG = 'sewa-motor'
-const FALLBACK_PHONE = '60123456789'
+const WEBSITE = 'sewa-motor-malaysia.vercel.app'
+const FALLBACK_PHONE = '60174287801'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -20,11 +19,11 @@ export interface PhoneResult {
 
 export async function getPhoneNumbers(locationSlug: string): Promise<PhoneResult> {
   try {
+    // 1. Try location-specific match
     const { data: locationPhones, error: locError } = await supabase
       .from('phone_numbers')
       .select('phone_number, label')
-      .eq('website_slug', WEBSITE_SLUG)
-      .eq('product_slug', PRODUCT_SLUG)
+      .eq('website', WEBSITE)
       .eq('location_slug', locationSlug)
       .eq('is_active', true)
 
@@ -35,17 +34,17 @@ export async function getPhoneNumbers(locationSlug: string): Promise<PhoneResult
       }
     }
 
-    const { data: productPhones, error: prodError } = await supabase
+    // 2. Try website-wide default (location_slug = 'all')
+    const { data: defaultPhones, error: defError } = await supabase
       .from('phone_numbers')
       .select('phone_number, label')
-      .eq('website_slug', WEBSITE_SLUG)
-      .eq('product_slug', PRODUCT_SLUG)
-      .is('location_slug', null)
+      .eq('website', WEBSITE)
+      .eq('location_slug', 'all')
       .eq('is_active', true)
 
-    if (!prodError && productPhones && productPhones.length > 0) {
+    if (!defError && defaultPhones && defaultPhones.length > 0) {
       return {
-        phones: productPhones.map((r: PhoneRow) => r.phone_number),
+        phones: defaultPhones.map((r: PhoneRow) => r.phone_number),
         source: 'product',
       }
     }

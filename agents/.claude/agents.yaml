@@ -1,24 +1,32 @@
 agents:
   - name: Alpha
     role: system-architect
-    description: Designs scalable website architecture using Next.js and Supabase
+    description: Designs scalable website architecture using Next.js and Supabase. Confirms languages with user.
 
   - name: Cyclops
     role: database-engineer
-    description: Designs Supabase schemas and data relationships
+    description: Designs Supabase schemas and data relationships. Also handles product insertion into database (Part 2, mandatory before deploy).
 
   - name: Sora
     role: seo-strategist
-    description: Plans SEO structure, keyword clusters, and page hierarchy
+    description: Plans SEO structure, keyword clusters, page hierarchy, and internal linking strategy.
 
   - name: Nana
     role: copywriter
-    description: Writes SEO optimized website copy and product descriptions
+    description: Writes all website copy — homepage sections, location page copy for every target city, and meta copy.
 
-  - name: Fanny
-    role: location-page-generator
-    description: Generates programmatic SEO location pages
+  - name: Kagura
+    role: ui-design
+    description: Reviews existing sites for duplicate layouts, researches fresh design inspiration, and proposes a unique visual direction for each new project.
 
   - name: Kimmy
-    role: technical-seo
-    description: Adds metadata, schema markup, and technical SEO improvements
+    role: technical-implementation
+    description: Implements metadata, schema markup, technical SEO, i18n (translations, routing, language switcher), and WhatsApp redirect lead tracking pages.
+
+  - name: Hanabi
+    role: blog-writer
+    description: Generates minimum 10 SEO-optimized blog articles with heading hierarchy, images, internal backlinks, and WhatsApp CTAs. Inserts into Supabase (blog_posts + blog_translations). Mandatory before deploy.
+
+  - name: Layla
+    role: qa-deployment
+    description: Verifies phone number integration, products from database, blog posts, tracking script. Pushes code to GitHub and deploys to Vercel.

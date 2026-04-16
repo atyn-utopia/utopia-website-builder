@@ -1,0 +1,746 @@
+{
+  "metadata": {
+    "title": "Roller Shutter Malaysia | Install & Repair 24 Hours",
+    "description": "Malaysia's #1 roller shutter expert. Installation, repair & servicing of roller shutter doors 24 hours. Mild steel, aluminium, polycarbonate. WhatsApp us now!"
+  },
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "howItWorks": "How It Works",
+    "reviews": "Reviews",
+    "faq": "FAQ",
+    "locations": "Locations",
+    "contact": "Contact",
+    "brandName": "Roller Shutter Door Malaysia",
+    "ctaButton": "WhatsApp Now"
+  },
+  "fomoBanner": {
+    "texts": [
+      "12 customers in your area booked this week — installation slots this month nearly full!",
+      "Our emergency repair team completed 3 jobs today — contact us before slots run out!",
+      "Over 15,000 premises protected by our roller shutters across Malaysia"
+    ],
+    "slotsLeft": "Only {slots} slots left today",
+    "bookNow": "Book Now"
+  },
+  "hero": {
+    "badge": "24 Hour Emergency",
+    "h1": "Roller Shutter Door Malaysia",
+    "h1Highlight": "#1 Expert in Installation & Repair 24/7",
+    "subtitle": "Install, repair & maintain all types of roller shutter doors for factories, shops and warehouses. 24-hour emergency service, 7 days a week across Malaysia.",
+    "ctaPrimary": "WhatsApp Now",
+    "ctaPrimarySubtext": "Get a Free Quote",
+    "ctaSecondary": "View Our Roller Shutter Types",
+    "altText": "Roller shutter door installation for factory in Malaysia"
+  },
+  "stats": {
+    "items": [
+      {
+        "value": "15,000+",
+        "label": "Successful Installations"
+      },
+      {
+        "value": "24/7",
+        "label": "Emergency Service"
+      },
+      {
+        "value": "20+",
+        "label": "Years Experience"
+      },
+      {
+        "value": "50+",
+        "label": "Areas Covered"
+      }
+    ]
+  },
+  "products": {
+    "heading": "Our Roller Shutter Types",
+    "subheading": "Every premises has different needs. We offer 6 types of roller shutters for maximum protection of your business.",
+    "items": {
+      "mildSteel": {
+        "name": "Mild Steel Roller Shutter",
+        "description": "The most popular choice for factories, warehouses and commercial premises. Made from high-quality steel for maximum strength and durability.",
+        "keyPoints": [
+          "Industrial strength for maximum protection",
+          "Cost effective — best choice for moderate budgets",
+          "Suitable for factories, warehouses & large premises"
+        ],
+        "cta": "WhatsApp for Quote",
+        "altText": "Mild steel roller shutter for factory and warehouse"
+      },
+      "aluminium": {
+        "name": "Aluminium Roller Shutter",
+        "description": "Lightweight, rust-resistant and suitable for premises requiring a professional appearance. Ideal for offices, clinics and modern commercial premises.",
+        "keyPoints": [
+          "Lightweight — easy to operate manually or automatically",
+          "Rust-resistant & suited for Malaysia's tropical weather",
+          "Modern and neat appearance for professional premises"
+        ],
+        "cta": "WhatsApp for Quote",
+        "altText": "Aluminium roller shutter for commercial premises"
+      },
+      "polycarbonate": {
+        "name": "Polycarbonate Roller Shutter (Transparent)",
+        "description": "A combination of security and visibility. Customers can view your display products even after business hours. Suitable for boutiques, showrooms and malls.",
+        "keyPoints": [
+          "24-hour product display even when shop is closed",
+          "Security comparable to steel roller shutters",
+          "Natural light entry — save on electricity"
+        ],
+        "cta": "WhatsApp for Quote",
+        "altText": "Transparent polycarbonate roller shutter for shop"
+      },
+      "fireRated": {
+        "name": "Fire-Rated Roller Shutter",
+        "description": "Meets Malaysian fire safety standards. Mandatory for certain buildings under BOMBA regulations. Designed to prevent fire and smoke spread between zones.",
+        "keyPoints": [
+          "Certified & compliant with BOMBA Malaysia standards",
+          "Prevents fire & smoke from spreading between zones",
+          "Mandatory for certain factories, warehouses & commercial buildings"
+        ],
+        "cta": "WhatsApp for Quote",
+        "altText": "Fire-rated roller shutter for fire safety compliance"
+      },
+      "grille": {
+        "name": "Grille Roller Shutter",
+        "description": "Security with ventilation. The grille design allows airflow and visibility while maintaining protection. Top choice for retail shops, supermarkets and retail premises.",
+        "keyPoints": [
+          "Optimal ventilation — suitable for Malaysia's hot climate",
+          "Visibility into premises even after operating hours",
+          "Popular for convenience stores, supermarkets & food courts"
+        ],
+        "cta": "WhatsApp for Quote",
+        "altText": "Grille roller shutter for retail shop"
+      },
+      "motorised": {
+        "name": "Motorised/Automatic Roller Shutter",
+        "description": "Open and close with a button or remote control. Suitable for large doors that are frequently opened and closed. Saves time, energy and improves daily operation efficiency.",
+        "keyPoints": [
+          "Remote control or switch — no physical effort",
+          "Suitable for large factory & logistics warehouse doors",
+          "Upgrade from manual to automatic available"
+        ],
+        "cta": "WhatsApp for Quote",
+        "altText": "Motorised automatic roller shutter for warehouse"
+      }
+    }
+  },
+  "howItWorks": {
+    "heading": "How We Work",
+    "subheading": "From enquiry to installation — a simple 4-step process.",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Contact Us via WhatsApp",
+        "description": "Tell us your needs — new installation, repair or servicing. Send photos of your location for quick assessment."
+      },
+      {
+        "number": "2",
+        "title": "Site Visit & Quotation",
+        "description": "Our team will visit your premises for precise measurements. You receive a detailed quote with no hidden charges."
+      },
+      {
+        "number": "3",
+        "title": "Professional Installation",
+        "description": "Our certified technicians complete the installation according to the agreed schedule. Neat, fast work meeting safety standards."
+      },
+      {
+        "number": "4",
+        "title": "Warranty & After-Sales Support",
+        "description": "Every installation comes with warranty. Our 24-hour emergency team is always ready for any post-installation issues."
+      }
+    ]
+  },
+  "riskProblem": {
+    "heading": "Don't Leave Your Premises Exposed to Risk",
+    "subheading": "A damaged or missing roller shutter can invite serious problems.",
+    "problems": [
+      {
+        "title": "Theft & Break-ins",
+        "description": "Premises without roller shutters or with damaged doors are prime targets for thieves. Losses can reach tens of thousands of ringgit in a single night."
+      },
+      {
+        "title": "Weather Damage",
+        "description": "Heavy rain, strong winds and tropical storms can damage your stock and equipment if premises are not properly protected."
+      },
+      {
+        "title": "Escalating Repair Costs",
+        "description": "Unmaintained roller shutters break down faster. Emergency repair costs are far more expensive than regular preventive servicing."
+      },
+      {
+        "title": "BOMBA Compliance Failure",
+        "description": "Certain premises must have fire-rated roller shutters. Non-compliance can result in fines, closure and safety risks."
+      }
+    ],
+    "solutionCta": "Don't wait until it's too late — WhatsApp us now for a free assessment."
+  },
+  "midCta": {
+    "heading": "Need a New Roller Shutter or Urgent Repair?",
+    "subheading": "Our team is ready to help 24 hours, 7 days a week. Get a free quote within 30 minutes.",
+    "ctaButton": "WhatsApp Us Now"
+  },
+  "reviews": {
+    "heading": "What Our Customers Say",
+    "subheading": "Trusted by thousands of business owners across Malaysia.",
+    "ratingText": "4.9/5 on Google",
+    "items": [
+      {
+        "name": "Ahmad Faizal",
+        "location": "Klang, Selangor",
+        "rating": 5,
+        "text": "My factory roller shutter broke in the middle of the night. Called them at 2am and the technician arrived in 45 minutes. Fast and professional work. Highly recommend!"
+      },
+      {
+        "name": "Lee Wei Keat",
+        "location": "Petaling Jaya, Selangor",
+        "rating": 5,
+        "text": "Installed 8 units of aluminium roller shutters for my new shop. Completed in 2 days. Best quality and reasonable price. Their team is very organized."
+      },
+      {
+        "name": "Siti Nurhaliza",
+        "location": "Johor Bahru, Johor",
+        "rating": 5,
+        "text": "Been using their regular maintenance service for 3 years. My warehouse roller shutters are always in good condition. Best service in JB!"
+      },
+      {
+        "name": "Rajesh Kumar",
+        "location": "Penang",
+        "rating": 5,
+        "text": "Changed my old roller shutter motor to automatic. Now opening and closing the warehouse door is so easy. Thank you for the excellent work!"
+      },
+      {
+        "name": "Tan Mei Ling",
+        "location": "Shah Alam, Selangor",
+        "rating": 5,
+        "text": "Installed fire-rated roller shutter for BOMBA compliance. Smooth process from survey to installation. Competitive price and quality work."
+      },
+      {
+        "name": "Mohd Hafiz",
+        "location": "Kuala Lumpur",
+        "rating": 5,
+        "text": "Emergency call at 11pm because spring broke. They came quickly and solved the problem within an hour. Truly roller shutter experts!"
+      }
+    ]
+  },
+  "whyChoose": {
+    "heading": "Why Choose Us?",
+    "subheading": "We're not just contractors — we're roller shutter experts you can trust.",
+    "items": [
+      {
+        "title": "24-Hour Emergency Service",
+        "description": "Roller shutter breakdowns don't follow a schedule. Our emergency repair team operates 24/7, including public holidays and weekends."
+      },
+      {
+        "title": "20+ Years Experience",
+        "description": "Over two decades of experience in Malaysia's roller shutter industry. We've handled every type of breakdown and installation you can imagine."
+      },
+      {
+        "title": "50+ Coverage Areas",
+        "description": "From Johor to Penang, Kuching to Kota Kinabalu — our team network covers all of Malaysia for fast service."
+      },
+      {
+        "title": "Transparent Quotes — No Hidden Charges",
+        "description": "You know exactly how much it costs before work begins. No surprises, no additional charges without your consent."
+      },
+      {
+        "title": "Work & Material Warranty",
+        "description": "Every installation and repair comes with warranty. We use high-quality materials from trusted suppliers."
+      },
+      {
+        "title": "Certified & Experienced Technicians",
+        "description": "Every technician is trained and experienced. Neat, safe work meeting industry standards."
+      }
+    ]
+  },
+  "gallery": {
+    "heading": "Our Project Gallery",
+    "subheading": "See our roller shutter installation and repair work across Malaysia.",
+    "categories": [
+      "New Installation",
+      "Repair & Maintenance",
+      "Factory & Warehouse Projects",
+      "Shop & Commercial Projects"
+    ],
+    "altTexts": {
+      "newInstallation": "New roller shutter installation project",
+      "repair": "Roller shutter repair and maintenance project",
+      "factory": "Factory and warehouse roller shutter project",
+      "commercial": "Shop and commercial roller shutter project"
+    }
+  },
+  "locations": {
+    "heading": "Our Service Areas",
+    "subheading": "Professional roller shutter service in over 50 locations across Malaysia.",
+    "regions": {
+      "klangValley": "Klang Valley",
+      "southernSelangor": "Southern Selangor",
+      "negeriSembilan": "Negeri Sembilan",
+      "northern": "Northern",
+      "southern": "Southern",
+      "eastCoast": "East Coast",
+      "eastMalaysia": "East Malaysia"
+    },
+    "citiesLabel": "areas",
+    "viewDetails": "View Service in {city}"
+  },
+  "faq": {
+    "heading": "Frequently Asked Questions",
+    "items": [
+      {
+        "question": "How much does a new roller shutter installation cost?",
+        "answer": "The cost depends on the type of roller shutter, door size and your premises location. Mild steel roller shutters start from a reasonable price for standard sizes. Contact us via WhatsApp for an accurate quote based on your specific needs — assessment and quotation are FREE."
+      },
+      {
+        "question": "How long does installation take?",
+        "answer": "Standard installation for one roller shutter unit typically takes 1-2 working days. For projects involving multiple units or special installations like fire-rated, the duration may be longer. Our team will provide an exact schedule after site inspection."
+      },
+      {
+        "question": "Do you provide 24-hour emergency repair service?",
+        "answer": "Yes, we operate 24 hours, 7 days a week including public holidays. If your roller shutter breaks at any time — midnight, weekend or festive season — our technicians are ready to arrive at your location as soon as possible. WhatsApp us for immediate response."
+      },
+      {
+        "question": "Can manual roller shutters be converted to automatic?",
+        "answer": "Yes! We offer motor upgrade services to convert existing manual roller shutters to motorized systems. This improves operational efficiency especially for large doors that are frequently opened and closed. The upgrade process typically completes within a day."
+      },
+      {
+        "question": "What type of roller shutter is suitable for my premises?",
+        "answer": "It depends on your needs. For maximum security — mild steel. For professional appearance and rust resistance — aluminium. For product display — polycarbonate. For BOMBA compliance — fire-rated. Contact us via WhatsApp and our experts will recommend the best type for your premises."
+      },
+      {
+        "question": "Do your roller shutters come with warranty?",
+        "answer": "Yes, every installation and repair comes with warranty on materials and workmanship. Warranty period depends on the product type and scope of work. We also offer regular service packages to ensure your roller shutter stays in optimal condition throughout its lifespan."
+      }
+    ]
+  },
+  "finalCta": {
+    "heading": "Ready to Protect Your Premises?",
+    "subheading": "Get a free quote within 30 minutes. Our expert team is ready to help you 24/7.",
+    "ctaButton": "WhatsApp Now — Free Quote",
+    "supportingText": "No commitment. No hidden charges. Just the best roller shutter service in Malaysia."
+  },
+  "footer": {
+    "tagline": "Roller Shutter Door Malaysia — #1 Expert in Installation & Repair 24/7",
+    "services": {
+      "heading": "Services",
+      "items": [
+        "New Installation",
+        "Repair & Troubleshooting",
+        "Regular Maintenance",
+        "Motor Upgrade",
+        "Spring Replacement"
+      ]
+    },
+    "productTypes": {
+      "heading": "Roller Shutter Types",
+      "items": [
+        "Mild Steel",
+        "Aluminium",
+        "Polycarbonate / Transparent",
+        "Fire-Rated",
+        "Grille",
+        "Automatic / Motorised"
+      ]
+    },
+    "areas": {
+      "heading": "Areas",
+      "items": [
+        "Klang Valley",
+        "Selangor",
+        "Johor",
+        "Penang",
+        "Negeri Sembilan",
+        "Others"
+      ]
+    },
+    "social": {
+      "heading": "Follow Us",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "google": "Google Business"
+    },
+    "copyright": "© 2026 Roller Shutter Door Malaysia. All rights reserved.",
+    "whatsappFloat": "WhatsApp Us"
+  },
+  "breadcrumbs": {
+    "home": "Home",
+    "rollerShutter": "Roller Shutter"
+  },
+  "nearbyLocations": {
+    "heading": "Nearby Areas",
+    "subheading": "We also provide roller shutter services in the following areas:",
+    "viewService": "View Service"
+  },
+  "common": {
+    "callNow": "Call Now",
+    "whatsappUs": "WhatsApp Us",
+    "freeQuote": "Free Quote",
+    "learnMore": "Learn More",
+    "viewAll": "View All",
+    "backToTop": "Back to Top",
+    "loading": "Loading...",
+    "error": "An error occurred"
+  },
+  "shared": {
+    "whatsappCta": "WhatsApp Now",
+    "emergencyBadge": "24 Hour Emergency",
+    "freeQuoteBadge": "Free Quote",
+    "trustedBadge": "Trusted by 15,000+ Customers",
+    "brandName": "Roller Shutter Door Malaysia",
+    "phoneLabel": "Contact Us",
+    "allRightsReserved": "All rights reserved",
+    "whatsappPrefilledMessage": "Hi, I'm interested in roller shutter services. Can I get a quote?",
+    "whatsappPrefilledMessageLocation": "Hi, I'm interested in roller shutter services in {city}. Can I get a quote?"
+  },
+  "locationPages": {
+    "kuala-lumpur": {
+      "metaTitle": "Roller Shutter Kuala Lumpur | Install & Repair 24 Hours",
+      "metaDescription": "Expert roller shutter in Kuala Lumpur. Installation, repair & service 24 hours for factories, shops & warehouses in KL. WhatsApp for free quote.",
+      "h1": "Roller Shutter Kuala Lumpur — Install & Repair 24 Hours",
+      "intro": "Kuala Lumpur as the capital and main business hub of Malaysia has thousands of commercial and industrial premises requiring quality roller shutter protection.",
+      "closingCta": "Need a roller shutter expert in Kuala Lumpur? WhatsApp us now for a free quote and response within 30 minutes."
+    },
+    "petaling-jaya": {
+      "metaTitle": "Roller Shutter Petaling Jaya | Install & Repair 24 Hours",
+      "metaDescription": "Professional roller shutter service in Petaling Jaya. Install, repair & service 24 hours for shops, factories & offices in PJ. WhatsApp us!",
+      "h1": "Roller Shutter Petaling Jaya — Install & Repair 24 Hours",
+      "intro": "Petaling Jaya is a major commercial hub in Selangor with rapid development. Premises owners in PJ need durable roller shutters to protect their investments.",
+      "closingCta": "Roller shutter in PJ broken or need new installation? WhatsApp us now — our team is ready 24/7."
+    },
+    "shah-alam": {
+      "metaTitle": "Roller Shutter Shah Alam | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter expert Shah Alam. Installation & repair 24 hours for factories, warehouses & commercial premises. Free quote — WhatsApp us now!",
+      "h1": "Roller Shutter Shah Alam — Install & Repair 24 Hours",
+      "intro": "Shah Alam is famous for its large industrial areas. Thousands of factories and warehouses here depend on high-quality roller shutters for daily operations.",
+      "closingCta": "Factory or warehouse owner in Shah Alam? WhatsApp us for a free site assessment and no-commitment quote."
+    },
+    "subang-jaya": {
+      "metaTitle": "Roller Shutter Subang Jaya | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter service in Subang Jaya. Install, repair & maintain 24 hours for business premises. WhatsApp for free quote today!",
+      "h1": "Roller Shutter Subang Jaya — Install & Repair 24 Hours",
+      "intro": "Subang Jaya is growing rapidly as a business and commercial center with areas like USJ, Sunway and SS15 filled with shops and commercial premises.",
+      "closingCta": "Your premises in Subang Jaya need a roller shutter? WhatsApp us now for a free quote."
+    },
+    "cheras": {
+      "metaTitle": "Roller Shutter Cheras | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Cheras — new installation, repair & service 24 hours. Expert for shops, factories & warehouses. WhatsApp us!",
+      "h1": "Roller Shutter Cheras — Install & Repair 24 Hours",
+      "intro": "Cheras is one of the most densely populated areas in the Klang Valley with a mix of commercial, industrial and small business premises.",
+      "closingCta": "Business owner in Cheras? WhatsApp us now — get a roller shutter quote in 30 minutes."
+    },
+    "ampang": {
+      "metaTitle": "Roller Shutter Ampang | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter service in Ampang. Install, repair & maintain 24 hours. WhatsApp for free quote!",
+      "h1": "Roller Shutter Ampang — Install & Repair 24 Hours",
+      "intro": "Ampang is developing rapidly with various commercial and industrial premises requiring quality roller shutter protection.",
+      "closingCta": "Need a roller shutter in Ampang? WhatsApp us now for a free quote."
+    },
+    "puchong": {
+      "metaTitle": "Roller Shutter Puchong | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter expert Puchong. Installation, repair & service 24 hours for factories, shops & warehouses. WhatsApp us now!",
+      "h1": "Roller Shutter Puchong — Install & Repair 24 Hours",
+      "intro": "Puchong is a rapidly growing business area with many commercial premises, small factories and warehouses needing quality roller shutters.",
+      "closingCta": "Premises in Puchong need a roller shutter? WhatsApp us for a free quote today."
+    },
+    "bangsar": {
+      "metaTitle": "Roller Shutter Bangsar | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Bangsar — installation & repair 24 hours. Professional service for shops, offices & commercial premises. WhatsApp us!",
+      "h1": "Roller Shutter Bangsar — Install & Repair 24 Hours",
+      "intro": "Bangsar is known as a premium commercial area with rows of shops, restaurants and offices requiring high-quality roller shutters.",
+      "closingCta": "Premises in Bangsar need a roller shutter? WhatsApp us now for a free assessment."
+    },
+    "damansara": {
+      "metaTitle": "Roller Shutter Damansara | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter service in Damansara. Install, repair & maintain 24 hours. WhatsApp for free quote!",
+      "h1": "Roller Shutter Damansara — Install & Repair 24 Hours",
+      "intro": "Damansara covers modern business areas like Damansara Perdana, Damansara Jaya and Damansara Utama with commercial premises needing roller shutter protection.",
+      "closingCta": "Need a roller shutter in Damansara? WhatsApp us now — response within 30 minutes."
+    },
+    "cyberjaya": {
+      "metaTitle": "Roller Shutter Cyberjaya | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Cyberjaya — installation & repair 24 hours for technology & commercial premises. WhatsApp for free quote!",
+      "h1": "Roller Shutter Cyberjaya — Install & Repair 24 Hours",
+      "intro": "Cyberjaya as Malaysia's technology hub has many commercial premises and data centers requiring high-quality roller shutters for security.",
+      "closingCta": "Premises in Cyberjaya need a roller shutter? WhatsApp us now."
+    },
+    "klang": {
+      "metaTitle": "Roller Shutter Klang | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter expert Klang. Installation & repair 24 hours for factories, warehouses & commercial premises. WhatsApp us!",
+      "h1": "Roller Shutter Klang — Install & Repair 24 Hours",
+      "intro": "Klang is a major industrial hub with port and factory areas requiring heavy-duty roller shutters for maximum protection.",
+      "closingCta": "Factory owner in Klang? WhatsApp us for a free roller shutter quote."
+    },
+    "putrajaya": {
+      "metaTitle": "Roller Shutter Putrajaya | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter expert in Putrajaya. Professional installation & repair 24 hours for government buildings, offices & commercial premises. WhatsApp for free quote!",
+      "h1": "Roller Shutter Putrajaya — Install & Repair 24 Hours",
+      "intro": "Putrajaya is Malaysia's federal government administrative centre, home to ministries, agencies and a growing commercial corridor along Precinct 2 and Precinct 14. Government-linked facilities and support businesses here demand compliant, high-security roller shutters that meet strict building standards. Whether you manage a government complex annex, a retail outlet near Alamanda Shopping Centre, or a logistics depot serving the precinct, we deliver the right solution.",
+      "closingCta": "Need a roller shutter in Putrajaya? WhatsApp us now — free site assessment and quote within 30 minutes."
+    },
+    "kajang": {
+      "metaTitle": "Roller Shutter Kajang | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Kajang — installation, repair & service 24 hours for shops, factories & warehouses. Serving Kajang & Semenyih. WhatsApp us now!",
+      "h1": "Roller Shutter Kajang — Install & Repair 24 Hours",
+      "intro": "Kajang has grown from a quiet town into a busy commercial centre anchored by areas like Bandar Baru Bangi interchange, Kajang town centre and the expanding Semenyih corridor. Shophouses along Jalan Semenyih and the light industrial lots near MRR2 all rely on durable roller shutters for daily security. We cover the full Kajang-Semenyih belt with fast response and transparent pricing.",
+      "closingCta": "Business owner in Kajang or Semenyih? WhatsApp us now for a no-obligation roller shutter quote."
+    },
+    "bangi": {
+      "metaTitle": "Roller Shutter Bangi | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Bandar Baru Bangi — install & repair 24 hours for factories, labs & commercial premises. UKM area covered. WhatsApp us!",
+      "h1": "Roller Shutter Bangi — Install & Repair 24 Hours",
+      "intro": "Bandar Baru Bangi combines a major university town with a well-established industrial estate — Kawasan Perindustrian Bangi hosts hundreds of manufacturing and logistics businesses alongside the UKM campus. Commercial strips along Jalan Reko and the tech-light industries near Seksyen 15 all require reliable roller shutters. Our team services the entire BBB township and the Nilai-Bangi industrial corridor efficiently.",
+      "closingCta": "Factory, lab or shop in Bangi? WhatsApp us now — our technician can be on-site the same day."
+    },
+    "rawang": {
+      "metaTitle": "Roller Shutter Rawang | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Rawang — installation & repair 24 hours for industrial estates & commercial premises in north Selangor. WhatsApp for free quote!",
+      "h1": "Roller Shutter Rawang — Install & Repair 24 Hours",
+      "intro": "Rawang in northern Selangor is a fast-growing industrial belt, with Kawasan Perindustrian Rawang and the new Bandar Tasik Puteri township drawing factories, warehouses and distribution centres. The proximity to PLUS North-South Expressway makes Rawang a logistics node where heavy-duty roller shutters are essential for cargo security. We provide fast-response installation and repair throughout the Rawang–Kuang corridor.",
+      "closingCta": "Industrial or commercial premises in Rawang? WhatsApp us now for a free roller shutter assessment."
+    },
+    "kepong": {
+      "metaTitle": "Roller Shutter Kepong | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter expert Kepong KL — install, repair & service 24 hours for factories, shops & warehouses. WhatsApp us now!",
+      "h1": "Roller Shutter Kepong — Install & Repair 24 Hours",
+      "intro": "Kepong is one of Kuala Lumpur's established industrial and commercial districts, with the Kepong Industrial Area, Taman Kepong and Sri Kepong housing a dense mix of small factories, auto workshops and retail rows. Jalan Kepong and the surrounding shophouse blocks see constant commercial activity that depends on secure, well-maintained roller shutters. We respond to emergency calls from Kepong within the hour.",
+      "closingCta": "Premises in Kepong need a new or repaired roller shutter? WhatsApp us now — 24-hour service guaranteed."
+    },
+    "seri-kembangan": {
+      "metaTitle": "Roller Shutter Seri Kembangan | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Seri Kembangan — installation & repair 24 hours for shops, warehouses & commercial premises. South KL covered. WhatsApp us!",
+      "h1": "Roller Shutter Seri Kembangan — Install & Repair 24 Hours",
+      "intro": "Seri Kembangan south of Kuala Lumpur is dominated by Taman Equine, the Mines Resort City vicinity and a thriving light-industrial corridor along Jalan Balakong. The area's growing number of car showrooms, hypermarkets and wholesale distribution centres all need robust roller shutter systems for security and operations. We cover Seri Kembangan and the broader Equine Park-Balakong zone with prompt, reliable service.",
+      "closingCta": "Business in Seri Kembangan? WhatsApp us now for a free on-site roller shutter quote."
+    },
+    "balakong": {
+      "metaTitle": "Roller Shutter Balakong | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Balakong Cheras industrial — install, repair & service 24 hours for factories & warehouses. WhatsApp for free quote!",
+      "h1": "Roller Shutter Balakong — Install & Repair 24 Hours",
+      "intro": "Balakong is Cheras's industrial powerhouse, with Kawasan Perindustrian Balakong and Taman Perindustrian Seri Kembangan hosting hundreds of manufacturers, packaging companies and logistics operators. The sheer volume of heavy machinery and high-value stock at these facilities makes industrial-grade roller shutters non-negotiable. Our team specialises in large-opening mild steel and motorised shutters for the Balakong industrial belt.",
+      "closingCta": "Factory or warehouse in Balakong? WhatsApp us now — we'll send a technician the same day."
+    },
+    "sungai-buloh": {
+      "metaTitle": "Roller Shutter Sungai Buloh | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Sungai Buloh — install & repair 24 hours for industrial estates, shops & warehouses in north Selangor. WhatsApp us!",
+      "h1": "Roller Shutter Sungai Buloh — Install & Repair 24 Hours",
+      "intro": "Sungai Buloh is a key industrial hub in northern Selangor, anchored by Kawasan Perindustrian Sungai Buloh, Paya Jaras and the Damansara-Puchong highway interchange. The district is home to paint manufacturers, building material suppliers and pharmaceutical plants that depend on industrial roller shutters for compliance and security. We serve the full Sungai Buloh and Sg Buloh Baru corridor with 24-hour cover.",
+      "closingCta": "Industrial premises in Sungai Buloh? WhatsApp us now for fast roller shutter installation or repair."
+    },
+    "batu-caves": {
+      "metaTitle": "Roller Shutter Batu Caves | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Batu Caves — installation & repair 24 hours for factories, warehouses & commercial premises north KL. WhatsApp us!",
+      "h1": "Roller Shutter Batu Caves — Install & Repair 24 Hours",
+      "intro": "Batu Caves in north Kuala Lumpur hosts one of the most active industrial clusters in the Klang Valley, with Kawasan Perindustrian Batu Caves, Taman Sri Gombak and Taman Batu Muda accommodating stone quarries, construction suppliers and manufacturing plants. The area's heavy-industry mix means wide-opening, motorised roller shutters are in constant demand. We provide same-day emergency response anywhere in the Batu Caves corridor.",
+      "closingCta": "Factory or warehouse in Batu Caves? WhatsApp us now — free quote and same-day response."
+    },
+    "port-klang": {
+      "metaTitle": "Roller Shutter Port Klang | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Port Klang — expert installation & repair 24 hours for port warehouses, logistics & commercial premises. WhatsApp us now!",
+      "h1": "Roller Shutter Port Klang — Install & Repair 24 Hours",
+      "intro": "Port Klang is Malaysia's busiest seaport, with Westport and Northport handling tens of thousands of containers daily. The surrounding logistics parks, warehouses and freight forwarding companies along Jalan Pelabuhan and the Butterworth Road area all rely heavily on high-duty roller shutters to protect goods around the clock. We specialise in port-adjacent industrial shutter installations with strict compliance standards.",
+      "closingCta": "Warehouse or logistics business in Port Klang? WhatsApp us now for a specialist roller shutter quote."
+    },
+    "glenmarie": {
+      "metaTitle": "Roller Shutter Glenmarie | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Glenmarie Shah Alam — installation & repair 24 hours for industrial park & commercial premises. WhatsApp for free quote!",
+      "h1": "Roller Shutter Glenmarie — Install & Repair 24 Hours",
+      "intro": "Glenmarie in Shah Alam is home to one of Selangor's most prestigious industrial parks, housing automotive showrooms, engineering firms and multinational manufacturers along Persiaran Kerjaya and Jalan Pelabuhan Utama. The area's high-value facilities demand premium roller shutter solutions — from fire-rated doors for warehouse compliance to motorised systems for busy loading bays. We deliver quality installations tailored to Glenmarie's industrial-park standards.",
+      "closingCta": "Business in Glenmarie Industrial Park? WhatsApp us now for a compliant, high-quality roller shutter solution."
+    },
+    "hicom-shah-alam": {
+      "metaTitle": "Roller Shutter HICOM Shah Alam | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter HICOM Shah Alam — install & repair 24 hours for heavy industry, factories & warehouses. Specialist service. WhatsApp us!",
+      "h1": "Roller Shutter HICOM Shah Alam — Install & Repair 24 Hours",
+      "intro": "HICOM Industrial Estate in Shah Alam is Malaysia's premier heavy-industry zone, hosting Proton, DRB-HICOM and hundreds of automotive component manufacturers and defence contractors. The scale of operations at HICOM demands industrial-grade roller shutters — wide-span, motorised and fire-rated — maintained to the highest safety specifications. Our team has hands-on experience servicing HICOM-standard facilities across all sections of the estate.",
+      "closingCta": "Factory or plant in HICOM Shah Alam? WhatsApp us now for specialist heavy-industry roller shutter service."
+    },
+    "pandan-indah": {
+      "metaTitle": "Roller Shutter Pandan Indah | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Pandan Indah east KL — install, repair & service 24 hours for shops, offices & commercial premises. WhatsApp us!",
+      "h1": "Roller Shutter Pandan Indah — Install & Repair 24 Hours",
+      "intro": "Pandan Indah in east Kuala Lumpur is a mature commercial township with active shophouse rows along Jalan Pandan Indah, a busy wet market zone and light industrial units. Retailers, food court operators and small manufacturers here need dependable roller shutters that withstand daily heavy usage. We cover Pandan Indah, Pandan Jaya and the nearby Pandan Mewah area with rapid turnaround.",
+      "closingCta": "Shop or business in Pandan Indah? WhatsApp us now — get a roller shutter quote within 30 minutes."
+    },
+    "sri-damansara": {
+      "metaTitle": "Roller Shutter Sri Damansara | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Sri Damansara north PJ — installation & repair 24 hours for commercial & office premises. WhatsApp for free quote!",
+      "h1": "Roller Shutter Sri Damansara — Install & Repair 24 Hours",
+      "intro": "Sri Damansara in northern Petaling Jaya is a growing commercial node anchored by Bandar Sri Damansara's shophouse clusters, Sri Damansara Club and the busy commercial strips along Jalan Kuching interchange. The area serves a mix of professional offices, F&B outlets and neighbourhood retail that all benefit from aluminium and grille roller shutters for a modern, secure appearance. We serve the full Sri Damansara and Kepong Baru vicinity.",
+      "closingCta": "Business in Sri Damansara? WhatsApp us now for a free roller shutter installation or repair quote."
+    },
+    "kota-damansara": {
+      "metaTitle": "Roller Shutter Kota Damansara | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Kota Damansara — install & repair 24 hours for tech offices, shops & commercial premises. WhatsApp us now!",
+      "h1": "Roller Shutter Kota Damansara — Install & Repair 24 Hours",
+      "intro": "Kota Damansara is Petaling Jaya's northern tech and lifestyle hub, home to The Strand Mall, Empire Damansara and a dense cluster of SME offices and co-working spaces along Jalan PJU 5. The tech-forward businesses here favour sleek aluminium and polycarbonate roller shutters that blend security with a professional aesthetic. We serve Kota Damansara and the surrounding Tropicana-Petaling Jaya Utara area.",
+      "closingCta": "Office or shop in Kota Damansara? WhatsApp us now for a same-day roller shutter quote."
+    },
+    "seremban": {
+      "metaTitle": "Roller Shutter Seremban | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Seremban Negeri Sembilan — installation & repair 24 hours for factories, shops & commercial premises. WhatsApp us!",
+      "h1": "Roller Shutter Seremban — Install & Repair 24 Hours",
+      "intro": "Seremban is the capital of Negeri Sembilan and the commercial heart of the state, with Seremban 2, the Seremban town centre and the Taman Rasah Jaya commercial district hosting a growing number of shophouses, hypermarkets and light industrial units. The city's rapid population growth has driven significant demand for new roller shutter installations across retail and warehouse premises. We cover Seremban, Nilai and Senawang with prompt, reliable service.",
+      "closingCta": "Premises in Seremban need a roller shutter? WhatsApp us now — free quote and fast response."
+    },
+    "nilai": {
+      "metaTitle": "Roller Shutter Nilai | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Nilai N9 — installation & repair 24 hours for industrial estates, colleges & commercial premises. WhatsApp for free quote!",
+      "h1": "Roller Shutter Nilai — Install & Repair 24 Hours",
+      "intro": "Nilai in Negeri Sembilan is a dual-identity town — a major industrial estate housing garment factories and logistics operators alongside a large education hub centred on INTI International University and USIM. Kawasan Perindustrian Nilai 3, one of the largest wholesale textile markets in Asia, alone generates enormous demand for wide-span roller shutters on storage and wholesale units. We serve Nilai, Bandar Baru Nilai and the Labu corridor.",
+      "closingCta": "Warehouse or business in Nilai? WhatsApp us now — our team covers Nilai and surrounding N9 areas 24/7."
+    },
+    "senawang": {
+      "metaTitle": "Roller Shutter Senawang | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Senawang N9 — installation & repair 24 hours for factories, warehouses & industrial premises. WhatsApp us now!",
+      "h1": "Roller Shutter Senawang — Install & Repair 24 Hours",
+      "intro": "Senawang in Negeri Sembilan is an established industrial corridor connecting Seremban to the PLUS highway, with Kawasan Perindustrian Senawang hosting chemical plants, printing companies and food manufacturers. The industrial density here means roller shutter installations and emergency repairs are constant requirements for operations managers. We cover the full Senawang industrial estate and nearby Taman Desa Pahlawan commercial area.",
+      "closingCta": "Industrial or commercial premises in Senawang? WhatsApp us now for expert roller shutter service."
+    },
+    "penang": {
+      "metaTitle": "Roller Shutter Penang | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Penang — expert installation & repair 24 hours for factories, shops & warehouses in Penang island & mainland. WhatsApp us!",
+      "h1": "Roller Shutter Penang — Install & Repair 24 Hours",
+      "intro": "Penang is Malaysia's northern industrial powerhouse and a UNESCO World Heritage city, with Bayan Lepas Free Industrial Zone hosting global semiconductor and electronics giants alongside the heritage shophouses of George Town. From high-tech cleanroom facilities in Bayan Lepas to colonial shophouse storefronts in Georgetown needing sympathetic roller shutter designs, no job is too specialised for our Penang team. We cover both Penang Island and Seberang Perai.",
+      "closingCta": "Premises in Penang need a roller shutter? WhatsApp us now — island and mainland coverage 24/7."
+    },
+    "ipoh": {
+      "metaTitle": "Roller Shutter Ipoh | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Ipoh Perak — installation & repair 24 hours for factories, shops & commercial premises. WhatsApp for free quote!",
+      "h1": "Roller Shutter Ipoh — Install & Repair 24 Hours",
+      "intro": "Ipoh is Perak's capital and the third largest city in Malaysia, with a thriving commercial core around Jalan Sultan Idris Shah, the Greentown business district and a growing manufacturing base in Kawasan Perindustrian Meru and Jelapang. Ipoh's mix of heritage shophouses, modern commercial blocks and light-industrial estates creates diverse roller shutter requirements. Our Ipoh team delivers fast installation and 24-hour emergency repair across the city.",
+      "closingCta": "Business in Ipoh? WhatsApp us now for a free roller shutter consultation and same-day quote."
+    },
+    "alor-setar": {
+      "metaTitle": "Roller Shutter Alor Setar | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Alor Setar Kedah — installation & repair 24 hours for factories, shops & commercial premises. WhatsApp us now!",
+      "h1": "Roller Shutter Alor Setar — Install & Repair 24 Hours",
+      "intro": "Alor Setar is Kedah's state capital and the commercial gateway to northern Malaysia, with active shophouse districts along Jalan Tunku Ibrahim, the Pekan Rabu market area and a growing industrial zone at Mergong and Kawasan Perindustrian Mergong. The city's strategic position near the Thai border drives logistics and wholesale activity that demands robust roller shutter security. We cover Alor Setar and surrounding Kedah towns with full 24-hour service.",
+      "closingCta": "Premises in Alor Setar? WhatsApp us now — free roller shutter quote with fast north Malaysia response."
+    },
+    "sungai-petani": {
+      "metaTitle": "Roller Shutter Sungai Petani | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Sungai Petani Kedah — install & repair 24 hours for industrial estates & commercial premises. WhatsApp us!",
+      "h1": "Roller Shutter Sungai Petani — Install & Repair 24 Hours",
+      "intro": "Sungai Petani is Kedah's second largest city and a major industrial centre, with Kawasan Perindustrian Sungai Petani and the Hi-Tech Industrial Park hosting electronics manufacturers, glove producers and automotive parts suppliers. The SP town centre along Jalan Ibrahim also has a dense commercial district where shophouse owners rely on quality roller shutters for daily security. We serve the full SP and Kuala Muda district.",
+      "closingCta": "Factory or shop in Sungai Petani? WhatsApp us now for a fast roller shutter quote."
+    },
+    "taiping": {
+      "metaTitle": "Roller Shutter Taiping | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Taiping Perak — installation & repair 24 hours for heritage shophouses, factories & commercial premises. WhatsApp us!",
+      "h1": "Roller Shutter Taiping — Install & Repair 24 Hours",
+      "intro": "Taiping is one of Malaysia's oldest and most charming heritage towns, with rows of pre-war shophouses along Jalan Kota and Jalan Pasar that have been trading for over a century. Modern businesses around Taman Tasik Taiping and the Taiping Mall area also need contemporary roller shutter solutions. Whether you have a heritage shophouse needing a sympathetic grille shutter or a new commercial unit needing steel installation, our Taiping team is ready.",
+      "closingCta": "Shop or business in Taiping? WhatsApp us now — heritage-sensitive and modern roller shutter solutions available."
+    },
+    "butterworth": {
+      "metaTitle": "Roller Shutter Butterworth | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Butterworth Penang mainland — installation & repair 24 hours for industrial & commercial premises. WhatsApp us!",
+      "h1": "Roller Shutter Butterworth — Install & Repair 24 Hours",
+      "intro": "Butterworth on the Penang mainland is a major industrial and port town, home to Prai Industrial Estate — one of the largest industrial areas in northern Malaysia — and the Butterworth port terminal. Chemical plants, food processing factories and logistics operators here rely on heavy-duty motorised and fire-rated roller shutters around the clock. We serve Butterworth, Prai and the wider Seberang Perai Utara district.",
+      "closingCta": "Factory or warehouse in Butterworth or Prai? WhatsApp us now for specialist industrial roller shutter service."
+    },
+    "johor-bahru": {
+      "metaTitle": "Roller Shutter Johor Bahru | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Johor Bahru — expert installation & repair 24 hours for factories, shops & warehouses in JB. WhatsApp us now!",
+      "h1": "Roller Shutter Johor Bahru — Install & Repair 24 Hours",
+      "intro": "Johor Bahru is Malaysia's southern capital and one of Southeast Asia's fastest-growing cities, driven by cross-border trade with Singapore and the booming Iskandar Malaysia development region. From the dense commercial rows of Taman Pelangi and Jalan Wong Ah Fook to the massive logistics warehouses serving the Causeway corridor, roller shutter demand in JB is immense. Our JB team delivers 24-hour installation and emergency repair across the entire city.",
+      "closingCta": "Business in Johor Bahru? WhatsApp us now — JB's fastest roller shutter response team, available 24/7."
+    },
+    "melaka": {
+      "metaTitle": "Roller Shutter Melaka | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Melaka — installation & repair 24 hours for heritage shops, factories & commercial premises. WhatsApp for free quote!",
+      "h1": "Roller Shutter Melaka — Install & Repair 24 Hours",
+      "intro": "Melaka blends UNESCO World Heritage status with a thriving modern economy, featuring the tourist-heavy heritage corridor along Jonker Street, large shopping malls like Mahkota Parade and Dataran Pahlawan, and an active industrial zone at Kawasan Perindustrian Bertam and Alor Gajah. Business owners need roller shutters that complement Melaka's unique architectural character while providing modern security standards. We serve heritage shophouses to large warehouses across the state.",
+      "closingCta": "Premises in Melaka need a roller shutter? WhatsApp us now — free assessment and quote today."
+    },
+    "batu-pahat": {
+      "metaTitle": "Roller Shutter Batu Pahat | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Batu Pahat Johor — installation & repair 24 hours for factories, shops & industrial premises. WhatsApp us now!",
+      "h1": "Roller Shutter Batu Pahat — Install & Repair 24 Hours",
+      "intro": "Batu Pahat is Johor's third largest city and an important industrial town, with Kawasan Perindustrian Tongkang Pecah and Perindustrian Sri Gading housing garment factories, plastic manufacturers and food processors. The city's busy commercial stretch along Jalan Rahmat and the surrounding shophouse blocks also create constant demand for quality roller shutter installation and maintenance. We cover Batu Pahat and the surrounding Muar-BP corridor.",
+      "closingCta": "Factory or shop in Batu Pahat? WhatsApp us now for a free roller shutter quote."
+    },
+    "muar": {
+      "metaTitle": "Roller Shutter Muar | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Muar Johor — installation & repair 24 hours for furniture factories, shops & commercial premises. WhatsApp us!",
+      "h1": "Roller Shutter Muar — Install & Repair 24 Hours",
+      "intro": "Muar is Malaysia's undisputed furniture capital, with Kawasan Perindustrian Bukit Pasir and Parit Raja housing hundreds of furniture manufacturers that supply both domestic and export markets. The massive production halls and high-value timber storage at these factories demand industrial-grade motorised roller shutters with reliable automation. Beyond furniture, Muar's heritage riverside shophouses along Jalan Junid also need robust grille and steel shutter solutions.",
+      "closingCta": "Furniture factory or business in Muar? WhatsApp us now — specialist roller shutter service for Johor's furniture industry."
+    },
+    "kluang": {
+      "metaTitle": "Roller Shutter Kluang | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Kluang Johor — installation & repair 24 hours for factories, shops & industrial premises. WhatsApp for free quote!",
+      "h1": "Roller Shutter Kluang — Install & Repair 24 Hours",
+      "intro": "Kluang in central Johor is a strategic industrial town at the crossroads of the North-South Expressway and major rail lines, with Kawasan Perindustrian Kluang and Taman Perindustrian Paloh hosting rubber product manufacturers, palm oil processors and logistics companies. The town centre along Jalan Genuang is lined with active shophouses that rely on quality roller shutters for security. We cover Kluang and the surrounding Ayer Hitam-Paloh area.",
+      "closingCta": "Business in Kluang? WhatsApp us now for a free roller shutter installation or repair quote."
+    },
+    "skudai": {
+      "metaTitle": "Roller Shutter Skudai | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Skudai Johor — installation & repair 24 hours for factories, shops & commercial premises near JB. WhatsApp us!",
+      "h1": "Roller Shutter Skudai — Install & Repair 24 Hours",
+      "intro": "Skudai is a thriving township immediately northwest of Johor Bahru, anchored by Universiti Teknologi Malaysia (UTM), Taman Universiti and the busy commercial strips along Jalan Skudai. The area's proximity to JB drives high commercial activity across hypermarkets, car service centres and light industrial workshops. Our team covers Skudai, Tampoi and the nearby Taman Ungku Tun Aminah commercial district with 24-hour roller shutter service.",
+      "closingCta": "Shop or factory in Skudai? WhatsApp us now — fast response for roller shutter installation and repair."
+    },
+    "iskandar-puteri": {
+      "metaTitle": "Roller Shutter Iskandar Puteri | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Iskandar Puteri Johor — installation & repair 24 hours for development zone factories & commercial premises. WhatsApp us!",
+      "h1": "Roller Shutter Iskandar Puteri — Install & Repair 24 Hours",
+      "intro": "Iskandar Puteri (formerly Nusajaya) is the centrepiece of the Iskandar Malaysia economic zone, housing Medini business district, Legoland Malaysia, EduCity, and a rapidly expanding residential and commercial catchment. New commercial developments along Kota Iskandar and the Puteri Harbour waterfront are driving strong demand for modern aluminium and motorised roller shutters. As the zone continues to expand, we're here to meet all roller shutter needs for new and existing developments.",
+      "closingCta": "New business or development in Iskandar Puteri? WhatsApp us now for a roller shutter quote tailored to your project."
+    },
+    "kuantan": {
+      "metaTitle": "Roller Shutter Kuantan | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Kuantan Pahang — installation & repair 24 hours for east coast factories, shops & warehouses. WhatsApp us now!",
+      "h1": "Roller Shutter Kuantan — Install & Repair 24 Hours",
+      "intro": "Kuantan is Pahang's capital and the primary industrial gateway on the east coast, with Gebeng Industrial Estate hosting petrochemical plants, steel manufacturers and paper mills drawing significant logistics activity along the coastal corridor. The town centre around Jalan Besar, Jalan Teluk Sisek and the Kuantan Port area all have active commercial premises requiring reliable roller shutters. We cover the full Kuantan-Gebeng-Indera Mahkota belt.",
+      "closingCta": "Industrial or commercial premises in Kuantan? WhatsApp us now — east coast roller shutter specialist, 24/7."
+    },
+    "kota-bharu": {
+      "metaTitle": "Roller Shutter Kota Bharu | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Kota Bharu Kelantan — installation & repair 24 hours for shops, markets & commercial premises. WhatsApp us!",
+      "h1": "Roller Shutter Kota Bharu — Install & Repair 24 Hours",
+      "intro": "Kota Bharu is the capital of Kelantan and the cultural heart of the east coast, with vibrant commercial activity centred on Pasar Besar Siti Khadijah, Jalan Hamzah and the sprawling KB Mall-AEON commercial corridor. The dense concentration of shophouses, wet market stalls and small traders in KB creates high demand for grille and mild steel roller shutters built to withstand tropical conditions. We serve Kota Bharu and the surrounding Pasir Mas-Pengkalan Chepa area.",
+      "closingCta": "Business in Kota Bharu? WhatsApp us now for a free roller shutter assessment and quote."
+    },
+    "kuala-terengganu": {
+      "metaTitle": "Roller Shutter Kuala Terengganu | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Kuala Terengganu — installation & repair 24 hours for shops, oil & gas facilities & commercial premises. WhatsApp us!",
+      "h1": "Roller Shutter Kuala Terengganu — Install & Repair 24 Hours",
+      "intro": "Kuala Terengganu is the royal capital of Terengganu and an emerging commercial centre buoyed by the state's oil and gas wealth. The commercial hub along Jalan Sultan Ismail, the Cendering Industrial Estate and the supply-chain businesses serving the offshore petroleum sector all require quality roller shutters for asset protection. We cover Kuala Terengganu, Cendering and the Kuala Nerus commercial corridor with full 24-hour service.",
+      "closingCta": "Business or facility in Kuala Terengganu? WhatsApp us now for specialist roller shutter service on the east coast."
+    },
+    "temerloh": {
+      "metaTitle": "Roller Shutter Temerloh | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Temerloh Pahang — installation & repair 24 hours for shops, factories & commercial premises. WhatsApp for free quote!",
+      "h1": "Roller Shutter Temerloh — Install & Repair 24 Hours",
+      "intro": "Temerloh is a key inland town in central Pahang, situated at the confluence of the Pahang and Semantan rivers and serving as a commercial hub for the surrounding agricultural region. The town's shophouse rows along Jalan Ahmad Shah, fresh produce markets and light industrial units processing palm oil and rubber create steady demand for affordable, durable roller shutters. We serve Temerloh, Mentakab and the central Pahang corridor.",
+      "closingCta": "Shop or premises in Temerloh? WhatsApp us now — free roller shutter quote for Pahang's central region."
+    },
+    "kota-kinabalu": {
+      "metaTitle": "Roller Shutter Kota Kinabalu | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Kota Kinabalu Sabah — installation & repair 24 hours for factories, shops & warehouses in KK. WhatsApp us now!",
+      "h1": "Roller Shutter Kota Kinabalu — Install & Repair 24 Hours",
+      "intro": "Kota Kinabalu is Sabah's capital and the main commercial gateway for East Malaysia, with the busy KK waterfront, Lintas commercial hub, the Kolombong and Inanam industrial areas all driving demand for quality roller shutters. The city's high humidity and salt-air environment from the South China Sea exposure requires corrosion-resistant aluminium and hot-dip galvanised steel shutters for longevity. We provide specialist roller shutter solutions built for Sabah's coastal industrial environment.",
+      "closingCta": "Business in Kota Kinabalu? WhatsApp us now — Sabah-specialist roller shutter installation and repair, 24/7."
+    },
+    "kuching": {
+      "metaTitle": "Roller Shutter Kuching | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Kuching Sarawak — installation & repair 24 hours for factories, shops & commercial premises. WhatsApp for free quote!",
+      "h1": "Roller Shutter Kuching — Install & Repair 24 Hours",
+      "intro": "Kuching is Sarawak's capital and the economic centre of Malaysian Borneo, with Kuching Sentral commercial district, the sprawling Batu Kawa and Matang light industrial areas, and the Kuching port handling significant commodities trade. The city's diverse commercial landscape — from heritage shophouses in the Old Town to modern malls like The Spring and Vivacity Megamall — requires varied roller shutter solutions. We cover the full Kuching metropolitan area and surrounding townships.",
+      "closingCta": "Premises in Kuching? WhatsApp us now — Sarawak's roller shutter experts available 24/7."
+    },
+    "miri": {
+      "metaTitle": "Roller Shutter Miri | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Miri Sarawak — installation & repair 24 hours for oil & gas, factories & commercial premises. WhatsApp us now!",
+      "h1": "Roller Shutter Miri — Install & Repair 24 Hours",
+      "intro": "Miri is Sarawak's oil city and the birthplace of Malaysia's petroleum industry, with the Lutong refinery, Petronas supply-chain businesses and the Permyjaya commercial district driving economic activity. The city's oil-and-gas support facilities, logistics warehouses and retail businesses along Jalan Miri-Pujut and the Bintang Megamall area all need durable roller shutters suited to Miri's tropical coastal conditions. We provide corrosion-resistant installations for the full Miri district.",
+      "closingCta": "Oil & gas facility, warehouse or shop in Miri? WhatsApp us now for a specialist roller shutter quote."
+    },
+    "sandakan": {
+      "metaTitle": "Roller Shutter Sandakan | Install & Repair 24 Hours",
+      "metaDescription": "Roller shutter Sandakan Sabah — installation & repair 24 hours for port warehouses, factories & commercial premises. WhatsApp us!",
+      "h1": "Roller Shutter Sandakan — Install & Repair 24 Hours",
+      "intro": "Sandakan is Sabah's second largest city and a major industrial port town, historically known for timber and palm oil export and today home to a busy commercial waterfront, fish processing plants and the Batu Sapi industrial estate. The constant movement of goods through Sandakan port creates high demand for heavy-duty roller shutters at warehouses, cold storage facilities and export yards. We serve Sandakan and the surrounding Kinabatangan-Telupid corridor with 24-hour cover.",
+      "closingCta": "Warehouse or business in Sandakan? WhatsApp us now for heavy-duty roller shutter installation and repair in Sabah."
+    }
+  }
+}

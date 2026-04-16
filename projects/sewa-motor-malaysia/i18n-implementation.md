@@ -5,7 +5,7 @@
 **Languages:** English (`en`), Mandarin Chinese (`zh`)
 **Default locale:** `en`
 **i18n library:** next-intl
-**Author:** Joy (i18n Specialist)
+**Author:** Kimmy (Technical Implementation Specialist)
 
 ---
 
@@ -873,4 +873,4 @@ Key translation decisions for Simplified Chinese:
 | `components/LanguageSwitcher.tsx` | Complete | CSS-only language dropdown |
 | `app/[locale]/layout.tsx` | Complete | Locale-aware root layout |
 
-All files are ready for implementation by the frontend developer (Layla).
+All files are ready for implementation.

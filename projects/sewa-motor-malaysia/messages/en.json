@@ -4,6 +4,39 @@
     "locations": "Locations",
     "whatsapp": "WhatsApp Us"
   },
+  "fomo": {
+    "message": "Only {slots} bikes left for same-day delivery!",
+    "bookNow": "Book Now"
+  },
+  "shared": {
+    "freeToAsk": "Free to ask · Reply within 1 hour",
+    "safetyNote": "Safety-checked fleet · 30-day breakdown support",
+    "stats": {
+      "value1": "6,000+",
+      "label1": "Rentals completed across Malaysia",
+      "value2": "128",
+      "label2": "Cities with same-day delivery",
+      "value3": "RM30",
+      "label3": "Starting daily rental price",
+      "value4": "4.9",
+      "label4": "Average Google review rating"
+    },
+    "whyChoose": {
+      "title1": "Well-Maintained Fleet",
+      "desc1": "Safety-inspected before every delivery. Honda, Yamaha & Modenas in top condition.",
+      "title2": "Same-Day Delivery",
+      "desc2": "Book on WhatsApp, ride today. We deliver across 128 cities in Malaysia.",
+      "title3": "Budget-Friendly Rates",
+      "desc3": "From RM30/day. Daily, weekly & monthly plans — the longer you rent, the more you save.",
+      "title4": "WhatsApp Support 7 Days",
+      "desc4": "Our team replies fast every day. No paperwork, no red tape."
+    },
+    "midCta": "Ready to ride? WhatsApp us now — reply within 1 hour.",
+    "midCtaButton": "WhatsApp Sewa Motor",
+    "galleryLabel": "Real Rides",
+    "galleryHeading": "Our Fleet Across Malaysia",
+    "reviewsSubtext": "Based on 180+ Google Reviews"
+  },
   "footer": {
     "tagline": "Malaysia's trusted motorcycle rental service. Same-day delivery from RM30/day.",
     "quickLinks": "Quick Links",
@@ -128,6 +161,28 @@
       "heading": "Ready to Ride? Rent a Motorcycle Today.",
       "subheading": "From RM30/day with same-day delivery. Send us a WhatsApp message and we will get your bike to you today.",
       "button": "WhatsApp Us Now"
+    },
+    "faq": {
+      "q1": "How much does it cost to rent a motorcycle in Malaysia?",
+      "a1": "Motorcycle rental in Malaysia starts from RM30/day for a Modenas Kriss MR3. Weekly and monthly plans are also available, with prices ranging up to RM1,100/month for a Honda PCX 160. The longer your rental period, the more you save per day.",
+      "q2": "Do you deliver motorcycles across Malaysia?",
+      "a2": "Yes, we provide same-day delivery across 128 cities in Malaysia. Just send us a WhatsApp message with your preferred motorcycle and delivery address, and we will bring it to you on the same day.",
+      "q3": "What motorcycles are available for rent?",
+      "a3": "We offer six models: Honda Vario 160, Yamaha NMax 155, Honda PCX 160, Honda Wave 125, Yamaha Y15ZR, and Modenas Kriss MR3. Each bike is maintained and ready for immediate rental.",
+      "q4": "Do I need a deposit to rent a motorcycle?",
+      "a4": "A small refundable deposit may be required depending on the motorcycle and rental duration. Contact us on WhatsApp for the exact deposit amount for your chosen bike.",
+      "q5": "Can I rent a motorcycle for food delivery work?",
+      "a5": "Absolutely. Many of our customers rent motorcycles for food delivery with Grab, Foodpanda, and ShopeeFood. The Honda Vario 160 and Yamaha Y15ZR are popular choices for delivery riders.",
+      "q6": "How do I book a motorcycle rental?",
+      "a6": "Booking is simple. Send us a WhatsApp message with your preferred bike, rental period, and delivery address. We will confirm availability and arrange same-day delivery.",
+      "q7": "Is there a minimum rental period?",
+      "a7": "The minimum rental period is one day. You can rent for a single day, a full week, or an entire month. Monthly plans offer the best value per day.",
+      "q8": "What happens if the motorcycle breaks down during my rental?",
+      "a8": "Contact us immediately on WhatsApp. We will arrange a replacement motorcycle or roadside assistance as quickly as possible. Your safety and convenience come first.",
+      "q9": "Can I extend my motorcycle rental?",
+      "a9": "Yes, you can extend your rental anytime. Just message us on WhatsApp before your current rental period ends, and we will update your booking without any interruption.",
+      "q10": "Do you offer scooter rental in Malaysia?",
+      "a10": "Yes. The Honda Vario 160, Yamaha NMax 155, and Honda PCX 160 are all automatic scooters available for rent. Scooter rental starts from RM50/day with same-day delivery."
     }
   },
   "location": {

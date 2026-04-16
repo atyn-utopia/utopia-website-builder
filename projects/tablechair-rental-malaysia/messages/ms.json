@@ -1,0 +1,243 @@
+{
+  "nav": {
+    "services": "Perkhidmatan",
+    "locations": "Lokasi",
+    "gallery": "Galeri",
+    "blog": "Blog",
+    "contact": "Hubungi",
+    "whatsapp": "WhatsApp Kami"
+  },
+  "shared": {
+    "brand": "Kak Kenduri",
+    "tagline": "Sewa meja dan kerusi hantar sama hari seluruh Malaysia",
+    "whatsappCta": "WhatsApp Kami",
+    "whatsappCtaShort": "WhatsApp Sekarang",
+    "whatsappMessageDefault": "Hi Kak Kenduri, saya nak tanya pasal sewa meja dan kerusi.",
+    "whatsappMessageLocation": "Hi Kak Kenduri, saya nak tanya pasal sewa meja dan kerusi di {city}.",
+    "priceFrom": "Dari RM3.60 sekerusi",
+    "deliveryWindow": "Hantar sama hari",
+    "ratingBadge": "Google · 4.9★ · 380+ ulasan",
+    "reviewsLabel": "Dari ulasan Google sebenar",
+    "seeAllReviews": "Lihat semua ulasan di Google Business",
+    "gallery": {
+      "heading": "Majlis sebenar yang kami susun",
+      "subheading": "Dari ulasan Google sebenar",
+      "badge": "Google · 4.9★"
+    },
+    "alt": {
+      "heroHome": "Sewa meja dan kerusi Malaysia — Kak Kenduri",
+      "heroLocation": "Sewa meja dan kerusi di {city} — Kak Kenduri",
+      "standardChair": "Sewa kerusi plastik standard — kerusi kenduri boleh disusun",
+      "banquetChair": "Sewa kerusi banquet — tempat duduk gred hotel bercushion",
+      "chiavariChair": "Sewa kerusi Chiavari — tempat duduk majlis perkahwinan anggun",
+      "longTable": "Sewa meja panjang buffet 6 kaki — bersama kain skirting",
+      "roundTable": "Sewa meja bulat 10 orang — untuk majlis kahwin dan banquet",
+      "cocktailTable": "Sewa meja cocktail tinggi — bersama sarung spandex putih",
+      "couchChair": "Sewa sofa pelamin — gaya vintage untuk VIP",
+      "tentCanopy": "Sewa khemah canopy — 20x20 kaki kalis air",
+      "transparentCanopy": "Sewa khemah transparent — PVC jernih majlis malam",
+      "airCooler": "Sewa air cooler industrial untuk khemah luar",
+      "commercialFan": "Sewa kipas commercial berkuasa tinggi untuk event",
+      "paSystem": "Sewa PA system bersama mikrofon dan speaker",
+      "cateringEquipment": "Sewa peralatan catering — chafing dish dan dulang buffet",
+      "popcornMachine": "Sewa mesin popcorn retro merah untuk majlis",
+      "cottonCandy": "Sewa mesin gula kapas pink dan biru untuk majlis",
+      "gallery": "Majlis pelanggan Kak Kenduri {n} — susun meja kerusi",
+      "logoAria": "Halaman utama Kak Kenduri"
+    },
+    "usp1Title": "Penghantaran Hari Sama",
+    "usp1Sub": "Tempah pagi, pasang petang — seluruh KL, Selangor & Johor.",
+    "usp2Title": "Dipercayai 8,000+ Majlis",
+    "usp2Sub": "Perkahwinan, kenduri, makan malam korporat — semua kami uruskan.",
+    "usp3Title": "Pasang & Kutip Termasuk",
+    "usp3Sub": "Pasukan kami hantar, susun, dan kutip — anda tak perlu buat apa-apa.",
+    "fomoText": "Slot hujung minggu cepat penuh — sahkan tarikh anda di WhatsApp hari ini.",
+    "fomoCta": "WhatsApp Kami",
+    "ctaTag1": "Penghantaran hari sama",
+    "ctaTag2": "Pasang & kutip percuma",
+    "ctaTag3": "Tanpa deposit"
+  },
+  "footer": {
+    "tagline": "Sewa meja dan kerusi hantar sama hari seluruh Malaysia.",
+    "quickLinks": "Pautan pantas",
+    "topLocations": "Lokasi utama",
+    "contact": "Hubungi",
+    "phone": "Telefon",
+    "email": "Emel",
+    "address": "No. 3, Lot 156, Jalan Jurubina U1/18, 40150 Shah Alam, Selangor",
+    "hours": "8 pagi – 10 malam, setiap hari",
+    "legal": "© {year} Kak Kenduri Sdn. Bhd. Hak cipta terpelihara.",
+    "getInTouch": "Hubungi Kami",
+    "getInTouchSub": "Ada soalan atau nak sebut harga? Kami balas dalam beberapa minit."
+  },
+  "home": {
+    "meta": {
+      "title": "Sewa Meja Dan Kerusi Malaysia | Sama Hari | Kak Kenduri",
+      "description": "Sewa kerusi banquet, chiavari, meja bulat, khemah, PA & peralatan kenduri seluruh Malaysia. Hantar sama hari dari RM3.60. WhatsApp sekarang."
+    },
+    "hero": {
+      "h1": "Sewa Meja Dan Kerusi Malaysia — Hantar Sama Hari Dari RM3.60",
+      "sub": "Kak Kenduri bekalkan kerusi, meja, khemah dan peralatan kenduri lengkap ke rumah, dewan dan venue seluruh Malaysia — dihantar pada hari yang sama anda WhatsApp kami.",
+      "priceBadge": "Dari RM3.60 sekerusi",
+      "primaryCta": "WhatsApp Kami",
+      "secondaryCta": "Lihat sewaan",
+      "trust": "8,000+ majlis disempurnakan · KL · Selangor · Johor · Seluruh Malaysia"
+    },
+    "serviceArea": {
+      "heading": "38 kawasan servis di 13 negeri",
+      "intro": "Kami hantar kerusi, meja dan peralatan kenduri merentasi Selangor, Kuala Lumpur, Johor, Negeri Sembilan, Perak, Pulau Pinang, Melaka, Pahang, Kedah, Terengganu, Kelantan dan Perlis — meliputi kenduri, majlis perkahwinan, corporate event, majlis pertunangan, hari jadi dan kenduri arwah. Pilih bandar anda di bawah dan kami sahkan ketersediaan sama hari."
+    },
+    "products": {
+      "heading": "Kerusi & meja utama — sewa biji atau set penuh",
+      "plainLabel": "Kosong",
+      "withCoverLabel": "Bersarung",
+      "standardChair": {
+        "name": "Kerusi Standard",
+        "tagline": "Kerusi plastik asas yang setiap kenduri perlu.",
+        "blurb": "Sewa kerusi standard yang ringan, boleh disusun, untuk kenduri, tahlil dan majlis belakang rumah. Kosong RM3.60 atau bersama sarung kain RM9.60 — kami hantar beratus biji, sama hari, seluruh Malaysia.",
+        "cta": "WhatsApp tempah kerusi standard"
+      },
+      "banquetChair": {
+        "name": "Kerusi Banquet",
+        "tagline": "Bantal empuk, rangka besi — selesa gred hotel.",
+        "blurb": "Sewa kerusi banquet untuk majlis perkahwinan, makan malam dan dinner korporat. Tempat duduk bercushion, dibasuh sebelum setiap penghantaran. Kosong RM14.40, bersarung reben RM21.60.",
+        "cta": "WhatsApp tempah kerusi banquet"
+      },
+      "chiavariChair": {
+        "name": "Kerusi Chiavari",
+        "tagline": "Kerusi majlis cantik yang anda selalu nampak di Instagram.",
+        "blurb": "Sewa kerusi chiavari solid pada RM21.60 atau chiavari akrilik transparent RM28.80 — sesuai untuk gambar pelamin, meja pengantin dan majlis pertunangan mewah.",
+        "cta": "WhatsApp tempah kerusi chiavari"
+      },
+      "longTable": {
+        "name": "Meja Panjang / Buffet 6 kaki",
+        "tagline": "Meja 6 kaki yang jadi nadi setiap buffet dan dapur.",
+        "blurb": "Sewa meja panjang saiz standard 6 kaki. Tanpa kain RM72.00, bersama kain skirting RM86.40. Gabungkan dengan peralatan catering untuk setup buffet lengkap.",
+        "cta": "WhatsApp tempah meja panjang"
+      },
+      "roundTable": {
+        "name": "Meja Bulat (10 orang)",
+        "tagline": "Cukup untuk 10 tetamu — standard kenduri Malaysia.",
+        "blurb": "Sewa meja bulat yang muat 10 tetamu — pilihan utama untuk majlis perkahwinan Melayu dan makan malam banquet Cina. Kosong RM72.00, bersama kain & overlay RM86.40.",
+        "cta": "WhatsApp tempah meja bulat"
+      },
+      "cocktailTable": {
+        "name": "Meja Cocktail",
+        "tagline": "Meja tinggi untuk berdiri, minuman selamat datang dan mingle.",
+        "blurb": "Sewa meja cocktail pada RM86.40 termasuk sarung spandex putih — sesuai untuk foyer resepsi, networking korporat dan kawasan sambutan.",
+        "cta": "WhatsApp tempah meja cocktail"
+      }
+    },
+    "additional": {
+      "heading": "Semua keperluan kenduri anda di bawah satu bumbung",
+      "couch": {
+        "name": "Sofa Pelamin",
+        "blurb": "Sofa gaya vintage untuk pelamin, photo corner dan kawasan VIP. Disalut kain cream atau emas."
+      },
+      "tent": {
+        "name": "Khemah / Canopy",
+        "blurb": "Sewa khemah standard 20×20 dan 20×40 kaki untuk kenduri belakang rumah. Atap kalis air, rangka besi, termasuk pemasangan."
+      },
+      "transparentCanopy": {
+        "name": "Khemah Transparent",
+        "blurb": "Sewa khemah PVC transparent untuk majlis malam. Tahan angin, kalis bocor."
+      },
+      "airCooler": {
+        "name": "Air Cooler",
+        "blurb": "Sewa air cooler industrial yang benar-benar menyejukkan khemah terbuka. Setiap unit ~40 m²."
+      },
+      "fan": {
+        "name": "Kipas Gergasi",
+        "blurb": "Sewa kipas commercial berkuasa tinggi. Senyap, kuat, pastikan tetamu selesa sepanjang majlis."
+      },
+      "pa": {
+        "name": "PA System",
+        "blurb": "Sewa PA system lengkap dengan mikrofon, mixer dan 2 speaker — sesuai untuk MC, nasyid, akad nikah."
+      },
+      "catering": {
+        "name": "Peralatan Catering",
+        "blurb": "Chafing dish, soup warmer, water dispenser dan dulang buffet per set."
+      },
+      "popcorn": {
+        "name": "Mesin Popcorn",
+        "blurb": "Sewa mesin popcorn retro merah untuk hari jadi dan sudut kanak-kanak."
+      },
+      "cottonCandy": {
+        "name": "Mesin Gula Kapas",
+        "blurb": "Sewa mesin gula kapas pink atau biru — menghiburkan di mana-mana majlis."
+      },
+      "eyebrow": "Lebih daripada meja & kerusi"
+    },
+    "howItWorks": {
+      "heading": "Tempah sewaan anda dalam 3 langkah",
+      "step1Title": "WhatsApp tarikh & alamat anda",
+      "step1Body": "Beritahu kami tarikh majlis, alamat venue, jumlah tetamu dan mana-mana add-on. Kami sahkan dalam beberapa minit.",
+      "step2Title": "Sahkan sebutharga & bayar deposit",
+      "step2Body": "Kami hantar sebutharga bertulis dengan jumlah dan slot penghantaran. Kunci tempahan dengan deposit boleh dikembalikan.",
+      "step3Title": "Kami hantar, pasang & kutip balik",
+      "step3Body": "Kru kami sampai pada masa yang dijanjikan, susun, dan datang semula selepas majlis untuk kutip. Anda tak angkat satu kerusi pun."
+    },
+    "reviews": {
+      "heading": "Dari ulasan Google sebenar",
+      "badge": "Google · 4.9★ · 380+ ulasan",
+      "r1Name": "Farah Iskandar — Shah Alam",
+      "r1Body": "Tempah 200 kerusi banquet dan 20 meja bulat untuk majlis akad kakak minggu lepas. Lori sampai pukul 8 pagi tepat, boys susun cantik, pickup pun smooth.",
+      "r2Name": "Daniel Tan — Petaling Jaya",
+      "r2Body": "Perlu setup chiavari last minute untuk dinner korporat di PJ dan diorang betul-betul hantar sama hari. Chiavari transparent nampak cantik dalam gambar.",
+      "r3Name": "Aisyah Roslan — Johor Bahru",
+      "r3Body": "Dari kerusi sampai canopy semua dari Kak Kenduri untuk kenduri rumah di JB. Senang nak deal, boleh WhatsApp terus tanpa banyak borang."
+    },
+    "locationsCta": {
+      "heading": "Jumpa Kak Kenduri di bandar anda",
+      "sub": "Kami hantar sama hari ke 38 bandar seluruh Malaysia — tekan kawasan anda untuk harga, slot penghantaran dan soalan lazim."
+    },
+    "finalCta": {
+      "heading": "Mari aturkan majlis anda — dengan betul.",
+      "sub": "Satu mesej WhatsApp sahaja. Kami sahkan ketersediaan, hantar sebutharga, dan kunci penghantaran sama hari.",
+      "button": "WhatsApp Kami"
+    }
+  },
+  "blog": {
+    "meta": {
+      "title": "Blog | Kak Kenduri",
+      "description": "Tips, panduan dan senarai semak untuk merancang kenduri, perkahwinan atau majlis anda di Malaysia. Dari Kak Kenduri."
+    },
+    "heading": "Blog Kak Kenduri",
+    "subheading": "Tips, senarai semak dan panduan untuk membantu anda merancang kenduri, perkahwinan atau majlis yang sempurna.",
+    "noPosts": "Belum ada artikel — sila semak semula nanti!",
+    "breadcrumbs": {
+      "home": "Utama",
+      "blog": "Blog"
+    },
+    "cta": {
+      "heading": "Sedia merancang majlis anda?",
+      "sub": "WhatsApp Kak Kenduri — kami balas dalam beberapa minit dengan sebut harga percuma."
+    },
+    "recentPosts": "Artikel Terbaru",
+    "minRead": "{count} min baca"
+  },
+  "location": {
+    "meta": {
+      "title": "Sewa Meja Dan Kerusi {city} | Dari RM3.60 | Kak Kenduri",
+      "description": "Sewa kerusi banquet, chiavari, meja bulat & khemah untuk kenduri di {city}. Hantar sama hari dari RM3.60 sekerusi. WhatsApp Kak Kenduri sekarang."
+    },
+    "h1": "Sewa Meja Dan Kerusi {city} — Hantar Sama Hari",
+    "breadcrumbs": {
+      "home": "Utama",
+      "locations": "Lokasi",
+      "city": "{city}"
+    },
+    "banner": "Melayani {city} dan kawasan sekitarnya — hantar sama hari dari gudang Shah Alam.",
+    "whyHeading": "Kenapa pilih Kak Kenduri untuk {city}",
+    "faqHeading": "Soalan lazim — {city}",
+    "nearby": {
+      "heading": "Kawasan berdekatan yang kami juga layani",
+      "sub": "Tekan bandar untuk lihat halaman khusus."
+    },
+    "cta": {
+      "heading": "Rancang kenduri di {city}?",
+      "sub": "WhatsApp Kak Kenduri sekarang — kami sahkan ketersediaan, hantar sebutharga dan kunci penghantaran sama hari.",
+      "button": "WhatsApp Kami"
+    }
+  }
+}

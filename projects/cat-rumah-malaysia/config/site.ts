@@ -1,0 +1,17 @@
+export const site = {
+  domain: 'cat-rumah-malaysia.vercel.app',
+  siteUrl: 'https://cat-rumah-malaysia.vercel.app',
+  siteName: 'Cat Rumah Malaysia',
+  tagline: 'Rumah Lama Terus Nampak Baru Dalam 5 Jam — Dari RM3.50/sqft',
+  productSlug: 'cat-rumah',
+  productName: 'Cat Rumah',
+  phone: '60174287801',
+  phoneDisplay: '+60 17-428 7801',
+  whatsappText: 'Hi, saya berminat untuk servis cat rumah. Boleh dapatkan quotation?',
+  supabaseWebsiteKey: 'cat-rumah-malaysia.vercel.app',
+  defaultLocale: 'ms' as const,
+  locales: ['ms', 'en', 'zh'] as const,
+  brands: ['Nippon Paint', 'Jotun', 'Dulux'],
+  rating: { value: 4.9, count: 200 },
+  pricingFrom: 'RM3.50/sqft',
+} as const

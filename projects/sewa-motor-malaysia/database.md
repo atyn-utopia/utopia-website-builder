@@ -629,4 +629,4 @@ The `getPhoneNumbers()` function tries each level in order and never throws an e
 - **Rotating numbers:** Insert multiple rows with the same (website_slug, product_slug, location_slug). The client picks one at random on each click.
 - **Deactivating a number:** Set `is_active = false`. The number will stop being returned.
 - **Adding a new website:** Insert into `websites`, then add `phone_numbers` rows referencing the new website slug. All tables are multi-tenant by design.
-- **Phone Number Manager (Layla's admin tool):** Uses `service_role` key server-side to INSERT/UPDATE/DELETE phone numbers. The admin UI is a separate internal system, not part of the public website.
+- **Phone Number Manager (admin panel):** Uses `service_role` key server-side to INSERT/UPDATE/DELETE phone numbers. The admin UI is a separate internal system, not part of the public website.

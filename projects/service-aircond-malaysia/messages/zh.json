@@ -1,0 +1,237 @@
+{
+  "nav": {
+    "services": "服务",
+    "reviews": "评价",
+    "locations": "服务地区",
+    "whatsapp": "WhatsApp"
+  },
+  "footer": {
+    "description": "专业冷气服务、维修和安装，覆盖马来西亚38个城市。认证技术员，公平价格，每周7天服务。",
+    "whatsappUs": "WhatsApp 我们",
+    "servicesTitle": "服务",
+    "locationsTitle": "服务地区",
+    "viewAll": "查看全部38个城市",
+    "phone": "012-345 6789",
+    "ssm": "SSM Reg: 202X0XXXXX (XXXXXX-X)",
+    "copyright": "© {year} Encik Beku · serviceaircond.my"
+  },
+  "home": {
+    "meta": {
+      "title": "马来西亚冷气服务 | 安装、清洗与维修 — Encik Beku",
+      "description": "专业冷气服务，覆盖全马来西亚。快速安装、清洗、维修及化学清洗。已服务10,000+客户。立即WhatsApp Encik Beku。"
+    },
+    "fomo": {
+      "promo": "今日优惠 — ",
+      "slotsLeft": "仅剩 {slots} 个当日服务名额！",
+      "bookNow": "立即预约"
+    },
+    "hero": {
+      "badgeCertified": "认证技术员",
+      "badgeCities": "38个城市",
+      "headline": "专业冷气服务",
+      "headlineHighlight": "覆盖全马来西亚",
+      "subheadline": "从吉隆坡到亚庇 — 认证技术员上门服务。快速响应。价格公道。品质保证。",
+      "cta": "立即WhatsApp我们",
+      "ctaSubtext": "免费咨询 · 1小时内回复",
+      "heroAlt": "冷气技术员竖起大拇指",
+      "stampFrom": "起价",
+      "stampPrice": "RM80",
+      "stampUnit": "每台",
+      "sameDayTitle": "当日服务",
+      "sameDaySub": "每周7天"
+    },
+    "stats": {
+      "customers": "10,000+",
+      "customersLabel": "已服务客户",
+      "response": "1小时",
+      "responseLabel": "响应时间",
+      "rating": "5星",
+      "ratingLabel": "平均评分",
+      "experience": "8+年",
+      "experienceLabel": "经营历史"
+    },
+    "brands": {
+      "label": "服务品牌"
+    },
+    "services": {
+      "tag": "服务与价格",
+      "heading": "所有服务与价格",
+      "subheading": "壁挂式和天花板卡式冷气一览。",
+      "wall": "壁挂",
+      "cassette": "卡式",
+      "bookNow": "立即预约",
+      "disclaimer": "* 价格可能因地区和机组状况而异。",
+      "servicing": "冷气保养",
+      "servicingDesc": "清洗过滤网、清洁线圈、检查冷媒和电气部件。",
+      "installation": "冷气安装",
+      "installationDesc": "全套安装 — 壁挂、管道、接线和调试。",
+      "repair": "冷气维修",
+      "repairDesc": "快速诊断故障根因，当天维修到位。",
+      "chemicalWash": "化学清洗",
+      "chemicalWashDesc": "深度清洁 — 拆卸机组，浸泡化学溶液，杀灭细菌和霉菌。",
+      "gasTopUp": "冷媒加注",
+      "gasTopUpDesc": "检查泄漏，补充冷媒气体，恢复最佳制冷效果。",
+      "dismantling": "拆除",
+      "dismantlingDesc": "安全拆除旧机组 — 包括支架、管道和妥善处置。",
+      "popular": "热门",
+      "recommended": "推荐",
+      "waServicing": "你好，我需要冷气保养服务。请报价。",
+      "waInstallation": "你好，我需要安装冷气。请报价。",
+      "waRepair": "你好，我需要冷气维修。请报价。",
+      "waChemicalWash": "你好，我需要冷气化学清洗。请报价。",
+      "waGasTopUp": "你好，我需要冷气加注冷媒。请报价。",
+      "waDismantling": "你好，我需要拆除冷气。请报价。"
+    },
+    "why": {
+      "tag": "为什么选择Encik Beku",
+      "heading": "客户为什么信任我们",
+      "certified": "认证技术员",
+      "certifiedDesc": "每位技术员均经过SIRIM培训和背景审查。",
+      "sameDay": "当日服务",
+      "sameDayDesc": "1小时内派遣技术员到38个城市。",
+      "transparent": "透明定价",
+      "transparentDesc": "预先全额报价。绝无隐藏费用。",
+      "allBrands": "所有主要品牌",
+      "allBrandsDesc": "Daikin、Panasonic、Midea、York、Sharp、Hisense等。",
+      "warranty": "工作保修",
+      "warrantyDesc": "每项服务均附带30天工艺保修。",
+      "open7Days": "全周营业",
+      "open7DaysDesc": "包括周末和公共假期。"
+    },
+    "reviews": {
+      "googleReviews": "Google 评价",
+      "heading": "客户怎么说",
+      "review1Text": "服务非常好！技术员准时到达，工作干净利落。化学清洗后我的冷气又变冷了。下次一定还找他们。",
+      "review1Name": "Hasmah Binti Rosli",
+      "review1Location": "莎阿南",
+      "review2Text": "早上10点打电话，技术员11点半就到了。当场修好了冷媒泄漏并补充了冷媒。价格公道，解释清楚。",
+      "review2Name": "Kevin Tan",
+      "review2Location": "新山",
+      "review3Text": "通过WhatsApp联系，10分钟内就得到了回复。服务快速、干净、专业。推荐给槟城的所有人！",
+      "review3Name": "Norizan Ahmad",
+      "review3Location": "槟城",
+      "review4Text": "我们PJ办公室的冷气都出了问题。Encik Beku派了两名技术员，一个下午就把6台机组全部维修好了。非常有条理，非常专业。我们已经和他们签了年度维护合同。",
+      "review4Name": "Daniel Lim",
+      "review4Location": "八打灵再也",
+      "review5Text": "冷气3天不冷了，担心要花很多钱。但Encik Beku报价才RM150补充冷媒，还把所有地方都检查了。真的没有隐藏费用。强烈推荐！",
+      "review5Name": "Amirul Hakim",
+      "review5Location": "加影",
+      "review6Text": "预约了卧室冷气的化学清洗。技术员准时到达，铺好保护垫，工作非常仔细。现在冷气闻起来很清新，制冷效果好多了。物有所值！",
+      "review6Name": "Priya Nair",
+      "review6Location": "孟沙",
+      "reviewCount": "基于230+条Google评价"
+    },
+    "howItWorks": {
+      "tag": "简单流程",
+      "heading": "三步让家变凉爽",
+      "step1Num": "01",
+      "step1Title": "WhatsApp我们",
+      "step1Desc": "发送您的位置和所需服务。我们几分钟内回复。",
+      "step2Num": "02",
+      "step2Title": "确认并派遣",
+      "step2Desc": "我们确认档期，给出价格估算，并派遣认证技术员。",
+      "step3Num": "03",
+      "step3Title": "完成",
+      "step3Desc": "您的冷气已保养、维修或安装完毕 — 我们离开前会清理干净。",
+      "cta": "从第一步开始 — WhatsApp我们"
+    },
+    "gallery": {
+      "tag": "真实成果",
+      "heading": "我们在全马的工作",
+      "imageAlt": "客户冷气服务工作 {number}"
+    },
+    "faq": {
+      "tag": "常见问题",
+      "heading": "常见问题解答",
+      "q1": "冷气保养多少钱？",
+      "a1": "标准保养壁挂式每台RM80起，天花板卡式RM120起。化学清洗RM180起。我们始终先报价再开工 — 无隐藏费用。",
+      "q2": "技术员多快能到？",
+      "a2": "我们的目标是在您WhatsApp后1小时内响应。全部38个城市均可享受当日服务，每周7天。",
+      "q3": "你们服务什么品牌？",
+      "a3": "所有主要品牌 — Daikin、Panasonic、Midea、York、Samsung、Hisense、Sharp、Gree、Acson、Haier、LG等。",
+      "q4": "你们的工作有保修吗？",
+      "a4": "有。每项服务均附带30天工艺保修。如果在此期间出现问题，我们免费返修。",
+      "q5": "冷气不冷是什么问题？",
+      "a5": "冷气不冷通常是冷媒不足、过滤网脏污或压缩机故障。我们的技术员可以当场诊断并维修。",
+      "q6": "化学清洗需要多长时间？",
+      "a6": "化学清洗通常每台需要45分钟至1小时。我们会拆开机组，浸泡化学溶液，彻底清洁后重新安装。",
+      "q7": "冷气有噪音是怎么回事？",
+      "a7": "噪音可能是风扇松动、轴承损坏或内部部件脏污造成的。通过WhatsApp联系我们获取免费诊断。",
+      "q8": "可以安装新冷气吗？",
+      "a8": "当然可以。我们提供全套安装 — 支架、管道、电气连接和调试，适用于分体式、卡式和管道式等所有机型。",
+      "q9": "有办公室和商业冷气服务吗？",
+      "a9": "有。我们服务住宅和商业冷气系统，包括天花板卡式、VRF系统和办公室及商铺常见的管道式机组。",
+      "q10": "你们覆盖哪些地区？",
+      "a10": "我们覆盖马来西亚38个城市 — 巴生谷、槟城、新山、怡保、关丹、亚庇、古晋等。查看我们的地区列表了解完整信息。"
+    },
+    "locations": {
+      "tag": "服务范围",
+      "heading": "覆盖马来西亚38个城市",
+      "subheading": "从吉隆坡到沙巴和砂拉越 — 我们的技术员就在您附近。",
+      "cities": "个城市"
+    },
+    "midCta": {
+      "text": "准备预约？立即WhatsApp我们 — 1小时内回复。",
+      "button": "WhatsApp Encik Beku"
+    },
+    "guarantee": {
+      "text": "30天工艺保修 — 不满意，免费返修。"
+    },
+    "cta": {
+      "headline": "您的冷气值得更好的服务。",
+      "headlineHighlight": "您也是。",
+      "subheadline": "加入10,000+信任Encik Beku的客户，享受快速、专业的全马冷气服务。",
+      "button": "立即WhatsApp Encik Beku",
+      "fine": "1小时内响应 · 无隐藏费用 · 每周7天"
+    }
+  },
+  "location": {
+    "meta": {
+      "title": "{city}冷气服务 | 安装与维修 — Encik Beku",
+      "description": "寻找{city}冷气服务？Encik Beku提供安装、维修和化学清洗服务。认证技术员，快速响应。立即WhatsApp。"
+    },
+    "hero": {
+      "headline": "{city}冷气服务",
+      "cta": "WhatsApp我们（{city}）"
+    },
+    "services": {
+      "heading": "我们在{city}的服务",
+      "servicing": "{city}冷气保养 — 定期维护，保持机组高效运行。",
+      "installation": "{city}冷气安装 — 住宅、办公室和商业空间的全套安装。",
+      "repair": "{city}冷气维修 — 快速诊断，当场修复所有问题。",
+      "chemicalWash": "{city}化学清洗 — 深度清洁，去除霉菌，恢复气流。"
+    },
+    "why": {
+      "heading": "为什么在{city}选择Encik Beku",
+      "fast": "{city}全区当日响应",
+      "transparent": "透明定价，无隐藏费用",
+      "brands": "服务所有主要冷气品牌",
+      "warranty": "每项服务均附带30天工艺保修"
+    },
+    "faq": {
+      "heading": "常见问题 — {city}冷气服务",
+      "q1": "技术员多快能到{city}？",
+      "a1": "我们在{city}附近有驻点技术员，当日预约目标1小时内到达。",
+      "q2": "{city}冷气服务费用是多少？",
+      "a2": "{city}标准冷气保养每台RM80起。化学清洗和维修另计 — WhatsApp我们获取免费报价。",
+      "q3": "你们覆盖{city}所有区域吗？",
+      "a3": "是的 — 我们覆盖{city}全区及周边邮编。WhatsApp我们确认您的具体地址。",
+      "q4": "你们在{city}服务哪些冷气品牌？",
+      "a4": "我们服务所有主要品牌，包括Daikin、Panasonic、Midea、Samsung、Hisense、York、Gree和Sharp。"
+    },
+    "nearby": {
+      "heading": "附近地区",
+      "viewService": "{city}冷气服务"
+    },
+    "cta": {
+      "heading": "需要{city}冷气服务？",
+      "subheading": "立即WhatsApp Encik Beku，我们今天就为您安排{city}的技术员。",
+      "button": "WhatsApp Encik Beku（{city}）",
+      "fine": "快速、专业、诚实 — 这就是我们的方式。"
+    },
+    "breadcrumb": {
+      "home": "首页",
+      "locations": "服务地区"
+    }
+  }
+}

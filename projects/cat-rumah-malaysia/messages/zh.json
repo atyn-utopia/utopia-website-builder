@@ -1,0 +1,266 @@
+{
+  "meta": {
+    "homeTitle": "马来西亚房屋油漆服务 | RM3.50/平方尺起 — Cat Rumah Malaysia",
+    "homeDescription": "马来西亚专业房屋油漆服务，RM3.50/平方尺起。室内、外墙、天花板、环氧地坪、围栏油漆。立邦、Jotun、多乐士。立即 WhatsApp！"
+  },
+  "fomo": {
+    "text": "2026年4月促销 — 房屋油漆 RM3.50/平方尺起。1小时内免费报价。立即 WhatsApp 我们。"
+  },
+  "nav": {
+    "brand": "Cat Rumah Malaysia",
+    "home": "首页",
+    "services": "服务",
+    "reviews": "评价",
+    "gallery": "相册",
+    "locations": "地点",
+    "faq": "常见问题",
+    "cta": "联系我们 WhatsApp"
+  },
+  "hero": {
+    "eyebrow": "马来西亚房屋油漆",
+    "h1Line1": "让您的旧家",
+    "h1Highlight": "焕然一新",
+    "h1Line2": "仅需5小时！",
+    "subheadline": "专业油漆承包商使用立邦、Jotun 和多乐士 — 没有隐藏费用。",
+    "priceBadge": "RM3.50/平方尺起",
+    "cta": "立即 WhatsApp 我们",
+    "ctaSecondary": "查看作品",
+    "trustRating": "4.9/5 Google 评价",
+    "trustHomes": "500+ 已完工",
+    "trustYears": "8+ 年经验",
+    "trustGuarantee": "满意保证"
+  },
+  "stats": {
+    "rating": "4.9/5",
+    "ratingLabel": "Google 评价",
+    "homes": "500+",
+    "homesLabel": "已完工房屋",
+    "years": "8+",
+    "yearsLabel": "多年经验",
+    "brands": "3",
+    "brandsLabel": "高端品牌"
+  },
+  "products": {
+    "eyebrow": "我们的服务",
+    "heading": "我们的6项房屋油漆服务",
+    "subheading": "一支团队，一个保证 — 为您家中每一面墙壁服务。",
+    "interior": {
+      "title": "室内墙壁油漆",
+      "description": "室内油漆专为改造您的生活空间而设计。使用立邦无味漆。"
+    },
+    "texture": {
+      "title": "纹理油漆",
+      "description": "独特纹理墙壁 — 现代高端效果。",
+      "laborOnly": "仅人工",
+      "laborOnlyPrice": "RM2,000 起",
+      "laborAndPaint": "人工 + 油漆",
+      "laborAndPaintPrice": "RM2,500 起"
+    },
+    "marble": {
+      "title": "大理石油漆",
+      "description": "奢华大理石效果，无需真石成本。",
+      "laborOnly": "仅人工",
+      "laborOnlyPrice": "RM2,000 起",
+      "laborAndPaint": "人工 + 油漆",
+      "laborAndPaintPrice": "RM2,500 起"
+    },
+    "exterior": {
+      "title": "外墙油漆",
+      "description": "优质外墙漆让您的房屋更美观、更耐用。"
+    },
+    "weathershield": {
+      "title": "防风雨漆",
+      "description": "防雨、防晒、防潮 — 专为马来西亚气候打造。"
+    },
+    "metal": {
+      "title": "户外金属漆",
+      "description": "铁窗、电动门和扶手 — 颜色持久3年以上。",
+      "laborOnly": "仅人工",
+      "laborOnlyPrice": "RM1,800 起",
+      "laborAndPaint": "人工 + 油漆",
+      "laborAndPaintPrice": "RM3,000 起"
+    },
+    "otherServices": "附加服务",
+    "ceiling": {
+      "title": "天花板油漆",
+      "description": "雪白天花板油漆。",
+      "price": "RM3.50/平方尺起"
+    },
+    "epoxy": {
+      "title": "环氧地坪漆",
+      "description": "车库和大厨房环氧地坪漆。",
+      "price": "RM2,000 起"
+    },
+    "fence": {
+      "title": "围栏油漆",
+      "description": "石材和金属围栏油漆。",
+      "price": "现场报价"
+    },
+    "ctaGeneric": "立即询价"
+  },
+  "howItWorks": {
+    "eyebrow": "仅需3步",
+    "heading": "3个简单步骤",
+    "subheading": "无需冗长表格，不强推销售 — 从 WhatsApp 开始即可。",
+    "step1": {
+      "title": "WhatsApp 联系我们",
+      "description": "发送房屋照片。1小时内回复初步估价。"
+    },
+    "step2": {
+      "title": "上门勘察 & 免费报价",
+      "description": "我们上门测量、协助选色，并提供固定价格 — 无隐藏费用。"
+    },
+    "step3": {
+      "title": "最快5小时完工",
+      "description": "小型工作当天完成。大型项目1–3天内交付。"
+    }
+  },
+  "riskProblem": {
+    "eyebrow": "常见问题",
+    "heading": "您家目前的问题",
+    "body": "没有新漆，家会越来越显旧。以下是今天就该解决的信号。",
+    "problem1": {
+      "title": "墙面褪色暗淡",
+      "description": "明明才住5年，房子却像很旧。"
+    },
+    "problem2": {
+      "title": "发丝裂缝与黑色霉斑",
+      "description": "受潮的前兆 — 不处理只会越来越糟。"
+    },
+    "problem3": {
+      "title": "天价装修报价",
+      "description": "其他承包商RM3k的工程收费RM10k+。"
+    },
+    "problem4": {
+      "title": "铁栏生锈与围栏腐烂",
+      "description": "铁锈会蔓延，不先处理会毁掉新漆。"
+    }
+  },
+  "midCta": {
+    "heading": "别再拖延。今天就开始油漆。",
+    "line": "1小时内免费报价 — 无需承诺，无需预付定金。",
+    "cta": "立即 WhatsApp 我们"
+  },
+  "reviews": {
+    "eyebrow": "真实评价",
+    "heading": "顾客在 Google 怎么说",
+    "subheading": "4.9/5 星 · 200+ 条 Google 认证评价",
+    "googleLabel": "评价来自",
+    "googleBrand": "Google",
+    "review1": {
+      "text": "从 WhatsApp 联系到完工只用一天。客厅像样板房一样，非常推荐。",
+      "name": "Aminah R.",
+      "location": "吉隆坡"
+    },
+    "review2": {
+      "text": "价格诚实，无隐藏费用。使用 Jotun，收边非常精细。已经预约了妈妈家的工程。",
+      "name": "Jason T.",
+      "location": "八打灵再也"
+    },
+    "review3": {
+      "text": "双层楼外墙漆。团队准时到达，提前一天完工。5星实至名归。",
+      "name": "Mr Lim",
+      "location": "新山"
+    },
+    "review4": {
+      "text": "原以为油漆很贵，Cat Rumah Malaysia 只要 RM3.50/平方尺，比其他报价省了 RM5k。",
+      "name": "Siti N.",
+      "location": "莎阿南"
+    },
+    "review5": {
+      "text": "另一个承包商报价 RM8k，Cat Rumah Malaysia 只收 RM4.5k — 双层排屋用 Nippon 高级漆。非常划算！",
+      "name": "Faizal H.",
+      "location": "蒲种"
+    },
+    "review6": {
+      "text": "我在蕉赖的店面需要重新粉刷 — 墙壁脏了还脱漆。2天完工，顾客都说像新店一样。非常专业。",
+      "name": "David C.",
+      "location": "蕉赖"
+    }
+  },
+  "whyChoose": {
+    "eyebrow": "我们的优势",
+    "heading": "为什么选择 Cat Rumah Malaysia",
+    "reason1": {
+      "title": "仅使用高端品牌",
+      "description": "只用立邦、Jotun 和多乐士 — 绝不使用廉价经济漆。"
+    },
+    "reason2": {
+      "title": "最快5小时完工",
+      "description": "卧室或客厅当日即可入住。"
+    },
+    "reason3": {
+      "title": "免费报价，无拘无束",
+      "description": "上门勘察与固定价格，无任何预付。"
+    },
+    "reason4": {
+      "title": "满意保证",
+      "description": "有任何刮痕或色斑？我们免费重新上漆。"
+    }
+  },
+  "gallery": {
+    "eyebrow": "作品展示",
+    "heading": "我们的作品展示",
+    "subheading": "我们团队在吉隆坡、八打灵再也、莎阿南及全马各地的真实油漆作品。"
+  },
+  "locations": {
+    "eyebrow": "服务范围",
+    "heading": "我们服务全马来西亚",
+    "subheading": "16个主要城市 — 从巴生谷到新山和槟城。点击您所在的城市查看价格与工期。",
+    "regions": {
+      "klangValley": "巴生谷",
+      "southern": "南马",
+      "northern": "北马"
+    }
+  },
+  "faq": {
+    "eyebrow": "常见问题",
+    "heading": "马来西亚房屋油漆 — 常见问题",
+    "q1": "房屋油漆每平方尺多少钱？",
+    "a1": "我们的标准价从 RM3.50/平方尺起，采用立邦油漆，包括油漆、工钱、地面覆盖与清理。上门勘察后价格固定，不会再加价。",
+    "q2": "油漆工程需要多长时间？",
+    "a2": "单个房间或客厅最快5小时内完工。整栋排屋通常1–3天，具体视面积与墙面修补情况而定。",
+    "q3": "你们使用什么品牌的油漆？",
+    "a3": "我们只使用三个高端品牌：立邦、Jotun 和多乐士。您可以根据预算选择品牌和系列，我们会在开工前说明差异。",
+    "q4": "报价真的免费吗？",
+    "a4": "是的。我们派团队免费上门勘察并提供固定报价，无任何费用或约束。如果价格不合适，您可以直接拒绝，绝不强推。",
+    "q5": "你们服务哪些地区？",
+    "a5": "我们服务马来西亚16个主要城市，包括吉隆坡、八打灵再也、莎阿南、新山、槟城和怡保。",
+    "q6": "如果对成果不满意怎么办？",
+    "a6": "每个项目都有满意保证。若有刮痕、色斑或不平整，我们会回来免费重新上漆，绝无二话。"
+  },
+  "finalCta": {
+    "eyebrow": "立即开始",
+    "headline": "您崭新的家，从今天开始",
+    "subheadline": "1小时内免费报价。专业团队。RM3.50/平方尺起。无任何承诺。",
+    "cta": "立即 WhatsApp 我们",
+    "ctaSecondary": "查看作品图库"
+  },
+  "footer": {
+    "tagline": "马来西亚专业房屋油漆承包商 — 使用立邦、Jotun、多乐士高端油漆。",
+    "servicesHeading": "服务",
+    "locationsHeading": "地点",
+    "companyHeading": "公司",
+    "about": "关于我们",
+    "contact": "联系",
+    "copyright": "© {year} Cat Rumah Malaysia。版权所有。"
+  },
+  "location": {
+    "nearbyHeading": "周边服务区域",
+    "viewAll": "查看所有地点",
+    "breadcrumbsHome": "首页",
+    "breadcrumbsService": "房屋油漆服务",
+    "whyCityHeading": "为什么选择我们服务您的城市"
+  },
+  "whatsapp": {
+    "cta": "立即 WhatsApp",
+    "ariaLabel": "通过 WhatsApp 联系 Cat Rumah Malaysia",
+    "defaultMessage": "你好，我想咨询房屋油漆服务，请问可以提供报价吗？"
+  },
+  "language": {
+    "label": "语言",
+    "ms": "Bahasa Melayu",
+    "en": "English",
+    "zh": "中文"
+  }
+}

@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+:root {
+  --brand-navy:         #1B3A5C;
+  --brand-navy-mid:     #2A5280;
+  --brand-blue-light:   #A1D1FF;
+  --brand-blue-xs:      #EBF4FF;
+  --brand-yellow:       #FFE500;
+  --brand-yellow-dark:  #D4BF00;
+  --brand-yellow-xs:    #FFFCE6;
+  --brand-cream:        #F8FAFF;
+  --brand-text:         #1C2B3A;
+  --brand-text-muted:   #5A6B7D;
+  --brand-border:       #DEEAF2;
+  --wa-green:           #25D366;
+  --google-gold:        #FBBC04;
+
+  --font: 'Inter', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  color: var(--brand-text);
+  background: var(--brand-cream);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.7;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.dot-texture {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ccircle cx='2' cy='2' r='1.2' fill='%231B3A5C' fill-opacity='0.04'/%3E%3C/svg%3E");
+}
+
+@keyframes wa-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.5), 0 4px 20px rgba(37,211,102,0.3); }
+  50% { box-shadow: 0 0 0 8px rgba(37,211,102,0), 0 4px 20px rgba(37,211,102,0.5); }
+}
+.wa-btn { animation: wa-pulse 2.4s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .wa-btn { animation: none; } }
+
+.stat-number { font-weight: 800; color: var(--brand-yellow); letter-spacing: -0.03em; }
+
+.service-card {
+  background: #fff;
+  border-radius: 16px;
+  border-left: 4px solid var(--brand-navy);
+  box-shadow: 0 2px 8px rgba(27,58,92,0.06), 0 8px 24px rgba(27,58,92,0.08);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  overflow: hidden;
+}
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(27,58,92,0.1), 0 16px 40px rgba(27,58,92,0.14);
+}
+
+.review-card {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  backdrop-filter: blur(4px);
+}
+
+.nav-link { color: rgba(255,255,255,0.75); transition: color 0.15s; }
+.nav-link:hover, .nav-link:focus { color: #fff; }
+
+.fade-up {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) { .fade-up { opacity: 1; transform: none; transition: none; } }
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex; gap: 16px;
+  animation: marquee-scroll 40s linear infinite;
+  width: max-content;
+}
+.marquee-track:hover { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; flex-wrap: wrap; width: auto; } }
+
+.product-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--brand-border);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(27,58,92,0.12);
+}
+
+/* ── FOMO urgency banner ── */
+@keyframes fomo-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+.fomo-dot {
+  animation: fomo-pulse 1.5s ease-in-out infinite;
+}
+
+/* ── Hide scrollbar on overflow sections ── */
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }

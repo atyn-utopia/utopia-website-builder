@@ -1,0 +1,237 @@
+{
+  "nav": {
+    "services": "Services",
+    "reviews": "Reviews",
+    "locations": "Locations",
+    "whatsapp": "WhatsApp"
+  },
+  "footer": {
+    "description": "Professional aircond servicing, repair, and installation across 38 cities in Malaysia. Certified technicians, fair prices, 7 days a week.",
+    "whatsappUs": "WhatsApp Us",
+    "servicesTitle": "Services",
+    "locationsTitle": "Locations",
+    "viewAll": "View all 38 cities",
+    "phone": "012-345 6789",
+    "ssm": "SSM Reg: 202X0XXXXX (XXXXXX-X)",
+    "copyright": "© {year} Encik Beku · serviceaircond.my"
+  },
+  "home": {
+    "meta": {
+      "title": "Aircond Service Malaysia | Installation, Cleaning & Repair — Encik Beku",
+      "description": "Professional aircond service across Malaysia. Fast installation, cleaning, repair and chemical wash. Trusted by 10,000+ customers. WhatsApp Encik Beku now."
+    },
+    "fomo": {
+      "promo": "Today's Promo — ",
+      "slotsLeft": "Only {slots} slots left for same-day service!",
+      "bookNow": "Book Now"
+    },
+    "hero": {
+      "badgeCertified": "Certified Technicians",
+      "badgeCities": "38 Cities",
+      "headline": "Professional Aircond Service",
+      "headlineHighlight": "Across Malaysia",
+      "subheadline": "From Kuala Lumpur to Kota Kinabalu — certified technicians at your door. Fast response. Fair price. Quality guaranteed.",
+      "cta": "WhatsApp Us Now",
+      "ctaSubtext": "Free to ask · Reply within 1 hour",
+      "heroAlt": "Aircond technician with thumbs up",
+      "stampFrom": "From",
+      "stampPrice": "RM80",
+      "stampUnit": "Per Unit",
+      "sameDayTitle": "Same-Day Service",
+      "sameDaySub": "7 Days a Week"
+    },
+    "stats": {
+      "customers": "10,000+",
+      "customersLabel": "Customers Served",
+      "response": "1-Hour",
+      "responseLabel": "Response Time",
+      "rating": "5-Star",
+      "ratingLabel": "Average Rating",
+      "experience": "8+ Years",
+      "experienceLabel": "In Business"
+    },
+    "brands": {
+      "label": "Brands We Service"
+    },
+    "services": {
+      "tag": "Services & Pricing",
+      "heading": "All Services & Pricing",
+      "subheading": "Wall mounted and ceiling cassette pricing at a glance.",
+      "wall": "Wall",
+      "cassette": "Cassette",
+      "bookNow": "Book Now",
+      "disclaimer": "* Prices may vary by location and unit condition.",
+      "servicing": "Aircond Servicing",
+      "servicingDesc": "Flush filters, clean coils, check gas levels, and inspect electrical components.",
+      "installation": "Aircond Installation",
+      "installationDesc": "Full installation — wall mounting, piping, wiring, and commissioning.",
+      "repair": "Aircond Repair",
+      "repairDesc": "Diagnose the root cause fast and fix it right the first time with same-day parts.",
+      "chemicalWash": "Chemical Wash",
+      "chemicalWashDesc": "Deep clean — disassemble unit, soak in chemical solution, kill bacteria and mould.",
+      "gasTopUp": "Gas Top-Up",
+      "gasTopUpDesc": "Check for leaks, top up refrigerant gas, and restore optimal cooling.",
+      "dismantling": "Dismantling",
+      "dismantlingDesc": "Safe removal of old units — brackets, piping, and proper disposal included.",
+      "popular": "Popular",
+      "recommended": "Recommended",
+      "waServicing": "Hi, I need aircond servicing. Please quote me.",
+      "waInstallation": "Hi, I need aircond installation. Please quote me.",
+      "waRepair": "Hi, I need aircond repair. Please quote me.",
+      "waChemicalWash": "Hi, I need aircond chemical wash. Please quote me.",
+      "waGasTopUp": "Hi, I need aircond gas top-up. Please quote me.",
+      "waDismantling": "Hi, I need aircond dismantling. Please quote me."
+    },
+    "why": {
+      "tag": "Why Encik Beku",
+      "heading": "Why Customers Trust Us",
+      "certified": "Certified Technicians",
+      "certifiedDesc": "Every technician is SIRIM-trained and background-checked.",
+      "sameDay": "Same-Day Service",
+      "sameDayDesc": "We dispatch within 1 hour across 38 cities.",
+      "transparent": "Transparent Pricing",
+      "transparentDesc": "Full quote upfront. No surprise charges, ever.",
+      "allBrands": "All Major Brands",
+      "allBrandsDesc": "Daikin, Panasonic, Midea, York, Sharp, Hisense and more.",
+      "warranty": "Warranty on Work",
+      "warrantyDesc": "30-day workmanship warranty on every job.",
+      "open7Days": "Open 7 Days",
+      "open7DaysDesc": "Weekends and public holidays included."
+    },
+    "reviews": {
+      "googleReviews": "Google Reviews",
+      "heading": "What Customers Say",
+      "review1Text": "Servis yang sangat bagus! Technician datang tepat pada masa dan buat kerja dengan bersih. Aircond saya sejuk balik selepas chemical wash. Definitely will call again.",
+      "review1Name": "Hasmah Binti Rosli",
+      "review1Location": "Shah Alam",
+      "review2Text": "Called at 10am, technician was here by 11:30. Fixed the gas leak and topped up the refrigerant on the spot. Price was fair and he explained everything clearly.",
+      "review2Name": "Kevin Tan",
+      "review2Location": "Johor Bahru",
+      "review3Text": "Saya hubungi melalui WhatsApp dan dapat respons dalam masa 10 minit. Servis cepat, bersih dan profesional. Syorkan kepada semua orang di Penang!",
+      "review3Name": "Norizan Ahmad",
+      "review3Location": "Penang",
+      "review4Text": "Our office airconds in PJ were all giving problems. Encik Beku sent two technicians who serviced all 6 units in one afternoon. Very organised, very professional. We signed a yearly maintenance contract with them.",
+      "review4Name": "Daniel Lim",
+      "review4Location": "Petaling Jaya",
+      "review5Text": "Aircond dah 3 hari tak sejuk, risau kena charge mahal. Tapi Encik Beku quote RM150 je untuk top-up gas, siap check semua. No hidden charges betul-betul. Sangat recommended!",
+      "review5Name": "Amirul Hakim",
+      "review5Location": "Kajang",
+      "review6Text": "Booked a chemical wash for my bedroom unit. Technician arrived on time, laid down protective sheets, and did a thorough job. My aircond smells fresh now and cools so much better. Worth every ringgit.",
+      "review6Name": "Priya Nair",
+      "review6Location": "Bangsar",
+      "reviewCount": "Based on 230+ Google Reviews"
+    },
+    "howItWorks": {
+      "tag": "Simple Process",
+      "heading": "Three Steps to a Cool Home",
+      "step1Num": "01",
+      "step1Title": "WhatsApp Us",
+      "step1Desc": "Send us a message with your location and what service you need. We reply within minutes.",
+      "step2Num": "02",
+      "step2Title": "We Confirm & Dispatch",
+      "step2Desc": "We confirm availability, give you a price estimate, and dispatch a certified technician.",
+      "step3Num": "03",
+      "step3Title": "Job Done",
+      "step3Desc": "Your aircond is serviced, repaired, or installed — and we clean up before we leave.",
+      "cta": "Start with Step 1 — WhatsApp Us"
+    },
+    "gallery": {
+      "tag": "Real Results",
+      "heading": "Our Work Across Malaysia",
+      "imageAlt": "Customer aircond service job {number}"
+    },
+    "faq": {
+      "tag": "Common Questions",
+      "heading": "Frequently Asked Questions",
+      "q1": "How much does aircond servicing cost?",
+      "a1": "Standard servicing starts from RM80 per wall-mounted unit and RM120 for ceiling cassette. Chemical wash starts from RM180. We always quote before starting — no hidden charges.",
+      "q2": "How fast can you send a technician?",
+      "a2": "We aim to respond within 1 hour of your WhatsApp. Same-day service is available 7 days a week across all 38 cities we cover.",
+      "q3": "What brands do you service?",
+      "a3": "All major brands — Daikin, Panasonic, Midea, York, Samsung, Hisense, Sharp, Gree, Acson, Haier, LG, and more.",
+      "q4": "Do you provide warranty on your work?",
+      "a4": "Yes. Every service job comes with a 30-day workmanship warranty. If something goes wrong within that period, we come back and fix it at no extra cost.",
+      "q5": "Aircond tak sejuk, apa masalahnya?",
+      "a5": "Aircond yang tidak sejuk biasanya disebabkan gas refrigerant yang rendah, penapis kotor, atau masalah kompresor. Technician kami boleh diagnose dan repair on the spot.",
+      "q6": "Berapa lama proses cuci aircond chemical wash?",
+      "a6": "Chemical wash biasanya mengambil masa 45 minit hingga 1 jam per unit. Kami akan buka unit, rendam dalam chemical solution, cuci bersih, dan pasang semula.",
+      "q7": "Aircond bunyi bising, kenapa?",
+      "a7": "Bunyi bising boleh disebabkan oleh kipas yang longgar, bearing yang rosak, atau bahagian dalaman yang kotor. Hubungi kami via WhatsApp untuk diagnosis percuma.",
+      "q8": "Can you install a new aircond unit?",
+      "a8": "Absolutely. We handle full installations — brackets, piping, electrical connections, and commissioning for all unit types including split, cassette, and ducted systems.",
+      "q9": "Do you service office and commercial aircond?",
+      "a9": "Yes. We service both residential and commercial aircond systems including ceiling cassettes, VRF systems, and ducted units commonly found in offices and shops.",
+      "q10": "What areas do you cover?",
+      "a10": "We cover 38 cities across Malaysia — Klang Valley, Penang, Johor Bahru, Ipoh, Kuantan, Kota Kinabalu, Kuching, and more. Check our locations section for the full list."
+    },
+    "locations": {
+      "tag": "Service Coverage",
+      "heading": "We Cover 38 Cities Across Malaysia",
+      "subheading": "From KL to Sabah and Sarawak — our technicians are near you.",
+      "cities": "cities"
+    },
+    "midCta": {
+      "text": "Ready to book? WhatsApp us now — reply within 1 hour.",
+      "button": "WhatsApp Encik Beku"
+    },
+    "guarantee": {
+      "text": "30-Day Workmanship Guarantee — not satisfied, we come back free."
+    },
+    "cta": {
+      "headline": "Your Aircond Deserves Better.",
+      "headlineHighlight": "So Do You.",
+      "subheadline": "Join 10,000+ customers who trust Encik Beku for fast, professional aircond service across Malaysia.",
+      "button": "WhatsApp Encik Beku Now",
+      "fine": "Response within 1 hour · No hidden charges · 7 days a week"
+    }
+  },
+  "location": {
+    "meta": {
+      "title": "Aircond Service {city} | Installation & Repair — Encik Beku",
+      "description": "Looking for aircond service in {city}? Encik Beku offers fast, affordable aircond installation, cleaning and repair. WhatsApp us now."
+    },
+    "hero": {
+      "headline": "Aircond Service in {city}",
+      "cta": "WhatsApp Us in {city}"
+    },
+    "services": {
+      "heading": "Our Services in {city}",
+      "servicing": "Aircond servicing in {city} — regular maintenance to keep your unit running efficiently.",
+      "installation": "Aircond installation in {city} — full setup for homes, offices, and commercial spaces.",
+      "repair": "Aircond repair in {city} — fast diagnosis and on-the-spot fixing for all issues.",
+      "chemicalWash": "Chemical wash in {city} — deep internal cleaning that removes mould and restores airflow."
+    },
+    "why": {
+      "heading": "Why Choose Encik Beku in {city}",
+      "fast": "Same-day response across {city}",
+      "transparent": "Transparent pricing with no hidden charges",
+      "brands": "All major aircond brands serviced",
+      "warranty": "30-day workmanship warranty on every job"
+    },
+    "faq": {
+      "heading": "FAQ — Aircond Service in {city}",
+      "q1": "How fast can you reach {city}?",
+      "a1": "We have technicians stationed near {city} and aim to arrive within 1 hour for same-day bookings.",
+      "q2": "What is the cost of aircond service in {city}?",
+      "a2": "Standard aircond servicing in {city} starts from RM80 per unit. Chemical wash and repair jobs are priced separately — WhatsApp us for a free quote.",
+      "q3": "Do you cover all areas within {city}?",
+      "a3": "Yes — we cover the full {city} area and surrounding postcodes. WhatsApp us to confirm your exact address.",
+      "q4": "Which aircond brands do you service in {city}?",
+      "a4": "We service all major brands including Daikin, Panasonic, Midea, Samsung, Hisense, York, Gree, and Sharp."
+    },
+    "nearby": {
+      "heading": "Nearby Locations",
+      "viewService": "Aircond service in {city}"
+    },
+    "cta": {
+      "heading": "Need Aircond Service in {city}?",
+      "subheading": "WhatsApp Encik Beku now and we will arrange a technician in {city} for you today.",
+      "button": "WhatsApp Encik Beku in {city}",
+      "fine": "Fast, professional, and honest — that is how we do it."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "locations": "Locations"
+    }
+  }
+}

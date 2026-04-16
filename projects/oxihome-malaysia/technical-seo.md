@@ -1,6 +1,6 @@
 # Oxihome Malaysia — Technical SEO Implementation
 
-**Prepared by:** Kimmy (Technical SEO Specialist)
+**Prepared by:** Kimmy (Technical Implementation Specialist)
 **Brand:** Oxihome Malaysia
 **Domain:** oxihome.my
 **Locales:** en, ms, zh

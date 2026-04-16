@@ -1,0 +1,243 @@
+{
+  "nav": {
+    "services": "服务",
+    "locations": "地区",
+    "gallery": "案例",
+    "blog": "博客",
+    "contact": "联系",
+    "whatsapp": "立即 WhatsApp"
+  },
+  "shared": {
+    "brand": "Kak Kenduri",
+    "tagline": "马来西亚当天送达的桌椅出租",
+    "whatsappCta": "立即 WhatsApp",
+    "whatsappCtaShort": "立即WhatsApp",
+    "whatsappMessageDefault": "你好 Kak Kenduri，我想了解桌椅出租。",
+    "whatsappMessageLocation": "你好 Kak Kenduri，我想了解在{city}的桌椅出租。",
+    "priceFrom": "每张椅 RM3.60 起",
+    "deliveryWindow": "当天送达",
+    "ratingBadge": "Google · 4.9★ · 380+ 评价",
+    "reviewsLabel": "来自真实 Google 评价",
+    "seeAllReviews": "在 Google Business 查看全部评价",
+    "gallery": {
+      "heading": "真实客户现场",
+      "subheading": "来自真实 Google 评价",
+      "badge": "Google · 4.9★"
+    },
+    "alt": {
+      "heroHome": "马来西亚桌椅出租 — Kak Kenduri",
+      "heroLocation": "{city}桌椅出租 — Kak Kenduri",
+      "standardChair": "标准塑料椅出租 — 可堆叠宴会座椅",
+      "banquetChair": "宴会椅出租 — 酒店级软垫座椅",
+      "chiavariChair": "Chiavari 椅出租 — 优雅婚礼座椅",
+      "longTable": "6尺自助长桌出租 — 含褶裙桌布",
+      "roundTable": "圆桌出租 — 10人座婚宴桌",
+      "cocktailTable": "鸡尾酒桌出租 — 白色 spandex 桌套",
+      "couchChair": "沙发椅出租 — 复古舞台座椅",
+      "tentCanopy": "帐篷出租 — 20x20 尺防水活动帐篷",
+      "transparentCanopy": "透明帐篷出租 — 透明 PVC 夜间帐篷",
+      "airCooler": "工业冷风机出租 — 户外帐篷降温",
+      "commercialFan": "商用风扇出租 — 大型活动降温",
+      "paSystem": "音响系统出租 — 含麦克风与音箱",
+      "cateringEquipment": "餐饮设备出租 — 保温锅与自助餐盘",
+      "popcornMachine": "爆米花机出租 — 复古红色派对机",
+      "cottonCandy": "棉花糖机出租 — 粉红与蓝色派对机",
+      "gallery": "Kak Kenduri 客户活动现场 {n} — 桌椅布置",
+      "logoAria": "Kak Kenduri 首页"
+    },
+    "usp1Title": "当天送达",
+    "usp1Sub": "早上下单，下午搭建 — 覆盖吉隆坡、雪兰莪和柔佛。",
+    "usp2Title": "8,000+ 活动信赖",
+    "usp2Sub": "婚礼、宴会、企业晚宴 — 我们都安排妥当。",
+    "usp3Title": "搭建与回收全包",
+    "usp3Sub": "我们的团队送货、布置、回收 — 您无需动手。",
+    "fomoText": "周末档期正在快速售罄 — 今天就 WhatsApp 锁定日期。",
+    "fomoCta": "立即 WhatsApp",
+    "ctaTag1": "当天送达",
+    "ctaTag2": "免费搭建与回收",
+    "ctaTag3": "无需押金"
+  },
+  "footer": {
+    "tagline": "马来西亚当天送达的桌椅出租。",
+    "quickLinks": "快速链接",
+    "topLocations": "主要地区",
+    "contact": "联系我们",
+    "phone": "电话",
+    "email": "电邮",
+    "address": "No. 3, Lot 156, Jalan Jurubina U1/18, 40150 Shah Alam, Selangor",
+    "hours": "每天上午8点 – 晚上10点",
+    "legal": "© {year} Kak Kenduri Sdn. Bhd. 版权所有。",
+    "getInTouch": "联系我们",
+    "getInTouchSub": "有疑问或需要报价？我们几分钟内回复。"
+  },
+  "home": {
+    "meta": {
+      "title": "马来西亚桌椅出租 | 当天送达 | Kak Kenduri",
+      "description": "Kak Kenduri 出租宴会椅、Chiavari 椅、圆桌、帐篷、音响与餐饮设备，覆盖全马。当天送达，价格 RM3.60 起。立即 WhatsApp 询问。"
+    },
+    "hero": {
+      "h1": "马来西亚桌椅出租 — 当天送达 每张 RM3.60 起",
+      "sub": "Kak Kenduri 为全马各地家庭、礼堂和活动场地提供桌椅、帐篷及完整宴会设备租赁，WhatsApp 下单当天送达。",
+      "priceBadge": "每张椅 RM3.60 起",
+      "primaryCta": "立即 WhatsApp",
+      "secondaryCta": "查看出租品",
+      "trust": "已服务 8,000+ 场宴会 · 吉隆坡 · 雪兰莪 · 柔佛 · 全马配送"
+    },
+    "serviceArea": {
+      "heading": "全马 13 州 38 个服务地点",
+      "intro": "我们为雪兰莪、吉隆坡、柔佛、森美兰、霹雳、槟城、马六甲、彭亨、吉打、登嘉楼、吉兰丹和玻璃市提供桌椅与宴会设备租赁——涵盖婚宴、喜宴、企业活动、订婚仪式、生日会和追思会。在下方选择您的城市，我们立即确认当天可用情况。"
+    },
+    "products": {
+      "heading": "核心桌椅 — 单件或整套出租",
+      "plainLabel": "光椅/光桌",
+      "withCoverLabel": "含椅套/桌布",
+      "standardChair": {
+        "name": "标准椅",
+        "tagline": "每场宴会都需要的经济塑料椅。",
+        "blurb": "轻巧可堆叠的标准椅租赁，适合宴会、祈福仪式和后院聚会。光椅 RM3.60，配布椅套 RM9.60 — 当天批量送达全马。",
+        "cta": "WhatsApp 预订标准椅"
+      },
+      "banquetChair": {
+        "name": "宴会椅",
+        "tagline": "软垫钢架，酒店级舒适度。",
+        "blurb": "宴会椅租赁，适合婚礼、晚宴和企业聚餐。软垫座椅，每次送货前清洁。光椅 RM14.40，配丝带椅套 RM21.60。",
+        "cta": "WhatsApp 预订宴会椅"
+      },
+      "chiavariChair": {
+        "name": "Chiavari 椅",
+        "tagline": "社交媒体上最受欢迎的婚礼椅。",
+        "blurb": "实心 Chiavari 椅 RM21.60 或透明亚克力 Chiavari RM28.80 — 完美呈现舞台、新人主桌和奢华订婚宴。全马供应。",
+        "cta": "WhatsApp 预订 Chiavari 椅"
+      },
+      "longTable": {
+        "name": "长桌 / 自助桌 6尺",
+        "tagline": "自助餐线和后厨的万能 6 尺长桌。",
+        "blurb": "6 尺标准长桌租赁。不含桌布 RM72.00，含褶裙桌布 RM86.40。搭配我们的餐饮设备打造完整自助餐台。",
+        "cta": "WhatsApp 预订长桌"
+      },
+      "roundTable": {
+        "name": "圆桌（10人座）",
+        "tagline": "舒适容纳 10 位宾客 — 马来西亚宴会标准。",
+        "blurb": "10 人圆桌租赁 — 马来婚宴和华人喜宴的首选。光桌 RM72.00，含桌布与桌面罩 RM86.40。堆叠送达，开箱即用。",
+        "cta": "WhatsApp 预订圆桌"
+      },
+      "cocktailTable": {
+        "name": "鸡尾酒桌",
+        "tagline": "高脚站立桌，适合社交与欢迎酒会。",
+        "blurb": "鸡尾酒桌租赁 RM86.40，含白色 spandex 桌套 — 适合婚宴入场大厅、企业交流和欢迎区。",
+        "cta": "WhatsApp 预订鸡尾酒桌"
+      }
+    },
+    "additional": {
+      "heading": "一站式满足宴会所有需求",
+      "couch": {
+        "name": "沙发椅",
+        "blurb": "复古沙发椅，适合舞台、拍照角和 VIP 区。奶油色或金色布料。"
+      },
+      "tent": {
+        "name": "帐篷 / Canopy",
+        "blurb": "标准 20×20 尺和 20×40 尺帐篷租赁。防水顶布、钢架、含团队搭建。"
+      },
+      "transparentCanopy": {
+        "name": "透明帐篷",
+        "blurb": "透明 PVC 帐篷租赁，适合户外夜间宴会。防风防漏。"
+      },
+      "airCooler": {
+        "name": "工业冷风机",
+        "blurb": "真正为开放式帐篷降温。每台覆盖约 40 平方米。"
+      },
+      "fan": {
+        "name": "工业风扇",
+        "blurb": "大型工业风扇租赁，适合帐篷活动。安静强劲。"
+      },
+      "pa": {
+        "name": "音响系统",
+        "blurb": "含麦克风、调音台和 2 个音箱，适合 MC、婚礼仪式和祈祷。"
+      },
+      "catering": {
+        "name": "餐饮设备",
+        "blurb": "保温锅、汤炉、饮水机和自助餐盘，按套出租。"
+      },
+      "popcorn": {
+        "name": "爆米花机",
+        "blurb": "复古红色爆米花机，适合生日派对和儿童区。"
+      },
+      "cottonCandy": {
+        "name": "棉花糖机",
+        "blurb": "粉红或蓝色棉花糖机租赁，派对必备。"
+      },
+      "eyebrow": "桌椅之外"
+    },
+    "howItWorks": {
+      "heading": "3 个步骤完成预订",
+      "step1Title": "WhatsApp 告诉我们日期与地址",
+      "step1Body": "告诉我们活动日期、场地地址、宾客人数与附加项目。几分钟内确认。",
+      "step2Title": "确认报价并支付押金",
+      "step2Body": "我们会发送书面报价，含总额和送货时段。小额可退押金锁定订单。",
+      "step3Title": "我们送达、布置与回收",
+      "step3Body": "我们的团队准时到达、卸货、摆放，宴会结束后再回来回收。您一张椅子都不用搬。"
+    },
+    "reviews": {
+      "heading": "来自真实 Google 评价",
+      "badge": "Google · 4.9★ · 380+ 评价",
+      "r1Name": "Farah Iskandar — 莎阿南",
+      "r1Body": "上周为姐姐的婚礼订了 200 张宴会椅和 20 张圆桌。卡车早上 8 点准时到达，员工整齐地摆放，回收也很顺畅。",
+      "r2Name": "Daniel Tan — 八打灵再也",
+      "r2Body": "在 PJ 的企业晚宴急需 Chiavari 椅，他们当天就送达了。透明 Chiavari 椅拍照非常好看。价格透明。",
+      "r3Name": "Aisyah Roslan — 新山",
+      "r3Body": "从椅子到帐篷全部由 Kak Kenduri 包办，在新山的家宴。WhatsApp 直接沟通，无需繁琐表格。"
+    },
+    "locationsCta": {
+      "heading": "在您的城市找到 Kak Kenduri",
+      "sub": "我们当天送达全马 38 个城市 — 点击您的地区查看价格、送货时段和城市常见问题。"
+    },
+    "finalCta": {
+      "heading": "让我们为您的下一场宴会妥善安排座位。",
+      "sub": "只需一条 WhatsApp 讯息。我们确认可用性、发送报价并锁定当天送达。",
+      "button": "立即 WhatsApp"
+    }
+  },
+  "blog": {
+    "meta": {
+      "title": "博客 | Kak Kenduri",
+      "description": "规划宴会、婚礼或活动的技巧、指南与清单。来自 Kak Kenduri。"
+    },
+    "heading": "Kak Kenduri 博客",
+    "subheading": "帮助您策划完美宴会、婚礼或活动的技巧、清单和指南。",
+    "noPosts": "暂无文章 — 请稍后再来！",
+    "breadcrumbs": {
+      "home": "首页",
+      "blog": "博客"
+    },
+    "cta": {
+      "heading": "准备策划您的活动？",
+      "sub": "WhatsApp Kak Kenduri — 几分钟内回复，免费报价。"
+    },
+    "recentPosts": "最新文章",
+    "minRead": "{count} 分钟阅读"
+  },
+  "location": {
+    "meta": {
+      "title": "{city}桌椅出租 | RM3.60起 | Kak Kenduri",
+      "description": "Kak Kenduri 在{city}提供宴会椅、Chiavari 椅、圆桌与帐篷出租，当天送达，价格 RM3.60 起。立即 WhatsApp 洽询。"
+    },
+    "h1": "{city}桌椅出租 — 当天送达",
+    "breadcrumbs": {
+      "home": "首页",
+      "locations": "地区",
+      "city": "{city}"
+    },
+    "banner": "服务{city}及周边地区 — 从莎阿南仓库当天送达。",
+    "whyHeading": "为何在{city}选择 Kak Kenduri",
+    "faqHeading": "常见问题 — {city}",
+    "nearby": {
+      "heading": "我们也服务的邻近地区",
+      "sub": "点击城市查看专属页面。"
+    },
+    "cta": {
+      "heading": "在{city}筹办宴会？",
+      "sub": "立即 WhatsApp Kak Kenduri — 我们确认可用性、发送报价并锁定当天送达。",
+      "button": "立即 WhatsApp"
+    }
+  }
+}

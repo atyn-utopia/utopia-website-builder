@@ -1,0 +1,254 @@
+@import "tailwindcss";
+
+:root {
+  /* Brand Colors — Steel Fortress */
+  --brand-gunmetal: #2C3338;
+  --brand-gunmetal-light: #3D464C;
+  --brand-charcoal: #1C1F22;
+  --brand-steel: #6B7D8A;
+  --brand-steel-light: #8FA3B0;
+  --brand-yellow: #F2C744;
+  --brand-yellow-dark: #D4AD2E;
+  --brand-yellow-pale: #FFF9E6;
+  --brand-crimson: #DC2626;
+  --brand-crimson-dark: #B91C1C;
+  --brand-surface: #F0F1F3;
+  --brand-surface-warm: #F7F7F5;
+  --brand-white: #FFFFFF;
+  --brand-text: #1C1F22;
+  --brand-text-muted: #6B7D8A;
+  --brand-border: #D1D5DB;
+  --brand-border-steel: #9CA3AF;
+  --wa-green: #25D366;
+  --wa-green-dark: #1EAD53;
+  --google-gold: #FBBC04;
+
+  /* Gradients */
+  --gradient-hero: linear-gradient(155deg, #1C1F22 0%, #2C3338 45%, #3D464C 100%);
+  --gradient-hero-accent: linear-gradient(135deg, rgba(242,199,68,0.15) 0%, transparent 50%);
+  --gradient-dark-section: linear-gradient(180deg, #1C1F22 0%, #2C3338 100%);
+  --gradient-yellow-shine: linear-gradient(135deg, #F2C744 0%, #D4AD2E 100%);
+  --gradient-emergency: linear-gradient(90deg, #DC2626 0%, #B91C1C 100%);
+  --gradient-surface: linear-gradient(180deg, #F0F1F3 0%, #F7F7F5 100%);
+
+  /* Shadows — Layered, Never Flat */
+  --shadow-sm: 0 1px 4px rgba(44,51,56,0.06);
+  --shadow-md: 0 2px 8px rgba(107,125,138,0.08), 0 1px 2px rgba(44,51,56,0.04);
+  --shadow-lg: 0 8px 24px rgba(44,51,56,0.12), 0 2px 6px rgba(44,51,56,0.04);
+  --shadow-xl: 0 16px 40px rgba(44,51,56,0.15), 0 4px 12px rgba(44,51,56,0.06);
+  --shadow-yellow: 0 4px 16px rgba(242,199,68,0.2);
+  --shadow-wa: 0 4px 16px rgba(37,211,102,0.25);
+  --shadow-nav: 0 2px 12px rgba(44,51,56,0.15);
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+  --space-section: clamp(64px, 8vw, 96px);
+  --space-container: clamp(16px, 4vw, 80px);
+  --max-width: 1200px;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-pill: 9999px;
+}
+
+/* Base */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--brand-text);
+  background: var(--brand-surface);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Corrugated Steel Texture */
+.corrugated-texture {
+  background-image: repeating-linear-gradient(
+    88deg,
+    rgba(255,255,255,0.02) 0px,
+    rgba(255,255,255,0.02) 1px,
+    transparent 1px,
+    transparent 12px
+  );
+}
+
+/* Animations — Only transform and opacity */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(220,38,38,0); }
+}
+
+@keyframes fomo-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.fomo-dot {
+  animation: fomo-dot 1.5s ease-in-out infinite;
+}
+
+.emergency-pulse {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Fade-up on scroll */
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* WhatsApp button states */
+.wa-btn {
+  background: var(--wa-green);
+  box-shadow: var(--shadow-wa);
+  transition: transform 200ms ease, opacity 200ms ease;
+}
+.wa-btn:hover {
+  background: var(--wa-green-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(37,211,102,0.3);
+}
+.wa-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37,211,102,0.4), 0 0 0 5px rgba(37,211,102,0.15);
+}
+.wa-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(37,211,102,0.2);
+}
+
+/* Brand CTA button states */
+.brand-btn {
+  background: var(--gradient-yellow-shine);
+  box-shadow: var(--shadow-yellow);
+  transition: transform 200ms ease, opacity 200ms ease;
+}
+.brand-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(242,199,68,0.3);
+}
+.brand-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(242,199,68,0.4), 0 0 0 5px rgba(242,199,68,0.15);
+}
+.brand-btn:active {
+  transform: translateY(0);
+}
+
+/* Ghost button states */
+.ghost-btn {
+  border: 2px solid var(--brand-steel);
+  transition: transform 200ms ease, opacity 200ms ease;
+}
+.ghost-btn:hover {
+  border-color: var(--brand-yellow);
+  color: var(--brand-yellow);
+  transform: translateY(-1px);
+}
+.ghost-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(242,199,68,0.3), 0 0 0 5px rgba(242,199,68,0.1);
+}
+.ghost-btn:active {
+  transform: translateY(0);
+  background: rgba(242,199,68,0.05);
+}
+
+/* Product card hover */
+.product-card {
+  transition: transform 250ms ease, opacity 250ms ease;
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Nav link */
+.nav-link {
+  color: var(--brand-steel-light);
+  transition: opacity 200ms ease;
+}
+.nav-link:hover {
+  color: var(--brand-yellow);
+}
+.nav-link:focus-visible {
+  outline: none;
+  color: var(--brand-yellow);
+  box-shadow: 0 0 0 2px rgba(242,199,68,0.4);
+  border-radius: 4px;
+}
+.nav-link:active {
+  opacity: 0.8;
+}
+
+/* Accordion / FAQ button */
+.accordion-btn:hover {
+  background: rgba(242,199,68,0.04);
+}
+.accordion-btn:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px rgba(242,199,68,0.4);
+}
+.accordion-btn:active {
+  background: rgba(242,199,68,0.08);
+}
+
+/* Location link */
+.loc-link:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(242,199,68,0.4);
+  border-radius: 6px;
+  color: var(--brand-yellow);
+}
+.loc-link:active {
+  opacity: 0.7;
+}
+
+/* Icon button (mobile menu, close) */
+.icon-btn:hover {
+  opacity: 0.8;
+}
+.icon-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(242,199,68,0.4);
+  border-radius: 8px;
+}
+.icon-btn:active {
+  opacity: 0.6;
+}
+
+/* Hide scrollbar */
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Review card */
+.review-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(8px);
+}
+
+/* Stat number */
+.stat-number {
+  color: var(--brand-yellow);
+  letter-spacing: -0.02em;
+}

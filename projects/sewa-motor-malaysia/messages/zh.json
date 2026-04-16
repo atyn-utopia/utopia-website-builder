@@ -4,6 +4,39 @@
     "locations": "服务地区",
     "whatsapp": "立即WhatsApp"
   },
+  "fomo": {
+    "message": "今日仅剩 {slots} 辆电单车可当天送达！",
+    "bookNow": "立即预订"
+  },
+  "shared": {
+    "freeToAsk": "免费咨询 · 1小时内回复",
+    "safetyNote": "安全检测车队 · 30天故障保障",
+    "stats": {
+      "value1": "6,000+",
+      "label1": "马来西亚全国完成租赁",
+      "value2": "128",
+      "label2": "城市支持当天送达",
+      "value3": "RM30",
+      "label3": "每日起始租金",
+      "value4": "4.9",
+      "label4": "Google平均评分"
+    },
+    "whyChoose": {
+      "title1": "维护良好的车队",
+      "desc1": "每辆车交付前经过安全检测。Honda、Yamaha、Modenas均保持最佳状态。",
+      "title2": "当天送达",
+      "desc2": "WhatsApp预订，今天就能骑行。马来西亚128个城市均可送达。",
+      "title3": "经济实惠",
+      "desc3": "每日RM30起。日租、周租、月租方案 — 租期越长越划算。",
+      "title4": "7天WhatsApp客服",
+      "desc4": "团队每天快速回复。无繁琐手续，无额外条件。"
+    },
+    "midCta": "准备好骑行了吗？立即WhatsApp联系我们 — 1小时内回复。",
+    "midCtaButton": "WhatsApp Sewa Motor",
+    "galleryLabel": "真实座驾",
+    "galleryHeading": "我们遍布马来西亚的车队",
+    "reviewsSubtext": "基于180+条Google评价"
+  },
   "footer": {
     "tagline": "马来西亚值得信赖的电单车出租服务。当天送达，每日仅需RM30起。",
     "quickLinks": "快速链接",
@@ -128,6 +161,28 @@
       "heading": "准备好骑行了吗？今天就租一辆电单车。",
       "subheading": "每日RM30起，当天送达。发送WhatsApp消息，我们今天就把车送到你手上。",
       "button": "立即WhatsApp"
+    },
+    "faq": {
+      "q1": "在马来西亚租电单车要多少钱？",
+      "a1": "马来西亚电单车出租最低RM30/天（Modenas Kriss MR3）。也提供周租和月租方案，价格最高至RM1,100/月（Honda PCX 160）。租期越长，每日平均费用越低。",
+      "q2": "你们在马来西亚全国送车吗？",
+      "a2": "是的，我们提供马来西亚128个城市当天送达服务。只需通过WhatsApp告知您选择的车型和送车地址，我们当天就送到。",
+      "q3": "有哪些电单车可以租？",
+      "a3": "我们提供六款车型：Honda Vario 160、Yamaha NMax 155、Honda PCX 160、Honda Wave 125、Yamaha Y15ZR和Modenas Kriss MR3。每辆车都维护良好，可立即出租。",
+      "q4": "租电单车需要押金吗？",
+      "a4": "根据车型和租期，可能需要缴纳少量可退还押金。请通过WhatsApp联系我们，了解所选车型的具体押金金额。",
+      "q5": "可以租电单车做外卖吗？",
+      "a5": "当然可以。我们有很多客户租电单车用于Grab、Foodpanda和ShopeeFood外卖工作。Honda Vario 160和Yamaha Y15ZR是外卖骑手的热门选择。",
+      "q6": "怎么预订租车？",
+      "a6": "预订非常简单。通过WhatsApp发送消息，告知您选择的车型、租期和送车地址，我们会确认车辆可用情况并安排当天送达。",
+      "q7": "有最短租期限制吗？",
+      "a7": "最短租期为一天。您可以租一天、一周或一个月。月租方案每日平均费用最划算。",
+      "q8": "如果租赁期间电单车出故障怎么办？",
+      "a8": "请立即通过WhatsApp联系我们。我们会尽快安排更换车辆或道路救援。您的安全和便利是我们的首要考量。",
+      "q9": "可以续租吗？",
+      "a9": "可以，随时可以续租。只需在当前租期结束前通过WhatsApp联系我们，我们会为您更新预订，不会有任何中断。",
+      "q10": "有踏板车出租吗？",
+      "a10": "有。Honda Vario 160、Yamaha NMax 155和Honda PCX 160都是可租赁的自动挡踏板车。踏板车出租RM50/天起，支持当天送达。"
     }
   },
   "location": {
