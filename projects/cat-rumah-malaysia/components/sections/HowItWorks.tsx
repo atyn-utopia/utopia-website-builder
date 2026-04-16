@@ -7,7 +7,7 @@ export function HowItWorks() {
   return (
     <section className="section bg-cream">
       <div className="container-p">
-        <div style={{ textAlign: 'center', maxWidth: 680, margin: '0 auto 64px' }}>
+        <div style={{ textAlign: 'center', maxWidth: 680, margin: '0 auto 44px' }}>
           <span className="eyebrow">{t('eyebrow')}</span>
           <h2 className="t-h2" style={{ marginTop: 18 }}>{t('heading')}</h2>
           <p className="t-lead" style={{ marginTop: 14 }}>{t('subheading')}</p>

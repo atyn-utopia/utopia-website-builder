@@ -18,7 +18,7 @@ export function LocationsAccordion({ locale }: Props) {
   return (
     <section id="locations" className="section bg-elevated">
       <div className="container-p">
-        <div style={{ textAlign: 'center', maxWidth: 720, margin: '0 auto 48px' }}>
+        <div style={{ textAlign: 'center', maxWidth: 720, margin: '0 auto 36px' }}>
           <span className="eyebrow">{t('eyebrow')}</span>
           <h2 className="t-h2" style={{ marginTop: 18 }}>{t('heading')}</h2>
           <p className="t-lead" style={{ marginTop: 14 }}>{t('subheading')}</p>

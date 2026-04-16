@@ -144,6 +144,7 @@ export function Hero({ locale, locationSlug, cityOverride }: Props) {
           {/* Paint swatch chip stack */}
           <div
             aria-hidden
+            className="swatch-stack"
             style={{
               position: 'absolute',
               left: -20,
@@ -188,6 +189,7 @@ export function Hero({ locale, locationSlug, cityOverride }: Props) {
             margin: 32px clamp(20px, 4vw, 48px) 0 !important;
             min-height: 320px !important;
           }
+          .swatch-stack { display: none !important; }
         }
       `}</style>
     </section>

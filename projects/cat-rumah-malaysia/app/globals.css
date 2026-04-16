@@ -143,11 +143,11 @@ button { font-family: var(--font); }
 
 /* Section spacing */
 .section {
-  padding-top: clamp(40px, 4.5vw, 64px);
-  padding-bottom: clamp(40px, 4.5vw, 64px);
+  padding-top: clamp(36px, 4vw, 56px);
+  padding-bottom: clamp(36px, 4vw, 56px);
 }
 /* Tighter spacing when same-background sections are adjacent */
-.section + .section { padding-top: clamp(32px, 3vw, 48px); }
+.section + .section { padding-top: clamp(24px, 2.5vw, 40px); }
 .container-p {
   max-width: 1200px;
   margin: 0 auto;

@@ -9,7 +9,7 @@ export function Stats() {
     { num: t('brands'), label: t('brandsLabel') },
   ]
   return (
-    <section className="bg-cream" style={{ paddingBottom: 'clamp(40px, 5vw, 72px)' }}>
+    <section className="bg-cream" style={{ paddingTop: 'clamp(8px, 1vw, 16px)', paddingBottom: 'clamp(28px, 3.5vw, 48px)' }}>
       <div className="container-p">
         <div
           className="stats-grid"

@@ -8,7 +8,7 @@ export function WhyChoose() {
   return (
     <section className="section bg-jade-wash">
       <div className="container-p">
-        <div style={{ textAlign: 'center', maxWidth: 680, margin: '0 auto 56px' }}>
+        <div style={{ textAlign: 'center', maxWidth: 680, margin: '0 auto 40px' }}>
           <span className="eyebrow">{t('eyebrow')}</span>
           <h2 className="t-h2" style={{ marginTop: 18 }}>{t('heading')}</h2>
         </div>

@@ -104,6 +104,10 @@ Use the Agent tool. Pass the contents of the agent's `.md` file as the prompt, p
 
 See `prompts/orchestrate.md` for the full invocation guide.
 See `prompts/new-website.md` for the step-by-step new project workflow.
+See `docs/full-website-setup.md` for the complete setup reference (MANDATORY — follow this for every new website).
+
+## IMPORTANT: New Website Flow Enforcement
+When the user asks to create a new website, you MUST follow `docs/full-website-setup.md` exactly. Do NOT skip steps, reorder steps, or improvise your own flow. Read the doc first, then execute step by step. Every checklist item must be completed before moving to the next step. Both user approval gates (Gate 1: design, Gate 2: content) are blocking — do not proceed without explicit user confirmation.
 
 ## Execution order
 
@@ -135,6 +139,45 @@ Every page must include:
 Avoid duplicate content.
 
 Location pages must have unique copy.
+
+
+# Frontend Design Rules
+
+These rules apply to EVERY website. No exceptions.
+
+## Heading Hierarchy
+- One **H1** per page — the main title in the hero section
+- One **H2** per page — the subtitle in the hero section
+- All other section headings use **H3 through H6**
+- Never use multiple H1s or H2s on a single page
+
+## Section Backgrounds
+- Use **image backgrounds** for some sections (hero, CTA, testimonials)
+- Not every section should be flat solid color — mix image backgrounds with overlays for visual depth
+
+## USP Bar
+- **3-point USP bar** immediately below the hero section on every homepage
+- Mandatory on every project
+
+## Buttons
+- All buttons must use the **same rounded button shape** across the entire site
+- Only the **color** changes between variants (primary, secondary, CTA)
+- Never mix rounded and square buttons on the same site
+
+## No Phone Numbers or Domains on Site
+- Do NOT display any phone number or domain/URL as visible text anywhere on the website
+- All contact goes through WhatsApp redirect buttons only
+
+## Mobile Layout (PRIMARY viewport)
+- Most users come from mobile — design for mobile FIRST
+- Most items should be **center-aligned** on mobile (headings, buttons, cards, icons)
+- Left-aligned body text is acceptable but headings, buttons, and standalone elements must center
+- Always review mobile layout before marking design as complete
+
+## Images
+- Always **re-check every image** to confirm it is the correct image for its context
+- No mismatched or placeholder images left behind
+- Add gradient overlay to improve text readability on image backgrounds
 
 
 # Dynamic Location Pages
@@ -304,6 +347,15 @@ If assets exist:
 - use provided images
 
 Do not replace real assets with placeholders.
+
+## Logo Rules
+
+- The logo can be any design (text, graphic, combination — designer's choice)
+- The **icon** inside the logo MUST also be used as the **favicon** (`app/icon.svg`)
+- The icon must be consistent — the same icon appears in the logo and the favicon
+- Extract or design the icon so it works standalone at small sizes (16x16, 32x32)
+- If the user provides a logo with an icon element, isolate that icon for the favicon
+- If designing from scratch, design the icon first, then build the logo around it
 
 
 # Anti-Generic Design Guardrails
