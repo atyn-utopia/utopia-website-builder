@@ -23,9 +23,10 @@ Create SQL for all tables. The system must support:
 Required tables (extend as needed):
 ```sql
 phone_numbers (
-  id, website, product_slug, location_slug, phone_number, created_at
+  id, website, location_slug, phone_number, whatsapp_text, percentage, label, type, is_active, created_at
 )
 ```
+NOTE: The `product_slug` column has been REMOVED from the schema. Do not reference it anywhere.
 
 Design for scale: 100+ websites, 1,000+ locations.
 
@@ -35,7 +36,6 @@ Provide the exact query for fetching a phone number:
 SELECT phone_number
 FROM phone_numbers
 WHERE website = 'cpapmachine.my'
-  AND product_slug = 'cpap-machine'
   AND location_slug = 'kuala-lumpur'
 LIMIT 1
 ```
@@ -64,12 +64,12 @@ Return:
 5. RLS policy SQL
 
 ### 6. Database row requirements (MANDATORY)
-When seeding or inserting phone numbers, the `product_slug` value MUST exactly match the constant used in `lib/getPhoneNumber.ts` for that project. Mismatched product_slug is the #1 cause of phone number lookup failures.
+Phone number rows are matched by `website` + `location_slug` only. The `product_slug` column no longer exists.
 
 **Verification checklist:**
-- [ ] Check `lib/getPhoneNumber.ts` → find the `PRODUCT_SLUG` constant (e.g. `'service-aircond'`)
-- [ ] Every row in `phone_numbers` for this website MUST have that exact `product_slug` value
-- [ ] Never use generic values like `'default'` — always use the project-specific slug
+- [ ] Every row uses the exact deployed domain in `website`
+- [ ] Use `location_slug = 'all'` for the default / homepage fallback
+- [ ] Other rows use the exact city slug from Alpha's location list
 
 **Multi-domain support:**
 When a site is deployed on Vercel before a custom domain is added, phone numbers must exist for BOTH domains:
@@ -100,7 +100,7 @@ When seeding a new website:
 - Always use the anon key for public reads
 - Always provide a fallback phone number (from siteConfig) when Supabase returns null
 - Design for multi-tenancy from day one
-- Always verify `product_slug` matches the code constant before marking seed data as complete
+- Never reference the removed `product_slug` column in any code or SQL
 
 ## Schema Consistency Rules (MANDATORY)
 The `lib/getPhoneNumber.ts` query columns MUST exactly match the actual Supabase table schema. Past mistakes to avoid:

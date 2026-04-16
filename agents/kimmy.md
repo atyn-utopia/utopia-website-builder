@@ -402,7 +402,9 @@ Every visible string on the website MUST go through the i18n translation system.
 The homepage and location pages MUST have the identical section structure. The only difference is the copywriting (generic vs location-specific).
 
 **Both pages must have these sections in this exact order:**
-FOMO Banner → Nav → Hero → Stats → Products → How It Works → Risk/Problem → Mid CTA → Google Reviews → Why Choose → Gallery → Locations Accordion → FAQ → Final CTA → Footer
+FOMO Banner (MANDATORY) → Nav → Hero → USP Bar (MANDATORY, 3-point selling proposition) → Products → How It Works → Risk/Problem → Mid CTA → Google Reviews → Why Choose → Gallery → Locations Accordion → FAQ → Final CTA → Footer
+
+**FOMO Banner** and **USP Bar** are mandatory sections on every project. The FOMO Banner must use `useTranslations()` for all text. The USP Bar must contain exactly 3 points, translated for all locales.
 
 **Location page extras (allowed):**
 - Breadcrumbs (between Nav and Hero)

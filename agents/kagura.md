@@ -116,16 +116,21 @@ After all pages are built and before pushing to GitHub, Kagura must review the l
 - [ ] **Service-specific WhatsApp messages** — Each service card "Book Now" button must pre-fill WhatsApp with the specific service type (e.g. "Hi, I need aircond chemical wash").
 - [ ] **Pricing on location pages** — Location pages must show starting prices for each service.
 
-#### Mobile layout checklist (MANDATORY — most users come from mobile):
-Kagura must screenshot the site at mobile viewport (390×844) and verify:
+#### Mobile layout checklist (MANDATORY — most customers are on mobile, this is the PRIMARY viewport):
+Kagura must screenshot the site at mobile viewport (390×844) and verify EVERY item below. Failures block deployment.
 
+- [ ] **Mobile-first design** — Every layout decision must be designed for 390px FIRST, then scaled up. Desktop is the enhancement.
 - [ ] **Equal-height containers** — All cards in a grid/row must be the same height per row. No card should be taller or shorter than its sibling. Use `h-full` on card wrappers.
-- [ ] **Readable font sizes** — No text smaller than 12px on mobile. Hero headline must be at least 28px. Body text at least 14px. Labels/captions at least 11px. Verify with browser dev tools or screenshot zoom.
+- [ ] **Readable font sizes** — No text smaller than 12px on mobile. Hero headline ≥28px. Section headings ≥22px. Body text ≥15px. Labels/captions ≥12px.
+- [ ] **Full-width CTA buttons on mobile** — ALL WhatsApp CTA buttons must be `w-full` below the `sm` breakpoint. No narrow pill buttons that are hard to tap.
 - [ ] **No visible scrollbars on overflow sections** — Horizontal overflow content (review cards, gallery, brand logos) must auto-scroll via CSS marquee animation or snap-scroll with hidden scrollbar. Never show a visible scrollbar on mobile. Use CSS: `scrollbar-width: none` and `::-webkit-scrollbar { display: none }`.
-- [ ] **Touch-friendly tap targets** — All buttons and links must be at least 44×44px touch area. WhatsApp CTA buttons must be full-width on mobile.
+- [ ] **Touch-friendly tap targets** — All buttons, links, and accordion headers must be at least 44×44px touch area.
 - [ ] **No horizontal overflow / breaking layout** — No section should cause horizontal page scroll. Verify stamps, badges, and absolute-positioned elements don't overflow the viewport on small screens.
-- [ ] **Stacking order** — Multi-column grids must stack to single column on mobile. Service cards, why-choose cards, and step cards must stack cleanly.
+- [ ] **Single-column stacking** — ALL multi-column grids (products, reviews, steps, additional rentals, USPs, locations) must stack to single column on mobile. No side-by-side cramming.
 - [ ] **Image sizing** — Hero image and gallery images must scale down proportionally. No images should be cropped awkwardly on mobile.
+- [ ] **Generous vertical spacing** — Minimum `py-14` (56px) between sections on mobile. Sections must breathe.
+- [ ] **Readable line height** — All body/paragraph text must use `leading-[1.7]` or greater on mobile.
+- [ ] **Easy to read info** — Text must have enough contrast, padding from edges (min `px-4`), and whitespace. Information should be scannable in 2-3 seconds per section.
 
 **If any overflow section uses a scrollbar instead of auto-scroll:**
 Replace with either:

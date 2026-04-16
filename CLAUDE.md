@@ -179,7 +179,6 @@ Phone numbers are stored in the `phone_numbers` table. The `company_websites` ta
 ### phone_numbers Table Columns
 
 - `website` — Vercel domain (e.g. `electric-wheelchair-malaysia.vercel.app`)
-- `product_slug` — product identifier
 - `location_slug` — city slug or `'all'` for default
 - `phone_number` — full international format
 - `whatsapp_text` — pre-filled WhatsApp message
@@ -194,8 +193,8 @@ When creating a new website, always:
 
 1. Insert one row in `phone_numbers`:
 ```sql
-INSERT INTO phone_numbers (website, product_slug, location_slug, phone_number, label, type, is_active, whatsapp_text, percentage)
-VALUES ('domain.vercel.app', 'product-slug', 'all', '60XXXXXXXXX', 'default', 'default', true, 'Hi, saya berminat...', 100);
+INSERT INTO phone_numbers (website, location_slug, phone_number, label, type, is_active, whatsapp_text, percentage)
+VALUES ('domain.vercel.app', 'all', '60XXXXXXXXX', 'default', 'default', true, 'Hi, saya berminat...', 100);
 ```
 
 2. Ensure `company_websites` row exists with `leads_mode = 'single'` (default).
