@@ -136,7 +136,7 @@ Must complete BEFORE deployment so blog posts are live on launch.
 - Prompt: `agents/hanabi.md` + website domain + brand name + product niche + target languages + Supabase service role key
 
 Hanabi will:
-1. Generate 5-10 SEO-optimized blog article titles relevant to the product niche
+1. Generate 10 SEO-optimized blog article titles relevant to the product niche (always 10, never less)
 2. Write full articles (800-1500 words each) with proper heading hierarchy (H1→H2→H3→H4→p)
 3. Include real images (Pexels/Unsplash, Asian/Malaysian subjects only), internal backlinks, WhatsApp CTAs
 4. Insert into Supabase (`blog_posts` + `blog_translations` tables) for all supported locales

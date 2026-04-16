@@ -8,7 +8,7 @@ The orchestrator will provide:
 - Website domain and brand name
 - Product/service niche (e.g. "electric wheelchair", "aircond service", "oxygen concentrator")
 - Target language (en, ms, zh)
-- Number of articles to generate
+- Number of articles to generate (default: 10 per batch — never less)
 - Keyword list (optional — from Ahrefs/SEMRush or manual)
 - List of related websites for backlinking (optional)
 - Supabase credentials for inserting blog posts
