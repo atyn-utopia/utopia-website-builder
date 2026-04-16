@@ -50,6 +50,24 @@ Deployment:
 Vercel
 
 
+# Dynamic Product Data (CRITICAL)
+
+Product data on every website MUST be fetched dynamically from the Supabase `products` + `product_photos` tables. NEVER hardcode product lists in config files for display.
+
+## Rules
+1. Homepage and location pages query `products` WHERE `website = domain` AND `is_active = true` ORDER BY `sort_order`, joined with `product_photos`
+2. Use ISR with `revalidate = 3600` (1 hour) so DB changes propagate without redeploy
+3. Grid layout must auto-adjust to any product count — use CSS grid auto-fill or responsive columns that handle 1, 6, or 20 products gracefully
+4. Adding a product in the database → it appears on the site automatically (within revalidate window)
+5. Setting `is_active = false` or deleting → it disappears automatically
+6. `config/products.ts` may exist ONLY as a fallback if Supabase is unreachable — it is NOT the source of truth
+7. Product images come from `product_photos.url` — never hardcode image URLs in frontend code
+
+## Database schema
+- `products`: id, website, parent_id, name, slug, description, sale_price, rental_price, sort_order, is_active
+- `product_photos`: product_id (FK), url
+
+
 # Agent Team
 
 Alpha — System Architect  

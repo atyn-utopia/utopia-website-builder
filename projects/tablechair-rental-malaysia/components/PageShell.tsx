@@ -14,11 +14,10 @@ import {
   KKMark,
 } from '@/components/Ornaments'
 import {
-  CORE_PRODUCTS,
-  ADDITIONAL_PRODUCTS,
   HERO_IMAGE,
   GALLERY_IMAGES,
 } from '@/config/products'
+import type { Product } from '@/lib/getProducts'
 import {
   LOCATIONS,
   STATES_ORDER,
@@ -31,28 +30,11 @@ import { siteConfig, type Locale } from '@/config/site'
 import { waRedirect } from '@/lib/waRedirect'
 import type { LocationCopy } from '@/lib/locationCopy'
 
-type CoreKey =
-  | 'standardChair'
-  | 'banquetChair'
-  | 'chiavariChair'
-  | 'longTable'
-  | 'roundTable'
-  | 'cocktailTable'
-
-type AddKey =
-  | 'couch'
-  | 'tent'
-  | 'transparentCanopy'
-  | 'airCooler'
-  | 'fan'
-  | 'pa'
-  | 'catering'
-  | 'popcorn'
-  | 'cottonCandy'
-
 export interface PageShellProps {
   locale: Locale
   variant: 'home' | 'location'
+  coreProducts: Product[]
+  additionalProducts: Product[]
   // location-only
   locationSlug?: string
   locationCity?: string
@@ -101,6 +83,8 @@ function WAButton({
 export default async function PageShell({
   locale,
   variant,
+  coreProducts,
+  additionalProducts,
   locationSlug,
   locationCity,
   locationCopy,
@@ -185,6 +169,13 @@ export default async function PageShell({
             style={{ transition: 'background-color 180ms ease, color 180ms ease' }}
           >
             {tNav('gallery')}
+          </a>
+          <a
+            href={`/${locale}/blog`}
+            className="rounded-full px-3.5 py-1.5 text-[14px] font-semibold text-[#111111]/80 hover:bg-[#FFF9C4] hover:text-[#111111]"
+            style={{ transition: 'background-color 180ms ease, color 180ms ease' }}
+          >
+            {tNav('blog')}
           </a>
           <a
             href="#contact"
@@ -355,7 +346,7 @@ export default async function PageShell({
   )
 
   // ======= PRODUCT GRID =======
-  const productGrid = (
+  const productGrid = coreProducts.length > 0 ? (
     <section id="services" className="bg-[#FFFEF8] py-16 sm:py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mb-10 max-w-2xl text-center sm:text-left">
@@ -367,63 +358,66 @@ export default async function PageShell({
           </h3>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {CORE_PRODUCTS.map((p) => {
-            const ctaMsg = tHome(`products.${p.key}.cta` as const)
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {coreProducts.map((p) => {
             const waHref = waRedirect(
               locale,
-              ctaMsg + (isLoc ? ` — ${city}` : ''),
+              p.name + (isLoc ? ` — ${city}` : ''),
               isLoc ? slug : undefined,
             )
+            const imageUrl = p.photos[0]?.url
+            const rentalDisplay = p.rental_price != null ? `RM${p.rental_price.toFixed(2)}` : '—'
+            const saleDisplay = p.sale_price != null ? `RM${p.sale_price.toFixed(2)}` : '—'
             return (
               <article
                 key={p.id}
                 className="flex h-full flex-col overflow-hidden rounded-[24px] border border-[#FDD835]/35 bg-[#FFFFFF] kk-card-shadow hover:-translate-y-0.5 hover:kk-card-shadow-hover"
                 style={{ transition: 'transform 220ms ease, box-shadow 220ms ease' }}
               >
-                <div
-                  className="relative flex h-52 items-center justify-center overflow-hidden bg-gradient-to-b from-[#FFFFFF]/60 to-[#FFFEF8]"
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={p.image}
-                    alt={tShared(`alt.${p.key}`)}
-                    className="max-h-full max-w-full object-contain"
-                  />
-                </div>
+                {imageUrl && (
+                  <div
+                    className="relative flex h-52 items-center justify-center overflow-hidden bg-gradient-to-b from-[#FFFFFF]/60 to-[#FFFEF8]"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={imageUrl}
+                      alt={p.name}
+                      className="max-h-full max-w-full object-contain"
+                    />
+                  </div>
+                )}
                 <div className="flex flex-1 flex-col p-6 sm:p-7">
                   <h5 className="text-[22px] font-bold tracking-tight text-[#111111]">
-                    {tHome(`products.${p.key}.name` as const)}
+                    {p.name}
                   </h5>
-                  <p className="mt-2 text-[15px] leading-[1.7] text-[#F9A825]">
-                    {tHome(`products.${p.key}.tagline` as const)}
-                  </p>
-                  <p
-                    className="mt-4 text-[15px] leading-[1.7] text-[#111111]/75"
-                    style={{
-                      display: '-webkit-box',
-                      WebkitLineClamp: 3,
-                      WebkitBoxOrient: 'vertical',
-                      overflow: 'hidden',
-                      height: 'calc(1.7em * 3)',
-                    }}
-                  >
-                    {tHome(`products.${p.key}.blurb` as const)}
-                  </p>
+                  {p.description && (
+                    <p
+                      className="mt-4 text-[15px] leading-[1.7] text-[#111111]/75"
+                      style={{
+                        display: '-webkit-box',
+                        WebkitLineClamp: 3,
+                        WebkitBoxOrient: 'vertical',
+                        overflow: 'hidden',
+                        height: 'calc(1.7em * 3)',
+                      }}
+                    >
+                      {p.description}
+                    </p>
+                  )}
 
                   <div className="mt-5 overflow-hidden rounded-2xl border border-[#FDD835]/25 bg-[#FFF9C4]/60 text-sm">
                     <p className="flex items-center justify-between px-4 py-2.5">
                       <span className="text-[#111111]/60">
                         {tHome('products.plainLabel')}
                       </span>
-                      <span className="font-semibold text-[#111111]">{p.plain}</span>
+                      <span className="font-semibold text-[#111111]">{rentalDisplay}</span>
                     </p>
                     <div className="h-px bg-[#FDD835]/35" />
                     <p className="flex items-center justify-between px-4 py-2.5">
                       <span className="text-[#111111]/60">
                         {tHome('products.withCoverLabel')}
                       </span>
-                      <span className="font-semibold text-[#111111]">{p.withCover}</span>
+                      <span className="font-semibold text-[#111111]">{saleDisplay}</span>
                     </p>
                   </div>
 
@@ -441,10 +435,10 @@ export default async function PageShell({
         </div>
       </div>
     </section>
-  )
+  ) : null
 
   // ======= ADDITIONAL RENTALS =======
-  const additional = (
+  const additional = additionalProducts.length > 0 ? (
     <section className="bg-[#7a9a83] py-16 text-white sm:py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mb-10 max-w-2xl text-center sm:text-left">
@@ -457,42 +451,47 @@ export default async function PageShell({
         </div>
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {ADDITIONAL_PRODUCTS.map((a) => {
+          {additionalProducts.map((a) => {
             const waHref = waRedirect(
               locale,
-              tHome(`additional.${a.key}.name` as const) + (isLoc ? ` — ${city}` : ''),
+              a.name + (isLoc ? ` — ${city}` : ''),
               isLoc ? slug : undefined,
             )
+            const imageUrl = a.photos[0]?.url
             return (
               <article
                 key={a.id}
                 className="flex h-full flex-col overflow-hidden rounded-[20px] border border-[#FDD835]/30 bg-[#FFFFFF] kk-card-shadow hover:-translate-y-0.5"
                 style={{ transition: 'transform 220ms ease, box-shadow 220ms ease' }}
               >
-                <div className="flex h-40 items-center justify-center bg-[#FFFEF8] p-3">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={a.image}
-                    alt={tShared(`alt.${a.altKey}` as const)}
-                    className="max-h-full max-w-full object-contain"
-                  />
-                </div>
+                {imageUrl && (
+                  <div className="flex h-40 items-center justify-center bg-[#FFFEF8] p-3">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={imageUrl}
+                      alt={a.name}
+                      className="max-h-full max-w-full object-contain"
+                    />
+                  </div>
+                )}
                 <div className="flex flex-1 flex-col p-6">
                   <h5 className="text-[17px] font-bold tracking-tight text-[#111111]">
-                    {tHome(`additional.${a.key}.name` as const)}
+                    {a.name}
                   </h5>
-                  <p
-                    className="mt-3 text-[15px] leading-[1.7] text-[#111111]/75"
-                    style={{
-                      display: '-webkit-box',
-                      WebkitLineClamp: 2,
-                      WebkitBoxOrient: 'vertical',
-                      overflow: 'hidden',
-                      height: 'calc(1.7em * 2)',
-                    }}
-                  >
-                    {tHome(`additional.${a.key}.blurb` as const)}
-                  </p>
+                  {a.description && (
+                    <p
+                      className="mt-3 text-[15px] leading-[1.7] text-[#111111]/75"
+                      style={{
+                        display: '-webkit-box',
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: 'vertical',
+                        overflow: 'hidden',
+                        height: 'calc(1.7em * 2)',
+                      }}
+                    >
+                      {a.description}
+                    </p>
+                  )}
                   <div className="flex-1" />
                   <a
                     href={waHref}
@@ -510,7 +509,7 @@ export default async function PageShell({
         </div>
       </div>
     </section>
-  )
+  ) : null
 
   // ======= 3-STEP PROCESS =======
   const howItWorks = (

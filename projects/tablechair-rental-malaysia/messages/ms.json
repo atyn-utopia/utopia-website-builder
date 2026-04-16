@@ -3,6 +3,7 @@
     "services": "Perkhidmatan",
     "locations": "Lokasi",
     "gallery": "Galeri",
+    "blog": "Blog",
     "contact": "Hubungi",
     "whatsapp": "WhatsApp Kami"
   },
@@ -194,6 +195,23 @@
       "heading": "Mari aturkan majlis anda — dengan betul.",
       "sub": "Satu mesej WhatsApp sahaja. Kami sahkan ketersediaan, hantar sebutharga, dan kunci penghantaran sama hari.",
       "button": "WhatsApp Kami"
+    }
+  },
+  "blog": {
+    "meta": {
+      "title": "Blog | Kak Kenduri",
+      "description": "Tips, panduan dan senarai semak untuk merancang kenduri, perkahwinan atau majlis anda di Malaysia. Dari Kak Kenduri."
+    },
+    "heading": "Blog Kak Kenduri",
+    "subheading": "Tips, senarai semak dan panduan untuk membantu anda merancang kenduri, perkahwinan atau majlis yang sempurna.",
+    "noPosts": "Belum ada artikel — sila semak semula nanti!",
+    "breadcrumbs": {
+      "home": "Utama",
+      "blog": "Blog"
+    },
+    "cta": {
+      "heading": "Sedia merancang majlis anda?",
+      "sub": "WhatsApp Kak Kenduri — kami balas dalam beberapa minit dengan sebut harga percuma."
     }
   },
   "location": {

@@ -5,7 +5,7 @@ import { routing } from '@/i18n/routing'
 import PageShell from '@/components/PageShell'
 import { findLocation, LOCATIONS } from '@/config/locations'
 import { getLocationCopy } from '@/lib/locationCopy'
-import { CORE_PRODUCTS } from '@/config/products'
+import { getProducts } from '@/lib/getProducts'
 import {
   localBusinessLocationSchema,
   breadcrumbLocationSchema,
@@ -13,6 +13,8 @@ import {
   productSchemaForLocation,
 } from '@/lib/schema'
 import type { Locale } from '@/config/site'
+
+export const revalidate = 3600
 
 const SITE_URL = 'https://tablechair-rental-malaysia.vercel.app'
 const PRODUCT_SLUG = 'table-chair-rental'
@@ -76,9 +78,9 @@ export default async function LocationPage({
 
   const city = loc.display[locale]
   const copy = getLocationCopy(locale, location)
+  const { core, additional } = await getProducts()
 
   const t = await getTranslations({ locale, namespace: 'location' })
-  const tHome = await getTranslations({ locale, namespace: 'home.products' })
 
   return (
     <>
@@ -107,18 +109,18 @@ export default async function LocationPage({
           __html: JSON.stringify(faqPageSchema(copy.faqs)),
         }}
       />
-      {CORE_PRODUCTS.map((p) => (
+      {core.map((p) => (
         <script
           key={p.id}
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(
               productSchemaForLocation(locale, location, city, {
-                id: p.id,
-                name: tHome(`${p.key}.name`),
-                image: p.image,
-                low: p.low,
-                high: p.high,
+                id: p.slug,
+                name: p.name,
+                image: p.photos[0]?.url ?? '',
+                low: p.rental_price != null ? p.rental_price.toFixed(2) : '0',
+                high: p.sale_price != null ? p.sale_price.toFixed(2) : '0',
               }),
             ),
           }}
@@ -130,6 +132,8 @@ export default async function LocationPage({
         locationSlug={location}
         locationCity={city}
         locationCopy={copy}
+        coreProducts={core}
+        additionalProducts={additional}
       />
     </>
   )

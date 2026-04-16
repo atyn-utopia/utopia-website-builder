@@ -3,6 +3,7 @@
     "services": "服务",
     "locations": "地区",
     "gallery": "案例",
+    "blog": "博客",
     "contact": "联系",
     "whatsapp": "立即 WhatsApp"
   },
@@ -194,6 +195,23 @@
       "heading": "让我们为您的下一场宴会妥善安排座位。",
       "sub": "只需一条 WhatsApp 讯息。我们确认可用性、发送报价并锁定当天送达。",
       "button": "立即 WhatsApp"
+    }
+  },
+  "blog": {
+    "meta": {
+      "title": "博客 | Kak Kenduri",
+      "description": "规划宴会、婚礼或活动的技巧、指南与清单。来自 Kak Kenduri。"
+    },
+    "heading": "Kak Kenduri 博客",
+    "subheading": "帮助您策划完美宴会、婚礼或活动的技巧、清单和指南。",
+    "noPosts": "暂无文章 — 请稍后再来！",
+    "breadcrumbs": {
+      "home": "首页",
+      "blog": "博客"
+    },
+    "cta": {
+      "heading": "准备策划您的活动？",
+      "sub": "WhatsApp Kak Kenduri — 几分钟内回复，免费报价。"
     }
   },
   "location": {

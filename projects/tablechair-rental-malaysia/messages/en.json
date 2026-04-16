@@ -3,6 +3,7 @@
     "services": "Services",
     "locations": "Locations",
     "gallery": "Gallery",
+    "blog": "Blog",
     "contact": "Contact",
     "whatsapp": "WhatsApp Now"
   },
@@ -194,6 +195,23 @@
       "heading": "Let's seat your next majlis — properly.",
       "sub": "One WhatsApp message is all it takes. We'll confirm availability, send a quote, and lock in same-day delivery.",
       "button": "WhatsApp Now"
+    }
+  },
+  "blog": {
+    "meta": {
+      "title": "Blog | Kak Kenduri",
+      "description": "Tips, guides and checklists for planning your kenduri, wedding or event in Malaysia. From Kak Kenduri."
+    },
+    "heading": "Kak Kenduri Blog",
+    "subheading": "Tips, checklists and guides to help you plan the perfect kenduri, wedding or event.",
+    "noPosts": "No articles yet — check back soon!",
+    "breadcrumbs": {
+      "home": "Home",
+      "blog": "Blog"
+    },
+    "cta": {
+      "heading": "Ready to plan your event?",
+      "sub": "WhatsApp Kak Kenduri — we reply in minutes with a free quote."
     }
   },
   "location": {

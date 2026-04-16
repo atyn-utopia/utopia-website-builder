@@ -1,5 +1,4 @@
 import { LOCATIONS } from '@/config/locations'
-import { CORE_PRODUCTS } from '@/config/products'
 
 export const SITE_URL = 'https://tablechair-rental-malaysia.vercel.app'
 export const BRAND_NAME = 'Kak Kenduri'
@@ -244,4 +243,4 @@ export function productSchemaForLocation(
 }
 
 // Re-exports for convenience
-export { LOCATIONS, CORE_PRODUCTS }
+export { LOCATIONS }
