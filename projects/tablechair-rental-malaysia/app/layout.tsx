@@ -13,6 +13,9 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://tablechair-rental-malaysia.vercel.app'),
   title: 'Kak Kenduri — Table & Chair Rental Malaysia',
   description: 'Same-day table and chair rental across Malaysia.',
+  verification: {
+    google: 'tm0matiWoFe5vrz_jjCFkYpuL_iokve1Je2zV1ObdXc',
+  },
 }
 
 export default function RootLayout({

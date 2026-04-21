@@ -179,6 +179,30 @@ These rules apply to EVERY website. No exceptions.
 - No mismatched or placeholder images left behind
 - Add gradient overlay to improve text readability on image backgrounds
 
+## Customer Gallery Grid — No Blank Slots
+- The customer gallery grid must **never leave an empty / blank slot**. Every cell in the visible grid must contain an image
+- Pick a column count that evenly divides the image count (e.g. 12 images → 3, 4, or 6 cols), or pad / trim the image list so the last row is fully filled
+- No half-empty last row, no gaps caused by `auto-fill` stranding items
+- Applies at every breakpoint — re-check desktop, tablet, and mobile columns
+
+## FOMO Banner — Countdown + Urgent Colour
+- FOMO banner at the very top of the page must include a **live countdown timer** (hours:minutes:seconds) that visibly ticks down
+- Banner background must be **red or black** (never brand-colour, never yellow/green) — urgency colour only
+- Text must remain readable on the chosen background (white or light text)
+- Banner stays sticky/visible at the top of the first viewport
+
+## WhatsApp CTA — Official Green Only
+- Every WhatsApp CTA button must use the **official WhatsApp green** (`#25D366`, hover `#1EBE57`)
+- Never theme WhatsApp buttons with brand colour, black, or any other tint — the green is an instantly-recognised affordance
+- Applies to nav CTA, hero CTA, inline CTAs, sticky / floating FAB, final CTA, and the blog article CTA banner
+- Icon inside the button stays white
+
+## Heading Hierarchy (reminder + enforcement)
+- Every page must have **exactly one H1** AND **exactly one H2** — do not ship a page that is missing either
+- H1 = main hero title. H2 = hero subtitle / supporting line underneath. Both belong to the hero section
+- All remaining section titles use H3–H6
+- Lint every page before marking design complete: H1 count must equal 1, H2 count must equal 1
+
 
 # Dynamic Location Pages
 
@@ -199,6 +223,12 @@ Each page must include:
 - FAQs
 - call-to-action
 - dynamic phone number from database
+
+## Location Coverage Requirements
+- Every project's `config/locations.ts` must contain **at least 10 sub-locations per state** that the project serves
+- Total location count across all states must be **between 150 and 180 locations**
+- Sub-locations must be real, populated towns/suburbs (never invented) — verify against reference
+- `generateStaticParams` must emit a page for every location, and every location must appear in the sitemap
 
 
 # Supabase Database Logic
