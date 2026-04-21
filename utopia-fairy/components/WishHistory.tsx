@@ -7,7 +7,7 @@ interface Wish {
   slug: string
   prompt: string
   createdAt: string
-  status: 'deployed' | 'preview' | 'building'
+  status: 'deployed' | 'preview' | 'ready' | 'building'
   deployUrl: string | null
   localUrl: string | null
 }
@@ -34,6 +34,7 @@ export default function WishHistory() {
     const colors: Record<string, string> = {
       deployed: '#4ade80',
       preview: '#7EC8E3',
+      ready: '#a78bfa',
       building: '#F9A96A',
     }
     return colors[status] || '#607080'
@@ -43,6 +44,7 @@ export default function WishHistory() {
     const labels: Record<string, string> = {
       deployed: 'Live',
       preview: 'Preview',
+      ready: 'Ready',
       building: 'Building',
     }
     return labels[status] || 'Unknown'
