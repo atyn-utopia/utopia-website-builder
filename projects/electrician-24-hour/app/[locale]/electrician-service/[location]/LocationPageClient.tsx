@@ -186,7 +186,7 @@ export default function LocationPageClient({
                     <p>{p.description}</p>
                     {p.sale_price && (
                       <div className="service-price">
-                        RM {Math.round(p.sale_price)} <span>from</span>
+                        <span>from</span> RM {Math.round(p.sale_price)}
                       </div>
                     )}
                     <a
