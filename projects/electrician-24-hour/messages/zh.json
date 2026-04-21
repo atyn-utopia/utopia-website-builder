@@ -1,0 +1,220 @@
+{
+  "metadata": {
+    "title": "马来西亚24小时电工 | 紧急电线维修 | Electrician 24 Hours",
+    "description": "马来西亚24小时紧急电工服务 — 插座、重新布线、DB升级、热水器当天完成。4小时到场,WhatsApp直接联系。"
+  },
+  "nav": {
+    "brandName": "Electrician 24 Hours",
+    "services": "服务",
+    "howItWorks": "流程",
+    "gallery": "案例",
+    "reviews": "评价",
+    "locations": "服务区域",
+    "faq": "常见问题",
+    "blog": "博客",
+    "ctaButton": "WhatsApp 24/7"
+  },
+  "fomoBanner": {
+    "texts": [
+      "⚡ 紧急热线已开通 — 巴生谷正在派工",
+      "🛠️ 当天档期仍有空位",
+      "✅ 本周全马已完成 140+ 项目"
+    ],
+    "bookNow": "预约电工"
+  },
+  "hero": {
+    "badge": "24/7 紧急热线开放",
+    "h1Pre": "24小时电工",
+    "h1Highlight": "紧急电线维修",
+    "h1Suffix": "覆盖全马",
+    "subheadline": "插座维修、全屋重布线、DB升级、风扇与热水器安装 — 当天完成。ST注册电工 4 小时到场,每周 7 天。",
+    "ctaPrimary": "WhatsApp电工",
+    "ctaSecondary": "查看服务",
+    "trustBadge": "ST注册 · 全额保险 · Google 4.9★",
+    "arrivalFlag": "4小时到场"
+  },
+  "usp": {
+    "items": [
+      {
+        "title": "90% 当天完成",
+        "description": "从插座到全屋布线 — 大部分问题首次上门即修好。"
+      },
+      {
+        "title": "4小时到场",
+        "description": "吉隆坡、雪兰莪、柔佛、槟城、马六甲 — 响应最快。"
+      },
+      {
+        "title": "RM80 起,无加价",
+        "description": "透明收费 — 无中间商,无隐藏费用。"
+      }
+    ]
+  },
+  "services": {
+    "heading": "我们每天处理的电工服务",
+    "subheading": "ST 注册电工、原厂配件,单项固定收费 RM60 起。",
+    "cta": "WhatsApp询问报价"
+  },
+  "howItWorks": {
+    "heading": "服务流程",
+    "subheading": "半夜停电不该需要20分钟填表。仅3步。",
+    "steps": [
+      {
+        "title": "WhatsApp 联系",
+        "description": "一句话告诉我们故障。有照片更好,我们可直接准备好配件。"
+      },
+      {
+        "title": "派工",
+        "description": "锁定4小时到场窗口,并将电工姓名、照片、车牌发送给您。"
+      },
+      {
+        "title": "现场维修 · 付款",
+        "description": "工作完成、测试并签字确认后再付款。含30天工艺保修。"
+      }
+    ]
+  },
+  "emergency": {
+    "heading": "我们每晚都在修的常见紧急问题",
+    "points": [
+      "总开关不断跳闸",
+      "插座冒火花或烧黑",
+      "整层半夜断电",
+      "风扇停转有焦味",
+      "热水器洗澡后断电",
+      "DB 箱发出嗡嗡声"
+    ],
+    "solution": "WhatsApp 发一张故障照片给我们 — 通常电工上门前就能初步诊断,节省往返时间。",
+    "cta": "立即联系我们"
+  },
+  "midCta": {
+    "heading": "停电?插座冒火?",
+    "subheading": "24/7 热线 · 午夜前无附加费。告诉我们,派最近的 ST 注册电工过来。",
+    "cta": "WhatsApp 24/7"
+  },
+  "gallery": {
+    "heading": "全马真实案例",
+    "subheading": "每张照片均来自真实现场 — 无素材图。"
+  },
+  "reviews": {
+    "heading": "最先联系我们的客户",
+    "subheading": "Google 4.9★ · 200+ 条评价,遍布巴生谷",
+    "rating": "4.9",
+    "items": [
+      {
+        "name": "Hafiz Ramli",
+        "location": "吉隆坡",
+        "rating": 5,
+        "text": "凌晨1点总开关不断跳闸。WhatsApp联系后90分钟内电工到场,查出烧焦的插座,更换并检查整个 DB。一切正常后才付款。"
+      },
+      {
+        "name": "Lim Wei Jian",
+        "location": "八打灵再也",
+        "rating": 5,
+        "text": "SS2 一间30年的排屋需要全屋重布线。他们详细说明范围,给出固定价,两天内完工,现场干净。ST注册电工,工艺到位。"
+      },
+      {
+        "name": "Priya Nair",
+        "location": "莎阿南",
+        "rating": 5,
+        "text": "主卧室吊扇开始冒火花,很吓人。WhatsApp 几分钟内回复,当晚派技工上门。更换到吊扇的布线,非常专业。"
+      },
+      {
+        "name": "Tan Mei Ling",
+        "location": "蕉赖",
+        "rating": 5,
+        "text": "暴雨后热水器跳 RCCB。RM150 固定报价,第二天上午到场,诊断出加热元件故障,更换并重新布线。3 个月一切完美。"
+      },
+      {
+        "name": "Azman Bakar",
+        "location": "梳邦再也",
+        "rating": 5,
+        "text": "DB 箱嗡嗡作响,全家担心。4 小时内电工上门,更换主断路器与两个 MCB。再无噪音,现场给了保修卡。"
+      },
+      {
+        "name": "Jason Chew",
+        "location": "蒲种",
+        "rating": 5,
+        "text": "客厅新增4个插座和6盏筒灯。价格与 WhatsApp 报价一致,无加售,无拖拉。准时到场,完工后清理干净。"
+      }
+    ]
+  },
+  "locations": {
+    "heading": "服务覆盖",
+    "subheading": "14 州 · 159 城市 · 24/7 派工 · 当天响应",
+    "viewAll": "查看全部城市"
+  },
+  "faq": {
+    "heading": "常见问题",
+    "items": [
+      {
+        "question": "到场要多久?",
+        "answer": "巴生谷 4 小时内。外地城市(怡保、槟城、新山、马六甲)8 小时内。吉隆坡的深夜真实紧急通常 90 分钟内派出。"
+      },
+      {
+        "question": "凌晨 2 点也工作吗?",
+        "answer": "是。24/7 热线,午夜前无附加费。午夜后对全屋布线收少量加班费,但插座急修、跳闸复位仍按固定价。"
+      },
+      {
+        "question": "电工有牌照吗?",
+        "answer": "每位电工均为 ST(马来西亚能源委员会)注册。WhatsApp 索取,我们会提前发送注册号与身份证件。"
+      },
+      {
+        "question": "怎么收费?",
+        "answer": "单项固定收费:插座 RM80 起,吊扇安装 RM150 起,筒灯 RM60 起,热水器 RM150 起。大型项目(全屋布线、DB 升级)现场书面报价。"
+      },
+      {
+        "question": "公寓、共管公寓也服务吗?",
+        "answer": "是 — 排屋、公寓、共管公寓、店铺、厂房都覆盖。若需要大楼施工许可,一般可于同次上门办理。"
+      },
+      {
+        "question": "有保修吗?",
+        "answer": "每项工作含 30 天工艺保修。30 天内同一故障复现,免费上门重修。"
+      }
+    ]
+  },
+  "finalCta": {
+    "heading": "停电?插座冒火?立即 WhatsApp — 24/7。",
+    "subheading": "ST 注册电工 4 小时内上门。单项固定 RM60 起。10秒内 WhatsApp。",
+    "cta": "WhatsApp 我们"
+  },
+  "footer": {
+    "brandName": "Electrician 24 Hours",
+    "tagline": "ST 注册 · 全额保险 · 全马 4 小时上门 · 24/7。",
+    "quickLinks": "快速链接",
+    "coverage": "覆盖",
+    "copyright": "© 2026 Encik Beku Aircond Sdn. Bhd. 版权所有。",
+    "ssm": "Encik Beku Aircond Sdn. Bhd. — SSM 注册"
+  },
+  "blog": {
+    "title": "电线安全与布线指南",
+    "metaTitle": "电工博客 — 布线小贴士 & 安全指南 | Electrician 24 Hours",
+    "metaDescription": "马来西亚布线规范、DB 升级指南、插座故障诊断、热水器安装 — 来自一线电工的浅白指南。",
+    "readMore": "阅读全文",
+    "recentPosts": "最新文章",
+    "publishedOn": "发布",
+    "minRead": "分钟阅读",
+    "backToBlog": "← 返回博客",
+    "noPosts": "新文章即将上线。敬请期待。",
+    "sharePre": "分享本文",
+    "breadcrumbHome": "首页",
+    "breadcrumbBlog": "博客"
+  },
+  "location": {
+    "h1Prefix": "24小时电工 ·",
+    "h1Suffix": "· 当天布线与紧急维修",
+    "metaTitleSuffix": "| 当天布线 | Electrician 24 Hours",
+    "metaDescPrefix": "在",
+    "metaDescSuffix": " 需要24小时电工?插座、重新布线、DB升级 — 当天完成。RM80 起。WhatsApp 直接联系。",
+    "breadcrumbHome": "首页",
+    "breadcrumbProduct": "电工服务",
+    "nearbyTitle": "我们覆盖的邻近地区",
+    "nearbySubtitle": "这些周边地区也提供当天上门"
+  },
+  "shared": {
+    "whatsappUs": "WhatsApp 24/7",
+    "learnMore": "了解更多",
+    "viewAll": "查看全部",
+    "twentyFourSeven": "24/7",
+    "stRegistered": "ST 注册",
+    "fixedPrice": "固定价格"
+  }
+}

@@ -1,0 +1,220 @@
+{
+  "metadata": {
+    "title": "24 Hour Electrician Malaysia | Emergency Wiring & Repair | Electrician 24 Hours",
+    "description": "Emergency 24-hour electrician across Malaysia. Same-day plug point, full rewiring, DB upgrade, water heater. Arrives in 4 hours. Chat on WhatsApp now."
+  },
+  "nav": {
+    "brandName": "Electrician 24 Hours",
+    "services": "Services",
+    "howItWorks": "How It Works",
+    "gallery": "Gallery",
+    "reviews": "Reviews",
+    "locations": "Coverage",
+    "faq": "FAQ",
+    "blog": "Blog",
+    "ctaButton": "WhatsApp 24/7"
+  },
+  "fomoBanner": {
+    "texts": [
+      "⚡ Emergency line open — dispatching in Klang Valley right now",
+      "🛠️ Same-day slots still available today",
+      "✅ 140+ jobs completed this week across Malaysia"
+    ],
+    "bookNow": "Book an Electrician"
+  },
+  "hero": {
+    "badge": "24/7 Emergency Line Open",
+    "h1Pre": "24 Hour Electrician",
+    "h1Highlight": "Emergency Wiring & Repair",
+    "h1Suffix": "Across Malaysia",
+    "subheadline": "Same-day plug point, full rewiring, DB upgrade, ceiling fan & water heater. Our ST-registered team arrives within 4 hours — 7 days a week.",
+    "ctaPrimary": "WhatsApp an Electrician Now",
+    "ctaSecondary": "See Services",
+    "trustBadge": "ST Registered · Fully Insured · 4.9★ on Google",
+    "arrivalFlag": "4-HOUR ARRIVAL"
+  },
+  "usp": {
+    "items": [
+      {
+        "title": "90% Jobs Same-Day",
+        "description": "Most fixes settled on-site, first visit — from plug point to full rewiring."
+      },
+      {
+        "title": "Arrives in 4 Hours",
+        "description": "Fastest emergency response across KL, Selangor, Johor, Penang, Melaka."
+      },
+      {
+        "title": "From RM80, No Markup",
+        "description": "Transparent pricing — no middlemen, no hidden fees, no quote games."
+      }
+    ]
+  },
+  "services": {
+    "heading": "Wiring Services We Handle Daily",
+    "subheading": "ST-registered wiremen. Real parts. Fixed per-job pricing from RM60.",
+    "cta": "WhatsApp for a Fixed Quote"
+  },
+  "howItWorks": {
+    "heading": "How It Works",
+    "subheading": "A power-out at midnight should not need a 20-minute form. It takes 3 steps.",
+    "steps": [
+      {
+        "title": "Chat on WhatsApp",
+        "description": "Tell us the issue in one line. Attach a photo if you can — it helps us bring the right parts."
+      },
+      {
+        "title": "Electrician Dispatched",
+        "description": "We lock a 4-hour arrival window and send you the electrician's name, photo and plate number."
+      },
+      {
+        "title": "On-Site Fix & Pay",
+        "description": "Pay only after the job is finished, tested, and you've signed off. 30-day workmanship warranty included."
+      }
+    ]
+  },
+  "emergency": {
+    "heading": "Common Emergencies We Fix Every Night",
+    "points": [
+      "Main trip switch keeps tripping",
+      "Plug point is sparking or burnt black",
+      "Whole floor lost power at midnight",
+      "Ceiling fan stopped, smoke smell",
+      "Water heater no power after shower",
+      "DB box making buzzing noise"
+    ],
+    "solution": "Chat a photo to us on WhatsApp — we usually diagnose before the electrician arrives so the right parts come with the visit.",
+    "cta": "Message Us Now"
+  },
+  "midCta": {
+    "heading": "Power Out? Plug Sparking?",
+    "subheading": "24/7 line — no surcharge before midnight. Message us now, we'll send the nearest ST-registered electrician.",
+    "cta": "WhatsApp 24/7"
+  },
+  "gallery": {
+    "heading": "Real Jobs Across Malaysia",
+    "subheading": "Every photo is from an actual site visit — nothing stock."
+  },
+  "reviews": {
+    "heading": "Customers Who Called Us First",
+    "subheading": "4.9★ from 200+ Google reviews across Klang Valley",
+    "rating": "4.9",
+    "items": [
+      {
+        "name": "Hafiz Ramli",
+        "location": "Kuala Lumpur",
+        "rating": 5,
+        "text": "Main trip switch kept cutting off at 1am. Messaged on WhatsApp, electrician arrived in under 90 minutes. Traced a burnt plug point, replaced it, tested the whole DB. Paid only after it was all working."
+      },
+      {
+        "name": "Lim Wei Jian",
+        "location": "Petaling Jaya",
+        "rating": 5,
+        "text": "Needed full rewiring for a 30-year-old terrace in SS2. They walked me through the scope, gave a fixed price upfront, finished in 2 days with no mess. ST-registered wireman, clean work."
+      },
+      {
+        "name": "Priya Nair",
+        "location": "Shah Alam",
+        "rating": 5,
+        "text": "Ceiling fan in master bedroom started sparking. Scary. They answered WhatsApp within minutes, sent technician same evening. Replaced the wiring to the fan, very professional."
+      },
+      {
+        "name": "Tan Mei Ling",
+        "location": "Cheras",
+        "rating": 5,
+        "text": "Water heater tripped the RCCB after a storm. Quoted RM150 flat, came next morning, diagnosed a faulty heater element, replaced and re-wired properly. Has been working perfect for 3 months."
+      },
+      {
+        "name": "Azman Bakar",
+        "location": "Subang Jaya",
+        "rating": 5,
+        "text": "DB box was buzzing loud — whole family worried. Got an electrician at our door in under 4 hours. Replaced the main breaker and two MCBs. No more noise. Warranty card given on the spot."
+      },
+      {
+        "name": "Jason Chew",
+        "location": "Puchong",
+        "rating": 5,
+        "text": "Added 4 new plug points and 6 downlights to our living room. Price matched what they quoted on WhatsApp. No upsell, no drama. Came on time, cleaned up after. Exactly what I wanted."
+      }
+    ]
+  },
+  "locations": {
+    "heading": "Where We Cover",
+    "subheading": "159 cities across 14 states — 24/7 dispatch, same-day response",
+    "viewAll": "View All Cities"
+  },
+  "faq": {
+    "heading": "Frequently Asked Questions",
+    "items": [
+      {
+        "question": "How fast can you arrive?",
+        "answer": "Within 4 hours for Klang Valley. Outer cities (Ipoh, Penang, Johor Bahru, Melaka) are under 8 hours. Truly urgent calls at midnight are usually dispatched within 90 minutes in KL."
+      },
+      {
+        "question": "Do you work at 2 AM?",
+        "answer": "Yes. We run a 24/7 line with no surcharge before midnight. After midnight a small after-hours fee applies for full rewiring jobs only — emergency plug point or breaker resets stay at flat pricing."
+      },
+      {
+        "question": "Are your electricians certified?",
+        "answer": "Every wireman is ST (Suruhanjaya Tenaga) registered. Ask on WhatsApp and we'll send you the electrician's registration number and photo ID before they arrive."
+      },
+      {
+        "question": "How do you charge?",
+        "answer": "Fixed per-job pricing: plug point from RM80, ceiling fan install from RM150, downlight from RM60, water heater from RM150. Larger jobs (full rewiring, DB upgrade) are quoted on-site with written scope."
+      },
+      {
+        "question": "Do you serve apartments and condos?",
+        "answer": "Yes — landed houses, condos, apartments, shoplots and factories. If your building requires a permit-to-work, we can usually arrange it on the same visit."
+      },
+      {
+        "question": "Do you warranty your work?",
+        "answer": "30-day workmanship warranty on every job. If the same fault returns within 30 days, we come back and refix it with no call-out fee."
+      }
+    ]
+  },
+  "finalCta": {
+    "heading": "Power Out? Plug Sparking? Message Us Now — 24/7.",
+    "subheading": "ST-registered electrician at your door within 4 hours. Fixed per-job pricing from RM60. Chat on WhatsApp in under 10 seconds.",
+    "cta": "Chat on WhatsApp"
+  },
+  "footer": {
+    "brandName": "Electrician 24 Hours",
+    "tagline": "ST-registered, insured, 4-hour arrival across Malaysia — 24/7.",
+    "quickLinks": "Quick Links",
+    "coverage": "Coverage",
+    "copyright": "© 2026 Encik Beku Aircond Sdn. Bhd. All rights reserved.",
+    "ssm": "Encik Beku Aircond Sdn. Bhd. — SSM Registered"
+  },
+  "blog": {
+    "title": "Electrical Safety & Wiring Guides",
+    "metaTitle": "Electrician Blog — Wiring Tips & Safety Guides | Electrician 24 Hours",
+    "metaDescription": "Malaysian wiring regulations, DB upgrade guides, plug point diagnosis, water heater install — plain English guides from working electricians.",
+    "readMore": "Read More",
+    "recentPosts": "Recent Posts",
+    "publishedOn": "Published",
+    "minRead": "min read",
+    "backToBlog": "← Back to Blog",
+    "noPosts": "New articles coming soon. Subscribe for updates.",
+    "sharePre": "Share this article",
+    "breadcrumbHome": "Home",
+    "breadcrumbBlog": "Blog"
+  },
+  "location": {
+    "h1Prefix": "24 Hour Electrician in",
+    "h1Suffix": "— Same-Day Wiring & Emergency Repair",
+    "metaTitleSuffix": "| Same-Day Wiring | Electrician 24 Hours",
+    "metaDescPrefix": "Need a 24 hour electrician in",
+    "metaDescSuffix": "? Same-day plug point, rewiring, DB upgrade, fan installation. From RM80. Chat on WhatsApp now.",
+    "breadcrumbHome": "Home",
+    "breadcrumbProduct": "Electrician Service",
+    "nearbyTitle": "Nearby Areas We Cover",
+    "nearbySubtitle": "We also dispatch same-day to these surrounding areas"
+  },
+  "shared": {
+    "whatsappUs": "WhatsApp 24/7",
+    "learnMore": "Learn More",
+    "viewAll": "View All",
+    "twentyFourSeven": "24/7",
+    "stRegistered": "ST Registered",
+    "fixedPrice": "Fixed Pricing"
+  }
+}
