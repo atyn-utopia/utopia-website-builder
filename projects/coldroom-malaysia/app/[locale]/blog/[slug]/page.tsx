@@ -51,6 +51,10 @@ function estimateReadingTime(html: string): number {
   return Math.max(1, Math.round(words / 200));
 }
 
+function stripLeadingH1(html: string): string {
+  return html.replace(/^\s*<h1\b[^>]*>[\s\S]*?<\/h1>\s*/i, '');
+}
+
 export default async function BlogPostPage({
   params,
 }: {
@@ -128,7 +132,7 @@ export default async function BlogPostPage({
 
           <div
             className="blog-content"
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: stripLeadingH1(post.content) }}
           />
 
           <div className="blog-cta-inline">
