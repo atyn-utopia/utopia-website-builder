@@ -2,10 +2,10 @@ import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
 import { getBlogPosts } from '@/lib/getBlogPosts';
 import { waRedirect } from '@/lib/waRedirect';
-import Link from 'next/link';
 import { SiteFomoBar } from '@/components/SiteFomoBar';
 import { SiteNav } from '@/components/SiteNav';
 import { SiteFooter } from '@/components/SiteFooter';
+import { BlogCard } from './BlogCard';
 
 export async function generateMetadata({
   params,
@@ -103,84 +103,16 @@ export default async function BlogListingPage({
                 );
 
                 return (
-                  <a
+                  <BlogCard
                     key={post.id}
-                    href={`/${locale}/blog/${post.slug}`}
-                    style={{
-                      display: 'block',
-                      background: 'var(--white)',
-                      borderRadius: 'var(--radius-lg)',
-                      overflow: 'hidden',
-                      boxShadow: 'var(--shadow-card)',
-                      transition: 'transform 200ms cubic-bezier(0.16, 1, 0.3, 1)',
-                    }}
-                  >
-                    {/* Cover image */}
-                    {post.cover_image_url && (
-                      <div
-                        style={{
-                          width: '100%',
-                          height: '200px',
-                          backgroundImage: `url(${post.cover_image_url})`,
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center',
-                        }}
-                      />
-                    )}
-
-                    <div style={{ padding: 'var(--space-lg)' }}>
-                      {/* Date */}
-                      <p
-                        style={{
-                          fontSize: '13px',
-                          color: 'var(--text-muted)',
-                          marginBottom: 'var(--space-sm)',
-                        }}
-                      >
-                        {formattedDate}
-                      </p>
-
-                      {/* Title */}
-                      <h2
-                        style={{
-                          fontSize: '20px',
-                          fontWeight: 700,
-                          color: 'var(--navy)',
-                          lineHeight: 'var(--leading-snug)',
-                          marginBottom: 'var(--space-sm)',
-                        }}
-                      >
-                        {post.title}
-                      </h2>
-
-                      {/* Excerpt */}
-                      <p
-                        style={{
-                          fontSize: '14px',
-                          color: 'var(--text-muted)',
-                          lineHeight: 'var(--leading-relaxed)',
-                          marginBottom: 'var(--space-md)',
-                          display: '-webkit-box',
-                          WebkitLineClamp: 2,
-                          WebkitBoxOrient: 'vertical',
-                          overflow: 'hidden',
-                        }}
-                      >
-                        {post.excerpt}
-                      </p>
-
-                      {/* Read More */}
-                      <span
-                        style={{
-                          fontSize: '14px',
-                          fontWeight: 600,
-                          color: 'var(--orange)',
-                        }}
-                      >
-                        {t('readMore')} &rarr;
-                      </span>
-                    </div>
-                  </a>
+                    locale={locale}
+                    slug={post.slug}
+                    title={post.title}
+                    excerpt={post.excerpt}
+                    coverImageUrl={post.cover_image_url}
+                    formattedDate={formattedDate}
+                    readMoreLabel={t('readMore')}
+                  />
                 );
               })}
             </div>
