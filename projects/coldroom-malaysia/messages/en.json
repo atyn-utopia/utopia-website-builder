@@ -1,0 +1,297 @@
+{
+  "metadata": {
+    "title": "Cold Room Rental Malaysia | HALAL, Same-Day Delivery",
+    "description": "Rent -18°C frozen, freezer, chiller & cool-storage cold rooms in Malaysia. HALAL, same-day delivery, 13 states. Free WhatsApp quote."
+  },
+  "nav": {
+    "brandName": "Cold Room Malaysia",
+    "products": "Cold Rooms",
+    "howItWorks": "How It Works",
+    "reviews": "Reviews",
+    "locations": "Locations",
+    "faq": "FAQ",
+    "blog": "Blog",
+    "ctaShort": "WhatsApp Quote",
+    "ctaButton": "WhatsApp Quote"
+  },
+  "fomoBanner": {
+    "headline": "Limited cold room slots, claim yours before today ends in",
+    "bookNow": "Reserve Slot →"
+  },
+  "hero": {
+    "eyebrow": "5-Stars Cold Room Rental Service",
+    "h1": "Refrigerated <accent>Cold Room</accent> Rental, Delivered Across Malaysia",
+    "h2": "Same-day delivery, HALAL fleet, 13 states. Choose from -18°C frozen storage to +10°C cool storage, booked in 5 minutes via WhatsApp.",
+    "primaryCta": "Get WhatsApp Quote",
+    "secondaryCta": "View Temperature Tiers",
+    "tempLabels": {
+      "frozen-storage-minus-18": "Frozen",
+      "freezer-minus-5-to-minus-10": "Freezer",
+      "chiller-2-to-4": "Chiller",
+      "cool-storage-7-to-10": "Cool Storage"
+    },
+    "microStats": {
+      "tonnes": "tonnes delivered",
+      "customers": "happy customers",
+      "onTime": "on-time"
+    }
+  },
+  "usp": {
+    "delivery": {
+      "title": "Same-Day Delivery",
+      "subtitle": "Order before noon, plugged in by evening."
+    },
+    "halal": {
+      "title": "100% HALAL Certified",
+      "subtitle": "JAKIM-aligned cold-chain protocols."
+    },
+    "whatsapp": {
+      "title": "5-Min WhatsApp Reply",
+      "subtitle": "Quote sent before the kettle boils."
+    }
+  },
+  "stats": {
+    "heading": "Trusted Across Malaysia",
+    "tonnes": {
+      "value": "256,800+",
+      "label": "Tonnes Delivered"
+    },
+    "customers": {
+      "value": "1,730+",
+      "label": "Happy Customers"
+    },
+    "states": {
+      "value": "13",
+      "label": "States Covered"
+    },
+    "response": {
+      "value": "5 min",
+      "label": "Avg WhatsApp Reply"
+    }
+  },
+  "products": {
+    "eyebrow": "Cheapest Cold Chain Logistic in Malaysia",
+    "heading": "Our Cold Room Rental Service",
+    "subheading": "One trusted cold room rental service. Four temperature options to fit your goods. Same-day delivery across all 13 Peninsular states.",
+    "priceFrom": "From RM{price}",
+    "perPalletDay": "per pallet / day",
+    "cta": "WhatsApp Quote",
+    "tempOptionsLabel": "Available Temperature Ranges",
+    "tempItems": {
+      "frozen-storage-minus-18": "Frozen meats, chickens, fruits and vegetables.",
+      "freezer-minus-5-to-minus-10": "Bread and pizza dough, pastry and ice cream.",
+      "chiller-2-to-4": "Dairy products, milk, cheese, butter, flowers.",
+      "cool-storage-7-to-10": "Pharmaceutical, beverages and sauces."
+    },
+    "tierKind": {
+      "frozen-storage-minus-18": "Frozen Storage",
+      "freezer-minus-5-to-minus-10": "Freezer Room",
+      "chiller-2-to-4": "Chiller Room",
+      "cool-storage-7-to-10": "Cool Storage"
+    }
+  },
+  "howItWorks": {
+    "eyebrow": "3 Steps",
+    "heading": "Rent Your Cold Room in 3 Steps",
+    "steps": [
+      {
+        "title": "Tell us via WhatsApp",
+        "body": "Share your goods, temperature tier, location, and date, all over WhatsApp."
+      },
+      {
+        "title": "Confirm tier & date",
+        "body": "We send a quote in 5 minutes. You confirm and book, no paperwork, no deposit calls."
+      },
+      {
+        "title": "Delivered & plugged in",
+        "body": "Same-day delivery, on-site setup, plugged in and tested. You start storing the moment we leave."
+      }
+    ]
+  },
+  "risk": {
+    "eyebrow": "Cold-Chain Reality",
+    "heading": "Cold-Chain Failure Costs You More Than Rental",
+    "body": "One blackout, one delayed delivery, one lazy supplier, and your inventory is gone. Refrigerated rental gives you redundancy you can plug in today.",
+    "bullets": [
+      "Spoiled meat, seafood and dairy from delayed deliveries.",
+      "Lost revenue when supermarket overflow has nowhere to go.",
+      "HALAL certification voided by uncontrolled cold chain.",
+      "Pharmaceuticals & vaccines failing audit on temperature breach."
+    ],
+    "compare": {
+      "withoutLabel": "Without us",
+      "withLabel": "With us",
+      "spoiled": "Avg loss per incident",
+      "saved": "per pallet, per day"
+    }
+  },
+  "midCta": {
+    "heading": "Need a Cold Room Today?",
+    "body": "WhatsApp us with your goods and location, we'll quote in 5 minutes and deliver the same day.",
+    "cta": "Get a WhatsApp Quote"
+  },
+  "reviews": {
+    "eyebrow": "Rated 4.9 on Google · 230+ Reviews",
+    "heading": "What Malaysian Businesses Say",
+    "items": [
+      {
+        "initials": "AH",
+        "name": "Ahmad Hafiz",
+        "role": "F&B Operator, Shah Alam",
+        "body": "Booked at 11am, plugged in by 5pm. Saved my entire frozen meat shipment when our chiller broke."
+      },
+      {
+        "initials": "WL",
+        "name": "Wendy Lim",
+        "role": "Bakery Owner, Petaling Jaya",
+        "body": "The freezer cold room held our pizza dough perfectly through Hari Raya rush. WhatsApp reply was instant."
+      },
+      {
+        "initials": "RJ",
+        "name": "Raj Kumar",
+        "role": "Wholesale Seafood, Port Klang",
+        "body": "I rent two -18°C units monthly. HALAL-segregated, on-time, and the team actually picks up the phone."
+      },
+      {
+        "initials": "MS",
+        "name": "Mei Sin Tan",
+        "role": "Pharma Distributor, Cyberjaya",
+        "body": "Cool storage between 7-10°C is exactly what audit requires. Documentation was clean and ready."
+      },
+      {
+        "initials": "FA",
+        "name": "Faridah Aziz",
+        "role": "Catering Co., Kota Bharu",
+        "body": "Used the chiller for kenduri 3 times. Driver was punctual every single time, even from Kelantan side."
+      },
+      {
+        "initials": "KC",
+        "name": "Kelvin Chong",
+        "role": "Cold Truck Logistics, Johor",
+        "body": "Pairs perfectly with their cold truck rental, end-to-end cold chain in one WhatsApp thread."
+      }
+    ]
+  },
+  "whyChoose": {
+    "eyebrow": "Why Cold Room Malaysia",
+    "heading": "Why Operators Choose Us",
+    "featured": {
+      "badge": "100% HALAL",
+      "title": "Fully HALAL-Certified Cold-Chain Fleet",
+      "body": "JAKIM-aligned protocols, segregated storage, audited cleaning logs. Your HALAL certification stays intact end-to-end."
+    },
+    "tiles": [
+      {
+        "title": "Same-Day Delivery",
+        "body": "Order before noon, plugged in by evening across Peninsular Malaysia."
+      },
+      {
+        "title": "5-Min WhatsApp Reply",
+        "body": "Real humans, real quotes, no chatbot ping-pong."
+      },
+      {
+        "title": "13 States Covered",
+        "body": "From Perlis to Johor, full Peninsular logistics network."
+      },
+      {
+        "title": "Cold Truck Add-On",
+        "body": "Pair cold room rental with refrigerated truck delivery in one booking."
+      }
+    ]
+  },
+  "gallery": {
+    "eyebrow": "Project Gallery",
+    "heading": "Recent Customer Cold Rooms",
+    "subheading": "From frozen seafood warehouses to bakery freezer rooms, real Malaysian projects we've powered."
+  },
+  "locationsSection": {
+    "eyebrow": "Service Coverage",
+    "heading": "Cold Room Rental Across Malaysia",
+    "subheading": "153 sub-locations served across all 13 Peninsular states. Tap your state to see covered cities.",
+    "cities": "cities"
+  },
+  "nearby": {
+    "heading": "Cold Room Rental Near {city}"
+  },
+  "faq": {
+    "eyebrow": "Frequently Asked",
+    "heading": "Cold Room Rental FAQ",
+    "items": [
+      {
+        "q": "How fast can you deliver a cold room?",
+        "a": "Same-day delivery is available for most Peninsular Malaysia locations when you book before noon via WhatsApp. Outside that window, next-day is standard."
+      },
+      {
+        "q": "Are your cold rooms HALAL-compliant?",
+        "a": "Yes, every unit is JAKIM-aligned and maintained with HALAL-segregated storage protocols. We can supply HALAL audit documentation on request."
+      },
+      {
+        "q": "What temperature ranges do you offer?",
+        "a": "Four tiers: -18°C frozen, -5°C to -10°C freezer, 2°C to 4°C chiller, and 7°C to 10°C cool storage. Need a custom range? WhatsApp us."
+      },
+      {
+        "q": "Do you serve all 13 Peninsular states?",
+        "a": "Yes, from Perlis in the north to Johor in the south, including Putrajaya, Penang, and the East Coast. 153 sub-locations covered."
+      },
+      {
+        "q": "How is pricing calculated?",
+        "a": "From RM5–RM8 per pallet per day depending on temperature tier. Volume discounts available for monthly rentals. Final quote in 5 minutes via WhatsApp."
+      },
+      {
+        "q": "Can I rent for less than a week?",
+        "a": "Yes, daily rental is supported. Most customers rent 3–14 days; some rent monthly with discounts. Minimum 1 day."
+      },
+      {
+        "q": "Do you provide cold-truck delivery too?",
+        "a": "Yes, we operate Cold Truck Malaysia. You can book truck + room in one thread for a complete cold chain solution."
+      },
+      {
+        "q": "What if there's a power failure?",
+        "a": "All units have temperature alarms and we provide a 24-hour emergency line. Backup units can be dispatched within 4 hours within KL/Selangor."
+      }
+    ]
+  },
+  "finalCta": {
+    "eyebrow": "Ready to Book?",
+    "heading": "Get Your Cold Room Quote in 5 Minutes",
+    "body": "WhatsApp the team. Tell us your goods, dates, and location. We'll quote on the spot and deliver the same day across all 13 Peninsular states.",
+    "cta": "WhatsApp Us Now",
+    "trustTags": [
+      "Same-day delivery",
+      "100% HALAL",
+      "5-min response"
+    ]
+  },
+  "footer": {
+    "brandName": "Cold Room Malaysia",
+    "tagline": "Refrigerated cold room rental & cold-chain logistics across Peninsular Malaysia. Powered by Cold Truck Malaysia Sdn. Bhd.",
+    "cols": {
+      "products": "Cold Rooms",
+      "cities": "Top Cities",
+      "languages": "Languages"
+    },
+    "quickLinks": "Quick Links",
+    "contact": "Contact",
+    "ssm": "",
+    "rights": "All rights reserved.",
+    "poweredBy": "A Utopia Group company",
+    "copyright": "© 2026 Cold Room Malaysia. All rights reserved."
+  },
+  "stickyFab": {
+    "ariaLabel": "WhatsApp us, quote in 5 minutes"
+  },
+  "blog": {
+    "title": "Cold Room & Cold-Chain Insights",
+    "subtitle": "Practical guides for renting cold storage in Malaysia",
+    "metaTitle": "Cold Room & Cold-Chain Blog | Cold Room Malaysia",
+    "metaDescription": "Practical guides on cold room rental, HALAL cold chain, frozen storage, chillers, and cold-chain logistics in Malaysia.",
+    "readMore": "Read More",
+    "recentPosts": "Recent Posts",
+    "publishedOn": "Published on",
+    "minRead": "min read",
+    "backToBlog": "Back to Blog",
+    "noPosts": "No posts yet. Check back soon.",
+    "breadcrumbHome": "Home",
+    "breadcrumbBlog": "Blog"
+  }
+}
