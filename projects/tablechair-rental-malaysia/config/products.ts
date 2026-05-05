@@ -1,4 +1,4 @@
-// Product data is now fetched dynamically from Supabase via lib/getProducts.ts.
+// Product data is now fetched dynamically from Supabase via lib/webcore.ts.
 // CORE_PRODUCTS and ADDITIONAL_PRODUCTS have been removed — the database is the
 // single source of truth. Only gallery/hero assets remain here.
 

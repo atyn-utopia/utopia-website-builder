@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
-import { supabase } from '@/lib/supabase'
+import { getBlogPost, getBlogPostSlugs, getRecentBlogPosts } from '@/lib/webcore'
 import { siteConfig, type Locale } from '@/config/site'
 import { waRedirect } from '@/lib/waRedirect'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
@@ -13,56 +13,14 @@ import { TOP_FOOTER_LOCATIONS, findLocation } from '@/config/locations'
 type Params = { locale: string; slug: string }
 
 export async function generateStaticParams() {
-  const { data: posts } = await supabase
-    .from('blog_posts')
-    .select('slug')
-    .eq('website', siteConfig.domain)
-    .eq('status', 'published')
-
+  const posts = await getBlogPostSlugs()
   const params: { locale: string; slug: string }[] = []
   for (const locale of routing.locales) {
-    for (const post of posts ?? []) {
+    for (const post of posts) {
       params.push({ locale, slug: post.slug })
     }
   }
   return params
-}
-
-async function getPost(slug: string, locale: string) {
-  const { data } = await supabase
-    .from('blog_posts')
-    .select(`
-      id,
-      slug,
-      cover_image_url,
-      published_at,
-      blog_translations!inner (
-        title,
-        content,
-        excerpt,
-        meta_title,
-        meta_description
-      )
-    `)
-    .eq('website', siteConfig.domain)
-    .eq('slug', slug)
-    .eq('status', 'published')
-    .eq('blog_translations.language', locale)
-    .single()
-
-  return data as unknown as {
-    id: string
-    slug: string
-    cover_image_url: string | null
-    published_at: string
-    blog_translations: {
-      title: string
-      content: string
-      excerpt: string
-      meta_title: string
-      meta_description: string
-    }[]
-  } | null
 }
 
 export async function generateMetadata({
@@ -71,7 +29,7 @@ export async function generateMetadata({
   params: Promise<Params>
 }): Promise<Metadata> {
   const { locale, slug } = await params
-  const post = await getPost(slug, locale)
+  const post = await getBlogPost(slug, locale)
   if (!post || !post.blog_translations[0]) return {}
   const tr = post.blog_translations[0]
   return {
@@ -96,7 +54,7 @@ export default async function BlogPostPage({
   const { locale, slug } = await params
   setRequestLocale(locale)
 
-  const post = await getPost(slug, locale)
+  const post = await getBlogPost(slug, locale)
   if (!post || !post.blog_translations[0]) notFound()
 
   const tr = post.blog_translations[0]
@@ -131,15 +89,7 @@ export default async function BlogPostPage({
   })
 
   /* ---------- Recent Posts query ---------- */
-  const { data: recentPosts } = await supabase
-    .from('blog_posts')
-    .select('slug, published_at, blog_translations!inner(title)')
-    .eq('website', siteConfig.domain)
-    .eq('status', 'published')
-    .eq('blog_translations.language', locale)
-    .neq('slug', slug)
-    .order('published_at', { ascending: false })
-    .limit(3)
+  const recentPosts = await getRecentBlogPosts(locale, slug, 3)
 
   return (
     <div className="min-h-screen bg-[#FFFEF8]">

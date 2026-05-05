@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { setRequestLocale, getTranslations } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import PageShell from '@/components/PageShell'
-import { getProducts } from '@/lib/getProducts'
+import { getProducts } from '@/lib/webcore'
 import {
   localBusinessHomepageSchema,
   websiteSchema,
@@ -10,8 +10,6 @@ import {
 } from '@/lib/schema'
 import { LOCATIONS } from '@/config/locations'
 import type { Locale } from '@/config/site'
-
-export const revalidate = 3600
 
 const SITE_URL = 'https://tablechair-rental-malaysia.vercel.app'
 

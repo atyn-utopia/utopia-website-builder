@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
-import { supabase } from '@/lib/supabase'
+import { getBlogPosts } from '@/lib/webcore'
 import { siteConfig, type Locale } from '@/config/site'
 import { waRedirect } from '@/lib/waRedirect'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
@@ -31,17 +31,6 @@ export async function generateMetadata({
   }
 }
 
-interface BlogPost {
-  id: string
-  slug: string
-  cover_image_url: string | null
-  published_at: string
-  blog_translations: {
-    title: string
-    excerpt: string
-  }[]
-}
-
 export default async function BlogListingPage({
   params,
 }: {
@@ -57,24 +46,7 @@ export default async function BlogListingPage({
 
   const waHref = waRedirect(locale, tShared('whatsappMessageDefault'))
 
-  const { data: posts } = await supabase
-    .from('blog_posts')
-    .select(`
-      id,
-      slug,
-      cover_image_url,
-      published_at,
-      blog_translations!inner (
-        title,
-        excerpt
-      )
-    `)
-    .eq('website', siteConfig.domain)
-    .eq('status', 'published')
-    .eq('blog_translations.language', locale)
-    .order('published_at', { ascending: false })
-
-  const blogPosts = (posts ?? []) as unknown as BlogPost[]
+  const blogPosts = await getBlogPosts(locale)
 
   const formatDate = (dateStr: string) => {
     const d = new Date(dateStr)

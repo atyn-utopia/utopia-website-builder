@@ -5,7 +5,7 @@ import { routing } from '@/i18n/routing'
 import PageShell from '@/components/PageShell'
 import { findLocation, LOCATIONS } from '@/config/locations'
 import { getLocationCopy } from '@/lib/locationCopy'
-import { getProducts } from '@/lib/getProducts'
+import { getProducts } from '@/lib/webcore'
 import {
   localBusinessLocationSchema,
   breadcrumbLocationSchema,
@@ -13,8 +13,6 @@ import {
   productSchemaForLocation,
 } from '@/lib/schema'
 import type { Locale } from '@/config/site'
-
-export const revalidate = 3600
 
 const SITE_URL = 'https://tablechair-rental-malaysia.vercel.app'
 const PRODUCT_SLUG = 'table-chair-rental'

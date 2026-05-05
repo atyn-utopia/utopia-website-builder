@@ -17,7 +17,7 @@ import {
   HERO_IMAGE,
   GALLERY_IMAGES,
 } from '@/config/products'
-import type { Product } from '@/lib/getProducts'
+import type { Product } from '@/lib/webcore'
 import {
   LOCATIONS,
   STATES_ORDER,
