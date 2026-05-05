@@ -1,66 +1,145 @@
-import { getSupabase } from "./supabase";
+import { supabase } from "./supabase";
+import { headers } from "next/headers";
 
-const WEBSITE = "roller-shutter-malaysia.vercel.app";
-const PRODUCT_SLUG = "roller-shutter";
 const FALLBACK_PHONE = "60174287801";
+const FALLBACK_WA_TEXT =
+  "Hai, saya berminat dengan perkhidmatan roller shutter. Boleh saya dapatkan sebut harga?";
+
+type LeadsMode = "single" | "rotation" | "location" | "hybrid";
 
 interface PhoneRow {
   phone_number: string;
-  location_slug: string;
+  whatsapp_text: string | null;
+  percentage: number | null;
+  label: string | null;
+  location_slug: string | null;
 }
 
 export interface PhoneResult {
   phone: string;
-  source: "location" | "global-pool" | "env-fallback";
+  whatsappText: string;
+  source: "database" | "fallback";
+  mode: LeadsMode | "fallback";
 }
 
-function pickRandom<T>(arr: T[]): T | undefined {
-  if (arr.length === 0) return undefined;
-  return arr[Math.floor(Math.random() * arr.length)];
+function pickWeighted(rows: PhoneRow[]): PhoneRow | undefined {
+  if (rows.length === 0) return undefined;
+  if (rows.length === 1) return rows[0];
+  const total = rows.reduce((sum, r) => sum + (r.percentage || 1), 0);
+  let roll = Math.random() * total;
+  for (const row of rows) {
+    roll -= row.percentage || 1;
+    if (roll <= 0) return row;
+  }
+  return rows[rows.length - 1];
+}
+
+function findDefaultRow(rows: PhoneRow[]): PhoneRow | undefined {
+  return rows.find((r) => r.label === "default");
+}
+
+async function getHostDomain(): Promise<string> {
+  try {
+    const h = await headers();
+    const host = h.get("host") || h.get("x-forwarded-host") || "";
+    return host.replace(/:\d+$/, "");
+  } catch {
+    return "";
+  }
+}
+
+async function getLeadsMode(domain: string): Promise<LeadsMode> {
+  try {
+    if (!supabase) return "single";
+    const { data, error } = await supabase
+      .from("company_websites")
+      .select("leads_mode")
+      .eq("domain", domain)
+      .single();
+    if (error || !data) return "single";
+    return (data.leads_mode as LeadsMode) || "single";
+  } catch {
+    return "single";
+  }
+}
+
+function fallbackResult(): PhoneResult {
+  return {
+    phone: FALLBACK_PHONE,
+    whatsappText: FALLBACK_WA_TEXT,
+    source: "fallback",
+    mode: "fallback",
+  };
+}
+
+function toResult(
+  row: PhoneRow | undefined,
+  mode: LeadsMode,
+  host: string,
+): PhoneResult {
+  if (!row) return fallbackResult();
+  const text = row.whatsapp_text || FALLBACK_WA_TEXT;
+  return {
+    phone: row.phone_number,
+    whatsappText: `Hi ${host}, ${text}`,
+    source: "database",
+    mode,
+  };
 }
 
 export async function getPhoneNumber(
-  locationSlug: string
+  locationSlug?: string,
 ): Promise<PhoneResult> {
   try {
-    const supabase = getSupabase();
-    if (!supabase) {
-      return { phone: FALLBACK_PHONE, source: "env-fallback" };
-    }
+    if (!supabase) return fallbackResult();
+
+    const domain = await getHostDomain();
+    const mode = await getLeadsMode(domain);
 
     const { data, error } = await supabase
       .from("phone_numbers")
-      .select("phone_number, location_slug")
-      .eq("website", WEBSITE)
-      .eq("product_slug", PRODUCT_SLUG)
-      .eq("is_active", true)
-      .in("location_slug", [locationSlug, "all"]);
+      .select("phone_number, whatsapp_text, percentage, label, location_slug")
+      .eq("website", domain)
+      .eq("is_active", true);
 
-    if (error) {
-      console.error("[getPhoneNumber] Supabase error:", error.message);
-      return { phone: FALLBACK_PHONE, source: "env-fallback" };
-    }
-
-    if (!data || data.length === 0) {
-      return { phone: FALLBACK_PHONE, source: "env-fallback" };
-    }
+    if (error || !data || data.length === 0) return fallbackResult();
 
     const rows = data as PhoneRow[];
-    const locationPool = rows.filter((r) => r.location_slug === locationSlug);
-    const globalPool = rows.filter((r) => r.location_slug === "all");
+    const defaultRow = findDefaultRow(rows);
 
-    const fromLocation = pickRandom(locationPool);
-    if (fromLocation)
-      return { phone: fromLocation.phone_number, source: "location" };
+    switch (mode) {
+      case "single":
+        return toResult(defaultRow ?? rows[0], mode, domain);
 
-    const fromGlobal = pickRandom(globalPool);
-    if (fromGlobal)
-      return { phone: fromGlobal.phone_number, source: "global-pool" };
+      case "rotation":
+        return toResult(pickWeighted(rows), mode, domain);
 
-    return { phone: FALLBACK_PHONE, source: "env-fallback" };
+      case "location": {
+        if (locationSlug) {
+          const locRows = rows.filter((r) => r.location_slug === locationSlug);
+          if (locRows.length > 0) {
+            return toResult(pickWeighted(locRows), mode, domain);
+          }
+        }
+        return toResult(defaultRow, mode, domain);
+      }
+
+      case "hybrid": {
+        if (locationSlug && locationSlug !== "all") {
+          const locRows = rows.filter((r) => r.location_slug === locationSlug);
+          if (locRows.length > 0) {
+            return toResult(pickWeighted(locRows), mode, domain);
+          }
+        }
+        return toResult(defaultRow, mode, domain);
+      }
+
+      default:
+        return toResult(defaultRow, mode, domain);
+    }
   } catch (err) {
     console.error("[getPhoneNumber] Unexpected error:", err);
-    return { phone: FALLBACK_PHONE, source: "env-fallback" };
+    return fallbackResult();
   }
 }
 
@@ -70,9 +149,9 @@ export function waLink(phone: string, message?: string): string {
 }
 
 export async function getWhatsAppLink(
-  locationSlug: string,
-  message?: string
+  locationSlug?: string,
+  messageOverride?: string,
 ): Promise<string> {
-  const { phone } = await getPhoneNumber(locationSlug);
-  return waLink(phone, message);
+  const { phone, whatsappText } = await getPhoneNumber(locationSlug);
+  return waLink(phone, messageOverride || whatsappText);
 }

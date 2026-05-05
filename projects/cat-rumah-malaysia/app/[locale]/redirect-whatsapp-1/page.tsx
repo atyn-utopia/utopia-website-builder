@@ -1,4 +1,4 @@
-import { getPhoneNumber, waLink } from '@/lib/getPhoneNumbers'
+import { getPhoneNumber, waLink } from '@/lib/getPhoneNumber'
 import { RedirectClient } from './RedirectClient'
 
 export const dynamic = 'force-dynamic'

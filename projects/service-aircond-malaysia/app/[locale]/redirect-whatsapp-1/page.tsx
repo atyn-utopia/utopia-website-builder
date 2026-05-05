@@ -16,8 +16,8 @@ type Props = {
 export default async function RedirectWhatsAppPage({ searchParams }: Props) {
   const { location, message } = await searchParams
   const locationSlug = location ?? 'all'
-  const { phone } = await getPhoneNumber(locationSlug)
-  const url = waLink(phone, message ?? 'Hi, I need aircond service')
+  const { phone, whatsappText } = await getPhoneNumber(locationSlug)
+  const url = waLink(phone, message ?? whatsappText)
 
   return <RedirectClient url={url} />
 }

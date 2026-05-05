@@ -1,9 +1,9 @@
 import { supabase } from "./supabase";
 import { headers } from "next/headers";
-import { siteConfig } from "@/config/site";
 
-const FALLBACK_PHONE = siteConfig.fallbackPhone;
-const FALLBACK_WA_TEXT = "Hi Oxihome, I am interested in renting an oxygen machine.";
+const FALLBACK_PHONE = "60174287801";
+const FALLBACK_WA_TEXT =
+  "Hi, saya berminat untuk servis cat rumah. Boleh dapatkan quotation?";
 
 type LeadsMode = "single" | "rotation" | "location" | "hybrid";
 

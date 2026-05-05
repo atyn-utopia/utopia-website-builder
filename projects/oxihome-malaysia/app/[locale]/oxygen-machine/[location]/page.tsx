@@ -81,8 +81,8 @@ export default async function LocationPage({ params }: { params: Promise<Params>
   const cityName = locationData.displayName
   const stateName = locationData.state
 
-  const phoneNumber = await getPhoneNumber(location)
-  const waUrl = waLink(phoneNumber, `Hi Oxihome, I need an oxygen machine in ${cityName}.`)
+  const { phone, whatsappText } = await getPhoneNumber(location)
+  const waUrl = waLink(phone, whatsappText)
 
   const t  = await getTranslations({ locale, namespace: 'location' })
   const tp = await getTranslations({ locale, namespace: 'products' })
@@ -170,7 +170,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
         stateName={stateName}
         locationSlug={location}
         locale={locale}
-        phoneNumber={phoneNumber}
+        phoneNumber={phone}
       />
       <FAQSchema faqs={faqItems} />
       <BreadcrumbSchema locale={locale} cityName={cityName} locationSlug={location} />

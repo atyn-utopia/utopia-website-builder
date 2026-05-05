@@ -58,8 +58,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const t  = await getTranslations({ locale, namespace: 'home' })
   const tp = await getTranslations({ locale, namespace: 'products' })
   const tc = await getTranslations({ locale, namespace: 'common' })
-  const phone = await getPhoneNumber('all')
-  const WA_LINK = waLink(phone, 'Hi Oxihome, I am interested in renting an oxygen machine.')
+  const { phone, whatsappText } = await getPhoneNumber('all')
+  const WA_LINK = waLink(phone, whatsappText)
 
   const faqItems = [
     { question: t('faq.q1'), answer: t('faq.a1') },

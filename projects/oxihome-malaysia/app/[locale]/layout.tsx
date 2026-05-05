@@ -85,8 +85,8 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages()
   const t  = await getTranslations({ locale, namespace: 'nav' })
   const tf = await getTranslations({ locale, namespace: 'footer' })
-  const phone = await getPhoneNumber('all')
-  const WA_LINK = waLink(phone)
+  const { phone, whatsappText } = await getPhoneNumber('all')
+  const WA_LINK = waLink(phone, whatsappText)
 
   const navLinks = [
     { label: t('products'),  href: `/${locale}#products` },
