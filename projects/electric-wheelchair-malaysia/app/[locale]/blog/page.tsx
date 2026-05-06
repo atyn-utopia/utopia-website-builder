@@ -5,6 +5,7 @@ import { waRedirect } from '@/lib/waRedirect';
 import Link from 'next/link';
 import BlogNav from '@/components/BlogNav';
 import BlogFooter from '@/components/BlogFooter';
+import BlogLinkTracker from '@/components/tracking/BlogLinkTracker';
 
 export async function generateMetadata({
   params,
@@ -101,8 +102,9 @@ export default async function BlogListingPage({
                 );
 
                 return (
-                  <a
+                  <BlogLinkTracker
                     key={post.id}
+                    slug={post.slug}
                     href={`/${locale}/blog/${post.slug}`}
                     style={{
                       display: 'block',
@@ -178,7 +180,7 @@ export default async function BlogListingPage({
                         {t('readMore')} &rarr;
                       </span>
                     </div>
-                  </a>
+                  </BlogLinkTracker>
                 );
               })}
             </div>

@@ -1,12 +1,14 @@
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
-import { getBlogPostBySlug, getBlogPosts } from '@/lib/webcore';
+import { getBlogPostBySlug, getBlogPosts, getPhoneNumber } from '@/lib/webcore';
 import { waRedirect } from '@/lib/waRedirect';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import BlogNav from '@/components/BlogNav';
 import BlogFooter from '@/components/BlogFooter';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
+import WaClickTracker from '@/components/tracking/WaClickTracker';
+import BlogClickTracker from '@/components/tracking/BlogClickTracker';
 
 export async function generateMetadata({
   params,
@@ -46,9 +48,10 @@ export default async function BlogPostPage({
 }) {
   const { locale, slug } = await params;
   const t = await getTranslations({ locale, namespace: 'blog' });
-  const [post, all] = await Promise.all([
+  const [post, all, phoneResult] = await Promise.all([
     getBlogPostBySlug(slug, locale),
     getBlogPosts(locale),
+    getPhoneNumber(),
   ]);
   if (!post) notFound();
 
@@ -69,7 +72,7 @@ export default async function BlogPostPage({
   return (
     <>
       <BreadcrumbSchema items={breadcrumbItems} />
-      <BlogNav />
+      <BlogNav phoneNumber={phoneResult.phone} />
 
       <article className="section">
         <div className="blog-article">
@@ -104,9 +107,15 @@ export default async function BlogPostPage({
             <p style={{ margin: '10px 0 16px', color: 'rgba(255,255,255,0.85)' }}>
               ST-registered, 4-hour arrival, 24/7 dispatch across Malaysia.
             </p>
-            <a href={waHref} target="_blank" rel="noopener" className="btn btn-wa">
+            <WaClickTracker
+              phoneNumber={phoneResult.phone}
+              href={waHref}
+              target="_blank"
+              rel="noopener"
+              className="btn btn-wa"
+            >
               WhatsApp 24/7
-            </a>
+            </WaClickTracker>
           </div>
         </div>
       </article>
@@ -120,8 +129,9 @@ export default async function BlogPostPage({
             </div>
             <div className="blog-grid">
               {other.map((p) => (
-                <Link
+                <BlogClickTracker
                   key={p.id}
+                  slug={p.slug}
                   href={`/${locale}/blog/${p.slug}`}
                   className="blog-card"
                 >
@@ -137,14 +147,14 @@ export default async function BlogPostPage({
                     <p>{p.excerpt}</p>
                     <span className="blog-card-more">{t('readMore')} →</span>
                   </div>
-                </Link>
+                </BlogClickTracker>
               ))}
             </div>
           </div>
         </section>
       )}
 
-      <BlogFooter />
+      <BlogFooter phoneNumber={phoneResult.phone} />
     </>
   );
 }

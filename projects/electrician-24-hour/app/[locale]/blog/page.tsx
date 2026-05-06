@@ -1,9 +1,9 @@
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
-import { getBlogPosts } from '@/lib/webcore';
-import Link from 'next/link';
+import { getBlogPosts, getPhoneNumber } from '@/lib/webcore';
 import BlogNav from '@/components/BlogNav';
 import BlogFooter from '@/components/BlogFooter';
+import BlogClickTracker from '@/components/tracking/BlogClickTracker';
 
 export async function generateMetadata({
   params,
@@ -40,11 +40,14 @@ export default async function BlogListingPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'blog' });
-  const posts = await getBlogPosts(locale);
+  const [posts, phoneResult] = await Promise.all([
+    getBlogPosts(locale),
+    getPhoneNumber(),
+  ]);
 
   return (
     <>
-      <BlogNav />
+      <BlogNav phoneNumber={phoneResult.phone} />
 
       <section className="blog-header">
         <div className="container">
@@ -75,8 +78,9 @@ export default async function BlogListingPage({
                   { year: 'numeric', month: 'long', day: 'numeric' }
                 );
                 return (
-                  <Link
+                  <BlogClickTracker
                     key={post.id}
+                    slug={post.slug}
                     href={`/${locale}/blog/${post.slug}`}
                     className="blog-card"
                   >
@@ -93,7 +97,7 @@ export default async function BlogListingPage({
                       <p>{post.excerpt}</p>
                       <span className="blog-card-more">{t('readMore')} →</span>
                     </div>
-                  </Link>
+                  </BlogClickTracker>
                 );
               })}
             </div>
@@ -101,7 +105,7 @@ export default async function BlogListingPage({
         </div>
       </section>
 
-      <BlogFooter />
+      <BlogFooter phoneNumber={phoneResult.phone} />
     </>
   );
 }

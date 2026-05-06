@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { waRedirect } from '@/lib/waRedirect';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { regionOrder, getLocationsByRegion } from '@/config/locations';
+import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker';
 
 /* ============================================
    HELPER: WhatsApp icon SVG
@@ -562,8 +563,9 @@ export default function LocationPageClient({
 
           <div className="snap-scroll-x hide-scrollbar">
             {productKeys.map((key, i) => (
-              <div
+              <ProductImpressionTracker
                 key={key}
+                slug={key}
                 className="fade-up"
                 style={{
                   width: '300px',
@@ -597,7 +599,7 @@ export default function LocationPageClient({
                     {t('products.cta')}
                   </a>
                 </div>
-              </div>
+              </ProductImpressionTracker>
             ))}
           </div>
         </div>

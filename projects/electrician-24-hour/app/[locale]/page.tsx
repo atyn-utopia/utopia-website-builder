@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
-import { getProducts, getBlogPosts, getWhatsAppLink } from '@/lib/webcore';
+import { getProducts, getBlogPosts, getPhoneNumber, waLink } from '@/lib/webcore';
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
 import HomePageClient from './HomePageClient';
@@ -51,11 +51,12 @@ export default async function HomePage({
     });
   }
 
-  const [products, blogPosts, waUrl] = await Promise.all([
+  const [products, blogPosts, phoneResult] = await Promise.all([
     getProducts(),
     getBlogPosts(locale),
-    getWhatsAppLink(),
+    getPhoneNumber(),
   ]);
+  const waUrl = waLink(phoneResult.phone, phoneResult.whatsappText);
 
   return (
     <>
@@ -66,6 +67,7 @@ export default async function HomePage({
         products={products}
         recentPosts={blogPosts.slice(0, 3)}
         waUrl={waUrl}
+        phoneNumber={phoneResult.phone}
       />
     </>
   );

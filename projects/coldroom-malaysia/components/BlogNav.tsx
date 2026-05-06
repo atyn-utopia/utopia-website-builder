@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { waRedirect } from '@/lib/waRedirect';
+import { trackWhatsApp } from '@/lib/track';
+import { siteConfig } from '@/config/site';
 
 function WhatsAppIcon({ size = 16 }: { size?: number }) {
   return (
@@ -87,6 +89,7 @@ export default function BlogNav() {
             href={waHref}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackWhatsApp(siteConfig.fallbackPhone)}
             className="wa-btn desktop-nav"
             style={{ display: 'none', padding: '8px 16px', fontSize: '13px' }}
           >
@@ -183,6 +186,10 @@ export default function BlogNav() {
           href={waHref}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => {
+            trackWhatsApp(siteConfig.fallbackPhone);
+            setMobileMenuOpen(false);
+          }}
           className="wa-btn"
           style={{ marginTop: '16px', textAlign: 'center' }}
         >

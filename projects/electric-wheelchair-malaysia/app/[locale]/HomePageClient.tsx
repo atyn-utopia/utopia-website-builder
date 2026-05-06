@@ -5,6 +5,8 @@ import { useTranslations, useLocale } from 'next-intl';
 import { waRedirect } from '@/lib/waRedirect';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { locations, regionOrder, getLocationsByRegion } from '@/config/locations';
+import { siteConfig } from '@/config/site';
+import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker';
 
 /* ============================================
    HELPER: WhatsApp icon SVG
@@ -671,7 +673,8 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
             </p>
           </div>
 
-          <div
+          <ProductImpressionTracker
+            slug={siteConfig.productSlug}
             className="fade-up product-showcase"
             style={{
               display: 'grid',
@@ -839,7 +842,7 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
                 ))}
               </div>
             </div>
-          </div>
+          </ProductImpressionTracker>
         </div>
       </section>
 

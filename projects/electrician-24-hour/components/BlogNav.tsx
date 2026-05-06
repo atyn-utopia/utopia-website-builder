@@ -4,8 +4,9 @@ import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
 import { waRedirect } from '@/lib/waRedirect';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import WaClickTracker from './tracking/WaClickTracker';
 
-export default function BlogNav() {
+export default function BlogNav({ phoneNumber }: { phoneNumber: string }) {
   const locale = useLocale();
   const nav = useTranslations('nav');
   const waHref = waRedirect(locale);
@@ -24,14 +25,15 @@ export default function BlogNav() {
         </div>
         <div className="nav-actions">
           <LanguageSwitcher />
-          <a
+          <WaClickTracker
+            phoneNumber={phoneNumber}
             href={waHref}
             target="_blank"
             rel="noopener"
             className="btn btn-wa btn-sm"
           >
             {nav('ctaButton')}
-          </a>
+          </WaClickTracker>
         </div>
       </nav>
     </header>

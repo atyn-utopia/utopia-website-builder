@@ -7,6 +7,7 @@ import { waRedirect } from '@/lib/waRedirect';
 import BlogNav from '@/components/BlogNav';
 import { SiteFooter } from '@/components/SiteFooter';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
+import { TrackedWhatsAppLink } from '@/components/TrackedWhatsAppLink';
 import { BlogCard } from '../BlogCard';
 
 export async function generateMetadata({
@@ -136,9 +137,9 @@ export default async function BlogPostPage({
           <div className="blog-cta-inline">
             <strong>{cta.strong}</strong>
             <p>{cta.body}</p>
-            <a href={waHref} target="_blank" rel="noopener noreferrer" className="btn btn-wa">
+            <TrackedWhatsAppLink href={waHref} className="btn btn-wa">
               {cta.button}
-            </a>
+            </TrackedWhatsAppLink>
           </div>
         </div>
       </article>

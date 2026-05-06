@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { siteConfig } from '@/config/site';
 import { locales } from '@/i18n/routing';
 import { locations, getLocationBySlug, getNearbyLocations } from '@/config/locations';
-import { getProducts, getWhatsAppLink } from '@/lib/webcore';
+import { getProducts, getPhoneNumber, waLink } from '@/lib/webcore';
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
@@ -64,10 +64,11 @@ export default async function LocationPage({
   const loc = getLocationBySlug(locationSlug);
   if (!loc) notFound();
 
-  const [products, waUrl] = await Promise.all([
+  const [products, phoneResult] = await Promise.all([
     getProducts(),
-    getWhatsAppLink(locationSlug),
+    getPhoneNumber(locationSlug),
   ]);
+  const waUrl = waLink(phoneResult.phone, phoneResult.whatsappText);
 
   const t = await getTranslations({ locale, namespace: 'location' });
   const faqT = await getTranslations({ locale, namespace: 'faq' });
@@ -100,6 +101,7 @@ export default async function LocationPage({
         nearby={nearby.map((n) => ({ slug: n.slug, name: n.name }))}
         products={products}
         waUrl={waUrl}
+        phoneNumber={phoneResult.phone}
       />
     </>
   );

@@ -3,9 +3,9 @@
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
 import { waRedirect } from '@/lib/waRedirect';
-import { siteConfig } from '@/config/site';
+import WaClickTracker from './tracking/WaClickTracker';
 
-export default function BlogFooter() {
+export default function BlogFooter({ phoneNumber }: { phoneNumber: string }) {
   const locale = useLocale();
   const nav = useTranslations('nav');
   const fo = useTranslations('footer');
@@ -18,9 +18,15 @@ export default function BlogFooter() {
         <div className="container">
           <h3>{fin('heading')}</h3>
           <p>{fin('subheading')}</p>
-          <a href={waHref} target="_blank" rel="noopener" className="btn btn-wa btn-lg">
+          <WaClickTracker
+            phoneNumber={phoneNumber}
+            href={waHref}
+            target="_blank"
+            rel="noopener"
+            className="btn btn-wa btn-lg"
+          >
             {fin('cta')}
-          </a>
+          </WaClickTracker>
         </div>
       </section>
 

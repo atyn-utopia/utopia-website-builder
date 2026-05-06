@@ -13,11 +13,13 @@ import {
   BungaManggar,
   KKMark,
 } from '@/components/Ornaments'
+import WhatsAppClickTracker from '@/components/tracking/WhatsAppClickTracker'
+import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker'
 import {
   HERO_IMAGE,
   GALLERY_IMAGES,
 } from '@/config/products'
-import type { Product } from '@/lib/webcore'
+import { getPhoneNumber, type Product } from '@/lib/webcore'
 import {
   LOCATIONS,
   STATES_ORDER,
@@ -46,35 +48,39 @@ export interface PageShellProps {
 function WAButton({
   href,
   label,
+  phone,
   className,
 }: {
   href: string
   label: string
+  phone: string
   className?: string
 }) {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={
-        'inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-[15px] font-semibold text-white shadow-[0_8px_20px_-8px_rgba(37,211,102,0.55)] hover:bg-[#1EB85A] focus:outline-none focus-visible:ring-4 focus-visible:ring-[#25D366]/40 ' +
-        (className ?? '')
-      }
-      style={{
-        transition: 'transform 200ms ease, background-color 200ms ease, box-shadow 200ms ease',
-      }}
-    >
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 24 24"
-        className="h-5 w-5"
-        fill="currentColor"
+    <WhatsAppClickTracker phone={phone}>
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={
+          'inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-[15px] font-semibold text-white shadow-[0_8px_20px_-8px_rgba(37,211,102,0.55)] hover:bg-[#1EB85A] focus:outline-none focus-visible:ring-4 focus-visible:ring-[#25D366]/40 ' +
+          (className ?? '')
+        }
+        style={{
+          transition: 'transform 200ms ease, background-color 200ms ease, box-shadow 200ms ease',
+        }}
       >
-        <path d="M20.52 3.48A11.86 11.86 0 0 0 12.04 0C5.47 0 .12 5.35.12 11.92c0 2.1.55 4.15 1.6 5.96L0 24l6.28-1.65a11.9 11.9 0 0 0 5.75 1.47h.01c6.57 0 11.93-5.35 11.93-11.92 0-3.19-1.24-6.18-3.45-8.42zM12.04 21.8h-.01a9.88 9.88 0 0 1-5.03-1.38l-.36-.21-3.72.97.99-3.63-.23-.37a9.85 9.85 0 0 1-1.51-5.25c0-5.46 4.45-9.9 9.92-9.9 2.65 0 5.14 1.03 7.01 2.9a9.87 9.87 0 0 1 2.9 7.01c0 5.46-4.44 9.86-9.96 9.86zm5.68-7.41c-.31-.16-1.84-.91-2.12-1.01-.28-.1-.49-.16-.69.16-.2.31-.8 1.01-.98 1.22-.18.2-.36.23-.67.08-.31-.16-1.31-.48-2.49-1.54-.92-.82-1.54-1.84-1.72-2.15-.18-.31-.02-.48.14-.64.14-.14.31-.36.47-.54.16-.18.21-.31.31-.51.1-.2.05-.38-.03-.54-.08-.16-.69-1.66-.95-2.28-.25-.6-.51-.52-.69-.53-.18 0-.39-.02-.59-.02-.2 0-.54.08-.83.38-.28.31-1.08 1.06-1.08 2.58s1.11 3 1.27 3.21c.16.2 2.19 3.35 5.31 4.7.74.32 1.32.51 1.77.66.74.24 1.42.21 1.95.13.6-.09 1.84-.75 2.1-1.48.26-.73.26-1.35.18-1.48-.08-.13-.28-.2-.59-.36z" />
-      </svg>
-      {label}
-    </a>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          className="h-5 w-5"
+          fill="currentColor"
+        >
+          <path d="M20.52 3.48A11.86 11.86 0 0 0 12.04 0C5.47 0 .12 5.35.12 11.92c0 2.1.55 4.15 1.6 5.96L0 24l6.28-1.65a11.9 11.9 0 0 0 5.75 1.47h.01c6.57 0 11.93-5.35 11.93-11.92 0-3.19-1.24-6.18-3.45-8.42zM12.04 21.8h-.01a9.88 9.88 0 0 1-5.03-1.38l-.36-.21-3.72.97.99-3.63-.23-.37a9.85 9.85 0 0 1-1.51-5.25c0-5.46 4.45-9.9 9.92-9.9 2.65 0 5.14 1.03 7.01 2.9a9.87 9.87 0 0 1 2.9 7.01c0 5.46-4.44 9.86-9.96 9.86zm5.68-7.41c-.31-.16-1.84-.91-2.12-1.01-.28-.1-.49-.16-.69.16-.2.31-.8 1.01-.98 1.22-.18.2-.36.23-.67.08-.31-.16-1.31-.48-2.49-1.54-.92-.82-1.54-1.84-1.72-2.15-.18-.31-.02-.48.14-.64.14-.14.31-.36.47-.54.16-.18.21-.31.31-.51.1-.2.05-.38-.03-.54-.08-.16-.69-1.66-.95-2.28-.25-.6-.51-.52-.69-.53-.18 0-.39-.02-.59-.02-.2 0-.54.08-.83.38-.28.31-1.08 1.06-1.08 2.58s1.11 3 1.27 3.21c.16.2 2.19 3.35 5.31 4.7.74.32 1.32.51 1.77.66.74.24 1.42.21 1.95.13.6-.09 1.84-.75 2.1-1.48.26-.73.26-1.35.18-1.48-.08-.13-.28-.2-.59-.36z" />
+        </svg>
+        {label}
+      </a>
+    </WhatsAppClickTracker>
   )
 }
 
@@ -99,6 +105,12 @@ export default async function PageShell({
   const slug = isLoc ? locationSlug! : 'all'
   const city = isLoc ? locationCity! : ''
 
+  // Resolve the phone server-side for analytics labelling. The actual click
+  // still navigates through /redirect-whatsapp-1 (which re-resolves and may
+  // pick a different rotated number), but for the click-tracking label we
+  // need a stable identifier, so we use the number resolved at render time.
+  const { phone: trackedPhone } = await getPhoneNumber(isLoc ? slug : undefined)
+
   const waDefault = waRedirect(
     locale,
     isLoc
@@ -120,15 +132,17 @@ export default async function PageShell({
             {tShared('fomoText')}
           </span>
         </p>
-        <a
-          href={waDefault}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden shrink-0 rounded-full bg-[#25D366] px-4 py-1 text-[12px] font-bold text-white hover:bg-[#1EB85A] sm:inline-flex"
-          style={{ transition: 'background-color 180ms ease' }}
-        >
-          {tShared('fomoCta')}
-        </a>
+        <WhatsAppClickTracker phone={trackedPhone}>
+          <a
+            href={waDefault}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden shrink-0 rounded-full bg-[#25D366] px-4 py-1 text-[12px] font-bold text-white hover:bg-[#1EB85A] sm:inline-flex"
+            style={{ transition: 'background-color 180ms ease' }}
+          >
+            {tShared('fomoCta')}
+          </a>
+        </WhatsAppClickTracker>
       </div>
     </div>
   )
@@ -233,7 +247,7 @@ export default async function PageShell({
             </h2>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <WAButton href={waDefault} label={tHome('hero.primaryCta')} />
+              <WAButton href={waDefault} label={tHome('hero.primaryCta')} phone={trackedPhone} />
               <a
                 href="#services"
                 className="inline-flex items-center justify-center rounded-full border-[1.5px] border-[#F9A825] px-5 py-3 text-[15px] font-semibold text-[#111111] hover:bg-[#FFFFFF] text-center"
@@ -369,8 +383,8 @@ export default async function PageShell({
             const rentalDisplay = p.rental_price != null ? `RM${p.rental_price.toFixed(2)}` : '—'
             const saleDisplay = p.sale_price != null ? `RM${p.sale_price.toFixed(2)}` : '—'
             return (
+              <ProductImpressionTracker key={p.id} slug={p.slug}>
               <article
-                key={p.id}
                 className="flex h-full flex-col overflow-hidden rounded-[24px] border border-[#FDD835]/35 bg-[#FFFFFF] kk-card-shadow hover:-translate-y-0.5 hover:kk-card-shadow-hover"
                 style={{ transition: 'transform 220ms ease, box-shadow 220ms ease' }}
               >
@@ -425,11 +439,13 @@ export default async function PageShell({
                     <WAButton
                       href={waHref}
                       label={tShared('whatsappCta')}
+                      phone={trackedPhone}
                       className="w-full"
                     />
                   </div>
                 </div>
               </article>
+              </ProductImpressionTracker>
             )
           })}
         </div>
@@ -459,8 +475,8 @@ export default async function PageShell({
             )
             const imageUrl = a.photos[0]?.url
             return (
+              <ProductImpressionTracker key={a.id} slug={a.slug}>
               <article
-                key={a.id}
                 className="flex h-full flex-col overflow-hidden rounded-[20px] border border-[#FDD835]/30 bg-[#FFFFFF] kk-card-shadow hover:-translate-y-0.5"
                 style={{ transition: 'transform 220ms ease, box-shadow 220ms ease' }}
               >
@@ -493,17 +509,20 @@ export default async function PageShell({
                     </p>
                   )}
                   <div className="flex-1" />
-                  <a
-                    href={waHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-4 inline-flex items-center text-[15px] font-semibold text-[#1EB85A] hover:text-[#25D366]"
-                    style={{ transition: 'color 180ms ease' }}
-                  >
-                    {tShared('whatsappCtaShort')} →
-                  </a>
+                  <WhatsAppClickTracker phone={trackedPhone}>
+                    <a
+                      href={waHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-4 inline-flex items-center text-[15px] font-semibold text-[#1EB85A] hover:text-[#25D366]"
+                      style={{ transition: 'color 180ms ease' }}
+                    >
+                      {tShared('whatsappCtaShort')} →
+                    </a>
+                  </WhatsAppClickTracker>
                 </div>
               </article>
+              </ProductImpressionTracker>
             )
           })}
         </div>
@@ -549,7 +568,7 @@ export default async function PageShell({
         </div>
 
         <div className="mt-14 text-center">
-          <WAButton href={waDefault} label={tHome('hero.primaryCta')} className="w-full sm:w-auto" />
+          <WAButton href={waDefault} label={tHome('hero.primaryCta')} phone={trackedPhone} className="w-full sm:w-auto" />
         </div>
       </div>
     </section>
@@ -823,7 +842,8 @@ export default async function PageShell({
           <WAButton
             href={waDefault}
             label={isLoc ? t('location.cta.button') : tHome('finalCta.button')}
-                      />
+            phone={trackedPhone}
+          />
         </div>
       </div>
     </section>
@@ -883,7 +903,7 @@ export default async function PageShell({
               {tFoot('getInTouchSub')}
             </p>
             <div className="mt-4">
-              <WAButton href={waDefault} label={tNav('whatsapp')} />
+              <WAButton href={waDefault} label={tNav('whatsapp')} phone={trackedPhone} />
             </div>
             <div className="mt-5">
               <LanguageSwitcher />

@@ -2,6 +2,8 @@
 
 import { useTranslations, useLocale } from 'next-intl';
 import { waRedirect } from '@/lib/waRedirect';
+import { trackWhatsApp } from '@/lib/track';
+import { siteConfig } from '@/config/site';
 
 export default function BlogFooter() {
   const locale = useLocale();
@@ -95,6 +97,7 @@ export default function BlogFooter() {
                 href={waHref}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackWhatsApp(siteConfig.fallbackPhone)}
                 style={{
                   fontSize: '14px',
                   color: 'var(--wa-green)',
