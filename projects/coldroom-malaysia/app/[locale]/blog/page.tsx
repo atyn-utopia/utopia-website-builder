@@ -3,7 +3,7 @@ import { siteConfig } from '@/config/site';
 import { getBlogPosts } from '@/lib/webcore';
 import { BlogCard } from './BlogCard';
 import BlogNav from '@/components/BlogNav';
-import BlogFooter from '@/components/BlogFooter';
+import { SiteFooter } from '@/components/SiteFooter';
 
 export async function generateMetadata({
   params,
@@ -85,7 +85,7 @@ export default async function BlogListingPage({
         </div>
       </section>
 
-      <BlogFooter />
+      <SiteFooter locale={locale} />
     </>
   );
 }

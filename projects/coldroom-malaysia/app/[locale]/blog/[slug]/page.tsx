@@ -5,7 +5,7 @@ import { siteConfig } from '@/config/site';
 import { getBlogPosts, getBlogPostBySlug } from '@/lib/webcore';
 import { waRedirect } from '@/lib/waRedirect';
 import BlogNav from '@/components/BlogNav';
-import BlogFooter from '@/components/BlogFooter';
+import { SiteFooter } from '@/components/SiteFooter';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 import { BlogCard } from '../BlogCard';
 
@@ -176,7 +176,7 @@ export default async function BlogPostPage({
         </section>
       )}
 
-      <BlogFooter />
+      <SiteFooter locale={locale} />
     </>
   );
 }
