@@ -1,7 +1,7 @@
 export const siteConfig = {
   brandName: 'Encik Beku',
-  domain: 'serviceaircond.my',
-  baseUrl: 'https://serviceaircond.my',
+  domain: 'service-aircond-malaysia.vercel.app',
+  baseUrl: 'https://service-aircond-malaysia.vercel.app',
   productSlug: 'service-aircond',
   defaultLocale: 'en' as const,
   locales: ['en', 'ms', 'zh'] as const,

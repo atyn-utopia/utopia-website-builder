@@ -1,4 +1,4 @@
-const domain = process.env.NEXT_PUBLIC_SITE_DOMAIN ?? 'sewamotor.my'
+const domain = process.env.NEXT_PUBLIC_SITE_DOMAIN ?? 'sewa-motor-malaysia.vercel.app'
 
 export const siteConfig = {
   name: 'Sewa Motor Malaysia',

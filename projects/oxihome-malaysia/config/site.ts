@@ -1,4 +1,4 @@
-const domain = process.env.NEXT_PUBLIC_SITE_DOMAIN ?? 'oxihome.my'
+const domain = process.env.NEXT_PUBLIC_SITE_DOMAIN ?? 'oxihome-malaysia.vercel.app'
 
 export const siteConfig = {
   name: 'Oxihome Malaysia',
