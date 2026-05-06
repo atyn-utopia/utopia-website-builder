@@ -449,10 +449,23 @@ export default function HomePageClient({ products, location }: Props) {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 22 }} className="steps-grid">
             {[1, 2, 3].map((n) => (
-              <div key={n} className="fade-up" style={{ position: 'relative', background: '#fff', borderRadius: 'var(--radius-lg)', padding: 28, border: '1px solid var(--steel-100)', boxShadow: 'var(--shadow-md)' }}>
-                <span style={{ position: 'absolute', top: -22, right: 18, fontSize: 100, fontWeight: 800, color: 'var(--frost-deep)', opacity: 0.06, lineHeight: 1, letterSpacing: '-0.06em' }}>0{n}</span>
-                <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--grad-cold)', color: '#fff', display: 'grid', placeItems: 'center', fontWeight: 800, fontSize: 14 }}>0{n}</div>
-                <h4 style={{ marginTop: 16, fontSize: 18 }}>{t(`howItWorks.steps.${n - 1}.title`)}</h4>
+              <div key={n} className="fade-up" style={{ background: '#fff', borderRadius: 'var(--radius-lg)', padding: 28, border: '1px solid var(--steel-100)', boxShadow: 'var(--shadow-md)' }}>
+                <span
+                  aria-hidden
+                  style={{
+                    display: 'block',
+                    fontSize: 72,
+                    fontWeight: 800,
+                    lineHeight: 1,
+                    letterSpacing: '-0.04em',
+                    color: 'transparent',
+                    WebkitTextStroke: '1.5px var(--cold-amber)',
+                    marginBottom: 14,
+                  }}
+                >
+                  0{n}
+                </span>
+                <h4 style={{ fontSize: 18 }}>{t(`howItWorks.steps.${n - 1}.title`)}</h4>
                 <p style={{ marginTop: 8, fontSize: 14, color: 'var(--steel-500)' }}>{t(`howItWorks.steps.${n - 1}.body`)}</p>
               </div>
             ))}
