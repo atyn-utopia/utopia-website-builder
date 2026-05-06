@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <defs>
+    <linearGradient id="kk-canopy-fill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FDD835" />
+      <stop offset="100%" stop-color="#F9A825" />
+    </linearGradient>
+  </defs>
+  <path d="M24 4 L6 28 L42 28 Z" fill="url(#kk-canopy-fill)" />
+  <path d="M24 10 L14 28 L34 28 Z" fill="#FFFFFF" opacity="0.3" />
+  <line x1="24" y1="4" x2="24" y2="44" stroke="#F9A825" stroke-width="2" stroke-linecap="round" />
+  <path d="M6 28 C9 33, 13 33, 16 28 C19 33, 23 33, 26 28 C29 33, 33 33, 36 28 C39 33, 43 33, 42 28" fill="none" stroke="#F9A825" stroke-width="1.8" stroke-linecap="round" />
+  <line x1="10" y1="28" x2="8" y2="44" stroke="#111111" stroke-width="1.6" stroke-linecap="round" />
+  <line x1="38" y1="28" x2="40" y2="44" stroke="#111111" stroke-width="1.6" stroke-linecap="round" />
+  <line x1="4" y1="44" x2="44" y2="44" stroke="#111111" stroke-width="1.2" stroke-linecap="round" opacity="0.3" />
+</svg>
