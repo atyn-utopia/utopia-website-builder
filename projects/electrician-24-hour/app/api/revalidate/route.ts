@@ -19,6 +19,6 @@ export async function POST(req: Request) {
   if (tags.length === 0) {
     return NextResponse.json({ error: 'No tags provided' }, { status: 400 })
   }
-  for (const tag of tags) revalidateTag(tag)
+  for (const tag of tags) revalidateTag(tag, 'default')
   return NextResponse.json({ revalidated: tags })
 }
