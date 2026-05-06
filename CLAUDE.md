@@ -5,7 +5,7 @@
 This project builds SEO-driven product websites using reusable architecture.
 
 Primary example:
-cpapmachine.my
+electrician-24-hour.vercel.app
 
 Goals:
 
@@ -56,7 +56,7 @@ Product data on every website MUST be fetched dynamically from the Supabase `pro
 
 ## Rules
 1. Homepage and location pages query `products` WHERE `website = domain` AND `is_active = true` ORDER BY `sort_order`, joined with `product_photos`
-2. Use ISR with `revalidate = 3600` (1 hour) so DB changes propagate without redeploy
+2. Reads MUST go through `lib/webcore.ts` with cache tags (see Webcore Data Layer section). NEVER use `export const revalidate = N` time-based ISR — invalidation flows from the webcore admin via webhook → `revalidateTag()`
 3. Grid layout must auto-adjust to any product count — use CSS grid auto-fill or responsive columns that handle 1, 6, or 20 products gracefully
 4. Adding a product in the database → it appears on the site automatically (within revalidate window)
 5. Setting `is_active = false` or deleting → it disappears automatically
@@ -66,6 +66,36 @@ Product data on every website MUST be fetched dynamically from the Supabase `pro
 ## Database schema
 - `products`: id, website, parent_id, name, slug, description, sale_price, rental_price, sort_order, is_active
 - `product_photos`: product_id (FK), url
+
+
+# Webcore Data Layer (CRITICAL)
+
+Every site's data reads (products, phone numbers, blog posts) MUST go through a single `lib/webcore.ts` module that hits the Supabase REST API via `fetch()` with Next.js cache tags. This is the ONLY supported pattern. The webcore admin sends webhook POSTs after every mutation; the site's `/api/revalidate` route calls `revalidateTag()`; the cache invalidates without a redeploy.
+
+## Required files (every new site)
+
+1. `lib/webcore.ts` — exports `getProducts()`, `getPhoneNumber()`, `waLink()`, `getWhatsAppLink()`, plus `getBlogPosts()` / `getBlogPost()` etc. if the site has blog routes. Reference template: `projects/tablechair-rental-malaysia/lib/webcore.ts`.
+2. `app/api/revalidate/route.ts` — POST handler that validates the `x-webcore-secret` header against `WEBCORE_REVALIDATE_SECRET` env var, then calls `revalidateTag()` for each tag in the JSON body. Identical across all sites.
+
+## Rules
+
+1. Every fetch in `lib/webcore.ts` MUST use `fetch(url, { next: { tags: ['webcore-products' | 'webcore-phones' | 'webcore-blog'] }, headers: { apikey, Authorization } })`. Tag name MUST be one of those three exactly.
+2. NEVER create `lib/supabase.ts`, `lib/getProducts.ts`, `lib/getPhoneNumber.ts`, or `lib/getBlogPosts.ts`. The Supabase JS client is NOT cache-tag-aware and silently breaks invalidation.
+3. NEVER set `export const revalidate = N` on any page. Tag-based invalidation is the sole mechanism. (Exception: `export const revalidate = 0` paired with `export const dynamic = 'force-dynamic'` — for the WhatsApp redirect page, which must always re-execute.)
+4. Preserve the leads_mode logic in `getPhoneNumber()` (single / rotation / location / hybrid + weighted percentage selection) — see `Phone Numbers & Leads Mode` below.
+5. `WEBCORE_REVALIDATE_SECRET` env var MUST be set in each Vercel project before the webhook handler will work. Adding the env var alone does not invalidate running deployments — sites must be redeployed once.
+6. The webcore admin's Integrations panel MUST point at `https://<site>/api/revalidate` and store the same secret. Configure this once per domain.
+
+## Curl test (use to verify each new deploy)
+
+```
+curl -i -X POST https://<site>/api/revalidate \
+  -H "x-webcore-secret: <SECRET>" \
+  -H "content-type: application/json" \
+  -d '{"tags":["webcore-products"]}'
+```
+
+Expected: `200 {"revalidated":["webcore-products"]}`. `401` = secret mismatch. `500` = env var not set (or deployment hasn't picked it up). `404` = route handler missing.
 
 
 # Agent Team
@@ -178,6 +208,11 @@ These rules apply to EVERY website. No exceptions.
 - Always **re-check every image** to confirm it is the correct image for its context
 - No mismatched or placeholder images left behind
 - Add gradient overlay to improve text readability on image backgrounds
+
+## Hero Photo
+- **No watermarked or low-res stock images** — only clean, high-resolution sources (Pexels, Unsplash, or licensed brand assets)
+- **If the hero image has a transparent background (PNG/SVG cutout), do NOT wrap it in a container, card, or background box.** Place it freely in the layout so the cutout reads as a floating subject — no rectangle, border, shadow box, or coloured panel behind it
+- Container-bound treatment is only for full-bleed photographic heroes (non-transparent images)
 
 ## Customer Gallery Grid — No Blank Slots
 - The customer gallery grid must **never leave an empty / blank slot**. Every cell in the visible grid must contain an image
@@ -353,17 +388,6 @@ After screenshotting:
 - fix color mismatches
 
 Perform at least **two comparison rounds**.
-
-
-# Output Defaults
-
-Unless otherwise specified:
-
-- Single index.html file
-- Inline styles
-- Tailwind CSS via CDN
-- Placeholder images via https://placehold.co
-- Mobile-first responsive
 
 
 # Brand Assets
