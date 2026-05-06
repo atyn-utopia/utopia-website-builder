@@ -8,7 +8,7 @@ import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { OrganizationSchema } from '@/components/schema/OrganizationSchema'
 import { siteConfig } from '@/config/site'
 import { footerLocations } from '@/config/locations'
-import { getPhoneNumber, waLink } from '@/lib/getPhoneNumber'
+import { getPhoneNumber, waLink } from '@/lib/webcore'
 import '../globals.css'
 
 const inter = Inter({

@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import type { Product } from '@/lib/getProducts';
+import type { Product } from '@/lib/webcore';
 import { siteConfig } from '@/config/site';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import FomoBanner from '@/components/FomoBanner';

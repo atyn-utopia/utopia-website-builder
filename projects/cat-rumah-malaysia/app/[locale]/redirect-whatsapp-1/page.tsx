@@ -1,4 +1,4 @@
-import { getPhoneNumber, waLink } from '@/lib/getPhoneNumber'
+import { getPhoneNumber, waLink } from '@/lib/webcore'
 import { RedirectClient } from './RedirectClient'
 
 export const dynamic = 'force-dynamic'

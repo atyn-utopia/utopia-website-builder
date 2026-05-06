@@ -16,9 +16,7 @@ import { Faq } from '@/components/sections/Faq'
 import { FinalCta } from '@/components/sections/FinalCta'
 import { Footer } from '@/components/sections/Footer'
 import { StructuredData } from '@/components/seo/StructuredData'
-import { getProducts } from '@/lib/getProducts'
-
-export const revalidate = 3600
+import { getProducts } from '@/lib/webcore'
 
 type Props = { params: Promise<{ locale: string }> }
 

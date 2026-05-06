@@ -1,13 +1,11 @@
 import type { Metadata } from 'next';
 import { siteConfig } from '@/config/site';
 import { locales } from '@/i18n/routing';
-import { getSupabase } from '@/lib/supabase';
+import { getProducts } from '@/lib/webcore';
 import HomePageClient from './HomePageClient';
 import { SiteFooter } from '@/components/SiteFooter';
 import { ProductSchema } from '@/components/schema/ProductSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
-
-export const revalidate = 3600;
 
 const HOMEPAGE_META: Record<string, { title: string; description: string; ogLocale: string }> = {
   en: {
@@ -66,51 +64,13 @@ export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-interface ProductPhoto { url: string }
-interface ProductRow {
-  id: string;
-  name: string;
-  slug: string;
-  description: string | null;
-  rental_price: number | null;
-  sale_price: number | null;
-  sort_order: number | null;
-  product_photos: ProductPhoto[];
-}
-
-const FALLBACK_PRODUCTS: ProductRow[] = [
-  {
-    id: 'fb-cold-room',
-    name: 'Cold Room Rental',
-    slug: 'cold-room-rental',
-    description: 'Refrigerated cold room rental for frozen, freezer, chiller and cool storage. HALAL fleet, same-day delivery, full Peninsular Malaysia coverage.',
-    rental_price: 5,
-    sale_price: null,
-    sort_order: 1,
-    product_photos: [],
-  },
-];
-
-async function fetchProducts(): Promise<ProductRow[]> {
-  const supabase = getSupabase();
-  if (!supabase) return FALLBACK_PRODUCTS;
-  const { data, error } = await supabase
-    .from('products')
-    .select('id, name, slug, description, rental_price, sale_price, sort_order, product_photos(url)')
-    .eq('website', siteConfig.domain)
-    .eq('is_active', true)
-    .order('sort_order', { ascending: true });
-  if (error || !data || data.length === 0) return FALLBACK_PRODUCTS;
-  return data as unknown as ProductRow[];
-}
-
 export default async function HomePage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const products = await fetchProducts();
+  const products = await getProducts();
 
   return (
     <>

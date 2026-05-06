@@ -3,14 +3,11 @@ import { notFound } from 'next/navigation';
 import { siteConfig } from '@/config/site';
 import { locales } from '@/i18n/routing';
 import { locations, getLocationBySlug, getNearbyLocations } from '@/config/locations';
-import { getProducts } from '@/lib/getProducts';
-import { getWhatsAppLink } from '@/lib/getPhoneNumber';
+import { getProducts, getWhatsAppLink } from '@/lib/webcore';
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
 import LocationPageClient from './LocationPageClient';
-
-export const revalidate = 3600;
 
 export function generateStaticParams() {
   const params: { locale: string; location: string }[] = [];

@@ -1,4 +1,4 @@
-import { getWhatsAppLink } from '@/lib/getPhoneNumber';
+import { getWhatsAppLink } from '@/lib/webcore';
 import RedirectClient from './RedirectClient';
 
 export const dynamic = 'force-dynamic';

@@ -1,11 +1,9 @@
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
-import { getBlogPosts } from '@/lib/getBlogPosts';
+import { getBlogPosts } from '@/lib/webcore';
 import { BlogCard } from './BlogCard';
 import BlogNav from '@/components/BlogNav';
 import BlogFooter from '@/components/BlogFooter';
-
-export const revalidate = 3600;
 
 export async function generateMetadata({
   params,

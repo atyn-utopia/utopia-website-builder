@@ -76,8 +76,6 @@ export async function generateMetadata({
   };
 }
 
-export const revalidate = 86400;
-
 export default async function LocationPage({
   params,
 }: {

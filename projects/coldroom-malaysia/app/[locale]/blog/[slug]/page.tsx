@@ -2,14 +2,12 @@ import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { siteConfig } from '@/config/site';
-import { getBlogPosts, getBlogPostBySlug } from '@/lib/getBlogPosts';
+import { getBlogPosts, getBlogPostBySlug } from '@/lib/webcore';
 import { waRedirect } from '@/lib/waRedirect';
 import BlogNav from '@/components/BlogNav';
 import BlogFooter from '@/components/BlogFooter';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 import { BlogCard } from '../BlogCard';
-
-export const revalidate = 3600;
 
 export async function generateMetadata({
   params,

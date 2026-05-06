@@ -1,7 +1,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import type { ProductRow } from '@/lib/getProducts'
+import type { ProductRow } from '@/lib/webcore'
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton'
 
 interface Props {

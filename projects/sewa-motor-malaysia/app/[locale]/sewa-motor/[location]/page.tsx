@@ -89,8 +89,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export const revalidate = 3600
-
 export default async function LocationPage({ params }: Props) {
   const { locale, location } = await params
   const loc = locations.find((l) => l.slug === location)

@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import { locations, getNearbyLocations } from '@/config/locations'
 import { siteConfig } from '@/config/site'
-import { getPhoneNumber, waLink } from '@/lib/getPhoneNumber'
+import { getPhoneNumber, waLink } from '@/lib/webcore'
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema'
 import { FAQSchema } from '@/components/schema/FAQSchema'
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema'
@@ -35,8 +35,6 @@ export async function generateStaticParams() {
   }
   return params
 }
-
-export const revalidate = 60
 
 export async function generateMetadata({
   params,
