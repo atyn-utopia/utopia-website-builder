@@ -238,6 +238,22 @@ These rules apply to EVERY website. No exceptions.
 - All remaining section titles use H3–H6
 - Lint every page before marking design complete: H1 count must equal 1, H2 count must equal 1
 
+## Product Card Photos — Fully Visible (no cropping) — MANDATORY
+- Product card images must show the **entire product**. Use `object-fit: contain` (never `cover`) on `.product-card-img img` so the boom, basket, wheels, and labels of a skylift / wheelchair / fan / bed are all visible.
+- Add internal padding (e.g. `padding: 18px`) inside the image cell so the subject doesn't kiss the edges.
+- The photo must communicate the product at a glance — visitors decide which unit to rent based on the silhouette they see in the card.
+- Applies to homepage product grid, location-page product grid, and any product card embedded inside blog posts.
+- Lint check before shipping: open every product card on a wide viewport — no part of the truck / chassis / boom / basket should be cut off by the image frame.
+
+## Section Tagging (eyebrow above every heading) — MANDATORY
+- **Every section heading (H3–H6) must have at least one tag/eyebrow line directly above it.** No bare headings on any section.
+- The eyebrow is a short, ALL-CAPS mono label (e.g. `UNIT CATALOGUE`, `PROCESS`, `SAFETY BRIEF`, `CUSTOMER VOICE`, `LIVE NOW`, `LOCK IN TODAY`) that orients the reader before they read the heading.
+- Applies to homepage, location pages, blog listing, blog post pages — everywhere a section appears.
+- Use a consistent component / class (`.eyebrow` or `.section-head .eyebrow`) so the spacing and typography match site-wide.
+- For sections on dark or image backgrounds, apply a light variant (`.eyebrow-light`) but keep the yellow pill so the eyebrow remains the brand signal.
+- Mid-CTA, Final-CTA, Reviews, FAQ, and any section without a `.section-head` wrapper must STILL render an eyebrow above the heading.
+- Lint check before shipping: every `<h3>`, `<h4>`, `<h5>` rendered in a page section has a sibling `.eyebrow` (or equivalent tag) immediately preceding it.
+
 
 # Dynamic Location Pages
 

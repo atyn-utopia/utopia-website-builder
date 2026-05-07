@@ -1,0 +1,325 @@
+{
+  "metadata": {
+    "title": "马来西亚高空车出租 | 半日RM500起，含操作员 | Skylift Malaysia",
+    "description": "全马高空作业车租赁，半日RM500起。9米、20米、24米、32米伸缩臂 + 蜘蛛车，配持证操作员，吉隆坡雪兰莪当日送达。WhatsApp预订仅需5分钟。"
+  },
+  "nav": {
+    "brandName": "Skylift Malaysia",
+    "home": "首页",
+    "products": "高空车型号",
+    "locations": "服务地区",
+    "blog": "博客",
+    "ctaButton": "WhatsApp 联络我们"
+  },
+  "fomoBanner": {
+    "label": "今日促销倒计时",
+    "pill": "吉隆坡及雪兰莪当日免费送达",
+    "bookNow": "WhatsApp 立即预订"
+  },
+  "hero": {
+    "h1": "马来西亚高空车出租",
+    "h2": "配持证操作员，吉隆坡及雪兰莪当日送达",
+    "supporting": "从 9 米室内型到 32 米伸缩臂——每次预订都配备受训操作员与全保。",
+    "ctaPrimary": "WhatsApp 立即预订",
+    "ctaSecondary": "查看高空车型号",
+    "trustBadge": "CIDB 持证 · MOSHA 受训 · 谷歌 5.0★",
+    "imageAlt": "马来西亚高空车出租 — 持证工地主管"
+  },
+  "usp": {
+    "items": [
+      {
+        "title": "每日租金 RM500 起",
+        "description": "20 米及 24 米设有半日租，无隐藏费。"
+      },
+      {
+        "title": "当日送达",
+        "description": "上午 11 点前确认，下午即送至吉隆坡或雪兰莪工地。"
+      },
+      {
+        "title": "持证操作员随车",
+        "description": "每辆车均配 CIDB 与 MOSHA 受训操作员。"
+      }
+    ]
+  },
+  "products": {
+    "heading": "我们出租的高空车型号",
+    "subheading": "两款卡车装载机型覆盖所有常见工程 — 从店面招牌到高层立面。选定高度,我们送车送操作员。",
+    "cta": "WhatsApp 询价",
+    "priceFromLabel": "起",
+    "halfDayLabel": "半日",
+    "fullDayLabel": "全日"
+  },
+  "howItWorks": {
+    "heading": "5 分钟预订，高空车当日送达",
+    "subheading": "从 WhatsApp 信息到工地高空车——四步搞定，无需文件。",
+    "steps": [
+      {
+        "title": "WhatsApp 发送作业资料",
+        "description": "分享地点、高度、作业类型、照片。"
+      },
+      {
+        "title": "获取报价",
+        "description": "清楚的日租 / 半日租，含操作员与运输。"
+      },
+      {
+        "title": "确认 + 付订金",
+        "description": "小额订金锁定时段。"
+      },
+      {
+        "title": "当日送达",
+        "description": "操作员到场简报，立即开工。"
+      }
+    ]
+  },
+  "risk": {
+    "heading": "没有合适高空车的后果",
+    "subheading": "错误高度的梯子、未受训操作员、太短的伸缩臂——这就是工伤、延误与返工账单的来源。",
+    "points": [
+      {
+        "title": "梯子在高处会失效",
+        "description": "DOSH 数据显示高处坠落是马来西亚建筑业首位致命原因。"
+      },
+      {
+        "title": "高度错=损失一天",
+        "description": "用 20 米去做 24 米的活，等于租两次、付两次运费。"
+      },
+      {
+        "title": "未受训操作员让保险失效",
+        "description": "仅 CIDB 持证操作员能保住您工地的保险有效。"
+      }
+    ]
+  },
+  "midCta": {
+    "heading": "今天就需要高空车？",
+    "subheading": "立即 WhatsApp——吉隆坡与雪兰莪数小时内派出操作员。",
+    "cta": "WhatsApp 立即预订",
+    "eyebrow": "现在可派出"
+  },
+  "reviews": {
+    "heading": "工地主管这样说",
+    "subheading": "80+ 谷歌评价，5.0/5",
+    "rating": "5.0",
+    "googleLabel": "谷歌评价",
+    "items": [
+      {
+        "name": "Faiz",
+        "location": "莎阿南",
+        "rating": 5,
+        "text": "周二早上预订 20 米，下午 2 点抵达。操作员清楚如何摆位做店铺招牌。下次还会找。"
+      },
+      {
+        "name": "Tan 女士",
+        "location": "八打灵再也",
+        "rating": 5,
+        "text": "蜘蛛车是唯一能进酒店中庭做吊灯保养的方式。履带干净，没有损伤大理石。"
+      },
+      {
+        "name": "Daniel",
+        "location": "蕉赖",
+        "rating": 5,
+        "text": "用 24 米装广告牌——操作员自己处理交通指挥。省下另请一组人。"
+      },
+      {
+        "name": "Razak 先生",
+        "location": "巴生",
+        "rating": 5,
+        "text": "20 米半日租做冷气保养。比上一家便宜，准时到。"
+      },
+      {
+        "name": "Mei Ling",
+        "location": "梳邦再也",
+        "rating": 5,
+        "text": "9 米室内车通过我们仓库卷帘门。操作流畅，3 小时换完高架灯。"
+      },
+      {
+        "name": "Hafiz",
+        "location": "吉隆坡",
+        "rating": 5,
+        "text": "32 米做体育场泛光灯——他们与我们保安协调，夜场前完成。专业团队。"
+      }
+    ],
+    "eyebrow": "客户心声"
+  },
+  "whyChoose": {
+    "heading": "马来西亚承建商为什么选择 Skylift Malaysia",
+    "items": [
+      {
+        "title": "巴生谷最大车队",
+        "description": "9 米、20 米、24 米、32 米与蜘蛛车一站搞定。"
+      },
+      {
+        "title": "CIDB 与 MOSHA 受训操作员",
+        "description": "持有马来西亚有效高空车证。"
+      },
+      {
+        "title": "保险全包",
+        "description": "每次预订含公众责任险，无额外费用。"
+      },
+      {
+        "title": "提供半日租",
+        "description": "只为实际使用付费——多数短工只需半日。"
+      },
+      {
+        "title": "多州覆盖",
+        "description": "吉隆坡、雪兰莪、布城、槟城、柔佛及另外 9 州。"
+      },
+      {
+        "title": "中 / 英 / 马来语客服",
+        "description": "用您工地团队的语言沟通。"
+      }
+    ]
+  },
+  "gallery": {
+    "heading": "马来西亚各地最近高空车作业",
+    "subheading": "每张照片都来自真实租赁工地——非素材图。",
+    "captions": [
+      "联邦大道广告牌安装",
+      "武吉加里尔体育场灯具更换",
+      "八打灵再也店铺招牌",
+      "仓库高架灯保养",
+      "KLCC 玻璃幕墙清洗",
+      "商场中庭吊灯保养",
+      "电信塔天线检测",
+      "工业烟囱检查",
+      "蕉赖屋顶排水沟清理",
+      "白沙罗住宅修剪树木",
+      "MBPJ 路灯合约",
+      "工厂排气扇更换",
+      "满家乐酒店外墙重漆",
+      "机场机库灯具保养",
+      "加油站顶棚作业",
+      "学校礼堂天花重漆"
+    ]
+  },
+  "locations": {
+    "heading": "覆盖马来西亚所有主要地区",
+    "subheading": "13 州，160+ 城镇。点击您的州属查看子地区。",
+    "viewAll": "查看所有地区",
+    "stateIntros": {
+      "klang-valley": "当日送达区，含吉隆坡、八打灵再也、莎阿南、梳邦、布城、赛城及巴生走廊。",
+      "selangor": "雪邦、万津、瓜拉雪兰莪、乌鲁雪兰莪及西海岸。",
+      "negeri-sembilan": "芙蓉、汝来、波德申及南部工业带。",
+      "melaka": "马六甲遗产区、亚罗牙也及野新县。",
+      "johor": "新山、依斯干达公主城、古来、峇株巴辖、麻坡——依斯干达工业区全覆盖。",
+      "perak": "怡保、太平、实兆远、金宝、安顺、江沙。",
+      "penang": "乔治市、北海、大山脚、峇六拜——岛与陆兼顾。",
+      "kedah": "亚罗士打、双溪大年、居林高科技、兰卡威。",
+      "perlis": "加央、亚娄、巴东勿刹及北部边境。",
+      "kelantan": "哥打巴鲁、巴西马、瓜拉吉赖、话望生内陆。",
+      "terengganu": "瓜拉登嘉楼、甘马挽、龙运、北加石化区。",
+      "pahang": "关丹、淡马鲁、文冬、金马仑高原、瓜拉立卑。",
+      "sabah": "亚庇、山打根、斗湖、拿笃——协调驳船运输。",
+      "sarawak": "古晋、美里、民都鲁、诗巫——本地车厂合作。"
+    }
+  },
+  "faq": {
+    "heading": "常见问题",
+    "items": [
+      {
+        "question": "马来西亚高空车租金怎么算？",
+        "answer": "大多数预订按半日或全日计费。我们 20 米与 24 米伸缩臂半日 RM500 起，全日 RM620–RM650。运输、燃油与持证操作员全包——无隐藏费。"
+      },
+      {
+        "question": "吉隆坡与雪兰莪可以当日送达吗？",
+        "answer": "可以——上午 11 点前确认，当天下午即送达巴生谷任何地点。雪兰莪以外，若就近车厂有所需车型也可同日送达。"
+      },
+      {
+        "question": "租金含操作员吗？",
+        "answer": "始终包含。每次租赁均配 CIDB 注册、MOSHA 受训操作员，无额外费用。我们不会把车交给未受训司机。"
+      },
+      {
+        "question": "接受哪些付款方式？",
+        "answer": "网上转账（DuitNow、FPX、即时转账）、小额订单货到付款，回头客可开公司发票。需付订金锁定时段。"
+      },
+      {
+        "question": "覆盖哪些州？",
+        "answer": "马来西亚 13 州及联邦直辖区。巴生谷由 KL/雪兰莪车厂直送；东马通过沙巴与砂拉越合作伙伴提供服务。"
+      },
+      {
+        "question": "需要付订金吗？",
+        "answer": "是的——小额可退订金确认预订。完成作业后付清余款。长期租赁可分阶段付款。"
+      },
+      {
+        "question": "作业有意外保险吗？",
+        "answer": "有——每次预订均含车辆与操作员的公众责任险。可按需追加工地特定保险。"
+      },
+      {
+        "question": "如果需要取消怎么办？",
+        "answer": "提前 24 小时取消——全额退还订金。当日取消——订金抵扣派车成本。我们绝不收取超出订金的取消费。"
+      }
+    ]
+  },
+  "finalCta": {
+    "heading": "预订高空车，操作员出动，傍晚前完工。",
+    "subheading": "立即 WhatsApp——半日费率，持证操作员，吉隆坡与雪兰莪当日送达。",
+    "cta": "WhatsApp 立即预订",
+    "eyebrow": "立刻锁定"
+  },
+  "footer": {
+    "brandName": "Skylift Malaysia",
+    "tagline": "全国日租高空车，配持证操作员。",
+    "unitsHeading": "高空车型号",
+    "topLocationsHeading": "主要服务地区",
+    "resourcesHeading": "资源",
+    "blog": "博客",
+    "siteSafety": "工地安全",
+    "operatorCert": "操作员证书",
+    "copyright": "© 2026 Skylift Malaysia. 版权所有。",
+    "ssm": "Scaffolding Malaysia Sdn. Bhd. — SSM 注册"
+  },
+  "blog": {
+    "title": "高空车租赁与工地安全指南",
+    "metaTitle": "Skylift 博客 — 租赁与高空作业安全 | Skylift Malaysia",
+    "metaDescription": "高空车租赁指南、高空作业安全标准、CIDB 与 MOSHA 合规、广告牌、体育场及仓库使用案例。",
+    "readMore": "阅读更多",
+    "recentPosts": "最新文章",
+    "publishedOn": "发布于",
+    "minRead": "分钟阅读",
+    "backToBlog": "← 返回博客",
+    "noPosts": "新文章即将上线。",
+    "sharePre": "分享文章",
+    "breadcrumbHome": "首页",
+    "breadcrumbBlog": "博客"
+  },
+  "location": {
+    "h1Prefix": "",
+    "h1Suffix": "高空车出租",
+    "h2Prefix": "",
+    "h2Suffix": "当日送达，配持证操作员",
+    "metaTitleSuffix": "| 9米 / 20米 / 24米 / 32米 / 蜘蛛车 | Skylift Malaysia",
+    "metaDescPrefix": "",
+    "metaDescSuffix": "高空作业车租赁 — 9米至32米伸缩臂及蜘蛛车，配持证操作员。半日RM500起，当日送达。WhatsApp立即预订。",
+    "breadcrumbHome": "首页",
+    "breadcrumbProduct": "高空车出租",
+    "introHeading": "关于",
+    "introSuffix": "高空车出租",
+    "whyHeading": "为什么选择 Skylift Malaysia",
+    "nearbyTitle": "邻近地区也可服务",
+    "nearbySubtitle": "我们也当日送达以下邻近地区",
+    "ctaHeading": "今天需要高空车在",
+    "ctaSuffix": "?"
+  },
+  "shared": {
+    "whatsappCta": "WhatsApp 立即预订",
+    "whatsappCtaShort": "WhatsApp 联络",
+    "viewAll": "查看全部",
+    "learnMore": "了解更多",
+    "from": "起",
+    "halfDay": "半日",
+    "fullDay": "全日",
+    "dailyRate": "日租金",
+    "withOperator": "含操作员",
+    "sameDay": "当日",
+    "klSelangor": "吉隆坡 & 雪兰莪",
+    "cidbCertified": "CIDB 持证",
+    "moshaTrained": "MOSHA 受训",
+    "perDay": "/ 日"
+  },
+  "whatsappMessages": {
+    "default": "你好 Skylift Malaysia，我想了解高空车租赁。",
+    "hero": "你好 Skylift Malaysia，我看到你们的网站，想询问高空车租赁报价。",
+    "products": "你好 Skylift Malaysia，我想询问高空车租赁的报价。",
+    "location": "你好 Skylift Malaysia，我在 {location} 需要高空车租赁。",
+    "blog": "你好 Skylift Malaysia，我看了你们的文章，想了解高空车租赁。"
+  }
+}

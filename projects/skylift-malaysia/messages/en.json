@@ -1,0 +1,322 @@
+{
+  "metadata": {
+    "title": "Skylift Rental Malaysia | Daily Rate from RM500 with Operator | Skylift Malaysia",
+    "description": "Skylift rental across Malaysia from RM500/half-day. 9m, 20m, 24m, 32m boom + Spider lift with certified operator. Same-day delivery KL & Selangor. Chat on WhatsApp."
+  },
+  "nav": {
+    "brandName": "Skylift Malaysia",
+    "home": "Home",
+    "products": "Skylift Units",
+    "locations": "Locations",
+    "blog": "Blog",
+    "ctaButton": "WhatsApp Us"
+  },
+  "fomoBanner": {
+    "label": "Today's promo ends in",
+    "pill": "Free same-day delivery KL & Selangor",
+    "bookNow": "WhatsApp Tempahan"
+  },
+  "hero": {
+    "h1": "Skylift Rental Malaysia",
+    "h2": "Daily-Rate Aerial Lifts with Certified Operators — Same-Day KL & Selangor",
+    "supporting": "From 9-metre indoor units up to a 32-metre boom — every booking arrives with a trained operator and full insurance.",
+    "ctaPrimary": "WhatsApp Tempahan",
+    "ctaSecondary": "See Skylift Units",
+    "trustBadge": "CIDB Certified · MOSHA Trained · 5.0★ on Google",
+    "imageAlt": "Skylift Rental Malaysia — certified site supervisor"
+  },
+  "usp": {
+    "items": [
+      {
+        "title": "Daily Rate from RM500",
+        "description": "Half-day pricing on 20m and 24m units. No hidden setup or fuel charges."
+      },
+      {
+        "title": "Same-Day Delivery",
+        "description": "Booked before 11am, on your KL or Selangor site by afternoon."
+      },
+      {
+        "title": "Trained Operator Included",
+        "description": "Every unit comes with a CIDB-trained, MOSHA-aware skylift operator."
+      }
+    ]
+  },
+  "products": {
+    "heading": "Skylift Units We Rent Out",
+    "subheading": "Two truck-mounted units cover every common job — from shop-front signage to high-rise facade. Pick the height, we send the truck and the operator.",
+    "cta": "WhatsApp for a Quote",
+    "priceFromLabel": "From",
+    "halfDayLabel": "half-day",
+    "fullDayLabel": "full-day"
+  },
+  "howItWorks": {
+    "heading": "5 Minit Tempahan, Skylift Sampai Hari Sama",
+    "subheading": "From WhatsApp message to skylift on site — four steps, no paperwork.",
+    "steps": [
+      {
+        "title": "WhatsApp the Job",
+        "description": "Share location, height, work type and a photo of the site."
+      },
+      {
+        "title": "Get a Quote",
+        "description": "Clear daily / half-day rate — operator and transport included."
+      },
+      {
+        "title": "Confirm + Deposit",
+        "description": "A small booking deposit locks your slot."
+      },
+      {
+        "title": "Skylift Arrives Same Day",
+        "description": "Operator briefs the site team and starts work."
+      }
+    ]
+  },
+  "risk": {
+    "heading": "What Goes Wrong Without the Right Skylift",
+    "subheading": "A wrong-height ladder, a non-certified operator or a too-short boom is how injuries, delays and re-do bills happen.",
+    "points": [
+      {
+        "title": "Ladders Fail at Height",
+        "description": "DOSH statistics show falls from height are the #1 cause of construction fatalities in Malaysia."
+      },
+      {
+        "title": "Wrong Height = Lost Day",
+        "description": "A 20m boom on a 24m job means renting twice and paying transport twice."
+      },
+      {
+        "title": "Untrained Operators Void Insurance",
+        "description": "Only CIDB-certified skylift operators keep your project's site insurance valid."
+      }
+    ]
+  },
+  "midCta": {
+    "heading": "Need a Skylift on Site Today?",
+    "subheading": "WhatsApp now — operator dispatched within hours across KL and Selangor.",
+    "cta": "WhatsApp Tempahan Sekarang",
+    "eyebrow": "Live Right Now"
+  },
+  "reviews": {
+    "heading": "What Our Site Supervisors Say",
+    "subheading": "5.0★ from 80+ Google Reviews",
+    "rating": "5.0",
+    "googleLabel": "Google Reviews",
+    "items": [
+      {
+        "name": "Faiz",
+        "location": "Shah Alam",
+        "rating": 5,
+        "text": "Booked the 20m on Tuesday morning, on site by 2pm. Operator knew exactly how to position for our shoplot signage. Will call again."
+      },
+      {
+        "name": "Ms Tan",
+        "location": "Petaling Jaya",
+        "rating": 5,
+        "text": "Spider lift was the only way we could service the chandelier in our hotel atrium. Clean tracks, no damage to the marble."
+      },
+      {
+        "name": "Daniel",
+        "location": "Cheras",
+        "rating": 5,
+        "text": "Used the 24m for a billboard install — operator handled the flagman briefing himself. Saved us a separate hire."
+      },
+      {
+        "name": "Encik Razak",
+        "location": "Klang",
+        "rating": 5,
+        "text": "Half-day rate on the 20m for an aircond servicing job. Cheaper than the previous vendor and on time. Done."
+      },
+      {
+        "name": "Mei Ling",
+        "location": "Subang Jaya",
+        "rating": 5,
+        "text": "Indoor 9m lift fit through our warehouse roller door. Smooth operator, finished the high-bay light replacement in 3 hours."
+      },
+      {
+        "name": "Hafiz",
+        "location": "Kuala Lumpur",
+        "rating": 5,
+        "text": "32m for stadium floodlights — they coordinated with our security and finished before the night match. Pro outfit."
+      }
+    ],
+    "eyebrow": "Customer Voice"
+  },
+  "whyChoose": {
+    "heading": "Why Contractors Across Malaysia Pick Skylift Malaysia",
+    "items": [
+      {
+        "title": "Largest Klang Valley Fleet",
+        "description": "9m, 20m, 24m, 32m and Spider all under one roof."
+      },
+      {
+        "title": "CIDB & MOSHA-Trained Operators",
+        "description": "Every operator holds a valid Malaysian skylift cert."
+      },
+      {
+        "title": "Insurance-Covered Jobs",
+        "description": "Public liability cover on every booking, no extra fee."
+      },
+      {
+        "title": "Half-Day Rate Available",
+        "description": "Pay for what you actually use — most short jobs are half-day."
+      },
+      {
+        "title": "Multi-State Coverage",
+        "description": "KL, Selangor, Putrajaya, Penang, Johor and 9 more states."
+      },
+      {
+        "title": "EN / BM / Mandarin Support",
+        "description": "Talk to us in the language your site team speaks."
+      }
+    ]
+  },
+  "gallery": {
+    "heading": "Recent Skylift Jobs Across Malaysia",
+    "subheading": "Every photo is from an actual rental — nothing stock.",
+    "captions": [
+      "Billboard install along Federal Highway",
+      "Stadium floodlight replacement, Bukit Jalil",
+      "Shoplot signage, Petaling Jaya",
+      "Warehouse high-bay light service",
+      "Glass facade cleaning, KLCC area",
+      "Mall atrium chandelier service",
+      "Telecom tower antenna check",
+      "Industrial chimney inspection",
+      "Roof gutter clearance, Cheras",
+      "Tree trimming, Damansara residential",
+      "Street lighting MBPJ contract",
+      "Factory exhaust fan replacement",
+      "Hotel exterior re-paint, Mont Kiara",
+      "Airport hangar lighting service",
+      "Petrol station canopy works",
+      "School hall ceiling repaint"
+    ]
+  },
+  "locations": {
+    "heading": "We Cover All Major Areas in Malaysia",
+    "subheading": "13 states, 160+ towns. Click your state to see covered sub-locations.",
+    "viewAll": "View All Cities",
+    "stateIntros": {
+      "klang-valley": "Same-day delivery zone. KL, PJ, Shah Alam, Subang, Putrajaya, Cyberjaya and the Klang corridor.",
+      "selangor": "Sepang, Banting, Kuala Selangor, Hulu Selangor and the western coastline.",
+      "negeri-sembilan": "Seremban, Nilai, Port Dickson and the southern industrial belt.",
+      "melaka": "Melaka heritage zone plus Alor Gajah and Jasin districts.",
+      "johor": "Johor Bahru, Iskandar Puteri, Kulai, Batu Pahat, Muar — Iskandar industrial zone covered.",
+      "perak": "Ipoh, Taiping, Sitiawan, Kampar, Teluk Intan, Kuala Kangsar.",
+      "penang": "George Town, Butterworth, Bukit Mertajam, Bayan Lepas — both island and mainland.",
+      "kedah": "Alor Setar, Sungai Petani, Kulim Hi-Tech and Langkawi services.",
+      "perlis": "Kangar, Arau, Padang Besar and northern border towns.",
+      "kelantan": "Kota Bharu, Pasir Mas, Kuala Krai, Gua Musang inland coverage.",
+      "terengganu": "Kuala Terengganu, Kemaman, Dungun, Paka petrochemical zone.",
+      "pahang": "Kuantan, Temerloh, Bentong, Cameron Highlands, Kuala Lipis.",
+      "sabah": "Kota Kinabalu, Sandakan, Tawau, Lahad Datu — coordinated barge transport.",
+      "sarawak": "Kuching, Miri, Bintulu, Sibu — local depot partnerships."
+    }
+  },
+  "faq": {
+    "heading": "Frequently Asked Questions",
+    "items": [
+      {
+        "question": "How is skylift rental priced in Malaysia?",
+        "answer": "Most bookings are charged half-day or full-day. Our 20m and 24m boom lifts start at RM500 half-day and RM620–RM650 full-day. Transport, fuel and a certified operator are included — no hidden charges."
+      },
+      {
+        "question": "Can you deliver same day in KL & Selangor?",
+        "answer": "Yes — confirm before 11am and we deploy by afternoon to anywhere in the Klang Valley. Outside Selangor, same-day is possible if our nearest depot has the unit you need."
+      },
+      {
+        "question": "Is an operator included in the rental?",
+        "answer": "Always. Every skylift hire from us comes with a CIDB-registered, MOSHA-aware operator at no extra fee. We do not rent units to non-certified drivers."
+      },
+      {
+        "question": "What payment methods do you accept?",
+        "answer": "Online transfer (DuitNow, FPX, instant transfer), cash on delivery for small bookings, and corporate invoicing for repeat clients. A booking deposit is required to lock your slot."
+      },
+      {
+        "question": "Which states do you cover?",
+        "answer": "All 13 Malaysian states plus the Federal Territories. Klang Valley jobs are direct from our KL/Selangor depot; East Malaysia is served via our Sabah and Sarawak partners."
+      },
+      {
+        "question": "Do I need to pay a deposit?",
+        "answer": "Yes — a small refundable deposit confirms the booking. The balance is paid on completion. For longer hires we agree milestone payments."
+      },
+      {
+        "question": "Are your jobs insured against accidents?",
+        "answer": "Yes — every booking comes with public liability insurance on the unit and operator. Site-specific insurance riders are available on request."
+      },
+      {
+        "question": "What happens if I need to cancel?",
+        "answer": "Cancel 24 hours before the slot — full refund of the deposit. Cancel on the day — deposit covers our dispatch cost. We never charge cancellation penalties beyond the deposit."
+      }
+    ]
+  },
+  "finalCta": {
+    "heading": "Skylift Booked. Operator Dispatched. Job Done by Sundown.",
+    "subheading": "WhatsApp us now — half-day pricing, certified operator, same-day delivery across KL & Selangor.",
+    "cta": "WhatsApp Tempahan Sekarang",
+    "eyebrow": "Lock In Today"
+  },
+  "footer": {
+    "brandName": "Skylift Malaysia",
+    "tagline": "Daily-rate aerial lifts with certified operators, nationwide.",
+    "unitsHeading": "Skylift Units",
+    "topLocationsHeading": "Top Locations",
+    "resourcesHeading": "Resources",
+    "blog": "Blog",
+    "siteSafety": "Site Safety",
+    "operatorCert": "Operator Cert",
+    "copyright": "© 2026 Skylift Malaysia. All rights reserved.",
+    "ssm": "Scaffolding Malaysia Sdn. Bhd. — SSM Registered"
+  },
+  "blog": {
+    "title": "Skylift Rental Insights & Site Safety Guides",
+    "metaTitle": "Skylift Blog — Rental Tips & Aerial Work Safety | Skylift Malaysia",
+    "metaDescription": "Skylift rental guides, aerial work safety standards, CIDB and MOSHA compliance, plus use-case tips for billboard, stadium and warehouse jobs in Malaysia.",
+    "readMore": "Read More",
+    "recentPosts": "Recent Posts",
+    "publishedOn": "Published",
+    "minRead": "min read",
+    "backToBlog": "← Back to Blog",
+    "noPosts": "New articles coming soon.",
+    "sharePre": "Share this article",
+    "breadcrumbHome": "Home",
+    "breadcrumbBlog": "Blog"
+  },
+  "location": {
+    "h1Prefix": "Skylift Rental in",
+    "h2Prefix": "Same-Day Delivery and Certified Operator in",
+    "metaTitleSuffix": "| 9m / 20m / 24m / 32m / Spider Lift | Skylift Malaysia",
+    "metaDescPrefix": "Skylift rental in",
+    "metaDescSuffix": "— 9m to 32m boom lifts and Spider Lift with certified operator. Daily rate from RM500. Same-day delivery. Chat on WhatsApp now.",
+    "breadcrumbHome": "Home",
+    "breadcrumbProduct": "Skylift Rental",
+    "introHeading": "About Skylift Rental in",
+    "whyHeading": "Why Skylift Malaysia in",
+    "nearbyTitle": "Nearby Areas We Cover",
+    "nearbySubtitle": "We also dispatch same-day to these surrounding areas",
+    "ctaHeading": "Need a Skylift in",
+    "ctaSuffix": "Today?"
+  },
+  "shared": {
+    "whatsappCta": "WhatsApp Tempahan",
+    "whatsappCtaShort": "WhatsApp Us",
+    "viewAll": "View All",
+    "learnMore": "Learn More",
+    "from": "From",
+    "halfDay": "half-day",
+    "fullDay": "full-day",
+    "dailyRate": "Daily Rate",
+    "withOperator": "with Operator",
+    "sameDay": "Same-Day",
+    "klSelangor": "KL & Selangor",
+    "cidbCertified": "CIDB Certified",
+    "moshaTrained": "MOSHA Trained",
+    "perDay": "/ day"
+  },
+  "whatsappMessages": {
+    "default": "Hi Skylift Malaysia, I'd like to enquire about skylift rental.",
+    "hero": "Hi Skylift Malaysia, I saw your website and need a skylift rental quote.",
+    "products": "Hi Skylift Malaysia, I'd like a quote for skylift rental.",
+    "location": "Hi Skylift Malaysia, I need skylift rental in {location}.",
+    "blog": "Hi Skylift Malaysia, I read your article and want to enquire about skylift rental."
+  }
+}
