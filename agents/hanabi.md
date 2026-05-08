@@ -61,6 +61,8 @@ d) Content:
 - **H3**: Sub-points under H2 — detailed explanations, long-tail keywords.
 - **H4**: Very specific details inside H3 (optional, for FAQs or spec breakdowns).
 - **Paragraphs**: Body text — keep SHORT (2-4 sentences). Use keywords naturally. Answer search intent quickly.
+- **Every paragraph block must sit under a heading.** No orphan / floating paragraphs in articles. Each body section is introduced by an H2 or H3 above it. If you can't write a meaningful heading for a block, the block doesn't belong in the article.
+- **Keyword-bearing subheadings must NOT use H5 or H6.** Secondary keywords and long-tail variants belong in H2, H3, or (for FAQ questions / spec items) H4. Burying keyword phrases in H5/H6 wastes ranking weight.
 
 #### Content Rules
 - Each article: 800-1500 words
@@ -139,6 +141,8 @@ Before marking any article as complete, verify:
 - [ ] H1 contains primary keyword (one H1 only)
 - [ ] H2s contain secondary keywords
 - [ ] H3s contain long-tail keywords
+- [ ] No keyword phrases in H5 or H6 — keyword-bearing subheadings are H2/H3/H4 only
+- [ ] No orphan paragraphs — every body block sits under a heading
 - [ ] All paragraphs are 2-4 sentences max
 - [ ] Minimum 2 images with descriptive alt text
 - [ ] Meta title ≤60 characters

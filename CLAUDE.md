@@ -180,6 +180,8 @@ These rules apply to EVERY website. No exceptions.
 - One **H2** per page — the subtitle in the hero section
 - All other section headings use **H3 through H6**
 - Never use multiple H1s or H2s on a single page
+- **Every block of body copy must sit under a heading** — no orphan / floating paragraphs. Each section, USP item, problem-agitation block, "How It Works" step, customer-review group, FAQ, location intro, etc. gets its own heading above the body text
+- **Keyword-bearing subheadings must NOT use H5 or H6.** Phrases that contain a primary or secondary keyword (product name, target location, intent phrase like "rental in Kuala Lumpur") sit in H3 or H4 on landing pages, or in H2–H4 on blog articles. Burying keywords in H5/H6 wastes ranking weight
 
 ## Section Backgrounds
 - Use **image backgrounds** for some sections (hero, CTA, testimonials)
@@ -236,7 +238,9 @@ These rules apply to EVERY website. No exceptions.
 - Every page must have **exactly one H1** AND **exactly one H2** — do not ship a page that is missing either
 - H1 = main hero title. H2 = hero subtitle / supporting line underneath. Both belong to the hero section
 - All remaining section titles use H3–H6
-- Lint every page before marking design complete: H1 count must equal 1, H2 count must equal 1
+- Every body-copy block sits under a heading — lint zero orphan paragraphs
+- Keyword-bearing subheadings must be H3 or H4 (landing pages) / H2–H4 (blog articles) — lint zero keyword phrases in H5/H6
+- Lint every page before marking design complete: H1 count must equal 1, H2 count must equal 1, no `<p>` outside a heading-led block, no keyword phrases in H5/H6
 
 ## Product Card Photos — Fully Visible (no cropping) — MANDATORY
 - Product card images must show the **entire product**. Use `object-fit: contain` (never `cover`) on `.product-card-img img` so the boom, basket, wheels, and labels of a skylift / wheelchair / fan / bed are all visible.
