@@ -86,6 +86,9 @@ Provide meta copy for:
 After writing, verify each section against:
 - [ ] Primary keyword appears in H1
 - [ ] Secondary keywords appear in at least 2 subheadings
+- [ ] Every body-copy block sits under a heading (no orphan paragraphs)
+- [ ] Keyword-bearing subheadings use H3 or H4 (never H5/H6)
+- [ ] Each heading is output with its explicit level (e.g. `H3: ...`)
 - [ ] No passive voice in CTAs
 - [ ] WhatsApp is the only CTA (no phone call buttons)
 - [ ] Delivery time stated consistently (same-day / 4 hours)
@@ -114,3 +117,8 @@ Save location copy to: `copy-locations.md`
 - Keep sentences short and scannable — this is web copy, not an essay
 - Never use the same intro paragraph for two different cities
 - Nearby locations must be real cities from the provided list — do not invent locations
+
+## Heading rules (SEO)
+- **Every block of body copy must sit under a heading.** No floating/orphan paragraphs. Each section (intro, USP item, problem agitation, "How It Works" step, customer review group, FAQ, location intro, etc.) gets its own heading above the body text. If a block has nothing meaningful to title, it does not belong on the page.
+- **Keyword-bearing subheadings use H3 or H4.** When a heading contains a primary or secondary keyword (product name, target location, key intent phrase like "rental in Kuala Lumpur"), assign it H3 or H4 — never H5/H6. This concentrates keyword weight in the levels Google ranks. Non-keyword headings (e.g. "How It Works", "Customer Reviews") may use any level H3–H6 as section depth requires.
+- **Output every heading explicitly with its level**, e.g. `H3: Why rent CPAP machines in Petaling Jaya`. Don't write headings as plain bold text; Kimmy needs the level to render the right markup. The hero H1 + H2 are still single-instance per page (existing rule).
