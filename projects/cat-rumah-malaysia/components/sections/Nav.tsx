@@ -3,9 +3,9 @@ import Link from 'next/link'
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher'
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton'
 
-interface Props { locale: string }
+interface Props { locale: string; phoneNumber?: string }
 
-export function Nav({ locale }: Props) {
+export function Nav({ locale, phoneNumber }: Props) {
   const t = useTranslations('nav')
   return (
     <nav
@@ -57,7 +57,7 @@ export function Nav({ locale }: Props) {
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <LanguageSwitcher />
           <div className="nav-cta">
-            <WhatsAppButton locale={locale} label={t('cta')} />
+            <WhatsAppButton locale={locale} label={t('cta')} phoneNumber={phoneNumber} />
           </div>
         </div>
       </div>

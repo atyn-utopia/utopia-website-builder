@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import WhatsAppClickTracker from './tracking/WhatsAppClickTracker'
 
 const WA_GREEN = '#25D366'
 
@@ -11,7 +12,7 @@ function getSecondsUntilMidnight() {
   return Math.max(0, Math.floor((midnight.getTime() - now.getTime()) / 1000))
 }
 
-export function CountdownStrip({ waLink, label }: { waLink: string; label: string }) {
+export function CountdownStrip({ waLink, label, phoneNumber }: { waLink: string; label: string; phoneNumber?: string }) {
   const [secs, setSecs] = useState<number | null>(null)
 
   useEffect(() => {
@@ -42,7 +43,8 @@ export function CountdownStrip({ waLink, label }: { waLink: string; label: strin
         <span className="px-2 py-0.5 rounded" style={{ background: 'rgba(0,0,0,0.25)' }}>{s}</span>
       </div>
 
-      <a
+      <WhatsAppClickTracker
+        phoneNumber={phoneNumber ?? ''}
         href={waLink}
         target="_blank"
         rel="noopener noreferrer"
@@ -50,7 +52,7 @@ export function CountdownStrip({ waLink, label }: { waLink: string; label: strin
         style={{ background: WA_GREEN, color: 'white' }}
       >
         Claim Now →
-      </a>
+      </WhatsAppClickTracker>
     </div>
   )
 }

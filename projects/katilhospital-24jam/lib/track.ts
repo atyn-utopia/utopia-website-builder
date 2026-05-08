@@ -20,3 +20,15 @@ export function trackWhatsApp(phone: string, locationSlug?: string) {
   const label = locationSlug ? `whatsapp-${phone}-${locationSlug}` : `whatsapp-${phone}`;
   trackClick(label);
 }
+
+export function trackProductImpression(slug: string) {
+  if (typeof window !== 'undefined' && typeof window.uwc === 'function') {
+    window.uwc('impression', { label: `product-${slug}` });
+  }
+}
+
+export function trackBlogClick(slug: string) {
+  if (typeof window !== 'undefined' && typeof window.uwc === 'function') {
+    window.uwc('click', { label: `blog-${slug}` });
+  }
+}

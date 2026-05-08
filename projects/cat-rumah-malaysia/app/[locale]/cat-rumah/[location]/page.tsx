@@ -22,7 +22,7 @@ import { Faq } from '@/components/sections/Faq'
 import { FinalCta } from '@/components/sections/FinalCta'
 import { Footer } from '@/components/sections/Footer'
 import { StructuredData } from '@/components/seo/StructuredData'
-import { getProducts } from '@/lib/webcore'
+import { getProducts, getPhoneNumber } from '@/lib/webcore'
 
 type Props = { params: Promise<{ locale: string; location: string }> }
 
@@ -68,10 +68,12 @@ export default async function LocationPage({ params }: Props) {
   if (!loc) notFound()
   setRequestLocale(locale)
 
-  const [copy, products] = await Promise.all([
+  const [copy, products, phoneResult] = await Promise.all([
     Promise.resolve(getLocationCopy(location, locale)),
     getProducts(),
+    getPhoneNumber(location),
   ])
+  const phoneNumber = phoneResult.phone
   const cityName = cityDisplay(location, locale)
 
   return (
@@ -84,21 +86,21 @@ export default async function LocationPage({ params }: Props) {
         cityName={cityName}
       />
       <FomoBanner />
-      <Nav locale={locale} />
+      <Nav locale={locale} phoneNumber={phoneNumber} />
       <Breadcrumbs locale={locale} cityName={cityName} />
-      <Hero locale={locale} locationSlug={location} cityOverride={copy.h1} />
+      <Hero locale={locale} locationSlug={location} cityOverride={copy.h1} phoneNumber={phoneNumber} />
       <Stats />
-      <Products locale={locale} locationSlug={location} products={products} />
+      <Products locale={locale} locationSlug={location} products={products} phoneNumber={phoneNumber} />
       <HowItWorks />
       <RiskProblem />
-      <MidCta locale={locale} locationSlug={location} />
+      <MidCta locale={locale} locationSlug={location} phoneNumber={phoneNumber} />
       <GoogleReviews />
       <WhyChoose />
       <Gallery locale={locale} />
       <LocationsAccordion locale={locale} />
       <NearbyLocations locale={locale} slugs={loc.nearby} />
       <Faq items={copy.faqs} heading={copy.h1} />
-      <FinalCta locale={locale} locationSlug={location} />
+      <FinalCta locale={locale} locationSlug={location} phoneNumber={phoneNumber} />
       <Footer locale={locale} />
     </>
   )

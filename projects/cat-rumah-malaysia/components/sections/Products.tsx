@@ -3,11 +3,13 @@
 import { useTranslations } from 'next-intl'
 import type { ProductRow } from '@/lib/webcore'
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton'
+import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker'
 
 interface Props {
   locale: string
   locationSlug?: string
   products: ProductRow[]
+  phoneNumber?: string
 }
 
 const W = (baseUrl: string) =>
@@ -29,7 +31,7 @@ function slugToKey(slug: string): string {
   return map[slug] ?? slug
 }
 
-export function Products({ locale, locationSlug, products }: Props) {
+export function Products({ locale, locationSlug, products, phoneNumber }: Props) {
   const t = useTranslations('products')
 
   return (
@@ -56,8 +58,9 @@ export function Products({ locale, locationSlug, products }: Props) {
             const hasLaborOnly = t.has(`${key}.laborOnly`)
 
             return (
-              <div
+              <ProductImpressionTracker
                 key={product.id}
+                slug={product.slug}
                 className="card"
                 style={{
                   padding: 0,
@@ -119,10 +122,11 @@ export function Products({ locale, locationSlug, products }: Props) {
                       message={t(`${key}.title`)}
                       label={t.has(`${key}.cta`) ? t(`${key}.cta`) : t('ctaGeneric')}
                       className="wa-btn-sm"
+                      phoneNumber={phoneNumber}
                     />
                   </div>
                 </div>
-              </div>
+              </ProductImpressionTracker>
             )
           })}
         </div>

@@ -6,6 +6,8 @@ import { locations, regionOrder, regionKeys, getLocationsByRegion } from '@/conf
 import { products } from '@/config/products'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import { waRedirect } from '@/lib/waRedirect'
+import WhatsAppClickTracker from '@/components/tracking/WhatsAppClickTracker'
+import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker'
 
 /* ── SVG Icons ── */
 const WAIcon = () => (
@@ -120,7 +122,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 }
 
 /* ── FOMO Banner ── */
-function FomoBanner() {
+function FomoBanner({ phoneNumber }: { phoneNumber: string }) {
   const locale = useLocale()
   const t = useTranslations('fomoBanner')
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 })
@@ -151,7 +153,7 @@ function FomoBanner() {
         <span className="fomo-dot w-2 h-2 rounded-full bg-white shrink-0" />
         <span className="font-medium">{texts[textIdx]}</span>
         <span className="font-mono font-semibold px-2 py-0.5 rounded" style={{ background: 'rgba(0,0,0,0.25)' }}>{pad(timeLeft.hours)}:{pad(timeLeft.minutes)}:{pad(timeLeft.seconds)}</span>
-        <a href={waRedirect(locale)} target="_blank" rel="noopener noreferrer" className="font-semibold underline underline-offset-2 hover:no-underline shrink-0">{t('bookNow')} &rarr;</a>
+        <WhatsAppClickTracker phoneNumber={phoneNumber} href={waRedirect(locale)} target="_blank" rel="noopener noreferrer" className="font-semibold underline underline-offset-2 hover:no-underline shrink-0">{t('bookNow')} &rarr;</WhatsAppClickTracker>
       </div>
     </div>
   )
@@ -160,7 +162,9 @@ function FomoBanner() {
 /* ══════════════════════════════════════════
    HOMEPAGE
    ══════════════════════════════════════════ */
-export default function HomePage() {
+type HomePageProps = { phoneNumber: string }
+
+export default function HomePage({ phoneNumber }: HomePageProps) {
   const locale = useLocale()
   const t = useTranslations()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -168,6 +172,10 @@ export default function HomePage() {
   const WA_LINK = waRedirect(locale)
 
   const productKeys = products.map(p => p.key)
+  const productSlugByKey: Record<string, string> = products.reduce((acc, p) => {
+    acc[p.key] = p.slug
+    return acc
+  }, {} as Record<string, string>)
 
   const whyIcons = ['shield', 'clock', 'map', 'dollar', 'check', 'users']
 
@@ -191,7 +199,7 @@ export default function HomePage() {
 
   return (
     <>
-      <FomoBanner />
+      <FomoBanner phoneNumber={phoneNumber} />
 
       {/* ── NAV ── */}
       <header className="sticky top-0 z-50" style={{ background: 'rgba(44,51,56,0.97)', backdropFilter: 'blur(12px)', boxShadow: 'var(--shadow-nav)' }}>
@@ -215,9 +223,9 @@ export default function HomePage() {
           </nav>
           <div className="flex items-center gap-3">
             <LanguageSwitcher />
-            <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white">
+            <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white">
               <WAIcon /><span>{t('nav.ctaButton')}</span>
-            </a>
+            </WhatsAppClickTracker>
             <button className="icon-btn md:hidden text-white p-1 cursor-pointer" onClick={() => setMobileMenuOpen(true)} aria-label="Open menu">
               <MenuIcon />
             </button>
@@ -239,9 +247,9 @@ export default function HomePage() {
               ].map(link => (
                 <a key={link.href} href={link.href} onClick={() => setMobileMenuOpen(false)} className="hover:text-[var(--brand-yellow)]">{link.label}</a>
               ))}
-              <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2 px-6 py-3 rounded-xl text-base font-bold text-white mt-4">
+              <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2 px-6 py-3 rounded-xl text-base font-bold text-white mt-4">
                 <WAIcon />{t('nav.ctaButton')}
-              </a>
+              </WhatsAppClickTracker>
             </nav>
           </div>
         )}
@@ -287,9 +295,9 @@ export default function HomePage() {
               </p>
 
               <div className="flex flex-col sm:flex-row items-start gap-3 mb-4">
-                <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-base font-bold text-white">
+                <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-base font-bold text-white">
                   <WAIcon />{t('hero.ctaPrimary')}
-                </a>
+                </WhatsAppClickTracker>
                 <a href="#products" className="ghost-btn inline-flex items-center px-6 py-3.5 rounded-xl text-base font-semibold text-white" style={{ border: '2px solid rgba(255,255,255,0.3)' }}>
                   {t('hero.ctaSecondary')}
                 </a>
@@ -325,7 +333,11 @@ export default function HomePage() {
             <div className="space-y-6">
               {productKeys.map((key, i) => (
                 <FadeSection key={key} delay={i * 80}>
-                  <div className={`product-card bg-white rounded-2xl overflow-hidden flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`} style={{ boxShadow: 'var(--shadow-md)', border: '1px solid var(--brand-border)' }}>
+                  <ProductImpressionTracker
+                    slug={productSlugByKey[key] || key}
+                    className={`product-card bg-white rounded-2xl overflow-hidden flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+                    style={{ boxShadow: 'var(--shadow-md)', border: '1px solid var(--brand-border)' }}
+                  >
                     {/* Image side */}
                     <div className="relative md:w-2/5 h-56 md:h-auto overflow-hidden" style={{ background: 'var(--brand-gunmetal)', minHeight: '240px' }}>
                       <img
@@ -349,11 +361,11 @@ export default function HomePage() {
                           <span key={j} className="text-xs font-semibold px-3 py-1.5 rounded-full" style={{ background: 'var(--brand-gunmetal)', color: 'var(--brand-yellow)' }}>{t(`products.items.${key}.keyPoints.${j}`)}</span>
                         ))}
                       </div>
-                      <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-white self-start">
+                      <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-white self-start">
                         <WAIcon />{t(`products.items.${key}.cta`)}
-                      </a>
+                      </WhatsAppClickTracker>
                     </div>
-                  </div>
+                  </ProductImpressionTracker>
                 </FadeSection>
               ))}
             </div>
@@ -410,9 +422,9 @@ export default function HomePage() {
               <FadeSection delay={150}>
                 <div className="text-center md:text-left">
                   <p className="text-base font-semibold mb-6" style={{ color: 'var(--brand-charcoal)', lineHeight: '1.6' }}>{t('riskProblem.solutionCta')}</p>
-                  <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-base font-bold text-white">
+                  <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-base font-bold text-white">
                     <WAIcon />{t('shared.whatsappCta')}
-                  </a>
+                  </WhatsAppClickTracker>
                 </div>
               </FadeSection>
             </div>
@@ -427,9 +439,9 @@ export default function HomePage() {
             <FadeSection>
               <h2 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ letterSpacing: '-0.025em' }}>{t('midCta.heading')}</h2>
               <p className="text-sm font-normal mb-6" style={{ color: 'var(--brand-yellow)', lineHeight: '1.7' }}>{t('midCta.subheading')}</p>
-              <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-lg font-bold text-white">
+              <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-lg font-bold text-white">
                 <WAIcon />{t('midCta.ctaButton')}
-              </a>
+              </WhatsAppClickTracker>
             </FadeSection>
           </div>
         </section>
@@ -617,9 +629,9 @@ export default function HomePage() {
               <h2 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ letterSpacing: '-0.025em' }}>{t('finalCta.heading')}</h2>
               <p className="text-sm font-normal mb-6" style={{ color: 'var(--brand-yellow)', lineHeight: '1.7' }}>{t('finalCta.subheading')}</p>
               <div className="flex flex-col sm:flex-row justify-center items-center gap-3 mb-4">
-                <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-lg font-bold text-white">
+                <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-lg font-bold text-white">
                   <WAIcon />{t('finalCta.ctaButton')}
-                </a>
+                </WhatsAppClickTracker>
                 <a href={`tel:+60174287801`} className="ghost-btn inline-flex items-center px-6 py-3.5 rounded-xl text-base font-semibold text-white" style={{ border: '2px solid rgba(255,255,255,0.3)' }}>
                   {t('common.callNow')}
                 </a>
@@ -681,14 +693,15 @@ export default function HomePage() {
       </footer>
 
       {/* ── FLOATING WHATSAPP BUTTON ── */}
-      <a
+      <WhatsAppClickTracker
+        phoneNumber={phoneNumber}
         href={WA_LINK}
         className="fixed bottom-6 right-6 z-50 wa-btn flex items-center gap-2 px-4 py-3 rounded-full text-sm font-semibold text-white"
         aria-label={t('footer.whatsappFloat')}
         style={{ boxShadow: '0 4px 20px rgba(37,211,102,0.4)' }}
       >
         <WAIcon /><span className="hidden sm:inline">{t('footer.whatsappFloat')}</span>
-      </a>
+      </WhatsAppClickTracker>
     </>
   )
 }

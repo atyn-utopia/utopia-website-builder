@@ -1,11 +1,21 @@
 'use client'
 
 import { useEffect } from 'react'
+import WhatsAppClickTracker from '@/components/tracking/WhatsAppClickTracker'
 
-export default function RedirectClient({ url }: { url: string }) {
+export default function RedirectClient({
+  url,
+  phoneNumber,
+}: {
+  url: string
+  phoneNumber: string
+}) {
   useEffect(() => {
+    if (typeof window !== 'undefined' && window.uwc) {
+      window.uwc('click', { label: `whatsapp-${phoneNumber}` })
+    }
     window.location.href = url
-  }, [url])
+  }, [url, phoneNumber])
 
   return (
     <div className="min-h-[60vh] flex items-center justify-center px-6">
@@ -22,9 +32,9 @@ export default function RedirectClient({ url }: { url: string }) {
         <p className="text-lg font-semibold">Opening WhatsApp...</p>
         <p className="text-sm mt-2">
           If nothing happens,{' '}
-          <a href={url} className="underline font-semibold">
+          <WhatsAppClickTracker phoneNumber={phoneNumber} href={url} className="underline font-semibold">
             click here
-          </a>
+          </WhatsAppClickTracker>
           .
         </p>
       </div>

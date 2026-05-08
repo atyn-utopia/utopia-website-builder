@@ -1,8 +1,7 @@
 'use client';
 
-import { useEffect, useRef, type CSSProperties } from 'react';
+import { type CSSProperties } from 'react';
 import WhatsAppButton from '@/components/WhatsAppButton';
-import { trackImpression } from '@/lib/track';
 
 export interface ProductCardData {
   slug: string;
@@ -40,31 +39,8 @@ export default function ProductCard({
   locale,
   priceHintFallback,
 }: Props) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    let fired = false;
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting && !fired) {
-            fired = true;
-            trackImpression(`product-${product.slug}`);
-            io.disconnect();
-          }
-        }
-      },
-      { threshold: 0.35 }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [product.slug]);
-
   return (
     <div
-      ref={ref}
       id={`product-${product.slug}`}
       className="hover-lift"
       style={{

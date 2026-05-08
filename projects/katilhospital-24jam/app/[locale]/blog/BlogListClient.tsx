@@ -1,11 +1,11 @@
 'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
-import { trackClick } from '@/lib/track';
 import FomoBar from '@/components/FomoBar';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import BlogClickTracker from '@/components/tracking/BlogClickTracker';
 import { waRedirect } from '@/lib/waRedirect';
 
 interface Post {
@@ -94,10 +94,9 @@ export default function BlogListClient({ posts }: Props) {
                   { year: 'numeric', month: 'long', day: 'numeric' }
                 );
                 return (
+                  <BlogClickTracker key={post.id} slug={post.slug}>
                   <a
-                    key={post.id}
                     href={`/${locale}/blog/${post.slug}`}
-                    onClick={() => trackClick(`blog-${post.slug}`)}
                     style={{
                       display: 'block',
                       background: '#FFFFFF',
@@ -169,6 +168,7 @@ export default function BlogListClient({ posts }: Props) {
                       </span>
                     </div>
                   </a>
+                  </BlogClickTracker>
                 );
               })}
             </div>

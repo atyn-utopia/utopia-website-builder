@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { locales } from '@/i18n/routing';
 import { siteConfig } from '@/config/site';
+import { getPhoneNumber } from '@/lib/webcore';
 import HomePageClient from './HomePageClient';
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
@@ -62,12 +63,14 @@ export default async function HomePage({
     }));
   } catch { /* fallback empty */ }
 
+  const { phone } = await getPhoneNumber();
+
   return (
     <>
       <LocalBusinessSchema locale={locale} />
       <ProductSchema name="Roller Shutter Door" description="Professional roller shutter door installation, repair & maintenance in Malaysia. 24/7 emergency service." locale={locale} />
       {faqs.length > 0 && <FAQSchema faqs={faqs} />}
-      <HomePageClient />
+      <HomePageClient phoneNumber={phone} />
     </>
   );
 }

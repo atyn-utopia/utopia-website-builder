@@ -15,6 +15,9 @@ export default function WhatsAppButton({
 
   function handleClick() {
     const randomPhone = phones[Math.floor(Math.random() * phones.length)];
+    if (typeof window !== "undefined" && window.uwc) {
+      window.uwc("click", { label: `whatsapp-${randomPhone}` });
+    }
     window.open(`https://wa.me/${randomPhone}`, "_blank", "noopener");
   }
 

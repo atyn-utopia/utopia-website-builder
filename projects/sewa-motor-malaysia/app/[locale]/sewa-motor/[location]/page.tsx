@@ -9,6 +9,7 @@ import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema'
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema'
 import { ProductSchema } from '@/components/schema/ProductSchema'
 import { FAQSchema } from '@/components/schema/FAQSchema'
+import { getPhoneNumber } from '@/lib/webcore'
 import LocationPageClient from './LocationPageClient'
 
 type Props = {
@@ -99,6 +100,7 @@ export default async function LocationPage({ params }: Props) {
 
   const displayName = loc.displayName
   const nearby = getNearbyLocations(loc.slug)
+  const { phone } = await getPhoneNumber(loc.slug)
 
   // Build FAQ data for schema
   const faqs = Array.from({ length: 10 }, (_, i) => ({
@@ -152,6 +154,7 @@ export default async function LocationPage({ params }: Props) {
           displayName: n.displayName,
           state: n.state,
         }))}
+        phoneNumber={phone}
       />
     </>
   )

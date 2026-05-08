@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import WhatsAppButton from "./WhatsAppButton";
+import ProductImpressionTracker from "./tracking/ProductImpressionTracker";
 
 interface Product {
   slug: string;
@@ -43,7 +44,8 @@ export default async function ProductCard({
   const badgeInfo = product.badge ? badgeStyles[product.badge] : null;
 
   return (
-    <div
+    <ProductImpressionTracker
+      slug={product.slug}
       className="relative flex flex-col bg-white rounded-2xl overflow-hidden
                  shadow-[0_1px_3px_rgba(0,0,0,0.06),0_4px_16px_rgba(0,0,0,0.08),0_8px_32px_rgba(220,38,38,0.04)]
                  hover:shadow-[0_2px_6px_rgba(0,0,0,0.08),0_8px_24px_rgba(0,0,0,0.12),0_16px_48px_rgba(220,38,38,0.08)]
@@ -151,6 +153,6 @@ export default async function ProductCard({
         {/* WhatsApp CTA */}
         <WhatsAppButton phones={phones} className="w-full text-sm" />
       </div>
-    </div>
+    </ProductImpressionTracker>
   );
 }

@@ -8,6 +8,8 @@ import { getPhoneNumber, waLink } from '@/lib/webcore'
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema'
 import { FAQSchema } from '@/components/schema/FAQSchema'
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema'
+import WhatsAppClickTracker from '@/components/tracking/WhatsAppClickTracker'
+import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker'
 
 const WA_GREEN = '#25D366'
 
@@ -208,14 +210,16 @@ export default async function LocationPage({ params }: { params: Promise<Params>
               <p className="text-base leading-relaxed mb-6 max-w-md" style={{ color: 'rgba(255,255,255,0.75)' }}>
                 {t('hero.sub', { city: cityName })}
               </p>
-              <a href={`/${locale}/redirect-whatsapp-1`}
+              <WhatsAppClickTracker
+                phoneNumber={phone}
+                href={`/${locale}/redirect-whatsapp-1`}
                   target="_blank"
                   rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 font-bold px-7 py-4 rounded-full text-base text-white transition-all hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-green-400"
                 style={{ background: WA_GREEN, boxShadow: '0 8px 32px rgba(37,211,102,0.35)' }}>
                 <WAIcon />
                 {t('hero.cta', { city: cityName })}
-              </a>
+              </WhatsAppClickTracker>
             </div>
 
             {/* Hero image with stamp frame + badges */}
@@ -313,8 +317,9 @@ export default async function LocationPage({ params }: { params: Promise<Params>
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {products.map(product => (
-              <div
+              <ProductImpressionTracker
                 key={product.id}
+                slug={product.id}
                 className="relative flex flex-col rounded-2xl p-5 transition-transform hover:-translate-y-1"
                 style={{
                   background: 'var(--brand-white)',
@@ -368,15 +373,17 @@ export default async function LocationPage({ params }: { params: Promise<Params>
                     </p>
                   ))}
                 </div>
-                <a href={`/${locale}/redirect-whatsapp-1`}
+                <WhatsAppClickTracker
+                  phoneNumber={phone}
+                  href={`/${locale}/redirect-whatsapp-1`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 font-bold py-3 rounded-xl text-sm text-white transition-opacity hover:opacity-90 active:opacity-80 focus:outline-none focus:ring-2 focus:ring-green-400"
                   style={{ background: WA_GREEN }}>
                   <WAIcon />
                   {tc('whatsappOrder')}
-                </a>
-              </div>
+                </WhatsAppClickTracker>
+              </ProductImpressionTracker>
             ))}
           </div>
         </div>
@@ -482,7 +489,8 @@ export default async function LocationPage({ params }: { params: Promise<Params>
           <p className="text-base leading-relaxed mb-7" style={{ color: 'rgba(255,255,255,0.8)' }}>
             {t('cta.sub', { city: cityName })}
           </p>
-          <a
+          <WhatsAppClickTracker
+            phoneNumber={phone}
             href={`/${locale}/redirect-whatsapp-1`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -491,7 +499,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
           >
             <WAIcon />
             {t('cta.btn')}
-          </a>
+          </WhatsAppClickTracker>
         </div>
       </section>
     </main>

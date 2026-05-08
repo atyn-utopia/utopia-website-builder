@@ -16,7 +16,7 @@ import { Faq } from '@/components/sections/Faq'
 import { FinalCta } from '@/components/sections/FinalCta'
 import { Footer } from '@/components/sections/Footer'
 import { StructuredData } from '@/components/seo/StructuredData'
-import { getProducts } from '@/lib/webcore'
+import { getProducts, getPhoneNumber } from '@/lib/webcore'
 
 type Props = { params: Promise<{ locale: string }> }
 
@@ -51,10 +51,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function HomePage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale)
-  const [tFaq, products] = await Promise.all([
+  const [tFaq, products, phoneResult] = await Promise.all([
     getTranslations({ locale, namespace: 'faq' }),
     getProducts(),
+    getPhoneNumber(),
   ])
+  const phoneNumber = phoneResult.phone
   const faqs = [1, 2, 3, 4, 5, 6].map((n) => ({
     q: tFaq(`q${n}`),
     a: tFaq(`a${n}`),
@@ -64,19 +66,19 @@ export default async function HomePage({ params }: Props) {
     <>
       <StructuredData kind="home" locale={locale} faqs={faqs} />
       <FomoBanner />
-      <Nav locale={locale} />
-      <Hero locale={locale} />
+      <Nav locale={locale} phoneNumber={phoneNumber} />
+      <Hero locale={locale} phoneNumber={phoneNumber} />
       <Stats />
-      <Products locale={locale} products={products} />
+      <Products locale={locale} products={products} phoneNumber={phoneNumber} />
       <HowItWorks />
       <RiskProblem />
-      <MidCta locale={locale} />
+      <MidCta locale={locale} phoneNumber={phoneNumber} />
       <GoogleReviews />
       <WhyChoose />
       <Gallery locale={locale} />
       <LocationsAccordion locale={locale} />
       <Faq />
-      <FinalCta locale={locale} />
+      <FinalCta locale={locale} phoneNumber={phoneNumber} />
       <Footer locale={locale} />
     </>
   )

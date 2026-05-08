@@ -16,5 +16,5 @@ export default async function RedirectWhatsAppPage({
   const sp = await searchParams
   const { phone, whatsappText } = await getPhoneNumber(sp.location || undefined)
   const url = waLink(phone, sp.message || whatsappText)
-  return <RedirectClient url={url} />
+  return <RedirectClient url={url} phoneNumber={phone} />
 }

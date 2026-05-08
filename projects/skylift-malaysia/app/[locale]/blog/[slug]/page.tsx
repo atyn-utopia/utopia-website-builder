@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import BlogNav from '@/components/BlogNav';
 import BlogFooter from '@/components/BlogFooter';
+import BlogClickTracker from '@/components/tracking/BlogClickTracker';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 
 export async function generateMetadata({
@@ -110,24 +111,25 @@ export default async function BlogPostPage({
             </div>
             <div className="blog-grid">
               {other.map((p) => (
-                <Link
-                  key={p.id}
-                  href={`/${locale}/blog/${p.slug}`}
-                  className="blog-card"
-                >
-                  <div className="blog-card-img">
-                    <img
-                      src={p.cover_image_url || '/brand/hero.png'}
-                      alt={p.title}
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="blog-card-body">
-                    <h3>{p.title}</h3>
-                    <p>{p.excerpt}</p>
-                    <span className="blog-card-more">{t('readMore')} →</span>
-                  </div>
-                </Link>
+                <BlogClickTracker key={p.id} slug={p.slug}>
+                  <Link
+                    href={`/${locale}/blog/${p.slug}`}
+                    className="blog-card"
+                  >
+                    <div className="blog-card-img">
+                      <img
+                        src={p.cover_image_url || '/brand/hero.png'}
+                        alt={p.title}
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="blog-card-body">
+                      <h3>{p.title}</h3>
+                      <p>{p.excerpt}</p>
+                      <span className="blog-card-more">{t('readMore')} →</span>
+                    </div>
+                  </Link>
+                </BlogClickTracker>
               ))}
             </div>
           </div>

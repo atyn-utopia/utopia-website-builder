@@ -7,6 +7,8 @@ import { ProductSchema } from '@/components/schema/ProductSchema'
 import { FAQSchema } from '@/components/schema/FAQSchema'
 import { ReviewsCarousel } from '@/components/ReviewsCarousel'
 import { CountdownStrip } from '@/components/CountdownStrip'
+import WhatsAppClickTracker from '@/components/tracking/WhatsAppClickTracker'
+import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker'
 
 const WA_GREEN = '#25D366'
 
@@ -201,7 +203,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               {t('hero.sub')}
             </p>
 
-            <a
+            <WhatsAppClickTracker
+              phoneNumber={phone}
               href={`/${locale}/redirect-whatsapp-1`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -210,7 +213,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             >
               <WAIcon />
               {t('hero.cta')}
-            </a>
+            </WhatsAppClickTracker>
 
             {/* Trust indicators */}
             <div className="flex flex-wrap gap-4 mt-7">
@@ -347,6 +350,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
       <CountdownStrip
         waLink={`/${locale}/redirect-whatsapp-1`}
+        phoneNumber={phone}
         label={locale === 'ms' ? '⚡ Tawaran Hari Ini Tamat Dalam:' : locale === 'zh' ? '⚡ 今日优惠倒计时：' : '⚡ Today\'s delivery slots close in:'}
       />
 
@@ -399,8 +403,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {products.map((product) => (
-              <div
+              <ProductImpressionTracker
                 key={product.id}
+                slug={product.id}
                 className="relative flex flex-col rounded-2xl p-6 transition-transform hover:-translate-y-1"
                 style={{
                   background: 'var(--brand-white)',
@@ -473,7 +478,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   ))}
                 </div>
 
-                <a
+                <WhatsAppClickTracker
+                  phoneNumber={phone}
                   href={`/${locale}/redirect-whatsapp-1`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -482,8 +488,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 >
                   <WAIcon />
                   {tc('whatsappOrder')}
-                </a>
-              </div>
+                </WhatsAppClickTracker>
+              </ProductImpressionTracker>
             ))}
           </div>
         </div>
@@ -593,7 +599,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <p>{t('why.p1')}</p>
               <p>{t('why.p2')}</p>
             </div>
-            <a
+            <WhatsAppClickTracker
+              phoneNumber={phone}
               href={`/${locale}/redirect-whatsapp-1`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -602,7 +609,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             >
               <WAIcon />
               {t('hero.cta')}
-            </a>
+            </WhatsAppClickTracker>
           </div>
           <div className="grid grid-cols-2 gap-4">
             {[
@@ -767,7 +774,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               {t('cta.sub')}
             </p>
             <div>
-              <a
+              <WhatsAppClickTracker
+                phoneNumber={phone}
                 href={`/${locale}/redirect-whatsapp-1`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -776,7 +784,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               >
                 <WAIcon />
                 {t('cta.btn')}
-              </a>
+              </WhatsAppClickTracker>
             </div>
             {/* Small trust nudges */}
             <div className="flex flex-wrap gap-4 mt-6 justify-center">

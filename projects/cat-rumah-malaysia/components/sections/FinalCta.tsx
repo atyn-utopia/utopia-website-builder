@@ -1,9 +1,9 @@
 import { useTranslations } from 'next-intl'
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton'
 
-interface Props { locale: string; locationSlug?: string }
+interface Props { locale: string; locationSlug?: string; phoneNumber?: string }
 
-export function FinalCta({ locale, locationSlug }: Props) {
+export function FinalCta({ locale, locationSlug, phoneNumber }: Props) {
   const t = useTranslations('finalCta')
   return (
     <section className="section bg-charcoal" style={{ textAlign: 'center' }}>
@@ -24,7 +24,7 @@ export function FinalCta({ locale, locationSlug }: Props) {
           {t('subheadline')}
         </p>
         <div style={{ display: 'flex', justifyContent: 'center', gap: 14, marginTop: 32, flexWrap: 'wrap' }}>
-          <WhatsAppButton locale={locale} locationSlug={locationSlug} label={t('cta')} />
+          <WhatsAppButton locale={locale} locationSlug={locationSlug} label={t('cta')} phoneNumber={phoneNumber} />
           <a href="#gallery" className="btn-secondary" style={{ color: 'var(--brand-jade-soft)', borderColor: 'var(--brand-jade-soft)' }}>
             {t('ctaSecondary')}
           </a>

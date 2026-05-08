@@ -4,6 +4,7 @@ import { getBlogPosts } from '@/lib/webcore';
 import Link from 'next/link';
 import BlogNav from '@/components/BlogNav';
 import BlogFooter from '@/components/BlogFooter';
+import BlogClickTracker from '@/components/tracking/BlogClickTracker';
 
 export async function generateMetadata({
   params,
@@ -75,25 +76,26 @@ export default async function BlogListingPage({
                   { year: 'numeric', month: 'long', day: 'numeric' }
                 );
                 return (
-                  <Link
-                    key={post.id}
-                    href={`/${locale}/blog/${post.slug}`}
-                    className="blog-card"
-                  >
-                    <div className="blog-card-img">
-                      <img
-                        src={post.cover_image_url || '/brand/hero.png'}
-                        alt={post.title}
-                        loading="lazy"
-                      />
-                    </div>
-                    <div className="blog-card-body">
-                      <span className="blog-card-date">{date}</span>
-                      <h3>{post.title}</h3>
-                      <p>{post.excerpt}</p>
-                      <span className="blog-card-more">{t('readMore')} →</span>
-                    </div>
-                  </Link>
+                  <BlogClickTracker key={post.id} slug={post.slug}>
+                    <Link
+                      href={`/${locale}/blog/${post.slug}`}
+                      className="blog-card"
+                    >
+                      <div className="blog-card-img">
+                        <img
+                          src={post.cover_image_url || '/brand/hero.png'}
+                          alt={post.title}
+                          loading="lazy"
+                        />
+                      </div>
+                      <div className="blog-card-body">
+                        <span className="blog-card-date">{date}</span>
+                        <h3>{post.title}</h3>
+                        <p>{post.excerpt}</p>
+                        <span className="blog-card-more">{t('readMore')} →</span>
+                      </div>
+                    </Link>
+                  </BlogClickTracker>
                 );
               })}
             </div>

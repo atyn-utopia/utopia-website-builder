@@ -7,6 +7,8 @@ import { products } from '@/config/products'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import { waRedirect } from '@/lib/waRedirect'
 import { useParams } from 'next/navigation'
+import WhatsAppClickTracker from '@/components/tracking/WhatsAppClickTracker'
+import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker'
 
 /* ── SVG Icons ── */
 const WAIcon = () => (
@@ -109,7 +111,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   )
 }
 
-function FomoBanner() {
+function FomoBanner({ phoneNumber }: { phoneNumber: string }) {
   const locale = useLocale()
   const t = useTranslations('fomoBanner')
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 })
@@ -128,7 +130,7 @@ function FomoBanner() {
         <span className="fomo-dot w-2 h-2 rounded-full bg-white shrink-0" />
         <span className="font-medium">{texts[textIdx]}</span>
         <span className="font-mono font-semibold px-2 py-0.5 rounded" style={{ background: 'rgba(0,0,0,0.25)' }}>{pad(timeLeft.hours)}:{pad(timeLeft.minutes)}:{pad(timeLeft.seconds)}</span>
-        <a href={waRedirect(locale)} className="font-semibold underline underline-offset-2 hover:no-underline shrink-0">{t('bookNow')} &rarr;</a>
+        <WhatsAppClickTracker phoneNumber={phoneNumber} href={waRedirect(locale)} className="font-semibold underline underline-offset-2 hover:no-underline shrink-0">{t('bookNow')} &rarr;</WhatsAppClickTracker>
       </div>
     </div>
   )
@@ -137,7 +139,9 @@ function FomoBanner() {
 /* ══════════════════════════════════════════
    LOCATION PAGE
    ══════════════════════════════════════════ */
-export default function LocationPage() {
+type LocationPageProps = { phoneNumber: string }
+
+export default function LocationPage({ phoneNumber }: LocationPageProps) {
   const params = useParams()
   const locationSlug = params.location as string
   const locale = useLocale()
@@ -150,6 +154,10 @@ export default function LocationPage() {
 
   const WA_LINK = waRedirect(locale, undefined, locationSlug)
   const productKeys = products.map(p => p.key)
+  const productSlugByKey: Record<string, string> = products.reduce((acc, p) => {
+    acc[p.key] = p.slug
+    return acc
+  }, {} as Record<string, string>)
 
   // Try to get location-specific copy, fallback to homepage copy
   const hasLocationCopy = (() => {
@@ -179,7 +187,7 @@ export default function LocationPage() {
 
   return (
     <>
-      <FomoBanner />
+      <FomoBanner phoneNumber={phoneNumber} />
 
       {/* ── NAV ── */}
       <header className="sticky top-0 z-50" style={{ background: 'rgba(44,51,56,0.97)', backdropFilter: 'blur(12px)', boxShadow: 'var(--shadow-nav)' }}>
@@ -195,7 +203,7 @@ export default function LocationPage() {
           </nav>
           <div className="flex items-center gap-3">
             <LanguageSwitcher />
-            <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white"><WAIcon /><span>{t('nav.ctaButton')}</span></a>
+            <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white"><WAIcon /><span>{t('nav.ctaButton')}</span></WhatsAppClickTracker>
             <button className="icon-btn md:hidden text-white p-1 cursor-pointer" onClick={() => setMobileMenuOpen(true)} aria-label="Open menu"><MenuIcon /></button>
           </div>
         </div>
@@ -206,7 +214,7 @@ export default function LocationPage() {
               {[{ label: t('nav.products'), href: '#products' }, { label: t('nav.reviews'), href: '#reviews' }, { label: t('nav.locations'), href: '#locations' }, { label: t('nav.faq'), href: '#faq' }].map(link => (
                 <a key={link.href} href={link.href} onClick={() => setMobileMenuOpen(false)} className="hover:text-[var(--brand-yellow)]">{link.label}</a>
               ))}
-              <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2 px-6 py-3 rounded-xl text-base font-bold text-white mt-4"><WAIcon />{t('nav.ctaButton')}</a>
+              <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2 px-6 py-3 rounded-xl text-base font-bold text-white mt-4"><WAIcon />{t('nav.ctaButton')}</WhatsAppClickTracker>
             </nav>
           </div>
         )}
@@ -238,7 +246,7 @@ export default function LocationPage() {
               </h1>
               {locIntro && <p className="text-base font-normal mb-6 max-w-xl" style={{ color: 'rgba(255,255,255,0.75)', lineHeight: '1.7' }}>{locIntro}</p>}
               <div className="flex flex-col sm:flex-row items-start gap-3">
-                <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-base font-bold text-white"><WAIcon />{t('hero.ctaPrimary')}</a>
+                <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-base font-bold text-white"><WAIcon />{t('hero.ctaPrimary')}</WhatsAppClickTracker>
                 <a href="#products" className="ghost-btn inline-flex items-center px-6 py-3.5 rounded-xl text-base font-semibold text-white" style={{ border: '2px solid rgba(255,255,255,0.3)' }}>{t('hero.ctaSecondary')}</a>
               </div>
             </div>
@@ -265,7 +273,12 @@ export default function LocationPage() {
             </div>
             <div className="space-y-6">
               {productKeys.map((key, i) => (
-                <div key={key} className={`product-card bg-white rounded-2xl overflow-hidden flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`} style={{ boxShadow: 'var(--shadow-md)', border: '1px solid var(--brand-border)' }}>
+                <ProductImpressionTracker
+                  key={key}
+                  slug={productSlugByKey[key] || key}
+                  className={`product-card bg-white rounded-2xl overflow-hidden flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+                  style={{ boxShadow: 'var(--shadow-md)', border: '1px solid var(--brand-border)' }}
+                >
                   <div className="relative md:w-2/5 h-56 md:h-auto overflow-hidden" style={{ background: 'var(--brand-gunmetal)', minHeight: '240px' }}>
                     <img src={productImages[key]} alt={t(`products.items.${key}.altText`)} className="w-full h-full object-cover" loading="lazy" />
                     <div className="absolute top-4 left-4 w-10 h-10 rounded-lg flex items-center justify-center text-sm font-extrabold" style={{ background: 'var(--brand-yellow)', color: 'var(--brand-charcoal)' }}>0{i + 1}</div>
@@ -273,9 +286,9 @@ export default function LocationPage() {
                   <div className="md:w-3/5 p-6 md:p-8 flex flex-col justify-center">
                     <h3 className="text-lg md:text-xl font-bold mb-3" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.02em' }}>{t(`products.items.${key}.name`)}</h3>
                     <p className="text-sm font-normal mb-4" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7' }}>{t(`products.items.${key}.description`)}</p>
-                    <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-white self-start"><WAIcon />{t(`products.items.${key}.cta`)}</a>
+                    <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-white self-start"><WAIcon />{t(`products.items.${key}.cta`)}</WhatsAppClickTracker>
                   </div>
-                </div>
+                </ProductImpressionTracker>
               ))}
             </div>
           </div>
@@ -321,7 +334,7 @@ export default function LocationPage() {
             </div>
             <div className="text-center md:text-left">
               <p className="text-base font-semibold mb-6" style={{ color: 'var(--brand-charcoal)' }}>{locClosingCta || t('riskProblem.solutionCta')}</p>
-              <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-base font-bold text-white"><WAIcon />{t('shared.whatsappCta')}</a>
+              <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-base font-bold text-white"><WAIcon />{t('shared.whatsappCta')}</WhatsAppClickTracker>
             </div>
           </div>
         </section>
@@ -331,7 +344,7 @@ export default function LocationPage() {
           <div className="relative max-w-6xl mx-auto text-center">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ letterSpacing: '-0.025em' }}>{t('midCta.heading')}</h2>
             <p className="text-sm font-normal mb-6" style={{ color: 'var(--brand-yellow)' }}>{t('midCta.subheading')}</p>
-            <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-lg font-bold text-white"><WAIcon />{t('midCta.ctaButton')}</a>
+            <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-lg font-bold text-white"><WAIcon />{t('midCta.ctaButton')}</WhatsAppClickTracker>
           </div>
         </section>
 
@@ -508,7 +521,7 @@ export default function LocationPage() {
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ letterSpacing: '-0.025em' }}>{t('finalCta.heading')}</h2>
             <p className="text-sm font-normal mb-6" style={{ color: 'var(--brand-yellow)' }}>{t('finalCta.subheading')}</p>
             <div className="flex flex-col sm:flex-row justify-center items-center gap-3 mb-4">
-              <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-lg font-bold text-white"><WAIcon />{t('finalCta.ctaButton')}</a>
+              <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-lg font-bold text-white"><WAIcon />{t('finalCta.ctaButton')}</WhatsAppClickTracker>
               <a href={`tel:+60174287801`} className="ghost-btn inline-flex items-center px-6 py-3.5 rounded-xl text-base font-semibold text-white" style={{ border: '2px solid rgba(255,255,255,0.3)' }}>{t('common.callNow')}</a>
             </div>
             <p className="text-xs font-normal" style={{ color: 'var(--brand-steel-light)' }}>{t('finalCta.supportingText')}</p>
@@ -550,9 +563,9 @@ export default function LocationPage() {
       </footer>
 
       {/* ── FLOATING WHATSAPP ── */}
-      <a href={WA_LINK} className="fixed bottom-6 right-6 z-50 wa-btn flex items-center gap-2 px-4 py-3 rounded-full text-sm font-semibold text-white" aria-label={t('footer.whatsappFloat')} style={{ boxShadow: '0 4px 20px rgba(37,211,102,0.4)' }}>
+      <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} className="fixed bottom-6 right-6 z-50 wa-btn flex items-center gap-2 px-4 py-3 rounded-full text-sm font-semibold text-white" aria-label={t('footer.whatsappFloat')} style={{ boxShadow: '0 4px 20px rgba(37,211,102,0.4)' }}>
         <WAIcon /><span className="hidden sm:inline">{t('footer.whatsappFloat')}</span>
-      </a>
+      </WhatsAppClickTracker>
     </>
   )
 }

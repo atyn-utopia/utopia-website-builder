@@ -6,9 +6,10 @@ interface Props {
   locale: string
   locationSlug?: string
   cityOverride?: string
+  phoneNumber?: string
 }
 
-export function Hero({ locale, locationSlug, cityOverride }: Props) {
+export function Hero({ locale, locationSlug, cityOverride, phoneNumber }: Props) {
   const t = useTranslations('hero')
   const th = useTranslations('whatsapp')
   const heroImg = '/hero-painter.png'
@@ -61,6 +62,7 @@ export function Hero({ locale, locationSlug, cityOverride }: Props) {
               locationSlug={locationSlug}
               label={t('cta')}
               ariaLabel={th('ariaLabel')}
+              phoneNumber={phoneNumber}
             />
             <a href="#gallery" className="btn-secondary">{t('ctaSecondary')}</a>
           </div>

@@ -9,6 +9,7 @@ import { OrganizationSchema } from '@/components/schema/OrganizationSchema'
 import { siteConfig } from '@/config/site'
 import { footerLocations } from '@/config/locations'
 import { getPhoneNumber, waLink } from '@/lib/webcore'
+import WhatsAppClickTracker from '@/components/tracking/WhatsAppClickTracker'
 import '../globals.css'
 
 const inter = Inter({
@@ -140,7 +141,8 @@ export default async function LocaleLayout({ children, params }: Props) {
 
               <div className="flex items-center gap-3 shrink-0">
                 <LanguageSwitcher currentLocale={locale} />
-                <a
+                <WhatsAppClickTracker
+                  phoneNumber={phone}
                   href={`/${locale}/redirect-whatsapp-1`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -149,7 +151,7 @@ export default async function LocaleLayout({ children, params }: Props) {
                 >
                   <WAIcon />
                   {t('whatsapp')}
-                </a>
+                </WhatsAppClickTracker>
               </div>
             </div>
           </header>
@@ -174,7 +176,8 @@ export default async function LocaleLayout({ children, params }: Props) {
                   <p className="text-sm leading-relaxed max-w-xs" style={{ color: 'var(--brand-text-muted)' }}>
                     {tf('tagline')}
                   </p>
-                  <a
+                  <WhatsAppClickTracker
+                    phoneNumber={phone}
                     href={`/${locale}/redirect-whatsapp-1`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -183,7 +186,7 @@ export default async function LocaleLayout({ children, params }: Props) {
                   >
                     <WAIcon />
                     {tf('whatsapp')}
-                  </a>
+                  </WhatsAppClickTracker>
                 </div>
 
                 {/* Products */}

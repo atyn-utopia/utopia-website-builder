@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from 'react'
 import { useTranslations } from 'next-intl'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
+import WhatsAppClickTracker from '@/components/tracking/WhatsAppClickTracker'
+import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker'
 
 const WAIcon = () => (
   <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current shrink-0" aria-hidden="true">
@@ -69,10 +71,11 @@ type Props = {
   locale: string
   locationSlug: string
   cityName: string
+  phoneNumber: string
   nearby: { slug: string; name: string }[]
 }
 
-export default function LocationPageClient({ locale, locationSlug, cityName, nearby }: Props) {
+export default function LocationPageClient({ locale, locationSlug, cityName, phoneNumber, nearby }: Props) {
   const t = useTranslations('location')
   const nav = useTranslations('nav')
   const footer = useTranslations('footer')
@@ -103,9 +106,9 @@ export default function LocationPageClient({ locale, locationSlug, cityName, nea
           </a>
           <div className="flex items-center gap-3">
             <LanguageSwitcher />
-            <a href={waLink} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-white" style={{ background: 'var(--wa-green)' }}>
+            <WhatsAppClickTracker phoneNumber={phoneNumber} href={waLink} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-white" style={{ background: 'var(--wa-green)' }}>
               <WAIcon /><span className="hidden sm:inline">{nav('whatsapp')}</span>
-            </a>
+            </WhatsAppClickTracker>
           </div>
         </div>
       </header>
@@ -130,9 +133,9 @@ export default function LocationPageClient({ locale, locationSlug, cityName, nea
             <p className="text-base font-normal mb-8 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.72)', lineHeight: '1.7' }}>
               {t('cta.subheading', { city: cityName })}
             </p>
-            <a href={waLink} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2.5 px-6 py-3 rounded-xl text-base font-bold text-white" style={{ background: 'var(--wa-green)' }}>
+            <WhatsAppClickTracker phoneNumber={phoneNumber} href={waLink} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2.5 px-6 py-3 rounded-xl text-base font-bold text-white" style={{ background: 'var(--wa-green)' }}>
               <WAIcon />{t('hero.cta', { city: cityName })}
-            </a>
+            </WhatsAppClickTracker>
           </div>
         </section>
 
@@ -144,14 +147,16 @@ export default function LocationPageClient({ locale, locationSlug, cityName, nea
             </FadeSection>
             <div className="grid sm:grid-cols-2 gap-4">
               {serviceItems.map((svc, i) => (
-                <FadeSection key={svc.key} delay={i * 60}>
-                  <div className="flex gap-4 p-5 rounded-xl bg-white" style={{ border: '1px solid var(--brand-border)' }}>
-                    <span className="text-2xl shrink-0" aria-hidden="true">{svc.icon}</span>
-                    <p className="text-sm font-normal" style={{ color: 'var(--brand-text)', lineHeight: '1.7' }}>
-                      {t(`services.${svc.key}`, { city: cityName })}
-                    </p>
-                  </div>
-                </FadeSection>
+                <ProductImpressionTracker key={svc.key} slug={svc.key}>
+                  <FadeSection delay={i * 60}>
+                    <div className="flex gap-4 p-5 rounded-xl bg-white" style={{ border: '1px solid var(--brand-border)' }}>
+                      <span className="text-2xl shrink-0" aria-hidden="true">{svc.icon}</span>
+                      <p className="text-sm font-normal" style={{ color: 'var(--brand-text)', lineHeight: '1.7' }}>
+                        {t(`services.${svc.key}`, { city: cityName })}
+                      </p>
+                    </div>
+                  </FadeSection>
+                </ProductImpressionTracker>
               ))}
             </div>
           </div>
@@ -225,9 +230,9 @@ export default function LocationPageClient({ locale, locationSlug, cityName, nea
               <p className="text-base font-normal mb-8 max-w-2xl mx-auto" style={{ color: 'rgba(255,255,255,0.7)' }}>
                 {t('cta.subheading', { city: cityName })}
               </p>
-              <a href={waLink} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-lg font-bold text-white" style={{ background: 'var(--wa-green)' }}>
+              <WhatsAppClickTracker phoneNumber={phoneNumber} href={waLink} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-lg font-bold text-white" style={{ background: 'var(--wa-green)' }}>
                 <WAIcon />{t('cta.button', { city: cityName })}
-              </a>
+              </WhatsAppClickTracker>
               <p className="mt-4 text-xs font-normal" style={{ color: 'rgba(255,255,255,0.4)' }}>{t('cta.fine')}</p>
             </FadeSection>
           </div>
@@ -242,7 +247,7 @@ export default function LocationPageClient({ locale, locationSlug, cityName, nea
               <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'var(--brand-yellow)' }}><AircondIcon /></div>
               <span className="font-extrabold text-lg text-white tracking-tight">Encik Beku</span>
             </div>
-            <a href={waLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xs font-semibold hover:opacity-80" style={{ color: 'var(--wa-green)' }}><WAIcon />{footer('whatsappUs')}</a>
+            <WhatsAppClickTracker phoneNumber={phoneNumber} href={waLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xs font-semibold hover:opacity-80" style={{ color: 'var(--wa-green)' }}><WAIcon />{footer('whatsappUs')}</WhatsAppClickTracker>
           </div>
           <div className="border-t mt-6 pt-5 text-center text-xs font-normal" style={{ borderColor: 'rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.3)' }}>
             <p>{footer('copyright', { year: new Date().getFullYear() })}</p>

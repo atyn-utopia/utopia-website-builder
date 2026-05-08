@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import ProductCard, { ProductCardData } from '@/components/ProductCard';
+import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import { waRedirect } from '@/lib/waRedirect';
 
@@ -379,14 +380,15 @@ export default function HomeSections({ locale, products, location }: Props) {
             data-cols-desktop={desktopCols}
           >
             {renderProducts.map((p) => (
-              <ProductCard
-                key={p.slug}
-                product={p}
-                ctaLabel={productsT('cardCta')}
-                waHref={waHref}
-                locale={locale}
-                priceHintFallback={priceFallback}
-              />
+              <ProductImpressionTracker key={p.slug} slug={p.slug}>
+                <ProductCard
+                  product={p}
+                  ctaLabel={productsT('cardCta')}
+                  waHref={waHref}
+                  locale={locale}
+                  priceHintFallback={priceFallback}
+                />
+              </ProductImpressionTracker>
             ))}
           </div>
           <style jsx>{`

@@ -1,9 +1,9 @@
 import { useTranslations } from 'next-intl'
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton'
 
-interface Props { locale: string; locationSlug?: string }
+interface Props { locale: string; locationSlug?: string; phoneNumber?: string }
 
-export function MidCta({ locale, locationSlug }: Props) {
+export function MidCta({ locale, locationSlug, phoneNumber }: Props) {
   const t = useTranslations('midCta')
   return (
     <section className="bg-jade-gradient" style={{ padding: 'clamp(44px, 5.5vw, 72px) 0' }}>
@@ -13,7 +13,7 @@ export function MidCta({ locale, locationSlug }: Props) {
           {t('line')}
         </p>
         <div style={{ marginTop: 30 }}>
-          <WhatsAppButton locale={locale} locationSlug={locationSlug} label={t('cta')} />
+          <WhatsAppButton locale={locale} locationSlug={locationSlug} label={t('cta')} phoneNumber={phoneNumber} />
         </div>
       </div>
     </section>

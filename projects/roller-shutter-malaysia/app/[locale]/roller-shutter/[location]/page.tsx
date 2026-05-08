@@ -4,6 +4,7 @@ import { getTranslations } from 'next-intl/server';
 import { locales } from '@/i18n/routing';
 import { siteConfig } from '@/config/site';
 import { locations } from '@/config/locations';
+import { getPhoneNumber } from '@/lib/webcore';
 import LocationPageClient from './LocationPageClient';
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
@@ -94,6 +95,8 @@ export default async function LocationPage({
     }));
   } catch { /* fallback empty */ }
 
+  const { phone } = await getPhoneNumber(location);
+
   return (
     <>
       <LocalBusinessSchema locale={locale} locationSlug={location} cityName={locationData.name} />
@@ -103,7 +106,7 @@ export default async function LocationPage({
         { name: locationData.name, href: `/${locale}/roller-shutter/${location}` },
       ]} />
       {faqs.length > 0 && <FAQSchema faqs={faqs} />}
-      <LocationPageClient />
+      <LocationPageClient phoneNumber={phone} />
     </>
   );
 }
