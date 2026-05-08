@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <head>
-        <script defer src="https://webcore.utopiaai.my/t.js" data-website="tablechair-rental-malaysia.vercel.app"></script>
+        <script defer src="https://webcore.utopiaai.my/t.js" data-website="tablechair-rental-malaysia.utopiaai.my"></script>
       </head>
       <body className="bg-[#FFFEF8] text-[#111111] antialiased overflow-x-hidden">{children}</body>
     </html>

@@ -59,7 +59,7 @@ export default async function LocaleLayout({
         <script
           defer
           src="https://webcore.utopiaai.my/t.js"
-          data-website="electrician-24-hour.vercel.app"
+          data-website="electrician-24-hour.utopiaai.my"
         />
       </head>
       <body style={{ fontFamily: 'var(--font-inter), Inter, sans-serif' }}>
