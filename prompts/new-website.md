@@ -112,7 +112,7 @@ Work through each agent's output document and implement it:
 7. **Kimmy** → Write `i18n/routing.ts`, `i18n/request.ts`, `middleware.ts`, `messages/*.json`, `LanguageSwitcher.tsx`
 8. **Kimmy** → Write `app/[locale]/redirect-whatsapp-1/page.tsx` + `RedirectClient.tsx`
 9. **Tracking** → Add Utopia Webcore analytics (MANDATORY — see `docs/tracking-guide.md`):
-   - Add tracking script to root layout `<head>`: `<script defer src="https://utopia-webcore.vercel.app/t.js" data-website="{domain}" />`
+   - Add tracking script to root layout `<head>`: `<script defer src="https://webcore.utopiaai.my/t.js" data-website="{domain}" />`
    - Add TypeScript type declaration for `window.uwc` in `global.d.ts`
    - Track WhatsApp button clicks: `window.uwc('click', { label: 'whatsapp-{number}' })`
    - Track product card impressions with IntersectionObserver: `window.uwc('impression', { label: 'product-{slug}' })`

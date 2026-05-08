@@ -335,7 +335,7 @@ Sora must produce `seo-plan.md` covering:
 | i18n | next-intl 4 |
 | Database | Supabase (shared instance — NOT per-website) |
 | Deployment | Vercel |
-| Analytics | Utopia Webcore tracking script (`https://utopia-webcore.vercel.app/t.js`) |
+| Analytics | Utopia Webcore tracking script (`https://webcore.utopiaai.my/t.js`) |
 | Typography | **Inter only** — headings AND body. No serif. (User memory rule.) |
 
 ### Locked design rules (from CLAUDE.md — apply verbatim)
@@ -373,7 +373,7 @@ Homepage and location pages MUST render the **identical section order**. Locatio
 - Blog translation joins use `blog_translations.language` for the locale filter. Verified in `projects/electric-wheelchair-malaysia/lib/getBlogPosts.ts`.
 
 ### Tracking (mandatory)
-- `<script defer src="https://utopia-webcore.vercel.app/t.js" data-website="katilhospital-24jam.vercel.app">` in the `<head>` of `app/[locale]/layout.tsx`.
+- `<script defer src="https://webcore.utopiaai.my/t.js" data-website="katilhospital-24jam.vercel.app">` in the `<head>` of `app/[locale]/layout.tsx`.
 - `global.d.ts` declares `window.uwc`.
 - Events to fire:
   - `uwc('click', { label: 'whatsapp-60174287801' })` on every WhatsApp CTA press.

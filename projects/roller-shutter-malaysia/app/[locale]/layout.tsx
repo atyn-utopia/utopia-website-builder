@@ -29,7 +29,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={inter.variable}>
       <head>
-        <script defer src="https://utopia-webcore.vercel.app/t.js" data-website="roller-shutter-malaysia.vercel.app"></script>
+        <script defer src="https://webcore.utopiaai.my/t.js" data-website="roller-shutter-malaysia.vercel.app"></script>
       </head>
       <body style={{ fontFamily: 'var(--font-inter), Inter, sans-serif' }}>
         <NextIntlClientProvider messages={messages}>

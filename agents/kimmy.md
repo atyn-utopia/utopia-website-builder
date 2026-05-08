@@ -439,7 +439,7 @@ Kimmy is responsible for implementing Utopia Webcore analytics on every website.
 
 **1. Add tracking script to `app/[locale]/layout.tsx` `<head>`:**
 ```html
-<script defer src="https://utopia-webcore.vercel.app/t.js" data-website="{domain}" />
+<script defer src="https://webcore.utopiaai.my/t.js" data-website="{domain}" />
 ```
 `data-website` MUST match the exact deployed domain.
 

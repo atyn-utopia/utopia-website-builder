@@ -399,7 +399,7 @@ export default async function LocaleLayout({
       <head>
         <script
           defer
-          src="https://utopia-webcore.vercel.app/t.js"
+          src="https://webcore.utopiaai.my/t.js"
           data-website="{project-slug}.vercel.app"
         />
       </head>
@@ -583,7 +583,7 @@ Each location page must have:
 Already included in `app/[locale]/layout.tsx` above:
 
 ```html
-<script defer src="https://utopia-webcore.vercel.app/t.js" data-website="{domain}" />
+<script defer src="https://webcore.utopiaai.my/t.js" data-website="{domain}" />
 ```
 
 `data-website` MUST match the exact deployed domain.

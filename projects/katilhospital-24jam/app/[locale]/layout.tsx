@@ -31,7 +31,7 @@ export default async function LocaleLayout({
       <head>
         <script
           defer
-          src="https://utopia-webcore.vercel.app/t.js"
+          src="https://webcore.utopiaai.my/t.js"
           data-website="katilhospital-24jam.vercel.app"
         />
       </head>

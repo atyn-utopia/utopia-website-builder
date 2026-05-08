@@ -276,7 +276,7 @@ Nana writes the actual copy strings; Kimmy wires them in.
 | Database | Shared Supabase | Distinguished by `website = 'skylift-malaysia.vercel.app'` column |
 | Env loading | `loadEnvConfig(process.cwd() + '/../..')` in `next.config.ts` | Reads `/.env.local` at repo root via symlink |
 | Deployment | Vercel | Domain `skylift-malaysia.vercel.app`; same env vars added via `vercel env add` |
-| Tracking | Utopia Webcore (`https://utopia-webcore.vercel.app/t.js`) | `data-website` MUST equal `skylift-malaysia.vercel.app` |
+| Tracking | Utopia Webcore (`https://webcore.utopiaai.my/t.js`) | `data-website` MUST equal `skylift-malaysia.vercel.app` |
 | ISR | `revalidate = 3600` site-wide | WhatsApp redirect remains `force-dynamic` |
 | Leads mode | `single` at launch | Architecture supports later switch to `rotation` / `location` / `hybrid` with no code changes |
 | Dev port | Use a unique port (e.g. `3010`) | Avoid clashing with sibling projects |

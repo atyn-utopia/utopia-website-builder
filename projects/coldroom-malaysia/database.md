@@ -29,7 +29,7 @@ No new tables. No new columns. No schema migrations. This project only inserts r
 4. `products` — insert four rows (one per temperature tier — Cyclops Part 2, after Gate 1).
 5. `product_photos` — 8 rows (two per tier — Cyclops Part 2).
 6. `blog_posts` + `blog_translations` — Hanabi inserts (Step 11). Cyclops does not touch.
-7. Tracking tables — populated automatically by `https://utopia-webcore.vercel.app/t.js` once `data-website="coldroom-malaysia.vercel.app"` is set.
+7. Tracking tables — populated automatically by `https://webcore.utopiaai.my/t.js` once `data-website="coldroom-malaysia.vercel.app"` is set.
 
 ### Column-name reality check (verified against EWM `lib/getPhoneNumber.ts` + `lib/getBlogPosts.ts`)
 

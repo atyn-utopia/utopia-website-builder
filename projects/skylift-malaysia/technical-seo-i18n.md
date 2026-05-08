@@ -1358,7 +1358,7 @@ export default async function LocaleLayout({
       <head>
         <script
           defer
-          src="https://utopia-webcore.vercel.app/t.js"
+          src="https://webcore.utopiaai.my/t.js"
           data-website="skylift-malaysia.vercel.app"
         />
       </head>
@@ -1645,7 +1645,7 @@ Attach to the `<a>` / card wrapper before letting navigation proceed.
 
 ### 15.4 Tracking checklist (run before Layla deploys)
 
-- [ ] `<script defer src="https://utopia-webcore.vercel.app/t.js" data-website="skylift-malaysia.vercel.app" />` in `<head>` of `app/[locale]/layout.tsx`
+- [ ] `<script defer src="https://webcore.utopiaai.my/t.js" data-website="skylift-malaysia.vercel.app" />` in `<head>` of `app/[locale]/layout.tsx`
 - [ ] `global.d.ts` exports `Window.uwc`
 - [ ] Every WhatsApp button (12 call sites above) calls `window.uwc('click', { label: 'whatsapp-...' })`
 - [ ] Every product card calls `window.uwc('impression', { label: 'product-{slug}' })` exactly once

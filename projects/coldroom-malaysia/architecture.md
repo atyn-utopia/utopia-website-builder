@@ -503,7 +503,7 @@ Every page emits `<link rel="alternate">` for all 3 locales + `x-default` pointi
 | Database | Supabase (SHARED instance) | All websites share the same DB; distinguished by `website` column |
 | i18n | next-intl 4 | Proven across existing projects; App Router native |
 | Deployment | Vercel | ISR + edge + preview deploys |
-| Analytics | Utopia Webcore Tracking (`https://utopia-webcore.vercel.app/t.js`) | Mandatory; `data-website="coldroom-malaysia.vercel.app"` |
+| Analytics | Utopia Webcore Tracking (`https://webcore.utopiaai.my/t.js`) | Mandatory; `data-website="coldroom-malaysia.vercel.app"` |
 | Font | Inter (global, no serif) | User memory preference |
 | WhatsApp colour | `#25D366` (hover `#1EBE57`) | Official WhatsApp green — never themed |
 | Brand palette | Deep orange (`#F57C00`/`#FF8A00`) accent + cool steel grey (`#3A3F45`) + crisp white | From `brand_assets/pasted-image-1777254709725.png`; never default Tailwind blue/indigo |

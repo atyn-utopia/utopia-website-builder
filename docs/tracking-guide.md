@@ -7,7 +7,7 @@
 Add this **one line** to your website's `<head>` tag:
 
 ```html
-<script defer src="https://utopia-webcore.vercel.app/t.js" data-website="your-domain.vercel.app"></script>
+<script defer src="https://webcore.utopiaai.my/t.js" data-website="your-domain.vercel.app"></script>
 ```
 
 Replace `your-domain.vercel.app` with the **exact domain** of the website.
@@ -99,7 +99,7 @@ export default function RootLayout({ children }) {
       <head>
         <script
           defer
-          src="https://utopia-webcore.vercel.app/t.js"
+          src="https://webcore.utopiaai.my/t.js"
           data-website="your-domain.vercel.app"
         />
       </head>
