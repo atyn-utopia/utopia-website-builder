@@ -32,7 +32,7 @@ export default async function LocaleLayout({
         <script
           defer
           src="https://webcore.utopiaai.my/t.js"
-          data-website="katilhospital-24jam.vercel.app"
+          data-website="katilhospital-24jam.utopiaai.my"
         />
       </head>
       <body style={{ fontFamily: 'var(--font-inter), Inter, sans-serif' }}>

@@ -1,6 +1,6 @@
 export const siteConfig = {
-  domain: 'katilhospital-24jam.vercel.app',
-  siteUrl: 'https://katilhospital-24jam.vercel.app',
+  domain: 'katilhospital-24jam.utopiaai.my',
+  siteUrl: 'https://katilhospital-24jam.utopiaai.my',
   brandName: 'Katil Hospital 24 Jam',
   legalName: 'Ibnu Sina Care Sdn. Bhd.',
   tagline: 'Sewa & Jual Katil Hospital 24 Jam di Seluruh Malaysia',
