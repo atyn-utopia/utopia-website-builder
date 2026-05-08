@@ -1,0 +1,212 @@
+{
+  "nav": {
+    "home": "Laman Utama",
+    "products": "Produk",
+    "how": "Cara Pesan",
+    "reviews": "Ulasan",
+    "blog": "Blog",
+    "cta": "WhatsApp Kami"
+  },
+  "fomo": {
+    "primary": "Tawaran 24 Jam tamat dalam",
+    "secondary": "Hantar hari ini ke 159 bandar — tempah sebelum masa tamat.",
+    "labels": {
+      "hrs": "Jam",
+      "min": "Min",
+      "sec": "Saat"
+    }
+  },
+  "hero": {
+    "h1": "Sewa & Jual Katil Hospital 24 Jam di Seluruh Malaysia",
+    "h2": "Penghantaran hari sama ke 159 bandar — manual, elektrik & tilam anti-decubitus untuk warga emas dan pesakit di rumah.",
+    "ctaPrimary": "WhatsApp Kami Sekarang",
+    "ctaSecondary": "Lihat Produk",
+    "trustMicro": "Dipercayai ratusan keluarga di seluruh Malaysia · Hantar & pasang dalam 24 jam"
+  },
+  "usp": {
+    "p1": {
+      "label": "Penghantaran 24 Jam",
+      "sub": "Hantar & pasang hari sama di seluruh Malaysia"
+    },
+    "p2": {
+      "label": "Sewa Bulanan Fleksibel",
+      "sub": "Pakej sewa atau beli — ikut belanjawan keluarga"
+    },
+    "p3": {
+      "label": "Liputan Seluruh Malaysia",
+      "sub": "159 bandar dari Perlis ke Sabah & Sarawak"
+    }
+  },
+  "products": {
+    "h3": "Produk Kami",
+    "intro": "Katil hospital manual dan elektrik, tilam hospital, tilam angin anti-decubitus, mesin oksigen, kerusi roda, dan mesin CPAP — semua boleh disewa atau dibeli dengan penghantaran 24 jam.",
+    "cardCta": "Lihat di WhatsApp",
+    "eyebrow": "Katalog Sewa & Beli"
+  },
+  "values": {
+    "h3": "Kenapa Pilih Katil Hospital 24 Jam",
+    "intro": "Kami faham penjagaan di rumah tidak boleh tunggu. Inilah sebabnya ratusan keluarga Malaysia percayakan kami.",
+    "c1": {
+      "title": "Penghantaran 24 Jam",
+      "body": "Tempah pagi, sampai petang — atau dalam masa 24 jam di mana-mana lokasi di Malaysia. Tidak perlu tunggu berhari-hari."
+    },
+    "c2": {
+      "title": "Harga Telus & Berpatutan",
+      "body": "Sebut harga jelas, tiada caj tersembunyi. Pilihan sewa bulanan untuk keluarga yang masih menentukan tempoh penjagaan."
+    },
+    "c3": {
+      "title": "Hantar & Pasang Lengkap",
+      "body": "Pasukan kami hantar, pasang, dan tunjuk cara guna di tempat — supaya keluarga anda boleh fokus pada pesakit, bukan pada mesin."
+    },
+    "c4": {
+      "title": "Sokongan Selepas Hantar",
+      "body": "Ada soalan pada pukul 10 malam? WhatsApp kami — pasukan sokongan sedia bantu sepanjang tempoh sewa atau waranti."
+    },
+    "eyebrow": "Kelebihan Kami"
+  },
+  "howItWorks": {
+    "h3": "3 Langkah Mudah",
+    "s1": {
+      "title": "1. WhatsApp Kami",
+      "body": "Hubungi kami di WhatsApp dan beritahu keperluan anda — katil mana, berapa lama, di bandar mana. Kami balas dengan sebut harga segera."
+    },
+    "s2": {
+      "title": "2. Sahkan & Bayar",
+      "body": "Pilih sewa atau beli, sahkan tempoh, dan buat pembayaran secara dalam talian. Kami jadualkan penghantaran 24 jam."
+    },
+    "s3": {
+      "title": "3. Hantar, Pasang, Selesai",
+      "body": "Pasukan kami sampai, pasang katil dan peralatan di bilik, dan tunjuk cara guna. Anda hanya tumpukan pada penjagaan."
+    },
+    "eyebrow": "Proses 3-Langkah"
+  },
+  "gallery": {
+    "h3": "Gambar Pelanggan",
+    "intro": "Penghantaran dan pemasangan sebenar di rumah pelanggan di seluruh Malaysia — tiada lakonan, tiada stok foto.",
+    "eyebrow": "Bukti Sebenar"
+  },
+  "googleReview": {
+    "h3": "Ulasan Pelanggan di Google",
+    "intro": "Ulasan sebenar dari keluarga yang kami bantu — dengan logo Google Review rasmi, bukan bintang generik.",
+    "cta": "Chat WhatsApp",
+    "eyebrow": "Suara Pelanggan"
+  },
+  "faq": {
+    "h3": "Soalan Lazim",
+    "q1": {
+      "q": "Berapa lama penghantaran katil hospital?",
+      "a": "Kami komited untuk hantar dalam 24 jam ke mana-mana lokasi di Malaysia selepas tempahan disahkan. Untuk Lembah Klang dan bandar utama, hari-sama selalunya boleh."
+    },
+    "q2": {
+      "q": "Bagaimana cara sewa bulanan?",
+      "a": "Sewa bulanan fleksibel — minimum 1 bulan, lanjut bila-bila masa. Bayar deposit dan sewa bulan pertama untuk mula, dan kami ambil balik katil bila tempoh tamat."
+    },
+    "q3": {
+      "q": "Adakah pemasangan percuma?",
+      "a": "Ya. Pasukan kami pasang katil, sambung tilam, dan tunjuk cara guna remote atau pam angin tanpa caj tambahan — termasuk penghantaran ke tingkat atas jika perlu."
+    },
+    "q4": {
+      "q": "Cara bayar bagaimana?",
+      "a": "Kami terima pindahan bank dalam talian, DuitNow, dan kad kredit. Pautan pembayaran dihantar terus ke WhatsApp selepas anda sahkan tempahan."
+    },
+    "q5": {
+      "q": "Ada waranti untuk pembelian?",
+      "a": "Ya. Setiap pembelian disertai waranti rasmi — biasanya 1 tahun untuk katil elektrik dan 6 bulan untuk tilam angin. Kami juga uruskan tuntutan waranti untuk anda."
+    },
+    "q6": {
+      "q": "Pilih katil manual atau elektrik?",
+      "a": "Manual lebih jimat dan sesuai untuk pesakit yang boleh bergerak sedikit. Elektrik sesuai untuk pesakit terlantar jangka panjang atau penjaga warga emas — pelarasan dengan sentuhan butang."
+    },
+    "q7": {
+      "q": "Tilam mana muat dengan katil hospital?",
+      "a": "Tilam foam dan tilam angin kami semuanya bersaiz piawai katil hospital (90×190 cm). Jadi mana-mana tilam kami muat dengan mana-mana katil kami."
+    },
+    "q8": {
+      "q": "Boleh pulangkan selepas sewa?",
+      "a": "Ya. Kami ambil balik katil, tilam, dan aksesori di rumah anda tanpa caj tambahan selepas tempoh sewa. Peralatan akan dibersihkan dan diservis untuk pelanggan seterusnya."
+    },
+    "q9": {
+      "q": "Katil ini gred hospital atau rumah?",
+      "a": "Semua katil kami adalah gred hospital — bingkai keluli, rail sisi, dan roda berkunci — tetapi direka supaya selesa digunakan di rumah keluarga biasa."
+    },
+    "q10": {
+      "q": "Ada sokongan selepas beli atau sewa?",
+      "a": "Ya. Hubungi kami di WhatsApp bila-bila masa untuk bantuan teknikal, tukar alat, atau penjagaan alat. Pasukan kami layan pertanyaan sepanjang tempoh sewa atau waranti."
+    },
+    "eyebrow": "Bantuan Pantas"
+  },
+  "finalCta": {
+    "h3": "Perlukan Katil Hospital Hari Ini? WhatsApp Sekarang.",
+    "subtitle": "Pasukan kami standby 24 jam — hantar, pasang, dan selesai sebelum hari berikutnya.",
+    "cta": "WhatsApp Kami Sekarang",
+    "eyebrow": "Bertindak Sekarang"
+  },
+  "footer": {
+    "brand": {
+      "heading": "Katil Hospital 24 Jam",
+      "tagline": "Sewa & jual katil hospital, tilam anti-decubitus dan peralatan penjagaan — hantar dalam 24 jam ke seluruh Malaysia."
+    },
+    "products": {
+      "heading": "Produk"
+    },
+    "locations": {
+      "heading": "Lokasi Utama",
+      "all": "Lihat Semua 159 Lokasi"
+    },
+    "language": {
+      "heading": "Bahasa"
+    },
+    "copyright": "© 2026 Katil Hospital 24 Jam. Hakcipta terpelihara."
+  },
+  "location": {
+    "breadcrumb": {
+      "home": "Laman Utama",
+      "product": "Katil Hospital"
+    },
+    "h1Template": "Sewa Katil Hospital di {city} — Hantar 24 Jam",
+    "faqSharedIntro": "Soalan lazim dari keluarga di {city}",
+    "nearby": {
+      "h3": "Kawasan Berdekatan",
+      "intro": "Kami juga berkhidmat di kawasan berikut.",
+      "anchor": "Lihat katil hospital di {city}"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "readMore": "Baca Lanjut",
+    "noPosts": "Tiada artikel lagi.",
+    "breadcrumbHome": "Laman Utama",
+    "breadcrumbBlog": "Blog",
+    "publishedOn": "Diterbitkan pada",
+    "minRead": "min bacaan",
+    "recentPosts": "Artikel Terkini",
+    "tocTitle": "Kandungan",
+    "ctaBannerTitle": "Perlukan katil hospital hari ini?",
+    "ctaBannerCta": "WhatsApp Kami",
+    "metaTitle": "Blog — Katil Hospital 24 Jam",
+    "metaDescription": "Panduan memilih katil hospital, tilam angin, dan peralatan penjagaan di rumah untuk keluarga di Malaysia."
+  },
+  "languageSwitcher": {
+    "ms": "MS",
+    "en": "EN",
+    "zh": "ZH"
+  },
+  "metadata": {
+    "home": {
+      "title": "Katil Hospital 24 Jam — Sewa & Jual di Malaysia",
+      "description": "Sewa atau beli katil hospital manual & elektrik dengan penghantaran 24 jam ke 159 bandar di Malaysia. Tilam angin & mesin oksigen juga tersedia."
+    },
+    "location": {
+      "titleTemplate": "Sewa Katil Hospital {city} — 24 Jam Malaysia",
+      "descriptionTemplate": "Sewa atau beli katil hospital di {city}, {state} dengan {usp}. Pilihan manual, elektrik dan tilam anti-decubitus — tempah melalui WhatsApp."
+    },
+    "ogLocale": "ms_MY"
+  },
+  "lokasi": {
+    "eyebrow": "Liputan Penghantaran",
+    "h3": "Liputan 159 Kawasan di Seluruh Malaysia",
+    "intro": "Penghantaran percuma ke setiap negeri di Semenanjung, Sabah, dan Sarawak. Klik negeri anda untuk lihat senarai penuh kawasan.",
+    "empty": "Kawasan anda tidak tersenarai?",
+    "emptyCta": "WhatsApp untuk sahkan liputan"
+  }
+}
