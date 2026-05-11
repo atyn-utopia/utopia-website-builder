@@ -3,8 +3,8 @@ import { readFileSync } from 'fs';
 import { createClient } from '@supabase/supabase-js';
 
 for (const p of [
-  '/Users/intern/Documents/GitHub/utopia-website-system/.env.local',
-  '/Users/intern/Documents/GitHub/utopia-website-system/projects/hollywood-night/.env.local',
+  '/Users/intern/Documents/GitHub/utopia-website-builder/.env.local',
+  '/Users/intern/Documents/GitHub/utopia-website-builder/projects/hollywood-night/.env.local',
 ]) {
   try {
     for (const line of readFileSync(p, 'utf8').split(/\n/)) {

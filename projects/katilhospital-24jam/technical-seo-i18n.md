@@ -40,7 +40,7 @@ From `CLAUDE.md` + user memory rules. These are non-negotiable.
 
 ## 1. File Tree Diff
 
-Target project folder: `/Users/intern/Documents/GitHub/utopia-website-system/projects/katilhospital-24jam/`.
+Target project folder: `/Users/intern/Documents/GitHub/utopia-website-builder/projects/katilhospital-24jam/`.
 
 Legend: **NEW** = create from scratch. **COPY-EWM** = copy from `projects/electric-wheelchair-malaysia/` and edit the project-specific constants. **COPY-E24** = copy from `projects/electrician-24-hour/` and edit. **COPY-KH** = copy from this project's existing `brand_assets/` or `Downloads/katilhospital24jam.my/`.
 
@@ -126,7 +126,7 @@ Exact commands (to run AFTER Gate 0 alignment — Kimmy does not execute; Layla 
 ### 2.1 Project init
 
 ```bash
-cd /Users/intern/Documents/GitHub/utopia-website-system/projects/katilhospital-24jam
+cd /Users/intern/Documents/GitHub/utopia-website-builder/projects/katilhospital-24jam
 npx create-next-app@latest . --typescript --tailwind --app --src-dir=false
 npm install @supabase/supabase-js next-intl
 npm install -D @tailwindcss/postcss puppeteer
@@ -135,7 +135,7 @@ npm install -D @tailwindcss/postcss puppeteer
 ### 2.2 Symlink shared credentials
 
 ```bash
-cd /Users/intern/Documents/GitHub/utopia-website-system/projects/katilhospital-24jam
+cd /Users/intern/Documents/GitHub/utopia-website-builder/projects/katilhospital-24jam
 ln -sf ../../.env.local .env.local
 ```
 

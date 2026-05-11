@@ -32,7 +32,7 @@
 Before starting, ensure you have:
 
 - Access to the shared Supabase project (credentials in `/.env.local` at repo root)
-- A GitHub account with push access to the `utopia-website-system` repo
+- A GitHub account with push access to the `utopia-website-builder` repo
 - Vercel account for deployment
 - Brand assets ready (logo, colors, fonts, reference images) — store in `brand_assets/{project}/`
 

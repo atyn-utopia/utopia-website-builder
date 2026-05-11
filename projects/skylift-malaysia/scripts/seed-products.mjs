@@ -3,7 +3,7 @@ import { readFileSync } from 'fs';
 import { createClient } from '@supabase/supabase-js';
 
 try {
-  const envText = readFileSync('/Users/intern/Documents/GitHub/utopia-website-system/.env.local', 'utf8');
+  const envText = readFileSync('/Users/intern/Documents/GitHub/utopia-website-builder/.env.local', 'utf8');
   for (const line of envText.split(/\n/)) {
     const m = line.match(/^([A-Z0-9_]+)=(.*)$/);
     if (m && !process.env[m[1]]) process.env[m[1]] = m[2];

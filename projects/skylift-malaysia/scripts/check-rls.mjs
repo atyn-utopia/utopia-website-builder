@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 import { createClient } from '@supabase/supabase-js';
-const envText = readFileSync('/Users/intern/Documents/GitHub/utopia-website-system/.env.local', 'utf8');
+const envText = readFileSync('/Users/intern/Documents/GitHub/utopia-website-builder/.env.local', 'utf8');
 for (const line of envText.split(/\n/)) { const m = line.match(/^([A-Z0-9_]+)=(.*)$/); if (m) process.env[m[1]] = m[2]; }
 const sb = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
 const { data: prods, error } = await sb.from('products').select('website, name').limit(20);

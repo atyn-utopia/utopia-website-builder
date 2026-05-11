@@ -5,8 +5,8 @@ function readEnv(p) {
   return Object.fromEntries(readFileSync(p,'utf8').split(/\n/).map(l=>l.match(/^([A-Z0-9_]+)=(.*)$/)).filter(Boolean).map(m=>[m[1],m[2]]));
 }
 
-const root = readEnv('/Users/intern/Documents/GitHub/utopia-website-system/.env.local');
-const hn = readEnv('/Users/intern/Documents/GitHub/utopia-website-system/projects/hollywood-night/.env.local');
+const root = readEnv('/Users/intern/Documents/GitHub/utopia-website-builder/.env.local');
+const hn = readEnv('/Users/intern/Documents/GitHub/utopia-website-builder/projects/hollywood-night/.env.local');
 
 console.log('--- TEST 1: hollywood-night URL + hn service-role key ---');
 {

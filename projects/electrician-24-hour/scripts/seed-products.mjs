@@ -4,8 +4,8 @@ import { createClient } from '@supabase/supabase-js';
 
 // Load env manually from repo root + hollywood-night (where service-role key lives)
 for (const p of [
-  '/Users/intern/Documents/GitHub/utopia-website-system/.env.local',
-  '/Users/intern/Documents/GitHub/utopia-website-system/projects/hollywood-night/.env.local',
+  '/Users/intern/Documents/GitHub/utopia-website-builder/.env.local',
+  '/Users/intern/Documents/GitHub/utopia-website-builder/projects/hollywood-night/.env.local',
 ]) {
   try {
     const envText = readFileSync(p, 'utf8');

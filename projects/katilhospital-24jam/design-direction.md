@@ -396,7 +396,7 @@ All 4 columns stack. Each column heading centred. Links centred. CTA in Col A be
 
 ## 13. Blog layout note
 
-**The blog listing and every blog post page MUST match `/Users/intern/Documents/GitHub/utopia-website-system/projects/electric-wheelchair-malaysia/app/[locale]/blog/` exactly** (user memory "Blog layout reference"). Sequence per post: full site header → breadcrumbs → H1 → metadata row (author + date + read-time) → table of contents → body with H2/H3/H4/p → FAQ block → bottom WhatsApp CTA (green, full-width) → recent-posts grid → full site footer. Single column, no sidebar. **Do not propose an alternative blog layout.** Only the colour tokens change from the electric-wheelchair reference (swap teal for `#E11C1C` red + `#2A5FB0` blue + Inter only, no serif).
+**The blog listing and every blog post page MUST match `/Users/intern/Documents/GitHub/utopia-website-builder/projects/electric-wheelchair-malaysia/app/[locale]/blog/` exactly** (user memory "Blog layout reference"). Sequence per post: full site header → breadcrumbs → H1 → metadata row (author + date + read-time) → table of contents → body with H2/H3/H4/p → FAQ block → bottom WhatsApp CTA (green, full-width) → recent-posts grid → full site footer. Single column, no sidebar. **Do not propose an alternative blog layout.** Only the colour tokens change from the electric-wheelchair reference (swap teal for `#E11C1C` red + `#2A5FB0` blue + Inter only, no serif).
 
 The blog CTA banner uses the WhatsApp green `#25D366` pill — same rounded shape as every other CTA on the site.
 

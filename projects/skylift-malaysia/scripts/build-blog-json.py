@@ -2,7 +2,7 @@
 """Generate seed-blog-posts.json with 12 skylift-rental articles in EN/MS/ZH."""
 import json, os, sys
 
-OUT = "/Users/intern/Documents/GitHub/utopia-website-system/projects/skylift-malaysia/scripts/seed-blog-posts.json"
+OUT = "/Users/intern/Documents/GitHub/utopia-website-builder/projects/skylift-malaysia/scripts/seed-blog-posts.json"
 
 PEXELS = lambda i: f"https://images.pexels.com/photos/{i}/pexels-photo-{i}.jpeg?auto=compress&cs=tinysrgb&w=1200"
 

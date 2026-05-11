@@ -100,7 +100,7 @@ const { data } = await supabase
 
 ## 4. Full `lib/getPhoneNumbers.ts`
 
-Save to `/Users/intern/Documents/GitHub/utopia-website-system/projects/cat-rumah-malaysia/lib/getPhoneNumbers.ts`.
+Save to `/Users/intern/Documents/GitHub/utopia-website-builder/projects/cat-rumah-malaysia/lib/getPhoneNumbers.ts`.
 
 ```ts
 import { headers } from 'next/headers'
