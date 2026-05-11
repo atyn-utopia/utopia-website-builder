@@ -12,9 +12,29 @@ interface Wish {
   localUrl: string | null
 }
 
+type GroupKey = 'building' | 'live' | 'other'
+
+const GROUP_ORDER: GroupKey[] = ['building', 'live', 'other']
+const GROUP_LABELS: Record<GroupKey, string> = {
+  building: 'Building',
+  live: 'Live',
+  other: 'Other',
+}
+
+function groupOf(status: Wish['status']): GroupKey {
+  if (status === 'building') return 'building'
+  if (status === 'deployed') return 'live'
+  return 'other'
+}
+
 export default function WishHistory() {
   const [open, setOpen] = useState(false)
   const [wishes, setWishes] = useState<Wish[]>([])
+  const [collapsed, setCollapsed] = useState<Record<GroupKey, boolean>>({
+    building: false,
+    live: false,
+    other: false,
+  })
   const router = useRouter()
   const pathname = usePathname()
 
@@ -29,6 +49,12 @@ export default function WishHistory() {
     const interval = setInterval(fetchWishes, 15000)
     return () => clearInterval(interval)
   }, [pathname]) // refetch when page changes + poll every 15s
+
+  const grouped: Record<GroupKey, Wish[]> = {
+    building: wishes.filter(w => groupOf(w.status) === 'building'),
+    live: wishes.filter(w => groupOf(w.status) === 'live'),
+    other: wishes.filter(w => groupOf(w.status) === 'other'),
+  }
 
   const statusDot = (status: string) => {
     const colors: Record<string, string> = {
@@ -133,99 +159,169 @@ export default function WishHistory() {
             </div>
           )}
 
-          {wishes.map((wish) => {
-            const isActive = pathname === `/wish/${wish.slug}`
+          {GROUP_ORDER.map((groupKey) => {
+            const items = grouped[groupKey]
+            if (items.length === 0) return null
+            const isCollapsed = collapsed[groupKey]
+            const dotColor = groupKey === 'building' ? '#F9A96A'
+              : groupKey === 'live' ? '#4ade80'
+              : '#7EC8E3'
             return (
-              <button
-                key={wish.slug}
-                onClick={() => {
-                  router.push(`/wish/${wish.slug}`)
-                  setOpen(false)
-                }}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 4,
-                  width: '100%',
-                  padding: '12px 16px',
-                  background: isActive ? 'rgba(79, 195, 247, 0.08)' : 'transparent',
-                  border: 'none',
-                  borderLeft: isActive ? '3px solid var(--accent)' : '3px solid transparent',
-                  cursor: 'pointer',
-                  textAlign: 'left',
-                  transition: 'background 0.2s',
-                }}
-                onMouseEnter={(e) => {
-                  if (!isActive) e.currentTarget.style.background = 'rgba(79, 195, 247, 0.04)'
-                }}
-                onMouseLeave={(e) => {
-                  if (!isActive) e.currentTarget.style.background = 'transparent'
-                }}
-              >
-                {/* Slug + status */}
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  width: '100%',
-                }}>
-                  <span style={{
-                    color: 'var(--text-primary)',
-                    fontSize: 13,
-                    fontWeight: 600,
+              <div key={groupKey} style={{ marginBottom: 4 }}>
+                {/* Group header — clickable */}
+                <button
+                  onClick={() => setCollapsed(c => ({ ...c, [groupKey]: !c[groupKey] }))}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    width: '100%',
+                    padding: '8px 16px',
+                    background: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer',
+                    color: 'var(--text-secondary)',
                     fontFamily: 'var(--font-body)',
-                  }}>
-                    {wish.slug}
-                  </span>
+                    textAlign: 'left',
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(79, 195, 247, 0.04)' }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent' }}
+                >
                   <span style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 4,
-                    fontSize: 10,
-                    color: statusDot(wish.status),
-                    fontFamily: 'var(--font-body)',
-                    fontWeight: 600,
-                    letterSpacing: '0.5px',
+                    gap: 8,
+                    fontSize: 11,
+                    fontWeight: 700,
+                    letterSpacing: '1px',
                     textTransform: 'uppercase',
                   }}>
                     <span style={{
                       width: 6,
                       height: 6,
                       borderRadius: '50%',
-                      background: statusDot(wish.status),
+                      background: dotColor,
                       display: 'inline-block',
+                      boxShadow: groupKey === 'building' ? `0 0 6px ${dotColor}` : 'none',
                     }} />
-                    {statusLabel(wish.status)}
+                    {GROUP_LABELS[groupKey]}
+                    <span style={{
+                      color: 'var(--text-muted)',
+                      fontWeight: 500,
+                      letterSpacing: 'normal',
+                      textTransform: 'none',
+                    }}>
+                      {items.length}
+                    </span>
                   </span>
-                </div>
+                  <span style={{
+                    color: 'var(--text-muted)',
+                    fontSize: 10,
+                    transition: 'transform 0.2s',
+                    transform: isCollapsed ? 'rotate(-90deg)' : 'rotate(0deg)',
+                    display: 'inline-block',
+                  }}>
+                    ▾
+                  </span>
+                </button>
 
-                {/* Prompt preview */}
-                <span style={{
-                  color: 'var(--text-muted)',
-                  fontSize: 11,
-                  lineHeight: 1.4,
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  whiteSpace: 'nowrap',
-                  width: '100%',
-                  display: 'block',
-                }}>
-                  {wish.prompt || 'No prompt'}
-                </span>
+                {/* Group items */}
+                {!isCollapsed && items.map((wish) => {
+                  const isActive = pathname === `/wish/${wish.slug}`
+                  return (
+                    <button
+                      key={wish.slug}
+                      onClick={() => {
+                        router.push(`/wish/${wish.slug}`)
+                        setOpen(false)
+                      }}
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 4,
+                        width: '100%',
+                        padding: '12px 16px',
+                        background: isActive ? 'rgba(79, 195, 247, 0.08)' : 'transparent',
+                        border: 'none',
+                        borderLeft: isActive ? '3px solid var(--accent)' : '3px solid transparent',
+                        cursor: 'pointer',
+                        textAlign: 'left',
+                        transition: 'background 0.2s',
+                      }}
+                      onMouseEnter={(e) => {
+                        if (!isActive) e.currentTarget.style.background = 'rgba(79, 195, 247, 0.04)'
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!isActive) e.currentTarget.style.background = 'transparent'
+                      }}
+                    >
+                      {/* Slug + status */}
+                      <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        width: '100%',
+                      }}>
+                        <span style={{
+                          color: 'var(--text-primary)',
+                          fontSize: 13,
+                          fontWeight: 600,
+                          fontFamily: 'var(--font-body)',
+                        }}>
+                          {wish.slug}
+                        </span>
+                        <span style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 4,
+                          fontSize: 10,
+                          color: statusDot(wish.status),
+                          fontFamily: 'var(--font-body)',
+                          fontWeight: 600,
+                          letterSpacing: '0.5px',
+                          textTransform: 'uppercase',
+                        }}>
+                          <span style={{
+                            width: 6,
+                            height: 6,
+                            borderRadius: '50%',
+                            background: statusDot(wish.status),
+                            display: 'inline-block',
+                          }} />
+                          {statusLabel(wish.status)}
+                        </span>
+                      </div>
 
-                {/* Date */}
-                <span style={{
-                  color: 'var(--text-muted)',
-                  fontSize: 10,
-                  opacity: 0.5,
-                }}>
-                  {new Date(wish.createdAt).toLocaleDateString('en-MY', {
-                    day: 'numeric',
-                    month: 'short',
-                    year: 'numeric',
-                  })}
-                </span>
-              </button>
+                      {/* Prompt preview */}
+                      <span style={{
+                        color: 'var(--text-muted)',
+                        fontSize: 11,
+                        lineHeight: 1.4,
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                        width: '100%',
+                        display: 'block',
+                      }}>
+                        {wish.prompt || 'No prompt'}
+                      </span>
+
+                      {/* Date */}
+                      <span style={{
+                        color: 'var(--text-muted)',
+                        fontSize: 10,
+                        opacity: 0.5,
+                      }}>
+                        {new Date(wish.createdAt).toLocaleDateString('en-MY', {
+                          day: 'numeric',
+                          month: 'short',
+                          year: 'numeric',
+                        })}
+                      </span>
+                    </button>
+                  )
+                })}
+              </div>
             )
           })}
         </div>

@@ -35,6 +35,38 @@ body {
   position: relative;
 }
 
+/* Scrollbar — blends with the magic-bg dark navy gradient */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(79, 195, 247, 0.28) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(79, 195, 247, 0.25);
+  border: 2px solid transparent;
+  background-clip: content-box;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(79, 195, 247, 0.5);
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 /* Magical animated gradient background */
 .magic-bg {
   position: fixed;
