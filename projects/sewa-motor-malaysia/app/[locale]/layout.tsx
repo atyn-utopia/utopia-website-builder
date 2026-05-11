@@ -60,7 +60,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html lang={locale}>
       <head>
-        <script defer src="https://webcore.utopiaai.my/t.js" data-website="sewa-motor-malaysia.vercel.app"></script>
+        <script defer src="https://webcore.utopiaai.my/t.js" data-website="sewa-motor-malaysia.utopiaai.my"></script>
       </head>
       <body>
         <NextIntlClientProvider messages={messages}>

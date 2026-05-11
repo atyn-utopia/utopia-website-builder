@@ -55,7 +55,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       className={`${inter.variable} ${notoSC.variable}`}
     >
       <head>
-        <script defer src="https://webcore.utopiaai.my/t.js" data-website="cat-rumah-malaysia.vercel.app"></script>
+        <script defer src="https://webcore.utopiaai.my/t.js" data-website="cat-rumah-malaysia.utopiaai.my"></script>
       </head>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
