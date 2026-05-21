@@ -332,7 +332,7 @@ export default function WishHistory() {
           borderTop: '1px solid var(--input-border)',
         }}>
           <button
-            onClick={() => { router.push('/'); setOpen(false) }}
+            onClick={() => { router.push('/new'); setOpen(false) }}
             style={{
               width: '100%',
               background: 'linear-gradient(135deg, var(--accent-deep), var(--accent-glow))',

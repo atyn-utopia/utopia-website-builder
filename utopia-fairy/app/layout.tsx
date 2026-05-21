@@ -25,9 +25,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div style={{
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center',
+          alignItems: 'flex-start',
           minHeight: '100vh',
-          padding: '80px 16px',
+          padding: '60px 16px',
         }}>
           {children}
         </div>
