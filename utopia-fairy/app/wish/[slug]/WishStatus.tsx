@@ -270,7 +270,7 @@ export default function WishStatus({ slug }: { slug: string }) {
           fontFamily: 'var(--font-body)',
         }}
       >
-        ✧ Make another wish
+        ← Back to Monitor
       </button>
     </div>
   )
