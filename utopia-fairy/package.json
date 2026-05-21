@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev --port 3001",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "scan": "tsx scripts/scan.ts"
   },
   "dependencies": {
     "next": "16.2.1",
@@ -18,6 +19,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "tailwindcss": "^4",
+    "tsx": "^4.22.3",
     "typescript": "^5"
   }
 }
