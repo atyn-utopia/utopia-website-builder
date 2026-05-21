@@ -89,50 +89,42 @@ export default function WishChecklist({ slug }: { slug: string }) {
   }
 
   const tier = tierOf(data.passed, data.total)
-  const c = COLORS[tier]
   const failed = data.groups.flatMap((g) => g.items.filter((i) => i.status === 'fail').map((i) => ({ group: g.name, item: i })))
 
+  const scoreClass = tier === 'perfect' ? 'uf-score--pass'
+    : tier === 'partial' ? 'uf-score--warn'
+    : tier === 'failing' ? 'uf-score--fail'
+    : 'uf-score--neutral'
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 20, width: '100%' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: '100%' }}>
       {/* Score header */}
-      <div style={{
+      <div className="uf-card" style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         flexWrap: 'wrap',
-        gap: 12,
-        padding: '16px 20px',
-        borderRadius: 14,
-        background: c.bg,
-        border: `1px solid ${c.border}`,
+        gap: 14,
+        padding: '18px 20px',
+        background: 'var(--brand-bg)',
+        boxShadow: '0 0 0 1px var(--brand-border)',
       }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          <span style={{
-            color: c.fg,
-            fontSize: 11,
-            letterSpacing: '1px',
-            textTransform: 'uppercase',
-            fontWeight: 700,
-          }}>
-            Checklist
-          </span>
+          <span className="uf-eyebrow" style={{ color: 'var(--brand)' }}>Checklist</span>
           <span style={{
             color: 'var(--text-primary)',
-            fontSize: 15,
-            fontFamily: 'var(--font-body)',
-            fontWeight: 600,
+            fontSize: 14,
+            fontFamily: 'var(--font-sans)',
+            fontWeight: 500,
           }}>
-            {data.domain ?? data.slug}
+            {failed.length === 0
+              ? 'Everything is passing.'
+              : `${failed.length} item${failed.length === 1 ? '' : 's'} still to fix.`}
           </span>
         </div>
-        <div style={{
-          color: c.fg,
-          fontSize: 28,
-          fontFamily: 'var(--font-body)',
-          fontWeight: 700,
-          fontVariantNumeric: 'tabular-nums',
-        }}>
-          {data.passed} <span style={{ opacity: 0.5, fontSize: 18 }}>/ {data.total}</span>
+        <div className={`uf-score ${scoreClass}`} style={{ padding: '6px 14px', fontSize: 14 }}>
+          <span style={{ fontSize: 20 }}>{data.passed}</span>
+          <span style={{ opacity: 0.5, fontSize: 13, marginLeft: 2 }}>/ {data.total}</span>
         </div>
       </div>
 
@@ -141,39 +133,34 @@ export default function WishChecklist({ slug }: { slug: string }) {
         {data.groups.map((g) => {
           const passed = g.items.filter((i) => i.status === 'pass').length
           const total = g.items.length
+          const ratio = total > 0 ? passed / total : 0
+          const grpColor = total === 0 ? 'var(--text-quiet)'
+            : ratio >= 1 ? 'var(--status-pass)'
+            : ratio >= 0.6 ? 'var(--status-warn)'
+            : 'var(--status-fail)'
           return (
-            <div key={g.name} style={{
-              background: 'rgba(10, 22, 40, 0.55)',
-              border: '1px solid var(--input-border)',
-              borderRadius: 12,
-              padding: '14px 16px',
-            }}>
+            <div key={g.name} className="uf-card" style={{ padding: '16px 18px' }}>
               <div style={{
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                marginBottom: 10,
+                marginBottom: 12,
               }}>
-                <span style={{
-                  color: 'var(--text-secondary)',
-                  fontSize: 11,
-                  letterSpacing: '1px',
-                  textTransform: 'uppercase',
-                  fontWeight: 700,
-                }}>
+                <span className="uf-eyebrow">
                   {g.name}
                 </span>
                 <span style={{
-                  color: 'var(--text-muted)',
+                  color: grpColor,
                   fontSize: 12,
-                  fontFamily: 'var(--font-body)',
-                  fontWeight: 600,
+                  fontFamily: 'var(--font-sans)',
+                  fontWeight: 700,
                   fontVariantNumeric: 'tabular-nums',
+                  letterSpacing: '0.2px',
                 }}>
                   {passed}/{total}
                 </span>
               </div>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {g.items.map((i) => (
                   <li key={i.id} style={{
                     display: 'flex',
@@ -184,15 +171,14 @@ export default function WishChecklist({ slug }: { slug: string }) {
                   }}>
                     <StatusDot status={i.status} />
                     <span style={{
-                      color: i.status === 'fail' ? '#f87171' : i.status === 'skip' ? 'var(--text-muted)' : 'var(--text-primary)',
+                      color: i.status === 'fail' ? 'var(--status-fail)' : i.status === 'skip' ? 'var(--text-muted)' : 'var(--text-primary)',
                       flex: 1,
                     }}>
                       {i.name}
                       {i.detail && (
                         <span style={{
-                          color: 'var(--text-muted)',
+                          color: 'var(--text-quiet)',
                           fontSize: 11,
-                          opacity: 0.7,
                           marginLeft: 6,
                         }}>
                           — {i.detail}
@@ -250,11 +236,10 @@ function ToImplementSection({ slug, failed }: { slug: string; failed: { group: s
   }
 
   return (
-    <div style={{
-      background: 'rgba(248, 113, 113, 0.06)',
-      border: '1px solid rgba(248, 113, 113, 0.25)',
-      borderRadius: 12,
-      padding: '14px 16px',
+    <div className="uf-card" style={{
+      padding: '18px 20px',
+      background: 'var(--status-fail-bg)',
+      boxShadow: '0 0 0 1px var(--status-fail-border)',
     }}>
       <div style={{
         display: 'flex',
@@ -262,60 +247,55 @@ function ToImplementSection({ slug, failed }: { slug: string; failed: { group: s
         justifyContent: 'space-between',
         gap: 10,
         flexWrap: 'wrap',
-        marginBottom: 10,
+        marginBottom: 14,
       }}>
-        <span style={{
-          color: '#f87171',
-          fontSize: 11,
-          letterSpacing: '1px',
-          textTransform: 'uppercase',
-          fontWeight: 700,
-        }}>
-          To implement ({failed.length})
+        <span className="uf-eyebrow" style={{ color: 'var(--status-fail)' }}>
+          ✕ To implement ({failed.length})
         </span>
         <button
           onClick={copyAll}
           style={{
-            background: copiedAll ? 'rgba(74, 222, 128, 0.15)' : 'rgba(248, 113, 113, 0.12)',
-            border: `1px solid ${copiedAll ? 'rgba(74, 222, 128, 0.4)' : 'rgba(248, 113, 113, 0.3)'}`,
-            borderRadius: 8,
-            padding: '6px 12px',
-            color: copiedAll ? '#4ade80' : '#f87171',
+            background: copiedAll ? 'var(--status-pass-bg)' : 'rgba(248, 113, 113, 0.14)',
+            border: `1px solid ${copiedAll ? 'var(--status-pass-border)' : 'var(--status-fail-border)'}`,
+            borderRadius: 'var(--radius-pill)',
+            padding: '7px 16px',
+            color: copiedAll ? 'var(--status-pass)' : 'var(--status-fail)',
             fontSize: 11,
             fontWeight: 600,
             cursor: 'pointer',
-            fontFamily: 'var(--font-body)',
+            fontFamily: 'var(--font-sans)',
             letterSpacing: '0.3px',
             whiteSpace: 'nowrap',
+            transition: 'all var(--transition-snap)',
           }}
         >
           {copiedAll ? '✓ Copied' : '📋 Copy all as Claude prompt'}
         </button>
       </div>
-      <ol style={{ paddingLeft: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8, listStyle: 'none' }}>
+      <ol style={{ paddingLeft: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 10, listStyle: 'none' }}>
         {failed.map(({ group, item }, idx) => {
           const just = copiedId === item.id
           return (
             <li key={item.id} style={{
               color: 'var(--text-primary)',
               fontSize: 13,
-              lineHeight: 1.5,
+              lineHeight: 1.55,
               display: 'flex',
-              gap: 10,
+              gap: 12,
               alignItems: 'flex-start',
             }}>
               <span style={{
-                color: 'var(--text-muted)',
+                color: 'var(--text-quiet)',
                 fontSize: 11,
                 fontVariantNumeric: 'tabular-nums',
                 paddingTop: 2,
                 minWidth: 18,
               }}>{idx + 1}.</span>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <span style={{ color: 'var(--text-secondary)', fontSize: 11, marginRight: 6 }}>[{group}]</span>
+                <span style={{ color: 'var(--text-secondary)', fontSize: 10.5, marginRight: 6, letterSpacing: '0.5px' }}>[{group}]</span>
                 {item.name}
                 {item.detail && (
-                  <span style={{ color: 'var(--text-muted)', fontSize: 11, display: 'block', marginTop: 2 }}>
+                  <span style={{ color: 'var(--text-quiet)', fontSize: 11.5, display: 'block', marginTop: 3 }}>
                     {item.detail}
                   </span>
                 )}
@@ -324,17 +304,18 @@ function ToImplementSection({ slug, failed }: { slug: string; failed: { group: s
                 onClick={() => copyOne(item.id, group, item)}
                 title="Copy this item as a Claude prompt"
                 style={{
-                  background: just ? 'rgba(74, 222, 128, 0.15)' : 'transparent',
-                  border: `1px solid ${just ? 'rgba(74, 222, 128, 0.4)' : 'var(--input-border)'}`,
-                  borderRadius: 6,
-                  padding: '4px 8px',
-                  color: just ? '#4ade80' : 'var(--text-muted)',
-                  fontSize: 10,
+                  background: just ? 'var(--status-pass-bg)' : 'transparent',
+                  border: `1px solid ${just ? 'var(--status-pass-border)' : 'var(--border-soft)'}`,
+                  borderRadius: 'var(--radius-pill)',
+                  padding: '5px 12px',
+                  color: just ? 'var(--status-pass)' : 'var(--text-muted)',
+                  fontSize: 10.5,
                   fontWeight: 600,
                   cursor: 'pointer',
-                  fontFamily: 'var(--font-body)',
+                  fontFamily: 'var(--font-sans)',
                   whiteSpace: 'nowrap',
                   flexShrink: 0,
+                  transition: 'all var(--transition-snap)',
                 }}
               >
                 {just ? '✓ copied' : 'copy'}
@@ -348,23 +329,9 @@ function ToImplementSection({ slug, failed }: { slug: string; failed: { group: s
 }
 
 function StatusDot({ status }: { status: 'pass' | 'fail' | 'skip' }) {
-  const color = status === 'pass' ? '#4ade80' : status === 'fail' ? '#f87171' : '#7a8ea3'
   const glyph = status === 'pass' ? '✓' : status === 'fail' ? '✕' : '–'
   return (
-    <span style={{
-      display: 'inline-flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: 16,
-      height: 16,
-      borderRadius: '50%',
-      background: status === 'pass' ? 'rgba(74, 222, 128, 0.15)' : status === 'fail' ? 'rgba(248, 113, 113, 0.15)' : 'rgba(96, 112, 128, 0.15)',
-      color,
-      fontSize: 10,
-      fontWeight: 700,
-      flexShrink: 0,
-      marginTop: 2,
-    }}>
+    <span className={`uf-dot uf-dot--${status}`} style={{ marginTop: 1 }}>
       {glyph}
     </span>
   )

@@ -1,76 +1,71 @@
-import type { Metadata } from 'next'
-import { Cormorant_Garamond, Quicksand } from 'next/font/google'
-import WishHistory from '@/components/WishHistory'
+import type { Metadata, Viewport } from 'next'
+import { Fira_Sans, JetBrains_Mono } from 'next/font/google'
+import ThemeToggle from '@/components/ThemeToggle'
+import LogoutButton from '@/components/LogoutButton'
+import RegisterSW from '@/components/RegisterSW'
 import './globals.css'
 
-const cormorant = Cormorant_Garamond({ subsets: ['latin'], variable: '--font-display', weight: ['300', '400', '600'] })
-const quicksand = Quicksand({ subsets: ['latin'], variable: '--font-body', weight: ['400', '500', '600', '700'] })
+const fira = Fira_Sans({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  weight: ['400', '500', '600', '700', '800'],
+  display: 'swap',
+})
+
+const mono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  weight: ['400', '500', '600'],
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
-  title: 'Utopia Fairy',
-  description: 'Your wish is my command — what website shall I create for you today?',
-  icons: {
-    icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">✨</text></svg>',
-  },
+  title: 'Utopia Wizard',
+  description: 'Website Builder & Monitor for every site under Utopia.',
+  applicationName: 'Utopia Wizard',
   manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    title: 'Utopia Wizard',
+    statusBarStyle: 'black-translucent',
+  },
+  icons: {
+    icon: [
+      { url: '/utopia-wizard-logo.png', type: 'image/png' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: '/apple-touch-icon.png',
+  },
+}
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#09090b' },
+  ],
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${quicksand.variable}`}>
+    <html lang="en" className={`${fira.variable} ${mono.variable}`}>
       <body>
-        <div className="magic-bg" />
-        <Sparkles />
-        <WishHistory />
+        <ThemeToggle />
+        <LogoutButton />
         <div style={{
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'flex-start',
           minHeight: '100vh',
-          padding: '60px 16px',
+          padding: '48px 20px',
         }}>
           {children}
         </div>
         <RegisterSW />
       </body>
     </html>
-  )
-}
-
-function RegisterSW() {
-  return (
-    <script
-      dangerouslySetInnerHTML={{
-        __html: `if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js')}`,
-      }}
-    />
-  )
-}
-
-function Sparkles() {
-  const particles = Array.from({ length: 30 }, (_, i) => ({
-    id: i,
-    left: `${Math.random() * 100}%`,
-    duration: `${6 + Math.random() * 8}s`,
-    delay: `${Math.random() * 10}s`,
-    size: `${2 + Math.random() * 3}px`,
-  }))
-
-  return (
-    <div className="sparkles">
-      {particles.map((p) => (
-        <div
-          key={p.id}
-          className="sparkle"
-          style={{
-            left: p.left,
-            width: p.size,
-            height: p.size,
-            '--duration': p.duration,
-            '--delay': p.delay,
-          } as React.CSSProperties}
-        />
-      ))}
-    </div>
   )
 }

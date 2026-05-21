@@ -1,25 +1,145 @@
 @import "tailwindcss";
 
+/* ──────────────────────────────────────────────────────────────────────── */
+/* Tokens — Linear/Vercel-style neutral palette, dark default               */
+/* ──────────────────────────────────────────────────────────────────────── */
+
 :root {
-  --bg-1: #0a1628;
-  --bg-2: #0e2a4a;
-  --bg-3: #132e5b;
-  --bg-4: #0b1d3a;
-  --bg-5: #061224;
-  --accent: #4fc3f7;
-  --accent-glow: #29b6f6;
-  --accent-deep: #1565c0;
-  --accent-fairy: #81d4fa;
-  --sparkle: #e1f5fe;
-  --text-primary: #e8f4fd;
-  --text-secondary: #90caf9;
-  --text-muted: #5c8db5;
-  --input-bg: rgba(79, 195, 247, 0.06);
-  --input-border: rgba(79, 195, 247, 0.15);
-  --input-border-focus: rgba(79, 195, 247, 0.4);
-  --font-display: 'Cormorant Garamond', serif;
-  --font-body: 'Quicksand', sans-serif;
+  /* Surfaces — near-black base, elevated cards, hover state */
+  --bg-base:        #09090b;
+  --bg-elevated:    #131316;
+  --bg-hover:       #1c1c20;
+  --bg-input:       #0f0f12;
+
+  /* Borders — neutral grey scale */
+  --border-soft:    #27272a;
+  --border-strong:  #3f3f46;
+  --border-focus:   #71717a;
+  --input-border:   #27272a;
+  --input-border-focus: #52525b;
+  --input-bg:       #0f0f12;
+
+  /* Text ramp */
+  --text-primary:   #ededed;
+  --text-secondary: #a1a1aa;
+  --text-muted:     #71717a;
+  --text-quiet:     #52525b;
+
+  /* Brand mark colour — quiet neutral, not a magical accent */
+  --accent:         #ededed;
+  --accent-bg:      rgba(237, 237, 237, 0.06);
+
+  /* Brand — Utopia Wizard purple (logo primary) + gold accent (wand spark) */
+  --brand:          #4b20ea;
+  --brand-glow:     #6d4af0;
+  --brand-deep:     #3717b8;
+  --brand-bg:       rgba(75, 32, 234, 0.12);
+  --brand-bg-soft:  rgba(75, 32, 234, 0.06);
+  --brand-border:   rgba(75, 32, 234, 0.32);
+  --brand-on:       #ffffff;
+  --gold:           #fbbf24;
+
+  /* Status semantics — slightly warmer than dark mode defaults */
+  --status-pass:        #4ade80;
+  --status-pass-bg:     rgba(74, 222, 128, 0.10);
+  --status-pass-border: rgba(74, 222, 128, 0.30);
+  --status-warn:        #f59e0b;
+  --status-warn-bg:     rgba(245, 158, 11, 0.10);
+  --status-warn-border: rgba(245, 158, 11, 0.30);
+  --status-fail:        #f87171;
+  --status-fail-bg:     rgba(248, 113, 113, 0.10);
+  --status-fail-border: rgba(248, 113, 113, 0.30);
+  --status-skip:        #71717a;
+  --status-skip-bg:     rgba(113, 113, 122, 0.10);
+  --status-skip-border: rgba(113, 113, 122, 0.25);
+
+  /* Card surfaces — solid with a 1px border, no glow */
+  --surface-1: var(--bg-elevated);
+  --surface-2: var(--bg-elevated);
+  --surface-hover: var(--bg-hover);
+
+  /* Geometry */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-pill: 999px;
+
+  /* Shadows — flat. Border carries the weight. */
+  --shadow-card:
+    0 0 0 1px var(--border-soft);
+  --shadow-card-hover:
+    0 0 0 1px var(--border-strong);
+  --shadow-elevated:
+    0 4px 16px rgba(0, 0, 0, 0.35),
+    0 0 0 1px var(--border-soft);
+
+  --transition-snap: 120ms cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  --font-mono-fallback: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
+
+/* ──────────────────────────────────────────────────────────────────────── */
+/* Light theme — invert the surfaces, keep status semantics                 */
+/* ──────────────────────────────────────────────────────────────────────── */
+
+:root[data-theme='light'] {
+  --bg-base:        #ffffff;
+  --bg-elevated:    #fafafa;
+  --bg-hover:       #f4f4f5;
+  --bg-input:       #ffffff;
+
+  --border-soft:    #e4e4e7;
+  --border-strong:  #d4d4d8;
+  --border-focus:   #a1a1aa;
+  --input-border:   #e4e4e7;
+  --input-border-focus: #71717a;
+  --input-bg:       #ffffff;
+
+  --text-primary:   #18181b;
+  --text-secondary: #3f3f46;
+  --text-muted:     #71717a;
+  --text-quiet:     #a1a1aa;
+
+  --accent:         #18181b;
+  --accent-bg:      rgba(24, 24, 27, 0.05);
+
+  /* Brand stays the same purple on light theme; tints get slightly softer */
+  --brand:          #4b20ea;
+  --brand-glow:     #6d4af0;
+  --brand-deep:     #3717b8;
+  --brand-bg:       rgba(75, 32, 234, 0.08);
+  --brand-bg-soft:  rgba(75, 32, 234, 0.04);
+  --brand-border:   rgba(75, 32, 234, 0.24);
+  --brand-on:       #ffffff;
+  --gold:           #d97706;
+
+  --status-pass:        #16a34a;
+  --status-pass-bg:     rgba(22, 163, 74, 0.10);
+  --status-pass-border: rgba(22, 163, 74, 0.30);
+  --status-warn:        #d97706;
+  --status-warn-bg:     rgba(217, 119, 6, 0.10);
+  --status-warn-border: rgba(217, 119, 6, 0.30);
+  --status-fail:        #dc2626;
+  --status-fail-bg:     rgba(220, 38, 38, 0.08);
+  --status-fail-border: rgba(220, 38, 38, 0.30);
+  --status-skip:        #71717a;
+  --status-skip-bg:     rgba(113, 113, 122, 0.08);
+  --status-skip-border: rgba(113, 113, 122, 0.25);
+
+  --shadow-card:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 0 0 1px var(--border-soft);
+  --shadow-card-hover:
+    0 4px 12px rgba(0, 0, 0, 0.06),
+    0 0 0 1px var(--border-strong);
+  --shadow-elevated:
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    0 0 0 1px var(--border-soft);
+}
+
+/* ──────────────────────────────────────────────────────────────────────── */
+/* Reset + base                                                              */
+/* ──────────────────────────────────────────────────────────────────────── */
 
 * {
   box-sizing: border-box;
@@ -27,220 +147,205 @@
   padding: 0;
 }
 
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
 body {
+  background: var(--bg-base);
   color: var(--text-primary);
-  font-family: var(--font-body);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
   min-height: 100vh;
   overflow-x: hidden;
-  position: relative;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* Magical animated gradient background */
-.magic-bg {
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  background: linear-gradient(
-    135deg,
-    var(--bg-1) 0%,
-    var(--bg-2) 20%,
-    var(--bg-3) 40%,
-    var(--bg-4) 60%,
-    var(--bg-2) 80%,
-    var(--bg-5) 100%
-  );
-  background-size: 400% 400%;
-  animation: gradientFlow 12s ease infinite;
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
 }
 
-@keyframes gradientFlow {
-  0% { background-position: 0% 50%; }
-  25% { background-position: 100% 0%; }
-  50% { background-position: 100% 100%; }
-  75% { background-position: 0% 100%; }
-  100% { background-position: 0% 50%; }
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-/* Floating sparkle particles */
-.sparkles {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  overflow: hidden;
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border: 2px solid transparent;
+  background-clip: content-box;
+  border-radius: 8px;
 }
 
-.sparkle {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: var(--sparkle);
-  box-shadow: 0 0 6px 2px rgba(129, 212, 250, 0.4);
-  animation: float var(--duration) var(--delay) ease-in-out infinite;
-  opacity: 0;
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-focus);
+  background-clip: content-box;
 }
 
-@keyframes float {
-  0% {
-    opacity: 0;
-    transform: translateY(100vh) scale(0);
-  }
-  10% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.8;
-    transform: translateY(40vh) scale(1);
-  }
-  90% {
-    opacity: 0.3;
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-10vh) scale(0.3);
-  }
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-/* Fairy glow aura behind the image */
-.fairy-glow {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(79, 195, 247, 0.25) 0%,
-    rgba(41, 182, 246, 0.1) 40%,
-    transparent 70%
-  );
-  filter: blur(20px);
-  animation: pulse 3s ease-in-out infinite;
-  z-index: -1;
+button {
+  font-family: inherit;
 }
 
-@keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 0.7; }
-  50% { transform: scale(1.15); opacity: 1; }
+code {
+  font-family: var(--font-mono), var(--font-mono-fallback);
+  font-size: 0.92em;
 }
 
-/* Wand trail shimmer */
-.fairy-container {
-  position: relative;
-  display: flex;
+/* ──────────────────────────────────────────────────────────────────────── */
+/* Reusable surface + status component classes                              */
+/* ──────────────────────────────────────────────────────────────────────── */
+
+.uf-card {
+  background: var(--bg-elevated);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow var(--transition-snap), background var(--transition-snap);
+}
+
+.uf-card--clickable {
+  cursor: pointer;
+}
+
+.uf-card--clickable:hover {
+  background: var(--bg-hover);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.uf-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.uf-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0;
+  font-family: var(--font-sans);
+  white-space: nowrap;
+  border: 1px solid transparent;
+  line-height: 1.4;
+}
+
+.uf-pill--pass    { color: var(--status-pass); background: var(--status-pass-bg); border-color: var(--status-pass-border); }
+.uf-pill--warn    { color: var(--status-warn); background: var(--status-warn-bg); border-color: var(--status-warn-border); }
+.uf-pill--fail    { color: var(--status-fail); background: var(--status-fail-bg); border-color: var(--status-fail-border); }
+.uf-pill--neutral { color: var(--text-secondary); background: var(--accent-bg); border-color: var(--border-soft); }
+.uf-pill--brand   { color: var(--brand); background: var(--brand-bg); border-color: var(--brand-border); }
+
+.uf-btn-brand {
+  background: var(--brand);
+  color: var(--brand-on);
+  border: 1px solid var(--brand);
+  border-radius: var(--radius-pill);
+  padding: 9px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  transition: background var(--transition-snap), box-shadow var(--transition-snap), border-color var(--transition-snap);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08) inset;
+}
+
+.uf-btn-brand:hover {
+  background: var(--brand-deep);
+  border-color: var(--brand-deep);
+}
+
+.uf-btn-brand:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Rounded brand mark — applies to the white-bg logo for an iOS-app feel */
+/* Brand mark — naked transparent image, no box */
+.uf-logo {
+  object-fit: contain;
+  display: block;
+}
+
+.uf-score {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono), var(--font-mono-fallback);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  font-size: 12px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.uf-score--pass    { color: var(--status-pass); background: var(--status-pass-bg); border-color: var(--status-pass-border); }
+.uf-score--warn    { color: var(--status-warn); background: var(--status-warn-bg); border-color: var(--status-warn-border); }
+.uf-score--fail    { color: var(--status-fail); background: var(--status-fail-bg); border-color: var(--status-fail-border); }
+.uf-score--neutral { color: var(--text-secondary); background: var(--accent-bg); border-color: var(--border-soft); }
+
+.uf-dot {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-}
-
-.fairy-container::after {
-  content: '✦';
-  position: absolute;
-  top: 15%;
-  left: 10%;
-  font-size: 12px;
-  color: var(--accent-fairy);
-  animation: twinkle 2s ease-in-out infinite;
-  text-shadow: 0 0 8px rgba(129, 212, 250, 0.8);
-}
-
-.fairy-container::before {
-  content: '✧';
-  position: absolute;
-  bottom: 20%;
-  right: 15%;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
   font-size: 10px;
-  color: var(--sparkle);
-  animation: twinkle 2.5s 0.5s ease-in-out infinite;
-  text-shadow: 0 0 6px rgba(225, 245, 254, 0.6);
-}
-
-@keyframes twinkle {
-  0%, 100% { opacity: 0.3; transform: scale(0.8); }
-  50% { opacity: 1; transform: scale(1.2); }
-}
-
-/* Magical button styles */
-.fairy-btn {
-  position: relative;
-  background: linear-gradient(135deg, var(--accent-deep), var(--accent-glow), var(--accent-fairy));
-  background-size: 200% 200%;
-  border: none;
-  border-radius: 14px;
-  padding: 14px 36px;
-  color: white;
-  font-size: 16px;
   font-weight: 700;
-  cursor: pointer;
-  font-family: var(--font-body);
-  letter-spacing: 0.5px;
-  transition: transform 0.2s, box-shadow 0.3s;
-  box-shadow:
-    0 4px 20px rgba(79, 195, 247, 0.3),
-    0 0 40px rgba(41, 182, 246, 0.1);
-  animation: btnShimmer 3s ease infinite;
-  overflow: hidden;
+  flex-shrink: 0;
+  font-family: var(--font-sans);
 }
 
-.fairy-btn::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    45deg,
-    transparent 30%,
-    rgba(255, 255, 255, 0.08) 50%,
-    transparent 70%
-  );
-  animation: sheen 4s ease-in-out infinite;
-}
+.uf-dot--pass { background: var(--status-pass-bg); color: var(--status-pass); border: 1px solid var(--status-pass-border); }
+.uf-dot--fail { background: var(--status-fail-bg); color: var(--status-fail); border: 1px solid var(--status-fail-border); }
+.uf-dot--skip { background: var(--status-skip-bg); color: var(--status-skip); border: 1px solid var(--status-skip-border); }
 
-@keyframes sheen {
-  0% { transform: translateX(-100%) rotate(25deg); }
-  50% { transform: translateX(100%) rotate(25deg); }
-  100% { transform: translateX(-100%) rotate(25deg); }
-}
+/* ──────────────────────────────────────────────────────────────────────── */
+/* Magical form treatments — used on the wish form (purple-tinted)          */
+/* ──────────────────────────────────────────────────────────────────────── */
 
-@keyframes btnShimmer {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.fairy-btn:hover:not(:disabled) {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow:
-    0 6px 30px rgba(79, 195, 247, 0.5),
-    0 0 60px rgba(41, 182, 246, 0.2);
-}
-
-.fairy-btn:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-  box-shadow: none;
-}
-
-/* Input glow on focus */
 .fairy-input {
   width: 100%;
-  background: var(--input-bg);
+  background: var(--bg-input);
   border: 1px solid var(--input-border);
-  border-radius: 12px;
-  padding: 16px;
+  border-radius: var(--radius-pill);
+  padding: 14px 22px;
   color: var(--text-primary);
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.6;
   outline: none;
-  font-family: var(--font-body);
-  transition: border-color 0.3s, box-shadow 0.3s;
-  backdrop-filter: blur(8px);
+  font-family: var(--font-sans);
+  transition: border-color var(--transition-snap), box-shadow var(--transition-snap);
+}
+
+/* Textareas (multi-line inputs) — keep pill curve but allow tall content */
+textarea.fairy-input {
+  border-radius: 22px;
+  padding: 14px 20px;
 }
 
 .fairy-input:focus {
-  border-color: var(--input-border-focus);
-  box-shadow: 0 0 20px rgba(79, 195, 247, 0.1), inset 0 0 20px rgba(79, 195, 247, 0.03);
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px var(--brand-bg);
 }
 
 .fairy-input::placeholder {
@@ -251,80 +356,98 @@ body {
   opacity: 0.5;
 }
 
-/* File upload styling */
+.fairy-btn {
+  position: relative;
+  background: linear-gradient(135deg, var(--brand), var(--brand-glow));
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 13px 32px;
+  color: var(--brand-on);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  letter-spacing: 0.2px;
+  transition: transform var(--transition-snap), box-shadow var(--transition-snap), opacity var(--transition-snap);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.12) inset,
+    0 6px 20px rgba(75, 32, 234, 0.30);
+}
+
+.fairy-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.18) inset,
+    0 10px 28px rgba(75, 32, 234, 0.42);
+}
+
+.fairy-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
 .fairy-upload {
   border: 1.5px dashed var(--input-border);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   padding: 14px 18px;
   cursor: pointer;
   background: transparent;
-  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+  transition: border-color var(--transition-snap), background var(--transition-snap), box-shadow var(--transition-snap);
   font-size: 13px;
   color: var(--text-muted);
-  backdrop-filter: blur(4px);
 }
 
 .fairy-upload:hover,
 .fairy-upload-active {
-  border-color: var(--accent);
-  background: rgba(79, 195, 247, 0.05);
-  box-shadow: 0 0 20px rgba(79, 195, 247, 0.08);
+  border-color: var(--brand);
+  background: var(--brand-bg-soft);
+  box-shadow: 0 0 0 3px var(--brand-bg-soft);
 }
 
 .file-chip {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(79, 195, 247, 0.1);
-  border: 1px solid rgba(79, 195, 247, 0.2);
-  border-radius: 8px;
-  padding: 5px 10px;
+  background: var(--brand-bg);
+  border: 1px solid var(--brand-border);
+  border-radius: var(--radius-sm);
+  padding: 4px 10px;
   font-size: 12px;
-  color: var(--accent-fairy);
+  color: var(--brand);
 }
 
 .file-chip button {
   background: none;
   border: none;
-  color: var(--text-muted);
+  color: inherit;
   cursor: pointer;
   padding: 0;
   font-size: 12px;
   line-height: 1;
-  transition: color 0.2s;
+  opacity: 0.7;
+  transition: opacity var(--transition-snap);
 }
 
 .file-chip button:hover {
-  color: var(--accent);
-}
-
-/* Success state */
-.success-text {
-  color: var(--accent-fairy);
-  font-size: 15px;
-  font-weight: 600;
-  text-shadow: 0 0 20px rgba(129, 212, 250, 0.3);
+  opacity: 1;
 }
 
 .success-code {
-  background: rgba(79, 195, 247, 0.1);
-  padding: 2px 10px;
-  border-radius: 6px;
-  font-family: monospace;
+  background: var(--bg-input);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: var(--font-mono), var(--font-mono-fallback);
+  font-size: 0.9em;
+  color: var(--text-secondary);
 }
 
-/* Stagger fade-in animation */
+/* Stagger fade-in animation — kept for entrance polish */
 .fade-in {
-  animation: fadeUp 0.8s ease-out both;
+  animation: fadeUp 0.4s ease-out both;
 }
 
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }

@@ -96,6 +96,13 @@ async function listProjectSlugs(projectsDir: string): Promise<string[]> {
 }
 
 async function buildPayloadForSlug(slug: string, projectsDir: string) {
+  // 0. Project-start timestamp = mtime of inputs.md
+  let projectCreatedAt: string | null = null
+  try {
+    const s = await stat(path.join(projectsDir, slug, 'inputs.md'))
+    projectCreatedAt = s.mtime.toISOString()
+  } catch { /* shouldn't happen — listProjectSlugs already gated on this */ }
+
   // 1. Run the full checklist (uses cache internally — fine for one-shot run)
   const checklist = await runChecklist(slug, projectsDir, /* useCache */ false)
 
@@ -125,6 +132,10 @@ async function buildPayloadForSlug(slug: string, projectsDir: string) {
     fallbackPhone: info.fallbackPhone,
   })
 
+  // Denormalise company name out of the joined registered_domains so the
+  // listing endpoint can render it without an extra query per row.
+  const companyName = (registered ?? []).find((r) => r.companies?.name)?.companies?.name ?? null
+
   return {
     slug,
     total: checklist.total,
@@ -135,6 +146,8 @@ async function buildPayloadForSlug(slug: string, projectsDir: string) {
     fallback_phone: info.fallbackPhone,
     deploy_url: info.deployUrl,
     domain_candidates: info.domainCandidates,
+    project_created_at: projectCreatedAt,
+    company_name: companyName,
     groups: checklist.groups,
     registered: registered ?? null,
     phones: phones ?? null,

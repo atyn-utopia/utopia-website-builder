@@ -124,38 +124,30 @@ export default function WishData({ slug }: { slug: string }) {
 
 function LiveStatusBanner({ s }: { s: LiveStatus }) {
   const palette = {
-    connected:  { bg: 'rgba(74, 222, 128, 0.10)', border: 'rgba(74, 222, 128, 0.35)', fg: '#4ade80', label: 'Live · DB connected', dot: '#4ade80' },
-    fallback:   { bg: 'rgba(249, 169, 106, 0.10)', border: 'rgba(249, 169, 106, 0.35)', fg: '#F9A96A', label: 'Live · using fallback', dot: '#F9A96A' },
-    unexpected: { bg: 'rgba(248, 113, 113, 0.10)', border: 'rgba(248, 113, 113, 0.35)', fg: '#f87171', label: 'Live · phone mismatch',  dot: '#f87171' },
-    'no-response': { bg: 'rgba(248, 113, 113, 0.08)', border: 'rgba(248, 113, 113, 0.25)', fg: '#f87171', label: 'Live · no response', dot: '#f87171' },
-    'no-target': { bg: 'rgba(96, 112, 128, 0.10)', border: 'rgba(96, 112, 128, 0.30)', fg: '#7a8ea3', label: 'Live · not deployed', dot: '#7a8ea3' },
+    connected:    { bg: 'var(--status-pass-bg)', border: 'var(--status-pass-border)', fg: 'var(--status-pass)', label: 'Live · DB connected', glow: true },
+    fallback:     { bg: 'var(--status-warn-bg)', border: 'var(--status-warn-border)', fg: 'var(--status-warn)', label: 'Live · using fallback', glow: false },
+    unexpected:   { bg: 'var(--status-fail-bg)', border: 'var(--status-fail-border)', fg: 'var(--status-fail)', label: 'Live · phone mismatch', glow: false },
+    'no-response':{ bg: 'var(--status-fail-bg)', border: 'var(--status-fail-border)', fg: 'var(--status-fail)', label: 'Live · no response', glow: false },
+    'no-target':  { bg: 'var(--status-skip-bg)', border: 'var(--status-skip-border)', fg: 'var(--status-skip)', label: 'Live · not deployed', glow: false },
   }[s.status]
 
   return (
-    <section style={{
-      background: palette.bg,
-      border: `1px solid ${palette.border}`,
-      borderRadius: 14,
-      padding: '16px 20px',
+    <section className="uf-card" style={{
+      padding: '18px 20px',
       display: 'flex',
       flexDirection: 'column',
-      gap: 10,
+      gap: 12,
+      background: palette.bg,
+      boxShadow: `0 0 0 1px ${palette.border}`,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <span style={{
             width: 10, height: 10, borderRadius: '50%',
-            background: palette.dot,
-            boxShadow: s.status === 'connected' ? `0 0 10px ${palette.dot}` : 'none',
+            background: palette.fg,
+            boxShadow: palette.glow ? `0 0 12px ${palette.fg}` : 'none',
           }} />
-          <span style={{
-            color: palette.fg,
-            fontSize: 12,
-            letterSpacing: '1.4px',
-            textTransform: 'uppercase',
-            fontWeight: 700,
-            fontFamily: 'var(--font-body)',
-          }}>
+          <span className="uf-eyebrow" style={{ color: palette.fg, fontSize: 11 }}>
             {palette.label}
           </span>
         </div>
@@ -164,7 +156,7 @@ function LiveStatusBanner({ s }: { s: LiveStatus }) {
             href={s.targetUrl}
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: 'var(--text-muted)', fontSize: 11, fontFamily: 'monospace', textDecoration: 'underline' }}
+            style={{ color: 'var(--text-muted)', fontSize: 11, fontFamily: 'var(--font-mono)', textDecoration: 'underline', textUnderlineOffset: 3 }}
           >
             probed: {s.targetUrl.replace(/^https?:\/\//, '')}
           </a>
@@ -174,8 +166,7 @@ function LiveStatusBanner({ s }: { s: LiveStatus }) {
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-        gap: 12,
-        marginTop: 4,
+        gap: 14,
       }}>
         <Stat label="Live phone" value={s.livePhone ?? '—'} accent={palette.fg} />
         <Stat label="DB phone(s)" value={s.dbPhones.length === 0 ? '—' : s.dbPhones.join(', ')} />
@@ -184,11 +175,10 @@ function LiveStatusBanner({ s }: { s: LiveStatus }) {
 
       <p style={{
         color: 'var(--text-primary)',
-        fontSize: 12,
-        lineHeight: 1.55,
-        fontFamily: 'var(--font-body)',
+        fontSize: 12.5,
+        lineHeight: 1.6,
+        fontFamily: 'var(--font-sans)',
         margin: 0,
-        opacity: 0.9,
       }}>
         {s.detail}
       </p>
@@ -196,12 +186,14 @@ function LiveStatusBanner({ s }: { s: LiveStatus }) {
       {s.status === 'fallback' && (
         <p style={{
           color: palette.fg,
-          fontSize: 11,
-          lineHeight: 1.5,
-          fontFamily: 'var(--font-body)',
+          fontSize: 11.5,
+          lineHeight: 1.55,
+          fontFamily: 'var(--font-sans)',
           margin: 0,
+          paddingTop: 6,
+          borderTop: `1px solid ${palette.border}`,
         }}>
-          Fix: confirm <code>NEXT_PUBLIC_SUPABASE_URL</code> + <code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code> are set on this Vercel project, then redeploy. If env was already set, fire the webcore revalidate webhook to flush stale cache.
+          Fix: confirm <code style={{ background: 'var(--bg-input)', padding: '1px 6px', borderRadius: 4 }}>NEXT_PUBLIC_SUPABASE_URL</code> + <code style={{ background: 'var(--bg-input)', padding: '1px 6px', borderRadius: 4 }}>NEXT_PUBLIC_SUPABASE_ANON_KEY</code> are set on this Vercel project, then redeploy. If env was already set, fire the webcore revalidate webhook to flush stale cache.
         </p>
       )}
     </section>
@@ -255,7 +247,7 @@ function RegisteredSection({ data }: { data: WishDataPayload }) {
               return (
                 <tr key={r.domain} style={rowStyle}>
                   <Td>
-                    <code style={{ color: 'var(--accent-fairy)', fontSize: 12 }}>{r.domain}</code>
+                    <code style={{ color: 'var(--text-primary)', fontSize: 12 }}>{r.domain}</code>
                   </Td>
                   <Td>
                     <Pill>{r.leads_mode ?? '—'}</Pill>
@@ -272,7 +264,7 @@ function RegisteredSection({ data }: { data: WishDataPayload }) {
         </table>
       )}
       {newDomains.length > 0 && (
-        <p style={{ color: '#F9A96A', fontSize: 12, marginTop: 8, fontFamily: 'var(--font-body)' }}>
+        <p style={{ color: '#F9A96A', fontSize: 12, marginTop: 8, fontFamily: 'var(--font-sans)' }}>
           Heads up — this project is registered under {newDomains.length === 1 ? 'a domain' : `${newDomains.length} domains`} that don't match config/site.ts (
           {newDomains.map((d) => d.domain).join(', ')}
           ). Update config/site.ts.domain if it has officially moved.
@@ -311,7 +303,7 @@ function PhonesSection({ rows }: { rows: PhoneRow[] | null }) {
             {rows.map((r, i) => (
               <tr key={i} style={rowStyle}>
                 <Td>
-                  <code style={{ color: 'var(--accent-fairy)', fontSize: 12 }}>{r.phone_number}</code>
+                  <code style={{ color: 'var(--text-primary)', fontSize: 12 }}>{r.phone_number}</code>
                   {r.type && <span style={{ color: 'var(--text-muted)', fontSize: 10, marginLeft: 6 }}>({r.type})</span>}
                 </Td>
                 <Td><span style={{ color: 'var(--text-primary)', fontSize: 12 }}>{r.label ?? '—'}</span></Td>
@@ -324,7 +316,7 @@ function PhonesSection({ rows }: { rows: PhoneRow[] | null }) {
                     fontSize: 11,
                     lineHeight: 1.4,
                     maxWidth: 360,
-                    fontFamily: 'var(--font-body)',
+                    fontFamily: 'var(--font-sans)',
                     whiteSpace: 'pre-wrap',
                   }}>
                     {r.whatsapp_text ?? <span style={{ color: 'var(--text-muted)', opacity: 0.6 }}>—</span>}
@@ -384,7 +376,7 @@ function ProductsSection({ rows }: { rows: ProductRow[] | null }) {
                     )}
                   </Td>
                   <Td><span style={{ color: 'var(--text-primary)', fontSize: 12, fontWeight: 600 }}>{r.name}</span></Td>
-                  <Td><code style={{ color: 'var(--accent-fairy)', fontSize: 11 }}>{r.slug}</code></Td>
+                  <Td><code style={{ color: 'var(--text-primary)', fontSize: 11 }}>{r.slug}</code></Td>
                   <Td><Price v={r.sale_price} /></Td>
                   <Td><Price v={r.rental_price} /></Td>
                   <Td><span style={{ color: 'var(--text-muted)', fontSize: 12 }}>{r.sort_order ?? '—'}</span></Td>
@@ -451,7 +443,7 @@ function BlogsSection({ rows }: { rows: BlogRow[] | null }) {
                   <Td>
                     <span style={{ color: 'var(--text-primary)', fontSize: 12, fontWeight: 500, lineHeight: 1.4, maxWidth: 320, display: 'inline-block' }}>{title}</span>
                   </Td>
-                  <Td><code style={{ color: 'var(--accent-fairy)', fontSize: 11 }}>{r.slug}</code></Td>
+                  <Td><code style={{ color: 'var(--text-primary)', fontSize: 11 }}>{r.slug}</code></Td>
                   <Td><span style={{ color: 'var(--text-muted)', fontSize: 11, fontFamily: 'monospace' }}>{locales || '—'}</span></Td>
                   <Td>
                     {r.status === 'published'
@@ -495,7 +487,7 @@ function HardcodedSection({ hits }: { hits: HardcodedHit[] }) {
             {hits.map((h, i) => (
               <tr key={i} style={rowStyle}>
                 <Td>
-                  <code style={{ color: 'var(--accent-fairy)', fontSize: 11 }}>{h.file}:{h.line}</code>
+                  <code style={{ color: 'var(--text-primary)', fontSize: 11 }}>{h.file}:{h.line}</code>
                 </Td>
                 <Td>
                   <code style={{ color: '#f87171', fontSize: 12, fontWeight: 600 }}>{h.match}</code>
@@ -543,7 +535,7 @@ function BlogHardcodedSection({ hits }: { hits: BlogHardcodedHit[] }) {
               <tr key={i} style={rowStyle}>
                 <Td>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                    <code style={{ color: 'var(--accent-fairy)', fontSize: 11 }}>{h.post_slug}</code>
+                    <code style={{ color: 'var(--text-primary)', fontSize: 11 }}>{h.post_slug}</code>
                     <Pill>{h.language}</Pill>
                   </div>
                 </Td>
@@ -578,30 +570,18 @@ function Card({ title, subtitle, count, tone, children }: {
   tone?: 'good' | 'warn'
   children: React.ReactNode
 }) {
-  const accent = tone === 'good' ? '#4ade80'
-    : tone === 'warn' ? '#F9A96A'
+  const accent = tone === 'good' ? 'var(--status-pass)'
+    : tone === 'warn' ? 'var(--status-warn)'
     : 'var(--text-secondary)'
   return (
-    <section style={{
-      background: 'rgba(10, 22, 40, 0.55)',
-      border: '1px solid var(--input-border)',
-      borderRadius: 12,
-      padding: '14px 16px',
-    }}>
-      <header style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 10, gap: 12 }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-          <span style={{
-            color: accent,
-            fontSize: 11,
-            letterSpacing: '1px',
-            textTransform: 'uppercase',
-            fontWeight: 700,
-            fontFamily: 'var(--font-body)',
-          }}>
+    <section className="uf-card" style={{ padding: '16px 18px' }}>
+      <header style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 12, gap: 12 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+          <span className="uf-eyebrow" style={{ color: accent }}>
             {title}
           </span>
           {subtitle && (
-            <span style={{ color: 'var(--text-muted)', fontSize: 11, fontFamily: 'var(--font-body)' }}>
+            <span style={{ color: 'var(--text-muted)', fontSize: 11.5, fontFamily: 'var(--font-sans)' }}>
               {subtitle}
             </span>
           )}
@@ -609,9 +589,13 @@ function Card({ title, subtitle, count, tone, children }: {
         <span style={{
           color: 'var(--text-secondary)',
           fontSize: 12,
-          fontFamily: 'var(--font-body)',
-          fontWeight: 600,
+          fontFamily: 'var(--font-sans)',
+          fontWeight: 700,
           fontVariantNumeric: 'tabular-nums',
+          padding: '2px 10px',
+          background: 'rgba(79, 195, 247, 0.08)',
+          border: '1px solid var(--border-soft)',
+          borderRadius: 'var(--radius-pill)',
         }}>
           {count}
         </span>
@@ -626,11 +610,11 @@ function Card({ title, subtitle, count, tone, children }: {
 function Empty({ children, tone }: { children: React.ReactNode; tone?: 'good' }) {
   return (
     <p style={{
-      color: tone === 'good' ? '#4ade80' : 'var(--text-muted)',
-      fontSize: 12,
-      fontFamily: 'var(--font-body)',
-      opacity: 0.85,
+      color: tone === 'good' ? 'var(--status-pass)' : 'var(--text-muted)',
+      fontSize: 12.5,
+      fontFamily: 'var(--font-sans)',
       margin: '4px 0 0',
+      lineHeight: 1.5,
     }}>
       {children}
     </p>
@@ -638,8 +622,8 @@ function Empty({ children, tone }: { children: React.ReactNode; tone?: 'good' })
 }
 
 function Pill({ children, tone }: { children: React.ReactNode; tone?: 'good' | 'warn' }) {
-  const fg = tone === 'good' ? '#4ade80' : tone === 'warn' ? '#F9A96A' : 'var(--text-muted)'
-  const bg = tone === 'good' ? 'rgba(74, 222, 128, 0.12)' : tone === 'warn' ? 'rgba(249, 169, 106, 0.12)' : 'rgba(96, 112, 128, 0.12)'
+  const fg = tone === 'good' ? 'var(--status-pass)' : tone === 'warn' ? 'var(--status-warn)' : 'var(--text-muted)'
+  const bg = tone === 'good' ? 'var(--status-pass-bg)' : tone === 'warn' ? 'var(--status-warn-bg)' : 'rgba(96, 112, 128, 0.12)'
   return (
     <span style={{
       color: fg,
@@ -649,7 +633,7 @@ function Pill({ children, tone }: { children: React.ReactNode; tone?: 'good' | '
       fontSize: 10,
       fontWeight: 600,
       letterSpacing: '0.3px',
-      fontFamily: 'var(--font-body)',
+      fontFamily: 'var(--font-sans)',
       whiteSpace: 'nowrap',
       display: 'inline-block',
     }}>
@@ -662,7 +646,7 @@ const tableStyle: React.CSSProperties = {
   width: '100%',
   borderCollapse: 'collapse',
   fontSize: 12,
-  fontFamily: 'var(--font-body)',
+  fontFamily: 'var(--font-sans)',
 }
 
 const rowStyle: React.CSSProperties = {
@@ -673,14 +657,14 @@ function Th({ children }: { children: React.ReactNode }) {
   return (
     <th style={{
       textAlign: 'left',
-      padding: '8px 10px',
+      padding: '10px 12px',
       color: 'var(--text-secondary)',
       fontSize: 10,
-      letterSpacing: '0.8px',
+      letterSpacing: '1px',
       textTransform: 'uppercase',
       fontWeight: 700,
       whiteSpace: 'nowrap',
-      borderBottom: '1px solid var(--input-border)',
+      borderBottom: '1px solid var(--border-soft)',
     }}>
       {children}
     </th>
@@ -690,7 +674,7 @@ function Th({ children }: { children: React.ReactNode }) {
 function Td({ children }: { children: React.ReactNode }) {
   return (
     <td style={{
-      padding: '8px 10px',
+      padding: '10px 12px',
       verticalAlign: 'top',
     }}>
       {children}
@@ -708,13 +692,12 @@ function Stub({ children }: { children: React.ReactNode }) {
 
 function ErrorBox({ children }: { children: React.ReactNode }) {
   return (
-    <div style={{
-      background: 'rgba(248, 113, 113, 0.08)',
-      border: '1px solid rgba(248, 113, 113, 0.25)',
-      borderRadius: 10,
+    <div className="uf-card" style={{
       padding: '12px 16px',
-      color: '#f87171',
+      background: 'var(--status-fail-bg)',
+      color: 'var(--status-fail)',
       fontSize: 13,
+      boxShadow: `0 8px 28px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255,255,255,0.04), 0 0 0 1px var(--status-fail-border)`,
     }}>
       {children}
     </div>

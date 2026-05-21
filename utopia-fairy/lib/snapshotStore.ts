@@ -29,6 +29,9 @@ export interface SnapshotRow {
   hardcoded: unknown
   blog_hardcoded: unknown
   live_status: unknown
+  /** Added in 20260522_project_metadata. Older rows will return null. */
+  project_created_at?: string | null
+  company_name?: string | null
 }
 
 function ensureRead() {

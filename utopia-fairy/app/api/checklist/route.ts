@@ -1,12 +1,27 @@
 import { NextResponse } from 'next/server'
 import { readdir, stat } from 'fs/promises'
 import path from 'path'
-import { runChecklist } from '@/lib/runChecklist'
+import { runChecklist, getExpandedProjectInfo } from '@/lib/runChecklist'
 import { totalCheckCount } from '@/lib/checklist'
 import { dataMode, projectsDir } from '@/lib/dataSource'
 import { readAllSnapshots } from '@/lib/snapshotStore'
+import { getRegisteredDomains } from '@/lib/supabaseChecks'
 
 export const dynamic = 'force-dynamic'
+
+interface RegisteredEmbed {
+  companies?: { name?: string | null } | null
+}
+
+function companyFromRegistered(registered: unknown): string | null {
+  if (!Array.isArray(registered)) return null
+  const rows = registered as RegisteredEmbed[]
+  for (const r of rows) {
+    const n = r?.companies?.name
+    if (n) return n
+  }
+  return null
+}
 
 export async function GET() {
   if (dataMode() === 'snapshot') {
@@ -29,13 +44,24 @@ async function serveLive() {
     }
 
     const runs = await Promise.all(
-      slugs.map(({ slug, createdAt }) =>
-        runChecklist(slug, dir)
-          .then((r) => ({
+      slugs.map(async ({ slug, createdAt }) => {
+        try {
+          const r = await runChecklist(slug, dir)
+          // Cheap parallel lookup for company name. Cached in supabaseChecks
+          // when invoked again for the wish-data endpoint.
+          let company: string | null = null
+          try {
+            const info = await getExpandedProjectInfo(slug, dir)
+            const reg = await getRegisteredDomains(info.domainCandidates)
+            company = companyFromRegistered(reg)
+          } catch { /* leave null */ }
+          return {
             slug,
             domain: r.domain,
             productSlug: r.productSlug,
             deployUrl: r.deployUrl,
+            company,
+            projectCreatedAt: createdAt,
             passed: r.passed,
             total: r.total,
             failedCount: r.failedCount,
@@ -45,13 +71,15 @@ async function serveLive() {
               total: g.items.length,
             })),
             createdAt,
-          }))
-          .catch(() => null),
-      ),
+          }
+        } catch {
+          return null
+        }
+      }),
     )
 
     const projects = runs.filter(Boolean)
-    projects.sort((a, b) => new Date(b!.createdAt).getTime() - new Date(a!.createdAt).getTime())
+    projects.sort((a, b) => new Date(b!.projectCreatedAt).getTime() - new Date(a!.projectCreatedAt).getTime())
 
     return NextResponse.json({
       projects,
@@ -74,6 +102,11 @@ async function serveFromSnapshots() {
       domain: r.domain,
       productSlug: r.product_slug,
       deployUrl: r.deploy_url,
+      // Prefer the denormalised columns added in 20260522_project_metadata.
+      // Fall back to deriving from the registered JSON / using ran_at if the
+      // migration hasn't been applied yet.
+      company: r.company_name ?? companyFromRegistered(r.registered),
+      projectCreatedAt: r.project_created_at ?? r.ran_at,
       passed: r.passed,
       total: r.total,
       failedCount: r.failed_count,
@@ -82,9 +115,8 @@ async function serveFromSnapshots() {
         passed: g.items.filter((i) => i.status === 'pass').length,
         total: g.items.length,
       })),
-      createdAt: r.ran_at,
+      createdAt: r.project_created_at ?? r.ran_at,
     }))
-    // Sort newest first by ran_at; ties keep original (already sorted by Supabase).
     return NextResponse.json({
       projects,
       totalChecks: projects[0]?.total ?? 0,
