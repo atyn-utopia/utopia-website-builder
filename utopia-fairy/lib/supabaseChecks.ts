@@ -106,6 +106,7 @@ export interface RegisteredDomain {
   domain: string
   leads_mode: string | null
   company_id: string | null
+  companies?: { name: string | null } | null
 }
 
 export async function findRegisteredDomainsByPhone(phone: string): Promise<string[]> {
@@ -152,7 +153,7 @@ export async function getRegisteredDomains(candidates: string[]): Promise<Regist
   return selectRows<RegisteredDomain>({
     table: 'company_websites',
     filter: inFilter('domain', dedup),
-    select: 'domain,leads_mode,company_id',
+    select: 'domain,leads_mode,company_id,companies(name)',
   })
 }
 
