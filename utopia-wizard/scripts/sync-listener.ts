@@ -79,7 +79,11 @@ async function supaFetch<T>(path: string, init?: RequestInit): Promise<T> {
     const text = await res.text().catch(() => '')
     throw new Error(`Supabase ${res.status}: ${text.slice(0, 200)}`)
   }
-  return (await res.json()) as T
+  // Supabase returns 204 No Content when Prefer=return=minimal — there's no
+  // body to parse. Read raw text first; only JSON.parse if non-empty.
+  const text = await res.text()
+  if (!text) return undefined as unknown as T
+  return JSON.parse(text) as T
 }
 
 async function pushStatus(): Promise<void> {
