@@ -1,10 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { writeFile, mkdir } from 'fs/promises'
+import { writeFile, mkdir, access } from 'fs/promises'
 import path from 'path'
-import { dataMode } from '@/lib/dataSource'
+
+export const maxDuration = 60
 
 function buildClaudeCommand(slug: string): string {
   return `claude "Using @CLAUDE.md files, generate the ${slug} website. Read projects/${slug}/inputs.md for the project brief."`
+}
+
+async function projectsDirIsWritable(repoRoot: string): Promise<boolean> {
+  try {
+    await access(path.join(repoRoot, 'projects'))
+    return true
+  } catch {
+    return false
+  }
 }
 
 export async function POST(request: NextRequest) {
@@ -23,9 +33,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, error: 'Slug must be lowercase letters, numbers, and hyphens only' }, { status: 400 })
     }
 
-    // On the deployed monitor (snapshot mode) there is no writable projects/
-    // folder — return the Claude command for the user to run locally.
-    if (dataMode() === 'snapshot') {
+    const repoRoot = path.resolve(process.cwd(), '..')
+
+    // The filesystem is the source of truth for whether we should write — not
+    // the dataMode flag. Running locally with UTOPIA_FAIRY_USE_SNAPSHOTS=1
+    // still gives access to projects/, so brand-asset uploads should land on
+    // disk. Only fall back to the "snapshot" reply when the directory genuinely
+    // isn't reachable (Vercel deployment).
+    if (!(await projectsDirIsWritable(repoRoot))) {
       return NextResponse.json({
         success: true,
         mode: 'snapshot',
@@ -37,7 +52,6 @@ export async function POST(request: NextRequest) {
     }
 
     // Resolve project path relative to the repo root (utopia-fairy lives at repo root)
-    const repoRoot = path.resolve(process.cwd(), '..')
     const projectDir = path.join(repoRoot, 'projects', slug)
     const brandAssetsDir = path.join(projectDir, 'brand_assets')
 
