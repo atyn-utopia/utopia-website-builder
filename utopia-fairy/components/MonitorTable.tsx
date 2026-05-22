@@ -377,6 +377,7 @@ export default function MonitorTable() {
                 background: 'var(--brand)',
                 borderBottom: '1px solid var(--brand-deep)',
               }}>
+                <Th onBrand align="right" compact>#</Th>
                 <Th onBrand onSort={() => toggleSort('slug')} sortDir={sortKey === 'slug' ? sortDir : null}>
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -397,7 +398,7 @@ export default function MonitorTable() {
               </tr>
             </thead>
             <tbody>
-              {sortProjects(data?.projects ?? [], sortKey, sortDir).map((p) => {
+              {sortProjects(data?.projects ?? [], sortKey, sortDir).map((p, idx) => {
                 const tier = tierOf(p)
                 const scoreClass = tier === 'perfect' ? 'uf-score--pass'
                   : tier === 'partial' ? 'uf-score--warn'
@@ -415,6 +416,16 @@ export default function MonitorTable() {
                     onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--surface-hover)' }}
                     onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent' }}
                   >
+                    <Td align="right" compact>
+                      <span style={{
+                        color: 'var(--text-quiet)',
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: 11.5,
+                        fontVariantNumeric: 'tabular-nums',
+                      }}>
+                        {idx + 1}
+                      </span>
+                    </Td>
                     <Td>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                         <span style={{ color: 'var(--text-primary)', fontWeight: 600, fontSize: 13 }}>{p.slug}</span>
@@ -459,7 +470,7 @@ export default function MonitorTable() {
 
               {!loading && data && data.projects.length === 0 && (
                 <tr>
-                  <td colSpan={5 + groupNames.length + 1} style={{
+                  <td colSpan={6 + groupNames.length + 1} style={{
                     color: 'var(--text-muted)',
                     fontSize: 13,
                     textAlign: 'center',
@@ -473,7 +484,7 @@ export default function MonitorTable() {
 
               {loading && (
                 <tr>
-                  <td colSpan={5 + groupNames.length + 1} style={{
+                  <td colSpan={6 + groupNames.length + 1} style={{
                     color: 'var(--text-muted)',
                     fontSize: 13,
                     textAlign: 'center',
