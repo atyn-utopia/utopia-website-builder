@@ -11,8 +11,8 @@ export default function ThemeToggle() {
       title={theme === 'dark' ? 'Switch to light' : 'Switch to dark'}
       style={{
         position: 'fixed',
-        top: 18,
-        right: 18,
+        top: 'calc(18px + env(safe-area-inset-top, 0px))',
+        right: 'calc(18px + env(safe-area-inset-right, 0px))',
         zIndex: 1000,
         width: 40,
         height: 40,

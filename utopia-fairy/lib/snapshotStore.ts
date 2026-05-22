@@ -89,6 +89,24 @@ export async function upsertSnapshot(row: Omit<SnapshotRow, 'ran_at'> & { ran_at
   }
 }
 
+export async function deleteSnapshot(slug: string): Promise<boolean> {
+  ensureWrite()
+  const res = await fetch(
+    `${SUPABASE_URL}/rest/v1/monitor_snapshots?slug=eq.${encodeURIComponent(slug)}`,
+    {
+      method: 'DELETE',
+      headers: {
+        apikey: SERVICE_ROLE_KEY,
+        Authorization: `Bearer ${SERVICE_ROLE_KEY}`,
+        Prefer: 'return=representation',
+      },
+    },
+  )
+  if (!res.ok) throw new Error(`deleteSnapshot ${slug}: HTTP ${res.status}`)
+  const removed = (await res.json()) as unknown[]
+  return removed.length > 0
+}
+
 export async function deleteSnapshotsExcept(keepSlugs: string[]): Promise<number> {
   ensureWrite()
   // Build a NOT-IN filter so we prune rows for projects that no longer exist.
