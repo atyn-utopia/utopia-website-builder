@@ -423,18 +423,29 @@ function Th({
       <span style={{
         display: 'inline-flex',
         alignItems: 'center',
-        gap: 4,
-        opacity: !clickable || sortDir ? 1 : 0.92,
+        gap: 6,
       }}>
         {children}
         {clickable && (
-          <span style={{
-            fontSize: 9,
+          <span aria-hidden="true" style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            fontSize: 10,
             lineHeight: 1,
-            opacity: sortDir ? 1 : 0.45,
-            color: 'inherit',
+            letterSpacing: 0,
+            fontFamily: 'var(--font-sans)',
           }}>
-            {sortDir === 'asc' ? '▲' : sortDir === 'desc' ? '▼' : '↕'}
+            <span style={{
+              opacity: sortDir === 'asc' ? 1 : 0.32,
+              fontWeight: sortDir === 'asc' ? 700 : 400,
+              color: 'inherit',
+            }}>↑</span>
+            <span style={{
+              opacity: sortDir === 'desc' ? 1 : 0.32,
+              fontWeight: sortDir === 'desc' ? 700 : 400,
+              color: 'inherit',
+              marginLeft: -1,
+            }}>↓</span>
           </span>
         )}
       </span>
