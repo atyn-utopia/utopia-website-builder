@@ -11,10 +11,10 @@ const ACCEPTED_TYPES = [
   'image/png', 'image/jpeg', 'image/svg+xml', 'image/webp', 'application/pdf',
 ]
 
-// Per-file: 3.5 MB. Total request: 4 MB (Next.js Route Handler cap).
-// Stay safely under the limit so prompt + slug + boundary headers fit too.
-const PER_FILE_LIMIT = 3.5 * 1024 * 1024
-const TOTAL_LIMIT = 4 * 1024 * 1024
+// Next 16 Route Handlers hard-cap the request body at 10 MB regardless of
+// config. Stay safely under it so multipart boundaries + prompt + slug fit.
+const PER_FILE_LIMIT = 9 * 1024 * 1024
+const TOTAL_LIMIT = 9 * 1024 * 1024
 
 function formatSize(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`
@@ -48,13 +48,13 @@ export default function FileUpload({ files, onFilesChange }: FileUploadProps) {
 
     const messages: string[] = []
     if (tooBig.length > 0) {
-      messages.push(`${tooBig.length} file${tooBig.length === 1 ? '' : 's'} skipped — over 3.5 MB per file`)
+      messages.push(`${tooBig.length} file${tooBig.length === 1 ? '' : 's'} skipped — over 9 MB per file`)
     }
     if (wrongType.length > 0) {
       messages.push(`${wrongType.length} file${wrongType.length === 1 ? '' : 's'} skipped — only PNG / JPG / SVG / WebP / PDF`)
     }
     if (skippedForTotal > 0) {
-      messages.push(`${skippedForTotal} file${skippedForTotal === 1 ? '' : 's'} skipped — total would exceed 4 MB`)
+      messages.push(`${skippedForTotal} file${skippedForTotal === 1 ? '' : 's'} skipped — total would exceed 9 MB`)
     }
     setWarning(messages.length > 0 ? messages.join(' · ') : null)
     if (keptFromAccepted.length > 0) onFilesChange([...files, ...keptFromAccepted])
@@ -80,7 +80,7 @@ export default function FileUpload({ files, onFilesChange }: FileUploadProps) {
       >
         ✦ Drop your brand assets here or click to upload
         <div style={{ marginTop: 4, fontSize: 11, color: 'var(--text-quiet)' }}>
-          PNG / JPG / SVG / WebP / PDF · 3.5 MB per file · 4 MB total
+          PNG / JPG / SVG / WebP / PDF · 9 MB total (Next.js runtime cap — compress on squoosh.app for bigger photos)
         </div>
         <input
           ref={inputRef}
@@ -138,7 +138,7 @@ export default function FileUpload({ files, onFilesChange }: FileUploadProps) {
             color: totalSize > TOTAL_LIMIT ? 'var(--status-fail)' : 'var(--text-quiet)',
             fontVariantNumeric: 'tabular-nums',
           }}>
-            Total: {formatSize(totalSize)} / 4.0 MB
+            Total: {formatSize(totalSize)} / 9 MB
           </div>
         </>
       )}

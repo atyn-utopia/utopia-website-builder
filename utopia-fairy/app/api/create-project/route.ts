@@ -3,9 +3,6 @@ import { writeFile, mkdir, access } from 'fs/promises'
 import path from 'path'
 
 export const maxDuration = 60
-// Some Next 16 + Node runtimes default to a ~4MB body limit on Route
-// Handlers — large brand asset bundles (logos + photos) trip it and
-// surface as "Failed to parse body as FormData". Bump to 50MB.
 export const runtime = 'nodejs'
 
 function buildClaudeCommand(slug: string): string {
@@ -31,19 +28,12 @@ export async function POST(request: NextRequest) {
     if (!prompt || !slug) {
       return NextResponse.json({ success: false, error: 'Prompt and slug are required' }, { status: 400 })
     }
-
-    // Validate slug format
     if (!/^[a-z0-9-]+$/.test(slug)) {
       return NextResponse.json({ success: false, error: 'Slug must be lowercase letters, numbers, and hyphens only' }, { status: 400 })
     }
 
     const repoRoot = path.resolve(process.cwd(), '..')
 
-    // The filesystem is the source of truth for whether we should write — not
-    // the dataMode flag. Running locally with UTOPIA_FAIRY_USE_SNAPSHOTS=1
-    // still gives access to projects/, so brand-asset uploads should land on
-    // disk. Only fall back to the "snapshot" reply when the directory genuinely
-    // isn't reachable (Vercel deployment).
     if (!(await projectsDirIsWritable(repoRoot))) {
       return NextResponse.json({
         success: true,
@@ -55,18 +45,14 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    // Resolve project path relative to the repo root (utopia-fairy lives at repo root)
     const projectDir = path.join(repoRoot, 'projects', slug)
     const brandAssetsDir = path.join(projectDir, 'brand_assets')
-
-    // Create directories
     await mkdir(brandAssetsDir, { recursive: true })
 
-    // Build inputs.md content
     const timestamp = new Date().toISOString()
-    const fileNames = files.filter(f => f.size > 0).map(f => f.name)
+    const fileNames = files.filter((f) => f.size > 0).map((f) => f.name)
     const assetsSection = fileNames.length > 0
-      ? fileNames.map(name => `- ${name}`).join('\n')
+      ? fileNames.map((n) => `- ${n}`).join('\n')
       : '- (none attached)'
 
     const inputsMd = `# ${slug} — Project Inputs
@@ -81,10 +67,8 @@ ${prompt}
 ${assetsSection}
 `
 
-    // Write inputs.md
     await writeFile(path.join(projectDir, 'inputs.md'), inputsMd, 'utf-8')
 
-    // Save uploaded files to brand_assets/
     for (const file of files) {
       if (file.size === 0) continue
       const buffer = Buffer.from(await file.arrayBuffer())
@@ -101,6 +85,11 @@ ${assetsSection}
     })
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error'
-    return NextResponse.json({ success: false, error: message }, { status: 500 })
+    // Friendlier surfaces for the two common failure modes
+    let userMessage = message
+    if (message.includes('Failed to parse body') || message.includes('Unexpected end of form')) {
+      userMessage = 'Upload exceeded the 9 MB request cap. Compress your files (try squoosh.app) and try again.'
+    }
+    return NextResponse.json({ success: false, error: userMessage }, { status: 500 })
   }
 }
