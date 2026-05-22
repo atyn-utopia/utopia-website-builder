@@ -304,9 +304,10 @@ export default function MonitorTable() {
                 : 'var(--border-soft)'
               }`,
               borderRadius: 'var(--radius-pill)',
-              padding: '8px 14px',
-              fontSize: 12,
+              padding: '9px 18px',
+              fontSize: 13,
               fontWeight: 600,
+              lineHeight: 1.2,
               cursor: rescan === 'triggering' || rescan === 'running' ? 'wait' : 'pointer',
               fontFamily: 'var(--font-sans)',
               transition: 'all var(--transition-snap)',
@@ -328,15 +329,16 @@ export default function MonitorTable() {
             }} />
             {rescan === 'triggering' ? 'Triggering…'
               : rescan === 'running'    ? 'Scanning…'
-              : rescan === 'success'    ? 'Scan complete'
-              : rescan === 'error'      ? 'Rescan failed'
-              : 'Rescan now'}
+              : rescan === 'success'    ? 'Scan Complete'
+              : rescan === 'error'      ? 'Rescan Failed'
+              : 'Rescan Now'}
           </button>
           <button
             onClick={() => router.push('/new')}
             className="uf-btn-brand"
+            style={{ lineHeight: 1.2 }}
           >
-            ✦ New project
+            ✦ New Project
           </button>
         </div>
       </header>

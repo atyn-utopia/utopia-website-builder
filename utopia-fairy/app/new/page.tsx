@@ -28,7 +28,7 @@ export default function NewWishPage() {
           marginBottom: 20,
         }}
       >
-        ← All projects
+        ← All Projects
       </Link>
 
       <div style={{
