@@ -1,0 +1,18 @@
+<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <!-- steam wisp left -->
+  <path d="M11 7 C 10 5, 12 4, 11 2" stroke="#3C3531" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.6"/>
+  <!-- steam wisp right -->
+  <path d="M16 6 C 17 4, 15 3, 16 1" stroke="#3C3531" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.6"/>
+  <!-- pot lid knob -->
+  <circle cx="16" cy="9" r="1.2" fill="#E89A2C" stroke="#1F1A17" stroke-width="0.8"/>
+  <!-- pot lid dome -->
+  <path d="M8 14 Q 16 7 24 14 Z" fill="#E89A2C" stroke="#1F1A17" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- pot rim band (darker) -->
+  <rect x="7" y="14" width="18" height="2" fill="#D9742A" stroke="#1F1A17" stroke-width="1.5"/>
+  <!-- pot body -->
+  <path d="M8 16 L 9 25 Q 16 28 23 25 L 24 16 Z" fill="#E89A2C" stroke="#1F1A17" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- pot handle left -->
+  <path d="M7 17 Q 4 19 7 22" stroke="#1F1A17" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- pot handle right -->
+  <path d="M25 17 Q 28 19 25 22" stroke="#1F1A17" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+</svg>

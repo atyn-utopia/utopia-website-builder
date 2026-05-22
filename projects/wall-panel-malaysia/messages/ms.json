@@ -1,0 +1,249 @@
+{
+  "nav": {
+    "services": "Gaya",
+    "locations": "Lokasi",
+    "gallery": "Galeri",
+    "blog": "Blog",
+    "contact": "Hubungi",
+    "whatsapp": "WhatsApp Kami"
+  },
+  "shared": {
+    "brand": "Wall Panel Malaysia",
+    "tagline": "Pemasangan panel dinding premium di seluruh Malaysia",
+    "whatsappCta": "Dapatkan Sebut Harga di WhatsApp",
+    "whatsappCtaShort": "WhatsApp untuk sebut harga percuma",
+    "whatsappMessageDefault": "Hi Wall Panel Malaysia, saya nak sebut harga percuma untuk pemasangan panel dinding.",
+    "whatsappMessageLocation": "Hi Wall Panel Malaysia, saya nak sebut harga percuma untuk pemasangan panel dinding di {city}.",
+    "priceFrom": "Dari RM25/sqft · Pemasangan Percuma",
+    "deliveryWindow": "Pemasangan Percuma",
+    "ratingBadge": "4.9★ · Ulasan Pelanggan Disahkan",
+    "reviewsLabel": "Suara Pelanggan",
+    "seeAllReviews": "Lihat semua ulasan",
+    "freeInstallBadge": "Pemasangan Percuma",
+    "gallery": {
+      "heading": "Pemasangan panel dinding yang telah siap",
+      "subheading": "Rumah dan pejabat Malaysia sebenar",
+      "badge": "4.9★ · Disahkan"
+    },
+    "alt": {
+      "heroHome": "Pemasangan panel dinding premium Malaysia — Wall Panel Malaysia",
+      "heroLocation": "Pemasangan panel dinding di {city} — Wall Panel Malaysia",
+      "woodPanel": "Pemasangan panel dinding kayu — kemasan urat kayu hangat untuk ruang tamu",
+      "flutedPanel": "Panel dinding fluted — tekstur alur menegak untuk dinding TV feature wall",
+      "pvcPanel": "Panel dinding PVC — tahan air untuk dapur dan bilik air",
+      "acousticPanel": "Panel dinding akustik — papan kayu penyerap bunyi untuk pejabat",
+      "marbleGoldPanel": "Panel dinding marmar emas — kemasan kilat mewah untuk reception",
+      "marbleSilverPanel": "Panel dinding marmar perak — kemasan kilat sejuk untuk interior minimalis",
+      "marbleBlackPanel": "Panel dinding marmar hitam — kemasan urat tebal untuk bilik mesyuarat",
+      "gallery": "Pemasangan Wall Panel Malaysia {n}",
+      "logoAria": "Laman utama Wall Panel Malaysia"
+    },
+    "usp1Title": "Pemasangan Percuma Disertakan",
+    "usp1Sub": "Kru terlatih, sistem klip tersembunyi dan kemas selepas kerja — semua sudah termasuk dalam harga sekaki persegi.",
+    "usp2Title": "5 Gaya Premium Untuk Pilihan",
+    "usp2Sub": "Kayu, Fluted, PVC, Akustik dan Marmar — boleh padan-padan dalam satu projek.",
+    "usp3Title": "Rumah Dan Pejabat Seluruh Negara",
+    "usp3Sub": "Kru yang sama, kualiti kemasan yang sama dari dinding TV di Bangsar ke lobi reception di Cyberjaya.",
+    "fomoText": "Pemasangan Percuma Bernilai RM500 — promo akan tamat. Kunci hari ini.",
+    "fomoCta": "Tuntut di WhatsApp",
+    "ctaTag1": "Pemasangan Percuma",
+    "ctaTag2": "Penjagaan Seumur Hidup",
+    "ctaTag3": "Seluruh Malaysia"
+  },
+  "footer": {
+    "tagline": "Wall Panel Malaysia — Pemasangan panel dinding premium di seluruh Malaysia.",
+    "quickLinks": "Jelajah",
+    "topLocations": "Lokasi Pemasangan",
+    "contact": "Hubungi Kami",
+    "phone": "WhatsApp",
+    "email": "Emel",
+    "address": "Beroperasi di seluruh Malaysia",
+    "hours": "9 pagi – 9 malam, setiap hari",
+    "legal": "© {year} Wall Panel Malaysia. Dikendalikan oleh Encik Beku Aircond Sdn. Bhd. Hak cipta terpelihara.",
+    "getInTouch": "Hubungi Kami",
+    "getInTouchSub": "Ada dinding dalam fikiran? WhatsApp gambar — kami balas dengan pilihan dan sebut harga percuma pada hari yang sama."
+  },
+  "home": {
+    "meta": {
+      "title": "Pemasangan Panel Dinding Malaysia | Dari RM25/sqft | Percuma",
+      "description": "Pasang panel dinding kayu, fluted, PVC, akustik atau marmar untuk rumah dan pejabat. Dari RM25/sqft termasuk pemasangan percuma. WhatsApp sekarang."
+    },
+    "hero": {
+      "h1": "Pemasangan Panel Dinding Premium Di Seluruh Malaysia",
+      "sub": "Kayu, Fluted, PVC, Akustik dan Marmar — dari RM25/sqft termasuk pemasangan percuma. Dinding cantik macam dalam majalah tanpa pening renovasi.",
+      "priceBadge": "Dari RM25/sqft · Pemasangan Percuma",
+      "primaryCta": "Dapatkan Sebut Harga di WhatsApp",
+      "secondaryCta": "Lihat 5 gaya panel",
+      "trust": "Rumah dan pejabat seluruh negara · 5 gaya premium · Ukuran dan pemasangan percuma"
+    },
+    "serviceArea": {
+      "heading": "Liputan pemasangan seluruh Malaysia",
+      "intro": "Kru kami pasang panel dinding di Selangor, Kuala Lumpur, Johor, Pulau Pinang, Negeri Sembilan, Melaka, Perak, Pahang, Kedah, Perlis, Kelantan, Terengganu, Sabah dan Sarawak — untuk pemilik rumah dan pejabat. Pilih bandar anda di bawah, kami sahkan slot ukuran percuma dalam beberapa minit."
+    },
+    "products": {
+      "heading": "Pilih Keluarga Panel Dinding Anda",
+      "eyebrow": "Katalog Panel",
+      "intro": "Dua keluarga. Panel Dinding Standard mengandungi kemasan Kayu, Fluted, PVC dan Akustik — dari RM25/sqft termasuk pemasangan percuma. Panel Dinding Marmar menambah tekstur PU marmar Emas, Perak dan Hitam — dari RM38/sqft termasuk pemasangan percuma. Semua panel 12mm pra-kemas dan dipasang oleh kru kami sendiri.",
+      "marketLabel": "Harga Pasaran",
+      "ourLabel": "Harga Kami",
+      "promoLabel": "Promo · Pemasangan Percuma"
+    },
+    "additional": {
+      "heading": "Lagi pilihan premium bila anda perlu",
+      "eyebrow": "Lebih banyak pilihan"
+    },
+    "howItWorks": {
+      "heading": "Dari WhatsApp Ke Dinding Siap Dalam 4 Langkah",
+      "eyebrow": "Proses",
+      "step1Title": "WhatsApp Ruang Anda Kepada Kami",
+      "step1Body": "Hantar gambar dinding, ukuran kasar jika ada, dan gaya yang anda minat. Kami balas dengan pilihan dan anggaran sekaki persegi pada hari yang sama.",
+      "step2Title": "Ukuran Di Tapak Dan Sampel Percuma",
+      "step2Body": "Kami datang ke rumah atau pejabat ikut waktu anda, ambil ukuran tepat, tunjuk sampel panel sebenar di bawah pencahayaan anda sendiri, dan sahkan arah reka bentuk.",
+      "step3Title": "Sebut Harga Bertulis — Promo Dikunci",
+      "step3Body": "Anda terima PDF sebut harga yang kemas dengan harga promo terkunci, termasuk pemasangan percuma. Deposit kecil mengesahkan slot — biasanya 30%, boleh dikembalikan sehingga hari pemasangan.",
+      "step4Title": "Pemasangan Dalam 3 Hingga 7 Hari",
+      "step4Body": "Kru kami pasang panel dengan sistem klip tersembunyi dalam satu lawatan (1–3 hari untuk kebanyakan ruang). Kami kemas sebelum balik — anda bangun pagi dengan feature wall siap."
+    },
+    "whyUs": {
+      "heading": "Apa Yang Anda Dapat Bila Tempah Dengan Kami",
+      "eyebrow": "Perbezaannya",
+      "p1Title": "Pemasangan Termasuk Dalam Setiap Sebut Harga",
+      "p1Body": "Tiada kejutan \"upah dari RM\" di hujung projek. Setiap harga sekaki persegi sudah termasuk pemasangan oleh pasukan terlatih kami.",
+      "p2Title": "Kami Pasang — Bukan Sub-Kontrak",
+      "p2Body": "Installer kami pekerja tetap, terlatih dengan setiap gaya yang kami jual. Jika ada masalah pada hari pemasangan, orang yang baiki kerja untuk kami.",
+      "p3Title": "Panel 12mm Dengan Klip Tersembunyi",
+      "p3Body": "Panel 12mm pra-kemas dipasang pada klip tersembunyi — tiada skru kelihatan. Lebih kukuh, lebih kemas, lebih mudah servis.",
+      "p4Title": "Waranti Kerja Tangan Bertulis",
+      "p4Body": "Jika panel terangkat, tercabut atau rosak kerana pemasangan kami — kami datang dan baiki. Tiada drama kertas kerja."
+    },
+    "reviews": {
+      "heading": "Apa Kata Rumah Dan Pejabat Malaysia Tentang Kami",
+      "eyebrow": "Suara Pelanggan",
+      "badge": "4.9★ · Ulasan Pelanggan Disahkan",
+      "r1Name": "Ahmad K. — Shah Alam",
+      "r1Tag": "5★ · Ruang Tamu",
+      "r1Body": "Tempah Panel Dinding Kayu untuk dinding TV di Setia Alam. Pasukan datang ukuran percuma hari Selasa, pasang siap hari Sabtu, finishing sama macam sampel. Tiada sampah selepas mereka balik — kru memang betul.",
+      "r2Name": "Lim S. — Petaling Jaya",
+      "r2Tag": "5★ · Bilik Mesyuarat",
+      "r2Body": "Buat Panel Dinding Marmar Hitam untuk bilik mesyuarat pejabat di Damansara. Klien terus tanya siapa buat renovation kami pada mesyuarat pertama. Harga jelas dari awal, pasang tiga hari, tiada caj tersembunyi.",
+      "r3Name": "Priya R. — Subang Jaya",
+      "r3Tag": "5★ · Bilik Tidur",
+      "r3Body": "Nak Panel Dinding Fluted di belakang katil dan risau salah pilih. Mereka hantar sampel dulu, tolong saya pilih warna, hasil akhir nampak macam hotel suite. Berbaloi setiap ringgit.",
+      "r4Name": "Aisyah — Bangi",
+      "r4Tag": "5★ · Bilik Air",
+      "r4Body": "Pakai Panel Dinding PVC untuk laundry yard dan bilik air kami. Sangat senang nak clean, tak lembap macam dinding cat lama. Kru sangat sopan dan kemas. Sangat saya cadangkan.",
+      "r5Name": "Tan W. — Cyberjaya",
+      "r5Tag": "5★ · Home Office",
+      "r5Body": "Pasang Panel Dinding Akustik untuk studio work-from-home. Bunyi Zoom call jadi lebih jelas, gema dah hilang. Papan kayu pun nampak premium dalam camera. Pasang satu hari, kemas.",
+      "r6Name": "Kavitha — Mont Kiara",
+      "r6Tag": "5★ · Reception",
+      "r6Body": "Guna Panel Dinding Marmar Emas di belakang reception desk dan lobi terus nampak dua kali lebih mahal. Pemasangan percuma memang betul-betul percuma — invoice sama dengan sebut harga sampai ringgit."
+    },
+    "faq": {
+      "heading": "Soalan Panel Dinding, Dijawab Dengan Jujur",
+      "eyebrow": "Soalan Lazim",
+      "q1": "Berapa harga pemasangan panel dinding sekaki persegi di Malaysia?",
+      "q1Tag": "Harga",
+      "a1": "Kemasan Panel Dinding Standard (Kayu, Fluted, PVC, Akustik) bermula RM25/sqft. Kemasan Panel Dinding Marmar (Emas, Perak, Hitam) bermula RM38/sqft. Kedua-dua harga termasuk pemasangan percuma, sistem klip tersembunyi dan kemas selepas kerja. Kos akhir bergantung pada jumlah keluasan dan potongan khas.",
+      "q2": "Adakah pemasangan percuma benar-benar percuma, atau ada caj tersembunyi?",
+      "q2Tag": "Pasang Percuma",
+      "a2": "Pemasangan percuma sepenuhnya termasuk dalam harga sekaki persegi yang anda lihat. Tiada \"upah dari RM\", tiada caj transport kejutan, tiada surcaj waktu malam. Hanya tambahan yang mungkin disebut harga adalah kerja kayu besar atau pembaikan permukaan — kami sentiasa tunjuk itu sebagai line berasingan.",
+      "q3": "Berapa lama pemasangan panel dinding?",
+      "q3Tag": "Masa Pemasangan",
+      "a3": "Kebanyakan ruang tamu dan bilik tidur siap dalam 1–2 hari. Bilik mesyuarat, dinding reception dan ruang lebih besar biasanya 3–7 hari dari ukuran sehingga kemasan. Kami sahkan tetingkap pemasangan tepat dalam sebut harga bertulis.",
+      "q4": "Adakah anda pasang panel dinding di luar Lembah Klang?",
+      "q4Tag": "Liputan",
+      "a4": "Ya — kami pasang di seluruh Malaysia termasuk KL, Selangor, Johor, Pulau Pinang, Ipoh, Negeri Sembilan, Melaka, Pahang, Kedah, Kelantan, Terengganu, Perlis, Sabah dan Sarawak. Kerja luar bandar dikenakan harga promo yang sama; pengangkutan termasuk untuk tempahan melebihi 200 sqft.",
+      "q5": "Gaya panel dinding mana yang paling sesuai untuk ruang saya?",
+      "q5Tag": "Gaya",
+      "a5": "Panduan kasar: Kayu dan Fluted sesuai untuk ruang tamu dan bilik tidur; PVC sesuai untuk dapur, bilik air dan ruang lembap; Akustik sesuai untuk home office, studio dan bilik mesyuarat; Marmar sesuai untuk feature wall mewah, reception dan bilik mesyuarat.",
+      "q6": "Sekuat mana panel dinding anda?",
+      "q6Tag": "Ketahanan",
+      "a6": "Semua panel kami 12mm pra-kemas dan dipasang pada klip tersembunyi — lebih kukuh dan mesra servis berbanding pemasangan gam. Dengan jagaan biasa, jangka hayat 8–10 tahun untuk panel Kayu dan Marmar, lebih lama untuk PVC dan Akustik.",
+      "q7": "Bagaimana saya cuci dan jaga panel dinding?",
+      "q7Tag": "Penjagaan",
+      "a7": "Lap dengan kain microfibre kering setiap minggu. Untuk panel PVC dan Marmar, anda boleh guna kain basah dengan sabun lembut. Elak thinner kuat atau berus dawai pada panel Kayu dan Akustik.",
+      "q8": "Macam mana saya tempah ukuran percuma?",
+      "q8Tag": "Tempahan",
+      "a8": "WhatsApp kami gambar dinding, ukuran kasar dan gaya yang anda minat. Kami sahkan slot ukuran percuma pada hari yang sama, hantar installer ikut waktu anda, dan susul dengan sebut harga bertulis."
+    },
+    "calculator": {
+      "eyebrow": "SEBUT HARGA SEGERA",
+      "heading": "Kira Kos Panel Dinding Anda",
+      "intro": "Geser ukuran dinding dan pilih keluarga panel — kami akan kira kaki persegi dan harga promo secara langsung. Pemasangan percuma bernilai RM500 sudah termasuk.",
+      "lengthLabel": "Panjang Dinding",
+      "heightLabel": "Tinggi Dinding",
+      "familyLabel": "Keluarga Panel",
+      "familyStandard": "Standard (Kayu, Fluted, PVC, Akustik)",
+      "familyMarble": "Marmar (Emas, Perak, Hitam)",
+      "metersUnit": "m",
+      "sqftLabel": "Anggaran Liputan",
+      "costLabel": "Jumlah Promo",
+      "promoPillLabel": "Harga Promo Digunakan",
+      "freeInstallLabel": "Pemasangan Percuma Bernilai RM500 Termasuk",
+      "ctaLabel": "Kunci Sebut Harga di WhatsApp",
+      "waTemplate": "Hi Wall Panel Malaysia, saya nak sebut harga untuk [SQFT] sqft panel dinding [FAMILY]. Anggaran kos: RM[TOTAL]. Bila boleh start?"
+    },
+    "logoStrip": {
+      "eyebrow": "DIPERCAYAI OLEH",
+      "item1": "Disiarkan dalam Property Insight",
+      "item2": "Ahli BCI Asia 2025",
+      "item3": "Material Bertauliah SIRIM",
+      "item4": "ISO 9001:2015",
+      "item5": "Malaysia Green Label",
+      "item6": "Rakan Senheng Home"
+    },
+    "locationsCta": {
+      "heading": "Cari Wall Panel Malaysia Di Bandar Anda",
+      "sub": "Kami pasang di 150+ bandar seluruh negara — tap kawasan anda untuk harga, masa pemasangan dan soalan lazim setempat."
+    },
+    "finalCta": {
+      "heading": "Feature Wall Anda Hanya Satu Mesej WhatsApp Sahaja",
+      "sub": "Ukuran percuma, sebut harga percuma, pemasangan percuma — dikunci pada harga promo selagi banner ini hidup. Satu mesej, satu pasukan, satu dinding premium.",
+      "button": "Dapatkan Sebut Harga di WhatsApp"
+    }
+  },
+  "blog": {
+    "meta": {
+      "title": "Blog | Wall Panel Malaysia",
+      "description": "Idea, tip pemasangan dan panduan reka bentuk panel dinding untuk rumah dan pejabat Malaysia."
+    },
+    "heading": "Blog Wall Panel Malaysia",
+    "subheading": "Idea, tip pemasangan dan panduan reka bentuk untuk projek panel dinding anda.",
+    "noPosts": "Tiada artikel lagi — datang lagi nanti!",
+    "breadcrumbs": {
+      "home": "Utama",
+      "blog": "Blog"
+    },
+    "cta": {
+      "heading": "Bersedia untuk pasang panel dinding anda?",
+      "sub": "WhatsApp Wall Panel Malaysia — kami balas dalam beberapa minit dengan sebut harga percuma."
+    },
+    "recentPosts": "Artikel Terkini",
+    "minRead": "{count} minit bacaan"
+  },
+  "location": {
+    "meta": {
+      "title": "Pemasangan Panel Dinding {city} | Dari RM25/sqft | Percuma",
+      "description": "Pasang panel dinding kayu, fluted, PVC, akustik atau marmar di {city}. Dari RM25/sqft termasuk pemasangan percuma. WhatsApp Wall Panel Malaysia untuk ukuran percuma."
+    },
+    "h1": "Pemasangan Panel Dinding Di {city} — Dari RM25/sqft Pemasangan Percuma",
+    "breadcrumbs": {
+      "home": "Utama",
+      "locations": "Lokasi",
+      "city": "{city}"
+    },
+    "banner": "Layani {city} dan kawasan sekitarnya — ukuran dan pemasangan percuma untuk setiap tempahan.",
+    "whyHeading": "Kenapa Pilih Wall Panel Malaysia Untuk {city}",
+    "faqHeading": "Soalan Panel Dinding — {city}",
+    "nearby": {
+      "heading": "Kawasan Berdekatan Yang Kami Juga Pasang",
+      "sub": "Tap bandar untuk lihat halaman khasnya."
+    },
+    "cta": {
+      "heading": "Merancang Feature Wall Di {city}?",
+      "sub": "WhatsApp Wall Panel Malaysia — kami sahkan ukuran percuma, hantar sebut harga bertulis dan kunci harga promo anda.",
+      "button": "Dapatkan Sebut Harga di WhatsApp"
+    }
+  }
+}

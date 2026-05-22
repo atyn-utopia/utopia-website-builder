@@ -1,0 +1,35 @@
+export const siteConfig = {
+  brandName: 'AuntyRokiah Katering',
+  legalName: 'Kak Kenduri Sdn. Bhd.',
+  companyId: 'ce95071b-e575-4983-bdd4-66910f45fe34',
+  slogan: 'Tradisi Rasa, Sentuhan Istimewa',
+  heritageLine: 'Since 1998',
+  foundingYear: '1998',
+  domain: 'auntyrokiah-katering.utopiaai.my',
+  url: 'https://auntyrokiah-katering.utopiaai.my',
+  productSlug: 'pakej-katering',
+  fallbackPhone: '60174287801',
+  defaultLocale: 'ms' as const,
+  locales: ['ms', 'en', 'zh'] as const,
+  priceRange: 'RM15–RM25 per pax',
+  servesCuisine: 'Malay',
+  whatsappMessages: {
+    ms: 'Hi AuntyRokiah Katering, saya berminat dengan pakej katering untuk majlis saya. Boleh bantu?',
+    en: "Hi AuntyRokiah Katering, I'm interested in your catering package for my event. Could you help?",
+    zh: '你好 AuntyRokiah Katering,我对您们的宴会餐饮配套有兴趣,请帮忙。',
+  },
+  colors: {
+    bg: '#FFFFFF',
+    cream: '#FAF3E5',
+    turmeric: '#E89A2C',
+    spiceOrange: '#D9742A',
+    charcoal: '#1F1A17',
+    ink: '#3C3531',
+    sambal: '#C9252C',
+    googleYellow: '#FBBC04',
+    whatsapp: '#25D366',
+    whatsappHover: '#1EBE57',
+  },
+} as const
+
+export type Locale = (typeof siteConfig.locales)[number]

@@ -3,3 +3,13 @@
 node_modules/
 .next/
 .DS_Store
+# TypeScript incremental build cache — regenerated per machine, never share
+*.tsbuildinfo
+# Local Claude / Codex / agent caches
+.claude/settings.local.json
+.codex/
+# Per-project development screenshots — multi-MB binaries, not for git
+projects/*/temporary screenshots/
+# Per-project local insert scripts produced by agents (Cyclops/Hanabi)
+projects/*/.cyclops-*/
+projects/*/.hanabi-*/
