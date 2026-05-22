@@ -10,24 +10,76 @@ interface PorcelainEntry {
 
 interface SyncPreview {
   available: boolean
-  branch?: string
+  source?: 'local' | 'remote'
+  branch?: string | null
   count?: number
   changes?: PorcelainEntry[]
   reason?: string
+  hint?: string
+  daemonAgeSeconds?: number
+  stale?: boolean
 }
 
 interface SyncResult {
   ok: boolean
-  mode?: 'pr' | 'main'
+  mode?: 'pr' | 'main' | 'queued'
+  requestId?: string
   commitSha?: string
   filesCommitted?: number
   message?: string
   branch?: string
   prUrl?: string | null
   error?: string
+  hint?: string
 }
 
-type SyncState = 'idle' | 'syncing' | 'success' | 'error'
+interface QueuedRequest {
+  id: string
+  status: 'pending' | 'running' | 'done' | 'error'
+  mode: 'pr' | 'main'
+  result: SyncResult | null
+}
+
+type SyncState = 'idle' | 'syncing' | 'queued' | 'success' | 'error'
+
+function pillStyle(variant: 'warn' | 'pass' | 'quiet'): React.CSSProperties {
+  const bg = variant === 'pass' ? 'var(--status-pass-bg)'
+    : variant === 'quiet' ? 'transparent'
+    : 'var(--status-warn-bg)'
+  const fg = variant === 'pass' ? 'var(--status-pass)'
+    : variant === 'quiet' ? 'var(--text-quiet)'
+    : 'var(--status-warn)'
+  const border = variant === 'pass' ? 'var(--status-pass-border)'
+    : variant === 'quiet' ? 'var(--border-soft)'
+    : 'var(--status-warn-border)'
+  return {
+    background: bg,
+    color: fg,
+    border: `1px solid ${border}`,
+    borderRadius: 'var(--radius-pill)',
+    padding: '9px 18px',
+    fontSize: 13,
+    fontWeight: 600,
+    lineHeight: 1.2,
+    cursor: 'pointer',
+    fontFamily: 'var(--font-sans)',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: 6,
+    whiteSpace: 'nowrap',
+    transition: 'all var(--transition-snap)',
+  }
+}
+
+function dotStyle(color: string): React.CSSProperties {
+  return {
+    display: 'inline-block',
+    width: 6,
+    height: 6,
+    borderRadius: '50%',
+    background: color,
+  }
+}
 
 export default function SyncButton() {
   const [preview, setPreview] = useState<SyncPreview | null>(null)
@@ -52,41 +104,48 @@ export default function SyncButton() {
     return () => clearInterval(t)
   }, [])
 
-  // Hidden when wizard is in snapshot mode (no filesystem) or when projects/
-  // is clean.
-  if (!preview || !preview.available || !preview.count) return null
+  // Hide entirely if we can't determine state OR if remote daemon hasn't
+  // reported in. (For remote, show a help-state button so the user knows why
+  // sync isn't working.)
+  if (!preview) return null
+  if (preview.source === 'local' && !preview.count) return null
+  if (preview.source === 'remote' && !preview.available) {
+    return (
+      <button
+        type="button"
+        onClick={() => setModalOpen(true)}
+        style={pillStyle('quiet')}
+        title={preview.hint ?? 'No sync daemon reporting'}
+      >
+        <span style={dotStyle('var(--text-quiet)')} />
+        Sync (offline)
+        {modalOpen && mounted && (
+          <SyncModal
+            preview={preview}
+            onClose={() => setModalOpen(false)}
+            onSynced={() => { setModalOpen(false); refresh() }}
+          />
+        )}
+      </button>
+    )
+  }
 
-  const count = preview.count
+  const count = preview.count ?? 0
+  const noWork = count === 0
   return (
     <>
       <button
         type="button"
         onClick={() => setModalOpen(true)}
-        style={{
-          background: 'var(--status-warn-bg)',
-          color: 'var(--status-warn)',
-          border: '1px solid var(--status-warn-border)',
-          borderRadius: 'var(--radius-pill)',
-          padding: '9px 18px',
-          fontSize: 13,
-          fontWeight: 600,
-          lineHeight: 1.2,
-          cursor: 'pointer',
-          fontFamily: 'var(--font-sans)',
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: 6,
-          whiteSpace: 'nowrap',
-          transition: 'all var(--transition-snap)',
-        }}
-        title={`${count} change${count === 1 ? '' : 's'} under projects/ not yet on GitHub`}
+        style={pillStyle(noWork ? 'pass' : 'warn')}
+        title={
+          noWork
+            ? 'No changes to sync — local working tree is clean'
+            : `${count} change${count === 1 ? '' : 's'} under projects/ not yet on GitHub`
+        }
       >
-        <span style={{
-          display: 'inline-block',
-          width: 6, height: 6, borderRadius: '50%',
-          background: 'var(--status-warn)',
-        }} />
-        Sync ({count})
+        <span style={dotStyle(noWork ? 'var(--status-pass)' : 'var(--status-warn)')} />
+        {noWork ? 'Sync (0)' : `Sync (${count})`}
       </button>
 
       {modalOpen && mounted && (
@@ -111,7 +170,7 @@ function SyncModal({ preview, onClose, onSynced }: {
   const [result, setResult] = useState<SyncResult | null>(null)
 
   const submit = async () => {
-    if (state === 'syncing') return
+    if (state === 'syncing' || state === 'queued') return
     setState('syncing')
     setResult(null)
     try {
@@ -121,6 +180,45 @@ function SyncModal({ preview, onClose, onSynced }: {
         body: JSON.stringify({ mode, message: message.trim() || undefined }),
       })
       const json: SyncResult = await res.json()
+
+      // Snapshot mode → response is a queued request. Poll until the daemon
+      // completes it, then surface the final result.
+      if (json.ok && json.mode === 'queued' && json.requestId) {
+        setState('queued')
+        setResult(json)
+        const id = json.requestId
+        const deadline = Date.now() + 90_000 // 90s
+        const tick = async (): Promise<void> => {
+          if (Date.now() > deadline) {
+            setState('error')
+            setResult({ ok: false, error: 'Timed out — is the sync-listener daemon running on your Mac?' })
+            return
+          }
+          try {
+            const sr = await fetch(`/api/sync-projects/status/${id}`, { cache: 'no-store' })
+            const sb = (await sr.json()) as { ok: boolean; request?: QueuedRequest }
+            if (sb.ok && sb.request) {
+              if (sb.request.status === 'done') {
+                const r = (sb.request.result ?? {}) as Partial<SyncResult>
+                setResult({ ok: true, ...r })
+                setState('success')
+                setTimeout(onSynced, 2200)
+                return
+              }
+              if (sb.request.status === 'error') {
+                const r = (sb.request.result ?? {}) as { error?: string }
+                setResult({ ok: false, error: r.error ?? 'Daemon reported an error' })
+                setState('error')
+                return
+              }
+            }
+          } catch { /* keep polling */ }
+          setTimeout(tick, 2000)
+        }
+        setTimeout(tick, 1500)
+        return
+      }
+
       setResult(json)
       setState(json.ok ? 'success' : 'error')
       if (json.ok) {
@@ -188,8 +286,23 @@ function SyncModal({ preview, onClose, onSynced }: {
             }}>projects/</code>
           </h2>
           <p style={{ color: 'var(--text-muted)', fontSize: 12, margin: 0 }}>
-            Branch: <code style={{ fontFamily: 'var(--font-mono)' }}>{preview.branch}</code>. Only files under <code style={{ fontFamily: 'var(--font-mono)' }}>projects/</code> are touched — utopia-wizard and root are left alone.
+            Branch: <code style={{ fontFamily: 'var(--font-mono)' }}>{preview.branch ?? '—'}</code>. Only files under <code style={{ fontFamily: 'var(--font-mono)' }}>projects/</code> are touched — utopia-wizard and root are left alone.
           </p>
+          {preview.source === 'remote' && (
+            <div style={{
+              background: preview.stale ? 'var(--status-warn-bg)' : 'var(--brand-bg)',
+              border: `1px solid ${preview.stale ? 'var(--status-warn-border)' : 'var(--brand-border)'}`,
+              borderRadius: 'var(--radius-md)',
+              padding: '8px 12px',
+              fontSize: 11.5,
+              color: preview.stale ? 'var(--status-warn)' : 'var(--brand)',
+              marginTop: 8,
+            }}>
+              {preview.available
+                ? <>● Remote mode — daemon reported {preview.daemonAgeSeconds}s ago{preview.stale ? ' (stale)' : ''}. Clicking submit queues the request; your local daemon will run it.</>
+                : <>○ Remote mode — no sync-listener daemon has reported in. Start it on your Mac with <code style={{ background: 'var(--bg-input)', padding: '1px 5px', borderRadius: 4 }}>cd utopia-wizard && npm run sync-listener</code>.</>}
+            </div>
+          )}
         </div>
 
         <div style={{
@@ -288,7 +401,30 @@ function SyncModal({ preview, onClose, onSynced }: {
           </div>
         )}
 
-        {result && result.ok && (
+        {state === 'queued' && (
+          <div style={{
+            color: 'var(--brand)',
+            background: 'var(--brand-bg)',
+            border: '1px solid var(--brand-border)',
+            borderRadius: 'var(--radius-md)',
+            padding: '10px 12px',
+            fontSize: 12.5,
+            lineHeight: 1.55,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 8,
+          }}>
+            <span style={{
+              display: 'inline-block',
+              width: 8, height: 8, borderRadius: '50%',
+              background: 'var(--brand)',
+              animation: 'pulseDot 1.4s ease-in-out infinite',
+            }} />
+            Queued. Waiting on the local daemon to commit and push…
+          </div>
+        )}
+
+        {result && result.ok && state === 'success' && (
           <div style={{
             color: 'var(--status-pass)',
             background: 'var(--status-pass-bg)',
@@ -340,7 +476,7 @@ function SyncModal({ preview, onClose, onSynced }: {
           </button>
           <button
             onClick={submit}
-            disabled={state === 'syncing' || state === 'success'}
+            disabled={state === 'syncing' || state === 'queued' || state === 'success' || (preview.count ?? 0) === 0 || (preview.source === 'remote' && !preview.available)}
             style={{
               background: mode === 'main' ? 'var(--status-fail)' : 'var(--brand)',
               color: '#fff',
@@ -349,13 +485,15 @@ function SyncModal({ preview, onClose, onSynced }: {
               padding: '9px 18px',
               fontSize: 13,
               fontWeight: 600,
-              cursor: state === 'syncing' ? 'wait' : 'pointer',
+              cursor: (state === 'syncing' || state === 'queued') ? 'wait' : 'pointer',
               fontFamily: 'var(--font-sans)',
               lineHeight: 1.2,
               transition: 'all var(--transition-snap)',
+              opacity: (preview.count ?? 0) === 0 ? 0.5 : 1,
             }}
           >
-            {state === 'syncing' ? 'Syncing…'
+            {state === 'queued' ? 'Waiting…'
+              : state === 'syncing' ? 'Syncing…'
               : state === 'success' ? '✓ Synced'
               : mode === 'main' ? 'Push to Main'
               : 'Open Sync PR'}
