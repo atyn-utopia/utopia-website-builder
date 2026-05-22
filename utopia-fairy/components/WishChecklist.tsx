@@ -250,7 +250,7 @@ function ToImplementSection({ slug, failed }: { slug: string; failed: { group: s
         marginBottom: 14,
       }}>
         <span className="uf-eyebrow" style={{ color: 'var(--status-fail)' }}>
-          ✕ To implement ({failed.length})
+          ✕ To Implement ({failed.length})
         </span>
         <button
           onClick={copyAll}
@@ -269,7 +269,7 @@ function ToImplementSection({ slug, failed }: { slug: string; failed: { group: s
             transition: 'all var(--transition-snap)',
           }}
         >
-          {copiedAll ? '✓ Copied' : '📋 Copy all as Claude prompt'}
+          {copiedAll ? '✓ Copied' : '📋 Copy All as Claude Prompt'}
         </button>
       </div>
       <ol style={{ paddingLeft: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 10, listStyle: 'none' }}>

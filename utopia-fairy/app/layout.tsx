@@ -60,7 +60,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           justifyContent: 'center',
           alignItems: 'flex-start',
           minHeight: '100vh',
-          padding: '48px 20px',
+          // Bigger top padding so the fixed top-right Theme + Logout buttons
+          // (each 40px tall, anchored at top: 18px) always clear the header
+          // content below them, even on narrow windows where the Rescan +
+          // New Project buttons sit on the same horizontal line.
+          padding: '76px 20px 48px',
         }}>
           {children}
         </div>

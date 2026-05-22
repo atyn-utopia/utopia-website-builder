@@ -98,7 +98,7 @@ export default function WishStatus({ slug }: { slug: string }) {
               onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.85' }}
               onMouseLeave={(e) => { e.currentTarget.style.opacity = '1' }}
             >
-              {isDeployed ? 'Visit website →' : 'Open preview →'}
+              {isDeployed ? 'Visit Website →' : 'Open Preview →'}
             </a>
             {localUrl && deployUrl && (
               <a
@@ -183,7 +183,7 @@ export default function WishStatus({ slug }: { slug: string }) {
                 transition: 'opacity var(--transition-snap)',
               }}
             >
-              {copied ? '✓ Copied' : 'Copy command'}
+              {copied ? '✓ Copied' : 'Copy Command'}
             </button>
           </div>
         </div>

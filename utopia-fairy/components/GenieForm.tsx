@@ -120,7 +120,7 @@ export default function GenieForm() {
           gap: 12,
         }}>
           <div>
-            <span className="uf-eyebrow" style={{ color: 'var(--brand)' }}>Wish prepared</span>
+            <span className="uf-eyebrow" style={{ color: 'var(--brand)' }}>Wish Prepared</span>
             <p style={{ color: 'var(--text-primary)', fontSize: 14, margin: '6px 0 0', lineHeight: 1.55 }}>
               The deployed monitor can't create folders on your machine. Copy this command and paste it into Claude Code (running in the <code style={{ background: 'var(--bg-input)', padding: '1px 6px', borderRadius: 4 }}>utopia-website-builder</code> repo) — Claude will scaffold the project locally with your prompt as <code style={{ background: 'var(--bg-input)', padding: '1px 6px', borderRadius: 4 }}>{snapshotResult.projectPath}inputs.md</code>.
             </p>
@@ -140,7 +140,7 @@ export default function GenieForm() {
           </div>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             <button onClick={copyCommand} className="uf-btn-brand" style={{ padding: '8px 16px' }}>
-              {copied ? '✓ Copied' : '📋 Copy command'}
+              {copied ? '✓ Copied' : '📋 Copy Command'}
             </button>
             <button
               onClick={() => {
@@ -162,7 +162,7 @@ export default function GenieForm() {
                 fontFamily: 'var(--font-sans)',
               }}
             >
-              Make another wish
+              Make Another Wish
             </button>
           </div>
           <p style={{ color: 'var(--text-muted)', fontSize: 11.5, margin: 0, lineHeight: 1.5 }}>
