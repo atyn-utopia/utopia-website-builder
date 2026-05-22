@@ -10,8 +10,10 @@ export default function RegisterSW() {
     const register = () => {
       navigator.serviceWorker.register('/sw.js').catch(() => { /* silently ignore */ })
     }
-    if ('requestIdleCallback' in window) {
-      ;(window as Window & { requestIdleCallback: (cb: () => void) => void }).requestIdleCallback(register)
+    type WindowWithIdle = Window & { requestIdleCallback?: (cb: () => void) => void }
+    const w = window as WindowWithIdle
+    if (typeof w.requestIdleCallback === 'function') {
+      w.requestIdleCallback(register)
     } else {
       window.setTimeout(register, 800)
     }
