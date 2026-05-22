@@ -123,12 +123,16 @@ function deployStatusOf(p: ProjectRow): DeployStatusInfo {
   return { status: 'issue', label: 'Issue', color: 'warn' }
 }
 
+type RescanState = 'idle' | 'triggering' | 'running' | 'success' | 'error'
+
 export default function MonitorTable() {
   const [data, setData] = useState<MonitorPayload | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [sortKey, setSortKey] = useState<SortKey>('created')
   const [sortDir, setSortDir] = useState<SortDir>('desc')
+  const [rescan, setRescan] = useState<RescanState>('idle')
+  const [rescanMsg, setRescanMsg] = useState<string | null>(null)
   const router = useRouter()
   const isMobile = useIsMobile()
 
@@ -144,6 +148,18 @@ export default function MonitorTable() {
     })
   }
 
+  const refetch = async () => {
+    try {
+      const res = await fetch('/api/checklist', { cache: 'no-store' })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      const json: MonitorPayload = await res.json()
+      setData(json)
+      setError(null)
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'failed to load')
+    }
+  }
+
   useEffect(() => {
     let mounted = true
     const load = async () => {
@@ -151,10 +167,7 @@ export default function MonitorTable() {
         const res = await fetch('/api/checklist', { cache: 'no-store' })
         if (!res.ok) throw new Error(`HTTP ${res.status}`)
         const json: MonitorPayload = await res.json()
-        if (mounted) {
-          setData(json)
-          setError(null)
-        }
+        if (mounted) { setData(json); setError(null) }
       } catch (e) {
         if (mounted) setError(e instanceof Error ? e.message : 'failed to load')
       } finally {
@@ -165,6 +178,55 @@ export default function MonitorTable() {
     const t = setInterval(load, 30_000)
     return () => { mounted = false; clearInterval(t) }
   }, [])
+
+  const triggerRescan = async () => {
+    if (rescan === 'triggering' || rescan === 'running') return
+    setRescan('triggering')
+    setRescanMsg('Triggering GitHub Actions…')
+    try {
+      const res = await fetch('/api/rescan', { method: 'POST' })
+      const body = await res.json()
+      if (!res.ok || !body.ok) {
+        setRescan('error')
+        setRescanMsg(body.error ?? `HTTP ${res.status}`)
+        return
+      }
+      setRescan('running')
+      setRescanMsg('Scan running on GitHub Actions…')
+
+      // Poll the latest workflow run status. Scans typically finish in ~60-90s.
+      const startedAt = Date.now()
+      const deadline = startedAt + 5 * 60 * 1000 // give up after 5 min
+      const poll = async () => {
+        if (Date.now() > deadline) {
+          setRescan('error')
+          setRescanMsg('Timed out waiting for the scan to finish. Check Actions tab.')
+          return
+        }
+        try {
+          const sr = await fetch('/api/rescan', { cache: 'no-store' })
+          const sb = await sr.json()
+          if (sb?.run?.status === 'completed') {
+            if (sb.run.conclusion === 'success') {
+              setRescan('success')
+              setRescanMsg('Scan complete — table updated.')
+              await refetch()
+              setTimeout(() => setRescan('idle'), 4000)
+              return
+            }
+            setRescan('error')
+            setRescanMsg(`Scan ${sb.run.conclusion ?? 'finished'} — check Actions tab.`)
+            return
+          }
+        } catch { /* swallow and keep polling */ }
+        setTimeout(poll, 4000)
+      }
+      setTimeout(poll, 5000)
+    } catch (e) {
+      setRescan('error')
+      setRescanMsg(e instanceof Error ? e.message : 'failed')
+    }
+  }
 
   const groupNames = data?.projects[0]?.groups.map((g) => g.name) ?? []
 
@@ -227,13 +289,63 @@ export default function MonitorTable() {
             </p>
           </div>
         </div>
-        <button
-          onClick={() => router.push('/new')}
-          className="uf-btn-brand"
-        >
-          ✦ New project
-        </button>
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+          <button
+            onClick={triggerRescan}
+            disabled={rescan === 'triggering' || rescan === 'running'}
+            style={{
+              background: 'transparent',
+              color: rescan === 'error' ? 'var(--status-fail)'
+                : rescan === 'success' ? 'var(--status-pass)'
+                : 'var(--text-secondary)',
+              border: `1px solid ${
+                rescan === 'error' ? 'var(--status-fail-border)'
+                : rescan === 'success' ? 'var(--status-pass-border)'
+                : 'var(--border-soft)'
+              }`,
+              borderRadius: 'var(--radius-pill)',
+              padding: '8px 14px',
+              fontSize: 12,
+              fontWeight: 600,
+              cursor: rescan === 'triggering' || rescan === 'running' ? 'wait' : 'pointer',
+              fontFamily: 'var(--font-sans)',
+              transition: 'all var(--transition-snap)',
+              whiteSpace: 'nowrap',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 6,
+            }}
+            title={rescanMsg ?? 'Trigger an immediate GitHub Actions scan'}
+          >
+            <span style={{
+              display: 'inline-block',
+              width: 6, height: 6, borderRadius: '50%',
+              background: rescan === 'running' ? 'var(--status-warn)'
+                : rescan === 'success' ? 'var(--status-pass)'
+                : rescan === 'error' ? 'var(--status-fail)'
+                : 'var(--text-quiet)',
+              animation: rescan === 'running' || rescan === 'triggering' ? 'pulseDot 1.6s ease-in-out infinite' : 'none',
+            }} />
+            {rescan === 'triggering' ? 'Triggering…'
+              : rescan === 'running'    ? 'Scanning…'
+              : rescan === 'success'    ? 'Scan complete'
+              : rescan === 'error'      ? 'Rescan failed'
+              : 'Rescan now'}
+          </button>
+          <button
+            onClick={() => router.push('/new')}
+            className="uf-btn-brand"
+          >
+            ✦ New project
+          </button>
+        </div>
       </header>
+      <style jsx>{`
+        @keyframes pulseDot {
+          0%, 100% { opacity: 0.5; transform: scale(0.85); }
+          50%      { opacity: 1;   transform: scale(1.15); }
+        }
+      `}</style>
 
       {error && (
         <div className="uf-card" style={{ padding: '12px 16px', color: 'var(--status-fail)', fontSize: 13 }}>
