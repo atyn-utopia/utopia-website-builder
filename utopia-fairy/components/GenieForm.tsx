@@ -42,7 +42,8 @@ export default function GenieForm() {
     return value.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e?: React.MouseEvent | React.FormEvent) => {
+    e?.preventDefault?.()
     if (!prompt.trim() || !slug.trim()) return
     setState('submitting')
     setErrorMsg('')
@@ -216,6 +217,7 @@ export default function GenieForm() {
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 4 }}>
         <button
+          type="button"
           className="fairy-btn"
           onClick={handleSubmit}
           disabled={!canSubmit}
