@@ -10,72 +10,58 @@ export default async function WishPage({ params }: { params: Promise<{ slug: str
     <main style={{
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
-      gap: 6,
+      gap: 20,
       width: '100%',
-      maxWidth: 760,
+      maxWidth: 880,
     }}>
-      <div className="fade-in" style={{ width: '100%', display: 'flex', justifyContent: 'flex-start', marginBottom: 8 }}>
-        <Link
-          href="/"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 6,
-            background: 'rgba(79, 195, 247, 0.08)',
-            border: '1px solid var(--input-border)',
-            borderRadius: 10,
-            padding: '8px 14px',
-            color: 'var(--accent-fairy)',
-            fontSize: 12,
-            fontWeight: 600,
-            textDecoration: 'none',
-            fontFamily: 'var(--font-body)',
-            letterSpacing: '0.3px',
-          }}
-        >
-          ← Back to Monitor
-        </Link>
-      </div>
-      <h1
-        className="fade-in"
+      <Link
+        href="/"
         style={{
-          fontFamily: 'var(--font-display)',
-          fontSize: 'clamp(26px, 6vw, 34px)',
-          fontWeight: 400,
-          color: 'var(--accent-fairy)',
-          letterSpacing: '3px',
-          margin: 0,
-          textShadow: '0 0 30px rgba(129, 212, 250, 0.3)',
-          textAlign: 'center',
-        }}
-      >
-        Utopia Fairy
-      </h1>
-      <p
-        className="fade-in"
-        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 4,
           color: 'var(--text-muted)',
-          fontSize: 14,
-          marginBottom: 20,
-          fontFamily: 'var(--font-body)',
+          fontSize: 12,
           fontWeight: 500,
-          letterSpacing: '0.3px',
-          animationDelay: '0.15s',
-          textAlign: 'center',
+          alignSelf: 'flex-start',
+          padding: '6px 14px',
+          marginLeft: -8,
+          borderRadius: 'var(--radius-pill)',
+          transition: 'color var(--transition-snap)',
         }}
       >
-        Your wish is being granted...
-      </p>
-      <div className="fade-in" style={{ width: '100%', animationDelay: '0.3s' }}>
+        ← All projects
+      </Link>
+
+      <header style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 4,
+        paddingBottom: 16,
+        borderBottom: '1px solid var(--border-soft)',
+      }}>
+        <span className="uf-eyebrow">Project</span>
+        <h1 style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: 'clamp(20px, 4vw, 26px)',
+          fontWeight: 600,
+          color: 'var(--text-primary)',
+          letterSpacing: '-0.01em',
+          margin: 0,
+        }}>
+          {slug}
+        </h1>
+      </header>
+
+      <div className="fade-in" style={{ width: '100%' }}>
         <WishStatus slug={slug} />
       </div>
 
-      <div className="fade-in" style={{ width: '100%', marginTop: 40, animationDelay: '0.45s' }}>
+      <div className="fade-in" style={{ width: '100%', marginTop: 16, animationDelay: '0.1s' }}>
         <WishChecklist slug={slug} />
       </div>
 
-      <div className="fade-in" style={{ width: '100%', marginTop: 40, animationDelay: '0.6s' }}>
+      <div className="fade-in" style={{ width: '100%', marginTop: 16, animationDelay: '0.2s' }}>
         <WishData slug={slug} />
       </div>
     </main>
