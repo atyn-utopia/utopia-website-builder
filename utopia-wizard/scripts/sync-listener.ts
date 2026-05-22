@@ -23,10 +23,27 @@ import { execFile } from 'child_process'
 import { promisify } from 'util'
 import path from 'path'
 import fs from 'fs'
-import { loadEnvConfig } from '@next/env'
 
-// Pick up SUPABASE_* keys from the repo-root .env.local symlink.
-loadEnvConfig(path.resolve(process.cwd(), '..'))
+// Pick up SUPABASE_* keys from the repo-root .env.local symlink. Inline this
+// instead of depending on @next/env (which is CJS — breaks Node's native
+// --experimental-strip-types loader used under launchd).
+function loadEnvLocal(): void {
+  const envPath = path.resolve(process.cwd(), '..', '.env.local')
+  if (!fs.existsSync(envPath)) return
+  for (const line of fs.readFileSync(envPath, 'utf-8').split('\n')) {
+    const trimmed = line.trim()
+    if (!trimmed || trimmed.startsWith('#')) continue
+    const eq = trimmed.indexOf('=')
+    if (eq < 0) continue
+    const key = trimmed.slice(0, eq).trim()
+    let value = trimmed.slice(eq + 1).trim()
+    if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+      value = value.slice(1, -1)
+    }
+    if (!process.env[key]) process.env[key] = value
+  }
+}
+loadEnvLocal()
 
 const SUPA_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY ?? ''
