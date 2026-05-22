@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { writeFile, mkdir } from 'fs/promises'
 import path from 'path'
+import { dataMode } from '@/lib/dataSource'
+
+function buildClaudeCommand(slug: string): string {
+  return `claude "Using @CLAUDE.md files, generate the ${slug} website. Read projects/${slug}/inputs.md for the project brief."`
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -16,6 +21,19 @@ export async function POST(request: NextRequest) {
     // Validate slug format
     if (!/^[a-z0-9-]+$/.test(slug)) {
       return NextResponse.json({ success: false, error: 'Slug must be lowercase letters, numbers, and hyphens only' }, { status: 400 })
+    }
+
+    // On the deployed monitor (snapshot mode) there is no writable projects/
+    // folder — return the Claude command for the user to run locally.
+    if (dataMode() === 'snapshot') {
+      return NextResponse.json({
+        success: true,
+        mode: 'snapshot',
+        slug,
+        projectPath: `projects/${slug}/`,
+        command: buildClaudeCommand(slug),
+        prompt,
+      })
     }
 
     // Resolve project path relative to the repo root (utopia-fairy lives at repo root)
@@ -57,8 +75,11 @@ ${assetsSection}
 
     return NextResponse.json({
       success: true,
+      mode: 'live',
+      slug,
       projectPath: `projects/${slug}/`,
       filesCount: fileNames.length,
+      command: buildClaudeCommand(slug),
     })
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error'

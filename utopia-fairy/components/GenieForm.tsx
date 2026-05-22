@@ -4,7 +4,14 @@ import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import FileUpload from './FileUpload'
 
-type FormState = 'idle' | 'submitting' | 'error'
+type FormState = 'idle' | 'submitting' | 'error' | 'snapshot-success'
+
+interface SnapshotResult {
+  slug: string
+  projectPath: string
+  command: string
+  filesCount: number
+}
 
 export default function GenieForm() {
   const [prompt, setPrompt] = useState('')
@@ -12,8 +19,17 @@ export default function GenieForm() {
   const [files, setFiles] = useState<File[]>([])
   const [state, setState] = useState<FormState>('idle')
   const [errorMsg, setErrorMsg] = useState('')
+  const [snapshotResult, setSnapshotResult] = useState<SnapshotResult | null>(null)
+  const [copied, setCopied] = useState(false)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const router = useRouter()
+
+  const copyCommand = async () => {
+    if (!snapshotResult) return
+    await navigator.clipboard.writeText(snapshotResult.command)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -40,12 +56,26 @@ export default function GenieForm() {
     try {
       const res = await fetch('/api/create-project', { method: 'POST', body: formData })
       const data = await res.json()
-      if (data.success) {
-        router.push(`/wish/${formattedSlug}`)
-      } else {
+      if (!data.success) {
         setState('error')
         setErrorMsg(data.error || 'Something went wrong')
+        return
       }
+      if (data.mode === 'snapshot') {
+        // Deployed monitor: no local filesystem. Show the Claude command for
+        // the user to run locally — the project folder + inputs.md will be
+        // created on their machine by Claude Code.
+        setSnapshotResult({
+          slug: data.slug,
+          projectPath: data.projectPath,
+          command: data.command,
+          filesCount: 0,
+        })
+        setState('snapshot-success')
+        return
+      }
+      // Live mode: file was written, navigate to the wish page
+      router.push(`/wish/${formattedSlug}`)
     } catch {
       setState('error')
       setErrorMsg('Failed to connect to server')
@@ -53,6 +83,73 @@ export default function GenieForm() {
   }
 
   const canSubmit = prompt.trim() && slug.trim() && state !== 'submitting'
+
+  // Snapshot-mode success card — deployed monitor can't write to disk so we
+  // hand the user the Claude command to run on their machine.
+  if (state === 'snapshot-success' && snapshotResult) {
+    return (
+      <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 14 }}>
+        <div className="uf-card" style={{
+          padding: 18,
+          background: 'var(--brand-bg)',
+          boxShadow: '0 0 0 1px var(--brand-border)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 12,
+        }}>
+          <div>
+            <span className="uf-eyebrow" style={{ color: 'var(--brand)' }}>Wish prepared</span>
+            <p style={{ color: 'var(--text-primary)', fontSize: 14, margin: '6px 0 0', lineHeight: 1.55 }}>
+              The deployed monitor can't create folders on your machine. Copy this command and paste it into Claude Code (running in the <code style={{ background: 'var(--bg-input)', padding: '1px 6px', borderRadius: 4 }}>utopia-website-builder</code> repo) — Claude will scaffold the project locally with your prompt as <code style={{ background: 'var(--bg-input)', padding: '1px 6px', borderRadius: 4 }}>{snapshotResult.projectPath}inputs.md</code>.
+            </p>
+          </div>
+          <div style={{
+            background: 'var(--bg-input)',
+            border: '1px solid var(--border-soft)',
+            borderRadius: 'var(--radius-md)',
+            padding: '12px 14px',
+            fontFamily: 'var(--font-mono)',
+            fontSize: 12,
+            color: 'var(--text-secondary)',
+            lineHeight: 1.55,
+            wordBreak: 'break-all',
+          }}>
+            {snapshotResult.command}
+          </div>
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+            <button onClick={copyCommand} className="uf-btn-brand" style={{ padding: '8px 16px' }}>
+              {copied ? '✓ Copied' : '📋 Copy command'}
+            </button>
+            <button
+              onClick={() => {
+                setState('idle')
+                setSnapshotResult(null)
+                setPrompt('')
+                setSlug('')
+                setFiles([])
+              }}
+              style={{
+                background: 'transparent',
+                color: 'var(--text-muted)',
+                border: '1px solid var(--border-soft)',
+                borderRadius: 'var(--radius-pill)',
+                padding: '8px 16px',
+                fontSize: 12,
+                fontWeight: 600,
+                cursor: 'pointer',
+                fontFamily: 'var(--font-sans)',
+              }}
+            >
+              Make another wish
+            </button>
+          </div>
+          <p style={{ color: 'var(--text-muted)', fontSize: 11.5, margin: 0, lineHeight: 1.5 }}>
+            After Claude finishes, push to <code>main</code> (or wait for the next hourly scan) and the new project will appear in the monitor.
+          </p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 14 }}>
