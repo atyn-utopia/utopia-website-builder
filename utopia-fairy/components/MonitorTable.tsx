@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useIsMobile } from '@/lib/useMediaQuery'
 import DeleteProjectModal from './DeleteProjectModal'
 import TrashIcon from './icons/TrashIcon'
+import SyncButton from './SyncButton'
 
 interface GroupSummary {
   name: string
@@ -303,6 +304,7 @@ export default function MonitorTable() {
           width: isMobile ? '100%' : 'auto',
           justifyContent: isMobile ? 'flex-start' : 'flex-end',
         }}>
+          <SyncButton />
           <button
             onClick={triggerRescan}
             disabled={rescan === 'triggering' || rescan === 'running'}
