@@ -4,6 +4,7 @@
 // on demand without redeploys.
 
 import { headers } from 'next/headers'
+import { siteConfig } from '@/config/site'
 
 const SUPABASE_URL =
   process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
@@ -185,4 +186,89 @@ export async function getWhatsAppLink(
 ): Promise<string> {
   const { phone, whatsappText } = await getPhoneNumber(locationSlug)
   return waLink(phone, messageOverride || whatsappText)
+}
+
+/* ============================================================
+ * Blog posts
+ * ============================================================ */
+
+export interface BlogPost {
+  id: string
+  slug: string
+  cover_image_url: string
+  published_at: string
+  title: string
+  content: string
+  excerpt: string
+  meta_title: string
+  meta_description: string
+}
+
+interface BlogPostRow {
+  id: string
+  slug: string
+  cover_image_url: string | null
+  published_at: string | null
+  created_at: string | null
+  blog_translations:
+    | {
+        title: string | null
+        content: string | null
+        excerpt: string | null
+        meta_title: string | null
+        meta_description: string | null
+      }[]
+    | null
+}
+
+function flattenBlogRow(row: BlogPostRow): BlogPost {
+  const translations = Array.isArray(row.blog_translations) ? row.blog_translations : []
+  const t = translations[0] ?? {
+    title: '',
+    content: '',
+    excerpt: '',
+    meta_title: '',
+    meta_description: '',
+  }
+  return {
+    id: row.id,
+    slug: row.slug,
+    cover_image_url: row.cover_image_url ?? '',
+    published_at: row.published_at || row.created_at || '',
+    title: t.title || '',
+    content: t.content || '',
+    excerpt: t.excerpt || '',
+    meta_title: t.meta_title || '',
+    meta_description: t.meta_description || '',
+  }
+}
+
+export async function getBlogPosts(language: string = 'en'): Promise<BlogPost[]> {
+  const path =
+    `blog_posts?select=id,slug,cover_image_url,published_at,created_at,blog_translations!inner(title,content,excerpt,meta_title,meta_description)` +
+    `&website=eq.${encodeURIComponent(siteConfig.domain)}` +
+    `&status=eq.published` +
+    `&blog_translations.language=eq.${encodeURIComponent(language)}` +
+    `&order=created_at.desc`
+
+  const data = await webcoreFetch<BlogPostRow[]>(path, 'webcore-blog')
+  if (!data) return []
+  return data.map(flattenBlogRow)
+}
+
+export async function getBlogPostBySlug(
+  slug: string,
+  language: string = 'en',
+): Promise<BlogPost | null> {
+  const path =
+    `blog_posts?select=id,slug,cover_image_url,published_at,created_at,blog_translations!inner(title,content,excerpt,meta_title,meta_description)` +
+    `&website=eq.${encodeURIComponent(siteConfig.domain)}` +
+    `&slug=eq.${encodeURIComponent(slug)}` +
+    `&status=eq.published` +
+    `&blog_translations.language=eq.${encodeURIComponent(language)}` +
+    `&limit=1`
+
+  const data = await webcoreFetch<BlogPostRow[]>(path, 'webcore-blog')
+  if (!data || data.length === 0) return null
+  return flattenBlogRow(data[0])
 }
