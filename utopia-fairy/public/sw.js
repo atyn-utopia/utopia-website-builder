@@ -1,56 +1,31 @@
 /**
- * Utopia Wizard — minimal service worker.
+ * Self-destructing service worker.
  *
- * Goals:
- *   1. Make the app installable as a PWA on mobile + desktop.
- *   2. Cache the app shell so launches feel fast.
- *   3. Never stale-serve API data — /api/* always hits the network.
- *
- * Strategy: network-first for everything, fall back to cache only when
- * offline, and only for non-API routes.
+ * The original SW caused stale-cache problems during the Vercel auth +
+ * deployment-protection transition. This replacement unregisters itself
+ * and wipes every cache the first time a browser fetches it, so any
+ * client that registered v1 gets back to a clean state.
  */
-
-const CACHE = 'utopia-wizard-v1'
-const SHELL = [
-  '/manifest.json',
-  '/utopia-wizard-logo.png',
-  '/apple-touch-icon.png',
-  '/icon-192.png',
-]
 
 self.addEventListener('install', (event) => {
   self.skipWaiting()
-  event.waitUntil(
-    caches.open(CACHE).then((cache) => cache.addAll(SHELL).catch(() => {})),
-  )
 })
 
 self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))),
-    ).then(() => self.clients.claim()),
-  )
+  event.waitUntil((async () => {
+    try {
+      const keys = await caches.keys()
+      await Promise.all(keys.map((k) => caches.delete(k)))
+    } catch { /* ignore */ }
+    try {
+      await self.registration.unregister()
+    } catch { /* ignore */ }
+    try {
+      const clients = await self.clients.matchAll({ type: 'window' })
+      for (const c of clients) c.navigate(c.url).catch(() => {})
+    } catch { /* ignore */ }
+  })())
 })
 
-self.addEventListener('fetch', (event) => {
-  const req = event.request
-  if (req.method !== 'GET') return
-  const url = new URL(req.url)
-  if (url.origin !== self.location.origin) return
-
-  // API + Next data must always be live. No caching, no offline fallback.
-  if (url.pathname.startsWith('/api/') || url.pathname.startsWith('/_next/data')) return
-
-  event.respondWith(
-    fetch(req)
-      .then((res) => {
-        if (res.ok) {
-          const copy = res.clone()
-          caches.open(CACHE).then((c) => c.put(req, copy)).catch(() => {})
-        }
-        return res
-      })
-      .catch(() => caches.match(req).then((hit) => hit || caches.match('/'))),
-  )
-})
+// Don't intercept any fetches — let the network handle everything.
+self.addEventListener('fetch', () => {})
