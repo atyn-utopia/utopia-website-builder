@@ -1,0 +1,394 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-navy: #13204C;
+  --color-navy-deep: #0B153A;
+  --color-navy-mid: #1F2F66;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #F8F8FA;
+  --color-bone: #E9DFD0;
+  --color-cream: #FFFFFF;
+  --color-paper: #FFFFFF;
+  --color-gold: #C8A45C;
+  --color-gold-deep: #A8853F;
+  --color-gold-pale: #F3E9D2;
+  --color-ink: #0E172E;
+  --color-ink-muted: #5A6480;
+  --color-line: #E5E7EE;
+  --color-wa: #25D366;
+  --color-wa-600: #1EBE57;
+  --color-fomo: #B71F2B;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-jakarta), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+:root {
+  /* --- Primary: dark editorial navy --- */
+  --brand-navy:           #13204C;
+  --brand-navy-deep:      #0B153A;
+  --brand-navy-mid:       #1F2F66;
+  --brand-navy-soft:      #2A3D80;
+
+  /* --- Neutral background system (pure white + very-light-gray) --- */
+  --brand-surface:        #FFFFFF;
+  --brand-surface-alt:    #F8F8FA;
+  --brand-surface-2:      #FAFAFA;
+  --brand-bone:           #E9DFD0;
+  --brand-paper:          #FFFFFF;
+
+  /* --- Muted gold accent --- */
+  --brand-gold:           #C8A45C;
+  --brand-gold-deep:      #A8853F;
+  --brand-gold-pale:      #F3E9D2;
+
+  /* --- Ink scale --- */
+  --brand-ink:            #0E172E;
+  --brand-ink-muted:      #5A6480;
+  --brand-ink-light:      #8A93A8;
+  --brand-line:           #E5E7EE;
+
+  /* --- Reserved system colours --- */
+  --wa-green:             #25D366;
+  --wa-green-dark:        #1EBE57;
+  --fomo-red:             #B71F2B;
+  --fomo-black:           #0B0E18;
+  --google-yellow:        #FBBC04;
+
+  /* --- Gradients --- */
+  --gradient-navy:        linear-gradient(135deg, #13204C 0%, #1F2F66 100%);
+  --gradient-navy-deep:   linear-gradient(160deg, #0B153A 0%, #13204C 65%, #1F2F66 100%);
+  --gradient-surface:     linear-gradient(180deg, #FFFFFF 0%, #F8F8FA 100%);
+  --gradient-gold-hair:   linear-gradient(90deg, transparent 0%, #C8A45C 50%, transparent 100%);
+  --gradient-hero-overlay:linear-gradient(180deg, rgba(11,21,58,.15) 0%, rgba(11,21,58,.75) 100%);
+  --gradient-final-cta:   linear-gradient(135deg, rgba(11,21,58,.82) 0%, rgba(19,32,76,.72) 100%);
+
+  /* --- Shadows --- */
+  --shadow-soft:
+    0 2px 4px rgba(11,21,58,.06),
+    0 4px 16px rgba(11,21,58,.08);
+  --shadow-card:
+    0 4px 10px rgba(11,21,58,.06),
+    0 18px 36px -8px rgba(11,21,58,.14),
+    0 1px 0 rgba(255,255,255,.6) inset;
+  --shadow-card-hover:
+    0 6px 14px rgba(11,21,58,.10),
+    0 28px 48px -8px rgba(11,21,58,.20),
+    0 1px 0 rgba(255,255,255,.7) inset;
+  --shadow-cta:
+    0 8px 22px rgba(37,211,102,.28),
+    0 1px 0 rgba(255,255,255,.10) inset;
+  --shadow-eyebrow-pill:
+    0 1px 0 rgba(200,164,92,.40) inset,
+    0 1px 2px rgba(11,21,58,.05);
+  --shadow-fab:
+    0 12px 32px rgba(11,21,58,.22),
+    0 4px 12px rgba(37,211,102,.30);
+}
+
+html, body {
+  background: #FFFFFF;
+  color: var(--brand-ink);
+  font-family: var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-feature-settings: 'kern' 1, 'liga' 1;
+}
+
+/* Display headings use Plus Jakarta Sans (sans, no serif anywhere) */
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: var(--font-jakarta), var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.015em;
+}
+
+/* --------- Eyebrow / mono label --------- */
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-jetbrains), 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  line-height: 1;
+  padding: 6px 12px;
+  margin-bottom: 14px;
+  color: var(--brand-navy);
+  background: var(--brand-gold-pale);
+  border: 1px solid rgba(200,164,92,.35);
+  border-radius: 999px;
+  box-shadow: var(--shadow-eyebrow-pill);
+  text-transform: uppercase;
+}
+
+.eyebrow-light {
+  color: var(--brand-gold);
+  background: rgba(200,164,92,.12);
+  border-color: rgba(200,164,92,.45);
+  box-shadow: 0 1px 0 rgba(200,164,92,.30) inset;
+}
+
+.eyebrow-lg {
+  font-size: 12px;
+  padding: 8px 14px;
+  margin-bottom: 18px;
+}
+
+/* --------- Buttons --------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 28px;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.005em;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 180ms ease, background-color 180ms ease,
+              color 180ms ease, box-shadow 220ms ease, border-color 180ms ease;
+}
+
+.btn-primary {
+  background: var(--brand-navy);
+  color: #FFFFFF;
+  box-shadow: 0 6px 18px rgba(11,21,58,.18),
+              0 1px 0 rgba(255,255,255,.04) inset;
+}
+.btn-primary:hover { background: var(--brand-navy-deep); transform: translateY(-1px); }
+.btn-primary:focus-visible { outline: 3px solid var(--brand-gold); outline-offset: 3px; }
+
+.btn-whatsapp {
+  background: var(--wa-green);
+  color: #FFFFFF;
+  box-shadow: var(--shadow-cta);
+}
+.btn-whatsapp:hover { background: var(--wa-green-dark); transform: translateY(-1px); }
+.btn-whatsapp:focus-visible { outline: 3px solid #fff; outline-offset: 3px; box-shadow: 0 0 0 6px var(--wa-green-dark); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--brand-navy);
+  border-color: var(--brand-navy);
+}
+.btn-outline:hover { background: var(--brand-navy); color: #FFFFFF; }
+
+.btn-outline-light {
+  background: transparent;
+  color: #fff;
+  border-color: rgba(255,255,255,.55);
+}
+.btn-outline-light:hover { background: #fff; color: var(--brand-navy); }
+
+.btn-lg { padding: 18px 32px; font-size: 16px; }
+.btn-sm { padding: 10px 20px; font-size: 14px; }
+
+/* --------- Product card image rule (lifestyle photo: cover, no padding) --------- */
+.product-card-img {
+  position: relative;
+  padding: 0;
+  display: block;
+  overflow: hidden;
+  background: #F8F8FA;
+}
+.product-card-img img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block;
+}
+
+/* --------- Cards --------- */
+.card-shadow {
+  box-shadow:
+    0 4px 10px rgba(11,21,58,.06),
+    0 18px 36px -8px rgba(11,21,58,.14),
+    0 1px 0 rgba(255,255,255,.6) inset;
+}
+.card-shadow-hover:hover {
+  box-shadow:
+    0 6px 14px rgba(11,21,58,.10),
+    0 28px 48px -8px rgba(11,21,58,.20),
+    0 1px 0 rgba(255,255,255,.7) inset;
+}
+
+/* --------- Product description: 2-line clamp --------- */
+.product-card-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --------- USP icon highlight pill --------- */
+.usp-icon-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--brand-gold-pale) 0%, rgba(200,164,92,0.35) 100%);
+  box-shadow: inset 0 0 0 2px var(--brand-navy);
+  color: var(--brand-navy);
+}
+
+/* --------- Free Installation rosette badge --------- */
+.free-install-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 68px;
+  height: 68px;
+  border-radius: 999px;
+  background: #FFFFFF;
+  border: 2px solid var(--brand-gold);
+  color: var(--brand-navy);
+  font-family: var(--font-jetbrains), 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(11,21,58,.12);
+  line-height: 1.05;
+  padding: 6px;
+  z-index: 2;
+}
+
+/* --------- No-scrollbar utility (carousels) --------- */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* --------- Customer gallery grid (no empty slots) --------- */
+.wp-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+@media (min-width: 768px) {
+  .wp-gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) {
+  .wp-gallery { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* --------- Logo strip (TRUSTED BY) --------- */
+.logo-strip {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+.logo-strip-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: var(--font-jakarta), 'Plus Jakarta Sans', Inter, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #13204C;
+  opacity: 0.85;
+  line-height: 1.3;
+  padding: 14px 12px;
+  min-height: 64px;
+  border: 1px solid rgba(19, 32, 76, 0.14);
+  border-radius: 12px;
+  background: #FFFFFF;
+  transition: opacity 200ms ease, border-color 200ms ease, transform 200ms ease;
+}
+.logo-strip-item:hover {
+  opacity: 1;
+  border-color: rgba(200, 164, 92, 0.55);
+  transform: translateY(-1px);
+}
+@media (max-width: 1023px) {
+  .logo-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+  }
+}
+@media (max-width: 639px) {
+  .logo-strip {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 18px;
+    padding-bottom: 4px;
+  }
+  .logo-strip-item {
+    flex: 0 0 60%;
+    scroll-snap-align: start;
+  }
+}
+
+/* --------- FAB pulse animation (transform only) --------- */
+@keyframes fab-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+.fab-pulse { animation: fab-pulse 2.5s ease-in-out infinite; }
+
+/* --------- Blog content typography --------- */
+.blog-content h2 {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 2em 0 0.6em;
+}
+.blog-content h3 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 1.6em 0 0.5em;
+}
+.blog-content h4 {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 1.4em 0 0.4em;
+}
+.blog-content p {
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  margin: 0 0 1.2em;
+  color: var(--brand-ink);
+}
+.blog-content ul, .blog-content ol {
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  margin: 0 0 1.4em 1.5em;
+}
+.blog-content img {
+  border-radius: 16px;
+  margin: 1.5em 0;
+  width: 100%;
+}
+.blog-content a {
+  color: var(--brand-navy);
+  text-decoration: underline;
+  text-decoration-color: var(--brand-gold);
+}
+
+/* Mobile centering helpers */
+@media (max-width: 768px) {
+  .center-mobile { text-align: center; }
+  .center-mobile .eyebrow { margin-left: auto; margin-right: auto; }
+}

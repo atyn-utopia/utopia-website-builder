@@ -1,0 +1,203 @@
+{
+  "meta": {
+    "home": {
+      "title": "马来西亚挖掘机出租 — 沃尔沃 EC200 与 EC400 | Abang Excavator",
+      "description": "沃尔沃 EC200、EC400 挖掘机日租、周租、月租，价格全马最优。WhatsApp 立即报价 — Abang Excavator。"
+    },
+    "location": {
+      "title": "{location} 挖掘机出租 — 沃尔沃 EC200 与 EC400 | Abang Excavator",
+      "description": "{location}（{state}）沃尔沃 EC200 / EC400 挖掘机出租，日租与月租价格透明，送货到工地。WhatsApp 即可获取 Abang Excavator 报价。"
+    },
+    "blogListing": {
+      "title": "挖掘机出租指南 — Abang Excavator 马来西亚博客",
+      "description": "马来西亚挖掘机出租指南、贴士与对比。学习如何选择沃尔沃 EC200 或 EC400，并控制项目预算。"
+    }
+  },
+  "nav": {
+    "logoAlt": "Abang Excavator — 马来西亚 No.1 挖掘机出租",
+    "products": "机型",
+    "calculator": "报价器",
+    "locations": "服务地区",
+    "blog": "博客",
+    "whatsappCta": "WhatsApp 报价"
+  },
+  "fomo": {
+    "eyebrow": "五月促销",
+    "body": "日租价格最高减 12% — 五月促销倒计时:",
+    "countdownLabel": "天 : 时 : 分 : 秒",
+    "ctaLabel": "立即获取报价"
+  },
+  "hero": {
+    "eyebrow": "司机 24/7 待命",
+    "h1Part1": "马来西亚",
+    "h1Highlight": "No.1",
+    "h1Part2": "挖掘机出租",
+    "h2": "沃尔沃 EC200 与 EC400 — 日租、周租、月租",
+    "supporting": "24 小时内送达您的工地。司机经验丰富，价格透明，无任何隐藏费用。",
+    "ctaPrimary": "WhatsApp 立即报价",
+    "ctaSecondary": "估算租赁费用 →",
+    "imageAlt": "橙色沃尔沃 EC200 挖掘机在马来西亚工地待命 — Abang Excavator",
+    "statModels": "沃尔沃机型",
+    "statStates": "州属",
+    "statDelivery": "小时送达"
+  },
+  "brandStrip": {
+    "eyebrow": "行业信赖之选",
+    "items": [
+      "CIDB 马来西亚注册",
+      "沃尔沃授权合作伙伴",
+      "DOSH 马来西亚认证",
+      "BCI Asia 会员",
+      "SIRIM 品质认证",
+      "《The Edge Malaysia》报道"
+    ]
+  },
+  "usp": {
+    "items": [
+      { "title": "24 小时送达", "body": "挖掘机一天内送达您的工地，覆盖马来西亚半岛与东马。" },
+      { "title": "资深司机", "body": "每台机器配备持证司机 — 到场即可开工。" },
+      { "title": "价格透明", "body": "日租、周租、月租 — 无隐藏费用，无季节性附加费。" }
+    ]
+  },
+  "products": {
+    "eyebrow": "机型目录",
+    "h3": "选择您的沃尔沃挖掘机",
+    "intro": "我们的核心机型有两款 — 沃尔沃 EC200 适用于中型工程，沃尔沃 EC400 适用于大型项目。两款均可日租、周租或月租。",
+    "priceFrom": "日租 RM {price} 起",
+    "ctaTemplate": "WhatsApp 预订 {model}",
+    "fallback": {
+      "ec200": { "eyebrow": "20 吨 · 中型", "description": "20 吨挖掘机，适合中型工地。可按日、周或月租赁。", "price": 1000 },
+      "ec400": { "eyebrow": "40 吨 · 重型", "description": "40 吨大功率挖掘机，适合全马大型项目与重型土方工程。", "price": 1700 }
+    }
+  },
+  "calculator": {
+    "eyebrow": "租赁报价器",
+    "h3": "立即估算租赁成本",
+    "intro": "选择机型、租期与天数 — 即时显示估算报价。发送至 WhatsApp 即可确认。",
+    "modelLabel": "挖掘机机型",
+    "periodLabel": "租赁周期",
+    "daysLabel": "租赁天数",
+    "quoteLabel": "估算报价",
+    "models": { "ec200": "沃尔沃 EC200（20 吨）", "ec400": "沃尔沃 EC400（40 吨）" },
+    "periods": { "daily": "日租", "weekly": "周租", "monthly": "月租" },
+    "quotePrefix": "RM",
+    "quoteSuffix": "含司机，不含运输。",
+    "disclaimer": "仅供参考 — 请通过 WhatsApp 确认实际工地需求与最终报价。",
+    "ctaLabel": "WhatsApp 确认报价"
+  },
+  "process": {
+    "eyebrow": "流程",
+    "h3": "4 步租赁挖掘机",
+    "steps": [
+      { "title": "WhatsApp 联系我们", "body": "发送工地位置、机型偏好和租赁周期。我们将在几分钟内回复。" },
+      { "title": "获取报价", "body": "我们提供清晰的报价，包含租金、运输与司机费用。绝无隐藏费用。" },
+      { "title": "确认与安排", "body": "支付订金后，我们将在 24 小时内安排送货到工地，司机按您的班次待命。" },
+      { "title": "开工", "body": "挖掘机送达，司机即刻开工。如需延长租期，WhatsApp 即可处理。" }
+    ]
+  },
+  "whyUs": {
+    "eyebrow": "为何选择我们",
+    "h3": "为何承包商选择 Abang Excavator",
+    "items": [
+      { "title": "原装沃尔沃机队", "body": "每台 EC200 与 EC400 严格按沃尔沃规范保养，杜绝因机械故障导致的工地停工。" },
+      { "title": "全马覆盖", "body": "我们送货至全马 14 州 — 从吉隆坡到亚庇，从新山到古晋。" },
+      { "title": "CIDB 持证司机", "body": "司机均持 DOSH 证书，熟悉大型承包商工地与中小型开发商项目。" },
+      { "title": "灵活计费", "body": "短工日租，大型项目周租或月租。订金低，无隐藏附加费。" }
+    ]
+  },
+  "reviews": {
+    "eyebrow": "客户心声",
+    "h3": "Google Reviews 4.9 / 5",
+    "aggregate": "187 条 Google 评价，平均 4.9 / 5",
+    "postedOn": "发布于 Google",
+    "items": [
+      { "name": "Ariff Hakimi", "suburb": "蕉赖，吉隆坡", "stars": 5, "body": "在蕉赖做中型土地工程，预订了 EC200。如约清晨送达，司机在房屋旁的斜坡作业稳健。下次还会再租。" },
+      { "name": "Lim Chee Wei", "suburb": "努沙再也，柔佛", "stars": 5, "body": "在努沙再也清场租了 EC400 一个月。价格比以前的供应商透明得多，司机也很专业。强烈推荐。" },
+      { "name": "Sharifah Aishah", "suburb": "莎阿南，雪兰莪", "stars": 5, "body": "15 分钟内收到报价，订金低，第二天一早机器就到工地。莎阿南的排水工程提前三天完成。一流服务。" },
+      { "name": "Mohan Selvarajah", "suburb": "峇六拜，槟城", "stars": 5, "body": "峇六拜工厂连续两周每天清晨准时到岗的 EC200 司机。零停工，账单透明清晰。团队很棒。" },
+      { "name": "Hafiz Ramli", "suburb": "关丹，彭亨", "stars": 5, "body": "我们在关丹做进场路面工程。EC400 的动力非常稳定，司机礼貌守规，全程遵守安全标准操作程序。" },
+      { "name": "Tan Yik Heng", "suburb": "古晋，砂拉越", "stars": 5, "body": "首次从半岛租机到砂拉越项目。Abang Excavator 一手包办物流，EC200 顺利抵达古晋，全程零问题。" }
+    ]
+  },
+  "gallery": {
+    "eyebrow": "工地图库",
+    "h3": "沃尔沃挖掘机在马来西亚工地实战",
+    "intro": "从吉隆坡的公寓项目到沙巴的进场路面 — 这些都是我们机器在全国各地的实战画面。"
+  },
+  "faq": {
+    "eyebrow": "常见问题",
+    "h3": "挖掘机出租常见问题",
+    "items": [
+      { "q": "沃尔沃 EC200 和 EC400 租金多少？", "a": "沃尔沃 EC200 日租 RM 1,000 起，EC400 日租 RM 1,700 起。周租与月租更优惠 — 可使用本站报价器，或 WhatsApp 我们获取正式报价。" },
+      { "q": "挖掘机是否含司机？", "a": "默认含 CIDB/DOSH 持证司机。如需不含司机租赁，请在 WhatsApp 上告知，我们将评估您工地的适用性。" },
+      { "q": "你们能送到我的工地吗？", "a": "可以 — 我们送货至全马，包括沙巴和砂拉越。通常 24 小时内安排送达，运输费已包含在报价内。" },
+      { "q": "如果挖掘机在工地出现故障怎么办？", "a": "每台机器均按沃尔沃规范保养，出场前严格检测。若发生故障，我们会尽快派遣技术团队或替代机器，您无需承担额外费用。" },
+      { "q": "租赁挖掘机需要多少订金？", "a": "订金视租期和机型而定 — 通常为租金价值的 30% 至 50%。租期越长，相对订金越低。我们会在报价中清楚列明。" },
+      { "q": "你们承接住宅或景观这类小型项目吗？", "a": "承接 — EC200 适合住宅、排水和景观工程。最低租期为一天，小型项目无需长期承诺。" },
+      { "q": "沃尔沃 EC400 最适合什么工程？", "a": "沃尔沃 EC400 属 40 吨级 — 适合大型清场、道路工程、采石场、工业建筑及陡坡重型土方作业。满负荷下动力依然稳定。" },
+      { "q": "原定租期结束后可以续租吗？", "a": "可以 — 续租可直接通过 WhatsApp 处理，无需重新签合同。如果项目延长，我们也可以将日租调整为周租或月租。" }
+    ]
+  },
+  "locations": {
+    "eyebrow": "全马覆盖",
+    "h3": "全马挖掘机出租",
+    "intro": "我们在马来西亚 14 州全境出租沃尔沃 EC200 与 EC400 — 从巴生谷一路到沙巴与砂拉越。选择您所在地区，获取工地专属信息。",
+    "topCitiesLabel": "热门城市",
+    "stateLabels": {
+      "klangValley": "巴生谷",
+      "selangor": "雪兰莪",
+      "negeriSembilan": "森美兰",
+      "melaka": "马六甲",
+      "johor": "柔佛",
+      "perak": "霹雳",
+      "penang": "槟城",
+      "kedah": "吉打",
+      "perlis": "玻璃市",
+      "kelantan": "吉兰丹",
+      "terengganu": "登嘉楼",
+      "pahang": "彭亨",
+      "sabah": "沙巴",
+      "sarawak": "砂拉越",
+      "labuan": "纳闽"
+    }
+  },
+  "finalCta": {
+    "eyebrow": "今日锁定",
+    "h3": "您的挖掘机可在明早送达",
+    "body": "立即在 WhatsApp 上发送您的工地位置、机型偏好与租赁周期。我们将在几分钟内回复、提供清晰报价，并在 24 小时内安排送达 — 无任何隐藏费用。",
+    "ctaLabel": "立即 WhatsApp Abang Excavator"
+  },
+  "footer": {
+    "tagline": "Abang Excavator — 马来西亚 No.1 挖掘机出租。沃尔沃 EC200 与 EC400，日租、周租、月租。",
+    "productsHeading": "机型",
+    "productsLinks": ["沃尔沃 EC200", "沃尔沃 EC400", "租赁报价器"],
+    "locationsHeading": "主要地区",
+    "resourcesHeading": "资源",
+    "blogLabel": "博客",
+    "faqLabel": "常见问题",
+    "copyright": "© 2026 Abang Excavator. 版权所有。由 Utopia Holiday Sdn. Bhd. 提供支持。"
+  },
+  "blog": {
+    "title": "Abang Excavator 博客",
+    "subtitle": "马来西亚挖掘机出租指南与贴士",
+    "readMore": "阅读更多",
+    "noPosts": "暂无文章发布。",
+    "breadcrumbHome": "首页",
+    "breadcrumbBlog": "博客",
+    "publishedOn": "发布于",
+    "minRead": "分钟阅读",
+    "recentPosts": "最新文章",
+    "ctaBannerTitle": "准备好租挖掘机了吗？",
+    "ctaBannerBody": "立即 WhatsApp Abang Excavator 获取即时报价。",
+    "ctaBannerLabel": "WhatsApp 报价"
+  },
+  "location": {
+    "breadcrumbHome": "首页",
+    "breadcrumbLocations": "服务地区",
+    "introTemplate": "在 {location}（{state}）租用沃尔沃 EC200 或 EC400。持证司机，24 小时内送达，日租或月租均可。",
+    "h1Template": "{location} 挖掘机出租",
+    "h2Template": "沃尔沃 EC200 与 EC400，助力 {state} 项目",
+    "nearbyHeading": "{location} 附近挖掘机出租",
+    "nearbyEyebrow": "附近地区"
+  }
+}

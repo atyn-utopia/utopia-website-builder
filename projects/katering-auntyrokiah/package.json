@@ -1,0 +1,33 @@
+{
+  "name": "katering-auntyrokiah",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3024",
+    "build": "next build",
+    "start": "next start --port 3024",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.101.1",
+    "lucide-react": "^0.460.0",
+    "next": "16.2.2",
+    "next-intl": "^4.8.4",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@next/env": "16.2.2",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.2",
+    "postcss": "^8.4.49",
+    "puppeteer": "^23.10.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
