@@ -188,7 +188,7 @@ function SyncModal({ preview, onClose, onSynced }: {
             }}>projects/</code>
           </h2>
           <p style={{ color: 'var(--text-muted)', fontSize: 12, margin: 0 }}>
-            Branch: <code style={{ fontFamily: 'var(--font-mono)' }}>{preview.branch}</code>. Only files under <code style={{ fontFamily: 'var(--font-mono)' }}>projects/</code> are touched — utopia-fairy and root are left alone.
+            Branch: <code style={{ fontFamily: 'var(--font-mono)' }}>{preview.branch}</code>. Only files under <code style={{ fontFamily: 'var(--font-mono)' }}>projects/</code> are touched — utopia-wizard and root are left alone.
           </p>
         </div>
 

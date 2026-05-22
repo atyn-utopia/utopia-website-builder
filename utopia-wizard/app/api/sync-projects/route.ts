@@ -92,7 +92,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ ok: false, error: 'Nothing to sync — projects/ is clean.' }, { status: 400 })
     }
 
-    // Stage only projects/ — never touches utopia-fairy or root.
+    // Stage only projects/ — never touches utopia-wizard or root.
     await git(['add', '--', 'projects/'])
 
     const stagedCount = parsePorcelain((await git(['diff', '--cached', '--name-only', '--', 'projects/'])).stdout).length

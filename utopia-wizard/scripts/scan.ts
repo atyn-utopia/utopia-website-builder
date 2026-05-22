@@ -7,7 +7,7 @@
  * is the only path that writes to it.
  *
  * Usage:
- *   npm run scan            # from utopia-fairy/
+ *   npm run scan            # from utopia-wizard/
  *   npm run scan -- --dry   # don't write to Supabase, print payload
  *
  * Env required (load from repo-root .env.local; CI provides via secrets):
@@ -164,7 +164,7 @@ async function main(): Promise<void> {
   await loadModules()
 
   // Resolve projects/ relative to wherever the script runs from.
-  // Local: utopia-fairy/ → ../projects.   CI: repo root → ./projects.
+  // Local: utopia-wizard/ → ../projects.   CI: repo root → ./projects.
   const candidates = [
     path.resolve(process.cwd(), '..', 'projects'),
     path.resolve(process.cwd(), 'projects'),
