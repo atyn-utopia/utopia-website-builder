@@ -30,7 +30,7 @@ export default async function WishPage({ params }: { params: Promise<{ slug: str
           transition: 'color var(--transition-snap)',
         }}
       >
-        ← All projects
+        ← All Projects
       </Link>
 
       <header style={{
