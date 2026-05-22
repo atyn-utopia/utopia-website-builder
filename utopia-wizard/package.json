@@ -6,7 +6,11 @@
     "dev": "next dev --port 3001",
     "build": "next build",
     "start": "next start",
-    "scan": "tsx scripts/scan.ts"
+    "scan": "tsx scripts/scan.ts",
+    "sync-listener": "tsx scripts/sync-listener.ts",
+    "sync-listener:install": "tsx scripts/sync-listener-install.ts install",
+    "sync-listener:uninstall": "tsx scripts/sync-listener-install.ts uninstall",
+    "sync-listener:status": "launchctl list | grep com.utopia-wizard.sync-listener || echo 'not loaded'"
   },
   "dependencies": {
     "next": "16.2.1",
