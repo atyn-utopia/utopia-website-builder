@@ -4,6 +4,7 @@ import { getTranslations } from 'next-intl/server'
 import { locations, getNearbyLocations, getCityName } from '@/config/locations'
 import { siteConfig } from '@/config/site'
 import { routing } from '@/i18n/routing'
+import { getPhoneNumber } from '@/lib/webcore'
 import LocationPageClient from './LocationPageClient'
 
 type Params = { locale: string; location: string }
@@ -62,12 +63,14 @@ export default async function LocationPage({ params }: { params: Promise<Params>
 
   const city = loc.names[locale as 'en' | 'ms' | 'zh'] ?? loc.displayName
   const nearby = getNearbyLocations(location)
+  const { phone } = await getPhoneNumber(location)
 
   return (
     <LocationPageClient
       locale={locale}
       locationSlug={location}
       cityName={city}
+      phoneNumber={phone}
       nearby={nearby.map(n => ({
         slug: n.slug,
         name: n.names[locale as 'en' | 'ms' | 'zh'] ?? n.displayName,

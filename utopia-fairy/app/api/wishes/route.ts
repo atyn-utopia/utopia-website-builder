@@ -49,32 +49,7 @@ export async function GET() {
         // Find local URL with port scanning
         const localUrl = await findLocalUrl(projectDir)
 
-        // Determine status: deployed > preview > ready (has build output) > building
-        let status: 'deployed' | 'preview' | 'ready' | 'building' = 'building'
-        if (deployUrl) {
-          status = 'deployed'
-        } else if (localUrl) {
-          status = 'preview'
-        } else {
-          // Check if project has been built (.next dir or out dir exists)
-          try {
-            await stat(path.join(projectDir, '.next'))
-            status = 'ready'
-          } catch {
-            try {
-              await stat(path.join(projectDir, 'out'))
-              status = 'ready'
-            } catch {
-              // Check if it has node_modules (at least set up)
-              try {
-                await stat(path.join(projectDir, 'node_modules'))
-                status = 'ready'
-              } catch {
-                status = 'building'
-              }
-            }
-          }
-        }
+        const status = deployUrl ? 'deployed' : localUrl ? 'preview' : 'building'
 
         wishes.push({
           slug: entry,

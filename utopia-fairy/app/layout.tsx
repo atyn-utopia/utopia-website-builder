@@ -60,11 +60,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           justifyContent: 'center',
           alignItems: 'flex-start',
           minHeight: '100vh',
-          // Bigger top padding so the fixed top-right Theme + Logout buttons
-          // (each 40px tall, anchored at top: 18px) always clear the header
-          // content below them, even on narrow windows where the Rescan +
-          // New Project buttons sit on the same horizontal line.
-          padding: '76px 20px 48px',
+          // Top padding clears the floating Theme + Logout buttons, plus the
+          // iOS safe-area inset so the buttons (and content) sit below the
+          // status bar / notch on installed PWAs.
+          paddingTop: 'calc(76px + env(safe-area-inset-top, 0px))',
+          paddingRight: 'calc(20px + env(safe-area-inset-right, 0px))',
+          paddingBottom: 'calc(48px + env(safe-area-inset-bottom, 0px))',
+          paddingLeft: 'calc(20px + env(safe-area-inset-left, 0px))',
         }}>
           {children}
         </div>
