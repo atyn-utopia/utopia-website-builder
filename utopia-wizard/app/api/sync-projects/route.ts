@@ -70,7 +70,9 @@ async function supaFetch<T>(path: string, init?: RequestInit): Promise<T | null>
       cache: 'no-store',
     })
     if (!res.ok) return null
-    return (await res.json()) as T
+    const text = await res.text()
+    if (!text) return null
+    return JSON.parse(text) as T
   } catch {
     return null
   }
