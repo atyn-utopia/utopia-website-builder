@@ -3,6 +3,10 @@ import { writeFile, mkdir, access } from 'fs/promises'
 import path from 'path'
 
 export const maxDuration = 60
+// Some Next 16 + Node runtimes default to a ~4MB body limit on Route
+// Handlers — large brand asset bundles (logos + photos) trip it and
+// surface as "Failed to parse body as FormData". Bump to 50MB.
+export const runtime = 'nodejs'
 
 function buildClaudeCommand(slug: string): string {
   return `claude "Using @CLAUDE.md files, generate the ${slug} website. Read projects/${slug}/inputs.md for the project brief."`
