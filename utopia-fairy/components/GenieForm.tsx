@@ -54,17 +54,39 @@ export default function GenieForm() {
     files.forEach((file) => formData.append('files', file))
 
     try {
-      const res = await fetch('/api/create-project', { method: 'POST', body: formData })
-      const data = await res.json()
+      const res = await fetch('/api/create-project', {
+        method: 'POST',
+        body: formData,
+        credentials: 'include',
+        headers: { Accept: 'application/json' },
+      })
+
+      // Inspect the response shape before assuming JSON — if Vercel's
+      // deployment-protection layer is in the way it returns HTML, which
+      // would throw a confusing "Failed to connect" when we try to parse.
+      const text = await res.text()
+      let data: { success?: boolean; error?: string; mode?: string; slug?: string; projectPath?: string; command?: string } | null = null
+      try { data = JSON.parse(text) } catch { /* not JSON */ }
+
+      if (!data) {
+        setState('error')
+        if (res.status === 401) {
+          setErrorMsg('Session expired — refresh the page and sign in again.')
+        } else if (text.includes('Vercel') || text.includes('authentication')) {
+          setErrorMsg('Blocked by Vercel deployment protection. Disable it in Project Settings → Deployment Protection.')
+        } else {
+          setErrorMsg(`Server returned HTTP ${res.status} (non-JSON response)`)
+        }
+        return
+      }
+
       if (!data.success) {
         setState('error')
         setErrorMsg(data.error || 'Something went wrong')
         return
       }
-      if (data.mode === 'snapshot') {
-        // Deployed monitor: no local filesystem. Show the Claude command for
-        // the user to run locally — the project folder + inputs.md will be
-        // created on their machine by Claude Code.
+
+      if (data.mode === 'snapshot' && data.slug && data.command && data.projectPath) {
         setSnapshotResult({
           slug: data.slug,
           projectPath: data.projectPath,
@@ -74,11 +96,10 @@ export default function GenieForm() {
         setState('snapshot-success')
         return
       }
-      // Live mode: file was written, navigate to the wish page
       router.push(`/wish/${formattedSlug}`)
-    } catch {
+    } catch (err) {
       setState('error')
-      setErrorMsg('Failed to connect to server')
+      setErrorMsg(err instanceof Error ? `Network error: ${err.message}` : 'Failed to connect to server')
     }
   }
 
