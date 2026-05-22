@@ -11,7 +11,7 @@ import { existsSync } from 'node:fs'
 import path from 'node:path'
 
 export function projectsDir(): string {
-  // utopia-fairy/ → ../projects
+  // utopia-wizard/ → ../projects
   return path.resolve(process.cwd(), '..', 'projects')
 }
 

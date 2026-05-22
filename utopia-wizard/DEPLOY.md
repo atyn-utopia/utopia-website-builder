@@ -28,7 +28,7 @@ select count(*) from monitor_snapshots;  -- → 0
 From the repo root:
 
 ```bash
-cd utopia-fairy
+cd utopia-wizard
 npm install   # picks up tsx
 npm run scan
 ```
@@ -65,7 +65,7 @@ The monitor now reads from `monitor_snapshots` instead of the local filesystem. 
 The workflow lives at [.github/workflows/monitor-scan.yml](../.github/workflows/monitor-scan.yml). It runs:
 
 - Every hour (minute 7)
-- On every push to `main` that touches `projects/**` or `utopia-fairy/**`
+- On every push to `main` that touches `projects/**` or `utopia-wizard/**`
 - Manually via the Actions tab → workflow_dispatch
 
 **Add these repository secrets** (Settings → Secrets and variables → Actions → New repository secret):
@@ -87,14 +87,14 @@ Trigger one run manually to verify the workflow works before relying on the cron
 From the repo root:
 
 ```bash
-cd utopia-fairy
+cd utopia-wizard
 vercel link
 ```
 
 Or in the Vercel dashboard:
 
 1. Import the `utopia-website-builder` GitHub repo
-2. **Root directory** → `utopia-fairy`
+2. **Root directory** → `utopia-wizard`
 3. Framework preset: Next.js
 
 ### Environment variables (Vercel project settings)

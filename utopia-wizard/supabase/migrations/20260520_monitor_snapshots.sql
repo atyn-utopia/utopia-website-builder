@@ -1,6 +1,6 @@
 -- Utopia Fairy — monitor snapshots
 -- ----------------------------------------------------------------------------
--- One row per project. The scanner (utopia-fairy/scripts/scan.ts, run from
+-- One row per project. The scanner (utopia-wizard/scripts/scan.ts, run from
 -- GitHub Actions) upserts the row each hour. The deployed monitor reads from
 -- this table via the anon key.
 --

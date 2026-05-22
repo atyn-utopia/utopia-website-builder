@@ -11,7 +11,7 @@ on:
     branches: [main]
     paths:
       - 'projects/**'
-      - 'utopia-fairy/**'
+      - 'utopia-wizard/**'
       - '.github/workflows/monitor-scan.yml'
   workflow_dispatch:
 
@@ -32,14 +32,14 @@ jobs:
         with:
           node-version: '24'
           cache: npm
-          cache-dependency-path: utopia-fairy/package-lock.json
+          cache-dependency-path: utopia-wizard/package-lock.json
 
-      - name: Install utopia-fairy deps
-        working-directory: utopia-fairy
+      - name: Install utopia-wizard deps
+        working-directory: utopia-wizard
         run: npm ci
 
       - name: Run scanner
-        working-directory: utopia-fairy
+        working-directory: utopia-wizard
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
