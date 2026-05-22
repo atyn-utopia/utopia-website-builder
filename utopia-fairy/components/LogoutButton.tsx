@@ -27,8 +27,8 @@ export default function LogoutButton() {
       disabled={busy}
       style={{
         position: 'fixed',
-        top: 18,
-        right: 70,
+        top: 'calc(18px + env(safe-area-inset-top, 0px))',
+        right: 'calc(70px + env(safe-area-inset-right, 0px))',
         zIndex: 1000,
         width: 40,
         height: 40,

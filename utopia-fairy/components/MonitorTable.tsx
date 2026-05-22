@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useIsMobile } from '@/lib/useMediaQuery'
+import DeleteProjectModal from './DeleteProjectModal'
+import TrashIcon from './icons/TrashIcon'
 
 interface GroupSummary {
   name: string
@@ -133,6 +135,7 @@ export default function MonitorTable() {
   const [sortDir, setSortDir] = useState<SortDir>('desc')
   const [rescan, setRescan] = useState<RescanState>('idle')
   const [rescanMsg, setRescanMsg] = useState<string | null>(null)
+  const [deleteTarget, setDeleteTarget] = useState<string | null>(null)
   const router = useRouter()
   const isMobile = useIsMobile()
 
@@ -289,7 +292,17 @@ export default function MonitorTable() {
             </p>
           </div>
         </div>
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+        <div style={{
+          display: 'flex',
+          gap: 8,
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          // On mobile we span the full header width and use `order` to flip
+          // New Project ahead of Rescan so the primary action sits on the
+          // left, closer to the thumb.
+          width: isMobile ? '100%' : 'auto',
+          justifyContent: isMobile ? 'flex-start' : 'flex-end',
+        }}>
           <button
             onClick={triggerRescan}
             disabled={rescan === 'triggering' || rescan === 'running'}
@@ -315,6 +328,7 @@ export default function MonitorTable() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: 6,
+              order: isMobile ? 2 : 1,
             }}
             title={rescanMsg ?? 'Trigger an immediate GitHub Actions scan'}
           >
@@ -336,7 +350,7 @@ export default function MonitorTable() {
           <button
             onClick={() => router.push('/new')}
             className="uf-btn-brand"
-            style={{ lineHeight: 1.2 }}
+            style={{ lineHeight: 1.2, order: isMobile ? 1 : 2 }}
           >
             ✦ New Project
           </button>
@@ -361,6 +375,7 @@ export default function MonitorTable() {
           projects={data?.projects ?? []}
           loading={loading}
           onOpen={(slug) => router.push(`/wish/${slug}`)}
+          onDelete={(slug) => setDeleteTarget(slug)}
         />
       ) : (
       <div className="uf-card" style={{ overflow: 'hidden' }}>
@@ -390,11 +405,11 @@ export default function MonitorTable() {
                   </span>
                 </Th>
                 <Th onBrand onSort={() => toggleSort('company')} sortDir={sortKey === 'company' ? sortDir : null}>Company</Th>
-                <Th onBrand onSort={() => toggleSort('domain')} sortDir={sortKey === 'domain' ? sortDir : null}>Domain</Th>
                 <Th onBrand onSort={() => toggleSort('created')} sortDir={sortKey === 'created' ? sortDir : null}>Created</Th>
                 <Th onBrand align="center" onSort={() => toggleSort('status')} sortDir={sortKey === 'status' ? sortDir : null}>Status</Th>
                 {groupNames.map((g) => <Th key={g} compact onBrand align="center">{g}</Th>)}
                 <Th onBrand align="center" onSort={() => toggleSort('score')} sortDir={sortKey === 'score' ? sortDir : null}>Score</Th>
+                <Th onBrand align="center" compact><span style={{ opacity: 0 }}>Del</span></Th>
               </tr>
             </thead>
             <tbody>
@@ -442,11 +457,6 @@ export default function MonitorTable() {
                       </span>
                     </Td>
                     <Td>
-                      <span style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', fontSize: 11 }}>
-                        {p.domain ?? '—'}
-                      </span>
-                    </Td>
-                    <Td>
                       <span style={{ color: 'var(--text-muted)', fontSize: 12, fontVariantNumeric: 'tabular-nums' }}>
                         {formatCreated(p.projectCreatedAt ?? p.createdAt)}
                       </span>
@@ -464,13 +474,49 @@ export default function MonitorTable() {
                         {p.passed} / {p.total}
                       </span>
                     </Td>
+                    <Td align="center" compact>
+                      <button
+                        type="button"
+                        title={`Delete ${p.slug}`}
+                        aria-label={`Delete ${p.slug}`}
+                        onClick={(e) => { e.stopPropagation(); setDeleteTarget(p.slug) }}
+                        style={{
+                          background: 'transparent',
+                          border: '1px solid transparent',
+                          borderRadius: 'var(--radius-pill)',
+                          width: 28,
+                          height: 28,
+                          padding: 0,
+                          color: 'var(--text-quiet)',
+                          cursor: 'pointer',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontSize: 14,
+                          lineHeight: 1,
+                          transition: 'all var(--transition-snap)',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.color = 'var(--status-fail)'
+                          e.currentTarget.style.borderColor = 'var(--status-fail-border)'
+                          e.currentTarget.style.background = 'var(--status-fail-bg)'
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.color = 'var(--text-quiet)'
+                          e.currentTarget.style.borderColor = 'transparent'
+                          e.currentTarget.style.background = 'transparent'
+                        }}
+                      >
+                        <TrashIcon size={14} />
+                      </button>
+                    </Td>
                   </tr>
                 )
               })}
 
               {!loading && data && data.projects.length === 0 && (
                 <tr>
-                  <td colSpan={6 + groupNames.length + 1} style={{
+                  <td colSpan={5 + groupNames.length + 2} style={{
                     color: 'var(--text-muted)',
                     fontSize: 13,
                     textAlign: 'center',
@@ -484,7 +530,7 @@ export default function MonitorTable() {
 
               {loading && (
                 <tr>
-                  <td colSpan={6 + groupNames.length + 1} style={{
+                  <td colSpan={5 + groupNames.length + 2} style={{
                     color: 'var(--text-muted)',
                     fontSize: 13,
                     textAlign: 'center',
@@ -509,6 +555,15 @@ export default function MonitorTable() {
       }}>
         Click any project for the full breakdown and what's still to implement.
       </p>
+
+      {deleteTarget && (
+        <DeleteProjectModal
+          slug={deleteTarget}
+          open={!!deleteTarget}
+          onClose={() => setDeleteTarget(null)}
+          onDeleted={() => { setDeleteTarget(null); refetch() }}
+        />
+      )}
     </div>
   )
 }
@@ -590,10 +645,11 @@ function Td({ children, align = 'left', compact = false }: { children: React.Rea
   )
 }
 
-function MobileCards({ projects, loading, onOpen }: {
+function MobileCards({ projects, loading, onOpen, onDelete }: {
   projects: ProjectRow[]
   loading: boolean
   onOpen: (slug: string) => void
+  onDelete: (slug: string) => void
 }) {
   if (loading && projects.length === 0) {
     return (
@@ -694,6 +750,37 @@ function MobileCards({ projects, loading, onOpen }: {
                   {p.passed} / {p.total}
                 </span>
                 <StatusPill info={deployStatusOf(p)} />
+                <span
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Delete ${p.slug}`}
+                  title={`Delete ${p.slug}`}
+                  onClick={(e) => { e.stopPropagation(); onDelete(p.slug) }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      onDelete(p.slug)
+                    }
+                  }}
+                  style={{
+                    color: 'var(--text-quiet)',
+                    background: 'transparent',
+                    border: '1px solid var(--border-soft)',
+                    borderRadius: 'var(--radius-pill)',
+                    padding: '3px 10px',
+                    fontSize: 11,
+                    cursor: 'pointer',
+                    fontFamily: 'var(--font-sans)',
+                    lineHeight: 1.2,
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 6,
+                  }}
+                >
+                  <TrashIcon size={12} />
+                  delete
+                </span>
               </div>
             </div>
             <StatusBar groups={p.groups} />

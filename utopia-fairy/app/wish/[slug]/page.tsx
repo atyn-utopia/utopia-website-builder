@@ -2,6 +2,7 @@ import Link from 'next/link'
 import WishStatus from './WishStatus'
 import WishChecklist from '@/components/WishChecklist'
 import WishData from '@/components/WishData'
+import WishDangerZone from '@/components/WishDangerZone'
 
 export default async function WishPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -63,6 +64,10 @@ export default async function WishPage({ params }: { params: Promise<{ slug: str
 
       <div className="fade-in" style={{ width: '100%', marginTop: 16, animationDelay: '0.2s' }}>
         <WishData slug={slug} />
+      </div>
+
+      <div className="fade-in" style={{ width: '100%', marginTop: 24, animationDelay: '0.3s' }}>
+        <WishDangerZone slug={slug} />
       </div>
     </main>
   )
