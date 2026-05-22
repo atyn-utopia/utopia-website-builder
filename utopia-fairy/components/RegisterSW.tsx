@@ -3,29 +3,36 @@
 import { useEffect } from 'react'
 
 /**
- * The service worker is temporarily DISABLED — it caused stale-cache issues
- * during the deploy + Vercel-auth-protection transition, where stale chunks
- * would mask the real failure mode of POST requests.
- *
- * On mount, we unregister any existing SW and clear all caches so users who
- * installed v1 get back to a clean state. We can re-enable the SW once
- * everything is stable; until then this component is a one-shot scrubber.
+ * One-shot SW scrubber. Runs after the page has rendered (so React + the
+ * monitor data have loaded first), then quietly unregisters any service
+ * worker still hanging around and clears all caches. Persisted via
+ * localStorage so we only re-run when sw.js changes.
  */
 export default function RegisterSW() {
   useEffect(() => {
     if (typeof window === 'undefined') return
     if (!('serviceWorker' in navigator)) return
+    const STAMP = 'uf-sw-scrubbed-v2'
+    if (localStorage.getItem(STAMP) === '1') return
     const scrub = async () => {
       try {
         const regs = await navigator.serviceWorker.getRegistrations()
         await Promise.all(regs.map((r) => r.unregister().catch(() => {})))
+      } catch { /* ignore */ }
+      try {
         if ('caches' in window) {
           const keys = await caches.keys()
           await Promise.all(keys.map((k) => caches.delete(k)))
         }
       } catch { /* ignore */ }
+      try { localStorage.setItem(STAMP, '1') } catch { /* private mode */ }
     }
-    scrub()
+    // Defer past initial paint so we don't interfere with data fetching
+    if (typeof window.requestIdleCallback === 'function') {
+      window.requestIdleCallback(() => { scrub() }, { timeout: 3000 })
+    } else {
+      window.setTimeout(scrub, 1500)
+    }
   }, [])
   return null
 }
