@@ -1,9 +1,7 @@
-import { headers } from 'next/headers'
-import { getPhoneNumber } from '@/lib/getPhoneNumber'
+import { getPhoneNumber, waLink } from '@/lib/webcore'
 import RedirectClient from './RedirectClient'
 
 export const dynamic = 'force-dynamic'
-export const revalidate = 0
 
 type Search = { loc?: string; message?: string }
 
@@ -13,17 +11,14 @@ export default async function RedirectWhatsapp1Page({
   searchParams: Promise<Search>
 }) {
   const sp = await searchParams
-  const loc = sp.loc?.trim() || 'all'
+  const loc = sp.loc?.trim() || undefined
   const overrideMessage = sp.message?.trim()
 
-  const hdrs = await headers()
-  const host = hdrs.get('host') ?? 'tablechair-rental-malaysia.vercel.app'
-
-  const { phone, whatsappText } = await getPhoneNumber(host, loc)
+  // webcore resolves the host from headers internally — no need to pass it.
+  const { phone, whatsappText } = await getPhoneNumber(loc)
 
   const text =
     overrideMessage && overrideMessage.length > 0 ? overrideMessage : whatsappText
-  const url = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`
 
-  return <RedirectClient url={url} />
+  return <RedirectClient url={waLink(phone, text)} />
 }

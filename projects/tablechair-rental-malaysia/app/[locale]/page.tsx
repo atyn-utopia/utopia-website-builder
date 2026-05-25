@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { setRequestLocale, getTranslations } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import PageShell from '@/components/PageShell'
-import { getProducts } from '@/lib/getProducts'
+import { getProducts } from '@/lib/webcore'
 import {
   localBusinessHomepageSchema,
   websiteSchema,
@@ -11,7 +11,6 @@ import {
 import { LOCATIONS } from '@/config/locations'
 import type { Locale } from '@/config/site'
 
-export const revalidate = 3600
 
 const SITE_URL = 'https://tablechair-rental-malaysia.vercel.app'
 
@@ -56,7 +55,12 @@ export default async function HomePage({
   const { locale } = await params
   setRequestLocale(locale)
 
-  const { core, additional } = await getProducts()
+  // Old getProducts returned { core, additional }. Webcore returns a flat list
+  // ordered by sort_order — partition by sort_order < 1000 (configured "core"
+  // products) vs >= 1000 (extras / add-ons).
+  const all = await getProducts()
+  const core = all.filter((p) => p.sort_order < 1000)
+  const additional = all.filter((p) => p.sort_order >= 1000)
 
   return (
     <>

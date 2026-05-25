@@ -3,7 +3,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
-import { supabase } from '@/lib/supabase'
+import { getBlogPostBySlug, getBlogPosts } from '@/lib/webcore'
+import BlogLinkTracker from '@/components/tracking/BlogLinkTracker'
 import { siteConfig, type Locale } from '@/config/site'
 import { waRedirect } from '@/lib/waRedirect'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
@@ -13,15 +14,12 @@ import { TOP_FOOTER_LOCATIONS, findLocation } from '@/config/locations'
 type Params = { locale: string; slug: string }
 
 export async function generateStaticParams() {
-  const { data: posts } = await supabase
-    .from('blog_posts')
-    .select('slug')
-    .eq('website', siteConfig.domain)
-    .eq('status', 'published')
-
+  // Fetch every published slug in English; locale variants share the same slug
+  // set, so we pair them up here.
+  const posts = await getBlogPosts('en')
   const params: { locale: string; slug: string }[] = []
   for (const locale of routing.locales) {
-    for (const post of posts ?? []) {
+    for (const post of posts) {
       params.push({ locale, slug: post.slug })
     }
   }
@@ -29,40 +27,21 @@ export async function generateStaticParams() {
 }
 
 async function getPost(slug: string, locale: string) {
-  const { data } = await supabase
-    .from('blog_posts')
-    .select(`
-      id,
-      slug,
-      cover_image_url,
-      published_at,
-      blog_translations!inner (
-        title,
-        content,
-        excerpt,
-        meta_title,
-        meta_description
-      )
-    `)
-    .eq('website', siteConfig.domain)
-    .eq('slug', slug)
-    .eq('status', 'published')
-    .eq('blog_translations.language', locale)
-    .single()
-
-  return data as unknown as {
-    id: string
-    slug: string
-    cover_image_url: string | null
-    published_at: string
-    blog_translations: {
-      title: string
-      content: string
-      excerpt: string
-      meta_title: string
-      meta_description: string
-    }[]
-  } | null
+  const post = await getBlogPostBySlug(slug, locale)
+  if (!post) return null
+  return {
+    id: post.id,
+    slug: post.slug,
+    cover_image_url: post.cover_image_url || null,
+    published_at: post.published_at,
+    blog_translations: [{
+      title: post.title,
+      content: post.content,
+      excerpt: post.excerpt,
+      meta_title: post.meta_title,
+      meta_description: post.meta_description,
+    }],
+  }
 }
 
 export async function generateMetadata({
@@ -131,15 +110,15 @@ export default async function BlogPostPage({
   })
 
   /* ---------- Recent Posts query ---------- */
-  const { data: recentPosts } = await supabase
-    .from('blog_posts')
-    .select('slug, published_at, blog_translations!inner(title)')
-    .eq('website', siteConfig.domain)
-    .eq('status', 'published')
-    .eq('blog_translations.language', locale)
-    .neq('slug', slug)
-    .order('published_at', { ascending: false })
-    .limit(3)
+  const allPosts = await getBlogPosts(locale)
+  const recentPosts = allPosts
+    .filter((p) => p.slug !== slug)
+    .slice(0, 3)
+    .map((p) => ({
+      slug: p.slug,
+      published_at: p.published_at,
+      blog_translations: [{ title: p.title }],
+    }))
 
   return (
     <div className="min-h-screen bg-[#FFFEF8]">
@@ -314,8 +293,9 @@ export default async function BlogPostPage({
           <h3 className="mb-6 text-[20px] font-bold text-[#111111]">{t('recentPosts')}</h3>
           <div className="grid gap-4 sm:grid-cols-3">
             {recentPosts.map((rp: { slug: string; published_at: string; blog_translations: { title: string }[] }) => (
-              <Link
+              <BlogLinkTracker
                 key={rp.slug}
+                slug={rp.slug}
                 href={`/${locale}/blog/${rp.slug}`}
                 className="group rounded-xl border border-[#FDD835]/25 bg-white p-4 hover:shadow-md"
                 style={{ transition: 'box-shadow 200ms ease' }}
@@ -326,7 +306,7 @@ export default async function BlogPostPage({
                 <p className="mt-2 text-[13px] text-[#111111]/50">
                   {formatDate(rp.published_at)}
                 </p>
-              </Link>
+              </BlogLinkTracker>
             ))}
           </div>
         </section>
