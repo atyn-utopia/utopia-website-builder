@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
-import { supabase } from '@/lib/supabase'
+import { getBlogPosts } from '@/lib/webcore'
+import BlogLinkTracker from '@/components/tracking/BlogLinkTracker'
 import { siteConfig, type Locale } from '@/config/site'
 import { waRedirect } from '@/lib/waRedirect'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
@@ -57,24 +58,14 @@ export default async function BlogListingPage({
 
   const waHref = waRedirect(locale, tShared('whatsappMessageDefault'))
 
-  const { data: posts } = await supabase
-    .from('blog_posts')
-    .select(`
-      id,
-      slug,
-      cover_image_url,
-      published_at,
-      blog_translations!inner (
-        title,
-        excerpt
-      )
-    `)
-    .eq('website', siteConfig.domain)
-    .eq('status', 'published')
-    .eq('blog_translations.language', locale)
-    .order('published_at', { ascending: false })
-
-  const blogPosts = (posts ?? []) as unknown as BlogPost[]
+  const fetched = await getBlogPosts(locale)
+  const blogPosts = fetched.map((p) => ({
+    id: p.id,
+    slug: p.slug,
+    cover_image_url: p.cover_image_url,
+    published_at: p.published_at,
+    blog_translations: [{ title: p.title, excerpt: p.excerpt }],
+  })) as unknown as BlogPost[]
 
   const formatDate = (dateStr: string) => {
     const d = new Date(dateStr)
@@ -191,8 +182,9 @@ export default async function BlogListingPage({
             {blogPosts.map((post) => {
               const translation = post.blog_translations[0]
               return (
-                <Link
+                <BlogLinkTracker
                   key={post.id}
+                  slug={post.slug}
                   href={`/${locale}/blog/${post.slug}`}
                   className="group overflow-hidden rounded-2xl bg-white shadow-[0_4px_24px_-6px_rgba(17,17,17,0.1)] ring-1 ring-black/5 hover:shadow-[0_8px_32px_-6px_rgba(253,216,53,0.3)]"
                   style={{ transition: 'box-shadow 250ms ease, transform 250ms ease' }}
@@ -225,7 +217,7 @@ export default async function BlogListingPage({
                       {translation?.excerpt ?? ''}
                     </p>
                   </div>
-                </Link>
+                </BlogLinkTracker>
               )
             })}
           </div>

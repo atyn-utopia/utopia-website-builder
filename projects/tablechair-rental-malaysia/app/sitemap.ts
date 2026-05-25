@@ -5,7 +5,6 @@ import { LOCATIONS } from '@/config/locations'
 const SITE_URL = 'https://tablechair-rental-malaysia.vercel.app'
 const PRODUCT_SLUG = 'table-chair-rental'
 
-export const revalidate = 86400
 
 function buildLanguages(pathSuffix: string) {
   const languages: Record<string, string> = {}

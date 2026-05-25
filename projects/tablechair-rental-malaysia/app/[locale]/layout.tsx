@@ -1,9 +1,17 @@
 import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
-import { organizationSchema } from '@/lib/schema'
+import { OrganizationSchema } from '@/components/schema/OrganizationSchema'
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800'],
+  variable: '--font-inter',
+  display: 'swap',
+})
 
 const SITE_URL = 'https://tablechair-rental-malaysia.vercel.app'
 
@@ -31,6 +39,7 @@ export async function generateMetadata(
     title: { default: t('title'), template: '%s | Kak Kenduri' },
     description: t('description'),
     alternates: { canonical: `${SITE_URL}/${locale}`, languages },
+    verification: { google: 'tm0matiWoFe5vrz_jjCFkYpuL_iokve1Je2zV1ObdXc' },
   }
 }
 
@@ -50,14 +59,21 @@ export default async function LocaleLayout({
   const messages = await getMessages()
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(organizationSchema()),
-        }}
-      />
-      {children}
-    </NextIntlClientProvider>
+    <html lang={locale} className={inter.variable}>
+      <head>
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <script
+          defer
+          src="https://webcore.utopiaai.my/t.js"
+          data-website="tablechair-rental-malaysia.vercel.app"
+        />
+      </head>
+      <body className="bg-[#FFFEF8] text-[#111111] antialiased overflow-x-hidden">
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <OrganizationSchema />
+          {children}
+        </NextIntlClientProvider>
+      </body>
+    </html>
   )
 }

@@ -5,7 +5,7 @@ import { routing } from '@/i18n/routing'
 import PageShell from '@/components/PageShell'
 import { findLocation, LOCATIONS } from '@/config/locations'
 import { getLocationCopy } from '@/lib/locationCopy'
-import { getProducts } from '@/lib/getProducts'
+import { getProducts } from '@/lib/webcore'
 import {
   localBusinessLocationSchema,
   breadcrumbLocationSchema,
@@ -14,7 +14,6 @@ import {
 } from '@/lib/schema'
 import type { Locale } from '@/config/site'
 
-export const revalidate = 3600
 
 const SITE_URL = 'https://tablechair-rental-malaysia.vercel.app'
 const PRODUCT_SLUG = 'table-chair-rental'
@@ -78,7 +77,11 @@ export default async function LocationPage({
 
   const city = loc.display[locale]
   const copy = getLocationCopy(locale, location)
-  const { core, additional } = await getProducts()
+  // Old getProducts returned { core, additional }. Webcore returns a flat list
+  // ordered by sort_order — partition by sort_order < 1000 vs >= 1000.
+  const all = await getProducts()
+  const core = all.filter((p) => p.sort_order < 1000)
+  const additional = all.filter((p) => p.sort_order >= 1000)
 
   const t = await getTranslations({ locale, namespace: 'location' })
 
