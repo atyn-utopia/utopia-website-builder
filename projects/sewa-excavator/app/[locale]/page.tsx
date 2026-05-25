@@ -54,7 +54,7 @@ const GALLERY_IMAGES = [
   '/gallery/14.jpg',
 ];
 
-const HERO_EXCAVATOR_IMG = '/brand/hero-photo.jpg';
+const HERO_EXCAVATOR_IMG = '/brand/hero-photo.png';
 const FINAL_CTA_BG = '/bg/bg-5.avif';
 
 function GoogleG({ size = 22 }: { size?: number }) {
