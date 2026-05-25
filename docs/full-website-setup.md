@@ -668,6 +668,102 @@ Check:
 
 ---
 
+### Layout & Design Checklist (MANDATORY before Gate 1)
+
+Every item below MUST be verified on the running site. These rules come from real user feedback on prior projects — every line is here because something broke or had to be iterated on. Treat them as blocking acceptance criteria.
+
+#### Assets & Images
+- [ ] Use brand-provided assets from `brand_assets/` for hero photo, product photos, gallery, logos. Never substitute with stock photos when brand assets exist.
+- [ ] Optimize before commit — gallery PNGs (often 30–60 MB each) MUST be converted to JPEG at ~1400 px wide / ~300 KB target. Brand logos resized to ~600 px PNG (~200 KB). Hero/product PNGs (with transparency) resized to ~1600 px (~1.5 MB).
+- [ ] Preserve transparency where it matters — cutout photos and logos stay as PNG. Photos without transparency convert to JPEG. JPEG flattens alpha; never JPEG a transparent asset.
+- [ ] For any asset >5 MB, use plain `<img loading="lazy" decoding="async">` — `<Image>` from `next/image` silently rejects huge files and leaves blank gaps in galleries / product cards.
+- [ ] Add `projects/{slug}/.gitignore` excluding `brand_assets/` and `temporary screenshots/` — raw artwork must not enter git.
+
+#### Typography
+- [ ] Body font is **Inter** site-wide. Not Plus Jakarta Sans, not the default Tailwind stack.
+- [ ] All H1–H4 strings in `messages/*.json` are in proper Title Case with conjunctions kept lowercase. MS lowercase set: `dan, atau, di, dalam, untuk, pada, ke, dengan, dari, oleh, yang, tanpa, bagi, serta, seperti, antara, melalui`. EN lowercase set: `a, an, the, and, or, but, nor, of, to, in, on, at, by, for, with, from, into, via, vs, as, if, so`. ZH untouched.
+- [ ] NEVER use CSS `text-transform: capitalize` on headings — it capitalizes every word and breaks conjunction rules. Title-case the source strings instead.
+- [ ] ICU placeholder names are lowercase (`{location}`, `{state}`, `{price}`, `{model}`) — a Title Case script must NOT uppercase placeholders. Run a final pass to lowercase `\{(\w+)\}`.
+- [ ] Exactly one H1 + one H2 per page (both in the hero). All other section titles use H3–H6.
+
+#### Hero (homepage + every location page)
+- [ ] Hero uses a brand-provided image background (e.g. `/brand/bg-hero.jpg`) with a multi-layer overlay: vertical fade (dark at top fading to darker at bottom) + horizontal gradient (text side darker) + subtle orange radial glow accents for warmth.
+- [ ] Stack order inside `.hero-text`: brand logo → eyebrow tag → H1 → H2 → support paragraph → CTA row → stats. The logo sits ABOVE the eyebrow, the eyebrow ABOVE the H1.
+- [ ] Hero brand logo is a plain `<img>` (not `<Image>`) with `width: clamp(120px, 13vw, 192px)` as a starting size — expect the user to iterate. Use the logo variant designed for the hero's background (dark bg → white wordmark file; this repo's convention is `abang-excavator-dark.png` = white wordmark for dark backgrounds).
+- [ ] Hero product/operator photo is a transparent PNG cutout displayed via plain `<img>`. Two-column hero-grid on desktop (`text` | `image`), single-column centred on mobile.
+
+#### USP bar
+- [ ] No section heading on the USP bar — go straight to 3 USP cells.
+- [ ] One contained `.usp-panel` (dark charcoal, brand-shadow, rounded corners) with 3 `.usp-cell` children separated by interior dividers — NOT three separate cards.
+- [ ] Icons are 32 px inside 72 px rounded-square chips with an orange-gradient fill. Icons must semantically match: delivery → truck/excavator silhouette, expert operator → hard-hat, transparent pricing → money/credit-card with RM glyph (NOT a generic map pin).
+
+#### Pricing display
+- [ ] Every price string in `messages/*.json` uses the localized 'From' prefix: MS `Dari RM {price}`, EN `From RM {price}`, ZH `RM {price} 起`.
+- [ ] Product cards show Daily and Monthly prices side-by-side in a bordered panel with a vertical divider — never single-price.
+- [ ] Use ICU substitution `t('priceDaily', { price: value })` — NEVER `.replace('{price}', value)`. The latter throws `FORMATTING_ERROR` on placeholder-containing strings.
+- [ ] Mobile: price value 13 px + `white-space: nowrap` so "Dari RM 1,800" never wraps to 2 lines.
+
+#### Marketing marquee
+- [ ] Replace any decorative tread-divider / dashed-line section divider between hero→USP and calculator→process with a `<MarketingMarquee>`.
+- [ ] Two variants: light (orange bg) below hero, dark (charcoal) before process/why-us.
+- [ ] Short punchy items (max ~3 words each), separated by ★. Slim padding (~8 px), 12.5 px font, scrolls left → right.
+
+#### Language switcher
+- [ ] Desktop: 3 inline pills (`.lsw-item`). Each pill has a bordered rounded shell, a circular SVG flag on the left, and the locale label (MS / EN / 中) on the right, side-by-side. Active state = dark charcoal fill with white text + drop shadow.
+- [ ] Mobile: collapsed to a single dropdown trigger (current flag + label + caret) that opens a small menu listing all locales. NEVER render the 3 pills in mobile — they wrap and look broken.
+- [ ] Each `CircleFlag` SVG MUST generate its `clipPath` id via `useId()`. Sharing one id across multiple flag instances breaks clipping on some — flags lose their circle and render square.
+- [ ] Language switcher CSS lives in `globals.css` with `!important` on `display`, `flex-direction`, `flex-wrap` — `<style jsx>` rules lose to global element resets.
+
+#### WhatsApp / CTA buttons
+- [ ] Use the official Meta WhatsApp SVG (the speech-bubble-with-phone-handset glyph). The placeholder simplified path looks wrong — replace immediately.
+- [ ] All WA CTAs use the official WhatsApp green `#25D366` (hover `#1EBE57`). Never themed in brand colour.
+- [ ] Header on mobile: hide the WA CTA entirely (`display: none !important`). The language dropdown replaces it. The WA button is also hidden inside the mobile drawer.
+- [ ] Header on desktop: nav links + language pills + WA CTA, all visible.
+- [ ] The `.nav-cta` class must be targeted via `:global(.nav-cta)` inside `<style jsx>` — styled-jsx scoping does not reach child components, so the bare `.nav-cta` rule will silently miss.
+- [ ] Mobile: all `.btn` → 12.5 px font, 44 px height, 16 px padding, `white-space: nowrap` so no CTA text wraps to 2 lines.
+
+#### Section backgrounds
+- [ ] Mix image backgrounds with flat sections — at minimum: Hero, Process, Reviews, Final CTA all use image backgrounds with a dark gradient overlay.
+- [ ] Headings on image-bg sections render white. Aggregate pills (e.g. "4.9/5 Google Reviews") use a translucent-white backdrop with white text — never leave dark text on dark image.
+- [ ] Use the brand-provided bg images first (`/brand/bg-hero.jpg`, `/bg/bg-3.webp`, etc.) before any stock fallback. The Final CTA bg must be a different file from the Hero bg (no repeats).
+
+#### Header / Footer (every page)
+- [ ] Every public page (home, location, blog listing, blog article) renders `<FomoBanner />`, `<SiteHeader />`, and `<SiteFooter />` — NEVER a per-page nav variant like `BlogNav`.
+- [ ] Header brand logo / brand text is HIDDEN — nav links + language switcher + WA CTA only.
+- [ ] Footer logo uses the variant designed for the dark footer bg (white wordmark file, e.g. `abang-excavator-dark.png`). Confirm the wordmark is visible — if the logo looks invisible, you picked the wrong variant.
+- [ ] All `nav.*` translation keys exist in all locales: `home, products, calculator, locations, blog, whatsappCta`. Missing key renders the raw key (e.g. "nav.home") on the live site.
+
+#### Location pages — must equal homepage layout
+- [ ] Location page imports `<PageStyles />` (the shared style component) — never inline-duplicate the homepage style block.
+- [ ] Shared section class names match homepage exactly (no `loc-` prefix on hero, USP, products, calculator, process, why, reviews, gallery, FAQ, locations grid, final CTA).
+- [ ] Only location-only elements live in a small dedicated style block under the `loc-` namespace: `.breadcrumb`, `.city-chip`, `.nearby-card`. Everything else inherits from `<PageStyles />`.
+- [ ] Hero structure on location pages mirrors homepage: two-column `hero-grid` with `hero-text` (logo → eyebrow → H1 → H2 → support → CTA-row) + `hero-image` (plain `<img className="hero-image-img">`).
+- [ ] Breadcrumb is a rounded pill on a white background, mono-font uppercase, with chevron `›` separators. The current city sits inside an orange chip with a brand-orange drop shadow — NEVER plain text.
+
+#### Mobile layout (max-width: 879 px)
+- [ ] All `.btn` → smaller (12.5 px / 44 px height / nowrap / 16 px padding).
+- [ ] All `.eyebrow` tags → `align-self: center`, auto-width, do not stretch to full row width.
+- [ ] Product price values → 13 px + nowrap. Product CTA → 12.5 px.
+- [ ] Per-state location list → 2-column grid (the default 1-column makes the page extremely long).
+- [ ] Language switcher → dropdown trigger (mobile rule activates the `.lsw-trigger` and hides `.lsw-toggle`).
+- [ ] Header WA button → hidden.
+- [ ] FOMO banner countdown stays sticky / visible at top of first viewport.
+
+#### Styled-jsx / CSS pitfalls (don't repeat these)
+- [ ] `:global(...)` only works inside `<style jsx>`, NOT plain `<style>`. In a server component's plain `<style>` block, `:global(.foo)` is invalid CSS and the rule is silently dropped. Use plain selectors there.
+- [ ] In `<style jsx>` (client component), child-component classes do not receive the jsx hash. To target a class rendered by a child (e.g. `WhatsAppButton` rendering `.nav-cta`), you must wrap with `:global(.nav-cta)`.
+- [ ] When multiple pages need identical CSS, extract into a shared `<PageStyles />` component — never duplicate the style block per page.
+- [ ] Run `grep -c ':global(' app/**/page.tsx` after big edits — any non-zero count inside a plain `<style>` block is a bug.
+
+#### Pre-deploy verification
+- [ ] `git status` is clean of `.DS_Store`, raw `brand_assets/`, `temporary screenshots/`.
+- [ ] `du -sh public/` is under 20 MB. If higher, audit large files (`find public -type f -size +500k`).
+- [ ] All 3 locales return 200: `curl -o /dev/null -w "%{http_code}" http://localhost:PORT/{ms,en,zh}`.
+- [ ] A spot-check of 2–3 random location pages also returns 200.
+- [ ] Kill any background `scripts/sync-listener.ts` process (`ps aux | grep sync-listener && pkill -f sync-listener`) — it can revert local edits mid-iteration.
+
+---
+
 ## 11. Step 9 — User Confirms Design (Gate 1)
 
 Present the website to the user. **Do not proceed until confirmed:**

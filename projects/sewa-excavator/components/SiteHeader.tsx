@@ -98,7 +98,11 @@ export default function SiteHeader() {
         .site-mobile-actions :global(.lsw-toggle) { justify-content: center; }
         .site-mobile-actions :global(.btn) { width: 100%; }
         @media (min-width: 880px) { .site-nav--desktop { display: inline-flex; } .site-burger { display: none; } .site-mobile-drawer { display: none !important; } }
-        @media (max-width: 879px) { .site-actions__lang { display: none; } .nav-cta-label { display: none; } .nav-cta { width: 40px; padding: 0; } }
+        @media (max-width: 879px) {
+          :global(.nav-cta) { display: none !important; }
+          .site-actions__lang { display: inline-flex; }
+          .site-mobile-actions :global(.btn-wa) { display: none; }
+        }
       `}</style>
     </header>
   );

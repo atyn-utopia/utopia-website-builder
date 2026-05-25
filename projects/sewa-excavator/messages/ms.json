@@ -33,7 +33,7 @@
     "h1Part1": "Sewa Excavator",
     "h1Highlight": "No.1",
     "h1Part2": "Malaysia",
-    "h2": "Volvo EC200 dan EC400 — harian, mingguan, bulanan",
+    "h2": "Volvo EC200 dan EC400 — Harian, Mingguan, Bulanan",
     "supporting": "Hantar terus ke tapak bina anda dalam 24 jam. Operator berpengalaman, harga kompetitif, tanpa caj tersembunyi.",
     "ctaPrimary": "WhatsApp Sebut Harga Sekarang",
     "ctaSecondary": "Kira anggaran sewa →",
@@ -67,14 +67,23 @@
   },
   "usp": {
     "items": [
-      { "title": "Hantar 24 Jam", "body": "Excavator sampai di tapak bina anda dalam sehari, di seluruh Semenanjung dan Borneo." },
-      { "title": "Operator Pakar", "body": "Setiap unit datang dengan operator bersijil — siap mula kerja sebaik tiba." },
-      { "title": "Harga Transparen", "body": "Kadar harian, mingguan, bulanan — tiada caj tersembunyi, tiada surcaj musim." }
+      {
+        "title": "Hantar 24 Jam",
+        "body": "Excavator sampai di tapak bina anda dalam sehari, di seluruh Semenanjung dan Borneo."
+      },
+      {
+        "title": "Operator Pakar",
+        "body": "Setiap unit datang dengan operator bersijil — siap mula kerja sebaik tiba."
+      },
+      {
+        "title": "Harga Transparen",
+        "body": "Kadar harian, mingguan, bulanan — tiada caj tersembunyi, tiada surcaj musim."
+      }
     ]
   },
   "products": {
     "eyebrow": "KATALOG UNIT",
-    "h3": "Pilih excavator Volvo anda",
+    "h3": "Pilih Excavator Volvo Anda",
     "intro": "Dua unit utama dalam fleet kami — Volvo EC200 untuk kerja sederhana dan Volvo EC400 untuk projek skala besar. Kedua-duanya boleh disewa harian, mingguan, atau bulanan.",
     "priceFrom": "Dari RM {price} / hari",
     "priceDailyLabel": "Harian",
@@ -84,20 +93,37 @@
     "ctaTemplate": "Tempah {model} di WhatsApp",
     "imageAltTemplate": "{model} excavator Volvo untuk sewa di Malaysia",
     "fallback": {
-      "ec200": { "eyebrow": "20 TAN · KELAS SEDERHANA", "description": "Excavator 20 tan untuk kerja tapak bina sederhana. Sewa harian atau bulanan.", "price": 1800, "monthly": 32000 },
-      "ec400": { "eyebrow": "40 TAN · TUGAS BERAT", "description": "Excavator 40 tan berkuasa tinggi untuk projek besar dan kerja tanah berat.", "price": 3800, "monthly": 78000 }
+      "ec200": {
+        "eyebrow": "20 TAN · KELAS SEDERHANA",
+        "description": "Excavator 20 tan untuk kerja tapak bina sederhana. Sewa harian atau bulanan.",
+        "price": 1800,
+        "monthly": 32000
+      },
+      "ec400": {
+        "eyebrow": "40 TAN · TUGAS BERAT",
+        "description": "Excavator 40 tan berkuasa tinggi untuk projek besar dan kerja tanah berat.",
+        "price": 3800,
+        "monthly": 78000
+      }
     }
   },
   "calculator": {
     "eyebrow": "KALKULATOR SEWA",
-    "h3": "Kira kos sewa segera",
+    "h3": "Kira Kos Sewa Segera",
     "intro": "Pilih model, tempoh sewa, dan jumlah hari — kami papar anggaran sebut harga serta-merta. Hantar terus ke WhatsApp untuk pengesahan.",
     "modelLabel": "Model excavator",
     "periodLabel": "Tempoh sewa",
     "daysLabel": "Jumlah hari",
     "quoteLabel": "Anggaran sebut harga",
-    "models": { "ec200": "Volvo EC200 (20 tan)", "ec400": "Volvo EC400 (40 tan)" },
-    "periods": { "daily": "Harian", "weekly": "Mingguan", "monthly": "Bulanan" },
+    "models": {
+      "ec200": "Volvo EC200 (20 tan)",
+      "ec400": "Volvo EC400 (40 tan)"
+    },
+    "periods": {
+      "daily": "Harian",
+      "weekly": "Mingguan",
+      "monthly": "Bulanan"
+    },
     "quoteFromLabel": "Dari",
     "quotePrefix": "RM",
     "quoteSuffix": "Tidak termasuk operator dan pengangkutan.",
@@ -106,22 +132,46 @@
   },
   "process": {
     "eyebrow": "PROSES",
-    "h3": "Cara sewa excavator dalam 4 langkah",
+    "h3": "Cara Sewa Excavator dalam 4 Langkah",
     "steps": [
-      { "title": "WhatsApp kami", "body": "Hantar mesej dengan lokasi tapak, model pilihan, dan tempoh sewa. Kami balas dalam beberapa minit." },
-      { "title": "Terima sebut harga", "body": "Kami siapkan sebut harga jelas dengan kos sewa, pengangkutan, dan operator. Tiada caj tersembunyi." },
-      { "title": "Sahkan dan jadualkan", "body": "Bayar deposit, kami atur penghantaran ke tapak dalam 24 jam. Operator standby ikut waktu kerja anda." },
-      { "title": "Mula kerja", "body": "Excavator sampai dengan operator siap-pakai. Sambungan sewa boleh diuruskan terus melalui WhatsApp." }
+      {
+        "title": "WhatsApp kami",
+        "body": "Hantar mesej dengan lokasi tapak, model pilihan, dan tempoh sewa. Kami balas dalam beberapa minit."
+      },
+      {
+        "title": "Terima sebut harga",
+        "body": "Kami siapkan sebut harga jelas dengan kos sewa, pengangkutan, dan operator. Tiada caj tersembunyi."
+      },
+      {
+        "title": "Sahkan dan jadualkan",
+        "body": "Bayar deposit, kami atur penghantaran ke tapak dalam 24 jam. Operator standby ikut waktu kerja anda."
+      },
+      {
+        "title": "Mula kerja",
+        "body": "Excavator sampai dengan operator siap-pakai. Sambungan sewa boleh diuruskan terus melalui WhatsApp."
+      }
     ]
   },
   "whyUs": {
     "eyebrow": "KENAPA ABANG EXCAVATOR",
-    "h3": "Kenapa kontraktor pilih Abang Excavator",
+    "h3": "Kenapa Kontraktor Pilih Abang Excavator",
     "items": [
-      { "title": "Fleet Volvo asli", "body": "Setiap unit EC200 dan EC400 disenggara mengikut spec Volvo. Tiada masa terbuang akibat rosak di tapak." },
-      { "title": "Liputan seluruh Malaysia", "body": "Kami hantar ke 14 negeri — dari Kuala Lumpur ke Kota Kinabalu, Johor Bahru ke Kuching." },
-      { "title": "Operator bersijil CIDB", "body": "Operator kami terlatih, bersijil DOSH, dan biasa dengan tapak kontraktor besar mahupun pemaju kecil." },
-      { "title": "Bayaran fleksibel", "body": "Sewa harian untuk kerja pendek, mingguan dan bulanan untuk projek besar. Deposit minimum, tiada caj surprise." }
+      {
+        "title": "Fleet Volvo asli",
+        "body": "Setiap unit EC200 dan EC400 disenggara mengikut spec Volvo. Tiada masa terbuang akibat rosak di tapak."
+      },
+      {
+        "title": "Liputan seluruh Malaysia",
+        "body": "Kami hantar ke 14 negeri — dari Kuala Lumpur ke Kota Kinabalu, Johor Bahru ke Kuching."
+      },
+      {
+        "title": "Operator bersijil CIDB",
+        "body": "Operator kami terlatih, bersijil DOSH, dan biasa dengan tapak kontraktor besar mahupun pemaju kecil."
+      },
+      {
+        "title": "Bayaran fleksibel",
+        "body": "Sewa harian untuk kerja pendek, mingguan dan bulanan untuk projek besar. Deposit minimum, tiada caj surprise."
+      }
     ]
   },
   "reviews": {
@@ -130,36 +180,90 @@
     "aggregate": "4.9 / 5 daripada 187 ulasan Google",
     "postedOn": "Disiarkan di Google",
     "items": [
-      { "name": "Ariff Hakimi", "suburb": "Cheras, Kuala Lumpur", "stars": 5, "body": "Tempah EC200 untuk projek tanah lot sederhana di Cheras. Sampai pagi macam dijanji, operator handle slope tepi rumah dengan tenang. Akan sewa lagi." },
-      { "name": "Lim Chee Wei", "suburb": "Iskandar Puteri, Johor", "stars": 5, "body": "Sewa EC400 sebulan untuk site clearing di Iskandar Puteri. Harga jauh lebih jelas berbanding supplier lama, operator pun rajin. Recommended." },
-      { "name": "Sharifah Aishah", "suburb": "Shah Alam, Selangor", "stars": 5, "body": "Sebut harga datang dalam 15 minit, deposit kecil, dan unit tiba esok pagi. Kerja drain di Shah Alam siap awal 3 hari. Terbaik." },
-      { "name": "Mohan Selvarajah", "suburb": "Bayan Lepas, Penang", "stars": 5, "body": "Operator EC200 sampai on time setiap pagi sepanjang dua minggu di kilang Bayan Lepas. Tiada masa terbuang, billing transparent. Tahniah." },
-      { "name": "Hafiz Ramli", "suburb": "Kuantan, Pahang", "stars": 5, "body": "Kami buat kerja landasan jalan masuk di Kuantan. EC400 power dia memang stabil, abang operator pun sopan dan ikut SOP keselamatan." },
-      { "name": "Tan Yik Heng", "suburb": "Kuching, Sarawak", "stars": 5, "body": "Pertama kali sewa dari Semenanjung untuk projek Sarawak. Logistik diuruskan terus dari pihak Abang Excavator — unit EC200 tiba di Kuching tanpa masalah." }
+      {
+        "name": "Ariff Hakimi",
+        "suburb": "Cheras, Kuala Lumpur",
+        "stars": 5,
+        "body": "Tempah EC200 untuk projek tanah lot sederhana di Cheras. Sampai pagi macam dijanji, operator handle slope tepi rumah dengan tenang. Akan sewa lagi."
+      },
+      {
+        "name": "Lim Chee Wei",
+        "suburb": "Iskandar Puteri, Johor",
+        "stars": 5,
+        "body": "Sewa EC400 sebulan untuk site clearing di Iskandar Puteri. Harga jauh lebih jelas berbanding supplier lama, operator pun rajin. Recommended."
+      },
+      {
+        "name": "Sharifah Aishah",
+        "suburb": "Shah Alam, Selangor",
+        "stars": 5,
+        "body": "Sebut harga datang dalam 15 minit, deposit kecil, dan unit tiba esok pagi. Kerja drain di Shah Alam siap awal 3 hari. Terbaik."
+      },
+      {
+        "name": "Mohan Selvarajah",
+        "suburb": "Bayan Lepas, Penang",
+        "stars": 5,
+        "body": "Operator EC200 sampai on time setiap pagi sepanjang dua minggu di kilang Bayan Lepas. Tiada masa terbuang, billing transparent. Tahniah."
+      },
+      {
+        "name": "Hafiz Ramli",
+        "suburb": "Kuantan, Pahang",
+        "stars": 5,
+        "body": "Kami buat kerja landasan jalan masuk di Kuantan. EC400 power dia memang stabil, abang operator pun sopan dan ikut SOP keselamatan."
+      },
+      {
+        "name": "Tan Yik Heng",
+        "suburb": "Kuching, Sarawak",
+        "stars": 5,
+        "body": "Pertama kali sewa dari Semenanjung untuk projek Sarawak. Logistik diuruskan terus dari pihak Abang Excavator — unit EC200 tiba di Kuching tanpa masalah."
+      }
     ]
   },
   "gallery": {
     "eyebrow": "GALERI TAPAK",
-    "h3": "Excavator Volvo kami beraksi di tapak Malaysia",
+    "h3": "Excavator Volvo Kami Beraksi di Tapak Malaysia",
     "intro": "Daripada projek kondominium di Kuala Lumpur ke kerja jalan masuk di Sabah — inilah hasil kerja unit kami di seluruh negara."
   },
   "faq": {
     "eyebrow": "SOALAN LAZIM",
-    "h3": "Soalan lazim sewa excavator",
+    "h3": "Soalan Lazim Sewa Excavator",
     "items": [
-      { "q": "Berapa harga sewa excavator Volvo EC200 dan EC400?", "a": "Volvo EC200 bermula dari RM 1,000 sehari dan Volvo EC400 dari RM 1,700 sehari. Kadar mingguan dan bulanan lebih jimat — gunakan kalkulator sewa kami atau WhatsApp untuk sebut harga rasmi." },
-      { "q": "Adakah excavator datang dengan operator?", "a": "Ya, setiap unit sewa termasuk operator bersijil CIDB/DOSH secara lalai. Jika anda mahu sewa tanpa operator, sila beritahu kami semasa WhatsApp dan kami akan menyemak kelayakan tapak anda." },
-      { "q": "Bolehkah anda hantar ke tapak bina saya?", "a": "Boleh — kami hantar ke seluruh Malaysia termasuk Sabah dan Sarawak. Penghantaran biasanya dijadualkan dalam 24 jam, dan kos pengangkutan dimasukkan terus ke dalam sebut harga." },
-      { "q": "Apa berlaku jika excavator rosak di tapak?", "a": "Setiap unit disenggara mengikut spec Volvo dan diperiksa sebelum penghantaran. Jika berlaku kerosakan, kami hantar pasukan teknikal atau unit gantian secepat mungkin tanpa caj tambahan pada anda." },
-      { "q": "Berapa deposit untuk sewa excavator?", "a": "Deposit berbeza mengikut tempoh sewa dan model — biasanya antara 30% hingga 50% daripada nilai sewa. Lebih panjang projek anda, lebih rendah deposit relatif. Kami terangkan dengan jelas semasa sebut harga." },
-      { "q": "Adakah anda melayani projek kecil seperti kerja rumah dan landskap?", "a": "Ya — EC200 sesuai untuk projek skala rumah, drainage, dan landskap. Sewa minimum bermula dari satu hari, jadi anda tidak perlu komit panjang untuk kerja kecil." },
-      { "q": "Jenis kerja apa Volvo EC400 paling sesuai?", "a": "Volvo EC400 adalah kelas 40 tan — sesuai untuk projek besar seperti site clearing, kerja jalan raya, kuari, pembinaan industri, dan kerja tanah berat di kawasan curam. Kuasanya stabil walaupun beban penuh." },
-      { "q": "Bolehkah saya sambung sewa selepas tempoh asal tamat?", "a": "Boleh — sambungan sewa boleh diuruskan terus melalui WhatsApp tanpa kontrak baru. Kami juga boleh tukar kadar harian kepada mingguan atau bulanan jika projek anda lanjut." }
+      {
+        "q": "Berapa harga sewa excavator Volvo EC200 dan EC400?",
+        "a": "Volvo EC200 bermula dari RM 1,000 sehari dan Volvo EC400 dari RM 1,700 sehari. Kadar mingguan dan bulanan lebih jimat — gunakan kalkulator sewa kami atau WhatsApp untuk sebut harga rasmi."
+      },
+      {
+        "q": "Adakah excavator datang dengan operator?",
+        "a": "Ya, setiap unit sewa termasuk operator bersijil CIDB/DOSH secara lalai. Jika anda mahu sewa tanpa operator, sila beritahu kami semasa WhatsApp dan kami akan menyemak kelayakan tapak anda."
+      },
+      {
+        "q": "Bolehkah anda hantar ke tapak bina saya?",
+        "a": "Boleh — kami hantar ke seluruh Malaysia termasuk Sabah dan Sarawak. Penghantaran biasanya dijadualkan dalam 24 jam, dan kos pengangkutan dimasukkan terus ke dalam sebut harga."
+      },
+      {
+        "q": "Apa berlaku jika excavator rosak di tapak?",
+        "a": "Setiap unit disenggara mengikut spec Volvo dan diperiksa sebelum penghantaran. Jika berlaku kerosakan, kami hantar pasukan teknikal atau unit gantian secepat mungkin tanpa caj tambahan pada anda."
+      },
+      {
+        "q": "Berapa deposit untuk sewa excavator?",
+        "a": "Deposit berbeza mengikut tempoh sewa dan model — biasanya antara 30% hingga 50% daripada nilai sewa. Lebih panjang projek anda, lebih rendah deposit relatif. Kami terangkan dengan jelas semasa sebut harga."
+      },
+      {
+        "q": "Adakah anda melayani projek kecil seperti kerja rumah dan landskap?",
+        "a": "Ya — EC200 sesuai untuk projek skala rumah, drainage, dan landskap. Sewa minimum bermula dari satu hari, jadi anda tidak perlu komit panjang untuk kerja kecil."
+      },
+      {
+        "q": "Jenis kerja apa Volvo EC400 paling sesuai?",
+        "a": "Volvo EC400 adalah kelas 40 tan — sesuai untuk projek besar seperti site clearing, kerja jalan raya, kuari, pembinaan industri, dan kerja tanah berat di kawasan curam. Kuasanya stabil walaupun beban penuh."
+      },
+      {
+        "q": "Bolehkah saya sambung sewa selepas tempoh asal tamat?",
+        "a": "Boleh — sambungan sewa boleh diuruskan terus melalui WhatsApp tanpa kontrak baru. Kami juga boleh tukar kadar harian kepada mingguan atau bulanan jika projek anda lanjut."
+      }
     ]
   },
   "locations": {
     "eyebrow": "LIPUTAN NEGARA",
-    "h3": "Sewa excavator seluruh Malaysia",
+    "h3": "Sewa Excavator Seluruh Malaysia",
     "intro": "Kami menyewakan Volvo EC200 dan EC400 di seluruh 14 negeri Malaysia — dari Lembah Klang sehingga ke Sabah dan Sarawak. Pilih lokasi anda untuk maklumat tapak yang lebih khusus.",
     "topCitiesLabel": "Bandar utama",
     "stateLabels": {
@@ -182,14 +286,18 @@
   },
   "finalCta": {
     "eyebrow": "LOCK-IN HARI INI",
-    "h3": "Excavator anda boleh tiba esok pagi",
+    "h3": "Excavator Anda Boleh Tiba Esok Pagi",
     "body": "Hantar lokasi tapak, model pilihan, dan tempoh sewa kepada kami di WhatsApp sekarang. Kami balas dalam beberapa minit, sediakan sebut harga jelas, dan jadualkan penghantaran dalam 24 jam — tanpa caj tersembunyi.",
     "ctaLabel": "WhatsApp Abang Excavator Sekarang"
   },
   "footer": {
     "tagline": "Abang Excavator — Sewa Excavator No.1 Malaysia. Volvo EC200 dan EC400, harian, mingguan, bulanan.",
     "productsHeading": "Produk",
-    "productsLinks": ["Volvo EC200", "Volvo EC400", "Kalkulator sewa"],
+    "productsLinks": [
+      "Volvo EC200",
+      "Volvo EC400",
+      "Kalkulator sewa"
+    ],
     "locationsHeading": "Lokasi Utama",
     "resourcesHeading": "Sumber",
     "blogLabel": "Blog",
@@ -215,7 +323,7 @@
     "breadcrumbLocations": "Lokasi",
     "introTemplate": "Sewa Volvo EC200 atau EC400 di {location}, {state}. Operator bersijil, hantar dalam 24 jam, kadar harian atau bulanan.",
     "h1Template": "Sewa Excavator di {location}",
-    "h2Template": "Volvo EC200 dan EC400 untuk projek anda di {state}",
+    "h2Template": "Volvo EC200 dan EC400 untuk Projek Anda di {state}",
     "nearbyHeading": "Sewa excavator berdekatan {location}",
     "nearbyEyebrow": "KAWASAN BERDEKATAN"
   }

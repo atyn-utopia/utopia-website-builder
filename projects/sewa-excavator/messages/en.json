@@ -32,8 +32,8 @@
     "eyebrow": "OPERATOR STANDBY 24/7",
     "h1Part1": "Excavator Rental,",
     "h1Highlight": "No.1",
-    "h1Part2": "in Malaysia",
-    "h2": "Volvo EC200 and EC400 — daily, weekly, monthly hire",
+    "h1Part2": "In Malaysia",
+    "h2": "Volvo EC200 and EC400 — Daily, Weekly, Monthly Hire",
     "supporting": "Delivered straight to your construction site within 24 hours. Experienced operators, competitive rates, zero hidden fees.",
     "ctaPrimary": "WhatsApp Quote Now",
     "ctaSecondary": "Estimate rental cost →",
@@ -67,14 +67,23 @@
   },
   "usp": {
     "items": [
-      { "title": "24-Hour Delivery", "body": "Your excavator arrives on-site within a day across Peninsular Malaysia and Borneo." },
-      { "title": "Skilled Operators", "body": "Every unit comes with a certified operator — ready to work the moment we arrive." },
-      { "title": "Transparent Pricing", "body": "Daily, weekly, monthly rates — no hidden charges, no seasonal surcharges." }
+      {
+        "title": "24-Hour Delivery",
+        "body": "Your excavator arrives on-site within a day across Peninsular Malaysia and Borneo."
+      },
+      {
+        "title": "Skilled Operators",
+        "body": "Every unit comes with a certified operator — ready to work the moment we arrive."
+      },
+      {
+        "title": "Transparent Pricing",
+        "body": "Daily, weekly, monthly rates — no hidden charges, no seasonal surcharges."
+      }
     ]
   },
   "products": {
     "eyebrow": "UNIT CATALOGUE",
-    "h3": "Pick your Volvo excavator",
+    "h3": "Pick Your Volvo Excavator",
     "intro": "Two core units in our fleet — the Volvo EC200 for mid-scale work and the Volvo EC400 for large projects. Both rent daily, weekly, or monthly.",
     "priceFrom": "From RM {price} / day",
     "priceDailyLabel": "Daily",
@@ -84,20 +93,37 @@
     "ctaTemplate": "Book {model} on WhatsApp",
     "imageAltTemplate": "{model} Volvo excavator available for rental in Malaysia",
     "fallback": {
-      "ec200": { "eyebrow": "20-TON · MID-DUTY CLASS", "description": "20-ton excavator for mid-scale construction sites. Daily or monthly hire.", "price": 1800, "monthly": 32000 },
-      "ec400": { "eyebrow": "40-TON · HEAVY-DUTY", "description": "High-power 40-ton excavator for large projects and heavy earthworks.", "price": 3800, "monthly": 78000 }
+      "ec200": {
+        "eyebrow": "20-TON · MID-DUTY CLASS",
+        "description": "20-ton excavator for mid-scale construction sites. Daily or monthly hire.",
+        "price": 1800,
+        "monthly": 32000
+      },
+      "ec400": {
+        "eyebrow": "40-TON · HEAVY-DUTY",
+        "description": "High-power 40-ton excavator for large projects and heavy earthworks.",
+        "price": 3800,
+        "monthly": 78000
+      }
     }
   },
   "calculator": {
     "eyebrow": "RENTAL CALCULATOR",
-    "h3": "Estimate your rental cost instantly",
+    "h3": "Estimate Your Rental Cost Instantly",
     "intro": "Pick the model, the rental window, and the number of days — we show an estimate immediately. Send it to WhatsApp to confirm.",
     "modelLabel": "Excavator model",
     "periodLabel": "Rental period",
     "daysLabel": "Number of days",
     "quoteLabel": "Estimated quote",
-    "models": { "ec200": "Volvo EC200 (20-ton)", "ec400": "Volvo EC400 (40-ton)" },
-    "periods": { "daily": "Daily", "weekly": "Weekly", "monthly": "Monthly" },
+    "models": {
+      "ec200": "Volvo EC200 (20-ton)",
+      "ec400": "Volvo EC400 (40-ton)"
+    },
+    "periods": {
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly"
+    },
     "quoteFromLabel": "From",
     "quotePrefix": "RM",
     "quoteSuffix": "Excludes operator and transport.",
@@ -106,22 +132,46 @@
   },
   "process": {
     "eyebrow": "PROCESS",
-    "h3": "Rent an excavator in 4 steps",
+    "h3": "Rent an Excavator in 4 Steps",
     "steps": [
-      { "title": "WhatsApp us", "body": "Send a message with your site location, preferred model, and rental period. We reply within minutes." },
-      { "title": "Receive your quote", "body": "We send a clear quote covering rental, transport, and operator costs. Zero hidden fees." },
-      { "title": "Confirm and schedule", "body": "Pay the deposit and we schedule delivery to your site within 24 hours. Operator standby on your shift hours." },
-      { "title": "Start work", "body": "The excavator arrives with a ready-to-go operator. Need to extend? Handle it straight on WhatsApp." }
+      {
+        "title": "WhatsApp us",
+        "body": "Send a message with your site location, preferred model, and rental period. We reply within minutes."
+      },
+      {
+        "title": "Receive your quote",
+        "body": "We send a clear quote covering rental, transport, and operator costs. Zero hidden fees."
+      },
+      {
+        "title": "Confirm and schedule",
+        "body": "Pay the deposit and we schedule delivery to your site within 24 hours. Operator standby on your shift hours."
+      },
+      {
+        "title": "Start work",
+        "body": "The excavator arrives with a ready-to-go operator. Need to extend? Handle it straight on WhatsApp."
+      }
     ]
   },
   "whyUs": {
     "eyebrow": "WHY ABANG EXCAVATOR",
-    "h3": "Why contractors choose Abang Excavator",
+    "h3": "Why Contractors Choose Abang Excavator",
     "items": [
-      { "title": "Genuine Volvo fleet", "body": "Every EC200 and EC400 unit is serviced to Volvo spec. No site downtime due to mechanical failure." },
-      { "title": "Nationwide coverage", "body": "We deliver across all 14 states — from Kuala Lumpur to Kota Kinabalu, Johor Bahru to Kuching." },
-      { "title": "CIDB-certified operators", "body": "Our operators are DOSH-certified and seasoned across major contractor sites and small developer projects alike." },
-      { "title": "Flexible billing", "body": "Daily for short jobs, weekly and monthly for big projects. Low deposits, zero surprise charges." }
+      {
+        "title": "Genuine Volvo fleet",
+        "body": "Every EC200 and EC400 unit is serviced to Volvo spec. No site downtime due to mechanical failure."
+      },
+      {
+        "title": "Nationwide coverage",
+        "body": "We deliver across all 14 states — from Kuala Lumpur to Kota Kinabalu, Johor Bahru to Kuching."
+      },
+      {
+        "title": "CIDB-certified operators",
+        "body": "Our operators are DOSH-certified and seasoned across major contractor sites and small developer projects alike."
+      },
+      {
+        "title": "Flexible billing",
+        "body": "Daily for short jobs, weekly and monthly for big projects. Low deposits, zero surprise charges."
+      }
     ]
   },
   "reviews": {
@@ -130,36 +180,90 @@
     "aggregate": "4.9 / 5 from 187 Google Reviews",
     "postedOn": "Posted on Google",
     "items": [
-      { "name": "Ariff Hakimi", "suburb": "Cheras, Kuala Lumpur", "stars": 5, "body": "Booked the EC200 for a mid-size lot job in Cheras. Arrived first thing in the morning as promised; operator handled the slope next to a house calmly. Will rent again." },
-      { "name": "Lim Chee Wei", "suburb": "Iskandar Puteri, Johor", "stars": 5, "body": "Rented the EC400 for a month-long site clearing in Iskandar Puteri. Pricing far more transparent than our old supplier, operator on the ball. Recommended." },
-      { "name": "Sharifah Aishah", "suburb": "Shah Alam, Selangor", "stars": 5, "body": "Quote came back in 15 minutes, low deposit, and the unit was on-site the next morning. Drain works in Shah Alam wrapped up three days early. Top tier." },
-      { "name": "Mohan Selvarajah", "suburb": "Bayan Lepas, Penang", "stars": 5, "body": "EC200 operator showed up on time every morning for two weeks at our Bayan Lepas factory. Zero downtime, billing was crystal clear. Great team." },
-      { "name": "Hafiz Ramli", "suburb": "Kuantan, Pahang", "stars": 5, "body": "We did access-road earthworks in Kuantan. The EC400's power was rock-steady, and the operator was polite and stuck to safety SOP throughout." },
-      { "name": "Tan Yik Heng", "suburb": "Kuching, Sarawak", "stars": 5, "body": "First time renting in from Peninsular for a Sarawak job. Abang Excavator handled the logistics end-to-end; the EC200 reached Kuching with zero issues." }
+      {
+        "name": "Ariff Hakimi",
+        "suburb": "Cheras, Kuala Lumpur",
+        "stars": 5,
+        "body": "Booked the EC200 for a mid-size lot job in Cheras. Arrived first thing in the morning as promised; operator handled the slope next to a house calmly. Will rent again."
+      },
+      {
+        "name": "Lim Chee Wei",
+        "suburb": "Iskandar Puteri, Johor",
+        "stars": 5,
+        "body": "Rented the EC400 for a month-long site clearing in Iskandar Puteri. Pricing far more transparent than our old supplier, operator on the ball. Recommended."
+      },
+      {
+        "name": "Sharifah Aishah",
+        "suburb": "Shah Alam, Selangor",
+        "stars": 5,
+        "body": "Quote came back in 15 minutes, low deposit, and the unit was on-site the next morning. Drain works in Shah Alam wrapped up three days early. Top tier."
+      },
+      {
+        "name": "Mohan Selvarajah",
+        "suburb": "Bayan Lepas, Penang",
+        "stars": 5,
+        "body": "EC200 operator showed up on time every morning for two weeks at our Bayan Lepas factory. Zero downtime, billing was crystal clear. Great team."
+      },
+      {
+        "name": "Hafiz Ramli",
+        "suburb": "Kuantan, Pahang",
+        "stars": 5,
+        "body": "We did access-road earthworks in Kuantan. The EC400's power was rock-steady, and the operator was polite and stuck to safety SOP throughout."
+      },
+      {
+        "name": "Tan Yik Heng",
+        "suburb": "Kuching, Sarawak",
+        "stars": 5,
+        "body": "First time renting in from Peninsular for a Sarawak job. Abang Excavator handled the logistics end-to-end; the EC200 reached Kuching with zero issues."
+      }
     ]
   },
   "gallery": {
     "eyebrow": "SITE GALLERY",
-    "h3": "Our Volvo excavators on Malaysian sites",
+    "h3": "Our Volvo Excavators on Malaysian Sites",
     "intro": "From condominium projects in Kuala Lumpur to access-road work in Sabah — these are our units at work across the country."
   },
   "faq": {
     "eyebrow": "FAQ",
-    "h3": "Excavator rental FAQ",
+    "h3": "Excavator Rental FAQ",
     "items": [
-      { "q": "How much does it cost to rent a Volvo EC200 or EC400?", "a": "The Volvo EC200 starts at RM 1,000/day and the Volvo EC400 starts at RM 1,700/day. Weekly and monthly rates are more economical — use our rental calculator or WhatsApp us for a formal quote." },
-      { "q": "Does the excavator come with an operator?", "a": "Yes — every rental includes a CIDB/DOSH-certified operator by default. If you'd prefer to rent without an operator, mention it on WhatsApp and we'll review the suitability of your site." },
-      { "q": "Can you deliver to my construction site?", "a": "Yes — we deliver across all of Malaysia including Sabah and Sarawak. Delivery is typically scheduled within 24 hours, and transport cost is rolled into the quote upfront." },
-      { "q": "What happens if the excavator breaks down on-site?", "a": "Every unit is serviced to Volvo spec and inspected before dispatch. If a breakdown does happen, we send a technical team or a replacement unit as fast as possible — at no extra cost to you." },
-      { "q": "How much deposit is required?", "a": "Deposit varies by rental period and model — typically 30% to 50% of the rental value. The longer your project, the lower the relative deposit. We spell it out clearly in the quote." },
-      { "q": "Do you handle small jobs like residential and landscape work?", "a": "Yes — the EC200 suits residential, drainage, and landscape work. Minimum rental starts at one day, so you don't need to commit long-term for small jobs." },
-      { "q": "What is the Volvo EC400 best for?", "a": "The Volvo EC400 is a 40-ton class machine — ideal for large-scale jobs like site clearing, road works, quarry operations, industrial construction, and heavy earthworks on steep terrain. Power stays stable under full load." },
-      { "q": "Can I extend the rental beyond the original period?", "a": "Yes — extensions are handled straight on WhatsApp without a new contract. We can also switch you from daily to weekly or monthly rates if the project runs longer than expected." }
+      {
+        "q": "How much does it cost to rent a Volvo EC200 or EC400?",
+        "a": "The Volvo EC200 starts at RM 1,000/day and the Volvo EC400 starts at RM 1,700/day. Weekly and monthly rates are more economical — use our rental calculator or WhatsApp us for a formal quote."
+      },
+      {
+        "q": "Does the excavator come with an operator?",
+        "a": "Yes — every rental includes a CIDB/DOSH-certified operator by default. If you'd prefer to rent without an operator, mention it on WhatsApp and we'll review the suitability of your site."
+      },
+      {
+        "q": "Can you deliver to my construction site?",
+        "a": "Yes — we deliver across all of Malaysia including Sabah and Sarawak. Delivery is typically scheduled within 24 hours, and transport cost is rolled into the quote upfront."
+      },
+      {
+        "q": "What happens if the excavator breaks down on-site?",
+        "a": "Every unit is serviced to Volvo spec and inspected before dispatch. If a breakdown does happen, we send a technical team or a replacement unit as fast as possible — at no extra cost to you."
+      },
+      {
+        "q": "How much deposit is required?",
+        "a": "Deposit varies by rental period and model — typically 30% to 50% of the rental value. The longer your project, the lower the relative deposit. We spell it out clearly in the quote."
+      },
+      {
+        "q": "Do you handle small jobs like residential and landscape work?",
+        "a": "Yes — the EC200 suits residential, drainage, and landscape work. Minimum rental starts at one day, so you don't need to commit long-term for small jobs."
+      },
+      {
+        "q": "What is the Volvo EC400 best for?",
+        "a": "The Volvo EC400 is a 40-ton class machine — ideal for large-scale jobs like site clearing, road works, quarry operations, industrial construction, and heavy earthworks on steep terrain. Power stays stable under full load."
+      },
+      {
+        "q": "Can I extend the rental beyond the original period?",
+        "a": "Yes — extensions are handled straight on WhatsApp without a new contract. We can also switch you from daily to weekly or monthly rates if the project runs longer than expected."
+      }
     ]
   },
   "locations": {
     "eyebrow": "NATIONWIDE COVERAGE",
-    "h3": "Excavator rental nationwide Malaysia",
+    "h3": "Excavator Rental Nationwide Malaysia",
     "intro": "We rent out Volvo EC200 and EC400 units across all 14 Malaysian states — from the Klang Valley out to Sabah and Sarawak. Pick your location for site-specific information.",
     "topCitiesLabel": "Top cities",
     "stateLabels": {
@@ -182,14 +286,18 @@
   },
   "finalCta": {
     "eyebrow": "LOCK IT IN TODAY",
-    "h3": "Your excavator can arrive tomorrow morning",
+    "h3": "Your Excavator Can Arrive Tomorrow Morning",
     "body": "Send your site location, preferred model, and rental period to us on WhatsApp now. We reply within minutes, send a clear quote, and schedule delivery within 24 hours — zero hidden charges.",
     "ctaLabel": "WhatsApp Abang Excavator Now"
   },
   "footer": {
     "tagline": "Abang Excavator — No.1 Excavator Rental in Malaysia. Volvo EC200 and EC400, daily, weekly, monthly.",
     "productsHeading": "Products",
-    "productsLinks": ["Volvo EC200", "Volvo EC400", "Rental calculator"],
+    "productsLinks": [
+      "Volvo EC200",
+      "Volvo EC400",
+      "Rental calculator"
+    ],
     "locationsHeading": "Top Locations",
     "resourcesHeading": "Resources",
     "blogLabel": "Blog",
@@ -215,7 +323,7 @@
     "breadcrumbLocations": "Locations",
     "introTemplate": "Rent a Volvo EC200 or EC400 in {location}, {state}. Certified operator, 24-hour delivery, daily or monthly rates.",
     "h1Template": "Excavator Rental in {location}",
-    "h2Template": "Volvo EC200 and EC400 for your project in {state}",
+    "h2Template": "Volvo EC200 and EC400 for Your Project in {state}",
     "nearbyHeading": "Excavator rental near {location}",
     "nearbyEyebrow": "NEARBY AREAS"
   }

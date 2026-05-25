@@ -7,8 +7,9 @@ import { routing } from '@/i18n/routing';
 import { getBlogPosts } from '@/lib/webcore';
 import { waRedirect } from '@/lib/waRedirect';
 import { WhatsAppButton, WaIcon } from '@/components/WhatsAppButton';
-import BlogNav from '@/components/BlogNav';
+import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import FomoBanner from '@/components/FomoBanner';
 
 export async function generateMetadata({
   params,
@@ -39,7 +40,8 @@ export default async function BlogListing({
 
   return (
     <>
-      <BlogNav locale={locale} />
+      <FomoBanner />
+      <SiteHeader />
 
       <section className="blog-hero">
         <div className="blog-hero-bg" aria-hidden="true" />

@@ -10,8 +10,9 @@ import { waRedirect } from '@/lib/waRedirect';
 import { ArticleSchema } from '@/components/schema/ArticleSchema';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 import { WhatsAppButton, WaIcon } from '@/components/WhatsAppButton';
-import BlogNav from '@/components/BlogNav';
+import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import FomoBanner from '@/components/FomoBanner';
 
 export async function generateStaticParams() {
   const slugs = await getBlogPostSlugs();
@@ -63,7 +64,8 @@ export default async function BlogPostPage({
 
   return (
     <>
-      <BlogNav locale={locale} />
+      <FomoBanner />
+      <SiteHeader />
       <ArticleSchema
         locale={locale}
         slug={slug}
