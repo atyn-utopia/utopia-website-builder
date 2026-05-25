@@ -301,14 +301,23 @@ const TRACKING: Check[] = [
       const m = c.match(/data-website=["']([^"']+)["']/)
       if (!m) return fail('data-website-match', 'data-website matches domain', 'no data-website attribute on tracking script')
       const dw = m[1]
-      // Accept either the vercel domain or the *.utopiaai.my alias
       const domain = ctx.info.domain
       if (!domain) return skip('data-website-match', 'data-website matches domain', `data-website=${dw} but project domain unknown`)
-      const alias = domain.replace(/\.vercel\.app$/, '.utopiaai.my')
-      const ok = dw === domain || dw === alias
-      return ok
+
+      // Build the set of acceptable bucket keys:
+      //   - the Vercel .vercel.app domain itself
+      //   - its auto-derived .utopiaai.my alias
+      //   - the deploy-url.txt host (the alias actually serving traffic, which
+      //     may have an ad-hoc shape like electrician-24hour.utopiaai.my
+      //     instead of electrician-24-hour.utopiaai.my)
+      const acceptable = new Set<string>([domain, domain.replace(/\.vercel\.app$/, '.utopiaai.my')])
+      if (ctx.info.deployUrl) {
+        try { acceptable.add(new URL(ctx.info.deployUrl).host) } catch { /* ignore */ }
+      }
+
+      return acceptable.has(dw)
         ? pass('data-website-match', 'data-website matches domain', dw)
-        : fail('data-website-match', 'data-website matches domain', `data-website=${dw}, expected ${domain} or ${alias}`)
+        : fail('data-website-match', 'data-website matches domain', `data-website=${dw}, expected one of: ${[...acceptable].join(', ')}`)
     },
   },
   {
