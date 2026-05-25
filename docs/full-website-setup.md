@@ -681,6 +681,14 @@ Every item below MUST be verified on the running site. These rules come from rea
 
 #### Typography
 - [ ] Body font is **Inter** site-wide. Not Plus Jakarta Sans, not the default Tailwind stack.
+- [ ] **Every visible text element must sit inside a heading tag (h1–h6).** This is non-negotiable per user rule, even if it appears to break "proper" semantic HTML. Concretely:
+  - H1 → hero title (one per page). H2 → hero subtitle (one per page).
+  - H3 → every section title (Products, Calculator, Process, Why Us, Reviews, Gallery, FAQ, Locations, Final CTA, Brand Strip). USP bar gets a visually-hidden H3 (preserves the "no visible USP heading" design rule).
+  - H4 → every section-head intro/description paragraph (`tNamespace('intro')`), eyebrow text inside hero, step numbers (01/02/03), card titles, reviews aggregate pill, final CTA body, every state label in the locations grid.
+  - H5 → every card body / description text (USP body, product description, process step body, why-card body, review body, FAQ answer).
+  - H6 → very small labels under cards (review author name, review suburb).
+  - Bare `<span>` / `<p>` for visible text is a bug. Update CSS selectors to target `p, h4, h5` (etc.) so styles still attach after the tag swap.
+- [ ] Update PageStyles selectors after any text-tag swap: e.g. `.usp-cell p` → `.usp-cell p, .usp-cell h5`. Add a `font-weight: inherit` normaliser at the top so the new headings don't pick up huge default sizes.
 - [ ] All H1–H4 strings in `messages/*.json` are in proper Title Case with conjunctions kept lowercase. MS lowercase set: `dan, atau, di, dalam, untuk, pada, ke, dengan, dari, oleh, yang, tanpa, bagi, serta, seperti, antara, melalui`. EN lowercase set: `a, an, the, and, or, but, nor, of, to, in, on, at, by, for, with, from, into, via, vs, as, if, so`. ZH untouched.
 - [ ] NEVER use CSS `text-transform: capitalize` on headings — it capitalizes every word and breaks conjunction rules. Title-case the source strings instead.
 - [ ] ICU placeholder names are lowercase (`{location}`, `{state}`, `{price}`, `{model}`) — a Title Case script must NOT uppercase placeholders. Run a final pass to lowercase `\{(\w+)\}`.

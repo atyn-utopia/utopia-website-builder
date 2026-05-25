@@ -171,7 +171,7 @@ export default async function HomePage({
               {tHero('h1Part2')}
             </h1>
             <h2>{tHero('h2')}</h2>
-            <p className="hero-support">{tHero('supporting')}</p>
+            <h4 className="hero-support">{tHero('supporting')}</h4>
             <div className="hero-cta-row">
               <WhatsAppButton href={waRedirect(locale)} label="hero" className="btn btn-wa">
                 <WaIcon /> {tHero('ctaPrimary')}
@@ -260,7 +260,7 @@ export default async function HomePage({
                   )}
                 </span>
                 <h4>{u.title}</h4>
-                <p>{u.body}</p>
+                <h5>{u.body}</h5>
               </div>
             ))}
           </div>
@@ -273,7 +273,7 @@ export default async function HomePage({
           <div className="section-head">
             <span className="eyebrow">{tProducts('eyebrow')}</span>
             <h3>{tProducts('h3')}</h3>
-            <p>{tProducts('intro')}</p>
+            <h4>{tProducts('intro')}</h4>
           </div>
           <div className="products-grid">
             {productCards.map((p) => {
@@ -287,7 +287,7 @@ export default async function HomePage({
                   </div>
                   <div className="product-body">
                     <h4 className="product-title">{p.name}</h4>
-                    <p className="product-desc">{p.description}</p>
+                    <h5 className="product-desc">{p.description}</h5>
                     <div className="product-prices">
                       <div className="price-cell">
                         <span className="price-label">{tProducts('priceDailyLabel')}</span>
@@ -340,9 +340,9 @@ export default async function HomePage({
           <div className="process-grid">
             {processSteps.map((s, i) => (
               <div key={i} className="process-card">
-                <span className="process-num">{String(i + 1).padStart(2, '0')}</span>
+                <h4 className="process-num">{String(i + 1).padStart(2, '0')}</h4>
                 <h4>{s.title}</h4>
-                <p>{s.body}</p>
+                <h5>{s.body}</h5>
               </div>
             ))}
           </div>
@@ -361,7 +361,7 @@ export default async function HomePage({
             {whyItems.map((w, i) => (
               <div key={i} className="why-card">
                 <h4>{w.title}</h4>
-                <p>{w.body}</p>
+                <h5>{w.body}</h5>
               </div>
             ))}
           </div>
@@ -375,7 +375,7 @@ export default async function HomePage({
           <div className="section-head">
             <span className="eyebrow eyebrow-light">{tReviews('eyebrow')}</span>
             <h3 style={{ color: '#fff' }}>{tReviews('h3')}</h3>
-            <p className="reviews-aggregate reviews-aggregate-light"><GoogleG size={18} /> {tReviews('aggregate')}</p>
+            <h4 className="reviews-aggregate reviews-aggregate-light"><GoogleG size={18} /> {tReviews('aggregate')}</h4>
           </div>
           <div className="reviews-grid">
             {reviewItems.map((r, i) => (
@@ -383,10 +383,10 @@ export default async function HomePage({
                 <span className="review-g"><GoogleG size={22} /></span>
                 <span className="review-source">{tReviews('postedOn')}</span>
                 <StarRow count={r.stars} />
-                <p className="review-body">{r.body}</p>
+                <h5 className="review-body">{r.body}</h5>
                 <div>
-                  <p className="review-author">{r.name}</p>
-                  <p className="review-suburb">{r.suburb}</p>
+                  <h6 className="review-author">{r.name}</h6>
+                  <h6 className="review-suburb">{r.suburb}</h6>
                 </div>
               </article>
             ))}
@@ -400,7 +400,7 @@ export default async function HomePage({
           <div className="section-head">
             <span className="eyebrow">{tGallery('eyebrow')}</span>
             <h3>{tGallery('h3')}</h3>
-            <p>{tGallery('intro')}</p>
+            <h4>{tGallery('intro')}</h4>
           </div>
           <div className="gallery-grid">
             {GALLERY_IMAGES.map((src, i) => (
@@ -425,7 +425,7 @@ export default async function HomePage({
             {faqItems.map((f, i) => (
               <details key={i} className="faq-item">
                 <summary>{f.q}</summary>
-                <p>{f.a}</p>
+                <h5>{f.a}</h5>
               </details>
             ))}
           </div>
@@ -438,7 +438,7 @@ export default async function HomePage({
           <div className="section-head">
             <span className="eyebrow">{tLoc('eyebrow')}</span>
             <h3>{tLoc('h3')}</h3>
-            <p>{tLoc('intro')}</p>
+            <h4>{tLoc('intro')}</h4>
           </div>
           <div className="top-cities">
             {topCitySlugs.map((slug) => {
@@ -486,7 +486,7 @@ export default async function HomePage({
         <div className="container final-cta-inner">
           <span className="eyebrow eyebrow-light">{tFinal('eyebrow')}</span>
           <h3>{tFinal('h3')}</h3>
-          <p>{tFinal('body')}</p>
+          <h4>{tFinal('body')}</h4>
           <WhatsAppButton href={waRedirect(locale)} label="final-cta" className="btn btn-wa">
             <WaIcon /> {tFinal('ctaLabel')}
           </WhatsAppButton>

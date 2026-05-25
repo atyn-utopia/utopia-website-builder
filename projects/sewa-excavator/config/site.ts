@@ -1,6 +1,6 @@
 export const siteConfig = {
   brandName: 'Abang Excavator',
-  legalName: 'Utopia Holiday Sdn. Bhd.',
+  legalName: 'Utopia Group of Companies',
   tagline: 'Sewa Excavator No.1 Malaysia',
   domain: 'sewa-excavator.utopiaai.my',
   url: 'https://sewa-excavator.utopiaai.my',

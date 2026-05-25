@@ -5,6 +5,8 @@
 export default function PageStyles() {
   return (
     <style>{`
+        /* Headings used as inline body / label text — reset to avoid huge defaults */
+        .usp-cell h5, .process-card h5, .why-card h5, .faq-item h5, .product-desc, .review-body, .review-author, .review-suburb, .hero-support, .reviews-aggregate, .process-num, h4.process-num { font-weight: inherit; }
         /* HERO */
         .hero {
           position: relative;
@@ -200,7 +202,7 @@ export default function PageStyles() {
           letter-spacing: -0.015em;
           margin: 0;
         }
-        .usp-cell p {
+        .usp-cell p, .usp-cell h5 {
           font-size: 14.5px; line-height: 1.6;
           color: rgba(255,255,255,0.7);
           margin: 8px 0 0;
@@ -338,7 +340,7 @@ export default function PageStyles() {
           line-height: 1;
         }
         .process-card h4 { font-size: 17px; font-weight: 700; margin: 4px 0 0; color: var(--brand-charcoal); }
-        .process-card p { font-size: 14.5px; color: var(--ink-muted); line-height: 1.6; margin: 0; }
+        .process-card p, .process-card h5 { font-size: 14.5px; color: var(--ink-muted); line-height: 1.6; margin: 0; }
 
         /* WHY US */
         .why-section { position: relative; background: var(--brand-paper); overflow: hidden; isolation: isolate; }
@@ -361,7 +363,7 @@ export default function PageStyles() {
           box-shadow: 0 4px 14px -6px rgba(15,15,15,0.06);
         }
         .why-card h4 { font-size: 17px; font-weight: 700; color: var(--brand-charcoal); margin: 0 0 8px; letter-spacing: -0.015em; }
-        .why-card p { font-size: 14.5px; line-height: 1.65; color: var(--ink-muted); margin: 0; }
+        .why-card p, .why-card h5 { font-size: 14.5px; line-height: 1.65; color: var(--ink-muted); margin: 0; }
 
         /* REVIEWS */
         .reviews-aggregate {
@@ -438,7 +440,7 @@ export default function PageStyles() {
         .faq-item summary::-webkit-details-marker { display: none; }
         .faq-item summary::after { content: '+'; font-weight: 700; color: var(--brand-orange); font-size: 22px; }
         .faq-item[open] summary::after { content: '−'; }
-        .faq-item p { padding: 0 22px 20px; font-size: 14.5px; line-height: 1.7; color: var(--ink-muted); margin: 0; }
+        .faq-item p, .faq-item h5 { padding: 0 22px 20px; font-size: 14.5px; line-height: 1.7; color: var(--ink-muted); margin: 0; }
 
         /* LOCATIONS */
         .top-cities {
