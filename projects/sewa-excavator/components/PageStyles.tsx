@@ -476,10 +476,7 @@ export default function PageStyles() {
           padding-bottom: 10px;
           border-bottom: 1px solid var(--brand-orange-ring);
         }
-        .state-block ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
-        @media (max-width: 879px) {
-          .state-block ul { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px; }
-        }
+        .state-block ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px; }
         .state-block a { color: var(--ink-muted); font-size: 14px; transition: color var(--dur) var(--ease-out); }
         .state-block a:hover { color: var(--brand-orange-deep); }
 

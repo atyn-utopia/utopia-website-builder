@@ -36,9 +36,14 @@ const BRAND_LOGO_ON_DARK = '/brand/abang-excavator-dark.png';
 const HERO_OPERATOR_PHOTO = '/brand/hero-photo.png';
 const FINAL_CTA_BG = '/bg/bg-5.avif';
 
+// Build the top ~30 cities at build time; the rest render on first request and
+// cache via ISR. Avoids 60s/route timeouts on Vercel's static worker when we
+// have 489 routes (163 cities × 3 locales).
+export const dynamicParams = true;
+export const revalidate = 3600;
 export function generateStaticParams() {
-  return locations.flatMap((loc) =>
-    routing.locales.map((locale) => ({ locale, location: loc.slug })),
+  return topCitySlugs.flatMap((slug) =>
+    routing.locales.map((locale) => ({ locale, location: slug })),
   );
 }
 

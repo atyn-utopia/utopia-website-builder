@@ -7,4 +7,6 @@ export const routing = defineRouting({
   locales,
   defaultLocale: 'ms',
   localePrefix: 'always',
+  // Force every fresh visitor to Malay regardless of browser Accept-Language header.
+  localeDetection: false,
 });

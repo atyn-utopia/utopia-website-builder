@@ -157,6 +157,15 @@ button { font-family: inherit; }
   white-space: nowrap; border: 0;
 }
 
+/* FOMO banner */
+.fomo-bar { background: var(--alert-red); color: #fff; font-family: var(--font-display); }
+.fomo-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; padding: 10px var(--gut); font-size: 13px; line-height: 1.4; }
+.fomo-tag { font-family: var(--font-mono-stack); font-weight: 700; font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; background: rgba(255,255,255,0.18); padding: 4px 8px; border-radius: 999px; }
+.fomo-body { font-weight: 500; text-align: center; }
+.fomo-clock { font-family: var(--font-mono-stack); font-weight: 700; font-size: 15px; letter-spacing: 0.04em; display: inline-flex; gap: 6px; align-items: center; }
+.fomo-sep { opacity: 0.6; }
+.fomo-link { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; font-size: 13px; }
+
 /* Mobile: smaller CTAs + auto-width eyebrows + roomier side gutters */
 @media (max-width: 879px) {
   :root { --gut: 20px; }
@@ -167,6 +176,12 @@ button { font-family: inherit; }
   .price-label { font-size: 9px !important; }
   .price-cell { padding: 12px 6px !important; gap: 4px !important; }
   .product-cta { font-size: 12.5px !important; padding: 0 14px !important; }
+  .fomo-inner { gap: 6px 10px; padding: 6px 16px; font-size: 11.5px; line-height: 1.3; }
+  .fomo-tag { font-size: 9.5px; padding: 3px 7px; letter-spacing: 0.14em; }
+  .fomo-body { font-size: 11px; flex-basis: 100%; }
+  .fomo-clock { font-size: 12.5px; gap: 4px; }
+  .fomo-link { font-size: 11.5px; }
+  .hero-logo { width: clamp(180px, 50vw, 280px) !important; margin: 6px auto 14px !important; }
 }
 .btn-ghost-light { background: transparent; color: #fff; border: 1.5px solid var(--line-on-dark-strong); }
 .btn-ghost-light:hover { border-color: rgba(255, 255, 255, 0.6); }

@@ -34,7 +34,7 @@
     "h1Highlight": "No.1",
     "h1Part2": "In Malaysia",
     "h2": "Volvo EC200 and EC400 — Daily, Weekly, Monthly Hire",
-    "supporting": "Delivered straight to your construction site within 24 hours. Experienced operators, competitive rates, zero hidden fees.",
+    "supporting": "Delivered in 24 hours. Experienced operators, transparent rates, no hidden fees.",
     "ctaPrimary": "WhatsApp Quote Now",
     "ctaSecondary": "Estimate rental cost →",
     "imageAlt": "Orange Volvo EC200 excavator ready on a Malaysian construction site — Abang Excavator",
@@ -69,15 +69,15 @@
     "items": [
       {
         "title": "24-Hour Delivery",
-        "body": "Your excavator arrives on-site within a day across Peninsular Malaysia and Borneo."
+        "body": "Arrives on your site within 24 hours, nationwide."
       },
       {
         "title": "Skilled Operators",
-        "body": "Every unit comes with a certified operator — ready to work the moment we arrive."
+        "body": "Every unit ships with a certified CIDB operator ready to work."
       },
       {
         "title": "Transparent Pricing",
-        "body": "Daily, weekly, monthly rates — no hidden charges, no seasonal surcharges."
+        "body": "Daily, weekly, monthly rates — no hidden fees, no seasonal surcharges."
       }
     ],
     "srHeading": "Trusted by Malaysia's Contractors & Developers"
@@ -85,7 +85,7 @@
   "products": {
     "eyebrow": "UNIT CATALOGUE",
     "h3": "Pick Your Volvo Excavator",
-    "intro": "Two core units in our fleet — the Volvo EC200 for mid-scale work and the Volvo EC400 for large projects. Both rent daily, weekly, or monthly.",
+    "intro": "Volvo EC200 for mid-scale work, EC400 for large projects. Daily, weekly, monthly.",
     "priceFrom": "From RM {price} / day",
     "priceDailyLabel": "Daily",
     "priceMonthlyLabel": "Monthly",
@@ -111,7 +111,7 @@
   "calculator": {
     "eyebrow": "RENTAL CALCULATOR",
     "h3": "Estimate Your Rental Cost Instantly",
-    "intro": "Pick the model, the rental window, and the number of days — we show an estimate immediately. Send it to WhatsApp to confirm.",
+    "intro": "Pick a model, period, and days — we show the estimate instantly.",
     "modelLabel": "Excavator model",
     "periodLabel": "Rental period",
     "daysLabel": "Number of days",
@@ -128,7 +128,7 @@
     "quoteFromLabel": "From",
     "quotePrefix": "RM",
     "quoteSuffix": "Excludes operator and transport.",
-    "disclaimer": "Estimate only — please confirm via WhatsApp based on your site conditions.",
+    "disclaimer": "Estimate only — WhatsApp us to confirm.",
     "ctaLabel": "WhatsApp to Confirm Quote"
   },
   "process": {
@@ -137,19 +137,19 @@
     "steps": [
       {
         "title": "WhatsApp us",
-        "body": "Send a message with your site location, preferred model, and rental period. We reply within minutes."
+        "body": "Send your site, model, and rental period — we reply in minutes."
       },
       {
         "title": "Receive your quote",
-        "body": "We send a clear quote covering rental, transport, and operator costs. Zero hidden fees."
+        "body": "Transparent quote with rental, transport, operator — no hidden charges."
       },
       {
         "title": "Confirm and schedule",
-        "body": "Pay the deposit and we schedule delivery to your site within 24 hours. Operator standby on your shift hours."
+        "body": "Pay deposit, we deliver to your site within 24 hours."
       },
       {
         "title": "Start work",
-        "body": "The excavator arrives with a ready-to-go operator. Need to extend? Handle it straight on WhatsApp."
+        "body": "Excavator arrives with operator ready. Extend via WhatsApp."
       }
     ]
   },
@@ -159,19 +159,19 @@
     "items": [
       {
         "title": "Genuine Volvo fleet",
-        "body": "Every EC200 and EC400 unit is serviced to Volvo spec. No site downtime due to mechanical failure."
+        "body": "Units serviced to Volvo spec — no downtime from on-site failure."
       },
       {
         "title": "Nationwide coverage",
-        "body": "We deliver across all 14 states — from Kuala Lumpur to Kota Kinabalu, Johor Bahru to Kuching."
+        "body": "14-state coverage — Kuala Lumpur to Kota Kinabalu, Johor to Kuching."
       },
       {
         "title": "CIDB-certified operators",
-        "body": "Our operators are DOSH-certified and seasoned across major contractor sites and small developer projects alike."
+        "body": "Trained, DOSH-certified operators experienced with large and small sites."
       },
       {
         "title": "Flexible billing",
-        "body": "Daily for short jobs, weekly and monthly for big projects. Low deposits, zero surprise charges."
+        "body": "Daily, weekly, monthly rates with low deposit and transparent pricing."
       }
     ]
   },
@@ -222,7 +222,7 @@
   "gallery": {
     "eyebrow": "SITE GALLERY",
     "h3": "Our Volvo Excavators on Malaysian Sites",
-    "intro": "From condominium projects in Kuala Lumpur to access-road work in Sabah — these are our units at work across the country."
+    "intro": "Real work by our units across Malaysia, KL to Sabah."
   },
   "faq": {
     "eyebrow": "FAQ",
@@ -265,7 +265,7 @@
   "locations": {
     "eyebrow": "NATIONWIDE COVERAGE",
     "h3": "Excavator Rental Nationwide Malaysia",
-    "intro": "We rent out Volvo EC200 and EC400 units across all 14 Malaysian states — from the Klang Valley out to Sabah and Sarawak. Pick your location for site-specific information.",
+    "intro": "We rent Volvo EC200 and EC400 across all 14 Malaysian states.",
     "topCitiesLabel": "Top cities",
     "stateLabels": {
       "klangValley": "Klang Valley",
@@ -288,7 +288,7 @@
   "finalCta": {
     "eyebrow": "LOCK IT IN TODAY",
     "h3": "Your Excavator Can Arrive Tomorrow Morning",
-    "body": "Send your site location, preferred model, and rental period to us on WhatsApp now. We reply within minutes, send a clear quote, and schedule delivery within 24 hours — zero hidden charges.",
+    "body": "Send your site, model, and rental period — we reply in minutes.",
     "ctaLabel": "WhatsApp Abang Excavator Now"
   },
   "footer": {
@@ -322,7 +322,7 @@
   "location": {
     "breadcrumbHome": "Home",
     "breadcrumbLocations": "Locations",
-    "introTemplate": "Rent a Volvo EC200 or EC400 in {location}, {state}. Certified operator, 24-hour delivery, daily or monthly rates.",
+    "introTemplate": "Rent Volvo EC200 or EC400 in {location}, {state}. Certified operator, 24-hour delivery.",
     "h1Template": "Excavator Rental in {location}",
     "h2Template": "Volvo EC200 and EC400 for Your Project in {state}",
     "nearbyHeading": "Excavator rental near {location}",

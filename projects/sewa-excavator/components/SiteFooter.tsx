@@ -73,12 +73,6 @@ export default async function SiteFooter({ locale }: { locale: string }) {
 
         <div className="footer-bottom">
           <p className="footer-copy">{t('copyright')}</p>
-          <p className="footer-states">
-            {[
-              locT('klangValley'), locT('selangor'), locT('johor'), locT('perak'),
-              locT('penang'), locT('pahang'), locT('sabah'), locT('sarawak'),
-            ].join(' · ')}
-          </p>
         </div>
       </div>
 
@@ -134,6 +128,20 @@ export default async function SiteFooter({ locale }: { locale: string }) {
         }
         .footer-copy { margin: 0; }
         .footer-states { margin: 0; font-family: var(--font-mono-stack); letter-spacing: 0.04em; }
+        @media (max-width: 767px) {
+          .site-footer { padding: 48px 0 24px; }
+          .footer-top { gap: 24px; }
+          .footer-top, .footer-brand, .footer-bottom { text-align: center; align-items: center; }
+          .footer-cols { text-align: center; }
+          .footer-cols > div { align-self: start; }
+          .footer-brand { max-width: none; gap: 12px; }
+          .footer-mark { justify-content: center; }
+          .footer-tag { font-size: 14px; }
+          .footer-cols ul { padding: 0; }
+          .footer-cols { gap: 24px; grid-template-columns: 1fr 1fr; align-items: start; }
+          .footer-cols h6 { margin: 0 0 10px; }
+          .footer-bottom { margin-top: 32px; padding-top: 18px; }
+        }
       `}</style>
     </footer>
   );

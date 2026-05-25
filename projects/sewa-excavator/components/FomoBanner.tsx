@@ -39,73 +39,20 @@ export default function FomoBanner() {
   }, []);
 
   return (
-    <div
-      style={{
-        background: 'var(--alert-red)',
-        color: '#fff',
-        fontFamily: 'var(--font-display)',
-      }}
-    >
-      <div
-        className="container"
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '12px',
-          padding: '10px var(--gut)',
-          fontSize: '13px',
-          lineHeight: 1.4,
-        }}
-      >
-        <span
-          style={{
-            fontFamily: 'var(--font-mono-stack)',
-            fontWeight: 700,
-            fontSize: '10.5px',
-            letterSpacing: '0.18em',
-            textTransform: 'uppercase',
-            background: 'rgba(255,255,255,0.18)',
-            padding: '4px 8px',
-            borderRadius: '999px',
-          }}
-        >
-          {t('eyebrow')}
-        </span>
-        <span style={{ fontWeight: 500 }}>{t('body')}</span>
-        <span
-          aria-live="polite"
-          style={{
-            fontFamily: 'var(--font-mono-stack)',
-            fontWeight: 700,
-            fontSize: '15px',
-            letterSpacing: '0.04em',
-            display: 'inline-flex',
-            gap: 6,
-            alignItems: 'center',
-          }}
-        >
+    <div className="fomo-bar">
+      <div className="container fomo-inner">
+        <span className="fomo-tag">{t('eyebrow')}</span>
+        <span className="fomo-body">{t('body')}</span>
+        <span aria-live="polite" className="fomo-clock">
           <span>{pad(parts.days)}</span>
-          <span style={{ opacity: 0.6 }}>:</span>
+          <span className="fomo-sep">:</span>
           <span>{pad(parts.hours)}</span>
-          <span style={{ opacity: 0.6 }}>:</span>
+          <span className="fomo-sep">:</span>
           <span>{pad(parts.minutes)}</span>
-          <span style={{ opacity: 0.6 }}>:</span>
+          <span className="fomo-sep">:</span>
           <span>{pad(parts.seconds)}</span>
         </span>
-        <Link
-          href={waRedirect(locale)}
-          style={{
-            color: '#fff',
-            fontWeight: 700,
-            textDecoration: 'underline',
-            textUnderlineOffset: '3px',
-            fontSize: '13px',
-          }}
-        >
-          {t('ctaLabel')} →
-        </Link>
+        <Link href={waRedirect(locale)} className="fomo-link">{t('ctaLabel')} →</Link>
         {target && <noscript style={{ display: 'none' }}>{target.toISOString()}</noscript>}
       </div>
     </div>

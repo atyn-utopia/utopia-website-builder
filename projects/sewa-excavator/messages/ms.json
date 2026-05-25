@@ -34,7 +34,7 @@
     "h1Highlight": "No.1",
     "h1Part2": "Malaysia",
     "h2": "Volvo EC200 dan EC400 — Harian, Mingguan, Bulanan",
-    "supporting": "Hantar terus ke tapak bina anda dalam 24 jam. Operator berpengalaman, harga kompetitif, tanpa caj tersembunyi.",
+    "supporting": "Hantar dalam 24 jam. Operator berpengalaman, harga telus, tiada caj tersembunyi.",
     "ctaPrimary": "WhatsApp Sebut Harga Sekarang",
     "ctaSecondary": "Kira anggaran sewa →",
     "imageAlt": "Excavator Volvo EC200 oren bersiap sedia di tapak bina Malaysia — Abang Excavator",
@@ -69,15 +69,15 @@
     "items": [
       {
         "title": "Hantar 24 Jam",
-        "body": "Excavator sampai di tapak bina anda dalam sehari, di seluruh Semenanjung dan Borneo."
+        "body": "Sampai di tapak anda dalam 24 jam, seluruh Malaysia."
       },
       {
         "title": "Operator Pakar",
-        "body": "Setiap unit datang dengan operator bersijil — siap mula kerja sebaik tiba."
+        "body": "Setiap unit datang dengan operator bersijil CIDB siap mula kerja."
       },
       {
         "title": "Harga Transparen",
-        "body": "Kadar harian, mingguan, bulanan — tiada caj tersembunyi, tiada surcaj musim."
+        "body": "Kadar harian, mingguan, bulanan — tiada caj tersembunyi."
       }
     ],
     "srHeading": "Dipercayai oleh Kontraktor & Pemaju Malaysia"
@@ -85,7 +85,7 @@
   "products": {
     "eyebrow": "KATALOG UNIT",
     "h3": "Pilih Excavator Volvo Anda",
-    "intro": "Dua unit utama dalam fleet kami — Volvo EC200 untuk kerja sederhana dan Volvo EC400 untuk projek skala besar. Kedua-duanya boleh disewa harian, mingguan, atau bulanan.",
+    "intro": "Volvo EC200 untuk kerja sederhana, EC400 untuk projek besar. Harian, mingguan, bulanan.",
     "priceFrom": "Dari RM {price} / hari",
     "priceDailyLabel": "Harian",
     "priceMonthlyLabel": "Bulanan",
@@ -111,7 +111,7 @@
   "calculator": {
     "eyebrow": "KALKULATOR SEWA",
     "h3": "Kira Kos Sewa Segera",
-    "intro": "Pilih model, tempoh sewa, dan jumlah hari — kami papar anggaran sebut harga serta-merta. Hantar terus ke WhatsApp untuk pengesahan.",
+    "intro": "Pilih model, tempoh, dan jumlah hari — kami papar sebut harga serta-merta.",
     "modelLabel": "Model excavator",
     "periodLabel": "Tempoh sewa",
     "daysLabel": "Jumlah hari",
@@ -128,7 +128,7 @@
     "quoteFromLabel": "Dari",
     "quotePrefix": "RM",
     "quoteSuffix": "Tidak termasuk operator dan pengangkutan.",
-    "disclaimer": "Sebut harga anggaran sahaja — sila WhatsApp untuk pengesahan dan keperluan tapak.",
+    "disclaimer": "Anggaran sahaja — WhatsApp untuk pengesahan rasmi.",
     "ctaLabel": "WhatsApp Sahkan Sebut Harga"
   },
   "process": {
@@ -137,19 +137,19 @@
     "steps": [
       {
         "title": "WhatsApp kami",
-        "body": "Hantar mesej dengan lokasi tapak, model pilihan, dan tempoh sewa. Kami balas dalam beberapa minit."
+        "body": "Hantar lokasi, model, dan tempoh sewa — kami balas dalam minit."
       },
       {
         "title": "Terima sebut harga",
-        "body": "Kami siapkan sebut harga jelas dengan kos sewa, pengangkutan, dan operator. Tiada caj tersembunyi."
+        "body": "Sebut harga jelas — kos sewa, pengangkutan, operator. Tiada caj tersembunyi."
       },
       {
         "title": "Sahkan dan jadualkan",
-        "body": "Bayar deposit, kami atur penghantaran ke tapak dalam 24 jam. Operator standby ikut waktu kerja anda."
+        "body": "Bayar deposit, kami hantar ke tapak dalam 24 jam."
       },
       {
         "title": "Mula kerja",
-        "body": "Excavator sampai dengan operator siap-pakai. Sambungan sewa boleh diuruskan terus melalui WhatsApp."
+        "body": "Excavator sampai dengan operator siap-pakai. Sambung sewa via WhatsApp."
       }
     ]
   },
@@ -159,19 +159,19 @@
     "items": [
       {
         "title": "Fleet Volvo asli",
-        "body": "Setiap unit EC200 dan EC400 disenggara mengikut spec Volvo. Tiada masa terbuang akibat rosak di tapak."
+        "body": "Unit disenggara ikut spec Volvo. Tiada masa terbuang akibat kerosakan."
       },
       {
         "title": "Liputan seluruh Malaysia",
-        "body": "Kami hantar ke 14 negeri — dari Kuala Lumpur ke Kota Kinabalu, Johor Bahru ke Kuching."
+        "body": "Liputan 14 negeri — Kuala Lumpur hingga Kota Kinabalu, Johor ke Kuching."
       },
       {
         "title": "Operator bersijil CIDB",
-        "body": "Operator kami terlatih, bersijil DOSH, dan biasa dengan tapak kontraktor besar mahupun pemaju kecil."
+        "body": "Operator terlatih, bersijil DOSH, biasa dengan tapak besar dan kecil."
       },
       {
         "title": "Bayaran fleksibel",
-        "body": "Sewa harian untuk kerja pendek, mingguan dan bulanan untuk projek besar. Deposit minimum, tiada caj surprise."
+        "body": "Sewa harian, mingguan, bulanan dengan deposit minimum dan harga telus."
       }
     ]
   },
@@ -222,7 +222,7 @@
   "gallery": {
     "eyebrow": "GALERI TAPAK",
     "h3": "Excavator Volvo Kami Beraksi di Tapak Malaysia",
-    "intro": "Daripada projek kondominium di Kuala Lumpur ke kerja jalan masuk di Sabah — inilah hasil kerja unit kami di seluruh negara."
+    "intro": "Hasil kerja unit kami di seluruh Malaysia, dari KL hingga Sabah."
   },
   "faq": {
     "eyebrow": "SOALAN LAZIM",
@@ -265,7 +265,7 @@
   "locations": {
     "eyebrow": "LIPUTAN NEGARA",
     "h3": "Sewa Excavator Seluruh Malaysia",
-    "intro": "Kami menyewakan Volvo EC200 dan EC400 di seluruh 14 negeri Malaysia — dari Lembah Klang sehingga ke Sabah dan Sarawak. Pilih lokasi anda untuk maklumat tapak yang lebih khusus.",
+    "intro": "Kami menyewakan Volvo EC200 dan EC400 di seluruh 14 negeri Malaysia.",
     "topCitiesLabel": "Bandar utama",
     "stateLabels": {
       "klangValley": "Lembah Klang",
@@ -288,7 +288,7 @@
   "finalCta": {
     "eyebrow": "LOCK-IN HARI INI",
     "h3": "Excavator Anda Boleh Tiba Esok Pagi",
-    "body": "Hantar lokasi tapak, model pilihan, dan tempoh sewa kepada kami di WhatsApp sekarang. Kami balas dalam beberapa minit, sediakan sebut harga jelas, dan jadualkan penghantaran dalam 24 jam — tanpa caj tersembunyi.",
+    "body": "Hantar lokasi, model, dan tempoh sewa — kami balas dalam minit.",
     "ctaLabel": "WhatsApp Abang Excavator Sekarang"
   },
   "footer": {
@@ -322,7 +322,7 @@
   "location": {
     "breadcrumbHome": "Laman Utama",
     "breadcrumbLocations": "Lokasi",
-    "introTemplate": "Sewa Volvo EC200 atau EC400 di {location}, {state}. Operator bersijil, hantar dalam 24 jam, kadar harian atau bulanan.",
+    "introTemplate": "Sewa Volvo EC200 atau EC400 di {location}, {state}. Operator bersijil, hantar 24 jam.",
     "h1Template": "Sewa Excavator di {location}",
     "h2Template": "Volvo EC200 dan EC400 untuk Projek Anda di {state}",
     "nearbyHeading": "Sewa excavator berdekatan {location}",

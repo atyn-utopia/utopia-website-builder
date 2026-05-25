@@ -34,7 +34,7 @@
     "h1Highlight": "No.1",
     "h1Part2": "挖掘机出租",
     "h2": "沃尔沃 EC200 与 EC400 — 日租、周租、月租",
-    "supporting": "24 小时内送达您的工地。司机经验丰富，价格透明，无任何隐藏费用。",
+    "supporting": "24 小时送达。资深司机，价格透明，无隐藏收费。",
     "ctaPrimary": "WhatsApp 立即报价",
     "ctaSecondary": "估算租赁费用 →",
     "imageAlt": "橙色沃尔沃 EC200 挖掘机在马来西亚工地待命 — Abang Excavator",
@@ -69,15 +69,15 @@
     "items": [
       {
         "title": "24 小时送达",
-        "body": "挖掘机一天内送达您的工地，覆盖马来西亚半岛与东马。"
+        "body": "24 小时内送达全马各地工地。"
       },
       {
         "title": "资深司机",
-        "body": "每台机器配备持证司机 — 到场即可开工。"
+        "body": "每台机型配备 CIDB 认证操作员，立即开工。"
       },
       {
         "title": "价格透明",
-        "body": "日租、周租、月租 — 无隐藏费用，无季节性附加费。"
+        "body": "日租、周租、月租 — 价格透明，无隐藏费用。"
       }
     ],
     "srHeading": "马来西亚承包商与发展商的信赖之选"
@@ -85,7 +85,7 @@
   "products": {
     "eyebrow": "机型目录",
     "h3": "选择您的沃尔沃挖掘机",
-    "intro": "我们的核心机型有两款 — 沃尔沃 EC200 适用于中型工程，沃尔沃 EC400 适用于大型项目。两款均可日租、周租或月租。",
+    "intro": "Volvo EC200 适合中型工程，EC400 适合大型项目。日租、周租、月租。",
     "priceFrom": "日租 RM {price} 起",
     "priceDailyLabel": "日租",
     "priceMonthlyLabel": "月租",
@@ -111,7 +111,7 @@
   "calculator": {
     "eyebrow": "租赁报价器",
     "h3": "立即估算租赁成本",
-    "intro": "选择机型、租期与天数 — 即时显示估算报价。发送至 WhatsApp 即可确认。",
+    "intro": "选择型号、租期与天数 — 立刻得出预估报价。",
     "modelLabel": "挖掘机机型",
     "periodLabel": "租赁周期",
     "daysLabel": "租赁天数",
@@ -128,7 +128,7 @@
     "quoteFromLabel": "由",
     "quotePrefix": "RM",
     "quoteSuffix": "不含司机与运输。",
-    "disclaimer": "仅供参考 — 请通过 WhatsApp 确认实际工地需求与最终报价。",
+    "disclaimer": "仅供参考 — 请 WhatsApp 我们正式确认。",
     "ctaLabel": "WhatsApp 确认报价"
   },
   "process": {
@@ -137,19 +137,19 @@
     "steps": [
       {
         "title": "WhatsApp 联系我们",
-        "body": "发送工地位置、机型偏好和租赁周期。我们将在几分钟内回复。"
+        "body": "通过 WhatsApp 发送地点、型号、租期 — 我们几分钟内回复。"
       },
       {
         "title": "获取报价",
-        "body": "我们提供清晰的报价，包含租金、运输与司机费用。绝无隐藏费用。"
+        "body": "透明报价：租金、运输、操作员 — 无隐藏费用。"
       },
       {
         "title": "确认与安排",
-        "body": "支付订金后，我们将在 24 小时内安排送货到工地，司机按您的班次待命。"
+        "body": "支付订金后，我们 24 小时内送达工地。"
       },
       {
         "title": "开工",
-        "body": "挖掘机送达，司机即刻开工。如需延长租期，WhatsApp 即可处理。"
+        "body": "挖掘机连同司机抵达。WhatsApp 即可续租。"
       }
     ]
   },
@@ -159,19 +159,19 @@
     "items": [
       {
         "title": "原装沃尔沃机队",
-        "body": "每台 EC200 与 EC400 严格按沃尔沃规范保养，杜绝因机械故障导致的工地停工。"
+        "body": "机型按沃尔沃规格维护 — 工地零停机。"
       },
       {
         "title": "全马覆盖",
-        "body": "我们送货至全马 14 州 — 从吉隆坡到亚庇，从新山到古晋。"
+        "body": "覆盖 14 州 — 吉隆坡到亚庇、新山到古晋。"
       },
       {
         "title": "CIDB 持证司机",
-        "body": "司机均持 DOSH 证书，熟悉大型承包商工地与中小型开发商项目。"
+        "body": "资深 DOSH 认证操作员，熟悉大小型工地。"
       },
       {
         "title": "灵活计费",
-        "body": "短工日租，大型项目周租或月租。订金低，无隐藏附加费。"
+        "body": "日租、周租、月租，低订金，价格透明。"
       }
     ]
   },
@@ -222,7 +222,7 @@
   "gallery": {
     "eyebrow": "工地图库",
     "h3": "沃尔沃挖掘机在马来西亚工地实战",
-    "intro": "从吉隆坡的公寓项目到沙巴的进场路面 — 这些都是我们机器在全国各地的实战画面。"
+    "intro": "我们的机型在马来西亚各地的真实作业现场。"
   },
   "faq": {
     "eyebrow": "常见问题",
@@ -265,7 +265,7 @@
   "locations": {
     "eyebrow": "全马覆盖",
     "h3": "全马挖掘机出租",
-    "intro": "我们在马来西亚 14 州全境出租沃尔沃 EC200 与 EC400 — 从巴生谷一路到沙巴与砂拉越。选择您所在地区，获取工地专属信息。",
+    "intro": "我们在全马 14 州出租沃尔沃 EC200 与 EC400。",
     "topCitiesLabel": "热门城市",
     "stateLabels": {
       "klangValley": "巴生谷",
@@ -288,7 +288,7 @@
   "finalCta": {
     "eyebrow": "今日锁定",
     "h3": "您的挖掘机可在明早送达",
-    "body": "立即在 WhatsApp 上发送您的工地位置、机型偏好与租赁周期。我们将在几分钟内回复、提供清晰报价，并在 24 小时内安排送达 — 无任何隐藏费用。",
+    "body": "通过 WhatsApp 发送工地、型号、租期 — 我们几分钟内回复。",
     "ctaLabel": "立即 WhatsApp Abang Excavator"
   },
   "footer": {
@@ -322,7 +322,7 @@
   "location": {
     "breadcrumbHome": "首页",
     "breadcrumbLocations": "服务地区",
-    "introTemplate": "在 {location}（{state}）租用沃尔沃 EC200 或 EC400。持证司机，24 小时内送达，日租或月租均可。",
+    "introTemplate": "{location}（{state}）沃尔沃 EC200 / EC400 出租。认证司机，24 小时送达。",
     "h1Template": "{location} 挖掘机出租",
     "h2Template": "沃尔沃 EC200 与 EC400，助力 {state} 项目",
     "nearbyHeading": "{location} 附近挖掘机出租",
