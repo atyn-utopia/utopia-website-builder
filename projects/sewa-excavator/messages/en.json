@@ -15,6 +15,7 @@
   },
   "nav": {
     "logoAlt": "Abang Excavator — No.1 Excavator Rental in Malaysia",
+    "home": "Home",
     "products": "Fleet",
     "calculator": "Calculator",
     "locations": "Locations",
@@ -41,6 +42,18 @@
     "statStates": "States",
     "statDelivery": "Hour Delivery"
   },
+  "marquee": {
+    "items": [
+      "24-Hour Delivery",
+      "CIDB Certified",
+      "Volvo EC200 & EC400",
+      "Transparent Pricing",
+      "Daily · Weekly · Monthly",
+      "14 States Coverage",
+      "Lowbed Transport",
+      "15-Min WhatsApp Quote"
+    ]
+  },
   "brandStrip": {
     "eyebrow": "TRUSTED BY THE TRADE",
     "items": [
@@ -64,10 +77,15 @@
     "h3": "Pick your Volvo excavator",
     "intro": "Two core units in our fleet — the Volvo EC200 for mid-scale work and the Volvo EC400 for large projects. Both rent daily, weekly, or monthly.",
     "priceFrom": "From RM {price} / day",
+    "priceDailyLabel": "Daily",
+    "priceMonthlyLabel": "Monthly",
+    "priceDaily": "From RM {price}",
+    "priceMonthly": "From RM {price}",
     "ctaTemplate": "Book {model} on WhatsApp",
+    "imageAltTemplate": "{model} Volvo excavator available for rental in Malaysia",
     "fallback": {
-      "ec200": { "eyebrow": "20-TON · MID-DUTY CLASS", "description": "20-ton excavator for mid-scale construction sites. Rent daily, weekly, or monthly.", "price": 1000 },
-      "ec400": { "eyebrow": "40-TON · HEAVY-DUTY", "description": "High-power 40-ton excavator for large projects and heavy earthworks across Malaysia.", "price": 1700 }
+      "ec200": { "eyebrow": "20-TON · MID-DUTY CLASS", "description": "20-ton excavator for mid-scale construction sites. Daily or monthly hire.", "price": 1800, "monthly": 32000 },
+      "ec400": { "eyebrow": "40-TON · HEAVY-DUTY", "description": "High-power 40-ton excavator for large projects and heavy earthworks.", "price": 3800, "monthly": 78000 }
     }
   },
   "calculator": {
@@ -80,8 +98,9 @@
     "quoteLabel": "Estimated quote",
     "models": { "ec200": "Volvo EC200 (20-ton)", "ec400": "Volvo EC400 (40-ton)" },
     "periods": { "daily": "Daily", "weekly": "Weekly", "monthly": "Monthly" },
+    "quoteFromLabel": "From",
     "quotePrefix": "RM",
-    "quoteSuffix": "Operator included. Transport excluded.",
+    "quoteSuffix": "Excludes operator and transport.",
     "disclaimer": "Estimate only — please confirm via WhatsApp based on your site conditions.",
     "ctaLabel": "WhatsApp to Confirm Quote"
   },

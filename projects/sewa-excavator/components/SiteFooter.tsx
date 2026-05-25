@@ -20,17 +20,9 @@ export default async function SiteFooter({ locale }: { locale: string }) {
       <div className="container">
         <div className="footer-top">
           <div className="footer-brand">
-            <div className="footer-mark" aria-hidden="true">
-              <svg viewBox="0 0 64 64" width="40" height="40">
-                <rect width="64" height="64" rx="14" fill="#F26C1F" />
-                <g fill="#0F0F0F">
-                  <path d="M11 44 L11 47 L13 49 L51 49 L53 47 L53 44 L11 44 Z" />
-                  <rect x="13" y="40" width="38" height="4" rx="1" />
-                  <path d="M31 26 L31 40 L48 40 L48 30 L42 30 L40 26 Z" />
-                  <path d="M30 33 L18 16 L15 19 L26 33 Z" />
-                  <path d="M19 17 L9 27 L11 30 L14 28 L13 30 L18 28 L20 22 Z" />
-                </g>
-              </svg>
+            <div className="footer-mark">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/brand/abang-excavator-dark.png" alt="Abang Excavator" className="footer-logo" />
             </div>
             <p className="footer-tag">{t('tagline')}</p>
           </div>
@@ -106,6 +98,7 @@ export default async function SiteFooter({ locale }: { locale: string }) {
         }
         .footer-brand { display: flex; flex-direction: column; gap: 16px; max-width: 320px; }
         .footer-mark { display: inline-flex; }
+        .footer-logo { width: 180px; height: auto; object-fit: contain; }
         .footer-tag { margin: 0; color: #fff; font-size: 15px; line-height: 1.6; }
         .footer-cols {
           display: grid;

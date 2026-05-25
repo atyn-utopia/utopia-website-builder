@@ -11,12 +11,16 @@ export function waRedirect(
 }
 
 export function calcQuote(
-  dailyRate: number,
+  rates: { daily: number; monthly: number },
   days: number,
   period: 'daily' | 'weekly' | 'monthly',
 ): number {
   const d = Math.max(1, Math.floor(days));
-  if (period === 'daily') return dailyRate * d;
-  if (period === 'weekly') return dailyRate * (Math.floor(d / 7) * 6 + (d % 7));
-  return dailyRate * (Math.floor(d / 30) * 22 + Math.min(d % 30, 22));
+  const daily = rates.daily;
+  const monthly = rates.monthly;
+  if (period === 'daily') return daily * d;
+  if (period === 'weekly') return daily * (Math.floor(d / 7) * 6 + (d % 7));
+  const fullMonths = Math.floor(d / 30);
+  const remainder = d % 30;
+  return fullMonths * monthly + Math.min(remainder * daily, monthly);
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import LanguageSwitcher from './LanguageSwitcher';
 import { WhatsAppButton, WaIcon } from './WhatsAppButton';
@@ -9,44 +10,55 @@ import { waRedirect } from '@/lib/waRedirect';
 export default function SiteHeader() {
   const t = useTranslations('nav');
   const locale = useLocale();
+  const [open, setOpen] = useState(false);
+  const close = () => setOpen(false);
 
   return (
     <header className="site-header">
       <div className="container site-header-inner">
-        <Link href={`/${locale}`} className="brand" aria-label={t('logoAlt')}>
-          <span className="brand-icon" aria-hidden="true">
-            <svg viewBox="0 0 64 64" width="32" height="32">
-              <rect width="64" height="64" rx="14" fill="#0F0F0F" />
-              <g fill="#F26C1F">
-                <path d="M11 44 L11 47 L13 49 L51 49 L53 47 L53 44 L11 44 Z" />
-                <rect x="13" y="40" width="38" height="4" rx="1" />
-                <circle cx="17" cy="46.5" r="2.4" fill="#0F0F0F" />
-                <circle cx="25" cy="46.5" r="2.4" fill="#0F0F0F" />
-                <circle cx="33" cy="46.5" r="2.4" fill="#0F0F0F" />
-                <circle cx="41" cy="46.5" r="2.4" fill="#0F0F0F" />
-                <circle cx="47" cy="46.5" r="2.4" fill="#0F0F0F" />
-                <path d="M31 26 L31 40 L48 40 L48 30 L42 30 L40 26 Z" />
-                <rect x="34" y="29" width="6" height="6" fill="#FFC9A1" />
-                <path d="M30 33 L18 16 L15 19 L26 33 Z" />
-                <path d="M19 17 L9 27 L11 30 L14 28 L13 30 L18 28 L20 22 Z" />
-              </g>
-            </svg>
-          </span>
-          <span className="brand-name">Abang Excavator</span>
-        </Link>
-
-        <nav className="site-nav" aria-label="Primary">
+        <nav className="site-nav site-nav--desktop" aria-label="Primary">
+          <Link href={`/${locale}`}>{t('home')}</Link>
           <Link href={`/${locale}#products`}>{t('products')}</Link>
           <Link href={`/${locale}#calculator`}>{t('calculator')}</Link>
           <Link href={`/${locale}#locations`}>{t('locations')}</Link>
           <Link href={`/${locale}/blog`}>{t('blog')}</Link>
         </nav>
 
+        <button
+          type="button"
+          className="site-burger"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          aria-controls="site-nav-mobile"
+          onClick={() => setOpen((v) => !v)}
+        >
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+        </button>
+
         <div className="site-actions">
-          <LanguageSwitcher />
+          <div className="site-actions__lang"><LanguageSwitcher /></div>
           <WhatsAppButton href={waRedirect(locale)} label="nav" className="btn btn-wa nav-cta">
             <WaIcon size={16} />
-            <span>{t('whatsappCta')}</span>
+            <span className="nav-cta-label">{t('whatsappCta')}</span>
+          </WhatsAppButton>
+        </div>
+      </div>
+
+      <div id="site-nav-mobile" className={`site-mobile-drawer ${open ? 'is-open' : ''}`} aria-hidden={!open}>
+        <nav className="site-mobile-nav" aria-label="Mobile primary">
+          <Link href={`/${locale}`} onClick={close}>{t('home')}</Link>
+          <Link href={`/${locale}#products`} onClick={close}>{t('products')}</Link>
+          <Link href={`/${locale}#calculator`} onClick={close}>{t('calculator')}</Link>
+          <Link href={`/${locale}#locations`} onClick={close}>{t('locations')}</Link>
+          <Link href={`/${locale}/blog`} onClick={close}>{t('blog')}</Link>
+        </nav>
+        <div className="site-mobile-actions">
+          <LanguageSwitcher />
+          <WhatsAppButton href={waRedirect(locale)} label="nav-mobile" className="btn btn-wa">
+            <WaIcon size={16} />
+            {t('whatsappCta')}
           </WhatsAppButton>
         </div>
       </div>
@@ -61,26 +73,32 @@ export default function SiteHeader() {
         }
         .site-header-inner {
           display: flex; align-items: center; justify-content: space-between;
-          gap: 16px;
-          padding: 14px var(--gut);
+          gap: 12px;
+          padding: 12px var(--gut);
+          min-height: 60px;
         }
-        .brand { display: inline-flex; align-items: center; gap: 10px; }
-        .brand-name { font-weight: 800; font-size: 16px; letter-spacing: -0.015em; color: var(--brand-charcoal); }
-        .site-nav { display: none; gap: 28px; }
-        .site-nav a {
-          color: var(--ink-muted);
-          font-weight: 500;
-          font-size: 14px;
-          transition: color var(--dur) var(--ease-out);
-        }
+        .site-nav { display: inline-flex; gap: 24px; flex-wrap: nowrap; }
+        .site-nav a { color: var(--ink); font-weight: 600; font-size: 14px; letter-spacing: -0.005em; transition: color var(--dur) var(--ease-out); white-space: nowrap; }
         .site-nav a:hover { color: var(--brand-orange-deep); }
+        .site-nav--desktop { display: none; }
         .site-actions { display: inline-flex; align-items: center; gap: 10px; }
-        .nav-cta { height: 42px; padding: 0 16px; font-size: 13px; }
-        @media (min-width: 960px) { .site-nav { display: inline-flex; } }
-        @media (max-width: 640px) {
-          .nav-cta { display: none; }
-          .brand-name { display: none; }
-        }
+        .nav-cta { height: 40px; padding: 0 14px; font-size: 13px; }
+        .nav-cta-label { display: inline; }
+        .site-burger { display: inline-flex; flex-direction: column; justify-content: center; gap: 4px; width: 38px; height: 38px; padding: 0 8px; background: transparent; border: 1px solid var(--line-strong); border-radius: 10px; cursor: pointer; }
+        .site-burger span { display: block; height: 2px; width: 100%; background: var(--brand-charcoal); border-radius: 2px; transition: transform 0.18s ease, opacity 0.18s ease; }
+        .site-burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .site-burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+        .site-burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+        .site-mobile-drawer { display: none; background: #fff; border-top: 1px solid var(--line); padding: 14px var(--gut) 18px; }
+        .site-mobile-drawer.is-open { display: block; }
+        .site-mobile-nav { display: flex; flex-direction: column; }
+        .site-mobile-nav a { padding: 13px 4px; font-weight: 700; font-size: 15px; color: var(--brand-charcoal); border-bottom: 1px solid var(--line); }
+        .site-mobile-nav a:last-child { border-bottom: none; }
+        .site-mobile-actions { display: flex; flex-direction: column; gap: 12px; padding-top: 16px; margin-top: 12px; border-top: 1px solid var(--line); }
+        .site-mobile-actions :global(.lsw-toggle) { justify-content: center; }
+        .site-mobile-actions :global(.btn) { width: 100%; }
+        @media (min-width: 880px) { .site-nav--desktop { display: inline-flex; } .site-burger { display: none; } .site-mobile-drawer { display: none !important; } }
+        @media (max-width: 879px) { .site-actions__lang { display: none; } .nav-cta-label { display: none; } .nav-cta { width: 40px; padding: 0; } }
       `}</style>
     </header>
   );

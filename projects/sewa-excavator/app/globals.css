@@ -53,10 +53,10 @@
   --radius-pill: 9999px;
 
   --section-y: clamp(64px, 9vw, 112px);
-  --max-w: 1240px;
-  --gut: clamp(20px, 4vw, 56px);
+  --max-w: 1440px;
+  --gut: clamp(12px, 1.2vw, 16px);
 
-  --font-display: var(--font-jakarta), 'Plus Jakarta Sans', -apple-system, system-ui, sans-serif;
+  --font-display: var(--font-inter), 'Inter', -apple-system, system-ui, sans-serif;
   --font-mono-stack: var(--font-mono), ui-monospace, 'JetBrains Mono', Menlo, monospace;
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -160,7 +160,57 @@ button { font-family: inherit; }
   margin-inline: auto;
   padding-inline: var(--gut);
 }
-.section-head { text-align: center; max-width: 720px; margin-inline: auto; margin-bottom: 48px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.section-head { text-align: center; max-width: none; margin-inline: auto; margin-bottom: 48px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.section-head h3 { max-width: none; white-space: normal; text-wrap: balance; }
+
+/* Language switcher — kept in globals so layout rules always win */
+.lsw-toggle {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center;
+  gap: 6px;
+}
+.lsw-item {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px 0 8px;
+  border-radius: 999px;
+  background: #FFFFFF;
+  border: 1.5px solid var(--line-strong);
+  color: var(--brand-charcoal);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color var(--dur) var(--ease-out),
+              background-color var(--dur) var(--ease-out),
+              color var(--dur) var(--ease-out),
+              box-shadow var(--dur) var(--ease-out);
+}
+.lsw-flag {
+  display: inline-block !important;
+  flex-shrink: 0;
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+}
+.lsw-label { display: inline-block; flex-shrink: 0; line-height: 1; white-space: nowrap; }
+.lsw-item:hover { border-color: rgba(15, 15, 15, 0.35); background: var(--brand-grey-soft); }
+.lsw-item.is-active {
+  background: var(--brand-charcoal);
+  border-color: var(--brand-charcoal);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(15, 15, 15, 0.18);
+}
+.lsw-item.is-active:hover { background: var(--brand-charcoal-2); border-color: var(--brand-charcoal-2); color: #FFFFFF; }
 .section-head h3 { font-size: clamp(1.625rem, 3vw, 2.25rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; color: var(--brand-charcoal); margin: 0; }
 .section-head p { font-size: clamp(1rem, 1.25vw, 1.125rem); line-height: 1.7; color: var(--ink-muted); margin: 0; }
 

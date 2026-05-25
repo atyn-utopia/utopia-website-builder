@@ -15,6 +15,7 @@
   },
   "nav": {
     "logoAlt": "Abang Excavator — Sewa Excavator No.1 Malaysia",
+    "home": "Utama",
     "products": "Produk",
     "calculator": "Kalkulator",
     "locations": "Lokasi",
@@ -41,6 +42,18 @@
     "statStates": "Negeri",
     "statDelivery": "Jam Hantar"
   },
+  "marquee": {
+    "items": [
+      "24 Jam Hantar",
+      "Operator CIDB",
+      "Volvo EC200 & EC400",
+      "Harga Telus",
+      "Harian · Mingguan · Bulanan",
+      "Liputan 14 Negeri",
+      "Lowbed Tersedia",
+      "WhatsApp 15 Minit"
+    ]
+  },
   "brandStrip": {
     "eyebrow": "DIPERCAYAI OLEH INDUSTRI",
     "items": [
@@ -64,10 +77,15 @@
     "h3": "Pilih excavator Volvo anda",
     "intro": "Dua unit utama dalam fleet kami — Volvo EC200 untuk kerja sederhana dan Volvo EC400 untuk projek skala besar. Kedua-duanya boleh disewa harian, mingguan, atau bulanan.",
     "priceFrom": "Dari RM {price} / hari",
+    "priceDailyLabel": "Harian",
+    "priceMonthlyLabel": "Bulanan",
+    "priceDaily": "Dari RM {price}",
+    "priceMonthly": "Dari RM {price}",
     "ctaTemplate": "Tempah {model} di WhatsApp",
+    "imageAltTemplate": "{model} excavator Volvo untuk sewa di Malaysia",
     "fallback": {
-      "ec200": { "eyebrow": "20 TAN · KELAS SEDERHANA", "description": "Excavator 20 tan untuk kerja tapak bina sederhana. Sewa harian, mingguan, atau bulanan.", "price": 1000 },
-      "ec400": { "eyebrow": "40 TAN · TUGAS BERAT", "description": "Excavator 40 tan berkuasa tinggi untuk projek besar dan kerja tanah berat seluruh Malaysia.", "price": 1700 }
+      "ec200": { "eyebrow": "20 TAN · KELAS SEDERHANA", "description": "Excavator 20 tan untuk kerja tapak bina sederhana. Sewa harian atau bulanan.", "price": 1800, "monthly": 32000 },
+      "ec400": { "eyebrow": "40 TAN · TUGAS BERAT", "description": "Excavator 40 tan berkuasa tinggi untuk projek besar dan kerja tanah berat.", "price": 3800, "monthly": 78000 }
     }
   },
   "calculator": {
@@ -80,8 +98,9 @@
     "quoteLabel": "Anggaran sebut harga",
     "models": { "ec200": "Volvo EC200 (20 tan)", "ec400": "Volvo EC400 (40 tan)" },
     "periods": { "daily": "Harian", "weekly": "Mingguan", "monthly": "Bulanan" },
+    "quoteFromLabel": "Dari",
     "quotePrefix": "RM",
-    "quoteSuffix": "Termasuk operator. Tidak termasuk pengangkutan.",
+    "quoteSuffix": "Tidak termasuk operator dan pengangkutan.",
     "disclaimer": "Sebut harga anggaran sahaja — sila WhatsApp untuk pengesahan dan keperluan tapak.",
     "ctaLabel": "WhatsApp Sahkan Sebut Harga"
   },

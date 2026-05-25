@@ -15,6 +15,7 @@
   },
   "nav": {
     "logoAlt": "Abang Excavator — 马来西亚 No.1 挖掘机出租",
+    "home": "首页",
     "products": "机型",
     "calculator": "报价器",
     "locations": "服务地区",
@@ -41,6 +42,18 @@
     "statStates": "州属",
     "statDelivery": "小时送达"
   },
+  "marquee": {
+    "items": [
+      "24 小时送达",
+      "CIDB 持证司机",
+      "沃尔沃 EC200 与 EC400",
+      "价格透明",
+      "日租 · 周租 · 月租",
+      "覆盖全马 14 州",
+      "低板拖车透明报价",
+      "WhatsApp 15 分钟报价"
+    ]
+  },
   "brandStrip": {
     "eyebrow": "行业信赖之选",
     "items": [
@@ -64,10 +77,15 @@
     "h3": "选择您的沃尔沃挖掘机",
     "intro": "我们的核心机型有两款 — 沃尔沃 EC200 适用于中型工程，沃尔沃 EC400 适用于大型项目。两款均可日租、周租或月租。",
     "priceFrom": "日租 RM {price} 起",
+    "priceDailyLabel": "日租",
+    "priceMonthlyLabel": "月租",
+    "priceDaily": "RM {price} 起",
+    "priceMonthly": "RM {price} 起",
     "ctaTemplate": "WhatsApp 预订 {model}",
+    "imageAltTemplate": "{model} 沃尔沃挖掘机马来西亚出租",
     "fallback": {
-      "ec200": { "eyebrow": "20 吨 · 中型", "description": "20 吨挖掘机，适合中型工地。可按日、周或月租赁。", "price": 1000 },
-      "ec400": { "eyebrow": "40 吨 · 重型", "description": "40 吨大功率挖掘机，适合全马大型项目与重型土方工程。", "price": 1700 }
+      "ec200": { "eyebrow": "20 吨 · 中型", "description": "20 吨挖掘机，适合中型工地。可按日或月租赁。", "price": 1800, "monthly": 32000 },
+      "ec400": { "eyebrow": "40 吨 · 重型", "description": "40 吨大功率挖掘机，适合大型项目与重型土方工程。", "price": 3800, "monthly": 78000 }
     }
   },
   "calculator": {
@@ -80,8 +98,9 @@
     "quoteLabel": "估算报价",
     "models": { "ec200": "沃尔沃 EC200（20 吨）", "ec400": "沃尔沃 EC400（40 吨）" },
     "periods": { "daily": "日租", "weekly": "周租", "monthly": "月租" },
+    "quoteFromLabel": "由",
     "quotePrefix": "RM",
-    "quoteSuffix": "含司机，不含运输。",
+    "quoteSuffix": "不含司机与运输。",
     "disclaimer": "仅供参考 — 请通过 WhatsApp 确认实际工地需求与最终报价。",
     "ctaLabel": "WhatsApp 确认报价"
   },
