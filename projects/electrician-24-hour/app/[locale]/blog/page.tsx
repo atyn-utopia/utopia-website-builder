@@ -1,11 +1,10 @@
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
-import { getBlogPosts } from '@/lib/getBlogPosts';
+import { getBlogPosts } from '@/lib/webcore';
 import Link from 'next/link';
 import BlogNav from '@/components/BlogNav';
 import BlogFooter from '@/components/BlogFooter';
-
-export const revalidate = 3600;
+import BlogLinkTracker from '@/components/tracking/BlogLinkTracker';
 
 export async function generateMetadata({
   params,
@@ -77,8 +76,9 @@ export default async function BlogListingPage({
                   { year: 'numeric', month: 'long', day: 'numeric' }
                 );
                 return (
-                  <Link
+                  <BlogLinkTracker
                     key={post.id}
+                    slug={post.slug}
                     href={`/${locale}/blog/${post.slug}`}
                     className="blog-card"
                   >
@@ -95,7 +95,7 @@ export default async function BlogListingPage({
                       <p>{post.excerpt}</p>
                       <span className="blog-card-more">{t('readMore')} →</span>
                     </div>
-                  </Link>
+                  </BlogLinkTracker>
                 );
               })}
             </div>
