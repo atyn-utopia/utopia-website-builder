@@ -85,7 +85,7 @@ export default async function LocaleLayout({
         <script
           defer
           src="https://webcore.utopiaai.my/t.js"
-          data-website="sewa-excavator.vercel.app"
+          data-website="sewa-excavator.utopiaai.my"
         />
       </head>
       <body>

@@ -212,9 +212,9 @@ export default async function HomePage({
       <MarketingMarquee locale={locale} variant="light" />
 
       {/* BRAND STRIP */}
-      <section className="brand-strip">
+      <section className="brand-strip" aria-labelledby="brand-strip-heading">
         <div className="container">
-          <p className="brand-strip-eyebrow">{tBrand('eyebrow')}</p>
+          <h3 id="brand-strip-heading" className="brand-strip-eyebrow">{tBrand('eyebrow')}</h3>
           <div className="brand-strip-track no-scrollbar">
             <div className="marquee-track">
               {[...brandItems, ...brandItems].map((label, i) => (
@@ -226,7 +226,8 @@ export default async function HomePage({
       </section>
 
       {/* USP BAR (no section heading) */}
-      <section className="usp-bar">
+      <section className="usp-bar" aria-labelledby="usp-heading">
+        <h3 id="usp-heading" className="visually-hidden">{tUsp('srHeading')}</h3>
         <div className="container">
           <div className="usp-panel">
             {uspItems.map((u, i) => (

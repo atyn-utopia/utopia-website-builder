@@ -211,9 +211,9 @@ export default async function LocationPage({
 
       <MarketingMarquee locale={locale} variant="light" />
 
-      <section className="brand-strip">
+      <section className="brand-strip" aria-labelledby="brand-strip-heading">
         <div className="container">
-          <p className="brand-strip-eyebrow">{tBrand('eyebrow')}</p>
+          <h3 id="brand-strip-heading" className="brand-strip-eyebrow">{tBrand('eyebrow')}</h3>
           <div className="brand-strip-track no-scrollbar">
             <div className="marquee-track">
               {[...brandItems, ...brandItems].map((label, i) => (
@@ -224,7 +224,8 @@ export default async function LocationPage({
         </div>
       </section>
 
-      <section className="usp-bar">
+      <section className="usp-bar" aria-labelledby="usp-heading">
+        <h3 id="usp-heading" className="visually-hidden">{tUsp('srHeading')}</h3>
         <div className="container">
           <div className="usp-panel">
             {uspItems.map((u, i) => (
