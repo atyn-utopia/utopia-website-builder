@@ -312,6 +312,30 @@ const TRACKING: Check[] = [
     },
   },
   {
+    // Catches typos & broken aliases that `data-website-match` lets through.
+    // Example: `data-website="electrician-24-hour.utopiaai.my"` (with extra
+    // dash) matches the auto-derived alias but DNS doesn't resolve — every
+    // tracker event lands in a bucket nobody is watching.
+    group: 'Tracking', id: 'data-website-reachable', name: 'data-website resolves to a live URL',
+    run: async (ctx) => {
+      const c = await readProjectFile(ctx, 'app/[locale]/layout.tsx')
+      if (!c) return fail('data-website-reachable', 'data-website resolves to a live URL', 'layout.tsx missing')
+      const m = c.match(/data-website=["']([^"']+)["']/)
+      if (!m) return fail('data-website-reachable', 'data-website resolves to a live URL', 'no data-website attribute on tracking script')
+      const dw = m[1]
+      const url = `https://${dw}`
+      try {
+        const res = await fetch(url, { method: 'HEAD', redirect: 'manual', signal: AbortSignal.timeout(5000) })
+        if (res.ok || (res.status >= 300 && res.status < 400)) {
+          return pass('data-website-reachable', 'data-website resolves to a live URL', dw)
+        }
+        return fail('data-website-reachable', 'data-website resolves to a live URL', `${url} returned ${res.status} — events will land in a dead bucket`)
+      } catch {
+        return fail('data-website-reachable', 'data-website resolves to a live URL', `${url} unreachable — events will land in a dead bucket`)
+      }
+    },
+  },
+  {
     group: 'Tracking', id: 'uwc-typedef', name: 'window.uwc type declaration',
     run: async (ctx) => {
       const c = await readProjectFile(ctx, 'global.d.ts')
