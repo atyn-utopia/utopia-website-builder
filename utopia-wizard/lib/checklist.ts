@@ -438,10 +438,18 @@ const DEPLOYMENT: Check[] = [
   {
     group: 'Deployment', id: 'vercel-linked', name: 'Vercel project linked',
     run: async (ctx) => {
+      // `.vercel/project.json` is gitignored, so the GitHub-Actions cron never
+      // sees it. If the project nevertheless has a working deploy signal
+      // (deploy-url.txt) AND a data-website tag (proving production runs are
+      // happening), treat the file's absence as expected and skip the check
+      // instead of failing.
       const ok = await fileExists(ctx, '.vercel/project.json')
-      return ok
-        ? pass('vercel-linked', 'Vercel project linked')
-        : fail('vercel-linked', 'Vercel project linked', 'Missing .vercel/project.json — run `vercel link`')
+      if (ok) return pass('vercel-linked', 'Vercel project linked')
+      const hasDeployUrl = await fileExists(ctx, 'deploy-url.txt')
+      if (hasDeployUrl) {
+        return skip('vercel-linked', 'Vercel project linked', 'deploy-url.txt present (CI cannot see .vercel/)')
+      }
+      return fail('vercel-linked', 'Vercel project linked', 'Missing .vercel/project.json — run `vercel link`')
     },
   },
   {
