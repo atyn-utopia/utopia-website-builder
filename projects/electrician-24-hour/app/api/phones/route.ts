@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getPhoneNumber } from '@/lib/getPhoneNumber';
+import { getPhoneNumber } from '@/lib/webcore';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);

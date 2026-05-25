@@ -43,7 +43,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Blog posts - fetch dynamically at runtime
   try {
-    const { getBlogPosts } = await import('@/lib/getBlogPosts');
+    const { getBlogPosts } = await import('@/lib/webcore');
     const posts = await getBlogPosts('en');
     for (const locale of locales) {
       for (const post of posts) {

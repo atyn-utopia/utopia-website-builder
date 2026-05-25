@@ -1,14 +1,13 @@
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
-import { getBlogPostBySlug, getBlogPosts } from '@/lib/getBlogPosts';
+import { getBlogPostBySlug, getBlogPosts } from '@/lib/webcore';
 import { waRedirect } from '@/lib/waRedirect';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import BlogNav from '@/components/BlogNav';
 import BlogFooter from '@/components/BlogFooter';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
-
-export const revalidate = 3600;
+import BlogLinkTracker from '@/components/tracking/BlogLinkTracker';
 
 export async function generateMetadata({
   params,
@@ -122,8 +121,9 @@ export default async function BlogPostPage({
             </div>
             <div className="blog-grid">
               {other.map((p) => (
-                <Link
+                <BlogLinkTracker
                   key={p.id}
+                  slug={p.slug}
                   href={`/${locale}/blog/${p.slug}`}
                   className="blog-card"
                 >
@@ -139,7 +139,7 @@ export default async function BlogPostPage({
                     <p>{p.excerpt}</p>
                     <span className="blog-card-more">{t('readMore')} →</span>
                   </div>
-                </Link>
+                </BlogLinkTracker>
               ))}
             </div>
           </div>

@@ -1,13 +1,9 @@
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
-import { getProducts } from '@/lib/getProducts';
-import { getBlogPosts } from '@/lib/getBlogPosts';
-import { getWhatsAppLink } from '@/lib/getPhoneNumber';
+import { getProducts, getBlogPosts, getWhatsAppLink } from '@/lib/webcore';
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
 import HomePageClient from './HomePageClient';
-
-export const revalidate = 3600;
 
 export async function generateMetadata({
   params,
