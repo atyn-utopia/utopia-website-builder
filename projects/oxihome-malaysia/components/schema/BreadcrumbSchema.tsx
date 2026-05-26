@@ -1,23 +1,33 @@
-export interface Crumb {
-  name: string;
-  url: string;
+interface Props {
+  locale: string
+  cityName: string
+  locationSlug: string
 }
 
-export function BreadcrumbSchema({ items }: { items: Crumb[] }) {
-  const data = {
+export function BreadcrumbSchema({ locale, cityName, locationSlug }: Props) {
+  const schema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: items.map((c, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: c.name,
-      item: c.url,
-    })),
-  };
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: `https://oxihome.my/${locale}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: `Oxygen Machine in ${cityName}`,
+        item: `https://oxihome.my/${locale}/oxygen-machine/${locationSlug}`,
+      },
+    ],
+  }
+
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />
-  );
+  )
 }

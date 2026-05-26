@@ -1,20 +1,23 @@
-import { siteConfig } from '@/config/site';
-
 export function OrganizationSchema() {
-  const data = {
+  const schema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: siteConfig.brandName,
-    legalName: siteConfig.legalName,
-    url: siteConfig.url,
-    logo: `${siteConfig.url}/logo.png`,
-    description: siteConfig.tagline,
+    name: 'Oxihome Malaysia',
+    url: 'https://oxihome.my',
+    logo: 'https://oxihome.my/logo.svg',
+    description: "Malaysia's dedicated home oxygen equipment provider. Rent or buy oxygen machines with 4-hour same-day delivery across 127 locations.",
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      availableLanguage: ['English', 'Malay', 'Chinese'],
+    },
     areaServed: { '@type': 'Country', name: 'Malaysia' },
-  };
+  }
+
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />
-  );
+  )
 }

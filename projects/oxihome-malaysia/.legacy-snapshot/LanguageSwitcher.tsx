@@ -10,11 +10,10 @@ const LANG_LABELS: Record<string, string> = {
   zh: '中文',
 }
 
-export function LanguageSwitcher({ currentLocale }: { currentLocale?: string } = {}) {
+export function LanguageSwitcher({ currentLocale }: { currentLocale: string }) {
   const pathname = usePathname()
   const router = useRouter()
   const locale = useLocale()
-  const activeLocale = currentLocale ?? locale
 
   function switchLocale(next: string) {
     // Replace the current locale prefix in the pathname
@@ -34,7 +33,7 @@ export function LanguageSwitcher({ currentLocale }: { currentLocale?: string } =
           className={[
             'px-2 py-1 text-xs font-semibold rounded transition-colors focus:outline-none focus:ring-2 focus:ring-teal-400',
             i > 0 ? 'border-l border-slate-200' : '',
-            loc === activeLocale
+            loc === currentLocale
               ? 'text-teal-700'
               : 'text-slate-500 hover:text-teal-600',
           ].join(' ')}
@@ -45,8 +44,3 @@ export function LanguageSwitcher({ currentLocale }: { currentLocale?: string } =
     </div>
   )
 }
-
-// Default export so the shared SiteHeader (which imports LanguageSwitcher
-// as default) keeps compiling. The named export is what the restored
-// pre-migration layout.tsx imports.
-export default LanguageSwitcher

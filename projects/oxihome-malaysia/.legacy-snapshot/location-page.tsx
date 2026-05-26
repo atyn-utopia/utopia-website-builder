@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import { locations, getNearbyLocations } from '@/config/locations'
 import { siteConfig } from '@/config/site'
-import { getPhoneNumber, waLink } from '@/lib/webcore'
+import { getPhoneNumber, waLink } from '@/lib/getPhoneNumber'
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema'
 import { FAQSchema } from '@/components/schema/FAQSchema'
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema'
@@ -81,7 +81,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
   const cityName = locationData.displayName
   const stateName = locationData.state
 
-  const { phone: phoneNumber } = await getPhoneNumber(location)
+  const phoneNumber = await getPhoneNumber(location)
   const waUrl = waLink(phoneNumber, `Hi Oxihome, I need an oxygen machine in ${cityName}.`)
 
   const t  = await getTranslations({ locale, namespace: 'location' })

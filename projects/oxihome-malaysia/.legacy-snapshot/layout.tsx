@@ -8,7 +8,7 @@ import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { OrganizationSchema } from '@/components/schema/OrganizationSchema'
 import { siteConfig } from '@/config/site'
 import { footerLocations } from '@/config/locations'
-import { getPhoneNumber, waLink } from '@/lib/webcore'
+import { getPhoneNumber, waLink } from '@/lib/getPhoneNumber'
 import '../globals.css'
 
 const inter = Inter({
@@ -85,7 +85,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages()
   const t  = await getTranslations({ locale, namespace: 'nav' })
   const tf = await getTranslations({ locale, namespace: 'footer' })
-  const { phone } = await getPhoneNumber('all')
+  const phone = await getPhoneNumber('all')
   const WA_LINK = waLink(phone)
 
   const navLinks = [

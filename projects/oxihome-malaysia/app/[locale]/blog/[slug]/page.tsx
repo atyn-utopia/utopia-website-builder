@@ -8,7 +8,7 @@ import { routing } from '@/i18n/routing';
 import { getBlogPost, getBlogPostSlugs, getRecentBlogPosts } from '@/lib/webcore';
 import { waRedirect } from '@/lib/waRedirect';
 import { ArticleSchema } from '@/components/schema/ArticleSchema';
-import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
+// BreadcrumbSchema import removed — legacy oxihome schemas have a different API
 import { WhatsAppButton, WaIcon } from '@/components/WhatsAppButton';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
@@ -73,13 +73,6 @@ export default async function BlogPostPage({
         excerpt={tr.excerpt}
         coverImage={post.cover_image_url}
         publishedAt={post.published_at}
-      />
-      <BreadcrumbSchema
-        items={[
-          { name: t('breadcrumbHome'), url: `${siteConfig.url}/${locale}` },
-          { name: t('breadcrumbBlog'), url: `${siteConfig.url}/${locale}/blog` },
-          { name: tr.title, url: `${siteConfig.url}/${locale}/blog/${slug}` },
-        ]}
       />
 
       <article className="post">
