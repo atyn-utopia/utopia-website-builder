@@ -1,3 +1,5 @@
+import { siteConfig } from "@/config/site";
+
 export function LocalBusinessSchema({
   locationName,
   locationSlug,
@@ -16,7 +18,7 @@ export function LocalBusinessSchema({
     name: `Sewa Motor Malaysia — ${locationName}`,
     description: `Motorcycle rental service in ${locationName}, ${state}, Malaysia. Daily, weekly, and monthly motorbike rentals.`,
     url: `https://sewamotor.my/${locale}/sewa-motor/${locationSlug}`,
-    telephone: "+60123456789",
+    telephone: `+${siteConfig.fallbackPhone}`,
     image: "https://sewamotor.my/og-image.jpg",
     address: {
       "@type": "PostalAddress",

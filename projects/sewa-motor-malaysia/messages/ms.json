@@ -1,0 +1,251 @@
+{
+  "nav": {
+    "products": "Motosikal",
+    "locations": "Lokasi",
+    "whatsapp": "WhatsApp Kami"
+  },
+  "fomo": {
+    "message": "Hanya tinggal {slots} motor untuk penghantaran hari yang sama!",
+    "bookNow": "Tempah Sekarang"
+  },
+  "shared": {
+    "freeToAsk": "Percuma untuk bertanya · Balas dalam 1 jam",
+    "safetyNote": "Armada selamat · Sokongan kerosakan 30 hari",
+    "stats": {
+      "value1": "6,000+",
+      "label1": "Sewaan diselesaikan di seluruh Malaysia",
+      "value2": "128",
+      "label2": "Bandar dengan penghantaran hari yang sama",
+      "value3": "RM30",
+      "label3": "Harga permulaan sewa harian",
+      "value4": "4.9",
+      "label4": "Penilaian purata Google review"
+    },
+    "whyChoose": {
+      "title1": "Armada Terjaga",
+      "desc1": "Pemeriksaan keselamatan sebelum setiap penghantaran. Honda, Yamaha & Modenas dalam keadaan terbaik.",
+      "title2": "Penghantaran Hari Sama",
+      "desc2": "Tempah di WhatsApp, naik hari ini. Kami hantar di 128 bandar seluruh Malaysia.",
+      "title3": "Kadar Mesra Bajet",
+      "desc3": "Dari RM30/hari. Pelan harian, mingguan & bulanan — lagi lama anda sewa, lagi banyak jimat.",
+      "title4": "Sokongan WhatsApp 7 Hari",
+      "desc4": "Pasukan kami balas pantas setiap hari. Tiada kertas kerja, tiada birokrasi."
+    },
+    "midCta": "Sedia untuk berkendara? WhatsApp kami sekarang — balasan dalam 1 jam.",
+    "midCtaButton": "WhatsApp Sewa Motor",
+    "galleryLabel": "Tunggangan Sebenar",
+    "galleryHeading": "Armada Kami Di Seluruh Malaysia",
+    "reviewsSubtext": "Berdasarkan 180+ Google Reviews"
+  },
+  "footer": {
+    "tagline": "Perkhidmatan sewa motosikal yang dipercayai di Malaysia. Penghantaran hari sama dari RM30/hari.",
+    "quickLinks": "Pautan Pantas",
+    "topLocations": "Lokasi Utama",
+    "copyright": "© {year} Sewa Motor Malaysia. Hak cipta terpelihara.",
+    "home": "Laman Utama",
+    "products": "Motosikal",
+    "locations": "Semua Lokasi"
+  },
+  "home": {
+    "meta": {
+      "title": "Sewa Motor Malaysia | Sewa Motosikal No.1 dari RM30/hari | sewamotor.my",
+      "description": "Sewa motosikal di seluruh Malaysia dari RM30/hari. Honda Vario, Yamaha NMax, PCX dan lebih. Penghantaran hari sama. WhatsApp untuk tempah sekarang. Sewa motor murah seluruh Malaysia."
+    },
+    "hero": {
+      "headline": "Sewa Motor Malaysia — Dari RM30/hari",
+      "subheadline": "Sewa motosikal yang dipercayai dihantar ke depan pintu anda. Honda Vario, Yamaha NMax, PCX dan lebih lagi — pelan harian, mingguan atau bulanan di seluruh Malaysia.",
+      "cta": "WhatsApp Kami Untuk Tempah Sekarang"
+    },
+    "stats": {
+      "rentals": "6,000+ Sewaan",
+      "rentalsDesc": "Dipercayai penunggang di seluruh Malaysia",
+      "delivery": "Penghantaran Hari Sama",
+      "deliveryDesc": "Tempah hari ini, naik hari ini",
+      "price": "Dari RM30/hari",
+      "priceDesc": "Sewa motosikal mesra bajet",
+      "rating": "Penilaian 5-Bintang",
+      "ratingDesc": "Penilaian tinggi di Google"
+    },
+    "risk": {
+      "heading": "Tersangkut Tanpa Pengangkutan? Itu Lebih Mahal Daripada Yang Anda Sangka.",
+      "paragraph1": "Bergerak di Malaysia tanpa pengangkutan sendiri adalah mahal dan menyusahkan. Tambang Grab cepat melonjak — RM30 hingga RM50 setiap perjalanan, beberapa kali sehari. Dalam seminggu, anda mungkin habiskan lebih banyak pada perjalanan dalam talian daripada sewa motosikal untuk sebulan penuh.",
+      "paragraph2": "Pengangkutan awam tidak meliputi setiap kawasan, dan masa menunggu memakan waktu anda. Jika anda pelajar, penghantar makanan, atau pelancong yang meneroka Malaysia, anda sudah tahu kesusahannya. Anda perlukan cara cepat dan mampu milik untuk bergerak — mengikut jadual sendiri.",
+      "paragraph3": "Itulah sebab Sewa Motor Malaysia wujud. Sewa motosikal dari RM30/hari, dapatkan penghantaran hari sama, dan rebut kembali kebebasan anda. Tiada drama deposit, tiada terikat jangka panjang."
+    },
+    "products": {
+      "heading": "Sewa Motosikal Malaysia — Pilih Tunggangan Anda",
+      "cta": "Sewa Melalui WhatsApp",
+      "daily": "Harian",
+      "weekly": "Mingguan",
+      "monthly": "Bulanan",
+      "perDay": "/hari",
+      "perWeek": "/minggu",
+      "perMonth": "/bulan",
+      "badgeMostPopular": "Paling Popular",
+      "badgeBestValue": "Nilai Terbaik",
+      "badgeBudgetPick": "Pilihan Jimat",
+      "hondaVario160": {
+        "name": "Honda Vario 160",
+        "description": "Skuter automatik yang lancar — sesuai untuk perjalanan bandar dan penghantaran makanan.",
+        "daily": "RM50",
+        "weekly": "RM280",
+        "monthly": "RM900"
+      },
+      "yamahaNMax155": {
+        "name": "Yamaha NMax 155",
+        "description": "Tunggangan premium dengan brek ABS — selesa untuk jarak jauh.",
+        "daily": "RM55",
+        "weekly": "RM310",
+        "monthly": "RM1,000"
+      },
+      "hondaPCX160": {
+        "name": "Honda PCX 160",
+        "description": "Skuter peringkat tertinggi dengan smart key dan suspensi lancar. Hebat untuk penunggang harian.",
+        "daily": "RM60",
+        "weekly": "RM340",
+        "monthly": "RM1,100"
+      },
+      "hondaWave125": {
+        "name": "Honda Wave 125",
+        "description": "Jimat bahan api dan mudah dikendalikan. Pilihan paling mampu milik untuk penyewa bajet.",
+        "daily": "RM35",
+        "weekly": "RM200",
+        "monthly": "RM650"
+      },
+      "yamahaY15ZR": {
+        "name": "Yamaha Y15ZR",
+        "description": "Motosikal underbone bergaya sukan — ringan dan seronok untuk ditunggang di sekitar bandar.",
+        "daily": "RM40",
+        "weekly": "RM230",
+        "monthly": "RM750"
+      },
+      "modenasKrissMR3": {
+        "name": "Modenas Kriss MR3",
+        "description": "Motosikal klasik Malaysia — dipercayai, penyelenggaraan rendah, dan bermula dari RM30/hari sahaja.",
+        "daily": "RM30",
+        "weekly": "RM170",
+        "monthly": "RM550"
+      }
+    },
+    "howItWorks": {
+      "heading": "Sewa Motosikal Dalam 3 Langkah Mudah",
+      "step1Title": "Pilih Motor Anda",
+      "step1Desc": "Lihat motosikal kami di atas dan pilih yang sesuai dengan keperluan dan bajet anda.",
+      "step2Title": "WhatsApp Kami",
+      "step2Desc": "Hantar mesej WhatsApp dengan motor pilihan, tempoh sewa, dan lokasi penghantaran anda.",
+      "step3Title": "Penghantaran Hari Sama",
+      "step3Desc": "Kami hantar motosikal ke depan pintu anda pada hari yang sama. Terus berkendara."
+    },
+    "reviews": {
+      "heading": "Apa Kata Pelanggan Tentang Sewa Motor Malaysia",
+      "review1": "Saya sewa Honda Vario 160 selama sebulan dan keadaannya sempurna. Penghantaran hari sama seperti dijanjikan. Pasti akan sewa lagi.",
+      "review1Author": "Ahmad R.",
+      "review1Location": "Petaling Jaya",
+      "review2": "Saya perlukan motor segera untuk kerja penghantaran makanan. Sewa Motor hantar Yamaha Y15ZR pada hari saya WhatsApp mereka. Sangat boleh dipercayai.",
+      "review2Author": "Wei Liang C.",
+      "review2Location": "Kuala Lumpur",
+      "review3": "Mesra bajet dan tiada masalah. Saya sewa Modenas Kriss MR3 pada RM30/hari semasa motor saya berada di kedai. Servis hebat dan pasukan yang mesra.",
+      "review3Author": "Priya S.",
+      "review3Location": "Shah Alam"
+    },
+    "authority": {
+      "heading": "Perkhidmatan Sewa Motosikal Yang Dipercayai di Malaysia",
+      "paragraph1": "Sewa Motor Malaysia dibina untuk penunggang yang perlukan motosikal segera — tanpa birokrasi. Kami selenggarakan armada motosikal Honda, Yamaha, dan Modenas yang sentiasa diservis untuk penghantaran hari sama di seluruh Malaysia. Setiap motor melalui pemeriksaan keselamatan sebelum sampai kepada anda.",
+      "paragraph2": "Sama ada anda pelancong yang meneroka negara, pelajar yang berulang-alik ke kampus, penunggang penghantaran yang mencari nafkah, atau hanya perlukan pengganti sementara semasa motor anda di kedai — kami ada motosikal yang sesuai pada harga yang sesuai. Pasukan kami tempatan, responsif, dan tersedia di WhatsApp setiap hari."
+    },
+    "locations": {
+      "heading": "Sewa Motor Dekat Anda — Kami Hantar Di Seluruh Malaysia",
+      "subheading": "Pilih bandar anda di bawah untuk melihat pilihan sewa motosikal dengan penghantaran hari sama ke kawasan anda."
+    },
+    "cta": {
+      "heading": "Sedia Untuk Berkendara? Sewa Motosikal Hari Ini.",
+      "subheading": "Dari RM30/hari dengan penghantaran hari sama. Hantar mesej WhatsApp dan kami akan hantar motor anda hari ini juga.",
+      "button": "WhatsApp Kami Sekarang"
+    },
+    "faq": {
+      "q1": "Berapa kos untuk sewa motosikal di Malaysia?",
+      "a1": "Sewa motosikal di Malaysia bermula dari RM30/hari untuk Modenas Kriss MR3. Pelan mingguan dan bulanan juga tersedia, dengan harga sehingga RM1,100/bulan untuk Honda PCX 160. Lagi lama tempoh sewa anda, lagi banyak jimat setiap hari.",
+      "q2": "Adakah anda hantar motosikal ke seluruh Malaysia?",
+      "a2": "Ya, kami sediakan penghantaran hari sama ke 128 bandar di Malaysia. Cuma hantar mesej WhatsApp dengan motosikal pilihan dan alamat penghantaran anda, dan kami akan bawa kepada anda pada hari yang sama.",
+      "q3": "Motosikal apa yang tersedia untuk disewa?",
+      "a3": "Kami tawarkan enam model: Honda Vario 160, Yamaha NMax 155, Honda PCX 160, Honda Wave 125, Yamaha Y15ZR, dan Modenas Kriss MR3. Setiap motor diselenggara dan sedia untuk sewa segera.",
+      "q4": "Adakah saya perlu deposit untuk sewa motosikal?",
+      "a4": "Deposit kecil yang boleh dikembalikan mungkin diperlukan bergantung pada motosikal dan tempoh sewa. Hubungi kami di WhatsApp untuk jumlah deposit tepat bagi motor pilihan anda.",
+      "q5": "Boleh saya sewa motosikal untuk kerja penghantaran makanan?",
+      "a5": "Sudah tentu. Banyak pelanggan kami sewa motosikal untuk penghantaran makanan dengan Grab, Foodpanda, dan ShopeeFood. Honda Vario 160 dan Yamaha Y15ZR adalah pilihan popular untuk penunggang penghantaran.",
+      "q6": "Bagaimana cara saya tempah sewa motosikal?",
+      "a6": "Tempahan adalah mudah. Hantar mesej WhatsApp dengan motor pilihan, tempoh sewa, dan alamat penghantaran. Kami akan sahkan ketersediaan dan atur penghantaran hari sama.",
+      "q7": "Adakah terdapat tempoh sewa minimum?",
+      "a7": "Tempoh sewa minimum adalah satu hari. Anda boleh sewa untuk sehari, seminggu penuh, atau sebulan penuh. Pelan bulanan menawarkan nilai terbaik setiap hari.",
+      "q8": "Apa berlaku jika motosikal rosak semasa sewaan saya?",
+      "a8": "Hubungi kami segera di WhatsApp. Kami akan atur motosikal pengganti atau bantuan tepi jalan secepat mungkin. Keselamatan dan keselesaan anda diutamakan.",
+      "q9": "Boleh saya lanjutkan sewaan motosikal saya?",
+      "a9": "Ya, anda boleh lanjutkan sewaan pada bila-bila masa. Cuma mesej kami di WhatsApp sebelum tempoh sewa semasa anda berakhir, dan kami akan kemas kini tempahan anda tanpa sebarang gangguan.",
+      "q10": "Adakah anda menawarkan sewa skuter di Malaysia?",
+      "a10": "Ya. Honda Vario 160, Yamaha NMax 155, dan Honda PCX 160 semuanya adalah skuter automatik yang tersedia untuk disewa. Sewa skuter bermula dari RM50/hari dengan penghantaran hari sama."
+    }
+  },
+  "location": {
+    "meta": {
+      "title": "Sewa Motor {city} | Sewa Motosikal Dari RM30/hari | sewamotor.my",
+      "description": "Sewa motosikal di {city} dari RM30/hari. Honda, Yamaha & Modenas — penghantaran hari sama. WhatsApp untuk tempah sewa motosikal anda di {city} hari ini."
+    },
+    "breadcrumbs": {
+      "home": "Laman Utama",
+      "location": "{city}"
+    },
+    "hero": {
+      "headline": "Sewa Motor {city} — Sewa Motosikal Dari RM30/hari",
+      "intro": "Mencari sewa motosikal di {city}? Sewa Motor Malaysia hantar motosikal terus ke lokasi anda di {city} — pada hari anda tempah. Pilih daripada Honda Vario, Yamaha NMax, Honda PCX, dan lebih lagi, dengan pelan sewa harian, mingguan, dan bulanan dari RM30/hari."
+    },
+    "badges": {
+      "sameDayDelivery": "Penghantaran Hari Sama ke {city}",
+      "affordable": "Dari RM30/hari",
+      "maintained": "Armada Diperiksa Keselamatan",
+      "localSupport": "Sokongan Tempatan {city}"
+    },
+    "whyChoose": {
+      "heading": "Mengapa Pilih Sewa Motor di {city}",
+      "delivery": "Penghantaran hari sama ke {city} — Tempah di WhatsApp, naik hari ini. Tanpa menunggu.",
+      "affordable": "Kadar mampu milik dari RM30/hari — Pelan harian, mingguan, dan bulanan untuk muat bajet anda.",
+      "fleet": "Armada terjaga — Setiap motosikal diperiksa keselamatan sebelum penghantaran.",
+      "support": "Pasukan sokongan tempatan — Pasukan {city} kami tersedia di WhatsApp untuk bantuan cepat."
+    },
+    "banner": {
+      "heading": "Sewa Motosikal di {city}",
+      "description": "Pilih daripada 6 motosikal yang tersedia untuk disewa di {city} dengan penghantaran hari sama."
+    },
+    "nearby": {
+      "heading": "Lokasi Berdekatan",
+      "description": "Juga tersedia dengan penghantaran hari sama berdekatan {city}."
+    },
+    "cta": {
+      "heading": "Sedia untuk sewa motosikal di {city}?",
+      "subheading": "Sewa Motor Malaysia menawarkan penghantaran hari sama terus ke pintu anda — bermula dari RM30/hari sahaja. Hantar mesej WhatsApp sekarang dan naik hari ini.",
+      "button": "WhatsApp Kami Untuk Sewa di {city}"
+    },
+    "faq": {
+      "heading": "Soalan Lazim — Sewa Motor {city}",
+      "q1": "Berapa kos untuk sewa motosikal di {city}?",
+      "a1": "Sewa motosikal di {city} bermula dari RM30/hari untuk Modenas Kriss MR3. Pelan mingguan dan bulanan juga tersedia, dengan harga sehingga RM1,100/bulan untuk Honda PCX 160. Lagi lama tempoh sewa anda, lagi banyak jimat setiap hari.",
+      "q2": "Adakah anda hantar motosikal di {city}?",
+      "a2": "Ya, kami sediakan penghantaran hari sama di seluruh {city}. Cuma hantar mesej WhatsApp dengan motosikal pilihan dan alamat penghantaran anda, dan kami akan bawa kepada anda pada hari yang sama.",
+      "q3": "Motosikal apa yang tersedia untuk disewa di {city}?",
+      "a3": "Kami tawarkan enam model di {city}: Honda Vario 160, Yamaha NMax 155, Honda PCX 160, Honda Wave 125, Yamaha Y15ZR, dan Modenas Kriss MR3. Setiap motor diselenggara dan sedia untuk sewa segera.",
+      "q4": "Adakah saya perlu deposit untuk sewa motosikal di {city}?",
+      "a4": "Deposit kecil yang boleh dikembalikan mungkin diperlukan bergantung pada motosikal dan tempoh sewa. Hubungi kami di WhatsApp untuk jumlah deposit tepat bagi motor pilihan anda di {city}.",
+      "q5": "Boleh saya sewa motosikal di {city} untuk kerja penghantaran makanan?",
+      "a5": "Sudah tentu. Banyak pelanggan kami di {city} sewa motosikal untuk penghantaran makanan dengan Grab, Foodpanda, dan ShopeeFood. Honda Vario 160 dan Yamaha Y15ZR adalah pilihan popular untuk penunggang penghantaran.",
+      "q6": "Bagaimana cara saya tempah sewa motosikal di {city}?",
+      "a6": "Tempahan adalah mudah. Hantar mesej WhatsApp dengan motor pilihan, tempoh sewa, dan alamat penghantaran di {city}. Kami akan sahkan ketersediaan dan atur penghantaran hari sama.",
+      "q7": "Adakah terdapat tempoh sewa minimum di {city}?",
+      "a7": "Tempoh sewa minimum adalah satu hari. Anda boleh sewa untuk sehari, seminggu penuh, atau sebulan penuh. Pelan bulanan di {city} menawarkan nilai terbaik setiap hari.",
+      "q8": "Apa berlaku jika motosikal rosak semasa sewaan saya di {city}?",
+      "a8": "Hubungi kami segera di WhatsApp. Kami akan atur motosikal pengganti atau bantuan tepi jalan di {city} secepat mungkin. Keselamatan dan keselesaan anda diutamakan.",
+      "q9": "Boleh saya lanjutkan sewaan motosikal saya di {city}?",
+      "a9": "Ya, anda boleh lanjutkan sewaan pada bila-bila masa. Cuma mesej kami di WhatsApp sebelum tempoh sewa semasa anda berakhir, dan kami akan kemas kini tempahan anda untuk {city} tanpa sebarang gangguan.",
+      "q10": "Adakah anda menawarkan sewa skuter di {city}?",
+      "a10": "Ya. Honda Vario 160, Yamaha NMax 155, dan Honda PCX 160 semuanya adalah skuter automatik yang tersedia untuk disewa di {city}. Sewa skuter bermula dari RM50/hari dengan penghantaran hari sama."
+    }
+  }
+}
