@@ -1,3 +1,5 @@
+import { siteConfig } from "@/config/site";
+
 export function BreadcrumbSchema({
   locationName,
   locationSlug,
@@ -7,7 +9,7 @@ export function BreadcrumbSchema({
   locationSlug: string;
   locale: string;
 }) {
-  const baseUrl = "https://sewamotor.my";
+  const baseUrl = siteConfig.siteUrl;
 
   const schema = {
     "@context": "https://schema.org",

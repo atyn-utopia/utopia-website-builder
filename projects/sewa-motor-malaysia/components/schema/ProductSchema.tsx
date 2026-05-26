@@ -1,3 +1,5 @@
+import { siteConfig } from "@/config/site";
+
 interface ProductData {
   name: string;
   description: string;
@@ -42,7 +44,7 @@ export function ProductSchema({
           priceCurrency: "MYR",
           priceValidUntil: "2030-12-31",
           availability: "https://schema.org/InStock",
-          url: `https://sewamotor.my/${locale}/sewa-motor/${locationSlug}`,
+          url: `${siteConfig.siteUrl}/${locale}/sewa-motor/${locationSlug}`,
         },
         {
           "@type": "Offer",
@@ -51,7 +53,7 @@ export function ProductSchema({
           priceCurrency: "MYR",
           priceValidUntil: "2030-12-31",
           availability: "https://schema.org/InStock",
-          url: `https://sewamotor.my/${locale}/sewa-motor/${locationSlug}`,
+          url: `${siteConfig.siteUrl}/${locale}/sewa-motor/${locationSlug}`,
         },
         {
           "@type": "Offer",
@@ -60,7 +62,7 @@ export function ProductSchema({
           priceCurrency: "MYR",
           priceValidUntil: "2030-12-31",
           availability: "https://schema.org/InStock",
-          url: `https://sewamotor.my/${locale}/sewa-motor/${locationSlug}`,
+          url: `${siteConfig.siteUrl}/${locale}/sewa-motor/${locationSlug}`,
         },
       ],
     },

@@ -69,7 +69,7 @@
   },
   "home": {
     "meta": {
-      "title": "Sewa Motor Malaysia | Sewa Motosikal No.1 dari RM30/hari | sewamotor.my",
+      "title": "Sewa Motor Malaysia | Sewa Motosikal No.1 dari RM30/hari",
       "description": "Sewa motosikal di seluruh Malaysia dari RM30/hari. Honda Vario, Yamaha NMax, PCX dan lebih. Penghantaran hari sama. WhatsApp untuk tempah sekarang. Sewa motor murah seluruh Malaysia."
     },
     "hero": {
@@ -211,7 +211,7 @@
   },
   "location": {
     "meta": {
-      "title": "Sewa Motor {city} | Sewa Motosikal Dari RM30/hari | sewamotor.my",
+      "title": "Sewa Motor {city} | Sewa Motosikal Dari RM30/hari",
       "description": "Sewa motosikal di {city} dari RM30/hari. Honda, Yamaha & Modenas — penghantaran hari sama. WhatsApp untuk tempah sewa motosikal anda di {city} hari ini."
     },
     "breadcrumbs": {
