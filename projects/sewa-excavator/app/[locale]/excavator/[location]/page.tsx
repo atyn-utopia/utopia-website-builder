@@ -353,7 +353,7 @@ export default async function LocationPage({
         <div className="container">
           <div className="section-head">
             <span className="eyebrow">{tWhy('eyebrow')}</span>
-            <h3 style={{ color: '#fff' }}>{tWhy('h3')}</h3>
+            <h3>{tWhy('h3')}</h3>
           </div>
           <div className="why-grid">
             {whyItems.map((w, i) => (
