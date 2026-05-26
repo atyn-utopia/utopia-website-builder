@@ -8,5 +8,4 @@ export const siteConfig = {
   siteUrl: `https://${domain}`,
   productSlug: 'sewa-motor',
   fallbackPhone: '60174287801',
-  defaultWhatsApp: 'https://wa.me/60174287801',
 }

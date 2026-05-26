@@ -161,6 +161,8 @@ export default async function BlogPostPage({
           <p style={{ fontSize: 15, opacity: 0.85, margin: '12px 0 22px', lineHeight: 1.6 }}>{c.ctaBody}</p>
           <Link
             href={`/${locale}/redirect-whatsapp-1`}
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
               display: 'inline-block',
               background: '#25D366',
