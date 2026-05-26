@@ -105,10 +105,9 @@ export default async function HomePage({
         </div>
       </div>
 
-      <MarketingMarquee variant="light" />
-
       <HomePageClient />
 
+      <MarketingMarquee variant="dark" />
       <SiteFooter />
       <PageStyles />
     </>

@@ -33,7 +33,7 @@ export default function SiteFooter() {
         <p>{t('copyright', { year })}</p>
       </div>
       <style jsx>{`
-        .site-footer { background: #0F172A; color: #E2E8F0; margin-top: 64px; }
+        .site-footer { background: #0F172A; color: #E2E8F0; }
         .site-footer-inner { max-width: 1200px; margin: 0 auto; padding: 48px 20px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; }
         .footer-col { display: flex; flex-direction: column; gap: 10px; }
         .footer-brand { font-weight: 800; font-size: 18px; color: #fff; margin: 0; }
