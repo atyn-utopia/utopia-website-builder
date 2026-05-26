@@ -198,85 +198,8 @@ export default function HomePageClient() {
   ]
 
   return (
-    <div className="min-h-screen" style={{ background: 'var(--brand-surface)' }}>
-      {/* ── FOMO BANNER ── */}
-      <FomoBanner />
-
-      {/* ── NAV ── */}
-      <header className="sticky top-0 z-50" style={{ background: 'var(--brand-dark)', boxShadow: '0 2px 12px rgba(22,33,62,0.2)' }}>
-        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-          <a href={`/${locale}`} className="flex items-center gap-2.5" aria-label="Sewa Motor Malaysia homepage">
-            <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'var(--brand-primary)' }}>
-              <MotorcycleIcon />
-            </div>
-            <div className="hidden sm:block">
-              <div className="text-sm font-bold text-white leading-tight">Sewa Motor</div>
-              <div className="text-[11px] font-normal" style={{ color: 'rgba(255,255,255,0.45)' }}>Malaysia</div>
-            </div>
-          </a>
-          <nav className="hidden md:flex items-center gap-6 text-sm font-medium" aria-label="Main navigation">
-            {[{ label: nav('products'), href: '#products' }, { label: nav('locations'), href: '#locations' }].map(link => (
-              <a key={link.href} href={link.href} className="nav-link focus:outline-none">{link.label}</a>
-            ))}
-          </nav>
-          <div className="flex items-center gap-3">
-            <LanguageSwitcher />
-            <a href={WA_LINK} className="wa-btn inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-white" style={{ background: 'var(--wa-green)' }}>
-              <WAIcon /><span className="hidden sm:inline">{nav('whatsapp')}</span>
-            </a>
-          </div>
-        </div>
-      </header>
-
+    <div style={{ background: 'var(--brand-surface)' }}>
       <main>
-        {/* ── HERO ── */}
-        <section className="relative overflow-hidden" aria-label="Hero">
-          <div className="absolute inset-0" style={{ backgroundImage: 'url(https://static.wixstatic.com/media/d3104b_f1742c506a064da3af63f6b834024ad4~mv2.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }} aria-hidden="true" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(22,33,62,0.92) 0%, rgba(26,39,68,0.88) 40%, rgba(30,45,74,0.85) 100%)' }} />
-          <div className="relative max-w-6xl mx-auto px-6 pt-12 pb-0 md:pt-16 md:pb-0">
-            <div className="grid md:grid-cols-2 gap-8 items-end">
-              {/* Text */}
-              <div className="pb-8 md:pb-16">
-                <div className="flex flex-wrap gap-2 mb-5">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wide text-white" style={{ background: 'rgba(255,107,53,0.2)', border: '1px solid rgba(255,107,53,0.3)' }}>Same-Day Delivery</span>
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wide text-white" style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)' }}>128 Cities</span>
-                </div>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-4" style={{ letterSpacing: '-0.03em', lineHeight: '1.1' }}>
-                  Motor Rental Malaysia —{' '}
-                  <span className="gradient-text">Sewa Motor from RM30/day</span>
-                </h2>
-                <p className="text-sm md:text-base font-normal mb-6" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.75' }}>{t('hero.subheadline')}</p>
-                <a href={WA_LINK} className="wa-btn inline-flex items-center gap-2.5 px-6 py-3 rounded-xl text-base font-bold text-white" style={{ background: 'var(--wa-green)' }}>
-                  <WAIcon />{t('hero.cta')}
-                </a>
-                <p className="text-[11px] mt-3 font-normal" style={{ color: 'rgba(255,255,255,0.4)' }}>{s('freeToAsk')}</p>
-              </div>
-              {/* Hero image */}
-              <div className="relative flex justify-center md:justify-end">
-                <img src="https://static.wixstatic.com/media/d3104b_9219aed8e59e4a0d9ee86be2066ff532~mv2.png" alt="Motorcycle rental Malaysia" className="w-64 sm:w-72 md:w-[360px] lg:w-[420px]" style={{ display: 'block', filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.3))', marginBottom: '-40px' }} />
-                {/* Parallelogram price stamp */}
-                <div className="absolute top-4 right-0 md:right-4 px-4 py-2 z-10" style={{ background: 'var(--brand-primary)', transform: 'skewX(-6deg)', boxShadow: '0 4px 16px rgba(255,107,53,0.35)' }}>
-                  <div style={{ transform: 'skewX(6deg)' }} className="text-center">
-                    <span className="text-[11px] font-semibold uppercase text-white block leading-none">From</span>
-                    <span className="text-xl font-extrabold text-white leading-none">RM30</span>
-                    <span className="text-[11px] font-medium uppercase text-white block leading-none">/day</span>
-                  </div>
-                </div>
-                {/* Same-day pill */}
-                <div className="absolute bottom-16 left-0 sm:left-4 px-3 py-2 rounded-xl flex items-center gap-2 z-10" style={{ background: '#fff', boxShadow: '0 4px 16px rgba(22,33,62,0.15)' }}>
-                  <div className="w-7 h-7 rounded-full flex items-center justify-center shrink-0" style={{ background: 'var(--brand-primary)' }}>
-                    <svg viewBox="0 0 20 20" className="w-3.5 h-3.5" fill="none" aria-hidden="true"><path d="M6 10l3 3 5-5" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                  </div>
-                  <div className="text-left">
-                    <div className="text-[11px] font-bold" style={{ color: 'var(--brand-dark)' }}>Same-Day Delivery</div>
-                    <div className="text-[11px] font-normal" style={{ color: 'var(--brand-text-muted)' }}>7 Days a Week</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* ── STATS ── */}
         <section style={{ background: 'var(--brand-dark)' }}>
           <div className="max-w-6xl mx-auto px-6 py-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
@@ -542,44 +465,6 @@ export default function HomePageClient() {
           </div>
         </section>
       </main>
-
-      {/* ── FOOTER ── */}
-      <footer className="py-10 px-6" style={{ background: '#0F1A2E' }}>
-        <div className="max-w-6xl mx-auto grid md:grid-cols-4 gap-8">
-          <div>
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'var(--brand-primary)' }}>
-                <MotorcycleIcon />
-              </div>
-              <span className="text-sm font-bold text-white">Sewa Motor</span>
-            </div>
-            <p className="text-xs font-normal" style={{ color: 'rgba(255,255,255,0.5)', lineHeight: '1.7' }}>{footer('tagline')}</p>
-          </div>
-          <div>
-            <h4 className="text-[11px] font-bold uppercase tracking-widest mb-3" style={{ color: 'rgba(255,255,255,0.4)' }}>{footer('quickLinks')}</h4>
-            <div className="space-y-2">
-              <a href={`/${locale}`} className="block text-xs text-white hover:opacity-80">{footer('home')}</a>
-              <a href="#products" className="block text-xs text-white hover:opacity-80">{footer('products')}</a>
-              <a href="#locations" className="block text-xs text-white hover:opacity-80">{footer('locations')}</a>
-            </div>
-          </div>
-          <div>
-            <h4 className="text-[11px] font-bold uppercase tracking-widest mb-3" style={{ color: 'rgba(255,255,255,0.4)' }}>{footer('topLocations')}</h4>
-            <div className="space-y-2">
-              {footerLocations.map(loc => (
-                <a key={loc.slug} href={`/${locale}/sewa-motor/${loc.slug}`} className="block text-xs text-white hover:opacity-80">{loc.displayName}</a>
-              ))}
-            </div>
-          </div>
-          <div>
-            <h4 className="text-[11px] font-bold uppercase tracking-widest mb-3" style={{ color: 'rgba(255,255,255,0.4)' }}>Contact</h4>
-            <a href={WA_LINK} className="inline-flex items-center gap-2 text-xs font-semibold hover:opacity-80" style={{ color: 'var(--wa-green)' }}><WAIcon />WhatsApp Us</a>
-          </div>
-        </div>
-        <div className="max-w-6xl mx-auto mt-8 pt-6 text-center" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-          <p className="text-[11px] font-normal" style={{ color: 'rgba(255,255,255,0.3)' }}>{footer('copyright', { year: new Date().getFullYear().toString() })}</p>
-        </div>
-      </footer>
     </div>
   )
 }

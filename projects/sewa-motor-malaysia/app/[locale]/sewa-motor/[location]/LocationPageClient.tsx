@@ -213,36 +213,7 @@ export default function LocationPageClient({
   ]
 
   return (
-    <div className="min-h-screen" style={{ background: 'var(--brand-surface)' }}>
-      {/* ── FOMO BANNER ── */}
-      <FomoBanner />
-
-      {/* ── NAV ── */}
-      <header className="sticky top-0 z-50" style={{ background: 'var(--brand-dark)', boxShadow: '0 2px 12px rgba(22,33,62,0.2)' }}>
-        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-          <Link href={`/${locale}`} className="flex items-center gap-2.5" aria-label="Sewa Motor Malaysia homepage">
-            <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'var(--brand-primary)' }}>
-              <MotorcycleIcon />
-            </div>
-            <div className="hidden sm:block">
-              <div className="text-sm font-bold text-white leading-tight">Sewa Motor</div>
-              <div className="text-[11px] font-normal" style={{ color: 'rgba(255,255,255,0.45)' }}>Malaysia</div>
-            </div>
-          </Link>
-          <nav className="hidden md:flex items-center gap-6 text-sm font-medium" aria-label="Main navigation">
-            {[{ label: nav('products'), href: '#products' }, { label: nav('locations'), href: '#locations' }].map(link => (
-              <a key={link.href} href={link.href} className="nav-link focus:outline-none">{link.label}</a>
-            ))}
-          </nav>
-          <div className="flex items-center gap-3">
-            <LanguageSwitcher />
-            <a href={WA_LINK} className="wa-btn inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-white" style={{ background: 'var(--wa-green)' }}>
-              <WAIcon /><span className="hidden sm:inline">{nav('whatsapp')}</span>
-            </a>
-          </div>
-        </div>
-      </header>
-
+    <div style={{ background: 'var(--brand-surface)' }}>
       {/* ── BREADCRUMBS ── */}
       <nav className="max-w-6xl mx-auto px-6 py-3" aria-label="Breadcrumb">
         <ol className="flex items-center gap-2 text-xs font-medium" style={{ color: 'var(--brand-text-muted)' }}>
@@ -624,44 +595,6 @@ export default function LocationPageClient({
           </div>
         </section>
       </main>
-
-      {/* ── FOOTER ── */}
-      <footer className="py-10 px-6" style={{ background: '#0F1A2E' }}>
-        <div className="max-w-6xl mx-auto grid md:grid-cols-4 gap-8">
-          <div>
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'var(--brand-primary)' }}>
-                <MotorcycleIcon />
-              </div>
-              <span className="text-sm font-bold text-white">Sewa Motor</span>
-            </div>
-            <p className="text-xs font-normal" style={{ color: 'rgba(255,255,255,0.5)', lineHeight: '1.7' }}>{footer('tagline')}</p>
-          </div>
-          <div>
-            <h4 className="text-[11px] font-bold uppercase tracking-widest mb-3" style={{ color: 'rgba(255,255,255,0.4)' }}>{footer('quickLinks')}</h4>
-            <div className="space-y-2">
-              <Link href={`/${locale}`} className="block text-xs text-white hover:opacity-80">{footer('home')}</Link>
-              <a href="#products" className="block text-xs text-white hover:opacity-80">{footer('products')}</a>
-              <a href="#locations" className="block text-xs text-white hover:opacity-80">{footer('locations')}</a>
-            </div>
-          </div>
-          <div>
-            <h4 className="text-[11px] font-bold uppercase tracking-widest mb-3" style={{ color: 'rgba(255,255,255,0.4)' }}>{footer('topLocations')}</h4>
-            <div className="space-y-2">
-              {footerLocations.map(loc => (
-                <Link key={loc.slug} href={`/${locale}/sewa-motor/${loc.slug}`} className="block text-xs text-white hover:opacity-80">{loc.displayName}</Link>
-              ))}
-            </div>
-          </div>
-          <div>
-            <h4 className="text-[11px] font-bold uppercase tracking-widest mb-3" style={{ color: 'rgba(255,255,255,0.4)' }}>Contact</h4>
-            <a href={WA_LINK} className="inline-flex items-center gap-2 text-xs font-semibold hover:opacity-80" style={{ color: 'var(--wa-green)' }}><WAIcon />WhatsApp Us</a>
-          </div>
-        </div>
-        <div className="max-w-6xl mx-auto mt-8 pt-6 text-center" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-          <p className="text-[11px] font-normal" style={{ color: 'rgba(255,255,255,0.3)' }}>{footer('copyright', { year: new Date().getFullYear().toString() })}</p>
-        </div>
-      </footer>
     </div>
   )
 }
