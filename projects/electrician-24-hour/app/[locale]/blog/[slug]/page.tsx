@@ -70,9 +70,35 @@ export default async function BlogPostPage({
     { name: post.title, url: `/${locale}/blog/${slug}` },
   ];
 
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.meta_description || post.excerpt,
+    image: post.cover_image_url ? [post.cover_image_url] : undefined,
+    datePublished: post.published_at,
+    dateModified: post.published_at,
+    inLanguage: locale,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${siteConfig.siteUrl}/${locale}/blog/${slug}`,
+    },
+    author: { '@type': 'Organization', name: siteConfig.brandName },
+    publisher: {
+      '@type': 'Organization',
+      name: siteConfig.brandName,
+      url: siteConfig.siteUrl,
+    },
+  };
+
   return (
     <>
       <BreadcrumbSchema items={breadcrumbItems} />
+      <script
+        type="application/ld+json"
+        // Server-rendered structured data — never executed as JS.
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <FomoBanner text={fomoTexts[0]} />
       <SiteHeader />
 
