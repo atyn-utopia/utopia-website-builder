@@ -85,6 +85,29 @@ export default function PageStyles() {
         .home-hero-media { justify-content: flex-end; }
       }
 
+      /* Stats strip (sits between hero and USP) ───────────────────────── */
+      .home-stats {
+        background: #16213E;
+        padding: 56px 24px 72px;
+        color: #fff;
+      }
+      .home-stats-grid {
+        max-width: 1100px; margin: 0 auto;
+        display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px;
+        text-align: center;
+      }
+      .home-stat-value {
+        font-size: clamp(24px, 3.4vw, 34px); font-weight: 800;
+        letter-spacing: -0.03em; color: #FF6B35; margin-bottom: 6px;
+      }
+      .home-stat-label {
+        font-size: 12px; font-weight: 400; line-height: 1.5;
+        color: rgba(255,255,255,0.6);
+      }
+      @media (min-width: 720px) {
+        .home-stats-grid { grid-template-columns: repeat(4, 1fr); gap: 36px; }
+      }
+
       /* USP panel ────────────────────────────────────────────────────── */
       .usp-panel {
         max-width: 1100px;

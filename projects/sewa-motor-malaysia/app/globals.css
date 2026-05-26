@@ -222,7 +222,39 @@ h1, h2, h3, h4, h5, h6 {
 /* ── USP panel (single container with 3 cells) ─────────────────────────── */
 .usp-panel-fallback { /* keep .usp-panel from PageStyles authoritative */ }
 
-/* ── Nav CTA mobile-hide fallback (header also enforces this) ──────────── */
+/* ── Header WhatsApp CTAs — kept in globals because styled-jsx in
+ *    SiteHeader doesn't scope rules through next/link's <Link>. */
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #25D366;
+  color: #fff !important;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 13px;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.nav-cta:hover { background: #1EBE57; }
+.nav-cta-mobile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  background: #25D366;
+  color: #fff !important;
+  box-shadow: 0 2px 8px rgba(37,211,102,0.4);
+  text-decoration: none;
+}
+.nav-cta-mobile:hover { background: #1EBE57; }
+
+@media (min-width: 880px) {
+  .nav-cta-mobile { display: none !important; }
+}
 @media (max-width: 879px) {
   .nav-cta { display: none !important; }
 }

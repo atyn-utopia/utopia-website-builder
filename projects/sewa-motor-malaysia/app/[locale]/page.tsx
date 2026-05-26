@@ -49,6 +49,7 @@ export default async function HomePage({
   const { locale } = await params
   const hero = await getTranslations({ locale, namespace: 'home.hero' })
   const shared = await getTranslations({ locale, namespace: 'shared' })
+  const stats = [1, 2, 3, 4] as const
 
   return (
     <>
@@ -87,6 +88,17 @@ export default async function HomePage({
               <span className="home-hero-stamp-per">/day</span>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="home-stats" aria-label="Service highlights">
+        <div className="home-stats-grid">
+          {stats.map((n) => (
+            <div className="home-stat" key={n}>
+              <div className="home-stat-value">{shared(`stats.value${n}` as 'stats.value1')}</div>
+              <div className="home-stat-label">{shared(`stats.label${n}` as 'stats.label1')}</div>
+            </div>
+          ))}
         </div>
       </section>
 

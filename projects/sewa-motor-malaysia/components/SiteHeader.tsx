@@ -116,20 +116,10 @@ export default function SiteHeader() {
         .site-nav a:hover { color: var(--brand-primary, #FF6B35); }
         .site-nav--desktop { display: none; }
         .site-actions { display: inline-flex; align-items: center; gap: 10px; }
-        .nav-cta {
-          display: inline-flex; align-items: center; gap: 7px;
-          background: var(--wa-green, #25D366); color: #fff;
-          padding: 8px 14px; border-radius: 999px; font-weight: 700; font-size: 13px;
-          white-space: nowrap;
-        }
-        .nav-cta:hover { background: #1EBE57; }
-        .nav-cta-mobile {
-          display: inline-flex; align-items: center; justify-content: center;
-          width: 38px; height: 38px; border-radius: 999px;
-          background: var(--wa-green, #25D366); color: #fff;
-          box-shadow: 0 2px 8px rgba(37,211,102,0.4);
-        }
-        .nav-cta-mobile:hover { background: #1EBE57; }
+        /* .nav-cta / .nav-cta-mobile styled in globals.css — styled-jsx
+           doesn't scope rules through next/link's <Link>, so the green
+           background and the desktop hide of .nav-cta-mobile silently
+           dropped when applied here. */
         .site-burger { display: inline-flex; flex-direction: column; justify-content: center; gap: 4px; width: 38px; height: 38px; padding: 0 8px; background: transparent; border: 1px solid #CBD5E1; border-radius: 10px; cursor: pointer; }
         .site-burger span { display: block; height: 2px; width: 100%; background: #16213E; border-radius: 2px; }
         .site-mobile-drawer { display: none; background: #fff; border-top: 1px solid #E2E8F0; padding: 14px 20px 18px; }
@@ -140,7 +130,6 @@ export default function SiteHeader() {
           .site-nav--desktop { display: inline-flex; }
           .site-burger { display: none; }
           .site-mobile-drawer { display: none !important; }
-          .nav-cta-mobile { display: none; }
         }
         @media (max-width: 879px) {
           :global(.nav-cta) { display: none !important; }
