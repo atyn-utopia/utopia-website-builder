@@ -548,7 +548,15 @@ export default async function LocationPage({
         .city-chip { padding: 8px 16px; background: #fff; border: 1px solid var(--line); border-radius: 999px; font-weight: 600; font-size: 13.5px; color: var(--brand-charcoal); }
         .city-chip:hover { background: var(--brand-orange-pale); border-color: var(--brand-orange-ring); color: var(--brand-orange-deep); }
         .city-chip.is-current { background: var(--brand-charcoal); border-color: var(--brand-charcoal); color: #fff; }
-        .nearby-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+        .nearby-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+          max-width: 960px;
+          margin: 0 auto;
+        }
+        @media (min-width: 640px) { .nearby-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 980px) { .nearby-grid { grid-template-columns: repeat(4, 1fr); } }
         .nearby-card { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-md); padding: 16px 18px; transition: border-color var(--dur) var(--ease-out), transform var(--dur) var(--ease-out); }
         .nearby-card:hover { border-color: var(--brand-orange-ring); transform: translateY(-2px); }
         .nearby-name { color: var(--brand-charcoal); font-weight: 700; font-size: 15px; flex: 1; }
