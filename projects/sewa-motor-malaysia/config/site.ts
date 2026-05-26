@@ -1,14 +1,16 @@
-// `sewamotor.my` is a separate Wix site that we do not own — siteConfig.domain
-// must reflect the alias actually serving this Next deploy so webcore lookups,
-// monitor_snapshots.domain, and schema URLs all point at the right place.
-const domain = process.env.NEXT_PUBLIC_SITE_DOMAIN ?? 'sewa-motor-malaysia.utopiaai.my'
-
+// `domain` is the canonical live host — Supabase rows for products, blog posts,
+// phone numbers, and company_websites are keyed by this exact string. Keep this
+// in sync with `deploy-url.txt` and the `data-website` attribute in
+// app/[locale]/layout.tsx — the checklist enforces this match.
+//
+// Note: `sewamotor.my` is a separate Wix site we do not own; do not point this
+// at that host.
 export const siteConfig = {
   name: 'Sewa Motor Malaysia',
   brandName: 'Sewa Motor Malaysia',
-  domain,
-  baseUrl: `https://${domain}`,
-  siteUrl: `https://${domain}`,
+  domain: 'sewa-motor-malaysia.utopiaai.my',
+  baseUrl: 'https://sewa-motor-malaysia.utopiaai.my',
+  siteUrl: 'https://sewa-motor-malaysia.utopiaai.my',
   productSlug: 'sewa-motor',
   fallbackPhone: '60174287801',
 }
