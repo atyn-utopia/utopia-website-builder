@@ -20,7 +20,7 @@ export default function FomoBanner() {
   const t = useTranslations('fomo');
   const locale = useLocale();
   const [target, setTarget] = useState<Date | null>(null);
-  const [parts, setParts] = useState({ days: 5, hours: 12, minutes: 0, seconds: 0 });
+  const [parts, setParts] = useState<{ days: number; hours: number; minutes: number; seconds: number } | null>(null);
 
   useEffect(() => {
     // Promo ends 7 days from first visit, persisted in localStorage so it doesn't reset.
@@ -43,14 +43,20 @@ export default function FomoBanner() {
       <div className="container fomo-inner">
         <span className="fomo-tag">{t('eyebrow')}</span>
         <span className="fomo-body">{t('body')}</span>
-        <span aria-live="polite" className="fomo-clock">
-          <span>{pad(parts.days)}</span>
-          <span className="fomo-sep">:</span>
-          <span>{pad(parts.hours)}</span>
-          <span className="fomo-sep">:</span>
-          <span>{pad(parts.minutes)}</span>
-          <span className="fomo-sep">:</span>
-          <span>{pad(parts.seconds)}</span>
+        <span aria-live="polite" className={`fomo-clock ${parts ? 'is-ready' : ''}`}>
+          {parts ? (
+            <>
+              <span>{pad(parts.days)}</span>
+              <span className="fomo-sep">:</span>
+              <span>{pad(parts.hours)}</span>
+              <span className="fomo-sep">:</span>
+              <span>{pad(parts.minutes)}</span>
+              <span className="fomo-sep">:</span>
+              <span>{pad(parts.seconds)}</span>
+            </>
+          ) : (
+            <span style={{ visibility: 'hidden' }}>00 : 00 : 00 : 00</span>
+          )}
         </span>
         <Link href={waRedirect(locale)} className="fomo-link">{t('ctaLabel')} →</Link>
         {target && <noscript style={{ display: 'none' }}>{target.toISOString()}</noscript>}

@@ -6,7 +6,7 @@ export default function PageStyles() {
   return (
     <style>{`
         /* Headings used as inline body / label text — reset to avoid huge defaults */
-        .usp-cell h5, .process-card h5, .why-card h5, .faq-item h5, .product-desc, .review-body, .review-author, .review-suburb, .hero-support, .reviews-aggregate, .process-num, h4.process-num { font-weight: inherit; }
+        .usp-cell h5, .process-card h5, .why-card h5, .faq-item h4, .product-desc, .review-body, .review-author, .review-suburb, .hero-support, .reviews-aggregate, .process-num, h4.process-num, h5.process-num, h6.process-num { font-weight: inherit; }
         /* HERO */
         .hero {
           position: relative;
@@ -48,6 +48,7 @@ export default function PageStyles() {
           display: block;
           width: clamp(120px, 13vw, 192px);
           height: auto;
+          aspect-ratio: 600 / 441;
           margin: 4px auto 12px;
           object-fit: contain;
         }
@@ -440,7 +441,7 @@ export default function PageStyles() {
         .faq-item summary::-webkit-details-marker { display: none; }
         .faq-item summary::after { content: '+'; font-weight: 700; color: var(--brand-orange); font-size: 22px; }
         .faq-item[open] summary::after { content: '−'; }
-        .faq-item p, .faq-item h5 { padding: 0 22px 20px; font-size: 14.5px; line-height: 1.7; color: var(--ink-muted); margin: 0; }
+        .faq-item p, .faq-item h4 { padding: 0 22px 20px; font-size: 14.5px; line-height: 1.7; color: var(--ink-muted); margin: 0; font-weight: inherit; }
 
         /* LOCATIONS */
         .top-cities {

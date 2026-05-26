@@ -40,7 +40,8 @@
     "imageAlt": "Orange Volvo EC200 excavator ready on a Malaysian construction site — Abang Excavator",
     "statModels": "Volvo Models",
     "statStates": "States",
-    "statDelivery": "Hour Delivery"
+    "statDelivery": "Hour Delivery",
+    "bgAlt": "Volvo EC400 excavator on a construction site with a dump truck"
   },
   "marquee": {
     "items": [
@@ -151,7 +152,8 @@
         "title": "Start work",
         "body": "Excavator arrives with operator ready. Extend via WhatsApp."
       }
-    ]
+    ],
+    "bgAlt": "Construction site with excavator working"
   },
   "whyUs": {
     "eyebrow": "WHY ABANG EXCAVATOR",
@@ -173,7 +175,8 @@
         "title": "Flexible billing",
         "body": "Daily, weekly, monthly rates with low deposit and transparent pricing."
       }
-    ]
+    ],
+    "bgAlt": "Volvo excavator on a Malaysian project site"
   },
   "reviews": {
     "eyebrow": "CUSTOMER VOICE",
@@ -217,12 +220,27 @@
         "stars": 5,
         "body": "First time renting in from Peninsular for a Sarawak job. Abang Excavator handled the logistics end-to-end; the EC200 reached Kuching with zero issues."
       }
-    ]
+    ],
+    "bgAlt": "Excavator operator at work on a Malaysian site"
   },
   "gallery": {
     "eyebrow": "SITE GALLERY",
     "h3": "Our Volvo Excavators on Malaysian Sites",
-    "intro": "Real work by our units across Malaysia, KL to Sabah."
+    "intro": "Real work by our units across Malaysia, KL to Sabah.",
+    "alts": [
+      "Volvo EC200 excavating a site in Kuala Lumpur",
+      "Volvo EC400 on a site clearing project in Iskandar",
+      "Excavator with CIDB operator ready on site",
+      "Volvo EC200 working drainage on a residential project",
+      "EC400 excavator on a road construction site",
+      "Volvo EC200 with a full bucket at a quarry",
+      "Volvo excavator on a commercial landscaping site",
+      "EC400 digging foundations for a Selangor office build",
+      "Volvo EC200 on a terrace housing construction site",
+      "EC400 excavator stable on a steep slope",
+      "Volvo EC200 with operator on a Penang site",
+      "Volvo EC400 excavator for stone quarry work"
+    ]
   },
   "faq": {
     "eyebrow": "FAQ",
@@ -289,7 +307,8 @@
     "eyebrow": "LOCK IT IN TODAY",
     "h3": "Your Excavator Can Arrive Tomorrow Morning",
     "body": "Send your site, model, and rental period — we reply in minutes.",
-    "ctaLabel": "WhatsApp Abang Excavator Now"
+    "ctaLabel": "WhatsApp Abang Excavator Now",
+    "bgAlt": "Volvo excavator ready for night site delivery"
   },
   "footer": {
     "tagline": "Abang Excavator — No.1 Excavator Rental in Malaysia. Volvo EC200 and EC400, daily, weekly, monthly.",

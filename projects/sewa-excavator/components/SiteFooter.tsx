@@ -22,7 +22,7 @@ export default async function SiteFooter({ locale }: { locale: string }) {
           <div className="footer-brand">
             <div className="footer-mark">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/brand/abang-excavator-dark.png" alt="Abang Excavator" className="footer-logo" />
+              <img src="/brand/abang-excavator-dark.png" alt={navT('logoAlt')} className="footer-logo" />
             </div>
             <p className="footer-tag">{t('tagline')}</p>
           </div>
@@ -138,7 +138,8 @@ export default async function SiteFooter({ locale }: { locale: string }) {
           .footer-mark { justify-content: center; }
           .footer-tag { font-size: 14px; }
           .footer-cols ul { padding: 0; }
-          .footer-cols { gap: 24px; grid-template-columns: 1fr 1fr; align-items: start; }
+          .footer-cols { display: block; column-count: 2; column-gap: 24px; }
+          .footer-cols > div { break-inside: avoid; display: inline-block; width: 100%; margin: 0 0 24px; }
           .footer-cols h6 { margin: 0 0 10px; }
           .footer-bottom { margin-top: 32px; padding-top: 18px; }
         }

@@ -40,7 +40,8 @@
     "imageAlt": "Excavator Volvo EC200 oren bersiap sedia di tapak bina Malaysia — Abang Excavator",
     "statModels": "Model Volvo",
     "statStates": "Negeri",
-    "statDelivery": "Jam Hantar"
+    "statDelivery": "Jam Hantar",
+    "bgAlt": "Excavator Volvo EC400 di tapak bina dengan lori dumper"
   },
   "marquee": {
     "items": [
@@ -151,7 +152,8 @@
         "title": "Mula kerja",
         "body": "Excavator sampai dengan operator siap-pakai. Sambung sewa via WhatsApp."
       }
-    ]
+    ],
+    "bgAlt": "Tapak bina dengan excavator beroperasi"
   },
   "whyUs": {
     "eyebrow": "KENAPA ABANG EXCAVATOR",
@@ -173,7 +175,8 @@
         "title": "Bayaran fleksibel",
         "body": "Sewa harian, mingguan, bulanan dengan deposit minimum dan harga telus."
       }
-    ]
+    ],
+    "bgAlt": "Excavator Volvo di tapak projek Malaysia"
   },
   "reviews": {
     "eyebrow": "SUARA PELANGGAN",
@@ -217,12 +220,27 @@
         "stars": 5,
         "body": "Pertama kali sewa dari Semenanjung untuk projek Sarawak. Logistik diuruskan terus dari pihak Abang Excavator — unit EC200 tiba di Kuching tanpa masalah."
       }
-    ]
+    ],
+    "bgAlt": "Operator excavator bekerja di tapak Malaysia"
   },
   "gallery": {
     "eyebrow": "GALERI TAPAK",
     "h3": "Excavator Volvo Kami Beraksi di Tapak Malaysia",
-    "intro": "Hasil kerja unit kami di seluruh Malaysia, dari KL hingga Sabah."
+    "intro": "Hasil kerja unit kami di seluruh Malaysia, dari KL hingga Sabah.",
+    "alts": [
+      "Volvo EC200 menggali tapak bina di Kuala Lumpur",
+      "Excavator Volvo EC400 di projek site clearing Iskandar",
+      "Unit excavator dengan operator CIDB bersedia di tapak",
+      "Volvo EC200 untuk kerja drainage perumahan",
+      "Excavator EC400 di tapak pembinaan jalan raya",
+      "Volvo EC200 dengan bucket penuh di kuari",
+      "Excavator Volvo di tapak landskap komersial",
+      "EC400 menggali pondasi pejabat di Selangor",
+      "Volvo EC200 di tapak pembinaan rumah teres",
+      "Excavator EC400 stabil di lereng curam",
+      "Volvo EC200 dengan operator di tapak Penang",
+      "Excavator Volvo EC400 untuk kerja kuari batu"
+    ]
   },
   "faq": {
     "eyebrow": "SOALAN LAZIM",
@@ -289,7 +307,8 @@
     "eyebrow": "LOCK-IN HARI INI",
     "h3": "Excavator Anda Boleh Tiba Esok Pagi",
     "body": "Hantar lokasi, model, dan tempoh sewa — kami balas dalam minit.",
-    "ctaLabel": "WhatsApp Abang Excavator Sekarang"
+    "ctaLabel": "WhatsApp Abang Excavator Sekarang",
+    "bgAlt": "Excavator Volvo bersedia untuk dihantar di tapak bina malam"
   },
   "footer": {
     "tagline": "Abang Excavator — Sewa Excavator No.1 Malaysia. Volvo EC200 dan EC400, harian, mingguan, bulanan.",

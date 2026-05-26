@@ -100,6 +100,7 @@ export default async function HomePage({
   const tFaq = await getTranslations({ locale, namespace: 'faq' });
   const tLoc = await getTranslations({ locale, namespace: 'locations' });
   const tFinal = await getTranslations({ locale, namespace: 'finalCta' });
+  const tNav = await getTranslations({ locale, namespace: 'nav' });
 
   const { core } = await getProducts();
 
@@ -159,11 +160,11 @@ export default async function HomePage({
 
       {/* HERO */}
       <section className="hero">
-        <div className="hero-bg" aria-hidden="true" />
+        <div className="hero-bg" role="img" aria-label={tHero('bgAlt')} />
         <div className="container hero-grid">
           <div className="hero-text">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/abang-excavator-dark.png" alt="Abang Excavator" className="hero-logo" />
+            <img src="/brand/abang-excavator-dark.png" alt={tNav('logoAlt')} width={600} height={441} className="hero-logo" />
             <span className="eyebrow eyebrow-light">{tHero('eyebrow')}</span>
             <h1>
               {tHero('h1Part1')}{' '}
@@ -171,7 +172,7 @@ export default async function HomePage({
               {tHero('h1Part2')}
             </h1>
             <h2>{tHero('h2')}</h2>
-            <h4 className="hero-support">{tHero('supporting')}</h4>
+            <h5 className="hero-support">{tHero('supporting')}</h5>
             <div className="hero-cta-row">
               <WhatsAppButton href={waRedirect(locale)} label="hero" className="btn btn-wa">
                 <WaIcon /> {tHero('ctaPrimary')}
@@ -214,7 +215,7 @@ export default async function HomePage({
       {/* BRAND STRIP */}
       <section className="brand-strip" aria-labelledby="brand-strip-heading">
         <div className="container">
-          <h3 id="brand-strip-heading" className="brand-strip-eyebrow">{tBrand('eyebrow')}</h3>
+          <h5 id="brand-strip-heading" className="brand-strip-eyebrow">{tBrand('eyebrow')}</h5>
           <div className="brand-strip-track no-scrollbar">
             <div className="marquee-track">
               {[...brandItems, ...brandItems].map((label, i) => (
@@ -259,7 +260,7 @@ export default async function HomePage({
                     </svg>
                   )}
                 </span>
-                <h4>{u.title}</h4>
+                <h5>{u.title}</h5>
                 <h5>{u.body}</h5>
               </div>
             ))}
@@ -330,7 +331,7 @@ export default async function HomePage({
       <MarketingMarquee locale={locale} variant="dark" />
 
       {/* PROCESS */}
-      <section className="section section-bg-image section-bg-process">
+      <section className="section section-bg-image section-bg-process" aria-label={tProcess('bgAlt')}>
         <div className="section-bg-overlay" aria-hidden="true" />
         <div className="container">
           <div className="section-head">
@@ -340,8 +341,8 @@ export default async function HomePage({
           <div className="process-grid">
             {processSteps.map((s, i) => (
               <div key={i} className="process-card">
-                <h4 className="process-num">{String(i + 1).padStart(2, '0')}</h4>
-                <h4>{s.title}</h4>
+                <h6 className="process-num">{String(i + 1).padStart(2, '0')}</h6>
+                <h5>{s.title}</h5>
                 <h5>{s.body}</h5>
               </div>
             ))}
@@ -351,7 +352,7 @@ export default async function HomePage({
 
       {/* WHY US */}
       <section className="section why-section">
-        <div className="why-bg" aria-hidden="true" />
+        <div className="why-bg" role="img" aria-label={tWhy('bgAlt')} />
         <div className="container">
           <div className="section-head">
             <span className="eyebrow">{tWhy('eyebrow')}</span>
@@ -360,7 +361,7 @@ export default async function HomePage({
           <div className="why-grid">
             {whyItems.map((w, i) => (
               <div key={i} className="why-card">
-                <h4>{w.title}</h4>
+                <h5>{w.title}</h5>
                 <h5>{w.body}</h5>
               </div>
             ))}
@@ -369,13 +370,13 @@ export default async function HomePage({
       </section>
 
       {/* REVIEWS */}
-      <section className="section section-bg-image section-bg-reviews">
+      <section className="section section-bg-image section-bg-reviews" aria-label={tReviews('bgAlt')}>
         <div className="section-bg-overlay" aria-hidden="true" />
         <div className="container">
           <div className="section-head">
             <span className="eyebrow eyebrow-light">{tReviews('eyebrow')}</span>
             <h3 style={{ color: '#fff' }}>{tReviews('h3')}</h3>
-            <h4 className="reviews-aggregate reviews-aggregate-light"><GoogleG size={18} /> {tReviews('aggregate')}</h4>
+            <h5 className="reviews-aggregate reviews-aggregate-light"><GoogleG size={18} /> {tReviews('aggregate')}</h5>
           </div>
           <div className="reviews-grid">
             {reviewItems.map((r, i) => (
@@ -400,14 +401,14 @@ export default async function HomePage({
           <div className="section-head">
             <span className="eyebrow">{tGallery('eyebrow')}</span>
             <h3>{tGallery('h3')}</h3>
-            <h4>{tGallery('intro')}</h4>
+            <h5>{tGallery('intro')}</h5>
           </div>
           <div className="gallery-grid">
             {GALLERY_IMAGES.map((src, i) => (
               <div key={i} className="gallery-item">
                 {/* Plain <img> — Next/Image rejects the very large source files; this also lets lazy loading work straight through */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={src} alt={`Construction site gallery image ${i + 1}`} loading="lazy" decoding="async" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
+                <img src={src} alt={((tGallery.raw('alts') as string[])[i]) ?? `Tapak bina ${i + 1}`} loading="lazy" decoding="async" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
               </div>
             ))}
           </div>
@@ -425,7 +426,7 @@ export default async function HomePage({
             {faqItems.map((f, i) => (
               <details key={i} className="faq-item">
                 <summary>{f.q}</summary>
-                <h5>{f.a}</h5>
+                <h4>{f.a}</h4>
               </details>
             ))}
           </div>
@@ -481,12 +482,12 @@ export default async function HomePage({
       <section className="section final-cta">
         <div className="final-cta-bg" aria-hidden="true">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={FINAL_CTA_BG} alt="" loading="lazy" decoding="async" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+          <img src={FINAL_CTA_BG} alt={tFinal('bgAlt')} loading="lazy" decoding="async" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
         <div className="container final-cta-inner">
           <span className="eyebrow eyebrow-light">{tFinal('eyebrow')}</span>
           <h3>{tFinal('h3')}</h3>
-          <h4>{tFinal('body')}</h4>
+          <h5>{tFinal('body')}</h5>
           <WhatsAppButton href={waRedirect(locale)} label="final-cta" className="btn btn-wa">
             <WaIcon /> {tFinal('ctaLabel')}
           </WhatsAppButton>
