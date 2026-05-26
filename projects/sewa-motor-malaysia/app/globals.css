@@ -282,3 +282,114 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 879px) {
   .nav-cta { display: none !important; }
 }
+
+/* ── Blog article typography (`.blog-content` is the wrapper around the
+ *    DB-stored HTML body). Without these rules every heading, list, and
+ *    link in the article body would render at body-text size with no
+ *    bullets or indent. */
+.blog-content h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #16213E;
+  margin: 2em 0 0.5em;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+.blog-content h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #16213E;
+  margin: 1.5em 0 0.5em;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+}
+.blog-content h4 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #16213E;
+  margin: 1.25em 0 0.4em;
+  line-height: 1.35;
+}
+.blog-content p {
+  font-size: 16px;
+  line-height: 1.75;
+  margin: 0 0 1em;
+  color: #1B2432;
+}
+.blog-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin: 1.5em 0;
+}
+.blog-content ul,
+.blog-content ol {
+  margin: 1em 0;
+  padding-left: 1.5em;
+}
+.blog-content ul { list-style: disc; }
+.blog-content ol { list-style: decimal; }
+.blog-content li {
+  margin: 0.5em 0;
+  line-height: 1.7;
+  color: #1B2432;
+}
+.blog-content strong { color: #16213E; font-weight: 700; }
+.blog-content blockquote {
+  border-left: 4px solid #FF6B35;
+  padding: 1em 1.5em;
+  margin: 1.5em 0;
+  background: #FFF4EE;
+  border-radius: 0 8px 8px 0;
+  color: #1B2432;
+  font-style: italic;
+}
+.blog-content a {
+  color: #E85A25;
+  text-decoration: underline;
+}
+.blog-content a:hover { opacity: 0.8; }
+
+/* Table of contents — applies to <div class="toc"> blocks the blog
+ *  writer emits, and to any <nav> inside the article body. */
+.toc,
+.blog-content nav {
+  background: #F8F8F8;
+  border-left: 4px solid #FF6B35;
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 0 0 28px;
+}
+.toc h2, .toc h3, .toc h4,
+.blog-content nav h2,
+.blog-content nav h3,
+.blog-content nav h4 {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #E85A25;
+}
+.toc ul, .toc ol,
+.blog-content nav ul,
+.blog-content nav ol {
+  margin: 0;
+  padding-left: 1.25em;
+  list-style: disc;
+  line-height: 1.9;
+}
+.toc li,
+.blog-content nav li {
+  margin: 0.15em 0;
+}
+.toc a,
+.blog-content nav a {
+  color: #16213E;
+  text-decoration: none;
+}
+.toc a:hover,
+.blog-content nav a:hover {
+  color: #E85A25;
+  text-decoration: underline;
+}
