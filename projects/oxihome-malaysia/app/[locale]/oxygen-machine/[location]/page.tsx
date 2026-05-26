@@ -120,8 +120,8 @@ export default async function LocationPage({
   const tNav = await getTranslations({ locale, namespace: 'nav' });
 
   const { core } = await getProducts();
-  const fallback5L = tProducts.raw('fallback.ec200') as { eyebrow: string; description: string; price: number; monthly: number };
-  const fallback10L = tProducts.raw('fallback.ec400') as { eyebrow: string; description: string; price: number; monthly: number };
+  const fallback5L = tProducts.raw('fallback.5l') as { eyebrow: string; description: string; price: number; monthly: number };
+  const fallback10L = tProducts.raw('fallback.10l') as { eyebrow: string; description: string; price: number; monthly: number };
   const productCards = [
     {
       slug: 'oxihome-5l',
