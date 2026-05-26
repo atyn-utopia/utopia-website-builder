@@ -2,7 +2,12 @@
   "nav": {
     "products": "产品",
     "locations": "服务地区",
-    "whatsapp": "WhatsApp联系"
+    "whatsapp": "WhatsApp联系",
+    "logoAlt": "Oxihome Malaysia — 氧气机租赁与销售",
+    "calculator": "报价器",
+    "blog": "博客",
+    "home": "首页",
+    "whatsappCta": "WhatsApp 报价"
   },
   "home": {
     "meta": {
@@ -186,7 +191,16 @@
     "productsCol": "产品",
     "locationsCol": "主要地区",
     "viewAll": "查看所有地区 →",
-    "copyright": "Oxihome Malaysia. 版权所有。"
+    "copyright": "Oxihome Malaysia. 版权所有。",
+    "productsLinks": [
+      "Oxihome 5L",
+      "Oxihome 10L"
+    ],
+    "productsHeading": "产品",
+    "locationsHeading": "服务地区",
+    "resourcesHeading": "资源",
+    "blogLabel": "博客",
+    "faqLabel": "常见问题"
   },
   "meta": {
     "blogListing": {

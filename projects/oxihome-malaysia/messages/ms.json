@@ -2,7 +2,12 @@
   "nav": {
     "products": "Produk",
     "locations": "Lokasi",
-    "whatsapp": "WhatsApp Kami"
+    "whatsapp": "WhatsApp Kami",
+    "logoAlt": "Oxihome Malaysia — Sewa & Beli Mesin Oksigen",
+    "calculator": "Kalkulator",
+    "blog": "Blog",
+    "home": "Utama",
+    "whatsappCta": "WhatsApp Sebut Harga"
   },
   "home": {
     "meta": {
@@ -186,7 +191,16 @@
     "productsCol": "Produk",
     "locationsCol": "Lokasi Utama",
     "viewAll": "Lihat semua lokasi →",
-    "copyright": "Oxihome Malaysia. Hak cipta terpelihara."
+    "copyright": "Oxihome Malaysia. Hak cipta terpelihara.",
+    "productsLinks": [
+      "Oxihome 5L",
+      "Oxihome 10L"
+    ],
+    "productsHeading": "Produk",
+    "locationsHeading": "Lokasi",
+    "resourcesHeading": "Sumber",
+    "blogLabel": "Blog",
+    "faqLabel": "Soalan Lazim"
   },
   "meta": {
     "blogListing": {

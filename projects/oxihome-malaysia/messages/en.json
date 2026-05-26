@@ -2,7 +2,12 @@
   "nav": {
     "products": "Products",
     "locations": "Locations",
-    "whatsapp": "WhatsApp Us"
+    "whatsapp": "WhatsApp Us",
+    "logoAlt": "Oxihome Malaysia — Oxygen Machine Rental & Sales",
+    "calculator": "Calculator",
+    "blog": "Blog",
+    "home": "Home",
+    "whatsappCta": "WhatsApp Quote"
   },
   "home": {
     "meta": {
@@ -186,7 +191,16 @@
     "productsCol": "Products",
     "locationsCol": "Top Locations",
     "viewAll": "View all locations →",
-    "copyright": "Oxihome Malaysia. All rights reserved."
+    "copyright": "Oxihome Malaysia. All rights reserved.",
+    "productsLinks": [
+      "Oxihome 5L Concentrator",
+      "Oxihome 10L Concentrator"
+    ],
+    "productsHeading": "Products",
+    "locationsHeading": "Locations",
+    "resourcesHeading": "Resources",
+    "blogLabel": "Blog",
+    "faqLabel": "FAQ"
   },
   "meta": {
     "blogListing": {
