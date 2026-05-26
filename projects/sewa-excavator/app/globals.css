@@ -392,6 +392,50 @@ button { font-family: inherit; }
 .blog-content a { color: var(--brand-orange-deep); text-decoration: underline; }
 .blog-content a:hover { opacity: 0.8; }
 
+/* Table of contents — applies to <div class="toc"> blocks the blog writer
+   emits, and to any <nav> inside the article body. */
+.toc,
+.blog-content nav {
+  background: #F8F8F8;
+  border-left: 4px solid var(--brand-orange);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  margin: 0 0 28px;
+}
+.toc h2, .toc h3, .toc h4,
+.blog-content nav h2,
+.blog-content nav h3,
+.blog-content nav h4 {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brand-orange-deep);
+}
+.toc ul, .toc ol,
+.blog-content nav ul,
+.blog-content nav ol {
+  margin: 0;
+  padding-left: 1.25em;
+  list-style: disc;
+  line-height: 1.9;
+}
+.toc li,
+.blog-content nav li {
+  margin: 0.15em 0;
+}
+.toc a,
+.blog-content nav a {
+  color: var(--brand-charcoal);
+  text-decoration: none;
+}
+.toc a:hover,
+.blog-content nav a:hover {
+  color: var(--brand-orange-deep);
+  text-decoration: underline;
+}
+
 /* Scrollbar utilities */
 .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
