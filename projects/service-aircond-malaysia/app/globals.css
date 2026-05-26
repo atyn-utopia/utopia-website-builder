@@ -183,3 +183,132 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 879px) {
   .nav-cta { display: none !important; }
 }
+
+/* ============================================================
+   Blog article body — `.blog-content` wraps the HTML rendered
+   from the CMS via dangerouslySetInnerHTML. Without these rules,
+   `<h2>`/`<h3>`/`<p>`/`<ul>` inside that wrapper inherit nothing
+   useful (Tailwind preflight strips heading sizes and list bullets).
+   ============================================================ */
+.blog-content {
+  font-size: 16.5px;
+  line-height: 1.75;
+  color: #0f172a;
+}
+.blog-content h2 {
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #0f172a;
+  margin: 2em 0 0.6em;
+  letter-spacing: -0.01em;
+  scroll-margin-top: 80px;
+}
+.blog-content h3 {
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #0f172a;
+  margin: 1.6em 0 0.5em;
+  letter-spacing: -0.005em;
+  scroll-margin-top: 80px;
+}
+.blog-content h4 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #0f172a;
+  margin: 1.4em 0 0.4em;
+}
+.blog-content p {
+  font-size: 16.5px;
+  line-height: 1.75;
+  margin: 0 0 1.1em;
+  color: #1f2937;
+}
+.blog-content a {
+  color: #1B3A5C;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.blog-content a:hover { color: #FACC15; }
+.blog-content strong { color: #0f172a; font-weight: 700; }
+
+/* Lists — restore the bullet/number affordance Tailwind's reset removed. */
+.blog-content ul,
+.blog-content ol {
+  margin: 1em 0 1.4em;
+  padding-left: 1.6em;
+}
+.blog-content ul { list-style: disc; }
+.blog-content ol { list-style: decimal; }
+.blog-content li {
+  margin: 0.4em 0;
+  line-height: 1.7;
+}
+.blog-content li::marker { color: #FACC15; }
+
+/* Images + blockquotes inside the article body */
+.blog-content img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  margin: 1.6em 0;
+}
+.blog-content blockquote {
+  border-left: 4px solid #FACC15;
+  background: #FFFBEB;
+  padding: 14px 20px;
+  margin: 1.4em 0;
+  color: #1f2937;
+  font-style: italic;
+  border-radius: 0 12px 12px 0;
+}
+
+/* Table of Contents — the CMS embeds the TOC as either a <nav class="toc">
+   or <div class="toc"> right before the article body. Make sure both variants
+   read as a clickable index, not plain text. */
+.blog-content nav,
+.blog-content .toc,
+.toc {
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  border-radius: 14px;
+  padding: 18px 22px;
+  margin: 1.4em 0 2em;
+}
+.blog-content nav h4,
+.blog-content .toc h4,
+.toc h4 {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin: 0 0 10px;
+}
+.blog-content nav ul,
+.blog-content .toc ul,
+.toc ul {
+  list-style: disc;
+  padding-left: 1.4em;
+  margin: 0;
+}
+.blog-content nav li,
+.blog-content .toc li,
+.toc li {
+  margin: 4px 0;
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+.blog-content nav a,
+.blog-content .toc a,
+.toc a {
+  color: #1B3A5C;
+  text-decoration: none;
+  font-weight: 500;
+}
+.blog-content nav a:hover,
+.blog-content .toc a:hover,
+.toc a:hover { text-decoration: underline; }

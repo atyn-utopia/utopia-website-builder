@@ -115,6 +115,38 @@ export default async function BlogPostPage({
           { name: post.title, url: `/${locale}/blog/${slug}` },
         ]}
       />
+      {/* Article / BlogPosting JSON-LD — required by checklist `blog-post-article-schema`.
+          Inlined here (rather than a dedicated component) so the canonical fields
+          (headline, datePublished, image, author, mainEntityOfPage) match exactly
+          what we already render visibly. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BlogPosting',
+            mainEntityOfPage: {
+              '@type': 'WebPage',
+              '@id': `${siteConfig.siteUrl}/${locale}/blog/${slug}`,
+            },
+            headline: post.title,
+            description: post.meta_description || post.excerpt || '',
+            ...(post.cover_image_url ? { image: [post.cover_image_url] } : {}),
+            datePublished: post.published_at,
+            dateModified: post.published_at,
+            author: { '@type': 'Organization', name: siteConfig.brandName },
+            publisher: {
+              '@type': 'Organization',
+              name: siteConfig.brandName,
+              logo: {
+                '@type': 'ImageObject',
+                url: `${siteConfig.siteUrl}/favicon.svg`,
+              },
+            },
+            inLanguage: locale,
+          }),
+        }}
+      />
 
       <section style={{ background: '#f8fafc', padding: '14px 24px' }}>
         <nav style={{ maxWidth: 880, margin: '0 auto', fontSize: 13, color: '#64748b' }}>
