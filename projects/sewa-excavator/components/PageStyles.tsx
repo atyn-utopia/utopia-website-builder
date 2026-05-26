@@ -5,8 +5,12 @@
 export default function PageStyles() {
   return (
     <style>{`
-        /* Headings used as inline body / label text — reset to avoid huge defaults */
-        .usp-cell h5, .process-card h5, .why-card h5, .faq-item h4, .product-desc, .review-body, .review-author, .review-suburb, .hero-support, .reviews-aggregate, .process-num, h4.process-num, h5.process-num, h6.process-num { font-weight: inherit; }
+        /* Heading-tag normaliser:
+           Body text wrapped in headings (per the keyword-driven heading rule) inherits weight from its
+           parent so it doesn't render as the browser's default bold.
+           Card TITLES (first h5 inside a card container) keep bold via the :first-of-type override below. */
+        .usp-cell h5, .process-card h5, .why-card h5, .faq-item h4, .product-desc, .review-body, .review-suburb, .hero-support { font-weight: inherit; }
+        .usp-cell h5:first-of-type, .process-card h5:first-of-type, .why-card h5:first-of-type { font-weight: 700; }
         /* HERO */
         .hero {
           position: relative;
