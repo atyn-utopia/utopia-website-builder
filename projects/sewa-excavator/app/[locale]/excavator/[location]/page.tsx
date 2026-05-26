@@ -329,11 +329,12 @@ export default async function LocationPage({
 
       <MarketingMarquee locale={locale} variant="dark" />
 
-      <section className="section bg-paper">
+      <section className="section section-bg-image section-bg-process" aria-label={tProcess('bgAlt')}>
+        <div className="section-bg-overlay" aria-hidden="true" />
         <div className="container">
           <div className="section-head">
-            <span className="eyebrow">{tProcess('eyebrow')}</span>
-            <h3>{tProcess('h3')}</h3>
+            <span className="eyebrow eyebrow-light">{tProcess('eyebrow')}</span>
+            <h3 style={{ color: '#fff' }}>{tProcess('h3')}</h3>
           </div>
           <div className="process-grid">
             {processSteps.map((s, i) => (
@@ -365,12 +366,13 @@ export default async function LocationPage({
         </div>
       </section>
 
-      <section className="section bg-paper">
+      <section className="section section-bg-image section-bg-reviews" aria-label={tReviews('bgAlt')}>
+        <div className="section-bg-overlay" aria-hidden="true" />
         <div className="container">
           <div className="section-head">
-            <span className="eyebrow">{tReviews('eyebrow')}</span>
-            <h3>{tReviews('h3')}</h3>
-            <h5 className="reviews-aggregate"><GoogleG size={18} /> {tReviews('aggregate')}</h5>
+            <span className="eyebrow eyebrow-light">{tReviews('eyebrow')}</span>
+            <h3 style={{ color: '#fff' }}>{tReviews('h3')}</h3>
+            <h5 className="reviews-aggregate reviews-aggregate-light"><GoogleG size={18} /> {tReviews('aggregate')}</h5>
           </div>
           <div className="reviews-grid">
             {reviewItems.map((r, i) => (
