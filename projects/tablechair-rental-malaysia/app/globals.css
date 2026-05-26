@@ -164,6 +164,36 @@ html, body {
 .blog-content strong { color: #111111; font-weight: 700; }
 .blog-content blockquote { border-left: 4px solid #FDD835; padding: 0.6em 1.2em; margin: 1.5em 0; background: #FFF9C4; border-radius: 0 12px 12px 0; }
 
+/* Tables embedded in article body (comparison tables, price tables, etc.) */
+.blog-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+  font-size: 15px;
+  background: #FFFFFF;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 0 rgba(17, 17, 17, 0.06), 0 8px 24px -16px rgba(17, 17, 17, 0.18);
+}
+.blog-content thead { background: #FFF9C4; }
+.blog-content th,
+.blog-content td {
+  padding: 12px 16px;
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.6;
+  border-bottom: 1px solid #F1ECC0;
+}
+.blog-content th {
+  font-weight: 700;
+  color: #111111;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+}
+.blog-content td { color: #111111cc; }
+.blog-content tbody tr:last-child td { border-bottom: 0; }
+.blog-content tbody tr:nth-child(even) { background: #FFFEF8; }
+
 /* Table of contents — applies to <nav> inside the article body and to any
    <div class="toc"> emitted by the blog writer. */
 .toc,

@@ -95,10 +95,20 @@ export default async function BlogPostPage({
   const wordCount = tr.content.replace(/<[^>]*>/g, '').split(/\s+/).length
   const readTime = Math.max(1, Math.ceil(wordCount / 200))
 
+  /* ---------- Strip duplicates ----------
+     The blog writer emits content with its own <h1> title and a <nav> TOC.
+     The page provides both, so render-side strip them to avoid two titles
+     and two TOCs on the live post. */
+  const strippedContent = tr.content
+    .replace(/<h1\b[^>]*>[\s\S]*?<\/h1>\s*/i, '')
+    .replace(/<nav\b[^>]*>[\s\S]*?<\/nav>\s*/i, '')
+
   /* ---------- Table of Contents ---------- */
   const tocItems: { id: string; text: string }[] = []
-  const contentWithIds = tr.content.replace(/<h2([^>]*)>(.*?)<\/h2>/gi, (_match, attrs: string, text: string) => {
+  const contentWithIds = strippedContent.replace(/<h2([^>]*)>(.*?)<\/h2>/gi, (_match, attrs: string, text: string) => {
     const plainText = text.replace(/<[^>]*>/g, '')
+    // Skip the writer's "Table of Contents" h2 if it leaked through outside <nav>.
+    if (/table[\s_-]?of[\s_-]?contents/i.test(plainText)) return ''
     const id = attrs.match(/id=["']([^"']+)["']/)?.[1]
       ?? plainText.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
     tocItems.push({ id, text: plainText })
