@@ -1,7 +1,13 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 import { siteConfig } from '@/config/site'
 import { OrganizationSchema } from '@/components/schema/OrganizationSchema'
+import FomoBanner from '@/components/FomoBanner'
+import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
+import MarketingMarquee from '@/components/MarketingMarquee'
+import PageStyles from '@/components/PageStyles'
 import HomePageClient from './HomePageClient'
 
 export async function generateMetadata({
@@ -12,7 +18,6 @@ export async function generateMetadata({
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'home.meta' })
   const url = `${siteConfig.siteUrl}/${locale}`
-
   return {
     title: t('title'),
     description: t('description'),
@@ -36,11 +41,62 @@ export async function generateMetadata({
   }
 }
 
-export default function HomePage() {
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params
+  const hero = await getTranslations({ locale, namespace: 'home.hero' })
+  const shared = await getTranslations({ locale, namespace: 'shared' })
+
   return (
     <>
       <OrganizationSchema />
+      <FomoBanner />
+      <SiteHeader />
+
+      <section className="home-hero">
+        <div
+          className="home-hero-bg"
+          role="img"
+          aria-label={hero('bgAlt')}
+        />
+        <div className="home-hero-inner">
+          <h1>{hero('headline')}</h1>
+          <h2>{hero('subheadline')}</h2>
+          <Link
+            href={`/${locale}/redirect-whatsapp-1`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="home-hero-cta"
+          >
+            {hero('cta')}
+          </Link>
+        </div>
+      </section>
+
+      <div className="usp-panel">
+        <div className="usp-cell">
+          <h3>{shared('whyChoose.title1')}</h3>
+          <p>{shared('whyChoose.desc1')}</p>
+        </div>
+        <div className="usp-cell">
+          <h3>{shared('whyChoose.title2')}</h3>
+          <p>{shared('whyChoose.desc2')}</p>
+        </div>
+        <div className="usp-cell">
+          <h3>{shared('whyChoose.title3')}</h3>
+          <p>{shared('whyChoose.desc3')}</p>
+        </div>
+      </div>
+
+      <MarketingMarquee variant="light" />
+
       <HomePageClient />
+
+      <SiteFooter />
+      <PageStyles />
     </>
   )
 }

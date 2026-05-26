@@ -4,6 +4,9 @@ import Link from 'next/link'
 import { siteConfig } from '@/config/site'
 import { getBlogPosts, getBlogPostBySlug } from '@/lib/webcore'
 import BlogLinkTracker from '@/components/tracking/BlogLinkTracker'
+import FomoBanner from '@/components/FomoBanner'
+import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
 
 const POST_COPY = {
   en: { home: 'Home', blog: 'Blog', back: '← Back to blog', minRead: 'min read', relatedTitle: 'Related articles', ctaTitle: 'Ready to ride?', ctaBody: 'WhatsApp Sewa Motor Malaysia for same-day delivery from RM30/day.', ctaButton: 'Chat on WhatsApp' },
@@ -84,6 +87,9 @@ export default async function BlogPostPage({
   }
 
   return (
+    <>
+      <FomoBanner />
+      <SiteHeader />
     <main style={{ background: '#ffffff', minHeight: '100vh' }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJson) }} />
 
@@ -219,5 +225,7 @@ export default async function BlogPostPage({
         <Link href={`/${locale}/blog`} style={{ fontSize: 14, color: '#64748b', textDecoration: 'none' }}>{c.back}</Link>
       </section>
     </main>
+      <SiteFooter />
+    </>
   )
 }

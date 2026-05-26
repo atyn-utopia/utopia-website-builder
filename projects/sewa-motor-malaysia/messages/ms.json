@@ -1,8 +1,29 @@
 {
   "nav": {
+    "home": "Laman Utama",
     "products": "Motosikal",
+    "calculator": "Kalkulator",
     "locations": "Lokasi",
-    "whatsapp": "WhatsApp Kami"
+    "blog": "Blog",
+    "whatsapp": "WhatsApp Kami",
+    "whatsappCta": "WhatsApp"
+  },
+  "shared": {
+    "logoAlt": "Logo Sewa Motor Malaysia",
+    "imageAlt": "Imej hiasan tema motosikal"
+  },
+  "gallery": {
+    "alts": [
+      "Honda Vario 160 dihantar di Petaling Jaya",
+      "Yamaha NMax 155 di hadapan kondominium KL",
+      "Honda PCX 160 dengan kunci pintar",
+      "Honda Wave 125 untuk penghantar makanan",
+      "Yamaha Y15ZR di laluan kota",
+      "Modenas Kriss MR3 dalam keadaan baharu"
+    ]
+  },
+  "finalCta": {
+    "bgAlt": "Latar belakang gambar penunggang motosikal di senja Malaysia"
   },
   "fomo": {
     "message": "Hanya tinggal {slots} motor untuk penghantaran hari yang sama!",
@@ -54,7 +75,8 @@
     "hero": {
       "headline": "Sewa Motor Malaysia — Dari RM30/hari",
       "subheadline": "Sewa motosikal yang dipercayai dihantar ke depan pintu anda. Honda Vario, Yamaha NMax, PCX dan lebih lagi — pelan harian, mingguan atau bulanan di seluruh Malaysia.",
-      "cta": "WhatsApp Kami Untuk Tempah Sekarang"
+      "cta": "WhatsApp Kami Untuk Tempah Sekarang",
+      "bgAlt": "Penunggang motosikal di jalan raya Malaysia ketika senja"
     },
     "stats": {
       "rentals": "6,000+ Sewaan",
@@ -75,6 +97,8 @@
     "products": {
       "heading": "Sewa Motosikal Malaysia — Pilih Tunggangan Anda",
       "cta": "Sewa Melalui WhatsApp",
+      "priceFromTemplate": "Dari RM {price}",
+      "imageAltTemplate": "Sewa motor {model} di Malaysia — penghantaran hari sama",
       "daily": "Harian",
       "weekly": "Mingguan",
       "monthly": "Bulanan",

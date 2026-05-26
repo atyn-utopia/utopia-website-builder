@@ -3,6 +3,9 @@ import Link from 'next/link'
 import { siteConfig } from '@/config/site'
 import { getBlogPosts } from '@/lib/webcore'
 import BlogLinkTracker from '@/components/tracking/BlogLinkTracker'
+import FomoBanner from '@/components/FomoBanner'
+import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
 
 const BLOG_COPY = {
   en: {
@@ -80,7 +83,10 @@ export default async function BlogListingPage({
   const dateLocale = locale === 'ms' ? 'ms-MY' : locale === 'zh' ? 'zh-CN' : 'en-MY'
 
   return (
-    <main style={{ minHeight: '100vh', background: '#ffffff' }}>
+    <>
+      <FomoBanner />
+      <SiteHeader />
+      <main style={{ minHeight: '100vh', background: '#ffffff' }}>
       <section
         style={{
           background: 'linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%)',
@@ -214,6 +220,8 @@ export default async function BlogListingPage({
           {c.backHome}
         </Link>
       </section>
-    </main>
+      </main>
+      <SiteFooter />
+    </>
   )
 }

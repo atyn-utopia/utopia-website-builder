@@ -241,10 +241,10 @@ export default function HomePageClient() {
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wide text-white" style={{ background: 'rgba(255,107,53,0.2)', border: '1px solid rgba(255,107,53,0.3)' }}>Same-Day Delivery</span>
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wide text-white" style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)' }}>128 Cities</span>
                 </div>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-4" style={{ letterSpacing: '-0.03em', lineHeight: '1.1' }}>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-4" style={{ letterSpacing: '-0.03em', lineHeight: '1.1' }}>
                   Motor Rental Malaysia —{' '}
                   <span className="gradient-text">Sewa Motor from RM30/day</span>
-                </h1>
+                </h2>
                 <p className="text-sm md:text-base font-normal mb-6" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.75' }}>{t('hero.subheadline')}</p>
                 <a href={WA_LINK} className="wa-btn inline-flex items-center gap-2.5 px-6 py-3 rounded-xl text-base font-bold text-white" style={{ background: 'var(--wa-green)' }}>
                   <WAIcon />{t('hero.cta')}
