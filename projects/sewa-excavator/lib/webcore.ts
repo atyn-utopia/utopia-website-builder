@@ -205,17 +205,12 @@ export async function getPhoneNumber(locationSlug?: string): Promise<PhoneResult
   }
 }
 
+// Internal helper — only the /redirect-whatsapp-1 page is allowed to
+// construct a raw wa.me URL. Every other CTA must route through that page
+// so phone routing, leads_mode, and click tracking go through one place.
 export function waLink(phone: string, message?: string): string {
   const query = message ? `?text=${encodeURIComponent(message)}` : '';
   return `https://wa.me/${phone}${query}`;
-}
-
-export async function getWhatsAppLink(
-  locationSlug?: string,
-  messageOverride?: string,
-): Promise<string> {
-  const { phone, whatsappText } = await getPhoneNumber(locationSlug);
-  return waLink(phone, messageOverride || whatsappText);
 }
 
 /* Blog */
