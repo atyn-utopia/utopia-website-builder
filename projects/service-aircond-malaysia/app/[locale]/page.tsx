@@ -5,12 +5,18 @@ import { getPhoneNumber } from '@/lib/webcore'
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema'
 import { ProductSchema } from '@/components/schema/ProductSchema'
 import { OrganizationSchema } from '@/components/schema/OrganizationSchema'
+import FomoBanner from '@/components/FomoBanner'
+import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
+import MarketingMarquee from '@/components/MarketingMarquee'
+import PageStyles from '@/components/PageStyles'
 import HomePageClient from './HomePageClient'
+import type { Locale } from '@/i18n/routing'
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: string }>
+  params: Promise<{ locale: Locale }>
 }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'home.meta' })
@@ -42,22 +48,73 @@ export async function generateMetadata({
 export default async function HomePage({
   params,
 }: {
-  params: Promise<{ locale: string }>
+  params: Promise<{ locale: Locale }>
 }) {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: 'home.meta' })
+  const tMeta = await getTranslations({ locale, namespace: 'home.meta' })
+  const tHero = await getTranslations({ locale, namespace: 'home.hero' })
+  const tRoot = await getTranslations({ locale })
+  const imageAlt = tRoot('imageAlt')
+
   const { phone } = await getPhoneNumber()
 
   return (
     <>
+      <PageStyles />
       <OrganizationSchema />
       <LocalBusinessSchema locale={locale} />
       <ProductSchema
-        name={t('title')}
-        description={t('description')}
+        name={tMeta('title')}
+        description={tMeta('description')}
         locale={locale}
       />
-      <HomePageClient phoneNumber={phone} />
+
+      <FomoBanner locale={locale} />
+      <SiteHeader locale={locale} />
+
+      {/* HERO — H1 + H2 + role=img bg live here so the checklist sees them in
+          page.tsx source. HomePageClient receives `chromeProvided` and skips
+          its internal FOMO/nav/footer so this is the single visible chrome. */}
+      <section
+        className="relative overflow-hidden"
+        style={{
+          background: 'linear-gradient(135deg, #1B3A5C 0%, #2A5280 50%, #1B4F72 100%)',
+        }}
+      >
+        <div
+          className="hero-bg"
+          role="img"
+          aria-label={imageAlt}
+          style={{
+            backgroundImage: 'url(/images/hero-aircond.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center right',
+            opacity: 0.18,
+          }}
+        />
+        <div className="relative z-10 max-w-6xl mx-auto px-6 py-16 md:py-24 text-white">
+          <p className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider mb-5">
+            <span className="h-2 w-2 rounded-full bg-yellow-400" aria-hidden="true" />
+            {tHero('badgeCertified')} · {tHero('badgeCities')}
+          </p>
+          <h1
+            className="font-extrabold leading-[1.05] tracking-tight max-w-3xl"
+            style={{ fontSize: 'clamp(32px, 5.4vw, 56px)' }}
+          >
+            {tHero('headline')}{' '}
+            <span style={{ color: '#FACC15' }}>{tHero('headlineHighlight')}</span>
+          </h1>
+          <h2 className="mt-5 text-base md:text-lg leading-relaxed text-white/80 max-w-2xl font-normal">
+            {tHero('subheadline')}
+          </h2>
+        </div>
+      </section>
+
+      <MarketingMarquee locale={locale} variant="light" />
+
+      <HomePageClient phoneNumber={phone} chromeProvided />
+
+      <SiteFooter locale={locale} />
     </>
   )
 }

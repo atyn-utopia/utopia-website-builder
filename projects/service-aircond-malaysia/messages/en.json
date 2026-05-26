@@ -1,9 +1,39 @@
 {
   "nav": {
+    "home": "Home",
+    "products": "Services",
+    "calculator": "Cost Estimate",
     "services": "Services",
     "reviews": "Reviews",
     "locations": "Locations",
-    "whatsapp": "WhatsApp"
+    "blog": "Blog",
+    "whatsapp": "WhatsApp",
+    "whatsappCta": "WhatsApp Encik Beku",
+    "logoAlt": "Encik Beku — Professional Aircond Service Across Malaysia"
+  },
+  "logoAlt": "Encik Beku — Professional Aircond Service Across Malaysia",
+  "imageAlt": "Certified Encik Beku aircond technician servicing an indoor unit at a Malaysia home",
+  "products": {
+    "imageAltTemplate": "{model} aircond service by Encik Beku — install and repair across Malaysia"
+  },
+  "gallery": {
+    "alts": [
+      "Encik Beku technician cleaning a split aircond unit in a bedroom",
+      "Aircond PCB repair with voltage testing on customer site",
+      "New inverter aircond installation at a Kuala Lumpur apartment",
+      "Chemical aircond wash with steam machine to remove mould",
+      "R32 refrigerant top-up using a certified pressure gauge",
+      "Aircond wiring upgrade with a dedicated MCB for a new unit",
+      "Outdoor aircond bracket installation on a Selangor condo wall",
+      "Technician safely recharging refrigerant gas",
+      "24-hour emergency call-out — Encik Beku arrives within 4 hours",
+      "Ceiling cassette aircond service inside a corporate office",
+      "Ceiling-mounted aircond cleaning at a restaurant",
+      "Delivery and installation of a brand-new aircond at a terrace home"
+    ]
+  },
+  "finalCta": {
+    "bgAlt": "Encik Beku aircond technician on call for emergency service across Malaysia"
   },
   "footer": {
     "description": "Professional aircond servicing, repair, and installation across 38 cities in Malaysia. Certified technicians, fair prices, 7 days a week.",

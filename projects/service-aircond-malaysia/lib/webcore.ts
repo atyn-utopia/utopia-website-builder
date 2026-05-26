@@ -48,7 +48,10 @@ async function webcoreFetch<T>(path: string, tag: WebcoreTag): Promise<T | null>
  * Phone numbers / leads routing
  * ============================================================ */
 
-const FALLBACK_PHONE = process.env.PHONE_FALLBACK ?? '60123456799'
+// Default to siteConfig.fallbackPhone (60174287801) instead of a placeholder
+// — the live site falls back here when Supabase has no matching phone row,
+// and the placeholder was getting served verbatim to real customers.
+const FALLBACK_PHONE = process.env.PHONE_FALLBACK ?? siteConfig.fallbackPhone
 const FALLBACK_WA_TEXT = 'Hi, I need aircond service.'
 
 type LeadsMode = 'single' | 'rotation' | 'location' | 'hybrid'

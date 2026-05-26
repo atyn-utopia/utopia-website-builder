@@ -3,6 +3,10 @@ import Link from 'next/link'
 import { siteConfig } from '@/config/site'
 import { getBlogPosts } from '@/lib/webcore'
 import BlogLinkTracker from '@/components/tracking/BlogLinkTracker'
+import FomoBanner from '@/components/FomoBanner'
+import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
+import type { Locale as AppLocale } from '@/i18n/routing'
 
 const BLOG_COPY = {
   en: {
@@ -80,6 +84,8 @@ export default async function BlogListingPage({
 
   return (
     <main style={{ minHeight: '100vh', background: '#ffffff' }}>
+      <FomoBanner locale={locale as AppLocale} />
+      <SiteHeader locale={locale as AppLocale} />
       <section
         style={{
           background: 'linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%)',
@@ -225,6 +231,8 @@ export default async function BlogListingPage({
           ← {locale === 'ms' ? 'Kembali ke laman utama' : locale === 'zh' ? '返回首页' : 'Back to home'}
         </Link>
       </section>
+
+      <SiteFooter locale={locale as AppLocale} />
     </main>
   )
 }

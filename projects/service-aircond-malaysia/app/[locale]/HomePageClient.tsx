@@ -180,9 +180,13 @@ function FadeSection({ children, className = '', delay = 0, full = false }: { ch
    ══════════════════════════════════════════ */
 type HomePageClientProps = {
   phoneNumber: string
+  /** When true, skip the internal FOMO banner, nav header, and footer —
+   *  page.tsx renders the canonical shared chrome (<FomoBanner />,
+   *  <SiteHeader />, <SiteFooter />) outside this component. */
+  chromeProvided?: boolean
 }
 
-export default function HomePageClient({ phoneNumber }: HomePageClientProps) {
+export default function HomePageClient({ phoneNumber, chromeProvided = false }: HomePageClientProps) {
   const locale = useLocale()
   const t = useTranslations('home')
   const nav = useTranslations('nav')
@@ -204,9 +208,10 @@ export default function HomePageClient({ phoneNumber }: HomePageClientProps) {
 
   return (
     <>
-      <FomoBanner phoneNumber={phoneNumber} />
+      {!chromeProvided && <FomoBanner phoneNumber={phoneNumber} />}
 
-      {/* NAV */}
+      {/* NAV — skipped when chromeProvided so the shared SiteHeader renders instead */}
+      {!chromeProvided && (
       <header className="sticky top-0 z-50" style={{ background: 'rgba(27,58,92,0.96)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between gap-4">
           <a href={`/${locale}`} className="flex items-center gap-2 shrink-0" aria-label="Encik Beku homepage">
@@ -229,6 +234,7 @@ export default function HomePageClient({ phoneNumber }: HomePageClientProps) {
           </div>
         </div>
       </header>
+      )}
 
       <main>
         {/* ── HERO ── */}
@@ -555,7 +561,8 @@ export default function HomePageClient({ phoneNumber }: HomePageClientProps) {
         </section>
       </main>
 
-      {/* FOOTER */}
+      {/* FOOTER — skipped when chromeProvided so the shared SiteFooter renders instead */}
+      {!chromeProvided && (
       <footer className="py-12 px-6" style={{ background: '#0F2238' }}>
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
@@ -594,6 +601,7 @@ export default function HomePageClient({ phoneNumber }: HomePageClientProps) {
           </div>
         </div>
       </footer>
+      )}
     </>
   )
 }

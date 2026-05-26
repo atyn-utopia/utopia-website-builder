@@ -5,6 +5,10 @@ import { siteConfig } from '@/config/site'
 import { getBlogPosts, getBlogPostBySlug } from '@/lib/webcore'
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema'
 import BlogLinkTracker from '@/components/tracking/BlogLinkTracker'
+import FomoBanner from '@/components/FomoBanner'
+import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
+import type { Locale as AppLocale } from '@/i18n/routing'
 
 const POST_COPY = {
   en: {
@@ -102,6 +106,8 @@ export default async function BlogPostPage({
 
   return (
     <main style={{ background: '#ffffff', minHeight: '100vh' }}>
+      <FomoBanner locale={locale as AppLocale} />
+      <SiteHeader locale={locale as AppLocale} />
       <BreadcrumbSchema
         items={[
           { name: c.home, url: `/${locale}` },
@@ -201,6 +207,8 @@ export default async function BlogPostPage({
           </p>
           <Link
             href={`/${locale}/redirect-whatsapp-1`}
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
               display: 'inline-block',
               background: '#25D366',
@@ -297,6 +305,8 @@ export default async function BlogPostPage({
           {c.back}
         </Link>
       </section>
+
+      <SiteFooter locale={locale as AppLocale} />
     </main>
   )
 }

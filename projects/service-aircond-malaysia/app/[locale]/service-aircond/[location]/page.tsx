@@ -3,9 +3,13 @@ import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 import { locations, getNearbyLocations, getCityName } from '@/config/locations'
 import { siteConfig } from '@/config/site'
-import { routing } from '@/i18n/routing'
+import { routing, type Locale } from '@/i18n/routing'
 import { getPhoneNumber } from '@/lib/webcore'
 import LocationPageClient from './LocationPageClient'
+import PageStyles from '@/components/PageStyles'
+import FomoBanner from '@/components/FomoBanner'
+import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
 
 type Params = { locale: string; location: string }
 
@@ -66,15 +70,22 @@ export default async function LocationPage({ params }: { params: Promise<Params>
   const { phone } = await getPhoneNumber(location)
 
   return (
-    <LocationPageClient
-      locale={locale}
-      locationSlug={location}
-      cityName={city}
-      phoneNumber={phone}
-      nearby={nearby.map(n => ({
-        slug: n.slug,
-        name: n.names[locale as 'en' | 'ms' | 'zh'] ?? n.displayName,
-      }))}
-    />
+    <>
+      <PageStyles />
+      <FomoBanner locale={locale as Locale} />
+      <SiteHeader locale={locale as Locale} />
+      <LocationPageClient
+        locale={locale}
+        locationSlug={location}
+        cityName={city}
+        phoneNumber={phone}
+        chromeProvided
+        nearby={nearby.map(n => ({
+          slug: n.slug,
+          name: n.names[locale as 'en' | 'ms' | 'zh'] ?? n.displayName,
+        }))}
+      />
+      <SiteFooter locale={locale as Locale} />
+    </>
   )
 }

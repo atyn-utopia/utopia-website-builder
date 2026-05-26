@@ -73,9 +73,12 @@ type Props = {
   cityName: string
   phoneNumber: string
   nearby: { slug: string; name: string }[]
+  /** When true, skip the internal nav header and footer — the wrapping
+   *  page.tsx renders the canonical shared chrome instead. */
+  chromeProvided?: boolean
 }
 
-export default function LocationPageClient({ locale, locationSlug, cityName, phoneNumber, nearby }: Props) {
+export default function LocationPageClient({ locale, locationSlug, cityName, phoneNumber, nearby, chromeProvided = false }: Props) {
   const t = useTranslations('location')
   const nav = useTranslations('nav')
   const footer = useTranslations('footer')
@@ -94,7 +97,8 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
 
   return (
     <>
-      {/* NAV */}
+      {/* NAV — skipped when chromeProvided so the shared SiteHeader renders instead */}
+      {!chromeProvided && (
       <header className="sticky top-0 z-50" style={{ background: 'rgba(27,58,92,0.96)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between gap-4">
           <a href={`/${locale}`} className="flex items-center gap-2 shrink-0" aria-label="Encik Beku homepage">
@@ -112,6 +116,7 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
           </div>
         </div>
       </header>
+      )}
 
       <main>
         {/* BREADCRUMB */}
@@ -239,7 +244,8 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
         </section>
       </main>
 
-      {/* FOOTER */}
+      {/* FOOTER — skipped when chromeProvided so the shared SiteFooter renders instead */}
+      {!chromeProvided && (
       <footer className="py-12 px-6" style={{ background: '#0F2238' }}>
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
@@ -254,6 +260,7 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
           </div>
         </div>
       </footer>
+      )}
     </>
   )
 }

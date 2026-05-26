@@ -1,9 +1,39 @@
 {
   "nav": {
+    "home": "Utama",
+    "products": "Perkhidmatan",
+    "calculator": "Anggaran Kos",
     "services": "Perkhidmatan",
     "reviews": "Ulasan",
     "locations": "Lokasi",
-    "whatsapp": "WhatsApp"
+    "blog": "Blog",
+    "whatsapp": "WhatsApp",
+    "whatsappCta": "WhatsApp Encik Beku",
+    "logoAlt": "Encik Beku — Servis Aircond Profesional Seluruh Malaysia"
+  },
+  "logoAlt": "Encik Beku — Servis Aircond Profesional Seluruh Malaysia",
+  "imageAlt": "Tukang aircond bertauliah Encik Beku menyervis unit aircond di rumah pelanggan Malaysia",
+  "products": {
+    "imageAltTemplate": "Servis aircond {model} oleh Encik Beku — pemasangan dan baiki di Malaysia"
+  },
+  "gallery": {
+    "alts": [
+      "Tukang aircond Encik Beku cuci aircond split unit di dalam bilik tidur",
+      "Pembaikan PCB aircond dengan ujian voltage di tapak pelanggan",
+      "Pemasangan aircond inverter baharu di apartment Kuala Lumpur",
+      "Cucian kimia aircond dengan steam machine untuk hilangkan kulat",
+      "Top-up gas R32 aircond menggunakan tolok tekanan bertauliah",
+      "Naik taraf wiring aircond dengan MCB khas untuk unit baharu",
+      "Pemasangan bracket aircond di dinding luar kondo Selangor",
+      "Tukang aircond mengisi semula gas refrigerant dengan selamat",
+      "Khidmat lawatan kecemasan 24 jam — Encik Beku sampai dalam 4 jam",
+      "Servis aircond casette siling di pejabat korporat",
+      "Pencucian aircond ceiling-mounted di restoran",
+      "Penghantaran dan pemasangan aircond baru ke rumah teres"
+    ]
+  },
+  "finalCta": {
+    "bgAlt": "Tukang aircond Encik Beku bersedia menjawab panggilan servis kecemasan di Malaysia"
   },
   "footer": {
     "description": "Servis aircond profesional, pembaikan dan pemasangan di 38 bandar seluruh Malaysia. Tukang bertauliah, harga berpatutan, 7 hari seminggu.",

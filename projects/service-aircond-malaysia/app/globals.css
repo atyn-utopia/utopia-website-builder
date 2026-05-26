@@ -115,3 +115,71 @@ h1, h2, h3, h4, h5, h6 {
 /* ── Hide scrollbar on overflow sections ── */
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 .hide-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Language switcher
+   Lives in globals.css (not <style jsx>) because global element resets on
+   <a>/<button> would beat scoped styles. !important keeps the flex layout
+   intact even when the switcher is nested inside other components' flex/grid
+   parents. */
+.lsw-root,
+.lang-switcher {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  gap: 6px;
+  align-items: center;
+}
+.lsw-item,
+.lang-switcher a,
+.lang-switcher button {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #1a1a1acc;
+  border: 1px solid #e5e7eb;
+  border-radius: 9999px;
+  background: #ffffff;
+  white-space: nowrap;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+.lsw-item:hover,
+.lang-switcher a:hover,
+.lang-switcher button:hover {
+  background: #f4f4f5;
+  color: #111111;
+}
+.lsw-item.is-active,
+.lang-switcher a.active,
+.lang-switcher button.active {
+  background: #1a1a1a !important;
+  color: #ffffff !important;
+  border-color: #1a1a1a !important;
+}
+.lsw-flag {
+  display: inline-block !important;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+/* USP panel — single container with three .usp-cell children, not three cards. */
+.usp-panel {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+@media (min-width: 640px) {
+  .usp-panel { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* Mobile: hide the header WhatsApp CTA so it doesn't overlap the language
+   dropdown. Targeted in globals.css (not <style jsx>) so WhatsAppButton
+   variants rendered from child components are caught too. */
+@media (max-width: 879px) {
+  .nav-cta { display: none !important; }
+}

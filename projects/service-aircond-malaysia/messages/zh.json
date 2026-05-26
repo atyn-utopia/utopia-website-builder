@@ -1,9 +1,39 @@
 {
   "nav": {
+    "home": "首页",
+    "products": "服务",
+    "calculator": "费用估算",
     "services": "服务",
     "reviews": "评价",
     "locations": "服务地区",
-    "whatsapp": "WhatsApp"
+    "blog": "博客",
+    "whatsapp": "WhatsApp",
+    "whatsappCta": "WhatsApp Encik Beku",
+    "logoAlt": "Encik Beku — 马来西亚专业冷气服务"
+  },
+  "logoAlt": "Encik Beku — 马来西亚专业冷气服务",
+  "imageAlt": "Encik Beku 认证技术员在马来西亚客户家中维修冷气",
+  "products": {
+    "imageAltTemplate": "Encik Beku 提供 {model} 冷气服务 — 马来西亚安装与维修"
+  },
+  "gallery": {
+    "alts": [
+      "Encik Beku 技术员在卧室清洗分体式冷气",
+      "客户现场对冷气 PCB 进行电压检测与维修",
+      "在吉隆坡公寓安装全新变频冷气",
+      "使用蒸气机进行化学清洗以去除冷气霉菌",
+      "使用专业压力表为冷气加 R32 制冷剂",
+      "为新冷气加装专用 MCB 升级线路",
+      "在雪兰莪公寓外墙安装冷气支架",
+      "技术员安全地为冷气补充制冷剂",
+      "24 小时紧急服务 — Encik Beku 4 小时内上门",
+      "为企业办公室提供天花板嵌入式冷气维护",
+      "在餐厅清洗天花板冷气",
+      "向排屋客户交付并安装全新冷气"
+    ]
+  },
+  "finalCta": {
+    "bgAlt": "Encik Beku 冷气技术员随时为马来西亚紧急服务待命"
   },
   "footer": {
     "description": "专业冷气服务、维修和安装，覆盖马来西亚38个城市。认证技术员，公平价格，每周7天服务。",
