@@ -130,7 +130,7 @@ function FomoBanner() {
         <span className="fomo-dot w-2 h-2 rounded-full bg-white shrink-0" />
         <span className="font-medium">{fomoT('message', { slots: slotsLeft })}</span>
         <span className="font-mono font-semibold px-2 py-0.5 rounded" style={{ background: 'rgba(0,0,0,0.25)' }}>{pad(timeLeft.hours)}:{pad(timeLeft.minutes)}:{pad(timeLeft.seconds)}</span>
-        <a href={waRedirect(locale)} className="font-semibold underline underline-offset-2 hover:no-underline shrink-0">{fomoT('bookNow')} &rarr;</a>
+        <a href={waRedirect(locale)} target="_blank" rel="noopener noreferrer" className="font-semibold underline underline-offset-2 hover:no-underline shrink-0">{fomoT('bookNow')} &rarr;</a>
       </div>
     </div>
   )
@@ -330,7 +330,7 @@ export default function HomePageClient() {
                             </div>
                           ))}
                         </div>
-                        <a href={waRedirect(locale, pk.waMsg)} className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg text-sm font-semibold text-white hover:opacity-90 w-full" style={{ background: 'var(--brand-primary)' }}>
+                        <a href={waRedirect(locale, pk.waMsg)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg text-sm font-semibold text-white hover:opacity-90 w-full" style={{ background: 'var(--brand-primary)' }}>
                           <WAIcon />{t('products.cta')}
                         </a>
                       </div>

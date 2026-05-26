@@ -368,7 +368,7 @@ export default function LocationPageClient({
                             </div>
                           ))}
                         </div>
-                        <a href={waRedirect(locale, pk.waMsg + ' Location: ' + displayName, locationSlug)} className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg text-sm font-semibold text-white hover:opacity-90 w-full" style={{ background: 'var(--brand-primary)' }}>
+                        <a href={waRedirect(locale, pk.waMsg + ' Location: ' + displayName, locationSlug)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg text-sm font-semibold text-white hover:opacity-90 w-full" style={{ background: 'var(--brand-primary)' }}>
                           <WAIcon />{tProducts('cta')}
                         </a>
                       </div>

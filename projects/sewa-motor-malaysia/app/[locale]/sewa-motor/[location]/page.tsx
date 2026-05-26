@@ -9,6 +9,10 @@ import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema'
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema'
 import { ProductSchema } from '@/components/schema/ProductSchema'
 import { FAQSchema } from '@/components/schema/FAQSchema'
+import FomoBanner from '@/components/FomoBanner'
+import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
+import PageStyles from '@/components/PageStyles'
 import LocationPageClient from './LocationPageClient'
 
 type Props = {
@@ -122,6 +126,8 @@ export default async function LocationPage({ params }: Props) {
 
   return (
     <>
+      <FomoBanner />
+      <SiteHeader />
       <LocalBusinessSchema
         locationName={displayName}
         locationSlug={loc.slug}
@@ -154,6 +160,8 @@ export default async function LocationPage({ params }: Props) {
           state: n.state,
         }))}
       />
+      <SiteFooter />
+      <PageStyles />
     </>
   )
 }
