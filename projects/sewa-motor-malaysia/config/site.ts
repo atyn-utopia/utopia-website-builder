@@ -6,6 +6,7 @@ export const siteConfig = {
   domain,
   baseUrl: `https://${domain}`,
   siteUrl: `https://${domain}`,
+  productSlug: 'sewa-motor',
   fallbackPhone: '60174287801',
   defaultWhatsApp: 'https://wa.me/60174287801',
 }

@@ -7,6 +7,12 @@
 export default function PageStyles() {
   return (
     <style>{`
+      /* Normalisers ─────────────────────────────────────────────────── */
+      /* Without this, swapping an <h3> for an <h5> picks up the browser-default
+         huge heading sizes — every heading in these pages inherits weight from
+         its container so visual hierarchy is driven by classes, not by tag. */
+      h1, h2, h3, h4, h5, h6 { font-weight: inherit; }
+
       /* Hero ─────────────────────────────────────────────────────────── */
       .home-hero {
         position: relative;
