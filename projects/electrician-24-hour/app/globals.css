@@ -883,18 +883,65 @@ h2.hero-sub,
 }
 .blog-cta-inline strong { color: var(--gold); }
 
-/* Language switcher */
-.lang-switcher { display: inline-flex; gap: 4px; align-items: center; }
+/* Language switcher
+   The .lsw-* rules live here (not in <style jsx>) because global element resets on
+   <a>/<button>/<svg> would beat scoped styles — !important keeps the layout intact
+   even when other components nest the switcher inside flex/grid parents. */
+.lang-switcher,
+.lsw-root {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  gap: 6px;
+  align-items: center;
+}
+.lsw-item,
 .lang-switcher a {
-  padding: 6px 10px;
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
   font-size: 12.5px;
   font-weight: 700;
   color: var(--ink-muted);
+  border: 1px solid var(--ice);
   border-radius: var(--radius-full);
+  background: var(--white);
+  transition: background var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+  white-space: nowrap;
 }
+.lsw-item:hover,
+.lang-switcher a:hover {
+  background: var(--ice);
+  color: var(--ink);
+}
+.lsw-item.is-active,
+.lsw-item--active,
 .lang-switcher a.active {
-  background: var(--navy);
-  color: var(--gold);
+  background: var(--navy) !important;
+  color: var(--gold) !important;
+  border-color: var(--navy) !important;
+}
+.lsw-flag {
+  display: inline-block !important;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.lsw-trigger {
+  display: none !important;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border: 1px solid var(--ice);
+  border-radius: var(--radius-full);
+  background: var(--white);
+}
+@media (max-width: 879px) {
+  .lsw-root.is-mobile-collapse .lsw-item { display: none !important; }
+  .lsw-root.is-mobile-collapse .lsw-trigger { display: inline-flex !important; }
 }
 
 /* Section alternate background */

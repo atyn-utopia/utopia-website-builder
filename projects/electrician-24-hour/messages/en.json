@@ -5,6 +5,10 @@
   },
   "nav": {
     "brandName": "Electrician 24 Hours",
+    "logoAlt": "Electrician 24 Hours — 24/7 Emergency Electrician Malaysia",
+    "home": "Home",
+    "products": "Services",
+    "calculator": "Cost Estimate",
     "services": "Services",
     "howItWorks": "How It Works",
     "gallery": "Gallery",
@@ -12,7 +16,8 @@
     "locations": "Coverage",
     "faq": "FAQ",
     "blog": "Blog",
-    "ctaButton": "WhatsApp 24/7"
+    "ctaButton": "WhatsApp 24/7",
+    "whatsappCta": "WhatsApp 24/7"
   },
   "fomoBanner": {
     "texts": [
@@ -31,7 +36,8 @@
     "ctaPrimary": "WhatsApp an Electrician Now",
     "ctaSecondary": "See Services",
     "trustBadge": "ST Registered · Fully Insured · 4.9★ on Google",
-    "arrivalFlag": "4-HOUR ARRIVAL"
+    "arrivalFlag": "4-HOUR ARRIVAL",
+    "imageAlt": "ST-registered 24-hour Electrician 24 Hours technician on a Malaysia emergency call-out"
   },
   "usp": {
     "items": [
@@ -53,6 +59,9 @@
     "heading": "Wiring Services We Handle Daily",
     "subheading": "ST-registered wiremen. Real parts. Fixed per-job pricing from RM60.",
     "cta": "WhatsApp for a Fixed Quote"
+  },
+  "products": {
+    "imageAltTemplate": "{model} electrical service by Electrician 24 Hours Malaysia"
   },
   "howItWorks": {
     "heading": "How It Works",
@@ -92,7 +101,21 @@
   },
   "gallery": {
     "heading": "Real Jobs Across Malaysia",
-    "subheading": "Every photo is from an actual site visit — nothing stock."
+    "subheading": "Every photo is from an actual site visit — nothing stock.",
+    "alts": [
+      "Electrician installing a new wall plug point in a Kuala Lumpur terrace home",
+      "ST-registered wireman replacing an MCB inside a DB box after repeat tripping",
+      "Ceiling fan installation with new wiring inside a Petaling Jaya apartment",
+      "Main DB box upgrade for a Shah Alam shoplot",
+      "Repairing a burnt kitchen plug point after an RCCB trip",
+      "Water heater installation with new bathroom wiring run",
+      "Full house rewiring using fresh copper cabling on a refurbished bungalow",
+      "Living room LED downlight install with dimmer wiring",
+      "Multimeter testing of a DB box during an emergency call-out",
+      "Restoring power to a condominium unit after a midnight blackout",
+      "24-hour emergency call-out — electrician arriving at a customer's door",
+      "Industrial 3-phase socket upgrade for a small factory floor"
+    ]
   },
   "reviews": {
     "heading": "Customers Who Called Us First",
@@ -174,7 +197,8 @@
   "finalCta": {
     "heading": "Power Out? Plug Sparking? Message Us Now — 24/7.",
     "subheading": "ST-registered electrician at your door within 4 hours. Fixed per-job pricing from RM60. Chat on WhatsApp in under 10 seconds.",
-    "cta": "Chat on WhatsApp"
+    "cta": "Chat on WhatsApp",
+    "bgAlt": "24-hour Electrician 24 Hours technician on call across Malaysia, ready for emergency wiring jobs"
   },
   "footer": {
     "brandName": "Electrician 24 Hours",

@@ -4,8 +4,9 @@ import { getBlogPostBySlug, getBlogPosts } from '@/lib/webcore';
 import { waRedirect } from '@/lib/waRedirect';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import BlogNav from '@/components/BlogNav';
-import BlogFooter from '@/components/BlogFooter';
+import SiteHeader from '@/components/SiteHeader';
+import SiteFooter from '@/components/SiteFooter';
+import FomoBanner from '@/components/FomoBanner';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 import BlogLinkTracker from '@/components/tracking/BlogLinkTracker';
 
@@ -47,6 +48,8 @@ export default async function BlogPostPage({
 }) {
   const { locale, slug } = await params;
   const t = await getTranslations({ locale, namespace: 'blog' });
+  const fomoT = await getTranslations({ locale, namespace: 'fomoBanner' });
+  const fomoTexts = fomoT.raw('texts') as string[];
   const [post, all] = await Promise.all([
     getBlogPostBySlug(slug, locale),
     getBlogPosts(locale),
@@ -70,7 +73,8 @@ export default async function BlogPostPage({
   return (
     <>
       <BreadcrumbSchema items={breadcrumbItems} />
-      <BlogNav />
+      <FomoBanner text={fomoTexts[0]} />
+      <SiteHeader />
 
       <article className="section">
         <div className="blog-article">
@@ -129,7 +133,7 @@ export default async function BlogPostPage({
                 >
                   <div className="blog-card-img">
                     <img
-                      src={p.cover_image_url || '/brand/hero.png'}
+                      src={p.cover_image_url || '/brand/hero.jpg'}
                       alt={p.title}
                       loading="lazy"
                     />
@@ -146,7 +150,7 @@ export default async function BlogPostPage({
         </section>
       )}
 
-      <BlogFooter />
+      <SiteFooter locale={locale} />
     </>
   );
 }

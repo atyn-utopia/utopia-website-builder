@@ -5,8 +5,7 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import type { Product } from '@/lib/webcore';
 import { siteConfig } from '@/config/site';
-import { LanguageSwitcher } from '@/components/LanguageSwitcher';
-import FomoBanner from '@/components/FomoBanner';
+import { waRedirect } from '@/lib/waRedirect';
 
 type Nearby = { slug: string; name: string };
 
@@ -16,7 +15,6 @@ type Props = {
   slug: string;
   nearby: Nearby[];
   products: Product[];
-  waUrl: string;
 };
 
 const CITY_INTROS: Record<string, string> = {
@@ -62,18 +60,14 @@ export default function LocationPageClient({
   slug,
   nearby,
   products,
-  waUrl,
 }: Props) {
-  const nav = useTranslations('nav');
+  // Pass the location slug so the redirect picks a location-routed phone number
+  // (relevant for `location` / `hybrid` leads modes).
+  const waHref = waRedirect(locale, undefined, slug);
   const t = useTranslations('location');
   const services = useTranslations('services');
   const faq = useTranslations('faq');
   const fin = useTranslations('finalCta');
-  const fo = useTranslations('footer');
-  const fomo = useTranslations('fomoBanner');
-  const locs = useTranslations('locations');
-  const locs_viewAll = locs('viewAll');
-  const fomoTexts = fomo.raw('texts') as string[];
 
   const productRefs = useRef<Record<string, HTMLDivElement | null>>({});
   useEffect(() => {
@@ -99,36 +93,6 @@ export default function LocationPageClient({
 
   return (
     <>
-      <FomoBanner text={fomoTexts[0]} />
-      {/* NAV */}
-      <header className="nav-wrap">
-        <nav className="nav-pill" aria-label="Main">
-          <Link href={`/${locale}`} className="nav-brand">
-            <img src="/brand/logo.svg" alt="Electrician 24 Hours" />
-          </Link>
-          <div className="nav-links">
-            <Link href={`/${locale}#services`}>{nav('services')}</Link>
-            <Link href={`/${locale}#how`}>{nav('howItWorks')}</Link>
-            <Link href={`/${locale}#gallery`}>{nav('gallery')}</Link>
-            <Link href={`/${locale}#reviews`}>{nav('reviews')}</Link>
-            <Link href={`/${locale}#locations`}>{nav('locations')}</Link>
-            <Link href={`/${locale}/blog`}>{nav('blog')}</Link>
-          </div>
-          <div className="nav-actions">
-            <LanguageSwitcher />
-            <a
-              href={waUrl}
-              target="_blank"
-              rel="noopener"
-              onClick={() => trackClick(`whatsapp-nav-${slug}`)}
-              className="btn btn-wa btn-sm"
-            >
-              {nav('ctaButton')}
-            </a>
-          </div>
-        </nav>
-      </header>
-
       {/* HERO — smaller, location-focused */}
       <section className="hero" style={{ padding: '80px 0 72px' }}>
         <div className="container">
@@ -147,7 +111,7 @@ export default function LocationPageClient({
             <h2 className="hero-sub" style={{ margin: '0 auto 22px' }}>{intro}</h2>
             <div className="hero-ctas" style={{ justifyContent: 'center' }}>
               <a
-                href={waUrl}
+                href={waHref}
                 target="_blank"
                 rel="noopener"
                 onClick={() => trackClick(`whatsapp-hero-${slug}`)}
@@ -170,7 +134,7 @@ export default function LocationPageClient({
           </div>
           <div className="service-grid">
             {products.map((p) => {
-              const photo = p.photos[0]?.url || '/brand/hero.png';
+              const photo = p.photos[0]?.url || '/brand/hero.jpg';
               return (
                 <div
                   key={p.id}
@@ -190,7 +154,7 @@ export default function LocationPageClient({
                       </div>
                     )}
                     <a
-                      href={waUrl}
+                      href={waHref}
                       target="_blank"
                       rel="noopener"
                       onClick={() => trackClick(`whatsapp-service-${slug}-${p.slug}`)}
@@ -255,7 +219,7 @@ export default function LocationPageClient({
           <h3>{fin('heading')}</h3>
           <p>{fin('subheading')}</p>
           <a
-            href={waUrl}
+            href={waHref}
             target="_blank"
             rel="noopener"
             onClick={() => trackClick(`whatsapp-final-${slug}`)}
@@ -266,57 +230,8 @@ export default function LocationPageClient({
         </div>
       </section>
 
-      <footer className="site-footer">
-        <div className="container">
-          <div className="footer-grid">
-            <div>
-              <div className="footer-brand">
-                <img src="/brand/logo-light.svg" alt="Electrician 24 Hours" />
-              </div>
-              <p style={{ fontSize: 14, lineHeight: 1.65, maxWidth: 340 }}>
-                {fo('tagline')}
-              </p>
-            </div>
-            <div>
-              <h5>{fo('quickLinks')}</h5>
-              <ul>
-                <li><Link href={`/${locale}#services`}>{nav('services')}</Link></li>
-                <li><Link href={`/${locale}#how`}>{nav('howItWorks')}</Link></li>
-                <li><Link href={`/${locale}#gallery`}>{nav('gallery')}</Link></li>
-                <li><Link href={`/${locale}#reviews`}>{nav('reviews')}</Link></li>
-                <li><Link href={`/${locale}/blog`}>{nav('blog')}</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h5>{fo('coverage')}</h5>
-              <ul>
-                <li>
-                  <Link href={`/${locale}/${siteConfig.productSlug}/${slug}`}>
-                    {city}
-                  </Link>
-                </li>
-                {nearby.slice(0, 6).map((n) => (
-                  <li key={n.slug}>
-                    <Link href={`/${locale}/${siteConfig.productSlug}/${n.slug}`}>
-                      {n.name}
-                    </Link>
-                  </li>
-                ))}
-                <li>
-                  <Link href={`/${locale}#locations`}>{locs_viewAll}</Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <span>{fo('copyright')}</span>
-            <span>{fo('ssm')}</span>
-          </div>
-        </div>
-      </footer>
-
       <a
-        href={waUrl}
+        href={waHref}
         target="_blank"
         rel="noopener"
         onClick={() => trackClick(`whatsapp-fab-${slug}`)}

@@ -4,6 +4,7 @@ import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { OrganizationSchema } from '@/components/schema/OrganizationSchema';
+import { siteConfig } from '@/config/site';
 import type { Metadata } from 'next';
 
 const inter = Inter({
@@ -27,8 +28,8 @@ export async function generateMetadata({
       title: t('title'),
       description: t('description'),
       type: 'website',
-      url: 'https://electrician-24-hour.vercel.app',
-      siteName: 'Electrician 24 Hours',
+      url: siteConfig.siteUrl,
+      siteName: siteConfig.brandName,
     },
     twitter: {
       card: 'summary_large_image',
@@ -59,7 +60,7 @@ export default async function LocaleLayout({
         <script
           defer
           src="https://webcore.utopiaai.my/t.js"
-          data-website="electrician-24hour.utopiaai.my"
+          data-website={siteConfig.domain}
         />
       </head>
       <body style={{ fontFamily: 'var(--font-inter), Inter, sans-serif' }}>

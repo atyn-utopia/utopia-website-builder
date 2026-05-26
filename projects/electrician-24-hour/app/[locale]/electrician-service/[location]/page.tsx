@@ -3,10 +3,14 @@ import { notFound } from 'next/navigation';
 import { siteConfig } from '@/config/site';
 import { locales } from '@/i18n/routing';
 import { locations, getLocationBySlug, getNearbyLocations } from '@/config/locations';
-import { getProducts, getWhatsAppLink } from '@/lib/webcore';
+import { getProducts } from '@/lib/webcore';
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
+import PageStyles from '@/components/PageStyles';
+import FomoBanner from '@/components/FomoBanner';
+import SiteHeader from '@/components/SiteHeader';
+import SiteFooter from '@/components/SiteFooter';
 import LocationPageClient from './LocationPageClient';
 
 export function generateStaticParams() {
@@ -64,13 +68,12 @@ export default async function LocationPage({
   const loc = getLocationBySlug(locationSlug);
   if (!loc) notFound();
 
-  const [products, waUrl] = await Promise.all([
-    getProducts(),
-    getWhatsAppLink(locationSlug),
-  ]);
+  const products = await getProducts();
 
   const t = await getTranslations({ locale, namespace: 'location' });
   const faqT = await getTranslations({ locale, namespace: 'faq' });
+  const fomoT = await getTranslations({ locale, namespace: 'fomoBanner' });
+  const fomoTexts = fomoT.raw('texts') as string[];
 
   const nearby = getNearbyLocations(locationSlug).slice(0, 4);
 
@@ -90,17 +93,23 @@ export default async function LocationPage({
 
   return (
     <>
+      <PageStyles />
       <BreadcrumbSchema items={breadcrumbItems} />
       <LocalBusinessSchema locale={locale} locationSlug={locationSlug} cityName={loc.name} />
       <FAQSchema faqs={faqs} />
+
+      <FomoBanner text={fomoTexts[0]} />
+      <SiteHeader />
+
       <LocationPageClient
         locale={locale}
         city={loc.name}
         slug={locationSlug}
         nearby={nearby.map((n) => ({ slug: n.slug, name: n.name }))}
         products={products}
-        waUrl={waUrl}
       />
+
+      <SiteFooter locale={locale} />
     </>
   );
 }

@@ -1,57 +1,33 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import type { Product, BlogPost } from '@/lib/webcore';
-import { locations, regionOrder, getLocationsByRegion } from '@/config/locations';
+import { regionOrder, getLocationsByRegion } from '@/config/locations';
 import { siteConfig } from '@/config/site';
-import { LanguageSwitcher } from '@/components/LanguageSwitcher';
-import FomoBanner from '@/components/FomoBanner';
+import { waRedirect } from '@/lib/waRedirect';
 
 type Props = {
   locale: string;
   products: Product[];
   recentPosts: BlogPost[];
-  waUrl: string;
 };
-
-// Top-of-page showcase list — one flagship city per state (16 cells = 8 × 2 fills cleanly).
-// Full coverage (150+ cities) lives in the footer "All Cities" grid below.
-const PRIMARY_CITIES = [
-  'kuala-lumpur',
-  'petaling-jaya',
-  'shah-alam',
-  'sepang',
-  'seremban',
-  'melaka',
-  'johor-bahru',
-  'kuching',
-  'ipoh',
-  'george-town',
-  'alor-setar',
-  'kangar',
-  'kota-bharu',
-  'kuala-terengganu',
-  'kuantan',
-  'kota-kinabalu',
-];
 
 // Exactly 12 images — fills 4×3 / 3×4 / 2×6 grids perfectly at every breakpoint.
 const GALLERY_IMAGES = [
-  '/gallery/gallery-1.png',
-  '/gallery/gallery-2.png',
-  '/gallery/gallery-3.png',
-  '/gallery/gallery-4.png',
-  '/gallery/gallery-5.png',
-  '/gallery/gallery-6.png',
-  '/gallery/gallery-7.png',
-  '/gallery/gallery-8.png',
-  '/gallery/gallery-9.png',
-  '/gallery/gallery-11.png',
-  '/gallery/gallery-12.png',
-  '/gallery/gallery-2b.png',
+  '/gallery/gallery-1.jpg',
+  '/gallery/gallery-2.jpg',
+  '/gallery/gallery-3.jpg',
+  '/gallery/gallery-4.jpg',
+  '/gallery/gallery-5.jpg',
+  '/gallery/gallery-6.jpg',
+  '/gallery/gallery-7.jpg',
+  '/gallery/gallery-8.jpg',
+  '/gallery/gallery-9.jpg',
+  '/gallery/gallery-11.jpg',
+  '/gallery/gallery-12.jpg',
+  '/gallery/gallery-2b.jpg',
 ];
 
 function GoogleG() {
@@ -77,8 +53,11 @@ function trackClick(label: string) {
   }
 }
 
-export default function HomePageClient({ locale, products, recentPosts, waUrl }: Props) {
-  const nav = useTranslations('nav');
+export default function HomePageClient({ locale, products, recentPosts }: Props) {
+  // Every WhatsApp CTA routes through the redirect page so the request hits the
+  // server, the leads-mode logic picks the right phone for the live host, and
+  // the click is tracked before forwarding to wa.me.
+  const waHref = waRedirect(locale);
   const hero = useTranslations('hero');
   const usp = useTranslations('usp');
   const services = useTranslations('services');
@@ -90,8 +69,6 @@ export default function HomePageClient({ locale, products, recentPosts, waUrl }:
   const locs = useTranslations('locations');
   const faq = useTranslations('faq');
   const fin = useTranslations('finalCta');
-  const fo = useTranslations('footer');
-  const fomo = useTranslations('fomoBanner');
   const blogT = useTranslations('blog');
 
   const productRefs = useRef<Record<string, HTMLDivElement | null>>({});
@@ -117,12 +94,6 @@ export default function HomePageClient({ locale, products, recentPosts, waUrl }:
   }, [products]);
 
   const locationsByState = getLocationsByRegion();
-  const footerCities = PRIMARY_CITIES
-    .map((slug) => locations.find((l) => l.slug === slug))
-    .filter(Boolean) as typeof locations;
-
-  const fomoTexts = fomo.raw('texts') as string[];
-  const fomoText = fomoTexts[0];
 
   const uspItems = usp.raw('items') as { title: string; description: string }[];
   const steps = how.raw('steps') as { title: string; description: string }[];
@@ -137,85 +108,29 @@ export default function HomePageClient({ locale, products, recentPosts, waUrl }:
 
   return (
     <>
-      {/* FOMO bar — red, countdown timer */}
-      <FomoBanner text={fomoText} />
+      {/* Hero CTA row (client island that lives just below the server-rendered hero) */}
+      <div className="hero-ctas-island container">
+        <a
+          href={waHref}
+          target="_blank"
+          rel="noopener"
+          onClick={() => trackClick('whatsapp-hero')}
+          className="btn btn-wa btn-lg"
+        >
+          {hero('ctaPrimary')}
+        </a>
+        <a href="#services" className="btn btn-outline btn-lg">
+          {hero('ctaSecondary')}
+        </a>
+      </div>
 
-      {/* NAV */}
-      <header className="nav-wrap">
-        <nav className="nav-pill" aria-label="Main">
-          <Link href={`/${locale}`} className="nav-brand">
-            <img src="/brand/logo.svg" alt="Electrician 24 Hours" />
-          </Link>
-          <div className="nav-links">
-            <a href="#services">{nav('services')}</a>
-            <a href="#how">{nav('howItWorks')}</a>
-            <a href="#gallery">{nav('gallery')}</a>
-            <a href="#reviews">{nav('reviews')}</a>
-            <a href="#locations">{nav('locations')}</a>
-            <Link href={`/${locale}/blog`}>{nav('blog')}</Link>
-          </div>
-          <div className="nav-actions">
-            <LanguageSwitcher />
-            <a
-              href={waUrl}
-              target="_blank"
-              rel="noopener"
-              onClick={() => trackClick('whatsapp-nav')}
-              className="btn btn-wa btn-sm"
-            >
-              {nav('ctaButton')}
-            </a>
-          </div>
-        </nav>
-      </header>
-
-      {/* HERO */}
-      <section className="hero">
-        <div className="container">
-          <div className="hero-grid">
-            <div className="hero-copy">
-              <span className="hero-badge">● {hero('badge')}</span>
-              <h1>
-                {hero('h1Pre')}{' '}
-                <span className="hl">{hero('h1Highlight')}</span>{' '}
-                {hero('h1Suffix')}
-              </h1>
-              <h2 className="hero-sub">{hero('subheadline')}</h2>
-              <div className="hero-ctas">
-                <a
-                  href={waUrl}
-                  target="_blank"
-                  rel="noopener"
-                  onClick={() => trackClick('whatsapp-hero')}
-                  className="btn btn-wa btn-lg"
-                >
-                  {hero('ctaPrimary')}
-                </a>
-                <a href="#services" className="btn btn-outline btn-lg">
-                  {hero('ctaSecondary')}
-                </a>
-              </div>
-              <div className="hero-trust">✓ {hero('trustBadge')}</div>
-            </div>
-            <div className="hero-media">
-              <span className="arrival-flag">⚡ {hero('arrivalFlag')}</span>
-              <img
-                src="/brand/hero-technician.png"
-                alt="ST-registered 24-hour electrician ready for emergency call"
-                loading="eager"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* USP bar */}
+      {/* USP bar — single .usp-panel container with 3 .usp-cell children */}
       <div className="usp-bar">
-        <div className="usp-grid">
+        <div className="usp-panel usp-grid">
           {uspItems.map((item, i) => (
-            <div className="usp-card" key={i}>
+            <div className="usp-cell usp-card" key={i}>
               <div className="usp-icon">
-                <img src={USP_ICONS[i]} alt="" />
+                <img src={USP_ICONS[i]} alt={item.title} />
               </div>
               <div>
                 <div className="usp-title">{item.title}</div>
@@ -250,7 +165,7 @@ export default function HomePageClient({ locale, products, recentPosts, waUrl }:
           ) : (
             <div className="service-grid">
               {products.map((p) => {
-                const photo = p.photos[0]?.url || '/brand/hero.png';
+                const photo = p.photos[0]?.url || '/brand/hero.jpg';
                 return (
                   <div
                     key={p.id}
@@ -270,7 +185,7 @@ export default function HomePageClient({ locale, products, recentPosts, waUrl }:
                         </div>
                       )}
                       <a
-                        href={waUrl}
+                        href={waHref}
                         target="_blank"
                         rel="noopener"
                         onClick={() => trackClick(`whatsapp-service-${p.slug}`)}
@@ -325,7 +240,7 @@ export default function HomePageClient({ locale, products, recentPosts, waUrl }:
           </p>
           <div style={{ textAlign: 'center' }}>
             <a
-              href={waUrl}
+              href={waHref}
               target="_blank"
               rel="noopener"
               onClick={() => trackClick('whatsapp-emergency')}
@@ -360,7 +275,7 @@ export default function HomePageClient({ locale, products, recentPosts, waUrl }:
         className="section"
         style={{
           background:
-            "linear-gradient(135deg, rgba(6,30,74,0.82), rgba(10,58,130,0.82)), url('/brand/hero-cta.png') center/cover no-repeat",
+            "linear-gradient(135deg, rgba(6,30,74,0.82), rgba(10,58,130,0.82)), url('/brand/hero-cta.jpg') center/cover no-repeat",
           color: 'var(--white)',
           textAlign: 'center',
         }}
@@ -373,7 +288,7 @@ export default function HomePageClient({ locale, products, recentPosts, waUrl }:
             {mid('subheading')}
           </p>
           <a
-            href={waUrl}
+            href={waHref}
             target="_blank"
             rel="noopener"
             onClick={() => trackClick('whatsapp-mid')}
@@ -482,7 +397,7 @@ export default function HomePageClient({ locale, products, recentPosts, waUrl }:
                 >
                   <div className="blog-card-img">
                     <img
-                      src={post.cover_image_url || '/brand/hero.png'}
+                      src={post.cover_image_url || '/brand/hero.jpg'}
                       alt={post.title}
                       loading="lazy"
                     />
@@ -495,7 +410,7 @@ export default function HomePageClient({ locale, products, recentPosts, waUrl }:
                         day: 'numeric',
                       })}
                     </span>
-                    <h3>{post.title}</h3>
+                    <h4>{post.title}</h4>
                     <p>{post.excerpt}</p>
                     <span className="blog-card-more">{blogT('readMore')} →</span>
                   </div>
@@ -530,7 +445,7 @@ export default function HomePageClient({ locale, products, recentPosts, waUrl }:
           <h3>{fin('heading')}</h3>
           <p>{fin('subheading')}</p>
           <a
-            href={waUrl}
+            href={waHref}
             target="_blank"
             rel="noopener"
             onClick={() => trackClick('whatsapp-final')}
@@ -541,49 +456,9 @@ export default function HomePageClient({ locale, products, recentPosts, waUrl }:
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="site-footer">
-        <div className="container">
-          <div className="footer-grid">
-            <div>
-              <div className="footer-brand">
-                <img src="/brand/logo-light.svg" alt="Electrician 24 Hours" />
-              </div>
-              <p style={{ fontSize: 14, lineHeight: 1.65, maxWidth: 340 }}>{fo('tagline')}</p>
-            </div>
-            <div>
-              <h5>{fo('quickLinks')}</h5>
-              <ul>
-                <li><a href="#services">{nav('services')}</a></li>
-                <li><a href="#how">{nav('howItWorks')}</a></li>
-                <li><a href="#gallery">{nav('gallery')}</a></li>
-                <li><a href="#reviews">{nav('reviews')}</a></li>
-                <li><Link href={`/${locale}/blog`}>{nav('blog')}</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h5>{fo('coverage')}</h5>
-              <ul>
-                {footerCities.slice(0, 8).map((l) => (
-                  <li key={l.slug}>
-                    <Link href={`/${locale}/${siteConfig.productSlug}/${l.slug}`}>
-                      {l.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <span>{fo('copyright')}</span>
-            <span>{fo('ssm')}</span>
-          </div>
-        </div>
-      </footer>
-
       {/* FAB WhatsApp */}
       <a
-        href={waUrl}
+        href={waHref}
         target="_blank"
         rel="noopener"
         onClick={() => trackClick('whatsapp-fab')}

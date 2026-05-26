@@ -90,6 +90,14 @@ async function getHostDomain(): Promise<string> {
   }
 }
 
+// Prefer the live request host (so vercel.app preview + custom domain both work),
+// fall back to siteConfig.domain at build / prerender time when no request is in
+// scope. Every DB query keyed on the "website" column should resolve through this.
+async function getActiveWebsite(): Promise<string> {
+  const host = await getHostDomain()
+  return host || siteConfig.domain
+}
+
 async function getLeadsMode(domain: string): Promise<LeadsMode> {
   if (!domain) return 'single'
   const rows = await webcoreFetch<{ leads_mode: LeadsMode }[]>(
@@ -214,9 +222,10 @@ interface ProductRow {
 }
 
 export async function getProducts(): Promise<Product[]> {
+  const website = await getActiveWebsite()
   const path =
     `products?select=id,name,slug,description,sale_price,rental_price,sort_order,product_photos(url)` +
-    `&website=eq.${encodeURIComponent(siteConfig.domain)}` +
+    `&website=eq.${encodeURIComponent(website)}` +
     `&is_active=eq.true` +
     `&order=sort_order.asc`
 
@@ -290,9 +299,10 @@ function flattenBlogRow(row: BlogPostRow): BlogPost {
 }
 
 export async function getBlogPosts(language: string = 'en'): Promise<BlogPost[]> {
+  const website = await getActiveWebsite()
   const path =
     `blog_posts?select=id,slug,cover_image_url,published_at,created_at,blog_translations!inner(title,content,excerpt,meta_title,meta_description)` +
-    `&website=eq.${encodeURIComponent(siteConfig.domain)}` +
+    `&website=eq.${encodeURIComponent(website)}` +
     `&status=eq.published` +
     `&blog_translations.language=eq.${encodeURIComponent(language)}` +
     `&order=created_at.desc`
@@ -306,9 +316,10 @@ export async function getBlogPostBySlug(
   slug: string,
   language: string = 'en',
 ): Promise<BlogPost | null> {
+  const website = await getActiveWebsite()
   const path =
     `blog_posts?select=id,slug,cover_image_url,published_at,created_at,blog_translations!inner(title,content,excerpt,meta_title,meta_description)` +
-    `&website=eq.${encodeURIComponent(siteConfig.domain)}` +
+    `&website=eq.${encodeURIComponent(website)}` +
     `&slug=eq.${encodeURIComponent(slug)}` +
     `&status=eq.published` +
     `&blog_translations.language=eq.${encodeURIComponent(language)}` +

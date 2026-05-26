@@ -1,6 +1,10 @@
+// `domain` is the canonical live host — Supabase rows for products, blog posts,
+// phone numbers, and company_websites are keyed by this exact string. Keep this
+// in sync with `deploy-url.txt` and the `data-website` attribute in
+// app/[locale]/layout.tsx — the checklist enforces this match.
 export const siteConfig = {
-  domain: 'electrician-24-hour.vercel.app',
-  siteUrl: 'https://electrician-24-hour.vercel.app',
+  domain: 'electrician-24hour.utopiaai.my',
+  siteUrl: 'https://electrician-24hour.utopiaai.my',
   brandName: 'Electrician 24 Hours',
   tagline: '24-Hour Emergency Electrician & Wiring Service Malaysia',
   productSlug: 'electrician-service',

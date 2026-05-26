@@ -5,6 +5,10 @@
   },
   "nav": {
     "brandName": "Electrician 24 Hours",
+    "logoAlt": "Electrician 24 Hours — Juruelektrik Kecemasan 24 Jam Malaysia",
+    "home": "Utama",
+    "products": "Servis",
+    "calculator": "Anggaran Kos",
     "services": "Servis",
     "howItWorks": "Cara Kerja",
     "gallery": "Galeri",
@@ -12,7 +16,8 @@
     "locations": "Liputan",
     "faq": "Soalan",
     "blog": "Blog",
-    "ctaButton": "WhatsApp 24/7"
+    "ctaButton": "WhatsApp 24/7",
+    "whatsappCta": "WhatsApp 24/7"
   },
   "fomoBanner": {
     "texts": [
@@ -31,7 +36,8 @@
     "ctaPrimary": "WhatsApp Juruelektrik Sekarang",
     "ctaSecondary": "Lihat Servis",
     "trustBadge": "ST Registered · Insurans Penuh · 4.9★ di Google",
-    "arrivalFlag": "SAMPAI 4 JAM"
+    "arrivalFlag": "SAMPAI 4 JAM",
+    "imageAlt": "Juruelektrik ST-registered Electrician 24 Hours bersedia menjawab panggilan kecemasan wiring di Malaysia"
   },
   "usp": {
     "items": [
@@ -53,6 +59,9 @@
     "heading": "Servis Wiring Harian Kami",
     "subheading": "Wireman ST-registered. Alat ganti asli. Harga tetap dari RM60 se-kerja.",
     "cta": "WhatsApp untuk Sebut Harga"
+  },
+  "products": {
+    "imageAltTemplate": "Servis juruelektrik {model} oleh Electrician 24 Hours Malaysia"
   },
   "howItWorks": {
     "heading": "Cara Ia Berfungsi",
@@ -92,7 +101,21 @@
   },
   "gallery": {
     "heading": "Kerja Sebenar Di Seluruh Malaysia",
-    "subheading": "Setiap gambar dari lawatan sebenar — tiada stok."
+    "subheading": "Setiap gambar dari lawatan sebenar — tiada stok.",
+    "alts": [
+      "Juruelektrik memasang plug point baharu di rumah teres Kuala Lumpur",
+      "Wireman ST-registered tukar MCB dalam DB box selepas tripping kerap",
+      "Pemasangan kipas siling dengan wiring baharu di apartment Petaling Jaya",
+      "Naik taraf DB box utama untuk shoplot di Shah Alam",
+      "Baikpulih plug point hangus dapur selepas trip RCCB",
+      "Pemasangan water heater dengan wiring tambahan di bilik mandi",
+      "Rewiring penuh rumah lama menggunakan kabel tembaga baharu",
+      "Pemasangan downlight LED siling ruang tamu dengan dimmer",
+      "Pemeriksaan dan ujian DB box dengan multimeter pada lawatan kecemasan",
+      "Baikpulih bekalan elektrik kondominium selepas blackout malam",
+      "Servis emergency call-out 24 jam — juruelektrik di pintu rumah",
+      "Naik taraf wiring kilang dan pemasangan socket industri 3-fasa"
+    ]
   },
   "reviews": {
     "heading": "Pelanggan Yang Hubungi Kami Dulu",
@@ -174,7 +197,8 @@
   "finalCta": {
     "heading": "Elektrik Terputus? Plug Point Bunga Api? WhatsApp Kami — 24/7.",
     "subheading": "Juruelektrik ST-registered di pintu anda dalam 4 jam. Harga tetap dari RM60. WhatsApp dalam 10 saat.",
-    "cta": "WhatsApp Kami"
+    "cta": "WhatsApp Kami",
+    "bgAlt": "Juruelektrik 24 jam Electrician 24 Hours bersedia menjawab panggilan kecemasan di seluruh Malaysia"
   },
   "footer": {
     "brandName": "Electrician 24 Hours",

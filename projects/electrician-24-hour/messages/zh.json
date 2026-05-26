@@ -5,6 +5,10 @@
   },
   "nav": {
     "brandName": "Electrician 24 Hours",
+    "logoAlt": "Electrician 24 Hours — 马来西亚24小时紧急电工",
+    "home": "首页",
+    "products": "服务",
+    "calculator": "费用估算",
     "services": "服务",
     "howItWorks": "流程",
     "gallery": "案例",
@@ -12,7 +16,8 @@
     "locations": "服务区域",
     "faq": "常见问题",
     "blog": "博客",
-    "ctaButton": "WhatsApp 24/7"
+    "ctaButton": "WhatsApp 24/7",
+    "whatsappCta": "WhatsApp 24/7"
   },
   "fomoBanner": {
     "texts": [
@@ -31,7 +36,8 @@
     "ctaPrimary": "WhatsApp电工",
     "ctaSecondary": "查看服务",
     "trustBadge": "ST注册 · 全额保险 · Google 4.9★",
-    "arrivalFlag": "4小时到场"
+    "arrivalFlag": "4小时到场",
+    "imageAlt": "Electrician 24 Hours 的 ST 注册电工在马来西亚紧急上门服务"
   },
   "usp": {
     "items": [
@@ -53,6 +59,9 @@
     "heading": "我们每天处理的电工服务",
     "subheading": "ST 注册电工、原厂配件,单项固定收费 RM60 起。",
     "cta": "WhatsApp询问报价"
+  },
+  "products": {
+    "imageAltTemplate": "{model} 电工服务 — Electrician 24 Hours 马来西亚"
   },
   "howItWorks": {
     "heading": "服务流程",
@@ -92,7 +101,21 @@
   },
   "gallery": {
     "heading": "全马真实案例",
-    "subheading": "每张照片均来自真实现场 — 无素材图。"
+    "subheading": "每张照片均来自真实现场 — 无素材图。",
+    "alts": [
+      "电工在吉隆坡排屋安装全新插座",
+      "ST 注册电工在 DB 配电盘内更换跳闸的 MCB",
+      "八打灵再也公寓内安装吊扇并重接电线",
+      "莎阿南店屋主 DB 配电盘升级现场",
+      "维修因 RCCB 跳闸而烧黑的厨房插座",
+      "热水器安装与浴室电线敷设",
+      "用全新铜芯电缆为旧屋进行全屋重新布线",
+      "客厅 LED 嵌灯安装并配置调光线路",
+      "紧急上门时使用万用表检测 DB 配电盘",
+      "公寓夜间停电后恢复供电的紧急维修",
+      "24 小时紧急上门 — 电工抵达客户门口",
+      "工厂 3 相工业插座升级安装"
+    ]
   },
   "reviews": {
     "heading": "最先联系我们的客户",
@@ -174,7 +197,8 @@
   "finalCta": {
     "heading": "停电?插座冒火?立即 WhatsApp — 24/7。",
     "subheading": "ST 注册电工 4 小时内上门。单项固定 RM60 起。10秒内 WhatsApp。",
-    "cta": "WhatsApp 我们"
+    "cta": "WhatsApp 我们",
+    "bgAlt": "Electrician 24 Hours 的 24 小时注册电工随时待命,覆盖全马的紧急电工服务"
   },
   "footer": {
     "brandName": "Electrician 24 Hours",

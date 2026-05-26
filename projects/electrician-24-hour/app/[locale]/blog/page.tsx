@@ -2,8 +2,9 @@ import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
 import { getBlogPosts } from '@/lib/webcore';
 import Link from 'next/link';
-import BlogNav from '@/components/BlogNav';
-import BlogFooter from '@/components/BlogFooter';
+import SiteHeader from '@/components/SiteHeader';
+import SiteFooter from '@/components/SiteFooter';
+import FomoBanner from '@/components/FomoBanner';
 import BlogLinkTracker from '@/components/tracking/BlogLinkTracker';
 
 export async function generateMetadata({
@@ -41,11 +42,14 @@ export default async function BlogListingPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'blog' });
+  const fomoT = await getTranslations({ locale, namespace: 'fomoBanner' });
+  const fomoTexts = fomoT.raw('texts') as string[];
   const posts = await getBlogPosts(locale);
 
   return (
     <>
-      <BlogNav />
+      <FomoBanner text={fomoTexts[0]} />
+      <SiteHeader />
 
       <section className="blog-header">
         <div className="container">
@@ -84,7 +88,7 @@ export default async function BlogListingPage({
                   >
                     <div className="blog-card-img">
                       <img
-                        src={post.cover_image_url || '/brand/hero.png'}
+                        src={post.cover_image_url || '/brand/hero.jpg'}
                         alt={post.title}
                         loading="lazy"
                       />
@@ -103,7 +107,7 @@ export default async function BlogListingPage({
         </div>
       </section>
 
-      <BlogFooter />
+      <SiteFooter locale={locale} />
     </>
   );
 }
