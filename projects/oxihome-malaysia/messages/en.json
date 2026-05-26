@@ -105,7 +105,10 @@
       "h2": "Breathe Easy — Start Today",
       "sub": "Your family deserves reliable oxygen support without the hospital price tag. Rent an oxygen machine from RM250/month with same-day delivery to your doorstep.",
       "btn": "WhatsApp Us Now"
-    }
+    },
+    "heroBgAlt": "Asian family at home with an Oxihome oxygen machine running",
+    "whyBgAlt": "Oxihome technician supporting a Malaysian family at home",
+    "finalCtaBgAlt": "Asian family at home with an Oxihome oxygen concentrator running"
   },
   "location": {
     "meta": {
