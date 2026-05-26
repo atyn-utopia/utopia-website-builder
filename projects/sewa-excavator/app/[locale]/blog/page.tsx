@@ -10,6 +10,7 @@ import { WhatsAppButton, WaIcon } from '@/components/WhatsAppButton';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import FomoBanner from '@/components/FomoBanner';
+import BlogLinkTracker from '@/components/tracking/BlogLinkTracker';
 
 export async function generateMetadata({
   params,
@@ -67,15 +68,15 @@ export default async function BlogListing({
                 return (
                   <article key={post.id} className="blog-card">
                     {post.cover_image_url && (
-                      <Link href={`/${locale}/blog/${post.slug}`} className="blog-card-img">
+                      <BlogLinkTracker slug={post.slug} href={`/${locale}/blog/${post.slug}`} className="blog-card-img">
                         <Image src={post.cover_image_url} alt={tr?.title ?? post.slug} width={600} height={350} style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
-                      </Link>
+                      </BlogLinkTracker>
                     )}
                     <div className="blog-card-body">
                       <p className="blog-card-date">{new Date(post.published_at).toLocaleDateString(locale, { day: 'numeric', month: 'short', year: 'numeric' })}</p>
-                      <h3><Link href={`/${locale}/blog/${post.slug}`}>{tr?.title}</Link></h3>
+                      <h3><BlogLinkTracker slug={post.slug} href={`/${locale}/blog/${post.slug}`}>{tr?.title}</BlogLinkTracker></h3>
                       <p className="blog-card-excerpt">{tr?.excerpt}</p>
-                      <Link href={`/${locale}/blog/${post.slug}`} className="blog-card-link">{t('readMore')} →</Link>
+                      <BlogLinkTracker slug={post.slug} href={`/${locale}/blog/${post.slug}`} className="blog-card-link">{t('readMore')} →</BlogLinkTracker>
                     </div>
                   </article>
                 );

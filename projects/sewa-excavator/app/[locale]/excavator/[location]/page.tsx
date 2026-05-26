@@ -25,6 +25,7 @@ import FomoBanner from '@/components/FomoBanner';
 import Calculator from '@/components/Calculator';
 import MarketingMarquee from '@/components/MarketingMarquee';
 import PageStyles from '@/components/PageStyles';
+import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker';
 import { WhatsAppButton, WaIcon } from '@/components/WhatsAppButton';
 
 const GALLERY_IMAGES = [
@@ -36,11 +37,11 @@ const BRAND_LOGO_ON_DARK = '/brand/abang-excavator-dark.png';
 const HERO_OPERATOR_PHOTO = '/brand/hero-photo.png';
 const FINAL_CTA_BG = '/bg/bg-5.avif';
 
-// Build the top ~30 cities at build time; the rest render on first request and
-// cache via ISR. Avoids 60s/route timeouts on Vercel's static worker when we
-// have 489 routes (163 cities × 3 locales).
+// Build the top cities at build time; the rest render on first request and
+// stay cached until a webcore tag (products/phones/blog) is invalidated via
+// /api/revalidate. Tag-based only — no time-based revalidate. Avoids 60s/route
+// timeouts on Vercel's static worker when we have 489 routes (163 cities × 3 locales).
 export const dynamicParams = true;
-export const revalidate = 3600;
 export function generateStaticParams() {
   return topCitySlugs.flatMap((slug) =>
     routing.locales.map((locale) => ({ locale, location: slug })),
@@ -283,6 +284,7 @@ export default async function LocationPage({
               const monthly = p.slug === 'volvo-ec200' ? fallbackEc200.monthly : fallbackEc400.monthly;
               return (
                 <article key={p.slug} className="product-card" data-product={p.slug}>
+                  <ProductImpressionTracker slug={p.slug} />
                   <div className="product-media">
                     <span className="product-tag">{p.eyebrow}</span>
                     {/* eslint-disable-next-line @next/next/no-img-element */}

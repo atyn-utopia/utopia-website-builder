@@ -15,6 +15,7 @@ import FomoBanner from '@/components/FomoBanner';
 import Calculator from '@/components/Calculator';
 import MarketingMarquee from '@/components/MarketingMarquee';
 import PageStyles from '@/components/PageStyles';
+import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker';
 import { WhatsAppButton, WaIcon } from '@/components/WhatsAppButton';
 
 export async function generateMetadata({
@@ -281,6 +282,7 @@ export default async function HomePage({
               const monthly = p.slug === 'volvo-ec200' ? fallbackEc200.monthly : fallbackEc400.monthly;
               return (
                 <article key={p.slug} className="product-card" data-product={p.slug}>
+                  <ProductImpressionTracker slug={p.slug} />
                   <div className="product-media">
                     <span className="product-tag">{p.eyebrow}</span>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
