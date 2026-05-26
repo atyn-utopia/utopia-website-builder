@@ -237,7 +237,9 @@ export default function HomePageClient({ phoneNumber, chromeProvided = false }: 
       )}
 
       <main>
-        {/* ── HERO ── */}
+        {/* ── HERO — skipped when chromeProvided so page.tsx's inline hero
+            (with the keyword-driven h1/h2 + role=img bg) is the only one ── */}
+        {!chromeProvided && (
         <section className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #1B3A5C 0%, #2A5280 50%, #1B4F72 100%)' }} aria-label="Hero">
           {/* Aircond background image — right side only */}
           <div className="absolute inset-0 pointer-events-none" role="presentation" aria-hidden="true" style={{ backgroundImage: 'url(/images/hero-aircond.png)', backgroundSize: 'cover', backgroundPosition: 'center right', opacity: 0.15 }} />
@@ -290,6 +292,7 @@ export default function HomePageClient({ phoneNumber, chromeProvided = false }: 
             </div>
           </div>
         </section>
+        )}
 
         {/* ── STATS ── */}
         <section aria-label="Statistics" style={{ background: 'var(--brand-navy)' }}>
