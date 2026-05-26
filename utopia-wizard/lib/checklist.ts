@@ -321,6 +321,29 @@ const I18N: Check[] = [
         : fail('language-switcher', 'Language switcher component', 'Missing components/LanguageSwitcher.tsx')
     },
   },
+  {
+    group: 'i18n', id: 'default-locale-enforced', name: 'Default locale always shown first',
+    help: "When you pick a default language, every visitor lands on it — no browser auto-detection override and the URL always carries the locale prefix.",
+    run: async (ctx) => {
+      const c = await readProjectFile(ctx, 'i18n/routing.ts')
+      if (!c) return fail('default-locale-enforced', 'Default locale always shown first', 'Missing i18n/routing.ts')
+      const defMatch = c.match(/defaultLocale\s*:\s*['"]([a-z-]+)['"]/)
+      if (!defMatch) {
+        return fail('default-locale-enforced', 'Default locale always shown first', 'no defaultLocale set in i18n/routing.ts')
+      }
+      const defLoc = defMatch[1]
+      const missing: string[] = []
+      // Force the locale prefix on every URL so `/` always redirects to
+      // `/<defaultLocale>` instead of serving locale-detected content.
+      if (!/localePrefix\s*:\s*['"]always['"]/.test(c)) missing.push("localePrefix: 'always'")
+      // Disable browser-language autodetection so a visitor with
+      // Accept-Language: en doesn't bounce off a Malay-default site.
+      if (!/localeDetection\s*:\s*false/.test(c)) missing.push('localeDetection: false')
+      return missing.length === 0
+        ? pass('default-locale-enforced', 'Default locale always shown first', `defaultLocale=${defLoc}`)
+        : fail('default-locale-enforced', 'Default locale always shown first', `defaultLocale=${defLoc} but missing: ${missing.join(', ')}`)
+    },
+  },
 ]
 
 const WEBCORE: Check[] = [
@@ -389,9 +412,18 @@ const TRACKING: Check[] = [
     run: async (ctx) => {
       const c = await readProjectFile(ctx, 'app/[locale]/layout.tsx')
       if (!c) return fail('data-website-match', 'data-website matches domain', 'layout.tsx missing')
-      const m = c.match(/data-website=["']([^"']+)["']/)
-      if (!m) return fail('data-website-match', 'data-website matches domain', 'no data-website attribute on tracking script')
-      const dw = m[1]
+      // Resolve the data-website value, accepting either a literal string or
+      // `{siteConfig.domain}` interpolation. For the expression form we read
+      // siteConfig.domain from config/site.ts.
+      let dw: string | null = null
+      const literal = c.match(/data-website=["']([^"']+)["']/)
+      if (literal) dw = literal[1]
+      else if (/data-website=\{[^}]*siteConfig\.domain[^}]*\}/.test(c)) {
+        const cfg = await readProjectFile(ctx, 'config/site.ts')
+        const mm = cfg?.match(/domain\s*:\s*['"]([^'"]+)['"]/)
+        if (mm) dw = mm[1]
+      }
+      if (!dw) return fail('data-website-match', 'data-website matches domain', 'no data-website attribute on tracking script')
       const domain = ctx.info.domain
       if (!domain) return skip('data-website-match', 'data-website matches domain', `data-website=${dw} but project domain unknown`)
 
@@ -421,9 +453,16 @@ const TRACKING: Check[] = [
     run: async (ctx) => {
       const c = await readProjectFile(ctx, 'app/[locale]/layout.tsx')
       if (!c) return fail('data-website-reachable', 'data-website resolves to a live URL', 'layout.tsx missing')
-      const m = c.match(/data-website=["']([^"']+)["']/)
-      if (!m) return fail('data-website-reachable', 'data-website resolves to a live URL', 'no data-website attribute on tracking script')
-      const dw = m[1]
+      // Same dual-form resolution as data-website-match.
+      let dw: string | null = null
+      const literal = c.match(/data-website=["']([^"']+)["']/)
+      if (literal) dw = literal[1]
+      else if (/data-website=\{[^}]*siteConfig\.domain[^}]*\}/.test(c)) {
+        const cfg = await readProjectFile(ctx, 'config/site.ts')
+        const mm = cfg?.match(/domain\s*:\s*['"]([^'"]+)['"]/)
+        if (mm) dw = mm[1]
+      }
+      if (!dw) return fail('data-website-reachable', 'data-website resolves to a live URL', 'no data-website attribute on tracking script')
       const url = `https://${dw}`
       try {
         const res = await fetch(url, { method: 'HEAD', redirect: 'manual', signal: AbortSignal.timeout(5000) })
@@ -1005,19 +1044,27 @@ const DESIGN: Check[] = [
   // server picks the right phone from Supabase (per-location, per-mode, etc.).
   {
     group: 'Layout & Design', id: 'cta-uses-redirect-page', name: 'Every CTA routes through /redirect-whatsapp-1',
-    help: "Every CTA goes through the redirect page so it picks the right phone from Supabase. Direct wa.me/ links bypass the database and break rotation/location targeting.",
+    help: "Every CTA goes through the redirect page so it picks the right phone from Supabase. Direct wa.me/ links — or pages that import getWhatsAppLink/waLink and render the URL inline — bypass the database and break rotation/location targeting.",
     run: async (ctx) => {
-      // Only `lib/webcore.ts` (and the redirect page itself, which uses
-      // webcore via `waLink`) may legitimately reference wa.me — that's the
-      // single place the final URL is constructed server-side. Anywhere else
-      // is a bypass.
+      // Two failure modes we need to catch:
+      //   1. Hard-coded `wa.me/…` URLs in JSX (someone pasted a phone number).
+      //   2. Pages that import `getWhatsAppLink` / `waLink` from webcore and
+      //      pass the resolved URL into `<a href={…}>`. The wa.me string never
+      //      appears in source, so the regex above misses it — but the call
+      //      site bypasses the redirect just the same.
+      // Only `lib/webcore.ts` (defines the helpers) and
+      // `redirect-whatsapp-1/page.tsx` (the redirect itself) may use these.
       const hits = await scanProjectFiles(
         ctx,
         ['.tsx', '.ts'],
         (rel) => rel === 'lib/webcore.ts' || rel.includes('redirect-whatsapp-1/'),
         (text) => {
-          const m = text.match(/(?:https?:\/\/)?wa\.me\/[^\s"'`<>]*|api\.whatsapp\.com\/send/)
-          return m ? m[0].slice(0, 80) : null
+          const direct = text.match(/(?:https?:\/\/)?wa\.me\/[^\s"'`<>]*|api\.whatsapp\.com\/send/)
+          if (direct) return direct[0].slice(0, 80)
+          // Catch indirect bypass: importing or invoking the resolver outside webcore.
+          const helper = text.match(/\b(?:getWhatsAppLink|waLink)\s*\(/)
+          if (helper) return `${helper[0]} — moves wa.me out of redirect`
+          return null
         },
       )
       if (hits.length === 0) {
@@ -1029,6 +1076,55 @@ const DESIGN: Check[] = [
         'Every CTA routes through /redirect-whatsapp-1',
         `${hits.length} hit(s) — e.g. ${first.file}: ${first.sample}`,
       )
+    },
+  },
+  // Live-domain alignment — siteConfig.domain is the key Supabase rows are
+  // filtered on. If it drifts from the actual deploy host, the live site shows
+  // no products / phone-numbers / blog posts even though everything looks fine
+  // locally.
+  {
+    group: 'Layout & Design', id: 'site-domain-matches-deploy-url', name: 'siteConfig.domain matches deploy-url.txt',
+    help: "siteConfig.domain is the value Supabase rows are keyed on. If the deployed host doesn't match it, queries return empty and the live site looks 'disconnected'.",
+    run: async (ctx) => {
+      const deploy = await readProjectFile(ctx, 'deploy-url.txt')
+      if (!deploy) return skip('site-domain-matches-deploy-url', 'siteConfig.domain matches deploy-url.txt', 'no deploy-url.txt yet')
+      const config = await readProjectFile(ctx, 'config/site.ts')
+      if (!config) return skip('site-domain-matches-deploy-url', 'siteConfig.domain matches deploy-url.txt', 'config/site.ts not found')
+      const deployHost = deploy.trim().replace(/^https?:\/\//, '').replace(/\/.*$/, '').replace(/^www\./, '').toLowerCase()
+      const m = config.match(/domain\s*:\s*['"]([^'"]+)['"]/)
+      if (!m) return fail('site-domain-matches-deploy-url', 'siteConfig.domain matches deploy-url.txt', 'no `domain:` field in config/site.ts')
+      const configHost = m[1].toLowerCase().replace(/^www\./, '')
+      if (configHost === deployHost) return pass('site-domain-matches-deploy-url', 'siteConfig.domain matches deploy-url.txt', configHost)
+      return fail(
+        'site-domain-matches-deploy-url',
+        'siteConfig.domain matches deploy-url.txt',
+        `siteConfig.domain="${configHost}" but deploy host="${deployHost}" — Supabase rows keyed on "${configHost}" will be invisible on the live site`,
+      )
+    },
+  },
+  {
+    group: 'Layout & Design', id: 'tracking-domain-matches-config', name: '<script data-website="…"> matches siteConfig.domain',
+    help: "The tracking script's data-website must match siteConfig.domain so analytics, leads-mode, and the WhatsApp redirect all key off the same host.",
+    run: async (ctx) => {
+      const layout = await readProjectFile(ctx, 'app/[locale]/layout.tsx')
+      if (!layout) return skip('tracking-domain-matches-config', '<script data-website="…"> matches siteConfig.domain', 'layout.tsx not found')
+      const config = await readProjectFile(ctx, 'config/site.ts')
+      if (!config) return skip('tracking-domain-matches-config', '<script data-website="…"> matches siteConfig.domain', 'config/site.ts not found')
+      const configMatch = config.match(/domain\s*:\s*['"]([^'"]+)['"]/)
+      if (!configMatch) return fail('tracking-domain-matches-config', '<script data-website="…"> matches siteConfig.domain', 'no `domain:` field in config/site.ts')
+      const configHost = configMatch[1].toLowerCase()
+      // Accept either a literal data-website="…" or `data-website={siteConfig.domain}` (string-interpolated).
+      const literal = layout.match(/data-website=["']([^"']+)["']/)
+      if (literal) {
+        const v = literal[1].toLowerCase()
+        return v === configHost
+          ? pass('tracking-domain-matches-config', '<script data-website="…"> matches siteConfig.domain', v)
+          : fail('tracking-domain-matches-config', '<script data-website="…"> matches siteConfig.domain', `data-website="${v}" ≠ siteConfig.domain="${configHost}"`)
+      }
+      if (/data-website=\{[^}]*siteConfig\.domain[^}]*\}/.test(layout)) {
+        return pass('tracking-domain-matches-config', '<script data-website="…"> matches siteConfig.domain', 'bound to siteConfig.domain')
+      }
+      return fail('tracking-domain-matches-config', '<script data-website="…"> matches siteConfig.domain', 'no `data-website` attribute found in layout.tsx — tracking will not match any project in webcore')
     },
   },
   {
