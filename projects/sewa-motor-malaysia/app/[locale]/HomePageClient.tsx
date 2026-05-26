@@ -200,25 +200,6 @@ export default function HomePageClient() {
   return (
     <div style={{ background: 'var(--brand-surface)' }}>
       <main>
-        {/* ── STATS ── */}
-        <section style={{ background: 'var(--brand-dark)' }}>
-          <div className="max-w-6xl mx-auto px-6 py-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {[
-              { value: s('stats.value1'), label: s('stats.label1') },
-              { value: s('stats.value2'), label: s('stats.label2') },
-              { value: s('stats.value3'), label: s('stats.label3') },
-              { value: s('stats.value4'), label: s('stats.label4') },
-            ].map((stat, i) => (
-              <FadeSection key={i} delay={i * 80}>
-                <div>
-                  <div className="text-2xl md:text-3xl font-extrabold mb-2" style={{ color: 'var(--brand-primary)', letterSpacing: '-0.03em' }}>{stat.value}</div>
-                  <div className="text-xs font-normal" style={{ color: 'rgba(255,255,255,0.55)', lineHeight: '1.5' }}>{stat.label}</div>
-                </div>
-              </FadeSection>
-            ))}
-          </div>
-        </section>
-
         {/* ── PRODUCTS ── */}
         <section id="products" className="py-16 px-6" style={{ background: 'var(--brand-surface)' }} aria-labelledby="products-heading">
           <div className="max-w-6xl mx-auto">
