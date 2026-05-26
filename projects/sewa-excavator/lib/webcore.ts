@@ -13,6 +13,15 @@ const SUPABASE_KEY =
 
 export type WebcoreTag = 'webcore-products' | 'webcore-phones' | 'webcore-blog';
 
+// 6s hard timeout per Supabase request. Without this the default undici
+// headers timeout is 5 minutes, which on a slow link between Vercel iad1
+// build machines and Supabase's Cloudflare-KUL edge can hang `next build`
+// for the full 5min before failing — and the same hang shows up at runtime
+// on the WhatsApp redirect page, blowing past the wizard's liveness probe.
+// Failing fast lets the caller use its built-in fallback (config phone for
+// phones, [] for products/blog) so the page still renders.
+const WEBCORE_FETCH_TIMEOUT_MS = 6000;
+
 async function webcoreFetch<T>(path: string, tag: WebcoreTag): Promise<T | null> {
   if (!SUPABASE_URL || !SUPABASE_KEY) return null;
   try {
@@ -23,6 +32,7 @@ async function webcoreFetch<T>(path: string, tag: WebcoreTag): Promise<T | null>
         Accept: 'application/json',
       },
       next: { tags: [tag] },
+      signal: AbortSignal.timeout(WEBCORE_FETCH_TIMEOUT_MS),
     });
     if (!res.ok) {
       console.error(`[webcore] ${tag} ${res.status} ${res.statusText} :: ${path}`);
