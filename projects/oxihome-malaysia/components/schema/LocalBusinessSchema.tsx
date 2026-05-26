@@ -1,38 +1,35 @@
-interface Props {
-  cityName: string
-  stateName: string
-  locationSlug: string
-  locale: string
-  phoneNumber: string
-}
+import { siteConfig } from '@/config/site';
 
-export function LocalBusinessSchema({ cityName, stateName, locationSlug, locale, phoneNumber }: Props) {
-  const schema = {
+export function LocalBusinessSchema({
+  locale,
+  locationName,
+  locationSlug,
+  state,
+}: {
+  locale: string;
+  locationName: string;
+  locationSlug: string;
+  state: string;
+}) {
+  const data = {
     '@context': 'https://schema.org',
-    '@type': 'MedicalBusiness',
-    name: `Oxihome Malaysia - ${cityName}`,
-    url: `https://oxihome.my/${locale}/oxygen-machine/${locationSlug}`,
-    description: `Oxygen machine rental and sales in ${cityName}, Malaysia. 4-hour same-day delivery. Rent from RM250/month.`,
-    telephone: phoneNumber,
-    areaServed: {
-      '@type': 'City',
-      name: cityName,
-      containedInPlace: { '@type': 'State', name: stateName },
+    '@type': 'GeneralContractor',
+    name: `${siteConfig.brandName} — ${locationName}`,
+    url: `${siteConfig.url}/${locale}/${siteConfig.productSlug}/${locationSlug}`,
+    priceRange: 'RM$$',
+    areaServed: { '@type': 'City', name: locationName },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: locationName,
+      addressRegion: state,
+      addressCountry: 'MY',
     },
-    priceRange: 'RM40 - RM2,599',
-    currenciesAccepted: 'MYR',
-    openingHours: 'Mo-Su 08:00-22:00',
-    parentOrganization: {
-      '@type': 'Organization',
-      name: 'Oxihome Malaysia',
-      url: 'https://oxihome.my',
-    },
-  }
-
+    parentOrganization: { '@type': 'Organization', name: siteConfig.legalName },
+  };
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
     />
-  )
+  );
 }

@@ -1,15 +1,13 @@
 import { siteConfig } from '@/config/site';
 
-export function OrganizationSchema() {
+export function WebSiteSchema({ locale }: { locale: string }) {
   const data = {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
+    '@type': 'WebSite',
     name: siteConfig.brandName,
-    legalName: siteConfig.legalName,
-    url: siteConfig.url,
-    logo: `${siteConfig.url}/logo.png`,
-    description: siteConfig.tagline,
-    areaServed: { '@type': 'Country', name: 'Malaysia' },
+    url: `${siteConfig.url}/${locale}`,
+    inLanguage: locale,
+    publisher: { '@type': 'Organization', name: siteConfig.brandName },
   };
   return (
     <script

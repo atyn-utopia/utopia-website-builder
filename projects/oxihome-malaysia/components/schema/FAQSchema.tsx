@@ -1,23 +1,23 @@
-interface FAQ {
-  question: string
-  answer: string
+export interface FaqItem {
+  q: string;
+  a: string;
 }
 
-export function FAQSchema({ faqs }: { faqs: FAQ[] }) {
-  const schema = {
+export function FAQSchema({ items }: { items: FaqItem[] }) {
+  if (!items.length) return null;
+  const data = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: faqs.map(faq => ({
+    mainEntity: items.map(({ q, a }) => ({
       '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
     })),
-  }
-
+  };
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
     />
-  )
+  );
 }

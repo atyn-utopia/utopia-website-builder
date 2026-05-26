@@ -1,191 +1,350 @@
 {
+  "meta": {
+    "home": {
+      "title": "马来西亚挖掘机出租 — 沃尔沃 5L 与 10L | Oxihome Malaysia",
+      "description": "沃尔沃 5L、10L 挖掘机日租、周租、月租，价格全马最优。WhatsApp 立即报价 — Oxihome Malaysia。"
+    },
+    "location": {
+      "title": "{location} 挖掘机出租 — 沃尔沃 5L 与 10L | Oxihome Malaysia",
+      "description": "{location}（{state}）沃尔沃 5L / 10L 挖掘机出租，日租与月租价格透明，送货到工地。WhatsApp 即可获取 Oxihome Malaysia 报价。"
+    },
+    "blogListing": {
+      "title": "挖掘机出租指南 — Oxihome Malaysia 马来西亚博客",
+      "description": "马来西亚挖掘机出租指南、贴士与对比。学习如何选择沃尔沃 5L 或 10L，并控制项目预算。"
+    }
+  },
   "nav": {
-    "products": "产品",
+    "logoAlt": "Oxihome Malaysia — 马来西亚 No.1 挖掘机出租",
+    "home": "首页",
+    "products": "机型",
+    "calculator": "报价器",
     "locations": "服务地区",
-    "whatsapp": "WhatsApp联系"
+    "blog": "博客",
+    "whatsappCta": "WhatsApp 报价"
   },
-  "home": {
-    "meta": {
-      "title": "氧气机马来西亚 | 每月RM250起租 | Oxihome",
-      "description": "在马来西亚租用或购买氧气机，每月RM250起。4小时当天送货。氧气浓缩机、紧急氧气罐和血氧仪。立即WhatsApp我们。",
-      "ogImageAlt": "Oxihome Malaysia — 氧气机租赁与销售"
-    },
-    "hero": {
-      "h1": "氧气机马来西亚",
-      "sub": "租用或购买氧气机，4小时内送达您家门口。每月RM250起——无需押金，无麻烦。",
-      "cta": "立即WhatsApp我们"
-    },
-    "stats": {
-      "locations": "覆盖马来西亚127个地区",
-      "delivery": "4小时当天送货",
-      "price": "每月RM250起",
-      "purity": "96%医疗级氧气"
-    },
-    "risk": {
-      "h2": "不要等到紧急情况才行动",
-      "p1": "当亲人呼吸困难时，每一分钟都至关重要。医院氧气价格昂贵，等待时间长，而从传统供应商租用往往需要3至5天，合同复杂令人困惑。",
-      "p2": "许多家庭只有在亲人出院后才意识到需要家用氧气机——匆忙、不知所措，不知道从哪里开始。没有可靠的氧气浓缩机在家，康复会变慢，压力也随之增加。",
-      "p3": "Oxihome的使命正是解决这个问题。我们在4小时内将氧气机送到马来西亚各地，让您的家人今天就能得到所需的支持——而不是下周。"
-    },
-    "products": {
-      "h2": "租用或购买您的氧气机"
-    },
-    "how": {
-      "h2": "3个简单步骤获取您的氧气机",
-      "step1Title": "WhatsApp联系我们",
-      "step1Desc": "通过WhatsApp发送消息给我们。告诉我们您需要什么以及您的位置。我们在几分钟内回复。",
-      "step2Title": "选择您的方案",
-      "step2Desc": "选择租用或购买。租用无需押金。我们处理一切——无需文件，无长期合同。",
-      "step3Title": "4小时内收货",
-      "step3Desc": "我们的团队当天将氧气机送到您家门口。我们安装并向您演示使用方法。"
-    },
-    "reviews": {
-      "h2": "获得马来西亚各地家庭的信任",
-      "r1": "我父亲周五晚上出院。我WhatsApp了Oxihome，氧气浓缩机3小时内就到了。真是救星。",
-      "r1name": "Aisha R.",
-      "r1city": "八打灵再也",
-      "r2": "我们比较了4家供应商。Oxihome是唯一能当天送货的。机器很安静，我母亲现在晚上能睡得很好。",
-      "r2name": "David Tan",
-      "r2city": "吉隆坡",
-      "r3": "租用套餐为我们节省了超过RM500，与分开购买相比。免费血氧仪也是个不错的额外赠品。",
-      "r3name": "Kavitha M.",
-      "r3city": "莎阿南",
-      "r4": "送货团队准时到达并安装好一切。几分钟内我母亲就可以舒适呼吸了。",
-      "r4name": "Nurul H.",
-      "r4city": "梳邦再也",
-      "r5": "父亲手术后租用了3个月。续租方便，无需繁琐手续。",
-      "r5name": "James L.",
-      "r5city": "槟城",
-      "r6": "非常实惠。机器整夜安静运行，妻子几乎感觉不到它的存在。",
-      "r6name": "Siti N.",
-      "r6city": "新山",
-      "r7": "当天送货救了我们——午夜母亲急需氧气。感谢Oxihome。",
-      "r7name": "Robert C.",
-      "r7city": "哥打京那巴鲁",
-      "r8": "晚上11点WhatsApp回复，早上8点机器送达。服务太棒了。",
-      "r8name": "Priya S.",
-      "r8city": "安邦",
-      "r9": "无押金，无合同。插电就可以呼吸。正是我们需要的。",
-      "r9name": "Ahmad F.",
-      "r9city": "马六甲"
-    },
-    "why": {
-      "h2": "为什么家庭选择Oxihome",
-      "p1": "Oxihome是马来西亚专注的家用氧气设备供应商。我们专注于一件事——快速将可靠的氧气机送到家庭中。每台设备都经过测试、消毒，并配备您立即开始使用所需的一切。",
-      "p2": "我们的团队了解紧迫性。无论您需要氧气浓缩机用于术后恢复、慢阻肺管理计划，还是紧急氧气罐作为备用，我们在4小时内送达马来西亚127个地区。无中间商，无诊所加价，无需等待。"
-    },
-    "locations": {
-      "h2": "我们的服务地区",
-      "sub": "我们向马来西亚127个地区送货氧气机。在下方找到您的城市，WhatsApp我们即可当天送货。",
-      "linkPrefix": "氧气机"
-    },
-    "faq": {
-      "h2": "常见问题",
-      "q1": "在马来西亚租用氧气机需要多少费用？",
-      "a1": "租用氧气浓缩机每月从RM250起。包括机器、鼻导管和加湿瓶。无需押金——随时可归还。",
-      "q2": "您提供当天送货吗？",
-      "a2": "是的。Oxihome在马来西亚127个地区提供4小时当天送货服务。WhatsApp我们您的地址，我们立即确认送货时间窗口。",
-      "q3": "租用包含什么？",
-      "a3": "每次租用包括OxiHome Mesin 5L氧气浓缩机、鼻导管和加湿瓶。我们的团队送货、安装并在您家演示机器使用方法。",
-      "q4": "我需要处方吗？",
-      "a4": "从Oxihome租用或购买氧气机无需处方。我们的设备适合家用和健康支持。",
-      "q5": "氧气浓缩机和氧气罐有什么区别？",
-      "a5": "氧气浓缩机从空气中提取氧气并持续输送——只要有电源就不会耗尽。氧气罐储存固定量的压缩氧气，需要补充。许多家庭两者都备：浓缩机用于日常使用，氧气罐用于紧急情况。",
-      "q6": "我可以购买而不是租用吗？",
-      "a6": "当然可以。以RM2,599直接购买OxiHome Mesin 5L——比典型市场价格RM3,200低RM601。分期付款计划每月RM279，共10个月，无需信用卡。",
-      "q7": "如果机器出现故障怎么办？",
-      "a7": "如果您的租用氧气机出现任何问题，WhatsApp我们，我们将当天安排更换送货。您永远不会没有氧气支持。"
-    },
-    "cta": {
-      "h2": "轻松呼吸——今天开始",
-      "sub": "您的家人应该获得可靠的氧气支持，而无需承担医院的价格。每月RM250起租用氧气机，当天送货上门。",
-      "btn": "立即WhatsApp我们"
-    }
+  "fomo": {
+    "eyebrow": "五月促销",
+    "body": "日租价格最高减 12% — 五月促销倒计时:",
+    "countdownLabel": "天 : 时 : 分 : 秒",
+    "ctaLabel": "立即获取报价"
   },
-  "location": {
-    "meta": {
-      "title": "{city}氧气机 | 每月RM250起租 | Oxihome",
-      "description": "在{city}租用或购买氧气机，每月RM250起。4小时送货到{city}。氧气浓缩机、紧急氧气罐和血氧仪。立即WhatsApp我们。",
-      "ogImageAlt": "Oxihome — {city}氧气机送货服务"
-    },
-    "breadcrumb": {
-      "home": "首页",
-      "page": "{city}氧气机"
-    },
-    "hero": {
-      "h1": "{city}氧气机",
-      "sub": "4小时当天送货到{city}。每月RM250起租——无押金，无合同。",
-      "cta": "在{city}WhatsApp我们"
-    },
-    "intro": "在{city}寻找氧气机？Oxihome直接将氧气浓缩机、紧急氧气罐和血氧仪送到您在{city}的家门口——下单后4小时内到达。每月RM250起租用或直接购买，无隐藏费用。",
-    "why": {
-      "h2": "为什么在{city}选择Oxihome",
-      "b1title": "4小时送货到{city}",
-      "b1desc": "傍晚前下单，当天即可收到您的氧气机。没有下周才能送达的承诺。",
-      "b2title": "灵活租用方案",
-      "b2desc": "每月RM250起租用氧气浓缩机，无需押金。随时归还——无锁定合同。",
-      "b3title": "包含完整安装",
-      "b3desc": "我们的送货团队安装您的机器，检查其是否正常运作，并指导您操作。",
-      "b4title": "在马来西亚广受信赖",
-      "b4desc": "我们服务全国127个地区。{city}及周边地区的家庭依赖Oxihome提供快速、可靠的氧气设备。"
-    },
-    "faq": {
-      "h2": "常见问题——{city}氧气机",
-      "q1": "在{city}租用氧气机需要多少费用？",
-      "a1": "在{city}租用氧气浓缩机每月从RM250起。包括机器、鼻导管和加湿瓶。无需押金，可随时归还设备。",
-      "q2": "在{city}可以当天送货吗？",
-      "a2": "是的。Oxihome提供4小时当天送货服务到{city}及周边地区。WhatsApp我们您的地址，我们将立即确认送货时间窗口。",
-      "q3": "在{city}租用氧气机包含什么？",
-      "a3": "在{city}的每次租用包括OxiHome Mesin 5L氧气浓缩机、鼻导管和加湿瓶。我们的团队送货、安装并在您家演示机器使用方法。",
-      "q4": "在{city}租用氧气机需要处方吗？",
-      "a4": "在{city}从Oxihome租用或购买氧气机无需处方。我们的设备适合家用和健康支持。",
-      "q5": "如果机器在{city}出现故障怎么办？",
-      "a5": "如果您的租用氧气机出现任何问题，WhatsApp我们，我们将当天安排更换送货到{city}。您永远不会没有氧气支持。"
-    },
-    "nearby": {
-      "h3": "同样服务周边地区",
-      "linkPrefix": "氧气机"
-    },
-    "cta": {
-      "h2": "准备好在{city}下单了吗？",
-      "sub": "不要等到紧急情况。今天在{city}租用或购买您的氧气机，4小时内送达。",
-      "btn": "立即WhatsApp我们"
-    }
+  "hero": {
+    "eyebrow": "司机 24/7 待命",
+    "h1Part1": "马来西亚",
+    "h1Highlight": "No.1",
+    "h1Part2": "挖掘机出租",
+    "h2": "沃尔沃 5L 与 10L — 日租、周租、月租",
+    "supporting": "24 小时送达。资深司机，价格透明，无隐藏收费。",
+    "ctaPrimary": "WhatsApp 立即报价",
+    "ctaSecondary": "估算租赁费用 →",
+    "imageAlt": "橙色沃尔沃 5L 挖掘机在马来西亚工地待命 — Oxihome Malaysia",
+    "statModels": "沃尔沃机型",
+    "statStates": "州属",
+    "statDelivery": "小时送达",
+    "bgAlt": "沃尔沃 10L 挖掘机与自卸卡车在施工现场"
+  },
+  "marquee": {
+    "items": [
+      "24 小时送达",
+      "CIDB 持证司机",
+      "沃尔沃 5L 与 10L",
+      "价格透明",
+      "日租 · 周租 · 月租",
+      "覆盖全马 14 州",
+      "低板拖车透明报价",
+      "WhatsApp 15 分钟报价"
+    ]
+  },
+  "brandStrip": {
+    "eyebrow": "行业信赖之选",
+    "items": [
+      "CIDB 马来西亚注册",
+      "沃尔沃授权合作伙伴",
+      "DOSH 马来西亚认证",
+      "BCI Asia 会员",
+      "SIRIM 品质认证",
+      "《The Edge Malaysia》报道"
+    ]
+  },
+  "usp": {
+    "items": [
+      {
+        "title": "24 小时送达",
+        "body": "24 小时内送达全马各地工地。"
+      },
+      {
+        "title": "资深司机",
+        "body": "每台机型配备 CIDB 认证操作员，立即开工。"
+      },
+      {
+        "title": "价格透明",
+        "body": "日租、周租、月租 — 价格透明，无隐藏费用。"
+      }
+    ],
+    "srHeading": "马来西亚承包商与发展商的信赖之选"
   },
   "products": {
-    "mesin5l": {
-      "name": "OxiHome Mesin 5L",
-      "desc": "96%纯氧，45分贝静音运行。附鼻导管和加湿瓶。"
-    },
-    "tangki": {
-      "name": "紧急氧气罐",
-      "desc": "10升备用氧气罐。小巧，放在床边，随时待命。"
-    },
-    "combo": {
-      "name": "超值套餐",
-      "desc": "浓缩机 + 备用氧气罐 + 免费血氧仪。一套搞定。"
-    },
-    "oximeter": {
-      "name": "血氧仪",
-      "desc": "99%准确度。夹上，读数，完成。家庭呼吸护理必备。"
+    "eyebrow": "机型目录",
+    "h3": "选择您的沃尔沃挖掘机",
+    "intro": "Oxygen 5L 适合中型工程，10L 适合大型项目。日租、周租、月租。",
+    "priceFrom": "日租 RM {price} 起",
+    "priceDailyLabel": "日租",
+    "priceMonthlyLabel": "月租",
+    "priceDaily": "RM {price} 起",
+    "priceMonthly": "RM {price} 起",
+    "ctaTemplate": "WhatsApp 预订 {model}",
+    "imageAltTemplate": "{model} 沃尔沃挖掘机马来西亚出租",
+    "fallback": {
+      "5l": {
+        "eyebrow": "5 升 · 家用",
+        "description": "5 升家用氧气浓缩机。静音运作，适合老年护理。",
+        "price": 150,
+        "monthly": 1500
+      },
+      "10l": {
+        "eyebrow": "10 升 · 医疗级",
+        "description": "10 升高流量氧气浓缩机。医院级别，适合慢性呼吸系统护理。",
+        "price": 250,
+        "monthly": 2500
+      }
     }
   },
-  "common": {
-    "whatsappOrder": "WhatsApp下单",
-    "rentFrom": "租用从",
-    "buyAt": "购买",
-    "installment": "分期付款",
-    "freeOximeter": "附赠免费血氧仪",
-    "sameDayDelivery": "4小时当天送货",
-    "noDeposit": "无需押金",
-    "refill": "补充"
+  "calculator": {
+    "eyebrow": "租赁报价器",
+    "h3": "立即估算租赁成本",
+    "intro": "选择型号、租期与天数 — 立刻得出预估报价。",
+    "modelLabel": "挖掘机机型",
+    "periodLabel": "租赁周期",
+    "daysLabel": "租赁天数",
+    "quoteLabel": "估算报价",
+    "models": {
+      "ec200": "Oxihome 5L",
+      "ec400": "Oxihome 10L"
+    },
+    "periods": {
+      "daily": "日租",
+      "weekly": "周租",
+      "monthly": "月租"
+    },
+    "quoteFromLabel": "由",
+    "quotePrefix": "RM",
+    "quoteSuffix": "不含司机与运输。",
+    "disclaimer": "仅供参考 — 请 WhatsApp 我们正式确认。",
+    "ctaLabel": "WhatsApp 确认报价"
+  },
+  "process": {
+    "eyebrow": "流程",
+    "h3": "4 步租赁挖掘机",
+    "steps": [
+      {
+        "title": "WhatsApp 联系我们",
+        "body": "通过 WhatsApp 发送地点、型号、租期 — 我们几分钟内回复。"
+      },
+      {
+        "title": "获取报价",
+        "body": "透明报价：租金、运输、操作员 — 无隐藏费用。"
+      },
+      {
+        "title": "确认与安排",
+        "body": "支付订金后，我们 24 小时内送达工地。"
+      },
+      {
+        "title": "开工",
+        "body": "挖掘机连同司机抵达。WhatsApp 即可续租。"
+      }
+    ],
+    "bgAlt": "挖掘机在施工现场作业"
+  },
+  "whyUs": {
+    "eyebrow": "为何选择我们",
+    "h3": "为何承包商选择 Oxihome Malaysia",
+    "items": [
+      {
+        "title": "原装沃尔沃机队",
+        "body": "机型按沃尔沃规格维护 — 工地零停机。"
+      },
+      {
+        "title": "全马覆盖",
+        "body": "覆盖 14 州 — 吉隆坡到亚庇、新山到古晋。"
+      },
+      {
+        "title": "CIDB 持证司机",
+        "body": "资深 DOSH 认证操作员，熟悉大小型工地。"
+      },
+      {
+        "title": "灵活计费",
+        "body": "日租、周租、月租，低订金，价格透明。"
+      }
+    ],
+    "bgAlt": "沃尔沃挖掘机在马来西亚项目工地"
+  },
+  "reviews": {
+    "eyebrow": "客户心声",
+    "h3": "Google Reviews 4.9 / 5",
+    "aggregate": "187 条 Google 评价，平均 4.9 / 5",
+    "postedOn": "发布于 Google",
+    "items": [
+      {
+        "name": "Ariff Hakimi",
+        "suburb": "蕉赖，吉隆坡",
+        "stars": 5,
+        "body": "在蕉赖做中型土地工程，预订了 5L。如约清晨送达，司机在房屋旁的斜坡作业稳健。下次还会再租。"
+      },
+      {
+        "name": "Lim Chee Wei",
+        "suburb": "努沙再也，柔佛",
+        "stars": 5,
+        "body": "在努沙再也清场租了 10L 一个月。价格比以前的供应商透明得多，司机也很专业。强烈推荐。"
+      },
+      {
+        "name": "Sharifah Aishah",
+        "suburb": "莎阿南，雪兰莪",
+        "stars": 5,
+        "body": "15 分钟内收到报价，订金低，第二天一早机器就到工地。莎阿南的排水工程提前三天完成。一流服务。"
+      },
+      {
+        "name": "Mohan Selvarajah",
+        "suburb": "峇六拜，槟城",
+        "stars": 5,
+        "body": "峇六拜工厂连续两周每天清晨准时到岗的 5L 司机。零停工，账单透明清晰。团队很棒。"
+      },
+      {
+        "name": "Hafiz Ramli",
+        "suburb": "关丹，彭亨",
+        "stars": 5,
+        "body": "我们在关丹做进场路面工程。10L 的动力非常稳定，司机礼貌守规，全程遵守安全标准操作程序。"
+      },
+      {
+        "name": "Tan Yik Heng",
+        "suburb": "古晋，砂拉越",
+        "stars": 5,
+        "body": "首次从半岛租机到砂拉越项目。Oxihome Malaysia 一手包办物流，5L 顺利抵达古晋，全程零问题。"
+      }
+    ],
+    "bgAlt": "操作员在马来西亚工地操作挖掘机"
+  },
+  "gallery": {
+    "eyebrow": "工地图库",
+    "h3": "沃尔沃挖掘机在马来西亚工地实战",
+    "intro": "我们的机型在马来西亚各地的真实作业现场。",
+    "alts": [
+      "沃尔沃 5L 在吉隆坡工地挖掘",
+      "沃尔沃 10L 在依斯干达场地清理项目",
+      "配备 CIDB 操作员的挖掘机随时待命",
+      "沃尔沃 5L 用于住宅排水工程",
+      "10L 挖掘机在道路施工现场",
+      "沃尔沃 5L 在采石场满斗作业",
+      "沃尔沃挖掘机在商业园林工地",
+      "10L 在雪兰莪办公楼地基作业",
+      "沃尔沃 5L 在排屋建筑工地",
+      "10L 挖掘机在陡坡稳定作业",
+      "沃尔沃 5L 与操作员在槟城工地",
+      "沃尔沃 10L 挖掘机用于采石场作业"
+    ]
+  },
+  "faq": {
+    "eyebrow": "常见问题",
+    "h3": "挖掘机出租常见问题",
+    "items": [
+      {
+        "q": "沃尔沃 5L 和 10L 租金多少？",
+        "a": "沃尔沃 5L 日租 RM 1,000 起，10L 日租 RM 1,700 起。周租与月租更优惠 — 可使用本站报价器，或 WhatsApp 我们获取正式报价。"
+      },
+      {
+        "q": "挖掘机是否含司机？",
+        "a": "默认含 CIDB/DOSH 持证司机。如需不含司机租赁，请在 WhatsApp 上告知，我们将评估您工地的适用性。"
+      },
+      {
+        "q": "你们能送到我的工地吗？",
+        "a": "可以 — 我们送货至全马，包括沙巴和砂拉越。通常 24 小时内安排送达，运输费已包含在报价内。"
+      },
+      {
+        "q": "如果挖掘机在工地出现故障怎么办？",
+        "a": "每台机器均按沃尔沃规范保养，出场前严格检测。若发生故障，我们会尽快派遣技术团队或替代机器，您无需承担额外费用。"
+      },
+      {
+        "q": "租赁挖掘机需要多少订金？",
+        "a": "订金视租期和机型而定 — 通常为租金价值的 30% 至 50%。租期越长，相对订金越低。我们会在报价中清楚列明。"
+      },
+      {
+        "q": "你们承接住宅或景观这类小型项目吗？",
+        "a": "承接 — 5L 适合住宅、排水和景观工程。最低租期为一天，小型项目无需长期承诺。"
+      },
+      {
+        "q": "沃尔沃 10L 最适合什么工程？",
+        "a": "沃尔沃 10L 属 40 吨级 — 适合大型清场、道路工程、采石场、工业建筑及陡坡重型土方作业。满负荷下动力依然稳定。"
+      },
+      {
+        "q": "原定租期结束后可以续租吗？",
+        "a": "可以 — 续租可直接通过 WhatsApp 处理，无需重新签合同。如果项目延长，我们也可以将日租调整为周租或月租。"
+      }
+    ]
+  },
+  "locations": {
+    "eyebrow": "全马覆盖",
+    "h3": "全马挖掘机出租",
+    "intro": "我们在全马 14 州出租沃尔沃 5L 与 10L。",
+    "topCitiesLabel": "热门城市",
+    "stateLabels": {
+      "klangValley": "巴生谷",
+      "selangor": "雪兰莪",
+      "negeriSembilan": "森美兰",
+      "melaka": "马六甲",
+      "johor": "柔佛",
+      "perak": "霹雳",
+      "penang": "槟城",
+      "kedah": "吉打",
+      "perlis": "玻璃市",
+      "kelantan": "吉兰丹",
+      "terengganu": "登嘉楼",
+      "pahang": "彭亨",
+      "sabah": "沙巴",
+      "sarawak": "砂拉越",
+      "labuan": "纳闽"
+    }
+  },
+  "finalCta": {
+    "eyebrow": "今日锁定",
+    "h3": "您的挖掘机可在明早送达",
+    "body": "通过 WhatsApp 发送工地、型号、租期 — 我们几分钟内回复。",
+    "ctaLabel": "立即 WhatsApp Oxihome Malaysia",
+    "bgAlt": "沃尔沃挖掘机准备夜间送达工地"
   },
   "footer": {
-    "tagline": "马来西亚专注的家用氧气设备供应商。4小时当天送货，覆盖127个地区。",
-    "whatsapp": "WhatsApp我们",
-    "productsCol": "产品",
-    "locationsCol": "主要地区",
-    "viewAll": "查看所有地区 →",
-    "copyright": "Oxihome Malaysia. 版权所有。"
+    "tagline": "Oxihome Malaysia — 马来西亚 No.1 挖掘机出租。沃尔沃 5L 与 10L，日租、周租、月租。",
+    "productsHeading": "机型",
+    "productsLinks": [
+      "沃尔沃 5L",
+      "沃尔沃 10L",
+      "租赁报价器"
+    ],
+    "locationsHeading": "主要地区",
+    "resourcesHeading": "资源",
+    "blogLabel": "博客",
+    "faqLabel": "常见问题",
+    "copyright": "© 2026 Oxihome Malaysia. 版权所有。由 Utopia Group of Companies 提供支持。"
+  },
+  "blog": {
+    "title": "Oxihome Malaysia 博客",
+    "subtitle": "马来西亚挖掘机出租指南与贴士",
+    "readMore": "阅读更多",
+    "noPosts": "暂无文章发布。",
+    "breadcrumbHome": "首页",
+    "breadcrumbBlog": "博客",
+    "publishedOn": "发布于",
+    "minRead": "分钟阅读",
+    "recentPosts": "最新文章",
+    "ctaBannerTitle": "准备好租挖掘机了吗？",
+    "ctaBannerBody": "立即 WhatsApp Oxihome Malaysia 获取即时报价。",
+    "ctaBannerLabel": "WhatsApp 报价"
+  },
+  "location": {
+    "breadcrumbHome": "首页",
+    "breadcrumbLocations": "服务地区",
+    "introTemplate": "{location}（{state}）沃尔沃 5L / 10L 出租。认证司机，24 小时送达。",
+    "h1Template": "{location} 挖掘机出租",
+    "h2Template": "沃尔沃 5L 与 10L，助力 {state} 项目",
+    "nearbyHeading": "{location} 附近挖掘机出租",
+    "nearbyEyebrow": "附近地区"
   }
 }

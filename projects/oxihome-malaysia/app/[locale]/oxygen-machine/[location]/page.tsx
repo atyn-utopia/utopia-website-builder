@@ -1,501 +1,568 @@
-import type { Metadata } from 'next'
-import { getTranslations } from 'next-intl/server'
-import { notFound } from 'next/navigation'
-import { routing } from '@/i18n/routing'
-import { locations, getNearbyLocations } from '@/config/locations'
-import { siteConfig } from '@/config/site'
-import { getPhoneNumber, waLink } from '@/lib/getPhoneNumber'
-import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema'
-import { FAQSchema } from '@/components/schema/FAQSchema'
-import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema'
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
+import { getTranslations } from 'next-intl/server';
+import { siteConfig } from '@/config/site';
+import { routing } from '@/i18n/routing';
+import {
+  locations,
+  getLocationsByState,
+  getNearbyLocations,
+  regionOrder,
+  regionKeys,
+  topCitySlugs,
+} from '@/config/locations';
+import { getProducts } from '@/lib/webcore';
+import { waRedirect } from '@/lib/waRedirect';
+import { ProductSchema } from '@/components/schema/ProductSchema';
+import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
+import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
+import { FAQSchema } from '@/components/schema/FAQSchema';
+import SiteHeader from '@/components/SiteHeader';
+import SiteFooter from '@/components/SiteFooter';
+import FomoBanner from '@/components/FomoBanner';
+import Calculator from '@/components/Calculator';
+import MarketingMarquee from '@/components/MarketingMarquee';
+import PageStyles from '@/components/PageStyles';
+import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker';
+import { WhatsAppButton, WaIcon } from '@/components/WhatsAppButton';
 
-const WA_GREEN = '#25D366'
+const GALLERY_IMAGES = [
+  '/gallery/3.jpg', '/gallery/4.jpg', '/gallery/5.jpg', '/gallery/6.jpg',
+  '/gallery/7.jpg', '/gallery/8.jpg', '/gallery/9.jpg', '/gallery/10.jpg',
+  '/gallery/11.jpg', '/gallery/12.jpg', '/gallery/13.jpg', '/gallery/14.jpg',
+];
+const BRAND_LOGO_ON_DARK = '/brand/oxihome-dark.png';
+const HERO_OPERATOR_PHOTO = '/brand/hero-photo.png';
+const FINAL_CTA_BG = '/bg/bg-5.avif';
 
-const WAIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current shrink-0">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.549 4.107 1.508 5.839L.057 23.179c-.083.334.232.633.556.522l5.493-1.757A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.9c-1.888 0-3.661-.519-5.175-1.425l-.371-.22-3.842 1.229 1.167-3.77-.242-.389A9.877 9.877 0 012.1 12C2.1 6.534 6.534 2.1 12 2.1S21.9 6.534 21.9 12 17.466 21.9 12 21.9z" />
-  </svg>
-)
-
-const CheckIcon = () => (
-  <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 shrink-0" style={{ color: 'var(--brand-primary)' }}>
-    <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
-  </svg>
-)
-
-type Params = { locale: string; location: string }
-
-export async function generateStaticParams() {
-  const params: Params[] = []
-  for (const locale of routing.locales) {
-    for (const loc of locations) {
-      params.push({ locale, location: loc.slug })
-    }
-  }
-  return params
+// Build the top cities at build time; the rest render on first request and
+// stay cached until a webcore tag (products/phones/blog) is invalidated via
+// /api/revalidate. Tag-based only — no time-based revalidate. Avoids 60s/route
+// timeouts on Vercel's static worker when we have 489 routes (163 cities × 3 locales).
+export const dynamicParams = true;
+export function generateStaticParams() {
+  return topCitySlugs.flatMap((slug) =>
+    routing.locales.map((locale) => ({ locale, location: slug })),
+  );
 }
-
-export const revalidate = 60
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<Params>
+  params: Promise<{ locale: string; location: string }>;
 }): Promise<Metadata> {
-  const { locale, location } = await params
-  const locationData = locations.find(l => l.slug === location)
-  if (!locationData) return {}
-
-  const t = await getTranslations({ locale, namespace: 'location' })
-  const cityName = locationData.displayName
-
+  const { locale, location } = await params;
+  const loc = locations.find((l) => l.slug === location);
+  if (!loc) return {};
+  const t = await getTranslations({ locale, namespace: 'meta.location' });
+  const title = t('title', { location: loc.name });
+  const description = t('description', { location: loc.name, state: loc.state });
+  const path = `/${siteConfig.productSlug}/${loc.slug}`;
+  const languages: Record<string, string> = Object.fromEntries(
+    routing.locales.map((l) => [l, `${siteConfig.url}/${l}${path}`]),
+  );
+  languages['x-default'] = `${siteConfig.url}/${routing.defaultLocale}${path}`;
   return {
-    title: t('meta.title', { city: cityName }),
-    description: t('meta.description', { city: cityName }),
-    alternates: {
-      canonical: `https://oxihome.my/${locale}/oxygen-machine/${location}`,
-      languages: {
-        en: `https://oxihome.my/en/oxygen-machine/${location}`,
-        ms: `https://oxihome.my/ms/oxygen-machine/${location}`,
-        zh: `https://oxihome.my/zh/oxygen-machine/${location}`,
-        'x-default': `https://oxihome.my/en/oxygen-machine/${location}`,
-      },
-    },
-    openGraph: {
-      title: t('meta.title', { city: cityName }),
-      description: t('meta.description', { city: cityName }),
-      url: `https://oxihome.my/${locale}/oxygen-machine/${location}`,
-      images: [{ url: 'https://oxihome.my/og-image.jpg', width: 1200, height: 630, alt: t('meta.ogImageAlt', { city: cityName }) }],
-    },
-    robots: { index: true, follow: true },
-  }
+    title,
+    description,
+    alternates: { canonical: `${siteConfig.url}/${locale}${path}`, languages },
+    openGraph: { title, description, url: `${siteConfig.url}/${locale}${path}`, type: 'website' },
+  };
 }
 
-export default async function LocationPage({ params }: { params: Promise<Params> }) {
-  const { locale, location } = await params
+function GoogleG({ size = 22 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M21.6 12.2c0-.7-.1-1.3-.2-1.9H12v3.6h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.2Z" fill="#4285F4" />
+      <path d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1a6 6 0 0 1-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22Z" fill="#34A853" />
+      <path d="M6.4 14a6 6 0 0 1 0-3.8V7.6H3.1a10 10 0 0 0 0 8.8L6.4 14Z" fill="#FBBC04" />
+      <path d="M12 5.9c1.5 0 2.8.5 3.9 1.5l2.9-2.9A10 10 0 0 0 12 2 10 10 0 0 0 3.1 7.6L6.4 10A6 6 0 0 1 12 5.9Z" fill="#EA4335" />
+    </svg>
+  );
+}
 
-  const locationData = locations.find(l => l.slug === location)
-  if (!locationData) notFound()
+function StarRow({ count }: { count: number }) {
+  return (
+    <span className="stars" aria-label={`${count} out of 5 stars`}>
+      {Array.from({ length: count }).map((_, i) => (
+        <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true">
+          <path d="M12 2l3.1 6.3 7 1-5.1 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9L2 9.3l7-1L12 2Z" />
+        </svg>
+      ))}
+    </span>
+  );
+}
 
-  const cityName = locationData.displayName
-  const stateName = locationData.state
+export default async function LocationPage({
+  params,
+}: {
+  params: Promise<{ locale: string; location: string }>;
+}) {
+  const { locale, location } = await params;
+  const loc = locations.find((l) => l.slug === location);
+  if (!loc) notFound();
 
-  const phoneNumber = await getPhoneNumber(location)
-  const waUrl = waLink(phoneNumber, `Hi Oxihome, I need an oxygen machine in ${cityName}.`)
+  const tHero = await getTranslations({ locale, namespace: 'hero' });
+  const tLocPage = await getTranslations({ locale, namespace: 'location' });
+  const tUsp = await getTranslations({ locale, namespace: 'usp' });
+  const tBrand = await getTranslations({ locale, namespace: 'brandStrip' });
+  const tProducts = await getTranslations({ locale, namespace: 'products' });
+  const tCalc = await getTranslations({ locale, namespace: 'calculator' });
+  const tProcess = await getTranslations({ locale, namespace: 'process' });
+  const tWhy = await getTranslations({ locale, namespace: 'whyUs' });
+  const tReviews = await getTranslations({ locale, namespace: 'reviews' });
+  const tGallery = await getTranslations({ locale, namespace: 'gallery' });
+  const tFaq = await getTranslations({ locale, namespace: 'faq' });
+  const tLoc = await getTranslations({ locale, namespace: 'locations' });
+  const tFinal = await getTranslations({ locale, namespace: 'finalCta' });
+  const tNav = await getTranslations({ locale, namespace: 'nav' });
 
-  const t  = await getTranslations({ locale, namespace: 'location' })
-  const tp = await getTranslations({ locale, namespace: 'products' })
-  const tc = await getTranslations({ locale, namespace: 'common' })
-
-  const nearbyLocs = getNearbyLocations(location)
-
-  const faqItems = [
-    { question: t('faq.q1', { city: cityName }), answer: t('faq.a1', { city: cityName }) },
-    { question: t('faq.q2', { city: cityName }), answer: t('faq.a2', { city: cityName }) },
-    { question: t('faq.q3', { city: cityName }), answer: t('faq.a3', { city: cityName }) },
-    { question: t('faq.q4', { city: cityName }), answer: t('faq.a4', { city: cityName }) },
-    { question: t('faq.q5', { city: cityName }), answer: t('faq.a5', { city: cityName }) },
-  ]
-
-  const WIX = 'https://static.wixstatic.com/media'
-
-  type Product = {
-    id: string
-    name: string
-    desc: string
-    image: string
-    imageAlt: string
-    rentPrice?: string
-    buyPrice?: string
-    installment?: string
-    marketPrice?: string
-    savings?: string
-    badge?: string
-    highlight?: boolean
-    extras?: string[]
-  }
-
-  const products: Product[] = [
+  const { core } = await getProducts();
+  const fallback5L = tProducts.raw('fallback.ec200') as { eyebrow: string; description: string; price: number; monthly: number };
+  const fallback10L = tProducts.raw('fallback.ec400') as { eyebrow: string; description: string; price: number; monthly: number };
+  const productCards = [
     {
-      id: 'mesin-5l',
-      name: tp('mesin5l.name'),
-      desc: tp('mesin5l.desc'),
-      image: `${WIX}/b0f7ef_84d13101bba64c58a8f2b96f966cd98a~mv2.png/v1/fill/w_320,h_320,al_c,q_85,enc_auto/mesin-5l.png`,
-      imageAlt: 'OxiHome Mesin 5L oxygen concentrator with nasal cannula and humidifier bottle',
-      rentPrice: 'RM250/mo',
-      buyPrice: 'RM2,599',
-      installment: 'RM279 × 10 mo',
-      marketPrice: 'RM3,200',
-      savings: 'Save RM601',
-      badge: locale === 'ms' ? 'Paling Popular' : locale === 'zh' ? '最受欢迎' : 'Most Popular',
-      highlight: true,
+      slug: 'oxihome-5l',
+      name: 'Oxihome 5L',
+      description: core.find((p) => p.slug === 'oxihome-5l')?.description ?? fallback5L.description,
+      rentalPrice: core.find((p) => p.slug === 'oxihome-5l')?.rental_price ?? fallback5L.price,
+      eyebrow: fallback5L.eyebrow,
+      image: core.find((p) => p.slug === 'oxihome-5l')?.photos[0]?.url ?? '/products/oxihome-5l.png',
     },
     {
-      id: 'tangki',
-      name: tp('tangki.name'),
-      desc: tp('tangki.desc'),
-      image: `${WIX}/d3104b_83a1e346f88542bea4af1fc55ee1b941~mv2.png/v1/fill/w_320,h_320,al_c,q_85,enc_auto/tangki.png`,
-      imageAlt: '10-litre emergency oxygen tank by Oxihome for home backup use',
-      rentPrice: 'RM90/mo',
-      marketPrice: 'RM150',
-      savings: 'Save RM60',
+      slug: 'oxihome-10l',
+      name: 'Oxihome 10L',
+      description: core.find((p) => p.slug === 'oxihome-10l')?.description ?? fallback10L.description,
+      rentalPrice: core.find((p) => p.slug === 'oxihome-10l')?.rental_price ?? fallback10L.price,
+      eyebrow: fallback10L.eyebrow,
+      image: core.find((p) => p.slug === 'oxihome-10l')?.photos[0]?.url ?? '/products/oxihome-10l.png',
     },
-    {
-      id: 'combo',
-      name: tp('combo.name'),
-      desc: tp('combo.desc'),
-      image: `${WIX}/b0f7ef_f5648d945f6b44758ff1f504e089b1a3~mv2.png/v1/fill/w_320,h_320,al_c,q_85,enc_auto/combo.png`,
-      imageAlt: 'Oxihome value combo package — oxygen concentrator, emergency tank, and free oximeter',
-      rentPrice: 'RM320/mo',
-      badge: locale === 'ms' ? 'Nilai Terbaik' : locale === 'zh' ? '超值套餐' : 'Best Value',
-      extras: [tc('freeOximeter'), tc('sameDayDelivery')],
-    },
-    {
-      id: 'oximeter',
-      name: tp('oximeter.name'),
-      desc: tp('oximeter.desc'),
-      image: `${WIX}/d3104b_b1603a4e8c81438e852a19a57cc94b77~mv2.png/v1/fill/w_320,h_320,al_c,q_85,enc_auto/oximeter.png`,
-      imageAlt: 'Oxihome pulse oximeter for checking blood oxygen levels at home',
-      buyPrice: 'RM40',
-      marketPrice: 'RM60',
-      savings: 'Save RM20',
-    },
-  ]
+  ];
+  const calcRates = {
+    ec200: { daily: Number(productCards[0].rentalPrice), monthly: fallback5L.monthly },
+    ec400: { daily: Number(productCards[1].rentalPrice), monthly: fallback10L.monthly },
+  };
+
+  const uspItems = tUsp.raw('items') as { title: string; body: string }[];
+  const brandItems = tBrand.raw('items') as string[];
+  const processSteps = tProcess.raw('steps') as { title: string; body: string }[];
+  const whyItems = tWhy.raw('items') as { title: string; body: string }[];
+  const reviewItems = tReviews.raw('items') as { name: string; suburb: string; stars: number; body: string }[];
+  const faqItems = tFaq.raw('items') as { q: string; a: string }[];
+  const localisedFaq = faqItems.map((f) => ({
+    q: f.q,
+    a: f.a.replace(/Malaysia/g, `${loc.name}, ${loc.state}`),
+  }));
+
+  const nearby = getNearbyLocations(loc.slug);
+  const locationsByState = getLocationsByState();
 
   return (
-    <main>
-      <LocalBusinessSchema
-        cityName={cityName}
-        stateName={stateName}
-        locationSlug={location}
-        locale={locale}
-        phoneNumber={phoneNumber}
+    <>
+      <FomoBanner />
+      <SiteHeader />
+
+      <LocalBusinessSchema locale={locale} locationName={loc.name} locationSlug={loc.slug} state={loc.state} />
+      <BreadcrumbSchema
+        items={[
+          { name: tLocPage('breadcrumbHome'), url: `${siteConfig.url}/${locale}` },
+          { name: tLocPage('breadcrumbLocations'), url: `${siteConfig.url}/${locale}#locations` },
+          { name: loc.name, url: `${siteConfig.url}/${locale}/${siteConfig.productSlug}/${loc.slug}` },
+        ]}
       />
-      <FAQSchema faqs={faqItems} />
-      <BreadcrumbSchema locale={locale} cityName={cityName} locationSlug={location} />
+      {productCards.map((p) => (
+        <ProductSchema
+          key={p.slug}
+          name={p.name}
+          slug={p.slug}
+          description={p.description}
+          rentalPrice={p.rentalPrice}
+          image={p.image}
+          areaServed={loc.name}
+        />
+      ))}
+      <FAQSchema items={localisedFaq} />
 
-      {/* ── HERO ── */}
-      <section className="relative overflow-hidden flex items-center" style={{ minHeight: '60vh' }}>
-        {/* Real photo background */}
-        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-          <img
-            src="https://static.wixstatic.com/media/d3104b_35b047fff2574ce5b0fa9c576d2ccf51~mv2.jpg/v1/fill/w_1440,h_1058,al_c,q_85,enc_auto/hero-bg.jpg"
-            alt="" role="presentation"
-            className="w-full h-full object-cover object-center"
-          />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(10,37,53,0.93) 0%, rgba(10,37,53,0.80) 45%, rgba(11,107,130,0.65) 100%)' }} />
-        </div>
-        <div className="absolute inset-0 pointer-events-none" aria-hidden="true"
-          style={{ background: 'radial-gradient(ellipse 60% 50% at 72% 40%, rgba(21,160,192,0.25) 0%, transparent 70%)' }} />
-
-        <div className="relative max-w-6xl mx-auto w-full px-6 py-16">
-          {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm mb-6" style={{ color: 'rgba(255,255,255,0.5)' }}>
-            <a href={`/${locale}`} className="hover:text-white transition-colors">{t('breadcrumb.home')}</a>
-            <span>/</span>
-            <span style={{ color: 'rgba(255,255,255,0.85)' }}>{t('breadcrumb.page', { city: cityName })}</span>
-          </nav>
-
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="z-10">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-5"
-                style={{ background: 'rgba(21,160,192,0.15)', color: 'var(--brand-primary-lt)', border: '1px solid rgba(21,160,192,0.3)' }}>
-                <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
-                {stateName}
-              </div>
-              <h1 className="font-display text-4xl md:text-5xl leading-tight text-white mb-4" style={{ letterSpacing: '-0.02em' }}>
-                {t('hero.h1', { city: cityName })}
-              </h1>
-              <p className="text-base leading-relaxed mb-6 max-w-md" style={{ color: 'rgba(255,255,255,0.75)' }}>
-                {t('hero.sub', { city: cityName })}
-              </p>
-              <a href={`/${locale}/redirect-whatsapp-1`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 font-bold px-7 py-4 rounded-full text-base text-white transition-all hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-green-400"
-                style={{ background: WA_GREEN, boxShadow: '0 8px 32px rgba(37,211,102,0.35)' }}>
-                <WAIcon />
-                {t('hero.cta', { city: cityName })}
-              </a>
+      <section className="hero">
+        <div className="hero-bg" role="img" aria-label={tHero('bgAlt')} />
+        <div className="container hero-grid">
+          <div className="hero-text">
+            <nav className="breadcrumb breadcrumb-on-dark" aria-label="Breadcrumb">
+              <Link href={`/${locale}`}>{tLocPage('breadcrumbHome')}</Link>
+              <span aria-hidden="true">›</span>
+              <Link href={`/${locale}#locations`}>{tLocPage('breadcrumbLocations')}</Link>
+              <span aria-hidden="true">›</span>
+              <span aria-current="page">{loc.name}</span>
+            </nav>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={BRAND_LOGO_ON_DARK} alt={tNav('logoAlt')} width={600} height={441} className="hero-logo" />
+            <span className="eyebrow eyebrow-light">OPERATOR STANDBY · {loc.name.toUpperCase()}</span>
+            <h1>{tLocPage('h1Template', { location: loc.name })}</h1>
+            <h2>{tLocPage('h2Template', { state: loc.state })}</h2>
+            <h5 className="hero-support">{tLocPage('introTemplate', { location: loc.name, state: loc.state })}</h5>
+            <div className="hero-cta-row">
+              <WhatsAppButton href={waRedirect(locale, undefined, loc.slug)} label={`hero-${loc.slug}`} className="btn btn-wa">
+                <WaIcon /> {tHero('ctaPrimary')}
+              </WhatsAppButton>
+              <a href="#calculator" className="hero-secondary">{tHero('ctaSecondary')}</a>
             </div>
+          </div>
+          <div className="hero-image">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={HERO_OPERATOR_PHOTO} alt={tHero('imageAlt')} width={1600} height={1137} className="hero-image-img" />
+          </div>
+        </div>
+      </section>
 
-            {/* Hero image with stamp frame + badges */}
-            <div className="relative flex items-center justify-center z-10">
-              {/* Orbs */}
-              <div className="absolute w-72 h-72 rounded-full animate-orb pointer-events-none"
-                style={{ background: 'radial-gradient(circle, rgba(21,160,192,0.25) 0%, transparent 70%)', top: '-20%', right: '-10%' }} />
-              <div className="absolute w-48 h-48 rounded-full animate-orb-slow pointer-events-none"
-                style={{ background: 'radial-gradient(circle, rgba(232,105,42,0.2) 0%, transparent 70%)', bottom: '0%', left: '5%' }} />
-              {/* Ring */}
-              <div className="absolute w-80 h-80 rounded-full animate-ring pointer-events-none"
-                style={{ border: '1px dashed rgba(21,160,192,0.25)', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />
-              {/* Stamp badges */}
-              {[
-                { label: '4H',  sub: 'Delivery', top: '8%',    left: '-2%',  rotate: '-12deg' },
-                { label: '96%', sub: 'O₂ Purity', bottom: '12%', left: '-4%', rotate: '10deg' },
-                { label: 'No',  sub: 'Deposit',   top: '10%',  right: '-2%', rotate: '14deg' },
-              ].map((stamp, i) => (
-                <div key={i} className="absolute w-20 h-20 rounded-full flex flex-col items-center justify-center text-center pointer-events-none z-20"
-                  style={{
-                    ...(stamp.top    ? { top:    stamp.top    } : {}),
-                    ...(stamp.bottom ? { bottom: stamp.bottom } : {}),
-                    ...(stamp.left   ? { left:   stamp.left   } : {}),
-                    ...(stamp.right  ? { right:  stamp.right  } : {}),
-                    transform: `rotate(${stamp.rotate})`,
-                    background: 'rgba(11,107,130,0.9)',
-                    border: '2px dashed rgba(255,255,255,0.5)',
-                    boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
-                  }}>
-                  <span className="text-white font-black text-xl leading-none">{stamp.label}</span>
-                  <span className="text-white text-[10px] font-semibold uppercase tracking-wide leading-tight mt-0.5 opacity-90">{stamp.sub}</span>
-                </div>
+      <MarketingMarquee locale={locale} variant="light" />
+
+      <section className="brand-strip" aria-labelledby="brand-strip-heading">
+        <div className="container">
+          <h5 id="brand-strip-heading" className="brand-strip-eyebrow">{tBrand('eyebrow')}</h5>
+          <div className="brand-strip-track no-scrollbar">
+            <div className="marquee-track">
+              {[...brandItems, ...brandItems].map((label, i) => (
+                <span key={i} className="brand-chip">{label}</span>
               ))}
-              {/* Product image with stamp frame */}
-              <div className="relative animate-float">
-                <div className="absolute pointer-events-none" style={{ inset: '-14px', borderRadius: '28px', border: '2px dashed rgba(21,160,192,0.5)' }} />
-                <div className="absolute pointer-events-none" style={{ inset: '-28px', borderRadius: '36px', border: '1px solid rgba(21,160,192,0.2)' }} />
-                {[{ top: '-8px', left: '-8px' }, { top: '-8px', right: '-8px' }, { bottom: '-8px', left: '-8px' }, { bottom: '-8px', right: '-8px' }].map((pos, i) => (
-                  <div key={i} className="absolute w-5 h-5 rounded-sm pointer-events-none"
-                    style={{ ...pos as React.CSSProperties, background: 'var(--brand-primary-lt)', opacity: 0.7 }} />
-                ))}
-                <div className="absolute inset-0 rounded-3xl pointer-events-none"
-                  style={{ background: 'radial-gradient(circle, rgba(21,160,192,0.3) 0%, transparent 70%)', filter: 'blur(24px)', transform: 'scale(1.2)' }} />
-                <img
-                  src="https://static.wixstatic.com/media/b0f7ef_84d13101bba64c58a8f2b96f966cd98a~mv2.png/v1/fill/w_500,h_500,al_c,q_90,enc_auto/mesin-oksigen.png"
-                  alt={`Oxygen machine delivery in ${cityName} — Oxihome same-day 4-hour delivery service`}
-                  width={380} height={380}
-                  className="relative rounded-3xl"
-                  style={{ boxShadow: '0 32px 80px rgba(10,37,53,0.6), 0 8px 24px rgba(11,107,130,0.4)' }}
-                />
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── STATS BAR ── */}
-      <section style={{ background: 'var(--brand-primary)', color: 'white' }}>
-        <div className="max-w-6xl mx-auto px-6 py-4 grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[
-            { value: '4H', label: tc('sameDayDelivery') },
-            { value: 'RM250', label: locale === 'ms' ? 'Sewa dari' : locale === 'zh' ? '每月起租' : 'Rent from' },
-            { value: '96%', label: locale === 'ms' ? 'Ketulenan O₂' : locale === 'zh' ? 'O₂纯度' : 'O₂ Purity' },
-            { value: '0', label: locale === 'ms' ? 'Deposit' : locale === 'zh' ? '押金' : 'Deposit' },
-          ].map(stat => (
-            <div key={stat.value} className="flex flex-col items-center text-center py-2">
-              <span className="font-display text-2xl leading-none">{stat.value}</span>
-              <span className="text-xs mt-1 opacity-85">{stat.label}</span>
-            </div>
-          ))}
+      <section className="usp-bar" aria-labelledby="usp-heading">
+        <h3 id="usp-heading" className="visually-hidden">{tUsp('srHeading')}</h3>
+        <div className="container">
+          <div className="usp-panel">
+            {uspItems.map((u, i) => (
+              <div key={i} className="usp-cell">
+                <span className="usp-icon">
+                  {i === 0 && (
+                    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="32" height="32" aria-hidden="true">
+                      <path d="M4 22 V14 L11 14 L13 10 L20 10 L22 14 L26 14 L28 16 V22" />
+                      <circle cx="9" cy="24" r="3" fill="currentColor" />
+                      <circle cx="23" cy="24" r="3" fill="currentColor" />
+                      <path d="M14 14 L19 14 L20 18 L13 18 Z" fill="rgba(255,255,255,0.25)" />
+                    </svg>
+                  )}
+                  {i === 1 && (
+                    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="32" height="32" aria-hidden="true">
+                      <path d="M5 22 C5 14, 12 8, 16 8 C20 8, 27 14, 27 22 Z" fill="currentColor" />
+                      <path d="M5 22 H27" stroke="rgba(255,255,255,0.3)" />
+                      <rect x="14" y="18" width="4" height="4" fill="#0F0F0F" />
+                      <path d="M3 24 H29" />
+                    </svg>
+                  )}
+                  {i === 2 && (
+                    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="32" height="32" aria-hidden="true">
+                      <rect x="5" y="9" width="22" height="14" rx="2" fill="currentColor" />
+                      <circle cx="16" cy="16" r="4" fill="#0F0F0F" />
+                      <text x="16" y="19" textAnchor="middle" fontSize="6" fontWeight="700" fill="currentColor" stroke="none">RM</text>
+                      <circle cx="9" cy="13" r="0.8" fill="#0F0F0F" />
+                      <circle cx="23" cy="19" r="0.8" fill="#0F0F0F" />
+                    </svg>
+                  )}
+                </span>
+                <h5>{u.title}</h5>
+                <h5>{u.body}</h5>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ── INTRO PARAGRAPH ── */}
-      <section className="py-12 px-6" style={{ background: 'var(--brand-surface)' }}>
-        <div className="max-w-3xl mx-auto text-center">
-          <p className="text-lg leading-relaxed" style={{ color: 'var(--brand-text)' }}>
-            {t('intro', { city: cityName })}
-          </p>
-        </div>
-      </section>
-
-      {/* ── PRODUCTS ── */}
-      <section className="py-16 px-6">
-        <div className="max-w-6xl mx-auto">
-          <h2
-            className="font-display text-3xl text-center mb-10"
-            style={{ color: 'var(--brand-dark)', letterSpacing: '-0.02em' }}
-          >
-            {locale === 'ms'
-              ? `Produk Tersedia di ${cityName}`
-              : locale === 'zh'
-              ? `${cityName}可购产品`
-              : `Products Available in ${cityName}`}
-          </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {products.map(product => (
-              <div
-                key={product.id}
-                className="relative flex flex-col rounded-2xl p-5 transition-transform hover:-translate-y-1"
-                style={{
-                  background: 'var(--brand-white)',
-                  boxShadow: product.highlight
-                    ? '0 8px 40px rgba(11,107,130,0.18)'
-                    : '0 4px 20px rgba(10,37,53,0.07)',
-                  border: product.highlight ? '2px solid var(--brand-primary)' : '1px solid var(--brand-border)',
-                }}
-              >
-                {product.badge && (
-                  <div className="absolute -top-3 left-4 px-3 py-1 rounded-full text-xs font-bold text-white"
-                    style={{ background: product.highlight ? 'var(--brand-primary)' : 'var(--brand-accent)' }}>
-                    {product.badge}
+      <section id="products" className="section">
+        <div className="container">
+          <div className="section-head">
+            <span className="eyebrow">{tProducts('eyebrow')}</span>
+            <h3>{tProducts('h3')}</h3>
+            <h4>{tProducts('intro')}</h4>
+          </div>
+          <div className="products-grid">
+            {productCards.map((p) => {
+              const monthly = p.slug === 'oxihome-5l' ? fallback5L.monthly : fallback10L.monthly;
+              return (
+                <article key={p.slug} className="product-card" data-product={p.slug}>
+                  <ProductImpressionTracker slug={p.slug} />
+                  <div className="product-media">
+                    <span className="product-tag">{p.eyebrow}</span>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={p.image} alt={tProducts('imageAltTemplate', { model: p.name })} loading="lazy" decoding="async" />
                   </div>
-                )}
-                {/* Product image */}
-                <div className="w-full aspect-square rounded-xl overflow-hidden mb-4" style={{ background: 'var(--brand-primary-xs)' }}>
-                  <img src={product.image} alt={product.imageAlt} width={320} height={320} className="w-full h-full object-contain p-2" />
-                </div>
-                <h3 className="font-display text-lg leading-tight mb-2" style={{ color: 'var(--brand-dark)', minHeight: '3.5rem' }}>
-                  {product.name}
-                </h3>
-                <p className="text-sm leading-relaxed flex-1 mb-4" style={{ color: 'var(--brand-text-muted)', minHeight: '4rem' }}>
-                  {product.desc}
-                </p>
-                <div className="space-y-1.5 mb-4">
-                  {product.rentPrice && (
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-xl font-bold" style={{ color: 'var(--brand-primary)' }}>{product.rentPrice}</span>
-                      {product.marketPrice && (
-                        <span className="text-xs line-through" style={{ color: 'var(--brand-text-muted)' }}>{product.marketPrice}</span>
-                      )}
+                  <div className="product-body">
+                    <h4 className="product-title">{p.name}</h4>
+                    <h5 className="product-desc">{p.description}</h5>
+                    <div className="product-prices">
+                      <div className="price-cell">
+                        <span className="price-label">{tProducts('priceDailyLabel')}</span>
+                        <span className="price-value">{tProducts('priceDaily', { price: Number(p.rentalPrice).toLocaleString() })}</span>
+                      </div>
+                      <div className="price-divider" aria-hidden="true" />
+                      <div className="price-cell">
+                        <span className="price-label">{tProducts('priceMonthlyLabel')}</span>
+                        <span className="price-value">{tProducts('priceMonthly', { price: Number(monthly).toLocaleString() })}</span>
+                      </div>
                     </div>
-                  )}
-                  {product.buyPrice && (
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm font-semibold" style={{ color: 'var(--brand-accent)' }}>{tc('buyAt')} {product.buyPrice}</span>
-                      {product.savings && (
-                        <span className="text-xs font-medium px-1.5 py-0.5 rounded" style={{ background: 'var(--brand-accent-lt)', color: 'var(--brand-accent)' }}>
-                          {product.savings}
-                        </span>
-                      )}
-                    </div>
-                  )}
-                  {product.installment && (
-                    <p className="text-xs" style={{ color: 'var(--brand-text-muted)' }}>{tc('installment')}: {product.installment}</p>
-                  )}
-                  {product.extras && product.extras.map(e => (
-                    <p key={e} className="flex items-center gap-1.5 text-xs font-medium" style={{ color: 'var(--brand-primary)' }}>
-                      <CheckIcon /> {e}
-                    </p>
-                  ))}
-                </div>
-                <a href={`/${locale}/redirect-whatsapp-1`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 font-bold py-3 rounded-xl text-sm text-white transition-opacity hover:opacity-90 active:opacity-80 focus:outline-none focus:ring-2 focus:ring-green-400"
-                  style={{ background: WA_GREEN }}>
-                  <WAIcon />
-                  {tc('whatsappOrder')}
-                </a>
+                    <WhatsAppButton href={waRedirect(locale, `${p.name} di ${loc.name}`, loc.slug)} label={`product-${p.slug}-${loc.slug}`} className="btn btn-wa product-cta">
+                      <WaIcon size={16} />
+                      {tProducts('ctaTemplate', { model: p.name })}
+                    </WhatsAppButton>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section id="calculator" className="section bg-blueprint-glow calc-section">
+        <div className="container">
+          <div className="section-head">
+            <span className="eyebrow eyebrow-light">{tCalc('eyebrow')}</span>
+            <h3 style={{ color: '#fff' }}>{tCalc('h3')}</h3>
+            <p style={{ color: 'rgba(255,255,255,0.78)' }}>{tCalc('intro')}</p>
+          </div>
+          <Calculator rates={calcRates} />
+        </div>
+      </section>
+
+      <MarketingMarquee locale={locale} variant="dark" />
+
+      <section className="section section-bg-image section-bg-process" aria-label={tProcess('bgAlt')}>
+        <div className="section-bg-overlay" aria-hidden="true" />
+        <div className="container">
+          <div className="section-head">
+            <span className="eyebrow eyebrow-light">{tProcess('eyebrow')}</span>
+            <h3 style={{ color: '#fff' }}>{tProcess('h3')}</h3>
+          </div>
+          <div className="process-grid">
+            {processSteps.map((s, i) => (
+              <div key={i} className="process-card">
+                <h6 className="process-num">{String(i + 1).padStart(2, '0')}</h6>
+                <h5>{s.title}</h5>
+                <h5>{s.body}</h5>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── WHY CHOOSE IN CITY ── */}
-      <section className="relative overflow-hidden py-16 px-6">
-        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-          <img src="https://static.wixstatic.com/media/d3104b_c54d3854dbb44b9ebd369f9c9e15187d~mv2.jpg/v1/fill/w_1440,h_900,al_c,q_85,enc_auto/why-bg.jpg" alt="" role="presentation" className="w-full h-full object-cover object-center" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(10,37,53,0.96) 0%, rgba(13,51,71,0.92) 100%)' }} />
+      <section className="section why-section">
+        <div className="why-bg" role="img" aria-label={tWhy('bgAlt')} />
+        <div className="container">
+          <div className="section-head">
+            <span className="eyebrow">{tWhy('eyebrow')}</span>
+            <h3>{tWhy('h3')}</h3>
+          </div>
+          <div className="why-grid">
+            {whyItems.map((w, i) => (
+              <div key={i} className="why-card">
+                <h5>{w.title}</h5>
+                <h5>{w.body}</h5>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="relative max-w-5xl mx-auto">
-          <h2 className="font-display text-3xl md:text-4xl text-white mb-8" style={{ letterSpacing: '-0.02em' }}>
-            {t('why.h2', { city: cityName })}
-          </h2>
-          <div className="grid sm:grid-cols-2 gap-5">
-            {[
-              { title: t('why.b1title', { city: cityName }), desc: t('why.b1desc', { city: cityName }) },
-              { title: t('why.b2title'), desc: t('why.b2desc') },
-              { title: t('why.b3title'), desc: t('why.b3desc') },
-              { title: t('why.b4title'), desc: t('why.b4desc', { city: cityName }) },
-            ].map(item => (
-              <div
-                key={item.title}
-                className="flex gap-4 p-5 rounded-2xl"
-                style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}
-              >
-                <CheckIcon />
+      </section>
+
+      <section className="section section-bg-image section-bg-reviews" aria-label={tReviews('bgAlt')}>
+        <div className="section-bg-overlay" aria-hidden="true" />
+        <div className="container">
+          <div className="section-head">
+            <span className="eyebrow eyebrow-light">{tReviews('eyebrow')}</span>
+            <h3 style={{ color: '#fff' }}>{tReviews('h3')}</h3>
+            <h5 className="reviews-aggregate reviews-aggregate-light"><GoogleG size={18} /> {tReviews('aggregate')}</h5>
+          </div>
+          <div className="reviews-grid">
+            {reviewItems.map((r, i) => (
+              <article key={i} className="review-card">
+                <span className="review-g"><GoogleG size={22} /></span>
+                <span className="review-source">{tReviews('postedOn')}</span>
+                <StarRow count={r.stars} />
+                <h5 className="review-body">{r.body}</h5>
                 <div>
-                  <p className="font-semibold text-white text-sm mb-1">{item.title}</p>
-                  <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.65)' }}>{item.desc}</p>
+                  <h6 className="review-author">{r.name}</h6>
+                  <h6 className="review-suburb">{r.suburb}</h6>
                 </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <div className="section-head">
+            <span className="eyebrow">{tGallery('eyebrow')}</span>
+            <h3>{tGallery('h3')}</h3>
+            <h5>{tGallery('intro')}</h5>
+          </div>
+          <div className="gallery-grid">
+            {GALLERY_IMAGES.map((src, i) => (
+              <div key={i} className="gallery-item">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={src} alt={((tGallery.raw('alts') as string[])[i]) ?? `Tapak bina ${i + 1}`} loading="lazy" />
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── FAQ ── */}
-      <section className="py-16 px-6" style={{ background: 'var(--brand-surface)' }}>
-        <div className="max-w-3xl mx-auto">
-          <h2 className="font-display text-3xl text-center mb-10" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.02em' }}>
-            {t('faq.h2', { city: cityName })}
-          </h2>
-          <div className="space-y-3">
-            {faqItems.map((faq, i) => (
-              <details
-                key={i}
-                className="group rounded-2xl overflow-hidden"
-                style={{ border: '1px solid var(--brand-border)', background: 'var(--brand-white)' }}
-              >
-                <summary
-                  className="flex items-center justify-between gap-4 px-6 py-4 cursor-pointer select-none font-semibold text-sm list-none"
-                  style={{ color: 'var(--brand-dark)' }}
-                >
-                  {faq.question}
-                  <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 shrink-0 transition-transform group-open:rotate-180" style={{ color: 'var(--brand-primary)' }}>
-                    <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
-                  </svg>
-                </summary>
-                <div className="px-6 pb-5 text-sm leading-relaxed" style={{ color: 'var(--brand-text-muted)', borderTop: '1px solid var(--brand-border)' }}>
-                  <div className="pt-4">{faq.answer}</div>
-                </div>
+      <section id="faq" className="section bg-paper">
+        <div className="container faq-container">
+          <div className="section-head">
+            <span className="eyebrow">{tFaq('eyebrow')}</span>
+            <h3>{tFaq('h3')} — {loc.name}</h3>
+          </div>
+          <div className="faq-list">
+            {localisedFaq.map((f, i) => (
+              <details key={i} className="faq-item">
+                <summary>{f.q}</summary>
+                <h4>{f.a}</h4>
               </details>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── NEARBY LOCATIONS ── */}
-      {nearbyLocs.length > 0 && (
-        <section className="py-12 px-6">
-          <div className="max-w-5xl mx-auto">
-            <h3 className="font-display text-2xl mb-6 text-center" style={{ color: 'var(--brand-dark)' }}>
-              {t('nearby.h3')}
-            </h3>
-            <div className="flex flex-wrap justify-center gap-3">
-              {nearbyLocs.map(loc => (
-                <a
-                  key={loc.slug}
-                  href={`/${locale}/oxygen-machine/${loc.slug}`}
-                  className="px-4 py-2 rounded-xl text-sm font-medium transition-all hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-teal-400"
-                  style={{
-                    background: 'var(--brand-surface)',
-                    color: 'var(--brand-primary)',
-                    border: '1px solid var(--brand-border)',
-                  }}
-                >
-                  {t('nearby.linkPrefix')} {loc.displayName}
-                </a>
+      <section id="locations" className="section">
+        <div className="container">
+          <div className="section-head">
+            <span className="eyebrow">{tLoc('eyebrow')}</span>
+            <h3>{tLoc('h3')}</h3>
+            <h4>{tLoc('intro')}</h4>
+          </div>
+          <div className="top-cities">
+            {topCitySlugs.map((slug) => {
+              const c = locations.find((l) => l.slug === slug);
+              if (!c) return null;
+              return (
+                <Link key={slug} href={`/${locale}/${siteConfig.productSlug}/${slug}`} className={`loc-city-chip ${slug === loc.slug ? 'is-current' : ''}`}>
+                  {c.name}
+                </Link>
+              );
+            })}
+          </div>
+          <div className="states-grid">
+            {regionOrder.map((region) => {
+              const cities = locationsByState[region] || [];
+              if (cities.length === 0) return null;
+              const key = regionKeys[region];
+              return (
+                <div key={region} className="state-block">
+                  <h4>{tLoc(`stateLabels.${key}`)}</h4>
+                  <ul>
+                    {cities.map((c) => (
+                      <li key={c.slug}>
+                        <Link href={`/${locale}/${siteConfig.productSlug}/${c.slug}`}>{c.name}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {nearby.length > 0 && (
+        <section className="section bg-paper">
+          <div className="container">
+            <div className="section-head">
+              <span className="eyebrow">{tLocPage('nearbyEyebrow')}</span>
+              <h3>{tLocPage('nearbyHeading', { location: loc.name })}</h3>
+            </div>
+            <div className="nearby-grid">
+              {nearby.map((n) => (
+                <Link key={n.slug} href={`/${locale}/${siteConfig.productSlug}/${n.slug}`} className="nearby-card">
+                  <span className="nearby-name">{n.name}</span>
+                  <span className="nearby-state">{n.state}</span>
+                  <span className="nearby-arrow" aria-hidden="true">→</span>
+                </Link>
               ))}
             </div>
           </div>
         </section>
       )}
 
-      {/* ── FINAL CTA ── */}
-      <section className="py-16 px-6 text-center" style={{ background: 'var(--brand-primary)' }}>
-        <div className="max-w-2xl mx-auto">
-          <h2 className="font-display text-3xl md:text-4xl text-white mb-3" style={{ letterSpacing: '-0.02em' }}>
-            {t('cta.h2', { city: cityName })}
-          </h2>
-          <p className="text-base leading-relaxed mb-7" style={{ color: 'rgba(255,255,255,0.8)' }}>
-            {t('cta.sub', { city: cityName })}
-          </p>
-          <a
-            href={`/${locale}/redirect-whatsapp-1`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 font-bold px-8 py-4 rounded-full text-base text-white transition-all hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-white/40"
-            style={{ background: WA_GREEN, boxShadow: '0 8px 32px rgba(37,211,102,0.4)' }}
-          >
-            <WAIcon />
-            {t('cta.btn')}
-          </a>
+      <section className="section final-cta">
+        <div className="final-cta-bg" aria-hidden="true">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={FINAL_CTA_BG} alt={tFinal('bgAlt')} loading="lazy" decoding="async" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+        </div>
+        <div className="container final-cta-inner">
+          <span className="eyebrow eyebrow-light">{tFinal('eyebrow')}</span>
+          <h3>{tFinal('h3')} — {loc.name}</h3>
+          <h5>{tFinal('body')}</h5>
+          <WhatsAppButton href={waRedirect(locale, undefined, loc.slug)} label={`final-cta-${loc.slug}`} className="btn btn-wa">
+            <WaIcon /> {tFinal('ctaLabel')}
+          </WhatsAppButton>
         </div>
       </section>
-    </main>
-  )
+
+      <SiteFooter locale={locale} />
+
+      <PageStyles />
+      <style>{`
+        /* Location-only extras (everything else inherited from PageStyles) */
+        .breadcrumb {
+          display: inline-flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 10px;
+          margin: 0 0 4px;
+          padding: 7px 12px 7px 12px;
+          background: rgba(255,255,255,0.08);
+          border: 1px solid rgba(255,255,255,0.18);
+          border-radius: 999px;
+          backdrop-filter: blur(6px);
+          font-family: var(--font-mono-stack);
+          font-weight: 700;
+          font-size: 10px;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: rgba(255,255,255,0.7);
+          width: fit-content;
+          max-width: 100%;
+          align-self: center;
+        }
+        @media (min-width: 880px) { .breadcrumb { align-self: flex-start; } }
+        .breadcrumb a {
+          color: rgba(255,255,255,0.85);
+          transition: color var(--dur) var(--ease-out);
+        }
+        .breadcrumb a:hover { color: var(--brand-orange-bright); }
+        .breadcrumb [aria-current="page"] {
+          color: #fff;
+          background: var(--brand-orange);
+          padding: 3px 10px;
+          border-radius: 999px;
+          box-shadow: 0 4px 10px rgba(242,108,31,0.32);
+        }
+        .breadcrumb span[aria-hidden="true"] {
+          color: rgba(255,255,255,0.45);
+          font-weight: 500;
+        }
+        .top-cities { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 40px; }
+        .city-chip { padding: 8px 16px; background: #fff; border: 1px solid var(--line); border-radius: 999px; font-weight: 600; font-size: 13.5px; color: var(--brand-charcoal); }
+        .city-chip:hover { background: var(--brand-orange-pale); border-color: var(--brand-orange-ring); color: var(--brand-orange-deep); }
+        .city-chip.is-current { background: var(--brand-charcoal); border-color: var(--brand-charcoal); color: #fff; }
+        .nearby-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+          max-width: 960px;
+          margin: 0 auto;
+        }
+        @media (min-width: 640px) { .nearby-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 980px) { .nearby-grid { grid-template-columns: repeat(4, 1fr); } }
+        .nearby-card { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-md); padding: 16px 18px; transition: border-color var(--dur) var(--ease-out), transform var(--dur) var(--ease-out); }
+        .nearby-card:hover { border-color: var(--brand-orange-ring); transform: translateY(-2px); }
+        .nearby-name { color: var(--brand-charcoal); font-weight: 700; font-size: 15px; flex: 1; }
+        .nearby-state { font-family: var(--font-mono-stack); font-weight: 600; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); }
+        .nearby-arrow { color: var(--brand-orange); font-weight: 700; }
+      `}</style>
+    </>
+  );
 }

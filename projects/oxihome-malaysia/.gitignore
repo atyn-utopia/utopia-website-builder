@@ -1,14 +1,19 @@
-# dependencies
-node_modules/
+# Raw artwork sources — optimized versions live in public/
+brand_assets/
 
-# Next.js build output
+# One-shot insert/seed scripts written by agents (Cyclops/Hanabi)
+.blog-scripts/
+.cyclops-*/
+.hanabi-*/
+
+# Local screenshots produced during development
+temporary screenshots/
+
+# Build + IDE
 .next/
-out/
-
-# environment variables
-.env
+node_modules/
+*.tsbuildinfo
+.vercel/
 .env.local
-.env*.local
-
-# Vercel
+.DS_Store
 .vercel
