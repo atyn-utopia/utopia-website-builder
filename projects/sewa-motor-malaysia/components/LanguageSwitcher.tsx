@@ -1,97 +1,157 @@
-"use client";
+'use client';
 
-import { useLocale } from "next-intl";
-import { routing } from "@/i18n/routing";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Link from 'next/link';
+import { useLocale } from 'next-intl';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useEffect, useId, useRef, useState } from 'react';
+import { routing } from '@/i18n/routing';
 
-const languageLabels: Record<string, string> = {
-  en: "EN",
-  zh: "中文",
-};
+const LABELS: Record<string, string> = { ms: 'MS', en: 'EN', zh: '中' };
+
+function starPoints(cx: number, cy: number, outer: number, rot = -Math.PI / 2): string {
+  const inner = outer * 0.382;
+  const pts: string[] = [];
+  for (let i = 0; i < 10; i++) {
+    const angle = rot + (Math.PI / 5) * i;
+    const r = i % 2 === 0 ? outer : inner;
+    pts.push(`${(cx + r * Math.cos(angle)).toFixed(2)},${(cy + r * Math.sin(angle)).toFixed(2)}`);
+  }
+  return pts.join(' ');
+}
+
+function CircleFlag({ locale }: { locale: string }) {
+  const uid = useId().replace(/:/g, '');
+  const id = `clip-${locale}-${uid}`;
+  return (
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" className="lsw-flag">
+      <defs><clipPath id={id}><circle cx="12" cy="12" r="11.5" /></clipPath></defs>
+      <g clipPath={`url(#${id})`}>
+        {locale === 'ms' && (
+          <>
+            <rect width="24" height="24" fill="#fff" />
+            {[0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22].map((y, i) => (
+              <rect key={y} y={y - 4} width="24" height="2" fill={i % 2 === 0 ? '#CC0001' : '#FFFFFF'} />
+            ))}
+            <rect width="13" height="13" fill="#010066" />
+            <circle cx="5.5" cy="6.5" r="3" fill="#FFCC00" />
+            <circle cx="6.6" cy="6" r="2.6" fill="#010066" />
+            <polygon points={starPoints(9.5, 6.5, 1.8)} fill="#FFCC00" />
+          </>
+        )}
+        {locale === 'en' && (
+          <>
+            <rect width="24" height="24" fill="#012169" />
+            <path d="M0,0 L24,24 M24,0 L0,24" stroke="#FFFFFF" strokeWidth="5" />
+            <path d="M0,0 L24,24" stroke="#C8102E" strokeWidth="2" />
+            <path d="M24,0 L0,24" stroke="#C8102E" strokeWidth="2" />
+            <path d="M12,0 V24 M0,12 H24" stroke="#FFFFFF" strokeWidth="7" />
+            <path d="M12,0 V24 M0,12 H24" stroke="#C8102E" strokeWidth="4" />
+          </>
+        )}
+        {locale === 'zh' && (
+          <>
+            <rect width="24" height="24" fill="#EE1C25" />
+            <polygon points={starPoints(7, 7, 3.2)} fill="#FFFF00" />
+            {[{ x: 12, y: 3 }, { x: 14, y: 5.5 }, { x: 14, y: 9 }, { x: 12, y: 11 }].map((s, i) => {
+              const angle = Math.atan2(7 - s.y, 7 - s.x);
+              return <polygon key={i} points={starPoints(s.x, s.y, 1.2, angle)} fill="#FFFF00" />;
+            })}
+          </>
+        )}
+      </g>
+      <circle cx="12" cy="12" r="11.5" fill="none" stroke="rgba(15,15,15,0.18)" strokeWidth="1" />
+    </svg>
+  );
+}
 
 export default function LanguageSwitcher() {
-  const locale = useLocale();
-  const pathname = usePathname();
+  const currentLocale = useLocale();
+  const pathname = usePathname() || '/';
+  const search = useSearchParams();
+  const qs = search?.toString();
+  const suffix = qs ? `?${qs}` : '';
+  const rest = (() => {
+    for (const l of routing.locales) {
+      if (pathname === `/${l}`) return '';
+      if (pathname.startsWith(`/${l}/`)) return pathname.slice(`/${l}`.length);
+    }
+    return pathname === '/' ? '' : pathname;
+  })();
 
-  // Remove current locale prefix from pathname to get the base path
-  const pathnameWithoutLocale = pathname.replace(/^\/(en|zh)/, "") || "/";
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onClick = (e: MouseEvent) => {
+      if (!rootRef.current?.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false); };
+    document.addEventListener('mousedown', onClick);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('mousedown', onClick);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [open]);
 
   return (
-    <div className="relative group">
-      {/* Trigger: globe icon + current locale code */}
+    <div className="lsw" ref={rootRef}>
+      <div className="lsw-toggle" role="group" aria-label="Change language">
+        {routing.locales.map((l) => {
+          const active = l === currentLocale;
+          return (
+            <Link
+              key={l}
+              href={`/${l}${rest}${suffix}`}
+              hrefLang={l}
+              lang={l}
+              className={`lsw-item ${active ? 'is-active' : ''}`}
+              aria-current={active ? 'true' : undefined}
+            >
+              <CircleFlag locale={l} />
+              <span className="lsw-label">{LABELS[l] ?? l.toUpperCase()}</span>
+            </Link>
+          );
+        })}
+      </div>
+
       <button
         type="button"
-        className="flex items-center gap-1.5 px-3 py-2 text-white/90 hover:text-white
-                   transition-colors duration-200 rounded-lg
-                   hover:bg-white/10 focus:bg-white/10 focus:outline-none
-                   focus:ring-2 focus:ring-red-500/50 active:bg-white/15
-                   text-sm font-medium tracking-wide cursor-pointer"
-        aria-label="Switch language"
+        className="lsw-trigger"
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-label="Change language"
+        onClick={() => setOpen((v) => !v)}
       >
-        {/* Globe icon */}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <circle cx="12" cy="12" r="10" />
-          <path d="M2 12h20" />
-          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-        </svg>
-        <span>{locale.toUpperCase()}</span>
-        {/* Chevron */}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="14"
-          height="14"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-          className="transition-transform duration-200 group-hover:rotate-180"
-        >
-          <polyline points="6 9 12 15 18 9" />
+        <CircleFlag locale={currentLocale} />
+        <span className="lsw-trigger-label">{LABELS[currentLocale] ?? currentLocale.toUpperCase()}</span>
+        <svg className="lsw-caret" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+          <path d="M1 3l4 4 4-4" stroke="currentColor" strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
 
-      {/* Dropdown menu — CSS-only via group-hover */}
-      <ul
-        className="absolute right-0 top-full mt-1 min-w-[140px] py-1
-                    bg-gray-900 border border-white/10 rounded-lg
-                    shadow-[0_4px_20px_rgba(0,0,0,0.4),0_0_0_1px_rgba(255,255,255,0.05)]
-                    opacity-0 invisible translate-y-1
-                    group-hover:opacity-100 group-hover:visible group-hover:translate-y-0
-                    transition-all duration-200 z-50"
-      >
-        {routing.locales.map((loc) => (
-          <li key={loc}>
-            <Link
-              href={`/${loc}${pathnameWithoutLocale}`}
-              hrefLang={loc}
-              className={`block px-4 py-2.5 text-sm transition-colors duration-150
-                ${
-                  loc === locale
-                    ? "text-red-400 bg-red-500/10 font-semibold"
-                    : "text-white/80 hover:text-white hover:bg-white/10"
-                }
-                focus:outline-none focus:bg-white/10 active:bg-white/15`}
-            >
-              {languageLabels[loc]}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {open && (
+        <div className="lsw-menu" role="menu">
+          {routing.locales.map((l) => {
+            const active = l === currentLocale;
+            return (
+              <Link
+                key={l}
+                href={`/${l}${rest}${suffix}`}
+                hrefLang={l}
+                lang={l}
+                role="menuitem"
+                className={`lsw-menu-item ${active ? 'is-active' : ''}`}
+                onClick={() => setOpen(false)}
+              >
+                <CircleFlag locale={l} />
+                <span>{LABELS[l] ?? l.toUpperCase()}</span>
+              </Link>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

@@ -119,36 +119,105 @@ h1, h2, h3, h4, h5, h6 {
   background-clip: text;
 }
 
-/* ── Language switcher (high-specificity overrides so element resets don't
- *    clobber the dropdown's flex layout) ─────────────────────────────────── */
+/* ── Language switcher — standalone bordered pills + circle flags ─────────
+ *    Layout rules carry !important so element resets / Tailwind don't win. */
+.lsw { position: relative; display: inline-flex; }
 .lsw-toggle {
   display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
   align-items: center !important;
   gap: 6px !important;
-  flex-direction: row !important;
 }
 .lsw-item {
   display: inline-flex !important;
-  align-items: center !important;
-  gap: 6px !important;
   flex-direction: row !important;
-  padding: 6px 12px;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  gap: 8px !important;
+  height: 36px;
+  padding: 0 14px 0 8px;
   border-radius: 999px;
+  background: #FFFFFF;
+  border: 1.5px solid #CBD5E1;
+  color: #16213E;
+  font-weight: 700;
   font-size: 13px;
-  font-weight: 600;
-  color: var(--brand-text);
-  border: 1px solid transparent;
-  background: transparent;
+  letter-spacing: 0.02em;
+  line-height: 1;
   text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 0.18s ease, background-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
 }
-.lsw-item:hover { background: var(--brand-primary-xs); }
+.lsw-item:hover { border-color: rgba(15,15,15,0.35); background: #F1F5F9; }
 .lsw-item.is-active {
-  background: var(--brand-dark);
-  color: #fff !important;
+  background: #16213E;
+  border-color: #16213E;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(15,15,15,0.18);
 }
-.lsw-label { display: inline-block; line-height: 1; white-space: nowrap; }
-.lsw-flag { display: inline-block; line-height: 1; }
-.lsw-caret { opacity: 0.6; }
+.lsw-flag {
+  display: inline-block !important;
+  flex-shrink: 0;
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+}
+.lsw-label { display: inline-block; flex-shrink: 0; line-height: 1; white-space: nowrap; }
+
+/* Dropdown trigger (mobile only) */
+.lsw-trigger {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 12px 0 8px;
+  background: #FFFFFF;
+  border: 1.5px solid #CBD5E1;
+  border-radius: 999px;
+  color: #16213E;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  cursor: pointer;
+}
+.lsw-trigger-label { display: inline-block; line-height: 1; }
+.lsw-caret { opacity: 0.6; transition: transform 0.18s ease; }
+.lsw-trigger[aria-expanded="true"] .lsw-caret { transform: rotate(180deg); }
+.lsw-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 140px;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  box-shadow: 0 18px 40px -12px rgba(15,15,15,0.25);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  z-index: 60;
+}
+.lsw-menu-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: #16213E;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.lsw-menu-item:hover { background: #F1F5F9; }
+.lsw-menu-item.is-active { background: #16213E; color: #fff; }
+
+@media (max-width: 879px) {
+  .lsw-toggle { display: none !important; }
+  .lsw-trigger { display: inline-flex; }
+}
 
 /* ── USP panel (single container with 3 cells) ─────────────────────────── */
 .usp-panel-fallback { /* keep .usp-panel from PageStyles authoritative */ }
