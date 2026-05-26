@@ -89,10 +89,7 @@ export default async function HomePage({
             </div>
           </div>
         </div>
-      </section>
-
-      <section className="home-stats" aria-label="Service highlights">
-        <div className="home-stats-grid">
+        <div className="home-hero-stats" aria-label="Service highlights">
           {stats.map((n) => (
             <div className="home-stat" key={n}>
               <div className="home-stat-value">{shared(`stats.value${n}` as 'stats.value1')}</div>
