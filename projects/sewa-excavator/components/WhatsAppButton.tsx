@@ -24,7 +24,14 @@ export function WhatsAppButton({
   };
 
   return (
-    <Link href={href} onClick={onClick} className={className} prefetch={false}>
+    <Link
+      href={href}
+      onClick={onClick}
+      className={className}
+      prefetch={false}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       {children}
     </Link>
   );

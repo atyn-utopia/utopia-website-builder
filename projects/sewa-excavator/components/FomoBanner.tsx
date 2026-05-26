@@ -58,7 +58,7 @@ export default function FomoBanner() {
             <span style={{ visibility: 'hidden' }}>00 : 00 : 00 : 00</span>
           )}
         </span>
-        <Link href={waRedirect(locale)} className="fomo-link">{t('ctaLabel')} →</Link>
+        <Link href={waRedirect(locale)} className="fomo-link" target="_blank" rel="noopener noreferrer">{t('ctaLabel')} →</Link>
         {target && <noscript style={{ display: 'none' }}>{target.toISOString()}</noscript>}
       </div>
     </div>

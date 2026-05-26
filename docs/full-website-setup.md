@@ -736,6 +736,10 @@ Every item below MUST be verified on the running site. These rules come from rea
 - [ ] Each `CircleFlag` SVG MUST generate its `clipPath` id via `useId()`. Sharing one id across multiple flag instances breaks clipping on some — flags lose their circle and render square.
 - [ ] Language switcher CSS lives in `globals.css` with `!important` on `display`, `flex-direction`, `flex-wrap` — `<style jsx>` rules lose to global element resets.
 
+#### WhatsApp redirect (every link)
+- [ ] Every link pointing at `/{locale}/redirect-whatsapp-1` (header CTA, hero CTA, product card CTA, calculator CTA, FOMO banner link, final-CTA, blog CTA, footer CTA, sticky FAB) MUST open in a new tab: `target="_blank"` + `rel="noopener noreferrer"`. The redirect page bounces the visitor straight to `wa.me/<number>` — keeping the site open in the original tab preserves the SEO session and gives the visitor somewhere to return.
+- [ ] The shared `<WhatsAppButton>` already sets these attributes; verify any bare `<Link>` that uses `waRedirect()` (e.g. FOMO banner inline link, blog inline CTAs) also has `target="_blank"` + `rel="noopener noreferrer"`.
+
 #### WhatsApp / CTA buttons
 - [ ] Use the official Meta WhatsApp SVG (the speech-bubble-with-phone-handset glyph). The placeholder simplified path looks wrong — replace immediately.
 - [ ] All WA CTAs use the official WhatsApp green `#25D366` (hover `#1EBE57`). Never themed in brand colour.
