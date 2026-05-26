@@ -3,11 +3,7 @@
 import Link from 'next/link';
 import type { CSSProperties, ReactNode } from 'react';
 
-declare global {
-  interface Window {
-    uwc?: (eventType: string, options?: { label?: string }) => void;
-  }
-}
+// Window.uwc is declared globally in projects/sewa-excavator/global.d.ts.
 
 /**
  * Wraps a Next/Link for a blog article card. On click, emits

@@ -2,11 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 
-declare global {
-  interface Window {
-    uwc?: (eventType: string, options?: { label?: string }) => void;
-  }
-}
+// Window.uwc is declared globally in projects/sewa-excavator/global.d.ts.
 
 /**
  * Drop this inside a product card. On client-side mount it walks up to the
