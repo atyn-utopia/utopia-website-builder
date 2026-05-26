@@ -1,8 +1,29 @@
 {
   "nav": {
+    "home": "首页",
     "products": "电单车",
+    "calculator": "计算器",
     "locations": "服务地区",
-    "whatsapp": "立即WhatsApp"
+    "blog": "博客",
+    "whatsapp": "立即WhatsApp",
+    "whatsappCta": "WhatsApp"
+  },
+  "shared": {
+    "logoAlt": "Sewa Motor Malaysia 标志",
+    "imageAlt": "电单车租赁装饰图像"
+  },
+  "gallery": {
+    "alts": [
+      "Honda Vario 160 在八打灵再也送达",
+      "Yamaha NMax 155 停在吉隆坡公寓外",
+      "Honda PCX 160 配智能钥匙",
+      "Honda Wave 125 适合送餐骑士",
+      "Yamaha Y15ZR 在城市道路上",
+      "Modenas Kriss MR3 全新车况"
+    ]
+  },
+  "finalCta": {
+    "bgAlt": "马来西亚黄昏摩托车骑士的背景照片"
   },
   "fomo": {
     "message": "今日仅剩 {slots} 辆电单车可当天送达！",

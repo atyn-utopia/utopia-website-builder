@@ -1,14 +1,33 @@
 {
   "nav": {
+    "home": "Home",
     "products": "Motorcycles",
+    "calculator": "Calculator",
     "locations": "Locations",
-    "whatsapp": "WhatsApp Us"
+    "blog": "Blog",
+    "whatsapp": "WhatsApp Us",
+    "whatsappCta": "WhatsApp"
+  },
+  "gallery": {
+    "alts": [
+      "Honda Vario 160 delivered in Petaling Jaya",
+      "Yamaha NMax 155 outside a KL condo",
+      "Honda PCX 160 with smart key",
+      "Honda Wave 125 for a food delivery rider",
+      "Yamaha Y15ZR on a city route",
+      "Modenas Kriss MR3 in fresh condition"
+    ]
+  },
+  "finalCta": {
+    "bgAlt": "Background photo of a motorcycle rider at Malaysian dusk"
   },
   "fomo": {
     "message": "Only {slots} bikes left for same-day delivery!",
     "bookNow": "Book Now"
   },
   "shared": {
+    "logoAlt": "Sewa Motor Malaysia logo",
+    "imageAlt": "Motorcycle rental — decorative image",
     "freeToAsk": "Free to ask · Reply within 1 hour",
     "safetyNote": "Safety-checked fleet · 30-day breakdown support",
     "stats": {
@@ -54,7 +73,8 @@
     "hero": {
       "headline": "Motor Rental Malaysia — Sewa Motor from RM30/day",
       "subheadline": "Rent reliable motorcycles delivered to your doorstep. Honda Vario, Yamaha NMax, PCX and more — daily, weekly, or monthly plans across Malaysia.",
-      "cta": "WhatsApp Us to Book Now"
+      "cta": "WhatsApp Us to Book Now",
+      "bgAlt": "Motorcycle rider on a Malaysian highway at dusk"
     },
     "stats": {
       "rentals": "6,000+ Rentals",
@@ -75,6 +95,8 @@
     "products": {
       "heading": "Motorcycle Rental Malaysia — Choose Your Ride",
       "cta": "Rent via WhatsApp",
+      "priceFromTemplate": "From RM {price}",
+      "imageAltTemplate": "Rent {model} in Malaysia — same-day delivery",
       "daily": "Daily",
       "weekly": "Weekly",
       "monthly": "Monthly",

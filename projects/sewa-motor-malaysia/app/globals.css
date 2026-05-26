@@ -118,3 +118,42 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* ── Language switcher (high-specificity overrides so element resets don't
+ *    clobber the dropdown's flex layout) ─────────────────────────────────── */
+.lsw-toggle {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex-direction: row !important;
+}
+.lsw-item {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex-direction: row !important;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--brand-text);
+  border: 1px solid transparent;
+  background: transparent;
+  text-decoration: none;
+}
+.lsw-item:hover { background: var(--brand-primary-xs); }
+.lsw-item.is-active {
+  background: var(--brand-dark);
+  color: #fff !important;
+}
+.lsw-label { display: inline-block; line-height: 1; white-space: nowrap; }
+.lsw-flag { display: inline-block; line-height: 1; }
+.lsw-caret { opacity: 0.6; }
+
+/* ── USP panel (single container with 3 cells) ─────────────────────────── */
+.usp-panel-fallback { /* keep .usp-panel from PageStyles authoritative */ }
+
+/* ── Nav CTA mobile-hide fallback (header also enforces this) ──────────── */
+@media (max-width: 879px) {
+  .nav-cta { display: none !important; }
+}
