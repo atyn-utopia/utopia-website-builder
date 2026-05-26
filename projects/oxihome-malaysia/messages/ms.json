@@ -173,7 +173,11 @@
     "oximeter": {
       "name": "Pulse Oximeter",
       "desc": "Ketepatan 99%. Jepit, baca, selesai. Penting untuk penjagaan pernafasan di rumah."
-    }
+    },
+    "imageAltTemplate": "Mesin oksigen Oxihome {model} untuk sewa di Malaysia",
+    "priceDaily": "Dari RM {price}",
+    "priceMonthly": "Dari RM {price}",
+    "priceFrom": "Dari RM {price}"
   },
   "common": {
     "whatsappOrder": "WhatsApp untuk Pesan",
@@ -226,5 +230,37 @@
     "pageSubtitle": "Panduan terapi oksigen di rumah untuk Malaysia",
     "title": "Blog Oxihome",
     "subtitle": "Panduan terapi oksigen di rumah untuk Malaysia"
-  }
+  },
+  "hero": {
+    "imageAlt": "Mesin oksigen Oxihome sedia untuk penghantaran ke rumah di Malaysia"
+  },
+  "gallery": {
+    "alts": [
+      "Konsentrator oksigen Oxihome 5L di ruang tamu rumah Malaysia",
+      "Tangki oksigen dengan regulator sedia untuk penghantaran",
+      "Pesakit warga emas menerima terapi oksigen di rumah",
+      "Konsentrator gred hospital Oxihome 10L di klinik Pulau Pinang",
+      "Pulse oximeter mengukur oksigen darah pesakit Asia",
+      "Penjaga memasang konsentrator oksigen di rumah",
+      "Ahli keluarga melaraskan kadar aliran mesin oksigen",
+      "Van penghantaran mesin oksigen di Kuala Lumpur",
+      "Juruteknik Oxihome melakukan penyelenggaraan rutin",
+      "Wanita Asia menggunakan konsentrator oksigen mudah alih di luar",
+      "Aksesori mesin oksigen: cannula hidung, botol humidifier",
+      "Susunan bilik tidur senyap dengan konsentrator Oxihome 5L"
+    ]
+  },
+  "finalCta": {
+    "bgAlt": "Keluarga Asia di rumah dengan konsentrator oksigen Oxihome"
+  },
+  "whyUs": {
+    "bgAlt": "Juruteknik Oxihome menyokong keluarga Malaysia di rumah"
+  },
+  "reviews": {
+    "bgAlt": "Pelanggan Malaysia menggunakan peralatan Oxihome"
+  },
+  "process": {
+    "bgAlt": "Mesin oksigen sedang dipasang di rumah di Malaysia"
+  },
+  "imageAlt": "Mesin oksigen Oxihome sedia untuk penghantaran ke rumah di Malaysia"
 }

@@ -173,7 +173,11 @@
     "oximeter": {
       "name": "血氧仪",
       "desc": "99%准确度。夹上，读数，完成。家庭呼吸护理必备。"
-    }
+    },
+    "imageAltTemplate": "Oxihome {model} 氧气机 — 马来西亚出租",
+    "priceDaily": "RM {price} 起",
+    "priceMonthly": "RM {price} 起",
+    "priceFrom": "RM {price} 起"
   },
   "common": {
     "whatsappOrder": "WhatsApp下单",
@@ -226,5 +230,37 @@
     "pageSubtitle": "马来西亚家庭氧疗指南",
     "title": "Oxihome 博客",
     "subtitle": "马来西亚家庭氧疗指南"
-  }
+  },
+  "hero": {
+    "imageAlt": "准备送货上门的 Oxihome 氧气机"
+  },
+  "gallery": {
+    "alts": [
+      "马来西亚客厅中展示的 Oxihome 5L 氧气浓缩机",
+      "配备调节器的氧气罐，准备好送货上门",
+      "马来西亚老年患者在家接受氧疗",
+      "槟城诊所中的医院级 Oxihome 10L 浓缩机",
+      "为亚洲患者测量血氧的脉搏血氧仪",
+      "看护人员在家中设置氧气浓缩机",
+      "家庭成员调整氧气机的流量",
+      "吉隆坡的氧气机送货车",
+      "Oxihome 技术员进行例行维护",
+      "亚洲女性在户外使用便携式氧气浓缩机",
+      "氧气机配件：鼻插管、加湿瓶",
+      "配备 Oxihome 5L 浓缩机的安静卧室设置"
+    ]
+  },
+  "finalCta": {
+    "bgAlt": "马来西亚家庭使用 Oxihome 氧气浓缩机"
+  },
+  "whyUs": {
+    "bgAlt": "Oxihome 技术员在马来西亚家中提供支持"
+  },
+  "reviews": {
+    "bgAlt": "马来西亚客户使用 Oxihome 设备"
+  },
+  "process": {
+    "bgAlt": "在马来西亚家中安装氧气机"
+  },
+  "imageAlt": "准备送货上门的 Oxihome 氧气机"
 }

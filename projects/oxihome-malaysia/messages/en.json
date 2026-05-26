@@ -173,7 +173,11 @@
     "oximeter": {
       "name": "Pulse Oximeter",
       "desc": "99% accuracy. Clip on, read display, done. Essential for home respiratory care."
-    }
+    },
+    "imageAltTemplate": "Oxihome {model} oxygen machine for rent in Malaysia",
+    "priceDaily": "From RM {price}",
+    "priceMonthly": "From RM {price}",
+    "priceFrom": "From RM {price}"
   },
   "common": {
     "whatsappOrder": "WhatsApp to Order",
@@ -226,5 +230,37 @@
     "pageSubtitle": "Guides for oxygen therapy at home in Malaysia",
     "title": "Oxihome Blog",
     "subtitle": "Guides for oxygen therapy at home in Malaysia"
-  }
+  },
+  "hero": {
+    "imageAlt": "Oxihome oxygen machine ready for home delivery in Malaysia"
+  },
+  "gallery": {
+    "alts": [
+      "Oxihome 5L oxygen concentrator on display in a Malaysian living room",
+      "Oxygen tank with regulator ready for home delivery",
+      "Elderly Malaysian patient receiving home oxygen therapy",
+      "Hospital-grade Oxihome 10L concentrator in a Penang clinic",
+      "Pulse oximeter measuring blood oxygen on an Asian patient",
+      "Caregiver setting up an oxygen concentrator at home",
+      "Family member adjusting flow rate on an oxygen machine",
+      "Oxygen machine delivery van in Kuala Lumpur",
+      "Oxihome technician performing routine maintenance",
+      "Asian woman using a portable oxygen concentrator outdoors",
+      "Oxygen machine accessories: nasal cannula, humidifier bottle",
+      "Quiet bedroom setup with Oxihome 5L concentrator"
+    ]
+  },
+  "finalCta": {
+    "bgAlt": "Asian family at home with an Oxihome oxygen concentrator running"
+  },
+  "whyUs": {
+    "bgAlt": "Oxihome technician supporting a Malaysian family at home"
+  },
+  "reviews": {
+    "bgAlt": "Malaysian customers using Oxihome equipment"
+  },
+  "process": {
+    "bgAlt": "Oxygen machine being set up at a Malaysian home"
+  },
+  "imageAlt": "Oxihome oxygen machine ready for home delivery in Malaysia"
 }

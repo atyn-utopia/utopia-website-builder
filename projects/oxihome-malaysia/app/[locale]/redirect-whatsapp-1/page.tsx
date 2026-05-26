@@ -2,7 +2,6 @@ import { getPhoneNumber, waLink } from '@/lib/webcore';
 import RedirectClient from './RedirectClient';
 
 export const dynamic = 'force-dynamic';
-export const revalidate = 0;
 
 export const metadata = {
   robots: { index: false, follow: false },

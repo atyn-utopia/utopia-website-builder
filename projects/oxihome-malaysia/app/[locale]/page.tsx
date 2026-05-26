@@ -3,6 +3,11 @@ import { getTranslations } from 'next-intl/server'
 import { siteConfig } from '@/config/site'
 import { locations } from '@/config/locations'
 import { getPhoneNumber, waLink } from '@/lib/webcore'
+import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
+import FomoBanner from '@/components/FomoBanner'
+import PageStyles from '@/components/PageStyles'
+import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker'
 import { ProductSchema } from '@/components/schema/ProductSchema'
 import { FAQSchema } from '@/components/schema/FAQSchema'
 import { ReviewsCarousel } from '@/components/ReviewsCarousel'
@@ -59,7 +64,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const tp = await getTranslations({ locale, namespace: 'products' })
   const tc = await getTranslations({ locale, namespace: 'common' })
   const { phone } = await getPhoneNumber('all')
-  const WA_LINK = waLink(phone, 'Hi Oxihome, I am interested in renting an oxygen machine.')
 
   const faqItems = [
     { question: t('faq.q1'), answer: t('faq.a1') },
@@ -152,18 +156,21 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   ]
 
   return (
-    <main>
+    <>
+      <FomoBanner />
+      <SiteHeader />
+      <PageStyles />
+      <main>
       <ProductSchema />
       <FAQSchema faqs={faqItems} />
 
       {/* ── HERO ── */}
       <section className="relative overflow-hidden min-h-[90vh] flex items-center">
         {/* Real photo background */}
-        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div className="absolute inset-0 pointer-events-none" role="img" aria-label={t('heroBgAlt') ?? 'Asian family at home with an Oxihome oxygen machine'}>
           <img
             src="https://static.wixstatic.com/media/d3104b_35b047fff2574ce5b0fa9c576d2ccf51~mv2.jpg/v1/fill/w_1440,h_1058,al_c,q_85,enc_auto/hero-bg.jpg"
-            alt=""
-            role="presentation"
+            alt="Asian family at home with an Oxihome oxygen machine running"
             className="w-full h-full object-cover object-center"
           />
           <div
@@ -394,9 +401,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* ── PRODUCTS ── */}
       <section id="products" className="py-20 px-6" style={{ background: 'var(--brand-surface)' }}>
         <div className="max-w-6xl mx-auto">
-          <h2 className="font-display text-4xl text-center mb-12" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.02em' }}>
+          <h3 className="font-display text-4xl text-center mb-12" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.02em' }}>
             {t('products.h2')}
-          </h2>
+          </h3>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {products.map((product) => (
               <div
@@ -492,9 +499,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* ── HOW IT WORKS ── */}
       <section className="py-20 px-6" style={{ background: 'var(--brand-dark)' }}>
         <div className="max-w-5xl mx-auto">
-          <h2 className="font-display text-4xl text-center mb-14" style={{ color: 'var(--brand-white)', letterSpacing: '-0.02em' }}>
+          <h3 className="font-display text-4xl text-center mb-14" style={{ color: 'var(--brand-white)', letterSpacing: '-0.02em' }}>
             {t('how.h2')}
-          </h2>
+          </h3>
           <div className="grid md:grid-cols-3 gap-8">
             {[
               { num: '01', title: t('how.step1Title'), desc: t('how.step1Desc'), icon: '💬' },
@@ -520,9 +527,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* ── REVIEWS ── */}
       <section className="py-20 overflow-hidden" style={{ background: 'var(--brand-surface)' }}>
         <div className="max-w-5xl mx-auto px-6">
-          <h2 className="font-display text-4xl text-center mb-12" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.02em' }}>
+          <h3 className="font-display text-4xl text-center mb-12" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.02em' }}>
             {t('reviews.h2')}
-          </h2>
+          </h3>
         </div>
         <ReviewsCarousel reviews={[
           { text: t('reviews.r1'), name: t('reviews.r1name'), city: t('reviews.r1city') },
@@ -540,9 +547,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* ── CUSTOMER GALLERY ── */}
       <section className="py-20 px-6" style={{ background: 'var(--brand-surface)' }}>
         <div className="max-w-6xl mx-auto">
-          <h2 className="font-display text-4xl text-center mb-3" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.02em' }}>
+          <h3 className="font-display text-4xl text-center mb-3" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.02em' }}>
             {locale === 'ms' ? 'Galeri Pelanggan Kami' : locale === 'zh' ? '客户照片' : 'Customer Gallery'}
-          </h2>
+          </h3>
           <p className="text-center text-base mb-10 max-w-lg mx-auto" style={{ color: 'var(--brand-text-muted)' }}>
             {locale === 'ms'
               ? 'Lihat bagaimana mesin oksigen Oxihome digunakan oleh keluarga di seluruh Malaysia.'
@@ -572,11 +579,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
       {/* ── WHY OXIHOME ── */}
       <section className="relative overflow-hidden py-20 px-6">
-        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div className="absolute inset-0 pointer-events-none" role="img" aria-label={t('whyBgAlt') ?? 'Oxihome technician supporting a Malaysian family'}>
           <img
             src="https://static.wixstatic.com/media/d3104b_35b047fff2574ce5b0fa9c576d2ccf51~mv2.jpg/v1/fill/w_1440,h_900,al_c,q_85,enc_auto/why-bg.jpg"
-            alt=""
-            role="presentation"
+            alt="Oxihome technician supporting a Malaysian family at home"
             className="w-full h-full object-cover object-bottom"
           />
           <div
@@ -586,9 +592,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
         <div className="relative max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="font-display text-4xl md:text-5xl text-white mb-6" style={{ letterSpacing: '-0.02em' }}>
+            <h3 className="font-display text-4xl md:text-5xl text-white mb-6" style={{ letterSpacing: '-0.02em' }}>
               {t('why.h2')}
-            </h2>
+            </h3>
             <div className="space-y-4 text-base leading-relaxed" style={{ color: 'rgba(255,255,255,0.75)' }}>
               <p>{t('why.p1')}</p>
               <p>{t('why.p2')}</p>
@@ -628,9 +634,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* ── LOCATIONS ── */}
       <section id="locations" className="py-20 px-6" style={{ background: 'var(--brand-surface)' }}>
         <div className="max-w-6xl mx-auto">
-          <h2 className="font-display text-4xl text-center mb-3" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.02em' }}>
+          <h3 className="font-display text-4xl text-center mb-3" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.02em' }}>
             {t('locations.h2')}
-          </h2>
+          </h3>
           <p className="text-center text-base mb-10 max-w-xl mx-auto" style={{ color: 'var(--brand-text-muted)' }}>
             {t('locations.sub')}
           </p>
@@ -696,9 +702,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* ── FAQ ── */}
       <section className="py-20 px-6">
         <div className="max-w-3xl mx-auto">
-          <h2 className="font-display text-4xl text-center mb-12" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.02em' }}>
+          <h3 className="font-display text-4xl text-center mb-12" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.02em' }}>
             {t('faq.h2')}
-          </h2>
+          </h3>
           <div className="space-y-3">
             {faqItems.map((faq, i) => (
               <details
@@ -732,11 +738,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* ── FINAL CTA ── */}
       <section className="relative overflow-hidden py-24 px-6">
         {/* Background image + dark overlay */}
-        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div className="absolute inset-0 pointer-events-none" role="img" aria-label={t('finalCtaBgAlt') ?? 'Asian family at home with an Oxihome oxygen concentrator running'}>
           <img
             src="https://static.wixstatic.com/media/d3104b_c54d3854dbb44b9ebd369f9c9e15187d~mv2.jpg/v1/fill/w_1905,h_852,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/d3104b_c54d3854dbb44b9ebd369f9c9e15187d~mv2.jpg"
-            alt=""
-            role="presentation"
+            alt="Asian family at home with an Oxihome oxygen concentrator running"
             className="w-full h-full object-cover object-center"
           />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(10,37,53,0.92) 0%, rgba(11,107,130,0.80) 100%)' }} />
@@ -760,9 +765,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
           {/* CTA text */}
           <div className="flex flex-col justify-center text-center">
-            <h2 className="font-display text-4xl md:text-5xl text-white mb-4" style={{ letterSpacing: '-0.02em' }}>
+            <h3 className="font-display text-4xl md:text-5xl text-white mb-4" style={{ letterSpacing: '-0.02em' }}>
               {t('cta.h2')}
-            </h2>
+            </h3>
             <p className="text-base leading-relaxed mb-8" style={{ color: 'rgba(255,255,255,0.75)' }}>
               {t('cta.sub')}
             </p>
@@ -792,6 +797,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
       </section>
     </main>
-
+      <SiteFooter locale={locale} />
+    </>
   )
 }

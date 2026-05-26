@@ -5,6 +5,11 @@ import { routing } from '@/i18n/routing'
 import { locations, getNearbyLocations } from '@/config/locations'
 import { siteConfig } from '@/config/site'
 import { getPhoneNumber, waLink } from '@/lib/webcore'
+import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
+import FomoBanner from '@/components/FomoBanner'
+import PageStyles from '@/components/PageStyles'
+import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker'
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema'
 import { FAQSchema } from '@/components/schema/FAQSchema'
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema'
@@ -36,7 +41,6 @@ export async function generateStaticParams() {
   return params
 }
 
-export const revalidate = 60
 
 export async function generateMetadata({
   params,
@@ -82,7 +86,6 @@ export default async function LocationPage({ params }: { params: Promise<Params>
   const stateName = locationData.state
 
   const { phone: phoneNumber } = await getPhoneNumber(location)
-  const waUrl = waLink(phoneNumber, `Hi Oxihome, I need an oxygen machine in ${cityName}.`)
 
   const t  = await getTranslations({ locale, namespace: 'location' })
   const tp = await getTranslations({ locale, namespace: 'products' })
@@ -164,7 +167,11 @@ export default async function LocationPage({ params }: { params: Promise<Params>
   ]
 
   return (
-    <main>
+    <>
+      <FomoBanner />
+      <SiteHeader />
+      <PageStyles />
+      <main>
       <LocalBusinessSchema
         cityName={cityName}
         stateName={stateName}
@@ -178,10 +185,10 @@ export default async function LocationPage({ params }: { params: Promise<Params>
       {/* ── HERO ── */}
       <section className="relative overflow-hidden flex items-center" style={{ minHeight: '60vh' }}>
         {/* Real photo background */}
-        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div className="absolute inset-0 pointer-events-none" role="img" aria-label={`Oxihome oxygen machine ready for delivery in ${cityName}, Malaysia`}>
           <img
             src="https://static.wixstatic.com/media/d3104b_35b047fff2574ce5b0fa9c576d2ccf51~mv2.jpg/v1/fill/w_1440,h_1058,al_c,q_85,enc_auto/hero-bg.jpg"
-            alt="" role="presentation"
+            alt={`Oxihome oxygen machine ready for delivery in ${cityName}, Malaysia`}
             className="w-full h-full object-cover object-center"
           />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(10,37,53,0.93) 0%, rgba(10,37,53,0.80) 45%, rgba(11,107,130,0.65) 100%)' }} />
@@ -386,8 +393,8 @@ export default async function LocationPage({ params }: { params: Promise<Params>
 
       {/* ── WHY CHOOSE IN CITY ── */}
       <section className="relative overflow-hidden py-16 px-6">
-        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-          <img src="https://static.wixstatic.com/media/d3104b_c54d3854dbb44b9ebd369f9c9e15187d~mv2.jpg/v1/fill/w_1440,h_900,al_c,q_85,enc_auto/why-bg.jpg" alt="" role="presentation" className="w-full h-full object-cover object-center" />
+        <div className="absolute inset-0 pointer-events-none" role="img" aria-label={`Oxihome oxygen machine at a Malaysian home in ${cityName}`}>
+          <img src="https://static.wixstatic.com/media/d3104b_c54d3854dbb44b9ebd369f9c9e15187d~mv2.jpg/v1/fill/w_1440,h_900,al_c,q_85,enc_auto/why-bg.jpg" alt="Oxihome oxygen machine at a Malaysian home" className="w-full h-full object-cover object-center" />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(10,37,53,0.96) 0%, rgba(13,51,71,0.92) 100%)' }} />
         </div>
         <div className="relative max-w-5xl mx-auto">
@@ -497,5 +504,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
         </div>
       </section>
     </main>
+      <SiteFooter locale={locale} />
+    </>
   )
 }
