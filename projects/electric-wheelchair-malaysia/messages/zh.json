@@ -5,13 +5,47 @@
   },
   "nav": {
     "brandName": "电动轮椅 MY",
+    "home": "首页",
     "products": "产品",
+    "calculator": "租赁估算",
     "howItWorks": "订购流程",
+    "services": "产品",
     "reviews": "评价",
     "locations": "服务地区",
+    "gallery": "案例",
     "faq": "常见问题",
     "blog": "博客",
-    "ctaButton": "立即WhatsApp"
+    "ctaButton": "立即WhatsApp",
+    "whatsapp": "立即WhatsApp",
+    "whatsappCta": "立即WhatsApp",
+    "logoAlt": "Electric Wheelchair Malaysia — 马来西亚电动轮椅租赁与销售"
+  },
+  "logoAlt": "Electric Wheelchair Malaysia — 马来西亚电动轮椅租赁与销售",
+  "imageAlt": "Electric Wheelchair Malaysia 电动轮椅 — 为客户提供当日送达服务",
+  "gallery": {
+    "heading": "客户展示",
+    "subheading": "马来西亚各地的真实客户正在使用我们的电动轮椅",
+    "alts": [
+      "客户在雪兰莪排屋门口签收电动轮椅",
+      "吉隆坡医院大厅展示的可折叠轻便电动轮椅",
+      "为长者客户进行电动轮椅驾驶教学",
+      "送货前为电动轮椅电池充电",
+      "将电动轮椅装入 MPV 以便出行使用",
+      "电动轮椅例行保养 — 检查电机与刹车",
+      "在 KLCC 步行区使用的电动轮椅",
+      "电动轮椅停放在八打灵再也公寓电梯旁",
+      "莎阿南展厅的电动轮椅试驾体验",
+      "为电动轮椅加装防雨车顶配件",
+      "客户与家人在电动轮椅送达后合影",
+      "适合乡村路况的大功率电动轮椅"
+    ]
+  },
+  "finalCta": {
+    "heading": "今天就获取您的电动轮椅",
+    "subheading": "月租RM400起或购买RM2,400起。全马当日送达。",
+    "cta": "立即WhatsApp",
+    "phone": "6010-888 9849",
+    "bgAlt": "Electric Wheelchair Malaysia 团队将电动轮椅送至巴生谷客户家中"
   },
   "fomoBanner": {
     "texts": [
@@ -54,10 +88,12 @@
   "products": {
     "heading": "我们的电动轮椅",
     "subheading": "多合一可折叠、轻便、KKM认证电动轮椅",
+    "imageAltTemplate": "Electric Wheelchair Malaysia 提供的 {model} 电动轮椅 — 租赁与销售",
     "name": "多合一电动轮椅",
     "description": "可折叠、轻便、可躺式电动轮椅，适用于居家、医院和旅行。我们的电动轮椅紧凑便携，老年人和康复期用户都能轻松操作。KKM认证，6个月保修。",
     "rrp": "RM 3,399",
     "price": "RM 2,400",
+    "priceDaily": "RM {price} 起",
     "rental": "月租RM400起",
     "saveLabel": "省RM999！",
     "features": [
@@ -176,10 +212,6 @@
       }
     ]
   },
-  "gallery": {
-    "heading": "客户展示",
-    "subheading": "马来西亚各地的真实客户正在使用我们的电动轮椅"
-  },
   "locations": {
     "heading": "全马送货服务",
     "subheading": "全国80+城市当日送达",
@@ -213,12 +245,6 @@
         "answer": "我们的标准轻便款承重可达100公斤。对于体型较大的用户，我们的重型款承重可达120公斤，配有加固钢架。所有型号均可折叠，可放入大多数车尾箱。"
       }
     ]
-  },
-  "finalCta": {
-    "heading": "今天就获取您的电动轮椅",
-    "subheading": "月租RM400起或购买RM2,400起。全马当日送达。",
-    "cta": "立即WhatsApp",
-    "phone": "6010-888 9849"
   },
   "footer": {
     "brandName": "马来西亚电动轮椅",

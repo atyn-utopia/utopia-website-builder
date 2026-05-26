@@ -119,9 +119,12 @@ interface LocationProps {
   cityName?: string;
   locationSlug?: string;
   nearbyLocations?: { slug: string; name: string }[];
+  /** When true, skip the internal sticky nav + footer — page.tsx renders
+   *  the canonical shared <SiteHeader />, <SiteFooter />, and <FomoBanner /> instead. */
+  chromeProvided?: boolean;
 }
 
-export default function HomePageClient({ cityName, locationSlug, nearbyLocations }: LocationProps = {}) {
+export default function HomePageClient({ cityName, locationSlug, nearbyLocations, chromeProvided = false }: LocationProps = {}) {
   const isLocationPage = !!cityName;
   const locale = useLocale();
   const t = useTranslations();
@@ -239,8 +242,9 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
       </div>
 
       {/* ============================================
-          2. NAV
+          2. NAV — skipped when chromeProvided so the shared SiteHeader renders instead
           ============================================ */}
+      {!chromeProvided && (
       <nav
         style={{
           position: 'sticky',
@@ -439,6 +443,7 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
           />
         )}
       </nav>
+      )}
 
       {/* Breadcrumbs — location pages only */}
       {isLocationPage && (
@@ -1079,7 +1084,7 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
         {/* Background photo */}
         <img
           src="https://images.pexels.com/photos/6646922/pexels-photo-6646922.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=2"
-          alt=""
+          alt="Electric wheelchair user enjoying outdoor mobility in Malaysia"
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.15, pointerEvents: 'none' }}
         />
         <div
@@ -1737,8 +1742,9 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
       </section>
 
       {/* ============================================
-          15. FOOTER
+          15. FOOTER — skipped when chromeProvided so the shared SiteFooter renders instead
           ============================================ */}
+      {!chromeProvided && (
       <footer
         style={{
           background: 'var(--navy-dark)',
@@ -1873,6 +1879,7 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
           </div>
         </div>
       </footer>
+      )}
 
       {/* ============================================
           RESPONSIVE STYLES

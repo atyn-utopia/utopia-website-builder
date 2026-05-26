@@ -5,13 +5,51 @@
   },
   "nav": {
     "brandName": "Kerusi Roda Elektrik MY",
+    "home": "Utama",
     "products": "Produk",
+    "calculator": "Anggaran Sewa",
     "howItWorks": "Cara Pesanan",
+    "services": "Produk",
     "reviews": "Ulasan",
     "locations": "Lokasi",
+    "gallery": "Galeri",
     "faq": "Soalan Lazim",
     "blog": "Blog",
-    "ctaButton": "WhatsApp Sekarang"
+    "ctaButton": "WhatsApp Sekarang",
+    "whatsapp": "WhatsApp Sekarang",
+    "whatsappCta": "WhatsApp Sekarang",
+    "logoAlt": "Electric Wheelchair Malaysia — Sewa Dan Jualan Kerusi Roda Elektrik Seluruh Malaysia"
+  },
+  "logoAlt": "Electric Wheelchair Malaysia — Sewa Dan Jualan Kerusi Roda Elektrik Seluruh Malaysia",
+  "imageAlt": "Kerusi roda elektrik Electric Wheelchair Malaysia bersedia untuk penghantaran hari sama",
+  "productsAlt": {
+    "imageAltTemplate": "Kerusi roda elektrik {model} oleh Electric Wheelchair Malaysia — sewa dan jualan",
+    "priceDaily": "Dari RM {price}"
+  },
+  "gallery": {
+    "heading": "Galeri Pelanggan",
+    "subheading": "Pelanggan sebenar menggunakan kerusi roda elektrik kami di seluruh Malaysia",
+    "alts": [
+      "Pelanggan menerima penghantaran kerusi roda elektrik di rumah teres Selangor",
+      "Kerusi roda elektrik lipat ringan ditunjukkan di lobi hospital Kuala Lumpur",
+      "Tutorial pemanduan kerusi roda elektrik untuk pelanggan warga emas",
+      "Bateri kerusi roda elektrik dicas sebelum penghantaran",
+      "Kerusi roda elektrik dimuatkan ke MPV untuk kegunaan bercuti",
+      "Sesi servis berkala — pemeriksaan motor dan brek kerusi roda elektrik",
+      "Penggunaan kerusi roda elektrik di kawasan pejalan kaki KLCC",
+      "Kerusi roda elektrik diparkir berhampiran lif kondo Petaling Jaya",
+      "Sesi try-out kerusi roda elektrik di pusat showroom Shah Alam",
+      "Pemasangan aksesori bumbung penahan hujan pada kerusi roda elektrik",
+      "Pelanggan bersama keluarga selepas penghantaran kerusi roda elektrik",
+      "Kerusi roda elektrik berkuasa tinggi untuk pergerakan luar bandar"
+    ]
+  },
+  "finalCta": {
+    "heading": "Dapatkan Kerusi Roda Elektrik Anda Hari Ini",
+    "subheading": "Sewa dari RM400/bulan atau beli dari RM2,400. Penghantaran hari sama ke seluruh Malaysia.",
+    "cta": "WhatsApp Sekarang",
+    "phone": "6010-888 9849",
+    "bgAlt": "Pasukan Electric Wheelchair Malaysia menghantar kerusi roda elektrik kepada pelanggan di Lembah Klang"
   },
   "fomoBanner": {
     "texts": [
@@ -54,10 +92,12 @@
   "products": {
     "heading": "Kerusi Roda Elektrik Kami",
     "subheading": "Kerusi roda elektrik boleh lipat, ringan, dan bertauliah KKM",
+    "imageAltTemplate": "Kerusi roda elektrik {model} oleh Electric Wheelchair Malaysia — sewa dan jualan",
     "name": "Kerusi Roda Elektrik Semua-Dalam-Satu",
     "description": "Kerusi roda elektrik boleh lipat, ringan, dan boleh rebah untuk kegunaan di rumah, hospital, dan perjalanan. Kerusi roda bermotor kami padat, mesra perjalanan, dan mudah digunakan untuk warga emas atau pemulihan. Bertauliah KKM dengan waranti 6 bulan.",
     "rrp": "RM 3,399",
     "price": "RM 2,400",
+    "priceDaily": "Dari RM {price}",
     "rental": "Dari RM400/bulan",
     "saveLabel": "Jimat RM999!",
     "features": [
@@ -176,10 +216,6 @@
       }
     ]
   },
-  "gallery": {
-    "heading": "Galeri Pelanggan",
-    "subheading": "Pelanggan sebenar menggunakan kerusi roda elektrik kami di seluruh Malaysia"
-  },
   "locations": {
     "heading": "Kami Menghantar Ke Seluruh Malaysia",
     "subheading": "Penghantaran hari sama ke 80+ bandar di seluruh negara",
@@ -213,12 +249,6 @@
         "answer": "Model ringan standard kami menanggung sehingga 100kg. Untuk pengguna lebih besar, model tugas berat kami menanggung sehingga 120kg dengan rangka keluli diperkukuh. Semua model boleh dilipat dan muat dalam kebanyakan but kereta."
       }
     ]
-  },
-  "finalCta": {
-    "heading": "Dapatkan Kerusi Roda Elektrik Anda Hari Ini",
-    "subheading": "Sewa dari RM400/bulan atau beli dari RM2,400. Penghantaran hari sama ke seluruh Malaysia.",
-    "cta": "WhatsApp Sekarang",
-    "phone": "6010-888 9849"
   },
   "footer": {
     "brandName": "Kerusi Roda Elektrik Malaysia",

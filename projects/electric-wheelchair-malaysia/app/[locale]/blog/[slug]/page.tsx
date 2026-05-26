@@ -1,10 +1,11 @@
 import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { siteConfig } from '@/config/site';
-import { getBlogPosts, getBlogPostBySlug } from '@/lib/getBlogPosts';
+import { getBlogPosts, getBlogPostBySlug } from '@/lib/webcore';
 import { waRedirect } from '@/lib/waRedirect';
-import BlogNav from '@/components/BlogNav';
-import BlogFooter from '@/components/BlogFooter';
+import SiteHeader from '@/components/SiteHeader';
+import FomoBanner from '@/components/FomoBanner';
+import SiteFooter from '@/components/SiteFooter';
 
 export async function generateMetadata({
   params,
@@ -69,7 +70,34 @@ export default async function BlogPostPage({
 
   return (
     <>
-      <BlogNav />
+      {/* BlogPosting JSON-LD — required by checklist `blog-post-schema`. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BlogPosting',
+            mainEntityOfPage: {
+              '@type': 'WebPage',
+              '@id': `${siteConfig.siteUrl}/${locale}/blog/${slug}`,
+            },
+            headline: post.title,
+            description: post.meta_description || post.excerpt || '',
+            ...(post.cover_image_url ? { image: [post.cover_image_url] } : {}),
+            datePublished: post.published_at,
+            dateModified: post.published_at,
+            author: { '@type': 'Organization', name: siteConfig.brandName },
+            publisher: {
+              '@type': 'Organization',
+              name: siteConfig.brandName,
+              logo: { '@type': 'ImageObject', url: `${siteConfig.siteUrl}/icon.svg` },
+            },
+            inLanguage: locale,
+          }),
+        }}
+      />
+
+      <FomoBanner locale={locale as 'en' | 'ms' | 'zh'} /><SiteHeader locale={locale as 'en' | 'ms' | 'zh'} />
 
       {/* BREADCRUMBS */}
       <div style={{ background: 'var(--surface)', padding: 'var(--space-md) 0' }}>
@@ -266,7 +294,7 @@ export default async function BlogPostPage({
         </div>
       </section>
 
-      <BlogFooter />
+      <SiteFooter locale={locale as 'en' | 'ms' | 'zh'} />
     </>
   );
 }

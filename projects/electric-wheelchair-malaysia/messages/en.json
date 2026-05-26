@@ -5,13 +5,47 @@
   },
   "nav": {
     "brandName": "Electric Wheelchair MY",
+    "home": "Home",
     "products": "Products",
+    "calculator": "Rental Estimate",
     "howItWorks": "How It Works",
+    "services": "Products",
     "reviews": "Reviews",
     "locations": "Locations",
+    "gallery": "Gallery",
     "faq": "FAQ",
     "blog": "Blog",
-    "ctaButton": "WhatsApp Now"
+    "ctaButton": "WhatsApp Now",
+    "whatsapp": "WhatsApp Now",
+    "whatsappCta": "WhatsApp Now",
+    "logoAlt": "Electric Wheelchair Malaysia — Rental and Sales Across Malaysia"
+  },
+  "logoAlt": "Electric Wheelchair Malaysia — Rental and Sales Across Malaysia",
+  "imageAlt": "Electric Wheelchair Malaysia chair ready for same-day delivery to a customer",
+  "gallery": {
+    "heading": "Customer Gallery",
+    "subheading": "Real customers using our electric wheelchairs across Malaysia",
+    "alts": [
+      "Customer receiving an electric wheelchair delivery at a Selangor terrace home",
+      "Foldable lightweight electric wheelchair displayed in a Kuala Lumpur hospital lobby",
+      "Driving tutorial for an elderly customer on a new electric wheelchair",
+      "Electric wheelchair batteries on charge before delivery",
+      "Electric wheelchair loaded into an MPV for travel use",
+      "Routine service inspection — motor and brake check on an electric wheelchair",
+      "Electric wheelchair in use along the KLCC pedestrian walkway",
+      "Electric wheelchair parked beside the lift inside a Petaling Jaya condo",
+      "Try-out session at the Shah Alam showroom",
+      "Rain-cover accessory being fitted to an electric wheelchair",
+      "Customer with family after taking delivery of the electric wheelchair",
+      "High-power outdoor electric wheelchair for rural mobility"
+    ]
+  },
+  "finalCta": {
+    "heading": "Get Your Electric Wheelchair Today",
+    "subheading": "Rent from RM400/month or buy from RM2,400. Same-day delivery across Malaysia.",
+    "cta": "WhatsApp Now",
+    "phone": "6010-888 9849",
+    "bgAlt": "Electric Wheelchair Malaysia team delivering wheelchairs to customers across the Klang Valley"
   },
   "fomoBanner": {
     "texts": [
@@ -54,10 +88,12 @@
   "products": {
     "heading": "Our Electric Wheelchairs",
     "subheading": "All-in-one foldable, lightweight, and KKM certified electric wheelchair",
+    "imageAltTemplate": "{model} electric wheelchair by Electric Wheelchair Malaysia — rental and sales",
     "name": "All-In-One Electric Wheelchair",
     "description": "Foldable, lightweight, reclining electric wheelchair for home, hospital, and travel use. Our motorised wheelchair is compact, travel-friendly, and easy to use for elderly or recovery. KKM certified with 6-month warranty.",
     "rrp": "RM 3,399",
     "price": "RM 2,400",
+    "priceDaily": "From RM {price}",
     "rental": "From RM400/month",
     "saveLabel": "Save RM999!",
     "features": [
@@ -176,10 +212,6 @@
       }
     ]
   },
-  "gallery": {
-    "heading": "Customer Gallery",
-    "subheading": "Real customers using our electric wheelchairs across Malaysia"
-  },
   "locations": {
     "heading": "We Deliver Across Malaysia",
     "subheading": "Same-day delivery to 80+ cities nationwide",
@@ -213,12 +245,6 @@
         "answer": "Our standard lightweight models support up to 100kg. For larger users, our heavy-duty model supports up to 120kg with a reinforced steel frame. All models are foldable and fit in most car boots."
       }
     ]
-  },
-  "finalCta": {
-    "heading": "Get Your Electric Wheelchair Today",
-    "subheading": "Rent from RM400/month or buy from RM2,400. Same-day delivery across Malaysia.",
-    "cta": "WhatsApp Now",
-    "phone": "6010-888 9849"
   },
   "footer": {
     "brandName": "Electric Wheelchair Malaysia",

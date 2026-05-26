@@ -1,10 +1,11 @@
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
-import { getBlogPosts } from '@/lib/getBlogPosts';
+import { getBlogPosts } from '@/lib/webcore';
 import { waRedirect } from '@/lib/waRedirect';
 import Link from 'next/link';
-import BlogNav from '@/components/BlogNav';
-import BlogFooter from '@/components/BlogFooter';
+import SiteHeader from '@/components/SiteHeader';
+import FomoBanner from '@/components/FomoBanner';
+import SiteFooter from '@/components/SiteFooter';
 
 export async function generateMetadata({
   params,
@@ -49,7 +50,7 @@ export default async function BlogListingPage({
 
   return (
     <>
-      <BlogNav />
+      <FomoBanner locale={locale as 'en' | 'ms' | 'zh'} /><SiteHeader locale={locale as 'en' | 'ms' | 'zh'} />
 
       {/* BLOG HEADER */}
       <section
@@ -186,7 +187,7 @@ export default async function BlogListingPage({
         </div>
       </section>
 
-      <BlogFooter />
+      <SiteFooter locale={locale as 'en' | 'ms' | 'zh'} />
     </>
   );
 }

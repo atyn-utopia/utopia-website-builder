@@ -6,6 +6,10 @@ import { locations, getLocationBySlug, getNearbyLocations } from '@/config/locat
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
+import PageStyles from '@/components/PageStyles';
+import FomoBanner from '@/components/FomoBanner';
+import SiteHeader from '@/components/SiteHeader';
+import SiteFooter from '@/components/SiteFooter';
 import HomePageClient from '../../HomePageClient';
 
 export function generateStaticParams() {
@@ -86,14 +90,22 @@ export default async function LocationPage({
 
   return (
     <>
+      <PageStyles />
       <BreadcrumbSchema items={breadcrumbItems} />
       <LocalBusinessSchema locale={locale} locationSlug={locationSlug} cityName={loc.name} />
       <FAQSchema faqs={faqs} />
+
+      <FomoBanner locale={locale as 'en' | 'ms' | 'zh'} />
+      <SiteHeader locale={locale as 'en' | 'ms' | 'zh'} />
+
       <HomePageClient
         cityName={loc.name}
         locationSlug={locationSlug}
         nearbyLocations={nearbyData}
+        chromeProvided
       />
+
+      <SiteFooter locale={locale as 'en' | 'ms' | 'zh'} />
     </>
   );
 }
