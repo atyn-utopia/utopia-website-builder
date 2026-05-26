@@ -222,6 +222,30 @@ h1, h2, h3, h4, h5, h6 {
 /* ── USP panel (single container with 3 cells) ─────────────────────────── */
 .usp-panel-fallback { /* keep .usp-panel from PageStyles authoritative */ }
 
+/* ── Header brand mark — kept in globals because the brand link is a
+ *    next/link <Link> and styled-jsx scoping can miss its children. */
+.site-brand {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 15px;
+  color: #16213E;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.site-brand-icon {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #FF6B35;
+  box-shadow: 0 4px 12px rgba(255,107,53,0.35);
+}
+.site-brand-text { line-height: 1; }
+
 /* ── Header WhatsApp CTAs — kept in globals because styled-jsx in
  *    SiteHeader doesn't scope rules through next/link's <Link>. */
 .nav-cta {

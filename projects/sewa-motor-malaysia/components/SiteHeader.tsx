@@ -16,11 +16,13 @@ export default function SiteHeader() {
       <div className="site-header-inner">
         <Link href={`/${locale}`} className="site-brand" aria-label="Sewa Motor Malaysia homepage">
           <span className="site-brand-icon" aria-hidden="true">
-            <svg viewBox="0 0 32 32" width="28" height="28" fill="none">
-              <circle cx="8" cy="22" r="3.5" stroke="currentColor" strokeWidth="1.8" />
-              <circle cx="24" cy="22" r="3.5" stroke="currentColor" strokeWidth="1.8" />
-              <path d="M11.5 22h9M8 22l3.5-9h5.5l3.5 2.5h3.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M17 13l1.5-3.5h3.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            <svg viewBox="0 0 32 32" width="32" height="32">
+              <circle cx="9" cy="22" r="5" fill="#fff" />
+              <circle cx="9" cy="22" r="2" fill="#FF6B35" />
+              <circle cx="23" cy="22" r="5" fill="#fff" />
+              <circle cx="23" cy="22" r="2" fill="#FF6B35" />
+              <path d="M12 19 L14 12 L19 12 L22 16 L26 16 L26 21 L22 21 L20 18 Z" fill="#fff" />
+              <path d="M19 12 L22 8 L25 8" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
             </svg>
           </span>
           <span className="site-brand-text">Sewa Motor Malaysia</span>
@@ -96,19 +98,11 @@ export default function SiteHeader() {
           display: flex; align-items: center; justify-content: space-between;
           gap: 12px; padding: 12px 20px; min-height: 60px;
         }
-        .site-brand {
-          display: inline-flex; align-items: center; gap: 10px;
-          font-weight: 800; font-size: 15px; color: var(--brand-dark, #16213E);
-          white-space: nowrap; text-decoration: none;
-        }
-        .site-brand-icon {
-          display: inline-flex; align-items: center; justify-content: center;
-          width: 36px; height: 36px; border-radius: 10px;
-          background: var(--brand-primary, #FF6B35);
-          color: #fff;
-          box-shadow: 0 4px 12px rgba(255,107,53,0.35);
-        }
-        .site-brand-text { line-height: 1; }
+        /* .site-brand / .site-brand-icon / .site-brand-text are styled
+           in globals.css — styled-jsx adds its hash via JSX literal
+           tracking and the rules can fail to reach <span> descendants of
+           next/link's <Link> consistently. Keeping the actual paint in
+           globals.css matches how .nav-cta is handled. */
         .site-nav { display: inline-flex; gap: 24px; }
         .site-nav a { color: var(--brand-text, #1B2432); font-weight: 600; font-size: 14px; white-space: nowrap; }
         .site-nav a:hover { color: var(--brand-primary, #FF6B35); }
