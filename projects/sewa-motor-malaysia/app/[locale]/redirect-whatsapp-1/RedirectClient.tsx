@@ -1,49 +1,13 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useEffect } from 'react'
 import { siteConfig } from '@/config/site'
 
-const FALLBACK_PHONE = siteConfig.fallbackPhone
-
-export default function RedirectClient() {
-  const searchParams = useSearchParams()
-  const [status, setStatus] = useState<'loading' | 'redirecting' | 'error'>('loading')
-
+export default function RedirectClient({ url }: { url: string }) {
   useEffect(() => {
-    async function redirect() {
-      try {
-        const message = searchParams.get('message') ?? ''
-        const location = searchParams.get('location') ?? ''
-
-        let phone = FALLBACK_PHONE
-
-        // Dynamically import to avoid Supabase init crash when env vars are missing
-        if (location) {
-          try {
-            const { getPhoneNumbers, getRandomPhone } = await import('@/lib/getPhoneNumber')
-            const result = await getPhoneNumbers(location)
-            phone = getRandomPhone(result.phones)
-          } catch {
-            // Supabase not configured — use fallback
-          }
-        }
-
-        const waUrl = new URL(`https://wa.me/${phone}`)
-        if (message) {
-          waUrl.searchParams.set('text', message)
-        }
-
-        setStatus('redirecting')
-        window.location.href = waUrl.toString()
-      } catch {
-        setStatus('error')
-        window.location.href = `https://wa.me/${FALLBACK_PHONE}`
-      }
-    }
-
-    redirect()
-  }, [searchParams])
+    if (typeof window === 'undefined') return
+    window.location.href = url
+  }, [url])
 
   return (
     <div className="min-h-[60vh] flex items-center justify-center px-6">
@@ -58,11 +22,12 @@ export default function RedirectClient() {
           </svg>
         </div>
         <p className="text-lg font-semibold" style={{ color: 'var(--brand-dark)' }}>
-          {status === 'loading' ? 'Connecting to WhatsApp...' : status === 'redirecting' ? 'Opening WhatsApp...' : 'Redirecting...'}
+          Opening WhatsApp…
         </p>
         <p className="text-sm mt-2" style={{ color: 'var(--brand-text-muted)' }}>
-          If nothing happens, <a href={`https://wa.me/${FALLBACK_PHONE}`} className="underline" style={{ color: 'var(--brand-primary)' }}>click here</a>.
+          If nothing happens, <a href={url} className="underline" style={{ color: 'var(--brand-primary)' }}>click here</a>.
         </p>
+        <p className="sr-only">Fallback: {siteConfig.brandName} WhatsApp</p>
       </div>
     </div>
   )
