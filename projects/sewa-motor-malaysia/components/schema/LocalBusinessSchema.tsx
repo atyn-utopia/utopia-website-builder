@@ -14,12 +14,12 @@ export function LocalBusinessSchema({
   const schema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": `https://sewamotor.my/${locale}/sewa-motor/${locationSlug}#localbusiness`,
-    name: `Sewa Motor Malaysia — ${locationName}`,
+    "@id": `${siteConfig.siteUrl}/${locale}/sewa-motor/${locationSlug}#localbusiness`,
+    name: `${siteConfig.brandName} — ${locationName}`,
     description: `Motorcycle rental service in ${locationName}, ${state}, Malaysia. Daily, weekly, and monthly motorbike rentals.`,
-    url: `https://sewamotor.my/${locale}/sewa-motor/${locationSlug}`,
+    url: `${siteConfig.siteUrl}/${locale}/sewa-motor/${locationSlug}`,
     telephone: `+${siteConfig.fallbackPhone}`,
-    image: "https://sewamotor.my/og-image.jpg",
+    image: `${siteConfig.siteUrl}/og-image.jpg`,
     address: {
       "@type": "PostalAddress",
       addressLocality: locationName,

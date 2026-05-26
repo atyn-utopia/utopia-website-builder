@@ -67,7 +67,7 @@
   },
   "home": {
     "meta": {
-      "title": "Sewa Motor Malaysia | #1 Motorcycle Rental from RM30/day | sewamotor.my",
+      "title": "Sewa Motor Malaysia | #1 Motorcycle Rental from RM30/day",
       "description": "Rent motorcycles across Malaysia from RM30/day. Honda Vario, Yamaha NMax, PCX & more. Same-day delivery. WhatsApp to book now. Sewa motor murah seluruh Malaysia."
     },
     "hero": {
@@ -209,7 +209,7 @@
   },
   "location": {
     "meta": {
-      "title": "Sewa Motor {city} | Motorcycle Rental from RM30/day | sewamotor.my",
+      "title": "Sewa Motor {city} | Motorcycle Rental from RM30/day",
       "description": "Rent motorcycles in {city} from RM30/day. Honda, Yamaha & Modenas — same-day delivery. WhatsApp to book your motorcycle rental in {city} today."
     },
     "breadcrumbs": {

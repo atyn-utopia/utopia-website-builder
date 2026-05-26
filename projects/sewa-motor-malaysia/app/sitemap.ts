@@ -1,8 +1,9 @@
 import type { MetadataRoute } from "next";
 import { locations } from "@/config/locations";
+import { siteConfig } from "@/config/site";
 
-const BASE_URL = "https://sewamotor.my";
-const LOCALES = ["en", "zh"] as const;
+const BASE_URL = siteConfig.siteUrl;
+const LOCALES = ["en", "ms", "zh"] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [];

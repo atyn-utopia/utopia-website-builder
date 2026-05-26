@@ -1,10 +1,12 @@
+import { siteConfig } from "@/config/site";
+
 export function OrganizationSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Sewa Motor Malaysia",
-    url: "https://sewamotor.my",
-    logo: "https://sewamotor.my/logo.png",
+    name: siteConfig.brandName,
+    url: siteConfig.siteUrl,
+    logo: `${siteConfig.siteUrl}/logo.png`,
     description:
       "Motorcycle rental service across 128 locations in Malaysia. Daily, weekly, and monthly rentals.",
     areaServed: {
@@ -13,8 +15,9 @@ export function OrganizationSchema() {
     },
     contactPoint: {
       "@type": "ContactPoint",
+      telephone: `+${siteConfig.fallbackPhone}`,
       contactType: "customer service",
-      availableLanguage: ["English", "Chinese"],
+      availableLanguage: ["English", "Malay", "Chinese"],
     },
     sameAs: [],
   };

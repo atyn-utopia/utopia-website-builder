@@ -69,7 +69,7 @@
   },
   "home": {
     "meta": {
-      "title": "Sewa Motor Malaysia | 马来西亚电单车出租 RM30/天起 | sewamotor.my",
+      "title": "Sewa Motor Malaysia | 马来西亚电单车出租 RM30/天起",
       "description": "马来西亚电单车出租，每日RM30起。Honda Vario、Yamaha NMax、PCX等车型，当天送达。立即WhatsApp预订，便宜实惠的摩托车租赁服务。"
     },
     "hero": {
@@ -208,7 +208,7 @@
   },
   "location": {
     "meta": {
-      "title": "Sewa Motor {city} | 电单车出租 RM30/天起 | sewamotor.my",
+      "title": "Sewa Motor {city} | 电单车出租 RM30/天起",
       "description": "在{city}租电单车，每日RM30起。Honda、Yamaha、Modenas车型，当天送达。立即WhatsApp预订{city}电单车出租。"
     },
     "breadcrumbs": {

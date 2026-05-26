@@ -226,7 +226,7 @@ export default function LocationPageClient({
             </div>
             <div className="hidden sm:block">
               <div className="text-sm font-bold text-white leading-tight">Sewa Motor</div>
-              <div className="text-[11px] font-normal" style={{ color: 'rgba(255,255,255,0.45)' }}>sewamotor.my</div>
+              <div className="text-[11px] font-normal" style={{ color: 'rgba(255,255,255,0.45)' }}>Malaysia</div>
             </div>
           </Link>
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium" aria-label="Main navigation">
