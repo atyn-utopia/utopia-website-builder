@@ -90,6 +90,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   const navLinks = [
     { label: t('products'),  href: `/${locale}#products` },
     { label: t('locations'), href: `/${locale}#locations` },
+    { label: t('blog'),      href: `/${locale}/blog` },
   ]
 
   return (
