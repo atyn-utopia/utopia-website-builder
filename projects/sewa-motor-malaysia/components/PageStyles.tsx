@@ -16,12 +16,16 @@ export default function PageStyles() {
       /* Hero ─────────────────────────────────────────────────────────── */
       .home-hero {
         position: relative;
-        padding: 96px 24px 64px;
+        padding: 80px 24px 64px;
         background: linear-gradient(135deg, #16213E 0%, #1A2744 60%, #0F172A 100%);
         color: #fff;
         overflow: hidden;
       }
-      .home-hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; text-align: center; }
+      .home-hero-inner {
+        max-width: 1100px; margin: 0 auto; position: relative; z-index: 1;
+        display: grid; grid-template-columns: 1fr; gap: 32px; align-items: center;
+        text-align: center;
+      }
       .home-hero-bg {
         position: absolute; inset: 0;
         background-image: linear-gradient(135deg, rgba(22,33,62,0.85), rgba(15,23,42,0.95)), url('/og-image.jpg');
@@ -51,6 +55,34 @@ export default function PageStyles() {
         padding: 14px 30px;
         border-radius: 999px;
         text-decoration: none;
+      }
+      .home-hero-media {
+        position: relative;
+        display: flex; align-items: center; justify-content: center;
+      }
+      .home-hero-photo {
+        display: block;
+        width: 100%; max-width: 420px; height: auto;
+        filter: drop-shadow(0 12px 32px rgba(0,0,0,0.35));
+      }
+      .home-hero-stamp {
+        position: absolute; top: 12px; right: 4px;
+        background: #FF6B35;
+        padding: 10px 16px;
+        transform: skewX(-6deg);
+        box-shadow: 0 6px 20px rgba(255,107,53,0.4);
+        display: flex; flex-direction: column; align-items: center;
+        line-height: 1;
+      }
+      .home-hero-stamp > span { transform: skewX(6deg); color: #fff; }
+      .home-hero-stamp-from { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+      .home-hero-stamp-price { font-size: 24px; font-weight: 800; margin: 2px 0; }
+      .home-hero-stamp-per { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+      @media (min-width: 880px) {
+        .home-hero { padding: 96px 24px 80px; }
+        .home-hero-inner { grid-template-columns: 1.05fr 0.95fr; gap: 48px; text-align: left; }
+        .home-hero h2 { margin-left: 0; margin-right: 0; }
+        .home-hero-media { justify-content: flex-end; }
       }
 
       /* USP panel ────────────────────────────────────────────────────── */

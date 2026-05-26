@@ -75,7 +75,9 @@
     "hero": {
       "headline": "马来西亚电单车出租 — 每日RM30起",
       "subheadline": "租赁可靠的电单车，直送到您家门口。Honda Vario、Yamaha NMax、PCX等多款车型 — 日租、周租或月租，覆盖马来西亚全国。",
-      "cta": "立即WhatsApp预订"
+      "cta": "立即WhatsApp预订",
+      "bgAlt": "马来西亚高速公路上的黄昏电单车骑士",
+      "imageAlt": "Honda Vario 电单车马来西亚出租"
     },
     "stats": {
       "rentals": "6,000+ 次出租",
