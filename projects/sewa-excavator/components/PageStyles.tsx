@@ -121,6 +121,7 @@ export default function PageStyles() {
           width: 110%;
           max-width: 800px;
           height: auto;
+          aspect-ratio: 1600 / 1137;
           filter: drop-shadow(0 36px 70px rgba(242, 108, 31, 0.28));
           border-radius: var(--radius-card);
         }

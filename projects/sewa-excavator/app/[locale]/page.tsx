@@ -205,7 +205,7 @@ export default async function HomePage({
           </div>
           <div className="hero-image">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={HERO_EXCAVATOR_IMG} alt={tHero('imageAlt')} className="hero-image-img" />
+            <img src={HERO_EXCAVATOR_IMG} alt={tHero('imageAlt')} width={1600} height={1137} className="hero-image-img" />
           </div>
         </div>
       </section>

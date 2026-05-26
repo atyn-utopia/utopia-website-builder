@@ -672,6 +672,17 @@ Check:
 
 Every item below MUST be verified on the running site. These rules come from real user feedback on prior projects — every line is here because something broke or had to be iterated on. Treat them as blocking acceptance criteria.
 
+#### Alt text (every image, no exceptions)
+- [ ] Every `<img>` has a descriptive alt — never `alt=""` for content images. Decorative images that genuinely carry no information may use `alt=""` but only as a last resort.
+- [ ] **Brand logo alts** (hero, header, footer, location hero) all come from `nav.logoAlt` — a brand-name + tagline string (~6–10 words) localised for MS/EN/ZH. Never hard-code `alt="Abang Excavator"`.
+- [ ] **Hero image / operator photo** uses `hero.imageAlt` — describes the photo + product + scene.
+- [ ] **Product images** use `products.imageAltTemplate` with `{model}` substitution.
+- [ ] **Gallery images** use `gallery.alts[]` — one descriptive string per image per locale (not a generic "image N").
+- [ ] **CSS background images** (hero-bg, why-bg, process section, reviews section) attach `role="img"` + `aria-label={t('bgAlt')}` on the container so screen readers describe what's in the bg.
+- [ ] **Final CTA `<img>` bg** uses `finalCta.bgAlt` — never empty alt.
+- [ ] Alt strings live in `messages/{ms,en,zh}.json` so each locale gets its own. No hard-coded English fallbacks.
+- [ ] Alt should include the primary keyword at least once where natural — without keyword stuffing.
+
 #### Assets & Images
 - [ ] Use brand-provided assets from `brand_assets/` for hero photo, product photos, gallery, logos. Never substitute with stock photos when brand assets exist.
 - [ ] Optimize before commit — gallery PNGs (often 30–60 MB each) MUST be converted to JPEG at ~1400 px wide / ~300 KB target. Brand logos resized to ~600 px PNG (~200 KB). Hero/product PNGs (with transparency) resized to ~1600 px (~1.5 MB).
@@ -681,13 +692,16 @@ Every item below MUST be verified on the running site. These rules come from rea
 
 #### Typography
 - [ ] Body font is **Inter** site-wide. Not Plus Jakarta Sans, not the default Tailwind stack.
-- [ ] **Every visible text element must sit inside a heading tag (h1–h6).** This is non-negotiable per user rule, even if it appears to break "proper" semantic HTML. Concretely:
-  - H1 → hero title (one per page). H2 → hero subtitle (one per page).
-  - H3 → every section title (Products, Calculator, Process, Why Us, Reviews, Gallery, FAQ, Locations, Final CTA, Brand Strip). USP bar gets a visually-hidden H3 (preserves the "no visible USP heading" design rule).
-  - H4 → every section-head intro/description paragraph (`tNamespace('intro')`), eyebrow text inside hero, step numbers (01/02/03), card titles, reviews aggregate pill, final CTA body, every state label in the locations grid.
-  - H5 → every card body / description text (USP body, product description, process step body, why-card body, review body, FAQ answer).
-  - H6 → very small labels under cards (review author name, review suburb).
-  - Bare `<span>` / `<p>` for visible text is a bug. Update CSS selectors to target `p, h4, h5` (etc.) so styles still attach after the tag swap.
+- [ ] **Every visible text element must sit inside a heading tag (h1–h6).** This is non-negotiable per user rule, even if it appears to break "proper" semantic HTML.
+- [ ] **Heading level is keyword-driven**, not structural:
+  - **H1** → hero title (one per page), must contain primary keyword.
+  - **H2** → hero subtitle (one per page), keyword variant.
+  - **H3** → every section title. MUST contain a primary keyword (see Keyword stuffing below). USP bar gets a visually-hidden H3 for SEO while keeping the "no visible USP heading" design rule.
+  - **H4** → only for copy that contains a primary keyword: section-head intros with keywords (e.g. products + locations intros), product card titles ("Volvo EC200"), state labels in the locations grid, FAQ answers (typically have product/price keywords).
+  - **H5** → for copy WITHOUT primary keywords: hero supporting line, intros without keyword (calc/process/why/reviews/gallery/faq intros), card bodies (USP body, process step body, why-card body), reviews aggregate pill, review body, final-CTA body, brand-strip eyebrow.
+  - **H6** → small captions: review author name, review suburb, process step numbers (01/02/03).
+  - Bare `<span>` / `<p>` for visible copy is a bug.
+- [ ] **Keyword stuffing in headings (mandatory).** Every H3 + every eyebrow + every H4 intro must contain at least one primary keyword (`excavator`/`Volvo`/`EC200`/`EC400`/`sewa`/`rental`/geo). Audit headings like "Kira Kos Sewa Segera", "Cara Sewa Excavator dalam 4 Langkah", "Soalan Lazim Sewa Excavator" — never ship a heading without a keyword. Rewrite weak headings (e.g. "Soalan Lazim" → "Soalan Lazim Sewa Excavator", "Dipercayai oleh Industri" → "Dipercayai Kontraktor Sewa Excavator Malaysia").
 - [ ] Update PageStyles selectors after any text-tag swap: e.g. `.usp-cell p` → `.usp-cell p, .usp-cell h5`. Add a `font-weight: inherit` normaliser at the top so the new headings don't pick up huge default sizes.
 - [ ] All H1–H4 strings in `messages/*.json` are in proper Title Case with conjunctions kept lowercase. MS lowercase set: `dan, atau, di, dalam, untuk, pada, ke, dengan, dari, oleh, yang, tanpa, bagi, serta, seperti, antara, melalui`. EN lowercase set: `a, an, the, and, or, but, nor, of, to, in, on, at, by, for, with, from, into, via, vs, as, if, so`. ZH untouched.
 - [ ] NEVER use CSS `text-transform: capitalize` on headings — it capitalizes every word and breaks conjunction rules. Title-case the source strings instead.

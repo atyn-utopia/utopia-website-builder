@@ -94,6 +94,79 @@ After writing, verify each section against:
 - [ ] Every city intro is unique — no copy-paste between cities
 - [ ] FAQs include the city name at least once per question
 - [ ] Nearby locations are real cities from the provided list
+- [ ] Every description / sub-text string ≤ 12 words (web copy, scannable on mobile)
+- [ ] All H1–H4 strings are proper Title Case with conjunctions kept lowercase (MS: `dan, atau, di, dalam, untuk, pada, ke, dengan, dari, oleh, yang, tanpa, bagi, serta`; EN: `a, an, the, and, or, but, of, to, in, on, at, by, for, with, from, into, via`; ZH untouched)
+- [ ] ICU placeholder names lowercase only — `{location}`, `{state}`, `{price}`, `{model}` — Title Case scripts must lowercase them in a final pass
+
+### 5. Keyword stuffing in every section heading (MANDATORY)
+**Every section heading (H3) and every section eyebrow MUST contain a primary keyword.** No exceptions. Treat the section H3 as a mini-SEO title.
+
+Required keyword density per heading:
+- Every H3 contains AT LEAST one primary keyword (`excavator`, `Volvo`, `EC200`, `EC400`, `sewa`, `rental`, geo) — preferably two.
+- Every section eyebrow (the small label above the H3) also contains a keyword.
+- Every H4 section intro contains a keyword (mention the model + the action verb).
+- Card titles inside a section should include at least one keyword across the group (not necessarily every card).
+- Hidden / sr-only headings (e.g. the USP `srHeading`) MUST contain a keyword — they exist precisely for SEO.
+
+Heading examples that PASS this rule (sewa-excavator MS):
+- ✓ "Pilih Excavator Volvo Anda" — section H3
+- ✓ "Cara Sewa Excavator dalam 4 Langkah" — section H3
+- ✓ "Sewa Excavator Seluruh Malaysia" — section H3
+- ✓ "Volvo EC200 untuk kerja sederhana, EC400 untuk projek besar." — section H4 intro
+- ✓ "Excavator Anda Boleh Tiba Esok Pagi" — final CTA H3
+
+Headings that FAIL and must be rewritten:
+- ✗ "Kira Kos Sewa Segera" → too thin; expand to "Kira Kos Sewa Excavator Segera"
+- ✗ "Cara kami bekerja" → no keyword; rewrite to "Cara Sewa Excavator dalam 4 Langkah"
+- ✗ "Soalan Lazim" → no keyword; rewrite to "Soalan Lazim Sewa Excavator"
+- ✗ "Dipercayai oleh Industri" (brand strip) → no keyword; rewrite to e.g. "Dipercayai Kontraktor Sewa Excavator Malaysia"
+
+When in doubt, prefer the more keyword-rich phrasing — keep readability natural, but always stuff at least one primary keyword in. Nana must audit every heading string for keyword presence before handing off to Kimmy.
+
+### 6. Heading-tag rules (output-side — Kimmy enforces in JSX)
+Each piece of copy must be served inside the right semantic tag. Nana writes the copy; Kimmy assigns the tag based on whether the string contains a primary keyword.
+
+**Keywords for this site** = product name (excavator/Volvo/EC200/EC400), rental verbs (sewa/rental/harian/mingguan/bulanan), geo (Malaysia / state names / city names), trust signals (CIDB/DOSH/operator).
+
+| Copy slot | Tag | Reason |
+|---|---|---|
+| Hero title | H1 | Primary keyword required |
+| Hero subtitle | H2 | Keyword variant required |
+| Every section title (H3 slot) | H3 | Must contain a keyword |
+| Section intro paragraph **with** keyword | H4 | Keyword body |
+| Section intro paragraph **without** keyword | H5 | No keyword |
+| Card titles (USP / process / why / etc.) **with** keyword | H4 | e.g. "Fleet Volvo asli" |
+| Card titles (USP / process / why / etc.) **without** keyword | H5 | e.g. "Hantar 24 Jam", "Bayaran fleksibel" |
+| Card body / description **with** keyword | H4 | e.g. product spec strings |
+| Card body / description **without** keyword | H5 | USP body, process body, why body |
+| Review / testimonial body | H5 | non-keyword |
+| Review author / suburb labels | H6 | small captions |
+| Step numbers (01/02/03) | H6 | numeric labels |
+| Brand-strip eyebrow (no keyword) | H5 | "Dipercayai oleh Industri" → H5 |
+| Hidden USP section heading (sr-only) | H3 | Must contain keyword (e.g. "...Kontraktor & Pemaju Malaysia") |
+
+Rules of thumb:
+- Never use `<p>` or `<span>` for visible copy — wrap every block in an H tag.
+- Never use CSS `text-transform: capitalize` to fake Title Case — set the source string.
+
+### 7. Alt-text rules (every image, including CSS background images)
+For each image Nana references, also write alt text in **all three locales**. Kimmy wires the alt into the JSX.
+
+| Image slot | Alt source | Style |
+|---|---|---|
+| Brand logo (hero, footer, header) | `nav.logoAlt` | Brand + tagline, ~6–10 words, contains primary keyword. e.g. MS: `"Abang Excavator — Sewa Excavator No.1 Malaysia"` |
+| Hero product/operator photo | `hero.imageAlt` | Describe what's in the photo + product + location, 8–14 words |
+| Hero background image | `hero.bgAlt` | Describe scene + product name, 8–14 words |
+| Section background images (process, reviews, why us) | `<section>.bgAlt` (one per section) | Describe what's behind the overlay |
+| Product card photos | `products.imageAltTemplate` with `{model}` | e.g. MS: `"Volvo {model} excavator untuk sewa di Malaysia"` |
+| Gallery images | `gallery.alts[]` (one per image) | Per-image MS/EN/ZH descriptions of what's in the photo + location/work-type if possible |
+| Final-CTA background image | `finalCta.bgAlt` | Describe scene; never leave alt empty |
+
+Rules:
+- Every `<img>` MUST have descriptive alt — empty alt only when the image is purely decorative (and even then, prefer a description).
+- CSS background images: the rendering container gets `role="img"` + `aria-label={t('bgAlt')}` so screen readers can describe it. Don't leave a `<div aria-hidden>` for any background that conveys meaning.
+- Alt strings must be localised: MS / EN / ZH variants in `messages/*.json`. Don't hard-code English alts.
+- Alt should include the primary keyword at least once where it makes sense (without keyword stuffing).
 
 ## Output format
 Return structured copy in this order:
