@@ -187,5 +187,28 @@
     "locationsCol": "主要地区",
     "viewAll": "查看所有地区 →",
     "copyright": "Oxihome Malaysia. 版权所有。"
+  },
+  "meta": {
+    "blogListing": {
+      "title": "Oxihome 博客 — 马来西亚氧疗指南",
+      "description": "马来西亚氧气机租赁指南、贴士与对比。涵盖慢性阻塞性肺病护理与老年支援。"
+    },
+    "blogPost": {
+      "title": "{title} | Oxihome Malaysia",
+      "description": "{excerpt}"
+    }
+  },
+  "blog": {
+    "breadcrumbHome": "首页",
+    "breadcrumbBlog": "博客",
+    "publishedOn": "发布于",
+    "minRead": "分钟阅读",
+    "recentPosts": "近期文章",
+    "readMore": "阅读更多",
+    "ctaBannerTitle": "需要氧气机？",
+    "ctaBannerBody": "马来西亚全境当日送达。通过 WhatsApp 获取报价。",
+    "ctaBannerLabel": "WhatsApp 联系",
+    "pageTitle": "Oxihome 博客",
+    "pageSubtitle": "马来西亚家庭氧疗指南"
   }
 }

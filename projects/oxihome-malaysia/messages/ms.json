@@ -187,5 +187,28 @@
     "locationsCol": "Lokasi Utama",
     "viewAll": "Lihat semua lokasi →",
     "copyright": "Oxihome Malaysia. Hak cipta terpelihara."
+  },
+  "meta": {
+    "blogListing": {
+      "title": "Blog Oxihome — Panduan Terapi Oksigen Malaysia",
+      "description": "Panduan, tips dan perbandingan untuk sewa mesin oksigen di Malaysia. Dari penjagaan COPD hingga sokongan warga emas."
+    },
+    "blogPost": {
+      "title": "{title} | Oxihome Malaysia",
+      "description": "{excerpt}"
+    }
+  },
+  "blog": {
+    "breadcrumbHome": "Utama",
+    "breadcrumbBlog": "Blog",
+    "publishedOn": "Diterbitkan",
+    "minRead": "min baca",
+    "recentPosts": "Artikel terkini",
+    "readMore": "Baca lagi",
+    "ctaBannerTitle": "Perlukan mesin oksigen?",
+    "ctaBannerBody": "Penghantaran segera ke seluruh Malaysia. Dapatkan sebut harga melalui WhatsApp.",
+    "ctaBannerLabel": "WhatsApp kami",
+    "pageTitle": "Blog Oxihome",
+    "pageSubtitle": "Panduan terapi oksigen di rumah untuk Malaysia"
   }
 }

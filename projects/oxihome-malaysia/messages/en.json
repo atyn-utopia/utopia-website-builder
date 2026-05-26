@@ -187,5 +187,28 @@
     "locationsCol": "Top Locations",
     "viewAll": "View all locations →",
     "copyright": "Oxihome Malaysia. All rights reserved."
+  },
+  "meta": {
+    "blogListing": {
+      "title": "Oxihome Blog — Oxygen Therapy Guides Malaysia",
+      "description": "Guides, tips and comparisons for renting an oxygen machine in Malaysia. From COPD care to elderly support."
+    },
+    "blogPost": {
+      "title": "{title} | Oxihome Malaysia",
+      "description": "{excerpt}"
+    }
+  },
+  "blog": {
+    "breadcrumbHome": "Home",
+    "breadcrumbBlog": "Blog",
+    "publishedOn": "Published",
+    "minRead": "min read",
+    "recentPosts": "Recent posts",
+    "readMore": "Read more",
+    "ctaBannerTitle": "Need an oxygen machine?",
+    "ctaBannerBody": "Same-day delivery across Malaysia. Get a quote via WhatsApp.",
+    "ctaBannerLabel": "WhatsApp us",
+    "pageTitle": "Oxihome Blog",
+    "pageSubtitle": "Guides for oxygen therapy at home in Malaysia"
   }
 }
