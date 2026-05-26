@@ -63,16 +63,30 @@ export default async function HomePage({
           aria-label={hero('bgAlt')}
         />
         <div className="home-hero-inner">
-          <h1>{hero('headline')}</h1>
-          <h2>{hero('subheadline')}</h2>
-          <Link
-            href={`/${locale}/redirect-whatsapp-1`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="home-hero-cta"
-          >
-            {hero('cta')}
-          </Link>
+          <div className="home-hero-text">
+            <h1>{hero('headline')}</h1>
+            <h2>{hero('subheadline')}</h2>
+            <Link
+              href={`/${locale}/redirect-whatsapp-1`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="home-hero-cta"
+            >
+              {hero('cta')}
+            </Link>
+          </div>
+          <div className="home-hero-media">
+            <img
+              src="https://static.wixstatic.com/media/d3104b_9219aed8e59e4a0d9ee86be2066ff532~mv2.png"
+              alt={hero('imageAlt')}
+              className="home-hero-photo"
+            />
+            <div className="home-hero-stamp" aria-hidden="true">
+              <span className="home-hero-stamp-from">From</span>
+              <span className="home-hero-stamp-price">RM30</span>
+              <span className="home-hero-stamp-per">/day</span>
+            </div>
+          </div>
         </div>
       </section>
 
