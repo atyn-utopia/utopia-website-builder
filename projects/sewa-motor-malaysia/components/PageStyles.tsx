@@ -28,10 +28,11 @@ export default function PageStyles() {
       }
       .home-hero-bg {
         position: absolute; inset: 0;
-        background-image: linear-gradient(135deg, rgba(22,33,62,0.85), rgba(15,23,42,0.95)), url('/og-image.jpg');
+        background-image:
+          linear-gradient(135deg, rgba(22,33,62,0.78) 0%, rgba(15,23,42,0.88) 55%, rgba(15,23,42,0.95) 100%),
+          url('https://static.wixstatic.com/media/d3104b_f1742c506a064da3af63f6b834024ad4~mv2.jpg');
         background-size: cover;
         background-position: center;
-        opacity: 0.6;
       }
       .home-hero h1 {
         font-size: clamp(30px, 4.6vw, 52px);
@@ -85,27 +86,26 @@ export default function PageStyles() {
         .home-hero-media { justify-content: flex-end; }
       }
 
-      /* Stats strip (sits between hero and USP) ───────────────────────── */
-      .home-stats {
-        background: #16213E;
-        padding: 56px 24px 72px;
-        color: #fff;
-      }
-      .home-stats-grid {
-        max-width: 1100px; margin: 0 auto;
-        display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px;
+      /* Stats strip — sits at the bottom of the hero ───────────────────── */
+      .home-hero-stats {
+        position: relative; z-index: 1;
+        max-width: 1100px; margin: 48px auto 0;
+        display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+        padding: 24px;
         text-align: center;
+        border-top: 1px solid rgba(255,255,255,0.12);
       }
       .home-stat-value {
-        font-size: clamp(24px, 3.4vw, 34px); font-weight: 800;
-        letter-spacing: -0.03em; color: #FF6B35; margin-bottom: 6px;
+        font-size: clamp(22px, 3.2vw, 32px); font-weight: 800;
+        letter-spacing: -0.03em; color: #FF6B35; margin-bottom: 4px;
+        line-height: 1;
       }
       .home-stat-label {
-        font-size: 12px; font-weight: 400; line-height: 1.5;
-        color: rgba(255,255,255,0.6);
+        font-size: 12px; font-weight: 400; line-height: 1.45;
+        color: rgba(255,255,255,0.7);
       }
       @media (min-width: 720px) {
-        .home-stats-grid { grid-template-columns: repeat(4, 1fr); gap: 36px; }
+        .home-hero-stats { grid-template-columns: repeat(4, 1fr); gap: 32px; padding: 28px 24px 8px; }
       }
 
       /* USP panel ────────────────────────────────────────────────────── */

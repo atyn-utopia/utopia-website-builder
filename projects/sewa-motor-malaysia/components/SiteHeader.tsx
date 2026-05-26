@@ -16,11 +16,11 @@ export default function SiteHeader() {
       <div className="site-header-inner">
         <Link href={`/${locale}`} className="site-brand" aria-label="Sewa Motor Malaysia homepage">
           <span className="site-brand-icon" aria-hidden="true">
-            <svg viewBox="0 0 32 32" width="22" height="22" fill="none">
-              <circle cx="7" cy="23" r="4" stroke="currentColor" strokeWidth="2" />
-              <circle cx="25" cy="23" r="4" stroke="currentColor" strokeWidth="2" />
-              <path d="M11 23h10M7 23l4-10h6l4 3h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M17 13l2-4h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <svg viewBox="0 0 32 32" width="28" height="28" fill="none">
+              <circle cx="8" cy="22" r="3.5" stroke="currentColor" strokeWidth="1.8" />
+              <circle cx="24" cy="22" r="3.5" stroke="currentColor" strokeWidth="1.8" />
+              <path d="M11.5 22h9M8 22l3.5-9h5.5l3.5 2.5h3.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M17 13l1.5-3.5h3.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </span>
           <span className="site-brand-text">Sewa Motor Malaysia</span>
@@ -28,7 +28,6 @@ export default function SiteHeader() {
         <nav className="site-nav site-nav--desktop" aria-label="Primary">
           <Link href={`/${locale}`}>{t('home')}</Link>
           <Link href={`/${locale}#products`}>{t('products')}</Link>
-          <Link href={`/${locale}#calculator`}>{t('calculator')}</Link>
           <Link href={`/${locale}#locations`}>{t('locations')}</Link>
           <Link href={`/${locale}/blog`}>{t('blog')}</Link>
         </nav>
@@ -79,7 +78,6 @@ export default function SiteHeader() {
         <nav className="site-mobile-nav" aria-label="Mobile primary">
           <Link href={`/${locale}`} onClick={close}>{t('home')}</Link>
           <Link href={`/${locale}#products`} onClick={close}>{t('products')}</Link>
-          <Link href={`/${locale}#calculator`} onClick={close}>{t('calculator')}</Link>
           <Link href={`/${locale}#locations`} onClick={close}>{t('locations')}</Link>
           <Link href={`/${locale}/blog`} onClick={close}>{t('blog')}</Link>
         </nav>
