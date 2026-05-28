@@ -281,16 +281,16 @@ export default async function LocationPage({ params }: { params: Promise<Params>
         </div>
       </section>
 
-      {/* ── STATS BAR ── */}
-      <section style={{ background: 'var(--brand-primary)', color: 'white' }}>
-        <div className="max-w-6xl mx-auto px-6 py-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+      {/* ── STATS / USP BAR (mirrors homepage) ── */}
+      <section className="usp-bar" style={{ background: 'var(--brand-primary)', color: 'white' }}>
+        <div className="usp-panel max-w-6xl mx-auto px-6 py-4 grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
             { value: '4H', label: tc('sameDayDelivery') },
             { value: 'RM250', label: locale === 'ms' ? 'Sewa dari' : locale === 'zh' ? '每月起租' : 'Rent from' },
             { value: '96%', label: locale === 'ms' ? 'Ketulenan O₂' : locale === 'zh' ? 'O₂纯度' : 'O₂ Purity' },
             { value: '0', label: locale === 'ms' ? 'Deposit' : locale === 'zh' ? '押金' : 'Deposit' },
           ].map(stat => (
-            <div key={stat.value} className="flex flex-col items-center text-center py-2">
+            <div key={stat.value} className="usp-cell flex flex-col items-center text-center py-2">
               <span className="font-display text-2xl leading-none">{stat.value}</span>
               <span className="text-xs mt-1 opacity-85">{stat.label}</span>
             </div>

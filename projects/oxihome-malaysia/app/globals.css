@@ -16,9 +16,55 @@
   --brand-white:      #FFFFFF;
   --wa-green:         #25D366;
 
-  /* Fonts */
+  /* Fonts (--font-inter is injected at runtime by next/font; alias the
+     others to it so ported components resolve) */
+  --font-inter:   system-ui, sans-serif;
   --font-display: var(--font-inter), system-ui, sans-serif;
   --font-body:    var(--font-inter), system-ui, sans-serif;
+  --font-jakarta: var(--font-inter), system-ui, sans-serif;
+  --font-mono-stack: ui-monospace, 'JetBrains Mono', Menlo, monospace;
+
+  /* ── Compatibility aliases ──
+     The blog pages + shared components were ported from the sewa-excavator
+     Webcore template, which uses an orange/charcoal token vocabulary. Map
+     those tokens onto Oxihome's teal+orange palette so nothing renders with
+     missing colours/spacing. */
+  --brand-orange:        var(--brand-accent);
+  --brand-orange-bright: #FF8338;
+  --brand-orange-deep:   #C8531B;
+  --brand-orange-pale:   var(--brand-accent-lt);
+  --brand-orange-ring:   rgba(232, 105, 42, 0.28);
+  --brand-charcoal:   var(--brand-dark);
+  --brand-charcoal-2: var(--brand-dark-mid);
+  --brand-steel:      #2A4456;
+  --brand-paper:      var(--brand-surface);
+  --ink:        var(--brand-text);
+  --ink-muted:  var(--brand-text-muted);
+  --ink-faint:  #9CB2BF;
+  --line:        var(--brand-border);
+  --line-strong: rgba(10, 37, 53, 0.18);
+  --line-on-dark: rgba(255, 255, 255, 0.10);
+  --line-on-dark-strong: rgba(255, 255, 255, 0.18);
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-card: 18px;
+  --radius-btn: 12px;
+  --shadow-sm: 0 1px 2px rgba(10,37,53,0.06);
+  --shadow-md: 0 4px 14px rgba(10,37,53,0.08), 0 2px 4px rgba(10,37,53,0.04);
+  --shadow-lg: 0 16px 36px rgba(10,37,53,0.12), 0 4px 10px rgba(10,37,53,0.06);
+  --shadow-xl: 0 28px 60px rgba(10,37,53,0.18), 0 8px 18px rgba(10,37,53,0.08);
+  --shadow-orange: 0 14px 36px rgba(232,105,42,0.32), 0 4px 12px rgba(232,105,42,0.20);
+  --shadow-wa: 0 12px 28px rgba(37,211,102,0.32), 0 4px 10px rgba(37,211,102,0.18);
+  --gut: clamp(16px, 4vw, 24px);
+  --section-y: clamp(64px, 9vw, 112px);
+  --max-w: 1200px;
+  --gradient-orange: linear-gradient(135deg, #FF8338 0%, #E8692A 45%, #C8531B 100%);
+  --gradient-hero-glow: radial-gradient(60% 80% at 80% 65%, rgba(232,105,42,0.30) 0%, rgba(232,105,42,0) 70%);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 150ms;
+  --dur: 240ms;
+  --dur-slow: 420ms;
+  --marquee-duration: 30s;
 }
 
 * { box-sizing: border-box; }
