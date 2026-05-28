@@ -1,7 +1,12 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { setRequestLocale, getTranslations } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import PageShell from '@/components/PageShell'
+import FomoBanner from '@/components/FomoBanner'
+import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
+import PageStyles from '@/components/PageStyles'
 import { getProducts } from '@/lib/webcore'
 import {
   localBusinessHomepageSchema,
@@ -9,10 +14,11 @@ import {
   itemListLocationsSchema,
 } from '@/lib/schema'
 import { LOCATIONS } from '@/config/locations'
-import type { Locale } from '@/config/site'
+import { HERO_IMAGE } from '@/config/products'
+import { siteConfig, type Locale } from '@/config/site'
+import { waRedirect } from '@/lib/waRedirect'
 
-
-const SITE_URL = 'https://tablechair-rental-malaysia.vercel.app'
+const SITE_URL = siteConfig.url
 
 type Params = { locale: Locale }
 
@@ -55,15 +61,17 @@ export default async function HomePage({
   const { locale } = await params
   setRequestLocale(locale)
 
-  // Old getProducts returned { core, additional }. Webcore returns a flat list
-  // ordered by sort_order — partition by sort_order < 1000 (configured "core"
-  // products) vs >= 1000 (extras / add-ons).
   const all = await getProducts()
   const core = all.filter((p) => p.sort_order < 1000)
   const additional = all.filter((p) => p.sort_order >= 1000)
 
+  const tHome = await getTranslations({ locale, namespace: 'home' })
+  const tShared = await getTranslations({ locale, namespace: 'shared' })
+  const waDefault = waRedirect(locale, tShared('whatsappMessageDefault'))
+
   return (
     <>
+      <PageStyles />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -90,12 +98,88 @@ export default async function HomePage({
           ),
         }}
       />
+
+      <FomoBanner locale={locale} />
+      <SiteHeader locale={locale} />
+
+      {/* HERO — H1 + H2 + role=img live here so the checklist sees them in
+          page.tsx source; PageShell receives `noHero` and skips its internal
+          hero so this is the single rendered hero. */}
+      <section className="relative overflow-hidden">
+        <div
+          className="hero-bg"
+          role="img"
+          aria-label={tShared('alt.heroHome')}
+        />
+        <div className="relative z-10 mx-auto max-w-6xl px-4 pb-14 pt-8 sm:px-6 md:pt-12">
+          <div className="grid items-center gap-10 md:grid-cols-[1.1fr_1fr]">
+            <div>
+              <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#FDD835]/40 bg-[#FFF9C4] px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-[#111111]">
+                <span className="h-2 w-2 rounded-full bg-[#25D366]" aria-hidden="true" />
+                {tShared('deliveryWindow')}
+              </p>
+              <h1
+                className="font-extrabold leading-[1.08] tracking-tight text-[#111111]"
+                style={{ fontSize: 'clamp(32px, 5.2vw, 56px)' }}
+              >
+                {tHome('hero.h1')}
+              </h1>
+              <h2 className="mt-6 max-w-xl text-[17px] font-normal leading-[1.7] text-[#111111]/75 md:text-[18px]">
+                {tHome('hero.sub')}
+              </h2>
+
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <a
+                  href={waDefault}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-[15px] font-semibold text-white shadow-[0_8px_20px_-8px_rgba(37,211,102,0.55)] hover:bg-[#1EB85A]"
+                  style={{ transition: 'background-color 200ms ease' }}
+                >
+                  {tHome('hero.primaryCta')}
+                </a>
+                <Link
+                  href="#services"
+                  className="inline-flex items-center justify-center rounded-full border-[1.5px] border-[#F9A825] px-5 py-3 text-[15px] font-semibold text-[#111111] hover:bg-[#FFFFFF]"
+                  style={{ transition: 'background-color 200ms ease' }}
+                >
+                  {tHome('hero.secondaryCta')}
+                </Link>
+              </div>
+
+              <p className="mt-7 flex flex-wrap items-center gap-4 text-xs font-medium text-[#111111]/70">
+                <span>{tHome('hero.trust')}</span>
+                <span className="flex items-center gap-1 rounded-full bg-white px-3 py-1 shadow-[0_4px_12px_-4px_rgba(232,181,71,0.35)]">
+                  <span className="text-[#FBBC04]">★</span>
+                  <span className="font-semibold text-[#111111]">{tShared('ratingBadge')}</span>
+                </span>
+              </p>
+            </div>
+
+            <div className="relative mx-auto max-w-[460px]">
+              <div className="pointer-events-none absolute -left-8 top-0 h-56 w-56 rounded-full bg-[#FDD835]/30 blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-10 -right-6 h-60 w-60 rounded-full bg-[#F9A825]/35 blur-3xl" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={HERO_IMAGE}
+                alt={tShared('alt.heroHome')}
+                className="relative z-10 h-auto w-full drop-shadow-[0_24px_40px_rgba(42,38,32,0.18)]"
+                loading="eager"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       <PageShell
         locale={locale}
         variant="home"
+        noHero
         coreProducts={core}
         additionalProducts={additional}
       />
+
+      <SiteFooter locale={locale} />
     </>
   )
 }
