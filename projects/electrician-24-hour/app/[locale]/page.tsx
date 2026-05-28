@@ -8,7 +8,7 @@ import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import PageStyles from '@/components/PageStyles';
 import MarketingMarquee from '@/components/MarketingMarquee';
-import HomePageClient from './HomePageClient';
+import HomePageClient from '@/components/HomePageClient';
 
 export async function generateMetadata({
   params,
