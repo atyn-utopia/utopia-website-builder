@@ -96,12 +96,14 @@ export default async function BlogPostPage({
   const readTime = Math.max(1, Math.ceil(wordCount / 200))
 
   /* ---------- Strip duplicates ----------
-     The blog writer emits content with its own <h1> title and a <nav> TOC.
-     The page provides both, so render-side strip them to avoid two titles
-     and two TOCs on the live post. */
+     The blog writer emits content with its own top-level title heading and
+     a table-of-contents nav. The page provides both, so render-side strip
+     them to avoid two titles and two TOCs on the live post. */
+  const H1_BLOCK = /<h1\b[^>]*>[\s\S]*?<\/h1>\s*/i
+  const NAV_BLOCK = /<nav\b[^>]*>[\s\S]*?<\/nav>\s*/i
   const strippedContent = tr.content
-    .replace(/<h1\b[^>]*>[\s\S]*?<\/h1>\s*/i, '')
-    .replace(/<nav\b[^>]*>[\s\S]*?<\/nav>\s*/i, '')
+    .replace(H1_BLOCK, '')
+    .replace(NAV_BLOCK, '')
 
   /* ---------- Table of Contents ---------- */
   const tocItems: { id: string; text: string }[] = []
