@@ -204,9 +204,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               {t('hero.h1')}
             </h1>
 
-            <p className="text-lg leading-relaxed mb-8 max-w-md" style={{ color: 'rgba(255,255,255,0.75)' }}>
+            <h5 className="text-lg leading-relaxed mb-8 max-w-md" style={{ color: 'rgba(255,255,255,0.75)' }}>
               {t('hero.sub')}
-            </p>
+            </h5>
 
             <a
               href={`/${locale}/redirect-whatsapp-1`}
@@ -389,12 +389,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             {t('risk.h2')}
           </h2>
           <div className="space-y-4 text-lg leading-relaxed" style={{ color: 'rgba(255,255,255,0.75)' }}>
-            <p>{t('risk.p1')}</p>
-            <p>{t('risk.p2')}</p>
+            <h5>{t('risk.p1')}</h5>
+            <h5>{t('risk.p2')}</h5>
           </div>
-          <p className="mt-6 text-lg font-semibold" style={{ color: 'var(--brand-primary-lt)' }}>
+          <h5 className="mt-6 text-lg font-semibold" style={{ color: 'var(--brand-primary-lt)' }}>
             {t('risk.p3')}
-          </p>
+          </h5>
         </div>
       </section>
 
@@ -442,9 +442,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 <h3 className="font-display text-lg leading-tight mb-2" style={{ color: 'var(--brand-dark)', minHeight: '3.5rem' }}>
                   {product.name}
                 </h3>
-                <p className="text-sm leading-relaxed flex-1 mb-4" style={{ color: 'var(--brand-text-muted)', minHeight: '4rem' }}>
+                <h5 className="text-sm leading-relaxed flex-1 mb-4" style={{ color: 'var(--brand-text-muted)', minHeight: '4rem' }}>
                   {product.desc}
-                </p>
+                </h5>
 
                 {/* Pricing */}
                 <div className="space-y-1.5 mb-4">
@@ -469,14 +469,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     </div>
                   )}
                   {product.installment && (
-                    <p className="text-xs" style={{ color: 'var(--brand-text-muted)' }}>
+                    <h5 className="text-xs" style={{ color: 'var(--brand-text-muted)' }}>
                       {tc('installment')}: {product.installment}
-                    </p>
+                    </h5>
                   )}
                   {product.extras && product.extras.map(e => (
-                    <p key={e} className="flex items-center gap-1.5 text-xs font-medium" style={{ color: 'var(--brand-primary)' }}>
+                    <h5 key={e} className="flex items-center gap-1.5 text-xs font-medium" style={{ color: 'var(--brand-primary)' }}>
                       <CheckIcon /> {e}
-                    </p>
+                    </h5>
                   ))}
                 </div>
 
@@ -517,7 +517,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   {step.num}
                 </div>
                 <h3 className="font-display text-xl mb-2" style={{ color: 'var(--brand-white)' }}>{step.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>{step.desc}</p>
+                <h5 className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>{step.desc}</h5>
               </div>
             ))}
           </div>
@@ -550,13 +550,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <h3 className="font-display text-4xl text-center mb-3" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.02em' }}>
             {locale === 'ms' ? 'Galeri Pelanggan Kami' : locale === 'zh' ? '客户照片' : 'Customer Gallery'}
           </h3>
-          <p className="text-center text-base mb-10 max-w-lg mx-auto" style={{ color: 'var(--brand-text-muted)' }}>
+          <h5 className="text-center text-base mb-10 max-w-lg mx-auto" style={{ color: 'var(--brand-text-muted)' }}>
             {locale === 'ms'
               ? 'Lihat bagaimana mesin oksigen Oxihome digunakan oleh keluarga di seluruh Malaysia.'
               : locale === 'zh'
               ? '看看马来西亚各地家庭如何使用Oxihome氧气机。'
               : 'See how Oxihome oxygen machines are used by families across Malaysia.'}
-          </p>
+          </h5>
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
             {galleryImages.map((src, i) => (
               <div
@@ -596,8 +596,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               {t('why.h2')}
             </h3>
             <div className="space-y-4 text-base leading-relaxed" style={{ color: 'rgba(255,255,255,0.75)' }}>
-              <p>{t('why.p1')}</p>
-              <p>{t('why.p2')}</p>
+              <h5>{t('why.p1')}</h5>
+              <h5>{t('why.p2')}</h5>
             </div>
             <a
               href={`/${locale}/redirect-whatsapp-1`}
@@ -637,9 +637,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <h3 className="font-display text-4xl text-center mb-3" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.02em' }}>
             {t('locations.h2')}
           </h3>
-          <p className="text-center text-base mb-10 max-w-xl mx-auto" style={{ color: 'var(--brand-text-muted)' }}>
+          <h5 className="text-center text-base mb-10 max-w-xl mx-auto" style={{ color: 'var(--brand-text-muted)' }}>
             {t('locations.sub')}
-          </p>
+          </h5>
           {/* Group by state */}
           {(() => {
             const stateOrder = [
@@ -754,12 +754,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           >
             <span className="text-xl">😊</span>
             <div className="text-left">
-              <p className="text-white text-sm font-bold leading-tight">
+              <h5 className="text-white text-sm font-bold leading-tight">
                 {locale === 'ms' ? '2,400+ Keluarga' : locale === 'zh' ? '2,400+ 家庭' : '2,400+ Families'}
-              </p>
-              <p className="text-xs leading-tight" style={{ color: 'rgba(255,255,255,0.7)' }}>
+              </h5>
+              <h5 className="text-xs leading-tight" style={{ color: 'rgba(255,255,255,0.7)' }}>
                 {locale === 'ms' ? 'Sudah mempercayai Oxihome' : locale === 'zh' ? '已信任 Oxihome' : 'already trust Oxihome'}
-              </p>
+              </h5>
             </div>
           </div>
 
@@ -768,9 +768,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <h3 className="font-display text-4xl md:text-5xl text-white mb-4" style={{ letterSpacing: '-0.02em' }}>
               {t('cta.h2')}
             </h3>
-            <p className="text-base leading-relaxed mb-8" style={{ color: 'rgba(255,255,255,0.75)' }}>
+            <h5 className="text-base leading-relaxed mb-8" style={{ color: 'rgba(255,255,255,0.75)' }}>
               {t('cta.sub')}
-            </p>
+            </h5>
             <div>
               <a
                 href={`/${locale}/redirect-whatsapp-1`}

@@ -1,12 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
 import { routing } from '@/i18n/routing';
 import { getBlogPosts } from '@/lib/webcore';
-import { waRedirect } from '@/lib/waRedirect';
-import { WhatsAppButton, WaIcon } from '@/components/WhatsAppButton';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import FomoBanner from '@/components/FomoBanner';
@@ -38,47 +35,108 @@ export default async function BlogListing({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'blog' });
   const posts = await getBlogPosts(locale);
+  const dateLocale = locale === 'ms' ? 'ms-MY' : locale === 'zh' ? 'zh-CN' : 'en-MY';
 
   return (
-    <>
+    <main style={{ minHeight: '100vh', background: '#ffffff' }}>
       <FomoBanner />
       <SiteHeader />
 
-      <section className="blog-hero">
-        <div className="blog-hero-bg" aria-hidden="true" />
-        <div className="container blog-hero-inner">
-          <nav className="breadcrumb" aria-label="Breadcrumb">
-            <Link href={`/${locale}`}>{t('breadcrumbHome')}</Link>
-            <span aria-hidden="true">/</span>
-            <span aria-current="page">{t('breadcrumbBlog')}</span>
+      {/* Hero */}
+      <section
+        style={{
+          background: 'linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%)',
+          padding: '64px 24px',
+          color: '#fff',
+          textAlign: 'center',
+        }}
+      >
+        <div style={{ maxWidth: 880, margin: '0 auto' }}>
+          <nav aria-label="Breadcrumb" style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', marginBottom: 16 }}>
+            <Link href={`/${locale}`} style={{ color: 'rgba(255,255,255,0.7)', textDecoration: 'none' }}>{t('breadcrumbHome')}</Link>
+            <span style={{ margin: '0 8px', opacity: 0.5 }} aria-hidden="true">›</span>
+            <span aria-current="page" style={{ color: '#fff', fontWeight: 500 }}>{t('breadcrumbBlog')}</span>
           </nav>
-          <h1>{t('title')}</h1>
-          <h2>{t('subtitle')}</h2>
+          <h1 style={{
+            fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 800, margin: 0,
+            letterSpacing: '-0.02em', lineHeight: 1.15,
+          }}>
+            {t('title')}
+          </h1>
+          <h2 style={{
+            fontSize: 16, fontWeight: 400, margin: '14px auto 0', maxWidth: 620,
+            opacity: 0.85, lineHeight: 1.5,
+          }}>
+            {t('subtitle')}
+          </h2>
         </div>
       </section>
 
-      <section className="section">
-        <div className="container">
+      {/* Posts grid */}
+      <section style={{ padding: '56px 24px', background: '#f8fafc' }}>
+        <div style={{ maxWidth: 1120, margin: '0 auto' }}>
           {posts.length === 0 ? (
-            <p className="blog-empty">{t('noPosts')}</p>
+            <div style={{ textAlign: 'center', padding: '64px 0', color: '#64748b', fontSize: 16 }}>
+              {t('noPosts')}
+            </div>
           ) : (
-            <div className="blog-grid">
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+              gap: 24,
+            }}>
               {posts.map((post) => {
                 const tr = post.blog_translations[0];
+                const date = new Date(post.published_at);
+                const formattedDate = Number.isNaN(date.getTime())
+                  ? ''
+                  : date.toLocaleDateString(dateLocale, { year: 'numeric', month: 'long', day: 'numeric' });
                 return (
-                  <article key={post.id} className="blog-card">
+                  <BlogLinkTracker
+                    key={post.id}
+                    slug={post.slug}
+                    href={`/${locale}/blog/${post.slug}`}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      background: '#fff',
+                      borderRadius: 14,
+                      overflow: 'hidden',
+                      boxShadow: '0 1px 2px rgba(15, 23, 42, 0.06), 0 4px 12px rgba(15, 23, 42, 0.04)',
+                      textDecoration: 'none',
+                      color: 'inherit',
+                    }}
+                  >
                     {post.cover_image_url && (
-                      <BlogLinkTracker slug={post.slug} href={`/${locale}/blog/${post.slug}`} className="blog-card-img">
-                        <Image src={post.cover_image_url} alt={tr?.title ?? post.slug} width={600} height={350} style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
-                      </BlogLinkTracker>
+                      <div style={{
+                        width: '100%',
+                        height: 200,
+                        backgroundImage: `url(${post.cover_image_url})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                      }} />
                     )}
-                    <div className="blog-card-body">
-                      <p className="blog-card-date">{new Date(post.published_at).toLocaleDateString(locale, { day: 'numeric', month: 'short', year: 'numeric' })}</p>
-                      <h3><BlogLinkTracker slug={post.slug} href={`/${locale}/blog/${post.slug}`}>{tr?.title}</BlogLinkTracker></h3>
-                      <p className="blog-card-excerpt">{tr?.excerpt}</p>
-                      <BlogLinkTracker slug={post.slug} href={`/${locale}/blog/${post.slug}`} className="blog-card-link">{t('readMore')} →</BlogLinkTracker>
+                    <div style={{ padding: 22, display: 'flex', flexDirection: 'column', gap: 10, flex: 1 }}>
+                      {formattedDate && (
+                        <span style={{ fontSize: 12, color: '#64748b', letterSpacing: '0.04em' }}>{formattedDate}</span>
+                      )}
+                      <h3 style={{
+                        fontSize: 19, fontWeight: 700, color: '#0f172a', margin: 0,
+                        lineHeight: 1.3, letterSpacing: '-0.01em',
+                      }}>
+                        {tr?.title}
+                      </h3>
+                      <p style={{
+                        fontSize: 14, color: '#475569', margin: 0, lineHeight: 1.55,
+                        display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden',
+                      }}>
+                        {tr?.excerpt}
+                      </p>
+                      <span style={{ marginTop: 'auto', fontSize: 13, fontWeight: 600, color: '#2563eb', paddingTop: 6 }}>
+                        {t('readMore')} →
+                      </span>
                     </div>
-                  </article>
+                  </BlogLinkTracker>
                 );
               })}
             </div>
@@ -86,59 +144,13 @@ export default async function BlogListing({
         </div>
       </section>
 
-      {/* Blog CTA banner */}
-      <section className="blog-cta">
-        <div className="container blog-cta-inner">
-          <div>
-            <h3>{t('ctaBannerTitle')}</h3>
-            <p>{t('ctaBannerBody')}</p>
-          </div>
-          <WhatsAppButton href={waRedirect(locale)} label="blog-cta" className="btn btn-wa">
-            <WaIcon /> {t('ctaBannerLabel')}
-          </WhatsAppButton>
-        </div>
+      <section style={{ padding: '32px 24px', textAlign: 'center', background: '#fff' }}>
+        <Link href={`/${locale}`} style={{ display: 'inline-block', fontSize: 14, color: '#64748b', textDecoration: 'none' }}>
+          ← {locale === 'ms' ? 'Kembali ke laman utama' : locale === 'zh' ? '返回首页' : 'Back to home'}
+        </Link>
       </section>
 
       <SiteFooter locale={locale} />
-
-      <style>{`
-        .blog-hero { position: relative; color: #fff; padding: 56px 0 64px; overflow: hidden; }
-        .blog-hero-bg {
-          position: absolute; inset: 0;
-          background-color: var(--brand-charcoal);
-          background-image: var(--gradient-hero-glow),
-            linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-          background-size: auto, 56px 56px, 56px 56px;
-        }
-        .blog-hero-inner { position: relative; z-index: 1; text-align: center; }
-        .breadcrumb { display: inline-flex; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.6); margin: 0 0 18px; padding: 0; }
-        .breadcrumb a { color: var(--brand-orange-bright); font-weight: 600; }
-        .breadcrumb span[aria-hidden="true"] { color: rgba(255,255,255,0.3); }
-        .breadcrumb [aria-current="page"] { color: #fff; font-weight: 600; }
-        .blog-hero h1 { font-size: clamp(2rem, 4.5vw, 3.25rem); font-weight: 800; color: #fff; margin: 0; letter-spacing: -0.025em; }
-        .blog-hero h2 { font-size: clamp(1rem, 1.5vw, 1.25rem); font-weight: 500; color: rgba(255,255,255,0.78); margin: 8px 0 0; }
-
-        .blog-empty { text-align: center; color: var(--ink-muted); font-size: 16px; padding: 48px 0; }
-        .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
-        .blog-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-card); overflow: hidden; display: flex; flex-direction: column; transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out); }
-        .blog-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-        .blog-card-img { display: block; aspect-ratio: 16/9; overflow: hidden; }
-        .blog-card-body { padding: 22px; display: flex; flex-direction: column; gap: 8px; }
-        .blog-card-date { font-family: var(--font-mono-stack); font-weight: 600; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); margin: 0; }
-        .blog-card h3 { font-size: 19px; font-weight: 700; color: var(--brand-charcoal); letter-spacing: -0.015em; line-height: 1.3; margin: 0; }
-        .blog-card-excerpt { font-size: 14.5px; line-height: 1.6; color: var(--ink-muted); margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-        .blog-card-link { color: var(--brand-orange-deep); font-weight: 700; font-size: 14px; margin-top: auto; }
-
-        .blog-cta { background: var(--brand-orange-pale); padding: 56px 0; }
-        .blog-cta-inner {
-          display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 24px;
-          text-align: center;
-        }
-        @media (min-width: 768px) { .blog-cta-inner { flex-direction: row; text-align: left; } }
-        .blog-cta h3 { font-size: 22px; font-weight: 700; color: var(--brand-charcoal); margin: 0 0 6px; letter-spacing: -0.015em; }
-        .blog-cta p { font-size: 15px; color: var(--ink-muted); margin: 0; }
-      `}</style>
-    </>
+    </main>
   );
 }

@@ -1,15 +1,12 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
 import { routing } from '@/i18n/routing';
 import { getBlogPost, getBlogPostSlugs, getRecentBlogPosts } from '@/lib/webcore';
 import { waRedirect } from '@/lib/waRedirect';
 import { ArticleSchema } from '@/components/schema/ArticleSchema';
-// BreadcrumbSchema import removed — legacy oxihome schemas have a different API
-import { WhatsAppButton, WaIcon } from '@/components/WhatsAppButton';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import FomoBanner from '@/components/FomoBanner';
@@ -61,9 +58,12 @@ export default async function BlogPostPage({
   const recent = await getRecentBlogPosts(locale, slug, 3);
   const wordCount = (tr.content || '').replace(/<[^>]+>/g, ' ').trim().split(/\s+/).length;
   const minutes = Math.max(1, Math.round(wordCount / 220));
+  const formattedDate = new Date(post.published_at).toLocaleDateString(locale, {
+    day: 'numeric', month: 'long', year: 'numeric',
+  });
 
   return (
-    <>
+    <main style={{ background: '#ffffff', minHeight: '100vh' }}>
       <FomoBanner />
       <SiteHeader />
       <ArticleSchema
@@ -75,81 +75,114 @@ export default async function BlogPostPage({
         publishedAt={post.published_at}
       />
 
-      <article className="post">
-        <header className="post-header">
-          <div className="container">
-            <nav className="breadcrumb" aria-label="Breadcrumb">
-              <Link href={`/${locale}`}>{t('breadcrumbHome')}</Link>
-              <span aria-hidden="true">/</span>
-              <Link href={`/${locale}/blog`}>{t('breadcrumbBlog')}</Link>
-              <span aria-hidden="true">/</span>
-              <span aria-current="page">{tr.title}</span>
-            </nav>
-            <h1>{tr.title}</h1>
-            <p className="post-excerpt">{tr.excerpt}</p>
-            <p className="post-meta">
-              <span>{t('publishedOn')} {new Date(post.published_at).toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' })}</span>
-              <span aria-hidden="true">·</span>
-              <span>{minutes} {t('minRead')}</span>
-            </p>
+      {/* Breadcrumb */}
+      <section style={{ background: '#f8fafc', padding: '14px 24px', borderBottom: '1px solid #e2e8f0' }}>
+        <nav aria-label="Breadcrumb" style={{ maxWidth: 880, margin: '0 auto', fontSize: 13, color: '#64748b' }}>
+          <Link href={`/${locale}`} style={{ color: '#64748b', textDecoration: 'none' }}>{t('breadcrumbHome')}</Link>
+          <span style={{ margin: '0 8px' }} aria-hidden="true">›</span>
+          <Link href={`/${locale}/blog`} style={{ color: '#64748b', textDecoration: 'none' }}>{t('breadcrumbBlog')}</Link>
+          <span style={{ margin: '0 8px' }} aria-hidden="true">›</span>
+          <span aria-current="page" style={{ color: '#0f172a', fontWeight: 500 }}>{tr.title}</span>
+        </nav>
+      </section>
+
+      <article style={{ maxWidth: 760, margin: '0 auto', padding: '40px 24px' }}>
+        <header style={{ marginBottom: 32 }}>
+          <h1 style={{
+            fontSize: 'clamp(28px, 4vw, 40px)', fontWeight: 800, color: '#0f172a',
+            margin: 0, lineHeight: 1.2, letterSpacing: '-0.02em',
+          }}>
+            {tr.title}
+          </h1>
+          <h2 style={{ fontSize: 16, fontWeight: 400, color: '#475569', margin: '14px 0 0', lineHeight: 1.55 }}>
+            {tr.excerpt}
+          </h2>
+          <div style={{
+            display: 'flex', gap: 14, marginTop: 18, fontSize: 13, color: '#64748b',
+            alignItems: 'center', flexWrap: 'wrap',
+          }}>
+            <span>{t('publishedOn')} {formattedDate}</span>
+            <span style={{ opacity: 0.4 }} aria-hidden="true">·</span>
+            <span>{minutes} {t('minRead')}</span>
           </div>
         </header>
 
         {post.cover_image_url && (
-          <div className="container post-cover-wrap">
-            <Image src={post.cover_image_url} alt={tr.title} width={1200} height={630} style={{ width: '100%', height: 'auto', borderRadius: 'var(--radius-md)' }} priority />
-          </div>
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={post.cover_image_url}
+            alt={tr.title}
+            style={{ width: '100%', height: 'auto', borderRadius: 14, marginBottom: 32, display: 'block' }}
+          />
         )}
 
-        <div className="container post-body-wrap">
-          <div className="post-body">
-            <div className="blog-content" dangerouslySetInnerHTML={{ __html: tr.content }} />
-            <div className="blog-cta-banner">
-              <h3>{t('ctaBannerTitle')}</h3>
-              <p>{t('ctaBannerBody')}</p>
-              <WhatsAppButton href={waRedirect(locale)} label={`blog-${slug}`} className="btn btn-wa">
-                <WaIcon /> {t('ctaBannerLabel')}
-              </WhatsAppButton>
-            </div>
-          </div>
-          {recent.length > 0 && (
-            <aside className="post-sidebar">
-              <h4>{t('recentPosts')}</h4>
-              <ul>
-                {recent.map((r) => (
-                  <li key={r.slug}>
-                    <Link href={`/${locale}/blog/${r.slug}`}>{r.blog_translations[0]?.title}</Link>
-                  </li>
-                ))}
-              </ul>
-            </aside>
-          )}
-        </div>
+        <div
+          className="blog-content"
+          style={{ fontSize: 17, lineHeight: 1.75, color: '#1e293b' }}
+          dangerouslySetInnerHTML={{ __html: tr.content }}
+        />
       </article>
 
-      <SiteFooter locale={locale} />
+      {/* WhatsApp CTA */}
+      <section style={{ background: '#0f172a', color: '#fff', padding: '48px 24px', textAlign: 'center' }}>
+        <div style={{ maxWidth: 640, margin: '0 auto' }}>
+          <h3 style={{ fontSize: 24, fontWeight: 700, margin: 0, letterSpacing: '-0.01em' }}>
+            {t('ctaBannerTitle')}
+          </h3>
+          <p style={{ fontSize: 15, opacity: 0.85, margin: '12px 0 22px', lineHeight: 1.6 }}>
+            {t('ctaBannerBody')}
+          </p>
+          <Link
+            href={waRedirect(locale)}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-block', background: '#25D366', color: '#fff',
+              padding: '14px 28px', borderRadius: 999, fontSize: 15, fontWeight: 600, textDecoration: 'none',
+            }}
+          >
+            {t('ctaBannerLabel')}
+          </Link>
+        </div>
+      </section>
 
-      <style>{`
-        .post-header { padding: 56px 0 32px; background: var(--brand-paper); border-bottom: 1px solid var(--line); }
-        .post-header .breadcrumb { display: inline-flex; gap: 8px; font-size: 13px; color: var(--ink-muted); margin: 0 0 18px; padding: 0; }
-        .post-header .breadcrumb a { color: var(--brand-orange-deep); font-weight: 600; }
-        .post-header .breadcrumb [aria-current="page"] { color: var(--brand-charcoal); font-weight: 600; }
-        .post-header h1 { font-size: clamp(2rem, 4vw, 2.875rem); font-weight: 800; color: var(--brand-charcoal); letter-spacing: -0.025em; line-height: 1.1; margin: 0 0 12px; max-width: 800px; }
-        .post-excerpt { font-size: clamp(1rem, 1.4vw, 1.1875rem); color: var(--ink-muted); line-height: 1.6; max-width: 740px; margin: 0; }
-        .post-meta { display: inline-flex; flex-wrap: wrap; gap: 10px; font-family: var(--font-mono-stack); font-weight: 600; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); margin: 18px 0 0; }
-        .post-cover-wrap { padding: 32px var(--gut); }
-        .post-body-wrap { display: grid; grid-template-columns: 1fr; gap: 40px; padding: 32px var(--gut) 80px; }
-        @media (min-width: 960px) { .post-body-wrap { grid-template-columns: minmax(0, 1fr) 280px; } }
-        .post-body { max-width: 740px; }
-        .blog-cta-banner { margin: 48px 0 0; background: var(--brand-orange-pale); border-radius: var(--radius-card); padding: 32px; text-align: center; border: 1px solid var(--brand-orange-ring); }
-        .blog-cta-banner h3 { font-size: 22px; font-weight: 700; color: var(--brand-charcoal); margin: 0 0 8px; letter-spacing: -0.015em; }
-        .blog-cta-banner p { font-size: 15px; color: var(--ink-muted); margin: 0 0 18px; }
-        .post-sidebar { position: sticky; top: 100px; align-self: start; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-card); padding: 22px; }
-        .post-sidebar h4 { font-family: var(--font-mono-stack); font-weight: 700; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brand-orange-deep); margin: 0 0 12px; }
-        .post-sidebar ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
-        .post-sidebar a { color: var(--ink); font-weight: 600; font-size: 14px; line-height: 1.4; }
-        .post-sidebar a:hover { color: var(--brand-orange-deep); }
-      `}</style>
-    </>
+      {/* Related articles */}
+      {recent.length > 0 && (
+        <section style={{ padding: '56px 24px', background: '#f8fafc' }}>
+          <div style={{ maxWidth: 1120, margin: '0 auto' }}>
+            <h3 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', margin: '0 0 24px' }}>
+              {t('recentPosts')}
+            </h3>
+            <div style={{
+              display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 20,
+            }}>
+              {recent.map((r) => (
+                <Link
+                  key={r.slug}
+                  href={`/${locale}/blog/${r.slug}`}
+                  style={{
+                    background: '#fff', borderRadius: 12, padding: 20, textDecoration: 'none',
+                    color: 'inherit', boxShadow: '0 1px 2px rgba(15, 23, 42, 0.06)',
+                    display: 'flex', flexDirection: 'column', gap: 8,
+                  }}
+                >
+                  <h4 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', margin: 0, lineHeight: 1.35 }}>
+                    {r.blog_translations[0]?.title}
+                  </h4>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <section style={{ padding: '24px', textAlign: 'center', background: '#fff' }}>
+        <Link href={`/${locale}/blog`} style={{ fontSize: 14, color: '#64748b', textDecoration: 'none' }}>
+          {t('backToBlog')}
+        </Link>
+      </section>
+
+      <SiteFooter locale={locale} />
+    </main>
   );
 }

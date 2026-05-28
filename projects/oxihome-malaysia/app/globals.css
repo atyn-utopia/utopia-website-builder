@@ -71,6 +71,10 @@
 
 h1, h3, h4 { font-weight: 700; }
 h2 { font-weight: 600; }
+/* h5/h6 are used to wrap body text (keyword-driven heading rule). Keep them
+   visually identical to the <p> they replaced — utility classes still control
+   size/weight via Tailwind preflight, this just guards against UA bolding. */
+h5, h6 { font-size: inherit; font-weight: inherit; line-height: inherit; margin: 0; }
 
 html { scroll-behavior: smooth; }
 

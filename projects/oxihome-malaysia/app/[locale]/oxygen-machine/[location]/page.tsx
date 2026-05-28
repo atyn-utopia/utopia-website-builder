@@ -214,9 +214,9 @@ export default async function LocationPage({ params }: { params: Promise<Params>
               <h1 className="font-display text-4xl md:text-5xl leading-tight text-white mb-4" style={{ letterSpacing: '-0.02em' }}>
                 {t('hero.h1', { city: cityName })}
               </h1>
-              <p className="text-base leading-relaxed mb-6 max-w-md" style={{ color: 'rgba(255,255,255,0.75)' }}>
+              <h5 className="text-base leading-relaxed mb-6 max-w-md" style={{ color: 'rgba(255,255,255,0.75)' }}>
                 {t('hero.sub', { city: cityName })}
-              </p>
+              </h5>
               <a href={`/${locale}/redirect-whatsapp-1`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -301,9 +301,9 @@ export default async function LocationPage({ params }: { params: Promise<Params>
       {/* ── INTRO PARAGRAPH ── */}
       <section className="py-12 px-6" style={{ background: 'var(--brand-surface)' }}>
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-lg leading-relaxed" style={{ color: 'var(--brand-text)' }}>
+          <h5 className="text-lg leading-relaxed" style={{ color: 'var(--brand-text)' }}>
             {t('intro', { city: cityName })}
-          </p>
+          </h5>
         </div>
       </section>
 
@@ -346,9 +346,9 @@ export default async function LocationPage({ params }: { params: Promise<Params>
                 <h3 className="font-display text-lg leading-tight mb-2" style={{ color: 'var(--brand-dark)', minHeight: '3.5rem' }}>
                   {product.name}
                 </h3>
-                <p className="text-sm leading-relaxed flex-1 mb-4" style={{ color: 'var(--brand-text-muted)', minHeight: '4rem' }}>
+                <h5 className="text-sm leading-relaxed flex-1 mb-4" style={{ color: 'var(--brand-text-muted)', minHeight: '4rem' }}>
                   {product.desc}
-                </p>
+                </h5>
                 <div className="space-y-1.5 mb-4">
                   {product.rentPrice && (
                     <div className="flex items-baseline gap-2">
@@ -369,12 +369,12 @@ export default async function LocationPage({ params }: { params: Promise<Params>
                     </div>
                   )}
                   {product.installment && (
-                    <p className="text-xs" style={{ color: 'var(--brand-text-muted)' }}>{tc('installment')}: {product.installment}</p>
+                    <h5 className="text-xs" style={{ color: 'var(--brand-text-muted)' }}>{tc('installment')}: {product.installment}</h5>
                   )}
                   {product.extras && product.extras.map(e => (
-                    <p key={e} className="flex items-center gap-1.5 text-xs font-medium" style={{ color: 'var(--brand-primary)' }}>
+                    <h5 key={e} className="flex items-center gap-1.5 text-xs font-medium" style={{ color: 'var(--brand-primary)' }}>
                       <CheckIcon /> {e}
-                    </p>
+                    </h5>
                   ))}
                 </div>
                 <a href={`/${locale}/redirect-whatsapp-1`}
@@ -415,8 +415,8 @@ export default async function LocationPage({ params }: { params: Promise<Params>
               >
                 <CheckIcon />
                 <div>
-                  <p className="font-semibold text-white text-sm mb-1">{item.title}</p>
-                  <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.65)' }}>{item.desc}</p>
+                  <h5 className="font-semibold text-white text-sm mb-1">{item.title}</h5>
+                  <h5 className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.65)' }}>{item.desc}</h5>
                 </div>
               </div>
             ))}
@@ -488,9 +488,9 @@ export default async function LocationPage({ params }: { params: Promise<Params>
           <h2 className="font-display text-3xl md:text-4xl text-white mb-3" style={{ letterSpacing: '-0.02em' }}>
             {t('cta.h2', { city: cityName })}
           </h2>
-          <p className="text-base leading-relaxed mb-7" style={{ color: 'rgba(255,255,255,0.8)' }}>
+          <h5 className="text-base leading-relaxed mb-7" style={{ color: 'rgba(255,255,255,0.8)' }}>
             {t('cta.sub', { city: cityName })}
-          </p>
+          </h5>
           <a
             href={`/${locale}/redirect-whatsapp-1`}
                   target="_blank"
