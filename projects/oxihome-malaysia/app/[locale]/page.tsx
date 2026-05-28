@@ -357,16 +357,16 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         label={locale === 'ms' ? '⚡ Tawaran Hari Ini Tamat Dalam:' : locale === 'zh' ? '⚡ 今日优惠倒计时：' : '⚡ Today\'s delivery slots close in:'}
       />
 
-      {/* ── STATS BAR ── */}
-      <section style={{ background: 'var(--brand-primary)', color: 'white' }}>
-        <div className="max-w-6xl mx-auto px-6 py-5 grid grid-cols-2 md:grid-cols-4 gap-4">
+      {/* ── STATS / USP BAR ── */}
+      <section className="usp-bar" style={{ background: 'var(--brand-primary)', color: 'white' }}>
+        <div className="usp-panel max-w-6xl mx-auto px-6 py-5 grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
             { value: '127', label: t('stats.locations') },
             { value: '4H', label: t('stats.delivery') },
             { value: 'RM250', label: t('stats.price') },
             { value: '96%', label: t('stats.purity') },
           ].map(stat => (
-            <div key={stat.value} className="flex flex-col items-center text-center py-2">
+            <div key={stat.value} className="usp-cell flex flex-col items-center text-center py-2">
               <span className="font-display text-3xl font-normal leading-none" style={{ letterSpacing: '-0.02em' }}>
                 {stat.value}
               </span>
