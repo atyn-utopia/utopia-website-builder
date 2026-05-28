@@ -10,7 +10,7 @@ import PageStyles from '@/components/PageStyles';
 import FomoBanner from '@/components/FomoBanner';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
-import HomePageClient from '../../HomePageClient';
+import HomePageClient from '@/components/HomePageClient';
 
 export function generateStaticParams() {
   const params: { locale: string; location: string }[] = [];

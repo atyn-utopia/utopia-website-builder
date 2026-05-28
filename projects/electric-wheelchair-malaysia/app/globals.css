@@ -723,3 +723,7 @@ a {
 .blog-content nav li, .blog-content .toc li, .toc li { margin: 4px 0; font-size: 14.5px; line-height: 1.55; }
 .blog-content nav a, .blog-content .toc a, .toc a { color: #1B3A5C; text-decoration: none; font-weight: 500; }
 .blog-content nav a:hover, .blog-content .toc a:hover, .toc a:hover { text-decoration: underline; }
+
+/* Body copy that lives in <h5> per the house heading rule (keyword-driven
+   headings everywhere) should read like body text, not a bold subheading. */
+.section-container h5 { font-weight: 500; }

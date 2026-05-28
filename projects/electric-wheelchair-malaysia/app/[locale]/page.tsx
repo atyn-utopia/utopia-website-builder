@@ -8,7 +8,7 @@ import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import MarketingMarquee from '@/components/MarketingMarquee';
 import PageStyles from '@/components/PageStyles';
-import HomePageClient from './HomePageClient';
+import HomePageClient from '@/components/HomePageClient';
 
 export async function generateMetadata({
   params,
@@ -93,7 +93,7 @@ export default async function HomePage({
 
       <MarketingMarquee locale={locale as 'en' | 'ms' | 'zh'} variant="light" />
 
-      <HomePageClient chromeProvided />
+      <HomePageClient chromeProvided heroProvided />
 
       <SiteFooter locale={locale as 'en' | 'ms' | 'zh'} />
     </>

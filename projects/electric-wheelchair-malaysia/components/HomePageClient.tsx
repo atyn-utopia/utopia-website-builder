@@ -122,9 +122,12 @@ interface LocationProps {
   /** When true, skip the internal sticky nav + footer — page.tsx renders
    *  the canonical shared <SiteHeader />, <SiteFooter />, and <FomoBanner /> instead. */
   chromeProvided?: boolean;
+  /** When true, skip the internal hero — page.tsx renders its own hero with the
+   *  canonical single h1 + h2 (homepage does this; location pages don't). */
+  heroProvided?: boolean;
 }
 
-export default function HomePageClient({ cityName, locationSlug, nearbyLocations, chromeProvided = false }: LocationProps = {}) {
+export default function HomePageClient({ cityName, locationSlug, nearbyLocations, chromeProvided = false, heroProvided = false }: LocationProps = {}) {
   const isLocationPage = !!cityName;
   const locale = useLocale();
   const t = useTranslations();
@@ -459,8 +462,11 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
       )}
 
       {/* ============================================
-          3. HERO — Clean Split Layout (no photo BG)
+          3. HERO — skipped when heroProvided so page.tsx's canonical
+          single-h1/h2 hero is the only one (homepage). Location pages keep
+          this hero since they don't render their own.
           ============================================ */}
+      {!heroProvided && (
       <section
         style={{
           position: 'relative',
@@ -601,6 +607,7 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
           </div>
         </div>
       </section>
+      )}
 
       {/* ============================================
           4. STATS — Boxed USP Cards
@@ -671,9 +678,9 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
             >
               {t('products.heading')}
             </h3>
-            <p style={{ color: 'var(--text-muted)', fontSize: '16px', maxWidth: '600px', margin: '0 auto' }}>
+            <h5 style={{ color: 'var(--text-muted)', fontSize: '16px', maxWidth: '600px', margin: '0 auto' }}>
               {t('products.subheading')}
-            </p>
+            </h5>
           </div>
 
           <div
@@ -755,7 +762,7 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
               </div>
 
               {/* Description */}
-              <p
+              <h5
                 style={{
                   fontSize: '15px',
                   lineHeight: 'var(--leading-relaxed)',
@@ -764,7 +771,7 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
                 }}
               >
                 {t('products.description')}
-              </p>
+              </h5>
 
               {/* Price block */}
               <div
@@ -866,9 +873,9 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
             >
               {t('howItWorks.heading')}
             </h3>
-            <p style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
+            <h5 style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
               {t('howItWorks.subheading')}
-            </p>
+            </h5>
           </div>
 
           <div
@@ -945,7 +952,7 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
                 >
                   {t(`howItWorks.steps.${i}.title`)}
                 </h5>
-                <p
+                <h5
                   style={{
                     fontSize: '14px',
                     color: 'var(--text-muted)',
@@ -954,7 +961,7 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
                   }}
                 >
                   {t(`howItWorks.steps.${i}.description`)}
-                </p>
+                </h5>
               </div>
             ))}
           </div>
@@ -987,9 +994,9 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
               >
                 {t('risk.heading')}
               </h3>
-              <p style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
+              <h5 style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
                 {t('risk.subheading')}
-              </p>
+              </h5>
             </div>
 
             <div
@@ -1044,7 +1051,7 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
                   borderLeft: '4px solid var(--orange)',
                 }}
               >
-                <p
+                <h5
                   style={{
                     fontSize: '17px',
                     lineHeight: 'var(--leading-relaxed)',
@@ -1054,7 +1061,7 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
                   }}
                 >
                   {t('risk.solution')}
-                </p>
+                </h5>
                 <a
                   href={waHref}
                   target="_blank"
@@ -1102,7 +1109,7 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
           >
             {t('midCta.heading')}
           </h3>
-          <p
+          <h5
             style={{
               color: 'rgba(255,255,255,0.8)',
               fontSize: '16px',
@@ -1112,7 +1119,7 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
             }}
           >
             {t('midCta.subheading')}
-          </p>
+          </h5>
           <a
             href={waHref}
             target="_blank"
@@ -1253,7 +1260,7 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
                 </div>
 
                 {/* Review text */}
-                <p
+                <h5
                   style={{
                     fontSize: '14px',
                     lineHeight: 1.6,
@@ -1261,7 +1268,7 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
                   }}
                 >
                   &ldquo;{t(`reviews.items.${i}.text`)}&rdquo;
-                </p>
+                </h5>
 
                 {/* Attribution */}
                 <div style={{ borderTop: '1px solid rgba(27,45,91,0.08)', paddingTop: '12px', display: 'flex', alignItems: 'center', gap: '10px', marginTop: 'auto' }}>
@@ -1357,7 +1364,7 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
                 >
                   {t(`whyChoose.items.${i}.title`)}
                 </h5>
-                <p
+                <h5
                   style={{
                     fontSize: '14px',
                     color: 'var(--text-muted)',
@@ -1365,7 +1372,7 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
                   }}
                 >
                   {t(`whyChoose.items.${i}.description`)}
-                </p>
+                </h5>
               </div>
             ))}
           </div>
@@ -1396,9 +1403,9 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
             >
               {t('gallery.heading')}
             </h3>
-            <p style={{ color: 'var(--text-muted)', fontSize: '16px', maxWidth: '500px', margin: '0 auto' }}>
+            <h5 style={{ color: 'var(--text-muted)', fontSize: '16px', maxWidth: '500px', margin: '0 auto' }}>
               {t('gallery.subheading')}
-            </p>
+            </h5>
           </div>
 
           <div className="gallery-grid fade-up">
@@ -1470,9 +1477,9 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
             >
               {t('locations.heading')}
             </h3>
-            <p style={{ color: 'var(--text-muted)', fontSize: '15px' }}>
+            <h5 style={{ color: 'var(--text-muted)', fontSize: '15px' }}>
               {t('locations.subheading')}
-            </p>
+            </h5>
           </div>
 
           <div
@@ -1644,9 +1651,9 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
             <h4 style={{ fontSize: '20px', fontWeight: 700, color: 'var(--navy)', marginBottom: 'var(--space-md)', textAlign: 'center' }}>
               {t('location.nearbyTitle')}
             </h4>
-            <p style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: '14px', marginBottom: 'var(--space-lg)' }}>
+            <h5 style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: '14px', marginBottom: 'var(--space-lg)' }}>
               {t('location.nearbySubtitle')}
-            </p>
+            </h5>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'center' }}>
               {nearbyLocations.map((loc) => (
                 <a
@@ -1711,7 +1718,7 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
           >
             {t('finalCta.heading')}
           </h3>
-          <p
+          <h5
             style={{
               color: 'rgba(255,255,255,0.8)',
               fontSize: '17px',
@@ -1722,7 +1729,7 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
             }}
           >
             {t('finalCta.subheading')}
-          </p>
+          </h5>
           <a
             href={waHref}
             target="_blank"
@@ -1777,9 +1784,9 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
                 </svg>
                 <span style={{ fontWeight: 800, fontSize: '16px', color: 'var(--white)', letterSpacing: '-0.02em' }}>{t('footer.brandName')}</span>
               </div>
-              <p style={{ fontSize: '14px', lineHeight: 'var(--leading-relaxed)', maxWidth: '300px' }}>
+              <h5 style={{ fontSize: '14px', lineHeight: 'var(--leading-relaxed)', maxWidth: '300px' }}>
                 {t('footer.tagline')}
-              </p>
+              </h5>
             </div>
 
             {/* Quick links */}
@@ -1865,7 +1872,7 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
               gap: 'var(--space-md)',
             }}
           >
-            <p style={{ fontSize: '13px' }}>{t('footer.copyright')}</p>
+            <h5 style={{ fontSize: '13px' }}>{t('footer.copyright')}</h5>
             <span
               style={{
                 fontSize: '12px',
