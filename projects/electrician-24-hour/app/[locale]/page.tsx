@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
 import { getProducts, getBlogPosts } from '@/lib/webcore';
+import { waRedirect } from '@/lib/waRedirect';
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
 import FomoBanner from '@/components/FomoBanner';
@@ -75,19 +76,44 @@ export default async function HomePage({
       <FomoBanner text={fomoText} />
       <SiteHeader />
 
-      {/* Page title block — keeps the single H1 + H2 the homepage needs for SEO.
-          The full image hero + scrolling marquee were removed per request; the
-          role="img" bg layer is retained so screen readers still get a labelled
-          banner image. */}
-      <section className="page-title" aria-label="Page heading">
+      {/* HERO — same treatment as the location page (.hero dark band, badge →
+          H1 → H2 → WhatsApp CTA) with the technician photo restored. */}
+      <section className="hero">
         <div className="hero-bg" role="img" aria-label={hero('imageAlt')} />
         <div className="container">
-          <h1>
-            {hero('h1Pre')}{' '}
-            <span className="hl">{hero('h1Highlight')}</span>{' '}
-            {hero('h1Suffix')}
-          </h1>
-          <h2 className="hero-sub">{hero('subheadline')}</h2>
+          <div className="hero-grid">
+            <div className="hero-copy">
+              <span className="hero-badge">● {hero('badge')}</span>
+              <h1>
+                {hero('h1Pre')}{' '}
+                <span className="hl">{hero('h1Highlight')}</span>{' '}
+                {hero('h1Suffix')}
+              </h1>
+              <h2 className="hero-sub">{hero('subheadline')}</h2>
+              <div className="hero-ctas">
+                <a
+                  href={waRedirect(locale)}
+                  target="_blank"
+                  rel="noopener"
+                  className="btn btn-wa btn-lg"
+                >
+                  {hero('ctaPrimary')}
+                </a>
+                <a href="#services" className="btn btn-outline btn-lg">
+                  {hero('ctaSecondary')}
+                </a>
+              </div>
+              <div className="hero-trust">✓ {hero('trustBadge')}</div>
+            </div>
+            <div className="hero-media">
+              <span className="arrival-flag">⚡ {hero('arrivalFlag')}</span>
+              <img
+                src="/brand/hero-technician.jpg"
+                alt={hero('imageAlt')}
+                loading="eager"
+              />
+            </div>
+          </div>
         </div>
       </section>
 

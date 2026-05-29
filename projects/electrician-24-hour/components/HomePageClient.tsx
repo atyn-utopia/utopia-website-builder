@@ -58,7 +58,6 @@ export default function HomePageClient({ locale, products, recentPosts }: Props)
   // server, the leads-mode logic picks the right phone for the live host, and
   // the click is tracked before forwarding to wa.me.
   const waHref = waRedirect(locale);
-  const hero = useTranslations('hero');
   const usp = useTranslations('usp');
   const services = useTranslations('services');
   const how = useTranslations('howItWorks');
@@ -108,21 +107,7 @@ export default function HomePageClient({ locale, products, recentPosts }: Props)
 
   return (
     <>
-      {/* Hero CTA row (client island that lives just below the server-rendered hero) */}
-      <div className="hero-ctas-island container">
-        <a
-          href={waHref}
-          target="_blank"
-          rel="noopener"
-          onClick={() => trackClick('whatsapp-hero')}
-          className="btn btn-wa btn-lg"
-        >
-          {hero('ctaPrimary')}
-        </a>
-        <a href="#services" className="btn btn-outline btn-lg">
-          {hero('ctaSecondary')}
-        </a>
-      </div>
+      {/* Hero CTA buttons now live in the server-rendered hero (page.tsx). */}
 
       {/* USP bar — single .usp-panel container with 3 .usp-cell children */}
       <div className="usp-bar">
