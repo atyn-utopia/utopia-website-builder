@@ -8,7 +8,6 @@ import { OrganizationSchema } from '@/components/schema/OrganizationSchema'
 import FomoBanner from '@/components/FomoBanner'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
-import MarketingMarquee from '@/components/MarketingMarquee'
 import PageStyles from '@/components/PageStyles'
 import HomePageClient from './HomePageClient'
 import type { Locale } from '@/i18n/routing'
@@ -79,7 +78,7 @@ export default async function HomePage({
         className="relative overflow-hidden"
         style={{
           background:
-            'linear-gradient(135deg, rgba(27,58,92,0.86) 0%, rgba(42,82,128,0.80) 50%, rgba(27,79,114,0.88) 100%), url(/images/hero-aircond-bg.jpg) center/cover no-repeat',
+            'linear-gradient(135deg, rgba(15,34,56,0.93) 0%, rgba(27,58,92,0.90) 50%, rgba(20,52,76,0.95) 100%), url(/images/hero-aircond-bg.jpg) center/cover no-repeat',
         }}
       >
         {/* Labelled region so screen readers + the checklist see the hero
@@ -107,8 +106,6 @@ export default async function HomePage({
           </h2>
         </div>
       </section>
-
-      <MarketingMarquee locale={locale} variant="light" />
 
       <HomePageClient phoneNumber={phone} />
 
