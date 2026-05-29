@@ -7,7 +7,6 @@ import FomoBanner from '@/components/FomoBanner';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import PageStyles from '@/components/PageStyles';
-import MarketingMarquee from '@/components/MarketingMarquee';
 import HomePageClient from '@/components/HomePageClient';
 
 export async function generateMetadata({
@@ -76,35 +75,21 @@ export default async function HomePage({
       <FomoBanner text={fomoText} />
       <SiteHeader />
 
-      {/* HERO — H1 + H2 live here so the checklist sees them in page.tsx */}
-      <section className="hero">
-        {/* CSS-background layer announced to screen readers */}
+      {/* Page title block — keeps the single H1 + H2 the homepage needs for SEO.
+          The full image hero + scrolling marquee were removed per request; the
+          role="img" bg layer is retained so screen readers still get a labelled
+          banner image. */}
+      <section className="page-title" aria-label="Page heading">
         <div className="hero-bg" role="img" aria-label={hero('imageAlt')} />
         <div className="container">
-          <div className="hero-grid">
-            <div className="hero-copy">
-              <span className="hero-badge">● {hero('badge')}</span>
-              <h1>
-                {hero('h1Pre')}{' '}
-                <span className="hl">{hero('h1Highlight')}</span>{' '}
-                {hero('h1Suffix')}
-              </h1>
-              <h2 className="hero-sub">{hero('subheadline')}</h2>
-              <div className="hero-trust">✓ {hero('trustBadge')}</div>
-            </div>
-            <div className="hero-media">
-              <span className="arrival-flag">⚡ {hero('arrivalFlag')}</span>
-              <img
-                src="/brand/hero-technician.jpg"
-                alt={hero('imageAlt')}
-                loading="eager"
-              />
-            </div>
-          </div>
+          <h1>
+            {hero('h1Pre')}{' '}
+            <span className="hl">{hero('h1Highlight')}</span>{' '}
+            {hero('h1Suffix')}
+          </h1>
+          <h2 className="hero-sub">{hero('subheadline')}</h2>
         </div>
       </section>
-
-      <MarketingMarquee locale={locale} variant="light" />
 
       <HomePageClient
         locale={locale}
