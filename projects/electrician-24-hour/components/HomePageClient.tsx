@@ -260,7 +260,7 @@ export default function HomePageClient({ locale, products, recentPosts }: Props)
         className="section"
         style={{
           background:
-            "linear-gradient(135deg, rgba(6,30,74,0.82), rgba(10,58,130,0.82)), url('/brand/hero-cta.jpg') center/cover no-repeat",
+            "linear-gradient(135deg, rgba(6,30,74,0.82), rgba(10,58,130,0.82)), url('/brand/mid-cta-bg.jpg') center/cover no-repeat",
           color: 'var(--white)',
           textAlign: 'center',
         }}
