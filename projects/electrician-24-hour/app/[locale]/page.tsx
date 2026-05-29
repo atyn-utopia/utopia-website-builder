@@ -108,7 +108,7 @@ export default async function HomePage({
             <div className="hero-media">
               <span className="arrival-flag">⚡ {hero('arrivalFlag')}</span>
               <img
-                src="/brand/hero-technician.jpg"
+                src="/brand/hero-technician.png"
                 alt={hero('imageAlt')}
                 loading="eager"
               />
