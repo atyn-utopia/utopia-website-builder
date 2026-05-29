@@ -433,15 +433,15 @@ export default function HomePageClient() {
         </section>
 
         {/* ── FINAL CTA ── */}
-        <section className="py-16 px-6" style={{ background: 'var(--brand-dark)' }}>
+        <section className="py-24 px-6" style={{ background: 'var(--brand-dark)' }}>
           <div className="max-w-3xl mx-auto text-center">
             <FadeSection>
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">{t('cta.heading')}</h3>
-              <h5 className="text-sm font-normal mb-6" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.7' }}>{t('cta.subheading')}</h5>
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-5" style={{ lineHeight: '1.3' }}>{t('cta.heading')}</h3>
+              <h5 className="text-sm font-normal mb-9" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.85' }}>{t('cta.subheading')}</h5>
               <a href={WA_LINK} className="wa-btn inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-lg font-bold text-white" style={{ background: 'var(--wa-green)' }}>
                 <WAIcon />{t('cta.button')}
               </a>
-              <h5 className="text-[11px] mt-4 font-normal" style={{ color: 'rgba(255,255,255,0.4)' }}>Response within 1 hour · No hidden charges · 7 days a week</h5>
+              <h5 className="text-[11px] mt-5 font-normal" style={{ color: 'rgba(255,255,255,0.4)' }}>Response within 1 hour · No hidden charges · 7 days a week</h5>
             </FadeSection>
           </div>
         </section>
