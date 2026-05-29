@@ -11,6 +11,10 @@ interface GroupSummary {
   name: string
   passed: number
   total: number
+  // Surfaced by the API so the UI can colour each group "passed-aware" —
+  // i.e. green when nothing is failing even if some checks are skipped.
+  // Optional for backwards compatibility with cached snapshot responses.
+  failed?: number
 }
 
 interface ProjectRow {
@@ -90,10 +94,51 @@ const STATE_COLORS = {
   empty:   { bg: 'rgba(96, 112, 128, 0.08)', border: 'rgba(96, 112, 128, 0.25)', fg: '#7a8ea3' },
 } as const
 
+// Only completed rows get colour. Partial/failing/empty stay neutral so the
+// green stands out — the score pill + group dots still signal the failure mode
+// individually, but the row chrome doesn't compete for attention.
+const ROW_TINT = {
+  perfect: 'rgba(74, 222, 128, 0.08)',
+  partial: 'transparent',
+  failing: 'transparent',
+  empty:   'transparent',
+} as const
+const ROW_HOVER = {
+  perfect: 'rgba(74, 222, 128, 0.14)',
+  partial: 'var(--surface-hover)',
+  failing: 'var(--surface-hover)',
+  empty:   'var(--surface-hover)',
+} as const
+
+// Same "failed-aware" logic as tierOf() but for a single group — skipped
+// items don't drag the colour into orange/red. Used by GroupChip + StatusBar.
+function groupTier(g: GroupSummary): 'perfect' | 'partial' | 'failing' | 'empty' {
+  if (g.total === 0) return 'empty'
+  // Fall back to the old `passed/total` ratio if `failed` isn't in the payload
+  // (older API responses or stale caches).
+  if (g.failed == null) {
+    const r = g.passed / g.total
+    if (r >= 1) return 'perfect'
+    if (r >= 0.6) return 'partial'
+    return 'failing'
+  }
+  if (g.failed === 0) return 'perfect'
+  const denom = g.passed + g.failed
+  if (denom === 0) return 'empty'
+  const ratio = g.passed / denom
+  if (ratio >= 0.6) return 'partial'
+  return 'failing'
+}
+
 function tierOf(p: ProjectRow): keyof typeof STATE_COLORS {
   if (p.total === 0) return 'empty'
-  const ratio = p.passed / p.total
-  if (ratio >= 1) return 'perfect'
+  // Skipped checks (Supabase env missing, no CircleFlag, no price keys, etc.)
+  // shouldn't dilute the score — they're "not applicable", not "broken". If
+  // nothing is actually failing, the row is green even when passed < total.
+  if (p.failedCount === 0) return 'perfect'
+  const denom = p.passed + p.failedCount
+  if (denom === 0) return 'empty'
+  const ratio = p.passed / denom
   if (ratio >= 0.6) return 'partial'
   return 'failing'
 }
@@ -421,6 +466,8 @@ export default function MonitorTable() {
                   : tier === 'partial' ? 'uf-score--warn'
                   : tier === 'failing' ? 'uf-score--fail'
                   : 'uf-score--neutral'
+                const rowBg = ROW_TINT[tier]
+                const rowHover = ROW_HOVER[tier]
                 return (
                   <tr
                     key={p.slug}
@@ -428,10 +475,11 @@ export default function MonitorTable() {
                     style={{
                       borderTop: '1px solid var(--border-soft)',
                       cursor: 'pointer',
+                      background: rowBg,
                       transition: 'background var(--transition-snap)',
                     }}
-                    onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--surface-hover)' }}
-                    onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent' }}
+                    onMouseEnter={(e) => { e.currentTarget.style.background = rowHover }}
+                    onMouseLeave={(e) => { e.currentTarget.style.background = rowBg }}
                   >
                     <Td align="right" compact>
                       <span style={{
@@ -468,7 +516,7 @@ export default function MonitorTable() {
                     </Td>
                     {p.groups.map((g) => (
                       <Td key={g.name} compact align="center">
-                        <GroupChip passed={g.passed} total={g.total} />
+                        <GroupChip group={g} />
                       </Td>
                     ))}
                     <Td align="center">
@@ -685,6 +733,7 @@ function MobileCards({ projects, loading, onOpen, onDelete }: {
           : tier === 'partial' ? 'uf-score--warn'
           : tier === 'failing' ? 'uf-score--fail'
           : 'uf-score--neutral'
+        const cardTint = ROW_TINT[tier]
         return (
           <button
             key={p.slug}
@@ -700,6 +749,7 @@ function MobileCards({ projects, loading, onOpen, onDelete }: {
               fontFamily: 'inherit',
               width: '100%',
               border: 'none',
+              background: cardTint !== 'transparent' ? cardTint : undefined,
             }}
           >
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12, width: '100%' }}>
@@ -806,11 +856,11 @@ function StatusPill({ info }: { info: DeployStatusInfo }) {
 function StatusBar({ groups }: { groups: GroupSummary[] }) {
   // Find the highest-priority failing groups (worst ratio first) to surface
   // as a tiny inline summary above the bar. Caps at 3 to keep the card tight.
-  const ranked = groups
-    .map((g) => ({ ...g, ratio: g.total > 0 ? g.passed / g.total : 1 }))
-    .sort((a, b) => a.ratio - b.ratio)
-  const failing = ranked.filter((g) => g.ratio < 0.6 && g.total > 0).slice(0, 3)
-  const warning = ranked.filter((g) => g.ratio >= 0.6 && g.ratio < 1).slice(0, 3 - failing.length)
+  // Use failed-aware tiers so a group with skips but 0 failures isn't flagged
+  // as warning/failing.
+  const ranked = groups.map((g) => ({ g, tier: groupTier(g) }))
+  const failing = ranked.filter((r) => r.tier === 'failing').slice(0, 3)
+  const warning = ranked.filter((r) => r.tier === 'partial').slice(0, 3 - failing.length)
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -821,14 +871,14 @@ function StatusBar({ groups }: { groups: GroupSummary[] }) {
         height: 6,
       }} aria-label="group statuses">
         {groups.map((g) => {
-          const r = g.total > 0 ? g.passed / g.total : 0
-          const bg = g.total === 0 ? 'var(--status-skip-bg)'
-            : r >= 1 ? 'var(--status-pass)'
-            : r >= 0.6 ? 'var(--status-warn)'
+          const tier = groupTier(g)
+          const bg = tier === 'empty' ? 'var(--status-skip-bg)'
+            : tier === 'perfect' ? 'var(--status-pass)'
+            : tier === 'partial' ? 'var(--status-warn)'
             : 'var(--status-fail)'
-          const fade = g.total === 0 ? 0.25
-            : r >= 1 ? 0.75
-            : r >= 0.6 ? 0.85
+          const fade = tier === 'empty' ? 0.25
+            : tier === 'perfect' ? 0.75
+            : tier === 'partial' ? 0.85
             : 0.9
           return (
             <span
@@ -852,7 +902,7 @@ function StatusBar({ groups }: { groups: GroupSummary[] }) {
           fontFamily: 'var(--font-sans)',
           letterSpacing: '0.3px',
         }}>
-          {failing.map((g) => (
+          {failing.map(({ g }) => (
             <span key={g.name} style={{
               color: 'var(--status-fail)',
               background: 'var(--status-fail-bg)',
@@ -864,7 +914,7 @@ function StatusBar({ groups }: { groups: GroupSummary[] }) {
               {g.name.toLowerCase()} {g.passed}/{g.total}
             </span>
           ))}
-          {warning.map((g) => (
+          {warning.map(({ g }) => (
             <span key={g.name} style={{
               color: 'var(--status-warn)',
               background: 'var(--status-warn-bg)',
@@ -882,16 +932,15 @@ function StatusBar({ groups }: { groups: GroupSummary[] }) {
   )
 }
 
-function GroupChip({ passed, total }: { passed: number; total: number }) {
-  if (total === 0) {
+function GroupChip({ group }: { group: GroupSummary }) {
+  if (group.total === 0) {
     return <span style={{ color: 'var(--text-quiet)', fontSize: 11 }}>—</span>
   }
-  const ratio = passed / total
-  const color = ratio >= 1
-    ? 'var(--status-pass)'
-    : ratio >= 0.6
-      ? 'var(--status-warn)'
-      : 'var(--status-fail)'
+  const tier = groupTier(group)
+  const color = tier === 'perfect' ? 'var(--status-pass)'
+    : tier === 'partial' ? 'var(--status-warn)'
+    : tier === 'failing' ? 'var(--status-fail)'
+    : 'var(--text-quiet)'
   return (
     <span style={{
       color,
@@ -901,7 +950,7 @@ function GroupChip({ passed, total }: { passed: number; total: number }) {
       fontFamily: 'var(--font-sans)',
       letterSpacing: '0.2px',
     }}>
-      {passed}/{total}
+      {group.passed}/{group.total}
     </span>
   )
 }

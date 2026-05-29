@@ -7,6 +7,7 @@ interface CheckItem {
   name: string
   status: 'pass' | 'fail' | 'skip'
   detail?: string
+  help?: string
 }
 
 interface CheckGroup {
@@ -33,10 +34,15 @@ const COLORS = {
   empty:   { bg: 'rgba(96, 112, 128, 0.08)', border: 'rgba(96, 112, 128, 0.25)', fg: '#7a8ea3' },
 } as const
 
-function tierOf(passed: number, total: number): keyof typeof COLORS {
+function tierOf(passed: number, total: number, failed: number): keyof typeof COLORS {
   if (total === 0) return 'empty'
-  const r = passed / total
-  if (r >= 1) return 'perfect'
+  // Skipped checks (Supabase env missing, no CircleFlag, no price keys, etc.)
+  // are "not applicable", not "broken" — they shouldn't drag the score into
+  // the orange/red band. If nothing is failing, the row is green.
+  if (failed === 0) return 'perfect'
+  const denom = passed + failed
+  if (denom === 0) return 'empty'
+  const r = passed / denom
   if (r >= 0.6) return 'partial'
   return 'failing'
 }
@@ -88,8 +94,8 @@ export default function WishChecklist({ slug }: { slug: string }) {
     )
   }
 
-  const tier = tierOf(data.passed, data.total)
   const failed = data.groups.flatMap((g) => g.items.filter((i) => i.status === 'fail').map((i) => ({ group: g.name, item: i })))
+  const tier = tierOf(data.passed, data.total, failed.length)
 
   const scoreClass = tier === 'perfect' ? 'uf-score--pass'
     : tier === 'partial' ? 'uf-score--warn'
@@ -128,18 +134,38 @@ export default function WishChecklist({ slug }: { slug: string }) {
         </div>
       </div>
 
+      {/* To-implement list — surfaced at the top so users see what to fix
+          before scrolling through dozens of passing groups. */}
+      {failed.length > 0 && (
+        <ToImplementSection slug={data.slug} failed={failed} />
+      )}
+
       {/* Groups */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
         {data.groups.map((g) => {
           const passed = g.items.filter((i) => i.status === 'pass').length
+          const failed = g.items.filter((i) => i.status === 'fail').length
           const total = g.items.length
-          const ratio = total > 0 ? passed / total : 0
+          // Skips don't drag the colour. If nothing is failing it's green —
+          // even when not every item ran (e.g. Supabase env not configured).
+          const denom = passed + failed
+          const ratio = denom > 0 ? passed / denom : 1
           const grpColor = total === 0 ? 'var(--text-quiet)'
-            : ratio >= 1 ? 'var(--status-pass)'
+            : failed === 0 ? 'var(--status-pass)'
             : ratio >= 0.6 ? 'var(--status-warn)'
             : 'var(--status-fail)'
+          // Baby-blue category marker for data groups so Supabase-backed
+          // checks (Database) read as a different "kind" of result vs code
+          // checks. Otherwise: only fully-completed groups get a green tint;
+          // partial/failing groups stay on the default surface.
+          const isDataGroup = g.name === 'Database'
+          const cardBg = isDataGroup
+            ? 'rgba(155, 200, 255, 0.10)'
+            : total > 0 && failed === 0
+              ? 'rgba(74, 222, 128, 0.08)'
+              : undefined
           return (
-            <div key={g.name} className="uf-card" style={{ padding: '16px 18px' }}>
+            <div key={g.name} className="uf-card" style={{ padding: '16px 18px', background: cardBg }}>
               <div style={{
                 display: 'flex',
                 justifyContent: 'space-between',
@@ -160,7 +186,7 @@ export default function WishChecklist({ slug }: { slug: string }) {
                   {passed}/{total}
                 </span>
               </div>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {g.items.map((i) => (
                   <li key={i.id} style={{
                     display: 'flex',
@@ -170,21 +196,34 @@ export default function WishChecklist({ slug }: { slug: string }) {
                     lineHeight: 1.5,
                   }}>
                     <StatusDot status={i.status} />
-                    <span style={{
-                      color: i.status === 'fail' ? 'var(--status-fail)' : i.status === 'skip' ? 'var(--text-muted)' : 'var(--text-primary)',
-                      flex: 1,
-                    }}>
-                      {i.name}
-                      {i.detail && (
-                        <span style={{
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <span style={{
+                        color: i.status === 'fail' ? 'var(--status-fail)' : i.status === 'skip' ? 'var(--text-muted)' : 'var(--text-primary)',
+                      }}>
+                        {i.name}
+                        {i.detail && (
+                          <span style={{
+                            color: 'var(--text-quiet)',
+                            fontSize: 11,
+                            marginLeft: 6,
+                          }}>
+                            — {i.detail}
+                          </span>
+                        )}
+                      </span>
+                      {i.help && (
+                        <div style={{
                           color: 'var(--text-quiet)',
-                          fontSize: 11,
-                          marginLeft: 6,
+                          fontSize: 11.5,
+                          lineHeight: 1.45,
+                          marginTop: 2,
+                          fontStyle: 'normal',
+                          opacity: 0.85,
                         }}>
-                          — {i.detail}
-                        </span>
+                          {i.help}
+                        </div>
                       )}
-                    </span>
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -192,11 +231,6 @@ export default function WishChecklist({ slug }: { slug: string }) {
           )
         })}
       </div>
-
-      {/* To-implement list */}
-      {failed.length > 0 && (
-        <ToImplementSection slug={data.slug} failed={failed} />
-      )}
     </div>
   )
 }
