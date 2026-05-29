@@ -235,8 +235,8 @@ export default function LocationPageClient({
           <div className="relative max-w-6xl mx-auto px-6 pt-12 pb-0 md:pt-16 md:pb-0">
             <div className="grid md:grid-cols-2 gap-8 items-end">
               {/* Text */}
-              <div className="pb-8 md:pb-16">
-                <div className="flex flex-wrap gap-2 mb-5">
+              <div className="pb-10 md:pb-20">
+                <div className="flex flex-wrap gap-2.5 mb-7">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wide text-white" style={{ background: 'rgba(255,107,53,0.2)', border: '1px solid rgba(255,107,53,0.3)' }}>
                     {t('badges.sameDayDelivery', { city: displayName })}
                   </span>
@@ -244,16 +244,16 @@ export default function LocationPageClient({
                     {t('badges.affordable')}
                   </span>
                 </div>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-4" style={{ letterSpacing: '-0.03em', lineHeight: '1.1' }}>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-6" style={{ letterSpacing: '-0.03em', lineHeight: '1.18' }}>
                   {t('hero.headline', { city: displayName })}
                 </h1>
-                <h5 className="text-sm md:text-base font-normal mb-6" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.75' }}>
+                <h5 className="text-sm md:text-base font-normal mb-9" style={{ color: 'rgba(255,255,255,0.72)', lineHeight: '1.9' }}>
                   {t('hero.intro', { city: displayName })}
                 </h5>
                 <a href={WA_LINK} className="wa-btn inline-flex items-center gap-2.5 px-6 py-3 rounded-xl text-base font-bold text-white" style={{ background: 'var(--wa-green)' }}>
                   <WAIcon />{t('cta.button', { city: displayName })}
                 </a>
-                <h5 className="text-[11px] mt-3 font-normal" style={{ color: 'rgba(255,255,255,0.4)' }}>{s('freeToAsk')}</h5>
+                <h5 className="text-[11px] mt-4 font-normal" style={{ color: 'rgba(255,255,255,0.4)' }}>{s('freeToAsk')}</h5>
               </div>
               {/* Hero image */}
               <div className="relative flex justify-center md:justify-end">
@@ -419,7 +419,7 @@ export default function LocationPageClient({
 
         {/* ── GOOGLE REVIEWS ── */}
         <section id="reviews" className="relative py-16 px-6 overflow-hidden" aria-labelledby="reviews-heading">
-          <div className="absolute inset-0" style={{ backgroundImage: 'url(https://static.wixstatic.com/media/d3104b_f1742c506a064da3af63f6b834024ad4~mv2.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }} role="presentation" aria-hidden="true" />
+          <div className="absolute inset-0" style={{ backgroundImage: 'url(https://images.pexels.com/photos/2611686/pexels-photo-2611686.jpeg?auto=compress&cs=tinysrgb&w=1600)', backgroundSize: 'cover', backgroundPosition: 'center' }} role="presentation" aria-hidden="true" />
           <div className="absolute inset-0" style={{ background: 'rgba(22,33,62,0.90)' }} />
           <div className="relative max-w-6xl mx-auto">
             <FadeSection>

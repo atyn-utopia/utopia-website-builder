@@ -298,7 +298,7 @@ export default function HomePageClient() {
 
         {/* ── GOOGLE REVIEWS ── */}
         <section id="reviews" className="relative py-16 px-6 overflow-hidden" aria-labelledby="reviews-heading">
-          <div className="absolute inset-0" style={{ backgroundImage: 'url(https://static.wixstatic.com/media/d3104b_f1742c506a064da3af63f6b834024ad4~mv2.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }} role="presentation" aria-hidden="true" />
+          <div className="absolute inset-0" style={{ backgroundImage: 'url(https://images.pexels.com/photos/2611686/pexels-photo-2611686.jpeg?auto=compress&cs=tinysrgb&w=1600)', backgroundSize: 'cover', backgroundPosition: 'center' }} role="presentation" aria-hidden="true" />
           <div className="absolute inset-0" style={{ background: 'rgba(22,33,62,0.90)' }} />
           <div className="relative max-w-6xl mx-auto">
             <FadeSection>

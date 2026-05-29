@@ -13,8 +13,20 @@ export default function SiteFooter() {
     <footer className="site-footer">
       <div className="site-footer-inner">
         <div className="footer-col">
-          <p className="footer-brand">Sewa Motor Malaysia</p>
-          <p className="footer-tagline">{t('tagline')}</p>
+          <div className="footer-brand">
+            <span className="footer-brand-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" width="28" height="28">
+                <circle cx="9" cy="22" r="5" fill="#fff" />
+                <circle cx="9" cy="22" r="2" fill="#FF6B35" />
+                <circle cx="23" cy="22" r="5" fill="#fff" />
+                <circle cx="23" cy="22" r="2" fill="#FF6B35" />
+                <path d="M12 19 L14 12 L19 12 L22 16 L26 16 L26 21 L22 21 L20 18 Z" fill="#fff" />
+                <path d="M19 12 L22 8 L25 8" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+              </svg>
+            </span>
+            <span className="footer-brand-text">Sewa Motor Malaysia</span>
+          </div>
+          <h5 className="footer-tagline">{t('tagline')}</h5>
         </div>
         <div className="footer-col">
           <p className="footer-heading">{t('quickLinks')}</p>
@@ -36,7 +48,9 @@ export default function SiteFooter() {
         .site-footer { background: #0F172A; color: #E2E8F0; }
         .site-footer-inner { max-width: 1200px; margin: 0 auto; padding: 48px 20px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; }
         .footer-col { display: flex; flex-direction: column; gap: 10px; }
-        .footer-brand { font-weight: 800; font-size: 18px; color: #fff; margin: 0; }
+        .footer-brand { display: inline-flex; align-items: center; gap: 8px; margin: 0; }
+        .footer-brand-icon { display: inline-flex; width: 28px; height: 28px; border-radius: 8px; background: var(--brand-primary, #FF6B35); align-items: center; justify-content: center; flex-shrink: 0; }
+        .footer-brand-text { font-weight: 800; font-size: 15px; color: #fff; letter-spacing: -0.01em; }
         .footer-tagline { color: #94A3B8; font-size: 14px; line-height: 1.55; margin: 0; }
         .footer-heading { font-weight: 700; font-size: 13px; color: #fff; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 4px; }
         .footer-col a { color: #CBD5E1; font-size: 14px; }
