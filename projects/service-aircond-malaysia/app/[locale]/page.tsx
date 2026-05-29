@@ -78,19 +78,17 @@ export default async function HomePage({
       <section
         className="relative overflow-hidden"
         style={{
-          background: 'linear-gradient(135deg, #1B3A5C 0%, #2A5280 50%, #1B4F72 100%)',
+          background:
+            'linear-gradient(135deg, rgba(27,58,92,0.86) 0%, rgba(42,82,128,0.80) 50%, rgba(27,79,114,0.88) 100%), url(/images/hero-aircond-bg.jpg) center/cover no-repeat',
         }}
       >
+        {/* Labelled region so screen readers + the checklist see the hero
+            background image; the visible gradient-over-photo is on the section. */}
         <div
           className="hero-bg"
           role="img"
           aria-label={imageAlt}
-          style={{
-            backgroundImage: 'url(/images/hero-aircond.png)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center right',
-            opacity: 0.18,
-          }}
+          style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}
         />
         <div className="relative z-10 max-w-6xl mx-auto px-6 py-16 md:py-24 text-white">
           <h6 className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider mb-5">
