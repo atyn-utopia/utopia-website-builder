@@ -93,10 +93,10 @@ export default async function HomePage({
           }}
         />
         <div className="relative z-10 max-w-6xl mx-auto px-6 py-16 md:py-24 text-white">
-          <p className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider mb-5">
+          <h6 className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider mb-5">
             <span className="h-2 w-2 rounded-full bg-yellow-400" aria-hidden="true" />
             {tHero('badgeCertified')} · {tHero('badgeCities')}
-          </p>
+          </h6>
           <h1
             className="font-extrabold leading-[1.05] tracking-tight max-w-3xl"
             style={{ fontSize: 'clamp(32px, 5.4vw, 56px)' }}
@@ -112,7 +112,7 @@ export default async function HomePage({
 
       <MarketingMarquee locale={locale} variant="light" />
 
-      <HomePageClient phoneNumber={phone} chromeProvided />
+      <HomePageClient phoneNumber={phone} />
 
       <SiteFooter locale={locale} />
     </>

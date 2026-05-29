@@ -79,7 +79,6 @@ export default async function LocationPage({ params }: { params: Promise<Params>
         locationSlug={location}
         cityName={city}
         phoneNumber={phone}
-        chromeProvided
         nearby={nearby.map(n => ({
           slug: n.slug,
           name: n.names[locale as 'en' | 'ms' | 'zh'] ?? n.displayName,
