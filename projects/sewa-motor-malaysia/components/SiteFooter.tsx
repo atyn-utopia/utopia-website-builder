@@ -46,17 +46,22 @@ export default function SiteFooter() {
       </div>
       <style jsx>{`
         .site-footer { background: #0F172A; color: #E2E8F0; }
-        .site-footer-inner { max-width: 1200px; margin: 0 auto; padding: 48px 20px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; }
-        .footer-col { display: flex; flex-direction: column; gap: 10px; }
-        .footer-brand { display: inline-flex; align-items: center; gap: 8px; margin: 0; }
-        .footer-brand-icon { display: inline-flex; width: 28px; height: 28px; border-radius: 8px; background: var(--brand-primary, #FF6B35); align-items: center; justify-content: center; flex-shrink: 0; }
+        .site-footer-inner { max-width: 1200px; margin: 0 auto; padding: 72px 24px 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 56px; }
+        .footer-col { display: flex; flex-direction: column; gap: 16px; }
+        .footer-brand { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 4px; }
+        .footer-brand-icon { display: inline-flex; width: 32px; height: 32px; border-radius: 9px; background: var(--brand-primary, #FF6B35); align-items: center; justify-content: center; flex-shrink: 0; }
         .footer-brand-text { font-weight: 800; font-size: 15px; color: #fff; letter-spacing: -0.01em; }
-        .footer-tagline { color: #94A3B8; font-size: 14px; line-height: 1.55; margin: 0; }
-        .footer-heading { font-weight: 700; font-size: 13px; color: #fff; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 4px; }
-        .footer-col a { color: #CBD5E1; font-size: 14px; }
+        .footer-tagline { color: #94A3B8; font-size: 14px; line-height: 1.7; margin: 0; max-width: 30ch; }
+        .footer-heading { font-weight: 700; font-size: 13px; color: #fff; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 8px; }
+        .footer-col a { color: #CBD5E1; font-size: 14px; line-height: 1.4; padding: 3px 0; transition: color 0.2s; }
         .footer-col a:hover { color: #fff; }
-        .site-footer-bar { border-top: 1px solid #1E293B; padding: 18px 20px; text-align: center; font-size: 12px; color: #94A3B8; }
+        .site-footer-bar { border-top: 1px solid #1E293B; padding: 24px 20px; text-align: center; font-size: 12px; color: #94A3B8; }
         .site-footer-bar p { margin: 0; }
+        @media (max-width: 640px) {
+          .site-footer-inner { padding: 48px 24px 32px; gap: 40px; text-align: center; }
+          .footer-col { align-items: center; }
+          .footer-tagline { max-width: none; }
+        }
       `}</style>
     </footer>
   );

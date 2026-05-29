@@ -232,10 +232,10 @@ export default function LocationPageClient({
         <section className="relative overflow-hidden" aria-label="Hero">
           <div className="absolute inset-0" style={{ backgroundImage: 'url(https://static.wixstatic.com/media/d3104b_f1742c506a064da3af63f6b834024ad4~mv2.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }} aria-hidden="true" />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(22,33,62,0.92) 0%, rgba(26,39,68,0.88) 40%, rgba(30,45,74,0.85) 100%)' }} />
-          <div className="relative max-w-6xl mx-auto px-6 pt-12 pb-0 md:pt-16 md:pb-0">
-            <div className="grid md:grid-cols-2 gap-8 items-end">
+          <div className="relative max-w-6xl mx-auto px-6 pt-16 pb-0 md:pt-24 md:pb-0">
+            <div className="grid md:grid-cols-2 gap-10 lg:gap-16 items-end">
               {/* Text */}
-              <div className="pb-10 md:pb-20">
+              <div className="pb-12 md:pb-24">
                 <div className="flex flex-wrap gap-2.5 mb-7">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wide text-white" style={{ background: 'rgba(255,107,53,0.2)', border: '1px solid rgba(255,107,53,0.3)' }}>
                     {t('badges.sameDayDelivery', { city: displayName })}
