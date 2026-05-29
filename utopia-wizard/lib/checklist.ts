@@ -27,16 +27,24 @@ interface Ctx {
   grepCache: Map<string, boolean>
 }
 
-async function readProjectFile(ctx: Ctx, rel: string): Promise<string | null> {
-  if (ctx.fileCache.has(rel)) return ctx.fileCache.get(rel)!
+// Shared file-read cache, keyed by absolute path so both relative-path
+// callers (readProjectFile) and walking callers (grepProject) can hit the
+// same entry. Without this, grepProject re-reads every source file for each
+// unique regex pattern — 20 patterns × 200 files = 4000 reads per project.
+async function readFileCached(ctx: Ctx, absPath: string): Promise<string | null> {
+  if (ctx.fileCache.has(absPath)) return ctx.fileCache.get(absPath)!
   try {
-    const content = await readFile(path.join(ctx.info.projectDir, rel), 'utf-8')
-    ctx.fileCache.set(rel, content)
+    const content = await readFile(absPath, 'utf-8')
+    ctx.fileCache.set(absPath, content)
     return content
   } catch {
-    ctx.fileCache.set(rel, null)
+    ctx.fileCache.set(absPath, null)
     return null
   }
+}
+
+async function readProjectFile(ctx: Ctx, rel: string): Promise<string | null> {
+  return readFileCached(ctx, path.join(ctx.info.projectDir, rel))
 }
 
 async function fileExists(ctx: Ctx, rel: string): Promise<boolean> {
@@ -67,10 +75,10 @@ async function grepProject(ctx: Ctx, pattern: RegExp, exts: string[] = ['.tsx', 
       if (e.isDirectory()) {
         if (await walk(p)) return true
       } else if (exts.some((x) => e.name.endsWith(x))) {
-        try {
-          const c = await readFile(p, 'utf-8')
-          if (pattern.test(c)) return true
-        } catch { /* skip unreadable */ }
+        // Read through the shared cache so every check reusing the same .tsx
+        // file pays one read total — not one read per regex.
+        const c = await readFileCached(ctx, p)
+        if (c != null && pattern.test(c)) return true
       }
     }
     return false
@@ -88,6 +96,142 @@ async function dirHasFiles(ctx: Ctx, rel: string, exts: string[]): Promise<boole
   } catch {
     return false
   }
+}
+
+// Concatenate the source of every .tsx directly inside `relDir` (not
+// recursive). A page often delegates its markup to a sibling *Client.tsx, so
+// counting tags only in page.tsx misses them — read the whole directory.
+async function concatTsxInDir(ctx: Ctx, relDir: string): Promise<string> {
+  const abs = path.join(ctx.info.projectDir, relDir)
+  let out = ''
+  let entries
+  try { entries = await readdir(abs, { withFileTypes: true }) } catch { return out }
+  for (const e of entries) {
+    if (!e.isFile() || !e.name.endsWith('.tsx')) continue
+    const c = await readFileCached(ctx, path.join(abs, e.name))
+    if (c) out += '\n' + c
+  }
+  return out
+}
+
+// ── Heading keyword coverage (informational) ───────────────────────────────
+// Resolves each homepage <h3>{tVar('key')} to its messages/ms.json string and
+// reports how many section headings carry a primary keyword. This is a soft
+// signal, never a hard fail — generic section titles ("FAQ", "Locations") and
+// rating pills legitimately have no keyword even on a perfect site.
+const KW_STOP = new Set([
+  'malaysia', 'your', 'kami', 'anda', 'untuk', 'dalam', 'dengan', 'pada', 'yang',
+  'seluruh', 'dari', 'atau', 'dan', 'the', 'and', 'near', 'setiap', 'boleh',
+  'esok', 'segera', 'cara', 'service', 'services', 'sdn', 'bhd', 'hour',
+])
+function kwWords(s: string): string[] {
+  return (s || '').toLowerCase().replace(/[^a-zà-ɏ\s]/gi, ' ').split(/\s+/)
+    .filter((w) => w.length >= 4 && !KW_STOP.has(w))
+}
+function kwAllStrings(obj: unknown, acc: string[] = []): string[] {
+  if (obj == null) return acc
+  if (typeof obj === 'string') { acc.push(obj); return acc }
+  if (typeof obj === 'object') for (const v of Object.values(obj as Record<string, unknown>)) kwAllStrings(v, acc)
+  return acc
+}
+function kwResolve(obj: unknown, dotted: string): unknown {
+  return dotted.split('.').reduce<unknown>((o, k) => (o == null ? undefined : (o as Record<string, unknown>)[k]), obj)
+}
+async function analyzeHeadingKeywords(ctx: Ctx): Promise<{ hit: number; total: number; misses: string[]; keywords: string[] } | null> {
+  const src = await concatTsxInDir(ctx, 'app/[locale]')
+  const msRaw = await readProjectFile(ctx, 'messages/ms.json')
+  if (!src || !msRaw) return null
+  let msgs: unknown
+  try { msgs = JSON.parse(msRaw) } catch { return null }
+
+  // var -> namespace from getTranslations({namespace}) / useTranslations('ns')
+  const nsMap: Record<string, string> = {}
+  for (const m of src.matchAll(/const\s+(\w+)\s*=\s*await\s+getTranslations\(\{[^}]*namespace:\s*'([^']+)'/g)) nsMap[m[1]] = m[2]
+  for (const m of src.matchAll(/const\s+(\w+)\s*=\s*useTranslations\('([^']+)'\)/g)) nsMap[m[1]] = m[2]
+
+  // Keywords: slug tokens + the most-frequent words in the hero copy (which is
+  // keyword-rich by rule and in the site's actual language, so this handles
+  // localized terms like "oksigen"/"elektrik" the English slug would miss).
+  const heroFreq: Record<string, number> = {}
+  for (const s of kwAllStrings(kwResolve(msgs, 'hero') ?? {})) for (const w of kwWords(s)) heroFreq[w] = (heroFreq[w] ?? 0) + 1
+  const heroKw = Object.entries(heroFreq).sort((a, b) => b[1] - a[1]).slice(0, 6).map((e) => e[0])
+  const keywords = [...new Set([...ctx.info.slug.split('-'), ...heroKw])]
+    .map((s) => s.toLowerCase()).filter((s) => s.length >= 3 && !KW_STOP.has(s) && !/^\d+$/.test(s))
+
+  let hit = 0, total = 0
+  const misses: string[] = []
+  for (const m of src.matchAll(/<h3[^>]*>\s*\{(\w+)\('([^']+)'\)/g)) {
+    const ns = nsMap[m[1]]
+    if (!ns) continue
+    const val = kwResolve(msgs, `${ns}.${m[2]}`)
+    if (typeof val !== 'string') continue
+    total++
+    if (keywords.some((k) => val.toLowerCase().includes(k))) hit++
+    else if (misses.length < 4) misses.push(val.slice(0, 32))
+  }
+  return { hit, total, misses, keywords }
+}
+
+// Collect className tokens from every .tsx directly inside `relDir` (not
+// recursive). Used to compare which sections a homepage vs a location page
+// renders — both may delegate to a sibling *Client.tsx, so we union the whole
+// directory's class usage.
+async function classTokensInDir(ctx: Ctx, relDir: string): Promise<Set<string>> {
+  const tokens = new Set<string>()
+  const abs = path.join(ctx.info.projectDir, relDir)
+  let entries
+  try { entries = await readdir(abs, { withFileTypes: true }) } catch { return tokens }
+  for (const e of entries) {
+    if (!e.isFile() || !e.name.endsWith('.tsx')) continue
+    const c = await readFileCached(ctx, path.join(abs, e.name))
+    if (!c) continue
+    for (const m of c.matchAll(/className=["'`]([^"'`]+)["'`]/g)) {
+      for (const t of m[1].split(/\s+/)) if (t && !t.startsWith('${')) tokens.add(t)
+    }
+  }
+  return tokens
+}
+
+// Walk the whole project once, collecting every CSS custom property that is
+// (a) defined `--x:` and (b) used `var(--x)`. Cached on the Ctx so multiple
+// checks share one walk. Returns the orphans: used but never defined.
+async function findUndefinedCssVars(ctx: Ctx): Promise<{ orphans: string[]; firstFile: string | null }> {
+  const cacheKey = '__cssvars__'
+  const memo = (ctx as unknown as { _cssVars?: { orphans: string[]; firstFile: string | null } })._cssVars
+  if (memo) return memo
+
+  const defined = new Set<string>()
+  const used = new Map<string, string>() // var -> first file (relative)
+  const walk = async (dir: string): Promise<void> => {
+    let entries
+    try { entries = await readdir(dir, { withFileTypes: true }) } catch { return }
+    for (const e of entries) {
+      if (SKIP_DIRS.has(e.name) || e.name.startsWith('.')) continue
+      const p = path.join(dir, e.name)
+      if (e.isDirectory()) { await walk(p); continue }
+      if (!/\.(css|tsx|ts)$/.test(e.name)) continue
+      const c = await readFileCached(ctx, p)
+      if (!c) continue
+      for (const m of c.matchAll(/(--[a-z0-9-]+)\s*:/gi)) defined.add(m[1])
+      for (const m of c.matchAll(/var\((--[a-z0-9-]+)\)/gi)) {
+        if (!used.has(m[1])) used.set(m[1], path.relative(ctx.info.projectDir, p))
+      }
+    }
+  }
+  await walk(ctx.info.projectDir)
+
+  // Exclude framework-injected vars: --tw-* (Tailwind) and --font-* (next/font
+  // sets these at runtime on <html>, so they're never in CSS source).
+  const orphans: string[] = []
+  let firstFile: string | null = null
+  for (const [v, file] of used) {
+    if (defined.has(v) || v.startsWith('--tw-') || v.startsWith('--font-')) continue
+    orphans.push(v)
+    if (!firstFile) firstFile = file
+  }
+  const result = { orphans, firstFile }
+  ;(ctx as unknown as { _cssVars?: typeof result })._cssVars = result
+  return result
 }
 
 async function dirSizeBytes(absDir: string): Promise<number | null> {
@@ -124,6 +268,102 @@ async function dirSizeBytes(absDir: string): Promise<number | null> {
 function countOccurrences(text: string, re: RegExp): number {
   const g = new RegExp(re.source, re.flags.includes('g') ? re.flags : re.flags + 'g')
   return (text.match(g) ?? []).length
+}
+
+interface BlogFormatStats {
+  contentChars: number       // raw HTML length — used for density-based checks
+  h2Count: number
+  h3Count: number
+  pCount: number
+  boldCount: number
+  ulCount: number
+  olCount: number
+  tableCount: number
+  imgCount: number
+  imgMissingAlt: number      // <img> with no alt= or empty alt
+  hasToc: boolean
+  paragraphCount: number
+  avgParagraphChars: number
+}
+
+// Scan a blog post's HTML body and report formatting stats. Cheap heuristics —
+// good enough to catch posts that are walls of text with no headings, no
+// emphasis, no lists, and no table of contents.
+function analyzeBlogFormat(html: string): BlogFormatStats {
+  const contentChars = html.length
+  const h2Count = countOccurrences(html, /<h2[\s>]/i)
+  const h3Count = countOccurrences(html, /<h3[\s>]/i)
+  const pCount = countOccurrences(html, /<p[\s>]/i)
+  const boldCount = countOccurrences(html, /<(?:strong|b)[\s>]/i)
+  const ulCount = countOccurrences(html, /<ul[\s>]/i)
+  const olCount = countOccurrences(html, /<ol[\s>]/i)
+  const tableCount = countOccurrences(html, /<table[\s>]/i)
+  const imgCount = countOccurrences(html, /<img[\s>]/i)
+  // Empty/missing alt: <img …> without `alt=` at all, OR alt="" / alt=' '.
+  const imgsRaw = html.match(/<img\b[^>]*>/gi) ?? []
+  const imgMissingAlt = imgsRaw.filter((tag) => !/alt=["'][^"']+["']/.test(tag)).length
+
+  // TOC: either an explicit toc/table-of-contents class on a nav/aside/div, OR
+  // a list of in-page anchor links sitting in the first ~1500 chars of the body.
+  const hasTocClass = /<(?:nav|div|aside|section)[^>]*class=["'][^"']*\b(?:toc|table-of-contents|table_of_contents|tableOfContents)\b/i.test(html)
+  const earlyAnchorList = /^[\s\S]{0,1500}<(?:ul|ol)[^>]*>\s*<li[^>]*>\s*<a\s+href=["']#[a-zA-Z0-9_-]+["']/i.test(html)
+  // Some authors hand-roll a TOC as a <nav> wrapping a <ul> of anchor links —
+  // catch that shape too.
+  const navTocAnywhere = /<nav[^>]*>[\s\S]{0,400}<(?:ul|ol)[^>]*>\s*<li[^>]*>\s*<a\s+href=["']#[a-zA-Z0-9_-]+["']/i.test(html)
+  const hasToc = hasTocClass || earlyAnchorList || navTocAnywhere
+
+  // Paragraph length: strip HTML inside <p>…</p> and average the text length.
+  const paragraphs = html.match(/<p[^>]*>([\s\S]*?)<\/p>/gi) ?? []
+  const paragraphTexts = paragraphs
+    .map((p) => p.replace(/<[^>]+>/g, '').replace(/&[a-z]+;/gi, ' ').trim())
+    .filter((t) => t.length > 0)
+  const totalChars = paragraphTexts.reduce((s, t) => s + t.length, 0)
+  const avgParagraphChars = paragraphTexts.length > 0 ? Math.round(totalChars / paragraphTexts.length) : 0
+
+  return { contentChars, h2Count, h3Count, pCount, boldCount, ulCount, olCount, tableCount, imgCount, imgMissingAlt, hasToc, paragraphCount: paragraphTexts.length, avgParagraphChars }
+}
+
+// Run a per-post predicate over every blog content row and return summary stats.
+// Uses the longest available translation as canonical (short translations may
+// just be auto-translated stubs). `criterion(stats)` returns true if the post
+// passes — the aggregate fails if any post fails, surfacing up to 3 offenders.
+type BlogTranslation = { language: string; content: string | null }
+type BlogContentRowLite = { slug: string; blog_translations: BlogTranslation[] }
+
+// Memoize the HTML parse so the 7 blog-content checks don't each re-analyze
+// the same posts. Keyed by translation object identity — getBlogContentRows
+// caches its result, so the same translation objects flow through every check.
+const blogStatsCache = new WeakMap<BlogTranslation, BlogFormatStats>()
+function statsFor(t: BlogTranslation): BlogFormatStats | null {
+  if (!t.content) return null
+  let cached = blogStatsCache.get(t)
+  if (cached) return cached
+  cached = analyzeBlogFormat(t.content)
+  blogStatsCache.set(t, cached)
+  return cached
+}
+function canonicalTranslation(post: BlogContentRowLite): BlogTranslation | null {
+  return (post.blog_translations ?? [])
+    .filter((t) => typeof t.content === 'string' && (t.content as string).length > 0)
+    .sort((a, b) => (b.content!.length) - (a.content!.length))[0] ?? null
+}
+function evaluateBlogPosts(
+  rows: BlogContentRowLite[],
+  criterion: (stats: BlogFormatStats) => boolean,
+): { total: number; passed: number; offenders: string[] } {
+  const offenders: string[] = []
+  let total = 0
+  let passed = 0
+  for (const post of rows) {
+    const canonical = canonicalTranslation(post)
+    if (!canonical) continue
+    const stats = statsFor(canonical)
+    if (!stats) continue
+    total++
+    if (criterion(stats)) passed++
+    else if (offenders.length < 3) offenders.push(`${post.slug}/${canonical.language}`)
+  }
+  return { total, passed, offenders }
 }
 
 // Walks .tsx/.ts under the project (minus build/asset dirs and a per-call
@@ -200,7 +440,7 @@ const STRUCTURE: Check[] = [
     },
   },
   {
-    group: 'Structure', id: 'blog-listing', name: 'Blog listing page',
+    group: 'Blog', id: 'blog-listing', name: 'Blog listing page',
     help: "The blog index page that lists all articles.",
     run: async (ctx) => {
       const ok = await fileExists(ctx, 'app/[locale]/blog/page.tsx')
@@ -210,7 +450,7 @@ const STRUCTURE: Check[] = [
     },
   },
   {
-    group: 'Structure', id: 'blog-post', name: 'Blog post detail page',
+    group: 'Blog', id: 'blog-post', name: 'Blog post detail page',
     help: "Individual blog article pages.",
     run: async (ctx) => {
       const ok = await fileExists(ctx, 'app/[locale]/blog/[slug]/page.tsx')
@@ -592,25 +832,56 @@ const DESIGN: Check[] = [
     },
   },
   {
-    group: 'Layout & Design', id: 'homepage-h1-count', name: 'Homepage has exactly one <h1>',
-    help: "Homepage has exactly one main title (H1) — SEO needs a single H1.",
+    group: 'Layout & Design', id: 'homepage-h1-h2', name: 'Homepage has exactly one <h1> + one <h2>',
+    help: "Homepage needs exactly one main title (H1) and one subtitle (H2) for SEO — all other section titles use H3–H6.",
     run: async (ctx) => {
-      const c = await readProjectFile(ctx, 'app/[locale]/page.tsx')
-      if (!c) return fail('homepage-h1-count', 'Homepage has exactly one <h1>', 'homepage file missing')
-      const n = countOccurrences(c, /<h1[\s>]/)
-      if (n === 1) return pass('homepage-h1-count', 'Homepage has exactly one <h1>')
-      return fail('homepage-h1-count', 'Homepage has exactly one <h1>', `found ${n} <h1> in page.tsx (expected 1)`)
+      const c = await concatTsxInDir(ctx, 'app/[locale]')
+      if (!c) return fail('homepage-h1-h2', 'Homepage has exactly one <h1> + one <h2>', 'homepage files missing')
+      const h1 = countOccurrences(c, /<h1[\s>]/)
+      const h2 = countOccurrences(c, /<h2[\s>]/)
+      if (h1 === 1 && h2 === 1) return pass('homepage-h1-h2', 'Homepage has exactly one <h1> + one <h2>')
+      return fail('homepage-h1-h2', 'Homepage has exactly one <h1> + one <h2>', `found ${h1} <h1> + ${h2} <h2> (expected 1 + 1)`)
     },
   },
   {
-    group: 'Layout & Design', id: 'homepage-h2-count', name: 'Homepage has exactly one <h2>',
-    help: "Homepage has exactly one subtitle (H2) — SEO needs a single H2.",
+    group: 'Layout & Design', id: 'body-text-in-headings', name: 'Visible text wrapped in heading tags (no bare <p>)',
+    help: "House rule: every visible text element sits inside a heading tag (h1–h6), even body copy (styled h5/h6) — not bare <p>. Keyword-rich headings everywhere is the SEO play. Blog article bodies are exempt (they're DB HTML). sewa-excavator follows this; pages with many <p> tags don't.",
     run: async (ctx) => {
-      const c = await readProjectFile(ctx, 'app/[locale]/page.tsx')
-      if (!c) return fail('homepage-h2-count', 'Homepage has exactly one <h2>', 'homepage file missing')
-      const n = countOccurrences(c, /<h2[\s>]/)
-      if (n === 1) return pass('homepage-h2-count', 'Homepage has exactly one <h2>')
-      return fail('homepage-h2-count', 'Homepage has exactly one <h2>', `found ${n} <h2> in page.tsx (expected 1)`)
+      // Scope: homepage, location pages, blog listing — everything EXCEPT the
+      // blog article (/blog/[slug]), whose body is markdown HTML from the DB.
+      const groups: { label: string; src: string }[] = []
+      groups.push({ label: 'homepage', src: await concatTsxInDir(ctx, 'app/[locale]') })
+      const slug = ctx.info.productSlug
+      if (slug) groups.push({ label: 'location page', src: await concatTsxInDir(ctx, `app/[locale]/${slug}/[location]`) })
+      const listing = await readProjectFile(ctx, 'app/[locale]/blog/page.tsx')
+      if (listing) groups.push({ label: 'blog listing', src: listing })
+
+      const LIMIT = 4
+      const offenders: string[] = []
+      for (const g of groups) {
+        if (!g.src) continue
+        const n = countOccurrences(g.src, /<p[\s>]/)
+        if (n > LIMIT) offenders.push(`${g.label} (${n} <p>)`)
+      }
+      return offenders.length === 0
+        ? pass('body-text-in-headings', 'Visible text wrapped in heading tags (no bare <p>)')
+        : fail('body-text-in-headings', 'Visible text wrapped in heading tags (no bare <p>)', `bare <p> body text (should be styled h5/h6): ${offenders.join(', ')}`)
+    },
+  },
+  {
+    // Informational only — ALWAYS passes. The detail reports how many section
+    // H3s carry a primary keyword + lists the weak ones, so you can strengthen
+    // headings. It never fails because generic section titles ("FAQ",
+    // "Locations") and rating pills legitimately have no keyword.
+    group: 'Layout & Design', id: 'heading-keyword-coverage', name: 'Section headings carry keywords (informational)',
+    help: "How many section H3s contain a primary keyword (derived from the slug + hero copy). Higher is better for SEO, but this never fails — generic titles like FAQ/Locations and rating pills don't need a keyword. Use the detail to spot headings worth rewording.",
+    run: async (ctx) => {
+      const r = await analyzeHeadingKeywords(ctx)
+      if (!r || r.total === 0) return skip('heading-keyword-coverage', 'Section headings carry keywords (informational)', 'no resolvable section H3s')
+      const pct = Math.round((100 * r.hit) / r.total)
+      const weak = r.misses.length ? ` · reword: ${r.misses.join(' | ')}` : ''
+      // Always pass — purely a visibility signal.
+      return pass('heading-keyword-coverage', 'Section headings carry keywords (informational)', `${r.hit}/${r.total} carry a keyword (${pct}%)${weak}`)
     },
   },
 
@@ -626,17 +897,11 @@ const DESIGN: Check[] = [
     },
   },
 
+  // NOTE: the scrolling MarketingMarquee is intentionally NOT a required check.
+  // It doesn't suit every layout (e.g. electrician) — projects may include it
+  // or not, by design.
+
   // Shared components exist
-  {
-    group: 'Layout & Design', id: 'marketing-marquee', name: 'MarketingMarquee component',
-    help: "Scrolling marquee between sections (replaces the old dashed dividers).",
-    run: async (ctx) => {
-      const ok = await fileExists(ctx, 'components/MarketingMarquee.tsx')
-      return ok
-        ? pass('marketing-marquee', 'MarketingMarquee component')
-        : fail('marketing-marquee', 'MarketingMarquee component', 'Missing components/MarketingMarquee.tsx (replaces decorative dividers between hero→USP and calculator→process)')
-    },
-  },
   {
     group: 'Layout & Design', id: 'page-styles', name: 'PageStyles shared style component',
     help: "Shared CSS block so homepage and location pages stay in sync.",
@@ -658,23 +923,17 @@ const DESIGN: Check[] = [
     },
   },
   {
-    group: 'Layout & Design', id: 'site-header', name: 'SiteHeader component',
-    help: "Shared site-wide top nav with logo, languages, and WhatsApp.",
+    // Merged SiteHeader + SiteFooter existence into one (both are the shared
+    // site chrome) to make room for heading-keyword-coverage while staying at 100.
+    group: 'Layout & Design', id: 'site-chrome-components', name: 'SiteHeader + SiteFooter components',
+    help: "Shared site-wide top nav (logo, languages, WhatsApp) and footer (links, copyright) exist as components.",
     run: async (ctx) => {
-      const ok = await fileExists(ctx, 'components/SiteHeader.tsx')
-      return ok
-        ? pass('site-header', 'SiteHeader component')
-        : fail('site-header', 'SiteHeader component', 'Missing components/SiteHeader.tsx')
-    },
-  },
-  {
-    group: 'Layout & Design', id: 'site-footer', name: 'SiteFooter component',
-    help: "Shared site-wide footer with links and copyright.",
-    run: async (ctx) => {
-      const ok = await fileExists(ctx, 'components/SiteFooter.tsx')
-      return ok
-        ? pass('site-footer', 'SiteFooter component')
-        : fail('site-footer', 'SiteFooter component', 'Missing components/SiteFooter.tsx')
+      const missing: string[] = []
+      if (!(await fileExists(ctx, 'components/SiteHeader.tsx'))) missing.push('SiteHeader.tsx')
+      if (!(await fileExists(ctx, 'components/SiteFooter.tsx'))) missing.push('SiteFooter.tsx')
+      return missing.length === 0
+        ? pass('site-chrome-components', 'SiteHeader + SiteFooter components')
+        : fail('site-chrome-components', 'SiteHeader + SiteFooter components', `missing: ${missing.join(', ')}`)
     },
   },
 
@@ -735,6 +994,50 @@ const DESIGN: Check[] = [
       return /\bPageStyles\b/.test(c)
         ? pass('location-uses-pagestyles', 'Location page imports PageStyles')
         : fail('location-uses-pagestyles', 'Location page imports PageStyles', 'location page should import + render <PageStyles /> to share the homepage styles')
+    },
+  },
+  {
+    group: 'Layout & Design', id: 'location-matches-homepage', name: 'Location page mirrors homepage sections',
+    help: "A location page must be the same layout as the homepage — same hero, USP bar, products, gallery, reviews, etc. — with only the copy localised. Stripped-down location pages convert worse and look half-built.",
+    run: async (ctx) => {
+      const slug = ctx.info.productSlug
+      if (!slug) return skip('location-matches-homepage', 'Location page mirrors homepage sections', 'unknown productSlug')
+      const homeTokens = await classTokensInDir(ctx, 'app/[locale]')
+      const locTokens = await classTokensInDir(ctx, `app/[locale]/${slug}/[location]`)
+      if (homeTokens.size === 0) return skip('location-matches-homepage', 'Location page mirrors homepage sections', 'homepage has no class tokens')
+      if (locTokens.size === 0) return skip('location-matches-homepage', 'Location page mirrors homepage sections', 'location page not found')
+      // Major homepage sections, identified by a substring in their class
+      // names. If the homepage renders one and the location page doesn't, the
+      // location page is a stripped-down variant.
+      const sections: Record<string, string> = {
+        usp: 'USP bar', gallery: 'gallery', review: 'reviews',
+        process: 'process/how-it-works', calc: 'calculator', why: 'why-us', product: 'products',
+      }
+      const missing: string[] = []
+      for (const [marker, label] of Object.entries(sections)) {
+        const homeHas = [...homeTokens].some((t) => t.includes(marker))
+        const locHas = [...locTokens].some((t) => t.includes(marker))
+        if (homeHas && !locHas) missing.push(label)
+      }
+      return missing.length === 0
+        ? pass('location-matches-homepage', 'Location page mirrors homepage sections')
+        : fail('location-matches-homepage', 'Location page mirrors homepage sections', `location page is missing homepage sections: ${missing.join(', ')} — it should mirror the homepage layout with only localised copy`)
+    },
+  },
+
+  // Layout-breaking CSS — passes structural checks but renders broken
+  {
+    group: 'Layout & Design', id: 'no-undefined-css-vars', name: 'No undefined CSS variables referenced',
+    help: "Every var(--x) must be defined somewhere in the project's CSS. Pages copied from another project often reference that project's variable names (--brand-charcoal, --gut, --radius-card…) — undefined, they silently collapse colours, padding, and radii into a broken layout.",
+    run: async (ctx) => {
+      const { orphans, firstFile } = await findUndefinedCssVars(ctx)
+      if (orphans.length === 0) return pass('no-undefined-css-vars', 'No undefined CSS variables referenced')
+      const sample = orphans.slice(0, 5).join(', ')
+      return fail(
+        'no-undefined-css-vars',
+        'No undefined CSS variables referenced',
+        `${orphans.length} undefined var(s)${firstFile ? ` (e.g. in ${firstFile})` : ''}: ${sample}${orphans.length > 5 ? ', …' : ''} — layout will render with missing colours/spacing`,
+      )
     },
   },
 
@@ -915,7 +1218,7 @@ const DESIGN: Check[] = [
     },
   },
   {
-    group: 'Layout & Design', id: 'blog-listing-chrome', name: 'Blog listing renders SiteHeader + SiteFooter + FomoBanner',
+    group: 'Blog', id: 'blog-listing-chrome', name: 'Blog listing renders SiteHeader + SiteFooter + FomoBanner',
     help: "Blog index includes the header, footer, and FOMO banner.",
     run: async (ctx) => {
       const c = await readProjectFile(ctx, 'app/[locale]/blog/page.tsx')
@@ -927,7 +1230,7 @@ const DESIGN: Check[] = [
     },
   },
   {
-    group: 'Layout & Design', id: 'blog-post-chrome', name: 'Blog post renders SiteHeader + SiteFooter + FomoBanner',
+    group: 'Blog', id: 'blog-post-chrome', name: 'Blog post renders SiteHeader + SiteFooter + FomoBanner',
     help: "Blog article pages include the header, footer, and FOMO banner.",
     run: async (ctx) => {
       const c = await readProjectFile(ctx, 'app/[locale]/blog/[slug]/page.tsx')
@@ -1164,6 +1467,128 @@ const DESIGN: Check[] = [
     },
   },
 
+  // Blog layout — both blog listing and blog post must follow the same
+  // canonical structure used by the reference projects (sewa-excavator,
+  // electric-wheelchair-malaysia). Hanabi-generated posts assume this shape.
+  {
+    group: 'Blog', id: 'blog-post-h1', name: 'Blog post has exactly one <h1>',
+    help: "Each article has exactly one main title (H1) — SEO ranks the H1 as the page topic, multiple H1s confuse search engines.",
+    run: async (ctx) => {
+      const c = await readProjectFile(ctx, 'app/[locale]/blog/[slug]/page.tsx')
+      if (!c) return skip('blog-post-h1', 'Blog post has exactly one <h1>', 'blog post page not found')
+      const n = countOccurrences(c, /<h1[\s>]/)
+      if (n === 1) return pass('blog-post-h1', 'Blog post has exactly one <h1>')
+      return fail('blog-post-h1', 'Blog post has exactly one <h1>', `found ${n} <h1> in blog post page (expected 1)`)
+    },
+  },
+  {
+    group: 'Blog', id: 'blog-post-breadcrumb', name: 'Blog post shows a breadcrumb',
+    help: "Tiny Home → Blog → Article trail at the top of every post so visitors know where they are and can step back.",
+    run: async (ctx) => {
+      const c = await readProjectFile(ctx, 'app/[locale]/blog/[slug]/page.tsx')
+      if (!c) return skip('blog-post-breadcrumb', 'Blog post shows a breadcrumb', 'blog post page not found')
+      const ok = /breadcrumb|aria-label=["']Breadcrumb["']/i.test(c)
+      return ok
+        ? pass('blog-post-breadcrumb', 'Blog post shows a breadcrumb')
+        : fail('blog-post-breadcrumb', 'Blog post shows a breadcrumb', 'no breadcrumb nav — add `<nav className="breadcrumb">` with Home → Blog → article')
+    },
+  },
+  {
+    group: 'Blog', id: 'blog-content-class', name: 'Blog post renders `blog-content` wrapper',
+    help: "The shared `.blog-content` CSS class is what styles headings, lists, and links inside the article body — without it the markdown HTML looks unstyled.",
+    run: async (ctx) => {
+      const c = await readProjectFile(ctx, 'app/[locale]/blog/[slug]/page.tsx')
+      if (!c) return skip('blog-content-class', 'Blog post renders `blog-content` wrapper', 'blog post page not found')
+      const ok = /className=["'][^"']*\bblog-content\b/.test(c)
+      return ok
+        ? pass('blog-content-class', 'Blog post renders `blog-content` wrapper')
+        : fail('blog-content-class', 'Blog post renders `blog-content` wrapper', 'no `blog-content` className — article body will render with default UA styles')
+    },
+  },
+  {
+    group: 'Blog', id: 'blog-post-cta-banner', name: 'Blog post has a WhatsApp CTA banner',
+    help: "Every article ends with a WhatsApp CTA so readers who finish a post can immediately convert.",
+    run: async (ctx) => {
+      const c = await readProjectFile(ctx, 'app/[locale]/blog/[slug]/page.tsx')
+      if (!c) return skip('blog-post-cta-banner', 'Blog post has a WhatsApp CTA banner', 'blog post page not found')
+      // Accept either a <WhatsAppButton …> or any link going to the redirect
+      // page from inside the post body.
+      const ok = /<WhatsAppButton\b|waRedirect\(|\/redirect-whatsapp-1/.test(c)
+      return ok
+        ? pass('blog-post-cta-banner', 'Blog post has a WhatsApp CTA banner')
+        : fail('blog-post-cta-banner', 'Blog post has a WhatsApp CTA banner', 'no WhatsApp CTA in blog post — readers finish the article with no path to convert')
+    },
+  },
+  {
+    group: 'Blog', id: 'blog-post-reading-time', name: 'Blog post shows reading time',
+    help: "A small `X min read` indicator helps visitors decide whether to start reading and increases dwell time.",
+    run: async (ctx) => {
+      const c = await readProjectFile(ctx, 'app/[locale]/blog/[slug]/page.tsx')
+      if (!c) return skip('blog-post-reading-time', 'Blog post shows reading time', 'blog post page not found')
+      const ok = /readingTime|minRead|min[\s_-]?read/i.test(c)
+      return ok
+        ? pass('blog-post-reading-time', 'Blog post shows reading time')
+        : fail('blog-post-reading-time', 'Blog post shows reading time', 'no reading-time indicator — compute it from word count and display next to the title')
+    },
+  },
+  {
+    group: 'Blog', id: 'blog-listing-h1-h2', name: 'Blog listing has one <h1> + one <h2>',
+    help: "Blog index page needs the same H1+H2 SEO structure as the homepage — one main title, one subtitle.",
+    run: async (ctx) => {
+      const c = await readProjectFile(ctx, 'app/[locale]/blog/page.tsx')
+      if (!c) return skip('blog-listing-h1-h2', 'Blog listing has one <h1> + one <h2>', 'blog listing not found')
+      const h1 = countOccurrences(c, /<h1[\s>]/)
+      const h2 = countOccurrences(c, /<h2[\s>]/)
+      if (h1 === 1 && h2 === 1) return pass('blog-listing-h1-h2', 'Blog listing has one <h1> + one <h2>')
+      return fail('blog-listing-h1-h2', 'Blog listing has one <h1> + one <h2>', `found ${h1} <h1> + ${h2} <h2> (expected 1 + 1)`)
+    },
+  },
+  {
+    group: 'Blog', id: 'blog-listing-grid', name: 'Blog listing uses a card grid',
+    help: "Articles render in a responsive card grid (3+ cols on desktop, 1 col on mobile) — never a vertical stack of full-width blocks.",
+    run: async (ctx) => {
+      const c = await readProjectFile(ctx, 'app/[locale]/blog/page.tsx')
+      if (!c) return skip('blog-listing-grid', 'Blog listing uses a card grid', 'blog listing not found')
+      // Accept either the canonical `blog-grid` className, a CSS rule with
+      // `grid-template-columns: repeat(…)`, or its inline-style camelCase
+      // counterpart (`gridTemplateColumns: 'repeat(…)'`).
+      const ok = /\bblog-grid\b/.test(c)
+        || /grid-template-columns\s*:\s*repeat\(/.test(c)
+        || /gridTemplateColumns\s*:\s*['"`]repeat\(/.test(c)
+      return ok
+        ? pass('blog-listing-grid', 'Blog listing uses a card grid')
+        : fail('blog-listing-grid', 'Blog listing uses a card grid', 'no `blog-grid` class or `grid-template-columns: repeat(...)` — listing must be a responsive card grid, not a vertical stack')
+    },
+  },
+  {
+    group: 'Blog', id: 'blog-listing-cover-image', name: 'Blog cards render cover image + excerpt',
+    help: "Each card shows the blog post's cover image and a short excerpt — text-only cards look unfinished and tank click-through.",
+    run: async (ctx) => {
+      const c = await readProjectFile(ctx, 'app/[locale]/blog/page.tsx')
+      if (!c) return skip('blog-listing-cover-image', 'Blog cards render cover image + excerpt', 'blog listing not found')
+      const hasCover = /cover_image_url|coverImage|cover_image/.test(c)
+      const hasExcerpt = /\bexcerpt\b/.test(c)
+      const missing: string[] = []
+      if (!hasCover) missing.push('cover_image_url')
+      if (!hasExcerpt) missing.push('excerpt')
+      return missing.length === 0
+        ? pass('blog-listing-cover-image', 'Blog cards render cover image + excerpt')
+        : fail('blog-listing-cover-image', 'Blog cards render cover image + excerpt', `missing: ${missing.join(', ')}`)
+    },
+  },
+  {
+    group: 'Blog', id: 'blog-post-metadata', name: 'Blog post exports metadata',
+    help: "Each article exports its own `metadata` / `generateMetadata` so Open Graph titles, descriptions, and share images are unique per post.",
+    run: async (ctx) => {
+      const c = await readProjectFile(ctx, 'app/[locale]/blog/[slug]/page.tsx')
+      if (!c) return skip('blog-post-metadata', 'Blog post exports metadata', 'blog post page not found')
+      const ok = /export\s+(?:const|async function)\s+(?:metadata|generateMetadata)/.test(c)
+      return ok
+        ? pass('blog-post-metadata', 'Blog post exports metadata')
+        : fail('blog-post-metadata', 'Blog post exports metadata', 'no `metadata` / `generateMetadata` export — every post needs its own OG title + description')
+    },
+  },
+
   // Pre-deploy disk hygiene
   {
     group: 'Layout & Design', id: 'public-folder-size', name: 'public/ under 20 MB',
@@ -1221,7 +1646,7 @@ const DATABASE: Check[] = [
     },
   },
   {
-    group: 'Database', id: 'db-blog-posts', name: '≥10 published blog posts',
+    group: 'Blog', id: 'db-blog-posts', name: '≥10 published blog posts',
     help: "At least 10 published blog posts exist for organic traffic.",
     run: async (ctx) => {
       if (!supabaseConfigured) return skip('db-blog-posts', '≥10 published blog posts', 'Supabase not configured')
@@ -1323,7 +1748,7 @@ const QUALITY: Check[] = [
     },
   },
   {
-    group: 'Quality', id: 'no-hardcoded-phones-blog', name: 'No hardcoded phone numbers in blog content',
+    group: 'Blog', id: 'no-hardcoded-phones-blog', name: 'No hardcoded phone numbers in blog content',
     help: "No phone numbers hardcoded in blog post content — every link goes through the redirect.",
     run: async (ctx) => {
       if (!supabaseConfigured) return skip('no-hardcoded-phones-blog', 'No hardcoded phone numbers in blog content', 'Supabase not configured')
@@ -1340,6 +1765,278 @@ const QUALITY: Check[] = [
       )
     },
   },
+
+  // Blog content quality — scans actual post HTML in Supabase to confirm
+  // articles are properly formatted (TOC, headings, paragraphs, lists, bold).
+  // A post that fails any of these is a wall of text that hurts dwell time.
+  {
+    group: 'Blog', id: 'blog-content-toc', name: 'Articles include a table of contents',
+    help: "Every article opens with a list of in-page links to its sections — readers can jump to what they want, and Google rewards posts that look scannable.",
+    run: async (ctx) => {
+      if (!supabaseConfigured) return skip('blog-content-toc', 'Articles include a table of contents', 'Supabase not configured')
+      if (ctx.info.domainCandidates.length === 0) return skip('blog-content-toc', 'Articles include a table of contents', 'unknown domain')
+      const rows = await getBlogContentRows(ctx.info.domainCandidates)
+      if (rows == null) return skip('blog-content-toc', 'Articles include a table of contents', 'query failed')
+      if (rows.length === 0) return skip('blog-content-toc', 'Articles include a table of contents', 'no posts to check')
+      const r = evaluateBlogPosts(rows, (s) => s.hasToc)
+      if (r.total === 0) return skip('blog-content-toc', 'Articles include a table of contents', 'no posts with content')
+      return r.passed === r.total
+        ? pass('blog-content-toc', 'Articles include a table of contents', `${r.passed}/${r.total} posts have a TOC`)
+        : fail('blog-content-toc', 'Articles include a table of contents', `${r.passed}/${r.total} posts have a TOC — missing in: ${r.offenders.join(', ')}`)
+    },
+  },
+  {
+    group: 'Blog', id: 'blog-content-headings', name: 'Articles use section headings (≥3 H2s)',
+    help: "Each article is broken into at least 3 H2 sections instead of running as one giant block of text — headings are how scanners read.",
+    run: async (ctx) => {
+      if (!supabaseConfigured) return skip('blog-content-headings', 'Articles use section headings (≥3 H2s)', 'Supabase not configured')
+      if (ctx.info.domainCandidates.length === 0) return skip('blog-content-headings', 'Articles use section headings (≥3 H2s)', 'unknown domain')
+      const rows = await getBlogContentRows(ctx.info.domainCandidates)
+      if (rows == null) return skip('blog-content-headings', 'Articles use section headings (≥3 H2s)', 'query failed')
+      if (rows.length === 0) return skip('blog-content-headings', 'Articles use section headings (≥3 H2s)', 'no posts to check')
+      const r = evaluateBlogPosts(rows, (s) => s.h2Count >= 3)
+      if (r.total === 0) return skip('blog-content-headings', 'Articles use section headings (≥3 H2s)', 'no posts with content')
+      return r.passed === r.total
+        ? pass('blog-content-headings', 'Articles use section headings (≥3 H2s)', `${r.passed}/${r.total} posts have ≥3 H2s`)
+        : fail('blog-content-headings', 'Articles use section headings (≥3 H2s)', `${r.passed}/${r.total} posts have ≥3 H2s — flat posts: ${r.offenders.join(', ')}`)
+    },
+  },
+  {
+    group: 'Blog', id: 'blog-content-bold', name: 'Articles use enough bold emphasis (≥1 per ~1800 chars)',
+    help: "Bolded keywords break visual monotony and help skimmers — one lonely <strong> in an 8000-char article reads as no emphasis at all.",
+    run: async (ctx) => {
+      if (!supabaseConfigured) return skip('blog-content-bold', 'Articles use enough bold emphasis (≥1 per ~1800 chars)', 'Supabase not configured')
+      if (ctx.info.domainCandidates.length === 0) return skip('blog-content-bold', 'Articles use enough bold emphasis (≥1 per ~1800 chars)', 'unknown domain')
+      const rows = await getBlogContentRows(ctx.info.domainCandidates)
+      if (rows == null) return skip('blog-content-bold', 'Articles use enough bold emphasis (≥1 per ~1800 chars)', 'query failed')
+      if (rows.length === 0) return skip('blog-content-bold', 'Articles use enough bold emphasis (≥1 per ~1800 chars)', 'no posts to check')
+      // Density-aware: long articles need proportionally more bold. 8000-char
+      // article needs ≥4 bolds; 3000-char article still needs ≥1.
+      const r = evaluateBlogPosts(rows, (s) => s.boldCount >= Math.max(1, Math.floor(s.contentChars / 1800)))
+      if (r.total === 0) return skip('blog-content-bold', 'Articles use enough bold emphasis (≥1 per ~1800 chars)', 'no posts with content')
+      return r.passed === r.total
+        ? pass('blog-content-bold', 'Articles use enough bold emphasis (≥1 per ~1800 chars)', `${r.passed}/${r.total} posts have density-appropriate bold`)
+        : fail('blog-content-bold', 'Articles use enough bold emphasis (≥1 per ~1800 chars)', `${r.passed}/${r.total} posts have density-appropriate bold — sparse posts: ${r.offenders.join(', ')}`)
+    },
+  },
+  {
+    group: 'Blog', id: 'blog-content-paragraphs', name: 'Articles have ≥5 paragraphs',
+    help: "Each article is broken into multiple paragraphs (at least 5) — a single giant block of text reads like an essay nobody finishes.",
+    run: async (ctx) => {
+      if (!supabaseConfigured) return skip('blog-content-paragraphs', 'Articles have ≥5 paragraphs', 'Supabase not configured')
+      if (ctx.info.domainCandidates.length === 0) return skip('blog-content-paragraphs', 'Articles have ≥5 paragraphs', 'unknown domain')
+      const rows = await getBlogContentRows(ctx.info.domainCandidates)
+      if (rows == null) return skip('blog-content-paragraphs', 'Articles have ≥5 paragraphs', 'query failed')
+      if (rows.length === 0) return skip('blog-content-paragraphs', 'Articles have ≥5 paragraphs', 'no posts to check')
+      const r = evaluateBlogPosts(rows, (s) => s.paragraphCount >= 5)
+      if (r.total === 0) return skip('blog-content-paragraphs', 'Articles have ≥5 paragraphs', 'no posts with content')
+      return r.passed === r.total
+        ? pass('blog-content-paragraphs', 'Articles have ≥5 paragraphs', `${r.passed}/${r.total} posts have ≥5 paragraphs`)
+        : fail('blog-content-paragraphs', 'Articles have ≥5 paragraphs', `${r.passed}/${r.total} posts have ≥5 paragraphs — sparse posts: ${r.offenders.join(', ')}`)
+    },
+  },
+  {
+    group: 'Blog', id: 'blog-content-lists', name: 'Articles use bullet or numbered lists',
+    help: "Lists (bullet or numbered) make steps and feature lists scannable — every article should have at least one.",
+    run: async (ctx) => {
+      if (!supabaseConfigured) return skip('blog-content-lists', 'Articles use bullet or numbered lists', 'Supabase not configured')
+      if (ctx.info.domainCandidates.length === 0) return skip('blog-content-lists', 'Articles use bullet or numbered lists', 'unknown domain')
+      const rows = await getBlogContentRows(ctx.info.domainCandidates)
+      if (rows == null) return skip('blog-content-lists', 'Articles use bullet or numbered lists', 'query failed')
+      if (rows.length === 0) return skip('blog-content-lists', 'Articles use bullet or numbered lists', 'no posts to check')
+      const r = evaluateBlogPosts(rows, (s) => s.ulCount + s.olCount >= 1)
+      if (r.total === 0) return skip('blog-content-lists', 'Articles use bullet or numbered lists', 'no posts with content')
+      return r.passed === r.total
+        ? pass('blog-content-lists', 'Articles use bullet or numbered lists', `${r.passed}/${r.total} posts use lists`)
+        : fail('blog-content-lists', 'Articles use bullet or numbered lists', `${r.passed}/${r.total} posts use lists — list-less posts: ${r.offenders.join(', ')}`)
+    },
+  },
+  {
+    group: 'Blog', id: 'blog-content-readable-paragraphs', name: 'Average paragraph under 600 chars',
+    help: "Average paragraph length stays under ~600 characters (≈100 words) — longer paragraphs become walls of text and visitors bounce.",
+    run: async (ctx) => {
+      if (!supabaseConfigured) return skip('blog-content-readable-paragraphs', 'Average paragraph under 600 chars', 'Supabase not configured')
+      if (ctx.info.domainCandidates.length === 0) return skip('blog-content-readable-paragraphs', 'Average paragraph under 600 chars', 'unknown domain')
+      const rows = await getBlogContentRows(ctx.info.domainCandidates)
+      if (rows == null) return skip('blog-content-readable-paragraphs', 'Average paragraph under 600 chars', 'query failed')
+      if (rows.length === 0) return skip('blog-content-readable-paragraphs', 'Average paragraph under 600 chars', 'no posts to check')
+      const r = evaluateBlogPosts(rows, (s) => s.paragraphCount === 0 || s.avgParagraphChars < 600)
+      if (r.total === 0) return skip('blog-content-readable-paragraphs', 'Average paragraph under 600 chars', 'no posts with content')
+      return r.passed === r.total
+        ? pass('blog-content-readable-paragraphs', 'Average paragraph under 600 chars', `${r.passed}/${r.total} posts are readable`)
+        : fail('blog-content-readable-paragraphs', 'Average paragraph under 600 chars', `${r.passed}/${r.total} posts under 600c avg — wall-of-text posts: ${r.offenders.join(', ')}`)
+    },
+  },
+  {
+    group: 'Blog', id: 'blog-content-images', name: 'Articles have enough inline images (≥1 per ~3500 chars)',
+    help: "Long articles need visual breaks — one inline image per ~3500 chars (so an 8000-char article gets 2-3 photos, not just a cover).",
+    run: async (ctx) => {
+      if (!supabaseConfigured) return skip('blog-content-images', 'Articles have enough inline images (≥1 per ~3500 chars)', 'Supabase not configured')
+      if (ctx.info.domainCandidates.length === 0) return skip('blog-content-images', 'Articles have enough inline images (≥1 per ~3500 chars)', 'unknown domain')
+      const rows = await getBlogContentRows(ctx.info.domainCandidates)
+      if (rows == null) return skip('blog-content-images', 'Articles have enough inline images (≥1 per ~3500 chars)', 'query failed')
+      if (rows.length === 0) return skip('blog-content-images', 'Articles have enough inline images (≥1 per ~3500 chars)', 'no posts to check')
+      const r = evaluateBlogPosts(rows, (s) => s.imgCount >= Math.max(1, Math.floor(s.contentChars / 3500)))
+      if (r.total === 0) return skip('blog-content-images', 'Articles have enough inline images (≥1 per ~3500 chars)', 'no posts with content')
+      return r.passed === r.total
+        ? pass('blog-content-images', 'Articles have enough inline images (≥1 per ~3500 chars)', `${r.passed}/${r.total} posts have density-appropriate images`)
+        : fail('blog-content-images', 'Articles have enough inline images (≥1 per ~3500 chars)', `${r.passed}/${r.total} posts have enough images — sparse posts: ${r.offenders.join(', ')}`)
+    },
+  },
+  {
+    group: 'Blog', id: 'blog-content-img-alt', name: 'Every <img> in articles has descriptive alt',
+    help: "Inline article images all carry a non-empty alt — screen readers, broken-image fallbacks, and Google Images all need it.",
+    run: async (ctx) => {
+      if (!supabaseConfigured) return skip('blog-content-img-alt', 'Every <img> in articles has descriptive alt', 'Supabase not configured')
+      if (ctx.info.domainCandidates.length === 0) return skip('blog-content-img-alt', 'Every <img> in articles has descriptive alt', 'unknown domain')
+      const rows = await getBlogContentRows(ctx.info.domainCandidates)
+      if (rows == null) return skip('blog-content-img-alt', 'Every <img> in articles has descriptive alt', 'query failed')
+      if (rows.length === 0) return skip('blog-content-img-alt', 'Every <img> in articles has descriptive alt', 'no posts to check')
+      // A post with no images can't fail this check — skip it. Otherwise every
+      // <img> must have a non-empty alt.
+      const r = evaluateBlogPosts(rows, (s) => s.imgCount === 0 || s.imgMissingAlt === 0)
+      if (r.total === 0) return skip('blog-content-img-alt', 'Every <img> in articles has descriptive alt', 'no posts with content')
+      return r.passed === r.total
+        ? pass('blog-content-img-alt', 'Every <img> in articles has descriptive alt', `${r.passed}/${r.total} posts have alt on every image`)
+        : fail('blog-content-img-alt', 'Every <img> in articles has descriptive alt', `${r.passed}/${r.total} posts have full alt coverage — missing-alt posts: ${r.offenders.join(', ')}`)
+    },
+  },
+  {
+    group: 'Blog', id: 'blog-content-internal-links', name: 'Articles include internal links (≥3)',
+    help: "Each article links to at least 3 other internal pages (products, locations, other articles) — crawlers follow these to discover the site and visitors bounce less.",
+    run: async (ctx) => {
+      if (!supabaseConfigured) return skip('blog-content-internal-links', 'Articles include internal links (≥3)', 'Supabase not configured')
+      if (ctx.info.domainCandidates.length === 0) return skip('blog-content-internal-links', 'Articles include internal links (≥3)', 'unknown domain')
+      const rows = await getBlogContentRows(ctx.info.domainCandidates)
+      if (rows == null) return skip('blog-content-internal-links', 'Articles include internal links (≥3)', 'query failed')
+      if (rows.length === 0) return skip('blog-content-internal-links', 'Articles include internal links (≥3)', 'no posts to check')
+      // Count <a href="/..."> — relative URLs that point at the same site.
+      // External http(s):// links and in-page #anchors (TOC) are excluded.
+      // Internal-link count is only meaningful here — keep its regex inline,
+      // but reuse `canonicalTranslation` so we don't re-walk the translations
+      // array for every blog-content check.
+      const offenders: string[] = []
+      let total = 0, passed = 0
+      for (const post of rows) {
+        const canonical = canonicalTranslation(post)
+        if (!canonical) continue
+        total++
+        const internal = (canonical.content!.match(/<a\s+[^>]*href=["']\/[^"'#][^"']*["']/gi) ?? []).length
+        if (internal >= 3) passed++
+        else if (offenders.length < 3) offenders.push(`${post.slug}/${canonical.language}(${internal})`)
+      }
+      if (total === 0) return skip('blog-content-internal-links', 'Articles include internal links (≥3)', 'no posts with content')
+      return passed === total
+        ? pass('blog-content-internal-links', 'Articles include internal links (≥3)', `${passed}/${total} posts have ≥3 internal links`)
+        : fail('blog-content-internal-links', 'Articles include internal links (≥3)', `${passed}/${total} posts have ≥3 internal links — under-linked: ${offenders.join(', ')}`)
+    },
+  },
+
+  // Blog rendering CSS — the article HTML can be perfectly structured but if
+  // there's no .blog-content CSS, every h2/h3/h4/ul renders at body-text size
+  // with no spacing and the post reads as a wall of identical-looking lines.
+  // (Real example: sewa-motor & tablechair both ship the right HTML and zero
+  // CSS to make it look like an article.)
+  {
+    group: 'Blog', id: 'blog-content-headings-css', name: 'CSS styles .blog-content h2/h3/h4',
+    help: "Without `.blog-content h2/h3/h4` font-size rules, every heading in the article renders at body-text size and the whole post reads as one undifferentiated wall of text.",
+    run: async (ctx) => {
+      // Combine the most likely CSS hosts: globals.css, PageStyles, and the
+      // blog page files themselves (some projects inline blog styles).
+      const sources = [
+        'app/globals.css',
+        'components/PageStyles.tsx',
+        'app/[locale]/blog/page.tsx',
+        'app/[locale]/blog/[slug]/page.tsx',
+      ]
+      let combined = ''
+      for (const rel of sources) {
+        const c = await readProjectFile(ctx, rel)
+        if (c) combined += '\n' + c
+      }
+      if (!combined) return skip('blog-content-headings-css', 'CSS styles .blog-content h2/h3/h4', 'no CSS source files found')
+      // A real heading rule has BOTH `.blog-content hN` selector AND a
+      // font-size (or font-weight) declaration in the same rule body.
+      const styled = (tag: string) => {
+        const rule = new RegExp(`\\.blog-content[^{]*?\\b${tag}\\b[^{]*\\{[^}]*(?:font-size|font-weight)\\s*:`, 'i')
+        return rule.test(combined)
+      }
+      const missing: string[] = []
+      if (!styled('h2')) missing.push('h2')
+      if (!styled('h3')) missing.push('h3')
+      // h4 is common in checklists/listicles — flag if missing, but don't fail
+      // solely on it. Only the h2/h3 absence is a hard fail.
+      if (missing.length === 0) {
+        const h4ok = styled('h4')
+        return pass('blog-content-headings-css', 'CSS styles .blog-content h2/h3/h4', h4ok ? 'h2 + h3 + h4 styled' : 'h2 + h3 styled (h4 missing but optional)')
+      }
+      return fail('blog-content-headings-css', 'CSS styles .blog-content h2/h3/h4', `missing CSS for: ${missing.join(', ')} — article headings will render at body-text size`)
+    },
+  },
+  {
+    // Merged paragraph + list CSS into one check (keeps the total at 100 while
+    // covering both). Fails if EITHER `.blog-content p` spacing OR
+    // `.blog-content ul/ol` bullets/indent styling is missing.
+    group: 'Blog', id: 'blog-content-body-css', name: 'CSS styles .blog-content p + ul/ol',
+    help: "Article paragraphs need `.blog-content p` line-height/spacing and lists need `.blog-content ul/ol` padding + list-style. Without them paragraphs cramp together and lists lose their bullets (flat plain-text lines, like sewa-motor's TOC).",
+    run: async (ctx) => {
+      const sources = ['app/globals.css', 'components/PageStyles.tsx', 'app/[locale]/blog/page.tsx', 'app/[locale]/blog/[slug]/page.tsx']
+      let combined = ''
+      for (const rel of sources) {
+        const c = await readProjectFile(ctx, rel)
+        if (c) combined += '\n' + c
+      }
+      if (!combined) return skip('blog-content-body-css', 'CSS styles .blog-content p + ul/ol', 'no CSS source files found')
+      const pOk = /\.blog-content\s+p\s*\{[^}]*(?:line-height|font-size|margin)\s*:/i.test(combined)
+      const listOk = /\.blog-content\s+(?:ul|ol)\s*[,{][^}]*(?:padding|list-style|margin)\s*:/i.test(combined)
+        || /\.blog-content\s+ul\s*,\s*\.blog-content\s+ol\s*\{[^}]*(?:padding|list-style|margin)/i.test(combined)
+      const missing: string[] = []
+      if (!pOk) missing.push('p (line-height/spacing)')
+      if (!listOk) missing.push('ul/ol (bullets/padding)')
+      return missing.length === 0
+        ? pass('blog-content-body-css', 'CSS styles .blog-content p + ul/ol')
+        : fail('blog-content-body-css', 'CSS styles .blog-content p + ul/ol', `missing CSS for: ${missing.join(', ')} — article body renders with default UA styling`)
+    },
+  },
+  {
+    group: 'Blog', id: 'blog-post-schema', name: 'Blog post emits Article / BlogPosting JSON-LD',
+    help: "Every post emits structured data (Article or BlogPosting JSON-LD) so Google can show rich snippets — author, publish date, headline — in search results.",
+    run: async (ctx) => {
+      const c = await readProjectFile(ctx, 'app/[locale]/blog/[slug]/page.tsx')
+      if (!c) return skip('blog-post-schema', 'Blog post emits Article / BlogPosting JSON-LD', 'blog post page not found')
+      // Accept three shapes: a <ArticleSchema /> / <BlogPostingSchema /> component,
+      // an inline application/ld+json script with the right @type, or a direct
+      // JSON-LD object referencing "Article" or "BlogPosting".
+      const ok = /<(?:Article|BlogPosting)Schema\b/.test(c)
+        || /application\/ld\+json/.test(c)
+        || /["']@type["']\s*:\s*["'](?:Article|BlogPosting|NewsArticle)["']/.test(c)
+      return ok
+        ? pass('blog-post-schema', 'Blog post emits Article / BlogPosting JSON-LD')
+        : fail('blog-post-schema', 'Blog post emits Article / BlogPosting JSON-LD', 'no Article/BlogPosting schema — add <ArticleSchema /> or an inline JSON-LD script')
+    },
+  },
+  {
+    group: 'Blog', id: 'blog-content-toc-css', name: 'CSS styles the TOC (.blog-content nav / .toc)',
+    help: "TOC needs its own visual treatment — a bordered box, indented list, hover state — otherwise it renders as a flat string of section names with no affordance that they're links.",
+    run: async (ctx) => {
+      const sources = ['app/globals.css', 'components/PageStyles.tsx', 'app/[locale]/blog/page.tsx', 'app/[locale]/blog/[slug]/page.tsx']
+      let combined = ''
+      for (const rel of sources) {
+        const c = await readProjectFile(ctx, rel)
+        if (c) combined += '\n' + c
+      }
+      if (!combined) return skip('blog-content-toc-css', 'CSS styles the TOC (.blog-content nav / .toc)', 'no CSS source files found')
+      // Accept any of: `.blog-content nav`, `.blog-toc`, `.toc` with any
+      // declaration body. The point is "the author actually styled the TOC".
+      const ok = /\.blog-content\s+nav\s*\{/i.test(combined)
+        || /\.blog-toc\s*\{/i.test(combined)
+        || /\.toc\s*\{/i.test(combined)
+        || /\.blog-content\s+nav\s+(?:ul|ol|li|a)\s*\{/i.test(combined)
+      return ok
+        ? pass('blog-content-toc-css', 'CSS styles the TOC (.blog-content nav / .toc)')
+        : fail('blog-content-toc-css', 'CSS styles the TOC (.blog-content nav / .toc)', 'no `.blog-content nav` / `.toc` rule — TOC renders as plain text with no bullets, no border, no hint that lines are links')
+    },
+  },
 ]
 
 const ALL_CHECKS: Check[] = [
@@ -1354,9 +2051,33 @@ const ALL_CHECKS: Check[] = [
   ...QUALITY,
 ]
 
+// Display order for the wizard UI. Lets us re-tag checks across groups without
+// physically moving their definitions in ALL_CHECKS. Unknown groups fall to
+// the end in alphabetical order.
+const GROUP_ORDER = [
+  'Structure',
+  'SEO',
+  'i18n',
+  'Webcore data layer',
+  'Tracking',
+  'Layout & Design',
+  'Blog',
+  'Database',
+  'Deployment',
+  'Quality',
+] as const
+
 export async function runChecksForProject(info: ProjectInfo): Promise<CheckGroup[]> {
   const ctx: Ctx = { info, fileCache: new Map(), grepCache: new Map() }
-  const results = await Promise.all(ALL_CHECKS.map((c) => c.run(ctx)))
+  const TIMING = process.env.CHECKLIST_TIMING === '1'
+  const results = await Promise.all(ALL_CHECKS.map(async (c) => {
+    if (!TIMING) return c.run(ctx)
+    const t0 = performance.now()
+    const r = await c.run(ctx)
+    const ms = performance.now() - t0
+    if (ms > 500) console.warn(`[checklist] slow check ${c.id}: ${ms.toFixed(0)}ms`)
+    return r
+  }))
 
   const byGroup = new Map<string, CheckResult[]>()
   ALL_CHECKS.forEach((c, i) => {
@@ -1367,7 +2088,16 @@ export async function runChecksForProject(info: ProjectInfo): Promise<CheckGroup
     byGroup.get(c.group)!.push({ ...results[i], help: c.help })
   })
 
-  return Array.from(byGroup.entries()).map(([name, items]) => ({ name, items }))
+  const groups = Array.from(byGroup.entries()).map(([name, items]) => ({ name, items }))
+  groups.sort((a, b) => {
+    const ai = GROUP_ORDER.indexOf(a.name as typeof GROUP_ORDER[number])
+    const bi = GROUP_ORDER.indexOf(b.name as typeof GROUP_ORDER[number])
+    if (ai === -1 && bi === -1) return a.name.localeCompare(b.name)
+    if (ai === -1) return 1
+    if (bi === -1) return -1
+    return ai - bi
+  })
+  return groups
 }
 
 export function totalCheckCount(): number {

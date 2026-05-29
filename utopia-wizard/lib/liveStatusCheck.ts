@@ -27,7 +27,10 @@ async function probe(baseUrl: string): Promise<string | null> {
   try {
     const res = await fetch(url, {
       method: 'GET',
-      signal: AbortSignal.timeout(7000),
+      // 4s is enough for any live site — anything slower is effectively down
+      // from a visitor's perspective anyway. (Was 7s; cut to speed up the
+      // wizard table page since several projects sit behind dead DNS.)
+      signal: AbortSignal.timeout(4000),
       redirect: 'follow',
       cache: 'no-store',
     })
@@ -59,10 +62,15 @@ export async function checkLiveDbConnection(args: Args): Promise<LiveDbStatus> {
     return value
   }
 
-  for (const baseUrl of baseUrls) {
-    const live = await probe(baseUrl)
-    if (!live) continue
-
+  // Probe all candidate URLs in parallel. Sequential probing of ~4 URLs at
+  // 7s each pinned the table page at 25-37s per project; the parallel race
+  // bounds it at one probe timeout (4s).
+  const probes = await Promise.all(
+    baseUrls.map(async (baseUrl) => ({ baseUrl, live: await probe(baseUrl) })),
+  )
+  const winner = probes.find((p) => p.live)
+  if (winner) {
+    const { baseUrl, live } = winner as { baseUrl: string; live: string }
     const target = `${baseUrl.replace(/\/$/, '')}/en/redirect-whatsapp-1`
     let value: LiveDbStatus
     if (dbPhones.includes(live)) {

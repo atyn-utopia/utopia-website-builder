@@ -41,7 +41,9 @@ interface DomainCounts {
   matchedAgainst: string[]
 }
 
-const cache = new Map<string, { ts: number; counts: DomainCounts }>()
+// Stores the in-flight promise — concurrent callers within the TTL share it
+// instead of each firing their own Supabase fan-out.
+const cache = new Map<string, { ts: number; promise: Promise<DomainCounts> }>()
 const TTL = 60_000
 
 function inFilter(field: string, candidates: string[]): string {
@@ -189,21 +191,25 @@ export interface BlogContentRow {
   }[]
 }
 
-const blogContentCache = new Map<string, { ts: number; rows: BlogContentRow[] | null }>()
+// Store the *promise* (not the resolved value) so concurrent callers within
+// the same TTL window share one in-flight request. Without this, 10 parallel
+// blog-content checks all fire their own Supabase request and the wizard
+// table page pays ~8s of synchronised Supabase latency.
+const blogContentCache = new Map<string, { ts: number; promise: Promise<BlogContentRow[] | null> }>()
 
 export async function getBlogContentRows(candidates: string[]): Promise<BlogContentRow[] | null> {
   const dedup = Array.from(new Set(candidates)).filter(Boolean)
   if (dedup.length === 0) return []
   const key = dedup.slice().sort().join('|')
   const cached = blogContentCache.get(key)
-  if (cached && Date.now() - cached.ts < TTL) return cached.rows
-  const rows = await selectRows<BlogContentRow>({
+  if (cached && Date.now() - cached.ts < TTL) return cached.promise
+  const promise = selectRows<BlogContentRow>({
     table: 'blog_posts',
     filter: inFilter('website', dedup),
     select: 'slug,blog_translations(language,title,content,excerpt,meta_title,meta_description)',
   })
-  blogContentCache.set(key, { ts: Date.now(), rows })
-  return rows
+  blogContentCache.set(key, { ts: Date.now(), promise })
+  return promise
 }
 
 export async function getBlogRows(candidates: string[]): Promise<BlogRow[] | null> {
@@ -224,22 +230,25 @@ export async function getDomainCounts(candidates: string[]): Promise<DomainCount
 
   const key = dedup.slice().sort().join('|')
   const cached = cache.get(key)
-  if (cached && Date.now() - cached.ts < TTL) return cached.counts
+  if (cached && Date.now() - cached.ts < TTL) return cached.promise
 
-  const [cw, ph, pr, bl] = await Promise.all([
-    countRows({ table: 'company_websites', filter: inFilter('domain', dedup) }),
-    countRows({ table: 'phone_numbers', filter: `${inFilter('website', dedup)}&is_active=eq.true` }),
-    countRows({ table: 'products', filter: `${inFilter('website', dedup)}&is_active=eq.true` }),
-    countRows({ table: 'blog_posts', filter: `${inFilter('website', dedup)}&status=eq.published` }),
-  ])
-
-  const counts: DomainCounts = {
-    companyWebsites: cw,
-    phoneNumbers: ph,
-    activeProducts: pr,
-    publishedBlogPosts: bl,
-    matchedAgainst: dedup,
-  }
-  cache.set(key, { ts: Date.now(), counts })
-  return counts
+  // Compose all 4 row counts into a single in-flight Promise. Concurrent
+  // db-* checks share it instead of each firing a fresh fan-out.
+  const promise = (async (): Promise<DomainCounts> => {
+    const [cw, ph, pr, bl] = await Promise.all([
+      countRows({ table: 'company_websites', filter: inFilter('domain', dedup) }),
+      countRows({ table: 'phone_numbers', filter: `${inFilter('website', dedup)}&is_active=eq.true` }),
+      countRows({ table: 'products', filter: `${inFilter('website', dedup)}&is_active=eq.true` }),
+      countRows({ table: 'blog_posts', filter: `${inFilter('website', dedup)}&status=eq.published` }),
+    ])
+    return {
+      companyWebsites: cw,
+      phoneNumbers: ph,
+      activeProducts: pr,
+      publishedBlogPosts: bl,
+      matchedAgainst: dedup,
+    }
+  })()
+  cache.set(key, { ts: Date.now(), promise })
+  return promise
 }

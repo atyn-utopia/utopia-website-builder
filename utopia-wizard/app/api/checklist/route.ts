@@ -68,6 +68,7 @@ async function serveLive() {
             groups: r.groups.map((g) => ({
               name: g.name,
               passed: g.items.filter((i) => i.status === 'pass').length,
+              failed: g.items.filter((i) => i.status === 'fail').length,
               total: g.items.length,
             })),
             createdAt,
@@ -113,6 +114,7 @@ async function serveFromSnapshots() {
       groups: (r.groups as { name: string; items: { status: string }[] }[]).map((g) => ({
         name: g.name,
         passed: g.items.filter((i) => i.status === 'pass').length,
+        failed: g.items.filter((i) => i.status === 'fail').length,
         total: g.items.length,
       })),
       createdAt: r.project_created_at ?? r.ran_at,
