@@ -102,15 +102,15 @@ export default async function HomePage({
       <div className="usp-panel">
         <div className="usp-cell">
           <h3>{shared('whyChoose.title1')}</h3>
-          <p>{shared('whyChoose.desc1')}</p>
+          <h5>{shared('whyChoose.desc1')}</h5>
         </div>
         <div className="usp-cell">
           <h3>{shared('whyChoose.title2')}</h3>
-          <p>{shared('whyChoose.desc2')}</p>
+          <h5>{shared('whyChoose.desc2')}</h5>
         </div>
         <div className="usp-cell">
           <h3>{shared('whyChoose.title3')}</h3>
-          <p>{shared('whyChoose.desc3')}</p>
+          <h5>{shared('whyChoose.desc3')}</h5>
         </div>
       </div>
 

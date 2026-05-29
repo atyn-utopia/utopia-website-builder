@@ -162,7 +162,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
         <ChevronIcon open={open} />
       </button>
       <div style={{ maxHeight: open ? '300px' : '0px', overflow: 'hidden', transition: 'max-height 0.35s ease' }}>
-        <p className="pb-4 text-sm font-normal" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.75' }}>{a}</p>
+        <h5 className="pb-4 text-sm font-normal" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.75' }}>{a}</h5>
       </div>
     </div>
   )
@@ -247,13 +247,13 @@ export default function LocationPageClient({
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-4" style={{ letterSpacing: '-0.03em', lineHeight: '1.1' }}>
                   {t('hero.headline', { city: displayName })}
                 </h1>
-                <p className="text-sm md:text-base font-normal mb-6" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.75' }}>
+                <h5 className="text-sm md:text-base font-normal mb-6" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.75' }}>
                   {t('hero.intro', { city: displayName })}
-                </p>
+                </h5>
                 <a href={WA_LINK} className="wa-btn inline-flex items-center gap-2.5 px-6 py-3 rounded-xl text-base font-bold text-white" style={{ background: 'var(--wa-green)' }}>
                   <WAIcon />{t('cta.button', { city: displayName })}
                 </a>
-                <p className="text-[11px] mt-3 font-normal" style={{ color: 'rgba(255,255,255,0.4)' }}>{s('freeToAsk')}</p>
+                <h5 className="text-[11px] mt-3 font-normal" style={{ color: 'rgba(255,255,255,0.4)' }}>{s('freeToAsk')}</h5>
               </div>
               {/* Hero image */}
               <div className="relative flex justify-center md:justify-end">
@@ -300,6 +300,22 @@ export default function LocationPageClient({
           </div>
         </section>
 
+        {/* ── USP BAR (mirrors homepage) ── */}
+        <div className="usp-panel">
+          <div className="usp-cell">
+            <h3>{s('whyChoose.title1')}</h3>
+            <h5>{s('whyChoose.desc1')}</h5>
+          </div>
+          <div className="usp-cell">
+            <h3>{s('whyChoose.title2')}</h3>
+            <h5>{s('whyChoose.desc2')}</h5>
+          </div>
+          <div className="usp-cell">
+            <h3>{s('whyChoose.title3')}</h3>
+            <h5>{s('whyChoose.desc3')}</h5>
+          </div>
+        </div>
+
         {/* ── PRODUCTS ── */}
         <section id="products" className="py-16 px-6" style={{ background: 'var(--brand-surface)' }} aria-labelledby="products-heading">
           <div className="max-w-6xl mx-auto">
@@ -309,9 +325,9 @@ export default function LocationPageClient({
                 <h2 id="products-heading" className="text-2xl md:text-3xl font-bold mt-2" style={{ color: 'var(--brand-dark)' }}>
                   {t('banner.heading', { city: displayName })}
                 </h2>
-                <p className="text-sm font-normal mt-2" style={{ color: 'var(--brand-text-muted)' }}>
+                <h5 className="text-sm font-normal mt-2" style={{ color: 'var(--brand-text-muted)' }}>
                   {t('banner.description', { city: displayName })}
-                </p>
+                </h5>
               </div>
             </FadeSection>
             <div className="grid md:grid-cols-3 gap-5">
@@ -330,7 +346,7 @@ export default function LocationPageClient({
                       </div>
                       <div className="p-5 flex flex-col flex-1">
                         <h3 className="text-base font-bold mb-1" style={{ color: 'var(--brand-dark)' }}>{tProducts(`${pk.key}.name` as any)}</h3>
-                        <p className="text-xs font-normal mb-4 flex-1" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.6' }}>{tProducts(`${pk.key}.description` as any)}</p>
+                        <h5 className="text-xs font-normal mb-4 flex-1" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.6' }}>{tProducts(`${pk.key}.description` as any)}</h5>
                         <div className="grid grid-cols-3 gap-2 mb-4">
                           {(['daily', 'weekly', 'monthly'] as const).map(period => (
                             <div key={period} className="px-2 py-2 rounded-lg text-center" style={{ background: 'var(--brand-primary-xs)' }}>
@@ -366,7 +382,7 @@ export default function LocationPageClient({
                   <div className="text-center p-6 h-full">
                     <div className="text-4xl font-extrabold mb-3 gradient-text">0{n}</div>
                     <h3 className="text-base font-bold mb-2" style={{ color: 'var(--brand-dark)' }}>{tHome(`howItWorks.step${n}Title` as any)}</h3>
-                    <p className="text-sm font-normal" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7' }}>{tHome(`howItWorks.step${n}Desc` as any)}</p>
+                    <h5 className="text-sm font-normal" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7' }}>{tHome(`howItWorks.step${n}Desc` as any)}</h5>
                   </div>
                 </FadeSection>
               ))}
@@ -380,9 +396,9 @@ export default function LocationPageClient({
             <FadeSection>
               <h2 className="text-xl md:text-2xl font-bold mb-6" style={{ color: 'var(--brand-dark)' }}>{tHome('risk.heading')}</h2>
               <div className="space-y-4 text-sm font-normal" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.8' }}>
-                <p>{tHome('risk.paragraph1')}</p>
-                <p>{tHome('risk.paragraph2')}</p>
-                <p className="font-semibold" style={{ color: 'var(--brand-dark)' }}>{tHome('risk.paragraph3')}</p>
+                <h5>{tHome('risk.paragraph1')}</h5>
+                <h5>{tHome('risk.paragraph2')}</h5>
+                <h5 className="font-semibold" style={{ color: 'var(--brand-dark)' }}>{tHome('risk.paragraph3')}</h5>
               </div>
             </FadeSection>
           </div>
@@ -391,13 +407,13 @@ export default function LocationPageClient({
         {/* ── MID CTA ── */}
         <section className="py-10 px-6" style={{ background: 'linear-gradient(135deg, var(--brand-primary), var(--brand-coral))' }}>
           <div className="max-w-4xl mx-auto text-center">
-            <p className="text-white text-base md:text-lg font-semibold mb-4">{s('midCta')}</p>
+            <h5 className="text-white text-base md:text-lg font-semibold mb-4">{s('midCta')}</h5>
             <a href={WA_LINK} className="wa-btn inline-flex items-center gap-2.5 px-6 py-3 rounded-xl text-sm font-bold text-white" style={{ background: 'var(--wa-green)' }}>
               <WAIcon />{s('midCtaButton')}
             </a>
-            <p className="text-[11px] mt-3 font-normal text-white" style={{ opacity: 0.7 }}>
+            <h5 className="text-[11px] mt-3 font-normal text-white" style={{ opacity: 0.7 }}>
               <ShieldIcon /> {s('safetyNote')}
-            </p>
+            </h5>
           </div>
         </section>
 
@@ -417,7 +433,7 @@ export default function LocationPageClient({
                   <div className="flex gap-0.5">{Array.from({ length: 5 }).map((_, i) => <GoogleStarIcon key={i} />)}</div>
                 </div>
                 <h2 id="reviews-heading" className="text-2xl md:text-3xl font-bold text-white">{t('cta.heading', { city: displayName })}</h2>
-                <p className="text-xs font-normal mt-2" style={{ color: 'rgba(255,255,255,0.5)' }}>{s('reviewsSubtext')}</p>
+                <h5 className="text-xs font-normal mt-2" style={{ color: 'rgba(255,255,255,0.5)' }}>{s('reviewsSubtext')}</h5>
               </div>
             </FadeSection>
             <div className="grid grid-flow-col md:grid-flow-row auto-cols-[75%] md:auto-cols-auto md:grid-cols-3 gap-4 overflow-x-auto pb-4 md:pb-0 snap-x snap-mandatory -mx-2 px-2 md:mx-0 md:px-0 hide-scrollbar">
@@ -468,7 +484,7 @@ export default function LocationPageClient({
                     <div className="text-4xl font-extrabold" style={{ color: 'var(--brand-primary)', letterSpacing: '-0.03em' }}>0{i + 1}</div>
                     <div className="w-8 h-[2px] mt-3 mb-4" style={{ background: 'var(--brand-primary)' }} />
                     <h3 className="text-sm font-bold mb-1.5" style={{ color: 'var(--brand-dark)' }}>{item.title}</h3>
-                    <p className="text-xs font-normal" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7' }}>{item.desc}</p>
+                    <h5 className="text-xs font-normal" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7' }}>{item.desc}</h5>
                   </div>
                 </FadeSection>
               ))}
@@ -502,7 +518,7 @@ export default function LocationPageClient({
               <div className="text-center mb-10">
                 <span className="text-[11px] font-semibold uppercase tracking-widest" style={{ color: 'var(--brand-primary)' }}>Service Coverage</span>
                 <h2 id="locations-heading" className="text-2xl md:text-3xl font-bold mt-2" style={{ color: 'var(--brand-dark)' }}>{tHome('locations.heading')}</h2>
-                <p className="text-sm font-normal mt-2" style={{ color: 'var(--brand-text-muted)' }}>{tHome('locations.subheading')}</p>
+                <h5 className="text-sm font-normal mt-2" style={{ color: 'var(--brand-text-muted)' }}>{tHome('locations.subheading')}</h5>
               </div>
             </FadeSection>
             <div>
@@ -554,9 +570,9 @@ export default function LocationPageClient({
               <FadeSection>
                 <div className="text-center mb-8">
                   <span className="text-[11px] font-semibold uppercase tracking-widest" style={{ color: 'var(--brand-primary)' }}>{t('nearby.heading')}</span>
-                  <p className="text-sm font-normal mt-2" style={{ color: 'var(--brand-text-muted)' }}>
+                  <h5 className="text-sm font-normal mt-2" style={{ color: 'var(--brand-text-muted)' }}>
                     {t('nearby.description', { city: displayName })}
-                  </p>
+                  </h5>
                 </div>
               </FadeSection>
               <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
@@ -584,13 +600,13 @@ export default function LocationPageClient({
               <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
                 {t('cta.heading', { city: displayName })}
               </h2>
-              <p className="text-sm font-normal mb-6" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.7' }}>
+              <h5 className="text-sm font-normal mb-6" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.7' }}>
                 {t('cta.subheading', { city: displayName })}
-              </p>
+              </h5>
               <a href={WA_LINK} className="wa-btn inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-lg font-bold text-white" style={{ background: 'var(--wa-green)' }}>
                 <WAIcon />{t('cta.button', { city: displayName })}
               </a>
-              <p className="text-[11px] mt-4 font-normal" style={{ color: 'rgba(255,255,255,0.4)' }}>Response within 1 hour · No hidden charges · 7 days a week</p>
+              <h5 className="text-[11px] mt-4 font-normal" style={{ color: 'rgba(255,255,255,0.4)' }}>Response within 1 hour · No hidden charges · 7 days a week</h5>
             </FadeSection>
           </div>
         </section>

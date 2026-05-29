@@ -30,10 +30,21 @@ body {
   line-height: 1.7;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4 {
   font-family: var(--font);
   line-height: 1.2;
   letter-spacing: -0.02em;
+}
+/* h5/h6 wrap body text (keyword-driven heading rule). Keep them visually
+   identical to the <p> they replaced — utility/custom classes control
+   size/weight; this guards against UA bolding + tight heading line-height. */
+h5, h6 {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  margin: 0;
 }
 
 /* ── WhatsApp pulse ── */

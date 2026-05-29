@@ -161,7 +161,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
         <ChevronIcon open={open} />
       </button>
       <div style={{ maxHeight: open ? '300px' : '0px', overflow: 'hidden', transition: 'max-height 0.35s ease' }}>
-        <p className="pb-4 text-sm font-normal" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.75' }}>{a}</p>
+        <h5 className="pb-4 text-sm font-normal" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.75' }}>{a}</h5>
       </div>
     </div>
   )
@@ -206,7 +206,7 @@ export default function HomePageClient() {
             <FadeSection>
               <div className="text-center mb-10">
                 <span className="text-[11px] font-semibold uppercase tracking-widest" style={{ color: 'var(--brand-primary)' }}>Motorcycles & Pricing</span>
-                <h2 id="products-heading" className="text-2xl md:text-3xl font-bold mt-2" style={{ color: 'var(--brand-dark)' }}>{t('products.heading')}</h2>
+                <h3 id="products-heading" className="text-2xl md:text-3xl font-bold mt-2" style={{ color: 'var(--brand-dark)' }}>{t('products.heading')}</h3>
               </div>
             </FadeSection>
             <div className="grid md:grid-cols-3 gap-5">
@@ -225,7 +225,7 @@ export default function HomePageClient() {
                       </div>
                       <div className="p-5 flex flex-col flex-1">
                         <h3 className="text-base font-bold mb-1" style={{ color: 'var(--brand-dark)' }}>{t(`products.${pk.key}.name`)}</h3>
-                        <p className="text-xs font-normal mb-4 flex-1" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.6' }}>{t(`products.${pk.key}.description`)}</p>
+                        <h5 className="text-xs font-normal mb-4 flex-1" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.6' }}>{t(`products.${pk.key}.description`)}</h5>
                         <div className="grid grid-cols-3 gap-2 mb-4">
                           {(['daily', 'weekly', 'monthly'] as const).map(period => (
                             <div key={period} className="px-2 py-2 rounded-lg text-center" style={{ background: 'var(--brand-primary-xs)' }}>
@@ -252,7 +252,7 @@ export default function HomePageClient() {
             <FadeSection>
               <div className="text-center mb-10">
                 <span className="text-[11px] font-semibold uppercase tracking-widest" style={{ color: 'var(--brand-primary)' }}>Simple Process</span>
-                <h2 className="text-2xl md:text-3xl font-bold mt-2" style={{ color: 'var(--brand-dark)' }}>{t('howItWorks.heading')}</h2>
+                <h3 className="text-2xl md:text-3xl font-bold mt-2" style={{ color: 'var(--brand-dark)' }}>{t('howItWorks.heading')}</h3>
               </div>
             </FadeSection>
             <div className="grid md:grid-cols-3 gap-6">
@@ -261,7 +261,7 @@ export default function HomePageClient() {
                   <div className="text-center p-6 h-full">
                     <div className="text-4xl font-extrabold mb-3 gradient-text">0{n}</div>
                     <h3 className="text-base font-bold mb-2" style={{ color: 'var(--brand-dark)' }}>{t(`howItWorks.step${n}Title`)}</h3>
-                    <p className="text-sm font-normal" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7' }}>{t(`howItWorks.step${n}Desc`)}</p>
+                    <h5 className="text-sm font-normal" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7' }}>{t(`howItWorks.step${n}Desc`)}</h5>
                   </div>
                 </FadeSection>
               ))}
@@ -273,11 +273,11 @@ export default function HomePageClient() {
         <section className="py-16 px-6" style={{ background: 'var(--brand-surface)' }}>
           <div className="max-w-3xl mx-auto">
             <FadeSection>
-              <h2 className="text-xl md:text-2xl font-bold mb-6" style={{ color: 'var(--brand-dark)' }}>{t('risk.heading')}</h2>
+              <h3 className="text-xl md:text-2xl font-bold mb-6" style={{ color: 'var(--brand-dark)' }}>{t('risk.heading')}</h3>
               <div className="space-y-4 text-sm font-normal" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.8' }}>
-                <p>{t('risk.paragraph1')}</p>
-                <p>{t('risk.paragraph2')}</p>
-                <p className="font-semibold" style={{ color: 'var(--brand-dark)' }}>{t('risk.paragraph3')}</p>
+                <h5>{t('risk.paragraph1')}</h5>
+                <h5>{t('risk.paragraph2')}</h5>
+                <h5 className="font-semibold" style={{ color: 'var(--brand-dark)' }}>{t('risk.paragraph3')}</h5>
               </div>
             </FadeSection>
           </div>
@@ -286,13 +286,13 @@ export default function HomePageClient() {
         {/* ── MID CTA ── */}
         <section className="py-10 px-6" style={{ background: 'linear-gradient(135deg, var(--brand-primary), var(--brand-coral))' }}>
           <div className="max-w-4xl mx-auto text-center">
-            <p className="text-white text-base md:text-lg font-semibold mb-4">{s('midCta')}</p>
+            <h5 className="text-white text-base md:text-lg font-semibold mb-4">{s('midCta')}</h5>
             <a href={WA_LINK} className="wa-btn inline-flex items-center gap-2.5 px-6 py-3 rounded-xl text-sm font-bold text-white" style={{ background: 'var(--wa-green)' }}>
               <WAIcon />{s('midCtaButton')}
             </a>
-            <p className="text-[11px] mt-3 font-normal text-white" style={{ opacity: 0.7 }}>
+            <h5 className="text-[11px] mt-3 font-normal text-white" style={{ opacity: 0.7 }}>
               <ShieldIcon /> {s('safetyNote')}
-            </p>
+            </h5>
           </div>
         </section>
 
@@ -311,8 +311,8 @@ export default function HomePageClient() {
                   <span className="text-3xl font-extrabold" style={{ color: 'var(--brand-primary)' }}>4.9</span>
                   <div className="flex gap-0.5">{Array.from({ length: 5 }).map((_, i) => <GoogleStarIcon key={i} />)}</div>
                 </div>
-                <h2 id="reviews-heading" className="text-2xl md:text-3xl font-bold text-white">{t('reviews.heading')}</h2>
-                <p className="text-xs font-normal mt-2" style={{ color: 'rgba(255,255,255,0.5)' }}>{s('reviewsSubtext')}</p>
+                <h3 id="reviews-heading" className="text-2xl md:text-3xl font-bold text-white">{t('reviews.heading')}</h3>
+                <h5 className="text-xs font-normal mt-2" style={{ color: 'rgba(255,255,255,0.5)' }}>{s('reviewsSubtext')}</h5>
               </div>
             </FadeSection>
             <div className="grid grid-flow-col md:grid-flow-row auto-cols-[75%] md:auto-cols-auto md:grid-cols-3 gap-4 overflow-x-auto pb-4 md:pb-0 snap-x snap-mandatory -mx-2 px-2 md:mx-0 md:px-0 hide-scrollbar">
@@ -346,7 +346,7 @@ export default function HomePageClient() {
             <FadeSection>
               <div className="text-center mb-10">
                 <span className="text-[11px] font-semibold uppercase tracking-widest" style={{ color: 'var(--brand-primary)' }}>Why Sewa Motor</span>
-                <h2 className="text-2xl md:text-3xl font-bold mt-2" style={{ color: 'var(--brand-dark)' }}>{t('authority.heading')}</h2>
+                <h3 className="text-2xl md:text-3xl font-bold mt-2" style={{ color: 'var(--brand-dark)' }}>{t('authority.heading')}</h3>
               </div>
             </FadeSection>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -361,7 +361,7 @@ export default function HomePageClient() {
                     <div className="text-4xl font-extrabold" style={{ color: 'var(--brand-primary)', letterSpacing: '-0.03em' }}>0{i + 1}</div>
                     <div className="w-8 h-[2px] mt-3 mb-4" style={{ background: 'var(--brand-primary)' }} />
                     <h3 className="text-sm font-bold mb-1.5" style={{ color: 'var(--brand-dark)' }}>{item.title}</h3>
-                    <p className="text-xs font-normal" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7' }}>{item.desc}</p>
+                    <h5 className="text-xs font-normal" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7' }}>{item.desc}</h5>
                   </div>
                 </FadeSection>
               ))}
@@ -375,7 +375,7 @@ export default function HomePageClient() {
             <FadeSection>
               <div className="text-center mb-8">
                 <span className="text-[11px] font-semibold uppercase tracking-widest" style={{ color: 'var(--brand-primary)' }}>{s('galleryLabel')}</span>
-                <h2 className="text-xl md:text-2xl font-bold mt-2" style={{ color: 'var(--brand-dark)' }}>{s('galleryHeading')}</h2>
+                <h3 className="text-xl md:text-2xl font-bold mt-2" style={{ color: 'var(--brand-dark)' }}>{s('galleryHeading')}</h3>
               </div>
             </FadeSection>
             <div className="overflow-hidden">
@@ -394,8 +394,8 @@ export default function HomePageClient() {
             <FadeSection>
               <div className="text-center mb-10">
                 <span className="text-[11px] font-semibold uppercase tracking-widest" style={{ color: 'var(--brand-primary)' }}>Service Coverage</span>
-                <h2 id="locations-heading" className="text-2xl md:text-3xl font-bold mt-2" style={{ color: 'var(--brand-dark)' }}>{t('locations.heading')}</h2>
-                <p className="text-sm font-normal mt-2" style={{ color: 'var(--brand-text-muted)' }}>{t('locations.subheading')}</p>
+                <h3 id="locations-heading" className="text-2xl md:text-3xl font-bold mt-2" style={{ color: 'var(--brand-dark)' }}>{t('locations.heading')}</h3>
+                <h5 className="text-sm font-normal mt-2" style={{ color: 'var(--brand-text-muted)' }}>{t('locations.subheading')}</h5>
               </div>
             </FadeSection>
             <div>
@@ -420,7 +420,7 @@ export default function HomePageClient() {
             <FadeSection>
               <div className="text-center mb-10">
                 <span className="text-[11px] font-semibold uppercase tracking-widest" style={{ color: 'var(--brand-primary)' }}>Common Questions</span>
-                <h2 id="faq-heading" className="text-2xl md:text-3xl font-bold mt-2" style={{ color: 'var(--brand-dark)' }}>Frequently Asked Questions</h2>
+                <h3 id="faq-heading" className="text-2xl md:text-3xl font-bold mt-2" style={{ color: 'var(--brand-dark)' }}>Frequently Asked Questions</h3>
               </div>
             </FadeSection>
             <div className="bg-white rounded-xl p-6" style={{ border: '1px solid var(--brand-border)' }}>
@@ -436,12 +436,12 @@ export default function HomePageClient() {
         <section className="py-16 px-6" style={{ background: 'var(--brand-dark)' }}>
           <div className="max-w-3xl mx-auto text-center">
             <FadeSection>
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">{t('cta.heading')}</h2>
-              <p className="text-sm font-normal mb-6" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.7' }}>{t('cta.subheading')}</p>
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">{t('cta.heading')}</h3>
+              <h5 className="text-sm font-normal mb-6" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.7' }}>{t('cta.subheading')}</h5>
               <a href={WA_LINK} className="wa-btn inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-lg font-bold text-white" style={{ background: 'var(--wa-green)' }}>
                 <WAIcon />{t('cta.button')}
               </a>
-              <p className="text-[11px] mt-4 font-normal" style={{ color: 'rgba(255,255,255,0.4)' }}>Response within 1 hour · No hidden charges · 7 days a week</p>
+              <h5 className="text-[11px] mt-4 font-normal" style={{ color: 'rgba(255,255,255,0.4)' }}>Response within 1 hour · No hidden charges · 7 days a week</h5>
             </FadeSection>
           </div>
         </section>
