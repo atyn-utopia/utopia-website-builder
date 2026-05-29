@@ -72,9 +72,9 @@ export default async function HomePage({
       <FomoBanner locale={locale} />
       <SiteHeader locale={locale} />
 
-      {/* HERO — H1 + H2 + role=img bg live here so the checklist sees them in
-          page.tsx source. HomePageClient receives `chromeProvided` and skips
-          its internal FOMO/nav/footer so this is the single visible chrome. */}
+      {/* HERO — the page's single H1 + H2 + role=img bg live here so the
+          checklist sees them in page.tsx source. FOMO/header/footer are the
+          shared components above/below; HomePageClient renders only sections. */}
       <section
         className="relative overflow-hidden"
         style={{
