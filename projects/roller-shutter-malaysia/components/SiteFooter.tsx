@@ -26,7 +26,7 @@ export default function SiteFooter() {
           <div>
             <div className="mb-3">
               <img
-                src="/brand/logo-wordmark.png"
+                src="/brand-assets/logo-roller-shutter.png"
                 alt={navT('logoAlt')}
                 style={{ width: 200, height: 'auto', display: 'block' }}
               />

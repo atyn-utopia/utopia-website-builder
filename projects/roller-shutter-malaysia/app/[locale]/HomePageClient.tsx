@@ -181,7 +181,7 @@ export default function HomePage() {
             <div className="flex justify-center md:justify-start" style={{ marginTop: 0, marginBottom: 0, lineHeight: 0 }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/brand/logo-wordmark.png"
+                src="/brand-assets/logo-roller-shutter.png"
                 alt={t('nav.logoAlt')}
                 className="hero-logo"
                 style={{ width: 'clamp(180px, 24vw, 260px)', height: 'auto', display: 'block', margin: 0, filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.35))' }}
