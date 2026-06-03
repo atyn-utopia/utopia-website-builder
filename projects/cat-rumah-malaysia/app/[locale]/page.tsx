@@ -160,7 +160,7 @@ export default async function HomePage({ params }: Props) {
           <div className="relative mt-10 mx-auto" style={{ maxWidth: 480 }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/painters/painter-roller.jpg"
+              src="/images/painters/painter-roller.png"
               alt={tHero('heroAlt')}
               className="mx-auto block"
               style={{ width: 'min(380px, 78%)', filter: 'drop-shadow(0 18px 38px rgba(0,0,0,0.45))' }}

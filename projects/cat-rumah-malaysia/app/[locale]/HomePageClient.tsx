@@ -200,7 +200,7 @@ const galleryImages = [
   'job-80', 'job-82', 'job-83', 'job-85',
   'job-86', 'job-87', 'job-88', 'job-89',
   'job-90', 'job-92', 'job-94', 'job-96',
-].map((n) => `/images/gallery/${n}.png`)
+].map((n) => `/images/gallery/${n}.jpg`)
 
 // ────────────────────────────────────────────────────────────
 // Cost calculator
