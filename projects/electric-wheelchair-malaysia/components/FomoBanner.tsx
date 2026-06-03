@@ -76,67 +76,8 @@ export default function FomoBanner(_props?: { locale?: Locale }) {
           {cta} →
         </Link>
       </div>
-
-      <style jsx>{`
-        .ewc-fomo {
-          background: #DC2626;
-          color: #fff;
-          position: relative;
-          z-index: 50;
-        }
-        .ewc-fomo__inner {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 10px 16px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 12px;
-          flex-wrap: wrap;
-          font-size: 13.5px;
-          line-height: 1.35;
-        }
-        .ewc-fomo__tag {
-          background: rgba(255,255,255,0.18);
-          padding: 3px 9px;
-          border-radius: 999px;
-          font-weight: 800;
-          font-size: 10.5px;
-          letter-spacing: 0.14em;
-        }
-        .ewc-fomo__body { font-weight: 600; }
-        .ewc-fomo__clock {
-          display: inline-flex;
-          align-items: center;
-          gap: 4px;
-          font-variant-numeric: tabular-nums;
-          font-weight: 800;
-          letter-spacing: 0.02em;
-          background: rgba(0,0,0,0.25);
-          padding: 3px 10px;
-          border-radius: 6px;
-          font-size: 12.5px;
-        }
-        .ewc-fomo__sep { opacity: 0.55; }
-        .ewc-fomo__cta {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          background: #fff;
-          color: #DC2626;
-          padding: 5px 14px;
-          border-radius: 999px;
-          font-weight: 800;
-          font-size: 12.5px;
-          text-decoration: none;
-          transition: transform 0.18s ease;
-        }
-        .ewc-fomo__cta:hover { transform: translateY(-1px); }
-        @media (max-width: 640px) {
-          .ewc-fomo__inner { padding: 9px 12px; gap: 8px; font-size: 12.5px; }
-          .ewc-fomo__tag { display: none; }
-        }
-      `}</style>
+      {/* All .ewc-fomo* styles live in app/globals.css — styled-jsx in the
+         App Router doesn't reliably ship CSS during SSR. */}
     </div>
   );
 }

@@ -160,13 +160,15 @@ export default async function SiteFooter({ locale }: { locale: Locale }) {
           margin: 0;
         }
         .ewc-footer__cols li { margin-bottom: 10px; }
-        .ewc-footer__cols a {
+        /* Scope to <ul> links so the rule doesn't bleed into the language
+           switcher pills (.lsw-item is also an <a> inside .ewc-footer__cols). */
+        .ewc-footer__cols ul a {
           color: rgba(255,255,255,0.72);
           font-size: 14px;
           text-decoration: none;
           transition: color 0.18s ease;
         }
-        .ewc-footer__cols a:hover { color: #F47B20; }
+        .ewc-footer__cols ul a:hover { color: #F47B20; }
         .ewc-footer__lang { margin-top: 16px; }
         .ewc-footer__bottom {
           margin-top: 56px;
