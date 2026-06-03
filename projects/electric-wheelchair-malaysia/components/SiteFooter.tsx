@@ -39,9 +39,9 @@ export default async function SiteFooter({ locale }: { locale: Locale }) {
             </div>
             <p
               className="text-xs font-normal leading-relaxed max-w-xs"
-              style={{ color: 'rgba(255,255,255,0.45)' }}
+              style={{ color: 'rgba(255,255,255,0.55)' }}
             >
-              {tFoot('description')}
+              {tFoot('tagline')}
             </p>
             <div className="flex items-center gap-4 mt-4">
               <a
@@ -51,11 +51,8 @@ export default async function SiteFooter({ locale }: { locale: Locale }) {
                 className="inline-flex items-center gap-2 text-xs font-semibold hover:opacity-80"
                 style={{ color: '#25D366' }}
               >
-                {tFoot('whatsappUs')}
+                {tNav('whatsapp')}
               </a>
-              <span className="text-xs font-normal" style={{ color: 'rgba(255,255,255,0.35)' }}>
-                {tFoot('phone')}
-              </span>
             </div>
           </div>
           <div>

@@ -15,14 +15,14 @@ export default async function FomoBanner({ locale }: { locale: Locale }) {
 
   return (
     <div style={{ background: '#DC2626' }}>
-      <div className="max-w-6xl mx-auto px-4 py-2 flex items-center justify-center gap-3 flex-wrap text-white text-xs sm:text-sm">
-        <span className="w-2 h-2 rounded-full bg-white shrink-0" aria-hidden="true" />
-        <span className="font-medium">{text}</span>
+      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-center gap-3 flex-wrap text-white text-sm sm:text-[15px] leading-snug">
+        <span className="inline-flex h-2.5 w-2.5 shrink-0 rounded-full bg-white" aria-hidden="true" />
+        <span className="font-semibold">{text}</span>
         <a
           href={waRedirect(locale)}
           target="_blank"
           rel="noopener noreferrer"
-          className="font-semibold underline underline-offset-2 hover:no-underline shrink-0"
+          className="shrink-0 rounded-full bg-white/15 px-3 py-1 font-bold underline underline-offset-2 hover:bg-white/25 hover:no-underline"
         >
           {t('bookNow')} &rarr;
         </a>
