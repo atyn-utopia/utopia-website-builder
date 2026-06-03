@@ -497,7 +497,7 @@ export default function HomePageClient({ phoneNumber }: Props) {
                     </div>
 
                     {/* Body */}
-                    <div className="px-5 pt-5 pb-5 flex flex-col flex-1">
+                    <div className="px-5 pt-6 pb-6 flex flex-col flex-1">
                       <h3
                         className="text-[17px] m-0"
                         style={{
@@ -516,16 +516,16 @@ export default function HomePageClient({ phoneNumber }: Props) {
                       </h3>
 
                       <p
-                        className="m-0 mt-2"
+                        className="m-0 mt-3"
                         style={{
                           color: 'var(--muted)',
                           fontSize: 13.5,
-                          lineHeight: 1.55,
+                          lineHeight: 1.6,
                           // Lock to exactly 2 lines so every card in the row
                           // has identical vertical spacing — shorter
                           // descriptions don't leave ghost whitespace and
                           // longer ones truncate cleanly with an ellipsis.
-                          height: 'calc(1.55em * 2)',
+                          height: 'calc(1.6em * 2)',
                           display: '-webkit-box',
                           WebkitLineClamp: 2,
                           WebkitBoxOrient: 'vertical',
@@ -535,9 +535,13 @@ export default function HomePageClient({ phoneNumber }: Props) {
                         {t(`products.${p.key}.description`)}
                       </p>
 
-                      {/* Footer: price (left) + CTA (right) — hairline divider above */}
+                      {/* Footer: price (left) + CTA (right) — hairline divider above.
+                          mt-auto pushes the footer to the bottom of the card
+                          body so cards in the same row stay equal-height; the
+                          larger pt-6 + body padding give the card vertical
+                          breathing room. */}
                       <div
-                        className="mt-auto pt-4 flex items-center justify-between gap-3"
+                        className="mt-auto pt-6 flex items-center justify-between gap-3"
                         style={{ borderTop: '1px solid var(--line)' }}
                       >
                         <div className="flex flex-col leading-tight">
