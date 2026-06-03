@@ -124,10 +124,9 @@ export default function HomePage() {
   // Pull gallery alt strings from i18n (alts[] array — checklist item #26)
   // Real installation photos from /public/photos/ — mixed watermarked + clean
   const galleryAlts = t.raw('gallery.alts') as string[] | undefined
-  // Yellow-bordered customer install photos only — close-up/borderless
-  // shots (14/15/16/17/18/35) are excluded so the gallery reads as a
-  // consistent "real-world customer install" grid.
-  const PHOTO_IDS = [12, 13, 32, 33, 34, 36, 38, 41, 44, 45, 47, 49] as const
+  // Yellow-bordered customer install photos only — confirmed visually.
+  // Excluded for being borderless: 12, 13, 14, 15, 16, 17, 18, 35.
+  const PHOTO_IDS = [32, 33, 34, 36, 38, 41, 42, 43, 44, 45, 47, 49] as const
   const galleryImages = PHOTO_IDS.map((id, i) => ({
     src: `/photos/${id}.jpg`,
     alt: (Array.isArray(galleryAlts) && galleryAlts[i]) || t('gallery.altTexts.newInstallation'),
@@ -294,18 +293,16 @@ export default function HomePage() {
                           className="w-full h-full object-cover"
                           loading="lazy"
                         />
-                        <div className="absolute top-3 left-3 w-8 h-8 rounded-md flex items-center justify-center text-xs font-extrabold" style={{ background: i % 2 === 0 ? 'var(--brand-yellow)' : 'var(--brand-blue)', color: i % 2 === 0 ? 'var(--brand-charcoal)' : '#fff' }}>
-                          0{i + 1}
-                        </div>
                       </div>
                       <div className="p-4 flex flex-col flex-1">
                         <h4 className="text-base font-extrabold mb-2" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.02em', lineHeight: 1.25 }}>{t(`products.items.${key}.name`)}</h4>
-                        {/* Pricing — primary value signal */}
+                        {/* Pricing — primary value signal. Coloured with the
+                            brand electric blue so it stands out from body text. */}
                         <div className="mb-4">
                           <h6 className="text-[10px] font-bold uppercase tracking-widest mb-0.5" style={{ color: 'var(--brand-text-muted)' }}>Harga dari</h6>
                           <div className="flex items-baseline gap-1">
-                            <span className="text-xs font-bold leading-none" style={{ color: 'var(--brand-charcoal)' }}>RM</span>
-                            <span className="text-2xl font-extrabold leading-none" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.03em' }}>{products[i].priceFrom?.toLocaleString('en-MY')}</span>
+                            <span className="text-xs font-bold leading-none" style={{ color: 'var(--brand-blue-dark)' }}>RM</span>
+                            <span className="text-2xl font-extrabold leading-none" style={{ color: 'var(--brand-blue-dark)', letterSpacing: '-0.03em' }}>{products[i].priceFrom?.toLocaleString('en-MY')}</span>
                             <span className="text-[11px] font-medium ml-0.5" style={{ color: 'var(--brand-text-muted)' }}>/ {products[i].unit ?? 'unit'}</span>
                           </div>
                         </div>
@@ -378,7 +375,7 @@ export default function HomePage() {
               </FadeSection>
               <FadeSection delay={150}>
                 <div className="text-center md:text-left">
-                  <h5 className="body-h5 text-base font-semibold mb-6" style={{ color: 'var(--brand-charcoal)', lineHeight: '1.6' }}>{t('riskProblem.solutionCta')}</h5>
+                  <h5 className="body-h5 text-base mb-6" style={{ color: 'var(--brand-charcoal)', lineHeight: '1.6', fontWeight: 400 }}>{t('riskProblem.solutionCta')}</h5>
                   <WhatsAppClickTracker
                     label="risk"
                     href={WA_LINK}

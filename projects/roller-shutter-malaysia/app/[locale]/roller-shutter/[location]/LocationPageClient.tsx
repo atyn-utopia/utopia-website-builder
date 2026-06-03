@@ -130,7 +130,7 @@ export default function LocationPage() {
 
   const galleryAlts = t.raw('gallery.alts') as string[] | undefined
   // Yellow-bordered customer install photos only (matches homepage filter).
-  const PHOTO_IDS = [12, 13, 32, 33, 34, 36, 38, 41, 44, 45, 47, 49] as const
+  const PHOTO_IDS = [32, 33, 34, 36, 38, 41, 42, 43, 44, 45, 47, 49] as const
   const galleryImages = PHOTO_IDS.map((id, i) => ({
     src: `/photos/${id}.jpg`,
     alt:
