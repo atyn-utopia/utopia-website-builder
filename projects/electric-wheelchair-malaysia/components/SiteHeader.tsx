@@ -1,71 +1,254 @@
-// Shared header used by homepage, location pages, blog listing, blog post.
-// The WhatsApp CTA carries `nav-cta` so globals.css can hide it on mobile
-// AND a styled-jsx :global(.nav-cta) shim (NavCtaGlobalStyle) keeps the
-// sizing intact when other components render an element with that class.
-import Link from 'next/link'
-import { getTranslations } from 'next-intl/server'
-import { LanguageSwitcher } from '@/components/LanguageSwitcher'
-import NavCtaGlobalStyle from '@/components/NavCtaGlobalStyle'
-import type { Locale } from '@/i18n/routing'
+// Sticky white header that mirrors sewa-excavator's chrome 1:1: brand logo +
+// horizontal nav in the centre, language switcher + WhatsApp CTA on the right,
+// burger menu on mobile. Uses electric-wheelchair's nav.* keys and brand
+// colours (#1B2D5B navy ink, #F47B20 orange accent, #25D366 WA green).
+'use client';
 
-function waRedirect(locale: string) {
-  return `/${locale}/redirect-whatsapp-1`
+import Link from 'next/link';
+import { useState } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { siteConfig } from '@/config/site';
+import type { Locale } from '@/i18n/routing';
+
+function WaIcon({ size = 16 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-1.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+    </svg>
+  );
 }
 
-export default async function SiteHeader({ locale }: { locale: Locale }) {
-  const tNav = await getTranslations({ locale, namespace: 'nav' })
-  const waHref = waRedirect(locale)
+// page.tsx still passes a locale prop. Accept it for back-compat but read
+// useLocale() at runtime so this can be a client component (needed for burger
+// menu state).
+export default function SiteHeader(_props?: { locale?: Locale }) {
+  const t = useTranslations('nav');
+  const locale = useLocale();
+  const [open, setOpen] = useState(false);
+  const close = () => setOpen(false);
+  const waHref = `/${locale}/redirect-whatsapp-1`;
+  const productSlug = siteConfig.productSlug;
+
+  const navItems = [
+    { href: `/${locale}`, label: t('home') },
+    { href: `/${locale}#products`, label: t('products') },
+    { href: `/${locale}#services`, label: t('services') },
+    { href: `/${locale}#reviews`, label: t('reviews') },
+    { href: `/${locale}#locations`, label: t('locations') },
+    { href: `/${locale}/blog`, label: t('blog') },
+  ];
 
   return (
-    <header
-      className="sticky top-0 z-50"
-      style={{
-        background: 'rgba(27,45,91,0.96)',
-        backdropFilter: 'blur(12px)',
-        borderBottom: '1px solid rgba(255,255,255,0.08)',
-      }}
-    >
-      <NavCtaGlobalStyle />
-      <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between gap-4">
-        <Link
-          href={`/${locale}`}
-          className="flex items-center gap-2 shrink-0"
-          aria-label={tNav('logoAlt')}
-        >
-          {/* Logo icon = the favicon (/icon.svg, served from app/icon.svg by Next.js)
-              so the header logo and favicon always match. */}
+    <header className="ewc-header">
+      <div className="ewc-header__inner">
+        <Link href={`/${locale}`} className="ewc-header__brand" aria-label={t('brandName')}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/icon.svg" alt={tNav('logoAlt')} className="w-8 h-8" />
-          <span className="hidden sm:inline font-extrabold text-base text-white tracking-tight whitespace-nowrap">
-            {tNav('brandName')}
-          </span>
+          <img src="/icon.svg" alt={t('logoAlt')} className="ewc-header__logo" />
+          <span className="ewc-header__brand-text">{t('brandName')}</span>
         </Link>
 
-        <nav className="hidden lg:flex flex-1 items-center justify-center gap-6 text-sm font-semibold text-white/85">
-          <Link href={`/${locale}`} className="hover:text-white">{tNav('home')}</Link>
-          <a href={`/${locale}#services`} className="hover:text-white">{tNav('products')}</a>
-          <a href={`/${locale}#locations`} className="hover:text-white">{tNav('locations')}</a>
-          <a href={`/${locale}#reviews`} className="hover:text-white">{tNav('reviews')}</a>
-          <Link href={`/${locale}/blog`} className="hover:text-white">{tNav('blog')}</Link>
+        <nav className="ewc-header__nav ewc-header__nav--desktop" aria-label="Primary">
+          {navItems.map((item) => (
+            <Link key={item.href} href={item.href}>{item.label}</Link>
+          ))}
         </nav>
 
-        <div className="flex items-center gap-3">
-          <LanguageSwitcher />
-          <a
+        <button
+          type="button"
+          className="ewc-header__burger"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          aria-controls="ewc-mobile-nav"
+          onClick={() => setOpen((v) => !v)}
+        >
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+        </button>
+
+        <div className="ewc-header__actions">
+          <div className="ewc-header__lang"><LanguageSwitcher /></div>
+          <Link
             href={waHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="nav-cta wa-btn inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-white"
-            style={{ background: '#25D366' }}
+            className="ewc-header__cta"
           >
-            {/* Always-visible WhatsApp glyph + label that hides on tight viewports. */}
-            <svg viewBox="0 0 24 24" className="w-4 h-4 shrink-0" fill="currentColor" aria-hidden="true">
-              <path d="M20.52 3.48A11.86 11.86 0 0012.04 0C5.47 0 .12 5.35.12 11.92c0 2.1.55 4.15 1.6 5.96L0 24l6.28-1.65a11.9 11.9 0 005.75 1.47h.01c6.57 0 11.93-5.35 11.93-11.92 0-3.19-1.24-6.18-3.45-8.42zM12.04 21.8h-.01a9.88 9.88 0 01-5.03-1.38l-.36-.21-3.72.97.99-3.63-.23-.37a9.85 9.85 0 01-1.51-5.25c0-5.46 4.45-9.9 9.92-9.9 2.65 0 5.14 1.03 7.01 2.9a9.87 9.87 0 012.9 7.01c0 5.46-4.44 9.86-9.96 9.86zm5.68-7.41c-.31-.16-1.84-.91-2.12-1.01-.28-.1-.49-.16-.69.16-.2.31-.8 1.01-.98 1.22-.18.2-.36.23-.67.08-.31-.16-1.31-.48-2.49-1.54-.92-.82-1.54-1.84-1.72-2.15-.18-.31-.02-.48.14-.64.14-.14.31-.36.47-.54.16-.18.21-.31.31-.51.1-.2.05-.38-.03-.54-.08-.16-.69-1.66-.95-2.28-.25-.6-.51-.52-.69-.53-.18 0-.39-.02-.59-.02-.2 0-.54.08-.83.38-.28.31-1.08 1.06-1.08 2.58s1.11 3 1.27 3.21c.16.2 2.19 3.35 5.31 4.7.74.32 1.32.51 1.77.66.74.24 1.42.21 1.95.13.6-.09 1.84-.75 2.1-1.48.26-.73.26-1.35.18-1.48-.08-.13-.28-.2-.59-.36z" />
-            </svg>
-            <span className="hidden md:inline">{tNav('whatsappCta')}</span>
-          </a>
+            <WaIcon size={15} />
+            <span className="ewc-header__cta-label">{t('whatsappCta')}</span>
+          </Link>
         </div>
       </div>
+
+      <div id="ewc-mobile-nav" className={`ewc-header__drawer ${open ? 'is-open' : ''}`} aria-hidden={!open}>
+        <nav className="ewc-header__nav--mobile" aria-label="Mobile primary">
+          {navItems.map((item) => (
+            <Link key={item.href} href={item.href} onClick={close}>{item.label}</Link>
+          ))}
+          <Link href={`/${locale}/${productSlug}/kuala-lumpur`} onClick={close}>
+            {t('locations')} — Kuala Lumpur
+          </Link>
+        </nav>
+        <div className="ewc-header__mobile-actions">
+          <LanguageSwitcher />
+          <Link
+            href={waHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ewc-header__cta ewc-header__cta--mobile"
+            onClick={close}
+          >
+            <WaIcon size={16} />
+            {t('whatsappCta')}
+          </Link>
+        </div>
+      </div>
+
+      <style jsx>{`
+        .ewc-header {
+          position: sticky;
+          top: 0;
+          z-index: 40;
+          background: rgba(255,255,255,0.94);
+          backdrop-filter: saturate(180%) blur(10px);
+          -webkit-backdrop-filter: saturate(180%) blur(10px);
+          border-bottom: 1px solid rgba(15,27,58,0.08);
+        }
+        .ewc-header__inner {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 14px;
+          padding: 12px clamp(14px, 2.5vw, 28px);
+          max-width: 1200px;
+          margin: 0 auto;
+          min-height: 64px;
+        }
+        .ewc-header__brand {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          text-decoration: none;
+          color: #1B2D5B;
+          flex-shrink: 0;
+        }
+        .ewc-header__logo { width: 32px; height: 32px; }
+        .ewc-header__brand-text {
+          font-weight: 800;
+          font-size: 15px;
+          letter-spacing: -0.01em;
+          color: #1B2D5B;
+          white-space: nowrap;
+        }
+        .ewc-header__nav { display: none; }
+        .ewc-header__nav--desktop {
+          flex: 1;
+          justify-content: center;
+          align-items: center;
+          gap: 26px;
+        }
+        .ewc-header__actions {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          flex-shrink: 0;
+        }
+        .ewc-header__cta {
+          display: inline-flex;
+          align-items: center;
+          gap: 7px;
+          padding: 0 14px;
+          height: 40px;
+          background: #25D366;
+          color: #fff;
+          font-weight: 700;
+          font-size: 13px;
+          border-radius: 999px;
+          text-decoration: none;
+          transition: background 0.18s ease, transform 0.18s ease;
+          white-space: nowrap;
+        }
+        .ewc-header__cta:hover { background: #1EBE57; transform: translateY(-1px); }
+        .ewc-header__cta-label { display: inline; }
+        .ewc-header__burger {
+          display: inline-flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: 4px;
+          width: 40px;
+          height: 40px;
+          padding: 0 9px;
+          background: transparent;
+          border: 1px solid rgba(15,27,58,0.18);
+          border-radius: 10px;
+          cursor: pointer;
+        }
+        .ewc-header__burger span {
+          display: block;
+          height: 2px;
+          width: 100%;
+          background: #1B2D5B;
+          border-radius: 2px;
+          transition: transform 0.18s ease, opacity 0.18s ease;
+        }
+        .ewc-header__burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .ewc-header__burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+        .ewc-header__burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+        .ewc-header__drawer {
+          display: none;
+          background: #fff;
+          border-top: 1px solid rgba(15,27,58,0.08);
+          padding: 14px clamp(14px, 2.5vw, 28px) 20px;
+        }
+        .ewc-header__drawer.is-open { display: block; }
+        .ewc-header__nav--mobile { display: flex; flex-direction: column; }
+        .ewc-header__mobile-actions {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          padding-top: 16px;
+          margin-top: 12px;
+          border-top: 1px solid rgba(15,27,58,0.08);
+        }
+        .ewc-header__cta--mobile { justify-content: center; height: 46px; width: 100%; }
+
+        @media (min-width: 960px) {
+          .ewc-header__nav--desktop { display: inline-flex; }
+          .ewc-header__burger { display: none; }
+          .ewc-header__drawer { display: none !important; }
+        }
+        @media (max-width: 959px) {
+          .ewc-header__cta { display: none; }
+          .ewc-header__brand-text { display: none; }
+        }
+        @media (max-width: 480px) {
+          .ewc-header__lang { display: none; }
+        }
+      `}</style>
+
+      <style jsx global>{`
+        .ewc-header__nav--desktop a {
+          color: #1B2D5B;
+          font-weight: 600;
+          font-size: 14px;
+          letter-spacing: -0.005em;
+          text-decoration: none;
+          white-space: nowrap;
+          transition: color 0.18s ease;
+        }
+        .ewc-header__nav--desktop a:hover { color: #F47B20; }
+        .ewc-header__nav--mobile a {
+          padding: 13px 4px;
+          font-weight: 700;
+          font-size: 15px;
+          color: #1B2D5B;
+          text-decoration: none;
+          border-bottom: 1px solid rgba(15,27,58,0.08);
+        }
+        .ewc-header__nav--mobile a:last-child { border-bottom: none; }
+        .ewc-header__mobile-actions .lsw-toggle { justify-content: center; }
+      `}</style>
     </header>
-  )
+  );
 }
