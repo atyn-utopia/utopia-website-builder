@@ -49,6 +49,7 @@ export default async function HomePage({ params }: Props) {
   const tHero = await getTranslations({ locale, namespace: 'home.hero' })
   const tUsp = await getTranslations({ locale, namespace: 'home.usp' })
   const tFaq = await getTranslations({ locale, namespace: 'home.faq' })
+  const tBrands = await getTranslations({ locale, namespace: 'home.paintBrands' })
   const tRoot = await getTranslations({ locale })
   const imageAlt = tRoot('imageAlt')
 
@@ -56,9 +57,9 @@ export default async function HomePage({ params }: Props) {
   const waHref = `/${locale}/redirect-whatsapp-1`
 
   const uspItems = [
-    { title: tUsp('usp1Title'), sub: tUsp('usp1Sub'), icon: 'clock' as const },
-    { title: tUsp('usp2Title'), sub: tUsp('usp2Sub'), icon: 'paint' as const },
-    { title: tUsp('usp3Title'), sub: tUsp('usp3Sub'), icon: 'shield' as const },
+    { title: tUsp('usp1Title'), sub: tUsp('usp1Sub'), icon: 'fast' as const },
+    { title: tUsp('usp2Title'), sub: tUsp('usp2Sub'), icon: 'quality' as const },
+    { title: tUsp('usp3Title'), sub: tUsp('usp3Sub'), icon: 'value' as const },
   ]
 
   const faqs = [1, 2, 3, 4, 5, 6, 7, 8].map((n) => ({
@@ -82,38 +83,41 @@ export default async function HomePage({ params }: Props) {
         className="relative overflow-hidden"
         style={{
           background:
-            'linear-gradient(135deg, rgba(20,28,48,0.92) 0%, rgba(20,28,48,0.88) 50%, rgba(20,28,48,0.94) 100%), url(/images/hero-bg.jpg) center/cover no-repeat',
+            'linear-gradient(135deg, #1F2A6B 0%, #16204F 60%, #0F1840 100%)',
         }}
       >
         <div
           className="hero-bg"
           role="img"
           aria-label={imageAlt}
-          style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}
+          style={{
+            position: 'absolute', inset: 0, pointerEvents: 'none',
+            backgroundImage: 'radial-gradient(circle at 80% 20%, rgba(255,210,63,0.18), transparent 55%), radial-gradient(circle at 15% 80%, rgba(233,30,99,0.18), transparent 55%)',
+          }}
         />
-        <div className="relative z-10 max-w-4xl mx-auto px-6 pt-14 md:pt-16 pb-12 text-center text-white">
-          <h6 className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-3.5 py-1 text-[11px] font-semibold uppercase tracking-wider mb-4">
+        <div className="relative z-10 max-w-5xl mx-auto px-6 pt-12 md:pt-14 pb-0 text-center text-white">
+          <h6 className="inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-[11px] font-semibold uppercase tracking-wider mb-4" style={{ background: 'rgba(255,210,63,0.18)', border: '1px solid rgba(255,210,63,0.36)', color: '#FFD23F' }}>
             <span className="h-2 w-2 rounded-full" style={{ background: '#FFD23F' }} aria-hidden="true" />
             {tHero('badgeCertified')} · {tHero('badgeCities')}
           </h6>
           <h1
-            className="font-extrabold leading-[1.1] tracking-tight mx-auto"
-            style={{ fontSize: 'clamp(1.75rem, 4.4vw, 2.75rem)', letterSpacing: '-0.03em' }}
+            className="font-extrabold leading-[1.05] tracking-tight mx-auto"
+            style={{ fontSize: 'clamp(2rem, 5.2vw, 3.25rem)', letterSpacing: '-0.03em' }}
           >
             {tHero('headline')}{' '}
             <span style={{ color: '#FFD23F' }}>{tHero('headlineHighlight')}</span>
           </h1>
-          <h2 className="mt-4 text-sm md:text-base text-white/80 max-w-xl mx-auto font-normal" style={{ lineHeight: 1.6 }}>
+          <h2 className="mt-4 text-sm md:text-base text-white/80 max-w-2xl mx-auto font-normal" style={{ lineHeight: 1.6 }}>
             {tHero('subheadline')}
           </h2>
-          <div className="mt-6 flex flex-col items-center gap-3">
+          <div className="mt-7 flex flex-col items-center gap-3">
             <WhatsAppClickTracker
               phoneNumber={phone}
               href={waHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white"
-              style={{ background: '#25D366' }}
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-base font-bold text-white shadow-lg"
+              style={{ background: '#25D366', boxShadow: '0 10px 30px rgba(37,211,102,0.35)' }}
             >
               <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current shrink-0" aria-hidden="true">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
@@ -125,68 +129,93 @@ export default async function HomePage({ params }: Props) {
               {tHero('ctaSubtext').split(' · ').map((part, i) => (
                 <span
                   key={i}
-                  className="inline-flex items-center rounded-full bg-white/10 border border-white/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white/70"
+                  className="inline-flex items-center rounded-full bg-white/10 border border-white/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white/75"
                 >
                   {part}
                 </span>
               ))}
             </div>
           </div>
+
+          {/* Painter photo + floating brand badges */}
+          <div className="relative mt-10 mx-auto" style={{ maxWidth: 480 }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/painters/painter-roller.png"
+              alt={tHero('heroAlt')}
+              className="mx-auto block"
+              style={{ width: 'min(380px, 78%)', filter: 'drop-shadow(0 18px 38px rgba(0,0,0,0.45))' }}
+            />
+            <div className="hidden md:block absolute -left-2 top-10" style={{ width: 130 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/usp/badge-5jam.png" alt="5 Jam Siap Cat Rumah" style={{ width: '100%', filter: 'drop-shadow(0 6px 18px rgba(0,0,0,0.35))' }} />
+            </div>
+            <div className="hidden md:block absolute -right-2 top-4" style={{ width: 130 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/usp/badge-180warna.png" alt="180 Pilihan Warna" style={{ width: '100%', filter: 'drop-shadow(0 6px 18px rgba(0,0,0,0.35))' }} />
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* 3-POINT USP BAR — one contained panel, three cells (matches checklist) */}
+      {/* 3-POINT USP BAR — brand PNG icons inside a single .usp-panel container */}
       <section
-        className="px-6 py-8 md:py-10"
-        style={{ background: '#fff', borderBottom: '1px solid rgba(20,28,48,0.10)' }}
+        className="px-6 py-10 md:py-12"
+        style={{ background: '#fff', borderBottom: '1px solid var(--line)' }}
         aria-label="Why choose us"
       >
         <div className="max-w-6xl mx-auto">
           <div
             className="usp-panel rounded-2xl"
             style={{
-              background: '#FAF7F2',
-              border: '1px solid rgba(20,28,48,0.10)',
+              background: 'var(--brand-cream)',
+              border: '1px solid var(--line)',
               padding: '20px',
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-              gap: '12px',
+              gap: '14px',
             }}
           >
             {uspItems.map((item) => (
               <div
                 key={item.icon}
-                className="usp-cell flex flex-col md:flex-row md:items-center items-center text-center md:text-left gap-3 md:gap-4 p-3 md:p-4 rounded-xl"
-                style={{ background: '#fff', border: '1px solid rgba(20,28,48,0.06)' }}
+                className="usp-cell flex flex-col md:flex-row md:items-center items-center text-center md:text-left gap-3 md:gap-4 p-4 rounded-xl"
+                style={{ background: '#fff', border: '1px solid var(--line)' }}
               >
                 <span
-                  className="shrink-0 inline-flex items-center justify-center w-12 h-12 rounded-xl"
-                  style={{ background: 'rgba(20,28,48,0.06)', color: '#142C50' }}
+                  className="shrink-0 inline-flex items-center justify-center"
+                  style={{ width: 56, height: 56 }}
                   aria-hidden="true"
                 >
-                  {item.icon === 'clock' && (
-                    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="12" r="9" />
-                      <path d="M12 7v5l3 2" />
-                    </svg>
-                  )}
-                  {item.icon === 'paint' && (
-                    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M19 7V3H5v8h14V7zM12 11v4M9 21h6v-6H9v6z" />
-                    </svg>
-                  )}
-                  {item.icon === 'shield' && (
-                    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6l8-3z" />
-                      <path d="M9 12l2 2 4-4" />
-                    </svg>
-                  )}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={`/images/usp/${item.icon}.png`} alt="" style={{ width: 56, height: 56, objectFit: 'contain' }} />
                 </span>
                 <div>
-                  <h5 className="text-sm font-bold" style={{ color: '#142C50' }}>{item.title}</h5>
-                  <h5 className="text-xs font-normal mt-0.5" style={{ color: '#5B6478', lineHeight: 1.6 }}>{item.sub}</h5>
+                  <h5 className="text-sm font-bold" style={{ color: 'var(--brand-ink)' }}>{item.title}</h5>
+                  <h5 className="text-xs font-normal mt-0.5" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{item.sub}</h5>
                 </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PAINT BRANDS STRIP */}
+      <section className="px-6 py-10" style={{ background: '#fff', borderBottom: '1px solid var(--line)' }} aria-labelledby="brands-heading">
+        <div className="max-w-6xl mx-auto text-center">
+          <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--muted)' }}>{tBrands('tag')}</h5>
+          <h3 id="brands-heading" className="text-lg md:text-xl font-bold" style={{ color: 'var(--brand-ink)' }}>{tBrands('heading')}</h3>
+          <h5 className="text-xs font-normal mt-2 max-w-2xl mx-auto" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{tBrands('subheading')}</h5>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+            {[
+              { src: '/images/paint-brands/nippon.png', alt: 'Nippon Paint' },
+              { src: '/images/paint-brands/jotun.png', alt: 'Jotun' },
+              { src: '/images/paint-brands/dulux.png', alt: 'Dulux' },
+              { src: '/images/paint-brands/kcc.png', alt: 'KCC Paint' },
+              { src: '/images/paint-brands/sissons.png', alt: 'Sissons' },
+            ].map((b) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img key={b.alt} src={b.src} alt={b.alt} style={{ height: 48, width: 'auto', objectFit: 'contain', filter: 'saturate(0.95)' }} loading="lazy" />
             ))}
           </div>
         </div>

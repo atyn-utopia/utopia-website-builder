@@ -29,7 +29,7 @@ const GoogleLogo = () => (
 )
 
 const ChevronIcon = ({ open }: { open: boolean }) => (
-  <svg viewBox="0 0 20 20" className="w-5 h-5 shrink-0 transition-transform duration-300" style={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)', color: '#142C50' }} fill="none" aria-hidden="true">
+  <svg viewBox="0 0 20 20" className="w-5 h-5 shrink-0 transition-transform duration-300" style={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)', color: 'var(--brand-ink)' }} fill="none" aria-hidden="true">
     <path d="M5 8l5 5 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 )
@@ -42,29 +42,49 @@ function waRedirect(locale: string, message?: string, location?: string) {
   return `/${locale}/redirect-whatsapp-1${qs ? `?${qs}` : ''}`
 }
 
+// 8 products — slug aligns with key in messages, image points to the brand
+// photo in /public/images/products.
 const productKeys = [
-  { key: 'interior', slug: 'interior' },
-  { key: 'exterior', slug: 'exterior' },
-  { key: 'ceiling', slug: 'ceiling' },
-  { key: 'epoxy', slug: 'epoxy' },
-  { key: 'fence', slug: 'fence' },
-  { key: 'weathershield', slug: 'weathershield' },
+  { key: 'interior', slug: 'interior', img: '/images/products/interior-1.png' },
+  { key: 'bedroom', slug: 'bedroom', img: '/images/products/bedroom-1.png' },
+  { key: 'kitchen', slug: 'kitchen', img: '/images/products/kitchen-1.png' },
+  { key: 'bathroom', slug: 'bathroom', img: '/images/products/bathroom-1.png' },
+  { key: 'exterior', slug: 'exterior', img: '/images/products/exterior-1.png' },
+  { key: 'weathershield', slug: 'weathershield', img: '/images/products/exterior-2.png' },
+  { key: 'marble', slug: 'marble', img: '/images/products/marble-1.png' },
+  { key: 'texture', slug: 'texture', img: '/images/products/texture-1.png' },
+  { key: 'decor3d', slug: 'decor3d', img: '/images/products/decor3d-1.png' },
 ]
 
 const reasonKeys = ['reason1', 'reason2', 'reason3', 'reason4', 'reason5', 'reason6']
 const faqIndexes = [1, 2, 3, 4, 5, 6, 7, 8]
 const reviewIndexes = [1, 2, 3, 4, 5, 6]
 
+// Before/After pairs — chosen so the visual story reads cleanly.
+const beforeAfterPairs = [
+  { before: '/images/before-after/before-1.png', after: '/images/gallery/job-88.png', captionKey: 'pair2Caption' },
+  { before: '/images/before-after/before-2.png', after: '/images/gallery/job-85.png', captionKey: 'pair3Caption' },
+  { before: '/images/before-after/before-3.png', after: '/images/gallery/job-80.png', captionKey: 'pair1Caption' },
+] as const
+
+// Real customer work photos — 12 cells exactly so the grid stays full at every
+// breakpoint (2/3/4 cols all divide 12).
+const galleryImages = [
+  'job-80', 'job-82', 'job-83', 'job-85',
+  'job-86', 'job-87', 'job-88', 'job-89',
+  'job-90', 'job-92', 'job-94', 'job-96',
+].map((n) => `/images/gallery/${n}.png`)
+
 function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false)
   return (
-    <div style={{ borderBottom: '1px solid rgba(20,28,48,0.10)' }}>
-      <button onClick={() => setOpen((o) => !o)} className="w-full flex items-center justify-between py-4 text-left cursor-pointer text-sm font-semibold" style={{ color: '#142C50' }} aria-expanded={open}>
+    <div style={{ borderBottom: '1px solid var(--line)' }}>
+      <button onClick={() => setOpen((o) => !o)} className="w-full flex items-center justify-between py-4 text-left cursor-pointer text-sm font-semibold" style={{ color: 'var(--brand-ink)' }} aria-expanded={open}>
         <span className="pr-4">{q}</span>
         <ChevronIcon open={open} />
       </button>
       <div style={{ maxHeight: open ? '500px' : '0px', overflow: 'hidden', transition: 'max-height 0.35s ease' }}>
-        <h5 className="pb-4 text-sm font-normal" style={{ color: '#5B6478', lineHeight: 1.6 }}>{a}</h5>
+        <h5 className="pb-4 text-sm font-normal" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{a}</h5>
       </div>
     </div>
   )
@@ -73,11 +93,11 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 function LocationAccordion({ regionName, cities, citiesLabel, defaultOpen, locale }: { regionName: string; cities: { slug: string; name: string }[]; citiesLabel: string; defaultOpen: boolean; locale: string }) {
   const [open, setOpen] = useState(defaultOpen)
   return (
-    <div className="rounded-xl overflow-hidden" style={{ border: open ? '1.5px solid #142C50' : '1.5px solid rgba(20,28,48,0.12)', background: '#fff' }}>
-      <button onClick={() => setOpen((o) => !o)} className="w-full flex items-center justify-between px-5 py-3.5 text-left cursor-pointer text-sm font-semibold" style={{ color: '#142C50', borderLeft: open ? '4px solid #142C50' : '4px solid transparent' }} aria-expanded={open}>
+    <div className="rounded-xl overflow-hidden" style={{ border: open ? '1.5px solid var(--brand-ink)' : '1.5px solid var(--line)', background: '#fff' }}>
+      <button onClick={() => setOpen((o) => !o)} className="w-full flex items-center justify-between px-5 py-3.5 text-left cursor-pointer text-sm font-semibold" style={{ color: 'var(--brand-ink)', borderLeft: open ? '4px solid var(--brand-yellow)' : '4px solid transparent' }} aria-expanded={open}>
         <span>{regionName}</span>
         <div className="flex items-center gap-2">
-          <span className="text-xs font-normal" style={{ color: '#5B6478' }}>{cities.length} {citiesLabel}</span>
+          <span className="text-xs font-normal" style={{ color: 'var(--muted)' }}>{cities.length} {citiesLabel}</span>
           <ChevronIcon open={open} />
         </div>
       </button>
@@ -85,7 +105,7 @@ function LocationAccordion({ regionName, cities, citiesLabel, defaultOpen, local
         <div className="px-5 pb-5 pt-1">
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
             {cities.map((city) => (
-              <a key={city.slug} href={`/${locale}/cat-rumah/${city.slug}`} className="text-xs font-normal px-3 py-1.5 rounded-lg hover:opacity-80" style={{ background: 'rgba(20,28,48,0.06)', color: '#142C50' }}>
+              <a key={city.slug} href={`/${locale}/cat-rumah/${city.slug}`} className="text-xs font-normal px-3 py-1.5 rounded-lg hover:opacity-80" style={{ background: 'var(--brand-cream)', color: 'var(--brand-ink)' }}>
                 {city.name}
               </a>
             ))}
@@ -120,7 +140,7 @@ type Props = { phoneNumber: string }
 export default function HomePageClient({ phoneNumber }: Props) {
   const locale = useLocale()
   const t = useTranslations('home')
-  const tBlog = useTranslations('blog')
+  const tBA = useTranslations('home.beforeAfter')
   const WA_LINK = waRedirect(locale)
 
   const regionGroups: { name: string; nameMs: string; nameZh: string; cities: string[] }[] = [
@@ -132,52 +152,101 @@ export default function HomePageClient({ phoneNumber }: Props) {
   return (
     <main>
       {/* PRODUCTS */}
-      <section id="products" className="py-16 px-6" style={{ background: '#FAF7F2' }} aria-labelledby="products-heading">
+      <section id="products" className="py-16 px-6" style={{ background: 'var(--brand-cream)' }} aria-labelledby="products-heading">
         <div className="max-w-6xl mx-auto">
           <FadeSection>
             <div className="text-center mb-10">
-              <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: '#5B6478' }}>{t('products.tag')}</h5>
-              <h3 id="products-heading" className="text-2xl md:text-3xl font-bold" style={{ color: '#142C50' }}>{t('products.heading')}</h3>
-              <h5 className="text-sm font-normal mt-2" style={{ color: '#5B6478', lineHeight: 1.6 }}>{t('products.subheading')}</h5>
+              <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{t('products.tag')}</h5>
+              <h3 id="products-heading" className="text-2xl md:text-3xl font-extrabold" style={{ color: 'var(--brand-ink)' }}>{t('products.heading')}</h3>
+              <h5 className="text-sm font-normal mt-2 max-w-2xl mx-auto" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{t('products.subheading')}</h5>
             </div>
           </FadeSection>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {productKeys.map((p, i) => (
               <ProductImpressionTracker key={p.key} slug={p.slug}>
-                <FadeSection delay={i * 50}>
-                  <div className="bg-white rounded-xl p-5 h-full flex flex-col" style={{ border: '1px solid rgba(20,28,48,0.10)' }}>
-                    <h3 className="text-sm font-bold mb-1" style={{ color: '#142C50' }}>{t(`products.${p.key}.title`)}</h3>
-                    <h5 className="text-xs font-normal mb-4 flex-1" style={{ color: '#5B6478', lineHeight: 1.6 }}>{t(`products.${p.key}.description`)}</h5>
-                    <div className="mb-3">
-                      <div className="text-sm font-extrabold" style={{ color: '#142C50' }}>{t(`products.${p.key}.price`)}</div>
+                <FadeSection delay={i * 40}>
+                  <div className="bg-white rounded-2xl overflow-hidden h-full flex flex-col" style={{ border: '1px solid var(--line)', boxShadow: '0 8px 24px rgba(31, 42, 107, 0.05)' }}>
+                    <div className="relative aspect-[4/3] overflow-hidden" style={{ background: 'var(--brand-cream)' }}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={p.img} alt={t(`products.${p.key}.title`)} className="w-full h-full object-cover" loading="lazy" />
+                      <div className="absolute top-3 right-3 inline-flex items-center rounded-full px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wider" style={{ background: 'var(--brand-yellow)', color: 'var(--brand-ink)' }}>
+                        {t(`products.${p.key}.price`)}
+                      </div>
                     </div>
-                    <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-white" style={{ background: '#25D366' }}>
-                      <WAIcon /> {t('products.bookNow')}
-                    </WhatsAppClickTracker>
+                    <div className="p-5 flex flex-col flex-1">
+                      <h3 className="text-base font-extrabold" style={{ color: 'var(--brand-ink)' }}>{t(`products.${p.key}.title`)}</h3>
+                      <h5 className="text-sm font-normal mt-1 flex-1" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{t(`products.${p.key}.description`)}</h5>
+                      <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full text-xs font-semibold text-white" style={{ background: '#25D366' }}>
+                        <WAIcon /> {t('products.bookNow')}
+                      </WhatsAppClickTracker>
+                    </div>
                   </div>
                 </FadeSection>
               </ProductImpressionTracker>
             ))}
           </div>
-          <h5 className="text-center text-xs font-normal mt-5" style={{ color: '#5B6478', lineHeight: 1.6 }}>{t('products.disclaimer')}</h5>
+          <h5 className="text-center text-xs font-normal mt-6 max-w-2xl mx-auto" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{t('products.disclaimer')}</h5>
+        </div>
+      </section>
+
+      {/* BEFORE & AFTER */}
+      <section className="py-16 px-6" style={{ background: '#fff' }} aria-labelledby="ba-heading">
+        <div className="max-w-6xl mx-auto">
+          <FadeSection>
+            <div className="text-center mb-10">
+              <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{tBA('tag')}</h5>
+              <h3 id="ba-heading" className="text-2xl md:text-3xl font-extrabold" style={{ color: 'var(--brand-ink)' }}>{tBA('heading')}</h3>
+              <h5 className="text-sm font-normal mt-2 max-w-2xl mx-auto" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{tBA('subheading')}</h5>
+            </div>
+          </FadeSection>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {beforeAfterPairs.map((pair, i) => (
+              <FadeSection key={i} delay={i * 80}>
+                <figure className="rounded-2xl overflow-hidden" style={{ background: 'var(--brand-cream)', border: '1px solid var(--line)' }}>
+                  <div className="grid grid-cols-2 gap-1" style={{ background: 'var(--line-strong)' }}>
+                    <div className="relative aspect-square overflow-hidden" style={{ background: '#fff' }}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={pair.before} alt={tBA('before')} className="w-full h-full object-cover" loading="lazy" />
+                      <span className="absolute top-2 left-2 text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full" style={{ background: 'var(--brand-ink)', color: '#fff' }}>{tBA('before')}</span>
+                    </div>
+                    <div className="relative aspect-square overflow-hidden" style={{ background: '#fff' }}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={pair.after} alt={tBA('after')} className="w-full h-full object-cover" loading="lazy" />
+                      <span className="absolute top-2 left-2 text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full" style={{ background: 'var(--brand-yellow)', color: 'var(--brand-ink)' }}>{tBA('after')}</span>
+                    </div>
+                  </div>
+                  <figcaption className="px-4 py-3 text-xs font-medium" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>
+                    {tBA(pair.captionKey)}
+                  </figcaption>
+                </figure>
+              </FadeSection>
+            ))}
+          </div>
+          <FadeSection>
+            <div className="text-center mt-8">
+              <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white" style={{ background: '#25D366' }}>
+                <WAIcon /> {tBA('ctaButton')}
+              </WhatsAppClickTracker>
+            </div>
+          </FadeSection>
         </div>
       </section>
 
       {/* WHY CHOOSE */}
-      <section className="py-16 px-6" style={{ background: '#fff' }} aria-labelledby="why-heading">
+      <section className="py-16 px-6" style={{ background: 'var(--brand-cream)' }} aria-labelledby="why-heading">
         <div className="max-w-6xl mx-auto">
           <FadeSection>
             <div className="text-center mb-10">
-              <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: '#5B6478' }}>{t('whyChoose.tag')}</h5>
-              <h3 id="why-heading" className="text-2xl md:text-3xl font-bold" style={{ color: '#142C50' }}>{t('whyChoose.heading')}</h3>
+              <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{t('whyChoose.tag')}</h5>
+              <h3 id="why-heading" className="text-2xl md:text-3xl font-extrabold" style={{ color: 'var(--brand-ink)' }}>{t('whyChoose.heading')}</h3>
             </div>
           </FadeSection>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {reasonKeys.map((r, i) => (
               <FadeSection key={r} delay={i * 60}>
-                <div className="why-card p-5 rounded-xl h-full" style={{ background: '#FAF7F2', border: '1px solid rgba(20,28,48,0.10)' }}>
-                  <h5 className="text-sm font-bold mb-1" style={{ color: '#142C50' }}>{t(`whyChoose.${r}.title`)}</h5>
-                  <h5 className="text-xs font-normal" style={{ color: '#5B6478', lineHeight: 1.6 }}>{t(`whyChoose.${r}.description`)}</h5>
+                <div className="why-card p-5 rounded-2xl h-full" style={{ background: '#fff', border: '1px solid var(--line)' }}>
+                  <h5 className="text-sm font-bold mb-1" style={{ color: 'var(--brand-ink)' }}>{t(`whyChoose.${r}.title`)}</h5>
+                  <h5 className="text-xs font-normal" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{t(`whyChoose.${r}.description`)}</h5>
                 </div>
               </FadeSection>
             ))}
@@ -186,28 +255,28 @@ export default function HomePageClient({ phoneNumber }: Props) {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="py-16 px-6" style={{ background: '#FAF7F2' }} aria-labelledby="how-heading">
+      <section className="py-16 px-6" style={{ background: '#fff' }} aria-labelledby="how-heading">
         <div className="max-w-6xl mx-auto">
           <FadeSection>
             <div className="text-center mb-10">
-              <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: '#5B6478' }}>{t('howItWorks.tag')}</h5>
-              <h3 id="how-heading" className="text-2xl md:text-3xl font-bold" style={{ color: '#142C50' }}>{t('howItWorks.heading')}</h3>
+              <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{t('howItWorks.tag')}</h5>
+              <h3 id="how-heading" className="text-2xl md:text-3xl font-extrabold" style={{ color: 'var(--brand-ink)' }}>{t('howItWorks.heading')}</h3>
             </div>
           </FadeSection>
           <div className="grid md:grid-cols-3 gap-5">
             {[1, 2, 3].map((n, i) => (
               <FadeSection key={n} delay={i * 100}>
-                <div className="step p-6 rounded-xl text-center h-full" style={{ background: '#fff', border: '1px solid rgba(20,28,48,0.10)' }}>
-                  <div className="text-5xl font-extrabold mb-3" style={{ color: 'rgba(20,28,48,0.18)' }} aria-hidden="true">{t(`howItWorks.step${n}Num`)}</div>
-                  <h5 className="text-base font-semibold mb-2" style={{ color: '#142C50' }}>{t(`howItWorks.step${n}Title`)}</h5>
-                  <h5 className="text-sm font-normal" style={{ color: '#5B6478', lineHeight: 1.6 }}>{t(`howItWorks.step${n}Desc`)}</h5>
+                <div className="step p-6 rounded-2xl text-center h-full" style={{ background: 'var(--brand-cream)', border: '1px solid var(--line)' }}>
+                  <div className="text-5xl font-extrabold mb-3" style={{ color: 'var(--brand-yellow-deep)' }} aria-hidden="true">{t(`howItWorks.step${n}Num`)}</div>
+                  <h5 className="text-base font-extrabold mb-2" style={{ color: 'var(--brand-ink)' }}>{t(`howItWorks.step${n}Title`)}</h5>
+                  <h5 className="text-sm font-normal" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{t(`howItWorks.step${n}Desc`)}</h5>
                 </div>
               </FadeSection>
             ))}
           </div>
           <FadeSection>
             <div className="text-center mt-8">
-              <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl text-sm font-semibold text-white" style={{ background: '#25D366' }}>
+              <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full text-sm font-semibold text-white" style={{ background: '#25D366' }}>
                 <WAIcon />{t('howItWorks.cta')}
               </WhatsAppClickTracker>
             </div>
@@ -220,9 +289,9 @@ export default function HomePageClient({ phoneNumber }: Props) {
         id="reviews"
         className="relative py-16 px-6 overflow-hidden"
         aria-labelledby="reviews-heading"
-        style={{ backgroundImage: 'linear-gradient(rgba(20,28,48,0.92), rgba(20,28,48,0.92)), url(/images/bg-review.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}
+        style={{ background: 'linear-gradient(135deg, var(--brand-ink) 0%, var(--brand-ink-deep) 100%)' }}
       >
-        <div className="absolute inset-0 hero-bg" role="img" aria-label={t('reviews.heading')} aria-hidden="false" style={{ pointerEvents: 'none' }} />
+        <div className="absolute inset-0 hero-bg" role="img" aria-label={t('reviews.heading')} aria-hidden="false" style={{ pointerEvents: 'none', backgroundImage: 'radial-gradient(circle at 80% 20%, rgba(255,210,63,0.10), transparent 55%)' }} />
         <div className="relative max-w-6xl mx-auto">
           <FadeSection>
             <div className="text-center mb-10">
@@ -231,24 +300,24 @@ export default function HomePageClient({ phoneNumber }: Props) {
                 <span className="text-sm font-medium text-white">{t('reviews.googleReviews')}</span>
               </div>
               <div className="flex items-center justify-center gap-2 mb-3">
-                <span className="text-3xl font-extrabold" style={{ color: '#FFD23F' }}>4.9</span>
+                <span className="text-3xl font-extrabold" style={{ color: 'var(--brand-yellow)' }}>4.9</span>
                 <div className="flex gap-0.5">{Array.from({ length: 5 }).map((_, i) => <GoogleStarIcon key={i} />)}</div>
               </div>
-              <h3 id="reviews-heading" className="text-2xl md:text-3xl font-bold text-white">{t('reviews.heading')}</h3>
-              <h5 className="text-xs font-normal mt-2" style={{ color: 'rgba(255,255,255,0.5)', lineHeight: 1.6 }}>{t('reviews.reviewCount')}</h5>
+              <h3 id="reviews-heading" className="text-2xl md:text-3xl font-extrabold text-white">{t('reviews.heading')}</h3>
+              <h5 className="text-xs font-normal mt-2" style={{ color: 'rgba(255,255,255,0.55)', lineHeight: 1.6 }}>{t('reviews.reviewCount')}</h5>
             </div>
           </FadeSection>
           <div className="grid md:grid-cols-3 gap-4">
             {reviewIndexes.map((n, i) => (
               <FadeSection key={n} delay={i * 80}>
-                <article className="p-5 rounded-xl h-full flex flex-col" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.10)' }}>
+                <article className="p-5 rounded-2xl h-full flex flex-col" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.10)' }}>
                   <div className="flex items-center gap-2 mb-3">
                     <GoogleLogo />
                     <div className="flex gap-0.5">{Array.from({ length: 5 }).map((_, j) => <GoogleStarIcon key={j} />)}</div>
                   </div>
-                  <blockquote className="review-body text-sm font-normal mb-5 flex-1" style={{ color: 'rgba(255,255,255,0.85)', lineHeight: 1.6 }}>&ldquo;{t(`reviews.review${n}Text`)}&rdquo;</blockquote>
+                  <blockquote className="review-body text-sm font-normal mb-5 flex-1" style={{ color: 'rgba(255,255,255,0.88)', lineHeight: 1.6 }}>&ldquo;{t(`reviews.review${n}Text`)}&rdquo;</blockquote>
                   <div className="flex items-center gap-2.5 mt-auto">
-                    <div className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold shrink-0" style={{ background: '#FFD23F', color: '#142C50' }}>
+                    <div className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold shrink-0" style={{ background: 'var(--brand-yellow)', color: 'var(--brand-ink)' }}>
                       {t(`reviews.review${n}Name`).split(' ').map((w: string) => w[0]).join('').slice(0, 2)}
                     </div>
                     <div>
@@ -263,19 +332,20 @@ export default function HomePageClient({ phoneNumber }: Props) {
         </div>
       </section>
 
-      {/* GALLERY */}
+      {/* GALLERY — real customer work photos with the brand watermark */}
       <section className="py-16 px-6" style={{ background: '#fff' }} aria-label="Customer gallery">
         <div className="max-w-6xl mx-auto">
           <FadeSection>
             <div className="text-center mb-10">
-              <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: '#5B6478' }}>{t('gallery.tag')}</h5>
-              <h3 className="text-2xl md:text-3xl font-bold" style={{ color: '#142C50' }}>{t('gallery.heading')}</h3>
+              <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{t('gallery.tag')}</h5>
+              <h3 className="text-2xl md:text-3xl font-extrabold" style={{ color: 'var(--brand-ink)' }}>{t('gallery.heading')}</h3>
             </div>
           </FadeSection>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-            {Array.from({ length: 12 }).map((_, i) => (
-              <div key={i} className="aspect-square rounded-xl overflow-hidden" style={{ background: 'linear-gradient(135deg, rgba(20,28,48,0.05), rgba(20,28,48,0.12))', border: '1px solid rgba(20,28,48,0.08)' }}>
-                <img src={`/images/gallery-${(i % 12) + 1}.jpg`} alt={t('gallery.imageAlt', { number: i + 1 })} className="w-full h-full object-cover" loading="lazy" />
+            {galleryImages.map((src, i) => (
+              <div key={src} className="aspect-square rounded-xl overflow-hidden" style={{ background: 'var(--brand-cream)', border: '1px solid var(--line)' }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={src} alt={t('gallery.imageAlt', { number: i + 1 })} className="w-full h-full object-cover" loading="lazy" />
               </div>
             ))}
           </div>
@@ -283,12 +353,12 @@ export default function HomePageClient({ phoneNumber }: Props) {
       </section>
 
       {/* FAQ */}
-      <section className="py-16 px-6" style={{ background: '#FAF7F2' }} aria-labelledby="faq-heading">
+      <section className="py-16 px-6" style={{ background: 'var(--brand-cream)' }} aria-labelledby="faq-heading">
         <div className="max-w-6xl mx-auto">
           <FadeSection>
             <div className="text-center mb-10">
-              <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: '#5B6478' }}>{t('faq.tag')}</h5>
-              <h3 id="faq-heading" className="text-2xl md:text-3xl font-bold" style={{ color: '#142C50' }}>{t('faq.heading')}</h3>
+              <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{t('faq.tag')}</h5>
+              <h3 id="faq-heading" className="text-2xl md:text-3xl font-extrabold" style={{ color: 'var(--brand-ink)' }}>{t('faq.heading')}</h3>
             </div>
           </FadeSection>
           <FadeSection>
@@ -306,13 +376,13 @@ export default function HomePageClient({ phoneNumber }: Props) {
         <div className="max-w-6xl mx-auto">
           <FadeSection>
             <div className="text-center mb-10">
-              <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: '#5B6478' }}>{t('locations.tag')}</h5>
-              <h3 id="locations-heading" className="text-2xl md:text-3xl font-bold mb-2" style={{ color: '#142C50' }}>{t('locations.heading')}</h3>
-              <h5 className="text-sm font-normal" style={{ color: '#5B6478', lineHeight: 1.6 }}>{t('locations.subheading')}</h5>
+              <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{t('locations.tag')}</h5>
+              <h3 id="locations-heading" className="text-2xl md:text-3xl font-extrabold mb-2" style={{ color: 'var(--brand-ink)' }}>{t('locations.heading')}</h3>
+              <h5 className="text-sm font-normal" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{t('locations.subheading')}</h5>
             </div>
           </FadeSection>
           <FadeSection>
-            <div className="space-y-2.5">
+            <div className="space-y-2.5 max-w-3xl mx-auto">
               {regionGroups.map((region, i) => {
                 const regionName = locale === 'ms' ? region.nameMs : locale === 'zh' ? region.nameZh : region.name
                 const cities = region.cities
@@ -332,21 +402,21 @@ export default function HomePageClient({ phoneNumber }: Props) {
       <section
         className="relative py-20 px-6 text-center text-white overflow-hidden"
         aria-label="Call to action"
-        style={{ backgroundImage: 'linear-gradient(rgba(20,28,48,0.88), rgba(20,28,48,0.88)), url(/images/bg-cta.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}
+        style={{ background: 'linear-gradient(135deg, var(--brand-ink) 0%, var(--brand-ink-deep) 100%)' }}
       >
-        <div className="absolute inset-0 hero-bg" role="img" aria-label={tBlog('ctaHeading')} aria-hidden="false" style={{ pointerEvents: 'none' }} />
+        <div className="absolute inset-0 hero-bg" role="img" aria-label={t('finalCta.headline')} aria-hidden="false" style={{ pointerEvents: 'none', backgroundImage: 'radial-gradient(circle at 80% 20%, rgba(255,210,63,0.15), transparent 55%), radial-gradient(circle at 15% 80%, rgba(233,30,99,0.15), transparent 55%)' }} />
         <div className="relative max-w-3xl mx-auto">
           <FadeSection>
             <h3 className="font-extrabold mb-3" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', letterSpacing: '-0.03em' }}>
-              {t('finalCta.headline')} <span style={{ color: '#FFD23F' }}>{t('finalCta.headlineHighlight')}</span>
+              {t('finalCta.headline')} <span style={{ color: 'var(--brand-yellow)' }}>{t('finalCta.headlineHighlight')}</span>
             </h3>
-            <h5 className="text-base font-normal mb-8 max-w-2xl mx-auto" style={{ color: 'rgba(255,255,255,0.8)', lineHeight: 1.6 }}>
+            <h5 className="text-base font-normal mb-8 max-w-2xl mx-auto" style={{ color: 'rgba(255,255,255,0.85)', lineHeight: 1.6 }}>
               {t('finalCta.subheadline')}
             </h5>
-            <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-lg font-bold text-white" style={{ background: '#25D366' }}>
+            <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-lg font-bold text-white" style={{ background: '#25D366', boxShadow: '0 10px 30px rgba(37,211,102,0.35)' }}>
               <WAIcon />{t('finalCta.cta')}
             </WhatsAppClickTracker>
-            <h5 className="mt-4 text-xs font-normal" style={{ color: 'rgba(255,255,255,0.5)' }}>{t('finalCta.fine')}</h5>
+            <h5 className="mt-4 text-xs font-normal" style={{ color: 'rgba(255,255,255,0.55)' }}>{t('finalCta.fine')}</h5>
           </FadeSection>
         </div>
       </section>

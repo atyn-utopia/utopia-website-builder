@@ -59,16 +59,35 @@
     },
     "products": {
       "tag": "我们的服务",
-      "heading": "6项房屋油漆服务",
-      "subheading": "一支团队，一项保证 — 覆盖家中每个表面。",
-      "interior": { "title": "室内墙壁油漆", "description": "改变室内氛围 — 立邦无味高级漆。", "price": "Dari RM3.50/sqft" },
-      "exterior": { "title": "室外油漆", "description": "为马来西亚气候设计 — 防雨、防晒、防潮。", "price": "Dari RM4.50/sqft" },
-      "ceiling": { "title": "天花板油漆", "description": "洁白天花板，防霉保护。", "price": "Dari RM3.50/sqft" },
-      "epoxy": { "title": "环氧地板漆", "description": "车库与大厨房地板的环氧饰面。", "price": "Dari RM2,000" },
-      "fence": { "title": "围栏油漆", "description": "石材与金属围栏 — 高级饰面。", "price": "Dari RM1,800" },
-      "weathershield": { "title": "高级耐候漆", "description": "耐候外墙漆 — 颜色保持5年以上。", "price": "Dari RM5.50/sqft" },
+      "heading": "8项房屋油漆服务",
+      "subheading": "从客厅到外墙 — 一支团队，一项保证。",
+      "interior": { "title": "室内墙壁油漆", "description": "客厅、走廊与重点墙 — 立邦无味高级漆，细致完工。", "price": "Dari RM3.50/sqft" },
+      "bedroom": { "title": "卧室油漆", "description": "粉彩或暖色调，让睡眠更安稳。含表面处理与遮蔽。", "price": "Dari RM3.50/sqft" },
+      "kitchen": { "title": "厨房油漆", "description": "耐油耐热的油性或乳胶漆，易于清洁。", "price": "Dari RM3.80/sqft" },
+      "bathroom": { "title": "浴室油漆", "description": "防霉防潮 — Jotun Drygolin 或 Dulux Easycare。", "price": "Dari RM4.00/sqft" },
+      "exterior": { "title": "外墙油漆", "description": "为马来西亚气候设计 — 含免费高压清洗。", "price": "Dari RM4.50/sqft" },
+      "weathershield": { "title": "高级耐候漆", "description": "Jotun Jotashield 或立邦 Weatherbond — 7–10年保修。", "price": "Dari RM5.50/sqft" },
+      "marble": { "title": "大理石漆", "description": "室内墙的奢华大理石效果。每面墙独一无二。", "price": "Dari RM12.00/sqft" },
+      "texture": { "title": "纹理 / 仿混凝土", "description": "现代仿混凝土纹理，工业风高级感。", "price": "Dari RM8.50/sqft" },
+      "decor3d": { "title": "3D 装饰墙", "description": "立体浮雕墙板 — 龟背叶、几何或有机图案。", "price": "Dari RM18.00/sqft" },
       "bookNow": "立即询价",
-      "disclaimer": "最终价格视乎现场检查与表面积。"
+      "disclaimer": "最终价格视乎现场检查与表面积。高压清洗与裂缝填补已含在内。"
+    },
+    "beforeAfter": {
+      "tag": "焕新对比",
+      "heading": "前后对比",
+      "subheading": "看看客户的家如何在一天之内焕然一新。",
+      "before": "之前",
+      "after": "之后",
+      "pair1Caption": "双层排屋外墙 — 高压清洗 + 两层 Jotun 耐候漆。",
+      "pair2Caption": "陈旧客厅 → 洁白如新的细致完工。",
+      "pair3Caption": "昏暗油腻的厨房 → 清新易擦的新色彩。",
+      "ctaButton": "在 WhatsApp 查看更多"
+    },
+    "paintBrands": {
+      "tag": "我们使用的品牌",
+      "heading": "只用高级油漆",
+      "subheading": "绝无廉价漆。每个项目都使用世界级品牌。"
     },
     "whyChoose": {
       "tag": "为什么选我们",

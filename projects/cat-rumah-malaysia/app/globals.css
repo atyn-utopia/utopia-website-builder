@@ -1,17 +1,34 @@
 @import "tailwindcss";
 
 :root {
-  /* Brand palette — Cat Rumah Malaysia */
-  --brand-ink:            #142C50;
+  /* Brand palette — Cat Rumah Express
+     Navy ink (text + headings), sun yellow (primary accent), pink (secondary
+     accent for paint-roller highlights), sky blue (windows / cool fields),
+     fresh green (Express badge). Cream is the warm off-white section bg. */
+  --brand-ink:            #1F2A6B;
+  --brand-ink-deep:       #16204F;
+  --brand-yellow:         #FFD23F;
+  --brand-yellow-deep:    #F0B900;
+  --brand-pink:           #E91E63;
+  --brand-pink-soft:      #FCE7EE;
+  --brand-sky:            #4FC3F7;
+  --brand-sky-soft:       #E5F4FB;
+  --brand-green:          #7CB342;
+  --brand-cream:          #FFF8EA;
+  --brand-cream-deep:     #FEEFC8;
+  --brand-charcoal:       #1F2A6B;
+
+  --ink:                  #1F2A6B;
+  --muted:                #5C6580;
+  --line:                 rgba(31, 42, 107, 0.12);
+  --line-strong:          rgba(31, 42, 107, 0.20);
+
   --brand-accent:         #FFD23F;
-  --brand-cream:          #FAF7F2;
-  --brand-charcoal:       #142C50;
-  --ink:                  #142C50;
-  --muted:                #5B6478;
-  --line:                 rgba(20, 28, 48, 0.10);
-  --line-strong:          rgba(20, 28, 48, 0.16);
+  --brand-accent-deep:    #F0B900;
+
   --wa-green:             #25D366;
   --wa-green-dark:        #1EAD53;
+
   --gut:                  20px;
   --dur:                  0.18s;
   --ease-out:             cubic-bezier(0.22, 1, 0.36, 1);

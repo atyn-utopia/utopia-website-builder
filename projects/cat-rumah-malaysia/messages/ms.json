@@ -59,40 +59,71 @@
     },
     "products": {
       "tag": "SERVIS KAMI",
-      "heading": "6 Servis Cat Rumah Kami",
-      "subheading": "Satu pasukan, satu jaminan — untuk setiap permukaan rumah anda.",
+      "heading": "8 Servis Cat Rumah Kami",
+      "subheading": "Dari ruang tamu sampai eksterior — satu pasukan, satu jaminan untuk setiap permukaan.",
       "interior": {
         "title": "Cat Dinding Dalaman",
-        "description": "Cat dalam rumah ubah suasana ruang. Guna Nippon Paint Odour-less premium.",
+        "description": "Ruang tamu, lorong dan dinding aksen — Nippon Odour-less premium tanpa bau yang menyengat.",
         "price": "Dari RM3.50/sqft"
+      },
+      "bedroom": {
+        "title": "Cat Bilik Tidur",
+        "description": "Warna pastel atau panas untuk tidur lebih lena. Termasuk persiapan permukaan dan masking penuh.",
+        "price": "Dari RM3.50/sqft"
+      },
+      "kitchen": {
+        "title": "Cat Dapur",
+        "description": "Cat oil-based atau emulsion tahan minyak dan haba memasak. Mudah dilap.",
+        "price": "Dari RM3.80/sqft"
+      },
+      "bathroom": {
+        "title": "Cat Bilik Mandi",
+        "description": "Cat anti-kulat dan tahan kelembapan — Jotun Drygolin atau Dulux Easycare.",
+        "price": "Dari RM4.00/sqft"
       },
       "exterior": {
         "title": "Cat Luar Rumah",
-        "description": "Tahan cuaca Malaysia — kalis hujan, matahari dan lembap.",
+        "description": "Tahan UV, hujan dan lembap Malaysia. Termasuk pressure-wash percuma.",
         "price": "Dari RM4.50/sqft"
-      },
-      "ceiling": {
-        "title": "Cat Siling",
-        "description": "Siling rumah putih bersih, kalis kulat.",
-        "price": "Dari RM3.50/sqft"
-      },
-      "epoxy": {
-        "title": "Cat Epoxy Lantai",
-        "description": "Lantai garaj dan dapur besar dengan kemasan epoxy.",
-        "price": "Dari RM2,000"
-      },
-      "fence": {
-        "title": "Cat Pagar Rumah",
-        "description": "Cat pagar batu dan besi untuk nampak mewah.",
-        "price": "Dari RM1,800"
       },
       "weathershield": {
         "title": "Weathershield Premium",
-        "description": "Cat kalis cuaca tahan 5+ tahun, warna tak pudar.",
+        "description": "Jotun Jotashield atau Nippon Weatherbond — tahan 7-10 tahun dengan jaminan.",
         "price": "Dari RM5.50/sqft"
       },
+      "marble": {
+        "title": "Marble Painting",
+        "description": "Kesan marmar mewah pada dinding dalaman. Setiap dinding unik, tiada satu sama.",
+        "price": "Dari RM12.00/sqft"
+      },
+      "texture": {
+        "title": "Texture / Faux Concrete",
+        "description": "Tekstur konkrit moden untuk dinding aksen. Tampilan industri yang premium.",
+        "price": "Dari RM8.50/sqft"
+      },
+      "decor3d": {
+        "title": "3D Decorative Wall",
+        "description": "Panel hiasan 3D timbul — pilihan corak monstera, geometri atau organik.",
+        "price": "Dari RM18.00/sqft"
+      },
       "bookNow": "Tanya Harga Sekarang",
-      "disclaimer": "Harga muktamad bergantung kepada lawatan tapak dan keluasan permukaan."
+      "disclaimer": "Harga muktamad bergantung kepada lawatan tapak dan keluasan permukaan. Pressure-wash + pendempulan retak sudah termasuk dalam quote."
+    },
+    "beforeAfter": {
+      "tag": "TRANSFORMASI",
+      "heading": "Sebelum & Selepas",
+      "subheading": "Lihat sendiri bagaimana rumah pelanggan kami berubah dalam 1 hari sahaja.",
+      "before": "Sebelum",
+      "after": "Selepas",
+      "pair1Caption": "Dinding luar terres dua tingkat — pressure-wash + dua lapisan weathershield Jotun.",
+      "pair2Caption": "Ruang tamu lama → cat baru putih bersih dengan kemasan rapi.",
+      "pair3Caption": "Dapur kotor dan kusam → warna baru tahan minyak.",
+      "ctaButton": "Lihat lebih banyak di WhatsApp"
+    },
+    "paintBrands": {
+      "tag": "JENAMA YANG KAMI GUNA",
+      "heading": "Hanya Cat Premium Sahaja",
+      "subheading": "Tiada cat ekonomi murah. Setiap projek menggunakan jenama bertaraf dunia."
     },
     "whyChoose": {
       "tag": "KELEBIHAN KAMI",

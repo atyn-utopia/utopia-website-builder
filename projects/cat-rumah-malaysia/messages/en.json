@@ -59,16 +59,35 @@
     },
     "products": {
       "tag": "OUR SERVICES",
-      "heading": "6 House Painting Services",
-      "subheading": "One team, one guarantee — for every surface in your home.",
-      "interior": { "title": "Interior Wall Painting", "description": "Interior paint that transforms the mood of every room. Nippon Paint Odour-less premium.", "price": "Dari RM3.50/sqft" },
-      "exterior": { "title": "Exterior House Painting", "description": "Built for Malaysian weather — rain, sun, and humidity resistant.", "price": "Dari RM4.50/sqft" },
-      "ceiling": { "title": "Ceiling Painting", "description": "Clean white ceilings with anti-mould protection.", "price": "Dari RM3.50/sqft" },
-      "epoxy": { "title": "Epoxy Floor Paint", "description": "Garage and large kitchen floors with epoxy finish.", "price": "Dari RM2,000" },
-      "fence": { "title": "Fence Painting", "description": "Stone and metal fence painting — premium finish.", "price": "Dari RM1,800" },
-      "weathershield": { "title": "Weathershield Premium", "description": "Weather-resistant exterior paint — 5+ year colour retention.", "price": "Dari RM5.50/sqft" },
+      "heading": "8 House Painting Services",
+      "subheading": "From living room to exterior — one team, one guarantee for every surface.",
+      "interior": { "title": "Interior Wall Painting", "description": "Living rooms, hallways, and accent walls — premium Nippon Odour-less with neat finishing.", "price": "Dari RM3.50/sqft" },
+      "bedroom": { "title": "Bedroom Painting", "description": "Pastel or warm tones for better sleep. Surface prep and masking included.", "price": "Dari RM3.50/sqft" },
+      "kitchen": { "title": "Kitchen Painting", "description": "Oil-based or emulsion paints that resist heat and grease, and wipe clean easily.", "price": "Dari RM3.80/sqft" },
+      "bathroom": { "title": "Bathroom Painting", "description": "Anti-fungal, humidity-resistant — Jotun Drygolin or Dulux Easycare.", "price": "Dari RM4.00/sqft" },
+      "exterior": { "title": "Exterior House Painting", "description": "Built for Malaysian weather — pressure wash included free.", "price": "Dari RM4.50/sqft" },
+      "weathershield": { "title": "Weathershield Premium", "description": "Jotun Jotashield or Nippon Weatherbond — 7–10 year guarantee.", "price": "Dari RM5.50/sqft" },
+      "marble": { "title": "Marble Painting", "description": "Luxury marble effect on interior walls. Every wall unique, no two alike.", "price": "Dari RM12.00/sqft" },
+      "texture": { "title": "Texture / Faux Concrete", "description": "Modern concrete texture for accent walls. Industrial premium look.", "price": "Dari RM8.50/sqft" },
+      "decor3d": { "title": "3D Decorative Wall", "description": "Embossed 3D panel finish — monstera, geometric, or organic motifs.", "price": "Dari RM18.00/sqft" },
       "bookNow": "Get a Quote",
-      "disclaimer": "Final pricing depends on site inspection and surface area."
+      "disclaimer": "Final pricing depends on site inspection and surface area. Pressure wash + crack filling already included."
+    },
+    "beforeAfter": {
+      "tag": "TRANSFORMATION",
+      "heading": "Before & After",
+      "subheading": "See how our customers' homes transform in just one day.",
+      "before": "Before",
+      "after": "After",
+      "pair1Caption": "Double-storey terrace exterior — pressure wash + two coats of Jotun weathershield.",
+      "pair2Caption": "Old living room → fresh clean white with neat finishing.",
+      "pair3Caption": "Dim, greasy kitchen → fresh wipe-clean colour.",
+      "ctaButton": "See more on WhatsApp"
+    },
+    "paintBrands": {
+      "tag": "BRANDS WE USE",
+      "heading": "Premium Paints Only",
+      "subheading": "Never economy paints. Every project uses world-class brands."
     },
     "whyChoose": {
       "tag": "WHY US",

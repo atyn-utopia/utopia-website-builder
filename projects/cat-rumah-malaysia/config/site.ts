@@ -3,8 +3,8 @@
 // Keep it in sync with `deploy-url.txt` and the `data-website` attribute in
 // app/[locale]/layout.tsx — the checklist enforces this match.
 export const siteConfig = {
-  brandName: 'Cat Rumah Malaysia',
-  tagline: 'Servis Cat Rumah Profesional Seluruh Malaysia',
+  brandName: 'Cat Rumah Express',
+  tagline: 'Rumah Baru dalam 1 Hari — Dari RM3.50/sqft',
   domain: 'cat-rumah-malaysia.utopiaai.my',
   baseUrl: 'https://cat-rumah-malaysia.utopiaai.my',
   siteUrl: 'https://cat-rumah-malaysia.utopiaai.my',

@@ -29,8 +29,7 @@ export default async function SiteFooter({ locale }: { locale: string }) {
           <div className="footer-brand">
             <div className="footer-mark">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/favicon.svg" alt={navT('logoAlt')} className="footer-logo" />
-              <span className="footer-name">{siteConfig.brandName}</span>
+              <img src="/images/brand/logo-dark.png" alt={navT('logoAlt')} className="footer-logo" />
             </div>
             <p className="footer-tag">{t('tagline')}</p>
           </div>
@@ -76,7 +75,7 @@ export default async function SiteFooter({ locale }: { locale: string }) {
 
       <style>{`
         .site-footer {
-          background: var(--brand-ink, #142C50);
+          background: var(--brand-ink-deep, #16204F);
           color: #E5E7EB;
           padding: 72px 0 32px;
         }
@@ -89,9 +88,8 @@ export default async function SiteFooter({ locale }: { locale: string }) {
           .footer-top { grid-template-columns: 1fr 2fr; gap: 64px; }
         }
         .footer-brand { display: flex; flex-direction: column; gap: 16px; max-width: 360px; }
-        .footer-mark { display: inline-flex; align-items: center; gap: 10px; }
-        .footer-logo { width: 36px; height: 36px; object-fit: contain; }
-        .footer-name { color: #fff; font-weight: 800; font-size: 18px; letter-spacing: -0.01em; }
+        .footer-mark { display: inline-flex; align-items: center; }
+        .footer-logo { width: 160px; height: auto; object-fit: contain; }
         .footer-tag { margin: 0; color: #fff; font-size: 15px; line-height: 1.6; opacity: 0.9; }
         .footer-cols {
           display: grid;
