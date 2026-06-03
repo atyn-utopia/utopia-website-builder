@@ -39,16 +39,18 @@ h1, h2, h3, h4 {
    identical to the <p> they replaced — utility/custom classes control
    size/weight/margin; this guards against UA bolding + tight heading
    line-height.
-   :where() drops the selector specificity to 0 so Tailwind utility classes
-   (mt-7, mb-9, etc.) win — without :where the unlayered rule outranks every
-   @layer utilities declaration. */
-:where(h5, h6) {
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  line-height: inherit;
-  letter-spacing: inherit;
-  margin: 0;
+   MUST live inside @layer base — unlayered styles outrank @layer utilities
+   in the cascade, so without this every Tailwind margin utility (mt-7,
+   mb-9, etc.) on an <h5> was getting nuked to margin:0. */
+@layer base {
+  h5, h6 {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    margin: 0;
+  }
 }
 
 /* ── WhatsApp pulse ── */
