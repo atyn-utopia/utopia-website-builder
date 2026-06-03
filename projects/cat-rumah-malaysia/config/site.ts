@@ -1,17 +1,21 @@
-export const site = {
-  domain: 'cat-rumah-malaysia.vercel.app',
-  siteUrl: 'https://cat-rumah-malaysia.vercel.app',
-  siteName: 'Cat Rumah Malaysia',
-  tagline: 'Rumah Lama Terus Nampak Baru Dalam 5 Jam — Dari RM3.50/sqft',
+// `domain` is the canonical live host — Supabase rows for products, blog
+// posts, phones, and company_websites are filtered on this exact string.
+// Keep it in sync with `deploy-url.txt` and the `data-website` attribute in
+// app/[locale]/layout.tsx — the checklist enforces this match.
+export const siteConfig = {
+  brandName: 'Cat Rumah Malaysia',
+  tagline: 'Servis Cat Rumah Profesional Seluruh Malaysia',
+  domain: 'cat-rumah-malaysia.utopiaai.my',
+  baseUrl: 'https://cat-rumah-malaysia.utopiaai.my',
+  siteUrl: 'https://cat-rumah-malaysia.utopiaai.my',
   productSlug: 'cat-rumah',
   productName: 'Cat Rumah',
-  phone: '60174287801',
-  phoneDisplay: '+60 17-428 7801',
-  whatsappText: 'Hi, saya berminat untuk servis cat rumah. Boleh dapatkan quotation?',
-  supabaseWebsiteKey: 'cat-rumah-malaysia.vercel.app',
+  fallbackPhone: '60174287801',
   defaultLocale: 'ms' as const,
   locales: ['ms', 'en', 'zh'] as const,
-  brands: ['Nippon Paint', 'Jotun', 'Dulux'],
-  rating: { value: 4.9, count: 200 },
-  pricingFrom: 'RM3.50/sqft',
-} as const
+  emergency: false,
+}
+
+// Legacy export kept so any straggling imports don't break during the chassis
+// swap; new code should import { siteConfig } only.
+export const site = siteConfig

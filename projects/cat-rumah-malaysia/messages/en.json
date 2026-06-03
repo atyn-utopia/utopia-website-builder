@@ -1,266 +1,241 @@
 {
-  "meta": {
-    "homeTitle": "House Painting Malaysia | From RM3.50/sqft — Cat Rumah Malaysia",
-    "homeDescription": "Professional house painting Malaysia from RM3.50/sqft. Interior, exterior, ceiling, epoxy floor & fence. Nippon, Jotun, Dulux. WhatsApp now!"
-  },
-  "fomo": {
-    "text": "April 2026 Promo — House painting from RM3.50/sqft. Free quote in 1 hour. WhatsApp us now."
-  },
+  "logoAlt": "Cat Rumah Malaysia logo",
+  "imageAlt": "House painting Malaysia — professional painting contractor",
   "nav": {
-    "brand": "Cat Rumah Malaysia",
+    "logoAlt": "Cat Rumah Malaysia logo",
     "home": "Home",
-    "services": "Services",
-    "reviews": "Reviews",
-    "gallery": "Gallery",
+    "products": "Services",
+    "calculator": "Price calculator",
     "locations": "Locations",
-    "faq": "FAQ",
-    "cta": "WhatsApp Us"
-  },
-  "hero": {
-    "eyebrow": "HOUSE PAINTING MALAYSIA",
-    "h1Line1": "Make Your Old",
-    "h1Highlight": "House Look New",
-    "h1Line2": "In Just 5 Hours!",
-    "subheadline": "Professional painting contractors using Nippon Paint, Jotun and Dulux — no hidden fees.",
-    "priceBadge": "From RM3.50/sqft",
-    "cta": "WhatsApp Us Now",
-    "ctaSecondary": "See Our Work",
-    "trustRating": "4.9/5 Google",
-    "trustHomes": "500+ homes painted",
-    "trustYears": "8+ years experience",
-    "trustGuarantee": "Satisfaction guaranteed"
-  },
-  "stats": {
-    "rating": "4.9/5",
-    "ratingLabel": "Google Reviews",
-    "homes": "500+",
-    "homesLabel": "Homes painted",
-    "years": "8+",
-    "yearsLabel": "Years experience",
-    "brands": "3",
-    "brandsLabel": "Premium brands"
+    "reviews": "Reviews",
+    "blog": "Blog",
+    "whatsappCta": "WhatsApp"
   },
   "products": {
-    "eyebrow": "OUR SERVICES",
-    "heading": "Our 6 House Painting Services",
-    "subheading": "One team, one guarantee — for every surface in your home.",
-    "interior": {
-      "title": "Interior Wall Painting",
-      "description": "Interior paint designed to transform the look & feel of your living space. Premium Nippon Paint Odour-less."
-    },
-    "texture": {
-      "title": "Texture Painting",
-      "description": "Unique textured walls — modern and premium finish.",
-      "laborOnly": "Labor Only",
-      "laborOnlyPrice": "From RM2,000",
-      "laborAndPaint": "Labor & Paint",
-      "laborAndPaintPrice": "From RM2,500"
-    },
-    "marble": {
-      "title": "Marble Painting",
-      "description": "Luxurious marble effect without the cost of real stone.",
-      "laborOnly": "Labor Only",
-      "laborOnlyPrice": "From RM2,000",
-      "laborAndPaint": "Labor & Paint",
-      "laborAndPaintPrice": "From RM2,500"
-    },
-    "exterior": {
-      "title": "Exterior Wall Painting",
-      "description": "Your home looks better & lasts longer with premium exterior paint."
-    },
-    "weathershield": {
-      "title": "Weathershield Paint",
-      "description": "Rain-proof, sun-proof and moisture-resistant — built for Malaysian weather."
-    },
-    "metal": {
-      "title": "Outdoor Metal Paint",
-      "description": "Grilles, auto-gates & railings — colour holds 3+ years.",
-      "laborOnly": "Labor Only",
-      "laborOnlyPrice": "From RM1,800",
-      "laborAndPaint": "Labor & Paint",
-      "laborAndPaintPrice": "From RM3,000"
-    },
-    "otherServices": "Additional Services",
-    "ceiling": {
-      "title": "Ceiling Painting",
-      "description": "Clean white ceiling painting.",
-      "price": "From RM3.50/sqft"
-    },
-    "epoxy": {
-      "title": "Epoxy Floor Paint",
-      "description": "Epoxy floor coating for garages & large kitchens.",
-      "price": "From RM2,000"
-    },
-    "fence": {
-      "title": "Fence Painting",
-      "description": "Stone & metal fence painting for a premium look.",
-      "price": "Quote on site"
-    },
-    "ctaGeneric": "Ask Price Now"
-  },
-  "howItWorks": {
-    "eyebrow": "JUST 3 STEPS",
-    "heading": "How It Works in 3 Steps",
-    "subheading": "No long forms, no hard sell — just start on WhatsApp.",
-    "step1": {
-      "title": "Message Us on WhatsApp",
-      "description": "Send photos of your home. We reply within 1 hour with an early estimate."
-    },
-    "step2": {
-      "title": "Site Visit & Free Quote",
-      "description": "Our team visits, measures, helps you pick colours and delivers a fixed price — no hidden costs."
-    },
-    "step3": {
-      "title": "Painted in as Fast as 5 Hours",
-      "description": "Small jobs finish same-day. Larger homes are completed in 1–3 days."
-    }
-  },
-  "riskProblem": {
-    "eyebrow": "COMMON PROBLEMS",
-    "heading": "Problems With Your Home Right Now",
-    "body": "Without a fresh coat, your home starts to look tired fast. Here are the warning signs to tackle today.",
-    "problem1": {
-      "title": "Faded, dull walls",
-      "description": "Your house looks tired even though it's only 5 years old."
-    },
-    "problem2": {
-      "title": "Hairline cracks & black mould",
-      "description": "Early signs of damp — they only get worse if ignored."
-    },
-    "problem3": {
-      "title": "Sky-high renovation quotes",
-      "description": "Other contractors charge RM10k+ for work that should cost RM3k."
-    },
-    "problem4": {
-      "title": "Rusty grilles & rotten fences",
-      "description": "Rust spreads and ruins a new coat unless it's treated first."
-    }
-  },
-  "midCta": {
-    "heading": "Stop Postponing. Start Painting Today.",
-    "line": "Free quote in 1 hour — no commitment, no upfront deposit.",
-    "cta": "WhatsApp Us Now"
-  },
-  "reviews": {
-    "eyebrow": "REAL REVIEWS",
-    "heading": "What Our Customers Say on Google",
-    "subheading": "4.9/5 stars · 200+ Google-verified reviews",
-    "googleLabel": "Reviewed on",
-    "googleBrand": "Google",
-    "review1": {
-      "text": "From first WhatsApp to finished walls in the same day. My living room looks like a show unit. Highly recommended.",
-      "name": "Aminah R.",
-      "location": "Kuala Lumpur"
-    },
-    "review2": {
-      "text": "Honest pricing, no hidden charges. Used Jotun and the finish is razor-sharp. Already booked them for my mum's house.",
-      "name": "Jason T.",
-      "location": "Petaling Jaya"
-    },
-    "review3": {
-      "text": "Weathershield painting for my double-storey. The team showed up on time and finished a day early. A real 5-star experience.",
-      "name": "Mr Lim",
-      "location": "Johor Bahru"
-    },
-    "review4": {
-      "text": "I thought house painting was expensive. Cat Rumah Malaysia gave me RM3.50/sqft — that's RM5k cheaper than other quotes.",
-      "name": "Siti N.",
-      "location": "Shah Alam"
-    },
-    "review5": {
-      "text": "Another contractor quoted RM8k, but Cat Rumah Malaysia did it for RM4.5k — double-storey terrace with Nippon premium paint. Absolutely worth it!",
-      "name": "Faizal H.",
-      "location": "Puchong"
-    },
-    "review6": {
-      "text": "My shop in Cheras needed repainting — dirty walls and peeling paint. Done in 2 days, customers say it looks brand new. Very professional.",
-      "name": "David C.",
-      "location": "Cheras"
-    }
-  },
-  "whyChoose": {
-    "eyebrow": "OUR EDGE",
-    "heading": "Why Choose Cat Rumah Malaysia",
-    "reason1": {
-      "title": "Premium Brands Only",
-      "description": "We only use Nippon Paint, Jotun and Dulux — no cheap economy paint."
-    },
-    "reason2": {
-      "title": "As Fast as 5 Hours",
-      "description": "For bedrooms or living rooms, you move back in the same day."
-    },
-    "reason3": {
-      "title": "Free Quote, No Strings",
-      "description": "On-site visit and fixed price with zero upfront charges."
-    },
-    "reason4": {
-      "title": "Satisfaction Guarantee",
-      "description": "Any scratches or patches? We come back and repaint — free."
-    }
-  },
-  "gallery": {
-    "eyebrow": "OUR WORK",
-    "heading": "Our Work Gallery",
-    "subheading": "Real homes painted by our team across Kuala Lumpur, PJ, Shah Alam and all of Malaysia."
-  },
-  "locations": {
-    "eyebrow": "OUR COVERAGE",
-    "heading": "We Serve All Over Malaysia",
-    "subheading": "16 major cities — from the Klang Valley to Johor Bahru and Penang. Click your city for pricing and lead times.",
-    "regions": {
-      "klangValley": "Klang Valley",
-      "southern": "Southern Peninsula",
-      "northern": "Northern Peninsula"
-    }
-  },
-  "faq": {
-    "eyebrow": "FAQ",
-    "heading": "House Painting Malaysia — Frequently Asked Questions",
-    "q1": "How much does house painting cost per square foot in Malaysia?",
-    "a1": "Our standard rate starts at RM3.50/sqft for interior walls using Nippon Paint. That price includes paint, labour, floor covering and clean-up. The figure stays fixed after the site visit — no hidden add-ons.",
-    "q2": "How long does a house painting job take?",
-    "a2": "A single room or living area can be completed in as fast as 5 hours on the same day. A full terrace house usually takes 1–3 days depending on size and any surface repairs needed first.",
-    "q3": "Which paint brands do you use?",
-    "a3": "We only use three premium brands: Nippon Paint, Jotun and Dulux. You choose the brand and series that fits your budget — we'll explain the differences before we start.",
-    "q4": "Is the quotation really free?",
-    "a4": "Yes. We send a team for an on-site visit and fixed quotation with zero charges and no commitment. You can walk away if the price doesn't suit — no hard sell.",
-    "q5": "Which areas do you cover?",
-    "a5": "We serve 16 major cities across Malaysia including Kuala Lumpur, Petaling Jaya, Shah Alam, Johor Bahru, Penang and Ipoh.",
-    "q6": "What if I'm not happy with the result?",
-    "a6": "Every project is covered by our satisfaction guarantee. If there are scratches, patches or uneven finish, we return and repaint that area — free, no questions asked."
-  },
-  "finalCta": {
-    "eyebrow": "START TODAY",
-    "headline": "Your New-Looking Home Starts Today",
-    "subheadline": "Free quote in 1 hour. Professional team. From RM3.50/sqft. No commitment.",
-    "cta": "WhatsApp Us Now",
-    "ctaSecondary": "View Our Gallery"
+    "imageAltTemplate": "{model} house painting — Cat Rumah Malaysia"
   },
   "footer": {
-    "tagline": "Professional house painting contractors in Malaysia — premium Nippon, Jotun and Dulux paint.",
-    "servicesHeading": "Services",
-    "locationsHeading": "Locations",
-    "companyHeading": "Company",
-    "about": "About Us",
-    "contact": "Contact",
+    "tagline": "Professional house painting contractor across Malaysia — interior, exterior, ceiling, epoxy floor, and fence painting with Nippon, Jotun, and Dulux.",
+    "description": "Professional house painting contractor across Malaysia. Interior, exterior, ceiling, epoxy floor, and fence painting using Nippon, Jotun, and Dulux premium paints.",
+    "whatsappUs": "WhatsApp Us",
+    "productsHeading": "Services",
+    "productsLinks": ["Interior Wall Painting", "Exterior House Painting", "Ceiling Painting", "Epoxy Floor Paint", "Fence Painting"],
+    "locationsHeading": "Key Locations",
+    "resourcesHeading": "Resources",
+    "blogLabel": "Blog",
+    "faqLabel": "FAQ",
     "copyright": "© {year} Cat Rumah Malaysia. All rights reserved."
   },
+  "finalCta": {
+    "bgAlt": "Completed home painted by Cat Rumah Malaysia"
+  },
+  "home": {
+    "meta": {
+      "title": "House Painting Malaysia | From RM3.50/sqft — Cat Rumah Malaysia",
+      "description": "Malaysia house painting service from RM3.50/sqft. Interior, exterior, ceiling, epoxy floor & fence painting. Nippon, Jotun, Dulux. WhatsApp now."
+    },
+    "fomo": {
+      "promo": "This month — free quote within 1 hour.",
+      "slotsLeft": "Only {slots} slots left this week!",
+      "bookNow": "Book now"
+    },
+    "hero": {
+      "badgeCertified": "Certified Paint Contractor",
+      "badgeCities": "20+ Cities Covered",
+      "headline": "Make Your Old Home",
+      "headlineHighlight": "Look New",
+      "subheadline": "Malaysia's professional house painting contractor — Nippon Paint, Jotun, and Dulux. Free quote within 1 hour, fixed pricing with no hidden costs.",
+      "cta": "WhatsApp Us Now",
+      "ctaSubtext": "Free quote · 1-hour response",
+      "heroAlt": "Professional house painting contractor Malaysia"
+    },
+    "usp": {
+      "usp1Title": "Free Quote",
+      "usp1Sub": "Send photos via WhatsApp — we reply with an estimate within 1 hour.",
+      "usp2Title": "Premium Paint",
+      "usp2Sub": "Nippon Paint, Jotun, Dulux only — never cheap economy paints.",
+      "usp3Title": "1-Year Warranty",
+      "usp3Sub": "Scratches or peeling within 12 months? We repaint for free."
+    },
+    "products": {
+      "tag": "OUR SERVICES",
+      "heading": "6 House Painting Services",
+      "subheading": "One team, one guarantee — for every surface in your home.",
+      "interior": { "title": "Interior Wall Painting", "description": "Interior paint that transforms the mood of every room. Nippon Paint Odour-less premium.", "price": "Dari RM3.50/sqft" },
+      "exterior": { "title": "Exterior House Painting", "description": "Built for Malaysian weather — rain, sun, and humidity resistant.", "price": "Dari RM4.50/sqft" },
+      "ceiling": { "title": "Ceiling Painting", "description": "Clean white ceilings with anti-mould protection.", "price": "Dari RM3.50/sqft" },
+      "epoxy": { "title": "Epoxy Floor Paint", "description": "Garage and large kitchen floors with epoxy finish.", "price": "Dari RM2,000" },
+      "fence": { "title": "Fence Painting", "description": "Stone and metal fence painting — premium finish.", "price": "Dari RM1,800" },
+      "weathershield": { "title": "Weathershield Premium", "description": "Weather-resistant exterior paint — 5+ year colour retention.", "price": "Dari RM5.50/sqft" },
+      "bookNow": "Get a Quote",
+      "disclaimer": "Final pricing depends on site inspection and surface area."
+    },
+    "whyChoose": {
+      "tag": "WHY US",
+      "heading": "Why Choose Cat Rumah Malaysia",
+      "reason1": { "title": "Premium Brands Only", "description": "We use Nippon Paint, Jotun, and Dulux — never cheap economy paints." },
+      "reason2": { "title": "Done in 5 Hours", "description": "For bedroom or living room work, your home is repainted the same day." },
+      "reason3": { "title": "Free Quote, No Strings", "description": "Site visits and fixed quotes with no upfront charges." },
+      "reason4": { "title": "Satisfaction Guarantee", "description": "Scratches or peeling within 12 months? We repaint for free." },
+      "reason5": { "title": "Certified Contractors", "description": "Licensed team with 8+ years of industry experience." },
+      "reason6": { "title": "Malaysia-Wide Coverage", "description": "From KL to Penang, we come to your doorstep." }
+    },
+    "howItWorks": {
+      "tag": "3 SIMPLE STEPS",
+      "heading": "How to Book in 3 Steps",
+      "step1Num": "01",
+      "step1Title": "WhatsApp Your Photos",
+      "step1Desc": "Send photos of your home. We reply with an initial estimate within 1 hour.",
+      "step2Num": "02",
+      "step2Title": "Fixed Quote",
+      "step2Desc": "Free site visit. Pick your colours and lock in a fixed price.",
+      "step3Num": "03",
+      "step3Title": "Done in 5 Hours",
+      "step3Desc": "Small jobs same day. Larger projects finished in 1–3 days.",
+      "cta": "WhatsApp Us Now"
+    },
+    "reviews": {
+      "tag": "REAL REVIEWS",
+      "heading": "What Customers Say on Google",
+      "subheading": "4.9/5 stars · 200+ verified Google reviews",
+      "googleReviews": "Reviewed on Google",
+      "reviewCount": "Based on 200+ verified reviews",
+      "review1Text": "From first WhatsApp to finish in one day. My living room walls look like a show unit. Highly recommended!",
+      "review1Name": "Aminah R.",
+      "review1Location": "Kuala Lumpur",
+      "review2Text": "Honest pricing, no hidden charges. Used Jotun and the finish is very neat. Already booked them for my mum's place.",
+      "review2Name": "Jason T.",
+      "review2Location": "Petaling Jaya",
+      "review3Text": "Weathershield job for our double-storey. Team came on time and finished a day early. 5 stars deserved.",
+      "review3Name": "Mr Lim",
+      "review3Location": "Johor Bahru",
+      "review4Text": "Thought house painting was expensive. Cat Rumah Malaysia quoted RM3.50/sqft — saved RM5k vs other contractors.",
+      "review4Name": "Siti N.",
+      "review4Location": "Shah Alam",
+      "review5Text": "Other contractors quoted RM8k, Cat Rumah Malaysia gave RM4.5k for our terrace house. Premium Nippon paint used.",
+      "review5Name": "Faizal H.",
+      "review5Location": "Puchong",
+      "review6Text": "Our shop needed a repaint after the walls got dirty. Done in 2 days, customers complimented the fresh look.",
+      "review6Name": "David C.",
+      "review6Location": "Cheras"
+    },
+    "gallery": {
+      "tag": "OUR WORK",
+      "heading": "See Our Recent Jobs",
+      "imageAlt": "House painting work {number} — Cat Rumah Malaysia",
+      "alts": [
+        "Interior living room paint job — neat finish",
+        "Exterior paint job on double-storey terrace",
+        "White anti-mould ceiling painting",
+        "Auto-gate metal fence repaint",
+        "Garage epoxy floor smooth finish",
+        "Weathershield exterior paint",
+        "Pastel bedroom paint job",
+        "Kitchen wall oil-based finish",
+        "Marble painting luxury effect",
+        "Accent wall texture painting",
+        "Bungalow full house painting",
+        "Commercial shop wall painting"
+      ]
+    },
+    "faq": {
+      "tag": "FAQ",
+      "heading": "Common House Painting Questions",
+      "q1": "How much does painting a double-storey terrace cost in Malaysia?",
+      "a1": "For a typical double-storey terrace (around 1,800 sqft of wall area), expect RM6,000 to RM10,000 including premium paint and labour.",
+      "q2": "Do you use Nippon, Jotun, or Dulux?",
+      "a2": "Yes, all three premium brands. Customers can choose based on budget and surface type.",
+      "q3": "How long does it take to repaint a house?",
+      "a3": "Bedroom or living room work: 5 hours. Single-storey terrace: 1–2 days. Double-storey: 2–4 days depending on size.",
+      "q4": "Is the quote chargeable?",
+      "a4": "No. Site visits and quotes are free with no obligation.",
+      "q5": "What warranty do you offer?",
+      "a5": "12-month warranty on all work. Scratches or peeling in that period are repainted free of charge.",
+      "q6": "Do you serve outside the Klang Valley?",
+      "a6": "Yes — we cover Penang, Johor Bahru, Ipoh, Melaka, and Seremban. Travel costs are bundled into the quote.",
+      "q7": "Can I choose my own colours?",
+      "a7": "Of course. Our team brings fan decks to site, or you can send WhatsApp inspiration photos.",
+      "q8": "Do you remove furniture during work?",
+      "a8": "We cover furniture with dust sheets. Heavy furniture should be moved by the customer for full wall access."
+    },
+    "locations": {
+      "tag": "COVERAGE",
+      "heading": "We Cover All of Malaysia",
+      "subheading": "Click a city below for full local info.",
+      "cities": "cities"
+    },
+    "finalCta": {
+      "headline": "Ready for a",
+      "headlineHighlight": "Newer Home?",
+      "subheadline": "Get a free quote within 1 hour — no obligation, no upfront deposit.",
+      "cta": "WhatsApp Us Now",
+      "fine": "Free quote · 1-hour response · 12-month warranty"
+    }
+  },
   "location": {
-    "nearbyHeading": "Also Serving Nearby Areas",
-    "viewAll": "View all locations",
-    "breadcrumbsHome": "Home",
-    "breadcrumbsService": "House Painting",
-    "whyCityHeading": "Why Choose Us In Your City"
+    "meta": {
+      "title": "House Painting {city} | From RM3.50/sqft — Cat Rumah Malaysia",
+      "description": "Looking for a house painting contractor in {city}? Cat Rumah Malaysia offers interior, exterior, ceiling, and fence painting from RM3.50/sqft."
+    },
+    "hero": {
+      "badge": "Certified Paint Contractor · {city}",
+      "headline": "House Painting",
+      "headlineHighlight": "in {city}",
+      "subheadline": "Professional house painting contractor in {city} using Nippon Paint, Jotun, and Dulux. Free quote within 1 hour.",
+      "cta": "WhatsApp Us in {city}",
+      "ctaSubtext": "Free quote · 1-hour response",
+      "heroAlt": "House painting contractor in {city}"
+    },
+    "services": {
+      "heading": "House Painting Services In {city}",
+      "interior": "Interior wall painting in {city} — Nippon Odour-less premium, neat finish.",
+      "exterior": "Exterior house painting in {city} — weathershield for Malaysian climate.",
+      "ceiling": "Ceiling painting in {city} — clean white, anti-mould.",
+      "fence": "Fence and grille painting in {city} — anti-rust, colour lasting 3+ years."
+    },
+    "why": {
+      "heading": "Why Choose Us In {city}",
+      "fast": "Fast response — on site in {city} within 24 hours.",
+      "transparent": "Fixed pricing — no hidden costs.",
+      "brands": "All premium brands available in {city}.",
+      "warranty": "12-month warranty on every {city} job."
+    },
+    "faq": {
+      "heading": "FAQ — House Painting {city}",
+      "q1": "How fast can you reach {city}?",
+      "a1": "We have teams near {city} and can be on site within 24 hours.",
+      "q2": "How much does house painting cost in {city}?",
+      "a2": "Interior walls start from RM3.50/sqft in {city}. Exterior starts from RM4.50/sqft.",
+      "q3": "Do you cover all areas of {city}?",
+      "a3": "Yes — full {city} and surrounding postcodes.",
+      "q4": "Which paint brands do you use in {city}?",
+      "a4": "We use Nippon Paint, Jotun, and Dulux across {city}."
+    },
+    "nearby": {
+      "heading": "Nearby Areas",
+      "viewService": "House painting in {city}"
+    },
+    "cta": {
+      "heading": "Need House Painting In {city}?",
+      "subheading": "WhatsApp Cat Rumah Malaysia and we'll arrange a team in {city} for you.",
+      "button": "WhatsApp Cat Rumah Malaysia",
+      "fine": "Free quote · 12-month warranty."
+    },
+    "breadcrumb": { "home": "Home" }
   },
-  "whatsapp": {
-    "cta": "WhatsApp Us",
-    "ariaLabel": "Contact Cat Rumah Malaysia on WhatsApp",
-    "defaultMessage": "Hi, I'm interested in house painting service. Can I get a quotation?"
-  },
-  "language": {
-    "label": "Language",
-    "ms": "Bahasa Melayu",
-    "en": "English",
-    "zh": "中文"
+  "blog": {
+    "meta": {
+      "title": "Cat Rumah Malaysia Blog",
+      "description": "Guides, tips, and pricing for house painting in Malaysia."
+    },
+    "heading": "House Painting Blog",
+    "subheading": "Tips, pricing guides, and trends for Malaysian house painting.",
+    "readMore": "Read more",
+    "publishedOn": "Published on",
+    "backToBlog": "Back to Blog",
+    "shareOnWhatsapp": "Share on WhatsApp",
+    "ctaHeading": "Ready for a newer home?",
+    "ctaSubheading": "Get a free quote within 1 hour.",
+    "ctaButton": "WhatsApp Us Now"
   }
 }

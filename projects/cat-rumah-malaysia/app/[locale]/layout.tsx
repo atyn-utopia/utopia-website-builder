@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import { Inter, Noto_Sans_SC } from 'next/font/google'
 import { NextIntlClientProvider, hasLocale } from 'next-intl'
-import { getMessages, setRequestLocale } from 'next-intl/server'
+import { getMessages, setRequestLocale, getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
+import { siteConfig } from '@/config/site'
 import '../globals.css'
 
 const inter = Inter({
@@ -24,14 +25,33 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
 }
 
-export const metadata: Metadata = {
-  metadataBase: new URL('https://cat-rumah-malaysia.vercel.app'),
-  title: {
-    default: 'Cat Rumah Malaysia | Servis Dari RM3.50/sqft',
-    template: '%s',
-  },
-  description:
-    'Servis cat rumah Malaysia dari RM3.50/sqft. Cat dinding, luar, siling, epoxy lantai & pagar. Nippon, Jotun, Dulux. WhatsApp sekarang!',
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'home.meta' })
+  return {
+    metadataBase: new URL(siteConfig.baseUrl),
+    title: {
+      default: t('title'),
+      template: `%s | ${siteConfig.brandName}`,
+    },
+    description: t('description'),
+    alternates: {
+      canonical: `/${locale}`,
+      languages: {
+        ms: '/ms',
+        en: '/en',
+        zh: '/zh',
+        'x-default': '/ms',
+      },
+    },
+    openGraph: {
+      type: 'website',
+      locale: locale === 'zh' ? 'zh_MY' : locale === 'en' ? 'en_MY' : 'ms_MY',
+      url: `${siteConfig.baseUrl}/${locale}`,
+      siteName: siteConfig.brandName,
+    },
+    robots: { index: true, follow: true },
+  }
 }
 
 type Props = {
@@ -55,7 +75,8 @@ export default async function LocaleLayout({ children, params }: Props) {
       className={`${inter.variable} ${notoSC.variable}`}
     >
       <head>
-        <script defer src="https://utopia-webcore.vercel.app/t.js" data-website="cat-rumah-malaysia.vercel.app"></script>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <script defer src="https://webcore.utopiaai.my/t.js" data-website={siteConfig.domain}></script>
       </head>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>

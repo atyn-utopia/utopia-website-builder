@@ -1,266 +1,265 @@
 {
-  "meta": {
-    "homeTitle": "Cat Rumah Malaysia | Servis Dari RM3.50/sqft",
-    "homeDescription": "Servis cat rumah Malaysia dari RM3.50/sqft. Cat dinding, luar, siling, epoxy lantai & pagar. Nippon, Jotun, Dulux. WhatsApp sekarang!"
-  },
-  "fomo": {
-    "text": "Promo April 2026 — Cat rumah dari RM3.50/sqft. Quote percuma dalam 1 jam. WhatsApp sekarang."
-  },
+  "logoAlt": "Logo Cat Rumah Malaysia",
+  "imageAlt": "Cat rumah Malaysia — kontraktor cat profesional",
   "nav": {
-    "brand": "Cat Rumah Malaysia",
+    "logoAlt": "Logo Cat Rumah Malaysia",
     "home": "Utama",
-    "services": "Servis",
-    "reviews": "Ulasan",
-    "gallery": "Galeri",
+    "products": "Servis",
+    "calculator": "Kira Harga",
     "locations": "Lokasi",
-    "faq": "Soalan Lazim",
-    "cta": "WhatsApp Kami"
-  },
-  "hero": {
-    "eyebrow": "CAT RUMAH MALAYSIA",
-    "h1Line1": "Rumah Lama Terus",
-    "h1Highlight": "Nampak Baru",
-    "h1Line2": "Dalam 5 Jam!",
-    "subheadline": "Kontraktor cat profesional guna Nippon Paint, Jotun & Dulux — tanpa bayaran tersembunyi.",
-    "priceBadge": "Dari RM3.50/sqft",
-    "cta": "WhatsApp Kami Sekarang",
-    "ctaSecondary": "Lihat Kerja Kami",
-    "trustRating": "4.9/5 Google",
-    "trustHomes": "500+ rumah dicat",
-    "trustYears": "8+ tahun pengalaman",
-    "trustGuarantee": "Jaminan kepuasan"
-  },
-  "stats": {
-    "rating": "4.9/5",
-    "ratingLabel": "Ulasan Google",
-    "homes": "500+",
-    "homesLabel": "Rumah telah dicat",
-    "years": "8+",
-    "yearsLabel": "Tahun pengalaman",
-    "brands": "3",
-    "brandsLabel": "Jenama premium"
+    "reviews": "Ulasan",
+    "blog": "Blog",
+    "whatsappCta": "WhatsApp"
   },
   "products": {
-    "eyebrow": "SERVIS KAMI",
-    "heading": "6 Servis Cat Rumah Kami",
-    "subheading": "Satu pasukan, satu jaminan — untuk setiap permukaan rumah anda.",
-    "interior": {
-      "title": "Cat Dinding Rumah",
-      "description": "Cat dalam rumah direka untuk ubah suasana & mood ruang anda. Guna cat premium Nippon Paint Odour-less."
-    },
-    "texture": {
-      "title": "Texture Painting",
-      "description": "Dinding bertekstur unik — tampil moden dan premium.",
-      "laborOnly": "Upah Sahaja",
-      "laborOnlyPrice": "Dari RM2,000",
-      "laborAndPaint": "Upah & Cat",
-      "laborAndPaintPrice": "Dari RM2,500"
-    },
-    "marble": {
-      "title": "Marble Painting",
-      "description": "Kesan marmar mewah tanpa kos batu asli.",
-      "laborOnly": "Upah Sahaja",
-      "laborOnlyPrice": "Dari RM2,000",
-      "laborAndPaint": "Upah & Cat",
-      "laborAndPaintPrice": "Dari RM2,500"
-    },
-    "exterior": {
-      "title": "Cat Luar Rumah",
-      "description": "Rumah anda lebih cantik & tahan cuaca dengan cat luar premium."
-    },
-    "weathershield": {
-      "title": "Weathershield Paint",
-      "description": "Cat kalis hujan, matahari & lembap — tahan cuaca Malaysia."
-    },
-    "metal": {
-      "title": "Outdoor Metal Paint",
-      "description": "Grill, auto-gate & railing — warna kekal 3 tahun+.",
-      "laborOnly": "Upah Sahaja",
-      "laborOnlyPrice": "Dari RM1,800",
-      "laborAndPaint": "Upah & Cat",
-      "laborAndPaintPrice": "Dari RM3,000"
-    },
-    "otherServices": "Servis Tambahan",
-    "ceiling": {
-      "title": "Cat Siling",
-      "description": "Cat siling rumah putih bersih.",
-      "price": "Dari RM3.50/sqft"
-    },
-    "epoxy": {
-      "title": "Cat Epoxy Lantai",
-      "description": "Cat epoxy lantai rumah (garaj, dapur besar).",
-      "price": "Dari RM2,000"
-    },
-    "fence": {
-      "title": "Cat Pagar Rumah",
-      "description": "Cat pagar batu & besi untuk nampak mewah.",
-      "price": "Quote di tapak"
-    },
-    "ctaGeneric": "Tanya Harga Sekarang"
-  },
-  "howItWorks": {
-    "eyebrow": "3 LANGKAH SAHAJA",
-    "heading": "Cara Tempah Dalam 3 Langkah",
-    "subheading": "Tanpa borang panjang, tanpa jual tekan — mula dari WhatsApp.",
-    "step1": {
-      "title": "Hubungi Kami di WhatsApp",
-      "description": "Hantar gambar rumah anda. Kami balas dalam 1 jam dengan anggaran awal."
-    },
-    "step2": {
-      "title": "Lawatan Tapak & Quote Percuma",
-      "description": "Pasukan kami datang ukur, pilih warna, dan serahkan harga tetap — tanpa kos tersembunyi."
-    },
-    "step3": {
-      "title": "Siap Sepantas 5 Jam",
-      "description": "Untuk kerja kecil, rumah anda siap dicat dalam hari yang sama. Projek besar disiapkan dalam 1–3 hari."
-    }
-  },
-  "riskProblem": {
-    "eyebrow": "MASALAH BIASA",
-    "heading": "Masalah Rumah Anda Sekarang",
-    "body": "Tanpa cat baru, rumah anda cepat nampak lama dan kusam. Berikut tanda-tanda yang anda patut buat sesuatu hari ini.",
-    "problem1": {
-      "title": "Dinding pudar & kusam",
-      "description": "Rumah nampak lama walaupun baru 5 tahun."
-    },
-    "problem2": {
-      "title": "Retak rambut & kulat hitam",
-      "description": "Tanda lembap menyerap masuk — boleh jadi lebih teruk kalau dibiarkan."
-    },
-    "problem3": {
-      "title": "Kos renovasi melangit",
-      "description": "Kontraktor lain caj RM10k+ untuk kerja yang patut jadi RM3k."
-    },
-    "problem4": {
-      "title": "Grill berkarat & pagar reput",
-      "description": "Karat merebak dan boleh hancurkan kemasan baru kalau tak dirawat dulu."
-    }
-  },
-  "midCta": {
-    "heading": "Berhenti Tangguh. Mula Cat Hari Ini.",
-    "line": "Dapatkan quote percuma dalam 1 jam — tanpa ikatan, tanpa deposit dahulu.",
-    "cta": "WhatsApp Kami Sekarang"
-  },
-  "reviews": {
-    "eyebrow": "ULASAN SEBENAR",
-    "heading": "Apa Pelanggan Kami Kata Di Google",
-    "subheading": "4.9/5 bintang · 200+ ulasan disahkan Google",
-    "googleLabel": "Reviewed on",
-    "googleBrand": "Google",
-    "review1": {
-      "text": "Dari awal WhatsApp sampai siap dalam hari yang sama. Dinding ruang tamu saya nampak macam rumah show unit. Terbaik!",
-      "name": "Aminah R.",
-      "location": "Kuala Lumpur"
-    },
-    "review2": {
-      "text": "Harga jujur, tak ada caj tersembunyi. Pakai Jotun dan kemasan sangat rapi. Dah tempah untuk rumah mak saya pula.",
-      "name": "Jason T.",
-      "location": "Petaling Jaya"
-    },
-    "review3": {
-      "text": "Cat weathershield rumah dua tingkat. Pasukan datang ikut masa dan siap awal sehari. 5 bintang memang layak.",
-      "name": "Mr Lim",
-      "location": "Johor Bahru"
-    },
-    "review4": {
-      "text": "Saya ingat cat rumah mahal. Rupanya Cat Rumah Malaysia bagi harga RM3.50/sqft je. Jimat RM5k dari quote kontraktor lain.",
-      "name": "Siti N.",
-      "location": "Shah Alam"
-    },
-    "review5": {
-      "text": "Kontraktor lain caj RM8k, tapi Cat Rumah Malaysia bagi RM4.5k sahaja untuk rumah teres dua tingkat. Kualiti pun guna Nippon premium. Memang berbaloi!",
-      "name": "Faizal H.",
-      "location": "Puchong"
-    },
-    "review6": {
-      "text": "Kedai saya dekat Cheras perlu cat semula sebab dinding kotor dan pecah. Siap dalam 2 hari, pelanggan pun puji nampak macam kedai baru. Sangat profesional.",
-      "name": "David C.",
-      "location": "Cheras"
-    }
-  },
-  "whyChoose": {
-    "eyebrow": "KELEBIHAN KAMI",
-    "heading": "Kenapa Pilih Cat Rumah Malaysia",
-    "reason1": {
-      "title": "Jenama Premium Sahaja",
-      "description": "Kami hanya pakai Nippon Paint, Jotun dan Dulux — bukan cat ekonomi murah."
-    },
-    "reason2": {
-      "title": "Siap Sepantas 5 Jam",
-      "description": "Untuk kerja bilik atau ruang tamu, anda boleh balik ke rumah baru dalam sehari."
-    },
-    "reason3": {
-      "title": "Quote Percuma, Tiada Ikatan",
-      "description": "Lawatan tapak dan sebut harga tetap tanpa caj awal."
-    },
-    "reason4": {
-      "title": "Jaminan Kepuasan",
-      "description": "Kalau ada calar atau tompok, kami datang balik dan cat semula — percuma."
-    }
-  },
-  "gallery": {
-    "eyebrow": "GALERI KERJA",
-    "heading": "Galeri Kerja Kami",
-    "subheading": "Rumah sebenar pelanggan kami di Kuala Lumpur, PJ, Shah Alam dan seluruh Malaysia."
-  },
-  "locations": {
-    "eyebrow": "LIPUTAN KAMI",
-    "heading": "Kami Beroperasi Di Seluruh Malaysia",
-    "subheading": "16 bandar utama — dari Lembah Klang ke Johor Bahru dan Pulau Pinang. Klik bandar anda untuk harga dan masa kerja.",
-    "regions": {
-      "klangValley": "Lembah Klang",
-      "southern": "Selatan Semenanjung",
-      "northern": "Utara Semenanjung"
-    }
-  },
-  "faq": {
-    "eyebrow": "SOALAN LAZIM",
-    "heading": "Soalan Lazim Cat Rumah Malaysia",
-    "q1": "Berapa harga cat rumah per kaki persegi?",
-    "a1": "Harga standard kami mula dari RM3.50/sqft untuk cat dinding dalaman menggunakan Nippon Paint. Harga termasuk cat, tenaga kerja, tutup lantai dan pembersihan. Harga tetap kekal selepas lawatan tapak — tiada caj tambahan tersembunyi.",
-    "q2": "Berapa lama kerja cat rumah perlu ambil masa?",
-    "a2": "Untuk kerja satu bilik atau ruang tamu, kami boleh siap dalam sepantas 5 jam pada hari yang sama. Rumah teres penuh biasanya mengambil 1–3 hari bergantung kepada saiz dan permukaan yang perlu diperbaiki dahulu.",
-    "q3": "Jenama cat apa yang anda guna?",
-    "a3": "Kami hanya pakai tiga jenama premium: Nippon Paint, Jotun dan Dulux. Anda boleh pilih jenama dan siri mengikut bajet — kami terangkan perbezaan sebelum projek mula.",
-    "q4": "Adakah quote percuma?",
-    "a4": "Ya. Kami hantar pasukan untuk lawatan tapak dan sebut harga tanpa sebarang caj atau ikatan. Anda boleh batalkan jika harga tidak sesuai — tiada tekanan jualan.",
-    "q5": "Kerja cat meliputi kawasan mana?",
-    "a5": "Kami servis 16 bandar utama di seluruh Malaysia termasuk Kuala Lumpur, Petaling Jaya, Shah Alam, Johor Bahru, Pulau Pinang dan Ipoh.",
-    "q6": "Bagaimana kalau saya tak berpuas hati dengan hasil?",
-    "a6": "Setiap projek dilindungi jaminan kepuasan. Kalau ada calar, tompok atau kemasan tidak rata, kami datang semula dan cat balik kawasan itu — percuma, tanpa soal."
-  },
-  "finalCta": {
-    "eyebrow": "MULA HARI INI",
-    "headline": "Rumah Baru Bermula Hari Ini",
-    "subheadline": "Quote percuma dalam 1 jam. Pasukan profesional. Dari RM3.50/sqft. Tiada ikatan.",
-    "cta": "WhatsApp Kami Sekarang",
-    "ctaSecondary": "Lihat Galeri Kerja"
+    "imageAltTemplate": "Cat rumah {model} — Cat Rumah Malaysia"
   },
   "footer": {
-    "tagline": "Kontraktor cat rumah profesional Malaysia — guna jenama premium Nippon, Jotun dan Dulux.",
-    "servicesHeading": "Servis",
-    "locationsHeading": "Lokasi",
-    "companyHeading": "Syarikat",
-    "about": "Mengenai Kami",
-    "contact": "Hubungi",
+    "tagline": "Kontraktor cat rumah profesional di seluruh Malaysia. Cat dinding dalam & luar, siling, epoxy lantai, dan pagar — guna Nippon, Jotun, Dulux.",
+    "description": "Kontraktor cat rumah profesional di seluruh Malaysia. Cat dinding dalam & luar, siling, epoxy lantai, dan pagar. Jenama premium Nippon, Jotun, Dulux.",
+    "whatsappUs": "WhatsApp Kami",
+    "productsHeading": "Servis",
+    "productsLinks": ["Cat Dinding Dalaman", "Cat Luar Rumah", "Cat Siling", "Cat Epoxy Lantai", "Cat Pagar Rumah"],
+    "locationsHeading": "Lokasi Utama",
+    "resourcesHeading": "Sumber",
+    "blogLabel": "Blog",
+    "faqLabel": "Soalan Lazim",
     "copyright": "© {year} Cat Rumah Malaysia. Hak cipta terpelihara."
   },
+  "finalCta": {
+    "bgAlt": "Rumah siap dicat oleh Cat Rumah Malaysia"
+  },
+  "home": {
+    "meta": {
+      "title": "Cat Rumah Malaysia | Servis Dari RM3.50/sqft",
+      "description": "Servis cat rumah Malaysia dari RM3.50/sqft. Cat dinding, luar, siling, epoxy lantai & pagar. Nippon, Jotun, Dulux. WhatsApp sekarang."
+    },
+    "fomo": {
+      "promo": "Promo bulan ini — quote percuma dalam 1 jam.",
+      "slotsLeft": "Hanya {slots} slot lagi untuk minggu ini!",
+      "bookNow": "Tempah sekarang"
+    },
+    "hero": {
+      "badgeCertified": "Kontraktor Cat Bertauliah",
+      "badgeCities": "20+ Bandar Diliputi",
+      "headline": "Rumah Lama Nampak Baru",
+      "headlineHighlight": "Dalam 5 Jam",
+      "subheadline": "Kontraktor cat profesional Malaysia guna Nippon Paint, Jotun dan Dulux. Quote percuma dalam 1 jam, harga tetap tanpa kos tersembunyi.",
+      "cta": "WhatsApp Kami Sekarang",
+      "ctaSubtext": "Quote percuma · Respons dalam 1 jam",
+      "heroAlt": "Kontraktor cat rumah profesional Malaysia"
+    },
+    "usp": {
+      "usp1Title": "Quote Percuma",
+      "usp1Sub": "Hantar gambar via WhatsApp, kami balas dengan anggaran dalam 1 jam.",
+      "usp2Title": "Cat Premium",
+      "usp2Sub": "Nippon Paint, Jotun, Dulux — bukan cat ekonomi murahan.",
+      "usp3Title": "Jaminan 1 Tahun",
+      "usp3Sub": "Calar atau tompok dalam 12 bulan? Kami cat semula percuma."
+    },
+    "products": {
+      "tag": "SERVIS KAMI",
+      "heading": "6 Servis Cat Rumah Kami",
+      "subheading": "Satu pasukan, satu jaminan — untuk setiap permukaan rumah anda.",
+      "interior": {
+        "title": "Cat Dinding Dalaman",
+        "description": "Cat dalam rumah ubah suasana ruang. Guna Nippon Paint Odour-less premium.",
+        "price": "Dari RM3.50/sqft"
+      },
+      "exterior": {
+        "title": "Cat Luar Rumah",
+        "description": "Tahan cuaca Malaysia — kalis hujan, matahari dan lembap.",
+        "price": "Dari RM4.50/sqft"
+      },
+      "ceiling": {
+        "title": "Cat Siling",
+        "description": "Siling rumah putih bersih, kalis kulat.",
+        "price": "Dari RM3.50/sqft"
+      },
+      "epoxy": {
+        "title": "Cat Epoxy Lantai",
+        "description": "Lantai garaj dan dapur besar dengan kemasan epoxy.",
+        "price": "Dari RM2,000"
+      },
+      "fence": {
+        "title": "Cat Pagar Rumah",
+        "description": "Cat pagar batu dan besi untuk nampak mewah.",
+        "price": "Dari RM1,800"
+      },
+      "weathershield": {
+        "title": "Weathershield Premium",
+        "description": "Cat kalis cuaca tahan 5+ tahun, warna tak pudar.",
+        "price": "Dari RM5.50/sqft"
+      },
+      "bookNow": "Tanya Harga Sekarang",
+      "disclaimer": "Harga muktamad bergantung kepada lawatan tapak dan keluasan permukaan."
+    },
+    "whyChoose": {
+      "tag": "KELEBIHAN KAMI",
+      "heading": "Kenapa Pilih Cat Rumah Malaysia",
+      "reason1": { "title": "Jenama Premium Sahaja", "description": "Kami hanya pakai Nippon Paint, Jotun dan Dulux — bukan cat ekonomi murah." },
+      "reason2": { "title": "Siap Sepantas 5 Jam", "description": "Untuk kerja bilik atau ruang tamu, rumah anda siap dicat dalam sehari." },
+      "reason3": { "title": "Quote Percuma, Tiada Ikatan", "description": "Lawatan tapak dan sebut harga tetap tanpa caj awal." },
+      "reason4": { "title": "Jaminan Kepuasan", "description": "Calar atau tompok dalam 12 bulan? Kami cat semula percuma." },
+      "reason5": { "title": "Kontraktor Bertauliah", "description": "Pasukan berlesen dengan 8+ tahun pengalaman dalam industri." },
+      "reason6": { "title": "Liputan Seluruh Malaysia", "description": "Dari KL ke Pulau Pinang, kami sampai ke pintu rumah anda." }
+    },
+    "howItWorks": {
+      "tag": "3 LANGKAH SAHAJA",
+      "heading": "Cara Tempah Dalam 3 Langkah",
+      "step1Num": "01",
+      "step1Title": "WhatsApp Gambar",
+      "step1Desc": "Hantar gambar rumah anda. Kami balas dalam 1 jam dengan anggaran awal.",
+      "step2Num": "02",
+      "step2Title": "Quote Tetap",
+      "step2Desc": "Lawatan tapak percuma. Pilih warna dan dapatkan harga tetap.",
+      "step3Num": "03",
+      "step3Title": "Siap Sepantas 5 Jam",
+      "step3Desc": "Kerja kecil siap hari sama. Projek besar disiapkan dalam 1–3 hari.",
+      "cta": "WhatsApp Kami Sekarang"
+    },
+    "reviews": {
+      "tag": "ULASAN SEBENAR",
+      "heading": "Apa Pelanggan Kami Kata Di Google",
+      "subheading": "4.9/5 bintang · 200+ ulasan disahkan Google",
+      "googleReviews": "Reviewed on Google",
+      "reviewCount": "Berdasarkan 200+ ulasan disahkan",
+      "review1Text": "Dari awal WhatsApp sampai siap dalam hari yang sama. Dinding ruang tamu nampak macam rumah show unit. Terbaik!",
+      "review1Name": "Aminah R.",
+      "review1Location": "Kuala Lumpur",
+      "review2Text": "Harga jujur, tak ada caj tersembunyi. Pakai Jotun dan kemasan sangat rapi. Dah tempah untuk rumah mak saya pula.",
+      "review2Name": "Jason T.",
+      "review2Location": "Petaling Jaya",
+      "review3Text": "Cat weathershield rumah dua tingkat. Pasukan datang ikut masa dan siap awal sehari. 5 bintang memang layak.",
+      "review3Name": "Mr Lim",
+      "review3Location": "Johor Bahru",
+      "review4Text": "Saya ingat cat rumah mahal. Rupanya Cat Rumah Malaysia bagi harga RM3.50/sqft je. Jimat RM5k dari quote kontraktor lain.",
+      "review4Name": "Siti N.",
+      "review4Location": "Shah Alam",
+      "review5Text": "Kontraktor lain caj RM8k, tapi Cat Rumah Malaysia bagi RM4.5k sahaja untuk rumah teres dua tingkat. Kualiti pun guna Nippon premium.",
+      "review5Name": "Faizal H.",
+      "review5Location": "Puchong",
+      "review6Text": "Kedai saya perlu cat semula sebab dinding kotor. Siap dalam 2 hari, pelanggan pun puji nampak macam kedai baru. Sangat profesional.",
+      "review6Name": "David C.",
+      "review6Location": "Cheras"
+    },
+    "gallery": {
+      "tag": "GALERI KERJA",
+      "heading": "Lihat Kerja Kami",
+      "imageAlt": "Kerja cat rumah {number} — Cat Rumah Malaysia",
+      "alts": [
+        "Cat dinding dalaman ruang tamu — kemasan rapi",
+        "Cat luar rumah teres dua tingkat",
+        "Cat siling putih kalis kulat",
+        "Cat pagar besi auto-gate warna baru",
+        "Epoxy lantai garaj kemasan licin",
+        "Weathershield cat luar tahan cuaca",
+        "Cat bilik tidur warna pastel",
+        "Cat dapur kemasan oil-based",
+        "Marble painting kesan mewah",
+        "Texture painting dinding aksen",
+        "Cat rumah bungalow lengkap",
+        "Cat dinding kedai komersial"
+      ]
+    },
+    "faq": {
+      "tag": "SOALAN LAZIM",
+      "heading": "Soalan Lazim Cat Rumah",
+      "q1": "Berapa kos cat rumah teres dua tingkat di Malaysia?",
+      "a1": "Untuk rumah teres dua tingkat (kira-kira 1,800 sqft luas dinding), kos biasa antara RM6,000 hingga RM10,000 termasuk cat premium dan upah.",
+      "q2": "Adakah anda guna cat Nippon Paint, Jotun atau Dulux?",
+      "a2": "Ya, kami pakai ketiga-tiga jenama premium ini. Pelanggan boleh pilih ikut bajet.",
+      "q3": "Berapa lama untuk siapkan cat satu rumah?",
+      "a3": "Kerja bilik atau ruang tamu siap dalam 5 jam. Rumah teres satu tingkat 1–2 hari. Rumah dua tingkat 2–4 hari.",
+      "q4": "Adakah quote dikenakan caj?",
+      "a4": "Tidak. Lawatan tapak dan sebut harga adalah percuma tanpa ikatan.",
+      "q5": "Apa jaminan yang anda beri?",
+      "a5": "Kami beri jaminan 12 bulan. Kalau ada calar atau tompok dalam tempoh ini, kami cat semula tanpa caj.",
+      "q6": "Adakah anda servis luar Lembah Klang?",
+      "a6": "Ya, kami sampai ke Pulau Pinang, Johor Bahru, Ipoh, Melaka dan Seremban. Kos perjalanan termasuk dalam quote.",
+      "q7": "Boleh saya pilih warna sendiri?",
+      "a7": "Sudah tentu. Pasukan kami bawa fan deck semasa lawatan, atau hantar gambar inspirasi via WhatsApp.",
+      "q8": "Adakah anda buang perabot semasa kerja?",
+      "a8": "Kami tutup perabot dengan dust sheet. Perabot berat disyorkan dialihkan terlebih dahulu."
+    },
+    "locations": {
+      "tag": "KAWASAN LIPUTAN",
+      "heading": "Servis Kami Di Seluruh Malaysia",
+      "subheading": "Klik bandar di bawah untuk maklumat penuh.",
+      "cities": "bandar"
+    },
+    "finalCta": {
+      "headline": "Sedia Untuk Rumah",
+      "headlineHighlight": "Baru?",
+      "subheadline": "Dapatkan quote percuma dalam 1 jam — tanpa ikatan, tanpa deposit dahulu.",
+      "cta": "WhatsApp Kami Sekarang",
+      "fine": "Quote percuma · Respons dalam 1 jam · Jaminan 12 bulan"
+    }
+  },
   "location": {
-    "nearbyHeading": "Juga Berkhidmat Di Kawasan Berdekatan",
-    "viewAll": "Lihat semua lokasi",
-    "breadcrumbsHome": "Utama",
-    "breadcrumbsService": "Servis Cat Rumah",
-    "whyCityHeading": "Kenapa Pilih Kami Di Bandar Anda"
+    "meta": {
+      "title": "Cat Rumah {city} | Servis Dari RM3.50/sqft — Cat Rumah Malaysia",
+      "description": "Cari kontraktor cat rumah di {city}? Cat Rumah Malaysia menawarkan servis cat dinding, luar, siling dan pagar dari RM3.50/sqft."
+    },
+    "hero": {
+      "badge": "Kontraktor Cat Bertauliah · {city}",
+      "headline": "Cat Rumah",
+      "headlineHighlight": "di {city}",
+      "subheadline": "Kontraktor cat profesional di {city} guna Nippon Paint, Jotun dan Dulux. Quote percuma dalam 1 jam.",
+      "cta": "WhatsApp Kami di {city}",
+      "ctaSubtext": "Quote percuma · Respons dalam 1 jam",
+      "heroAlt": "Kontraktor cat rumah di {city}"
+    },
+    "services": {
+      "heading": "Servis Cat Rumah Di {city}",
+      "interior": "Cat dinding dalaman di {city} — Nippon Odour-less premium, kemasan rapi.",
+      "exterior": "Cat luar rumah di {city} — weathershield tahan cuaca Malaysia.",
+      "ceiling": "Cat siling di {city} — putih bersih, kalis kulat.",
+      "fence": "Cat pagar dan grill di {city} — anti-karat, warna tahan 3+ tahun."
+    },
+    "why": {
+      "heading": "Kenapa Pilih Kami Di {city}",
+      "fast": "Respons pantas — sampai {city} dalam masa 24 jam.",
+      "transparent": "Harga tetap, tanpa kos tersembunyi.",
+      "brands": "Semua jenama premium dilayan di {city}.",
+      "warranty": "Jaminan 12 bulan untuk setiap kerja di {city}."
+    },
+    "faq": {
+      "heading": "Soalan Lazim — Cat Rumah {city}",
+      "q1": "Berapa cepat anda sampai {city}?",
+      "a1": "Kami ada pasukan dekat {city} dan boleh datang dalam masa 24 jam.",
+      "q2": "Berapa kos cat rumah di {city}?",
+      "a2": "Cat dinding dalaman di {city} bermula RM3.50/sqft. Cat luar bermula RM4.50/sqft.",
+      "q3": "Adakah anda cover semua kawasan {city}?",
+      "a3": "Ya, kami liputi seluruh {city} dan poskod sekitar.",
+      "q4": "Jenama cat apa yang anda guna di {city}?",
+      "a4": "Kami pakai Nippon Paint, Jotun dan Dulux di {city}."
+    },
+    "nearby": {
+      "heading": "Kawasan Berdekatan",
+      "viewService": "Cat rumah di {city}"
+    },
+    "cta": {
+      "heading": "Perlu Cat Rumah Di {city}?",
+      "subheading": "WhatsApp Cat Rumah Malaysia sekarang dan kami akan aturkan pasukan di {city}.",
+      "button": "WhatsApp Cat Rumah Malaysia",
+      "fine": "Quote percuma · Jaminan 12 bulan."
+    },
+    "breadcrumb": { "home": "Utama" }
   },
-  "whatsapp": {
-    "cta": "WhatsApp Sekarang",
-    "ariaLabel": "Hubungi Cat Rumah Malaysia melalui WhatsApp",
-    "defaultMessage": "Hi, saya berminat untuk servis cat rumah. Boleh dapatkan quotation?"
-  },
-  "language": {
-    "label": "Bahasa",
-    "ms": "Bahasa Melayu",
-    "en": "English",
-    "zh": "中文"
+  "blog": {
+    "meta": {
+      "title": "Blog Cat Rumah Malaysia",
+      "description": "Panduan, tip dan harga cat rumah Malaysia. Belajar pilih cat, jimat kos, dan kenal pasti masalah dinding."
+    },
+    "heading": "Blog Cat Rumah",
+    "subheading": "Tip, panduan harga, dan trend cat rumah di Malaysia.",
+    "readMore": "Baca Penuh",
+    "publishedOn": "Diterbit pada",
+    "backToBlog": "Kembali ke Blog",
+    "shareOnWhatsapp": "Kongsi di WhatsApp",
+    "ctaHeading": "Sedia Untuk Rumah Baru?",
+    "ctaSubheading": "Dapatkan quote percuma dalam 1 jam.",
+    "ctaButton": "WhatsApp Kami Sekarang"
   }
 }

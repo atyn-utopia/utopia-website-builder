@@ -1,27 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  /* Brand palette — Fresh Coat */
-  --brand-jade:            #17A890;
-  --brand-jade-dark:       #108074;
-  --brand-jade-soft:       #D7F0EA;
-  --brand-jade-wash:       #ECF7F4;
-  --brand-coral:           #EC6A4A;
-  --brand-coral-soft:      #FDEAE2;
-  --brand-cream:           #FBF7F0;
-  --brand-cream-elevated:  #FFFFFF;
-  --brand-sand:            #F1EAD9;
-  --brand-charcoal:        #1E2430;
-  --brand-charcoal-mid:    #2A313F;
-  --brand-body:            #5A6472;
-  --brand-muted:           #8A94A3;
-  --brand-border:          #E8ECF1;
-  --wa-green:              #25D366;
-  --wa-green-dark:         #1EAD53;
-  --google-blue:           #4285F4;
-  --google-gold:           #FBBC04;
-
-  --font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+  /* Brand palette — Cat Rumah Malaysia */
+  --brand-ink:            #142C50;
+  --brand-accent:         #FFD23F;
+  --brand-cream:          #FAF7F2;
+  --brand-charcoal:       #142C50;
+  --ink:                  #142C50;
+  --muted:                #5B6478;
+  --line:                 rgba(20, 28, 48, 0.10);
+  --line-strong:          rgba(20, 28, 48, 0.16);
+  --wa-green:             #25D366;
+  --wa-green-dark:        #1EAD53;
+  --gut:                  20px;
+  --dur:                  0.18s;
+  --ease-out:             cubic-bezier(0.22, 1, 0.36, 1);
+  --font:                 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -29,206 +23,208 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: var(--font);
-  color: var(--brand-charcoal);
-  background: var(--brand-cream);
+  color: var(--ink);
+  background: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: 1.75;
-  margin: 0;
-  font-feature-settings: "cv11", "ss01";
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font);
-  line-height: 1.1;
-  letter-spacing: -0.025em;
-  color: var(--brand-charcoal);
+  line-height: 1.6;
   margin: 0;
 }
 
 a { color: inherit; text-decoration: none; }
-button { font-family: var(--font); }
 
-/* Hero jade highlight pill inline */
-.hero-highlight {
-  background: var(--brand-jade-soft);
-  color: var(--brand-jade-dark);
-  padding: 0.05em 0.22em;
+.container { max-width: 1180px; margin-left: auto; margin-right: auto; padding-left: var(--gut); padding-right: var(--gut); }
+
+/* ────────────────────────────────────────────────────────────
+   Buttons
+   ──────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 18px;
   border-radius: 12px;
-  display: inline-block;
+  font-weight: 700; font-size: 14px;
+  cursor: pointer;
+  transition: transform var(--dur) var(--ease-out), background var(--dur) var(--ease-out), opacity var(--dur) var(--ease-out);
+  border: 1px solid transparent;
+  white-space: nowrap;
 }
+.btn:hover { transform: translateY(-1px); }
+.btn-wa { background: var(--wa-green); color: #fff; }
+.btn-wa:hover { background: var(--wa-green-dark); }
 
-/* Price coral pill */
-.price-pill {
+/* ────────────────────────────────────────────────────────────
+   Language switcher (lsw-*) — element selectors so the rules
+   beat browser defaults. Lives in globals.css (NOT <style jsx>)
+   per the checklist.
+   ──────────────────────────────────────────────────────────── */
+.lsw { position: relative; display: inline-flex; align-items: center; }
+.lsw-toggle {
+  display: none;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+@media (min-width: 880px) {
+  .lsw-toggle { display: inline-flex; }
+  .lsw-trigger { display: none; }
+}
+.lsw-item {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: var(--brand-coral-soft);
-  color: var(--brand-coral);
+  padding: 6px 10px;
   border-radius: 999px;
-  padding: 10px 22px;
-  font-weight: 800;
-  font-size: 18px;
-  letter-spacing: -0.01em;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+  transition: background var(--dur) var(--ease-out), color var(--dur) var(--ease-out);
+  text-decoration: none;
 }
-
-/* WhatsApp primary button */
-.wa-btn {
+.lsw-item:hover { background: rgba(20,28,48,0.06); }
+.lsw-item.is-active { background: var(--ink); color: #fff; }
+.lsw-flag { border-radius: 999px; flex-shrink: 0; }
+.lsw-label { letter-spacing: 0.04em; }
+.lsw-trigger {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: var(--wa-green);
-  color: #fff;
-  font-weight: 700;
-  font-size: 16px;
-  padding: 16px 28px;
+  gap: 6px;
+  padding: 6px 10px;
+  background: #fff;
+  border: 1px solid var(--line-strong);
   border-radius: 999px;
-  box-shadow: 0 10px 28px rgba(37,211,102,0.35);
-  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, background-color 0.3s ease-out;
-  border: none;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
   cursor: pointer;
 }
-.wa-btn:hover { transform: scale(1.04); box-shadow: 0 14px 36px rgba(37,211,102,0.5); background: var(--wa-green-dark); }
-.wa-btn:focus-visible { outline: 3px solid var(--brand-jade); outline-offset: 3px; }
-.wa-btn:active { transform: scale(0.97); }
-
-/* Secondary button (jade outline) */
-.btn-secondary {
+.lsw-trigger-label { letter-spacing: 0.04em; }
+.lsw-caret { opacity: 0.6; }
+.lsw-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 110px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(20,28,48,0.10);
+  padding: 4px;
+  z-index: 50;
+}
+.lsw-menu-item {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 14px 26px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.lsw-menu-item:hover { background: rgba(20,28,48,0.06); }
+.lsw-menu-item.is-active { background: var(--ink); color: #fff; }
+
+/* ────────────────────────────────────────────────────────────
+   USP panel (single container, three cells — checklist rule)
+   ──────────────────────────────────────────────────────────── */
+.usp-panel { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.usp-cell { display: flex; align-items: center; }
+
+/* ────────────────────────────────────────────────────────────
+   Fade-in animation used by FadeSection
+   ──────────────────────────────────────────────────────────── */
+.fade-up { opacity: 0; transform: translateY(12px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ────────────────────────────────────────────────────────────
+   Mobile nav-cta safety: header's own styled-jsx already hides
+   .nav-cta below 880px, but a globals.css rule guards against
+   any future component that emits the class.
+   ──────────────────────────────────────────────────────────── */
+@media (max-width: 879px) {
+  .nav-cta { display: none !important; }
+}
+
+/* ────────────────────────────────────────────────────────────
+   Blog article styles — h2/h3/h4, paragraphs, lists, TOC
+   ──────────────────────────────────────────────────────────── */
+.blog-content { color: var(--ink); font-size: 17px; line-height: 1.7; }
+.blog-content > * + * { margin-top: 1em; }
+.blog-content h1 { font-size: 2.25rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; margin-top: 1.6em; }
+.blog-content h2 {
+  font-size: 1.5rem; font-weight: 800; letter-spacing: -0.01em;
+  margin-top: 2em; margin-bottom: 0.5em;
+  color: var(--brand-ink);
+  border-left: 4px solid var(--brand-accent);
+  padding-left: 14px;
+  line-height: 1.25;
+}
+.blog-content h3 {
+  font-size: 1.2rem; font-weight: 700; line-height: 1.3;
+  margin-top: 1.6em; margin-bottom: 0.4em;
+  color: var(--brand-ink);
+}
+.blog-content h4 {
+  font-size: 1rem; font-weight: 700; line-height: 1.4;
+  margin-top: 1.4em; margin-bottom: 0.3em;
+  color: var(--brand-ink);
+}
+.blog-content p { font-size: 16.5px; line-height: 1.75; color: #2A3550; margin: 0.8em 0; }
+.blog-content strong { font-weight: 700; color: var(--brand-ink); }
+.blog-content em { font-style: italic; }
+.blog-content a { color: #2563EB; text-decoration: underline; text-underline-offset: 3px; }
+.blog-content a:hover { color: #1D4ED8; }
+.blog-content ul, .blog-content ol { padding-left: 1.4em; margin: 1em 0; }
+.blog-content ul { list-style: disc; }
+.blog-content ol { list-style: decimal; }
+.blog-content li { margin: 0.4em 0; line-height: 1.7; }
+.blog-content img { width: 100%; height: auto; border-radius: 12px; margin: 1.6em 0; box-shadow: 0 4px 16px rgba(20,28,48,0.08); }
+.blog-content blockquote {
+  border-left: 4px solid var(--brand-accent);
+  padding: 8px 0 8px 18px;
+  color: var(--muted);
+  font-style: italic;
+  margin: 1.4em 0;
+}
+
+/* Table of contents — both <nav> and .toc are supported so the
+   blog author can use either pattern. */
+.blog-content nav,
+.blog-content .toc {
+  background: var(--brand-cream);
+  border: 1px solid var(--line);
   border-radius: 12px;
-  border: 2px solid var(--brand-jade);
-  color: var(--brand-jade-dark);
-  font-weight: 700;
-  background: transparent;
-  transition: transform 0.3s ease-out, background-color 0.3s ease-out;
+  padding: 18px 22px;
+  margin: 1.4em 0;
 }
-.btn-secondary:hover { background: var(--brand-jade-soft); }
-.btn-secondary:active { transform: scale(0.97); }
-
-/* Eyebrow label */
-.eyebrow {
-  display: inline-block;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
+.blog-content nav::before,
+.blog-content .toc::before {
+  content: "Kandungan / Contents";
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--brand-jade-dark);
-  background: var(--brand-jade-soft);
-  padding: 6px 14px;
-  border-radius: 999px;
+  color: var(--muted);
+  margin-bottom: 10px;
 }
-
-/* Cards */
-.card {
-  background: var(--brand-cream-elevated);
-  border: 1px solid var(--brand-border);
-  border-radius: 20px;
-  box-shadow: 0 1px 2px rgba(30,36,48,0.04), 0 12px 32px -12px rgba(23,168,144,0.14);
-  transition: transform 0.35s ease-out, box-shadow 0.35s ease-out;
-  overflow: hidden;
+.blog-content nav ul,
+.blog-content .toc ul,
+.blog-content nav ol,
+.blog-content .toc ol { margin: 0; padding-left: 1.2em; }
+.blog-content nav li,
+.blog-content .toc li { margin: 6px 0; }
+.blog-content nav a,
+.blog-content .toc a {
+  color: var(--brand-ink);
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 1px dashed rgba(20,28,48,0.20);
 }
-.card:hover { transform: translateY(-4px); box-shadow: 0 4px 12px rgba(30,36,48,0.06), 0 20px 44px -14px rgba(23,168,144,0.28); }
-
-/* Paint-swatch chip band (signature motif) */
-.swatch-band {
-  display: flex;
-  gap: 2px;
-  height: 8px;
-}
-.swatch-band > span { flex: 1; }
-
-/* Section spacing */
-.section {
-  padding-top: clamp(36px, 4vw, 56px);
-  padding-bottom: clamp(36px, 4vw, 56px);
-}
-/* Tighter spacing when same-background sections are adjacent */
-.section + .section { padding-top: clamp(24px, 2.5vw, 40px); }
-.container-p {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-left: clamp(20px, 4vw, 48px);
-  padding-right: clamp(20px, 4vw, 48px);
-}
-
-/* Section backgrounds */
-.bg-cream { background: var(--brand-cream); }
-.bg-jade-wash { background: var(--brand-jade-wash); }
-.bg-elevated { background: var(--brand-cream-elevated); }
-.bg-charcoal { background: linear-gradient(160deg, var(--brand-charcoal) 0%, var(--brand-charcoal-mid) 100%); color: #fff; }
-.bg-jade-gradient { background: linear-gradient(135deg, var(--brand-jade-dark) 0%, var(--brand-jade) 55%, #1EBFA6 100%); color: #fff; }
-
-/* Typography tokens */
-.t-display { font-size: clamp(44px, 6.4vw, 76px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.05; }
-.t-h2 { font-size: clamp(30px, 3.8vw, 44px); font-weight: 800; letter-spacing: -0.025em; line-height: 1.1; }
-.t-h3 { font-size: clamp(22px, 2.4vw, 28px); font-weight: 700; letter-spacing: -0.015em; line-height: 1.2; }
-.t-lead { font-size: clamp(17px, 1.4vw, 20px); font-weight: 400; line-height: 1.65; color: var(--brand-body); }
-.t-body { font-size: 16px; font-weight: 400; line-height: 1.75; color: var(--brand-body); }
-
-/* Focus ring */
-:focus-visible { outline: 3px solid var(--brand-jade); outline-offset: 3px; border-radius: 6px; }
-
-/* Hero floating photo shadow */
-.hero-photo {
-  border-radius: 32px;
-  overflow: hidden;
-  box-shadow: 0 24px 48px -16px rgba(23,168,144,0.28), 0 8px 16px -8px rgba(30,36,48,0.08);
-  position: relative;
-}
-.hero-photo::after {
-  content: "";
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg, transparent 60%, rgba(30,36,48,0.18) 100%);
-  pointer-events: none;
-}
-
-/* FAQ accordion */
-details.faq-row {
-  background: var(--brand-cream-elevated);
-  border: 1px solid var(--brand-border);
-  border-radius: 18px;
-  padding: 20px 24px;
-  transition: border-color 0.3s ease-out;
-}
-details.faq-row[open] { border-color: var(--brand-jade); }
-details.faq-row summary {
-  list-style: none;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  font-weight: 700;
-  font-size: 18px;
-  color: var(--brand-charcoal);
-}
-details.faq-row summary::-webkit-details-marker { display: none; }
-details.faq-row summary::after {
-  content: "+";
-  color: var(--brand-jade);
-  font-size: 24px;
-  font-weight: 700;
-  transition: transform 0.3s ease-out;
-}
-details.faq-row[open] summary::after { content: "−"; }
-details.faq-row p { margin-top: 14px; color: var(--brand-body); line-height: 1.75; }
-
-/* Smaller WA button for product cards */
-.wa-btn-sm {
-  font-size: 14px !important;
-  padding: 12px 20px !important;
-}
-
-/* Mobile full-width WA button */
-@media (max-width: 640px) {
-  .wa-btn { width: 100%; justify-content: center; }
-}
-
-/* reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; transition: none !important; }
-}
+.blog-content nav a:hover,
+.blog-content .toc a:hover { border-bottom-color: var(--brand-ink); color: #1D4ED8; }
