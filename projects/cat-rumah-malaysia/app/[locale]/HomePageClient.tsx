@@ -336,9 +336,9 @@ function CostCalculator({ locale, phoneNumber }: { locale: string; phoneNumber: 
                   onClick={() => setPkg(id)}
                   className="px-3 py-2.5 rounded-xl text-[11px] font-bold text-center"
                   style={{
-                    background: pkg === id ? 'var(--brand-ink)' : 'var(--brand-cream)',
+                    background: pkg === id ? 'var(--brand-blue)' : 'var(--brand-cream)',
                     color: pkg === id ? '#fff' : 'var(--brand-ink)',
-                    border: `1px solid ${pkg === id ? 'var(--brand-ink)' : 'var(--line-strong)'}`,
+                    border: `1px solid ${pkg === id ? 'var(--brand-blue)' : 'var(--line-strong)'}`,
                   }}
                 >
                   {t(`package${id.charAt(0).toUpperCase() + id.slice(1)}` as 'packageSingle' | 'packageMedium' | 'packageLarge')}
@@ -349,8 +349,8 @@ function CostCalculator({ locale, phoneNumber }: { locale: string; phoneNumber: 
         )}
       </div>
 
-      {/* Estimate output */}
-      <div className="rounded-2xl p-6 flex flex-col justify-between" style={{ background: 'linear-gradient(135deg, var(--brand-ink) 0%, var(--brand-ink-deep) 100%)', color: '#fff' }}>
+      {/* Estimate output — blue dark panel per the palette rule (blue = bg) */}
+      <div className="rounded-2xl p-6 flex flex-col justify-between" style={{ background: 'linear-gradient(135deg, var(--brand-blue) 0%, var(--brand-blue-deep) 100%)', color: '#fff' }}>
         <div>
           <span className="block text-[10px] font-bold uppercase tracking-[0.18em]" style={{ color: 'var(--brand-yellow)' }}>{t('estimateLabel')}</span>
           <div className="mt-3 flex items-baseline gap-2">
@@ -483,27 +483,38 @@ export default function HomePageClient({ phoneNumber }: Props) {
               <ProductImpressionTracker key={p.key} slug={p.slug}>
                 <FadeSection delay={i * 40}>
                   <div
-                    className="product-card bg-white rounded-2xl overflow-hidden"
+                    className="product-card bg-white rounded-2xl overflow-hidden flex flex-col"
                     style={{
                       border: '1px solid var(--line)',
                       boxShadow: '0 8px 24px rgba(2, 61, 147, 0.05)',
                       height: '100%',
-                      display: 'grid',
-                      gridTemplateRows: 'auto 1fr',
                     }}
                   >
                     <div className="relative w-full overflow-hidden" style={{ aspectRatio: '4 / 3', background: 'var(--brand-cream)' }}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={p.img} alt={t(`products.${p.key}.title`)} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
                     </div>
-                    <div className="p-5 grid" style={{ gridTemplateRows: 'auto auto 1fr auto', gap: 8 }}>
-                      <h3 className="text-base font-semibold m-0" style={{ color: 'var(--brand-ink)' }}>{t(`products.${p.key}.title`)}</h3>
+                    <div className="p-5 flex flex-col flex-1" style={{ gap: 10 }}>
+                      <h3
+                        className="text-base font-semibold m-0"
+                        style={{
+                          color: 'var(--brand-ink)',
+                          lineHeight: 1.25,
+                          minHeight: 'calc(1.25em * 2)',
+                          display: '-webkit-box',
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: 'vertical',
+                          overflow: 'hidden',
+                        }}
+                      >
+                        {t(`products.${p.key}.title`)}
+                      </h3>
                       {/* Price container — visually separate from the title (cream pill, pink price) */}
                       <div
                         className="inline-flex items-baseline gap-1.5 px-3 py-2 rounded-xl self-start"
                         style={{
                           background: 'var(--brand-cream)',
-                          border: '1px solid rgba(2, 61, 147, 0.08)',
+                          border: '1px solid var(--line)',
                         }}
                       >
                         <span className="text-[10px] font-semibold uppercase tracking-[0.18em]" style={{ color: 'var(--muted)' }}>
@@ -518,15 +529,17 @@ export default function HomePageClient({ phoneNumber }: Props) {
                         style={{
                           color: 'var(--muted)',
                           lineHeight: 1.55,
+                          minHeight: 'calc(1.55em * 3)',
                           display: '-webkit-box',
                           WebkitLineClamp: 3,
                           WebkitBoxOrient: 'vertical',
                           overflow: 'hidden',
+                          flex: 1,
                         }}
                       >
                         {t(`products.${p.key}.description`)}
                       </p>
-                      <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full text-xs font-semibold" style={{ background: '#25D366', color: '#fff' }}>
+                      <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full text-xs font-semibold mt-auto" style={{ background: '#25D366', color: '#fff' }}>
                         <WAIcon /> <span style={{ color: '#fff' }}>{t('products.bookNow')}</span>
                       </WhatsAppClickTracker>
                     </div>
@@ -607,7 +620,7 @@ export default function HomePageClient({ phoneNumber }: Props) {
                 <div className="why-card p-5 rounded-2xl flex gap-4" style={{ background: '#fff', border: '1px solid var(--line)', height: '100%' }}>
                   <span
                     className="shrink-0 inline-flex items-center justify-center rounded-full"
-                    style={{ width: 52, height: 52, background: 'var(--brand-yellow)', color: 'var(--brand-ink)', boxShadow: 'inset 0 0 0 4px rgba(31,42,107,0.08)' }}
+                    style={{ width: 52, height: 52, background: 'var(--brand-yellow)', color: 'var(--brand-blue)', boxShadow: 'inset 0 0 0 4px rgba(2, 61, 147, 0.10)' }}
                     aria-hidden="true"
                   >
                     <ReasonIcon name={r.icon} />
