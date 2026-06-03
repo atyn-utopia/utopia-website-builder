@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 290 80" role="img" aria-label="Katil Hospital 24 Jam">
+  <g fill="#ffffff">
+    <rect x="8" y="44" width="62" height="16" rx="2.5"/>
+    <rect x="4" y="26" width="4.5" height="34" rx="1"/>
+    <rect x="14" y="60" width="3.5" height="11" rx="0.5"/>
+    <rect x="63" y="60" width="3.5" height="11" rx="0.5"/>
+    <circle cx="24" cy="32" r="7"/>
+    <rect x="17" y="38" width="26" height="7" rx="3.5"/>
+  </g>
+  <g font-family="'Inter', system-ui, sans-serif" font-weight="900" letter-spacing="-0.5">
+    <text x="84" y="40" font-size="26" fill="#ffffff">Katil Hospital</text>
+    <text x="84" y="68" font-size="24" fill="#e63030">24 Jam</text>
+  </g>
+</svg>
