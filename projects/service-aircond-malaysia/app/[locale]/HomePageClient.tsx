@@ -160,25 +160,6 @@ export default function HomePageClient({ phoneNumber }: HomePageClientProps) {
   return (
     <>
       <main>
-        {/* ── STATS ── */}
-        <section aria-label="Statistics" style={{ background: 'var(--brand-navy)' }}>
-          <div className="max-w-6xl mx-auto px-6 py-10">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-              {[
-                { value: t('stats.customers'), label: t('stats.customersLabel') },
-                { value: t('stats.response'), label: t('stats.responseLabel') },
-                { value: t('stats.rating'), label: t('stats.ratingLabel') },
-                { value: t('stats.experience'), label: t('stats.experienceLabel') },
-              ].map((stat, i) => (
-                <FadeSection key={i} delay={i * 80}>
-                  <div className="stat-number text-3xl md:text-4xl mb-1 font-extrabold">{stat.value}</div>
-                  <div className="text-[11px] font-medium uppercase tracking-widest" style={{ color: 'var(--brand-blue-light)' }}>{stat.label}</div>
-                </FadeSection>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* ── BRANDS ── */}
         <section className="py-7 px-6" style={{ background: '#fff', borderBottom: '1px solid var(--brand-border)' }} aria-label="Brands we service">
           <div className="max-w-6xl mx-auto">

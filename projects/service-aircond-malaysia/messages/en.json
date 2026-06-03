@@ -80,6 +80,14 @@
       "experience": "8+ Years",
       "experienceLabel": "In Business"
     },
+    "usp": {
+      "usp1Title": "Same-Day Service",
+      "usp1Sub": "Book before 2pm and a technician arrives at your door today.",
+      "usp2Title": "Certified Technicians",
+      "usp2Sub": "Licensed, insured, background-checked aircond specialists only.",
+      "usp3Title": "30-Day Warranty",
+      "usp3Sub": "Free return visit if anything stops working after the job."
+    },
     "brands": {
       "label": "Brands We Service"
     },

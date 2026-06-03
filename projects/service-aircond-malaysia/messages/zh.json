@@ -80,6 +80,14 @@
       "experience": "8+年",
       "experienceLabel": "经营历史"
     },
+    "usp": {
+      "usp1Title": "当日服务",
+      "usp1Sub": "下午2点前预约，技术员当天上门服务。",
+      "usp2Title": "认证技术员",
+      "usp2Sub": "持牌、有保险且经过背景核查的冷气专业人员。",
+      "usp3Title": "30天保固",
+      "usp3Sub": "服务后如有任何问题，免费再次上门处理。"
+    },
     "brands": {
       "label": "服务品牌"
     },
