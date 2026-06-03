@@ -84,7 +84,7 @@ export default async function HomePage({ params }: Props) {
         className="relative overflow-hidden"
         style={{
           backgroundImage:
-            'linear-gradient(135deg, rgba(31, 42, 107, 0.90) 0%, rgba(22, 32, 79, 0.92) 50%, rgba(15, 24, 64, 0.96) 100%), url(/images/painters/painter-bg.png)',
+            'linear-gradient(135deg, rgba(2, 61, 147, 0.90) 0%, rgba(2, 42, 102, 0.92) 50%, rgba(2, 30, 76, 0.96) 100%), url(/images/painters/painter-bg.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -112,7 +112,7 @@ export default async function HomePage({ params }: Props) {
             {tHero('badgeCertified')} · {tHero('badgeCities')}
           </h6>
           <h1
-            className="font-extrabold leading-[1.05] tracking-tight mx-auto"
+            className="font-bold leading-[1.05] tracking-tight mx-auto"
             style={{ fontSize: 'clamp(2rem, 5.2vw, 3.25rem)', letterSpacing: '-0.03em' }}
           >
             {tHero('headline')}{' '}
@@ -127,7 +127,7 @@ export default async function HomePage({ params }: Props) {
             {[tHero('tag1'), tHero('tag2'), tHero('tag3')].map((label) => (
               <span
                 key={label}
-                className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider"
+                className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider"
                 style={{ background: 'rgba(255,210,63,0.18)', border: '1px solid rgba(255,210,63,0.36)', color: '#FFD23F' }}
               >
                 <span className="h-1.5 w-1.5 rounded-full" style={{ background: '#FFD23F' }} aria-hidden="true" />

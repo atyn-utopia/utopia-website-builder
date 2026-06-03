@@ -117,17 +117,18 @@ const ReasonIcon = ({ name }: { name: typeof reasonItems[number]['icon'] }) => {
 const faqIndexes = [1, 2, 3, 4, 5, 6, 7, 8]
 const reviewIndexes = [1, 2, 3, 4, 5, 6]
 
-// Before/After pairs — realistic stock photography of paint transformations.
-// Each pair is the SAME room type (interior, exterior, accent wall) shown
-// pre- and post-paint so the slider reads as a real transformation.
-const UNSPLASH = (id: string) => `https://images.unsplash.com/${id}?w=900&q=80&auto=format&fit=crop`
+// Before/After pairs — stable Unsplash photo IDs that resolve reliably on
+// the CDN. Each pair is the SAME room type (interior, exterior, accent
+// wall) shown pre- and post-paint so the slider reads as a real
+// transformation.
+const UNSPLASH = (id: string) => `https://images.unsplash.com/${id}?w=900&h=900&q=80&auto=format&fit=crop&crop=center`
 const beforeAfterPairs = [
-  // Interior room — bare/raw wall → freshly painted interior
-  { before: UNSPLASH('photo-1503387762-592deb58ef4e'), after: UNSPLASH('photo-1567016526105-22da7c13b9e2'), captionKey: 'pair2Caption' },
-  // Exterior — weathered facade → repainted exterior
-  { before: UNSPLASH('photo-1559070081-648fb04b6b27'), after: UNSPLASH('photo-1564540583246-934409427776'), captionKey: 'pair1Caption' },
-  // Kitchen / accent wall — old dim wall → fresh accent paint
-  { before: UNSPLASH('photo-1556909114-44e3e9399a2e'), after: UNSPLASH('photo-1556909172-54557c7e4fb7'), captionKey: 'pair3Caption' },
+  // Interior — empty/raw room → freshly painted modern interior
+  { before: UNSPLASH('photo-1513694203232-719a280e022f'), after: UNSPLASH('photo-1505691938895-1758d7feb511'), captionKey: 'pair2Caption' },
+  // Exterior — weathered/older house → freshly painted exterior
+  { before: UNSPLASH('photo-1506744038136-46273834b3fb'), after: UNSPLASH('photo-1518780664697-55e3ad937233'), captionKey: 'pair1Caption' },
+  // Living/accent wall — older dim wall → fresh painted living room
+  { before: UNSPLASH('photo-1502672260266-1c1ef2d93688'), after: UNSPLASH('photo-1493809842364-78817add7ffb'), captionKey: 'pair3Caption' },
 ] as const
 
 // Draggable before/after comparison slider. Pointer events handle both mouse
@@ -171,13 +172,13 @@ function BeforeAfterSlider({ before, after, beforeLabel, afterLabel }: { before:
       {/* After (bottom layer) */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={after} alt={afterLabel} className="absolute inset-0 w-full h-full object-cover" draggable={false} />
-      <span className="absolute bottom-3 right-3 z-20 text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-full" style={{ background: 'var(--brand-yellow)', color: 'var(--brand-ink)' }}>{afterLabel}</span>
+      <span className="absolute bottom-3 right-3 z-20 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full" style={{ background: 'var(--brand-yellow)', color: 'var(--brand-ink)' }}>{afterLabel}</span>
 
       {/* Before (top layer, clipped) */}
       <div className="absolute inset-0 overflow-hidden" style={{ width: `${pos}%` }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={before} alt={beforeLabel} className="absolute inset-0 h-full object-cover" style={{ width: ref.current?.clientWidth ? `${ref.current.clientWidth}px` : '100%' }} draggable={false} />
-        <span className="absolute bottom-3 left-3 text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-full" style={{ background: 'var(--brand-ink)', color: '#fff' }}>{beforeLabel}</span>
+        <span className="absolute bottom-3 left-3 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full" style={{ background: 'var(--brand-ink)', color: '#fff' }}>{beforeLabel}</span>
       </div>
 
       {/* Divider + drag handle */}
@@ -269,7 +270,7 @@ function CostCalculator({ locale, phoneNumber }: { locale: string; phoneNumber: 
   const packageServices = CALC_SERVICES.filter((s) => s.mode === 'package')
 
   return (
-    <div className="rounded-2xl p-6 md:p-8 grid md:grid-cols-2 gap-6 md:gap-8" style={{ background: '#fff', border: '1px solid var(--line)', boxShadow: '0 20px 50px rgba(31, 42, 107, 0.08)' }}>
+    <div className="rounded-2xl p-6 md:p-8 grid md:grid-cols-2 gap-6 md:gap-8" style={{ background: '#fff', border: '1px solid var(--line)', boxShadow: '0 20px 50px rgba(2, 61, 147, 0.08)' }}>
       {/* Inputs */}
       <div className="flex flex-col gap-4">
         <div>
@@ -280,8 +281,7 @@ function CostCalculator({ locale, phoneNumber }: { locale: string; phoneNumber: 
             id="calc-service"
             value={serviceKey}
             onChange={(e) => setServiceKey(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl text-sm font-semibold"
-            style={{ background: 'var(--brand-cream)', border: '1px solid var(--line-strong)', color: 'var(--brand-ink)' }}
+            className="calc-select w-full px-4 py-3 rounded-xl text-sm font-semibold"
           >
             <optgroup label="Per sqft">
               {sqftServices.map((s) => (
@@ -355,7 +355,7 @@ function CostCalculator({ locale, phoneNumber }: { locale: string; phoneNumber: 
           <span className="block text-[10px] font-bold uppercase tracking-[0.18em]" style={{ color: 'var(--brand-yellow)' }}>{t('estimateLabel')}</span>
           <div className="mt-3 flex items-baseline gap-2">
             <span className="text-2xl font-bold" style={{ color: 'rgba(255,255,255,0.7)' }}>RM</span>
-            <span className="text-5xl font-extrabold tabular-nums" style={{ color: '#fff', letterSpacing: '-0.02em' }}>{formatRM(estimate)}</span>
+            <span className="text-5xl font-bold tabular-nums" style={{ color: '#fff', letterSpacing: '-0.02em' }}>{formatRM(estimate)}</span>
           </div>
           <p className="text-xs font-normal mt-3" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: 1.6 }}>{t('estimateNote')}</p>
         </div>
@@ -386,9 +386,9 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 // cloud of every city in that state. Always-open (no toggle).
 function StateCard({ stateName, cities, citiesLabel, locale }: { stateName: string; cities: { slug: string; name: string }[]; citiesLabel: string; locale: string }) {
   return (
-    <article className="rounded-2xl p-5 flex flex-col" style={{ background: '#fff', border: '1px solid var(--line)', boxShadow: '0 4px 14px rgba(31, 42, 107, 0.04)', height: '100%' }}>
+    <article className="rounded-2xl p-5 flex flex-col" style={{ background: '#fff', border: '1px solid var(--line)', boxShadow: '0 4px 14px rgba(2, 61, 147, 0.04)', height: '100%' }}>
       <header className="flex items-baseline justify-between gap-2 pb-3 mb-3" style={{ borderBottom: '1px solid var(--line)' }}>
-        <h4 className="text-sm font-extrabold m-0" style={{ color: 'var(--brand-ink)', letterSpacing: '-0.005em' }}>{stateName}</h4>
+        <h4 className="text-sm font-bold m-0" style={{ color: 'var(--brand-ink)', letterSpacing: '-0.005em' }}>{stateName}</h4>
         <span className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: 'var(--brand-pink)' }}>{cities.length} {citiesLabel}</span>
       </header>
       <div className="flex flex-wrap gap-1.5">
@@ -474,7 +474,7 @@ export default function HomePageClient({ phoneNumber }: Props) {
           <FadeSection>
             <div className="text-center mb-10">
               <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{t('products.tag')}</h5>
-              <h3 id="products-heading" className="text-2xl md:text-3xl font-extrabold" style={{ color: 'var(--brand-ink)' }}>{t('products.heading')}</h3>
+              <h3 id="products-heading" className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--brand-ink)' }}>{t('products.heading')}</h3>
               <h5 className="text-sm font-normal mt-2 max-w-2xl mx-auto" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{t('products.subheading')}</h5>
             </div>
           </FadeSection>
@@ -486,7 +486,7 @@ export default function HomePageClient({ phoneNumber }: Props) {
                     className="product-card bg-white rounded-2xl overflow-hidden"
                     style={{
                       border: '1px solid var(--line)',
-                      boxShadow: '0 8px 24px rgba(31, 42, 107, 0.05)',
+                      boxShadow: '0 8px 24px rgba(2, 61, 147, 0.05)',
                       height: '100%',
                       display: 'grid',
                       gridTemplateRows: 'auto 1fr',
@@ -497,13 +497,19 @@ export default function HomePageClient({ phoneNumber }: Props) {
                       <img src={p.img} alt={t(`products.${p.key}.title`)} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
                     </div>
                     <div className="p-5 grid" style={{ gridTemplateRows: 'auto auto 1fr auto', gap: 8 }}>
-                      <h3 className="text-base font-extrabold m-0" style={{ color: 'var(--brand-ink)' }}>{t(`products.${p.key}.title`)}</h3>
-                      {/* Prominent price line — not a chip */}
-                      <div className="flex items-baseline gap-1.5">
-                        <span className="text-[10px] font-bold uppercase tracking-[0.18em]" style={{ color: 'var(--brand-pink)' }}>
+                      <h3 className="text-base font-semibold m-0" style={{ color: 'var(--brand-ink)' }}>{t(`products.${p.key}.title`)}</h3>
+                      {/* Price container — visually separate from the title (cream pill, pink price) */}
+                      <div
+                        className="inline-flex items-baseline gap-1.5 px-3 py-2 rounded-xl self-start"
+                        style={{
+                          background: 'var(--brand-cream)',
+                          border: '1px solid rgba(2, 61, 147, 0.08)',
+                        }}
+                      >
+                        <span className="text-[10px] font-semibold uppercase tracking-[0.18em]" style={{ color: 'var(--muted)' }}>
                           {t('products.fromLabel')}
                         </span>
-                        <span className="text-xl font-extrabold" style={{ color: 'var(--brand-ink)' }}>
+                        <span className="text-xl font-bold" style={{ color: 'var(--brand-pink)', letterSpacing: '-0.01em' }}>
                           {t(`products.${p.key}.price`).replace(/^Dari\s+/i, '')}
                         </span>
                       </div>
@@ -539,7 +545,7 @@ export default function HomePageClient({ phoneNumber }: Props) {
           <FadeSection>
             <div className="text-center mb-8">
               <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{tCalc('tag')}</h5>
-              <h3 id="calc-heading" className="text-2xl md:text-3xl font-extrabold" style={{ color: 'var(--brand-ink)' }}>{tCalc('heading')}</h3>
+              <h3 id="calc-heading" className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--brand-ink)' }}>{tCalc('heading')}</h3>
               <h5 className="text-sm font-normal mt-2 max-w-2xl mx-auto" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{tCalc('subheading')}</h5>
             </div>
           </FadeSection>
@@ -555,7 +561,7 @@ export default function HomePageClient({ phoneNumber }: Props) {
           <FadeSection>
             <div className="text-center mb-10">
               <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{tBA('tag')}</h5>
-              <h3 id="ba-heading" className="text-2xl md:text-3xl font-extrabold" style={{ color: 'var(--brand-ink)' }}>{tBA('heading')}</h3>
+              <h3 id="ba-heading" className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--brand-ink)' }}>{tBA('heading')}</h3>
               <h5 className="text-sm font-normal mt-2 max-w-2xl mx-auto" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{tBA('subheading')}</h5>
             </div>
           </FadeSection>
@@ -592,7 +598,7 @@ export default function HomePageClient({ phoneNumber }: Props) {
           <FadeSection>
             <div className="text-center mb-10">
               <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{t('whyChoose.tag')}</h5>
-              <h3 id="why-heading" className="text-2xl md:text-3xl font-extrabold" style={{ color: 'var(--brand-ink)' }}>{t('whyChoose.heading')}</h3>
+              <h3 id="why-heading" className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--brand-ink)' }}>{t('whyChoose.heading')}</h3>
             </div>
           </FadeSection>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" style={{ gridAutoRows: '1fr' }}>
@@ -623,15 +629,15 @@ export default function HomePageClient({ phoneNumber }: Props) {
           <FadeSection>
             <div className="text-center mb-10">
               <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{t('howItWorks.tag')}</h5>
-              <h3 id="how-heading" className="text-2xl md:text-3xl font-extrabold" style={{ color: 'var(--brand-ink)' }}>{t('howItWorks.heading')}</h3>
+              <h3 id="how-heading" className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--brand-ink)' }}>{t('howItWorks.heading')}</h3>
             </div>
           </FadeSection>
           <div className="grid md:grid-cols-3 gap-5">
             {[1, 2, 3].map((n, i) => (
               <FadeSection key={n} delay={i * 100}>
                 <div className="step p-6 rounded-2xl text-center h-full" style={{ background: 'var(--brand-cream)', border: '1px solid var(--line)' }}>
-                  <div className="text-5xl font-extrabold mb-3" style={{ color: 'var(--brand-yellow-deep)' }} aria-hidden="true">{t(`howItWorks.step${n}Num`)}</div>
-                  <h5 className="text-base font-extrabold mb-2" style={{ color: 'var(--brand-ink)' }}>{t(`howItWorks.step${n}Title`)}</h5>
+                  <div className="text-5xl font-bold mb-3" style={{ color: 'var(--brand-yellow-deep)' }} aria-hidden="true">{t(`howItWorks.step${n}Num`)}</div>
+                  <h5 className="text-base font-bold mb-2" style={{ color: 'var(--brand-ink)' }}>{t(`howItWorks.step${n}Title`)}</h5>
                   <h5 className="text-sm font-normal" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{t(`howItWorks.step${n}Desc`)}</h5>
                 </div>
               </FadeSection>
@@ -653,7 +659,7 @@ export default function HomePageClient({ phoneNumber }: Props) {
         className="relative py-16 px-6 overflow-hidden"
         aria-labelledby="reviews-heading"
         style={{
-          backgroundImage: 'linear-gradient(135deg, rgba(31, 42, 107, 0.88) 0%, rgba(22, 32, 79, 0.94) 100%), url(/images/painters/painter-bg.png)',
+          backgroundImage: 'linear-gradient(135deg, rgba(2, 61, 147, 0.88) 0%, rgba(2, 42, 102, 0.94) 100%), url(/images/painters/painter-bg.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -667,10 +673,10 @@ export default function HomePageClient({ phoneNumber }: Props) {
                 <span className="text-sm font-medium text-white">{t('reviews.googleReviews')}</span>
               </div>
               <div className="flex items-center justify-center gap-2 mb-3">
-                <span className="text-3xl font-extrabold" style={{ color: 'var(--brand-yellow)' }}>4.9</span>
+                <span className="text-3xl font-bold" style={{ color: 'var(--brand-yellow)' }}>4.9</span>
                 <div className="flex gap-0.5">{Array.from({ length: 5 }).map((_, i) => <GoogleStarIcon key={i} />)}</div>
               </div>
-              <h3 id="reviews-heading" className="text-2xl md:text-3xl font-extrabold text-white">{t('reviews.heading')}</h3>
+              <h3 id="reviews-heading" className="text-2xl md:text-3xl font-bold text-white">{t('reviews.heading')}</h3>
               <h5 className="text-xs font-normal mt-2" style={{ color: 'rgba(255,255,255,0.55)', lineHeight: 1.6 }}>{t('reviews.reviewCount')}</h5>
             </div>
           </FadeSection>
@@ -705,7 +711,7 @@ export default function HomePageClient({ phoneNumber }: Props) {
           <FadeSection>
             <div className="text-center mb-10">
               <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{t('gallery.tag')}</h5>
-              <h3 className="text-2xl md:text-3xl font-extrabold" style={{ color: 'var(--brand-ink)' }}>{t('gallery.heading')}</h3>
+              <h3 className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--brand-ink)' }}>{t('gallery.heading')}</h3>
             </div>
           </FadeSection>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
@@ -725,7 +731,7 @@ export default function HomePageClient({ phoneNumber }: Props) {
           <FadeSection>
             <div className="text-center mb-10">
               <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{t('faq.tag')}</h5>
-              <h3 id="faq-heading" className="text-2xl md:text-3xl font-extrabold" style={{ color: 'var(--brand-ink)' }}>{t('faq.heading')}</h3>
+              <h3 id="faq-heading" className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--brand-ink)' }}>{t('faq.heading')}</h3>
             </div>
           </FadeSection>
           <FadeSection>
@@ -744,7 +750,7 @@ export default function HomePageClient({ phoneNumber }: Props) {
           <FadeSection>
             <div className="text-center mb-10">
               <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{t('locations.tag')}</h5>
-              <h3 id="locations-heading" className="text-2xl md:text-3xl font-extrabold mb-2" style={{ color: 'var(--brand-ink)' }}>{t('locations.heading')}</h3>
+              <h3 id="locations-heading" className="text-2xl md:text-3xl font-bold mb-2" style={{ color: 'var(--brand-ink)' }}>{t('locations.heading')}</h3>
               <h5 className="text-sm font-normal" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{t('locations.subheading')}</h5>
             </div>
           </FadeSection>
@@ -774,7 +780,7 @@ export default function HomePageClient({ phoneNumber }: Props) {
         className="relative py-20 px-6 text-center text-white overflow-hidden"
         aria-label="Call to action"
         style={{
-          backgroundImage: 'linear-gradient(135deg, rgba(31, 42, 107, 0.88) 0%, rgba(15, 24, 64, 0.93) 100%), url(/images/gallery/job-84.png)',
+          backgroundImage: 'linear-gradient(135deg, rgba(2, 61, 147, 0.88) 0%, rgba(2, 30, 76, 0.93) 100%), url(/images/gallery/job-84.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -782,7 +788,7 @@ export default function HomePageClient({ phoneNumber }: Props) {
         <div className="absolute inset-0 hero-bg" role="img" aria-label={t('finalCta.headline')} aria-hidden="false" style={{ pointerEvents: 'none', backgroundImage: 'radial-gradient(circle at 80% 20%, rgba(255,210,63,0.18), transparent 55%), radial-gradient(circle at 15% 80%, rgba(233,30,99,0.15), transparent 55%)' }} />
         <div className="relative max-w-3xl mx-auto">
           <FadeSection>
-            <h3 className="font-extrabold mb-3" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', letterSpacing: '-0.03em' }}>
+            <h3 className="font-bold mb-3" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', letterSpacing: '-0.03em' }}>
               {t('finalCta.headline')} <span style={{ color: 'var(--brand-yellow)' }}>{t('finalCta.headlineHighlight')}</span>
             </h3>
             <h5 className="text-base font-normal mb-8 max-w-2xl mx-auto" style={{ color: 'rgba(255,255,255,0.85)', lineHeight: 1.6 }}>

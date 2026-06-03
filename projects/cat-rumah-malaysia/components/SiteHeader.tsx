@@ -83,7 +83,23 @@ export default function SiteHeader() {
         .site-nav a:hover { color: var(--brand-accent); }
         .site-nav--desktop { display: none; }
         .site-actions { display: inline-flex; align-items: center; gap: 10px; }
-        :global(.nav-cta) { height: 40px; padding: 0 14px; font-size: 13px; }
+        :global(.nav-cta) {
+          height: 42px;
+          padding: 0 18px;
+          font-size: 13px;
+          border-radius: 999px;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          white-space: nowrap;
+          background: var(--wa-green);
+          color: #fff;
+          font-weight: 700;
+          letter-spacing: 0.01em;
+          box-shadow: 0 6px 18px rgba(37, 211, 102, 0.28);
+          transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
+        }
+        :global(.nav-cta):hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(37, 211, 102, 0.40); }
         .nav-cta-label { display: inline; }
         .site-burger { display: inline-flex; flex-direction: column; justify-content: center; gap: 4px; width: 38px; height: 38px; padding: 0 8px; background: transparent; border: 1px solid var(--line-strong); border-radius: 10px; cursor: pointer; }
         .site-burger span { display: block; height: 2px; width: 100%; background: var(--ink); border-radius: 2px; transition: transform 0.18s ease, opacity 0.18s ease; }

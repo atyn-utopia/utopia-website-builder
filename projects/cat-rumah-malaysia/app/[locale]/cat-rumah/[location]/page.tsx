@@ -108,7 +108,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
             <span className="h-2 w-2 rounded-full" style={{ background: '#FFD23F' }} aria-hidden="true" />
             {tHero('badge', { city })}
           </h6>
-          <h1 className="font-extrabold mx-auto" style={{ fontSize: 'clamp(1.75rem, 4.4vw, 2.75rem)', letterSpacing: '-0.03em', lineHeight: 1.1 }}>
+          <h1 className="font-bold mx-auto" style={{ fontSize: 'clamp(1.75rem, 4.4vw, 2.75rem)', letterSpacing: '-0.03em', lineHeight: 1.1 }}>
             {tHero('headline', { city })}{' '}
             <span style={{ color: '#FFD23F' }}>{tHero('headlineHighlight', { city })}</span>
           </h1>

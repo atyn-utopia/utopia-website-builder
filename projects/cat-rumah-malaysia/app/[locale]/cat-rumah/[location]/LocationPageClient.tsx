@@ -210,7 +210,7 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
         <div className="absolute inset-0 hero-bg" role="img" aria-label={t('cta.heading', { city: cityName })} style={{ pointerEvents: 'none' }} />
         <div className="relative max-w-3xl mx-auto">
           <FadeSection>
-            <h3 className="font-extrabold mb-3" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', letterSpacing: '-0.03em' }}>{t('cta.heading', { city: cityName })}</h3>
+            <h3 className="font-bold mb-3" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', letterSpacing: '-0.03em' }}>{t('cta.heading', { city: cityName })}</h3>
             <h5 className="text-base font-normal mb-8 max-w-2xl mx-auto" style={{ color: 'rgba(255,255,255,0.8)', lineHeight: 1.6 }}>{t('cta.subheading', { city: cityName })}</h5>
             <WhatsAppClickTracker phoneNumber={phoneNumber} href={waLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-lg font-bold text-white" style={{ background: '#25D366' }}>
               <WAIcon />{t('cta.button', { city: cityName })}

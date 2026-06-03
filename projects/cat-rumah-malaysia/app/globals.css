@@ -2,11 +2,12 @@
 
 :root {
   /* Brand palette — Cat Rumah Express
-     Navy ink (text + headings), sun yellow (primary accent), pink (secondary
-     accent for paint-roller highlights), sky blue (windows / cool fields),
-     fresh green (Express badge). Cream is the warm off-white section bg. */
-  --brand-ink:            #1F2A6B;
-  --brand-ink-deep:       #16204F;
+     Pure brand blue (#023d93) for text + headings + dark sections; sun
+     yellow (primary accent); pink (secondary accent for paint-roller
+     highlights); sky blue (windows); fresh green (Express badge). Cream is
+     the warm off-white section bg. */
+  --brand-ink:            #023d93;
+  --brand-ink-deep:       #022a66;
   --brand-yellow:         #FFD23F;
   --brand-yellow-deep:    #F0B900;
   --brand-pink:           #E91E63;
@@ -16,12 +17,12 @@
   --brand-green:          #7CB342;
   --brand-cream:          #FFF8EA;
   --brand-cream-deep:     #FEEFC8;
-  --brand-charcoal:       #1F2A6B;
+  --brand-charcoal:       #023d93;
 
-  --ink:                  #1F2A6B;
-  --muted:                #5C6580;
-  --line:                 rgba(31, 42, 107, 0.12);
-  --line-strong:          rgba(31, 42, 107, 0.20);
+  --ink:                  #023d93;
+  --muted:                #4A5670;
+  --line:                 rgba(2, 61, 147, 0.12);
+  --line-strong:          rgba(2, 61, 147, 0.22);
 
   --brand-accent:         #FFD23F;
   --brand-accent-deep:    #F0B900;
@@ -47,6 +48,12 @@ body {
   line-height: 1.6;
   margin: 0;
 }
+
+/* Lighter heading weights — bold (700) instead of extrabold (800) so the
+   page feels less heavy. Hero h1 keeps a slight extra weight via inline
+   style; everything else inherits 700 from here. */
+h1, h2, h3, h4, h5, h6 { font-weight: 700; }
+h5, h6 { font-weight: 600; }
 
 a { color: inherit; text-decoration: none; }
 
@@ -105,6 +112,37 @@ a { color: inherit; text-decoration: none; }
   .lsw-item { padding: 4px 6px; }
   .lsw-label { display: none; }
 }
+
+/* ────────────────────────────────────────────────────────────
+   Cleaner native <select> for the calculator
+   ──────────────────────────────────────────────────────────── */
+.calc-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #fff;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--brand-ink) 50%),
+    linear-gradient(135deg, var(--brand-ink) 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) 50%,
+    calc(100% - 12px) 50%;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  border: 1.5px solid var(--line-strong);
+  color: var(--brand-ink);
+  cursor: pointer;
+  padding-right: 36px;
+  transition: border-color var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
+}
+.calc-select:hover { border-color: var(--brand-ink); }
+.calc-select:focus {
+  outline: none;
+  border-color: var(--brand-ink);
+  box-shadow: 0 0 0 4px rgba(2, 61, 147, 0.12);
+}
+.calc-select::-ms-expand { display: none; }
+.calc-select option { background: #fff; color: var(--brand-ink); }
 
 /* ────────────────────────────────────────────────────────────
    USP panel (single container, three cells — checklist rule)
