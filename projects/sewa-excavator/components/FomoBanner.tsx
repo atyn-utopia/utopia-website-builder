@@ -1,9 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { waRedirect } from '@/lib/waRedirect';
+
+function endOfMonth(d: Date): Date {
+  return new Date(d.getFullYear(), d.getMonth() + 1, 0, 23, 59, 59, 999);
+}
 
 function diffParts(target: Date) {
   const ms = Math.max(0, target.getTime() - Date.now());
@@ -16,33 +20,40 @@ function diffParts(target: Date) {
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
+const INTL_LOCALE: Record<string, string> = { en: 'en-US', ms: 'ms-MY', zh: 'zh-CN' };
+
 export default function FomoBanner() {
   const t = useTranslations('fomo');
   const locale = useLocale();
-  const [target, setTarget] = useState<Date | null>(null);
   const [parts, setParts] = useState<{ days: number; hours: number; minutes: number; seconds: number } | null>(null);
 
+  // Render-time month name so the banner copy matches the countdown month.
+  // Computed once per render to avoid hydration drift; rolls over naturally
+  // because the page is re-rendered on each new navigation.
+  const { month, monthUpper } = useMemo(() => {
+    const intlLocale = INTL_LOCALE[locale] ?? locale;
+    const m = new Intl.DateTimeFormat(intlLocale, { month: 'long' }).format(new Date());
+    return { month: m, monthUpper: m.toUpperCase() };
+  }, [locale]);
+
   useEffect(() => {
-    // Promo ends 7 days from first visit, persisted in localStorage so it doesn't reset.
-    const stored = typeof window !== 'undefined' ? localStorage.getItem('abang-promo-end') : null;
-    let end: Date;
-    if (stored && !Number.isNaN(Date.parse(stored)) && new Date(stored).getTime() > Date.now()) {
-      end = new Date(stored);
-    } else {
-      end = new Date(Date.now() + 7 * 86_400_000);
-      try { localStorage.setItem('abang-promo-end', end.toISOString()); } catch { /* noop */ }
-    }
-    setTarget(end);
-    setParts(diffParts(end));
-    const id = setInterval(() => setParts(diffParts(end)), 1000);
+    // Countdown ends at midnight on the last day of the current month so the
+    // "{month} promo" copy and the clock stay aligned. When the month flips,
+    // a page reload picks up the new month name + a fresh ~30-day clock.
+    const tick = () => {
+      const target = endOfMonth(new Date());
+      setParts(diffParts(target));
+    };
+    tick();
+    const id = setInterval(tick, 1000);
     return () => clearInterval(id);
   }, []);
 
   return (
     <div className="fomo-bar">
       <div className="container fomo-inner">
-        <span className="fomo-tag">{t('eyebrow')}</span>
-        <span className="fomo-body">{t('body')}</span>
+        <span className="fomo-tag">{t('eyebrow', { month, monthUpper })}</span>
+        <span className="fomo-body">{t('body', { month, monthUpper })}</span>
         <span aria-live="polite" className={`fomo-clock ${parts ? 'is-ready' : ''}`}>
           {parts ? (
             <>
@@ -59,7 +70,6 @@ export default function FomoBanner() {
           )}
         </span>
         <Link href={waRedirect(locale)} className="fomo-link" target="_blank" rel="noopener noreferrer">{t('ctaLabel')} →</Link>
-        {target && <noscript style={{ display: 'none' }}>{target.toISOString()}</noscript>}
       </div>
     </div>
   );

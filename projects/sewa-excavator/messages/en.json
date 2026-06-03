@@ -23,8 +23,8 @@
     "whatsappCta": "WhatsApp Quote"
   },
   "fomo": {
-    "eyebrow": "MAY PROMO",
-    "body": "Up to 12% off daily rates — May promo ends in:",
+    "eyebrow": "{monthUpper} PROMO",
+    "body": "Up to 12% off daily rates — {month} promo ends in:",
     "countdownLabel": "Days : Hours : Minutes : Seconds",
     "ctaLabel": "Lock in your quote"
   },

@@ -23,8 +23,8 @@
     "whatsappCta": "WhatsApp 报价"
   },
   "fomo": {
-    "eyebrow": "五月促销",
-    "body": "日租价格最高减 12% — 五月促销倒计时:",
+    "eyebrow": "{month}促销",
+    "body": "日租价格最高减 12% — {month}促销倒计时:",
     "countdownLabel": "天 : 时 : 分 : 秒",
     "ctaLabel": "立即获取报价"
   },
