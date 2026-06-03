@@ -1,0 +1,212 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "how": "How to Order",
+    "reviews": "Reviews",
+    "blog": "Blog",
+    "cta": "Chat WhatsApp"
+  },
+  "fomo": {
+    "primary": "24-Hour offer ends in",
+    "secondary": "Delivered today to 159 towns — order before the clock runs out.",
+    "labels": {
+      "hrs": "Hrs",
+      "min": "Min",
+      "sec": "Sec"
+    }
+  },
+  "hero": {
+    "h1": "Rent & Buy Hospital Beds — 24-Hour Delivery in Malaysia",
+    "h2": "Same-day delivery to 159 towns — manual, electric and anti-decubitus beds for elderly and home-care patients.",
+    "ctaPrimary": "Chat WhatsApp Now",
+    "ctaSecondary": "View Products",
+    "trustMicro": "Trusted by hundreds of Malaysian families · Delivered & set up within 24 hours"
+  },
+  "usp": {
+    "p1": {
+      "label": "24-Hour Delivery",
+      "sub": "Same-day delivery & setup nationwide"
+    },
+    "p2": {
+      "label": "Flexible Monthly Rental",
+      "sub": "Rent or buy — packages to fit your budget"
+    },
+    "p3": {
+      "label": "Nationwide Coverage",
+      "sub": "159 towns from Perlis to Sabah & Sarawak"
+    }
+  },
+  "products": {
+    "h3": "Our Products",
+    "intro": "Manual and electric hospital beds, foam mattresses, anti-decubitus air mattresses, oxygen concentrators, wheelchairs, and CPAP machines — all available for rent or purchase with 24-hour delivery.",
+    "cardCta": "Ask on WhatsApp",
+    "eyebrow": "Rent & Buy Catalogue"
+  },
+  "values": {
+    "h3": "Why Choose Katil Hospital 24 Jam",
+    "intro": "We understand home care cannot wait. Here is why hundreds of Malaysian families trust us.",
+    "c1": {
+      "title": "24-Hour Delivery",
+      "body": "Order in the morning, receive by evening — or within 24 hours anywhere in Malaysia. No waiting days on end."
+    },
+    "c2": {
+      "title": "Transparent, Fair Pricing",
+      "body": "Clear quotes, no hidden fees. Monthly rental options for families still figuring out the length of care needed."
+    },
+    "c3": {
+      "title": "Full Delivery & Setup",
+      "body": "Our team delivers, assembles, and walks you through every function on site — so your family can focus on the patient, not the equipment."
+    },
+    "c4": {
+      "title": "After-Delivery Support",
+      "body": "Question at 10pm? WhatsApp us — our support team is available throughout your rental or warranty period."
+    },
+    "eyebrow": "Why Choose Us"
+  },
+  "howItWorks": {
+    "h3": "3 Easy Steps",
+    "s1": {
+      "title": "1. WhatsApp Us",
+      "body": "Message us on WhatsApp with what you need — which bed, for how long, in which city. We reply with an instant quote."
+    },
+    "s2": {
+      "title": "2. Confirm & Pay",
+      "body": "Pick rent or buy, confirm the duration, and pay online. We schedule delivery within 24 hours."
+    },
+    "s3": {
+      "title": "3. Delivered, Set Up, Done",
+      "body": "Our team arrives, assembles the bed and equipment in the room, and walks you through how to use it. You focus only on care."
+    },
+    "eyebrow": "3-Step Process"
+  },
+  "gallery": {
+    "h3": "Customer Gallery",
+    "intro": "Real deliveries and setups at customer homes across Malaysia — no staged shots, no stock photos.",
+    "eyebrow": "Real Proof"
+  },
+  "googleReview": {
+    "h3": "Customer Reviews on Google",
+    "intro": "Real reviews from families we have helped — shown with the official Google Review branding, not generic star icons.",
+    "cta": "Chat WhatsApp",
+    "eyebrow": "Customer Voices"
+  },
+  "faq": {
+    "h3": "Frequently Asked Questions",
+    "q1": {
+      "q": "How fast is hospital bed delivery?",
+      "a": "We commit to delivery within 24 hours anywhere in Malaysia once the order is confirmed. In Klang Valley and major cities, same-day delivery is usually possible."
+    },
+    "q2": {
+      "q": "How does the monthly rental work?",
+      "a": "Flexible monthly rental — one month minimum, extend anytime. Pay the deposit and first month to start, and we collect the bed when your rental ends."
+    },
+    "q3": {
+      "q": "Is setup free?",
+      "a": "Yes. Our team assembles the bed, fits the mattress, and walks you through the remote or air pump at no extra charge — including upstairs delivery if needed."
+    },
+    "q4": {
+      "q": "What payment methods are accepted?",
+      "a": "We accept online bank transfer, DuitNow, and credit cards. The payment link is sent to your WhatsApp once you confirm the order."
+    },
+    "q5": {
+      "q": "Is there a warranty on purchases?",
+      "a": "Yes. Every purchase comes with an official warranty — typically 1 year for electric beds and 6 months for air mattresses. We also handle the warranty claim process for you."
+    },
+    "q6": {
+      "q": "Should I pick manual or electric?",
+      "a": "Manual beds are cheaper and suit patients who can still move a little. Electric beds suit long-term bedridden patients or elderly carers — one-button adjustment makes daily care much easier."
+    },
+    "q7": {
+      "q": "Which mattress fits the hospital bed?",
+      "a": "Our foam and air mattresses are all standard hospital-bed size (90×190 cm), so any of our mattresses fits any of our beds."
+    },
+    "q8": {
+      "q": "Can I return the items after rental?",
+      "a": "Yes. We collect the bed, mattress, and accessories from your home at no extra charge once the rental period ends. All equipment is cleaned and serviced before its next use."
+    },
+    "q9": {
+      "q": "Are these hospital-grade or home-grade beds?",
+      "a": "All our beds are hospital-grade — steel frame, side rails, locking wheels — but designed to feel comfortable in a normal family home."
+    },
+    "q10": {
+      "q": "Is there after-sales support?",
+      "a": "Yes. Message us on WhatsApp anytime for technical help, replacement parts, or equipment care tips. Our team handles requests throughout your rental or warranty period."
+    },
+    "eyebrow": "Quick Help"
+  },
+  "finalCta": {
+    "h3": "Need a Hospital Bed Today? WhatsApp Us Now.",
+    "subtitle": "Our team is on standby 24 hours a day — delivered, set up, and done before the next day.",
+    "cta": "Chat WhatsApp Now",
+    "eyebrow": "Act Now"
+  },
+  "footer": {
+    "brand": {
+      "heading": "Katil Hospital 24 Jam",
+      "tagline": "Rent & buy hospital beds, anti-decubitus mattresses, and care equipment — delivered within 24 hours across Malaysia."
+    },
+    "products": {
+      "heading": "Products"
+    },
+    "locations": {
+      "heading": "Featured Locations",
+      "all": "View All 159 Locations"
+    },
+    "language": {
+      "heading": "Language"
+    },
+    "copyright": "© 2026 Katil Hospital 24 Jam. All rights reserved."
+  },
+  "location": {
+    "breadcrumb": {
+      "home": "Home",
+      "product": "Hospital Bed"
+    },
+    "h1Template": "Hospital Bed Rental in {city} — 24-Hour Delivery",
+    "faqSharedIntro": "Common questions from families in {city}",
+    "nearby": {
+      "h3": "Nearby Areas",
+      "intro": "We also serve the following areas.",
+      "anchor": "See hospital beds in {city}"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "readMore": "Read More",
+    "noPosts": "No articles yet.",
+    "breadcrumbHome": "Home",
+    "breadcrumbBlog": "Blog",
+    "publishedOn": "Published on",
+    "minRead": "min read",
+    "recentPosts": "Recent Posts",
+    "tocTitle": "Table of Contents",
+    "ctaBannerTitle": "Need a hospital bed today?",
+    "ctaBannerCta": "Chat WhatsApp",
+    "metaTitle": "Blog — Katil Hospital 24 Jam",
+    "metaDescription": "Guides on choosing hospital beds, anti-decubitus mattresses, and home-care equipment for families in Malaysia."
+  },
+  "languageSwitcher": {
+    "ms": "MS",
+    "en": "EN",
+    "zh": "ZH"
+  },
+  "metadata": {
+    "home": {
+      "title": "Hospital Bed Rental & Sale — 24-Hour Delivery MY",
+      "description": "Rent or buy manual and electric hospital beds with 24-hour delivery to 159 towns in Malaysia. Anti-decubitus mattresses and oxygen also available."
+    },
+    "location": {
+      "titleTemplate": "Hospital Bed Rental {city} — 24-Hour Delivery",
+      "descriptionTemplate": "Rent or buy a hospital bed in {city}, {state} with {usp}. Manual, electric, and anti-decubitus options — order via WhatsApp."
+    },
+    "ogLocale": "en_MY"
+  },
+  "lokasi": {
+    "eyebrow": "Coverage Areas",
+    "h3": "Coverage Across 159 Areas in Malaysia",
+    "intro": "Free delivery to every state in Peninsular Malaysia, Sabah, and Sarawak. Click your state to see the full list of areas.",
+    "empty": "Your area not listed?",
+    "emptyCta": "WhatsApp to confirm coverage"
+  }
+}

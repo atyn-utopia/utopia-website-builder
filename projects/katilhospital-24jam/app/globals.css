@@ -1,0 +1,388 @@
+@import 'tailwindcss';
+
+/* ============================================
+   KATIL HOSPITAL 24 JAM — DESIGN SYSTEM
+   Palette: navy primary, brand-blue secondary, red as accent only
+   (FOMO bar + small chips). Static-site reference.
+   ============================================ */
+
+:root {
+  /* Brand Colors */
+  --navy: #1c3a6a;
+  --navy-dark: #0e2040;
+  --navy-deepest: #040A14;
+  --navy-pale: #F0F4FA;
+  --brand: #1877b7;
+  --brand-light: #2490d8;
+  --brand-dark: #115e93;
+  --brand-pale: #F7FAFD;
+  --soft-steel: #8FB8E0;
+
+  /* Red is accent only — FOMO bar, eyebrow chips, urgency cues */
+  --accent: #e63030;
+  --accent-light: #f04747;
+  --accent-dark: #c01e1e;
+  --accent-pale: #FDECEC;
+
+  /* Legacy aliases — kept so existing rules keep working without
+     hunting every reference. They now point to navy/brand. */
+  --primary: var(--navy);
+  --primary-dark: var(--navy-dark);
+  --primary-pale: var(--navy-pale);
+
+  --white: #FFFFFF;
+  --bg: #FFFFFF;
+  --bg-alt: var(--brand-pale);
+  --surface: var(--brand-pale);
+  --text: var(--navy);
+  --text-muted: rgba(28, 58, 106, 0.65);
+  --whatsapp: #25D366;
+  --whatsapp-hover: #1EBE57;
+  --google-gold: #FBBC04;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+  --gradient-navy: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+  --gradient-brand: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
+  --gradient-fomo: #0A0A0A;
+
+  /* Shadows — layered with navy tint */
+  --shadow-sm: 0 1px 3px rgba(28, 58, 106, 0.08), 0 1px 2px rgba(28, 58, 106, 0.06);
+  --shadow-md: 0 4px 12px rgba(28, 58, 106, 0.10), 0 2px 4px rgba(28, 58, 106, 0.06);
+  --shadow-lg: 0 10px 30px rgba(28, 58, 106, 0.12), 0 4px 8px rgba(28, 58, 106, 0.06);
+  --shadow-xl: 0 20px 50px rgba(28, 58, 106, 0.15), 0 8px 16px rgba(28, 58, 106, 0.08);
+  --shadow-card: 0 2px 8px rgba(28, 58, 106, 0.08), 0 8px 24px rgba(28, 58, 106, 0.06);
+  --shadow-card-hover: 0 4px 12px rgba(28, 58, 106, 0.12), 0 16px 40px rgba(28, 58, 106, 0.10);
+  --shadow-nav: 0 2px 16px rgba(28, 58, 106, 0.08);
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 9999px;
+  --radius-full: 9999px;
+
+  /* Typography */
+  --leading-tight: 1.15;
+  --leading-snug: 1.3;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.7;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  color: var(--text);
+  background-color: var(--bg);
+  line-height: var(--leading-normal);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ============================================
+   BUTTON SYSTEM — single rounded shape site-wide
+   Only color varies between variants.
+   ============================================ */
+
+.wa-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 11px 22px;
+  background-color: var(--whatsapp);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 14px;
+  border-radius: var(--radius-pill);
+  border: none;
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out),
+              opacity var(--duration-fast) var(--ease-out);
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+}
+.wa-btn:hover {
+  background-color: var(--whatsapp-hover);
+  transform: translateY(-2px) scale(1.02);
+  opacity: 0.97;
+}
+.wa-btn:focus-visible {
+  outline: 3px solid rgba(37, 211, 102, 0.5);
+  outline-offset: 3px;
+}
+.wa-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.brand-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: var(--gradient-primary);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: var(--radius-pill);
+  border: none;
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out),
+              opacity var(--duration-fast) var(--ease-out);
+  box-shadow: 0 4px 14px rgba(225, 28, 28, 0.3);
+}
+.brand-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  opacity: 0.95;
+}
+.brand-btn:focus-visible {
+  outline: 3px solid rgba(225, 28, 28, 0.5);
+  outline-offset: 3px;
+}
+.brand-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.ghost-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 26px;
+  background: transparent;
+  color: var(--navy);
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--navy);
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out),
+              opacity var(--duration-fast) var(--ease-out);
+}
+.ghost-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.85;
+}
+.ghost-btn:focus-visible {
+  outline: 3px solid rgba(42, 95, 176, 0.3);
+  outline-offset: 3px;
+}
+.ghost-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* ============================================
+   LOKASI ACCORDION — city pills
+   ============================================ */
+.city-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 7px 14px;
+  border-radius: 9999px;
+  background: rgba(28,58,106,0.04);
+  border: 1px solid rgba(28,58,106,0.10);
+  color: #1c3a6a;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition-property: transform, background-color, border-color, color;
+  transition-duration: 220ms;
+  transition-timing-function: cubic-bezier(.34,1.56,.64,1);
+}
+.city-pill:hover {
+  background: #1877b7;
+  border-color: #1877b7;
+  color: #fff;
+  transform: translateY(-1px);
+}
+.city-pill:active { transform: translateY(0) scale(0.98); }
+.city-pill:focus-visible { outline: 3px solid rgba(24,119,183,0.5); outline-offset: 2px; }
+
+/* ============================================
+   HOVER EFFECTS — interactive cards
+   ============================================ */
+.hover-lift {
+  transition: transform 220ms cubic-bezier(.34,1.56,.64,1), box-shadow 220ms ease, border-color 200ms ease;
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px -8px rgba(28,58,106,0.20), 0 4px 8px rgba(28,58,106,0.08);
+}
+
+/* ============================================
+   UTILITY
+   ============================================ */
+.section-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+@media (min-width: 768px) {
+  .section-container {
+    padding: 0 var(--space-xl);
+  }
+}
+
+.section-spacing {
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+}
+@media (min-width: 768px) {
+  .section-spacing {
+    padding-top: var(--space-4xl);
+    padding-bottom: var(--space-4xl);
+  }
+}
+
+/* ============================================
+   BLOG CONTENT STYLES — copied from EWM,
+   accent swapped to primary red (#e63030)
+   ============================================ */
+.blog-content h2 { font-size: 28px; font-weight: 700; color: var(--navy); margin: 2em 0 0.5em; line-height: 1.25; }
+.blog-content h3 { font-size: 24px; font-weight: 700; color: var(--navy); margin: 1.5em 0 0.5em; line-height: 1.3; }
+.blog-content p { font-size: 16px; line-height: 1.75; margin: 0 0 1em; color: var(--text); }
+.blog-content img { max-width: 100%; height: auto; border-radius: var(--radius-lg); margin: 1.5em 0; }
+.blog-content ul, .blog-content ol { margin: 1em 0; padding-left: 1.5em; }
+.blog-content li { margin: 0.5em 0; line-height: 1.6; }
+.blog-content blockquote {
+  border-left: 4px solid var(--primary);
+  padding: 1em 1.5em;
+  margin: 1.5em 0;
+  background: var(--primary-pale);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+.blog-content a { color: var(--primary); text-decoration: underline; }
+.blog-content a:hover { opacity: 0.8; }
+
+/* Comparison tables inside blog content */
+.blog-content table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 1.5em 0;
+  font-size: 15px;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #FFFFFF;
+}
+.blog-content thead { display: none; }
+.blog-content table tr:first-child {
+  background: #1c3a6a;
+}
+.blog-content table tr:first-child th,
+.blog-content table tr:first-child td {
+  color: #FFFFFF;
+  font-weight: 700;
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: none;
+}
+.blog-content table th,
+.blog-content table td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid #E2E8F0;
+  vertical-align: top;
+}
+.blog-content table tr:last-child th,
+.blog-content table tr:last-child td { border-bottom: none; }
+.blog-content table tr:nth-child(even):not(:first-child) {
+  background: #F8FAFC;
+}
+
+/* FAQ-style heading + answer pairs (any H3 directly followed by a paragraph in late article) */
+.blog-content h3 + p { margin-top: 0.25em; }
+.blog-content h2 + h3 { margin-top: 1em; }
+
+/* Tighten spacing for the inline emoji/CTA paragraph at end of article */
+.blog-content p[style*="text-align:center"] { margin: 2em 0; }
+
+/* ============================================
+   GALLERY GRID — no blank slots rule
+   ============================================ */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+@media (min-width: 640px) {
+  .gallery-grid { grid-template-columns: repeat(4, 1fr); }
+}
+@media (min-width: 1024px) {
+  .gallery-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ============================================
+   FOMO BANNER ANIMATION
+   ============================================ */
+@keyframes fomoPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+@keyframes fomoSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fomo-text-enter {
+  animation: fomoSlideIn 0.4s var(--ease-out) forwards;
+}
+
+/* ============================================
+   PRODUCT CARD
+   ============================================ */
+.product-card {
+  transition: transform var(--duration-normal) var(--ease-out),
+              opacity var(--duration-normal) var(--ease-out);
+  box-shadow: var(--shadow-card);
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card-hover);
+}
