@@ -92,7 +92,7 @@ export default async function SiteFooter({ locale }: { locale: Locale }) {
           className="border-t pt-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs font-normal"
           style={{ borderColor: 'rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.3)' }}
         >
-          <p>{tFoot('copyright', { year })} · {tFoot('ssm')}</p>
+          <p>{tFoot('copyright', { year })}</p>
         </div>
       </div>
     </footer>
