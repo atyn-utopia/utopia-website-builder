@@ -502,9 +502,9 @@ export default function HomePageClient({ phoneNumber }: Props) {
                         className="text-[17px] m-0"
                         style={{
                           color: 'var(--brand-ink)',
-                          fontWeight: 600,
+                          fontWeight: 700,
                           lineHeight: 1.3,
-                          letterSpacing: '-0.005em',
+                          letterSpacing: '-0.01em',
                           minHeight: 'calc(1.3em * 2)',
                           display: '-webkit-box',
                           WebkitLineClamp: 2,
