@@ -110,10 +110,10 @@ export default async function HomePage({
             {tHero('headline')}{' '}
             <span style={{ color: '#FFE500' }}>{tHero('headlineHighlight')}</span>
           </h1>
-          <h2 className="mt-4 text-sm md:text-base leading-relaxed text-white/75 max-w-xl mx-auto font-normal">
+          <h2 className="mt-4 text-sm md:text-base text-white/75 max-w-xl mx-auto font-normal" style={{ lineHeight: 1.6 }}>
             {tHero('subheadline')}
           </h2>
-          <div className="mt-6 flex flex-col items-center gap-2">
+          <div className="mt-6 flex flex-col items-center gap-3">
             <WhatsAppClickTracker
               phoneNumber={phone}
               href={waHref}
@@ -128,7 +128,16 @@ export default async function HomePage({
               </svg>
               {tHero('cta')}
             </WhatsAppClickTracker>
-            <span className="text-xs font-normal text-white/50">{tHero('ctaSubtext')}</span>
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              {tHero('ctaSubtext').split(' · ').map((part, i) => (
+                <span
+                  key={i}
+                  className="inline-flex items-center rounded-full bg-white/10 border border-white/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white/70"
+                >
+                  {part}
+                </span>
+              ))}
+            </div>
           </div>
           <img
             src="/images/hero-new.png"
@@ -177,7 +186,7 @@ export default async function HomePage({
               </span>
               <div>
                 <h3 className="text-sm font-bold" style={{ color: 'var(--brand-navy)' }}>{item.title}</h3>
-                <h5 className="text-xs font-normal mt-0.5" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.5' }}>{item.sub}</h5>
+                <h5 className="text-xs font-normal mt-0.5" style={{ color: 'var(--brand-text-muted)', lineHeight: 1.6 }}>{item.sub}</h5>
               </div>
             </div>
           ))}

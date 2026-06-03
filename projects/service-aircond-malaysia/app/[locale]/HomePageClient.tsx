@@ -116,7 +116,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
         <ChevronIcon open={open} />
       </button>
       <div style={{ maxHeight: open ? '300px' : '0px', overflow: 'hidden', transition: 'max-height 0.35s ease' }}>
-        <h5 className="pb-4 text-sm font-normal" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.75' }}>{a}</h5>
+        <h5 className="pb-4 text-sm font-normal" style={{ color: 'var(--brand-text-muted)', lineHeight: 1.6 }}>{a}</h5>
       </div>
     </div>
   )
@@ -194,7 +194,7 @@ export default function HomePageClient({ phoneNumber }: HomePageClientProps) {
                       )}
                       <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-4" style={{ background: 'var(--brand-blue-xs)', color: 'var(--brand-navy)' }}><ServiceIcon type={svc.icon} /></div>
                       <h3 className="text-sm font-bold mb-1" style={{ color: 'var(--brand-navy)' }}>{t(`services.${svc.key}`)}</h3>
-                      <h5 className="text-xs font-normal mb-4 flex-1" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.6' }}>{t(`services.${svc.key}Desc`)}</h5>
+                      <h5 className="text-xs font-normal mb-4 flex-1" style={{ color: 'var(--brand-text-muted)', lineHeight: 1.6 }}>{t(`services.${svc.key}Desc`)}</h5>
                       <div className="flex gap-2 mb-3">
                         <div className="flex-1 px-2.5 py-2 rounded-lg text-center" style={{ background: 'var(--brand-blue-xs)' }}>
                           <div className="text-[11px] font-semibold uppercase tracking-wide" style={{ color: 'var(--brand-text-muted)' }}>{t('services.wall')}</div>
@@ -229,7 +229,7 @@ export default function HomePageClient({ phoneNumber }: HomePageClientProps) {
                 <FadeSection key={key} delay={i * 60} full>
                   <div className="flex gap-3 p-5 rounded-xl h-full" style={{ background: 'var(--brand-cream)', border: '1px solid var(--brand-border)' }}>
                     <div className="shrink-0 pt-0.5"><CheckIcon /></div>
-                    <h5 className="text-sm font-normal" style={{ color: 'var(--brand-text)', lineHeight: '1.6' }}>
+                    <h5 className="text-sm font-normal" style={{ color: 'var(--brand-text)', lineHeight: 1.6 }}>
                       <strong className="font-semibold" style={{ color: 'var(--brand-navy)' }}>{t(`why.${key}`)}</strong>
                       <span style={{ color: 'var(--brand-text-muted)' }}> — {t(`why.${key}Desc`)}</span>
                     </h5>
@@ -283,7 +283,7 @@ export default function HomePageClient({ phoneNumber }: HomePageClientProps) {
                       <GoogleLogo />
                       <div className="flex gap-0.5">{Array.from({ length: 5 }).map((_, j) => <GoogleStarIcon key={j} />)}</div>
                     </div>
-                    <blockquote className="text-sm font-normal mb-5 leading-relaxed flex-1" style={{ color: 'rgba(255,255,255,0.85)' }}>&ldquo;{t(`reviews.review${n}Text`)}&rdquo;</blockquote>
+                    <blockquote className="text-sm font-normal mb-5 flex-1" style={{ color: 'rgba(255,255,255,0.85)', lineHeight: 1.6 }}>&ldquo;{t(`reviews.review${n}Text`)}&rdquo;</blockquote>
                     <div className="flex items-center gap-2.5 mt-auto">
                       <div className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold shrink-0" style={{ background: 'var(--brand-yellow)', color: 'var(--brand-navy)' }}>
                         {t(`reviews.review${n}Name`).split(' ').map((w: string) => w[0]).join('').slice(0, 2)}
@@ -315,7 +315,7 @@ export default function HomePageClient({ phoneNumber }: HomePageClientProps) {
                   <div className="relative p-6 rounded-xl text-center h-full" style={{ background: '#fff', border: '1px solid var(--brand-border)' }}>
                     <div className="text-5xl font-extrabold mb-3 leading-none" style={{ color: 'var(--brand-blue-light)', opacity: 0.4, letterSpacing: '-0.04em' }} aria-hidden="true">{t(`howItWorks.step${n}Num`)}</div>
                     <h3 className="text-base font-semibold mb-2" style={{ color: 'var(--brand-navy)' }}>{t(`howItWorks.step${n}Title`)}</h3>
-                    <h5 className="text-sm font-normal" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.65' }}>{t(`howItWorks.step${n}Desc`)}</h5>
+                    <h5 className="text-sm font-normal" style={{ color: 'var(--brand-text-muted)', lineHeight: 1.6 }}>{t(`howItWorks.step${n}Desc`)}</h5>
                   </div>
                 </FadeSection>
               ))}

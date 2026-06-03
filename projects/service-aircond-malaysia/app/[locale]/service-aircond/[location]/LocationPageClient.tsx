@@ -63,7 +63,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
         <ChevronIcon open={open} />
       </button>
       <div style={{ maxHeight: open ? '300px' : '0px', overflow: 'hidden', transition: 'max-height 0.35s ease' }}>
-        <h5 className="pb-4 text-sm font-normal" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.75' }}>{a}</h5>
+        <h5 className="pb-4 text-sm font-normal" style={{ color: 'var(--brand-text-muted)', lineHeight: 1.6 }}>{a}</h5>
       </div>
     </div>
   )
@@ -132,14 +132,23 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
               {t('hero.headline', { city: cityName })}{' '}
               <span style={{ color: 'var(--brand-yellow)' }}>{t('hero.headlineHighlight', { city: cityName })}</span>
             </h1>
-            <h2 className="mt-4 text-sm md:text-base leading-relaxed text-white/75 max-w-xl mx-auto font-normal">
+            <h2 className="mt-4 text-sm md:text-base text-white/75 max-w-xl mx-auto font-normal" style={{ lineHeight: 1.6 }}>
               {t('hero.subheadline', { city: cityName })}
             </h2>
-            <div className="mt-6 flex flex-col items-center gap-2">
+            <div className="mt-6 flex flex-col items-center gap-3">
               <WhatsAppClickTracker phoneNumber={phoneNumber} href={waLink} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white" style={{ background: 'var(--wa-green)' }}>
                 <WAIcon />{t('hero.cta', { city: cityName })}
               </WhatsAppClickTracker>
-              <span className="text-xs font-normal text-white/50">{t('hero.ctaSubtext', { city: cityName })}</span>
+              <div className="flex flex-wrap items-center justify-center gap-2">
+                {t('hero.ctaSubtext', { city: cityName }).split(' · ').map((part, i) => (
+                  <span
+                    key={i}
+                    className="inline-flex items-center rounded-full bg-white/10 border border-white/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white/70"
+                  >
+                    {part}
+                  </span>
+                ))}
+              </div>
             </div>
             <img
               src="/images/hero-new.png"
@@ -188,7 +197,7 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
                 </span>
                 <div>
                   <h3 className="text-sm font-bold" style={{ color: 'var(--brand-navy)' }}>{item.title}</h3>
-                  <h5 className="text-xs font-normal mt-0.5" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.5' }}>{item.sub}</h5>
+                  <h5 className="text-xs font-normal mt-0.5" style={{ color: 'var(--brand-text-muted)', lineHeight: 1.6 }}>{item.sub}</h5>
                 </div>
               </div>
             ))}
@@ -207,7 +216,7 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
                   <FadeSection delay={i * 60}>
                     <div className="flex gap-4 p-5 rounded-xl bg-white" style={{ border: '1px solid var(--brand-border)' }}>
                       <span className="text-2xl shrink-0" aria-hidden="true">{svc.icon}</span>
-                      <h5 className="text-sm font-normal" style={{ color: 'var(--brand-text)', lineHeight: '1.7' }}>
+                      <h5 className="text-sm font-normal" style={{ color: 'var(--brand-text)', lineHeight: 1.6 }}>
                         {t(`services.${svc.key}`, { city: cityName })}
                       </h5>
                     </div>
@@ -229,7 +238,7 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
                 <FadeSection key={key} delay={i * 60}>
                   <div className="flex gap-3 p-4 rounded-xl" style={{ background: 'var(--brand-cream)', border: '1px solid var(--brand-border)' }}>
                     <CheckIcon />
-                    <h5 className="text-sm font-normal" style={{ color: 'var(--brand-text)', lineHeight: '1.6' }}>
+                    <h5 className="text-sm font-normal" style={{ color: 'var(--brand-text)', lineHeight: 1.6 }}>
                       {t(`why.${key}`, { city: cityName })}
                     </h5>
                   </div>
@@ -266,7 +275,7 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
                       <GoogleLogo />
                       <div className="flex gap-0.5">{Array.from({ length: 5 }).map((_, j) => <GoogleStarIcon key={j} />)}</div>
                     </div>
-                    <blockquote className="text-sm font-normal mb-5 leading-relaxed flex-1" style={{ color: 'rgba(255,255,255,0.85)' }}>&ldquo;{homeReviews(`review${n}Text`)}&rdquo;</blockquote>
+                    <blockquote className="text-sm font-normal mb-5 flex-1" style={{ color: 'rgba(255,255,255,0.85)', lineHeight: 1.6 }}>&ldquo;{homeReviews(`review${n}Text`)}&rdquo;</blockquote>
                     <div className="flex items-center gap-2.5 mt-auto">
                       <div className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold shrink-0" style={{ background: 'var(--brand-yellow)', color: 'var(--brand-navy)' }}>
                         {homeReviews(`review${n}Name`).split(' ').map((w: string) => w[0]).join('').slice(0, 2)}
