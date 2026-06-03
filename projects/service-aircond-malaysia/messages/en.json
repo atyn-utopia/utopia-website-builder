@@ -229,8 +229,13 @@
       "description": "Looking for aircond service in {city}? Encik Beku offers fast, affordable aircond installation, cleaning and repair. WhatsApp us now."
     },
     "hero": {
-      "headline": "Aircond Service in {city}",
-      "cta": "WhatsApp Us in {city}"
+      "badge": "Certified Technicians · {city}",
+      "headline": "Aircond Service",
+      "headlineHighlight": "in {city}",
+      "subheadline": "WhatsApp Encik Beku now and we will arrange a technician in {city} for you today.",
+      "cta": "WhatsApp Us in {city}",
+      "ctaSubtext": "Free to ask · Reply within 1 hour",
+      "heroAlt": "Aircond technician with thumbs up"
     },
     "services": {
       "heading": "Our Services in {city}",

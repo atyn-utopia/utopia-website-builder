@@ -80,8 +80,15 @@ type Props = {
 export default function LocationPageClient({ locale, locationSlug, cityName, phoneNumber, nearby }: Props) {
   const t = useTranslations('location')
   const homeReviews = useTranslations('home.reviews')
+  const tUsp = useTranslations('home.usp')
 
   const waLink = waRedirect(locale, `Hi, I need aircond service in ${cityName}`, locationSlug)
+
+  const uspItems = [
+    { title: tUsp('usp1Title'), sub: tUsp('usp1Sub'), icon: 'clock' },
+    { title: tUsp('usp2Title'), sub: tUsp('usp2Sub'), icon: 'shield' },
+    { title: tUsp('usp3Title'), sub: tUsp('usp3Sub'), icon: 'badge' },
+  ] as const
 
   const serviceItems = [
     { key: 'servicing', icon: '🔧' },
@@ -105,18 +112,86 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
         </nav>
 
         {/* HERO */}
-        <section className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #1B3A5C 0%, #2A5280 50%, #1B4F72 100%)' }}>
+        <section
+          className="relative overflow-hidden"
+          style={{
+            background:
+              'linear-gradient(135deg, rgba(15,34,56,0.93) 0%, rgba(27,58,92,0.90) 50%, rgba(20,52,76,0.95) 100%), url(/images/hero-aircond-bg.jpg) center/cover no-repeat',
+          }}
+        >
           <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Ccircle cx='2' cy='2' r='1' fill='white' fill-opacity='0.04'/%3E%3C/svg%3E\")" }} />
-          <div className="relative max-w-6xl mx-auto px-6 py-16 text-center text-white">
-            <h1 className="font-extrabold text-white mb-4" style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)', letterSpacing: '-0.03em', lineHeight: '1.12' }}>
-              {t('hero.headline', { city: cityName })}
+          <div className="relative max-w-4xl mx-auto px-6 pt-14 md:pt-16 pb-0 text-center text-white">
+            <h6 className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-3.5 py-1 text-[11px] font-semibold uppercase tracking-wider mb-4">
+              <span className="h-2 w-2 rounded-full bg-[#FFE500]" aria-hidden="true" />
+              {t('hero.badge', { city: cityName })}
+            </h6>
+            <h1
+              className="font-extrabold text-white mx-auto"
+              style={{ fontSize: 'clamp(1.75rem, 4.4vw, 2.75rem)', letterSpacing: '-0.03em', lineHeight: '1.1' }}
+            >
+              {t('hero.headline', { city: cityName })}{' '}
+              <span style={{ color: 'var(--brand-yellow)' }}>{t('hero.headlineHighlight', { city: cityName })}</span>
             </h1>
-            <h5 className="text-base font-normal mb-8 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.72)', lineHeight: '1.7' }}>
-              {t('cta.subheading', { city: cityName })}
-            </h5>
-            <WhatsAppClickTracker phoneNumber={phoneNumber} href={waLink} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2.5 px-6 py-3 rounded-xl text-base font-bold text-white" style={{ background: 'var(--wa-green)' }}>
-              <WAIcon />{t('hero.cta', { city: cityName })}
-            </WhatsAppClickTracker>
+            <h2 className="mt-4 text-sm md:text-base leading-relaxed text-white/75 max-w-xl mx-auto font-normal">
+              {t('hero.subheadline', { city: cityName })}
+            </h2>
+            <div className="mt-6 flex flex-col items-center gap-2">
+              <WhatsAppClickTracker phoneNumber={phoneNumber} href={waLink} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white" style={{ background: 'var(--wa-green)' }}>
+                <WAIcon />{t('hero.cta', { city: cityName })}
+              </WhatsAppClickTracker>
+              <span className="text-xs font-normal text-white/50">{t('hero.ctaSubtext', { city: cityName })}</span>
+            </div>
+            <img
+              src="/images/hero-new.png"
+              alt={t('hero.heroAlt', { city: cityName })}
+              className="mx-auto mt-8 w-64 sm:w-72 md:w-[340px] lg:w-[380px] block"
+              style={{ filter: 'drop-shadow(0 12px 30px rgba(0,0,0,0.35))', marginBottom: '-1px' }}
+            />
+          </div>
+        </section>
+
+        {/* 3-POINT USP BAR */}
+        <section
+          className="px-6 py-8 md:py-10"
+          style={{ background: '#fff', borderBottom: '1px solid var(--brand-border)' }}
+          aria-label="Why choose us"
+        >
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+            {uspItems.map((item) => (
+              <div
+                key={item.icon}
+                className="flex items-center gap-4 text-center md:text-left justify-center md:justify-start"
+              >
+                <span
+                  className="shrink-0 inline-flex items-center justify-center w-12 h-12 rounded-xl"
+                  style={{ background: 'var(--brand-blue-xs)', color: 'var(--brand-navy)' }}
+                  aria-hidden="true"
+                >
+                  {item.icon === 'clock' && (
+                    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="9" />
+                      <path d="M12 7v5l3 2" />
+                    </svg>
+                  )}
+                  {item.icon === 'shield' && (
+                    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6l8-3z" />
+                      <path d="M9 12l2 2 4-4" />
+                    </svg>
+                  )}
+                  {item.icon === 'badge' && (
+                    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="9" r="6" />
+                      <path d="M9 13.5L7 21l5-3 5 3-2-7.5" />
+                    </svg>
+                  )}
+                </span>
+                <div>
+                  <h3 className="text-sm font-bold" style={{ color: 'var(--brand-navy)' }}>{item.title}</h3>
+                  <h5 className="text-xs font-normal mt-0.5" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.5' }}>{item.sub}</h5>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -124,7 +199,7 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
         <section className="dot-texture py-16 px-6" style={{ background: 'var(--brand-cream)' }}>
           <div className="max-w-6xl mx-auto">
             <FadeSection>
-              <h2 className="text-2xl md:text-3xl font-bold text-center mb-10" style={{ color: 'var(--brand-navy)' }}>{t('services.heading', { city: cityName })}</h2>
+              <h3 className="text-2xl md:text-3xl font-bold text-center mb-10" style={{ color: 'var(--brand-navy)' }}>{t('services.heading', { city: cityName })}</h3>
             </FadeSection>
             <div className="grid sm:grid-cols-2 gap-4">
               {serviceItems.map((svc, i) => (
@@ -147,7 +222,7 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
         <section className="py-16 px-6" style={{ background: '#fff' }}>
           <div className="max-w-6xl mx-auto">
             <FadeSection>
-              <h2 className="text-2xl md:text-3xl font-bold text-center mb-10" style={{ color: 'var(--brand-navy)' }}>{t('why.heading', { city: cityName })}</h2>
+              <h3 className="text-2xl md:text-3xl font-bold text-center mb-10" style={{ color: 'var(--brand-navy)' }}>{t('why.heading', { city: cityName })}</h3>
             </FadeSection>
             <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
               {whyItems.map((key, i) => (
@@ -179,7 +254,7 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
                   <span className="text-3xl font-extrabold" style={{ color: 'var(--brand-yellow)' }}>4.9</span>
                   <div className="flex gap-0.5">{Array.from({ length: 5 }).map((_, i) => <GoogleStarIcon key={i} />)}</div>
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-white">{homeReviews('heading')}</h2>
+                <h3 className="text-2xl md:text-3xl font-bold text-white">{homeReviews('heading')}</h3>
                 <h6 className="text-xs font-normal mt-2" style={{ color: 'rgba(255,255,255,0.5)' }}>{homeReviews('reviewCount')}</h6>
               </div>
             </FadeSection>
@@ -212,7 +287,7 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
         <section className="py-16 px-6" style={{ background: 'var(--brand-cream)' }}>
           <div className="max-w-6xl mx-auto">
             <FadeSection>
-              <h2 className="text-2xl md:text-3xl font-bold text-center mb-10" style={{ color: 'var(--brand-navy)' }}>{t('faq.heading', { city: cityName })}</h2>
+              <h3 className="text-2xl md:text-3xl font-bold text-center mb-10" style={{ color: 'var(--brand-navy)' }}>{t('faq.heading', { city: cityName })}</h3>
             </FadeSection>
             <FadeSection>
               <div className="max-w-3xl mx-auto">
@@ -229,7 +304,7 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
           <section className="py-16 px-6" style={{ background: '#fff' }}>
             <div className="max-w-6xl mx-auto">
               <FadeSection>
-                <h2 className="text-2xl md:text-3xl font-bold text-center mb-10" style={{ color: 'var(--brand-navy)' }}>{t('nearby.heading')}</h2>
+                <h3 className="text-2xl md:text-3xl font-bold text-center mb-10" style={{ color: 'var(--brand-navy)' }}>{t('nearby.heading')}</h3>
               </FadeSection>
               <FadeSection>
                 <div className="flex flex-wrap justify-center gap-3">
@@ -249,9 +324,9 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
           <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #1B3A5C 0%, #2A5280 100%)' }} />
           <div className="relative max-w-6xl mx-auto">
             <FadeSection>
-              <h2 className="font-extrabold mb-3" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', letterSpacing: '-0.03em' }}>
+              <h3 className="font-extrabold mb-3" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', letterSpacing: '-0.03em' }}>
                 {t('cta.heading', { city: cityName })}
-              </h2>
+              </h3>
               <h5 className="text-base font-normal mb-8 max-w-2xl mx-auto" style={{ color: 'rgba(255,255,255,0.7)' }}>
                 {t('cta.subheading', { city: cityName })}
               </h5>

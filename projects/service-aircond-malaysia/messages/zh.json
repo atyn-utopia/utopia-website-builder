@@ -229,8 +229,13 @@
       "description": "寻找{city}冷气服务？Encik Beku提供安装、维修和化学清洗服务。认证技术员，快速响应。立即WhatsApp。"
     },
     "hero": {
-      "headline": "{city}冷气服务",
-      "cta": "WhatsApp我们（{city}）"
+      "badge": "认证技术员 · {city}",
+      "headline": "冷气服务",
+      "headlineHighlight": "（{city}）",
+      "subheadline": "立即WhatsApp Encik Beku，我们将为您安排{city}的技术员当天上门。",
+      "cta": "WhatsApp我们（{city}）",
+      "ctaSubtext": "免费咨询 · 1小时内回复",
+      "heroAlt": "冷气技术员竖起大拇指"
     },
     "services": {
       "heading": "我们在{city}的服务",

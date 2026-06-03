@@ -98,28 +98,28 @@ export default async function HomePage({
           aria-label={imageAlt}
           style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}
         />
-        <div className="relative z-10 max-w-4xl mx-auto px-6 pt-16 md:pt-20 pb-0 text-center text-white">
-          <h6 className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider mb-5">
+        <div className="relative z-10 max-w-4xl mx-auto px-6 pt-14 md:pt-16 pb-0 text-center text-white">
+          <h6 className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-3.5 py-1 text-[11px] font-semibold uppercase tracking-wider mb-4">
             <span className="h-2 w-2 rounded-full bg-[#FFE500]" aria-hidden="true" />
             {tHero('badgeCertified')} · {tHero('badgeCities')}
           </h6>
           <h1
-            className="font-extrabold leading-[1.05] tracking-tight mx-auto"
-            style={{ fontSize: 'clamp(32px, 5.4vw, 56px)' }}
+            className="font-extrabold leading-[1.1] tracking-tight mx-auto"
+            style={{ fontSize: 'clamp(1.75rem, 4.4vw, 2.75rem)', letterSpacing: '-0.03em' }}
           >
             {tHero('headline')}{' '}
             <span style={{ color: '#FFE500' }}>{tHero('headlineHighlight')}</span>
           </h1>
-          <h2 className="mt-5 text-base md:text-lg leading-relaxed text-white/80 max-w-2xl mx-auto font-normal">
+          <h2 className="mt-4 text-sm md:text-base leading-relaxed text-white/75 max-w-xl mx-auto font-normal">
             {tHero('subheadline')}
           </h2>
-          <div className="mt-7 flex flex-col items-center gap-2">
+          <div className="mt-6 flex flex-col items-center gap-2">
             <WhatsAppClickTracker
               phoneNumber={phone}
               href={waHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="wa-btn inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl text-base font-bold text-white"
+              className="wa-btn inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white"
               style={{ background: 'var(--wa-green)' }}
             >
               <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current shrink-0" aria-hidden="true">

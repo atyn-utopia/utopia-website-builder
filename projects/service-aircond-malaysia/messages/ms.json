@@ -229,8 +229,13 @@
       "description": "Cari servis aircond di {city}? Encik Beku menyediakan pemasangan, pembaikan dan cuci kimia. Tukang berkelayakan, respons cepat. WhatsApp sekarang."
     },
     "hero": {
-      "headline": "Servis Aircond di {city}",
-      "cta": "WhatsApp Kami di {city}"
+      "badge": "Tukang Bertauliah · {city}",
+      "headline": "Servis Aircond",
+      "headlineHighlight": "di {city}",
+      "subheadline": "WhatsApp Encik Beku sekarang dan kami akan aturkan tukang di {city} untuk anda hari ini.",
+      "cta": "WhatsApp Kami di {city}",
+      "ctaSubtext": "Percuma untuk bertanya · Respons dalam 1 jam",
+      "heroAlt": "Tukang aircond memberi ibu jari"
     },
     "services": {
       "heading": "Perkhidmatan Kami di {city}",
