@@ -857,6 +857,22 @@ a {
   /* The desktop pill group crowds the header — the drawer already exposes the
      same switcher, so hide the inline copy on every mobile/tablet width. */
   .ewc-header__lang { display: none !important; }
+  /* Actions div is empty on mobile (lang + cta both hidden) — collapse it so
+     the burger can flush right and the brand can center cleanly. */
+  .ewc-header__actions { display: none !important; }
+
+  /* Burger on the right, brand absolutely centered. */
+  .ewc-header__inner { position: relative; justify-content: flex-end; }
+  .ewc-header__brand {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  /* Drawer nav items + actions read as a centered column when the menu opens. */
+  .ewc-header__nav--mobile { align-items: center; }
+  .ewc-header__nav--mobile a { text-align: center; width: 100%; }
+  .ewc-header__mobile-actions { align-items: center; }
 }
 @media (max-width: 520px) {
   .ewc-header__brand-text { font-size: 13px; }
