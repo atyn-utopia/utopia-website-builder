@@ -300,6 +300,19 @@ h1, h2, h3, h4 {
   .nav-cta { display: none !important; }
 }
 
+/* ── Footer quick-link / location links — kept in globals because they
+ *    are next/link <Link> elements and styled-jsx in SiteFooter doesn't
+ *    scope rules through them (they'd fall back to the default 16px). */
+.footer-col a {
+  color: #CBD5E1;
+  font-size: 14px;
+  line-height: 1.4;
+  padding: 3px 0;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: #fff; }
+
 /* ── Blog article typography (`.blog-content` is the wrapper around the
  *    DB-stored HTML body). Without these rules every heading, list, and
  *    link in the article body would render at body-text size with no

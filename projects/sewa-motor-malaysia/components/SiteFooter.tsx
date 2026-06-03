@@ -53,8 +53,11 @@ export default function SiteFooter() {
         .footer-brand-text { font-weight: 800; font-size: 15px; color: #fff; letter-spacing: -0.01em; }
         .footer-tagline { color: #94A3B8; font-size: 14px; line-height: 1.7; margin: 0; max-width: 30ch; }
         .footer-heading { font-weight: 700; font-size: 13px; color: #fff; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 8px; }
-        .footer-col a { color: #CBD5E1; font-size: 14px; line-height: 1.4; padding: 3px 0; transition: color 0.2s; }
-        .footer-col a:hover { color: #fff; }
+        /* .footer-col a styled in globals.css — the footer links are
+           next/link <Link> elements, which don't receive styled-jsx's
+           scope class, so a scoped rule here never matched and the links
+           fell back to the browser-default 16px (inconsistent with the
+           13–15px footer text). Same workaround as .site-brand/.nav-cta. */
         .site-footer-bar { border-top: 1px solid #1E293B; padding: 24px 20px; text-align: center; font-size: 12px; color: #94A3B8; }
         .site-footer-bar p { margin: 0; }
         @media (max-width: 640px) {
