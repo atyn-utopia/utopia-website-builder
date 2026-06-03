@@ -14,6 +14,22 @@
   "products": {
     "imageAltTemplate": "{model} house painting — Cat Rumah Malaysia"
   },
+  "gallery": {
+    "alts": [
+      "Interior living room paint job — neat finish",
+      "Exterior paint job on double-storey terrace",
+      "White anti-mould ceiling painting",
+      "Auto-gate metal fence repaint",
+      "Garage epoxy floor smooth finish",
+      "Weathershield exterior paint",
+      "Pastel bedroom paint job",
+      "Kitchen wall oil-based finish",
+      "Marble painting luxury effect",
+      "Accent wall texture painting",
+      "Bungalow full house painting",
+      "Commercial shop wall painting"
+    ]
+  },
   "footer": {
     "tagline": "Professional house painting contractor across Malaysia — interior, exterior, ceiling, epoxy floor, and fence painting with Nippon, Jotun, and Dulux.",
     "description": "Professional house painting contractor across Malaysia. Interior, exterior, ceiling, epoxy floor, and fence painting using Nippon, Jotun, and Dulux premium paints.",

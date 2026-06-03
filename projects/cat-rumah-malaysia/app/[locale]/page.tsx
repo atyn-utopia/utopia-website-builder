@@ -84,7 +84,7 @@ export default async function HomePage({ params }: Props) {
         className="relative overflow-hidden"
         style={{
           backgroundImage:
-            'linear-gradient(135deg, rgba(2, 61, 147, 0.90) 0%, rgba(2, 42, 102, 0.92) 50%, rgba(2, 30, 76, 0.96) 100%), url(/images/painters/painter-bg.png)',
+            'linear-gradient(135deg, rgba(2, 61, 147, 0.90) 0%, rgba(2, 42, 102, 0.92) 50%, rgba(2, 30, 76, 0.96) 100%), url(/images/painters/painter-bg.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -160,7 +160,7 @@ export default async function HomePage({ params }: Props) {
           <div className="relative mt-10 mx-auto" style={{ maxWidth: 480 }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/painters/painter-roller.png"
+              src="/images/painters/painter-roller.jpg"
               alt={tHero('heroAlt')}
               className="mx-auto block"
               style={{ width: 'min(380px, 78%)', filter: 'drop-shadow(0 18px 38px rgba(0,0,0,0.45))' }}
@@ -228,7 +228,7 @@ export default async function HomePage({ params }: Props) {
                   aria-hidden="true"
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={`/images/usp/${item.icon}.png`} alt="" style={{ width: 56, height: 56, objectFit: 'contain' }} />
+                  <img src={`/images/usp/${item.icon}.png`} alt={item.title} style={{ width: 56, height: 56, objectFit: 'contain' }} />
                 </span>
                 <div>
                   <h5 className="text-sm font-bold" style={{ color: 'var(--brand-ink)' }}>{item.title}</h5>

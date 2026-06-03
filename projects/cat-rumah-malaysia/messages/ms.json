@@ -14,6 +14,22 @@
   "products": {
     "imageAltTemplate": "Cat rumah {model} — Cat Rumah Malaysia"
   },
+  "gallery": {
+    "alts": [
+      "Cat dinding dalaman ruang tamu — kemasan rapi",
+      "Cat luar rumah teres dua tingkat",
+      "Cat siling putih kalis kulat",
+      "Cat pagar besi auto-gate warna baru",
+      "Epoxy lantai garaj kemasan licin",
+      "Weathershield cat luar tahan cuaca",
+      "Cat bilik tidur warna pastel",
+      "Cat dapur kemasan oil-based",
+      "Marble painting kesan mewah",
+      "Texture painting dinding aksen",
+      "Cat rumah bungalow lengkap",
+      "Cat dinding kedai komersial"
+    ]
+  },
   "footer": {
     "tagline": "Kontraktor cat rumah profesional di seluruh Malaysia. Cat dinding dalam & luar, siling, epoxy lantai, dan pagar — guna Nippon, Jotun, Dulux.",
     "description": "Kontraktor cat rumah profesional di seluruh Malaysia. Cat dinding dalam & luar, siling, epoxy lantai, dan pagar. Jenama premium Nippon, Jotun, Dulux.",
@@ -287,7 +303,7 @@
       "q1": "Berapa cepat anda sampai {city}?",
       "a1": "Kami ada pasukan dekat {city} dan boleh datang dalam masa 24 jam.",
       "q2": "Berapa kos cat rumah di {city}?",
-      "a2": "Cat dinding dalaman di {city} bermula RM3.50/sqft. Cat luar bermula RM4.50/sqft.",
+      "a2": "Cat dinding dalaman di {city} Dari RM3.50/sqft. Cat luar Dari RM4.50/sqft.",
       "q3": "Adakah anda cover semua kawasan {city}?",
       "a3": "Ya, kami liputi seluruh {city} dan poskod sekitar.",
       "q4": "Jenama cat apa yang anda guna di {city}?",

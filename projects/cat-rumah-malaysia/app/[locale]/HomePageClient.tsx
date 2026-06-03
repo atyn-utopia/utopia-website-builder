@@ -45,15 +45,15 @@ function waRedirect(locale: string, message?: string, location?: string) {
 // 8 products — slug aligns with key in messages, image points to the brand
 // photo in /public/images/products.
 const productKeys = [
-  { key: 'interior', slug: 'interior', img: '/images/products/interior-1.png' },
-  { key: 'bedroom', slug: 'bedroom', img: '/images/products/bedroom-1.png' },
-  { key: 'kitchen', slug: 'kitchen', img: '/images/products/kitchen-1.png' },
-  { key: 'bathroom', slug: 'bathroom', img: '/images/products/bathroom-1.png' },
-  { key: 'exterior', slug: 'exterior', img: '/images/products/exterior-1.png' },
-  { key: 'weathershield', slug: 'weathershield', img: '/images/products/exterior-2.png' },
-  { key: 'marble', slug: 'marble', img: '/images/products/marble-1.png' },
-  { key: 'texture', slug: 'texture', img: '/images/products/texture-1.png' },
-  { key: 'decor3d', slug: 'decor3d', img: '/images/products/decor3d-1.png' },
+  { key: 'interior', slug: 'interior', img: '/images/products/interior-1.jpg' },
+  { key: 'bedroom', slug: 'bedroom', img: '/images/products/bedroom-1.jpg' },
+  { key: 'kitchen', slug: 'kitchen', img: '/images/products/kitchen-1.jpg' },
+  { key: 'bathroom', slug: 'bathroom', img: '/images/products/bathroom-1.jpg' },
+  { key: 'exterior', slug: 'exterior', img: '/images/products/exterior-1.jpg' },
+  { key: 'weathershield', slug: 'weathershield', img: '/images/products/exterior-2.jpg' },
+  { key: 'marble', slug: 'marble', img: '/images/products/marble-1.jpg' },
+  { key: 'texture', slug: 'texture', img: '/images/products/texture-1.jpg' },
+  { key: 'decor3d', slug: 'decor3d', img: '/images/products/decor3d-1.jpg' },
 ]
 
 // Why-choose reasons — each has a matching SVG icon name.
@@ -694,7 +694,7 @@ export default function HomePageClient({ phoneNumber }: Props) {
         className="relative py-16 px-6 overflow-hidden"
         aria-labelledby="reviews-heading"
         style={{
-          backgroundImage: 'linear-gradient(135deg, rgba(2, 61, 147, 0.88) 0%, rgba(2, 42, 102, 0.94) 100%), url(/images/painters/painter-bg.png)',
+          backgroundImage: 'linear-gradient(135deg, rgba(2, 61, 147, 0.88) 0%, rgba(2, 42, 102, 0.94) 100%), url(/images/painters/painter-bg.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -815,7 +815,7 @@ export default function HomePageClient({ phoneNumber }: Props) {
         className="relative py-20 px-6 text-center text-white overflow-hidden"
         aria-label="Call to action"
         style={{
-          backgroundImage: 'linear-gradient(135deg, rgba(2, 61, 147, 0.88) 0%, rgba(2, 30, 76, 0.93) 100%), url(/images/gallery/job-84.png)',
+          backgroundImage: 'linear-gradient(135deg, rgba(2, 61, 147, 0.88) 0%, rgba(2, 30, 76, 0.93) 100%), url(/images/gallery/job-84.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}

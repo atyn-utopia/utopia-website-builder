@@ -11,6 +11,54 @@ const WAIcon = () => (
   </svg>
 )
 
+const GoogleStarIcon = () => (
+  <svg viewBox="0 0 16 16" className="w-4 h-4" aria-hidden="true">
+    <path d="M8 1l1.854 4.146H14l-3.382 2.708 1.236 4.146L8 9.708l-3.854 2.292 1.236-4.146L2 5.146h4.146L8 1z" fill="#FBBC04" />
+  </svg>
+)
+
+const GoogleLogo = () => (
+  <svg viewBox="0 0 24 24" className="w-5 h-5 shrink-0" aria-hidden="true">
+    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+  </svg>
+)
+
+// Product list mirrors HomePageClient so the location page shows the same
+// 9-card services grid as the homepage.
+const PRODUCT_KEYS = [
+  { key: 'interior', img: '/images/products/interior-1.jpg' },
+  { key: 'bedroom', img: '/images/products/bedroom-1.jpg' },
+  { key: 'kitchen', img: '/images/products/kitchen-1.jpg' },
+  { key: 'bathroom', img: '/images/products/bathroom-1.jpg' },
+  { key: 'exterior', img: '/images/products/exterior-1.jpg' },
+  { key: 'weathershield', img: '/images/products/exterior-2.jpg' },
+  { key: 'marble', img: '/images/products/marble-1.jpg' },
+  { key: 'texture', img: '/images/products/texture-1.jpg' },
+  { key: 'decor3d', img: '/images/products/decor3d-1.jpg' },
+]
+
+// Calculator service rates — mirror catrumah.com.my (also mirrors homepage).
+type CalcMode = 'sqft' | 'package'
+interface CalcService { key: string; mode: CalcMode; rate: number; packages?: { id: 'single' | 'medium' | 'large'; price: number }[] }
+const CALC_SERVICES: CalcService[] = [
+  { key: 'interior', mode: 'sqft', rate: 3.5 },
+  { key: 'bedroom', mode: 'sqft', rate: 3.5 },
+  { key: 'kitchen', mode: 'sqft', rate: 3.5 },
+  { key: 'bathroom', mode: 'sqft', rate: 3.5 },
+  { key: 'exterior', mode: 'sqft', rate: 3.5 },
+  { key: 'weathershield', mode: 'sqft', rate: 4.5 },
+  { key: 'marble', mode: 'package', rate: 0, packages: [{ id: 'single', price: 2250 }, { id: 'medium', price: 3500 }, { id: 'large', price: 5500 }] },
+  { key: 'texture', mode: 'package', rate: 0, packages: [{ id: 'single', price: 2500 }, { id: 'medium', price: 3800 }, { id: 'large', price: 6000 }] },
+  { key: 'decor3d', mode: 'package', rate: 0, packages: [{ id: 'single', price: 3500 }, { id: 'medium', price: 5500 }, { id: 'large', price: 8500 }] },
+]
+
+function formatRM(value: number): string {
+  return value.toLocaleString('en-MY', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+}
+
 const ChevronIcon = ({ open }: { open: boolean }) => (
   <svg viewBox="0 0 20 20" className="w-5 h-5 shrink-0" style={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s', color: '#142C50' }} fill="none" aria-hidden="true">
     <path d="M5 8l5 5 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -70,8 +118,30 @@ type Props = {
 export default function LocationPageClient({ locale, locationSlug, cityName, phoneNumber, nearby }: Props) {
   const t = useTranslations('location')
   const tHomeReviews = useTranslations('home.reviews')
+  const tHomeProducts = useTranslations('home.products')
+  const tCalc = useTranslations('home.calculator')
   const tUsp = useTranslations('home.usp')
   const waLink = waRedirect(locale, undefined, locationSlug)
+
+  // Calculator state — same component-level state as the homepage.
+  const [calcServiceKey, setCalcServiceKey] = useState(CALC_SERVICES[0].key)
+  const [calcArea, setCalcArea] = useState(1000)
+  const [calcPkg, setCalcPkg] = useState<'single' | 'medium' | 'large'>('single')
+  const calcService = CALC_SERVICES.find((s) => s.key === calcServiceKey) ?? CALC_SERVICES[0]
+  const calcEstimate = calcService.mode === 'sqft'
+    ? Math.round(Math.max(calcArea, 50) * calcService.rate)
+    : calcService.packages?.find((p) => p.id === calcPkg)?.price ?? 0
+  const calcDetail = calcService.mode === 'sqft'
+    ? `${Math.max(calcArea, 50)} sqft`
+    : tCalc(`package${calcPkg.charAt(0).toUpperCase() + calcPkg.slice(1)}` as 'packageSingle' | 'packageMedium' | 'packageLarge')
+  const calcMessage = tCalc('messageTemplate', {
+    service: tHomeProducts(`${calcServiceKey}.title`),
+    price: formatRM(calcEstimate),
+    detail: `${calcDetail} (${cityName})`,
+  })
+  const calcWaHref = waRedirect(locale, calcMessage, locationSlug)
+  const sqftServices = CALC_SERVICES.filter((s) => s.mode === 'sqft')
+  const packageServices = CALC_SERVICES.filter((s) => s.mode === 'package')
 
   const uspItems = [
     { title: tUsp('usp1Title'), sub: tUsp('usp1Sub'), icon: 'clock' as const },
@@ -147,19 +217,149 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
         </div>
       </section>
 
-      {/* REVIEWS — pulled from home.reviews so locations don't duplicate copy */}
-      <section className="relative py-16 px-6 overflow-hidden" id="reviews" style={{ backgroundImage: 'linear-gradient(rgba(20,28,48,0.92), rgba(20,28,48,0.92)), url(/images/bg-review.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-        <div className="absolute inset-0 hero-bg" role="img" aria-label={tHomeReviews('heading')} style={{ pointerEvents: 'none' }} />
+      {/* PRODUCTS — mirrors the homepage 9-card services grid */}
+      <section id="products" className="py-16 px-6" style={{ background: 'var(--brand-cream)' }} aria-labelledby="loc-products-heading">
+        <div className="max-w-6xl mx-auto">
+          <FadeSection>
+            <div className="text-center mb-10">
+              <h5 className="text-[11px] font-bold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{tHomeProducts('tag')}</h5>
+              <h3 id="loc-products-heading" className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--brand-ink)' }}>{tHomeProducts('heading')}</h3>
+              <h5 className="text-sm font-normal mt-2 max-w-2xl mx-auto" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{tHomeProducts('subheading')}</h5>
+            </div>
+          </FadeSection>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" style={{ gridAutoRows: '1fr' }}>
+            {PRODUCT_KEYS.map((p) => (
+              <FadeSection key={p.key}>
+                <div className="bg-white rounded-2xl overflow-hidden flex flex-col" style={{ border: '1px solid var(--line)', boxShadow: '0 6px 20px rgba(17, 17, 17, 0.04)', height: '100%' }}>
+                  <div className="relative w-full overflow-hidden" style={{ aspectRatio: '4 / 3', background: 'var(--brand-cream)' }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={p.img} alt={tHomeProducts(`${p.key}.title`)} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                  </div>
+                  <div className="px-5 pt-5 pb-5 flex flex-col">
+                    <h3 className="text-[17px] m-0" style={{ color: 'var(--brand-ink)', fontWeight: 700, lineHeight: 1.3, letterSpacing: '-0.01em', minHeight: 'calc(1.3em * 2)', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                      {tHomeProducts(`${p.key}.title`)}
+                    </h3>
+                    <p className="m-0 mt-3" style={{ color: 'var(--muted)', fontSize: 13.5, lineHeight: 1.6, height: 'calc(1.6em * 2)', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                      {tHomeProducts(`${p.key}.description`)}
+                    </p>
+                    <div className="mt-5 pt-4 flex items-center justify-between gap-3" style={{ borderTop: '1px solid var(--line)' }}>
+                      <div className="flex flex-col leading-tight">
+                        <span className="text-[10px] uppercase tracking-[0.16em]" style={{ color: 'var(--muted)', fontWeight: 500 }}>{tHomeProducts('fromLabel')}</span>
+                        <span className="text-[20px]" style={{ color: 'var(--brand-pink)', fontWeight: 700, letterSpacing: '-0.01em' }}>{tHomeProducts(`${p.key}.price`).replace(/^Dari\s+/i, '')}</span>
+                      </div>
+                      <WhatsAppClickTracker phoneNumber={phoneNumber} href={waLink} target="_blank" rel="noopener noreferrer" aria-label={tHomeProducts('bookNow')} className="shrink-0 inline-flex items-center justify-center rounded-full" style={{ background: '#25D366', color: '#fff', width: 44, height: 44, boxShadow: '0 6px 16px rgba(37, 211, 102, 0.30)' }}>
+                        <WAIcon />
+                      </WhatsAppClickTracker>
+                    </div>
+                  </div>
+                </div>
+              </FadeSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CALCULATOR — same widget as homepage, pre-tied to this location */}
+      <section id="calculator" className="py-16 px-6" style={{ background: '#fff', borderTop: '1px solid var(--line)' }} aria-labelledby="loc-calc-heading">
+        <div className="max-w-5xl mx-auto">
+          <FadeSection>
+            <div className="text-center mb-8">
+              <h5 className="text-[11px] font-bold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{tCalc('tag')}</h5>
+              <h3 id="loc-calc-heading" className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--brand-ink)' }}>{tCalc('heading')}</h3>
+              <h5 className="text-sm font-normal mt-2 max-w-2xl mx-auto" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{tCalc('subheading')}</h5>
+            </div>
+          </FadeSection>
+          <FadeSection>
+            <div className="rounded-2xl p-6 md:p-8 grid md:grid-cols-2 gap-6 md:gap-8" style={{ background: '#fff', border: '1px solid var(--line)', boxShadow: '0 20px 50px rgba(17, 17, 17, 0.06)' }}>
+              <div className="flex flex-col gap-4">
+                <div>
+                  <label htmlFor="loc-calc-service" className="block text-xs font-bold uppercase tracking-widest mb-2" style={{ color: 'var(--muted)' }}>{tCalc('serviceLabel')}</label>
+                  <select id="loc-calc-service" value={calcServiceKey} onChange={(e) => setCalcServiceKey(e.target.value)} className="calc-select w-full px-4 py-3 rounded-xl text-sm font-semibold">
+                    <optgroup label="Per sqft">
+                      {sqftServices.map((s) => (
+                        <option key={s.key} value={s.key}>{tHomeProducts(`${s.key}.title`)} — RM{s.rate}{tCalc('perSqftSuffix')}</option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="Pakej">
+                      {packageServices.map((s) => (
+                        <option key={s.key} value={s.key}>{tHomeProducts(`${s.key}.title`)}</option>
+                      ))}
+                    </optgroup>
+                  </select>
+                </div>
+                {calcService.mode === 'sqft' ? (
+                  <div>
+                    <label htmlFor="loc-calc-area" className="block text-xs font-bold uppercase tracking-widest mb-2" style={{ color: 'var(--muted)' }}>{tCalc('areaLabel')}</label>
+                    <input id="loc-calc-area" type="number" min={50} step={50} value={calcArea} onChange={(e) => setCalcArea(Math.max(50, Number(e.target.value) || 0))} placeholder={tCalc('areaPlaceholder')} className="w-full px-4 py-3 rounded-xl text-sm font-semibold" style={{ background: 'var(--brand-cream)', border: '1px solid var(--line-strong)', color: 'var(--brand-ink)' }} />
+                    <input type="range" min={50} max={5000} step={50} value={Math.min(calcArea, 5000)} onChange={(e) => setCalcArea(Number(e.target.value))} className="w-full mt-3" style={{ accentColor: 'var(--brand-yellow)' }} />
+                  </div>
+                ) : (
+                  <div>
+                    <span className="block text-xs font-bold uppercase tracking-widest mb-2" style={{ color: 'var(--muted)' }}>{tCalc('packageLabel')}</span>
+                    <div className="grid grid-cols-3 gap-2">
+                      {(['single', 'medium', 'large'] as const).map((id) => (
+                        <button key={id} type="button" onClick={() => setCalcPkg(id)} className="px-3 py-2.5 rounded-xl text-[11px] font-bold text-center" style={{ background: calcPkg === id ? 'var(--brand-blue)' : 'var(--brand-cream)', color: calcPkg === id ? '#fff' : 'var(--brand-ink)', border: `1px solid ${calcPkg === id ? 'var(--brand-blue)' : 'var(--line-strong)'}` }}>
+                          {tCalc(`package${id.charAt(0).toUpperCase() + id.slice(1)}` as 'packageSingle' | 'packageMedium' | 'packageLarge')}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div className="rounded-2xl p-6 flex flex-col justify-between" style={{ background: 'linear-gradient(135deg, var(--brand-blue) 0%, var(--brand-blue-deep) 100%)', color: '#fff' }}>
+                <div>
+                  <span className="block text-[10px] font-bold uppercase tracking-[0.18em]" style={{ color: 'var(--brand-yellow)' }}>{tCalc('estimateLabel')}</span>
+                  <div className="mt-3 flex items-baseline gap-2">
+                    <span className="text-2xl font-bold" style={{ color: 'rgba(255,255,255,0.7)' }}>RM</span>
+                    <span className="text-5xl font-bold tabular-nums" style={{ color: '#fff', letterSpacing: '-0.02em' }}>{formatRM(calcEstimate)}</span>
+                  </div>
+                  <p className="text-xs font-normal mt-3" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: 1.6 }}>{tCalc('estimateNote')}</p>
+                </div>
+                <WhatsAppClickTracker phoneNumber={phoneNumber} href={calcWaHref} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-bold w-full" style={{ background: '#25D366', color: '#fff' }}>
+                  <WAIcon /> <span style={{ color: '#fff' }}>{tCalc('ctaButton')}</span>
+                </WhatsAppClickTracker>
+              </div>
+            </div>
+          </FadeSection>
+        </div>
+      </section>
+
+      {/* REVIEWS — full 6-card grid mirrors the homepage */}
+      <section className="relative py-16 px-6 overflow-hidden" id="reviews" style={{ backgroundImage: 'linear-gradient(135deg, rgba(2, 61, 147, 0.88) 0%, rgba(2, 30, 76, 0.94) 100%), url(/images/painters/painter-bg.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        <div className="absolute inset-0 hero-bg" role="img" aria-label={tHomeReviews('heading')} style={{ pointerEvents: 'none', backgroundImage: 'radial-gradient(circle at 80% 20%, rgba(255,210,63,0.16), transparent 55%)' }} />
         <div className="relative max-w-6xl mx-auto">
           <FadeSection>
-            <h3 className="text-2xl md:text-3xl font-bold text-center mb-8 text-white">{tHomeReviews('heading')}</h3>
+            <div className="text-center mb-10">
+              <div className="flex items-center justify-center gap-2 mb-3">
+                <GoogleLogo />
+                <span className="text-sm font-medium text-white">{tHomeReviews('googleReviews')}</span>
+              </div>
+              <div className="flex items-center justify-center gap-2 mb-3">
+                <span className="text-3xl font-bold" style={{ color: 'var(--brand-yellow)' }}>4.9</span>
+                <div className="flex gap-0.5">{Array.from({ length: 5 }).map((_, i) => <GoogleStarIcon key={i} />)}</div>
+              </div>
+              <h3 className="text-2xl md:text-3xl font-bold text-white">{tHomeReviews('heading')}</h3>
+              <h5 className="text-xs font-normal mt-2" style={{ color: 'rgba(255,255,255,0.55)', lineHeight: 1.6 }}>{tHomeReviews('reviewCount')}</h5>
+            </div>
           </FadeSection>
           <div className="grid md:grid-cols-3 gap-4">
-            {[1, 2, 3].map((n) => (
+            {[1, 2, 3, 4, 5, 6].map((n) => (
               <FadeSection key={n}>
-                <article className="p-5 rounded-xl" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.10)' }}>
-                  <blockquote className="text-sm font-normal" style={{ color: 'rgba(255,255,255,0.85)', lineHeight: 1.6 }}>&ldquo;{tHomeReviews(`review${n}Text`)}&rdquo;</blockquote>
-                  <div className="mt-3 text-xs font-semibold" style={{ color: '#FFD23F' }}>{tHomeReviews(`review${n}Name`)} — {tHomeReviews(`review${n}Location`)}</div>
+                <article className="p-5 rounded-2xl h-full flex flex-col" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.10)' }}>
+                  <div className="flex items-center gap-2 mb-3">
+                    <GoogleLogo />
+                    <div className="flex gap-0.5">{Array.from({ length: 5 }).map((_, j) => <GoogleStarIcon key={j} />)}</div>
+                  </div>
+                  <blockquote className="text-sm font-normal mb-5 flex-1" style={{ color: 'rgba(255,255,255,0.88)', lineHeight: 1.6 }}>&ldquo;{tHomeReviews(`review${n}Text`)}&rdquo;</blockquote>
+                  <div className="flex items-center gap-2.5 mt-auto">
+                    <div className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold shrink-0" style={{ background: 'var(--brand-yellow)', color: 'var(--brand-ink)' }}>
+                      {tHomeReviews(`review${n}Name`).split(' ').map((w: string) => w[0]).join('').slice(0, 2)}
+                    </div>
+                    <div>
+                      <div className="text-sm font-semibold text-white">{tHomeReviews(`review${n}Name`)}</div>
+                      <div className="text-xs font-normal" style={{ color: 'rgba(255,255,255,0.6)' }}>{tHomeReviews(`review${n}Location`)}</div>
+                    </div>
+                  </div>
                 </article>
               </FadeSection>
             ))}
