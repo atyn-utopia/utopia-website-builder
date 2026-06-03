@@ -131,7 +131,9 @@ export default function ProductCard({
           background: '#F0F4FA',
           borderRadius: 8,
           borderLeft: '3px solid #e63030',
-          minHeight: 70,
+          // Fixed height so every card's price block is identical regardless
+          // of whether the product has rental + sale, just rental, or neither.
+          height: 78,
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
