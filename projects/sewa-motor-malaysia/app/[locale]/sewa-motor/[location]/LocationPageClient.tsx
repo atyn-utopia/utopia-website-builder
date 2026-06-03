@@ -281,6 +281,23 @@ export default function LocationPageClient({
           </div>
         </section>
 
+        {/* ── USP BAR (mirrors homepage — floats over the hero via .usp-panel's
+            -32px top margin, so it must sit directly after the hero) ── */}
+        <div className="usp-panel">
+          <div className="usp-cell">
+            <h3>{s('whyChoose.title1')}</h3>
+            <h5>{s('whyChoose.desc1')}</h5>
+          </div>
+          <div className="usp-cell">
+            <h3>{s('whyChoose.title2')}</h3>
+            <h5>{s('whyChoose.desc2')}</h5>
+          </div>
+          <div className="usp-cell">
+            <h3>{s('whyChoose.title3')}</h3>
+            <h5>{s('whyChoose.desc3')}</h5>
+          </div>
+        </div>
+
         {/* ── STATS ── */}
         <section style={{ background: 'var(--brand-dark)' }}>
           <div className="max-w-6xl mx-auto px-6 py-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
@@ -299,22 +316,6 @@ export default function LocationPageClient({
             ))}
           </div>
         </section>
-
-        {/* ── USP BAR (mirrors homepage) ── */}
-        <div className="usp-panel">
-          <div className="usp-cell">
-            <h3>{s('whyChoose.title1')}</h3>
-            <h5>{s('whyChoose.desc1')}</h5>
-          </div>
-          <div className="usp-cell">
-            <h3>{s('whyChoose.title2')}</h3>
-            <h5>{s('whyChoose.desc2')}</h5>
-          </div>
-          <div className="usp-cell">
-            <h3>{s('whyChoose.title3')}</h3>
-            <h5>{s('whyChoose.desc3')}</h5>
-          </div>
-        </div>
 
         {/* ── PRODUCTS ── */}
         <section id="products" className="py-16 px-6" style={{ background: 'var(--brand-surface)' }} aria-labelledby="products-heading">
