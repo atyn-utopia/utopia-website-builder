@@ -55,6 +55,8 @@ export default function ProductCard({
         display: 'flex',
         flexDirection: 'column',
         gap: 12,
+        // Equal height across the row + button sticks to bottom (via marginTop:auto below).
+        height: '100%',
       }}
     >
       <div
@@ -194,7 +196,7 @@ export default function ProductCard({
           </div>
         );
       })()}
-      <div style={{ marginTop: 4 }}>
+      <div style={{ marginTop: 'auto' }}>
         <WhatsAppButton href={waHref} label={ctaLabel} variant="full" />
       </div>
     </div>

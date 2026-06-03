@@ -38,7 +38,7 @@ export default function HomePageClient({ locale, products, chromeProvided = fals
         {/* SECTION 3 — HERO */}
         <section
           style={{
-            padding: '64px 16px 72px',
+            padding: 'clamp(96px, 12vw, 132px) 16px 72px',
             background: 'transparent',
           }}
         >

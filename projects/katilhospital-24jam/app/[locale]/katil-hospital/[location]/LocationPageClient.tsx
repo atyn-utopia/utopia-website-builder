@@ -77,7 +77,7 @@ export default function LocationPageClient({
       {/* SECTION 3 — HERO */}
       <section
         style={{
-          padding: '48px 16px 32px',
+          padding: 'clamp(96px, 12vw, 132px) 16px 32px',
           background:
             'radial-gradient(circle at 70% 20%, rgba(143,184,224,0.25), transparent 60%), #FFFFFF',
         }}

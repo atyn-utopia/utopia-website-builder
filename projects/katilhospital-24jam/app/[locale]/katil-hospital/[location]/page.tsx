@@ -117,18 +117,21 @@ export default async function LocationPage({
 
       <PageStyles />
       <FomoBanner />
-      <SiteHeader />
-      <LocationPageClient
-        locale={locale}
-        products={cardProducts}
-        location={loc}
-        h1={h1}
-        h2={h2}
-        intro={intro}
-        uniqueFaqs={uniqueFaqs}
-        nearby={nearby}
-        chromeProvided
-      />
+      {/* Relative wrapper so the absolute Navbar floats over the hero. */}
+      <div style={{ position: 'relative' }}>
+        <SiteHeader />
+        <LocationPageClient
+          locale={locale}
+          products={cardProducts}
+          location={loc}
+          h1={h1}
+          h2={h2}
+          intro={intro}
+          uniqueFaqs={uniqueFaqs}
+          nearby={nearby}
+          chromeProvided
+        />
+      </div>
       <SiteFooter />
     </>
   );
