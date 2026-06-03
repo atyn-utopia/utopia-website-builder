@@ -481,6 +481,29 @@ a {
   .hero-right-col {
     display: none !important;
   }
+  /* CLAUDE.md: mobile centers headings, buttons, chips. Override the
+     left-aligned inline styles on every direct child of the hero left col. */
+  .hero-split-grid .fade-up {
+    text-align: center;
+  }
+  .hero-split-grid .fade-up h1,
+  .hero-split-grid .fade-up h2 {
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  .hero-split-grid .hero-cta-row {
+    justify-content: center !important;
+  }
+  .hero-split-grid .fade-up > div:last-child {
+    /* The trust chip row */
+    justify-content: center !important;
+  }
+  .hero-split-grid .fade-up .wa-btn,
+  .hero-split-grid .fade-up .ghost-btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* ============================================
@@ -729,8 +752,12 @@ a {
 .ewc-fomo__cta:hover { transform: translateY(-1px); }
 .ewc-fomo__cta svg { flex-shrink: 0; }
 @media (max-width: 640px) {
-  .ewc-fomo__inner { padding: 9px 12px; gap: 8px; font-size: 12.5px; }
+  .ewc-fomo__inner { padding: 8px 10px; gap: 6px 10px; font-size: 11.5px; }
   .ewc-fomo__tag { display: none; }
+  .ewc-fomo__body { font-size: 11.5px; }
+  .ewc-fomo__clock { font-size: 11px; padding: 2px 7px; }
+  .ewc-fomo__cta { font-size: 11px; padding: 4px 11px; gap: 5px; }
+  .ewc-fomo__cta svg { width: 11px; height: 11px; }
 }
 
 /* --- Site header ----------------------------------------------------- */
@@ -827,12 +854,12 @@ a {
 }
 @media (max-width: 959px) {
   .ewc-header__cta:not(.ewc-header__cta--mobile) { display: none !important; }
+  /* The desktop pill group crowds the header — the drawer already exposes the
+     same switcher, so hide the inline copy on every mobile/tablet width. */
+  .ewc-header__lang { display: none !important; }
 }
 @media (max-width: 520px) {
   .ewc-header__brand-text { font-size: 13px; }
-}
-@media (max-width: 380px) {
-  .ewc-header__lang { display: none; }
 }
 
 /* ============================================================
