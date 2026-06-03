@@ -122,18 +122,23 @@ export default function HomePage() {
   }
 
   // Pull gallery alt strings from i18n (alts[] array — checklist item #26)
+  // Real installation photos from /public/photos/ — mixed watermarked + clean
   const galleryAlts = t.raw('gallery.alts') as string[] | undefined
-  const galleryImages = [
-    { src: '/images/gallery-1.jpg' },
-    { src: '/images/gallery-2.jpg' },
-    { src: '/images/gallery-3.jpg' },
-    { src: '/images/gallery-4.webp' },
-    { src: '/images/gallery-5.jpg' },
-    { src: '/images/gallery-6.jpg' },
-  ].map((g, i) => ({
-    src: g.src,
+  const PHOTO_IDS = [12, 13, 14, 15, 16, 17, 18, 32, 33, 34, 35, 49] as const
+  const galleryImages = PHOTO_IDS.map((id, i) => ({
+    src: `/photos/${id}.jpg`,
     alt: (Array.isArray(galleryAlts) && galleryAlts[i]) || t('gallery.altTexts.newInstallation'),
   }))
+
+  // Client logos for the "Trusted by" proof strip below the hero (task #3)
+  const trustLogos: { src: string; alt: string }[] = [
+    { src: '/brand-assets/20.png', alt: '99 Speedmart' },
+    { src: '/brand-assets/25.png', alt: 'TeaLive' },
+    { src: '/brand-assets/22.png', alt: 'AEON' },
+    { src: '/brand-assets/26.png', alt: 'FamilyMart' },
+    { src: '/brand-assets/27.png', alt: 'Giant' },
+    { src: '/brand-assets/23.png', alt: 'MR. D.I.Y.' },
+  ]
 
   return (
     <>
@@ -224,6 +229,29 @@ export default function HomePage() {
         </section>
 
         {/* ============================================
+            TRUSTED BY — client / proof logo strip
+            ============================================ */}
+        <section aria-label="Trusted by" style={{ background: '#fff', borderBottom: '1px solid var(--brand-border)' }}>
+          <div className="max-w-6xl mx-auto px-6 py-8">
+            <h6 className="trust-strip-label text-[10px] font-bold uppercase tracking-[0.22em] text-center mb-5" style={{ color: 'var(--brand-blue-dark)' }}>
+              Trusted by leading Malaysian brands
+            </h6>
+            <ul className="trust-strip flex flex-wrap items-center justify-center gap-x-10 gap-y-5">
+              {trustLogos.map((logo) => (
+                <li key={logo.src} className="trust-strip-item">
+                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    className="trust-strip-logo"
+                    loading="lazy"
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* ============================================
             STATS
             ============================================ */}
         <section aria-label="Statistics" style={{ background: 'var(--brand-charcoal)' }}>
@@ -263,7 +291,7 @@ export default function HomePage() {
                           loading="lazy"
                         />
                         <div className="absolute inset-0" style={{ background: i % 2 === 0 ? 'linear-gradient(to right, transparent 50%, rgba(255,255,255,0.05) 100%)' : 'linear-gradient(to left, transparent 50%, rgba(255,255,255,0.05) 100%)' }} />
-                        <div className="absolute top-4 left-4 w-10 h-10 rounded-lg flex items-center justify-center text-sm font-extrabold" style={{ background: 'var(--brand-yellow)', color: 'var(--brand-charcoal)' }}>
+                        <div className="absolute top-4 left-4 w-10 h-10 rounded-lg flex items-center justify-center text-sm font-extrabold" style={{ background: i % 2 === 0 ? 'var(--brand-yellow)' : 'var(--brand-blue)', color: i % 2 === 0 ? 'var(--brand-charcoal)' : '#fff' }}>
                           0{i + 1}
                         </div>
                       </div>
@@ -482,7 +510,7 @@ export default function HomePage() {
               {[0, 1, 2, 3, 4, 5].map((i) => (
                 <FadeSection key={i} delay={i * 50}>
                   <div className="why-card flex gap-5 py-6" style={{ borderBottom: '1px solid var(--brand-border)' }}>
-                    <div className="shrink-0 text-3xl md:text-4xl font-extrabold leading-none" style={{ color: 'var(--brand-yellow)', minWidth: '48px' }}>
+                    <div className="shrink-0 text-3xl md:text-4xl font-extrabold leading-none" style={{ color: i % 2 === 0 ? 'var(--brand-yellow-dark)' : 'var(--brand-blue-dark)', minWidth: '48px' }}>
                       0{i + 1}
                     </div>
                     <div>
@@ -507,12 +535,12 @@ export default function HomePage() {
                 <h5 className="body-h5 text-sm" style={{ color: 'var(--brand-steel-light)', lineHeight: '1.7', fontWeight: 400 }}>{t('gallery.subheading')}</h5>
               </div>
             </FadeSection>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
               {galleryImages.map((img, i) => (
-                <FadeSection key={i} delay={i * 60}>
-                  <div className="relative group rounded overflow-hidden cursor-pointer" style={{ aspectRatio: '3/2' }}>
+                <FadeSection key={i} delay={i * 50}>
+                  <div className="relative group rounded overflow-hidden cursor-pointer" style={{ aspectRatio: '1/1' }}>
                     <img src={img.src} alt={img.alt} className="w-full h-full object-cover" loading="lazy" style={{ transition: 'transform 300ms ease' }} />
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 flex items-end p-3" style={{ background: 'rgba(44,51,56,0.7)', transition: 'opacity 300ms ease', border: '2px solid var(--brand-yellow)' }}>
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 flex items-end p-3" style={{ background: 'rgba(15,33,43,0.7)', transition: 'opacity 300ms ease', border: '2px solid var(--brand-yellow)' }}>
                       <span className="text-xs font-medium text-white">{img.alt}</span>
                     </div>
                   </div>

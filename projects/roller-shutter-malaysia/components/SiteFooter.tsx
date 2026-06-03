@@ -4,19 +4,6 @@ import { useLocale, useTranslations } from 'next-intl'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import { waRedirect } from '@/lib/waRedirect'
 
-function ShutterIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="var(--brand-charcoal)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <rect x="3" y="2" width="18" height="20" rx="2" />
-      <line x1="3" y1="6" x2="21" y2="6" />
-      <line x1="3" y1="10" x2="21" y2="10" />
-      <line x1="3" y1="14" x2="21" y2="14" />
-      <line x1="3" y1="18" x2="21" y2="18" />
-      <circle cx="12" cy="20" r="1" fill="var(--brand-charcoal)" stroke="none" />
-    </svg>
-  )
-}
-
 function WAIcon({ size = 18 }: { size?: number }) {
   return (
     <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor" aria-hidden="true">
@@ -37,16 +24,12 @@ export default function SiteFooter() {
       <div className="max-w-6xl mx-auto">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div>
-            <div className="flex items-center gap-2 mb-3">
-              <div
-                className="w-7 h-7 rounded-md flex items-center justify-center"
-                style={{ background: 'var(--brand-yellow)' }}
-                role="img"
-                aria-label={navT('logoAlt')}
-              >
-                <ShutterIcon />
-              </div>
-              <span className="font-bold text-white text-sm">{navT('brandName')}</span>
+            <div className="mb-3">
+              <img
+                src="/brand/logo-wordmark.png"
+                alt={navT('logoAlt')}
+                style={{ width: 180, height: 'auto', display: 'block', background: '#fff', padding: '6px 8px', borderRadius: 10 }}
+              />
             </div>
             <h6 className="body-h6 text-xs font-normal mb-4" style={{ color: 'var(--brand-steel-light)', lineHeight: '1.7' }}>{footT('tagline')}</h6>
             <a

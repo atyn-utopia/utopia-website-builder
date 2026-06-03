@@ -1,6 +1,7 @@
 export const siteConfig = {
   domain: 'roller-shutter-malaysia.utopiaai.my',
-  brandName: 'Roller Shutter Door Malaysia',
+  brandName: 'Encik Roller Shutter',
+  tagline: 'Kukuh & Berbaloi, Kami Janji!',
   productSlug: 'roller-shutter',
   fallbackPhone: '60174287801',
   defaultLocale: 'ms',

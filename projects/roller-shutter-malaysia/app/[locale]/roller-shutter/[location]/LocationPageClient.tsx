@@ -129,15 +129,9 @@ export default function LocationPage() {
   }
 
   const galleryAlts = t.raw('gallery.alts') as string[] | undefined
-  const galleryImages = [
-    { src: '/images/gallery-1.jpg' },
-    { src: '/images/gallery-2.jpg' },
-    { src: '/images/gallery-3.jpg' },
-    { src: '/images/gallery-4.webp' },
-    { src: '/images/gallery-5.jpg' },
-    { src: '/images/gallery-6.jpg' },
-  ].map((g, i) => ({
-    src: g.src,
+  const PHOTO_IDS = [12, 13, 14, 15, 16, 17, 18, 32, 33, 34, 35, 49] as const
+  const galleryImages = PHOTO_IDS.map((id, i) => ({
+    src: `/photos/${id}.jpg`,
     alt:
       (Array.isArray(galleryAlts) && galleryAlts[i] && `${galleryAlts[i]} — ${cityName}`) ||
       `Roller shutter project ${cityName}`,
@@ -247,7 +241,7 @@ export default function LocationPage() {
                   <div className={`product-card bg-white rounded-2xl overflow-hidden flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`} style={{ boxShadow: 'var(--shadow-md)', border: '1px solid var(--brand-border)' }}>
                     <div className="relative md:w-2/5 h-56 md:h-auto overflow-hidden" style={{ background: 'var(--brand-gunmetal)', minHeight: '240px' }}>
                       <img src={productImages[key]} alt={t('products.imageAltTemplate', { model: t(`products.items.${key}.name`) })} className="w-full h-full object-cover" loading="lazy" />
-                      <div className="absolute top-4 left-4 w-10 h-10 rounded-lg flex items-center justify-center text-sm font-extrabold" style={{ background: 'var(--brand-yellow)', color: 'var(--brand-charcoal)' }}>0{i + 1}</div>
+                      <div className="absolute top-4 left-4 w-10 h-10 rounded-lg flex items-center justify-center text-sm font-extrabold" style={{ background: i % 2 === 0 ? 'var(--brand-yellow)' : 'var(--brand-blue)', color: i % 2 === 0 ? 'var(--brand-charcoal)' : '#fff' }}>0{i + 1}</div>
                     </div>
                     <div className="md:w-3/5 p-6 md:p-8 flex flex-col justify-center">
                       <h4 className="text-lg md:text-xl font-bold mb-3" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.02em' }}>{t(`products.items.${key}.name`)}</h4>
@@ -418,7 +412,7 @@ export default function LocationPage() {
             <div className="grid md:grid-cols-2 gap-x-10 gap-y-0">
               {[0, 1, 2, 3, 4, 5].map(i => (
                 <div key={i} className="why-card flex gap-5 py-6" style={{ borderBottom: '1px solid var(--brand-border)' }}>
-                  <div className="shrink-0 text-3xl md:text-4xl font-extrabold leading-none" style={{ color: 'var(--brand-yellow)', minWidth: '48px' }}>0{i + 1}</div>
+                  <div className="shrink-0 text-3xl md:text-4xl font-extrabold leading-none" style={{ color: i % 2 === 0 ? 'var(--brand-yellow-dark)' : 'var(--brand-blue-dark)', minWidth: '48px' }}>0{i + 1}</div>
                   <div>
                     <h4 className="text-base font-bold mb-1.5" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.015em' }}>{t(`whyChoose.items.${i}.title`)}</h4>
                     <h5 className="body-h5 text-sm" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7', fontWeight: 400 }}>{t(`whyChoose.items.${i}.description`)}</h5>
@@ -436,11 +430,11 @@ export default function LocationPage() {
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ letterSpacing: '-0.025em' }}>{t('gallery.heading')}</h3>
               <h5 className="body-h5 text-sm" style={{ color: 'var(--brand-steel-light)', fontWeight: 400 }}>{t('gallery.subheading')}</h5>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
               {galleryImages.map((img, i) => (
-                <div key={i} className="relative group rounded overflow-hidden cursor-pointer" style={{ aspectRatio: '3/2' }}>
+                <div key={i} className="relative group rounded overflow-hidden cursor-pointer" style={{ aspectRatio: '1/1' }}>
                   <img src={img.src} alt={img.alt} className="w-full h-full object-cover" loading="lazy" />
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 flex items-end p-3" style={{ background: 'rgba(44,51,56,0.7)', transition: 'opacity 300ms ease', border: '2px solid var(--brand-yellow)' }}>
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 flex items-end p-3" style={{ background: 'rgba(15,33,43,0.7)', transition: 'opacity 300ms ease', border: '2px solid var(--brand-yellow)' }}>
                     <span className="text-xs font-medium text-white">{img.alt}</span>
                   </div>
                 </div>

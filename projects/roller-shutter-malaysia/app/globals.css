@@ -1,35 +1,41 @@
 @import "tailwindcss";
 
 :root {
-  /* Brand Colors — Steel Fortress */
-  --brand-gunmetal: #2C3338;
-  --brand-gunmetal-light: #3D464C;
-  --brand-charcoal: #1C1F22;
-  --brand-steel: #6B7D8A;
-  --brand-steel-light: #8FA3B0;
-  --brand-yellow: #F2C744;
-  --brand-yellow-dark: #D4AD2E;
-  --brand-yellow-pale: #FFF9E6;
+  /* Brand Colors — Encik Roller Shutter (yellow + electric blue, from the logo) */
+  --brand-yellow: #FFC700;          /* hard-hat / logo halo yellow */
+  --brand-yellow-bright: #FFD83D;   /* hover / highlight */
+  --brand-yellow-dark: #E0A800;     /* darker for contrast text */
+  --brand-yellow-pale: #FFF6D1;     /* tinted background */
+  --brand-blue: #1AB1E6;            /* electric blue from "Roller" wordmark + 24h badge */
+  --brand-blue-bright: #36C0F0;     /* hover / highlight */
+  --brand-blue-dark: #0E8DBC;       /* deeper electric blue for headings/links */
+  --brand-blue-pale: #E0F4FB;       /* tinted background */
+  --brand-charcoal: #15212B;        /* primary text */
+  --brand-gunmetal: #1F2D38;        /* footer bg */
+  --brand-gunmetal-light: #2D3B47;  /* footer hover */
+  --brand-steel: #5C6A76;           /* muted text */
+  --brand-steel-light: #8A98A4;     /* faint text */
+  --brand-surface: #F5F9FC;         /* page bg with a hint of blue */
+  --brand-surface-warm: #FFFEF6;    /* subtle yellow-tinted bg */
+  --brand-white: #FFFFFF;
+  --brand-text: #15212B;
+  --brand-text-muted: #5C6A76;
+  --brand-border: #D1DCE4;
+  --brand-border-steel: #9FB0BD;
   --brand-crimson: #DC2626;
   --brand-crimson-dark: #B91C1C;
-  --brand-surface: #F0F1F3;
-  --brand-surface-warm: #F7F7F5;
-  --brand-white: #FFFFFF;
-  --brand-text: #1C1F22;
-  --brand-text-muted: #6B7D8A;
-  --brand-border: #D1D5DB;
-  --brand-border-steel: #9CA3AF;
   --wa-green: #25D366;
   --wa-green-dark: #1EAD53;
   --google-gold: #FBBC04;
 
   /* Gradients */
-  --gradient-hero: linear-gradient(155deg, #1C1F22 0%, #2C3338 45%, #3D464C 100%);
-  --gradient-hero-accent: linear-gradient(135deg, rgba(242,199,68,0.15) 0%, transparent 50%);
-  --gradient-dark-section: linear-gradient(180deg, #1C1F22 0%, #2C3338 100%);
-  --gradient-yellow-shine: linear-gradient(135deg, #F2C744 0%, #D4AD2E 100%);
+  --gradient-hero: linear-gradient(155deg, #15212B 0%, #1F2D38 45%, #1AB1E6 140%);
+  --gradient-hero-accent: linear-gradient(135deg, rgba(255,199,0,0.18) 0%, transparent 50%);
+  --gradient-dark-section: linear-gradient(180deg, #15212B 0%, #1F2D38 100%);
+  --gradient-yellow-shine: linear-gradient(135deg, #FFC700 0%, #E0A800 100%);
+  --gradient-blue-shine: linear-gradient(135deg, #36C0F0 0%, #0E8DBC 100%);
   --gradient-emergency: linear-gradient(90deg, #DC2626 0%, #B91C1C 100%);
-  --gradient-surface: linear-gradient(180deg, #F0F1F3 0%, #F7F7F5 100%);
+  --gradient-surface: linear-gradient(180deg, #F5F9FC 0%, #FFFEF6 100%);
 
   /* Shadows — Layered, Never Flat */
   --shadow-sm: 0 1px 4px rgba(44,51,56,0.06);
@@ -287,11 +293,176 @@ body {
 }
 
 /* ============================================================
-   Mobile: hide the header WhatsApp CTA at <=879px so it doesn't
-   overlap the language switcher (checklist item #31).
+   Site Header — ported from sewa-excavator (1:1 layout, brand-adapted).
+   Defined in globals.css (not <style jsx>) so rules apply pre-hydration.
    ============================================================ */
+.container {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 80px);
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: saturate(180%) blur(10px);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid rgba(15, 33, 43, 0.08);
+}
+.site-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px clamp(16px, 4vw, 80px);
+  min-height: 64px;
+}
+.site-header-brand {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+.site-header-logo {
+  width: 160px;
+  height: auto;
+  display: block;
+}
+@media (min-width: 880px) {
+  .site-header-logo { width: 180px; }
+}
+@media (max-width: 879px) {
+  .site-header-logo { width: 130px; }
+}
+
+.site-nav { display: inline-flex; gap: 24px; flex-wrap: nowrap; }
+.site-nav a {
+  color: var(--brand-charcoal);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: -0.005em;
+  transition: color 200ms ease;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.site-nav a:hover { color: var(--brand-blue-dark); }
+.site-nav--desktop { display: none; }
+
+.site-actions { display: inline-flex; align-items: center; gap: 10px; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 200ms ease, box-shadow 200ms ease, background-color 200ms ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn-wa { background: var(--wa-green); color: #fff; box-shadow: var(--shadow-wa); }
+.btn-wa:hover { background: var(--wa-green-dark); }
+
+.nav-cta { height: 40px; padding: 0 14px; font-size: 13px; }
+.nav-cta-label { display: inline; }
+
+.site-burger {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 38px;
+  height: 38px;
+  padding: 0 8px;
+  background: transparent;
+  border: 1px solid rgba(15, 33, 43, 0.18);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.site-burger span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--brand-charcoal);
+  border-radius: 2px;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+.site-burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.site-burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.site-burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+.site-mobile-drawer {
+  display: none;
+  background: #fff;
+  border-top: 1px solid rgba(15, 33, 43, 0.08);
+  padding: 14px clamp(16px, 4vw, 80px) 18px;
+}
+.site-mobile-drawer.is-open { display: block; }
+.site-mobile-nav { display: flex; flex-direction: column; }
+.site-mobile-nav a {
+  padding: 13px 4px;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--brand-charcoal);
+  border-bottom: 1px solid rgba(15, 33, 43, 0.08);
+  text-decoration: none;
+}
+.site-mobile-nav a:last-child { border-bottom: none; }
+.site-mobile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 16px;
+  margin-top: 12px;
+  border-top: 1px solid rgba(15, 33, 43, 0.08);
+}
+.site-mobile-actions .lsw-root { justify-content: center; }
+.site-mobile-actions .btn { width: 100%; height: 48px; font-size: 15px; }
+
+@media (min-width: 880px) {
+  .site-nav--desktop { display: inline-flex; }
+  .site-burger { display: none; }
+  .site-mobile-drawer { display: none !important; }
+}
 @media (max-width: 879px) {
   .nav-cta { display: none !important; }
+  .site-actions__lang { display: inline-flex; }
+  .site-mobile-actions .btn-wa { display: inline-flex; }
+}
+
+/* ============================================================
+   Trusted-by strip — client logos under hero. Uniform height,
+   slight grayscale on rest, full colour on hover.
+   ============================================================ */
+.trust-strip {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.trust-strip-item { display: inline-flex; align-items: center; }
+.trust-strip-logo {
+  height: 40px;
+  width: auto;
+  max-width: 130px;
+  object-fit: contain;
+  filter: grayscale(60%);
+  opacity: 0.72;
+  transition: filter 220ms ease, opacity 220ms ease, transform 220ms ease;
+}
+.trust-strip-logo:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: translateY(-1px);
+}
+@media (min-width: 768px) {
+  .trust-strip-logo { height: 46px; max-width: 150px; }
 }
 
 /* ============================================================
