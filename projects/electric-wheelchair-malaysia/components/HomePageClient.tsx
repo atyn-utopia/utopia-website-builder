@@ -192,8 +192,10 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
   return (
     <>
       {/* ============================================
-          1. FOMO BANNER
+          1. FOMO BANNER — skipped when chromeProvided so the shared FomoBanner
+          (rendered by page.tsx) is the only one
           ============================================ */}
+      {!chromeProvided && (
       <div
         style={{
           background: 'var(--gradient-fomo)',
@@ -243,6 +245,7 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
           </a>
         </div>
       </div>
+      )}
 
       {/* ============================================
           2. NAV — skipped when chromeProvided so the shared SiteHeader renders instead

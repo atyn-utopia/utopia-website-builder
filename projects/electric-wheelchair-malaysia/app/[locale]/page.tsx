@@ -143,7 +143,16 @@ export default async function HomePage({
               src={HERO_PHOTO_URL}
               alt={imageAlt}
               loading="eager"
-              style={{ width: '100%', maxWidth: 460, height: 'auto', filter: 'drop-shadow(0 30px 60px rgba(244,123,32,0.25))' }}
+              style={{
+                width: '100%',
+                maxWidth: 460,
+                height: 'auto',
+                filter: 'drop-shadow(0 30px 60px rgba(244,123,32,0.25))',
+                // Fade the bottom of the source photo so the white pedestal
+                // baked into the brand asset dissolves into the navy hero bg.
+                WebkitMaskImage: 'linear-gradient(to bottom, #000 78%, transparent 100%)',
+                maskImage: 'linear-gradient(to bottom, #000 78%, transparent 100%)',
+              }}
             />
           </div>
         </div>
