@@ -121,6 +121,8 @@ export default function ProductCard({
           {product.description}
         </p>
       )}
+      {/* Price block + WhatsApp CTA grouped together at the bottom of the card. */}
+      <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: 8 }}>
       {(() => {
         const L = priceLabels(locale);
         const hasAny = product.rental_price || product.sale_price;
@@ -134,9 +136,6 @@ export default function ProductCard({
           flexDirection: 'column',
           justifyContent: 'center',
           gap: 6,
-          // Push price + button group to the bottom of the card; the button
-          // sits directly below this block via its own marginTop:auto.
-          marginTop: 'auto',
         };
         const rowStyle: CSSProperties = {
           display: 'flex',
@@ -199,8 +198,7 @@ export default function ProductCard({
           </div>
         );
       })()}
-      <div style={{ marginTop: 'auto' }}>
-        <WhatsAppButton href={waHref} label={ctaLabel} variant="full" />
+      <WhatsAppButton href={waHref} label={ctaLabel} variant="full" />
       </div>
     </div>
   );
