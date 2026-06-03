@@ -32,7 +32,7 @@ export default async function SiteFooter({ locale }: { locale: Locale }) {
             <div className="flex items-center gap-2 mb-3">
               {/* Logo icon = the favicon, so the two always match. */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/favicon.svg" alt="" className="w-8 h-8" aria-hidden="true" />
+              <img src="/favicon.svg" alt={tNav('logoAlt')} className="w-8 h-8" />
               <span className="font-extrabold text-lg text-white tracking-tight">Encik Beku</span>
             </div>
             <p
