@@ -568,15 +568,19 @@ a {
 @media (max-width: 767px) {
   .why-grid {
     grid-template-columns: 1fr;
-    gap: var(--space-md);
+    gap: 14px;
   }
+  /* Centered vertical stack: icon on top, title, then description. Matches
+     the rest of the mobile-center pattern; the prior flex-row override
+     mashed the icon into a deformed capsule. */
   .why-grid > div {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: flex-start !important;
-    gap: 16px !important;
-    padding: 16px !important;
-    text-align: left !important;
+    display: block !important;
+    padding: 22px 20px !important;
+    text-align: center !important;
+  }
+  .why-grid > div > div:first-child {
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 }
 
