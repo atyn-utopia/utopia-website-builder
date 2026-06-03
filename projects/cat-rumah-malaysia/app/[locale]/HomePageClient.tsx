@@ -521,9 +521,13 @@ export default function HomePageClient({ phoneNumber }: Props) {
                           color: 'var(--muted)',
                           fontSize: 13.5,
                           lineHeight: 1.55,
-                          minHeight: 'calc(1.55em * 3)',
+                          // Lock to exactly 2 lines so every card in the row
+                          // has identical vertical spacing — shorter
+                          // descriptions don't leave ghost whitespace and
+                          // longer ones truncate cleanly with an ellipsis.
+                          height: 'calc(1.55em * 2)',
                           display: '-webkit-box',
-                          WebkitLineClamp: 3,
+                          WebkitLineClamp: 2,
                           WebkitBoxOrient: 'vertical',
                           overflow: 'hidden',
                         }}
