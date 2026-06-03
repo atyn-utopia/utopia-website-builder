@@ -16,25 +16,6 @@ export default function SiteHeader() {
   return (
     <header className="site-header">
       <div className="container site-header-inner">
-        <Link href={`/${locale}`} className="site-brand" aria-label={t('logoAlt')}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/brand/logo-light.png"
-            alt={t('logoAlt')}
-            className="site-brand-logo"
-            width={160}
-            height={50}
-          />
-        </Link>
-
-        <nav className="site-nav site-nav--desktop" aria-label="Primary">
-          <Link href={`/${locale}`}>{t('home')}</Link>
-          <Link href={`/${locale}#products`}>{t('products')}</Link>
-          <Link href={`/${locale}#calculator`}>{t('calculator')}</Link>
-          <Link href={`/${locale}#locations`}>{t('locations')}</Link>
-          <Link href={`/${locale}/blog`}>{t('blog')}</Link>
-        </nav>
-
         <button
           type="button"
           className="site-burger"
@@ -48,7 +29,17 @@ export default function SiteHeader() {
           <span aria-hidden="true" />
         </button>
 
+        <nav className="site-nav site-nav--desktop" aria-label="Primary">
+          <Link href={`/${locale}`}>{t('home')}</Link>
+          <Link href={`/${locale}#products`}>{t('products')}</Link>
+          <Link href={`/${locale}#calculator`}>{t('calculator')}</Link>
+          <Link href={`/${locale}#locations`}>{t('locations')}</Link>
+          <Link href={`/${locale}/blog`}>{t('blog')}</Link>
+        </nav>
+
         <div className="site-actions">
+          {/* The language switcher renders as inline pills on desktop and a
+              dropdown trigger on mobile — only one is visible at a time. */}
           <div className="site-actions__lang"><LanguageSwitcher /></div>
           <WhatsAppButton href={waRedirect(locale)} label="nav" className="btn btn-wa nav-cta">
             <WaIcon size={16} />
@@ -66,7 +57,6 @@ export default function SiteHeader() {
           <Link href={`/${locale}/blog`} onClick={close}>{t('blog')}</Link>
         </nav>
         <div className="site-mobile-actions">
-          <LanguageSwitcher />
           <WhatsAppButton href={waRedirect(locale)} label="nav-mobile" className="btn btn-wa">
             <WaIcon size={16} />
             {t('whatsappCta')}
@@ -88,9 +78,6 @@ export default function SiteHeader() {
           padding: 12px var(--gut);
           min-height: 60px;
         }
-        .site-brand { display: inline-flex; align-items: center; }
-        .site-brand-logo { height: 44px; width: auto; display: block; }
-        @media (max-width: 480px) { .site-brand-logo { height: 38px; } }
         .site-nav { display: inline-flex; gap: 24px; flex-wrap: nowrap; }
         .site-nav a { color: var(--ink); font-weight: 600; font-size: 14px; letter-spacing: -0.005em; transition: color var(--dur) var(--ease-out); white-space: nowrap; }
         .site-nav a:hover { color: var(--brand-accent); }

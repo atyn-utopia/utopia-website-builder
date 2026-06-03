@@ -60,12 +60,80 @@ const reasonKeys = ['reason1', 'reason2', 'reason3', 'reason4', 'reason5', 'reas
 const faqIndexes = [1, 2, 3, 4, 5, 6, 7, 8]
 const reviewIndexes = [1, 2, 3, 4, 5, 6]
 
-// Before/After pairs — chosen so the visual story reads cleanly.
+// Before/After pairs — realistic transitions. Each "before" is a mid-paint or
+// prep-stage photo (raw wall / half-painted) paired with a finished-work
+// "after" so the comparison slider reads as a true transformation.
 const beforeAfterPairs = [
-  { before: '/images/before-after/before-1.png', after: '/images/gallery/job-88.png', captionKey: 'pair2Caption' },
-  { before: '/images/before-after/before-2.png', after: '/images/gallery/job-85.png', captionKey: 'pair3Caption' },
-  { before: '/images/before-after/before-3.png', after: '/images/gallery/job-80.png', captionKey: 'pair1Caption' },
+  // Exterior: mid-paint roller stroke on bare wall → finished exterior repaint
+  { before: '/images/before-after/before-exterior.png', after: '/images/gallery/job-84.png', captionKey: 'pair1Caption' },
+  // Interior prep: empty room with sheets + ladder → freshly painted interior
+  { before: '/images/before-after/before-prep.png', after: '/images/gallery/job-88.png', captionKey: 'pair2Caption' },
+  // Ceiling/wall: half-painted green ceiling roller → finished clean room
+  { before: '/images/before-after/before-ceiling.png', after: '/images/gallery/job-85.png', captionKey: 'pair3Caption' },
 ] as const
+
+// Draggable before/after comparison slider. Pointer events handle both mouse
+// and touch in one path.
+function BeforeAfterSlider({ before, after, beforeLabel, afterLabel }: { before: string; after: string; beforeLabel: string; afterLabel: string }) {
+  const [pos, setPos] = useState(50)
+  const ref = useRef<HTMLDivElement>(null)
+  const dragging = useRef(false)
+
+  const update = (clientX: number) => {
+    const el = ref.current
+    if (!el) return
+    const rect = el.getBoundingClientRect()
+    const pct = ((clientX - rect.left) / rect.width) * 100
+    setPos(Math.max(0, Math.min(100, pct)))
+  }
+
+  const onDown = (e: React.PointerEvent) => {
+    dragging.current = true
+    ;(e.target as Element).setPointerCapture?.(e.pointerId)
+    update(e.clientX)
+  }
+  const onMove = (e: React.PointerEvent) => {
+    if (!dragging.current) return
+    update(e.clientX)
+  }
+  const onUp = () => { dragging.current = false }
+
+  return (
+    <div
+      ref={ref}
+      className="relative w-full select-none overflow-hidden rounded-2xl"
+      style={{ aspectRatio: '1 / 1', background: 'var(--brand-cream)', border: '1px solid var(--line)', cursor: 'ew-resize', touchAction: 'none' }}
+      onPointerDown={onDown}
+      onPointerMove={onMove}
+      onPointerUp={onUp}
+      onPointerCancel={onUp}
+      role="img"
+      aria-label={`${beforeLabel} / ${afterLabel}`}
+    >
+      {/* After (bottom layer) */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={after} alt={afterLabel} className="absolute inset-0 w-full h-full object-cover" draggable={false} />
+      <span className="absolute bottom-3 right-3 z-20 text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-full" style={{ background: 'var(--brand-yellow)', color: 'var(--brand-ink)' }}>{afterLabel}</span>
+
+      {/* Before (top layer, clipped) */}
+      <div className="absolute inset-0 overflow-hidden" style={{ width: `${pos}%` }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={before} alt={beforeLabel} className="absolute inset-0 h-full object-cover" style={{ width: ref.current?.clientWidth ? `${ref.current.clientWidth}px` : '100%' }} draggable={false} />
+        <span className="absolute bottom-3 left-3 text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-full" style={{ background: 'var(--brand-ink)', color: '#fff' }}>{beforeLabel}</span>
+      </div>
+
+      {/* Divider + drag handle */}
+      <div className="absolute top-0 bottom-0 pointer-events-none z-10" style={{ left: `${pos}%`, transform: 'translateX(-50%)' }}>
+        <div style={{ width: 3, height: '100%', background: '#fff', boxShadow: '0 0 0 1px rgba(0,0,0,0.15)' }} />
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center rounded-full" style={{ width: 40, height: 40, background: '#fff', boxShadow: '0 4px 12px rgba(0,0,0,0.25)' }}>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M7 5l-4 5 4 5M13 5l4 5-4 5" stroke="var(--brand-ink)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 // Real customer work photos — 12 cells exactly so the grid stays full at every
 // breakpoint (2/3/4 cols all divide 12).
@@ -165,19 +233,26 @@ export default function HomePageClient({ phoneNumber }: Props) {
             {productKeys.map((p, i) => (
               <ProductImpressionTracker key={p.key} slug={p.slug}>
                 <FadeSection delay={i * 40}>
-                  <div className="bg-white rounded-2xl overflow-hidden h-full flex flex-col" style={{ border: '1px solid var(--line)', boxShadow: '0 8px 24px rgba(31, 42, 107, 0.05)' }}>
-                    <div className="relative aspect-[4/3] overflow-hidden" style={{ background: 'var(--brand-cream)' }}>
+                  <div className="product-card bg-white rounded-2xl overflow-hidden flex flex-col" style={{ border: '1px solid var(--line)', boxShadow: '0 8px 24px rgba(31, 42, 107, 0.05)', height: '100%' }}>
+                    <div className="relative w-full overflow-hidden" style={{ aspectRatio: '4 / 3', background: 'var(--brand-cream)' }}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={p.img} alt={t(`products.${p.key}.title`)} className="w-full h-full object-cover" loading="lazy" />
-                      <div className="absolute top-3 right-3 inline-flex items-center rounded-full px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wider" style={{ background: 'var(--brand-yellow)', color: 'var(--brand-ink)' }}>
+                      <img src={p.img} alt={t(`products.${p.key}.title`)} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                      <div className="absolute top-3 right-3 inline-flex items-center rounded-full px-3 py-1 text-[11px] font-extrabold tracking-wide" style={{ background: 'var(--brand-yellow)', color: 'var(--brand-ink)', boxShadow: '0 4px 12px rgba(0,0,0,0.18)' }}>
                         {t(`products.${p.key}.price`)}
                       </div>
                     </div>
                     <div className="p-5 flex flex-col flex-1">
-                      <h3 className="text-base font-extrabold" style={{ color: 'var(--brand-ink)' }}>{t(`products.${p.key}.title`)}</h3>
-                      <h5 className="text-sm font-normal mt-1 flex-1" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{t(`products.${p.key}.description`)}</h5>
-                      <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full text-xs font-semibold text-white" style={{ background: '#25D366' }}>
-                        <WAIcon /> {t('products.bookNow')}
+                      <h3 className="text-base font-extrabold" style={{ color: 'var(--brand-ink)', minHeight: '1.5em' }}>{t(`products.${p.key}.title`)}</h3>
+                      <p className="text-sm font-normal mt-1.5 flex-1" style={{
+                        color: 'var(--muted)',
+                        lineHeight: 1.6,
+                        display: '-webkit-box',
+                        WebkitLineClamp: 3,
+                        WebkitBoxOrient: 'vertical',
+                        overflow: 'hidden',
+                      }}>{t(`products.${p.key}.description`)}</p>
+                      <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full text-xs font-semibold" style={{ background: '#25D366', color: '#fff' }}>
+                        <WAIcon /> <span style={{ color: '#fff' }}>{t('products.bookNow')}</span>
                       </WhatsAppClickTracker>
                     </div>
                   </div>
@@ -202,19 +277,13 @@ export default function HomePageClient({ phoneNumber }: Props) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {beforeAfterPairs.map((pair, i) => (
               <FadeSection key={i} delay={i * 80}>
-                <figure className="rounded-2xl overflow-hidden" style={{ background: 'var(--brand-cream)', border: '1px solid var(--line)' }}>
-                  <div className="grid grid-cols-2 gap-1" style={{ background: 'var(--line-strong)' }}>
-                    <div className="relative aspect-square overflow-hidden" style={{ background: '#fff' }}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={pair.before} alt={tBA('before')} className="w-full h-full object-cover" loading="lazy" />
-                      <span className="absolute top-2 left-2 text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full" style={{ background: 'var(--brand-ink)', color: '#fff' }}>{tBA('before')}</span>
-                    </div>
-                    <div className="relative aspect-square overflow-hidden" style={{ background: '#fff' }}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={pair.after} alt={tBA('after')} className="w-full h-full object-cover" loading="lazy" />
-                      <span className="absolute top-2 left-2 text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full" style={{ background: 'var(--brand-yellow)', color: 'var(--brand-ink)' }}>{tBA('after')}</span>
-                    </div>
-                  </div>
+                <figure className="rounded-2xl overflow-hidden flex flex-col h-full" style={{ background: '#fff', border: '1px solid var(--line)' }}>
+                  <BeforeAfterSlider
+                    before={pair.before}
+                    after={pair.after}
+                    beforeLabel={tBA('before')}
+                    afterLabel={tBA('after')}
+                  />
                   <figcaption className="px-4 py-3 text-xs font-medium" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>
                     {tBA(pair.captionKey)}
                   </figcaption>
@@ -222,9 +291,12 @@ export default function HomePageClient({ phoneNumber }: Props) {
               </FadeSection>
             ))}
           </div>
+          <h5 className="text-center text-[11px] font-normal mt-3" style={{ color: 'var(--muted)' }}>
+            ↔ {tBA('dragHint')}
+          </h5>
           <FadeSection>
             <div className="text-center mt-8">
-              <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white" style={{ background: '#25D366' }}>
+              <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold" style={{ background: '#25D366', color: '#fff' }}>
                 <WAIcon /> {tBA('ctaButton')}
               </WhatsAppClickTracker>
             </div>
@@ -276,7 +348,7 @@ export default function HomePageClient({ phoneNumber }: Props) {
           </div>
           <FadeSection>
             <div className="text-center mt-8">
-              <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full text-sm font-semibold text-white" style={{ background: '#25D366' }}>
+              <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full text-sm font-semibold" style={{ background: '#25D366', color: '#fff' }}>
                 <WAIcon />{t('howItWorks.cta')}
               </WhatsAppClickTracker>
             </div>
@@ -284,14 +356,18 @@ export default function HomePageClient({ phoneNumber }: Props) {
         </div>
       </section>
 
-      {/* REVIEWS */}
+      {/* REVIEWS — dark section with a real painter-in-action background image */}
       <section
         id="reviews"
         className="relative py-16 px-6 overflow-hidden"
         aria-labelledby="reviews-heading"
-        style={{ background: 'linear-gradient(135deg, var(--brand-ink) 0%, var(--brand-ink-deep) 100%)' }}
+        style={{
+          backgroundImage: 'linear-gradient(135deg, rgba(31, 42, 107, 0.88) 0%, rgba(22, 32, 79, 0.94) 100%), url(/images/painters/painter-bg.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
       >
-        <div className="absolute inset-0 hero-bg" role="img" aria-label={t('reviews.heading')} aria-hidden="false" style={{ pointerEvents: 'none', backgroundImage: 'radial-gradient(circle at 80% 20%, rgba(255,210,63,0.10), transparent 55%)' }} />
+        <div className="absolute inset-0 hero-bg" role="img" aria-label={t('reviews.heading')} aria-hidden="false" style={{ pointerEvents: 'none', backgroundImage: 'radial-gradient(circle at 80% 20%, rgba(255,210,63,0.18), transparent 55%), radial-gradient(circle at 15% 80%, rgba(233,30,99,0.10), transparent 55%)' }} />
         <div className="relative max-w-6xl mx-auto">
           <FadeSection>
             <div className="text-center mb-10">
@@ -398,13 +474,17 @@ export default function HomePageClient({ phoneNumber }: Props) {
         </div>
       </section>
 
-      {/* FINAL CTA */}
+      {/* FINAL CTA — dark section, real exterior repaint photo as the background */}
       <section
         className="relative py-20 px-6 text-center text-white overflow-hidden"
         aria-label="Call to action"
-        style={{ background: 'linear-gradient(135deg, var(--brand-ink) 0%, var(--brand-ink-deep) 100%)' }}
+        style={{
+          backgroundImage: 'linear-gradient(135deg, rgba(31, 42, 107, 0.88) 0%, rgba(15, 24, 64, 0.93) 100%), url(/images/gallery/job-84.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
       >
-        <div className="absolute inset-0 hero-bg" role="img" aria-label={t('finalCta.headline')} aria-hidden="false" style={{ pointerEvents: 'none', backgroundImage: 'radial-gradient(circle at 80% 20%, rgba(255,210,63,0.15), transparent 55%), radial-gradient(circle at 15% 80%, rgba(233,30,99,0.15), transparent 55%)' }} />
+        <div className="absolute inset-0 hero-bg" role="img" aria-label={t('finalCta.headline')} aria-hidden="false" style={{ pointerEvents: 'none', backgroundImage: 'radial-gradient(circle at 80% 20%, rgba(255,210,63,0.18), transparent 55%), radial-gradient(circle at 15% 80%, rgba(233,30,99,0.15), transparent 55%)' }} />
         <div className="relative max-w-3xl mx-auto">
           <FadeSection>
             <h3 className="font-extrabold mb-3" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', letterSpacing: '-0.03em' }}>
@@ -413,7 +493,7 @@ export default function HomePageClient({ phoneNumber }: Props) {
             <h5 className="text-base font-normal mb-8 max-w-2xl mx-auto" style={{ color: 'rgba(255,255,255,0.85)', lineHeight: 1.6 }}>
               {t('finalCta.subheadline')}
             </h5>
-            <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-lg font-bold text-white" style={{ background: '#25D366', boxShadow: '0 10px 30px rgba(37,211,102,0.35)' }}>
+            <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-lg font-bold" style={{ background: '#25D366', color: '#fff', boxShadow: '0 10px 30px rgba(37,211,102,0.35)' }}>
               <WAIcon />{t('finalCta.cta')}
             </WhatsAppClickTracker>
             <h5 className="mt-4 text-xs font-normal" style={{ color: 'rgba(255,255,255,0.55)' }}>{t('finalCta.fine')}</h5>

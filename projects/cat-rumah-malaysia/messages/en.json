@@ -40,11 +40,15 @@
       "bookNow": "Book now"
     },
     "hero": {
+      "logoAlt": "Cat Rumah Express logo",
       "badgeCertified": "Certified Paint Contractor",
       "badgeCities": "20+ Cities Covered",
       "headline": "Make Your Old Home",
       "headlineHighlight": "Look New",
       "subheadline": "Malaysia's professional house painting contractor — Nippon Paint, Jotun, and Dulux. Free quote within 1 hour, fixed pricing with no hidden costs.",
+      "tag1": "Done in 5 Hours",
+      "tag2": "180 Colour Choices",
+      "tag3": "Free Pressure Wash",
       "cta": "WhatsApp Us Now",
       "ctaSubtext": "Free quote · 1-hour response",
       "heroAlt": "Professional house painting contractor Malaysia"
@@ -63,13 +67,13 @@
       "subheading": "From living room to exterior — one team, one guarantee for every surface.",
       "interior": { "title": "Interior Wall Painting", "description": "Living rooms, hallways, and accent walls — premium Nippon Odour-less with neat finishing.", "price": "Dari RM3.50/sqft" },
       "bedroom": { "title": "Bedroom Painting", "description": "Pastel or warm tones for better sleep. Surface prep and masking included.", "price": "Dari RM3.50/sqft" },
-      "kitchen": { "title": "Kitchen Painting", "description": "Oil-based or emulsion paints that resist heat and grease, and wipe clean easily.", "price": "Dari RM3.80/sqft" },
-      "bathroom": { "title": "Bathroom Painting", "description": "Anti-fungal, humidity-resistant — Jotun Drygolin or Dulux Easycare.", "price": "Dari RM4.00/sqft" },
-      "exterior": { "title": "Exterior House Painting", "description": "Built for Malaysian weather — pressure wash included free.", "price": "Dari RM4.50/sqft" },
-      "weathershield": { "title": "Weathershield Premium", "description": "Jotun Jotashield or Nippon Weatherbond — 7–10 year guarantee.", "price": "Dari RM5.50/sqft" },
-      "marble": { "title": "Marble Painting", "description": "Luxury marble effect on interior walls. Every wall unique, no two alike.", "price": "Dari RM12.00/sqft" },
-      "texture": { "title": "Texture / Faux Concrete", "description": "Modern concrete texture for accent walls. Industrial premium look.", "price": "Dari RM8.50/sqft" },
-      "decor3d": { "title": "3D Decorative Wall", "description": "Embossed 3D panel finish — monstera, geometric, or organic motifs.", "price": "Dari RM18.00/sqft" },
+      "kitchen": { "title": "Kitchen Painting", "description": "Oil-based or emulsion paints that resist heat and grease, and wipe clean easily.", "price": "Dari RM3.50/sqft" },
+      "bathroom": { "title": "Bathroom Painting", "description": "Anti-fungal, humidity-resistant — Jotun Drygolin or Dulux Easycare.", "price": "Dari RM3.50/sqft" },
+      "exterior": { "title": "Exterior House Painting", "description": "Built for Malaysian weather — pressure wash included free.", "price": "Dari RM3.50/sqft" },
+      "weathershield": { "title": "Weathershield Premium", "description": "Jotun Jotashield or Nippon Weatherbond — 7–10 year guarantee.", "price": "Dari RM4.50/sqft" },
+      "marble": { "title": "Marble Painting", "description": "Luxury marble effect on interior walls. Every wall unique, no two alike.", "price": "Dari RM2,250" },
+      "texture": { "title": "Texture Painting", "description": "Modern concrete texture for accent walls. Industrial premium look.", "price": "Dari RM2,500" },
+      "decor3d": { "title": "3D Decorative Wall", "description": "Embossed 3D panel finish — monstera, geometric, or organic motifs.", "price": "Dari RM3,500" },
       "bookNow": "Get a Quote",
       "disclaimer": "Final pricing depends on site inspection and surface area. Pressure wash + crack filling already included."
     },
@@ -82,7 +86,8 @@
       "pair1Caption": "Double-storey terrace exterior — pressure wash + two coats of Jotun weathershield.",
       "pair2Caption": "Old living room → fresh clean white with neat finishing.",
       "pair3Caption": "Dim, greasy kitchen → fresh wipe-clean colour.",
-      "ctaButton": "See more on WhatsApp"
+      "ctaButton": "See more on WhatsApp",
+      "dragHint": "Drag the divider to reveal the transformation"
     },
     "paintBrands": {
       "tag": "BRANDS WE USE",

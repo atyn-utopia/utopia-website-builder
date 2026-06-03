@@ -40,11 +40,15 @@
       "bookNow": "Tempah sekarang"
     },
     "hero": {
+      "logoAlt": "Logo Cat Rumah Express",
       "badgeCertified": "Kontraktor Cat Bertauliah",
       "badgeCities": "20+ Bandar Diliputi",
       "headline": "Rumah Lama Nampak Baru",
       "headlineHighlight": "Dalam 5 Jam",
       "subheadline": "Kontraktor cat profesional Malaysia guna Nippon Paint, Jotun dan Dulux. Quote percuma dalam 1 jam, harga tetap tanpa kos tersembunyi.",
+      "tag1": "5 Jam Siap",
+      "tag2": "180 Pilihan Warna",
+      "tag3": "Pressure Wash Percuma",
       "cta": "WhatsApp Kami Sekarang",
       "ctaSubtext": "Quote percuma · Respons dalam 1 jam",
       "heroAlt": "Kontraktor cat rumah profesional Malaysia"
@@ -59,7 +63,7 @@
     },
     "products": {
       "tag": "SERVIS KAMI",
-      "heading": "8 Servis Cat Rumah Kami",
+      "heading": "9 Servis Cat Rumah Kami",
       "subheading": "Dari ruang tamu sampai eksterior — satu pasukan, satu jaminan untuk setiap permukaan.",
       "interior": {
         "title": "Cat Dinding Dalaman",
@@ -74,37 +78,37 @@
       "kitchen": {
         "title": "Cat Dapur",
         "description": "Cat oil-based atau emulsion tahan minyak dan haba memasak. Mudah dilap.",
-        "price": "Dari RM3.80/sqft"
+        "price": "Dari RM3.50/sqft"
       },
       "bathroom": {
         "title": "Cat Bilik Mandi",
         "description": "Cat anti-kulat dan tahan kelembapan — Jotun Drygolin atau Dulux Easycare.",
-        "price": "Dari RM4.00/sqft"
+        "price": "Dari RM3.50/sqft"
       },
       "exterior": {
         "title": "Cat Luar Rumah",
         "description": "Tahan UV, hujan dan lembap Malaysia. Termasuk pressure-wash percuma.",
-        "price": "Dari RM4.50/sqft"
+        "price": "Dari RM3.50/sqft"
       },
       "weathershield": {
         "title": "Weathershield Premium",
         "description": "Jotun Jotashield atau Nippon Weatherbond — tahan 7-10 tahun dengan jaminan.",
-        "price": "Dari RM5.50/sqft"
+        "price": "Dari RM4.50/sqft"
       },
       "marble": {
         "title": "Marble Painting",
         "description": "Kesan marmar mewah pada dinding dalaman. Setiap dinding unik, tiada satu sama.",
-        "price": "Dari RM12.00/sqft"
+        "price": "Dari RM2,250"
       },
       "texture": {
-        "title": "Texture / Faux Concrete",
+        "title": "Texture Painting",
         "description": "Tekstur konkrit moden untuk dinding aksen. Tampilan industri yang premium.",
-        "price": "Dari RM8.50/sqft"
+        "price": "Dari RM2,500"
       },
       "decor3d": {
         "title": "3D Decorative Wall",
         "description": "Panel hiasan 3D timbul — pilihan corak monstera, geometri atau organik.",
-        "price": "Dari RM18.00/sqft"
+        "price": "Dari RM3,500"
       },
       "bookNow": "Tanya Harga Sekarang",
       "disclaimer": "Harga muktamad bergantung kepada lawatan tapak dan keluasan permukaan. Pressure-wash + pendempulan retak sudah termasuk dalam quote."
@@ -118,7 +122,8 @@
       "pair1Caption": "Dinding luar terres dua tingkat — pressure-wash + dua lapisan weathershield Jotun.",
       "pair2Caption": "Ruang tamu lama → cat baru putih bersih dengan kemasan rapi.",
       "pair3Caption": "Dapur kotor dan kusam → warna baru tahan minyak.",
-      "ctaButton": "Lihat lebih banyak di WhatsApp"
+      "ctaButton": "Lihat lebih banyak di WhatsApp",
+      "dragHint": "Tarik garis tengah untuk lihat perubahan"
     },
     "paintBrands": {
       "tag": "JENAMA YANG KAMI GUNA",

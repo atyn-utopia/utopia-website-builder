@@ -78,12 +78,15 @@ export default async function HomePage({ params }: Props) {
       <FomoBanner locale={locale as Locale} />
       <SiteHeader />
 
-      {/* HERO — single H1 + H2 + role=img bg sit here. */}
+      {/* HERO — dark section with a real painter-at-work image background,
+          the canonical role=img wrapper, and the page's single H1/H2 inside. */}
       <section
         className="relative overflow-hidden"
         style={{
-          background:
-            'linear-gradient(135deg, #1F2A6B 0%, #16204F 60%, #0F1840 100%)',
+          backgroundImage:
+            'linear-gradient(135deg, rgba(31, 42, 107, 0.90) 0%, rgba(22, 32, 79, 0.92) 50%, rgba(15, 24, 64, 0.96) 100%), url(/images/painters/painter-bg.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }}
       >
         <div
@@ -92,11 +95,19 @@ export default async function HomePage({ params }: Props) {
           aria-label={imageAlt}
           style={{
             position: 'absolute', inset: 0, pointerEvents: 'none',
-            backgroundImage: 'radial-gradient(circle at 80% 20%, rgba(255,210,63,0.18), transparent 55%), radial-gradient(circle at 15% 80%, rgba(233,30,99,0.18), transparent 55%)',
+            backgroundImage: 'radial-gradient(circle at 80% 20%, rgba(255,210,63,0.22), transparent 55%), radial-gradient(circle at 15% 80%, rgba(233,30,99,0.18), transparent 55%)',
           }}
         />
-        <div className="relative z-10 max-w-5xl mx-auto px-6 pt-12 md:pt-14 pb-0 text-center text-white">
-          <h6 className="inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-[11px] font-semibold uppercase tracking-wider mb-4" style={{ background: 'rgba(255,210,63,0.18)', border: '1px solid rgba(255,210,63,0.36)', color: '#FFD23F' }}>
+        <div className="relative z-10 max-w-5xl mx-auto px-6 pt-8 md:pt-10 pb-0 text-center text-white">
+          {/* Brand logo lives at the very top of the hero per design feedback */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/brand/logo-dark.png"
+            alt={tHero('logoAlt')}
+            className="mx-auto block"
+            style={{ width: 'min(180px, 50%)', height: 'auto' }}
+          />
+          <h6 className="inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-[11px] font-semibold uppercase tracking-wider mt-6 mb-4" style={{ background: 'rgba(255,210,63,0.18)', border: '1px solid rgba(255,210,63,0.36)', color: '#FFD23F' }}>
             <span className="h-2 w-2 rounded-full" style={{ background: '#FFD23F' }} aria-hidden="true" />
             {tHero('badgeCertified')} · {tHero('badgeCities')}
           </h6>
@@ -110,14 +121,29 @@ export default async function HomePage({ params }: Props) {
           <h2 className="mt-4 text-sm md:text-base text-white/80 max-w-2xl mx-auto font-normal" style={{ lineHeight: 1.6 }}>
             {tHero('subheadline')}
           </h2>
-          <div className="mt-7 flex flex-col items-center gap-3">
+
+          {/* Promise tags — text only, no cutout PNGs */}
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
+            {[tHero('tag1'), tHero('tag2'), tHero('tag3')].map((label) => (
+              <span
+                key={label}
+                className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider"
+                style={{ background: 'rgba(255,210,63,0.18)', border: '1px solid rgba(255,210,63,0.36)', color: '#FFD23F' }}
+              >
+                <span className="h-1.5 w-1.5 rounded-full" style={{ background: '#FFD23F' }} aria-hidden="true" />
+                {label}
+              </span>
+            ))}
+          </div>
+
+          <div className="mt-6 flex flex-col items-center gap-3">
             <WhatsAppClickTracker
               phoneNumber={phone}
               href={waHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-base font-bold text-white shadow-lg"
-              style={{ background: '#25D366', boxShadow: '0 10px 30px rgba(37,211,102,0.35)' }}
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-base font-bold shadow-lg"
+              style={{ background: '#25D366', color: '#fff', boxShadow: '0 10px 30px rgba(37,211,102,0.35)' }}
             >
               <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current shrink-0" aria-hidden="true">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
@@ -125,19 +151,12 @@ export default async function HomePage({ params }: Props) {
               </svg>
               {tHero('cta')}
             </WhatsAppClickTracker>
-            <div className="flex flex-wrap items-center justify-center gap-2">
-              {tHero('ctaSubtext').split(' · ').map((part, i) => (
-                <span
-                  key={i}
-                  className="inline-flex items-center rounded-full bg-white/10 border border-white/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white/75"
-                >
-                  {part}
-                </span>
-              ))}
-            </div>
+            <span className="text-[11px] font-medium text-white/65">
+              {tHero('ctaSubtext')}
+            </span>
           </div>
 
-          {/* Painter photo + floating brand badges */}
+          {/* Painter photo — no decorative badge cutouts, just the painter */}
           <div className="relative mt-10 mx-auto" style={{ maxWidth: 480 }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -146,14 +165,6 @@ export default async function HomePage({ params }: Props) {
               className="mx-auto block"
               style={{ width: 'min(380px, 78%)', filter: 'drop-shadow(0 18px 38px rgba(0,0,0,0.45))' }}
             />
-            <div className="hidden md:block absolute -left-2 top-10" style={{ width: 130 }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/usp/badge-5jam.png" alt="5 Jam Siap Cat Rumah" style={{ width: '100%', filter: 'drop-shadow(0 6px 18px rgba(0,0,0,0.35))' }} />
-            </div>
-            <div className="hidden md:block absolute -right-2 top-4" style={{ width: 130 }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/usp/badge-180warna.png" alt="180 Pilihan Warna" style={{ width: '100%', filter: 'drop-shadow(0 6px 18px rgba(0,0,0,0.35))' }} />
-            </div>
           </div>
         </div>
       </section>
