@@ -63,7 +63,7 @@ export default async function SiteFooter({ locale }: { locale: Locale }) {
                 ))}
               </ul>
             </div>
-            <div>
+            <div className="ewc-footer__col--contact">
               <h6>{tFoot('contact')}</h6>
               <ul>
                 <li><Link href={waHref} target="_blank" rel="noopener noreferrer">{tNav('whatsapp')}</Link></li>
@@ -169,6 +169,19 @@ export default async function SiteFooter({ locale }: { locale: Locale }) {
           transition: color 0.18s ease;
         }
         .ewc-footer__cols ul a:hover { color: #F47B20; }
+        /* Per spec, the Contact column (heading + links + LSW pills) reads as
+           centered at every viewport — not only on mobile. */
+        .ewc-footer__col--contact { text-align: center; }
+        .ewc-footer__col--contact .ewc-footer__lang {
+          display: flex;
+          justify-content: center;
+        }
+        /* On mobile, the cols auto-fit drops to 2 narrow ~150px cells. The
+           3 LSW pills (~180px total) overflow the cell — span the Contact col
+           across the full row so the pills have room to centre. */
+        @media (max-width: 600px) {
+          .ewc-footer__col--contact { grid-column: 1 / -1; }
+        }
         .ewc-footer__lang { margin-top: 16px; }
         .ewc-footer__bottom {
           margin-top: 56px;

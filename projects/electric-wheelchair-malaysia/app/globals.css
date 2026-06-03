@@ -858,17 +858,13 @@ a {
      same switcher, so hide the inline copy on every mobile/tablet width. */
   .ewc-header__lang { display: none !important; }
   /* Actions div is empty on mobile (lang + cta both hidden) — collapse it so
-     the burger can flush right and the brand can center cleanly. */
+     the burger can flush right while the brand sits flush left. */
   .ewc-header__actions { display: none !important; }
 
-  /* Burger on the right, brand absolutely centered. */
-  .ewc-header__inner { position: relative; justify-content: flex-end; }
-  .ewc-header__brand {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
+  /* Brand left, burger right — with actions hidden, space-between puts the
+     two remaining flex children at opposite edges of the bar. */
+  .ewc-header__inner { justify-content: space-between; }
+
   /* Drawer nav items + actions read as a centered column when the menu opens. */
   .ewc-header__nav--mobile { align-items: center; }
   .ewc-header__nav--mobile a { text-align: center; width: 100%; }
