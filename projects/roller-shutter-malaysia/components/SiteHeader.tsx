@@ -30,8 +30,8 @@ export default function SiteHeader() {
   return (
     <header className="site-header">
       <div className="container site-header-inner">
-        <Link href={`/${locale}`} className="site-header-brand" aria-label={t('brandName')}>
-          <img src="/brand/logo-wordmark.png" alt={t('logoAlt')} className="site-header-logo" />
+        <Link href={`/${locale}`} className="site-header-brand site-header-brand--text" aria-label={t('brandName')}>
+          <span className="site-header-brand-text">{t('brandName')}</span>
         </Link>
 
         <nav className="site-nav site-nav--desktop" aria-label="Primary">

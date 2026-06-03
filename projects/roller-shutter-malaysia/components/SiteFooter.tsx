@@ -28,7 +28,7 @@ export default function SiteFooter() {
               <img
                 src="/brand/logo-wordmark.png"
                 alt={navT('logoAlt')}
-                style={{ width: 180, height: 'auto', display: 'block', background: '#fff', padding: '6px 8px', borderRadius: 10 }}
+                style={{ width: 200, height: 'auto', display: 'block' }}
               />
             </div>
             <h6 className="body-h6 text-xs font-normal mb-4" style={{ color: 'var(--brand-steel-light)', lineHeight: '1.7' }}>{footT('tagline')}</h6>

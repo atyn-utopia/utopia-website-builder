@@ -171,7 +171,17 @@ export default function HomePage() {
           <div className="absolute inset-0 pointer-events-none" style={{ background: 'var(--gradient-hero-accent)' }} aria-hidden="true" />
           <div className="absolute inset-0 pointer-events-none corrugated-texture" style={{ opacity: 0.5 }} aria-hidden="true" />
 
-          <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-24">
+          <div className="relative max-w-6xl mx-auto px-6 py-12 lg:py-20">
+            {/* Wordmark logo at the very top of the hero, above the badge. */}
+            <div className="mb-6 flex justify-center md:justify-start">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/brand/logo-wordmark.png"
+                alt={t('nav.logoAlt')}
+                className="hero-logo"
+                style={{ width: 'clamp(180px, 24vw, 260px)', height: 'auto', display: 'block', filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.35))' }}
+              />
+            </div>
             <div className="max-w-2xl">
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium text-white mb-6 emergency-pulse" style={{ background: 'var(--gradient-emergency)' }}>
                 <span className="w-2 h-2 rounded-full bg-white" />{t('hero.badge')}
@@ -251,21 +261,9 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ============================================
-            STATS
-            ============================================ */}
-        <section aria-label="Statistics" style={{ background: 'var(--brand-charcoal)' }}>
-          <div className="max-w-6xl mx-auto px-6 py-10">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-              {[0, 1, 2, 3].map(i => (
-                <FadeSection key={i} delay={i * 80}>
-                  <h5 className="stat-number text-3xl md:text-4xl mb-1 font-extrabold">{t(`stats.items.${i}.value`)}</h5>
-                  <h6 className="body-h6 text-xs font-medium uppercase tracking-widest" style={{ color: 'var(--brand-steel-light)' }}>{t(`stats.items.${i}.label`)}</h6>
-                </FadeSection>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* STATS section removed per request — proof now lives in the
+            trust-strip above and the USP bar; product pricing tells the
+            value story instead. */}
 
         {/* ============================================
             PRODUCTS — H3 sub-headings (only hero owns h1+h2)
@@ -283,24 +281,50 @@ export default function HomePage() {
                 <FadeSection key={key} delay={i * 80}>
                   <ProductImpressionTracker slug={products[i].slug}>
                     <div className={`product-card bg-white rounded-2xl overflow-hidden flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`} style={{ boxShadow: 'var(--shadow-md)', border: '1px solid var(--brand-border)' }}>
-                      <div className="relative md:w-2/5 h-56 md:h-auto overflow-hidden" style={{ background: 'var(--brand-gunmetal)', minHeight: '240px' }}>
+                      <div className="relative md:w-2/5 h-64 md:h-auto overflow-hidden" style={{ background: 'var(--brand-gunmetal)', minHeight: '280px' }}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={productImages[key]}
                           alt={t('products.imageAltTemplate', { model: t(`products.items.${key}.name`) })}
                           className="w-full h-full object-cover"
                           loading="lazy"
                         />
-                        <div className="absolute inset-0" style={{ background: i % 2 === 0 ? 'linear-gradient(to right, transparent 50%, rgba(255,255,255,0.05) 100%)' : 'linear-gradient(to left, transparent 50%, rgba(255,255,255,0.05) 100%)' }} />
+                        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(21,33,43,0.55) 100%)' }} />
+                        {/* "0X" type chip — top-left */}
                         <div className="absolute top-4 left-4 w-10 h-10 rounded-lg flex items-center justify-center text-sm font-extrabold" style={{ background: i % 2 === 0 ? 'var(--brand-yellow)' : 'var(--brand-blue)', color: i % 2 === 0 ? 'var(--brand-charcoal)' : '#fff' }}>
                           0{i + 1}
                         </div>
+                        {/* Sticker price tag — bottom-left of image */}
+                        <div className="absolute bottom-4 left-4 inline-flex items-baseline gap-1 px-3 py-2 rounded-xl" style={{ background: 'var(--brand-yellow)', color: 'var(--brand-charcoal)', boxShadow: '0 6px 16px rgba(0,0,0,0.25)' }}>
+                          <span className="text-[10px] font-bold uppercase tracking-wider">Dari</span>
+                          <span className="text-base font-bold leading-none">RM</span>
+                          <span className="text-2xl font-extrabold leading-none">{products[i].priceFrom?.toLocaleString('en-MY')}</span>
+                        </div>
                       </div>
-                      <div className="md:w-3/5 p-6 md:p-8 flex flex-col justify-center">
-                        <h4 className="text-lg md:text-xl font-bold mb-3" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.02em' }}>{t(`products.items.${key}.name`)}</h4>
-                        <h5 className="body-h5 product-desc text-sm mb-4" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7', fontWeight: 400 }}>{t(`products.items.${key}.description`)}</h5>
+                      <div className="md:w-3/5 p-6 md:p-8 flex flex-col">
+                        <div className="flex items-start justify-between gap-4 mb-3">
+                          <h4 className="text-lg md:text-2xl font-extrabold" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.02em', lineHeight: 1.2 }}>{t(`products.items.${key}.name`)}</h4>
+                        </div>
+                        <h5 className="body-h5 product-desc text-sm mb-5" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7', fontWeight: 400 }}>{t(`products.items.${key}.description`)}</h5>
+
+                        {/* Pricing block — primary value signal */}
+                        <div className="flex items-end justify-between gap-3 mb-5 pb-5" style={{ borderBottom: '1px dashed var(--brand-border)' }}>
+                          <div>
+                            <h6 className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{ color: 'var(--brand-text-muted)' }}>Harga dari</h6>
+                            <div className="flex items-baseline gap-1.5">
+                              <span className="text-sm font-bold leading-none" style={{ color: 'var(--brand-charcoal)' }}>RM</span>
+                              <span className="text-3xl md:text-4xl font-extrabold leading-none" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.03em' }}>{products[i].priceFrom?.toLocaleString('en-MY')}</span>
+                              <span className="text-xs font-medium" style={{ color: 'var(--brand-text-muted)' }}>/ {products[i].unit ?? 'unit'}</span>
+                            </div>
+                          </div>
+                          <h6 className="text-[11px] font-semibold" style={{ color: 'var(--brand-blue-dark)' }}>Free quotation</h6>
+                        </div>
+
                         <div className="flex flex-wrap gap-2 mb-5">
                           {[0, 1, 2].map(j => (
-                            <span key={j} className="text-xs font-semibold px-3 py-1.5 rounded-full" style={{ background: 'var(--brand-gunmetal)', color: 'var(--brand-yellow)' }}>{t(`products.items.${key}.keyPoints.${j}`)}</span>
+                            <span key={j} className="text-xs font-semibold px-3 py-1.5 rounded-full inline-flex items-center gap-1.5" style={{ background: 'var(--brand-blue-pale)', color: 'var(--brand-blue-dark)' }}>
+                              <span aria-hidden="true">✓</span>{t(`products.items.${key}.keyPoints.${j}`)}
+                            </span>
                           ))}
                         </div>
                         <WhatsAppClickTracker

@@ -1,10 +1,13 @@
+// priceFrom mirrors the sale_price seeded in Supabase. Kept here so the
+// public homepage can render pricing without an extra DB round-trip — the
+// canonical source of truth remains the products table.
 export const products = [
-  { slug: 'mild-steel', key: 'mildSteel', name: 'Mild Steel Roller Shutter' },
-  { slug: 'aluminium', key: 'aluminium', name: 'Aluminium Roller Shutter' },
-  { slug: 'polycarbonate', key: 'polycarbonate', name: 'Polycarbonate/Transparent Roller Shutter' },
-  { slug: 'fire-rated', key: 'fireRated', name: 'Fire-Rated Roller Shutter' },
-  { slug: 'grille', key: 'grille', name: 'Grille Roller Shutter' },
-  { slug: 'motorised', key: 'motorised', name: 'Motorised/Automatic Roller Shutter' },
+  { slug: 'mild-steel', key: 'mildSteel', name: 'Mild Steel Roller Shutter', priceFrom: 3200, unit: 'sq ft' },
+  { slug: 'aluminium', key: 'aluminium', name: 'Aluminium Roller Shutter', priceFrom: 4500, unit: 'sq ft' },
+  { slug: 'polycarbonate', key: 'polycarbonate', name: 'Polycarbonate/Transparent Roller Shutter', priceFrom: 5800, unit: 'sq ft' },
+  { slug: 'fire-rated', key: 'fireRated', name: 'Fire-Rated Roller Shutter', priceFrom: 8500, unit: 'sq ft' },
+  { slug: 'grille', key: 'grille', name: 'Grille Roller Shutter', priceFrom: 4200, unit: 'sq ft' },
+  { slug: 'motorised', key: 'motorised', name: 'Motorised/Automatic Roller Shutter', priceFrom: 6500, unit: 'sq ft' },
 ];
 
 export const services = [
