@@ -107,30 +107,34 @@ export default function BlogPostClient({
             />
           )}
 
-          <h1
-            style={{
-              fontSize: 'clamp(26px, 4vw, 38px)',
-              fontWeight: 800,
-              color: '#1c3a6a',
-              lineHeight: 1.2,
-              letterSpacing: -0.4,
-              margin: '0 0 14px',
-            }}
-          >
-            {post.title}
-          </h1>
+          {!chromeProvided && (
+            <h1
+              style={{
+                fontSize: 'clamp(26px, 4vw, 38px)',
+                fontWeight: 800,
+                color: '#1c3a6a',
+                lineHeight: 1.2,
+                letterSpacing: -0.4,
+                margin: '0 0 14px',
+              }}
+            >
+              {post.title}
+            </h1>
+          )}
 
-          <h2
-            style={{
-              fontSize: 17,
-              fontWeight: 500,
-              color: '#334155',
-              lineHeight: 1.6,
-              margin: '0 0 20px',
-            }}
-          >
-            {post.excerpt}
-          </h2>
+          {!chromeProvided && (
+            <h2
+              style={{
+                fontSize: 17,
+                fontWeight: 500,
+                color: '#334155',
+                lineHeight: 1.6,
+                margin: '0 0 20px',
+              }}
+            >
+              {post.excerpt}
+            </h2>
+          )}
 
           <div
             style={{

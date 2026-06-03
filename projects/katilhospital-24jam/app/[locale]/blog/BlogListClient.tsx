@@ -43,29 +43,33 @@ export default function BlogListClient({ posts, chromeProvided = false }: Props)
         }}
       >
         <div style={{ maxWidth: 960, margin: '0 auto' }}>
-          <h1
-            style={{
-              fontSize: 'clamp(28px, 4vw, 44px)',
-              fontWeight: 800,
-              color: '#FFFFFF',
-              letterSpacing: -0.5,
-              margin: '0 0 10px',
-              lineHeight: 1.2,
-            }}
-          >
-            {t('title')}
-          </h1>
-          <h2
-            style={{
-              fontSize: 16,
-              fontWeight: 500,
-              color: 'rgba(255,255,255,0.88)',
-              margin: 0,
-              lineHeight: 1.6,
-            }}
-          >
-            {t('metaDescription')}
-          </h2>
+          {!chromeProvided && (
+            <h1
+              style={{
+                fontSize: 'clamp(28px, 4vw, 44px)',
+                fontWeight: 800,
+                color: '#FFFFFF',
+                letterSpacing: -0.5,
+                margin: '0 0 10px',
+                lineHeight: 1.2,
+              }}
+            >
+              {t('title')}
+            </h1>
+          )}
+          {!chromeProvided && (
+            <h2
+              style={{
+                fontSize: 16,
+                fontWeight: 500,
+                color: 'rgba(255,255,255,0.88)',
+                margin: 0,
+                lineHeight: 1.6,
+              }}
+            >
+              {t('metaDescription')}
+            </h2>
+          )}
         </div>
       </section>
 
