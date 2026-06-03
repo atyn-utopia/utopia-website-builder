@@ -23,7 +23,7 @@ export function ProductSchema({
     ? Array.isArray(image)
       ? image
       : [image]
-    : [`${siteConfig.siteUrl}/brand/hero/hero.png`];
+    : [`${siteConfig.siteUrl}/brand/hero/hero.jpg`];
 
   const hasPriceRange =
     typeof salePrice === 'number' && typeof rentalPrice === 'number';

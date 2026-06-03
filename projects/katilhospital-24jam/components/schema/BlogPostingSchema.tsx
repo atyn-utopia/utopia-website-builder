@@ -21,7 +21,7 @@ export function BlogPostingSchema({
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: title,
-    image: coverImageUrl ? [coverImageUrl] : [`${siteConfig.siteUrl}/brand/hero/hero.png`],
+    image: coverImageUrl ? [coverImageUrl] : [`${siteConfig.siteUrl}/brand/hero/hero.jpg`],
     datePublished: publishedAt,
     dateModified: publishedAt,
     author: {

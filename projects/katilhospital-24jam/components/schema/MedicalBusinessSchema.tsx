@@ -19,7 +19,7 @@ export function MedicalBusinessSchema({
     '@context': 'https://schema.org',
     '@type': 'MedicalBusiness',
     name: cityName ? `${siteConfig.brandName} — ${cityName}` : siteConfig.brandName,
-    image: `${siteConfig.siteUrl}/brand/hero/hero.png`,
+    image: `${siteConfig.siteUrl}/brand/hero/hero.jpg`,
     url,
     areaServed: cityName
       ? { '@type': 'City', name: cityName }

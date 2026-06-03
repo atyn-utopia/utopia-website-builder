@@ -448,7 +448,7 @@ export default function HomeSections({ locale, products, location }: Props) {
               }}
             >
               <img
-                src="/brand/hero/doctor-mascot.png"
+                src="/brand/hero/doctor-mascot.jpg"
                 alt="Doktor Katil Hospital 24 Jam"
                 style={{
                   position: 'absolute',
@@ -710,7 +710,7 @@ export default function HomeSections({ locale, products, location }: Props) {
                 }}
               >
                 <img
-                  src={`/brand/reviews/review-${n}.png`}
+                  src={`/brand/reviews/review-${n}.jpg`}
                   alt={`Ulasan pelanggan Katil Hospital 24 Jam ${n}`}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   loading="lazy"

@@ -31,7 +31,7 @@ export function LocalBusinessSchema({
     },
     priceRange: 'RM',
     openingHours: 'Mo-Su 00:00-23:59',
-    image: `${siteConfig.siteUrl}/brand/hero/hero.png`,
+    image: `${siteConfig.siteUrl}/brand/hero/hero.jpg`,
   };
 
   return (

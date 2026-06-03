@@ -5,7 +5,11 @@
     "how": "订购方式",
     "reviews": "评价",
     "blog": "博客",
-    "cta": "立即 WhatsApp"
+    "cta": "立即 WhatsApp",
+    "calculator": "租金计算",
+    "locations": "地区",
+    "whatsappCta": "WhatsApp 我们",
+    "whatsapp": "WhatsApp"
   },
   "fomo": {
     "primary": "24小时优惠倒计时",
@@ -41,7 +45,8 @@
     "h3": "我们的产品",
     "intro": "手动与电动病床、医用床垫、防褥疮气垫床、制氧机、轮椅及CPAP呼吸机 — 全部支持租用或购买，24小时送达。",
     "cardCta": "WhatsApp 咨询",
-    "eyebrow": "租赁与购买目录"
+    "eyebrow": "租赁与购买目录",
+    "imageAltTemplate": "{model} 医院病床 — Katil Hospital 24 Jam 全马来西亚租赁/销售"
   },
   "values": {
     "h3": "为什么选择 Katil Hospital 24 Jam",
@@ -83,7 +88,21 @@
   "gallery": {
     "h3": "客户实景",
     "intro": "全马客户家中的真实送货与安装照片 — 非摆拍，非图库照片。",
-    "eyebrow": "真实见证"
+    "eyebrow": "真实见证",
+    "alts": [
+      "手动医院病床送达吉隆坡客户家中",
+      "三功能电动医院病床安装于病人房间",
+      "防褥疮波动气垫准备送货",
+      "雪兰莪客户接收已消毒的医院病床",
+      "客户感言 — 槟城当日医院病床送货",
+      "中风康复患者的医院病床和轮椅配套",
+      "可折叠医院病床装载以进行全国送货",
+      "制氧机与租赁医院病床配套",
+      "护理者为长者调节电动医院病床",
+      "配有护栏的医院病床用于防跌",
+      "医院病床和点滴架捆绑用于居家护理",
+      "Katil Hospital 24 Jam 团队完成当日安装"
+    ]
   },
   "googleReview": {
     "h3": "Google 客户评价",
@@ -139,7 +158,8 @@
     "h3": "今天就需要病床？立即 WhatsApp 我们。",
     "subtitle": "我们的团队全天候待命 — 在隔天前完成送达与安装。",
     "cta": "立即 WhatsApp 联系",
-    "eyebrow": "立即行动"
+    "eyebrow": "立即行动",
+    "bgAlt": "Katil Hospital 24 Jam 全马来西亚 24 小时医院病床送货及安装"
   },
   "footer": {
     "brand": {
@@ -208,5 +228,7 @@
     "intro": "免费送货至西马、沙巴和砂拉越每个州。点击您的州查看完整区域列表。",
     "empty": "您的地区未列出?",
     "emptyCta": "WhatsApp 确认覆盖范围"
-  }
+  },
+  "logoAlt": "Katil Hospital 24 Jam — 全马来西亚医院病床租赁与销售",
+  "imageAlt": "Katil Hospital 24 Jam 团队在马来西亚住家送货并安装医院病床"
 }

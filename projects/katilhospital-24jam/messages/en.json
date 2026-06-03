@@ -5,7 +5,11 @@
     "how": "How to Order",
     "reviews": "Reviews",
     "blog": "Blog",
-    "cta": "Chat WhatsApp"
+    "cta": "Chat WhatsApp",
+    "calculator": "Rental Calculator",
+    "locations": "Locations",
+    "whatsappCta": "WhatsApp Us",
+    "whatsapp": "WhatsApp"
   },
   "fomo": {
     "primary": "24-Hour offer ends in",
@@ -41,7 +45,8 @@
     "h3": "Our Products",
     "intro": "Manual and electric hospital beds, foam mattresses, anti-decubitus air mattresses, oxygen concentrators, wheelchairs, and CPAP machines — all available for rent or purchase with 24-hour delivery.",
     "cardCta": "Ask on WhatsApp",
-    "eyebrow": "Rent & Buy Catalogue"
+    "eyebrow": "Rent & Buy Catalogue",
+    "imageAltTemplate": "{model} hospital bed from Katil Hospital 24 Jam — rent or buy across Malaysia"
   },
   "values": {
     "h3": "Why Choose Katil Hospital 24 Jam",
@@ -83,7 +88,21 @@
   "gallery": {
     "h3": "Customer Gallery",
     "intro": "Real deliveries and setups at customer homes across Malaysia — no staged shots, no stock photos.",
-    "eyebrow": "Real Proof"
+    "eyebrow": "Real Proof",
+    "alts": [
+      "Manual hospital bed delivered to a customer home in Kuala Lumpur",
+      "Electric 3-function hospital bed set up beside a patient room",
+      "Anti-bedsore ripple mattress prepared for delivery",
+      "Family receiving a sanitised hospital bed at home in Selangor",
+      "Customer testimonial — same-day hospital bed delivery in Penang",
+      "Hospital bed and wheelchair package for a stroke recovery patient",
+      "Foldable hospital bed loaded for nationwide delivery",
+      "Oxygen concentrator paired with a rented hospital bed",
+      "Caregiver adjusting an electric hospital bed for an elderly patient",
+      "Hospital bed with side rails installed for fall prevention",
+      "Hospital bed and IV pole bundle for home care",
+      "Katil Hospital 24 Jam crew completing same-day setup"
+    ]
   },
   "googleReview": {
     "h3": "Customer Reviews on Google",
@@ -139,7 +158,8 @@
     "h3": "Need a Hospital Bed Today? WhatsApp Us Now.",
     "subtitle": "Our team is on standby 24 hours a day — delivered, set up, and done before the next day.",
     "cta": "Chat WhatsApp Now",
-    "eyebrow": "Act Now"
+    "eyebrow": "Act Now",
+    "bgAlt": "Katil Hospital 24 Jam 24-hour delivery and setup of a hospital bed at a Malaysian home"
   },
   "footer": {
     "brand": {
@@ -208,5 +228,7 @@
     "intro": "Free delivery to every state in Peninsular Malaysia, Sabah, and Sarawak. Click your state to see the full list of areas.",
     "empty": "Your area not listed?",
     "emptyCta": "WhatsApp to confirm coverage"
-  }
+  },
+  "logoAlt": "Katil Hospital 24 Jam — Hospital Bed Rental & Sale Across Malaysia",
+  "imageAlt": "Katil Hospital 24 Jam team delivering and installing a hospital bed in a Malaysian home"
 }

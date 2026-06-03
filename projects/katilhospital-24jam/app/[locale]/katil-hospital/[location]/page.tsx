@@ -19,6 +19,10 @@ import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
 import type { ProductCardData } from '@/components/ProductCard';
+import FomoBanner from '@/components/FomoBanner';
+import SiteHeader from '@/components/SiteHeader';
+import SiteFooter from '@/components/SiteFooter';
+import PageStyles from '@/components/PageStyles';
 
 export async function generateStaticParams() {
   return locations.flatMap((loc) =>
@@ -111,6 +115,9 @@ export default async function LocationPage({
         faqs={fullFaqs.map((f) => ({ question: f.q, answer: f.a }))}
       />
 
+      <PageStyles />
+      <FomoBanner />
+      <SiteHeader />
       <LocationPageClient
         locale={locale}
         products={cardProducts}
@@ -120,7 +127,9 @@ export default async function LocationPage({
         intro={intro}
         uniqueFaqs={uniqueFaqs}
         nearby={nearby}
+        chromeProvided
       />
+      <SiteFooter />
     </>
   );
 }

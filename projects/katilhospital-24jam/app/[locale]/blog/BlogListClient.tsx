@@ -19,17 +19,18 @@ interface Post {
 
 interface Props {
   posts: Post[];
+  chromeProvided?: boolean;
 }
 
-export default function BlogListClient({ posts }: Props) {
+export default function BlogListClient({ posts, chromeProvided = false }: Props) {
   const t = useTranslations('blog');
   const locale = useLocale();
   const waHref = waRedirect(locale);
 
   return (
     <>
-      <FomoBar />
-      <Navbar />
+      {!chromeProvided && <FomoBar />}
+      {!chromeProvided && <Navbar />}
 
       {/* Header banner */}
       <section
@@ -202,7 +203,7 @@ export default function BlogListClient({ posts }: Props) {
         </div>
       </section>
 
-      <Footer />
+      {!chromeProvided && <Footer />}
       <WhatsAppButton href={waHref} label="WhatsApp" variant="floating" ariaLabel="WhatsApp" />
     </>
   );

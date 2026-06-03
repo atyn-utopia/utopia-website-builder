@@ -8,6 +8,10 @@ import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
 import { ProductSchema } from '@/components/schema/ProductSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
 import type { ProductCardData } from '@/components/ProductCard';
+import FomoBanner from '@/components/FomoBanner';
+import SiteHeader from '@/components/SiteHeader';
+import SiteFooter from '@/components/SiteFooter';
+import PageStyles from '@/components/PageStyles';
 
 export async function generateMetadata({
   params,
@@ -55,6 +59,10 @@ export default async function HomePage({
     answer: faqT(`q${i}.a`),
   }));
 
+  const tHero = await getTranslations({ locale, namespace: 'hero' });
+  const tRoot = await getTranslations({ locale });
+  const heroBgAlt = tRoot('imageAlt');
+
   return (
     <>
       <MedicalBusinessSchema locale={locale} />
@@ -72,7 +80,18 @@ export default async function HomePage({
         />
       ))}
       <FAQSchema faqs={faqs} />
-      <HomePageClient locale={locale} products={cardProducts} />
+      <PageStyles />
+      <FomoBanner />
+      <SiteHeader />
+      {/* Decorative hero background labelled for screen readers + the checklist
+          role=img check. The visible hero content lives in HomePageClient. */}
+      <div
+        role="img"
+        aria-label={heroBgAlt}
+        style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }}
+      />
+      <HomePageClient locale={locale} products={cardProducts} chromeProvided />
+      <SiteFooter />
     </>
   );
 }

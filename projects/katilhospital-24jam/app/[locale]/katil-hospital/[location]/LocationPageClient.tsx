@@ -19,6 +19,7 @@ interface Props {
   intro: string;
   uniqueFaqs: { q: string; a: string }[];
   nearby: Location[];
+  chromeProvided?: boolean;
 }
 
 export default function LocationPageClient({
@@ -30,14 +31,15 @@ export default function LocationPageClient({
   intro,
   uniqueFaqs,
   nearby,
+  chromeProvided = false,
 }: Props) {
   const locT = useTranslations('location');
   const waHref = waRedirect(locale, undefined, location.slug);
 
   return (
     <>
-      <FomoBar />
-      <Navbar />
+      {!chromeProvided && <FomoBar />}
+      {!chromeProvided && <Navbar />}
 
       {/* SECTION 1 — Breadcrumbs */}
       <nav
@@ -200,7 +202,7 @@ export default function LocationPageClient({
               }}
             >
               <img
-                src="/brand/hero/hero-bed.png"
+                src="/brand/hero/hero-bed.jpg"
                 alt={`Katil hospital dihantar ke ${location.name}`}
                 style={{
                   width: '100%',
@@ -337,7 +339,7 @@ export default function LocationPageClient({
         </section>
       )}
 
-      <Footer />
+      {!chromeProvided && <Footer />}
 
       <WhatsAppButton
         href={waHref}

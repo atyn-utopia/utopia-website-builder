@@ -23,6 +23,7 @@ interface Props {
   recentPosts: Post[];
   readingTime: number;
   formattedDate: string;
+  chromeProvided?: boolean;
 }
 
 export default function BlogPostClient({
@@ -30,6 +31,7 @@ export default function BlogPostClient({
   recentPosts,
   readingTime,
   formattedDate,
+  chromeProvided = false,
 }: Props) {
   const t = useTranslations('blog');
   const locale = useLocale();
@@ -48,8 +50,8 @@ export default function BlogPostClient({
 
   return (
     <>
-      <FomoBar />
-      <Navbar />
+      {!chromeProvided && <FomoBar />}
+      {!chromeProvided && <Navbar />}
 
       {/* Breadcrumbs */}
       <nav
@@ -301,7 +303,7 @@ export default function BlogPostClient({
         </section>
       )}
 
-      <Footer />
+      {!chromeProvided && <Footer />}
       <WhatsAppButton href={waHref} label="WhatsApp" variant="floating" ariaLabel="WhatsApp" />
     </>
   );

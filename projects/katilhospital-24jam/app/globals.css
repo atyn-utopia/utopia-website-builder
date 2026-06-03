@@ -386,3 +386,114 @@ a {
   transform: translateY(-6px);
   box-shadow: var(--shadow-card-hover);
 }
+
+/* ── Language switcher (lives here so element resets don't override scoped styles) ── */
+.lsw-root,
+.lang-switcher {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  gap: 6px;
+  align-items: center;
+}
+.lsw-item,
+.lang-switcher a,
+.lang-switcher button {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #0F172A;
+  border: 1px solid #DCEEF8;
+  border-radius: 9999px;
+  background: #FFFFFF;
+  white-space: nowrap;
+  transition: background-color 180ms ease;
+}
+.lsw-item:hover,
+.lang-switcher a:hover,
+.lang-switcher button:hover {
+  background: #DCEEF8;
+}
+.lsw-flag {
+  display: inline-block !important;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+/* ── USP panel — one container with 3 .usp-cell children, not 3 cards. ── */
+.usp-panel {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+@media (min-width: 640px) {
+  .usp-panel { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* ── Mobile: hide the nav WhatsApp CTA so it doesn't overlap the language pills. ── */
+@media (max-width: 879px) {
+  .nav-cta { display: none !important; }
+}
+
+/* ── Blog table of contents (matches .blog-content nav + standalone .toc). ── */
+.toc,
+.blog-content nav {
+  background: #F6F8FB;
+  border: 1px solid rgba(42, 95, 176, 0.18);
+  border-left: 4px solid var(--primary, #E11C1C);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 0 0 28px;
+}
+.toc h2, .toc h3, .toc h4,
+.blog-content nav h2,
+.blog-content nav h3,
+.blog-content nav h4 {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary, #E11C1C);
+}
+.toc ul, .toc ol,
+.blog-content nav ul,
+.blog-content nav ol {
+  margin: 0;
+  padding-left: 1.25em;
+  list-style: disc;
+  line-height: 1.9;
+}
+.toc li,
+.blog-content nav li {
+  margin: 0.15em 0;
+}
+.toc a,
+.blog-content nav a {
+  color: #0F172A;
+  text-decoration: none;
+}
+.toc a:hover,
+.blog-content nav a:hover {
+  color: var(--primary, #E11C1C);
+  text-decoration: underline;
+}
+
+/* ── Blog listing card grid — checklist enforces `blog-grid` class or repeat() ── */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 16px;
+}
+@media (min-width: 640px) {
+  .blog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) {
+  .blog-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}

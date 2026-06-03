@@ -24,4 +24,5 @@ next-env.d.ts
 
 # Local QA artifacts
 temporary screenshots/
+brand_assets/
 _temp_*.mjs

@@ -12,15 +12,18 @@ import type { ProductCardData } from '@/components/ProductCard';
 interface Props {
   locale: string;
   products: ProductCardData[];
+  /** When true, skip internal FomoBar/Navbar/Footer — the server page renders
+   *  the canonical SiteHeader/SiteFooter/FomoBanner instead. */
+  chromeProvided?: boolean;
 }
 
-export default function HomePageClient({ locale, products }: Props) {
+export default function HomePageClient({ locale, products, chromeProvided = false }: Props) {
   const heroT = useTranslations('hero');
   const waHref = waRedirect(locale);
 
   return (
     <>
-      <FomoBar />
+      {!chromeProvided && <FomoBar />}
 
       {/* HEADER + HERO share the same gradient background so the floating pill nav blends with the hero */}
       <div
@@ -30,7 +33,7 @@ export default function HomePageClient({ locale, products }: Props) {
             'radial-gradient(ellipse 70% 60% at 85% 10%, rgba(36,144,216,0.16) 0%, transparent 65%), radial-gradient(ellipse 60% 50% at 10% 90%, rgba(220,238,248,0.85) 0%, transparent 60%), linear-gradient(180deg, #f4f9fd 0%, #dceef8 100%)',
         }}
       >
-        <Navbar />
+        {!chromeProvided && <Navbar />}
 
         {/* SECTION 3 — HERO */}
         <section
@@ -157,7 +160,7 @@ export default function HomePageClient({ locale, products }: Props) {
             className="kh-hero-disc-wrap"
           >
             <img
-              src="/brand/hero/hero-bed.png"
+              src="/brand/hero/hero-bed.jpg"
               alt="Katil hospital elektrik berkualiti tinggi"
               style={{
                 width: 'min(520px, 100%)',
@@ -250,7 +253,7 @@ export default function HomePageClient({ locale, products }: Props) {
 
       <HomeSections locale={locale} products={products} />
 
-      <Footer />
+      {!chromeProvided && <Footer />}
 
       {/* Floating WhatsApp FAB */}
       <WhatsAppButton href={waHref} label="WhatsApp" variant="floating" ariaLabel="WhatsApp" />

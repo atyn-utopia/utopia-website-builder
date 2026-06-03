@@ -1,6 +1,7 @@
 'use client';
 
 import { trackWhatsApp } from '@/lib/track';
+import { siteConfig } from '@/config/site';
 
 const WA_ICON = (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -66,7 +67,7 @@ export default function WhatsAppButton({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={ariaLabel || label}
-      onClick={() => trackWhatsApp('60174287801', locationSlug)}
+      onClick={() => trackWhatsApp(siteConfig.fallbackPhone, locationSlug)}
       style={{ ...baseStyle, ...variantStyles[variant] }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = 'translateY(-2px)';

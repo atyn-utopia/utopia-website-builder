@@ -5,7 +5,11 @@
     "how": "Cara Pesan",
     "reviews": "Ulasan",
     "blog": "Blog",
-    "cta": "WhatsApp Kami"
+    "cta": "WhatsApp Kami",
+    "calculator": "Pengira Sewa",
+    "locations": "Lokasi",
+    "whatsappCta": "WhatsApp Kami",
+    "whatsapp": "WhatsApp"
   },
   "fomo": {
     "primary": "Tawaran 24 Jam tamat dalam",
@@ -41,7 +45,8 @@
     "h3": "Produk Kami",
     "intro": "Katil hospital manual dan elektrik, tilam hospital, tilam angin anti-decubitus, mesin oksigen, kerusi roda, dan mesin CPAP — semua boleh disewa atau dibeli dengan penghantaran 24 jam.",
     "cardCta": "Lihat di WhatsApp",
-    "eyebrow": "Katalog Sewa & Beli"
+    "eyebrow": "Katalog Sewa & Beli",
+    "imageAltTemplate": "Katil hospital {model} daripada Katil Hospital 24 Jam — sewa atau beli seluruh Malaysia"
   },
   "values": {
     "h3": "Kenapa Pilih Katil Hospital 24 Jam",
@@ -83,7 +88,21 @@
   "gallery": {
     "h3": "Gambar Pelanggan",
     "intro": "Penghantaran dan pemasangan sebenar di rumah pelanggan di seluruh Malaysia — tiada lakonan, tiada stok foto.",
-    "eyebrow": "Bukti Sebenar"
+    "eyebrow": "Bukti Sebenar",
+    "alts": [
+      "Katil hospital manual dihantar ke rumah pelanggan di Kuala Lumpur",
+      "Katil hospital elektrik 3-fungsi dipasang di bilik pesakit",
+      "Tilam ripple anti-bedsore disediakan untuk penghantaran",
+      "Keluarga menerima katil hospital yang dinyahkuman di Selangor",
+      "Testimoni pelanggan — penghantaran katil hari sama di Pulau Pinang",
+      "Pakej katil hospital dan kerusi roda untuk pesakit pemulihan strok",
+      "Katil hospital boleh lipat dimuatkan untuk penghantaran seluruh negara",
+      "Mesin oksigen digabungkan dengan katil hospital sewaan",
+      "Penjaga melaraskan katil hospital elektrik untuk pesakit warga emas",
+      "Katil hospital dengan pagar sisi dipasang untuk pencegahan jatuh",
+      "Bundle katil hospital dan tiang IV untuk penjagaan di rumah",
+      "Krew Katil Hospital 24 Jam menyiapkan pemasangan hari sama"
+    ]
   },
   "googleReview": {
     "h3": "Ulasan Pelanggan di Google",
@@ -139,7 +158,8 @@
     "h3": "Perlukan Katil Hospital Hari Ini? WhatsApp Sekarang.",
     "subtitle": "Pasukan kami standby 24 jam — hantar, pasang, dan selesai sebelum hari berikutnya.",
     "cta": "WhatsApp Kami Sekarang",
-    "eyebrow": "Bertindak Sekarang"
+    "eyebrow": "Bertindak Sekarang",
+    "bgAlt": "Penghantaran dan pemasangan katil hospital 24 jam Katil Hospital 24 Jam di rumah di Malaysia"
   },
   "footer": {
     "brand": {
@@ -208,5 +228,7 @@
     "intro": "Penghantaran percuma ke setiap negeri di Semenanjung, Sabah, dan Sarawak. Klik negeri anda untuk lihat senarai penuh kawasan.",
     "empty": "Kawasan anda tidak tersenarai?",
     "emptyCta": "WhatsApp untuk sahkan liputan"
-  }
+  },
+  "logoAlt": "Katil Hospital 24 Jam — Sewa & Jual Katil Hospital Seluruh Malaysia",
+  "imageAlt": "Pasukan Katil Hospital 24 Jam menghantar dan memasang katil hospital di rumah pelanggan"
 }
