@@ -37,8 +37,12 @@ h1, h2, h3, h4 {
 }
 /* h5/h6 wrap body text (keyword-driven heading rule). Keep them visually
    identical to the <p> they replaced — utility/custom classes control
-   size/weight; this guards against UA bolding + tight heading line-height. */
-h5, h6 {
+   size/weight/margin; this guards against UA bolding + tight heading
+   line-height.
+   :where() drops the selector specificity to 0 so Tailwind utility classes
+   (mt-7, mb-9, etc.) win — without :where the unlayered rule outranks every
+   @layer utilities declaration. */
+:where(h5, h6) {
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
