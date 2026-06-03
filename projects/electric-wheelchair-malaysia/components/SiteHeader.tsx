@@ -220,9 +220,11 @@ export default function SiteHeader(_props?: { locale?: Locale }) {
         }
         @media (max-width: 959px) {
           .ewc-header__cta { display: none; }
-          .ewc-header__brand-text { display: none; }
         }
-        @media (max-width: 480px) {
+        @media (max-width: 520px) {
+          .ewc-header__brand-text { font-size: 13px; }
+        }
+        @media (max-width: 380px) {
           .ewc-header__lang { display: none; }
         }
       `}</style>

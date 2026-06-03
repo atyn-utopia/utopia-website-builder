@@ -1,113 +1,107 @@
+// Pill-style language switcher — mirrors sewa-excavator's chrome 1:1 so the
+// markup matches the .lsw-root / .lsw-item / .lsw-flag CSS already in
+// globals.css. Renders one rounded pill per locale (EN, MS, ZH) with a
+// circular flag glyph + label side-by-side; the active locale flips to dark.
 'use client';
 
+import Link from 'next/link';
 import { useLocale } from 'next-intl';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useId } from 'react';
+import { locales } from '@/i18n/routing';
 
-const localeLabels: Record<string, string> = {
-  en: 'English',
-  ms: 'Bahasa Melayu',
-  zh: '中文',
-};
+const LABELS: Record<string, string> = { en: 'EN', ms: 'MS', zh: '中' };
+
+function starPoints(cx: number, cy: number, outer: number, rot = -Math.PI / 2): string {
+  const inner = outer * 0.382;
+  const pts: string[] = [];
+  for (let i = 0; i < 10; i++) {
+    const angle = rot + (Math.PI / 5) * i;
+    const r = i % 2 === 0 ? outer : inner;
+    pts.push(`${(cx + r * Math.cos(angle)).toFixed(2)},${(cy + r * Math.sin(angle)).toFixed(2)}`);
+  }
+  return pts.join(' ');
+}
+
+function CircleFlag({ locale }: { locale: string }) {
+  const uid = useId().replace(/:/g, '');
+  const id = `clip-${locale}-${uid}`;
+  return (
+    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" className="lsw-flag">
+      <defs><clipPath id={id}><circle cx="12" cy="12" r="11.5" /></clipPath></defs>
+      <g clipPath={`url(#${id})`}>
+        {locale === 'ms' && (
+          <>
+            <rect width="24" height="24" fill="#fff" />
+            {[0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22].map((y, i) => (
+              <rect key={y} y={y - 4} width="24" height="2" fill={i % 2 === 0 ? '#CC0001' : '#FFFFFF'} />
+            ))}
+            <rect width="13" height="13" fill="#010066" />
+            <circle cx="5.5" cy="6.5" r="3" fill="#FFCC00" />
+            <circle cx="6.6" cy="6" r="2.6" fill="#010066" />
+            <polygon points={starPoints(9.5, 6.5, 1.8)} fill="#FFCC00" />
+          </>
+        )}
+        {locale === 'en' && (
+          <>
+            <rect width="24" height="24" fill="#012169" />
+            <path d="M0,0 L24,24 M24,0 L0,24" stroke="#FFFFFF" strokeWidth="5" />
+            <path d="M0,0 L24,24" stroke="#C8102E" strokeWidth="2" />
+            <path d="M24,0 L0,24" stroke="#C8102E" strokeWidth="2" />
+            <path d="M12,0 V24 M0,12 H24" stroke="#FFFFFF" strokeWidth="7" />
+            <path d="M12,0 V24 M0,12 H24" stroke="#C8102E" strokeWidth="4" />
+          </>
+        )}
+        {locale === 'zh' && (
+          <>
+            <rect width="24" height="24" fill="#EE1C25" />
+            <polygon points={starPoints(7, 7, 3.2)} fill="#FFFF00" />
+            {[{ x: 12, y: 3 }, { x: 14, y: 5.5 }, { x: 14, y: 9 }, { x: 12, y: 11 }].map((s, i) => {
+              const angle = Math.atan2(7 - s.y, 7 - s.x);
+              return <polygon key={i} points={starPoints(s.x, s.y, 1.2, angle)} fill="#FFFF00" />;
+            })}
+          </>
+        )}
+      </g>
+      <circle cx="12" cy="12" r="11.5" fill="none" stroke="rgba(15,15,15,0.18)" strokeWidth="1" />
+    </svg>
+  );
+}
 
 export function LanguageSwitcher() {
-  const locale = useLocale();
-  const pathname = usePathname();
-  const router = useRouter();
+  const current = useLocale();
+  const pathname = usePathname() || '/';
+  const search = useSearchParams();
+  const qs = search?.toString();
+  const suffix = qs ? `?${qs}` : '';
 
-  function switchLocale(newLocale: string) {
-    const segments = pathname.split('/');
-    segments[1] = newLocale;
-    router.push(segments.join('/'));
-  }
+  // Strip the leading /<locale> segment so we can re-prefix with the target locale.
+  const rest = (() => {
+    for (const l of locales) {
+      if (pathname === `/${l}`) return '';
+      if (pathname.startsWith(`/${l}/`)) return pathname.slice(`/${l}`.length);
+    }
+    return pathname === '/' ? '' : pathname;
+  })();
 
   return (
-    <div className="group" style={{ position: 'relative' }}>
-      <button
-        aria-label="Switch language"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '6px',
-          padding: '6px 12px',
-          borderRadius: 'var(--radius-md)',
-          border: '1px solid rgba(27, 45, 91, 0.15)',
-          background: 'transparent',
-          cursor: 'pointer',
-          fontSize: '14px',
-          fontWeight: 500,
-          color: 'var(--navy)',
-          transition: 'transform 150ms cubic-bezier(0.16, 1, 0.3, 1), opacity 150ms cubic-bezier(0.16, 1, 0.3, 1)',
-        }}
-      >
-        {/* Globe icon */}
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="10" />
-          <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-        </svg>
-        {locale.toUpperCase()}
-      </button>
-
-      {/* Dropdown */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '100%',
-          right: 0,
-          marginTop: '4px',
-          background: 'var(--white)',
-          borderRadius: 'var(--radius-md)',
-          boxShadow: 'var(--shadow-lg)',
-          minWidth: '160px',
-          zIndex: 100,
-          overflow: 'hidden',
-          opacity: 0,
-          transform: 'translateY(-4px)',
-          pointerEvents: 'none',
-          transition: 'opacity 150ms cubic-bezier(0.16, 1, 0.3, 1), transform 150ms cubic-bezier(0.16, 1, 0.3, 1)',
-        }}
-        className="lang-dropdown"
-      >
-        {Object.entries(localeLabels).map(([code, label]) => (
-          <button
-            key={code}
-            onClick={() => switchLocale(code)}
-            style={{
-              display: 'block',
-              width: '100%',
-              padding: '10px 16px',
-              textAlign: 'left',
-              border: 'none',
-              cursor: 'pointer',
-              fontSize: '14px',
-              fontWeight: code === locale ? 600 : 400,
-              color: code === locale ? 'var(--white)' : 'var(--text)',
-              background: code === locale ? 'var(--orange)' : 'transparent',
-              transition: 'transform 150ms cubic-bezier(0.16, 1, 0.3, 1), opacity 150ms cubic-bezier(0.16, 1, 0.3, 1)',
-            }}
-            onMouseEnter={(e) => {
-              if (code !== locale) {
-                (e.target as HTMLElement).style.background = 'var(--surface)';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (code !== locale) {
-                (e.target as HTMLElement).style.background = 'transparent';
-              }
-            }}
+    <div className="lsw-root" role="group" aria-label="Change language">
+      {locales.map((l) => {
+        const active = l === current;
+        return (
+          <Link
+            key={l}
+            href={`/${l}${rest}${suffix}`}
+            hrefLang={l}
+            lang={l}
+            className={`lsw-item ${active ? 'is-active' : ''}`}
+            aria-current={active ? 'true' : undefined}
           >
-            {label}
-          </button>
-        ))}
-      </div>
-
-      <style>{`
-        .group:hover .lang-dropdown,
-        .group:focus-within .lang-dropdown {
-          opacity: 1 !important;
-          transform: translateY(0) !important;
-          pointer-events: auto !important;
-        }
-      `}</style>
+            <CircleFlag locale={l} />
+            <span>{LABELS[l] ?? l.toUpperCase()}</span>
+          </Link>
+        );
+      })}
     </div>
   );
 }
