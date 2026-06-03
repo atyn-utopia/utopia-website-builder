@@ -202,7 +202,7 @@ export default function LocationPageClient({
               }}
             >
               <img
-                src="/brand/hero/hero-bed.jpg"
+                src="/brand/hero/hero-bed.png"
                 alt={`Katil hospital dihantar ke ${location.name}`}
                 style={{
                   width: '100%',

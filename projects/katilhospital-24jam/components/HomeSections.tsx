@@ -257,19 +257,46 @@ export default function HomeSections({ locale, products, location }: Props) {
           borderBottom: '1px solid #E2E8F0',
         }}
       >
-        <div className="kh-usp-grid">
+        <div className="kh-usp-grid usp-panel">
           {[
-            { k: 'p1', icon: '🚚' },
-            { k: 'p2', icon: '💳' },
-            { k: 'p3', icon: '🗺️' },
+            {
+              k: 'p1',
+              icon: (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M3 7h11v9H3z" />
+                  <path d="M14 10h4l3 3v3h-7" />
+                  <circle cx="7" cy="18" r="2" />
+                  <circle cx="17" cy="18" r="2" />
+                </svg>
+              ),
+            },
+            {
+              k: 'p2',
+              icon: (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="3" y="6" width="18" height="13" rx="2" />
+                  <path d="M3 10h18" />
+                  <path d="M7 15h4" />
+                </svg>
+              ),
+            },
+            {
+              k: 'p3',
+              icon: (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z" />
+                  <circle cx="12" cy="10" r="2.5" />
+                </svg>
+              ),
+            },
           ].map((u) => (
-            <div key={u.k} className="kh-usp-card">
+            <div key={u.k} className="kh-usp-card usp-cell">
               <div aria-hidden="true" className="kh-usp-icon">
                 {u.icon}
               </div>
               <div className="kh-usp-text">
-                <div className="kh-usp-label">{uspT(`${u.k}.label`)}</div>
-                <div className="kh-usp-sub">{uspT(`${u.k}.sub`)}</div>
+                <h5 className="kh-usp-label">{uspT(`${u.k}.label`)}</h5>
+                <h6 className="kh-usp-sub">{uspT(`${u.k}.sub`)}</h6>
               </div>
             </div>
           ))}
@@ -301,9 +328,12 @@ export default function HomeSections({ locale, products, location }: Props) {
             align-items: center;
             justify-content: center;
             color: #e63030;
-            font-size: 22px;
             flex: 0 0 52px;
             box-shadow: 0 2px 8px rgba(15, 31, 80, 0.08);
+          }
+          .kh-usp-icon svg {
+            width: 24px;
+            height: 24px;
           }
           .kh-usp-text {
             min-width: 0;
@@ -448,7 +478,7 @@ export default function HomeSections({ locale, products, location }: Props) {
               }}
             >
               <img
-                src="/brand/hero/doctor-mascot.jpg"
+                src="/brand/hero/doctor-mascot.png"
                 alt="Doktor Katil Hospital 24 Jam"
                 style={{
                   position: 'absolute',

@@ -160,7 +160,7 @@ export default function HomePageClient({ locale, products, chromeProvided = fals
             className="kh-hero-disc-wrap"
           >
             <img
-              src="/brand/hero/hero-bed.jpg"
+              src="/brand/hero/hero-bed.png"
               alt="Katil hospital elektrik berkualiti tinggi"
               style={{
                 width: 'min(520px, 100%)',

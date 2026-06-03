@@ -23,8 +23,10 @@ export default function Navbar() {
   return (
     <div
       style={{
-        position: 'sticky',
+        position: 'absolute',
         top: 0,
+        left: 0,
+        right: 0,
         zIndex: 55,
         padding: '12px 16px',
         display: 'flex',

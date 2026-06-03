@@ -82,15 +82,20 @@ export default async function HomePage({
       <FAQSchema faqs={faqs} />
       <PageStyles />
       <FomoBanner />
-      <SiteHeader />
-      {/* Decorative hero background labelled for screen readers + the checklist
-          role=img check. The visible hero content lives in HomePageClient. */}
-      <div
-        role="img"
-        aria-label={heroBgAlt}
-        style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }}
-      />
-      <HomePageClient locale={locale} products={cardProducts} chromeProvided />
+      {/* SiteHeader floats absolutely over the hero so there's no separate
+          header strip above. The relative wrapper makes the hero its
+          positioning context. */}
+      <div style={{ position: 'relative' }}>
+        <SiteHeader />
+        {/* Decorative hero background labelled for screen readers + the
+            checklist role=img check. The visible hero is inside HomePageClient. */}
+        <div
+          role="img"
+          aria-label={heroBgAlt}
+          style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }}
+        />
+        <HomePageClient locale={locale} products={cardProducts} chromeProvided />
+      </div>
       <SiteFooter />
     </>
   );
