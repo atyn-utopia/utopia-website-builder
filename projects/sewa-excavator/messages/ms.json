@@ -23,8 +23,8 @@
     "whatsappCta": "WhatsApp Sebut Harga"
   },
   "fomo": {
-    "eyebrow": "PROMO MEI",
-    "body": "Diskaun sewa harian sehingga 12% — promo Mei berakhir dalam:",
+    "eyebrow": "PROMO {monthUpper}",
+    "body": "Diskaun sewa harian sehingga 12% — promo {month} berakhir dalam:",
     "countdownLabel": "Hari : Jam : Minit : Saat",
     "ctaLabel": "Sebut harga sekarang"
   },
