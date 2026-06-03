@@ -30,13 +30,9 @@ export default async function SiteFooter({ locale }: { locale: Locale }) {
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-3">
-              <div
-                className="w-8 h-8 rounded-lg flex items-center justify-center"
-                style={{ background: '#FACC15' }}
-                aria-hidden="true"
-              >
-                <span className="text-[#1B3A5C] font-bold text-sm">EB</span>
-              </div>
+              {/* Logo icon = the favicon, so the two always match. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/favicon.svg" alt="" className="w-8 h-8" aria-hidden="true" />
               <span className="font-extrabold text-lg text-white tracking-tight">Encik Beku</span>
             </div>
             <p
@@ -61,7 +57,7 @@ export default async function SiteFooter({ locale }: { locale: Locale }) {
             </div>
           </div>
           <div>
-            <h6 className="text-[11px] font-bold uppercase tracking-widest mb-3 text-yellow-400">
+            <h6 className="text-[11px] font-bold uppercase tracking-widest mb-3 text-[#FFE500]">
               {tNav('locations')}
             </h6>
             <ul className="space-y-2 text-xs font-normal" style={{ color: 'rgba(255,255,255,0.55)' }}>
@@ -78,7 +74,7 @@ export default async function SiteFooter({ locale }: { locale: Locale }) {
             </ul>
           </div>
           <div>
-            <h6 className="text-[11px] font-bold uppercase tracking-widest mb-3 text-yellow-400">
+            <h6 className="text-[11px] font-bold uppercase tracking-widest mb-3 text-[#FFE500]">
               {tNav('home')}
             </h6>
             <ul className="space-y-2 text-xs font-normal" style={{ color: 'rgba(255,255,255,0.55)' }}>

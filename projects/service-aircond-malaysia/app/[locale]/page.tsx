@@ -91,7 +91,7 @@ export default async function HomePage({
         />
         <div className="relative z-10 max-w-6xl mx-auto px-6 py-16 md:py-24 text-white">
           <h6 className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider mb-5">
-            <span className="h-2 w-2 rounded-full bg-yellow-400" aria-hidden="true" />
+            <span className="h-2 w-2 rounded-full bg-[#FFE500]" aria-hidden="true" />
             {tHero('badgeCertified')} · {tHero('badgeCities')}
           </h6>
           <h1
@@ -99,7 +99,7 @@ export default async function HomePage({
             style={{ fontSize: 'clamp(32px, 5.4vw, 56px)' }}
           >
             {tHero('headline')}{' '}
-            <span style={{ color: '#FACC15' }}>{tHero('headlineHighlight')}</span>
+            <span style={{ color: '#FFE500' }}>{tHero('headlineHighlight')}</span>
           </h1>
           <h2 className="mt-5 text-base md:text-lg leading-relaxed text-white/80 max-w-2xl font-normal">
             {tHero('subheadline')}

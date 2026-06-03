@@ -32,13 +32,9 @@ export default async function SiteHeader({ locale }: { locale: Locale }) {
           className="flex items-center gap-2 shrink-0"
           aria-label={tNav('logoAlt')}
         >
-          <div
-            className="w-8 h-8 rounded-lg flex items-center justify-center"
-            style={{ background: '#FACC15' }}
-            aria-hidden="true"
-          >
-            <span className="text-[#1B3A5C] font-bold text-sm">EB</span>
-          </div>
+          {/* Logo icon = the favicon, so the two always match. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/favicon.svg" alt="" className="w-8 h-8" aria-hidden="true" />
           <span className="font-extrabold text-lg text-white tracking-tight">Encik Beku</span>
         </Link>
 

@@ -41,7 +41,7 @@ export default async function MarketingMarquee({
 
       <style>{`
         .mkt-marquee {
-          background: #FACC15;
+          background: #FFE500;
           color: #1B3A5C;
           overflow: hidden;
           padding: 8px 0;
@@ -50,7 +50,7 @@ export default async function MarketingMarquee({
         }
         .mkt-marquee--dark {
           background: #1B3A5C;
-          color: #FACC15;
+          color: #FFE500;
         }
         .mkt-marquee-track {
           display: inline-flex;

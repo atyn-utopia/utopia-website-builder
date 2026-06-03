@@ -231,7 +231,7 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
-.blog-content a:hover { color: #FACC15; }
+.blog-content a:hover { color: #FFE500; }
 .blog-content strong { color: #0f172a; font-weight: 700; }
 
 /* Lists — restore the bullet/number affordance Tailwind's reset removed. */
@@ -246,7 +246,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0.4em 0;
   line-height: 1.7;
 }
-.blog-content li::marker { color: #FACC15; }
+.blog-content li::marker { color: #FFE500; }
 
 /* Images + blockquotes inside the article body */
 .blog-content img {
@@ -257,7 +257,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 1.6em 0;
 }
 .blog-content blockquote {
-  border-left: 4px solid #FACC15;
+  border-left: 4px solid #FFE500;
   background: #FFFBEB;
   padding: 14px 20px;
   margin: 1.4em 0;
