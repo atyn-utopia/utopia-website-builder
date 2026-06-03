@@ -49,6 +49,8 @@
       "tag1": "Done in 5 Hours",
       "tag2": "180 Colour Choices",
       "tag3": "Free Pressure Wash",
+      "stampSmall": "Book Today",
+      "stampBig": "We Paint Same Day",
       "cta": "WhatsApp Us Now",
       "ctaSubtext": "Free quote · 1-hour response",
       "heroAlt": "Professional house painting contractor Malaysia"
@@ -75,7 +77,26 @@
       "texture": { "title": "Texture Painting", "description": "Modern concrete texture for accent walls. Industrial premium look.", "price": "Dari RM2,500" },
       "decor3d": { "title": "3D Decorative Wall", "description": "Embossed 3D panel finish — monstera, geometric, or organic motifs.", "price": "Dari RM3,500" },
       "bookNow": "Get a Quote",
+      "fromLabel": "From",
       "disclaimer": "Final pricing depends on site inspection and surface area. Pressure wash + crack filling already included."
+    },
+    "calculator": {
+      "tag": "PRICE CALCULATOR",
+      "heading": "How Much Will Your Paint Job Cost?",
+      "subheading": "Pick a service and enter the wall area for an instant estimate. Final price confirmed after a free site visit.",
+      "serviceLabel": "Choose a service",
+      "areaLabel": "Wall area (sqft)",
+      "packageLabel": "Package",
+      "estimateLabel": "Estimated cost",
+      "estimateNote": "Includes surface prep and two coats of premium paint.",
+      "ctaButton": "Send This Estimate To WhatsApp",
+      "perSqftSuffix": "/sqft",
+      "packageSingle": "1 accent wall (≤ 60 sqft)",
+      "packageMedium": "2 accent walls (≤ 120 sqft)",
+      "packageLarge": "Full room (≤ 250 sqft)",
+      "messageTemplate": "Hi Cat Rumah Express, I'm interested in {service}. My estimate: RM{price} (area/package: {detail}). Can I get a fixed quote?",
+      "areaPlaceholder": "e.g. 1000",
+      "minArea": 50
     },
     "beforeAfter": {
       "tag": "TRANSFORMATION",
@@ -186,7 +207,8 @@
       "tag": "COVERAGE",
       "heading": "We Cover All of Malaysia",
       "subheading": "Click a city below for full local info.",
-      "cities": "cities"
+      "cities": "cities",
+      "totalLine": "We serve {count}+ cities across Malaysia"
     },
     "finalCta": {
       "headline": "Ready for a",

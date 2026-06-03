@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useLocale } from 'next-intl';
 import { usePathname } from 'next/navigation';
-import { useEffect, useId, useRef, useState } from 'react';
+import { useId } from 'react';
 import { routing } from '@/i18n/routing';
 
 const LABELS: Record<string, string> = { ms: 'MS', en: 'EN', zh: '中' };
@@ -67,7 +67,6 @@ function CircleFlag({ locale }: { locale: string }) {
 export default function LanguageSwitcher() {
   const currentLocale = useLocale();
   const pathname = usePathname() || '/';
-  const suffix = '';
   const rest = (() => {
     for (const l of routing.locales) {
       if (pathname === `/${l}`) return '';
@@ -76,32 +75,15 @@ export default function LanguageSwitcher() {
     return pathname === '/' ? '' : pathname;
   })();
 
-  const [open, setOpen] = useState(false);
-  const rootRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!open) return;
-    const onClick = (e: MouseEvent) => {
-      if (!rootRef.current?.contains(e.target as Node)) setOpen(false);
-    };
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false); };
-    document.addEventListener('mousedown', onClick);
-    document.addEventListener('keydown', onKey);
-    return () => {
-      document.removeEventListener('mousedown', onClick);
-      document.removeEventListener('keydown', onKey);
-    };
-  }, [open]);
-
   return (
-    <div className="lsw" ref={rootRef}>
+    <div className="lsw">
       <div className="lsw-toggle" role="group" aria-label="Change language">
         {routing.locales.map((l) => {
           const active = l === currentLocale;
           return (
             <Link
               key={l}
-              href={`/${l}${rest}${suffix}`}
+              href={`/${l}${rest}`}
               hrefLang={l}
               lang={l}
               className={`lsw-item ${active ? 'is-active' : ''}`}
@@ -113,43 +95,6 @@ export default function LanguageSwitcher() {
           );
         })}
       </div>
-
-      <button
-        type="button"
-        className="lsw-trigger"
-        aria-haspopup="menu"
-        aria-expanded={open}
-        aria-label="Change language"
-        onClick={() => setOpen((v) => !v)}
-      >
-        <CircleFlag locale={currentLocale} />
-        <span className="lsw-trigger-label">{LABELS[currentLocale] ?? currentLocale.toUpperCase()}</span>
-        <svg className="lsw-caret" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
-          <path d="M1 3l4 4 4-4" stroke="currentColor" strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </button>
-
-      {open && (
-        <div className="lsw-menu" role="menu">
-          {routing.locales.map((l) => {
-            const active = l === currentLocale;
-            return (
-              <Link
-                key={l}
-                href={`/${l}${rest}${suffix}`}
-                hrefLang={l}
-                lang={l}
-                role="menuitem"
-                className={`lsw-menu-item ${active ? 'is-active' : ''}`}
-                onClick={() => setOpen(false)}
-              >
-                <CircleFlag locale={l} />
-                <span>{LABELS[l] ?? l.toUpperCase()}</span>
-              </Link>
-            );
-          })}
-        </div>
-      )}
     </div>
   );
 }

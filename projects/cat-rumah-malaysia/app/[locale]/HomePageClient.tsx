@@ -56,20 +56,78 @@ const productKeys = [
   { key: 'decor3d', slug: 'decor3d', img: '/images/products/decor3d-1.png' },
 ]
 
-const reasonKeys = ['reason1', 'reason2', 'reason3', 'reason4', 'reason5', 'reason6']
+// Why-choose reasons — each has a matching SVG icon name.
+const reasonItems: { key: string; icon: 'paint' | 'bolt' | 'shield' | 'tag' | 'badge' | 'pin' }[] = [
+  { key: 'reason1', icon: 'paint' },   // Premium paint
+  { key: 'reason2', icon: 'bolt' },    // Done in 5 hours
+  { key: 'reason3', icon: 'tag' },     // Free quote
+  { key: 'reason4', icon: 'shield' },  // Satisfaction guarantee
+  { key: 'reason5', icon: 'badge' },   // Certified contractor
+  { key: 'reason6', icon: 'pin' },     // Malaysia-wide coverage
+]
+
+const ReasonIcon = ({ name }: { name: typeof reasonItems[number]['icon'] }) => {
+  const props = { width: 26, height: 26, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, 'aria-hidden': true } as const
+  switch (name) {
+    case 'paint':
+      return (
+        <svg {...props}>
+          <rect x="3" y="3" width="18" height="6" rx="1" />
+          <path d="M21 6h2v6h-9v3" />
+          <path d="M11 15h3v6h-3z" />
+        </svg>
+      )
+    case 'bolt':
+      return (
+        <svg {...props}>
+          <path d="M13 2L3 14h9l-1 8 10-12h-9z" />
+        </svg>
+      )
+    case 'shield':
+      return (
+        <svg {...props}>
+          <path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6l8-3z" />
+          <path d="M9 12l2 2 4-4" />
+        </svg>
+      )
+    case 'tag':
+      return (
+        <svg {...props}>
+          <path d="M20 12l-8.5 8.5a2 2 0 01-2.8 0L2 13.8V4h9.8L20 12z" />
+          <circle cx="7" cy="9" r="1.5" />
+        </svg>
+      )
+    case 'badge':
+      return (
+        <svg {...props}>
+          <circle cx="12" cy="9" r="6" />
+          <path d="M9 14l-2 7 5-3 5 3-2-7" />
+          <path d="M9 9l2 2 4-4" />
+        </svg>
+      )
+    case 'pin':
+      return (
+        <svg {...props}>
+          <path d="M12 22s-7-7.5-7-13a7 7 0 1114 0c0 5.5-7 13-7 13z" />
+          <circle cx="12" cy="9" r="2.5" />
+        </svg>
+      )
+  }
+}
 const faqIndexes = [1, 2, 3, 4, 5, 6, 7, 8]
 const reviewIndexes = [1, 2, 3, 4, 5, 6]
 
-// Before/After pairs — realistic transitions. Each "before" is a mid-paint or
-// prep-stage photo (raw wall / half-painted) paired with a finished-work
-// "after" so the comparison slider reads as a true transformation.
+// Before/After pairs — realistic stock photography of paint transformations.
+// Each pair is the SAME room type (interior, exterior, accent wall) shown
+// pre- and post-paint so the slider reads as a real transformation.
+const UNSPLASH = (id: string) => `https://images.unsplash.com/${id}?w=900&q=80&auto=format&fit=crop`
 const beforeAfterPairs = [
-  // Exterior: mid-paint roller stroke on bare wall → finished exterior repaint
-  { before: '/images/before-after/before-exterior.png', after: '/images/gallery/job-84.png', captionKey: 'pair1Caption' },
-  // Interior prep: empty room with sheets + ladder → freshly painted interior
-  { before: '/images/before-after/before-prep.png', after: '/images/gallery/job-88.png', captionKey: 'pair2Caption' },
-  // Ceiling/wall: half-painted green ceiling roller → finished clean room
-  { before: '/images/before-after/before-ceiling.png', after: '/images/gallery/job-85.png', captionKey: 'pair3Caption' },
+  // Interior room — bare/raw wall → freshly painted interior
+  { before: UNSPLASH('photo-1503387762-592deb58ef4e'), after: UNSPLASH('photo-1567016526105-22da7c13b9e2'), captionKey: 'pair2Caption' },
+  // Exterior — weathered facade → repainted exterior
+  { before: UNSPLASH('photo-1559070081-648fb04b6b27'), after: UNSPLASH('photo-1564540583246-934409427776'), captionKey: 'pair1Caption' },
+  // Kitchen / accent wall — old dim wall → fresh accent paint
+  { before: UNSPLASH('photo-1556909114-44e3e9399a2e'), after: UNSPLASH('photo-1556909172-54557c7e4fb7'), captionKey: 'pair3Caption' },
 ] as const
 
 // Draggable before/after comparison slider. Pointer events handle both mouse
@@ -143,6 +201,172 @@ const galleryImages = [
   'job-90', 'job-92', 'job-94', 'job-96',
 ].map((n) => `/images/gallery/${n}.png`)
 
+// ────────────────────────────────────────────────────────────
+// Cost calculator
+// Rates mirror the catrumah.com.my pricing exactly. Wall services bill per
+// sqft; specialty services (marble/texture/3D) bill per package size.
+// ────────────────────────────────────────────────────────────
+type CalcMode = 'sqft' | 'package'
+
+interface CalcService {
+  key: string
+  mode: CalcMode
+  rate: number // RM per sqft when mode='sqft'
+  packages?: { id: 'single' | 'medium' | 'large'; price: number }[]
+}
+
+const CALC_SERVICES: CalcService[] = [
+  { key: 'interior',      mode: 'sqft',    rate: 3.5 },
+  { key: 'bedroom',       mode: 'sqft',    rate: 3.5 },
+  { key: 'kitchen',       mode: 'sqft',    rate: 3.5 },
+  { key: 'bathroom',      mode: 'sqft',    rate: 3.5 },
+  { key: 'exterior',      mode: 'sqft',    rate: 3.5 },
+  { key: 'weathershield', mode: 'sqft',    rate: 4.5 },
+  { key: 'marble',        mode: 'package', rate: 0, packages: [
+    { id: 'single', price: 2250 }, { id: 'medium', price: 3500 }, { id: 'large', price: 5500 },
+  ] },
+  { key: 'texture',       mode: 'package', rate: 0, packages: [
+    { id: 'single', price: 2500 }, { id: 'medium', price: 3800 }, { id: 'large', price: 6000 },
+  ] },
+  { key: 'decor3d',       mode: 'package', rate: 0, packages: [
+    { id: 'single', price: 3500 }, { id: 'medium', price: 5500 }, { id: 'large', price: 8500 },
+  ] },
+]
+
+function formatRM(value: number): string {
+  return value.toLocaleString('en-MY', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+}
+
+function CostCalculator({ locale, phoneNumber }: { locale: string; phoneNumber: string }) {
+  const t = useTranslations('home.calculator')
+  const tProducts = useTranslations('home.products')
+  const [serviceKey, setServiceKey] = useState(CALC_SERVICES[0].key)
+  const [area, setArea] = useState(1000)
+  const [pkg, setPkg] = useState<'single' | 'medium' | 'large'>('single')
+
+  const service = CALC_SERVICES.find((s) => s.key === serviceKey) ?? CALC_SERVICES[0]
+  const minArea = 50
+
+  const estimate = (() => {
+    if (service.mode === 'sqft') {
+      return Math.round(Math.max(area, minArea) * service.rate)
+    }
+    return service.packages?.find((p) => p.id === pkg)?.price ?? 0
+  })()
+
+  const detail = service.mode === 'sqft'
+    ? `${Math.max(area, minArea)} sqft`
+    : t(`package${pkg.charAt(0).toUpperCase() + pkg.slice(1)}` as 'packageSingle' | 'packageMedium' | 'packageLarge')
+
+  const message = t('messageTemplate', {
+    service: tProducts(`${serviceKey}.title`),
+    price: formatRM(estimate),
+    detail,
+  })
+  const waHref = waRedirect(locale, message)
+
+  const sqftServices = CALC_SERVICES.filter((s) => s.mode === 'sqft')
+  const packageServices = CALC_SERVICES.filter((s) => s.mode === 'package')
+
+  return (
+    <div className="rounded-2xl p-6 md:p-8 grid md:grid-cols-2 gap-6 md:gap-8" style={{ background: '#fff', border: '1px solid var(--line)', boxShadow: '0 20px 50px rgba(31, 42, 107, 0.08)' }}>
+      {/* Inputs */}
+      <div className="flex flex-col gap-4">
+        <div>
+          <label htmlFor="calc-service" className="block text-xs font-bold uppercase tracking-widest mb-2" style={{ color: 'var(--muted)' }}>
+            {t('serviceLabel')}
+          </label>
+          <select
+            id="calc-service"
+            value={serviceKey}
+            onChange={(e) => setServiceKey(e.target.value)}
+            className="w-full px-4 py-3 rounded-xl text-sm font-semibold"
+            style={{ background: 'var(--brand-cream)', border: '1px solid var(--line-strong)', color: 'var(--brand-ink)' }}
+          >
+            <optgroup label="Per sqft">
+              {sqftServices.map((s) => (
+                <option key={s.key} value={s.key}>{tProducts(`${s.key}.title`)} — RM{s.rate}{t('perSqftSuffix')}</option>
+              ))}
+            </optgroup>
+            <optgroup label="Pakej">
+              {packageServices.map((s) => (
+                <option key={s.key} value={s.key}>{tProducts(`${s.key}.title`)}</option>
+              ))}
+            </optgroup>
+          </select>
+        </div>
+
+        {service.mode === 'sqft' ? (
+          <div>
+            <label htmlFor="calc-area" className="block text-xs font-bold uppercase tracking-widest mb-2" style={{ color: 'var(--muted)' }}>
+              {t('areaLabel')}
+            </label>
+            <input
+              id="calc-area"
+              type="number"
+              min={minArea}
+              step={50}
+              value={area}
+              onChange={(e) => setArea(Math.max(minArea, Number(e.target.value) || 0))}
+              placeholder={t('areaPlaceholder')}
+              className="w-full px-4 py-3 rounded-xl text-sm font-semibold"
+              style={{ background: 'var(--brand-cream)', border: '1px solid var(--line-strong)', color: 'var(--brand-ink)' }}
+            />
+            <input
+              type="range"
+              min={minArea}
+              max={5000}
+              step={50}
+              value={Math.min(area, 5000)}
+              onChange={(e) => setArea(Number(e.target.value))}
+              className="w-full mt-3 accent-yellow-400"
+              style={{ accentColor: 'var(--brand-yellow)' }}
+            />
+          </div>
+        ) : (
+          <div>
+            <span className="block text-xs font-bold uppercase tracking-widest mb-2" style={{ color: 'var(--muted)' }}>
+              {t('packageLabel')}
+            </span>
+            <div className="grid grid-cols-3 gap-2">
+              {(['single', 'medium', 'large'] as const).map((id) => (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => setPkg(id)}
+                  className="px-3 py-2.5 rounded-xl text-[11px] font-bold text-center"
+                  style={{
+                    background: pkg === id ? 'var(--brand-ink)' : 'var(--brand-cream)',
+                    color: pkg === id ? '#fff' : 'var(--brand-ink)',
+                    border: `1px solid ${pkg === id ? 'var(--brand-ink)' : 'var(--line-strong)'}`,
+                  }}
+                >
+                  {t(`package${id.charAt(0).toUpperCase() + id.slice(1)}` as 'packageSingle' | 'packageMedium' | 'packageLarge')}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Estimate output */}
+      <div className="rounded-2xl p-6 flex flex-col justify-between" style={{ background: 'linear-gradient(135deg, var(--brand-ink) 0%, var(--brand-ink-deep) 100%)', color: '#fff' }}>
+        <div>
+          <span className="block text-[10px] font-bold uppercase tracking-[0.18em]" style={{ color: 'var(--brand-yellow)' }}>{t('estimateLabel')}</span>
+          <div className="mt-3 flex items-baseline gap-2">
+            <span className="text-2xl font-bold" style={{ color: 'rgba(255,255,255,0.7)' }}>RM</span>
+            <span className="text-5xl font-extrabold tabular-nums" style={{ color: '#fff', letterSpacing: '-0.02em' }}>{formatRM(estimate)}</span>
+          </div>
+          <p className="text-xs font-normal mt-3" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: 1.6 }}>{t('estimateNote')}</p>
+        </div>
+        <WhatsAppClickTracker phoneNumber={phoneNumber} href={waHref} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-bold w-full" style={{ background: '#25D366', color: '#fff' }}>
+          <WAIcon /> <span style={{ color: '#fff' }}>{t('ctaButton')}</span>
+        </WhatsAppClickTracker>
+      </div>
+    </div>
+  )
+}
+
 function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false)
   return (
@@ -158,29 +382,28 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   )
 }
 
-function LocationAccordion({ regionName, cities, citiesLabel, defaultOpen, locale }: { regionName: string; cities: { slug: string; name: string }[]; citiesLabel: string; defaultOpen: boolean; locale: string }) {
-  const [open, setOpen] = useState(defaultOpen)
+// State card — header with state name + city count, body is a wrapped pill
+// cloud of every city in that state. Always-open (no toggle).
+function StateCard({ stateName, cities, citiesLabel, locale }: { stateName: string; cities: { slug: string; name: string }[]; citiesLabel: string; locale: string }) {
   return (
-    <div className="rounded-xl overflow-hidden" style={{ border: open ? '1.5px solid var(--brand-ink)' : '1.5px solid var(--line)', background: '#fff' }}>
-      <button onClick={() => setOpen((o) => !o)} className="w-full flex items-center justify-between px-5 py-3.5 text-left cursor-pointer text-sm font-semibold" style={{ color: 'var(--brand-ink)', borderLeft: open ? '4px solid var(--brand-yellow)' : '4px solid transparent' }} aria-expanded={open}>
-        <span>{regionName}</span>
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-normal" style={{ color: 'var(--muted)' }}>{cities.length} {citiesLabel}</span>
-          <ChevronIcon open={open} />
-        </div>
-      </button>
-      <div style={{ maxHeight: open ? '600px' : '0px', overflow: 'hidden', transition: 'max-height 0.35s ease' }}>
-        <div className="px-5 pb-5 pt-1">
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-            {cities.map((city) => (
-              <a key={city.slug} href={`/${locale}/cat-rumah/${city.slug}`} className="text-xs font-normal px-3 py-1.5 rounded-lg hover:opacity-80" style={{ background: 'var(--brand-cream)', color: 'var(--brand-ink)' }}>
-                {city.name}
-              </a>
-            ))}
-          </div>
-        </div>
+    <article className="rounded-2xl p-5 flex flex-col" style={{ background: '#fff', border: '1px solid var(--line)', boxShadow: '0 4px 14px rgba(31, 42, 107, 0.04)', height: '100%' }}>
+      <header className="flex items-baseline justify-between gap-2 pb-3 mb-3" style={{ borderBottom: '1px solid var(--line)' }}>
+        <h4 className="text-sm font-extrabold m-0" style={{ color: 'var(--brand-ink)', letterSpacing: '-0.005em' }}>{stateName}</h4>
+        <span className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: 'var(--brand-pink)' }}>{cities.length} {citiesLabel}</span>
+      </header>
+      <div className="flex flex-wrap gap-1.5">
+        {cities.map((city) => (
+          <a
+            key={city.slug}
+            href={`/${locale}/cat-rumah/${city.slug}`}
+            className="inline-flex items-center text-[11px] font-semibold px-2.5 py-1 rounded-full hover:opacity-90 transition-opacity"
+            style={{ background: 'var(--brand-cream)', color: 'var(--brand-ink)', border: '1px solid var(--line)' }}
+          >
+            {city.name}
+          </a>
+        ))}
       </div>
-    </div>
+    </article>
   )
 }
 
@@ -209,13 +432,39 @@ export default function HomePageClient({ phoneNumber }: Props) {
   const locale = useLocale()
   const t = useTranslations('home')
   const tBA = useTranslations('home.beforeAfter')
+  const tCalc = useTranslations('home.calculator')
   const WA_LINK = waRedirect(locale)
 
-  const regionGroups: { name: string; nameMs: string; nameZh: string; cities: string[] }[] = [
-    { name: 'Klang Valley', nameMs: 'Lembah Klang', nameZh: '巴生谷', cities: ['kuala-lumpur', 'petaling-jaya', 'shah-alam', 'subang-jaya', 'puchong', 'cheras', 'ampang', 'klang', 'kajang', 'cyberjaya', 'putrajaya'] },
-    { name: 'Southern Malaysia', nameMs: 'Selatan Malaysia', nameZh: '马来西亚南部', cities: ['seremban', 'melaka', 'johor-bahru'] },
-    { name: 'Northern Malaysia', nameMs: 'Utara Malaysia', nameZh: '马来西亚北部', cities: ['ipoh', 'george-town'] },
+  // Group every location by its state. Preserves config order, falls back to
+  // alphabetical inside each state.
+  const stateOrder = [
+    'WP Kuala Lumpur',
+    'Selangor',
+    'WP Putrajaya',
+    'Negeri Sembilan',
+    'Melaka',
+    'Johor',
+    'Pulau Pinang',
+    'Perak',
+    'Kedah',
+    'Perlis',
+    'Pahang',
+    'Terengganu',
+    'Kelantan',
+    'Sarawak',
+    'Sabah',
+    'WP Labuan',
   ]
+  const groupedByState: { state: string; cities: { slug: string; name: string }[] }[] = stateOrder
+    .map((state) => ({
+      state,
+      cities: locationConfig
+        .filter((l) => l.state === state)
+        .map((l) => ({ slug: l.slug, name: l.name }))
+        .sort((a, b) => a.name.localeCompare(b.name)),
+    }))
+    .filter((g) => g.cities.length > 0)
+  const totalCities = groupedByState.reduce((s, g) => s + g.cities.length, 0)
 
   return (
     <main>
@@ -229,29 +478,49 @@ export default function HomePageClient({ phoneNumber }: Props) {
               <h5 className="text-sm font-normal mt-2 max-w-2xl mx-auto" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{t('products.subheading')}</h5>
             </div>
           </FadeSection>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" style={{ gridAutoRows: '1fr' }}>
             {productKeys.map((p, i) => (
               <ProductImpressionTracker key={p.key} slug={p.slug}>
                 <FadeSection delay={i * 40}>
-                  <div className="product-card bg-white rounded-2xl overflow-hidden flex flex-col" style={{ border: '1px solid var(--line)', boxShadow: '0 8px 24px rgba(31, 42, 107, 0.05)', height: '100%' }}>
+                  <div
+                    className="product-card bg-white rounded-2xl overflow-hidden"
+                    style={{
+                      border: '1px solid var(--line)',
+                      boxShadow: '0 8px 24px rgba(31, 42, 107, 0.05)',
+                      height: '100%',
+                      display: 'grid',
+                      gridTemplateRows: 'auto 1fr',
+                    }}
+                  >
                     <div className="relative w-full overflow-hidden" style={{ aspectRatio: '4 / 3', background: 'var(--brand-cream)' }}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={p.img} alt={t(`products.${p.key}.title`)} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-                      <div className="absolute top-3 right-3 inline-flex items-center rounded-full px-3 py-1 text-[11px] font-extrabold tracking-wide" style={{ background: 'var(--brand-yellow)', color: 'var(--brand-ink)', boxShadow: '0 4px 12px rgba(0,0,0,0.18)' }}>
-                        {t(`products.${p.key}.price`)}
-                      </div>
                     </div>
-                    <div className="p-5 flex flex-col flex-1">
-                      <h3 className="text-base font-extrabold" style={{ color: 'var(--brand-ink)', minHeight: '1.5em' }}>{t(`products.${p.key}.title`)}</h3>
-                      <p className="text-sm font-normal mt-1.5 flex-1" style={{
-                        color: 'var(--muted)',
-                        lineHeight: 1.6,
-                        display: '-webkit-box',
-                        WebkitLineClamp: 3,
-                        WebkitBoxOrient: 'vertical',
-                        overflow: 'hidden',
-                      }}>{t(`products.${p.key}.description`)}</p>
-                      <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full text-xs font-semibold" style={{ background: '#25D366', color: '#fff' }}>
+                    <div className="p-5 grid" style={{ gridTemplateRows: 'auto auto 1fr auto', gap: 8 }}>
+                      <h3 className="text-base font-extrabold m-0" style={{ color: 'var(--brand-ink)' }}>{t(`products.${p.key}.title`)}</h3>
+                      {/* Prominent price line — not a chip */}
+                      <div className="flex items-baseline gap-1.5">
+                        <span className="text-[10px] font-bold uppercase tracking-[0.18em]" style={{ color: 'var(--brand-pink)' }}>
+                          {t('products.fromLabel')}
+                        </span>
+                        <span className="text-xl font-extrabold" style={{ color: 'var(--brand-ink)' }}>
+                          {t(`products.${p.key}.price`).replace(/^Dari\s+/i, '')}
+                        </span>
+                      </div>
+                      <p
+                        className="text-sm font-normal m-0"
+                        style={{
+                          color: 'var(--muted)',
+                          lineHeight: 1.55,
+                          display: '-webkit-box',
+                          WebkitLineClamp: 3,
+                          WebkitBoxOrient: 'vertical',
+                          overflow: 'hidden',
+                        }}
+                      >
+                        {t(`products.${p.key}.description`)}
+                      </p>
+                      <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full text-xs font-semibold" style={{ background: '#25D366', color: '#fff' }}>
                         <WAIcon /> <span style={{ color: '#fff' }}>{t('products.bookNow')}</span>
                       </WhatsAppClickTracker>
                     </div>
@@ -261,6 +530,22 @@ export default function HomePageClient({ phoneNumber }: Props) {
             ))}
           </div>
           <h5 className="text-center text-xs font-normal mt-6 max-w-2xl mx-auto" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{t('products.disclaimer')}</h5>
+        </div>
+      </section>
+
+      {/* CALCULATOR */}
+      <section id="calculator" className="py-16 px-6" style={{ background: '#fff', borderTop: '1px solid var(--line)' }} aria-labelledby="calc-heading">
+        <div className="max-w-5xl mx-auto">
+          <FadeSection>
+            <div className="text-center mb-8">
+              <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{tCalc('tag')}</h5>
+              <h3 id="calc-heading" className="text-2xl md:text-3xl font-extrabold" style={{ color: 'var(--brand-ink)' }}>{tCalc('heading')}</h3>
+              <h5 className="text-sm font-normal mt-2 max-w-2xl mx-auto" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{tCalc('subheading')}</h5>
+            </div>
+          </FadeSection>
+          <FadeSection>
+            <CostCalculator locale={locale} phoneNumber={phoneNumber} />
+          </FadeSection>
         </div>
       </section>
 
@@ -291,9 +576,6 @@ export default function HomePageClient({ phoneNumber }: Props) {
               </FadeSection>
             ))}
           </div>
-          <h5 className="text-center text-[11px] font-normal mt-3" style={{ color: 'var(--muted)' }}>
-            ↔ {tBA('dragHint')}
-          </h5>
           <FadeSection>
             <div className="text-center mt-8">
               <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold" style={{ background: '#25D366', color: '#fff' }}>
@@ -313,12 +595,21 @@ export default function HomePageClient({ phoneNumber }: Props) {
               <h3 id="why-heading" className="text-2xl md:text-3xl font-extrabold" style={{ color: 'var(--brand-ink)' }}>{t('whyChoose.heading')}</h3>
             </div>
           </FadeSection>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {reasonKeys.map((r, i) => (
-              <FadeSection key={r} delay={i * 60}>
-                <div className="why-card p-5 rounded-2xl h-full" style={{ background: '#fff', border: '1px solid var(--line)' }}>
-                  <h5 className="text-sm font-bold mb-1" style={{ color: 'var(--brand-ink)' }}>{t(`whyChoose.${r}.title`)}</h5>
-                  <h5 className="text-xs font-normal" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{t(`whyChoose.${r}.description`)}</h5>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" style={{ gridAutoRows: '1fr' }}>
+            {reasonItems.map((r, i) => (
+              <FadeSection key={r.key} delay={i * 60}>
+                <div className="why-card p-5 rounded-2xl flex gap-4" style={{ background: '#fff', border: '1px solid var(--line)', height: '100%' }}>
+                  <span
+                    className="shrink-0 inline-flex items-center justify-center rounded-full"
+                    style={{ width: 52, height: 52, background: 'var(--brand-yellow)', color: 'var(--brand-ink)', boxShadow: 'inset 0 0 0 4px rgba(31,42,107,0.08)' }}
+                    aria-hidden="true"
+                  >
+                    <ReasonIcon name={r.icon} />
+                  </span>
+                  <div>
+                    <h5 className="text-sm font-bold mb-1" style={{ color: 'var(--brand-ink)' }}>{t(`whyChoose.${r.key}.title`)}</h5>
+                    <h5 className="text-xs font-normal" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{t(`whyChoose.${r.key}.description`)}</h5>
+                  </div>
                 </div>
               </FadeSection>
             ))}
@@ -458,17 +749,21 @@ export default function HomePageClient({ phoneNumber }: Props) {
             </div>
           </FadeSection>
           <FadeSection>
-            <div className="space-y-2.5 max-w-3xl mx-auto">
-              {regionGroups.map((region, i) => {
-                const regionName = locale === 'ms' ? region.nameMs : locale === 'zh' ? region.nameZh : region.name
-                const cities = region.cities
-                  .map((slug) => locationConfig.find((l) => l.slug === slug))
-                  .filter((l): l is NonNullable<typeof l> => Boolean(l))
-                  .map((l) => ({ slug: l.slug, name: l.name }))
-                return (
-                  <LocationAccordion key={region.name} regionName={regionName} cities={cities} citiesLabel={t('locations.cities')} defaultOpen={i === 0} locale={locale} />
-                )
-              })}
+            <h5 className="text-center text-sm font-bold mb-6" style={{ color: 'var(--brand-ink)' }}>
+              {t('locations.totalLine', { count: totalCities })}
+            </h5>
+          </FadeSection>
+          <FadeSection>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" style={{ gridAutoRows: '1fr' }}>
+              {groupedByState.map((group) => (
+                <StateCard
+                  key={group.state}
+                  stateName={group.state}
+                  cities={group.cities}
+                  citiesLabel={t('locations.cities')}
+                  locale={locale}
+                />
+              ))}
             </div>
           </FadeSection>
         </div>

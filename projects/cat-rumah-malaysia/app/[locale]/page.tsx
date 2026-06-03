@@ -107,8 +107,8 @@ export default async function HomePage({ params }: Props) {
             className="mx-auto block"
             style={{ width: 'min(180px, 50%)', height: 'auto' }}
           />
-          <h6 className="inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-[11px] font-semibold uppercase tracking-wider mt-6 mb-4" style={{ background: 'rgba(255,210,63,0.18)', border: '1px solid rgba(255,210,63,0.36)', color: '#FFD23F' }}>
-            <span className="h-2 w-2 rounded-full" style={{ background: '#FFD23F' }} aria-hidden="true" />
+          {/* Trust line — plain uppercase text, no chip styling */}
+          <h6 className="mt-5 mb-4 text-[11px] font-semibold uppercase tracking-[0.18em]" style={{ color: '#FFD23F' }}>
             {tHero('badgeCertified')} · {tHero('badgeCities')}
           </h6>
           <h1
@@ -156,7 +156,7 @@ export default async function HomePage({ params }: Props) {
             </span>
           </div>
 
-          {/* Painter photo — no decorative badge cutouts, just the painter */}
+          {/* Painter photo with a rotated yellow "same-day" stamp */}
           <div className="relative mt-10 mx-auto" style={{ maxWidth: 480 }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -165,6 +165,35 @@ export default async function HomePage({ params }: Props) {
               className="mx-auto block"
               style={{ width: 'min(380px, 78%)', filter: 'drop-shadow(0 18px 38px rgba(0,0,0,0.45))' }}
             />
+            <div
+              aria-hidden="false"
+              className="hero-stamp absolute"
+              style={{
+                top: '12%',
+                right: '4%',
+                width: 'clamp(110px, 22vw, 150px)',
+                height: 'clamp(110px, 22vw, 150px)',
+                transform: 'rotate(-12deg)',
+                background: '#FFD23F',
+                borderRadius: '50%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#1F2A6B',
+                textAlign: 'center',
+                lineHeight: 1.05,
+                padding: 14,
+                boxShadow: '0 12px 30px rgba(0,0,0,0.35), inset 0 0 0 4px rgba(31,42,107,0.10)',
+                border: '3px dashed rgba(31,42,107,0.35)',
+                fontWeight: 900,
+                letterSpacing: '0.04em',
+                textTransform: 'uppercase',
+              }}
+            >
+              <span style={{ fontSize: 'clamp(11px, 2.4vw, 13px)', opacity: 0.85 }}>{tHero('stampSmall')}</span>
+              <span style={{ fontSize: 'clamp(15px, 3.2vw, 19px)', marginTop: 2 }}>{tHero('stampBig')}</span>
+            </div>
           </div>
         </div>
       </section>

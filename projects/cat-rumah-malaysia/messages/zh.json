@@ -49,6 +49,8 @@
       "tag1": "5小时完工",
       "tag2": "180种颜色",
       "tag3": "免费高压清洗",
+      "stampSmall": "今日预约",
+      "stampBig": "同日上门油漆",
       "cta": "立即 WhatsApp 我们",
       "ctaSubtext": "免费报价 · 1小时回复",
       "heroAlt": "马来西亚专业房屋油漆承包商"
@@ -75,7 +77,26 @@
       "texture": { "title": "纹理漆", "description": "现代仿混凝土纹理，工业风高级感。", "price": "Dari RM2,500" },
       "decor3d": { "title": "3D 装饰墙", "description": "立体浮雕墙板 — 龟背叶、几何或有机图案。", "price": "Dari RM3,500" },
       "bookNow": "立即询价",
+      "fromLabel": "起",
       "disclaimer": "最终价格视乎现场检查与表面积。高压清洗与裂缝填补已含在内。"
+    },
+    "calculator": {
+      "tag": "价格计算器",
+      "heading": "您的油漆工程要多少钱？",
+      "subheading": "选择服务并输入墙面面积即可获得即时估价。最终价格在免费上门考察后确认。",
+      "serviceLabel": "选择服务",
+      "areaLabel": "墙面面积（平方尺）",
+      "packageLabel": "套餐",
+      "estimateLabel": "预估费用",
+      "estimateNote": "包含表面处理和两层优质油漆。",
+      "ctaButton": "发送估价到 WhatsApp",
+      "perSqftSuffix": "/平方尺",
+      "packageSingle": "1 面重点墙（≤ 60 平方尺）",
+      "packageMedium": "2 面重点墙（≤ 120 平方尺）",
+      "packageLarge": "整间房（≤ 250 平方尺）",
+      "messageTemplate": "您好 Cat Rumah Express，我对{service}感兴趣。我的估价：RM{price}（面积/套餐：{detail}）。可以获得固定报价吗？",
+      "areaPlaceholder": "例如：1000",
+      "minArea": 50
     },
     "beforeAfter": {
       "tag": "焕新对比",
@@ -186,7 +207,8 @@
       "tag": "服务范围",
       "heading": "覆盖全马来西亚",
       "subheading": "点击下方城市查看详细信息。",
-      "cities": "城市"
+      "cities": "城市",
+      "totalLine": "我们服务马来西亚 {count}+ 城市"
     },
     "finalCta": {
       "headline": "准备好",

@@ -49,6 +49,8 @@
       "tag1": "5 Jam Siap",
       "tag2": "180 Pilihan Warna",
       "tag3": "Pressure Wash Percuma",
+      "stampSmall": "Tempah Hari Ini",
+      "stampBig": "Kami Cat Hari Sama",
       "cta": "WhatsApp Kami Sekarang",
       "ctaSubtext": "Quote percuma · Respons dalam 1 jam",
       "heroAlt": "Kontraktor cat rumah profesional Malaysia"
@@ -111,7 +113,26 @@
         "price": "Dari RM3,500"
       },
       "bookNow": "Tanya Harga Sekarang",
+      "fromLabel": "Dari",
       "disclaimer": "Harga muktamad bergantung kepada lawatan tapak dan keluasan permukaan. Pressure-wash + pendempulan retak sudah termasuk dalam quote."
+    },
+    "calculator": {
+      "tag": "KALKULATOR ANGGARAN",
+      "heading": "Berapa Kos Cat Rumah Anda?",
+      "subheading": "Pilih jenis servis dan masukkan keluasan untuk anggaran segera. Harga akhir disahkan selepas lawatan tapak percuma.",
+      "serviceLabel": "Pilih Servis",
+      "areaLabel": "Keluasan Dinding (sqft)",
+      "packageLabel": "Pakej",
+      "estimateLabel": "Anggaran Kos",
+      "estimateNote": "Termasuk persiapan permukaan dan 2 lapisan cat premium.",
+      "ctaButton": "Hantar Anggaran Ini Ke WhatsApp",
+      "perSqftSuffix": "/sqft",
+      "packageSingle": "1 dinding aksen (≤ 60 sqft)",
+      "packageMedium": "2 dinding aksen (≤ 120 sqft)",
+      "packageLarge": "Ruang penuh (≤ 250 sqft)",
+      "messageTemplate": "Hi Cat Rumah Express, saya minat servis {service}. Anggaran saya: RM{price} (keluasan/pakej: {detail}). Boleh dapatkan quote tetap?",
+      "areaPlaceholder": "Contoh: 1000",
+      "minArea": 50
     },
     "beforeAfter": {
       "tag": "TRANSFORMASI",
@@ -222,7 +243,8 @@
       "tag": "KAWASAN LIPUTAN",
       "heading": "Servis Kami Di Seluruh Malaysia",
       "subheading": "Klik bandar di bawah untuk maklumat penuh.",
-      "cities": "bandar"
+      "cities": "bandar",
+      "totalLine": "Kami servis {count}+ bandar di seluruh Malaysia"
     },
     "finalCta": {
       "headline": "Sedia Untuk Rumah",
