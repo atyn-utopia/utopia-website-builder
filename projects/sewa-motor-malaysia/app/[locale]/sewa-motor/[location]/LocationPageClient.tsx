@@ -229,7 +229,7 @@ export default function LocationPageClient({
 
       <main>
         {/* ── HERO ── */}
-        <section className="relative overflow-hidden" aria-label="Hero">
+        <section className="relative overflow-hidden pb-16 md:pb-20" aria-label="Hero">
           <div className="absolute inset-0" style={{ backgroundImage: 'url(https://static.wixstatic.com/media/d3104b_f1742c506a064da3af63f6b834024ad4~mv2.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }} aria-hidden="true" />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(22,33,62,0.92) 0%, rgba(26,39,68,0.88) 40%, rgba(30,45,74,0.85) 100%)' }} />
           <div className="relative max-w-6xl mx-auto px-6 pt-16 pb-0 md:pt-24 md:pb-0">
@@ -279,6 +279,15 @@ export default function LocationPageClient({
               </div>
             </div>
           </div>
+          {/* Stats strip — sits inside the hero, exact mirror of homepage */}
+          <div className="home-hero-stats relative max-w-6xl mx-auto px-6" aria-label="Service highlights">
+            {[1, 2, 3, 4].map((n) => (
+              <div className="home-stat" key={n}>
+                <div className="home-stat-value">{s(`stats.value${n}` as 'stats.value1')}</div>
+                <div className="home-stat-label">{s(`stats.label${n}` as 'stats.label1')}</div>
+              </div>
+            ))}
+          </div>
         </section>
 
         {/* ── USP BAR (mirrors homepage — floats over the hero via .usp-panel's
@@ -297,25 +306,6 @@ export default function LocationPageClient({
             <h5>{s('whyChoose.desc3')}</h5>
           </div>
         </div>
-
-        {/* ── STATS ── */}
-        <section style={{ background: 'var(--brand-dark)' }}>
-          <div className="max-w-6xl mx-auto px-6 py-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {[
-              { value: s('stats.value1'), label: s('stats.label1') },
-              { value: s('stats.value2'), label: s('stats.label2') },
-              { value: s('stats.value3'), label: s('stats.label3') },
-              { value: s('stats.value4'), label: s('stats.label4') },
-            ].map((stat, i) => (
-              <FadeSection key={i} delay={i * 80}>
-                <div>
-                  <div className="text-2xl md:text-3xl font-extrabold mb-2" style={{ color: 'var(--brand-primary)', letterSpacing: '-0.03em' }}>{stat.value}</div>
-                  <div className="text-xs font-normal" style={{ color: 'rgba(255,255,255,0.55)', lineHeight: '1.5' }}>{stat.label}</div>
-                </div>
-              </FadeSection>
-            ))}
-          </div>
-        </section>
 
         {/* ── PRODUCTS ── */}
         <section id="products" className="py-16 px-6" style={{ background: 'var(--brand-surface)' }} aria-labelledby="products-heading">

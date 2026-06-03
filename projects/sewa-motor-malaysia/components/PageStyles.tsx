@@ -130,8 +130,9 @@ export default function PageStyles() {
       .usp-cell h3 {
         font-size: 15px; font-weight: 700; margin: 0; color: #16213E; letter-spacing: -0.01em;
       }
-      .usp-cell p {
-        font-size: 13px; color: #475569; line-height: 1.5; margin: 0;
+      .usp-cell p,
+      .usp-cell h5 {
+        font-size: 13px; font-weight: 400; color: #475569; line-height: 1.5; margin: 0;
       }
       @media (max-width: 720px) {
         .usp-cell { border-right: none; border-bottom: 1px solid #F1F5F9; }
