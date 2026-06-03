@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <rect width="32" height="32" rx="6" fill="#1B3A5C"/>
+  <!-- medical cross -->
+  <path d="M22 6h2v2h2v2h-2v2h-2v-2h-2V8h2z" fill="#FFE500"/>
+  <!-- pillow -->
+  <rect x="7" y="15" width="6" height="3" rx="1.5" fill="#FFE500"/>
+  <!-- mattress -->
+  <path d="M6 20h20" stroke="#FFE500" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- headboard -->
+  <path d="M6 13v7" stroke="#FFE500" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- legs -->
+  <path d="M7 21v4" stroke="#FFE500" stroke-width="2" stroke-linecap="round"/>
+  <path d="M25 21v4" stroke="#FFE500" stroke-width="2" stroke-linecap="round"/>
+</svg>

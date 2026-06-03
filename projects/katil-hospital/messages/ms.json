@@ -1,0 +1,276 @@
+{
+  "nav": {
+    "home": "Utama",
+    "products": "Katil",
+    "calculator": "Kadar Sewa",
+    "services": "Katil",
+    "reviews": "Ulasan",
+    "locations": "Lokasi",
+    "blog": "Blog",
+    "whatsapp": "WhatsApp",
+    "whatsappCta": "WhatsApp KatilCare",
+    "logoAlt": "KatilCare — Sewa Katil Hospital Seluruh Malaysia"
+  },
+  "logoAlt": "KatilCare — Sewa Katil Hospital Seluruh Malaysia",
+  "imageAlt": "Katil hospital elektrik KatilCare dihantar dan dipasang di bilik rumah di Malaysia",
+  "products": {
+    "imageAltTemplate": "Katil hospital {model} untuk disewa daripada KatilCare — dihantar dan dipasang seluruh Malaysia"
+  },
+  "gallery": {
+    "alts": [
+      "Katil hospital elektrik dengan sandaran boleh laras dipasang di bilik rumah",
+      "Katil hospital manual dengan pagar sisi dihantar ke rumah teres",
+      "Tilam ripple anti-bedsore dipasang pada katil hospital sewaan",
+      "Katil hospital separa elektrik diletakkan bersebelahan kerusi penjaga",
+      "Pasukan KatilCare menghantar dan memasang katil hospital di kondominium",
+      "Pakej kerusi roda dan katil hospital sedia untuk pesakit dalam pemulihan",
+      "Katil hospital dengan tiang IV dan meja atas katil untuk penjagaan di rumah",
+      "Tilam katil hospital yang dinyahkuman sebelum penghantaran",
+      "Katil hospital boleh lipat dimuatkan untuk penghantaran hari sama di Lembah Klang",
+      "Mesin oksigen diletakkan bersebelahan katil hospital sewaan",
+      "Penjaga melaraskan ketinggian katil hospital elektrik",
+      "Katil hospital dengan pagar sisi penuh untuk mengelak jatuh di rumah"
+    ]
+  },
+  "finalCta": {
+    "bgAlt": "Katil hospital KatilCare dihantar dan dipasang untuk penjagaan di rumah seluruh Malaysia"
+  },
+  "marquee": {
+    "items": [
+      "🚚 Penghantaran & Pemasangan Hari Sama",
+      "★ 4.9 di Google",
+      "✓ Katil Dinyahkuman & Diservis",
+      "🛏 Sewa Harian · Mingguan · Bulanan",
+      "📍 Seluruh Malaysia"
+    ]
+  },
+  "footer": {
+    "description": "Sewa katil hospital dihantar dan dipasang seluruh Malaysia. Katil manual, separa elektrik dan elektrik, tilam ripple, kerusi roda dan peralatan penjagaan di rumah — dinyahkuman dan sedia, 7 hari seminggu.",
+    "whatsappUs": "WhatsApp Kami",
+    "servicesTitle": "Katil",
+    "locationsTitle": "Lokasi",
+    "viewAll": "Lihat semua bandar",
+    "phone": "012-345 6789",
+    "ssm": "Pendaftaran SSM: 202X0XXXXX (XXXXXX-X)",
+    "copyright": "© {year} KatilCare · katilcare.my"
+  },
+  "home": {
+    "meta": {
+      "title": "Sewa Katil Hospital Malaysia | Harian, Mingguan & Bulanan — KatilCare",
+      "description": "Sewa katil hospital di Malaysia. Katil manual, separa elektrik dan elektrik dihantar serta dipasang pada hari sama. Tilam ripple, kerusi roda dan peralatan penjagaan di rumah. WhatsApp KatilCare sekarang."
+    },
+    "fomo": {
+      "promo": "Tawaran Minggu Ini — ",
+      "slotsLeft": "Tinggal {slots} slot penghantaran untuk pemasangan hari sama!",
+      "bookNow": "Tempah Sekarang"
+    },
+    "hero": {
+      "badgeCertified": "Dinyahkuman & Diservis",
+      "badgeCities": "Penghantaran Seluruh Negara",
+      "headline": "Sewa Katil Hospital",
+      "headlineHighlight": "Seluruh Malaysia",
+      "subheadline": "Katil hospital manual, separa elektrik dan elektrik dihantar ke pintu anda dan dipasang pada hari sama. Kadar harian, mingguan dan bulanan yang fleksibel.",
+      "cta": "WhatsApp Kami Sekarang",
+      "ctaSubtext": "Percuma untuk bertanya · Balas dalam 1 jam",
+      "heroAlt": "Katil hospital elektrik sedia untuk penjagaan di rumah",
+      "stampFrom": "Dari",
+      "stampPrice": "RM150",
+      "stampUnit": "Sebulan",
+      "sameDayTitle": "Penghantaran Hari Sama",
+      "sameDaySub": "7 Hari Seminggu"
+    },
+    "stats": {
+      "customers": "5,000+",
+      "customersLabel": "Keluarga Dibantu",
+      "response": "1 Jam",
+      "responseLabel": "Masa Balas",
+      "rating": "4.9-Bintang",
+      "ratingLabel": "Penarafan Purata",
+      "experience": "Hari Sama",
+      "experienceLabel": "Hantar & Pasang"
+    },
+    "brands": {
+      "label": "Jenama Peralatan Dipercayai"
+    },
+    "services": {
+      "tag": "Katil & Kadar Sewa",
+      "heading": "Katil & Kadar Sewa",
+      "subheading": "Kadar sewa harian dan bulanan sepintas lalu — penghantaran dan pemasangan disertakan.",
+      "wall": "Harian",
+      "cassette": "Bulanan",
+      "bookNow": "Sewa Sekarang",
+      "disclaimer": "* Kadar mungkin berbeza ikut lokasi dan tempoh sewa. Deposit dikenakan.",
+      "manualBed": "Katil Hospital Manual",
+      "manualBedDesc": "Laras ketinggian dan sandaran secara engkol tangan dengan pagar sisi — kukuh dan jimat.",
+      "electricBed": "Katil Hospital Elektrik",
+      "electricBedDesc": "Laras ketinggian, sandaran dan lutut menggunakan alat kawalan — sesuai untuk penjagaan jangka panjang.",
+      "semiElectricBed": "Katil Separa Elektrik",
+      "semiElectricBedDesc": "Sandaran dan lutut elektrik dengan ketinggian manual — gabungan keselesaan dan nilai.",
+      "rippleMattress": "Tilam Anti-Bedsore",
+      "rippleMattressDesc": "Tilam ripple udara berselang yang mengelakkan luka tekanan bagi pesakit terlantar.",
+      "wheelchair": "Kerusi Roda",
+      "wheelchairDesc": "Kerusi roda standard dan boleh baring untuk memindahkan pesakit dengan selamat di rumah.",
+      "oxygenConcentrator": "Mesin Oksigen",
+      "oxygenConcentratorDesc": "Mesin oksigen aliran berterusan untuk pesakit yang memerlukan sokongan pernafasan.",
+      "popular": "Popular",
+      "recommended": "Disyorkan",
+      "waManualBed": "Hi, saya nak sewa katil hospital manual. Boleh quote?",
+      "waElectricBed": "Hi, saya nak sewa katil hospital elektrik. Boleh quote?",
+      "waSemiElectricBed": "Hi, saya nak sewa katil hospital separa elektrik. Boleh quote?",
+      "waRippleMattress": "Hi, saya nak sewa tilam ripple anti-bedsore. Boleh quote?",
+      "waWheelchair": "Hi, saya nak sewa kerusi roda. Boleh quote?",
+      "waOxygenConcentrator": "Hi, saya nak sewa mesin oksigen. Boleh quote?"
+    },
+    "why": {
+      "tag": "Kenapa KatilCare",
+      "heading": "Kenapa Keluarga Percayakan Kami",
+      "certified": "Dinyahkuman & Diservis",
+      "certifiedDesc": "Setiap katil dibersihkan, dinyahkuman dan diperiksa fungsi sebelum dihantar.",
+      "sameDay": "Penghantaran Hari Sama",
+      "sameDayDesc": "Tempah pagi, guna malam yang sama di kebanyakan kawasan Malaysia.",
+      "transparent": "Harga Telus",
+      "transparentDesc": "Kadar harian, mingguan dan bulanan yang jelas. Tiada caj tersembunyi, deposit dipulangkan.",
+      "allBrands": "Peralatan Berkualiti",
+      "allBrandsDesc": "Katil dan tilam gred hospital daripada jenama yang dipercayai.",
+      "warranty": "Tukar Percuma Jika Rosak",
+      "warrantyDesc": "Jika ada yang rosak semasa sewa, kami ganti tanpa caj.",
+      "open7Days": "Buka 7 Hari",
+      "open7DaysDesc": "Hujung minggu dan cuti umum termasuk untuk penghantaran dan sokongan."
+    },
+    "reviews": {
+      "googleReviews": "Ulasan Google",
+      "heading": "Apa Kata Keluarga",
+      "review1Text": "Mak saya baru discharge dari hospital dan kami perlukan katil dengan segera. KatilCare hantar electric bed pada hari yang sama dan pasang terus. Sangat membantu pada waktu kami betul-betul perlukan.",
+      "review1Name": "Hasmah Binti Rosli",
+      "review1Location": "Shah Alam",
+      "review2Text": "Sewa katil hospital elektrik untuk ayah selepas pembedahan. Penghantaran cepat, katil sangat bersih, dan mereka tunjuk cara guna alat kawalan. Kadar bulanan sangat berpatutan.",
+      "review2Name": "Kevin Tan",
+      "review2Location": "Johor Bahru",
+      "review3Text": "Saya sewa katil hospital dan ripple mattress untuk ayah saya yang terlantar. Tilam ripple tu betul-betul elak bedsore. Staff sopan dan terangkan semua dengan jelas.",
+      "review3Name": "Norizan Ahmad",
+      "review3Location": "Pulau Pinang",
+      "review4Text": "Kami perlukan katil untuk nenek dalam masa terdesak. KatilCare hantar dalam beberapa jam dan tolong alihkan perabot lama. Katil berfungsi sempurna sepanjang tiga bulan penjagaan di rumah.",
+      "review4Name": "Daniel Lim",
+      "review4Location": "Petaling Jaya",
+      "review5Text": "Harga berpatutan dan tiada caj tersembunyi. Bila motor katil ada masalah sikit, depa datang tukar percuma esok terus. Memang recommended untuk yang jaga pesakit di rumah.",
+      "review5Name": "Amirul Hakim",
+      "review5Location": "Kajang",
+      "review6Text": "Sewa pakej katil separa elektrik dan kerusi roda. Kedua-duanya bersih dan dalam keadaan baik. Sokongan WhatsApp pantas setiap kali saya ada soalan. Sangat disyorkan.",
+      "review6Name": "Priya Nair",
+      "review6Location": "Bangsar",
+      "reviewCount": "Berdasarkan 230+ Ulasan Google"
+    },
+    "howItWorks": {
+      "tag": "Proses Mudah",
+      "heading": "Tiga Langkah Dapat Katil di Rumah",
+      "step1Num": "01",
+      "step1Title": "WhatsApp Kami",
+      "step1Desc": "Beritahu jenis katil yang anda perlukan, lokasi dan tempoh sewa. Kami balas dalam beberapa minit.",
+      "step2Num": "02",
+      "step2Title": "Kami Sahkan & Hantar",
+      "step2Desc": "Kami sahkan kadar dan deposit, kemudian hantar serta pasang katil di rumah anda — hari sama jika boleh.",
+      "step3Num": "03",
+      "step3Title": "Penjagaan di Rumah",
+      "step3Desc": "Guna katil seberapa lama yang anda perlukan. Bila selesai, kami datang ambil — tanpa kerumitan.",
+      "cta": "Mula dengan Langkah 1 — WhatsApp Kami"
+    },
+    "gallery": {
+      "tag": "Penghantaran Sebenar",
+      "heading": "Katil Kami di Rumah Seluruh Malaysia",
+      "imageAlt": "Penghantaran dan pemasangan katil hospital sewaan {number}"
+    },
+    "faq": {
+      "tag": "Soalan Lazim",
+      "heading": "Soalan Lazim",
+      "q1": "Berapa kos untuk sewa katil hospital?",
+      "a1": "Katil manual bermula RM150/bulan, separa elektrik RM220/bulan, dan elektrik RM280/bulan. Kadar harian dan mingguan juga ada. Penghantaran dan pemasangan disertakan; deposit yang boleh dipulangkan dikenakan.",
+      "q2": "Berapa cepat anda boleh hantar?",
+      "a2": "Kami balas dalam 1 jam selepas WhatsApp anda dan menawarkan penghantaran serta pemasangan hari sama di kebanyakan kawasan Malaysia, 7 hari seminggu.",
+      "q3": "Jenis katil hospital apa yang boleh disewa?",
+      "a3": "Katil hospital manual, separa elektrik dan elektrik penuh — semua dengan sandaran boleh laras dan pagar sisi. Kami juga menyewa tilam ripple anti-bedsore, kerusi roda dan mesin oksigen.",
+      "q4": "Adakah katil dibersihkan sebelum dihantar?",
+      "a4": "Ya. Setiap katil dan tilam dibersihkan, dinyahkuman dan diperiksa fungsi sepenuhnya sebelum sampai ke rumah anda.",
+      "q5": "Berapa lama tempoh minimum sewa?",
+      "a5": "Tempoh minimum sewa biasanya satu minggu, tetapi kami fleksibel mengikut keperluan keluarga anda. Sewa bulanan adalah pilihan paling berbaloi untuk penjagaan jangka panjang.",
+      "q6": "Adakah anda hantar dan pasang katil?",
+      "a6": "Ya. Harga sewa termasuk penghantaran, pemasangan dan tunjuk cara penggunaan. Bila tamat sewa, kami datang ambil semula tanpa caj tambahan.",
+      "q7": "Tilam ripple untuk apa?",
+      "a7": "Tilam ripple (anti-bedsore) menukar tekanan udara secara berkala untuk mengelakkan luka tekanan bagi pesakit yang terlantar lama. Kami sangat syorkan untuk penjagaan jangka panjang.",
+      "q8": "Berapa deposit yang diperlukan?",
+      "a8": "Deposit kecil yang boleh dipulangkan dikutip semasa penghantaran dan dipulangkan sepenuhnya apabila peralatan dikembalikan dalam keadaan baik. WhatsApp kami untuk jumlah tepat bagi katil pilihan anda.",
+      "q9": "Bagaimana jika katil rosak semasa tempoh sewa?",
+      "a9": "Hubungi kami di WhatsApp dan kami akan baiki atau ganti unit tanpa caj, biasanya dalam masa 24 jam, supaya penjagaan pesakit tidak terganggu.",
+      "q10": "Kawasan mana yang anda liputi?",
+      "a10": "Kami menghantar seluruh Malaysia — Lembah Klang, Pulau Pinang, Johor Bahru, Ipoh, Kuantan, Kota Kinabalu, Kuching, dan banyak lagi. Lihat bahagian lokasi untuk senarai penuh."
+    },
+    "locations": {
+      "tag": "Liputan Penghantaran",
+      "heading": "Kami Menghantar Seluruh Malaysia",
+      "subheading": "Dari KL ke Sabah dan Sarawak — katil hospital dihantar berhampiran anda.",
+      "cities": "bandar"
+    },
+    "midCta": {
+      "text": "Sedia untuk menyewa? WhatsApp kami sekarang — balas dalam 1 jam.",
+      "button": "WhatsApp KatilCare"
+    },
+    "guarantee": {
+      "text": "Katil Dinyahkuman · Tukar Percuma Jika Rosak · Deposit Dipulangkan"
+    },
+    "cta": {
+      "headline": "Penjagaan Selesa.",
+      "headlineHighlight": "Di Rumah.",
+      "subheadline": "Sertai ribuan keluarga yang mempercayai KatilCare untuk sewa katil hospital yang pantas dan berpatutan seluruh Malaysia.",
+      "button": "WhatsApp KatilCare Sekarang",
+      "fine": "Balas dalam 1 jam · Tiada caj tersembunyi · 7 hari seminggu"
+    }
+  },
+  "location": {
+    "meta": {
+      "title": "Sewa Katil Hospital {city} | Harian & Bulanan — KatilCare",
+      "description": "Perlu sewa katil hospital di {city}? KatilCare hantar katil manual, separa elektrik dan elektrik dengan pemasangan hari sama. WhatsApp kami sekarang."
+    },
+    "hero": {
+      "headline": "Sewa Katil Hospital di {city}",
+      "cta": "WhatsApp Kami di {city}"
+    },
+    "services": {
+      "heading": "Apa Yang Kami Sewa di {city}",
+      "manualBed": "Katil hospital manual di {city} — sandaran boleh laras dan pagar sisi, dihantar dan dipasang.",
+      "electricBed": "Katil hospital elektrik di {city} — keselesaan kawalan jauh untuk penjagaan jangka panjang.",
+      "rippleMattress": "Tilam ripple anti-bedsore di {city} — mengelak luka tekanan bagi pesakit terlantar.",
+      "delivery": "Penghantaran dan pemasangan hari sama di {city} — kami pasang katil dan tunjuk cara guna."
+    },
+    "why": {
+      "heading": "Kenapa Pilih KatilCare di {city}",
+      "fast": "Penghantaran hari sama di seluruh {city}",
+      "transparent": "Kadar telus dengan deposit yang boleh dipulangkan",
+      "brands": "Katil dan tilam gred hospital yang dinyahkuman",
+      "warranty": "Tukar percuma jika rosak sepanjang tempoh sewa"
+    },
+    "faq": {
+      "heading": "Soalan Lazim — Sewa Katil Hospital di {city}",
+      "q1": "Berapa cepat anda boleh hantar ke {city}?",
+      "a1": "Kami berkhidmat di {city} dengan penghantaran dan pemasangan hari sama untuk kebanyakan tempahan sebelum tengah hari.",
+      "q2": "Berapa kos sewa katil hospital di {city}?",
+      "a2": "Sewa di {city} bermula RM150/bulan untuk katil manual. Katil elektrik dan aksesori dikenakan harga berasingan — WhatsApp kami untuk sebut harga percuma.",
+      "q3": "Adakah anda meliputi semua kawasan dalam {city}?",
+      "a3": "Ya — kami meliputi seluruh kawasan {city} dan poskod sekitarnya. WhatsApp kami untuk sahkan alamat tepat anda.",
+      "q4": "Adakah anda hantar dan ambil semula katil di {city}?",
+      "a4": "Ya. Penghantaran, pemasangan dan pengambilan semula tamat sewa semuanya disertakan untuk {city} — tanpa caj tambahan."
+    },
+    "nearby": {
+      "heading": "Lokasi Berhampiran",
+      "viewService": "Sewa katil hospital di {city}"
+    },
+    "cta": {
+      "heading": "Perlu Katil Hospital di {city}?",
+      "subheading": "WhatsApp KatilCare sekarang dan kami akan hantar serta pasang katil hospital di {city} untuk anda hari ini.",
+      "button": "WhatsApp KatilCare di {city}",
+      "fine": "Pantas, bersih dan jujur — itulah cara kami."
+    },
+    "breadcrumb": {
+      "home": "Utama",
+      "locations": "Lokasi"
+    }
+  }
+}
