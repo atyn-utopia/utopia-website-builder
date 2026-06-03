@@ -496,8 +496,10 @@ export default function HomePageClient({ phoneNumber }: Props) {
                       <img src={p.img} alt={t(`products.${p.key}.title`)} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
                     </div>
 
-                    {/* Body */}
-                    <div className="px-5 pt-6 pb-6 flex flex-col flex-1">
+                    {/* Body — title + description are both height-locked to
+                        2 lines, so every card has identical total height
+                        without needing flex spacers. */}
+                    <div className="px-5 pt-5 pb-5 flex flex-col">
                       <h3
                         className="text-[17px] m-0"
                         style={{
@@ -535,13 +537,11 @@ export default function HomePageClient({ phoneNumber }: Props) {
                         {t(`products.${p.key}.description`)}
                       </p>
 
-                      {/* Footer: price (left) + CTA (right) — hairline divider above.
-                          mt-auto pushes the footer to the bottom of the card
-                          body so cards in the same row stay equal-height; the
-                          larger pt-6 + body padding give the card vertical
-                          breathing room. */}
+                      {/* Footer: price (left) + CTA (right). No mt-auto —
+                          cards already match height naturally because every
+                          row above is height-locked. */}
                       <div
-                        className="mt-auto pt-6 flex items-center justify-between gap-3"
+                        className="mt-5 pt-4 flex items-center justify-between gap-3"
                         style={{ borderTop: '1px solid var(--line)' }}
                       >
                         <div className="flex flex-col leading-tight">
