@@ -173,20 +173,19 @@ export default function HomePage() {
           <div className="absolute inset-0 pointer-events-none" style={{ background: 'var(--gradient-hero-accent)' }} aria-hidden="true" />
           <div className="absolute inset-0 pointer-events-none corrugated-texture" style={{ opacity: 0.5 }} aria-hidden="true" />
 
-          {/* Wordmark logo — sits flush at the top of the hero with zero
-              vertical spacing (no padding above, no margin below). The hero
-              content (badge / H1 / etc.) starts immediately below. */}
-          <div className="relative max-w-6xl mx-auto px-6 pt-0 pb-12 lg:pb-20">
-            <div className="flex justify-center md:justify-start" style={{ marginTop: 0, marginBottom: 0, lineHeight: 0 }}>
+          {/* Wordmark logo at the top of the hero with breathing room
+              above and below. */}
+          <div className="relative max-w-6xl mx-auto px-6 pt-10 lg:pt-14 pb-12 lg:pb-20">
+            <div className="flex justify-center md:justify-start mb-8 lg:mb-10">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/brand-assets/logo-roller-shutter.png"
                 alt={t('nav.logoAlt')}
                 className="hero-logo"
-                style={{ width: 'clamp(180px, 24vw, 260px)', height: 'auto', display: 'block', margin: 0, filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.35))' }}
+                style={{ width: 'clamp(220px, 28vw, 320px)', height: 'auto', display: 'block', filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.35))' }}
               />
             </div>
-            <div className="max-w-2xl pt-6 lg:pt-8">
+            <div className="max-w-2xl">
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium text-white mb-6 emergency-pulse" style={{ background: 'var(--gradient-emergency)' }}>
                 <span className="w-2 h-2 rounded-full bg-white" />{t('hero.badge')}
               </span>
@@ -295,7 +294,7 @@ export default function HomePage() {
                         />
                       </div>
                       <div className="p-4 flex flex-col flex-1">
-                        <h4 className="text-base font-extrabold mb-2" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.02em', lineHeight: 1.25 }}>{t(`products.items.${key}.name`)}</h4>
+                        <h4 className="text-base mb-2" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.01em', lineHeight: 1.25, fontWeight: 600 }}>{t(`products.items.${key}.name`)}</h4>
                         {/* Pricing — primary value signal. Coloured with the
                             brand electric blue so it stands out from body text. */}
                         <div className="mb-4">
