@@ -158,7 +158,7 @@ export default async function HomePage({
           {uspItems.map((item) => (
             <div
               key={item.icon}
-              className="flex items-center gap-4 text-center md:text-left justify-center md:justify-start"
+              className="flex flex-col items-center text-center gap-3 md:flex-row md:items-center md:text-left md:gap-4 md:justify-start"
             >
               <span
                 className="shrink-0 inline-flex items-center justify-center w-12 h-12 rounded-xl"
