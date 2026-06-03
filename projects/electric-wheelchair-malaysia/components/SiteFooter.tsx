@@ -33,7 +33,9 @@ export default async function SiteFooter({ locale }: { locale: Locale }) {
               {/* Logo icon = the favicon (/icon.svg) so the footer logo and favicon match. */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/icon.svg" alt={tNav('logoAlt')} className="w-8 h-8" />
-              <span className="font-extrabold text-lg text-white tracking-tight">Electric Wheelchair Malaysia</span>
+              <span className="font-extrabold text-base text-white tracking-tight whitespace-nowrap">
+                {tNav('brandName')}
+              </span>
             </div>
             <p
               className="text-xs font-normal leading-relaxed max-w-xs"

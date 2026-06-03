@@ -36,7 +36,9 @@ export default async function SiteHeader({ locale }: { locale: Locale }) {
               so the header logo and favicon always match. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/icon.svg" alt={tNav('logoAlt')} className="w-8 h-8" />
-          <span className="font-extrabold text-lg text-white tracking-tight">Electric Wheelchair Malaysia</span>
+          <span className="hidden sm:inline font-extrabold text-base text-white tracking-tight whitespace-nowrap">
+            {tNav('brandName')}
+          </span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-5 text-sm font-semibold text-white/85">
