@@ -1,6 +1,7 @@
 node_modules/
 .next/
 temporary screenshots/
+brand_assets/
 .env
 .env.local
 .vercel

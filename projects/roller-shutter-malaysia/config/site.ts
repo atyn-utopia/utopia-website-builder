@@ -1,5 +1,5 @@
 export const siteConfig = {
-  domain: 'roller-shutter-malaysia.vercel.app',
+  domain: 'roller-shutter-malaysia.utopiaai.my',
   brandName: 'Roller Shutter Door Malaysia',
   productSlug: 'roller-shutter',
   fallbackPhone: '60174287801',

@@ -1,6 +1,6 @@
 /**
  * Build a WhatsApp redirect URL that routes through our tracking page.
- * All WhatsApp links MUST use this helper — zero hardcoded wa.me/ links.
+ * All WhatsApp CTAs go through here — never link directly to WhatsApp.
  */
 export function waRedirect(
   locale: string,

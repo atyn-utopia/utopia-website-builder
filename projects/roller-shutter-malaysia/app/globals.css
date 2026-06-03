@@ -252,3 +252,131 @@ body {
   color: var(--brand-yellow);
   letter-spacing: -0.02em;
 }
+
+/* ============================================================
+   USP panel — single container with three .usp-cell children
+   (checklist item #32). Auto-stacks on mobile, 3-column on >=640.
+   ============================================================ */
+.usp-panel {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(242,199,68,0.15);
+}
+.usp-cell {
+  text-align: center;
+  padding: 6px 8px;
+}
+@media (min-width: 640px) {
+  .usp-panel {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+  .usp-cell {
+    text-align: left;
+    border-left: 1px solid rgba(242,199,68,0.2);
+    padding: 6px 16px;
+  }
+  .usp-cell:first-child {
+    border-left: none;
+    padding-left: 0;
+  }
+}
+
+/* ============================================================
+   Mobile: hide the header WhatsApp CTA at <=879px so it doesn't
+   overlap the language switcher (checklist item #31).
+   ============================================================ */
+@media (max-width: 879px) {
+  .nav-cta { display: none !important; }
+}
+
+/* ============================================================
+   Language switcher pills — lives in globals.css (not <style jsx>)
+   so global element resets on <a>/<button> can't beat the layout.
+   Checklist item #23.
+   ============================================================ */
+.lsw-root,
+.lang-switcher {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  gap: 6px;
+  align-items: center;
+}
+.lsw-item,
+.lang-switcher a,
+.lang-switcher button {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #1f2937cc;
+  border: 1px solid #e5e7eb;
+  border-radius: 9999px;
+  background: #ffffff;
+  white-space: nowrap;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+.lsw-item.is-active,
+.lang-switcher a.active,
+.lang-switcher button.active {
+  background: var(--brand-gunmetal) !important;
+  color: #ffffff !important;
+  border-color: var(--brand-gunmetal) !important;
+}
+.lsw-flag {
+  display: inline-block !important;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+/* ============================================================
+   Blog content body — wraps the dangerouslySetInnerHTML article.
+   Without these, headings + lists render as plain text.
+   Checklist items #39, #40, #41.
+   ============================================================ */
+.blog-content { font-size: 16.5px; line-height: 1.75; color: var(--brand-text); }
+.blog-content h2 { font-size: 26px; font-weight: 800; line-height: 1.25; margin: 2em 0 0.6em; letter-spacing: -0.01em; scroll-margin-top: 80px; color: var(--brand-charcoal); }
+.blog-content h3 { font-size: 21px; font-weight: 700; line-height: 1.3; margin: 1.6em 0 0.5em; scroll-margin-top: 80px; color: var(--brand-charcoal); }
+.blog-content h4 { font-size: 18px; font-weight: 700; line-height: 1.35; margin: 1.4em 0 0.4em; color: var(--brand-charcoal); }
+.blog-content p { font-size: 16.5px; line-height: 1.75; margin: 0 0 1.1em; color: var(--brand-text); }
+.blog-content a { color: var(--brand-yellow-dark); text-decoration: underline; text-underline-offset: 2px; }
+.blog-content strong { color: var(--brand-charcoal); font-weight: 700; }
+.blog-content ul, .blog-content ol { margin: 1em 0 1.4em; padding-left: 1.6em; }
+.blog-content ul { list-style: disc; }
+.blog-content ol { list-style: decimal; }
+.blog-content li { margin: 0.4em 0; line-height: 1.7; }
+.blog-content img { display: block; width: 100%; height: auto; border-radius: 14px; margin: 1.6em 0; }
+.blog-content blockquote { border-left: 4px solid var(--brand-yellow); background: var(--brand-yellow-pale); padding: 14px 20px; margin: 1.4em 0; border-radius: 0 12px 12px 0; font-style: italic; }
+
+/* Blog table-of-contents block */
+.blog-content nav,
+.blog-content .toc,
+.toc {
+  border: 1px solid var(--brand-border);
+  background: var(--brand-surface);
+  border-radius: 14px;
+  padding: 18px 22px;
+  margin: 1.4em 0 2em;
+}
+.blog-content nav h4, .blog-content .toc h4, .toc h4 {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brand-text-muted);
+  margin: 0 0 10px;
+}
+.blog-content nav ul, .blog-content .toc ul, .toc ul { list-style: disc; padding-left: 1.4em; margin: 0; }
+.blog-content nav li, .blog-content .toc li, .toc li { margin: 4px 0; font-size: 14.5px; line-height: 1.55; }
+.blog-content nav a, .blog-content .toc a, .toc a { color: var(--brand-charcoal); text-decoration: none; font-weight: 500; }
+.blog-content nav a:hover, .blog-content .toc a:hover, .toc a:hover { text-decoration: underline; }

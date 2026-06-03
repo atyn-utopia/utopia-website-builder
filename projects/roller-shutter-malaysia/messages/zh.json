@@ -3,6 +3,20 @@
     "title": "马来西亚卷帘门 | 安装与维修 24小时",
     "description": "马来西亚#1卷帘门专家。24小时安装、维修与服务铁卷门。钢铁、铝合金、聚碳酸酯。立即WhatsApp我们！"
   },
+  "logoAlt": "马来西亚卷帘门 — 全马卷帘门安装、维修与保养专家",
+  "imageAlt": "马来西亚卷帘门团队在巴生谷一间工厂完成卷帘门安装",
+  "blog": {
+    "title": "卷帘门资讯与新闻",
+    "metaTitle": "博客 | 马来西亚卷帘门",
+    "metaDescription": "马来西亚卷帘门相关的提示、指南和新闻 — 安装、维修、保养和产品选择。",
+    "readMore": "阅读全文",
+    "noPosts": "暂无博客文章。请稍后再来！",
+    "breadcrumbHome": "首页",
+    "breadcrumbBlog": "博客",
+    "publishedOn": "发布于",
+    "minRead": "分钟阅读",
+    "recentPosts": "近期文章"
+  },
   "nav": {
     "home": "首页",
     "products": "产品",
@@ -10,9 +24,14 @@
     "reviews": "评价",
     "faq": "常见问题",
     "locations": "服务地区",
+    "calculator": "获取报价",
+    "blog": "博客",
     "contact": "联系我们",
     "brandName": "马来西亚卷帘门",
-    "ctaButton": "立即WhatsApp"
+    "ctaButton": "立即WhatsApp",
+    "whatsappCta": "立即WhatsApp",
+    "whatsapp": "立即WhatsApp",
+    "logoAlt": "马来西亚卷帘门 — 全马卷帘门安装、维修与保养专家"
   },
   "fomoBanner": {
     "texts": [
@@ -56,6 +75,7 @@
   "products": {
     "heading": "我们的卷帘门类型",
     "subheading": "每个场所需求不同。我们提供6种卷帘门，为您的业务提供最大保护。",
+    "imageAltTemplate": "{model} 卷帘门 — 由马来西亚卷帘门提供安装、维修与保养",
     "items": {
       "mildSteel": {
         "name": "钢铁卷帘门",
@@ -266,7 +286,21 @@
       "repair": "卷帘门维修和保养项目",
       "factory": "工厂和仓库卷帘门项目",
       "commercial": "商店和商业卷帘门项目"
-    }
+    },
+    "alts": [
+      "为雪兰莪一间工厂安装的新钢铁卷帘门",
+      "吉隆坡商业店铺安装的铝合金卷帘门",
+      "精品店门口的透明聚碳酸酯卷帘门",
+      "符合BOMBA规范仓库的防火卷帘门",
+      "零售商场出口的格栅式卷帘门",
+      "物流仓库装卸口的电动卷帘门",
+      "紧急维修团队更换断裂的卷帘门弹簧",
+      "卷帘门电机升级 — 由手动转为自动",
+      "钢铁卷帘门的例行维护检查",
+      "HICOM Shah Alam重型工业卷帘门",
+      "巴生工厂装卸口双扇卷帘门",
+      "槟城办公楼前安装的精致铝合金卷帘门"
+    ]
   },
   "locations": {
     "heading": "我们的服务地区",
@@ -316,7 +350,8 @@
     "heading": "准备好保护您的场所了吗？",
     "subheading": "30分钟内获取免费报价。我们的专家团队24/7随时为您服务。",
     "ctaButton": "立即WhatsApp — 免费报价",
-    "supportingText": "无承诺。无隐藏费用。只有马来西亚最好的卷帘门服务。"
+    "supportingText": "无承诺。无隐藏费用。只有马来西亚最好的卷帘门服务。",
+    "bgAlt": "马来西亚卷帘门技术员在客户现场完成卷帘门安装"
   },
   "footer": {
     "tagline": "马来西亚卷帘门 — #1安装与维修专家 全天候服务",

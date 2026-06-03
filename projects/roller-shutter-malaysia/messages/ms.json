@@ -3,6 +3,20 @@
     "title": "Roller Shutter Malaysia | Pasang & Baiki 24 Jam",
     "description": "Pakar roller shutter #1 di Malaysia. Pemasangan, baiki & servis pintu besi gulung 24 jam. Mild steel, aluminium, polycarbonate. WhatsApp kami sekarang!"
   },
+  "logoAlt": "Roller Shutter Door Malaysia — Pakar Pemasangan, Baiki & Servis Pintu Roller Shutter di seluruh Malaysia",
+  "imageAlt": "Pemasangan pintu roller shutter oleh Roller Shutter Door Malaysia di sebuah kilang di Lembah Klang",
+  "blog": {
+    "title": "Tips & Berita Roller Shutter",
+    "metaTitle": "Blog | Roller Shutter Door Malaysia",
+    "metaDescription": "Tip, panduan dan berita berkenaan pintu roller shutter di Malaysia — pemasangan, baiki, penyelenggaraan dan pemilihan produk.",
+    "readMore": "Baca lagi",
+    "noPosts": "Belum ada artikel diterbitkan. Sila datang semula tidak lama lagi!",
+    "breadcrumbHome": "Utama",
+    "breadcrumbBlog": "Blog",
+    "publishedOn": "Diterbitkan pada",
+    "minRead": "min bacaan",
+    "recentPosts": "Artikel terkini"
+  },
   "nav": {
     "home": "Utama",
     "products": "Produk",
@@ -10,9 +24,14 @@
     "reviews": "Ulasan",
     "faq": "Soalan Lazim",
     "locations": "Lokasi",
+    "calculator": "Sebut Harga",
+    "blog": "Blog",
     "contact": "Hubungi",
     "brandName": "Roller Shutter Door Malaysia",
-    "ctaButton": "WhatsApp Sekarang"
+    "ctaButton": "WhatsApp Sekarang",
+    "whatsappCta": "WhatsApp Sekarang",
+    "whatsapp": "WhatsApp Sekarang",
+    "logoAlt": "Roller Shutter Door Malaysia — Pakar Pemasangan, Baiki & Servis Pintu Roller Shutter di seluruh Malaysia"
   },
   "fomoBanner": {
     "texts": [
@@ -56,6 +75,7 @@
   "products": {
     "heading": "Jenis Roller Shutter Kami",
     "subheading": "Setiap premis ada keperluan berbeza. Kami sediakan 6 jenis roller shutter untuk perlindungan maksimum perniagaan anda.",
+    "imageAltTemplate": "Pintu roller shutter {model} oleh Roller Shutter Door Malaysia — pemasangan, baiki & servis",
     "items": {
       "mildSteel": {
         "name": "Roller Shutter Mild Steel",
@@ -266,7 +286,21 @@
       "repair": "Projek pembaikan dan penyelenggaraan roller shutter",
       "factory": "Projek roller shutter kilang dan gudang",
       "commercial": "Projek roller shutter kedai dan komersial"
-    }
+    },
+    "alts": [
+      "Pemasangan baru roller shutter mild steel untuk kilang di Selangor",
+      "Roller shutter aluminium dipasang di kedai komersial Kuala Lumpur",
+      "Roller shutter polycarbonate transparent di hadapan butik",
+      "Roller shutter tahan api di gudang patuh BOMBA",
+      "Roller shutter jenis gril untuk outlet pusat membeli-belah",
+      "Roller shutter automatik bermotor di pintu memuat gudang logistik",
+      "Pasukan baiki kecemasan menggantikan spring roller shutter yang patah",
+      "Naik taraf motor roller shutter — manual kepada automatik",
+      "Pemeriksaan penyelenggaraan berkala pada roller shutter mild steel",
+      "Roller shutter industri tugas berat di HICOM Shah Alam",
+      "Pintu roller shutter kembar di dok pemunggahan kilang di Klang",
+      "Roller shutter aluminium digilap dipasang di hadapan pejabat Pulau Pinang"
+    ]
   },
   "locations": {
     "heading": "Kawasan Perkhidmatan Kami",
@@ -316,7 +350,8 @@
     "heading": "Sedia Untuk Melindungi Premis Anda?",
     "subheading": "Dapatkan sebut harga percuma dalam masa 30 minit. Pasukan pakar kami sedia membantu anda 24/7.",
     "ctaButton": "WhatsApp Sekarang — Sebut Harga Percuma",
-    "supportingText": "Tiada komitmen. Tiada caj tersembunyi. Hanya perkhidmatan roller shutter terbaik di Malaysia."
+    "supportingText": "Tiada komitmen. Tiada caj tersembunyi. Hanya perkhidmatan roller shutter terbaik di Malaysia.",
+    "bgAlt": "Juruteknik Roller Shutter Door Malaysia menyiapkan pemasangan di tapak untuk pelanggan"
   },
   "footer": {
     "tagline": "Roller Shutter Door Malaysia — Pakar #1 Pemasangan & Baiki 24 Jam",

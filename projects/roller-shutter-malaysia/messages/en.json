@@ -3,6 +3,20 @@
     "title": "Roller Shutter Malaysia | Install & Repair 24 Hours",
     "description": "Malaysia's #1 roller shutter expert. Installation, repair & servicing of roller shutter doors 24 hours. Mild steel, aluminium, polycarbonate. WhatsApp us now!"
   },
+  "logoAlt": "Roller Shutter Door Malaysia — Installation, Repair & Maintenance Across Malaysia",
+  "imageAlt": "Roller shutter door installation by Roller Shutter Door Malaysia for a factory in the Klang Valley",
+  "blog": {
+    "title": "Roller Shutter Insights & News",
+    "metaTitle": "Blog | Roller Shutter Door Malaysia",
+    "metaDescription": "Tips, guides and news about roller shutter doors in Malaysia — installation, repair, maintenance and product selection.",
+    "readMore": "Read more",
+    "noPosts": "No blog posts published yet. Check back soon!",
+    "breadcrumbHome": "Home",
+    "breadcrumbBlog": "Blog",
+    "publishedOn": "Published on",
+    "minRead": "min read",
+    "recentPosts": "Recent posts"
+  },
   "nav": {
     "home": "Home",
     "products": "Products",
@@ -10,9 +24,14 @@
     "reviews": "Reviews",
     "faq": "FAQ",
     "locations": "Locations",
+    "calculator": "Get a Quote",
+    "blog": "Blog",
     "contact": "Contact",
     "brandName": "Roller Shutter Door Malaysia",
-    "ctaButton": "WhatsApp Now"
+    "ctaButton": "WhatsApp Now",
+    "whatsappCta": "WhatsApp Now",
+    "whatsapp": "WhatsApp Now",
+    "logoAlt": "Roller Shutter Door Malaysia — Installation, Repair & Maintenance Across Malaysia"
   },
   "fomoBanner": {
     "texts": [
@@ -56,6 +75,7 @@
   "products": {
     "heading": "Our Roller Shutter Types",
     "subheading": "Every premises has different needs. We offer 6 types of roller shutters for maximum protection of your business.",
+    "imageAltTemplate": "{model} roller shutter door by Roller Shutter Door Malaysia — installation, repair & maintenance",
     "items": {
       "mildSteel": {
         "name": "Mild Steel Roller Shutter",
@@ -266,7 +286,21 @@
       "repair": "Roller shutter repair and maintenance project",
       "factory": "Factory and warehouse roller shutter project",
       "commercial": "Shop and commercial roller shutter project"
-    }
+    },
+    "alts": [
+      "New mild steel roller shutter installation for a factory in Selangor",
+      "Aluminium roller shutter installed at a commercial shop in Kuala Lumpur",
+      "Polycarbonate transparent roller shutter at a boutique storefront",
+      "Fire-rated roller shutter at a BOMBA-compliant warehouse",
+      "Grille-style roller shutter for a retail mall outlet",
+      "Motorised roller shutter at a logistics warehouse loading bay",
+      "Emergency repair team replacing a snapped roller shutter spring",
+      "Roller shutter motor upgrade — manual to automatic conversion",
+      "Routine maintenance check on a mild steel roller shutter",
+      "Heavy-duty industrial roller shutter at HICOM Shah Alam",
+      "Twin roller shutter doors at a factory loading dock in Klang",
+      "Polished aluminium roller shutter installed at a Penang office front"
+    ]
   },
   "locations": {
     "heading": "Our Service Areas",
@@ -316,7 +350,8 @@
     "heading": "Ready to Protect Your Premises?",
     "subheading": "Get a free quote within 30 minutes. Our expert team is ready to help you 24/7.",
     "ctaButton": "WhatsApp Now — Free Quote",
-    "supportingText": "No commitment. No hidden charges. Just the best roller shutter service in Malaysia."
+    "supportingText": "No commitment. No hidden charges. Just the best roller shutter service in Malaysia.",
+    "bgAlt": "Roller Shutter Door Malaysia technician completing an installation on-site for a customer"
   },
   "footer": {
     "tagline": "Roller Shutter Door Malaysia — #1 Expert in Installation & Repair 24/7",

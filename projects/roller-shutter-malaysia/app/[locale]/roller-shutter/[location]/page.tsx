@@ -5,6 +5,10 @@ import { locales } from '@/i18n/routing';
 import { siteConfig } from '@/config/site';
 import { locations } from '@/config/locations';
 import LocationPageClient from './LocationPageClient';
+import FomoBanner from '@/components/FomoBanner';
+import SiteHeader from '@/components/SiteHeader';
+import SiteFooter from '@/components/SiteFooter';
+import PageStyles from '@/components/PageStyles';
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
@@ -76,7 +80,7 @@ export async function generateMetadata({
   };
 }
 
-export const revalidate = 86400;
+// No time-based ISR — caching is now tag-based via lib/webcore + /api/revalidate.
 
 export default async function LocationPage({
   params,
@@ -105,7 +109,11 @@ export default async function LocationPage({
         { name: locationData.name, href: `/${locale}/roller-shutter/${location}` },
       ]} />
       {faqs.length > 0 && <FAQSchema faqs={faqs} />}
+      <PageStyles />
+      <FomoBanner />
+      <SiteHeader />
       <LocationPageClient />
+      <SiteFooter />
     </>
   );
 }

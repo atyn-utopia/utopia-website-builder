@@ -1,67 +1,102 @@
 'use client';
 
+import Link from 'next/link';
 import { useLocale } from 'next-intl';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useId } from 'react';
+import { locales } from '@/i18n/routing';
 
-const localeLabels: Record<string, string> = {
-  ms: 'BM',
-  en: 'EN',
-  zh: 'ZH',
-};
+const LABELS: Record<string, string> = { ms: 'BM', en: 'EN', zh: '中' };
+
+function starPoints(cx: number, cy: number, outer: number, rot = -Math.PI / 2): string {
+  const inner = outer * 0.382;
+  const pts: string[] = [];
+  for (let i = 0; i < 10; i++) {
+    const angle = rot + (Math.PI / 5) * i;
+    const r = i % 2 === 0 ? outer : inner;
+    pts.push(`${(cx + r * Math.cos(angle)).toFixed(2)},${(cy + r * Math.sin(angle)).toFixed(2)}`);
+  }
+  return pts.join(' ');
+}
+
+function CircleFlag({ locale }: { locale: string }) {
+  const uid = useId().replace(/:/g, '');
+  const id = `clip-${locale}-${uid}`;
+  return (
+    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" className="lsw-flag">
+      <defs><clipPath id={id}><circle cx="12" cy="12" r="11.5" /></clipPath></defs>
+      <g clipPath={`url(#${id})`}>
+        {locale === 'ms' && (
+          <>
+            <rect width="24" height="24" fill="#fff" />
+            {[0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22].map((y, i) => (
+              <rect key={y} y={y - 4} width="24" height="2" fill={i % 2 === 0 ? '#CC0001' : '#FFFFFF'} />
+            ))}
+            <rect width="13" height="13" fill="#010066" />
+            <circle cx="5.5" cy="6.5" r="3" fill="#FFCC00" />
+            <circle cx="6.6" cy="6" r="2.6" fill="#010066" />
+            <polygon points={starPoints(9.5, 6.5, 1.8)} fill="#FFCC00" />
+          </>
+        )}
+        {locale === 'en' && (
+          <>
+            <rect width="24" height="24" fill="#012169" />
+            <path d="M0,0 L24,24 M24,0 L0,24" stroke="#FFFFFF" strokeWidth="5" />
+            <path d="M0,0 L24,24" stroke="#C8102E" strokeWidth="2" />
+            <path d="M24,0 L0,24" stroke="#C8102E" strokeWidth="2" />
+            <path d="M12,0 V24 M0,12 H24" stroke="#FFFFFF" strokeWidth="7" />
+            <path d="M12,0 V24 M0,12 H24" stroke="#C8102E" strokeWidth="4" />
+          </>
+        )}
+        {locale === 'zh' && (
+          <>
+            <rect width="24" height="24" fill="#EE1C25" />
+            <polygon points={starPoints(7, 7, 3.2)} fill="#FFFF00" />
+            {[{ x: 12, y: 3 }, { x: 14, y: 5.5 }, { x: 14, y: 9 }, { x: 12, y: 11 }].map((s, i) => {
+              const angle = Math.atan2(7 - s.y, 7 - s.x);
+              return <polygon key={i} points={starPoints(s.x, s.y, 1.2, angle)} fill="#FFFF00" />;
+            })}
+          </>
+        )}
+      </g>
+      <circle cx="12" cy="12" r="11.5" fill="none" stroke="rgba(15,15,15,0.18)" strokeWidth="1" />
+    </svg>
+  );
+}
 
 export default function LanguageSwitcher() {
-  const locale = useLocale();
-  const pathname = usePathname();
+  const current = useLocale();
+  const pathname = usePathname() || '/';
+  const search = useSearchParams();
+  const qs = search?.toString();
+  const suffix = qs ? `?${qs}` : '';
 
-  const switchLocale = (newLocale: string) => {
-    const segments = pathname.split('/');
-    segments[1] = newLocale;
-    return segments.join('/');
-  };
+  const rest = (() => {
+    for (const l of locales) {
+      if (pathname === `/${l}`) return '';
+      if (pathname.startsWith(`/${l}/`)) return pathname.slice(`/${l}`.length);
+    }
+    return pathname === '/' ? '' : pathname;
+  })();
 
   return (
-    <div className="relative group">
-      <button
-        className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium cursor-pointer"
-        style={{
-          border: '1px solid rgba(255,255,255,0.2)',
-          color: 'rgba(255,255,255,0.7)',
-          background: 'transparent',
-        }}
-        aria-label="Switch language"
-        aria-haspopup="true"
-      >
-        {localeLabels[locale] || locale.toUpperCase()}
-        <svg viewBox="0 0 12 12" className="w-3 h-3" fill="none" aria-hidden="true">
-          <path d="M3 5l3 3 3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </button>
-      <div
-        className="absolute right-0 top-full mt-1 py-1 rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible"
-        style={{
-          background: 'var(--brand-gunmetal)',
-          border: '1px solid rgba(255,255,255,0.1)',
-          boxShadow: 'var(--shadow-lg)',
-          minWidth: '64px',
-          transition: 'opacity 200ms ease, visibility 200ms ease',
-          zIndex: 60,
-        }}
-        role="menu"
-      >
-        {Object.entries(localeLabels).map(([loc, label]) => (
-          <a
-            key={loc}
-            href={switchLocale(loc)}
-            className="block px-3 py-1.5 text-xs font-medium"
-            style={{
-              color: loc === locale ? 'var(--brand-yellow)' : 'rgba(255,255,255,0.7)',
-            }}
-            role="menuitem"
+    <div className="lsw-root" role="group" aria-label="Change language">
+      {locales.map((l) => {
+        const active = l === current;
+        return (
+          <Link
+            key={l}
+            href={`/${l}${rest}${suffix}`}
+            hrefLang={l}
+            lang={l}
+            className={`lsw-item ${active ? 'is-active' : ''}`}
+            aria-current={active ? 'true' : undefined}
           >
-            {label}
-          </a>
-        ))}
-      </div>
+            <CircleFlag locale={l} />
+            <span>{LABELS[l] ?? l.toUpperCase()}</span>
+          </Link>
+        );
+      })}
     </div>
   );
 }

@@ -2,10 +2,12 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { useTranslations, useLocale } from 'next-intl'
-import { locations, regionOrder, regionKeys, getLocationsByRegion } from '@/config/locations'
+import { regionOrder, regionKeys, getLocationsByRegion } from '@/config/locations'
 import { products } from '@/config/products'
-import LanguageSwitcher from '@/components/LanguageSwitcher'
 import { waRedirect } from '@/lib/waRedirect'
+import WhatsAppClickTracker from '@/components/tracking/WhatsAppClickTracker'
+import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker'
+import PageStyles from '@/components/PageStyles'
 
 /* ── SVG Icons ── */
 const WAIcon = () => (
@@ -44,26 +46,6 @@ const XIcon = () => (
   <svg viewBox="0 0 20 20" className="w-5 h-5 shrink-0" fill="none" aria-hidden="true">
     <circle cx="10" cy="10" r="10" fill="var(--brand-crimson)" fillOpacity="0.15" />
     <path d="M7 7l6 6M13 7l-6 6" stroke="var(--brand-crimson)" strokeWidth="2" strokeLinecap="round" />
-  </svg>
-)
-const ShutterIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="var(--brand-charcoal)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <rect x="3" y="2" width="18" height="20" rx="2" />
-    <line x1="3" y1="6" x2="21" y2="6" />
-    <line x1="3" y1="10" x2="21" y2="10" />
-    <line x1="3" y1="14" x2="21" y2="14" />
-    <line x1="3" y1="18" x2="21" y2="18" />
-    <circle cx="12" cy="20" r="1" fill="var(--brand-charcoal)" stroke="none" />
-  </svg>
-)
-const MenuIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-    <path d="M4 6h16M4 12h16M4 18h16" />
-  </svg>
-)
-const CloseIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-    <path d="M6 6l12 12M18 6L6 18" />
   </svg>
 )
 
@@ -113,63 +95,22 @@ function FAQItem({ q, a }: { q: string; a: string }) {
         <ChevronIcon open={open} />
       </button>
       <div style={{ maxHeight: open ? '400px' : '0px', overflow: 'hidden', transition: 'max-height 0.35s ease' }}>
-        <p className="pb-4 text-sm font-normal" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.75' }}>{a}</p>
-      </div>
-    </div>
-  )
-}
-
-/* ── FOMO Banner ── */
-function FomoBanner() {
-  const locale = useLocale()
-  const t = useTranslations('fomoBanner')
-  const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 })
-  const [slotsLeft, setSlotsLeft] = useState(3)
-  const [textIdx, setTextIdx] = useState(0)
-
-  useEffect(() => {
-    const getEndOfDay = () => { const end = new Date(); end.setHours(23, 59, 59, 999); return end }
-    const updateTimer = () => {
-      const diff = getEndOfDay().getTime() - Date.now()
-      if (diff <= 0) return
-      setTimeLeft({ hours: Math.floor(diff / 3600000), minutes: Math.floor((diff % 3600000) / 60000), seconds: Math.floor((diff % 60000) / 1000) })
-    }
-    updateTimer()
-    const interval = setInterval(updateTimer, 1000)
-    const hour = new Date().getHours()
-    if (hour < 10) setSlotsLeft(5); else if (hour < 14) setSlotsLeft(3); else if (hour < 18) setSlotsLeft(2); else setSlotsLeft(1)
-    const textInterval = setInterval(() => setTextIdx(i => (i + 1) % 3), 8000)
-    return () => { clearInterval(interval); clearInterval(textInterval) }
-  }, [])
-
-  const pad = (n: number) => n.toString().padStart(2, '0')
-  const texts: string[] = [t('texts.0'), t('texts.1'), t('texts.2')]
-
-  return (
-    <div style={{ background: 'var(--gradient-emergency)' }}>
-      <div className="max-w-6xl mx-auto px-4 py-2 flex items-center justify-center gap-3 flex-wrap text-white text-xs sm:text-sm">
-        <span className="fomo-dot w-2 h-2 rounded-full bg-white shrink-0" />
-        <span className="font-medium">{texts[textIdx]}</span>
-        <span className="font-mono font-semibold px-2 py-0.5 rounded" style={{ background: 'rgba(0,0,0,0.25)' }}>{pad(timeLeft.hours)}:{pad(timeLeft.minutes)}:{pad(timeLeft.seconds)}</span>
-        <a href={waRedirect(locale)} target="_blank" rel="noopener noreferrer" className="font-semibold underline underline-offset-2 hover:no-underline shrink-0">{t('bookNow')} &rarr;</a>
+        <h6 className="body-h6 pb-4 text-sm" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.75', fontWeight: 400 }}>{a}</h6>
       </div>
     </div>
   )
 }
 
 /* ══════════════════════════════════════════
-   HOMEPAGE
+   HOMEPAGE — body sections only.
+   Chrome (FomoBanner, SiteHeader, SiteFooter) is rendered by page.tsx.
    ══════════════════════════════════════════ */
 export default function HomePage() {
   const locale = useLocale()
   const t = useTranslations()
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
   const WA_LINK = waRedirect(locale)
 
   const productKeys = products.map(p => p.key)
-
-  const whyIcons = ['shield', 'clock', 'map', 'dollar', 'check', 'users']
 
   const productImages: Record<string, string> = {
     mildSteel: '/images/product-mild-steel.jpg',
@@ -180,99 +121,53 @@ export default function HomePage() {
     motorised: '/images/product-motorised.jpg',
   }
 
+  // Pull gallery alt strings from i18n (alts[] array — checklist item #26)
+  const galleryAlts = t.raw('gallery.alts') as string[] | undefined
   const galleryImages = [
-    { src: '/images/gallery-1.jpg', alt: t('gallery.altTexts.newInstallation') },
-    { src: '/images/gallery-2.jpg', alt: t('gallery.altTexts.factory') },
-    { src: '/images/gallery-3.jpg', alt: t('gallery.altTexts.repair') },
-    { src: '/images/gallery-4.webp', alt: t('gallery.altTexts.commercial') },
-    { src: '/images/gallery-5.jpg', alt: t('gallery.altTexts.newInstallation') },
-    { src: '/images/gallery-6.jpg', alt: t('gallery.altTexts.factory') },
-  ]
+    { src: '/images/gallery-1.jpg' },
+    { src: '/images/gallery-2.jpg' },
+    { src: '/images/gallery-3.jpg' },
+    { src: '/images/gallery-4.webp' },
+    { src: '/images/gallery-5.jpg' },
+    { src: '/images/gallery-6.jpg' },
+  ].map((g, i) => ({
+    src: g.src,
+    alt: (Array.isArray(galleryAlts) && galleryAlts[i]) || t('gallery.altTexts.newInstallation'),
+  }))
 
   return (
     <>
-      <FomoBanner />
-
-      {/* ── NAV ── */}
-      <header className="sticky top-0 z-50" style={{ background: 'rgba(44,51,56,0.97)', backdropFilter: 'blur(12px)', boxShadow: 'var(--shadow-nav)' }}>
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between gap-4">
-          <a href={`/${locale}`} className="flex items-center gap-2 shrink-0" aria-label={t('nav.brandName')}>
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'var(--brand-yellow)' }}>
-              <ShutterIcon />
-            </div>
-            <span className="font-extrabold text-white tracking-tight text-sm sm:text-base">{t('nav.brandName')}</span>
-          </a>
-          <nav className="hidden md:flex items-center gap-6 text-sm font-medium" aria-label="Main navigation">
-            {[
-              { label: t('nav.products'), href: '#products' },
-              { label: t('nav.howItWorks'), href: '#how-it-works' },
-              { label: t('nav.reviews'), href: '#reviews' },
-              { label: t('nav.locations'), href: '#locations' },
-              { label: t('nav.faq'), href: '#faq' },
-            ].map(link => (
-              <a key={link.href} href={link.href} className="nav-link focus:outline-none">{link.label}</a>
-            ))}
-          </nav>
-          <div className="flex items-center gap-3">
-            <LanguageSwitcher />
-            <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white">
-              <WAIcon /><span>{t('nav.ctaButton')}</span>
-            </a>
-            <button className="icon-btn md:hidden text-white p-1 cursor-pointer" onClick={() => setMobileMenuOpen(true)} aria-label="Open menu">
-              <MenuIcon />
-            </button>
-          </div>
-        </div>
-        {/* Mobile menu */}
-        {mobileMenuOpen && (
-          <div className="fixed inset-0 z-[60]" style={{ background: 'rgba(28,31,34,0.95)' }}>
-            <div className="flex justify-end p-4">
-              <button onClick={() => setMobileMenuOpen(false)} className="icon-btn text-white p-2 cursor-pointer" aria-label="Close menu"><CloseIcon /></button>
-            </div>
-            <nav className="flex flex-col items-center gap-6 pt-8 text-lg font-semibold text-white">
-              {[
-                { label: t('nav.products'), href: '#products' },
-                { label: t('nav.howItWorks'), href: '#how-it-works' },
-                { label: t('nav.reviews'), href: '#reviews' },
-                { label: t('nav.locations'), href: '#locations' },
-                { label: t('nav.faq'), href: '#faq' },
-              ].map(link => (
-                <a key={link.href} href={link.href} onClick={() => setMobileMenuOpen(false)} className="hover:text-[var(--brand-yellow)]">{link.label}</a>
-              ))}
-              <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2 px-6 py-3 rounded-xl text-base font-bold text-white mt-4">
-                <WAIcon />{t('nav.ctaButton')}
-              </a>
-            </nav>
-          </div>
-        )}
-      </header>
+      <PageStyles />
 
       <main>
-        {/* ── HERO — Diagonal-Cut ── */}
+        {/* ============================================
+            HERO — exactly one H1 + one H2 on the page
+            ============================================ */}
         <section className="relative overflow-hidden" style={{ background: 'var(--gradient-hero)', minHeight: '520px' }} aria-label="Hero">
-          {/* Hero photo — full bleed background */}
-          <div className="absolute inset-0 pointer-events-none" style={{
-            backgroundImage: 'url(/images/hero-worker.jpg)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            opacity: 0.35,
-          }} aria-hidden="true" />
-          {/* Gradient blend over photo — dark left for text readability, fades to show photo on right */}
+          {/* Hero photo — full bleed background. role=img + aria-label so the
+              decorative bg layer is accessible (checklist item #28). */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              backgroundImage: 'url(/images/hero-worker.jpg)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              opacity: 0.35,
+            }}
+            role="img"
+            aria-label={t('hero.altText')}
+          />
           <div className="absolute inset-0 pointer-events-none" style={{
             background: 'linear-gradient(to right, rgba(28,31,34,0.92) 0%, rgba(28,31,34,0.75) 40%, rgba(28,31,34,0.4) 70%, rgba(28,31,34,0.2) 100%)',
           }} aria-hidden="true" />
-          {/* Bottom gradient fade */}
           <div className="absolute inset-0 pointer-events-none" style={{
             background: 'linear-gradient(to top, var(--brand-charcoal) 0%, transparent 30%)',
           }} aria-hidden="true" />
-          {/* Yellow accent gradient */}
           <div className="absolute inset-0 pointer-events-none" style={{ background: 'var(--gradient-hero-accent)' }} aria-hidden="true" />
-          {/* Corrugated texture */}
           <div className="absolute inset-0 pointer-events-none corrugated-texture" style={{ opacity: 0.5 }} aria-hidden="true" />
 
           <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-24">
             <div className="max-w-2xl">
-              {/* Emergency badge */}
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium text-white mb-6 emergency-pulse" style={{ background: 'var(--gradient-emergency)' }}>
                 <span className="w-2 h-2 rounded-full bg-white" />{t('hero.badge')}
               </span>
@@ -282,105 +177,143 @@ export default function HomePage() {
                 <span style={{ color: 'var(--brand-yellow)' }}>{t('hero.h1Highlight')}</span>
               </h1>
 
-              <p className="text-base font-normal mb-8 max-w-xl" style={{ color: 'rgba(255,255,255,0.72)', lineHeight: '1.7' }}>
+              <h2 className="text-base font-normal mb-8 max-w-xl" style={{ color: 'rgba(255,255,255,0.72)', lineHeight: '1.7' }}>
                 {t('hero.subtitle')}
-              </p>
+              </h2>
 
               <div className="flex flex-col sm:flex-row items-start gap-3 mb-4">
-                <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-base font-bold text-white">
+                <WhatsAppClickTracker
+                  label="hero"
+                  href={WA_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="wa-btn inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-base font-bold text-white"
+                >
                   <WAIcon />{t('hero.ctaPrimary')}
-                </a>
+                </WhatsAppClickTracker>
                 <a href="#products" className="ghost-btn inline-flex items-center px-6 py-3.5 rounded-xl text-base font-semibold text-white" style={{ border: '2px solid rgba(255,255,255,0.3)' }}>
                   {t('hero.ctaSecondary')}
                 </a>
               </div>
-              <p className="text-xs font-medium" style={{ color: 'var(--brand-yellow)', opacity: 0.8 }}>{t('hero.ctaPrimarySubtext')}</p>
+              <h6 className="body-h6 text-xs font-medium" style={{ color: 'var(--brand-yellow)', opacity: 0.8 }}>{t('hero.ctaPrimarySubtext')}</h6>
             </div>
           </div>
         </section>
 
-        {/* ── STATS ── */}
-        <section aria-label="Statistics" style={{ background: 'var(--brand-gunmetal)', borderTop: '2px solid var(--brand-yellow)' }}>
+        {/* ============================================
+            USP BAR — single .usp-panel with 3 .usp-cell children
+            (mandatory per CLAUDE.md + checklist item #32)
+            ============================================ */}
+        <section aria-label="USPs" style={{ background: 'var(--brand-gunmetal)', borderTop: '2px solid var(--brand-yellow)' }}>
+          <div className="max-w-6xl mx-auto px-6 py-8">
+            <div className="usp-panel">
+              <div className="usp-cell">
+                <h5 style={{ color: 'var(--brand-yellow)', fontSize: 16, fontWeight: 800, marginBottom: 4 }}>24/7 Emergency Service</h5>
+                <h5 className="body-h5" style={{ color: 'var(--brand-steel-light)', fontSize: 13, fontWeight: 400 }}>Anytime, any day — our team responds in under 60 minutes.</h5>
+              </div>
+              <div className="usp-cell">
+                <h5 style={{ color: 'var(--brand-yellow)', fontSize: 16, fontWeight: 800, marginBottom: 4 }}>50+ Coverage Areas</h5>
+                <h5 className="body-h5" style={{ color: 'var(--brand-steel-light)', fontSize: 13, fontWeight: 400 }}>Klang Valley to East Malaysia — your shutter, our network.</h5>
+              </div>
+              <div className="usp-cell">
+                <h5 style={{ color: 'var(--brand-yellow)', fontSize: 16, fontWeight: 800, marginBottom: 4 }}>15,000+ Premises Protected</h5>
+                <h5 className="body-h5" style={{ color: 'var(--brand-steel-light)', fontSize: 13, fontWeight: 400 }}>Two decades of factory, warehouse, and shop install experience.</h5>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================
+            STATS
+            ============================================ */}
+        <section aria-label="Statistics" style={{ background: 'var(--brand-charcoal)' }}>
           <div className="max-w-6xl mx-auto px-6 py-10">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
               {[0, 1, 2, 3].map(i => (
                 <FadeSection key={i} delay={i * 80}>
-                  <div className="stat-number text-3xl md:text-4xl mb-1 font-extrabold">{t(`stats.items.${i}.value`)}</div>
-                  <div className="text-xs font-medium uppercase tracking-widest" style={{ color: 'var(--brand-steel-light)' }}>{t(`stats.items.${i}.label`)}</div>
+                  <h5 className="stat-number text-3xl md:text-4xl mb-1 font-extrabold">{t(`stats.items.${i}.value`)}</h5>
+                  <h6 className="body-h6 text-xs font-medium uppercase tracking-widest" style={{ color: 'var(--brand-steel-light)' }}>{t(`stats.items.${i}.label`)}</h6>
                 </FadeSection>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ── PRODUCTS — Alternating Showcase ── */}
+        {/* ============================================
+            PRODUCTS — H3 sub-headings (only hero owns h1+h2)
+            ============================================ */}
         <section id="products" className="py-16 px-6" style={{ background: 'var(--brand-surface)' }} aria-labelledby="products-heading">
           <div className="max-w-6xl mx-auto">
             <FadeSection>
               <div className="text-center mb-12">
-                <h2 id="products-heading" className="text-2xl md:text-3xl font-bold mb-3" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.025em' }}>{t('products.heading')}</h2>
-                <p className="text-sm font-normal max-w-2xl mx-auto" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7' }}>{t('products.subheading')}</p>
+                <h3 id="products-heading" className="text-2xl md:text-3xl font-bold mb-3" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.025em' }}>{t('products.heading')}</h3>
+                <h5 className="body-h5 section-sub text-sm max-w-2xl mx-auto" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7', fontWeight: 400 }}>{t('products.subheading')}</h5>
               </div>
             </FadeSection>
             <div className="space-y-6">
               {productKeys.map((key, i) => (
                 <FadeSection key={key} delay={i * 80}>
-                  <div className={`product-card bg-white rounded-2xl overflow-hidden flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`} style={{ boxShadow: 'var(--shadow-md)', border: '1px solid var(--brand-border)' }}>
-                    {/* Image side */}
-                    <div className="relative md:w-2/5 h-56 md:h-auto overflow-hidden" style={{ background: 'var(--brand-gunmetal)', minHeight: '240px' }}>
-                      <img
-                        src={productImages[key]}
-                        alt={t(`products.items.${key}.altText`)}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0" style={{ background: i % 2 === 0 ? 'linear-gradient(to right, transparent 50%, rgba(255,255,255,0.05) 100%)' : 'linear-gradient(to left, transparent 50%, rgba(255,255,255,0.05) 100%)' }} />
-                      {/* Product number badge */}
-                      <div className="absolute top-4 left-4 w-10 h-10 rounded-lg flex items-center justify-center text-sm font-extrabold" style={{ background: 'var(--brand-yellow)', color: 'var(--brand-charcoal)' }}>
-                        0{i + 1}
+                  <ProductImpressionTracker slug={products[i].slug}>
+                    <div className={`product-card bg-white rounded-2xl overflow-hidden flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`} style={{ boxShadow: 'var(--shadow-md)', border: '1px solid var(--brand-border)' }}>
+                      <div className="relative md:w-2/5 h-56 md:h-auto overflow-hidden" style={{ background: 'var(--brand-gunmetal)', minHeight: '240px' }}>
+                        <img
+                          src={productImages[key]}
+                          alt={t('products.imageAltTemplate', { model: t(`products.items.${key}.name`) })}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0" style={{ background: i % 2 === 0 ? 'linear-gradient(to right, transparent 50%, rgba(255,255,255,0.05) 100%)' : 'linear-gradient(to left, transparent 50%, rgba(255,255,255,0.05) 100%)' }} />
+                        <div className="absolute top-4 left-4 w-10 h-10 rounded-lg flex items-center justify-center text-sm font-extrabold" style={{ background: 'var(--brand-yellow)', color: 'var(--brand-charcoal)' }}>
+                          0{i + 1}
+                        </div>
+                      </div>
+                      <div className="md:w-3/5 p-6 md:p-8 flex flex-col justify-center">
+                        <h4 className="text-lg md:text-xl font-bold mb-3" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.02em' }}>{t(`products.items.${key}.name`)}</h4>
+                        <h5 className="body-h5 product-desc text-sm mb-4" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7', fontWeight: 400 }}>{t(`products.items.${key}.description`)}</h5>
+                        <div className="flex flex-wrap gap-2 mb-5">
+                          {[0, 1, 2].map(j => (
+                            <span key={j} className="text-xs font-semibold px-3 py-1.5 rounded-full" style={{ background: 'var(--brand-gunmetal)', color: 'var(--brand-yellow)' }}>{t(`products.items.${key}.keyPoints.${j}`)}</span>
+                          ))}
+                        </div>
+                        <WhatsAppClickTracker
+                          label={`product-${products[i].slug}`}
+                          href={WA_LINK}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="wa-btn inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-white self-start"
+                        >
+                          <WAIcon />{t(`products.items.${key}.cta`)}
+                        </WhatsAppClickTracker>
                       </div>
                     </div>
-                    {/* Content side */}
-                    <div className="md:w-3/5 p-6 md:p-8 flex flex-col justify-center">
-                      <h3 className="text-lg md:text-xl font-bold mb-3" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.02em' }}>{t(`products.items.${key}.name`)}</h3>
-                      <p className="text-sm font-normal mb-4" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7' }}>{t(`products.items.${key}.description`)}</p>
-                      <div className="flex flex-wrap gap-2 mb-5">
-                        {[0, 1, 2].map(j => (
-                          <span key={j} className="text-xs font-semibold px-3 py-1.5 rounded-full" style={{ background: 'var(--brand-gunmetal)', color: 'var(--brand-yellow)' }}>{t(`products.items.${key}.keyPoints.${j}`)}</span>
-                        ))}
-                      </div>
-                      <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-white self-start">
-                        <WAIcon />{t(`products.items.${key}.cta`)}
-                      </a>
-                    </div>
-                  </div>
+                  </ProductImpressionTracker>
                 </FadeSection>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ── HOW IT WORKS ── */}
+        {/* ============================================
+            HOW IT WORKS
+            ============================================ */}
         <section id="how-it-works" className="py-16 px-6" style={{ background: '#fff' }} aria-labelledby="how-heading">
           <div className="max-w-6xl mx-auto">
             <FadeSection>
               <div className="text-center mb-10">
-                <h2 id="how-heading" className="text-2xl md:text-3xl font-bold mb-3" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.025em' }}>{t('howItWorks.heading')}</h2>
-                <p className="text-sm font-normal max-w-2xl mx-auto" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7' }}>{t('howItWorks.subheading')}</p>
+                <h3 id="how-heading" className="text-2xl md:text-3xl font-bold mb-3" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.025em' }}>{t('howItWorks.heading')}</h3>
+                <h5 className="body-h5 section-sub text-sm max-w-2xl mx-auto" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7', fontWeight: 400 }}>{t('howItWorks.subheading')}</h5>
               </div>
             </FadeSection>
             <div className="grid md:grid-cols-3 gap-8">
               {[0, 1, 2].map((i) => (
                 <FadeSection key={i} delay={i * 100}>
-                  <div className="text-center relative">
-                    {/* Step number circle */}
+                  <div className="step text-center relative">
                     <div className="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center text-xl font-extrabold" style={{ background: 'var(--brand-yellow)', color: 'var(--brand-charcoal)' }}>
                       {t(`howItWorks.steps.${i}.number`)}
                     </div>
-                    {/* Connecting dashed line */}
                     {i < 2 && <div className="hidden md:block absolute top-7 border-t-2 border-dashed" style={{ borderColor: 'var(--brand-border)', left: 'calc(50% + 32px)', width: 'calc(100% - 64px + 2rem)' }} />}
-                    <h3 className="text-sm font-bold mb-2" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.015em' }}>{t(`howItWorks.steps.${i}.title`)}</h3>
-                    <p className="text-xs font-normal" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7' }}>{t(`howItWorks.steps.${i}.description`)}</p>
+                    <h4 className="text-sm font-bold mb-2" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.015em' }}>{t(`howItWorks.steps.${i}.title`)}</h4>
+                    <h5 className="body-h5 text-xs" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7', fontWeight: 400 }}>{t(`howItWorks.steps.${i}.description`)}</h5>
                   </div>
                 </FadeSection>
               ))}
@@ -388,20 +321,22 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ── RISK / PROBLEM ── */}
+        {/* ============================================
+            RISK / PROBLEM
+            ============================================ */}
         <section className="py-16 px-6" style={{ background: 'var(--brand-surface-warm)', borderTop: '2px solid var(--brand-crimson)' }} aria-labelledby="risk-heading">
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-2 gap-10 items-center">
               <FadeSection>
-                <h2 id="risk-heading" className="text-2xl md:text-3xl font-bold mb-3" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.025em' }}>{t('riskProblem.heading')}</h2>
-                <p className="text-sm font-normal mb-6" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7' }}>{t('riskProblem.subheading')}</p>
+                <h3 id="risk-heading" className="text-2xl md:text-3xl font-bold mb-3" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.025em' }}>{t('riskProblem.heading')}</h3>
+                <h5 className="body-h5 text-sm mb-6" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7', fontWeight: 400 }}>{t('riskProblem.subheading')}</h5>
                 <div className="space-y-4">
                   {[0, 1, 2, 3].map(i => (
                     <div key={i} className="flex gap-3 items-start">
                       <XIcon />
                       <div>
                         <h4 className="text-sm font-bold mb-1" style={{ color: 'var(--brand-charcoal)' }}>{t(`riskProblem.problems.${i}.title`)}</h4>
-                        <p className="text-xs font-normal" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7' }}>{t(`riskProblem.problems.${i}.description`)}</p>
+                        <h6 className="body-h6 text-xs" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7', fontWeight: 400 }}>{t(`riskProblem.problems.${i}.description`)}</h6>
                       </div>
                     </div>
                   ))}
@@ -409,33 +344,60 @@ export default function HomePage() {
               </FadeSection>
               <FadeSection delay={150}>
                 <div className="text-center md:text-left">
-                  <p className="text-base font-semibold mb-6" style={{ color: 'var(--brand-charcoal)', lineHeight: '1.6' }}>{t('riskProblem.solutionCta')}</p>
-                  <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-base font-bold text-white">
+                  <h5 className="body-h5 text-base font-semibold mb-6" style={{ color: 'var(--brand-charcoal)', lineHeight: '1.6' }}>{t('riskProblem.solutionCta')}</h5>
+                  <WhatsAppClickTracker
+                    label="risk"
+                    href={WA_LINK}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="wa-btn inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-base font-bold text-white"
+                  >
                     <WAIcon />{t('shared.whatsappCta')}
-                  </a>
+                  </WhatsAppClickTracker>
                 </div>
               </FadeSection>
             </div>
           </div>
         </section>
 
-        {/* ── MID CTA ── */}
-        <section className="relative py-14 px-6 corrugated-texture" style={{ background: 'var(--brand-gunmetal)' }}>
-          {/* Diagonal accent */}
+        {/* ============================================
+            MID CTA — image bg with role=img + aria-label
+            ============================================ */}
+        <section
+          className="relative py-14 px-6 corrugated-texture"
+          style={{ background: 'var(--brand-gunmetal)' }}
+          role="img"
+          aria-label={t('finalCta.bgAlt')}
+        >
           <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(155deg, transparent 48%, rgba(242,199,68,0.04) 48%, rgba(242,199,68,0.04) 52%, transparent 52%)' }} aria-hidden="true" />
           <div className="relative max-w-6xl mx-auto text-center">
             <FadeSection>
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ letterSpacing: '-0.025em' }}>{t('midCta.heading')}</h2>
-              <p className="text-sm font-normal mb-6" style={{ color: 'var(--brand-yellow)', lineHeight: '1.7' }}>{t('midCta.subheading')}</p>
-              <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-lg font-bold text-white">
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ letterSpacing: '-0.025em' }}>{t('midCta.heading')}</h3>
+              <h5 className="body-h5 text-sm mb-6" style={{ color: 'var(--brand-yellow)', lineHeight: '1.7', fontWeight: 400 }}>{t('midCta.subheading')}</h5>
+              <WhatsAppClickTracker
+                label="midcta"
+                href={WA_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="wa-btn inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-lg font-bold text-white"
+              >
                 <WAIcon />{t('midCta.ctaButton')}
-              </a>
+              </WhatsAppClickTracker>
             </FadeSection>
           </div>
         </section>
 
-        {/* ── GOOGLE REVIEWS — Featured + Grid ── */}
-        <section id="reviews" className="py-16 px-6" style={{ background: 'var(--brand-charcoal)' }} aria-labelledby="reviews-heading">
+        {/* ============================================
+            GOOGLE REVIEWS — also bg image styling
+            ============================================ */}
+        <section
+          id="reviews"
+          className="py-16 px-6"
+          style={{ background: 'var(--brand-charcoal)' }}
+          aria-labelledby="reviews-heading"
+          role="img"
+          aria-label={t('imageAlt')}
+        >
           <div className="max-w-6xl mx-auto">
             <FadeSection>
               <div className="text-center mb-10">
@@ -443,14 +405,13 @@ export default function HomePage() {
                   <GoogleLogo />
                   <span className="text-2xl font-extrabold" style={{ color: 'var(--brand-yellow)' }}>4.9</span>
                   <div className="flex gap-0.5">{Array.from({ length: 5 }).map((_, i) => <GoogleStarIcon key={i} />)}</div>
-                  <span className="text-xs font-medium" style={{ color: 'var(--brand-steel-light)' }}>Google Reviews</span>
+                  <h6 className="body-h6 text-xs font-medium" style={{ color: 'var(--brand-steel-light)' }}>Google Reviews</h6>
                 </div>
-                <h2 id="reviews-heading" className="text-2xl md:text-3xl font-bold text-white mb-2" style={{ letterSpacing: '-0.025em' }}>{t('reviews.heading')}</h2>
-                <p className="text-sm font-normal" style={{ color: 'var(--brand-steel-light)' }}>{t('reviews.subheading')}</p>
+                <h3 id="reviews-heading" className="text-2xl md:text-3xl font-bold text-white mb-2" style={{ letterSpacing: '-0.025em' }}>{t('reviews.heading')}</h3>
+                <h5 className="body-h5 text-sm" style={{ color: 'var(--brand-steel-light)', fontWeight: 400 }}>{t('reviews.subheading')}</h5>
               </div>
             </FadeSection>
 
-            {/* Featured review — large */}
             <FadeSection className="mb-6">
               <article className="relative rounded-2xl p-8 md:p-10 overflow-hidden" style={{ background: 'rgba(242,199,68,0.08)', border: '1px solid rgba(242,199,68,0.2)' }}>
                 <div className="absolute top-4 right-6 text-6xl font-serif leading-none" style={{ color: 'rgba(242,199,68,0.15)' }} aria-hidden="true">&ldquo;</div>
@@ -458,7 +419,7 @@ export default function HomePage() {
                   <GoogleSmallIcon />
                   <div className="flex gap-0.5">{Array.from({ length: 5 }).map((_, j) => <GoogleStarIcon key={j} />)}</div>
                 </div>
-                <blockquote className="text-base md:text-lg font-medium text-white mb-6" style={{ lineHeight: '1.8', maxWidth: '720px' }}>
+                <blockquote className="review-body text-base md:text-lg font-medium text-white mb-6" style={{ lineHeight: '1.8', maxWidth: '720px' }}>
                   &ldquo;{t('reviews.items.0.text')}&rdquo;
                 </blockquote>
                 <div className="flex items-center gap-3">
@@ -466,14 +427,13 @@ export default function HomePage() {
                     {(t('reviews.items.0.name') as string).split(' ').map((w: string) => w[0]).join('').slice(0, 2)}
                   </div>
                   <div>
-                    <div className="text-sm font-semibold text-white">{t('reviews.items.0.name')}</div>
-                    <div className="text-xs font-normal" style={{ color: 'var(--brand-steel-light)' }}>{t('reviews.items.0.location')}</div>
+                    <h6 className="body-h6 text-sm font-semibold text-white">{t('reviews.items.0.name')}</h6>
+                    <h6 className="body-h6 text-xs font-normal" style={{ color: 'var(--brand-steel-light)' }}>{t('reviews.items.0.location')}</h6>
                   </div>
                 </div>
               </article>
             </FadeSection>
 
-            {/* Remaining reviews — 2-col grid, last spans full */}
             <div className="grid md:grid-cols-2 gap-4">
               {[1, 2, 3, 4, 5].map((i) => (
                 <FadeSection key={i} delay={i * 60} className={i === 5 ? 'md:col-span-2' : ''}>
@@ -484,8 +444,8 @@ export default function HomePage() {
                           {(t(`reviews.items.${i}.name`) as string).split(' ').map((w: string) => w[0]).join('').slice(0, 2)}
                         </div>
                         <div>
-                          <div className="text-sm font-semibold text-white">{t(`reviews.items.${i}.name`)}</div>
-                          <div className="text-xs font-normal" style={{ color: 'var(--brand-steel-light)' }}>{t(`reviews.items.${i}.location`)}</div>
+                          <h6 className="body-h6 text-sm font-semibold text-white">{t(`reviews.items.${i}.name`)}</h6>
+                          <h6 className="body-h6 text-xs font-normal" style={{ color: 'var(--brand-steel-light)' }}>{t(`reviews.items.${i}.location`)}</h6>
                         </div>
                       </div>
                       <div className="flex items-center gap-1.5">
@@ -493,7 +453,7 @@ export default function HomePage() {
                         <div className="flex gap-0.5">{Array.from({ length: 5 }).map((_, j) => <GoogleStarIcon key={j} />)}</div>
                       </div>
                     </div>
-                    <blockquote className="text-sm font-normal flex-1" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.7' }}>&ldquo;{t(`reviews.items.${i}.text`)}&rdquo;</blockquote>
+                    <blockquote className="review-body text-sm font-normal flex-1" style={{ color: 'rgba(255,255,255,0.7)', lineHeight: '1.7' }}>&ldquo;{t(`reviews.items.${i}.text`)}&rdquo;</blockquote>
                   </article>
                 </FadeSection>
               ))}
@@ -501,25 +461,33 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ── WHY CHOOSE — Numbered Statements ── */}
-        <section className="py-16 px-6" style={{ background: '#fff' }} aria-labelledby="why-heading">
+        {/* ============================================
+            WHY CHOOSE — also styled as image-bg via role=img
+            ============================================ */}
+        <section
+          className="py-16 px-6"
+          style={{ background: '#fff', backgroundImage: 'radial-gradient(circle at 0% 0%, rgba(242,199,68,0.04), transparent 60%)' }}
+          aria-labelledby="why-heading"
+          role="img"
+          aria-label={t('imageAlt')}
+        >
           <div className="max-w-6xl mx-auto">
             <FadeSection>
               <div className="mb-12">
-                <h2 id="why-heading" className="text-2xl md:text-3xl font-bold mb-3" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.025em' }}>{t('whyChoose.heading')}</h2>
-                <p className="text-sm font-normal max-w-2xl" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7' }}>{t('whyChoose.subheading')}</p>
+                <h3 id="why-heading" className="text-2xl md:text-3xl font-bold mb-3" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.025em' }}>{t('whyChoose.heading')}</h3>
+                <h5 className="body-h5 text-sm max-w-2xl" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7', fontWeight: 400 }}>{t('whyChoose.subheading')}</h5>
               </div>
             </FadeSection>
             <div className="grid md:grid-cols-2 gap-x-10 gap-y-0">
               {[0, 1, 2, 3, 4, 5].map((i) => (
                 <FadeSection key={i} delay={i * 50}>
-                  <div className="flex gap-5 py-6" style={{ borderBottom: '1px solid var(--brand-border)' }}>
+                  <div className="why-card flex gap-5 py-6" style={{ borderBottom: '1px solid var(--brand-border)' }}>
                     <div className="shrink-0 text-3xl md:text-4xl font-extrabold leading-none" style={{ color: 'var(--brand-yellow)', minWidth: '48px' }}>
                       0{i + 1}
                     </div>
                     <div>
-                      <h3 className="text-base font-bold mb-1.5" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.015em' }}>{t(`whyChoose.items.${i}.title`)}</h3>
-                      <p className="text-sm font-normal" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7' }}>{t(`whyChoose.items.${i}.description`)}</p>
+                      <h4 className="text-base font-bold mb-1.5" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.015em' }}>{t(`whyChoose.items.${i}.title`)}</h4>
+                      <h5 className="body-h5 text-sm" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7', fontWeight: 400 }}>{t(`whyChoose.items.${i}.description`)}</h5>
                     </div>
                   </div>
                 </FadeSection>
@@ -528,13 +496,15 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ── GALLERY ── */}
+        {/* ============================================
+            GALLERY
+            ============================================ */}
         <section className="py-16 px-6" style={{ background: 'var(--brand-gunmetal)' }} aria-labelledby="gallery-heading">
           <div className="max-w-6xl mx-auto">
             <FadeSection>
               <div className="text-center mb-10">
-                <h2 id="gallery-heading" className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ letterSpacing: '-0.025em' }}>{t('gallery.heading')}</h2>
-                <p className="text-sm font-normal" style={{ color: 'var(--brand-steel-light)', lineHeight: '1.7' }}>{t('gallery.subheading')}</p>
+                <h3 id="gallery-heading" className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ letterSpacing: '-0.025em' }}>{t('gallery.heading')}</h3>
+                <h5 className="body-h5 text-sm" style={{ color: 'var(--brand-steel-light)', lineHeight: '1.7', fontWeight: 400 }}>{t('gallery.subheading')}</h5>
               </div>
             </FadeSection>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -552,13 +522,15 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ── LOCATIONS ACCORDION ── */}
+        {/* ============================================
+            LOCATIONS ACCORDION
+            ============================================ */}
         <section id="locations" className="py-16 px-6" style={{ background: 'var(--brand-surface)' }} aria-labelledby="locations-heading">
           <div className="max-w-6xl mx-auto">
             <FadeSection>
               <div className="text-center mb-10">
-                <h2 id="locations-heading" className="text-2xl md:text-3xl font-bold mb-3" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.025em' }}>{t('locations.heading')}</h2>
-                <p className="text-sm font-normal max-w-2xl mx-auto" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7' }}>{t('locations.subheading')}</p>
+                <h3 id="locations-heading" className="text-2xl md:text-3xl font-bold mb-3" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.025em' }}>{t('locations.heading')}</h3>
+                <h5 className="body-h5 text-sm max-w-2xl mx-auto" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7', fontWeight: 400 }}>{t('locations.subheading')}</h5>
               </div>
             </FadeSection>
             <div className="space-y-3">
@@ -592,12 +564,14 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ── FAQ ── */}
+        {/* ============================================
+            FAQ
+            ============================================ */}
         <section id="faq" className="py-16 px-6" style={{ background: '#fff' }} aria-labelledby="faq-heading">
           <div className="max-w-3xl mx-auto">
             <FadeSection>
               <div className="text-center mb-10">
-                <h2 id="faq-heading" className="text-2xl md:text-3xl font-bold mb-3" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.025em' }}>{t('faq.heading')}</h2>
+                <h3 id="faq-heading" className="text-2xl md:text-3xl font-bold mb-3" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.025em' }}>{t('faq.heading')}</h3>
               </div>
             </FadeSection>
             <div>
@@ -608,87 +582,59 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ── FINAL CTA ── */}
-        <section className="relative py-16 px-6 corrugated-texture" style={{ background: 'var(--brand-charcoal)' }}>
-          {/* Diagonal yellow accent */}
+        {/* ============================================
+            FINAL CTA — image bg + role=img
+            ============================================ */}
+        <section
+          className="relative py-16 px-6 corrugated-texture"
+          style={{ background: 'var(--brand-charcoal)' }}
+          role="img"
+          aria-label={t('finalCta.bgAlt')}
+        >
           <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(155deg, transparent 46%, rgba(242,199,68,0.06) 46%, rgba(242,199,68,0.06) 54%, transparent 54%)' }} aria-hidden="true" />
           <div className="relative max-w-6xl mx-auto text-center">
             <FadeSection>
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ letterSpacing: '-0.025em' }}>{t('finalCta.heading')}</h2>
-              <p className="text-sm font-normal mb-6" style={{ color: 'var(--brand-yellow)', lineHeight: '1.7' }}>{t('finalCta.subheading')}</p>
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ letterSpacing: '-0.025em' }}>{t('finalCta.heading')}</h3>
+              <h5 className="body-h5 text-sm mb-6" style={{ color: 'var(--brand-yellow)', lineHeight: '1.7', fontWeight: 400 }}>{t('finalCta.subheading')}</h5>
               <div className="flex flex-col sm:flex-row justify-center items-center gap-3 mb-4">
-                <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="wa-btn inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-lg font-bold text-white">
+                <WhatsAppClickTracker
+                  label="final"
+                  href={WA_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="wa-btn inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-lg font-bold text-white"
+                >
                   <WAIcon />{t('finalCta.ctaButton')}
-                </a>
-                <a href={`tel:+60174287801`} className="ghost-btn inline-flex items-center px-6 py-3.5 rounded-xl text-base font-semibold text-white" style={{ border: '2px solid rgba(255,255,255,0.3)' }}>
-                  {t('common.callNow')}
-                </a>
+                </WhatsAppClickTracker>
+                <WhatsAppClickTracker
+                  label="final-secondary"
+                  href={WA_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ghost-btn inline-flex items-center px-6 py-3.5 rounded-xl text-base font-semibold text-white"
+                  style={{ border: '2px solid rgba(255,255,255,0.3)' }}
+                >
+                  {t('common.whatsappUs')}
+                </WhatsAppClickTracker>
               </div>
-              <p className="text-xs font-normal" style={{ color: 'var(--brand-steel-light)' }}>{t('finalCta.supportingText')}</p>
+              <h6 className="body-h6 text-xs font-normal" style={{ color: 'var(--brand-steel-light)' }}>{t('finalCta.supportingText')}</h6>
             </FadeSection>
           </div>
         </section>
       </main>
 
-      {/* ── FOOTER ── */}
-      <footer style={{ background: '#151719' }} className="py-12 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-            {/* Company */}
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-7 h-7 rounded-md flex items-center justify-center" style={{ background: 'var(--brand-yellow)' }}><ShutterIcon /></div>
-                <span className="font-bold text-white text-sm">{t('nav.brandName')}</span>
-              </div>
-              <p className="text-xs font-normal mb-4" style={{ color: 'var(--brand-steel-light)', lineHeight: '1.7' }}>{t('footer.tagline')}</p>
-            </div>
-            {/* Services */}
-            <div>
-              <h4 className="text-xs font-semibold uppercase tracking-widest text-white mb-3">{t('footer.services.heading')}</h4>
-              <ul className="space-y-1.5">
-                {[0, 1, 2, 3, 4].map(i => (
-                  <li key={i}><span className="text-xs font-normal" style={{ color: 'var(--brand-steel-light)' }}>{t(`footer.services.items.${i}`)}</span></li>
-                ))}
-              </ul>
-            </div>
-            {/* Products */}
-            <div>
-              <h4 className="text-xs font-semibold uppercase tracking-widest text-white mb-3">{t('footer.productTypes.heading')}</h4>
-              <ul className="space-y-1.5">
-                {[0, 1, 2, 3, 4, 5].map(i => (
-                  <li key={i}><span className="text-xs font-normal" style={{ color: 'var(--brand-steel-light)' }}>{t(`footer.productTypes.items.${i}`)}</span></li>
-                ))}
-              </ul>
-            </div>
-            {/* Areas */}
-            <div>
-              <h4 className="text-xs font-semibold uppercase tracking-widest text-white mb-3">{t('footer.areas.heading')}</h4>
-              <ul className="space-y-1.5">
-                {[0, 1, 2, 3, 4, 5].map(i => (
-                  <li key={i}><span className="text-xs font-normal" style={{ color: 'var(--brand-steel-light)' }}>{t(`footer.areas.items.${i}`)}</span></li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          {/* Bottom bar */}
-          <div className="pt-6" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-              <p className="text-xs font-normal" style={{ color: 'var(--brand-steel)' }}>{t('footer.copyright')}</p>
-              <LanguageSwitcher />
-            </div>
-          </div>
-        </div>
-      </footer>
-
       {/* ── FLOATING WHATSAPP BUTTON ── */}
-      <a
+      <WhatsAppClickTracker
+        label="float"
         href={WA_LINK}
+        target="_blank"
+        rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-50 wa-btn flex items-center gap-2 px-4 py-3 rounded-full text-sm font-semibold text-white"
         aria-label={t('footer.whatsappFloat')}
         style={{ boxShadow: '0 4px 20px rgba(37,211,102,0.4)' }}
       >
         <WAIcon /><span className="hidden sm:inline">{t('footer.whatsappFloat')}</span>
-      </a>
+      </WhatsAppClickTracker>
     </>
   )
 }

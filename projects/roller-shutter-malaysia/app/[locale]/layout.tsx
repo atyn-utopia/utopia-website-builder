@@ -4,6 +4,7 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { OrganizationSchema } from '@/components/schema/OrganizationSchema';
+import { siteConfig } from '@/config/site';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -27,9 +28,9 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={inter.variable}>
+    <html lang={locale} className={inter.variable} data-website={siteConfig.domain}>
       <head>
-        <script defer src="https://utopia-webcore.vercel.app/t.js" data-website="roller-shutter-malaysia.vercel.app"></script>
+        <script defer src="https://webcore.utopiaai.my/t.js" data-website={siteConfig.domain}></script>
       </head>
       <body style={{ fontFamily: 'var(--font-inter), Inter, sans-serif' }}>
         <NextIntlClientProvider messages={messages}>
