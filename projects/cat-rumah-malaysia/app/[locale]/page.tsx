@@ -127,7 +127,7 @@ export default async function HomePage({ params }: Props) {
             {[tHero('tag1'), tHero('tag2'), tHero('tag3')].map((label) => (
               <span
                 key={label}
-                className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider"
+                className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-medium uppercase tracking-wider"
                 style={{ background: 'rgba(255,210,63,0.18)', border: '1px solid rgba(255,210,63,0.36)', color: '#FFD23F' }}
               >
                 <span className="h-1.5 w-1.5 rounded-full" style={{ background: '#FFD23F' }} aria-hidden="true" />
@@ -243,7 +243,7 @@ export default async function HomePage({ params }: Props) {
       {/* PAINT BRANDS STRIP */}
       <section className="px-6 py-10" style={{ background: '#fff', borderBottom: '1px solid var(--line)' }} aria-labelledby="brands-heading">
         <div className="max-w-6xl mx-auto text-center">
-          <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--muted)' }}>{tBrands('tag')}</h5>
+          <h5 className="text-[11px] font-medium uppercase tracking-widest mb-2" style={{ color: 'var(--muted)' }}>{tBrands('tag')}</h5>
           <h3 id="brands-heading" className="text-lg md:text-xl font-bold" style={{ color: 'var(--brand-ink)' }}>{tBrands('heading')}</h3>
           <h5 className="text-xs font-normal mt-2 max-w-2xl mx-auto" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{tBrands('subheading')}</h5>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">

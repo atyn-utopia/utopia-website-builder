@@ -52,11 +52,16 @@ body {
   margin: 0;
 }
 
-/* Lighter heading weights — bold (700) instead of extrabold (800) so the
-   page feels less heavy. Hero h1 keeps a slight extra weight via inline
-   style; everything else inherits 700 from here. */
-h1, h2, h3, h4, h5, h6 { font-weight: 700; }
-h5, h6 { font-weight: 600; }
+/* Heading weight scale:
+   - h1/h2: 700 (bold) for the main hero pair
+   - h3/h4: 600 (semibold) for section + sub-section headings
+   - h5/h6: 500 (medium) — subheadings / eyebrows / promise tags should
+     never read as bold.
+   Inline Tailwind utilities still override per-instance when explicitly
+   set, but the defaults push everything lighter. */
+h1, h2 { font-weight: 700; }
+h3, h4 { font-weight: 600; }
+h5, h6 { font-weight: 500; }
 
 a { color: inherit; text-decoration: none; }
 

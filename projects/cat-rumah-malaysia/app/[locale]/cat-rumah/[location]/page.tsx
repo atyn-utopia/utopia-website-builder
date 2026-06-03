@@ -104,7 +104,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
       >
         <div className="hero-bg" role="img" aria-label={imageAlt} style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }} />
         <div className="relative z-10 max-w-4xl mx-auto px-6 pt-14 md:pt-16 pb-12 text-center text-white">
-          <h6 className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-3.5 py-1 text-[11px] font-semibold uppercase tracking-wider mb-4">
+          <h6 className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-3.5 py-1 text-[11px] font-medium uppercase tracking-wider mb-4">
             <span className="h-2 w-2 rounded-full" style={{ background: '#FFD23F' }} aria-hidden="true" />
             {tHero('badge', { city })}
           </h6>
@@ -125,7 +125,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
             </WhatsAppClickTracker>
             <div className="flex flex-wrap items-center justify-center gap-2">
               {tHero('ctaSubtext', { city }).split(' · ').map((part, i) => (
-                <span key={i} className="inline-flex items-center rounded-full bg-white/10 border border-white/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white/70">
+                <span key={i} className="inline-flex items-center rounded-full bg-white/10 border border-white/15 px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-white/70">
                   {part}
                 </span>
               ))}

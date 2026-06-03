@@ -172,13 +172,13 @@ function BeforeAfterSlider({ before, after, beforeLabel, afterLabel }: { before:
       {/* After (bottom layer) */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={after} alt={afterLabel} className="absolute inset-0 w-full h-full object-cover" draggable={false} />
-      <span className="absolute bottom-3 right-3 z-20 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full" style={{ background: 'var(--brand-yellow)', color: 'var(--brand-ink)' }}>{afterLabel}</span>
+      <span className="absolute bottom-3 right-3 z-20 text-[10px] font-medium uppercase tracking-wider px-2.5 py-1 rounded-full" style={{ background: 'var(--brand-yellow)', color: 'var(--brand-ink)' }}>{afterLabel}</span>
 
       {/* Before (top layer, clipped) */}
       <div className="absolute inset-0 overflow-hidden" style={{ width: `${pos}%` }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={before} alt={beforeLabel} className="absolute inset-0 h-full object-cover" style={{ width: ref.current?.clientWidth ? `${ref.current.clientWidth}px` : '100%' }} draggable={false} />
-        <span className="absolute bottom-3 left-3 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full" style={{ background: 'var(--brand-ink)', color: '#fff' }}>{beforeLabel}</span>
+        <span className="absolute bottom-3 left-3 text-[10px] font-medium uppercase tracking-wider px-2.5 py-1 rounded-full" style={{ background: 'var(--brand-ink)', color: '#fff' }}>{beforeLabel}</span>
       </div>
 
       {/* Divider + drag handle */}
@@ -352,7 +352,7 @@ function CostCalculator({ locale, phoneNumber }: { locale: string; phoneNumber: 
       {/* Estimate output — blue dark panel per the palette rule (blue = bg) */}
       <div className="rounded-2xl p-6 flex flex-col justify-between" style={{ background: 'linear-gradient(135deg, var(--brand-blue) 0%, var(--brand-blue-deep) 100%)', color: '#fff' }}>
         <div>
-          <span className="block text-[10px] font-bold uppercase tracking-[0.18em]" style={{ color: 'var(--brand-yellow)' }}>{t('estimateLabel')}</span>
+          <span className="block text-[10px] font-medium uppercase tracking-[0.18em]" style={{ color: 'var(--brand-yellow)' }}>{t('estimateLabel')}</span>
           <div className="mt-3 flex items-baseline gap-2">
             <span className="text-2xl font-bold" style={{ color: 'rgba(255,255,255,0.7)' }}>RM</span>
             <span className="text-5xl font-bold tabular-nums" style={{ color: '#fff', letterSpacing: '-0.02em' }}>{formatRM(estimate)}</span>
@@ -371,7 +371,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false)
   return (
     <div style={{ borderBottom: '1px solid var(--line)' }}>
-      <button onClick={() => setOpen((o) => !o)} className="w-full flex items-center justify-between py-4 text-left cursor-pointer text-sm font-semibold" style={{ color: 'var(--brand-ink)' }} aria-expanded={open}>
+      <button onClick={() => setOpen((o) => !o)} className="w-full flex items-center justify-between py-4 text-left cursor-pointer text-sm font-medium" style={{ color: 'var(--brand-ink)' }} aria-expanded={open}>
         <span className="pr-4">{q}</span>
         <ChevronIcon open={open} />
       </button>
@@ -389,7 +389,7 @@ function StateCard({ stateName, cities, citiesLabel, locale }: { stateName: stri
     <article className="rounded-2xl p-5 flex flex-col" style={{ background: '#fff', border: '1px solid var(--line)', boxShadow: '0 4px 14px rgba(2, 61, 147, 0.04)', height: '100%' }}>
       <header className="flex items-baseline justify-between gap-2 pb-3 mb-3" style={{ borderBottom: '1px solid var(--line)' }}>
         <h4 className="text-sm font-bold m-0" style={{ color: 'var(--brand-ink)', letterSpacing: '-0.005em' }}>{stateName}</h4>
-        <span className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: 'var(--brand-pink)' }}>{cities.length} {citiesLabel}</span>
+        <span className="text-[10px] font-medium uppercase tracking-[0.14em]" style={{ color: 'var(--brand-pink)' }}>{cities.length} {citiesLabel}</span>
       </header>
       <div className="flex flex-wrap gap-1.5">
         {cities.map((city) => (
@@ -473,7 +473,7 @@ export default function HomePageClient({ phoneNumber }: Props) {
         <div className="max-w-6xl mx-auto">
           <FadeSection>
             <div className="text-center mb-10">
-              <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{t('products.tag')}</h5>
+              <h5 className="text-[11px] font-medium uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{t('products.tag')}</h5>
               <h3 id="products-heading" className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--brand-ink)' }}>{t('products.heading')}</h3>
               <h5 className="text-sm font-normal mt-2 max-w-2xl mx-auto" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{t('products.subheading')}</h5>
             </div>
@@ -486,21 +486,26 @@ export default function HomePageClient({ phoneNumber }: Props) {
                     className="product-card bg-white rounded-2xl overflow-hidden flex flex-col"
                     style={{
                       border: '1px solid var(--line)',
-                      boxShadow: '0 8px 24px rgba(2, 61, 147, 0.05)',
+                      boxShadow: '0 6px 20px rgba(17, 17, 17, 0.04)',
                       height: '100%',
                     }}
                   >
+                    {/* Photo */}
                     <div className="relative w-full overflow-hidden" style={{ aspectRatio: '4 / 3', background: 'var(--brand-cream)' }}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={p.img} alt={t(`products.${p.key}.title`)} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
                     </div>
-                    <div className="p-5 flex flex-col flex-1" style={{ gap: 10 }}>
+
+                    {/* Body */}
+                    <div className="px-5 pt-5 pb-5 flex flex-col flex-1">
                       <h3
-                        className="text-base font-semibold m-0"
+                        className="text-[17px] m-0"
                         style={{
                           color: 'var(--brand-ink)',
-                          lineHeight: 1.25,
-                          minHeight: 'calc(1.25em * 2)',
+                          fontWeight: 600,
+                          lineHeight: 1.3,
+                          letterSpacing: '-0.005em',
+                          minHeight: 'calc(1.3em * 2)',
                           display: '-webkit-box',
                           WebkitLineClamp: 2,
                           WebkitBoxOrient: 'vertical',
@@ -509,39 +514,48 @@ export default function HomePageClient({ phoneNumber }: Props) {
                       >
                         {t(`products.${p.key}.title`)}
                       </h3>
-                      {/* Price container — visually separate from the title (cream pill, pink price) */}
-                      <div
-                        className="inline-flex items-baseline gap-1.5 px-3 py-2 rounded-xl self-start"
-                        style={{
-                          background: 'var(--brand-cream)',
-                          border: '1px solid var(--line)',
-                        }}
-                      >
-                        <span className="text-[10px] font-semibold uppercase tracking-[0.18em]" style={{ color: 'var(--muted)' }}>
-                          {t('products.fromLabel')}
-                        </span>
-                        <span className="text-xl font-bold" style={{ color: 'var(--brand-pink)', letterSpacing: '-0.01em' }}>
-                          {t(`products.${p.key}.price`).replace(/^Dari\s+/i, '')}
-                        </span>
-                      </div>
+
                       <p
-                        className="text-sm font-normal m-0"
+                        className="m-0 mt-2"
                         style={{
                           color: 'var(--muted)',
+                          fontSize: 13.5,
                           lineHeight: 1.55,
                           minHeight: 'calc(1.55em * 3)',
                           display: '-webkit-box',
                           WebkitLineClamp: 3,
                           WebkitBoxOrient: 'vertical',
                           overflow: 'hidden',
-                          flex: 1,
                         }}
                       >
                         {t(`products.${p.key}.description`)}
                       </p>
-                      <WhatsAppClickTracker phoneNumber={phoneNumber} href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full text-xs font-semibold mt-auto" style={{ background: '#25D366', color: '#fff' }}>
-                        <WAIcon /> <span style={{ color: '#fff' }}>{t('products.bookNow')}</span>
-                      </WhatsAppClickTracker>
+
+                      {/* Footer: price (left) + CTA (right) — hairline divider above */}
+                      <div
+                        className="mt-auto pt-4 flex items-center justify-between gap-3"
+                        style={{ borderTop: '1px solid var(--line)' }}
+                      >
+                        <div className="flex flex-col leading-tight">
+                          <span className="text-[10px] uppercase tracking-[0.16em]" style={{ color: 'var(--muted)', fontWeight: 500 }}>
+                            {t('products.fromLabel')}
+                          </span>
+                          <span className="text-[20px]" style={{ color: 'var(--brand-pink)', fontWeight: 700, letterSpacing: '-0.01em' }}>
+                            {t(`products.${p.key}.price`).replace(/^Dari\s+/i, '')}
+                          </span>
+                        </div>
+                        <WhatsAppClickTracker
+                          phoneNumber={phoneNumber}
+                          href={WA_LINK}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={t('products.bookNow')}
+                          className="shrink-0 inline-flex items-center justify-center rounded-full"
+                          style={{ background: '#25D366', color: '#fff', width: 44, height: 44, boxShadow: '0 6px 16px rgba(37, 211, 102, 0.30)' }}
+                        >
+                          <WAIcon />
+                        </WhatsAppClickTracker>
+                      </div>
                     </div>
                   </div>
                 </FadeSection>
@@ -557,7 +571,7 @@ export default function HomePageClient({ phoneNumber }: Props) {
         <div className="max-w-5xl mx-auto">
           <FadeSection>
             <div className="text-center mb-8">
-              <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{tCalc('tag')}</h5>
+              <h5 className="text-[11px] font-medium uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{tCalc('tag')}</h5>
               <h3 id="calc-heading" className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--brand-ink)' }}>{tCalc('heading')}</h3>
               <h5 className="text-sm font-normal mt-2 max-w-2xl mx-auto" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{tCalc('subheading')}</h5>
             </div>
@@ -573,7 +587,7 @@ export default function HomePageClient({ phoneNumber }: Props) {
         <div className="max-w-6xl mx-auto">
           <FadeSection>
             <div className="text-center mb-10">
-              <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{tBA('tag')}</h5>
+              <h5 className="text-[11px] font-medium uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{tBA('tag')}</h5>
               <h3 id="ba-heading" className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--brand-ink)' }}>{tBA('heading')}</h3>
               <h5 className="text-sm font-normal mt-2 max-w-2xl mx-auto" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{tBA('subheading')}</h5>
             </div>
@@ -610,7 +624,7 @@ export default function HomePageClient({ phoneNumber }: Props) {
         <div className="max-w-6xl mx-auto">
           <FadeSection>
             <div className="text-center mb-10">
-              <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{t('whyChoose.tag')}</h5>
+              <h5 className="text-[11px] font-medium uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{t('whyChoose.tag')}</h5>
               <h3 id="why-heading" className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--brand-ink)' }}>{t('whyChoose.heading')}</h3>
             </div>
           </FadeSection>
@@ -641,7 +655,7 @@ export default function HomePageClient({ phoneNumber }: Props) {
         <div className="max-w-6xl mx-auto">
           <FadeSection>
             <div className="text-center mb-10">
-              <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{t('howItWorks.tag')}</h5>
+              <h5 className="text-[11px] font-medium uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{t('howItWorks.tag')}</h5>
               <h3 id="how-heading" className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--brand-ink)' }}>{t('howItWorks.heading')}</h3>
             </div>
           </FadeSection>
@@ -723,7 +737,7 @@ export default function HomePageClient({ phoneNumber }: Props) {
         <div className="max-w-6xl mx-auto">
           <FadeSection>
             <div className="text-center mb-10">
-              <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{t('gallery.tag')}</h5>
+              <h5 className="text-[11px] font-medium uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{t('gallery.tag')}</h5>
               <h3 className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--brand-ink)' }}>{t('gallery.heading')}</h3>
             </div>
           </FadeSection>
@@ -743,7 +757,7 @@ export default function HomePageClient({ phoneNumber }: Props) {
         <div className="max-w-6xl mx-auto">
           <FadeSection>
             <div className="text-center mb-10">
-              <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{t('faq.tag')}</h5>
+              <h5 className="text-[11px] font-medium uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{t('faq.tag')}</h5>
               <h3 id="faq-heading" className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--brand-ink)' }}>{t('faq.heading')}</h3>
             </div>
           </FadeSection>
@@ -762,13 +776,13 @@ export default function HomePageClient({ phoneNumber }: Props) {
         <div className="max-w-6xl mx-auto">
           <FadeSection>
             <div className="text-center mb-10">
-              <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{t('locations.tag')}</h5>
+              <h5 className="text-[11px] font-medium uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{t('locations.tag')}</h5>
               <h3 id="locations-heading" className="text-2xl md:text-3xl font-bold mb-2" style={{ color: 'var(--brand-ink)' }}>{t('locations.heading')}</h3>
               <h5 className="text-sm font-normal" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{t('locations.subheading')}</h5>
             </div>
           </FadeSection>
           <FadeSection>
-            <h5 className="text-center text-sm font-bold mb-6" style={{ color: 'var(--brand-ink)' }}>
+            <h5 className="text-center text-sm font-medium mb-6" style={{ color: 'var(--brand-ink)' }}>
               {t('locations.totalLine', { count: totalCities })}
             </h5>
           </FadeSection>
