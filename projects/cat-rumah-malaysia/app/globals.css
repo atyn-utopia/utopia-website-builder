@@ -53,14 +53,15 @@ body {
 }
 
 /* Heading weight scale:
-   - h1/h2: 700 (bold) for the main hero pair
-   - h3/h4: 600 (semibold) for section + sub-section headings
-   - h5/h6: 500 (medium) — subheadings / eyebrows / promise tags should
-     never read as bold.
-   Inline Tailwind utilities still override per-instance when explicitly
-   set, but the defaults push everything lighter. */
-h1, h2 { font-weight: 700; }
-h3, h4 { font-weight: 600; }
+   - h1: 700 (bold) — main page title
+   - h2: 400 (regular) — h2 is reserved for the hero SUBTITLE below the
+     h1 (per CLAUDE.md), which should read as regular weight, not bold.
+   - h3/h4: 700 (bold) — section + card titles
+   - h5/h6: 500 (medium) — eyebrows / promise tags / minor sub-elements
+   Inline Tailwind utilities still override per-instance. */
+h1 { font-weight: 700; }
+h2 { font-weight: 400; }
+h3, h4 { font-weight: 700; }
 h5, h6 { font-weight: 500; }
 
 a { color: inherit; text-decoration: none; }
