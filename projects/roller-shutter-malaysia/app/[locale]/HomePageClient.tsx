@@ -124,7 +124,10 @@ export default function HomePage() {
   // Pull gallery alt strings from i18n (alts[] array — checklist item #26)
   // Real installation photos from /public/photos/ — mixed watermarked + clean
   const galleryAlts = t.raw('gallery.alts') as string[] | undefined
-  const PHOTO_IDS = [12, 13, 14, 15, 16, 17, 18, 32, 33, 34, 35, 49] as const
+  // Yellow-bordered customer install photos only — close-up/borderless
+  // shots (14/15/16/17/18/35) are excluded so the gallery reads as a
+  // consistent "real-world customer install" grid.
+  const PHOTO_IDS = [12, 13, 32, 33, 34, 36, 38, 41, 44, 45, 47, 49] as const
   const galleryImages = PHOTO_IDS.map((id, i) => ({
     src: `/photos/${id}.jpg`,
     alt: (Array.isArray(galleryAlts) && galleryAlts[i]) || t('gallery.altTexts.newInstallation'),
@@ -171,18 +174,20 @@ export default function HomePage() {
           <div className="absolute inset-0 pointer-events-none" style={{ background: 'var(--gradient-hero-accent)' }} aria-hidden="true" />
           <div className="absolute inset-0 pointer-events-none corrugated-texture" style={{ opacity: 0.5 }} aria-hidden="true" />
 
-          <div className="relative max-w-6xl mx-auto px-6 py-12 lg:py-20">
-            {/* Wordmark logo at the very top of the hero, above the badge. */}
-            <div className="mb-6 flex justify-center md:justify-start">
+          {/* Wordmark logo — sits flush at the top of the hero with zero
+              vertical spacing (no padding above, no margin below). The hero
+              content (badge / H1 / etc.) starts immediately below. */}
+          <div className="relative max-w-6xl mx-auto px-6 pt-0 pb-12 lg:pb-20">
+            <div className="flex justify-center md:justify-start" style={{ marginTop: 0, marginBottom: 0, lineHeight: 0 }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/brand/logo-wordmark.png"
                 alt={t('nav.logoAlt')}
                 className="hero-logo"
-                style={{ width: 'clamp(180px, 24vw, 260px)', height: 'auto', display: 'block', filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.35))' }}
+                style={{ width: 'clamp(180px, 24vw, 260px)', height: 'auto', display: 'block', margin: 0, filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.35))' }}
               />
             </div>
-            <div className="max-w-2xl">
+            <div className="max-w-2xl pt-6 lg:pt-8">
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium text-white mb-6 emergency-pulse" style={{ background: 'var(--gradient-emergency)' }}>
                 <span className="w-2 h-2 rounded-full bg-white" />{t('hero.badge')}
               </span>
@@ -276,12 +281,12 @@ export default function HomePage() {
                 <h5 className="body-h5 section-sub text-sm max-w-2xl mx-auto" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7', fontWeight: 400 }}>{t('products.subheading')}</h5>
               </div>
             </FadeSection>
-            <div className="space-y-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {productKeys.map((key, i) => (
-                <FadeSection key={key} delay={i * 80}>
+                <FadeSection key={key} delay={i * 60}>
                   <ProductImpressionTracker slug={products[i].slug}>
-                    <div className={`product-card bg-white rounded-2xl overflow-hidden flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`} style={{ boxShadow: 'var(--shadow-md)', border: '1px solid var(--brand-border)' }}>
-                      <div className="relative md:w-2/5 h-64 md:h-auto overflow-hidden" style={{ background: 'var(--brand-gunmetal)', minHeight: '280px' }}>
+                    <div className="product-card bg-white rounded-xl overflow-hidden flex flex-col h-full" style={{ boxShadow: 'var(--shadow-md)', border: '1px solid var(--brand-border)' }}>
+                      <div className="relative h-44 overflow-hidden" style={{ background: 'var(--brand-gunmetal)' }}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={productImages[key]}
@@ -289,50 +294,27 @@ export default function HomePage() {
                           className="w-full h-full object-cover"
                           loading="lazy"
                         />
-                        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(21,33,43,0.55) 100%)' }} />
-                        {/* "0X" type chip — top-left */}
-                        <div className="absolute top-4 left-4 w-10 h-10 rounded-lg flex items-center justify-center text-sm font-extrabold" style={{ background: i % 2 === 0 ? 'var(--brand-yellow)' : 'var(--brand-blue)', color: i % 2 === 0 ? 'var(--brand-charcoal)' : '#fff' }}>
+                        <div className="absolute top-3 left-3 w-8 h-8 rounded-md flex items-center justify-center text-xs font-extrabold" style={{ background: i % 2 === 0 ? 'var(--brand-yellow)' : 'var(--brand-blue)', color: i % 2 === 0 ? 'var(--brand-charcoal)' : '#fff' }}>
                           0{i + 1}
                         </div>
-                        {/* Sticker price tag — bottom-left of image */}
-                        <div className="absolute bottom-4 left-4 inline-flex items-baseline gap-1 px-3 py-2 rounded-xl" style={{ background: 'var(--brand-yellow)', color: 'var(--brand-charcoal)', boxShadow: '0 6px 16px rgba(0,0,0,0.25)' }}>
-                          <span className="text-[10px] font-bold uppercase tracking-wider">Dari</span>
-                          <span className="text-base font-bold leading-none">RM</span>
-                          <span className="text-2xl font-extrabold leading-none">{products[i].priceFrom?.toLocaleString('en-MY')}</span>
-                        </div>
                       </div>
-                      <div className="md:w-3/5 p-6 md:p-8 flex flex-col">
-                        <div className="flex items-start justify-between gap-4 mb-3">
-                          <h4 className="text-lg md:text-2xl font-extrabold" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.02em', lineHeight: 1.2 }}>{t(`products.items.${key}.name`)}</h4>
-                        </div>
-                        <h5 className="body-h5 product-desc text-sm mb-5" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7', fontWeight: 400 }}>{t(`products.items.${key}.description`)}</h5>
-
-                        {/* Pricing block — primary value signal */}
-                        <div className="flex items-end justify-between gap-3 mb-5 pb-5" style={{ borderBottom: '1px dashed var(--brand-border)' }}>
-                          <div>
-                            <h6 className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{ color: 'var(--brand-text-muted)' }}>Harga dari</h6>
-                            <div className="flex items-baseline gap-1.5">
-                              <span className="text-sm font-bold leading-none" style={{ color: 'var(--brand-charcoal)' }}>RM</span>
-                              <span className="text-3xl md:text-4xl font-extrabold leading-none" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.03em' }}>{products[i].priceFrom?.toLocaleString('en-MY')}</span>
-                              <span className="text-xs font-medium" style={{ color: 'var(--brand-text-muted)' }}>/ {products[i].unit ?? 'unit'}</span>
-                            </div>
+                      <div className="p-4 flex flex-col flex-1">
+                        <h4 className="text-base font-extrabold mb-2" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.02em', lineHeight: 1.25 }}>{t(`products.items.${key}.name`)}</h4>
+                        {/* Pricing — primary value signal */}
+                        <div className="mb-4">
+                          <h6 className="text-[10px] font-bold uppercase tracking-widest mb-0.5" style={{ color: 'var(--brand-text-muted)' }}>Harga dari</h6>
+                          <div className="flex items-baseline gap-1">
+                            <span className="text-xs font-bold leading-none" style={{ color: 'var(--brand-charcoal)' }}>RM</span>
+                            <span className="text-2xl font-extrabold leading-none" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.03em' }}>{products[i].priceFrom?.toLocaleString('en-MY')}</span>
+                            <span className="text-[11px] font-medium ml-0.5" style={{ color: 'var(--brand-text-muted)' }}>/ {products[i].unit ?? 'unit'}</span>
                           </div>
-                          <h6 className="text-[11px] font-semibold" style={{ color: 'var(--brand-blue-dark)' }}>Free quotation</h6>
-                        </div>
-
-                        <div className="flex flex-wrap gap-2 mb-5">
-                          {[0, 1, 2].map(j => (
-                            <span key={j} className="text-xs font-semibold px-3 py-1.5 rounded-full inline-flex items-center gap-1.5" style={{ background: 'var(--brand-blue-pale)', color: 'var(--brand-blue-dark)' }}>
-                              <span aria-hidden="true">✓</span>{t(`products.items.${key}.keyPoints.${j}`)}
-                            </span>
-                          ))}
                         </div>
                         <WhatsAppClickTracker
                           label={`product-${products[i].slug}`}
                           href={WA_LINK}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="wa-btn inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-white self-start"
+                          className="wa-btn inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs font-bold text-white mt-auto"
                         >
                           <WAIcon />{t(`products.items.${key}.cta`)}
                         </WhatsAppClickTracker>
