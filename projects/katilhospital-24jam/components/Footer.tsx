@@ -8,26 +8,18 @@ import { waRedirect } from '@/lib/waRedirect';
 const FEATURED_CITIES: { slug: string; name: string }[] = [
   { slug: 'kuala-lumpur', name: 'Kuala Lumpur' },
   { slug: 'petaling-jaya', name: 'Petaling Jaya' },
-  { slug: 'shah-alam', name: 'Shah Alam' },
-  { slug: 'subang-jaya', name: 'Subang Jaya' },
   { slug: 'johor-bahru', name: 'Johor Bahru' },
-  { slug: 'klang', name: 'Klang' },
-  { slug: 'george-town', name: 'George Town' },
+  { slug: 'george-town', name: 'Penang' },
   { slug: 'ipoh', name: 'Ipoh' },
-  { slug: 'kuantan', name: 'Kuantan' },
   { slug: 'kota-kinabalu', name: 'Kota Kinabalu' },
-  { slug: 'kuching', name: 'Kuching' },
 ];
 
 const PRODUCT_SLUGS = [
-  'katil-hospital-manual-1-fungsi',
   'katil-hospital-manual-2-fungsi',
   'katil-hospital-elektrik-3-fungsi',
-  'tilam-hospital-foam',
   'tilam-angin-anti-decubitus',
   'mesin-oksigen',
   'kerusi-roda',
-  'mesin-cpap',
 ];
 
 const PRODUCT_LABELS: Record<string, Record<string, string>> = {
@@ -83,27 +75,28 @@ export default function Footer() {
         style={{
           maxWidth: 1240,
           margin: '0 auto',
-          padding: '56px 20px 20px',
+          padding: '32px 20px 16px',
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-          gap: 40,
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gap: 24,
         }}
       >
         {/* Col A — Brand */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <img
               src="/brand/logo/logo-light.svg"
               alt="Katil Hospital 24 Jam"
-              style={{ height: 38, width: 'auto' }}
+              style={{ height: 30, width: 'auto' }}
             />
           </div>
           <p
             style={{
-              fontSize: 14,
-              color: 'rgba(255,255,255,0.8)',
-              lineHeight: 1.65,
-              maxWidth: 280,
+              fontSize: 13,
+              color: 'rgba(255,255,255,0.75)',
+              lineHeight: 1.5,
+              maxWidth: 260,
+              margin: 0,
             }}
           >
             {t('brand.tagline')}
@@ -117,25 +110,26 @@ export default function Footer() {
         <div>
           <h4
             style={{
-              fontSize: 13,
+              fontSize: 12,
               fontWeight: 700,
               color: 'rgba(255,255,255,0.7)',
               textTransform: 'uppercase',
               letterSpacing: 1.2,
-              marginBottom: 16,
+              margin: '0 0 10px',
             }}
           >
             {t('products.heading')}
           </h4>
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 4 }}>
             {PRODUCT_SLUGS.map((slug) => (
               <li key={slug}>
                 <a
                   href={`/${locale}#product-${slug}`}
                   style={{
                     color: 'rgba(255,255,255,0.85)',
-                    fontSize: 14,
+                    fontSize: 13,
                     fontWeight: 500,
+                    lineHeight: 1.45,
                   }}
                 >
                   {labels[slug]}
@@ -149,38 +143,40 @@ export default function Footer() {
         <div>
           <h4
             style={{
-              fontSize: 13,
+              fontSize: 12,
               fontWeight: 700,
               color: 'rgba(255,255,255,0.7)',
               textTransform: 'uppercase',
               letterSpacing: 1.2,
-              marginBottom: 16,
+              margin: '0 0 10px',
             }}
           >
             {t('locations.heading')}
           </h4>
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 4 }}>
             {FEATURED_CITIES.map((c) => (
               <li key={c.slug}>
                 <a
                   href={`/${locale}/katil-hospital/${c.slug}`}
                   style={{
                     color: 'rgba(255,255,255,0.85)',
-                    fontSize: 14,
+                    fontSize: 13,
                     fontWeight: 500,
+                    lineHeight: 1.45,
                   }}
                 >
                   {c.name}
                 </a>
               </li>
             ))}
-            <li style={{ marginTop: 6 }}>
+            <li style={{ marginTop: 4 }}>
               <a
                 href={`/${locale}/sitemap.xml`}
                 style={{
                   color: '#F87171',
-                  fontSize: 14,
+                  fontSize: 13,
                   fontWeight: 600,
+                  lineHeight: 1.45,
                 }}
               >
                 {t('locations.all')}
@@ -193,12 +189,12 @@ export default function Footer() {
         <div>
           <h4
             style={{
-              fontSize: 13,
+              fontSize: 12,
               fontWeight: 700,
               color: 'rgba(255,255,255,0.7)',
               textTransform: 'uppercase',
               letterSpacing: 1.2,
-              marginBottom: 16,
+              margin: '0 0 10px',
             }}
           >
             {t('language.heading')}
@@ -210,7 +206,7 @@ export default function Footer() {
       <div
         style={{
           borderTop: '1px solid rgba(255,255,255,0.08)',
-          padding: '18px 20px',
+          padding: '12px 20px',
           textAlign: 'center',
           fontSize: 12,
           color: 'rgba(255,255,255,0.6)',

@@ -134,6 +134,9 @@ export default function ProductCard({
           flexDirection: 'column',
           justifyContent: 'center',
           gap: 6,
+          // Push price + button group to the bottom of the card; the button
+          // sits directly below this block via its own marginTop:auto.
+          marginTop: 'auto',
         };
         const rowStyle: CSSProperties = {
           display: 'flex',

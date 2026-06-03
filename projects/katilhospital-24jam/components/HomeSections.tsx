@@ -733,7 +733,7 @@ export default function HomeSections({ locale, products, location }: Props) {
                 style={{
                   borderRadius: 10,
                   overflow: 'hidden',
-                  aspectRatio: '3 / 4',
+                  aspectRatio: '1 / 1',
                   border: '1px solid #E2E8F0',
                   background: '#F0F4FA',
                   boxShadow: '0 2px 6px rgba(15,31,80,0.05)',
