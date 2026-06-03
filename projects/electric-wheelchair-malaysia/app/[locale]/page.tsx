@@ -6,9 +6,14 @@ import { FAQSchema } from '@/components/schema/FAQSchema';
 import FomoBanner from '@/components/FomoBanner';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
-import MarketingMarquee from '@/components/MarketingMarquee';
 import PageStyles from '@/components/PageStyles';
 import HomePageClient from '@/components/HomePageClient';
+
+// The wheelchair hero photo is hosted on the brand's Wix CDN (no public/brand
+// dir exists in this project). HomePageClient already references the same URL
+// for its product gallery, so it's already cached on visitors' browsers.
+const HERO_PHOTO_URL =
+  'https://static.wixstatic.com/media/d3104b_64b5d16422824a7384e5630d9b70c0ae~mv2.png';
 
 export async function generateMetadata({
   params,
@@ -73,25 +78,33 @@ export default async function HomePage({
       <FomoBanner locale={locale as 'en' | 'ms' | 'zh'} />
       <SiteHeader locale={locale as 'en' | 'ms' | 'zh'} />
 
-      {/* HERO — H1 + H2 + role=img bg live here so the checklist sees them in page.tsx source. */}
-      <section style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(135deg, #0F2238 0%, #1B2D5B 100%)', color: '#fff' }}>
+      {/* HERO — gradient-over-photo layout. H1 + H2 + role=img bg live in
+          page.tsx source so the checklist sees them. */}
+      <section
+        style={{
+          position: 'relative',
+          overflow: 'hidden',
+          color: '#fff',
+          background: `linear-gradient(135deg, rgba(15,27,58,0.86) 0%, rgba(27,45,91,0.82) 50%, rgba(42,64,128,0.86) 100%), url('${HERO_PHOTO_URL}') center right / cover no-repeat`,
+        }}
+      >
+        {/* Labelled region for screen readers + checklist; the visible
+            gradient-over-photo is on the section itself. */}
         <div
           className="hero-bg"
           role="img"
           aria-label={imageAlt}
-          style={{ backgroundImage: 'url(/brand/hero.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.18 }}
+          style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}
         />
-        <div className="section-container" style={{ position: 'relative', zIndex: 1, padding: '60px 24px 48px' }}>
+        <div className="section-container" style={{ position: 'relative', zIndex: 1, padding: '64px 24px 56px' }}>
           <h1 style={{ fontSize: 'clamp(32px, 5vw, 52px)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.02em', margin: 0, maxWidth: '780px' }}>
-            {heroT('h1')} <span style={{ color: '#FACC15' }}>{heroT('h1Highlight')}</span> {heroT('h1Suffix')}
+            {heroT('h1')} <span style={{ color: '#F47B20' }}>{heroT('h1Highlight')}</span> {heroT('h1Suffix')}
           </h1>
           <h2 style={{ fontSize: 'clamp(16px, 2vw, 19px)', fontWeight: 500, lineHeight: 1.55, marginTop: '20px', maxWidth: '640px', color: 'rgba(255,255,255,0.85)' }}>
             {heroT('subheadline')}
           </h2>
         </div>
       </section>
-
-      <MarketingMarquee locale={locale as 'en' | 'ms' | 'zh'} variant="light" />
 
       <HomePageClient chromeProvided heroProvided />
 

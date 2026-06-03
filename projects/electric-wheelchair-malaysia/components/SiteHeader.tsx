@@ -20,7 +20,7 @@ export default async function SiteHeader({ locale }: { locale: Locale }) {
     <header
       className="sticky top-0 z-50"
       style={{
-        background: 'rgba(27,58,92,0.96)',
+        background: 'rgba(27,45,91,0.96)',
         backdropFilter: 'blur(12px)',
         borderBottom: '1px solid rgba(255,255,255,0.08)',
       }}
@@ -32,13 +32,10 @@ export default async function SiteHeader({ locale }: { locale: Locale }) {
           className="flex items-center gap-2 shrink-0"
           aria-label={tNav('logoAlt')}
         >
-          <div
-            className="w-8 h-8 rounded-lg flex items-center justify-center"
-            style={{ background: '#FACC15' }}
-            aria-hidden="true"
-          >
-            <span className="text-[#1B3A5C] font-bold text-sm">EB</span>
-          </div>
+          {/* Logo icon = the favicon (/icon.svg, served from app/icon.svg by Next.js)
+              so the header logo and favicon always match. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/icon.svg" alt={tNav('logoAlt')} className="w-8 h-8" />
           <span className="font-extrabold text-lg text-white tracking-tight">Electric Wheelchair Malaysia</span>
         </Link>
 
