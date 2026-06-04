@@ -451,6 +451,29 @@ body {
 }
 
 /* ============================================================
+   Mobile centering + responsive CTA pill text
+   ============================================================ */
+.cta-pill {
+  font-size: 16px;
+  line-height: 1;
+  white-space: nowrap;
+}
+@media (max-width: 640px) {
+  /* Step CTA pill text + padding down on small screens so long labels
+     (e.g. "Lihat Jenis Roller Shutter Kami" / "WhatsApp Untuk Sebut Harga")
+     don't wrap or overflow. */
+  .cta-pill { font-size: 13px; padding-left: 16px; padding-right: 16px; }
+  /* Stretch CTA pills to full width in column-stacked CTA rows. */
+  .hero-copy .cta-pill { width: 100%; }
+}
+
+/* Mobile: center most stacked content blocks (hero copy is already
+   handled inline with `text-center md:text-left`). */
+@media (max-width: 767px) {
+  .hero-copy { align-items: center; }
+}
+
+/* ============================================================
    Trusted-by strip — client logos under hero. Uniform height,
    slight grayscale on rest, full colour on hover.
    ============================================================ */

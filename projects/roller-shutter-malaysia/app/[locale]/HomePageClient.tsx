@@ -185,7 +185,7 @@ export default function HomePage() {
                 style={{ width: 'clamp(220px, 28vw, 320px)', height: 'auto', display: 'block', filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.35))' }}
               />
             </div>
-            <div className="max-w-2xl">
+            <div className="max-w-2xl hero-copy mx-auto md:mx-0 text-center md:text-left">
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium text-white mb-6 emergency-pulse" style={{ background: 'var(--gradient-emergency)' }}>
                 <span className="w-2 h-2 rounded-full bg-white" />{t('hero.badge')}
               </span>
@@ -195,21 +195,21 @@ export default function HomePage() {
                 <span style={{ color: 'var(--brand-yellow)' }}>{t('hero.h1Highlight')}</span>
               </h1>
 
-              <h2 className="text-base font-normal mb-8 max-w-xl" style={{ color: 'rgba(255,255,255,0.72)', lineHeight: '1.7' }}>
+              <h2 className="text-base font-normal mb-8 max-w-xl mx-auto md:mx-0" style={{ color: 'rgba(255,255,255,0.72)', lineHeight: '1.7' }}>
                 {t('hero.subtitle')}
               </h2>
 
-              <div className="flex flex-col sm:flex-row items-start gap-3 mb-4">
+              <div className="flex flex-col sm:flex-row items-center md:items-start justify-center md:justify-start gap-3 mb-4">
                 <WhatsAppClickTracker
                   label="hero"
-                  href={WA_LINK}
+                  href={waRedirect(locale)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="wa-btn inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-base font-bold text-white"
+                  className="wa-btn cta-pill inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-bold text-white"
                 >
                   <WAIcon />{t('hero.ctaPrimary')}
                 </WhatsAppClickTracker>
-                <a href="#products" className="ghost-btn inline-flex items-center px-6 py-3.5 rounded-xl text-base font-semibold text-white" style={{ border: '2px solid rgba(255,255,255,0.3)' }}>
+                <a href="#products" className="ghost-btn cta-pill inline-flex items-center justify-center px-6 py-3.5 rounded-xl font-semibold text-white" style={{ border: '2px solid rgba(255,255,255,0.3)' }}>
                   {t('hero.ctaSecondary')}
                 </a>
               </div>
@@ -307,7 +307,7 @@ export default function HomePage() {
                         </div>
                         <WhatsAppClickTracker
                           label={`product-${products[i].slug}`}
-                          href={WA_LINK}
+                          href={waRedirect(locale)}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="wa-btn inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs font-bold text-white mt-auto"
@@ -377,7 +377,7 @@ export default function HomePage() {
                   <h5 className="body-h5 text-base mb-6" style={{ color: 'var(--brand-charcoal)', lineHeight: '1.6', fontWeight: 400 }}>{t('riskProblem.solutionCta')}</h5>
                   <WhatsAppClickTracker
                     label="risk"
-                    href={WA_LINK}
+                    href={waRedirect(locale)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="wa-btn inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-base font-bold text-white"
@@ -406,7 +406,7 @@ export default function HomePage() {
               <h5 className="body-h5 text-sm mb-6" style={{ color: 'var(--brand-yellow)', lineHeight: '1.7', fontWeight: 400 }}>{t('midCta.subheading')}</h5>
               <WhatsAppClickTracker
                 label="midcta"
-                href={WA_LINK}
+                href={waRedirect(locale)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="wa-btn inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-lg font-bold text-white"
@@ -629,7 +629,7 @@ export default function HomePage() {
               <div className="flex flex-col sm:flex-row justify-center items-center gap-3 mb-4">
                 <WhatsAppClickTracker
                   label="final"
-                  href={WA_LINK}
+                  href={waRedirect(locale)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="wa-btn inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-lg font-bold text-white"
@@ -638,7 +638,7 @@ export default function HomePage() {
                 </WhatsAppClickTracker>
                 <WhatsAppClickTracker
                   label="final-secondary"
-                  href={WA_LINK}
+                  href={waRedirect(locale)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="ghost-btn inline-flex items-center px-6 py-3.5 rounded-xl text-base font-semibold text-white"
@@ -656,7 +656,7 @@ export default function HomePage() {
       {/* ── FLOATING WHATSAPP BUTTON ── */}
       <WhatsAppClickTracker
         label="float"
-        href={WA_LINK}
+        href={waRedirect(locale)}
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-50 wa-btn flex items-center gap-2 px-4 py-3 rounded-full text-sm font-semibold text-white"
