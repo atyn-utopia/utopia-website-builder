@@ -59,6 +59,31 @@ function formatRM(value: number): string {
   return value.toLocaleString('en-MY', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 }
 
+// Mirror the homepage 6-reason whyChoose grid (with matching icons).
+const REASON_ITEMS: { key: string; icon: 'paint' | 'bolt' | 'shield' | 'tag' | 'badge' | 'pin' }[] = [
+  { key: 'reason1', icon: 'paint' },
+  { key: 'reason2', icon: 'bolt' },
+  { key: 'reason3', icon: 'tag' },
+  { key: 'reason4', icon: 'shield' },
+  { key: 'reason5', icon: 'badge' },
+  { key: 'reason6', icon: 'pin' },
+]
+
+const ReasonIcon = ({ name }: { name: typeof REASON_ITEMS[number]['icon'] }) => {
+  const props = { width: 26, height: 26, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, 'aria-hidden': true } as const
+  switch (name) {
+    case 'paint':  return (<svg {...props}><rect x="3" y="3" width="18" height="6" rx="1" /><path d="M21 6h2v6h-9v3" /><path d="M11 15h3v6h-3z" /></svg>)
+    case 'bolt':   return (<svg {...props}><path d="M13 2L3 14h9l-1 8 10-12h-9z" /></svg>)
+    case 'shield': return (<svg {...props}><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6l8-3z" /><path d="M9 12l2 2 4-4" /></svg>)
+    case 'tag':    return (<svg {...props}><path d="M20 12l-8.5 8.5a2 2 0 01-2.8 0L2 13.8V4h9.8L20 12z" /><circle cx="7" cy="9" r="1.5" /></svg>)
+    case 'badge':  return (<svg {...props}><circle cx="12" cy="9" r="6" /><path d="M9 14l-2 7 5-3 5 3-2-7" /><path d="M9 9l2 2 4-4" /></svg>)
+    case 'pin':    return (<svg {...props}><path d="M12 22s-7-7.5-7-13a7 7 0 1114 0c0 5.5-7 13-7 13z" /><circle cx="12" cy="9" r="2.5" /></svg>)
+  }
+}
+
+// 12-image gallery mirrors the homepage.
+const GALLERY_IMAGES = ['job-80','job-82','job-83','job-85','job-86','job-87','job-88','job-89','job-90','job-92','job-94','job-96'].map((n) => `/images/gallery/${n}.jpg`)
+
 const ChevronIcon = ({ open }: { open: boolean }) => (
   <svg viewBox="0 0 20 20" className="w-5 h-5 shrink-0" style={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s', color: '#142C50' }} fill="none" aria-hidden="true">
     <path d="M5 8l5 5 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -119,6 +144,8 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
   const t = useTranslations('location')
   const tHomeReviews = useTranslations('home.reviews')
   const tHomeProducts = useTranslations('home.products')
+  const tHomeWhy = useTranslations('home.whyChoose')
+  const tHomeGallery = useTranslations('home.gallery')
   const tCalc = useTranslations('home.calculator')
   const tUsp = useTranslations('home.usp')
   const waLink = waRedirect(locale, undefined, locationSlug)
@@ -199,19 +226,48 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
         </div>
       </section>
 
-      {/* WHY CHOOSE */}
-      <section className="py-16 px-6" style={{ background: '#fff' }}>
+      {/* WHY CHOOSE — full 6-reason grid mirrors the homepage */}
+      <section className="py-16 px-6" style={{ background: '#fff' }} aria-labelledby="loc-why-heading">
         <div className="max-w-6xl mx-auto">
           <FadeSection>
-            <h3 className="text-2xl md:text-3xl font-bold text-center mb-10" style={{ color: '#142C50' }}>{t('why.heading', { city: cityName })}</h3>
+            <div className="text-center mb-10">
+              <h5 className="text-[11px] font-bold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{tHomeWhy('tag')}</h5>
+              <h3 id="loc-why-heading" className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--brand-ink)' }}>{t('why.heading', { city: cityName })}</h3>
+            </div>
           </FadeSection>
-          <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
-            {(['fast', 'transparent', 'brands', 'warranty'] as const).map((k) => (
-              <FadeSection key={k}>
-                <div className="why-card p-4 rounded-xl" style={{ background: '#FAF7F2', border: '1px solid rgba(20,28,48,0.10)' }}>
-                  <h5 className="text-sm font-normal" style={{ color: '#142C50', lineHeight: 1.6 }}>{t(`why.${k}`, { city: cityName })}</h5>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" style={{ gridAutoRows: '1fr' }}>
+            {REASON_ITEMS.map((r) => (
+              <FadeSection key={r.key}>
+                <div className="why-card p-5 rounded-2xl flex gap-4" style={{ background: 'var(--brand-cream)', border: '1px solid var(--line)', height: '100%' }}>
+                  <span className="shrink-0 inline-flex items-center justify-center rounded-full" style={{ width: 52, height: 52, background: 'var(--brand-yellow)', color: 'var(--brand-blue)' }} aria-hidden="true">
+                    <ReasonIcon name={r.icon} />
+                  </span>
+                  <div>
+                    <h5 className="text-sm font-bold mb-1" style={{ color: 'var(--brand-ink)' }}>{tHomeWhy(`${r.key}.title`)}</h5>
+                    <h5 className="text-xs font-normal" style={{ color: 'var(--muted)', lineHeight: 1.6 }}>{tHomeWhy(`${r.key}.description`)}</h5>
+                  </div>
                 </div>
               </FadeSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* GALLERY — mirrors the homepage 12-image grid */}
+      <section className="py-16 px-6" style={{ background: 'var(--brand-cream)' }} aria-labelledby="loc-gallery-heading">
+        <div className="max-w-6xl mx-auto">
+          <FadeSection>
+            <div className="text-center mb-10">
+              <h5 className="text-[11px] font-bold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-pink)' }}>{tHomeGallery('tag')}</h5>
+              <h3 id="loc-gallery-heading" className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--brand-ink)' }}>{tHomeGallery('heading')}</h3>
+            </div>
+          </FadeSection>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+            {GALLERY_IMAGES.map((src, i) => (
+              <div key={src} className="aspect-square rounded-xl overflow-hidden" style={{ background: '#fff', border: '1px solid var(--line)' }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={src} alt={tHomeGallery('imageAlt', { number: i + 1 })} className="w-full h-full object-cover" loading="lazy" />
+              </div>
             ))}
           </div>
         </div>
@@ -330,6 +386,7 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
         <div className="relative max-w-6xl mx-auto">
           <FadeSection>
             <div className="text-center mb-10">
+              <h5 className="text-[11px] font-bold uppercase tracking-widest mb-3" style={{ color: 'var(--brand-yellow)' }}>{tHomeReviews('tag')}</h5>
               <div className="flex items-center justify-center gap-2 mb-3">
                 <GoogleLogo />
                 <span className="text-sm font-medium text-white">{tHomeReviews('googleReviews')}</span>
@@ -339,7 +396,8 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
                 <div className="flex gap-0.5">{Array.from({ length: 5 }).map((_, i) => <GoogleStarIcon key={i} />)}</div>
               </div>
               <h3 className="text-2xl md:text-3xl font-bold text-white">{tHomeReviews('heading')}</h3>
-              <h5 className="text-xs font-normal mt-2" style={{ color: 'rgba(255,255,255,0.55)', lineHeight: 1.6 }}>{tHomeReviews('reviewCount')}</h5>
+              <h5 className="text-sm font-normal mt-2" style={{ color: 'rgba(255,255,255,0.75)', lineHeight: 1.6 }}>{tHomeReviews('subheading')}</h5>
+              <h5 className="text-xs font-normal mt-1" style={{ color: 'rgba(255,255,255,0.55)', lineHeight: 1.6 }}>{tHomeReviews('reviewCount')}</h5>
             </div>
           </FadeSection>
           <div className="grid md:grid-cols-3 gap-4">
