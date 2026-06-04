@@ -626,7 +626,7 @@ export default function HomePage() {
             <FadeSection>
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ letterSpacing: '-0.025em' }}>{t('finalCta.heading')}</h3>
               <h5 className="body-h5 text-sm mb-6" style={{ color: 'var(--brand-yellow)', lineHeight: '1.7', fontWeight: 400 }}>{t('finalCta.subheading')}</h5>
-              <div className="flex flex-col sm:flex-row justify-center items-center gap-3 mb-4">
+              <div className="flex justify-center items-center mb-4">
                 <WhatsAppClickTracker
                   label="final"
                   href={waRedirect(locale)}
@@ -635,16 +635,6 @@ export default function HomePage() {
                   className="wa-btn inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-lg font-bold text-white"
                 >
                   <WAIcon />{t('finalCta.ctaButton')}
-                </WhatsAppClickTracker>
-                <WhatsAppClickTracker
-                  label="final-secondary"
-                  href={waRedirect(locale)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="ghost-btn inline-flex items-center px-6 py-3.5 rounded-xl text-base font-semibold text-white"
-                  style={{ border: '2px solid rgba(255,255,255,0.3)' }}
-                >
-                  {t('common.whatsappUs')}
                 </WhatsAppClickTracker>
               </div>
               <h6 className="body-h6 text-xs font-normal" style={{ color: 'var(--brand-steel-light)' }}>{t('finalCta.supportingText')}</h6>
