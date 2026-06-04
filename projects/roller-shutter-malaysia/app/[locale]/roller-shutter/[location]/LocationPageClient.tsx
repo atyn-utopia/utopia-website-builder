@@ -128,6 +128,16 @@ export default function LocationPage() {
     motorised: '/images/product-motorised.jpg',
   }
 
+  // Mirrors the homepage trusted-by logo strip (same logos, localised label).
+  const trustLogos: { src: string; alt: string }[] = [
+    { src: '/brand-assets/20.png', alt: '99 Speedmart' },
+    { src: '/brand-assets/25.png', alt: 'TeaLive' },
+    { src: '/brand-assets/22.png', alt: 'AEON' },
+    { src: '/brand-assets/26.png', alt: 'FamilyMart' },
+    { src: '/brand-assets/27.png', alt: 'Giant' },
+    { src: '/brand-assets/23.png', alt: 'MR. D.I.Y.' },
+  ]
+
   const galleryAlts = t.raw('gallery.alts') as string[] | undefined
   // Yellow-bordered customer install photos only (matches homepage filter).
   const PHOTO_IDS = [32, 33, 34, 36, 38, 41, 42, 43, 44, 45, 47, 49] as const
@@ -215,6 +225,28 @@ export default function LocationPage() {
           </div>
         </section>
 
+        {/* ── TRUSTED BY — client / proof logo strip (mirrors homepage) ── */}
+        <section aria-label="Trusted by" style={{ background: '#fff', borderBottom: '1px solid var(--brand-border)' }}>
+          <div className="max-w-6xl mx-auto px-6 py-8">
+            <h6 className="trust-strip-label text-[10px] font-bold uppercase tracking-[0.22em] text-center mb-5" style={{ color: 'var(--brand-blue-dark)' }}>
+              {t('trustStrip.label')}
+            </h6>
+            <ul className="trust-strip flex flex-wrap items-center justify-center gap-x-10 gap-y-5">
+              {trustLogos.map((logo) => (
+                <li key={logo.src} className="trust-strip-item">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    className="trust-strip-logo"
+                    loading="lazy"
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
         {/* ── STATS ── */}
         <section aria-label="Statistics" style={{ background: 'var(--brand-charcoal)' }}>
           <div className="max-w-6xl mx-auto px-6 py-10">
@@ -229,36 +261,54 @@ export default function LocationPage() {
           </div>
         </section>
 
-        {/* ── PRODUCTS ── */}
+        {/* ── PRODUCTS — mirrors the homepage 3-column pricing-card grid ── */}
         <section id="products" className="py-16 px-6" style={{ background: 'var(--brand-surface)' }} aria-labelledby="products-heading">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h3 id="products-heading" className="text-2xl md:text-3xl font-bold mb-3" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.025em' }}>{t('products.heading')}</h3>
-              <h5 className="body-h5 text-sm max-w-2xl mx-auto" style={{ color: 'var(--brand-text-muted)', fontWeight: 400 }}>{t('products.subheading')}</h5>
-            </div>
-            <div className="space-y-6">
+            <FadeSection>
+              <div className="text-center mb-12">
+                <h3 id="products-heading" className="text-2xl md:text-3xl font-bold mb-3" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.025em' }}>{t('products.heading')}</h3>
+                <h5 className="body-h5 section-sub text-sm max-w-2xl mx-auto" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7', fontWeight: 400 }}>{t('products.subheading')}</h5>
+              </div>
+            </FadeSection>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {productKeys.map((key, i) => (
-                <ProductImpressionTracker key={key} slug={products[i].slug}>
-                  <div className={`product-card bg-white rounded-2xl overflow-hidden flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`} style={{ boxShadow: 'var(--shadow-md)', border: '1px solid var(--brand-border)' }}>
-                    <div className="relative md:w-2/5 h-56 md:h-auto overflow-hidden" style={{ background: 'var(--brand-gunmetal)', minHeight: '240px' }}>
-                      <img src={productImages[key]} alt={t('products.imageAltTemplate', { model: t(`products.items.${key}.name`) })} className="w-full h-full object-cover" loading="lazy" />
-                      <div className="absolute top-4 left-4 w-10 h-10 rounded-lg flex items-center justify-center text-sm font-extrabold" style={{ background: i % 2 === 0 ? 'var(--brand-yellow)' : 'var(--brand-blue)', color: i % 2 === 0 ? 'var(--brand-charcoal)' : '#fff' }}>0{i + 1}</div>
+                <FadeSection key={key} delay={i * 60}>
+                  <ProductImpressionTracker slug={products[i].slug}>
+                    <div className="product-card bg-white rounded-xl overflow-hidden flex flex-col h-full" style={{ boxShadow: 'var(--shadow-md)', border: '1px solid var(--brand-border)' }}>
+                      <div className="relative h-44 overflow-hidden" style={{ background: 'var(--brand-gunmetal)' }}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={productImages[key]}
+                          alt={t('products.imageAltTemplate', { model: t(`products.items.${key}.name`) })}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div className="p-4 flex flex-col flex-1">
+                        <h4 className="text-base mb-2" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.01em', lineHeight: 1.25, fontWeight: 600 }}>{t(`products.items.${key}.name`)}</h4>
+                        {/* Pricing — primary value signal. Coloured with the
+                            brand electric blue so it stands out from body text. */}
+                        <div className="mb-4">
+                          <h6 className="text-[10px] font-bold uppercase tracking-widest mb-0.5" style={{ color: 'var(--brand-text-muted)' }}>Harga dari</h6>
+                          <div className="flex items-baseline gap-1">
+                            <span className="text-xs font-bold leading-none" style={{ color: 'var(--brand-blue-dark)' }}>RM</span>
+                            <span className="text-2xl font-extrabold leading-none" style={{ color: 'var(--brand-blue-dark)', letterSpacing: '-0.03em' }}>{products[i].priceFrom?.toLocaleString('en-MY')}</span>
+                            <span className="text-[11px] font-medium ml-0.5" style={{ color: 'var(--brand-text-muted)' }}>/ {products[i].unit ?? 'unit'}</span>
+                          </div>
+                        </div>
+                        <WhatsAppClickTracker
+                          label={`product-${products[i].slug}-${locationSlug}`}
+                          href={WA_LINK}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="wa-btn inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs font-bold text-white mt-auto"
+                        >
+                          <WAIcon />{t(`products.items.${key}.cta`)}
+                        </WhatsAppClickTracker>
+                      </div>
                     </div>
-                    <div className="md:w-3/5 p-6 md:p-8 flex flex-col justify-center">
-                      <h4 className="text-lg md:text-xl font-bold mb-3" style={{ color: 'var(--brand-charcoal)', letterSpacing: '-0.02em' }}>{t(`products.items.${key}.name`)}</h4>
-                      <h5 className="body-h5 product-desc text-sm mb-4" style={{ color: 'var(--brand-text-muted)', lineHeight: '1.7', fontWeight: 400 }}>{t(`products.items.${key}.description`)}</h5>
-                      <WhatsAppClickTracker
-                        label={`product-${products[i].slug}-${locationSlug}`}
-                        href={WA_LINK}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="wa-btn inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-white self-start"
-                      >
-                        <WAIcon />{t(`products.items.${key}.cta`)}
-                      </WhatsAppClickTracker>
-                    </div>
-                  </div>
-                </ProductImpressionTracker>
+                  </ProductImpressionTracker>
+                </FadeSection>
               ))}
             </div>
           </div>

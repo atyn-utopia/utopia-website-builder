@@ -247,7 +247,7 @@ export default function HomePage() {
         <section aria-label="Trusted by" style={{ background: '#fff', borderBottom: '1px solid var(--brand-border)' }}>
           <div className="max-w-6xl mx-auto px-6 py-8">
             <h6 className="trust-strip-label text-[10px] font-bold uppercase tracking-[0.22em] text-center mb-5" style={{ color: 'var(--brand-blue-dark)' }}>
-              Trusted by leading Malaysian brands
+              {t('trustStrip.label')}
             </h6>
             <ul className="trust-strip flex flex-wrap items-center justify-center gap-x-10 gap-y-5">
               {trustLogos.map((logo) => (

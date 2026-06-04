@@ -465,6 +465,20 @@ body {
   .cta-pill { font-size: 13px; padding-left: 16px; padding-right: 16px; }
   /* Stretch CTA pills to full width in column-stacked CTA rows. */
   .hero-copy .cta-pill { width: 100%; }
+
+  /* Site-wide WhatsApp CTA step-down. The large hero / mid / final CTAs ship
+     at text-base / text-lg with px-6–px-8 padding — fine on desktop, but they
+     dominate a ~360px screen. Cap every .wa-btn to the same compact size as
+     .cta-pill (13px) so CTAs stay consistent across home + location on mobile.
+     Small CTAs (product cards, floating FAB) are already near this size, so
+     they're unaffected in practice. !important to beat the Tailwind size
+     utilities (px-8/py-4/text-lg). */
+  .wa-btn {
+    font-size: 13px !important;
+    padding: 11px 18px !important;
+    gap: 8px !important;
+  }
+  .wa-btn svg { width: 17px !important; height: 17px !important; }
 }
 
 /* Mobile: center most stacked content blocks (hero copy is already
