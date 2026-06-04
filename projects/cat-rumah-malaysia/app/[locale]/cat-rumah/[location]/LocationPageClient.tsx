@@ -380,9 +380,18 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
         </div>
       </section>
 
-      {/* REVIEWS — full 6-card grid mirrors the homepage */}
-      <section className="relative py-16 px-6 overflow-hidden" id="reviews" style={{ backgroundImage: 'linear-gradient(135deg, rgba(2, 61, 147, 0.88) 0%, rgba(2, 30, 76, 0.94) 100%), url(/images/painters/painter-bg.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-        <div className="absolute inset-0 hero-bg" role="img" aria-label={tHomeReviews('heading')} style={{ pointerEvents: 'none', backgroundImage: 'radial-gradient(circle at 80% 20%, rgba(255,210,63,0.16), transparent 55%)' }} />
+      {/* REVIEWS — dark section with a real painter-in-action background image */}
+      <section
+        id="reviews"
+        className="relative py-16 px-6 overflow-hidden"
+        aria-labelledby="reviews-heading"
+        style={{
+          backgroundImage: 'linear-gradient(135deg, rgba(2, 61, 147, 0.88) 0%, rgba(2, 42, 102, 0.94) 100%), url(/images/painters/painter-bg.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className="absolute inset-0 hero-bg" role="img" aria-label={tHomeReviews('heading')} aria-hidden="false" style={{ pointerEvents: 'none', backgroundImage: 'radial-gradient(circle at 80% 20%, rgba(255,210,63,0.18), transparent 55%), radial-gradient(circle at 15% 80%, rgba(233,30,99,0.10), transparent 55%)' }} />
         <div className="relative max-w-6xl mx-auto">
           <FadeSection>
             <div className="text-center mb-10">
@@ -395,20 +404,20 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
                 <span className="text-3xl font-bold" style={{ color: 'var(--brand-yellow)' }}>4.9</span>
                 <div className="flex gap-0.5">{Array.from({ length: 5 }).map((_, i) => <GoogleStarIcon key={i} />)}</div>
               </div>
-              <h3 className="text-2xl md:text-3xl font-bold text-white">{tHomeReviews('heading')}</h3>
+              <h3 id="reviews-heading" className="text-2xl md:text-3xl font-bold text-white">{tHomeReviews('heading')}</h3>
               <h5 className="text-sm font-normal mt-2" style={{ color: 'rgba(255,255,255,0.75)', lineHeight: 1.6 }}>{tHomeReviews('subheading')}</h5>
               <h5 className="text-xs font-normal mt-1" style={{ color: 'rgba(255,255,255,0.55)', lineHeight: 1.6 }}>{tHomeReviews('reviewCount')}</h5>
             </div>
           </FadeSection>
           <div className="grid md:grid-cols-3 gap-4">
-            {[1, 2, 3, 4, 5, 6].map((n) => (
+            {[1, 2, 3, 4, 5, 6].map((n, i) => (
               <FadeSection key={n}>
                 <article className="p-5 rounded-2xl h-full flex flex-col" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.10)' }}>
                   <div className="flex items-center gap-2 mb-3">
                     <GoogleLogo />
                     <div className="flex gap-0.5">{Array.from({ length: 5 }).map((_, j) => <GoogleStarIcon key={j} />)}</div>
                   </div>
-                  <blockquote className="text-sm font-normal mb-5 flex-1" style={{ color: 'rgba(255,255,255,0.88)', lineHeight: 1.6 }}>&ldquo;{tHomeReviews(`review${n}Text`)}&rdquo;</blockquote>
+                  <blockquote className="review-body text-sm font-normal mb-5 flex-1" style={{ color: 'rgba(255,255,255,0.88)', lineHeight: 1.6 }}>&ldquo;{tHomeReviews(`review${n}Text`)}&rdquo;</blockquote>
                   <div className="flex items-center gap-2.5 mt-auto">
                     <div className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold shrink-0" style={{ background: 'var(--brand-yellow)', color: 'var(--brand-ink)' }}>
                       {tHomeReviews(`review${n}Name`).split(' ').map((w: string) => w[0]).join('').slice(0, 2)}

@@ -110,7 +110,7 @@
       "packageSingle": "1 面重点墙（≤ 60 平方尺）",
       "packageMedium": "2 面重点墙（≤ 120 平方尺）",
       "packageLarge": "整间房（≤ 250 平方尺）",
-      "messageTemplate": "您好 Cat Rumah Express，我对{service}感兴趣。我的估价：RM{price}（面积/套餐：{detail}）。可以获得固定报价吗？",
+      "messageTemplate": "您好 Cat Rumah Express，我对{service}感兴趣。我的估价：Dari RM{price}（面积/套餐：{detail}）。可以获得固定报价吗？",
       "areaPlaceholder": "例如：1000",
       "minArea": 50
     },

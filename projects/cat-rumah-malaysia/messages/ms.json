@@ -146,7 +146,7 @@
       "packageSingle": "1 dinding aksen (≤ 60 sqft)",
       "packageMedium": "2 dinding aksen (≤ 120 sqft)",
       "packageLarge": "Ruang penuh (≤ 250 sqft)",
-      "messageTemplate": "Hi Cat Rumah Express, saya minat servis {service}. Anggaran saya: RM{price} (keluasan/pakej: {detail}). Boleh dapatkan quote tetap?",
+      "messageTemplate": "Hi Cat Rumah Express, saya minat servis {service}. Anggaran saya: Dari RM{price} (keluasan/pakej: {detail}). Boleh dapatkan quote tetap?",
       "areaPlaceholder": "Contoh: 1000",
       "minArea": 50
     },

@@ -110,7 +110,7 @@
       "packageSingle": "1 accent wall (≤ 60 sqft)",
       "packageMedium": "2 accent walls (≤ 120 sqft)",
       "packageLarge": "Full room (≤ 250 sqft)",
-      "messageTemplate": "Hi Cat Rumah Express, I'm interested in {service}. My estimate: RM{price} (area/package: {detail}). Can I get a fixed quote?",
+      "messageTemplate": "Hi Cat Rumah Express, I'm interested in {service}. My estimate: Dari RM{price} (area/package: {detail}). Can I get a fixed quote?",
       "areaPlaceholder": "e.g. 1000",
       "minArea": 50
     },
