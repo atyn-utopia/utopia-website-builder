@@ -1,0 +1,297 @@
+{
+  "metadata": {
+    "title": "马来西亚冷库出租 | 清真，当天送达",
+    "description": "租赁 -18°C 冷冻库、冷冻室、冷藏库与冷藏室，覆盖马来西亚 13 州。清真认证，当天送达。WhatsApp 免费报价。"
+  },
+  "nav": {
+    "brandName": "马来西亚冷库",
+    "products": "冷库",
+    "howItWorks": "服务流程",
+    "reviews": "客户评价",
+    "locations": "服务地点",
+    "faq": "常见问题",
+    "blog": "博客",
+    "ctaShort": "WhatsApp 报价",
+    "ctaButton": "WhatsApp 报价"
+  },
+  "fomoBanner": {
+    "headline": "本周冷库名额有限，抢在倒计时结束前预订",
+    "bookNow": "立即预订 →"
+  },
+  "hero": {
+    "eyebrow": "五星级冷库租赁服务",
+    "h1": "<accent>冷库</accent>出租，覆盖全马交付",
+    "h2": "当天送达，清真车队，覆盖 13 州。从 -18°C 冷冻到 +10°C 冷藏，WhatsApp 5 分钟完成预订。",
+    "primaryCta": "WhatsApp 报价",
+    "secondaryCta": "查看温度等级",
+    "tempLabels": {
+      "frozen-storage-minus-18": "冷冻",
+      "freezer-minus-5-to-minus-10": "冷冻室",
+      "chiller-2-to-4": "冷藏",
+      "cool-storage-7-to-10": "冷藏室"
+    },
+    "microStats": {
+      "tonnes": "吨已送达",
+      "customers": "满意客户",
+      "onTime": "准时率"
+    }
+  },
+  "usp": {
+    "delivery": {
+      "title": "当天送达",
+      "subtitle": "中午前下单，傍晚通电启用。"
+    },
+    "halal": {
+      "title": "100% 清真认证",
+      "subtitle": "符合 JAKIM 冷链协议。"
+    },
+    "whatsapp": {
+      "title": "WhatsApp 5 分钟回复",
+      "subtitle": "报价比烧水还快。"
+    }
+  },
+  "stats": {
+    "heading": "马来西亚商家信赖之选",
+    "tonnes": {
+      "value": "256,800+",
+      "label": "吨已送达"
+    },
+    "customers": {
+      "value": "1,730+",
+      "label": "满意客户"
+    },
+    "states": {
+      "value": "13",
+      "label": "覆盖州属"
+    },
+    "response": {
+      "value": "5 分钟",
+      "label": "平均回复"
+    }
+  },
+  "products": {
+    "eyebrow": "马来西亚最便宜冷链物流",
+    "heading": "我们的冷库出租服务",
+    "subheading": "一项可靠的冷库出租服务。四种温度选项满足您的货物需求。覆盖 13 个西马州属，当天送达。",
+    "priceFrom": "RM{price} 起",
+    "perPalletDay": "每托盘 / 天",
+    "cta": "WhatsApp 报价",
+    "tempOptionsLabel": "可选温度范围",
+    "tempItems": {
+      "frozen-storage-minus-18": "冷冻肉类、鸡肉、水果和蔬菜。",
+      "freezer-minus-5-to-minus-10": "面包和披萨面团、糕点和冰淇淋。",
+      "chiller-2-to-4": "乳制品、牛奶、奶酪、黄油、鲜花。",
+      "cool-storage-7-to-10": "药品、饮料和酱料。"
+    },
+    "tierKind": {
+      "frozen-storage-minus-18": "冷冻库",
+      "freezer-minus-5-to-minus-10": "冷冻室",
+      "chiller-2-to-4": "冷藏库",
+      "cool-storage-7-to-10": "冷藏室"
+    }
+  },
+  "howItWorks": {
+    "eyebrow": "3 个步骤",
+    "heading": "3 步租到您的冷库",
+    "steps": [
+      {
+        "title": "WhatsApp 告诉我们",
+        "body": "通过 WhatsApp 分享您的货物、温度等级、地点和日期，全程一个对话窗口。"
+      },
+      {
+        "title": "确认等级与日期",
+        "body": "我们 5 分钟内发送报价。您确认即预订，无需文件，无押金来电。"
+      },
+      {
+        "title": "送达并通电启用",
+        "body": "当天送达，现场安装，通电测试。我们离开的瞬间，您即可开始储存。"
+      }
+    ]
+  },
+  "risk": {
+    "eyebrow": "冷链现实",
+    "heading": "冷链失效的代价远超租金",
+    "body": "一次停电、一次延迟、一个不靠谱的供应商，您的库存就全没了。租赁式冷库为您提供今天就能通电的冗余保障。",
+    "bullets": [
+      "因延迟送达导致肉类、海鲜、乳制品变质。",
+      "超市溢出库存无处可放，损失收入。",
+      "因冷链失控导致清真认证作废。",
+      "因温度违规导致药品和疫苗审计失败。"
+    ],
+    "compare": {
+      "withoutLabel": "不用我们",
+      "withLabel": "使用我们",
+      "spoiled": "每次事故平均损失",
+      "saved": "每天每托盘"
+    }
+  },
+  "midCta": {
+    "heading": "今天就需要冷库？",
+    "body": "WhatsApp 告知货物和地点，我们 5 分钟内报价，当天送达。",
+    "cta": "WhatsApp 报价"
+  },
+  "reviews": {
+    "eyebrow": "Google 4.9 星 · 230+ 条评价",
+    "heading": "马来西亚商家这样说",
+    "items": [
+      {
+        "initials": "AH",
+        "name": "Ahmad Hafiz",
+        "role": "餐饮业者，莎阿南",
+        "body": "上午 11 点预订，下午 5 点通电。冷柜坏掉时救了我整批冷冻肉类货。"
+      },
+      {
+        "initials": "WL",
+        "name": "Wendy Lim",
+        "role": "烘焙店主，八打灵再也",
+        "body": "冷冻室在开斋节高峰期完美保存了我们的披萨面团。WhatsApp 秒回。"
+      },
+      {
+        "initials": "RJ",
+        "name": "Raj Kumar",
+        "role": "海鲜批发，巴生港",
+        "body": "我每月租两台 -18°C 单元。清真隔离、准时、团队真的会接电话。"
+      },
+      {
+        "initials": "MS",
+        "name": "Mei Sin Tan",
+        "role": "药品分销，赛城",
+        "body": "7-10°C 冷藏室正是审计要求的范围。文件干净随时备查。"
+      },
+      {
+        "initials": "FA",
+        "name": "Faridah Aziz",
+        "role": "宴会承办，哥打巴鲁",
+        "body": "宴会用了 3 次冷藏室。司机每次都准时，连吉兰丹这边都是。"
+      },
+      {
+        "initials": "KC",
+        "name": "Kelvin Chong",
+        "role": "冷藏运输，柔佛",
+        "body": "和他们的冷藏车租赁完美搭配，一个 WhatsApp 对话搞定端到端冷链。"
+      }
+    ]
+  },
+  "whyChoose": {
+    "eyebrow": "为什么选择我们",
+    "heading": "运营商为何选择我们",
+    "featured": {
+      "badge": "100% 清真",
+      "title": "全程清真认证冷链车队",
+      "body": "符合 JAKIM 协议、隔离储存、清洁日志可审计。您的清真认证全程不受影响。"
+    },
+    "tiles": [
+      {
+        "title": "当天送达",
+        "body": "中午前下单，傍晚通电，覆盖整个西马。"
+      },
+      {
+        "title": "WhatsApp 5 分钟回复",
+        "body": "真人客服、真实报价，无机器人乒乓。"
+      },
+      {
+        "title": "覆盖 13 州",
+        "body": "从玻璃市到柔佛，全西马物流网络。"
+      },
+      {
+        "title": "冷藏车加购",
+        "body": "冷库 + 冷藏车在一个订单内完成。"
+      }
+    ]
+  },
+  "gallery": {
+    "eyebrow": "项目展示",
+    "heading": "近期客户冷库项目",
+    "subheading": "从冷冻海鲜仓到烘焙冷冻室，真实的马来西亚商家项目。"
+  },
+  "locationsSection": {
+    "eyebrow": "服务覆盖",
+    "heading": "覆盖马来西亚的冷库租赁",
+    "subheading": "覆盖 13 个西马州属共 153 个子地点。点击州属查看覆盖城市。",
+    "cities": "城市"
+  },
+  "nearby": {
+    "heading": "{city}附近冷库租赁"
+  },
+  "faq": {
+    "eyebrow": "常见问题",
+    "heading": "冷库租赁常见问题",
+    "items": [
+      {
+        "q": "你们多快可以送达冷库？",
+        "a": "在中午前通过 WhatsApp 预订，我们可在大多数西马地区当天送达。其他时间次日送达为标准选项。"
+      },
+      {
+        "q": "你们的冷库是清真的吗？",
+        "a": "是。每个单元都符合 JAKIM 协议，并采用清真隔离储存方案。可应要求提供清真审计文件。"
+      },
+      {
+        "q": "你们提供哪些温度范围？",
+        "a": "四个等级：-18°C 冷冻、-5°C 至 -10°C 冷冻室、2°C 至 4°C 冷藏、7°C 至 10°C 冷藏室。需要定制？WhatsApp 联系我们。"
+      },
+      {
+        "q": "覆盖全部 13 个西马州属吗？",
+        "a": "是，从北部的玻璃市到南部的柔佛，包括布城、槟城和东海岸。共 153 个子地点。"
+      },
+      {
+        "q": "价格如何计算？",
+        "a": "RM5–RM8 / 托盘 / 天，依温度等级而定。月租有折扣。最终报价 5 分钟内通过 WhatsApp 提供。"
+      },
+      {
+        "q": "可以租少于一周吗？",
+        "a": "可以，支持日租。多数客户租 3–14 天；部分客户月租享折扣。最低 1 天起租。"
+      },
+      {
+        "q": "你们也提供冷藏车送货吗？",
+        "a": "是，我们运营 Cold Truck Malaysia。可在同一对话内完成车 + 库的冷链全套预订。"
+      },
+      {
+        "q": "如果停电了怎么办？",
+        "a": "所有单元都有温度警报，并提供 24 小时紧急专线。雪兰莪/吉隆坡区域内备用单元 4 小时可达。"
+      }
+    ]
+  },
+  "finalCta": {
+    "eyebrow": "准备预订？",
+    "heading": "5 分钟内拿到您的冷库报价",
+    "body": "WhatsApp 联系团队。告诉我们货物、日期和地点。我们当场报价，当天送达覆盖全部 13 个西马州属。",
+    "cta": "立即 WhatsApp",
+    "trustTags": [
+      "当天送达",
+      "100% 清真",
+      "5 分钟回复"
+    ]
+  },
+  "footer": {
+    "brandName": "马来西亚冷库",
+    "tagline": "覆盖西马的冷库租赁与冷链物流。由 Cold Truck Malaysia Sdn. Bhd. 提供支持。",
+    "cols": {
+      "products": "冷库",
+      "cities": "主要城市",
+      "languages": "语言"
+    },
+    "quickLinks": "快速链接",
+    "contact": "联系",
+    "ssm": "",
+    "rights": "版权所有。",
+    "poweredBy": "Utopia Group 旗下公司",
+    "copyright": "© 2026 马来西亚冷库. 版权所有。"
+  },
+  "stickyFab": {
+    "ariaLabel": "WhatsApp 我们，5 分钟内报价"
+  },
+  "blog": {
+    "title": "冷库与冷链洞察",
+    "subtitle": "马来西亚冷库租赁实用指南",
+    "metaTitle": "冷库与冷链博客 | 马来西亚冷库出租",
+    "metaDescription": "关于冷库租赁、清真冷链、冷冻储存、冷藏室与马来西亚冷链物流的实用指南。",
+    "readMore": "阅读更多",
+    "recentPosts": "近期文章",
+    "publishedOn": "发布于",
+    "minRead": "分钟阅读",
+    "backToBlog": "返回博客",
+    "noPosts": "暂无文章，请稍后再来。",
+    "breadcrumbHome": "首页",
+    "breadcrumbBlog": "博客"
+  }
+}

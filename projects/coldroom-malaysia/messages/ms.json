@@ -1,0 +1,297 @@
+{
+  "metadata": {
+    "title": "Sewa Cold Room Malaysia | HALAL, Penghantaran Hari Ini",
+    "description": "Sewa cold room beku -18°C, freezer, chiller & stor sejuk di Malaysia. HALAL, penghantaran hari yang sama, 13 negeri. Sebut harga WhatsApp."
+  },
+  "nav": {
+    "brandName": "Cold Room Malaysia",
+    "products": "Cold Room",
+    "howItWorks": "Cara Kerja",
+    "reviews": "Ulasan",
+    "locations": "Lokasi",
+    "faq": "Soalan Lazim",
+    "blog": "Blog",
+    "ctaShort": "Sebut Harga",
+    "ctaButton": "Sebut Harga"
+  },
+  "fomoBanner": {
+    "headline": "Slot cold room terhad, rebut sebelum hari ini tamat dalam",
+    "bookNow": "Tempah Slot →"
+  },
+  "hero": {
+    "eyebrow": "Perkhidmatan Sewa Cold Room 5 Bintang",
+    "h1": "Sewa <accent>Cold Room</accent> Berpenyaman, Dihantar Seluruh Malaysia",
+    "h2": "Penghantaran hari yang sama, armada HALAL, 13 negeri. Pilih dari -18°C hingga +10°C, tempah dalam 5 minit melalui WhatsApp.",
+    "primaryCta": "WhatsApp Sebut Harga",
+    "secondaryCta": "Lihat Tahap Suhu",
+    "tempLabels": {
+      "frozen-storage-minus-18": "Beku",
+      "freezer-minus-5-to-minus-10": "Freezer",
+      "chiller-2-to-4": "Chiller",
+      "cool-storage-7-to-10": "Stor Sejuk"
+    },
+    "microStats": {
+      "tonnes": "tan dihantar",
+      "customers": "pelanggan gembira",
+      "onTime": "tepat masa"
+    }
+  },
+  "usp": {
+    "delivery": {
+      "title": "Penghantaran Hari Ini",
+      "subtitle": "Tempah sebelum tengah hari, siap dipasang petang."
+    },
+    "halal": {
+      "title": "100% HALAL Sah",
+      "subtitle": "Protokol rantaian sejuk selaras JAKIM."
+    },
+    "whatsapp": {
+      "title": "Balas WhatsApp 5 Minit",
+      "subtitle": "Sebut harga sebelum air ketel mendidih."
+    }
+  },
+  "stats": {
+    "heading": "Dipercayai Seluruh Malaysia",
+    "tonnes": {
+      "value": "256,800+",
+      "label": "Tan Dihantar"
+    },
+    "customers": {
+      "value": "1,730+",
+      "label": "Pelanggan Gembira"
+    },
+    "states": {
+      "value": "13",
+      "label": "Negeri Diliputi"
+    },
+    "response": {
+      "value": "5 min",
+      "label": "Purata Balas WhatsApp"
+    }
+  },
+  "products": {
+    "eyebrow": "Logistik Rantaian Sejuk Termurah di Malaysia",
+    "heading": "Perkhidmatan Sewa Cold Room Kami",
+    "subheading": "Satu perkhidmatan sewa cold room dipercayai. Empat pilihan suhu untuk barang anda. Penghantaran hari yang sama di 13 negeri Semenanjung.",
+    "priceFrom": "Dari RM{price}",
+    "perPalletDay": "sehari / palet",
+    "cta": "Sebut Harga",
+    "tempOptionsLabel": "Pilihan Julat Suhu",
+    "tempItems": {
+      "frozen-storage-minus-18": "Daging beku, ayam, buah dan sayur.",
+      "freezer-minus-5-to-minus-10": "Roti dan doh pizza, pastri dan ais krim.",
+      "chiller-2-to-4": "Produk tenusu, susu, keju, mentega, bunga.",
+      "cool-storage-7-to-10": "Farmaseutikal, minuman dan sos."
+    },
+    "tierKind": {
+      "frozen-storage-minus-18": "Storan Beku",
+      "freezer-minus-5-to-minus-10": "Bilik Freezer",
+      "chiller-2-to-4": "Bilik Chiller",
+      "cool-storage-7-to-10": "Stor Sejuk"
+    }
+  },
+  "howItWorks": {
+    "eyebrow": "3 Langkah",
+    "heading": "Sewa Cold Room Dalam 3 Langkah",
+    "steps": [
+      {
+        "title": "Hubungi WhatsApp",
+        "body": "Kongsi barang, tahap suhu, lokasi dan tarikh, semua di WhatsApp."
+      },
+      {
+        "title": "Sahkan tahap & tarikh",
+        "body": "Kami hantar sebut harga dalam 5 minit. Anda sahkan dan tempah, tiada kertas, tiada panggilan deposit."
+      },
+      {
+        "title": "Dihantar & dipasang",
+        "body": "Penghantaran hari yang sama, pemasangan di tapak, diuji. Anda mula simpan sebaik kami beredar."
+      }
+    ]
+  },
+  "risk": {
+    "eyebrow": "Realiti Rantaian Sejuk",
+    "heading": "Kegagalan Rantaian Sejuk Lebih Mahal Dari Sewaan",
+    "body": "Satu blackout, satu penghantaran lewat, satu pembekal cuai, inventori anda hangus. Sewaan berpenyaman beri redundansi yang boleh dipasang hari ini.",
+    "bullets": [
+      "Daging, makanan laut dan tenusu rosak akibat penghantaran lewat.",
+      "Hilang hasil bila lebihan stor pasaraya tiada tempat.",
+      "Sijil HALAL terbatal akibat rantaian sejuk tak terkawal.",
+      "Farmaseutikal & vaksin gagal audit akibat pelanggaran suhu."
+    ],
+    "compare": {
+      "withoutLabel": "Tanpa kami",
+      "withLabel": "Dengan kami",
+      "spoiled": "Purata kerugian setiap insiden",
+      "saved": "sehari, sepalet"
+    }
+  },
+  "midCta": {
+    "heading": "Perlu Cold Room Hari Ini?",
+    "body": "WhatsApp kami dengan barang dan lokasi anda, sebut harga dalam 5 minit dan hantar hari yang sama.",
+    "cta": "Sebut Harga WhatsApp"
+  },
+  "reviews": {
+    "eyebrow": "Penarafan 4.9 Google · 230+ Ulasan",
+    "heading": "Apa Kata Perniagaan Malaysia",
+    "items": [
+      {
+        "initials": "AH",
+        "name": "Ahmad Hafiz",
+        "role": "Operator F&B, Shah Alam",
+        "body": "Tempah pukul 11 pagi, dipasang pukul 5 petang. Selamatkan seluruh kiriman daging beku saya bila chiller pecah."
+      },
+      {
+        "initials": "WL",
+        "name": "Wendy Lim",
+        "role": "Pemilik Bakeri, Petaling Jaya",
+        "body": "Cold room freezer simpan doh pizza kami sempurna sepanjang sambutan Hari Raya. Balas WhatsApp serta-merta."
+      },
+      {
+        "initials": "RJ",
+        "name": "Raj Kumar",
+        "role": "Borong Makanan Laut, Port Klang",
+        "body": "Saya sewa dua unit -18°C bulanan. HALAL-segregasi, tepat masa, dan team angkat telefon betul-betul."
+      },
+      {
+        "initials": "MS",
+        "name": "Mei Sin Tan",
+        "role": "Pengedar Farmasi, Cyberjaya",
+        "body": "Stor sejuk 7-10°C tepat seperti audit perlukan. Dokumentasi bersih dan sedia."
+      },
+      {
+        "initials": "FA",
+        "name": "Faridah Aziz",
+        "role": "Katering, Kota Bharu",
+        "body": "Guna chiller untuk kenduri 3 kali. Pemandu tepat masa setiap kali, walau dari Kelantan."
+      },
+      {
+        "initials": "KC",
+        "name": "Kelvin Chong",
+        "role": "Logistik Trak Sejuk, Johor",
+        "body": "Padan sempurna dengan sewa trak sejuk mereka, rantaian sejuk hujung-ke-hujung dalam satu thread WhatsApp."
+      }
+    ]
+  },
+  "whyChoose": {
+    "eyebrow": "Mengapa Cold Room Malaysia",
+    "heading": "Mengapa Operator Pilih Kami",
+    "featured": {
+      "badge": "100% HALAL",
+      "title": "Armada Rantaian Sejuk HALAL Sepenuhnya",
+      "body": "Protokol selaras JAKIM, storan bersegregasi, log pencucian diaudit. Sijil HALAL anda kekal utuh hujung-ke-hujung."
+    },
+    "tiles": [
+      {
+        "title": "Penghantaran Hari Ini",
+        "body": "Tempah sebelum tengah hari, dipasang petang seluruh Semenanjung Malaysia."
+      },
+      {
+        "title": "Balas WhatsApp 5 Minit",
+        "body": "Manusia sebenar, sebut harga sebenar, tiada chatbot."
+      },
+      {
+        "title": "Liputan 13 Negeri",
+        "body": "Dari Perlis ke Johor, rangkaian logistik Semenanjung penuh."
+      },
+      {
+        "title": "Tambahan Trak Sejuk",
+        "body": "Pasangkan cold room dengan penghantaran trak sejuk dalam satu tempahan."
+      }
+    ]
+  },
+  "gallery": {
+    "eyebrow": "Galeri Projek",
+    "heading": "Cold Room Pelanggan Terkini",
+    "subheading": "Dari gudang makanan laut beku ke bilik freezer bakeri, projek Malaysia sebenar yang kami kuasakan."
+  },
+  "locationsSection": {
+    "eyebrow": "Liputan Perkhidmatan",
+    "heading": "Sewa Cold Room Seluruh Malaysia",
+    "subheading": "153 sub-lokasi diliputi merentasi 13 negeri Semenanjung. Ketuk negeri anda untuk lihat bandar yang diliputi.",
+    "cities": "bandar"
+  },
+  "nearby": {
+    "heading": "Sewa Cold Room Berhampiran {city}"
+  },
+  "faq": {
+    "eyebrow": "Soalan Lazim",
+    "heading": "Soalan Lazim Sewa Cold Room",
+    "items": [
+      {
+        "q": "Berapa cepat anda boleh hantar cold room?",
+        "a": "Penghantaran hari yang sama tersedia untuk kebanyakan lokasi Semenanjung Malaysia bila tempah sebelum tengah hari melalui WhatsApp. Selepas itu, hari berikutnya adalah standard."
+      },
+      {
+        "q": "Adakah cold room anda HALAL?",
+        "a": "Ya, setiap unit selaras JAKIM dan diselenggarakan dengan protokol storan HALAL-bersegregasi. Kami boleh bekalkan dokumentasi audit HALAL atas permintaan."
+      },
+      {
+        "q": "Apakah julat suhu yang ditawarkan?",
+        "a": "Empat tahap: beku -18°C, freezer -5°C hingga -10°C, chiller 2°C hingga 4°C, dan stor sejuk 7°C hingga 10°C. Perlukan julat khusus? WhatsApp kami."
+      },
+      {
+        "q": "Adakah anda layan ke-13 negeri Semenanjung?",
+        "a": "Ya, dari Perlis di utara ke Johor di selatan, termasuk Putrajaya, Pulau Pinang, dan Pantai Timur. 153 sub-lokasi diliputi."
+      },
+      {
+        "q": "Bagaimana harga dikira?",
+        "a": "Dari RM5–RM8 setiap palet sehari bergantung pada tahap suhu. Diskaun jumlah tersedia untuk sewaan bulanan. Sebut harga akhir dalam 5 minit melalui WhatsApp."
+      },
+      {
+        "q": "Boleh sewa kurang seminggu?",
+        "a": "Ya, sewaan harian disokong. Kebanyakan pelanggan sewa 3–14 hari; sesetengah sewa bulanan dengan diskaun. Minimum 1 hari."
+      },
+      {
+        "q": "Adakah anda menyediakan penghantaran trak sejuk juga?",
+        "a": "Ya, kami operasikan Cold Truck Malaysia. Anda boleh tempah trak + bilik dalam satu thread untuk penyelesaian rantaian sejuk lengkap."
+      },
+      {
+        "q": "Bagaimana jika ada gangguan elektrik?",
+        "a": "Semua unit ada penggera suhu dan kami sediakan talian kecemasan 24 jam. Unit sandaran boleh dihantar dalam 4 jam di kawasan KL/Selangor."
+      }
+    ]
+  },
+  "finalCta": {
+    "eyebrow": "Sedia untuk Tempah?",
+    "heading": "Dapatkan Sebut Harga Cold Room Dalam 5 Minit",
+    "body": "WhatsApp pasukan kami. Beritahu barang, tarikh dan lokasi. Kami sebut harga di tempat dan hantar hari yang sama merentasi ke-13 negeri Semenanjung.",
+    "cta": "WhatsApp Sekarang",
+    "trustTags": [
+      "Penghantaran hari ini",
+      "100% HALAL",
+      "Balasan 5 minit"
+    ]
+  },
+  "footer": {
+    "brandName": "Cold Room Malaysia",
+    "tagline": "Sewa cold room berpenyaman & logistik rantaian sejuk merentasi Semenanjung Malaysia. Dikuasakan oleh Cold Truck Malaysia Sdn. Bhd.",
+    "cols": {
+      "products": "Cold Room",
+      "cities": "Bandar Utama",
+      "languages": "Bahasa"
+    },
+    "quickLinks": "Pautan Pantas",
+    "contact": "Hubungi",
+    "ssm": "",
+    "rights": "Hak cipta terpelihara.",
+    "poweredBy": "Sebuah syarikat Utopia Group",
+    "copyright": "© 2026 Cold Room Malaysia. Hak cipta terpelihara."
+  },
+  "stickyFab": {
+    "ariaLabel": "WhatsApp kami, sebut harga dalam 5 minit"
+  },
+  "blog": {
+    "title": "Wawasan Cold Room & Rantaian Sejuk",
+    "subtitle": "Panduan praktikal sewa cold room di Malaysia",
+    "metaTitle": "Blog Cold Room & Rantaian Sejuk | Cold Room Malaysia",
+    "metaDescription": "Panduan praktikal sewa cold room, rantaian sejuk HALAL, storan beku, chiller dan logistik rantaian sejuk Malaysia.",
+    "readMore": "Baca Lagi",
+    "recentPosts": "Pos Terkini",
+    "publishedOn": "Diterbitkan pada",
+    "minRead": "min baca",
+    "backToBlog": "Kembali ke Blog",
+    "noPosts": "Tiada pos lagi. Sila kembali tidak lama lagi.",
+    "breadcrumbHome": "Laman Utama",
+    "breadcrumbBlog": "Blog"
+  }
+}
