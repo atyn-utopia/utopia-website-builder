@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "scan": "tsx scripts/scan.ts",
+    "scaffold": "tsx scripts/scaffold-site.ts",
     "gate": "tsx scripts/gate.ts",
     "guardrails": "tsx scripts/gen-guardrails.ts",
     "check-meta:sync": "tsx scripts/check-meta-sync.ts",
