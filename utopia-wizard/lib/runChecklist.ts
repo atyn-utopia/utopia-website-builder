@@ -1,5 +1,6 @@
 import { getProjectInfo, ProjectInfo } from './projectInfo'
 import { runChecksForProject, CheckGroup, totalCheckCount } from './checklist'
+import { scorePct } from './score'
 import { findRegisteredDomainsByPhone, findRegisteredDomainsByKeyword } from './supabaseChecks'
 
 export interface ChecklistRun {
@@ -12,6 +13,8 @@ export interface ChecklistRun {
   passed: number
   total: number
   failedCount: number
+  /** 0–100 score = % of applicable (non-skipped) checks passing. Always /100. */
+  score: number
   groups: CheckGroup[]
   ranAt: string
 }
@@ -111,6 +114,7 @@ export async function runChecklist(
     passed,
     total,
     failedCount,
+    score: scorePct(passed, failedCount),
     groups,
     ranAt: new Date().toISOString(),
   }
