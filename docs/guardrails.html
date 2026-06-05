@@ -61,8 +61,8 @@
 </header>
 <div class="wrap">
   <div class="stats">
-    <div class="stat"><div class="n">100</div><div class="l">Total rules</div></div>
-    <div class="stat block"><div class="n">54</div><div class="l">Blocking</div></div>
+    <div class="stat"><div class="n">101</div><div class="l">Total rules</div></div>
+    <div class="stat block"><div class="n">55</div><div class="l">Blocking</div></div>
     <div class="stat adv"><div class="n">46</div><div class="l">Advisory</div></div>
     <div class="stat"><div class="n">10</div><div class="l">Categories</div></div>
   </div>
@@ -711,7 +711,7 @@
       </table>
     </section>
     <section class="group" data-group="Deployment">
-      <h2>Deployment <span class="gcount">3 rules · 3 blocking</span></h2>
+      <h2>Deployment <span class="gcount">4 rules · 4 blocking</span></h2>
       <table>
         <thead><tr><th>Severity</th><th>Rule</th><th>Check id</th><th>Doc</th></tr></thead>
         <tbody>
@@ -725,6 +725,12 @@
         <td><span class="badge sev-block">BLOCKING</span></td>
         <td class="rule-name">Deploy URL responds</td>
         <td><code>deploy-url-live</code></td>
+        <td><a href="full-website-setup.md#16-step-14--deploy" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="siteconfig.domain is served by vercel vercel-domain-match">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">siteConfig.domain is served by Vercel</td>
+        <td><code>vercel-domain-match</code></td>
         <td><a href="full-website-setup.md#16-step-14--deploy" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
       <tr class="rule" data-sev="blocking" data-text="live site reads phone from supabase live-db-connected">

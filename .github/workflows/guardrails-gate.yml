@@ -77,6 +77,10 @@ jobs:
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          # Lets the vercel-domain-match check ask Vercel what domains the project
+          # actually serves. Without these the check skips (never false-fails).
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_TEAM_ID: ${{ secrets.VERCEL_TEAM_ID }}
         run: npx tsx scripts/gate.ts --ratchet ${{ steps.changed.outputs.slugs }}
 
       - name: No projects changed

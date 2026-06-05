@@ -151,6 +151,7 @@ export const CHECK_META: CheckMeta[] = [
   // ── Deployment ──────────────────────────────────────────────────────────────
   { id: 'vercel-linked',                  group: 'Deployment', severity: 'blocking', doc: DEPLOY, name: 'Vercel project linked' },
   { id: 'deploy-url-live',                group: 'Deployment', severity: 'blocking', doc: DEPLOY, name: 'Deploy URL responds' },
+  { id: 'vercel-domain-match',            group: 'Deployment', severity: 'blocking', doc: DEPLOY, name: 'siteConfig.domain is served by Vercel' },
   { id: 'live-db-connected',              group: 'Deployment', severity: 'blocking', doc: DEPLOY, name: 'Live site reads phone from Supabase' },
 
   // ── Quality ─────────────────────────────────────────────────────────────────
