@@ -9,6 +9,7 @@
     "scan": "tsx scripts/scan.ts",
     "scaffold": "tsx scripts/scaffold-site.ts",
     "chrome:check": "tsx scripts/chrome-check.ts",
+    "chrome:sync": "tsx scripts/chrome-sync.ts",
     "gate": "tsx scripts/gate.ts",
     "guardrails": "tsx scripts/gen-guardrails.ts",
     "check-meta:sync": "tsx scripts/check-meta-sync.ts",
