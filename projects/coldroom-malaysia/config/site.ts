@@ -1,6 +1,6 @@
 export const siteConfig = {
-  domain: 'coldroom-malaysia.vercel.app',
-  siteUrl: 'https://coldroom-malaysia.vercel.app',
+  domain: 'coldroom-malaysia.utopiaai.my',
+  siteUrl: 'https://coldroom-malaysia.utopiaai.my',
   brandName: 'Cold Room Malaysia',
   tagline: 'Cold Room Rental & Cold Chain Storage in Malaysia',
   productSlug: 'cold-room',

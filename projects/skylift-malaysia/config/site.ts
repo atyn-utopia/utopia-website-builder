@@ -1,6 +1,6 @@
 export const siteConfig = {
-  domain: 'skylift-malaysia.vercel.app',
-  siteUrl: 'https://skylift-malaysia.vercel.app',
+  domain: 'skylift-my.utopiaai.my',
+  siteUrl: 'https://skylift-my.utopiaai.my',
   brandName: 'Skylift Malaysia',
   tagline: 'Skylift Rental Malaysia — Same-Day Delivery, Trained Operator Included',
   productSlug: 'skylift',
