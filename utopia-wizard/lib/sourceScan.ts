@@ -139,3 +139,69 @@ export async function findHardcodedPhones(projectDir: string): Promise<Hardcoded
   }
   return Array.from(byKey.values())
 }
+
+// Domains / URLs shown as visible copy. Translation (messages/*.json) values
+// are ALL user-facing strings, so any domain or phone number there renders on
+// the page — and code-only findHardcodedPhones never sees it (it walks app/ +
+// components/ source, not JSON copy). We deliberately scan messages/ ONLY:
+// app/components legitimately carry the domain in non-rendered code (canonical
+// URLs, metadataBase, JSON-LD schema), so scanning those would false-flag.
+export const DOMAIN_PATTERN =
+  /\b(?:https?:\/\/)?(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+(?:com|my|net|org|io|app|co|gov|edu)(?:\.[a-z]{2})?\b/gi
+
+export interface MessageLeak {
+  file: string
+  key: string
+  kind: 'phone' | 'domain'
+  match: string
+}
+
+// Flatten a parsed messages object into (dotted key path, string value) pairs
+// so a hit can point the operator straight at e.g. `footer.copyright`.
+function collectStrings(obj: unknown, prefix: string, out: { key: string; value: string }[]): void {
+  if (typeof obj === 'string') { out.push({ key: prefix, value: obj }); return }
+  if (Array.isArray(obj)) { obj.forEach((v, i) => collectStrings(v, `${prefix}[${i}]`, out)); return }
+  if (obj && typeof obj === 'object') {
+    for (const [k, v] of Object.entries(obj as Record<string, unknown>)) {
+      collectStrings(v, prefix ? `${prefix}.${k}` : k, out)
+    }
+  }
+}
+
+/**
+ * Scan a project's messages/*.json translation files for contact info that
+ * renders as visible copy: phone numbers (any locale) and domains / URLs.
+ * Every translation value is user-facing, so a hit here is shown on the page
+ * even though the code-only findHardcodedPhones scan never inspects JSON copy.
+ */
+export async function findMessageLeaks(projectDir: string): Promise<MessageLeak[]> {
+  const dir = path.join(projectDir, 'messages')
+  let entries
+  try { entries = await readdir(dir, { withFileTypes: true }) } catch { return [] }
+  const hits: MessageLeak[] = []
+  for (const e of entries) {
+    if (!e.isFile() || !e.name.endsWith('.json')) continue
+    let parsed: unknown
+    try { parsed = JSON.parse(await readFile(path.join(dir, e.name), 'utf-8')) } catch { continue }
+    const strings: { key: string; value: string }[] = []
+    collectStrings(parsed, '', strings)
+    const rel = path.join('messages', e.name)
+    for (const { key, value } of strings) {
+      // The `metadata` namespace holds SEO <title>/<description>/keywords —
+      // rendered in the browser tab + search results, NOT on-page body copy.
+      // Brand + domain in the meta title ("Acme Malaysia | acme.com.my") is a
+      // deliberate, standard SEO convention, so we never flag it. The
+      // visible-text rule targets body copy (footer, hero, CTAs, etc.).
+      if (key === 'metadata' || key.startsWith('metadata.')) continue
+      for (const h of scanTextForPhones(value)) {
+        hits.push({ file: rel, key, kind: 'phone', match: h.match })
+      }
+      DOMAIN_PATTERN.lastIndex = 0
+      let m: RegExpExecArray | null
+      while ((m = DOMAIN_PATTERN.exec(value)) !== null) {
+        hits.push({ file: rel, key, kind: 'domain', match: m[0] })
+      }
+    }
+  }
+  return hits
+}
