@@ -210,16 +210,16 @@ export default function LocationPage() {
           <div className="max-w-6xl mx-auto px-6 py-8">
             <div className="usp-panel">
               <div className="usp-cell">
-                <h5 style={{ color: 'var(--brand-yellow)', fontSize: 16, fontWeight: 800, marginBottom: 4 }}>24/7 in {cityName}</h5>
-                <h5 className="body-h5" style={{ color: 'var(--brand-steel-light)', fontSize: 13, fontWeight: 400 }}>Local crew responds in under an hour.</h5>
+                <h5 style={{ color: 'var(--brand-yellow)', fontSize: 16, fontWeight: 800, marginBottom: 4 }}>{t('usp.location.title1', { city: cityName })}</h5>
+                <h5 className="body-h5" style={{ color: 'var(--brand-steel-light)', fontSize: 13, fontWeight: 400 }}>{t('usp.location.desc1')}</h5>
               </div>
               <div className="usp-cell">
-                <h5 style={{ color: 'var(--brand-yellow)', fontSize: 16, fontWeight: 800, marginBottom: 4 }}>Free Site Survey</h5>
-                <h5 className="body-h5" style={{ color: 'var(--brand-steel-light)', fontSize: 13, fontWeight: 400 }}>On-site measurement + quote — no obligation.</h5>
+                <h5 style={{ color: 'var(--brand-yellow)', fontSize: 16, fontWeight: 800, marginBottom: 4 }}>{t('usp.location.title2')}</h5>
+                <h5 className="body-h5" style={{ color: 'var(--brand-steel-light)', fontSize: 13, fontWeight: 400 }}>{t('usp.location.desc2')}</h5>
               </div>
               <div className="usp-cell">
-                <h5 style={{ color: 'var(--brand-yellow)', fontSize: 16, fontWeight: 800, marginBottom: 4 }}>Warranty Backed</h5>
-                <h5 className="body-h5" style={{ color: 'var(--brand-steel-light)', fontSize: 13, fontWeight: 400 }}>Every install + repair covered by warranty.</h5>
+                <h5 style={{ color: 'var(--brand-yellow)', fontSize: 16, fontWeight: 800, marginBottom: 4 }}>{t('usp.location.title3')}</h5>
+                <h5 className="body-h5" style={{ color: 'var(--brand-steel-light)', fontSize: 13, fontWeight: 400 }}>{t('usp.location.desc3')}</h5>
               </div>
             </div>
           </div>

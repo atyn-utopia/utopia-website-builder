@@ -8,6 +8,24 @@
   "trustStrip": {
     "label": "Trusted by leading Malaysian brands"
   },
+  "usp": {
+    "home": {
+      "title1": "24/7 Emergency Service",
+      "desc1": "Anytime, any day — our team responds in under 60 minutes.",
+      "title2": "50+ Coverage Areas",
+      "desc2": "Klang Valley to East Malaysia — your shutter, our network.",
+      "title3": "15,000+ Premises Protected",
+      "desc3": "Two decades of factory, warehouse, and shop install experience."
+    },
+    "location": {
+      "title1": "24/7 in {city}",
+      "desc1": "Local crew responds in under an hour.",
+      "title2": "Free Site Survey",
+      "desc2": "On-site measurement + quote — no obligation.",
+      "title3": "Warranty Backed",
+      "desc3": "Every install + repair covered by warranty."
+    }
+  },
   "blog": {
     "title": "Roller Shutter Insights & News",
     "metaTitle": "Blog | Encik Roller Shutter",
@@ -52,7 +70,7 @@
     "subtitle": "Install, repair & maintain all types of roller shutter doors for factories, shops and warehouses. 24-hour emergency service, 7 days a week across Malaysia.",
     "ctaPrimary": "WhatsApp Now",
     "ctaPrimarySubtext": "Get a Free Quote",
-    "ctaSecondary": "View Our Roller Shutter Types",
+    "ctaSecondary": "View Shutter Types",
     "altText": "Roller shutter door installation for factory in Malaysia"
   },
   "stats": {
@@ -352,7 +370,7 @@
   "finalCta": {
     "heading": "Ready to Protect Your Premises?",
     "subheading": "Get a free quote within 30 minutes. Our expert team is ready to help you 24/7.",
-    "ctaButton": "WhatsApp Now — Free Quote",
+    "ctaButton": "WhatsApp Free Quote",
     "supportingText": "No commitment. No hidden charges. Just the best roller shutter service in Malaysia.",
     "bgAlt": "Encik Roller Shutter technician completing an installation on-site for a customer"
   },

@@ -1,5 +1,5 @@
 export const siteConfig = {
-  domain: 'roller-shutter-malaysia.utopiaai.my',
+  domain: 'rollershutter-malaysia.utopiaai.my',
   brandName: 'Encik Roller Shutter',
   tagline: 'Kukuh & Berbaloi, Kami Janji!',
   productSlug: 'roller-shutter',
