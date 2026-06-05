@@ -1,0 +1,84 @@
+name: guardrails-gate
+
+# Blocking guardrail gate for pull requests. Fails the PR if any changed project
+# has a BLOCKING guardrail failure, a registry/checklist drift, or a score
+# regression vs its last stored snapshot (the ratchet — quality may only go up).
+#
+# Make this a REQUIRED status check in branch protection to actually block merge.
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'projects/**'
+      - 'utopia-wizard/**'
+      - '.github/workflows/guardrails-gate.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: guardrails-gate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # need the merge base to diff changed projects
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: utopia-wizard/package-lock.json
+
+      - name: Install utopia-wizard deps
+        working-directory: utopia-wizard
+        run: npm ci
+
+      - name: Registry ↔ checklist drift guard
+        working-directory: utopia-wizard
+        run: npm run check-meta:sync
+
+      - name: Guardrails page is up to date
+        working-directory: utopia-wizard
+        run: |
+          npm run guardrails
+          if ! git diff --quiet -- ../docs/guardrails.html; then
+            echo "::error::docs/guardrails.html is stale — run 'npm run guardrails' and commit the result."
+            git --no-pager diff --stat -- ../docs/guardrails.html
+            exit 1
+          fi
+
+      - name: Compute changed projects
+        id: changed
+        run: |
+          base="${{ github.event.pull_request.base.sha }}"
+          head="${{ github.event.pull_request.head.sha }}"
+          slugs=$(git diff --name-only "$base" "$head" \
+            | grep -E '^projects/[^/]+/' \
+            | sed -E 's#^projects/([^/]+)/.*#\1#' \
+            | sort -u || true)
+          # keep only real projects (have inputs.md)
+          keep=""
+          for s in $slugs; do
+            if [ -f "projects/$s/inputs.md" ]; then keep="$keep $s"; fi
+          done
+          echo "slugs=$(echo $keep | xargs)" >> "$GITHUB_OUTPUT"
+          echo "Changed projects:$keep"
+
+      - name: Run blocking gate (full + ratchet)
+        if: steps.changed.outputs.slugs != ''
+        working-directory: utopia-wizard
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+        run: npx tsx scripts/gate.ts --ratchet ${{ steps.changed.outputs.slugs }}
+
+      - name: No projects changed
+        if: steps.changed.outputs.slugs == ''
+        run: echo "No project source changed — guardrail gate skipped. ✓"

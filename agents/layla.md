@@ -161,3 +161,17 @@ After deployment, verify that ALL WhatsApp buttons route through the redirect pa
 - If the Vercel build fails, report the error and suggest fixes — do not retry blindly
 - Always report the final live URL back to the user
 - Always verify WhatsApp redirect works with real phone number AFTER deployment — never skip this step
+
+## MANDATORY: blocking gate before you push or deploy
+
+Run the FULL guardrail gate (includes Database + Deployment checks) on the
+project. If it exits non-zero, **stop — do not push or deploy.** Report the
+blocking failures back instead.
+
+```bash
+cd utopia-wizard && npm run gate -- --ratchet {slug}
+```
+
+`--ratchet` also fails if the project's score dropped below its last snapshot —
+a deploy must never lower quality. The complete rule list is in
+[docs/guardrails.html](../docs/guardrails.html).
