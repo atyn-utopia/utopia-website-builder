@@ -94,11 +94,43 @@ Project Inputs Checklist:
 
 ## 3. Step 1 — Create Project Folder
 
+**Preferred: scaffold from the canonical reference (starts at ~96/100, zero blocking failures).**
+Instead of an empty folder, clone the `sewa-excavator` skeleton — chrome, PageStyles,
+i18n, schema, and tracking come pre-correct, so whole guardrail failure classes
+(`site-chrome`, `homepage-h1-h2`, `page-styles`, `i18n-routing`, `schema-components`)
+are prevented by construction:
+
 ```bash
-mkdir -p projects/{project-slug}
+cd utopia-wizard && npm run scaffold -- \
+  --slug={project-slug} --brand="{Brand Name}" \
+  --product="{Product Name}" --product-slug={product-slug} \
+  --domain={project-slug}.vercel.app --phone=60XXXXXXXXX
 ```
 
-Save all collected inputs to `projects/{project-slug}/inputs.md`.
+This writes `projects/{project-slug}/` with a correct structure + an `inputs.md` stub.
+It deliberately leaves **copy, brand assets, the real locations list, and the
+project-unique special section** as TODO — those are the agent pipeline's job
+(Steps 2–6). Update the generated `inputs.md` with the full Step 0 inputs.
+
+> Manual fallback (not recommended): `mkdir -p projects/{project-slug}` and save
+> inputs to `projects/{project-slug}/inputs.md`, then scaffold the Next.js app by
+> hand in Step 3. You lose the 96/100 baseline and must build the chrome correctly yourself.
+
+### The guardrail gate applies from here on
+
+Every builder agent and every commit is now gated by the wizard's 100 checks
+(54 blocking / 46 advisory — see [guardrails.html](guardrails.html)):
+
+- **Agents** must run `cd utopia-wizard && npm run gate -- --source-only {slug}`,
+  fix every **blocking** failure, and paste the passing output before returning
+  (see [prompts/agent-self-check.md](../prompts/agent-self-check.md)).
+- **Commits** touching a project run the same gate via `.githooks/pre-commit`.
+- **PRs** run the full gate + ratchet in CI (`guardrails-gate` workflow).
+- **Deploy** (Step 14, Layla) runs `npm run gate -- --ratchet {slug}` and refuses
+  to deploy on any blocking failure or score regression.
+
+The two human gates (Gate 1 design, Gate 2 content) then focus purely on judgment
+the scanner can't make — image fit, layout craft, copy quality.
 
 ---
 
@@ -143,6 +175,11 @@ Agent tool:
 ---
 
 ## 5. Step 3 — Scaffold the Next.js Project
+
+> **If you scaffolded in Step 1, skip Initialize** — the Next.js app, config,
+> chrome, and dependencies are already in place. Just symlink env + install:
+> `cd projects/{project-slug} && ln -sf ../../.env.local .env.local && npm install`.
+> The steps below are only for the manual fallback path.
 
 ### Initialize
 
@@ -328,9 +365,18 @@ export type Locale = (typeof locales)[number];
 export const routing = defineRouting({
   locales,
   defaultLocale: 'en',
+  // MANDATORY: every URL carries the locale prefix so `/` redirects to
+  // `/<defaultLocale>` instead of serving locale-detected content.
   localePrefix: 'always',
+  // MANDATORY: disables browser Accept-Language autodetection. Without this,
+  // a Malay-default site loses every visitor whose browser is set to English
+  // — they get served the wrong language on the first hit. The default
+  // language we configure is the one we want every fresh visitor to land on.
+  localeDetection: false,
 });
 ```
+
+**Default-language rule (MANDATORY).** Whichever locale is set as `defaultLocale`, every fresh visitor MUST land on that locale's page first — regardless of browser language. `localePrefix: 'always'` + `localeDetection: false` is what enforces this. Pick the default per project (MS for sewa-* / Malay-first brands, EN for English-first brands) and never leave `localeDetection` on its default (`true`).
 
 ### `i18n/request.ts`
 
@@ -685,8 +731,7 @@ Every item below MUST be verified on the running site. These rules come from rea
 
 #### Assets & Images
 - [ ] Use brand-provided assets from `brand_assets/` for hero photo, product photos, gallery, logos. Never substitute with stock photos when brand assets exist.
-- [ ] Optimize before commit — gallery PNGs (often 30–60 MB each) MUST be converted to JPEG at ~1400 px wide / ~300 KB target. Brand logos resized to ~600 px PNG (~200 KB). Hero/product PNGs (with transparency) resized to ~1600 px (~1.5 MB).
-- [ ] Preserve transparency where it matters — cutout photos and logos stay as PNG. Photos without transparency convert to JPEG. JPEG flattens alpha; never JPEG a transparent asset.
+- [ ] **DO NOT convert image formats automatically.** Keep PNGs as PNG and JPEGs as JPEG — don't change formats when fixing tasks. Re-encoding PNG → JPEG flattens alpha (breaks transparent cutouts) and has broken images in real projects. If a file is genuinely too large for the web (>5 MB) flag it for the user; do not silently re-encode it.
 - [ ] For any asset >5 MB, use plain `<img loading="lazy" decoding="async">` — `<Image>` from `next/image` silently rejects huge files and leaves blank gaps in galleries / product cards.
 - [ ] Add `projects/{slug}/.gitignore` excluding `brand_assets/` and `temporary screenshots/` — raw artwork must not enter git.
 
@@ -725,10 +770,9 @@ Every item below MUST be verified on the running site. These rules come from rea
 - [ ] Use ICU substitution `t('priceDaily', { price: value })` — NEVER `.replace('{price}', value)`. The latter throws `FORMATTING_ERROR` on placeholder-containing strings.
 - [ ] Mobile: price value 13 px + `white-space: nowrap` so "Dari RM 1,800" never wraps to 2 lines.
 
-#### Marketing marquee
-- [ ] Replace any decorative tread-divider / dashed-line section divider between hero→USP and calculator→process with a `<MarketingMarquee>`.
-- [ ] Two variants: light (orange bg) below hero, dark (charcoal) before process/why-us.
-- [ ] Short punchy items (max ~3 words each), separated by ★. Slim padding (~8 px), 12.5 px font, scrolls left → right.
+#### Marketing marquee (OPTIONAL — not mandatory)
+- The scrolling `<MarketingMarquee>` is **optional**, not required. It doesn't suit every layout (e.g. electrician) — only use it if it fits the design. Do NOT force it onto a site where it looks out of place. The wizard does not check for it.
+- If you do use it: two variants (light orange below hero, dark charcoal before process/why-us), short punchy items (max ~3 words) separated by ★, slim padding (~8 px), 12.5 px font, scrolls left → right.
 
 #### Language switcher
 - [ ] Desktop: 3 inline pills (`.lsw-item`). Each pill has a bordered rounded shell, a circular SVG flag on the left, and the locale label (MS / EN / 中) on the right, side-by-side. Active state = dark charcoal fill with white text + drop shadow.
@@ -736,13 +780,15 @@ Every item below MUST be verified on the running site. These rules come from rea
 - [ ] Each `CircleFlag` SVG MUST generate its `clipPath` id via `useId()`. Sharing one id across multiple flag instances breaks clipping on some — flags lose their circle and render square.
 - [ ] Language switcher CSS lives in `globals.css` with `!important` on `display`, `flex-direction`, `flex-wrap` — `<style jsx>` rules lose to global element resets.
 
-#### WhatsApp redirect (every link)
-- [ ] Every link pointing at `/{locale}/redirect-whatsapp-1` (header CTA, hero CTA, product card CTA, calculator CTA, FOMO banner link, final-CTA, blog CTA, footer CTA, sticky FAB) MUST open in a new tab: `target="_blank"` + `rel="noopener noreferrer"`. The redirect page bounces the visitor straight to `wa.me/<number>` — keeping the site open in the original tab preserves the SEO session and gives the visitor somewhere to return.
-- [ ] The shared `<WhatsAppButton>` already sets these attributes; verify any bare `<Link>` that uses `waRedirect()` (e.g. FOMO banner inline link, blog inline CTAs) also has `target="_blank"` + `rel="noopener noreferrer"`.
+#### WhatsApp redirect (every link) — MANDATORY
+- [ ] **Every CTA on the site must route through `/{locale}/redirect-whatsapp-1`** — never link directly to `wa.me/<number>` or `api.whatsapp.com/send`. The redirect page reads `leads_mode` + `location_slug` from Supabase and picks the correct number for the visitor; a hardcoded `wa.me` link bypasses rotation, location targeting, and per-agent split — every miss is a tracked lead lost. The only file that may legitimately reference `wa.me` is `lib/webcore.ts`, which is what the redirect page itself uses.
+- [ ] **Every link pointing at `/{locale}/redirect-whatsapp-1`** (header CTA, hero CTA, product card CTA, calculator CTA, FOMO banner link, final-CTA, blog CTA, footer CTA, sticky FAB) MUST open in a new tab: `target="_blank"` + `rel="noopener noreferrer"`. The redirect page bounces the visitor straight to `wa.me/<number>` — keeping the site open in the original tab preserves the SEO session and gives the visitor somewhere to return.
+- [ ] The shared `<WhatsAppButton>` already sets `target="_blank"` + `rel="noopener noreferrer"` internally; verify any bare `<Link>` or `<a>` that uses `waRedirect()` (e.g. FOMO banner inline link, blog inline CTAs) explicitly sets them too — styled-jsx scoping won't help here, the attributes have to live on the element.
 
 #### WhatsApp / CTA buttons
 - [ ] Use the official Meta WhatsApp SVG (the speech-bubble-with-phone-handset glyph). The placeholder simplified path looks wrong — replace immediately.
 - [ ] All WA CTAs use the official WhatsApp green `#25D366` (hover `#1EBE57`). Never themed in brand colour.
+- [ ] **Every CTA button label is ≤3 words** (count "WhatsApp" too): `WhatsApp Us Now`, `Get a Quote`, `Book Now`. `WhatsApp for a Quote` (4) is too long. Button-label keys only (`cta`, `ctaButton`, `ctaPrimary/Secondary`, `ctaLabel`, `ctaTemplate`, `whatsappCta`, `bookNow`) — not CTA headings, subtext, tags, alt text, or sentence-style closing CTAs. Enforced on `en` + `ms`; keep `zh` equally short. Wizard: `cta-button-word-limit`.
 - [ ] Header on mobile: hide the WA CTA entirely (`display: none !important`). The language dropdown replaces it. The WA button is also hidden inside the mobile drawer.
 - [ ] Header on desktop: nav links + language pills + WA CTA, all visible.
 - [ ] The `.nav-cta` class must be targeted via `:global(.nav-cta)` inside `<style jsx>` — styled-jsx scoping does not reach child components, so the bare `.nav-cta` rule will silently miss.
@@ -759,7 +805,8 @@ Every item below MUST be verified on the running site. These rules come from rea
 - [ ] Footer logo uses the variant designed for the dark footer bg (white wordmark file, e.g. `abang-excavator-dark.png`). Confirm the wordmark is visible — if the logo looks invisible, you picked the wrong variant.
 - [ ] All `nav.*` translation keys exist in all locales: `home, products, calculator, locations, blog, whatsappCta`. Missing key renders the raw key (e.g. "nav.home") on the live site.
 
-#### Location pages — must equal homepage layout
+#### Location pages — must equal homepage layout (MANDATORY)
+- [ ] **The location page must render the SAME sections as the homepage** — hero, USP bar, products, calculator, process, why-us, reviews, gallery, FAQ, final CTA. Only the *copy* changes (localised to the city). A stripped-down location page that drops the USP bar / gallery / reviews is a bug (the electrician site had exactly this). The wizard's `location-matches-homepage` check fails when the location page is missing sections the homepage has.
 - [ ] Location page imports `<PageStyles />` (the shared style component) — never inline-duplicate the homepage style block.
 - [ ] Shared section class names match homepage exactly (no `loc-` prefix on hero, USP, products, calculator, process, why, reviews, gallery, FAQ, locations grid, final CTA).
 - [ ] Only location-only elements live in a small dedicated style block under the `loc-` namespace: `.breadcrumb`, `.city-chip`, `.nearby-card`. Everything else inherits from `<PageStyles />`.
@@ -780,6 +827,7 @@ Every item below MUST be verified on the running site. These rules come from rea
 - [ ] In `<style jsx>` (client component), child-component classes do not receive the jsx hash. To target a class rendered by a child (e.g. `WhatsAppButton` rendering `.nav-cta`), you must wrap with `:global(.nav-cta)`.
 - [ ] When multiple pages need identical CSS, extract into a shared `<PageStyles />` component — never duplicate the style block per page.
 - [ ] Run `grep -c ':global(' app/**/page.tsx` after big edits — any non-zero count inside a plain `<style>` block is a bug.
+- [ ] **Never copy a page from another project without remapping its CSS variables.** Each project defines its own `--brand-*` / `--ink-*` / `--gut` / `--radius-*` tokens in `globals.css`. A page copied from sewa-excavator into oxihome that still says `var(--brand-charcoal)` / `var(--gut)` references variables that don't exist in oxihome — they resolve to nothing, so colours, padding, and radii silently collapse and the layout looks broken even though every element is present. Confirm every `var(--x)` in a page is defined in *this* project's CSS. The wizard's `no-undefined-css-vars` check fails when a page references an undefined variable. (This is the real reason oxihome's blog article looked broken despite passing structural checks.)
 
 #### Pre-deploy verification
 - [ ] `git status` is clean of `.DS_Store`, raw `brand_assets/`, `temporary screenshots/`.
@@ -843,11 +891,23 @@ VALUES
 - `blog_posts` and `blog_translations` tables exist in Supabase
 
 ### Blog Layout Reference
-**Must match `projects/electric-wheelchair-malaysia/app/[locale]/blog/`:**
-- Same `blog-content` CSS styles for headings
-- Table of contents in articles
-- Same listing grid + post page layout
-- Breadcrumbs, reading time, WhatsApp CTA banner
+**Must match `projects/electric-wheelchair-malaysia/app/[locale]/blog/` (canonical layout).** Every rule below is enforced by the wizard checklist — a failing blog scan blocks Gate 2.
+
+**Blog post page (`app/[locale]/blog/[slug]/page.tsx`) — MANDATORY:**
+- [ ] Exactly one `<h1>` — the article title.
+- [ ] Breadcrumb nav at the top: Home → Blog → article (`<nav className="breadcrumb">` or `aria-label="Breadcrumb"`).
+- [ ] Article body wrapped in `<div className="blog-content">` so the shared CSS styles headings, lists, and links.
+- [ ] Reading-time indicator (`readingTime` / `minRead`) shown near the title.
+- [ ] WhatsApp CTA banner inside the post (`<WhatsAppButton>` with `label={`blog-${slug}`}` for tracking, routing through `/redirect-whatsapp-1`).
+- [ ] Per-post metadata export (`export const metadata` or `generateMetadata`) so Open Graph titles, descriptions, and share images are unique per article.
+
+**Blog listing page (`app/[locale]/blog/page.tsx`) — MANDATORY:**
+- [ ] Exactly one `<h1>` + one `<h2>` (same SEO structure as the homepage).
+- [ ] Card grid layout — either `className="blog-grid"` or `grid-template-columns: repeat(auto-fill, …)`. Never a vertical stack of full-width blocks.
+- [ ] Each card renders the post's `cover_image_url` + `excerpt`. Text-only cards tank click-through.
+
+**Site chrome (both pages, every locale):**
+- [ ] `<FomoBanner />`, `<SiteHeader />`, `<SiteFooter />` — never a per-page `BlogNav` variant.
 
 ### Spawn Hanabi (Blog Writer)
 
@@ -1001,6 +1061,7 @@ Before calling the website "done", verify everything:
 - [ ] **Image backgrounds** used on some sections (not all flat solid color)
 - [ ] **3-point USP bar** immediately below hero section
 - [ ] **All buttons same rounded shape** — only color varies
+- [ ] **CTA button labels ≤3 words** (WhatsApp counts) — `en` + `ms`
 - [ ] **No phone numbers or domain names** displayed as visible text
 - [ ] **Mobile center-aligned** — headings, buttons, cards, icons centered on mobile
 - [ ] **All images verified** — every image matches its context, no placeholders left

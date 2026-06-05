@@ -1,0 +1,8 @@
+temporary screenshots/
+*.tsbuildinfo
+scripts/
+screenshot-*.mjs
+screenshot.mjs
+serve.mjs
+*.md
+brand_assets/

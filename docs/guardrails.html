@@ -1,0 +1,801 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Utopia Website-Generation Guardrails</title>
+<style>
+  :root {
+    --ink:#0f1115; --muted:#6b7280; --line:#e5e7eb; --bg:#f7f8fa; --card:#fff;
+    --block:#c0392b; --block-bg:#fdecea; --adv:#b8860b; --adv-bg:#fdf6e3;
+    --accent:#2563eb;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+         color:var(--ink); background:var(--bg); line-height:1.4; }
+  header { background:linear-gradient(135deg,#11131a,#1f2430); color:#fff; padding:36px 24px 28px; }
+  header h1 { margin:0 0 6px; font-size:26px; letter-spacing:-0.02em; }
+  header p { margin:0; color:#aeb6c2; font-size:14px; max-width:760px; }
+  .wrap { max-width:1040px; margin:0 auto; padding:0 24px 64px; }
+  .stats { display:flex; gap:12px; flex-wrap:wrap; margin:-22px 0 22px; }
+  .stat { background:var(--card); border:1px solid var(--line); border-radius:12px;
+          padding:14px 18px; box-shadow:0 6px 18px rgba(15,17,21,.06); flex:1; min-width:150px; }
+  .stat .n { font-size:28px; font-weight:800; letter-spacing:-0.02em; }
+  .stat .l { font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; }
+  .stat.block .n { color:var(--block); } .stat.adv .n { color:var(--adv); }
+  .controls { position:sticky; top:0; z-index:5; background:var(--bg); padding:14px 0;
+              display:flex; gap:10px; flex-wrap:wrap; align-items:center; border-bottom:1px solid var(--line); }
+  #q { flex:1; min-width:220px; padding:10px 14px; border:1px solid var(--line); border-radius:10px; font-size:14px; }
+  .filters { display:flex; gap:6px; }
+  .chip { border:1px solid var(--line); background:#fff; border-radius:999px; padding:7px 14px;
+          font-size:13px; cursor:pointer; user-select:none; }
+  .chip.active { background:var(--ink); color:#fff; border-color:var(--ink); }
+  section.group { background:var(--card); border:1px solid var(--line); border-radius:14px;
+                  margin:18px 0; padding:8px 18px 16px; box-shadow:0 4px 14px rgba(15,17,21,.04); }
+  section.group h2 { font-size:17px; margin:14px 4px 8px; display:flex; align-items:baseline; gap:10px; }
+  .gcount { font-size:12px; color:var(--muted); font-weight:500; }
+  table { width:100%; border-collapse:collapse; }
+  th { text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.05em;
+       color:var(--muted); padding:8px 8px; border-bottom:1px solid var(--line); }
+  td { padding:9px 8px; border-bottom:1px solid #f1f2f4; font-size:14px; vertical-align:top; }
+  tr.rule:last-child td { border-bottom:none; }
+  .rule-name { font-weight:500; }
+  code { background:#f3f4f6; border-radius:6px; padding:2px 6px; font-size:12.5px;
+         font-family:ui-monospace,SFMono-Regular,Menlo,monospace; color:#374151; }
+  .badge { font-size:10.5px; font-weight:700; letter-spacing:.04em; padding:3px 8px; border-radius:999px; white-space:nowrap; }
+  .sev-block { background:var(--block-bg); color:var(--block); }
+  .sev-adv { background:var(--adv-bg); color:var(--adv); }
+  a { color:var(--accent); text-decoration:none; font-size:13px; }
+  a:hover { text-decoration:underline; }
+  .empty { display:none; color:var(--muted); padding:30px; text-align:center; }
+  footer { color:var(--muted); font-size:12.5px; text-align:center; padding:24px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🛡️ Utopia Website-Generation Guardrails</h1>
+  <p>Every deterministic rule enforced when an agent builds a site. Verified by the Utopia Wizard
+     (<code>npm run scan</code>). <strong>Blocking</strong> rules must stop the pipeline; <strong>advisory</strong>
+     rules are warnings that count against the 0–100 score. Generated from
+     <code>utopia-wizard/lib/checkMeta.ts</code> — the single source of truth.</p>
+</header>
+<div class="wrap">
+  <div class="stats">
+    <div class="stat"><div class="n">101</div><div class="l">Total rules</div></div>
+    <div class="stat block"><div class="n">55</div><div class="l">Blocking</div></div>
+    <div class="stat adv"><div class="n">46</div><div class="l">Advisory</div></div>
+    <div class="stat"><div class="n">10</div><div class="l">Categories</div></div>
+  </div>
+
+  <div class="controls">
+    <input id="q" type="search" placeholder="Search rules by name or check id…" autocomplete="off">
+    <div class="filters">
+      <span class="chip active" data-f="all">All</span>
+      <span class="chip" data-f="blocking">Blocking</span>
+      <span class="chip" data-f="advisory">Advisory</span>
+    </div>
+  </div>
+
+    <section class="group" data-group="Structure">
+      <h2>Structure <span class="gcount">3 rules · 3 blocking</span></h2>
+      <table>
+        <thead><tr><th>Severity</th><th>Rule</th><th>Check id</th><th>Doc</th></tr></thead>
+        <tbody>
+      <tr class="rule" data-sev="blocking" data-text="homepage exists homepage">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Homepage exists</td>
+        <td><code>homepage</code></td>
+        <td><a href="full-website-setup.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="location pages exist location-page">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Location pages exist</td>
+        <td><code>location-page</code></td>
+        <td><a href="full-website-setup.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="whatsapp redirect page whatsapp-redirect">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">WhatsApp redirect page</td>
+        <td><code>whatsapp-redirect</code></td>
+        <td><a href="full-website-setup.md#7-step-5--build-core-files" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="group" data-group="SEO">
+      <h2>SEO <span class="gcount">4 rules · 4 blocking</span></h2>
+      <table>
+        <thead><tr><th>Severity</th><th>Rule</th><th>Check id</th><th>Doc</th></tr></thead>
+        <tbody>
+      <tr class="rule" data-sev="blocking" data-text="sitemap generator sitemap">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Sitemap generator</td>
+        <td><code>sitemap</code></td>
+        <td><a href="full-website-setup.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="robots.txt generator robots">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">robots.txt generator</td>
+        <td><code>robots</code></td>
+        <td><a href="full-website-setup.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="schema markup components schema-components">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Schema markup components</td>
+        <td><code>schema-components</code></td>
+        <td><a href="full-website-setup.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="homepage exports metadata homepage-metadata">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Homepage exports metadata</td>
+        <td><code>homepage-metadata</code></td>
+        <td><a href="full-website-setup.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="group" data-group="i18n">
+      <h2>i18n <span class="gcount">5 rules · 5 blocking</span></h2>
+      <table>
+        <thead><tr><th>Severity</th><th>Rule</th><th>Check id</th><th>Doc</th></tr></thead>
+        <tbody>
+      <tr class="rule" data-sev="blocking" data-text="i18n routing config i18n-routing">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">i18n routing config</td>
+        <td><code>i18n-routing</code></td>
+        <td><a href="full-website-setup.md#7-step-5--build-core-files" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="next-intl middleware middleware">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">next-intl middleware</td>
+        <td><code>middleware</code></td>
+        <td><a href="full-website-setup.md#7-step-5--build-core-files" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="translation files (en/ms/zh) translations">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Translation files (en/ms/zh)</td>
+        <td><code>translations</code></td>
+        <td><a href="full-website-setup.md#7-step-5--build-core-files" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="language switcher component language-switcher">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Language switcher component</td>
+        <td><code>language-switcher</code></td>
+        <td><a href="full-website-setup.md#7-step-5--build-core-files" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="default locale always shown first default-locale-enforced">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Default locale always shown first</td>
+        <td><code>default-locale-enforced</code></td>
+        <td><a href="full-website-setup.md#7-step-5--build-core-files" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="group" data-group="Webcore data layer">
+      <h2>Webcore data layer <span class="gcount">4 rules · 4 blocking</span></h2>
+      <table>
+        <thead><tr><th>Severity</th><th>Rule</th><th>Check id</th><th>Doc</th></tr></thead>
+        <tbody>
+      <tr class="rule" data-sev="blocking" data-text="lib/webcore.ts exists webcore-lib">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">lib/webcore.ts exists</td>
+        <td><code>webcore-lib</code></td>
+        <td><a href="full-website-setup.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="/api/revalidate route revalidate-route">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">/api/revalidate route</td>
+        <td><code>revalidate-route</code></td>
+        <td><a href="full-website-setup.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="no forbidden lib/* files no-forbidden-libs">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">No forbidden lib/* files</td>
+        <td><code>no-forbidden-libs</code></td>
+        <td><a href="full-website-setup.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="no time-based isr (export const revalidate = n) no-time-revalidate">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">No time-based ISR (export const revalidate = N)</td>
+        <td><code>no-time-revalidate</code></td>
+        <td><a href="full-website-setup.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="group" data-group="Tracking">
+      <h2>Tracking <span class="gcount">7 rules · 4 blocking</span></h2>
+      <table>
+        <thead><tr><th>Severity</th><th>Rule</th><th>Check id</th><th>Doc</th></tr></thead>
+        <tbody>
+      <tr class="rule" data-sev="blocking" data-text="tracking script in layout tracking-script">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Tracking script in layout</td>
+        <td><code>tracking-script</code></td>
+        <td><a href="full-website-setup.md#9-step-7--add-tracking" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="data-website matches domain data-website-match">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">data-website matches domain</td>
+        <td><code>data-website-match</code></td>
+        <td><a href="full-website-setup.md#9-step-7--add-tracking" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="data-website resolves to a live url data-website-reachable">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">data-website resolves to a live URL</td>
+        <td><code>data-website-reachable</code></td>
+        <td><a href="full-website-setup.md#9-step-7--add-tracking" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="window.uwc type declaration uwc-typedef">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">window.uwc type declaration</td>
+        <td><code>uwc-typedef</code></td>
+        <td><a href="full-website-setup.md#9-step-7--add-tracking" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="whatsapp click tracked whatsapp-click-track">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">WhatsApp click tracked</td>
+        <td><code>whatsapp-click-track</code></td>
+        <td><a href="full-website-setup.md#9-step-7--add-tracking" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="product impression tracked product-impression-track">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Product impression tracked</td>
+        <td><code>product-impression-track</code></td>
+        <td><a href="full-website-setup.md#9-step-7--add-tracking" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="blog article click tracked blog-click-track">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Blog article click tracked</td>
+        <td><code>blog-click-track</code></td>
+        <td><a href="full-website-setup.md#9-step-7--add-tracking" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="group" data-group="Layout &amp; Design">
+      <h2>Layout &amp; Design <span class="gcount">40 rules · 17 blocking</span></h2>
+      <table>
+        <thead><tr><th>Severity</th><th>Rule</th><th>Check id</th><th>Doc</th></tr></thead>
+        <tbody>
+      <tr class="rule" data-sev="advisory" data-text="uses inter or plus jakarta sans font-house-style">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Uses Inter or Plus Jakarta Sans</td>
+        <td><code>font-house-style</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="no forbidden serif display fonts no-forbidden-serifs">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">No forbidden serif display fonts</td>
+        <td><code>no-forbidden-serifs</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="favicon (app/icon.svg) favicon">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Favicon (app/icon.svg)</td>
+        <td><code>favicon</code></td>
+        <td><a href="full-website-setup.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="no &lt;img alt=&quot;&quot;&gt; in app/ or components/ no-empty-img-alt">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">No &lt;img alt=&quot;&quot;&gt; in app/ or components/</td>
+        <td><code>no-empty-img-alt</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="no css text-transform: capitalize no-text-transform-capitalize">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">No CSS text-transform: capitalize</td>
+        <td><code>no-text-transform-capitalize</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="homepage has exactly one &lt;h1&gt; + one &lt;h2&gt; homepage-h1-h2">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Homepage has exactly one &lt;h1&gt; + one &lt;h2&gt;</td>
+        <td><code>homepage-h1-h2</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="visible text wrapped in heading tags (no bare &lt;p&gt;) body-text-in-headings">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Visible text wrapped in heading tags (no bare &lt;p&gt;)</td>
+        <td><code>body-text-in-headings</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="section headings carry keywords (informational) heading-keyword-coverage">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Section headings carry keywords (informational)</td>
+        <td><code>heading-keyword-coverage</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="pagestyles shared style component page-styles">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">PageStyles shared style component</td>
+        <td><code>page-styles</code></td>
+        <td><a href="website-building-flow.md#layout-build-process" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="fomobanner component (+ live countdown) fomo-banner">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">FomoBanner component (+ live countdown)</td>
+        <td><code>fomo-banner</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="siteheader + sitefooter components site-chrome-components">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">SiteHeader + SiteFooter components</td>
+        <td><code>site-chrome-components</code></td>
+        <td><a href="website-building-flow.md#layout-build-process" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="homepage renders siteheader + sitefooter + fomobanner homepage-chrome">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Homepage renders SiteHeader + SiteFooter + FomoBanner</td>
+        <td><code>homepage-chrome</code></td>
+        <td><a href="website-building-flow.md#layout-build-process" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="homepage has enough whatsapp ctas (≥3) homepage-product-ctas">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Homepage has enough WhatsApp CTAs (≥3)</td>
+        <td><code>homepage-product-ctas</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="no &lt;blognav&gt; per-page variant used no-blognav-usage">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">No &lt;BlogNav&gt; per-page variant used</td>
+        <td><code>no-blognav-usage</code></td>
+        <td><a href="website-building-flow.md#layout-build-process" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="location page imports pagestyles location-uses-pagestyles">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Location page imports PageStyles</td>
+        <td><code>location-uses-pagestyles</code></td>
+        <td><a href="website-building-flow.md#layout-build-process" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="location page mirrors homepage sections location-matches-homepage">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Location page mirrors homepage sections</td>
+        <td><code>location-matches-homepage</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="no undefined css variables referenced no-undefined-css-vars">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">No undefined CSS variables referenced</td>
+        <td><code>no-undefined-css-vars</code></td>
+        <td><a href="website-building-flow.md#layout-build-process" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="uses official whatsapp green (#25d366) whatsapp-green">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Uses official WhatsApp green (#25D366)</td>
+        <td><code>whatsapp-green</code></td>
+        <td><a href="../CLAUDE.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="language switcher css lives in globals.css lsw-globals-css">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Language switcher CSS lives in globals.css</td>
+        <td><code>lsw-globals-css</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="circleflag uses useid() for clippath circle-flag-useid">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">CircleFlag uses useId() for clipPath</td>
+        <td><code>circle-flag-useid</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="alt-text keys present in en/ms/zh alt-keys-all-locales">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Alt-text keys present in en/ms/zh</td>
+        <td><code>alt-keys-all-locales</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="products.imagealttemplate uses {model} image-alt-template-model">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">products.imageAltTemplate uses {model}</td>
+        <td><code>image-alt-template-model</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="gallery.alts is a non-empty array per locale gallery-alts-array">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">gallery.alts is a non-empty array per locale</td>
+        <td><code>gallery-alts-array</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="finalcta.bgalt key exists (ms.json) final-cta-bg-alt">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">finalCta.bgAlt key exists (ms.json)</td>
+        <td><code>final-cta-bg-alt</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="css bg images attach role=&quot;img&quot; + aria-label bg-role-img-aria-label">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">CSS bg images attach role=&quot;img&quot; + aria-label</td>
+        <td><code>bg-role-img-aria-label</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="icu placeholder names are lowercase icu-placeholders-lowercase">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">ICU placeholder names are lowercase</td>
+        <td><code>icu-placeholders-lowercase</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="pagestyles normalises font-weight: inherit pagestyles-font-weight-inherit">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">PageStyles normalises font-weight: inherit</td>
+        <td><code>pagestyles-font-weight-inherit</code></td>
+        <td><a href="website-building-flow.md#layout-build-process" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="location page renders siteheader + sitefooter + fomobanner location-page-chrome">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Location page renders SiteHeader + SiteFooter + FomoBanner</td>
+        <td><code>location-page-chrome</code></td>
+        <td><a href="website-building-flow.md#layout-build-process" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="nav.{home,products,calculator,locations,blog,whatsappcta} in ms.json nav-keys-complete">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">nav.{home,products,calculator,locations,blog,whatsappCta} in ms.json</td>
+        <td><code>nav-keys-complete</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="cta button labels are ≤3 words cta-button-word-limit">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">CTA button labels are ≤3 words</td>
+        <td><code>cta-button-word-limit</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="styled-jsx targets .nav-cta via :global(...) nav-cta-global-scope">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Styled-jsx targets .nav-cta via :global(...)</td>
+        <td><code>nav-cta-global-scope</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="mobile header hides .nav-cta header-mobile-wa-hidden">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Mobile header hides .nav-cta</td>
+        <td><code>header-mobile-wa-hidden</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="usp bar uses single .usp-panel container usp-panel-class-used">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">USP bar uses single .usp-panel container</td>
+        <td><code>usp-panel-class-used</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="project .gitignore excludes brand_assets/ + temporary screenshots/ project-gitignore">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Project .gitignore excludes brand_assets/ + temporary screenshots/</td>
+        <td><code>project-gitignore</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="every cta routes through /redirect-whatsapp-1 cta-uses-redirect-page">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Every CTA routes through /redirect-whatsapp-1</td>
+        <td><code>cta-uses-redirect-page</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="siteconfig.domain matches deploy url + tracking data-website domain-consistency">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">siteConfig.domain matches deploy URL + tracking data-website</td>
+        <td><code>domain-consistency</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="cta links to redirect page open in new tab cta-opens-new-tab">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">CTA links to redirect page open in new tab</td>
+        <td><code>cta-opens-new-tab</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="public/ under 20 mb public-folder-size">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">public/ under 20 MB</td>
+        <td><code>public-folder-size</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="no .replace('{…}', …) on icu strings no-replace-icu">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">No .replace('{…}', …) on ICU strings</td>
+        <td><code>no-replace-icu</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="price strings use 'dari rm' prefix (ms.json) price-from-prefix">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Price strings use 'Dari RM' prefix (ms.json)</td>
+        <td><code>price-from-prefix</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="group" data-group="Blog">
+      <h2>Blog <span class="gcount">29 rules · 9 blocking</span></h2>
+      <table>
+        <thead><tr><th>Severity</th><th>Rule</th><th>Check id</th><th>Doc</th></tr></thead>
+        <tbody>
+      <tr class="rule" data-sev="blocking" data-text="blog listing page blog-listing">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Blog listing page</td>
+        <td><code>blog-listing</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="blog post detail page blog-post">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Blog post detail page</td>
+        <td><code>blog-post</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="blog listing renders siteheader + sitefooter + fomobanner blog-listing-chrome">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Blog listing renders SiteHeader + SiteFooter + FomoBanner</td>
+        <td><code>blog-listing-chrome</code></td>
+        <td><a href="website-building-flow.md#layout-build-process" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="blog post renders siteheader + sitefooter + fomobanner blog-post-chrome">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Blog post renders SiteHeader + SiteFooter + FomoBanner</td>
+        <td><code>blog-post-chrome</code></td>
+        <td><a href="website-building-flow.md#layout-build-process" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="blog post has exactly one &lt;h1&gt; blog-post-h1">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Blog post has exactly one &lt;h1&gt;</td>
+        <td><code>blog-post-h1</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="blog post shows a breadcrumb blog-post-breadcrumb">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Blog post shows a breadcrumb</td>
+        <td><code>blog-post-breadcrumb</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="blog post renders `blog-content` wrapper blog-content-class">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Blog post renders `blog-content` wrapper</td>
+        <td><code>blog-content-class</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="blog post has a whatsapp cta banner blog-post-cta-banner">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Blog post has a WhatsApp CTA banner</td>
+        <td><code>blog-post-cta-banner</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="blog post shows reading time blog-post-reading-time">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Blog post shows reading time</td>
+        <td><code>blog-post-reading-time</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="blog listing has one &lt;h1&gt; + one &lt;h2&gt; blog-listing-h1-h2">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Blog listing has one &lt;h1&gt; + one &lt;h2&gt;</td>
+        <td><code>blog-listing-h1-h2</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="blog listing uses a card grid blog-listing-grid">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Blog listing uses a card grid</td>
+        <td><code>blog-listing-grid</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="blog cards render cover image + excerpt blog-listing-cover-image">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Blog cards render cover image + excerpt</td>
+        <td><code>blog-listing-cover-image</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="blog post exports metadata blog-post-metadata">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Blog post exports metadata</td>
+        <td><code>blog-post-metadata</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="≥10 published blog posts db-blog-posts">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">≥10 published blog posts</td>
+        <td><code>db-blog-posts</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="live /blog page actually renders posts live-blog-renders">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Live /blog page actually renders posts</td>
+        <td><code>live-blog-renders</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="no hardcoded phone numbers in blog content no-hardcoded-phones-blog">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">No hardcoded phone numbers in blog content</td>
+        <td><code>no-hardcoded-phones-blog</code></td>
+        <td><a href="../CLAUDE.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="articles include a table of contents blog-content-toc">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Articles include a table of contents</td>
+        <td><code>blog-content-toc</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="articles use section headings (≥3 h2s) blog-content-headings">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Articles use section headings (≥3 H2s)</td>
+        <td><code>blog-content-headings</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="articles use enough bold emphasis (≥1 per ~1800 chars) blog-content-bold">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Articles use enough bold emphasis (≥1 per ~1800 chars)</td>
+        <td><code>blog-content-bold</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="articles have ≥5 paragraphs blog-content-paragraphs">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Articles have ≥5 paragraphs</td>
+        <td><code>blog-content-paragraphs</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="articles use bullet or numbered lists blog-content-lists">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Articles use bullet or numbered lists</td>
+        <td><code>blog-content-lists</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="average paragraph under 600 chars blog-content-readable-paragraphs">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Average paragraph under 600 chars</td>
+        <td><code>blog-content-readable-paragraphs</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="articles have enough inline images (≥1 per ~3500 chars) blog-content-images">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Articles have enough inline images (≥1 per ~3500 chars)</td>
+        <td><code>blog-content-images</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="every &lt;img&gt; in articles has descriptive alt blog-content-img-alt">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Every &lt;img&gt; in articles has descriptive alt</td>
+        <td><code>blog-content-img-alt</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="articles include internal links (≥3) blog-content-internal-links">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Articles include internal links (≥3)</td>
+        <td><code>blog-content-internal-links</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="css styles .blog-content h2/h3/h4 blog-content-headings-css">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">CSS styles .blog-content h2/h3/h4</td>
+        <td><code>blog-content-headings-css</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="css styles .blog-content p + ul/ol blog-content-body-css">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">CSS styles .blog-content p + ul/ol</td>
+        <td><code>blog-content-body-css</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="blog post emits article / blogposting json-ld blog-post-schema">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Blog post emits Article / BlogPosting JSON-LD</td>
+        <td><code>blog-post-schema</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="css styles the toc (.blog-content nav / .toc) blog-content-toc-css">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">CSS styles the TOC (.blog-content nav / .toc)</td>
+        <td><code>blog-content-toc-css</code></td>
+        <td><a href="full-website-setup.md#13-step-11--generate-blog-posts" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="group" data-group="Database">
+      <h2>Database <span class="gcount">3 rules · 3 blocking</span></h2>
+      <table>
+        <thead><tr><th>Severity</th><th>Rule</th><th>Check id</th><th>Doc</th></tr></thead>
+        <tbody>
+      <tr class="rule" data-sev="blocking" data-text="company_websites row db-company-website">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">company_websites row</td>
+        <td><code>db-company-website</code></td>
+        <td><a href="full-website-setup.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="phone_numbers row (active) db-phone-number">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">phone_numbers row (active)</td>
+        <td><code>db-phone-number</code></td>
+        <td><a href="full-website-setup.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="active products in supabase db-products">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Active products in Supabase</td>
+        <td><code>db-products</code></td>
+        <td><a href="full-website-setup.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="group" data-group="Deployment">
+      <h2>Deployment <span class="gcount">4 rules · 4 blocking</span></h2>
+      <table>
+        <thead><tr><th>Severity</th><th>Rule</th><th>Check id</th><th>Doc</th></tr></thead>
+        <tbody>
+      <tr class="rule" data-sev="blocking" data-text="vercel project linked vercel-linked">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Vercel project linked</td>
+        <td><code>vercel-linked</code></td>
+        <td><a href="full-website-setup.md#16-step-14--deploy" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="deploy url responds deploy-url-live">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Deploy URL responds</td>
+        <td><code>deploy-url-live</code></td>
+        <td><a href="full-website-setup.md#16-step-14--deploy" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="siteconfig.domain is served by vercel vercel-domain-match">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">siteConfig.domain is served by Vercel</td>
+        <td><code>vercel-domain-match</code></td>
+        <td><a href="full-website-setup.md#16-step-14--deploy" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="live site reads phone from supabase live-db-connected">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Live site reads phone from Supabase</td>
+        <td><code>live-db-connected</code></td>
+        <td><a href="full-website-setup.md#16-step-14--deploy" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="group" data-group="Quality">
+      <h2>Quality <span class="gcount">2 rules · 2 blocking</span></h2>
+      <table>
+        <thead><tr><th>Severity</th><th>Rule</th><th>Check id</th><th>Doc</th></tr></thead>
+        <tbody>
+      <tr class="rule" data-sev="blocking" data-text="no hardcoded phone numbers in app/, components/, or messages/ no-hardcoded-phones">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">No hardcoded phone numbers in app/, components/, or messages/</td>
+        <td><code>no-hardcoded-phones</code></td>
+        <td><a href="../CLAUDE.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="no domain/url shown as visible text in copy no-domains-in-copy">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">No domain/URL shown as visible text in copy</td>
+        <td><code>no-domains-in-copy</code></td>
+        <td><a href="../CLAUDE.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+        </tbody>
+      </table>
+    </section>
+  <p class="empty" id="empty">No rules match your search.</p>
+</div>
+<footer>Generated by <code>scripts/gen-guardrails.ts</code> · re-run after editing <code>checkMeta.ts</code> to refresh.</footer>
+
+<script>
+  const q = document.getElementById('q');
+  const chips = [...document.querySelectorAll('.chip')];
+  const rows = [...document.querySelectorAll('tr.rule')];
+  const empty = document.getElementById('empty');
+  let filter = 'all';
+
+  function apply() {
+    const term = q.value.trim().toLowerCase();
+    let shown = 0;
+    rows.forEach(r => {
+      const okSev = filter === 'all' || r.dataset.sev === filter;
+      const okTerm = !term || r.dataset.text.includes(term);
+      const vis = okSev && okTerm;
+      r.style.display = vis ? '' : 'none';
+      if (vis) shown++;
+    });
+    document.querySelectorAll('section.group').forEach(sec => {
+      const any = [...sec.querySelectorAll('tr.rule')].some(r => r.style.display !== 'none');
+      sec.style.display = any ? '' : 'none';
+    });
+    empty.style.display = shown ? 'none' : 'block';
+  }
+  q.addEventListener('input', apply);
+  chips.forEach(c => c.addEventListener('click', () => {
+    chips.forEach(x => x.classList.remove('active'));
+    c.classList.add('active');
+    filter = c.dataset.f;
+    apply();
+  }));
+</script>
+</body>
+</html>

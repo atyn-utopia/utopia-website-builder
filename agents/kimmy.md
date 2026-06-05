@@ -478,3 +478,16 @@ window.uwc('click', { label: `blog-${slug}` })
 - [ ] All WhatsApp buttons track clicks
 - [ ] Product cards track impressions
 - [ ] Blog listing tracks article clicks
+
+## MANDATORY: self-verify before you return
+
+Before handing your work back, run the guardrail gate on your project and fix
+every **blocking** failure — then paste the passing output as proof:
+
+```bash
+cd utopia-wizard && npm run gate -- --source-only {slug}
+```
+
+Exit 0 with zero blocking failures is required. For the full contract (the hard
+rules each blocking check maps to), follow [prompts/agent-self-check.md](../prompts/agent-self-check.md).
+The complete rule list is in [docs/guardrails.html](../docs/guardrails.html).

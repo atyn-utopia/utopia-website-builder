@@ -2,8 +2,9 @@ import { readFile, access, readdir, stat } from 'fs/promises'
 import path from 'path'
 import type { ProjectInfo } from './projectInfo'
 import { getDomainCounts, getBlogContentRows, getPhoneRows, getRegisteredDomains, supabaseConfigured } from './supabaseChecks'
-import { findHardcodedPhones, findBlogHardcodedPhones } from './sourceScan'
+import { findHardcodedPhones, findBlogHardcodedPhones, findMessageLeaks } from './sourceScan'
 import { checkLiveDbConnection } from './liveStatusCheck'
+import { getProjectDomains } from './vercelDomains'
 
 export type CheckStatus = 'pass' | 'fail' | 'skip'
 
@@ -807,18 +808,8 @@ const DESIGN: Check[] = [
         : pass('no-empty-img-alt', 'No <img alt=""> in app/ or components/')
     },
   },
-  {
-    group: 'Layout & Design', id: 'alt-translation-keys', name: 'Alt-text translation keys exist (ms.json)',
-    help: "Alt-text translation keys exist in the Malay messages file.",
-    run: async (ctx) => {
-      const c = await readProjectFile(ctx, 'messages/ms.json')
-      if (!c) return skip('alt-translation-keys', 'Alt-text translation keys exist (ms.json)', 'messages/ms.json missing')
-      const missing = ['logoAlt', 'imageAlt'].filter((k) => !c.includes(`"${k}"`))
-      return missing.length === 0
-        ? pass('alt-translation-keys', 'Alt-text translation keys exist (ms.json)', 'logoAlt + imageAlt present')
-        : fail('alt-translation-keys', 'Alt-text translation keys exist (ms.json)', `missing: ${missing.join(', ')}`)
-    },
-  },
+  // (alt-translation-keys merged into `alt-keys-all-locales` below — that check
+  // verifies the same logoAlt + imageAlt keys across en/ms/zh, a superset.)
 
   // Typography
   {
@@ -913,13 +904,17 @@ const DESIGN: Check[] = [
     },
   },
   {
-    group: 'Layout & Design', id: 'fomo-banner', name: 'FomoBanner component',
-    help: "The red urgency countdown banner at the very top of every page.",
+    group: 'Layout & Design', id: 'fomo-banner', name: 'FomoBanner component (+ live countdown)',
+    help: "The red urgency banner at the very top of every page. This check verifies the component exists and contains a live countdown timer (CLAUDE.md mandatory). It CANNOT verify the two visual properties that static analysis gets wrong: (1) red/black background — the canonical pattern styles the bar via a globals.css class with a project-specific colour token, so a colour grep both misses it and false-flags good projects; (2) mobile compactness/centering — the gold-standard sewa-excavator uses the exact same flex-wrap+justify-center pattern correctly, so there is no static signal that distinguishes a compact banner from a sprawling one. Both MUST be confirmed in the Gate-1 mobile (≈360px) screenshot review.",
     run: async (ctx) => {
-      const ok = await fileExists(ctx, 'components/FomoBanner.tsx')
-      return ok
-        ? pass('fomo-banner', 'FomoBanner component')
-        : fail('fomo-banner', 'FomoBanner component', 'Missing components/FomoBanner.tsx')
+      const c = await readProjectFile(ctx, 'components/FomoBanner.tsx')
+      if (c == null) return fail('fomo-banner', 'FomoBanner component (+ live countdown)', 'Missing components/FomoBanner.tsx')
+      // Live countdown is mandatory (CLAUDE.md: ticking hours:minutes:seconds).
+      // This is the one property we can verify reliably from source.
+      const hasCountdown = /countdown|timeLeft|setInterval|seconds/i.test(c)
+      return hasCountdown
+        ? pass('fomo-banner', 'FomoBanner component (+ live countdown)', 'exists with a live countdown — confirm red/black bg + mobile compactness in the screenshot review')
+        : fail('fomo-banner', 'FomoBanner component (+ live countdown)', 'FomoBanner has no live countdown timer (ticking hours:minutes:seconds is mandatory)')
     },
   },
   {
@@ -939,36 +934,34 @@ const DESIGN: Check[] = [
 
   // Header / footer usage on every page
   {
-    group: 'Layout & Design', id: 'homepage-uses-site-header', name: 'Homepage renders <SiteHeader />',
-    help: "Homepage actually renders the shared header (not a custom one).",
+    // Merged 3 homepage chrome checks into one for consistency with the
+    // location/blog chrome checks and to make room for the live-blog-renders
+    // + homepage-product-ctas checks below.
+    group: 'Layout & Design', id: 'homepage-chrome', name: 'Homepage renders SiteHeader + SiteFooter + FomoBanner',
+    help: "Homepage actually renders all three shared site chrome components, not custom variants.",
     run: async (ctx) => {
-      const c = await readProjectFile(ctx, 'app/[locale]/page.tsx')
-      if (!c) return fail('homepage-uses-site-header', 'Homepage renders <SiteHeader />', 'homepage file missing')
-      return /<SiteHeader\b/.test(c)
-        ? pass('homepage-uses-site-header', 'Homepage renders <SiteHeader />')
-        : fail('homepage-uses-site-header', 'Homepage renders <SiteHeader />', 'no <SiteHeader /> in homepage')
+      const c = await concatTsxInDir(ctx, 'app/[locale]')
+      if (!c) return fail('homepage-chrome', 'Homepage renders SiteHeader + SiteFooter + FomoBanner', 'homepage files missing')
+      const missing = (['SiteHeader', 'SiteFooter', 'FomoBanner'] as const).filter((tag) => !new RegExp(`<${tag}\\b`).test(c))
+      return missing.length === 0
+        ? pass('homepage-chrome', 'Homepage renders SiteHeader + SiteFooter + FomoBanner')
+        : fail('homepage-chrome', 'Homepage renders SiteHeader + SiteFooter + FomoBanner', `missing: ${missing.join(', ')}`)
     },
   },
   {
-    group: 'Layout & Design', id: 'homepage-uses-site-footer', name: 'Homepage renders <SiteFooter />',
-    help: "Homepage actually renders the shared footer.",
+    group: 'Layout & Design', id: 'homepage-product-ctas', name: 'Homepage has enough WhatsApp CTAs (≥3)',
+    help: "Each product/service card on the homepage should have a WhatsApp CTA routing through /redirect-whatsapp-1. Pages with only the hero CTA leave every product card without a way to convert — roller-shutter shipped with 1 CTA total.",
     run: async (ctx) => {
-      const c = await readProjectFile(ctx, 'app/[locale]/page.tsx')
-      if (!c) return fail('homepage-uses-site-footer', 'Homepage renders <SiteFooter />', 'homepage file missing')
-      return /<SiteFooter\b/.test(c)
-        ? pass('homepage-uses-site-footer', 'Homepage renders <SiteFooter />')
-        : fail('homepage-uses-site-footer', 'Homepage renders <SiteFooter />', 'no <SiteFooter /> in homepage')
-    },
-  },
-  {
-    group: 'Layout & Design', id: 'homepage-uses-fomo', name: 'Homepage renders <FomoBanner />',
-    help: "Homepage actually renders the urgency banner.",
-    run: async (ctx) => {
-      const c = await readProjectFile(ctx, 'app/[locale]/page.tsx')
-      if (!c) return fail('homepage-uses-fomo', 'Homepage renders <FomoBanner />', 'homepage file missing')
-      return /<FomoBanner\b/.test(c)
-        ? pass('homepage-uses-fomo', 'Homepage renders <FomoBanner />')
-        : fail('homepage-uses-fomo', 'Homepage renders <FomoBanner />', 'no <FomoBanner /> in homepage')
+      const c = await concatTsxInDir(ctx, 'app/[locale]')
+      if (!c) return skip('homepage-product-ctas', 'Homepage has enough WhatsApp CTAs (≥3)', 'homepage files missing')
+      // Count all forms of CTA that route through the redirect page or use the
+      // shared WhatsAppButton. We strip <SiteHeader> / <SiteFooter> usages first
+      // so the header/footer's own CTAs don't inflate the count.
+      const body = c.replace(/<SiteHeader\b[^>]*\/?>|<SiteFooter\b[^>]*\/?>/g, '')
+      const ctas = countOccurrences(body, /waRedirect\(|<WhatsAppButton\b|\/redirect-whatsapp-1/)
+      return ctas >= 3
+        ? pass('homepage-product-ctas', 'Homepage has enough WhatsApp CTAs (≥3)', `${ctas} CTAs on homepage`)
+        : fail('homepage-product-ctas', 'Homepage has enough WhatsApp CTAs (≥3)', `only ${ctas} WhatsApp CTA(s) on the homepage — product cards likely have no clickable conversion path`)
     },
   },
   {
@@ -998,30 +991,41 @@ const DESIGN: Check[] = [
   },
   {
     group: 'Layout & Design', id: 'location-matches-homepage', name: 'Location page mirrors homepage sections',
-    help: "A location page must be the same layout as the homepage — same hero, USP bar, products, gallery, reviews, etc. — with only the copy localised. Stripped-down location pages convert worse and look half-built.",
+    help: "A location page must be the same layout as the homepage — same hero, USP bar, products, gallery, reviews, etc. — with only the copy localised. Strips down sections like 'why-us' from 4 instances on the homepage to 1 on the location page = half-built page.",
     run: async (ctx) => {
       const slug = ctx.info.productSlug
       if (!slug) return skip('location-matches-homepage', 'Location page mirrors homepage sections', 'unknown productSlug')
-      const homeTokens = await classTokensInDir(ctx, 'app/[locale]')
-      const locTokens = await classTokensInDir(ctx, `app/[locale]/${slug}/[location]`)
-      if (homeTokens.size === 0) return skip('location-matches-homepage', 'Location page mirrors homepage sections', 'homepage has no class tokens')
-      if (locTokens.size === 0) return skip('location-matches-homepage', 'Location page mirrors homepage sections', 'location page not found')
-      // Major homepage sections, identified by a substring in their class
-      // names. If the homepage renders one and the location page doesn't, the
-      // location page is a stripped-down variant.
-      const sections: Record<string, string> = {
-        usp: 'USP bar', gallery: 'gallery', review: 'reviews',
-        process: 'process/how-it-works', calc: 'calculator', why: 'why-us', product: 'products',
+      const home = await concatTsxInDir(ctx, 'app/[locale]')
+      const loc = await concatTsxInDir(ctx, `app/[locale]/${slug}/[location]`)
+      if (!home) return skip('location-matches-homepage', 'Location page mirrors homepage sections', 'homepage source missing')
+      if (!loc) return skip('location-matches-homepage', 'Location page mirrors homepage sections', 'location page not found')
+      // Compare OCCURRENCE COUNTS per section (not just presence) — the old
+      // substring-only heuristic let roller-shutter pass with why-us reduced
+      // from 4 instances to 1. Rule: if homepage uses a marker ≥3 times and the
+      // location page has <50% of that count, the section is "stripped" (0/N
+      // included — an entirely dropped section trips this too).
+      //
+      // NOTE on marker choice: only DISTINCTIVE structural class/id tokens that
+      // appear iff the section is present belong here. Content tokens like "faq"
+      // are deliberately excluded — a location FAQ with fewer questions has a
+      // lower count but is NOT stripped, so counting them produced false fails.
+      // The 'trusted-by logo strip' marker was the gap that let roller-shutter
+      // ship a location page with no logo strip while this check stayed green.
+      const markers: Record<string, string> = {
+        'usp-': 'USP bar',
+        'trust-strip|trustlogos|trusted by|logo-strip|brand-strip': 'trusted-by logo strip',
+        gallery: 'gallery', review: 'reviews',
+        process: 'process/how-it-works', calc: 'calculator', 'why-': 'why-us', product: 'products',
       }
-      const missing: string[] = []
-      for (const [marker, label] of Object.entries(sections)) {
-        const homeHas = [...homeTokens].some((t) => t.includes(marker))
-        const locHas = [...locTokens].some((t) => t.includes(marker))
-        if (homeHas && !locHas) missing.push(label)
+      const stripped: string[] = []
+      for (const [marker, label] of Object.entries(markers)) {
+        const h = (home.match(new RegExp(marker, 'gi')) ?? []).length
+        const l = (loc.match(new RegExp(marker, 'gi')) ?? []).length
+        if (h >= 3 && l / h < 0.5) stripped.push(`${label} (${l}/${h})`)
       }
-      return missing.length === 0
+      return stripped.length === 0
         ? pass('location-matches-homepage', 'Location page mirrors homepage sections')
-        : fail('location-matches-homepage', 'Location page mirrors homepage sections', `location page is missing homepage sections: ${missing.join(', ')} — it should mirror the homepage layout with only localised copy`)
+        : fail('location-matches-homepage', 'Location page mirrors homepage sections', `stripped vs homepage: ${stripped.join(', ')} — location page should mirror the homepage layout with only localised copy`)
     },
   },
 
@@ -1262,6 +1266,48 @@ const DESIGN: Check[] = [
     },
   },
 
+  // CTA button copy length
+  {
+    group: 'Layout & Design', id: 'cta-button-word-limit', name: 'CTA button labels are ≤3 words',
+    help: "WhatsApp/CTA button copy stays punchy — at most 3 words (e.g. 'WhatsApp Us Now'). Longer labels wrap and look cluttered on mobile. Counts every word, WhatsApp included. Applies to clickable button labels only — not headings, subtext, tags, or sentence-style closing CTAs.",
+    run: async (ctx) => {
+      const MAX = 3
+      // A CTA *button label* key: name contains cta/bookNow, but NOT the
+      // heading / subtext / tag / alt-text / closing-paragraph variants that
+      // live next to a button without being one.
+      const isButtonKey = (k: string) => /cta|booknow/i.test(k) && !/bgalt|closing|alt$|subtext|subhead|subtitle|heading|tag/i.test(k)
+      // Sentence/paragraph CTAs (questions, long prose) aren't buttons.
+      const isButtonValue = (v: string) => v.length <= 45 && !/[?!]/.test(v)
+      // Count words; ignore decorative symbol-only tokens like → · — .
+      const wordCount = (v: string) => v.trim().split(/\s+/).filter((t) => /[\p{L}\p{N}]/u.test(t)).length
+      const violations: string[] = []
+      for (const loc of ['en', 'ms']) {
+        const c = await readProjectFile(ctx, `messages/${loc}.json`)
+        if (c == null) continue
+        let obj: unknown
+        try { obj = JSON.parse(c) } catch { return fail('cta-button-word-limit', 'CTA button labels are ≤3 words', `${loc}.json failed to parse`) }
+        const walk = (node: unknown, pathStr: string) => {
+          if (node && typeof node === 'object') {
+            for (const [k, v] of Object.entries(node as Record<string, unknown>)) {
+              const p = pathStr ? `${pathStr}.${k}` : k
+              if (typeof v === 'string') {
+                if (isButtonKey(k) && isButtonValue(v) && wordCount(v) > MAX) {
+                  violations.push(`${loc}:${p} ("${v}" = ${wordCount(v)} words)`)
+                }
+              } else {
+                walk(v, p)
+              }
+            }
+          }
+        }
+        walk(obj, '')
+      }
+      return violations.length === 0
+        ? pass('cta-button-word-limit', 'CTA button labels are ≤3 words')
+        : fail('cta-button-word-limit', 'CTA button labels are ≤3 words', `over the 3-word limit: ${violations.slice(0, 6).join(', ')}${violations.length > 6 ? ` (+${violations.length - 6} more)` : ''}`)
+    },
+  },
+
   // Pricing convention
   {
     group: 'Layout & Design', id: 'price-from-prefix', name: "Price strings use 'Dari RM' prefix (ms.json)",
@@ -1386,48 +1432,45 @@ const DESIGN: Check[] = [
   // no products / phone-numbers / blog posts even though everything looks fine
   // locally.
   {
-    group: 'Layout & Design', id: 'site-domain-matches-deploy-url', name: 'siteConfig.domain matches deploy-url.txt',
-    help: "siteConfig.domain is the value Supabase rows are keyed on. If the deployed host doesn't match it, queries return empty and the live site looks 'disconnected'.",
+    // Merged the deploy-url + tracking-data-website domain checks into one
+    // (keeps the wizard at exactly 100). Both compare against config/site.ts
+    // domain; fails if EITHER the deployed host or the tracking data-website
+    // disagrees. Each leg skips silently if its source file isn't present yet.
+    group: 'Layout & Design', id: 'domain-consistency', name: 'siteConfig.domain matches deploy URL + tracking data-website',
+    help: "siteConfig.domain is the key Supabase rows, leads-mode, and the WhatsApp redirect all use. The deployed host (deploy-url.txt) and the tracking <script data-website> must both match it, or the live site looks 'disconnected' and analytics miss.",
     run: async (ctx) => {
-      const deploy = await readProjectFile(ctx, 'deploy-url.txt')
-      if (!deploy) return skip('site-domain-matches-deploy-url', 'siteConfig.domain matches deploy-url.txt', 'no deploy-url.txt yet')
       const config = await readProjectFile(ctx, 'config/site.ts')
-      if (!config) return skip('site-domain-matches-deploy-url', 'siteConfig.domain matches deploy-url.txt', 'config/site.ts not found')
-      const deployHost = deploy.trim().replace(/^https?:\/\//, '').replace(/\/.*$/, '').replace(/^www\./, '').toLowerCase()
+      if (!config) return skip('domain-consistency', 'siteConfig.domain matches deploy URL + tracking data-website', 'config/site.ts not found')
       const m = config.match(/domain\s*:\s*['"]([^'"]+)['"]/)
-      if (!m) return fail('site-domain-matches-deploy-url', 'siteConfig.domain matches deploy-url.txt', 'no `domain:` field in config/site.ts')
+      if (!m) return fail('domain-consistency', 'siteConfig.domain matches deploy URL + tracking data-website', 'no `domain:` field in config/site.ts')
       const configHost = m[1].toLowerCase().replace(/^www\./, '')
-      if (configHost === deployHost) return pass('site-domain-matches-deploy-url', 'siteConfig.domain matches deploy-url.txt', configHost)
-      return fail(
-        'site-domain-matches-deploy-url',
-        'siteConfig.domain matches deploy-url.txt',
-        `siteConfig.domain="${configHost}" but deploy host="${deployHost}" — Supabase rows keyed on "${configHost}" will be invisible on the live site`,
-      )
-    },
-  },
-  {
-    group: 'Layout & Design', id: 'tracking-domain-matches-config', name: '<script data-website="…"> matches siteConfig.domain',
-    help: "The tracking script's data-website must match siteConfig.domain so analytics, leads-mode, and the WhatsApp redirect all key off the same host.",
-    run: async (ctx) => {
+      const problems: string[] = []
+
+      // 1) Deployed host (skip this leg if not deployed yet).
+      const deploy = await readProjectFile(ctx, 'deploy-url.txt')
+      if (deploy) {
+        const deployHost = deploy.trim().replace(/^https?:\/\//, '').replace(/\/.*$/, '').replace(/^www\./, '').toLowerCase()
+        if (configHost !== deployHost) {
+          problems.push(`deploy host="${deployHost}" ≠ siteConfig.domain="${configHost}" — Supabase rows keyed on "${configHost}" will be invisible on the live site`)
+        }
+      }
+
+      // 2) Tracking data-website in layout.tsx. Accept a literal value or
+      // `data-website={siteConfig.domain}` (string-interpolated).
       const layout = await readProjectFile(ctx, 'app/[locale]/layout.tsx')
-      if (!layout) return skip('tracking-domain-matches-config', '<script data-website="…"> matches siteConfig.domain', 'layout.tsx not found')
-      const config = await readProjectFile(ctx, 'config/site.ts')
-      if (!config) return skip('tracking-domain-matches-config', '<script data-website="…"> matches siteConfig.domain', 'config/site.ts not found')
-      const configMatch = config.match(/domain\s*:\s*['"]([^'"]+)['"]/)
-      if (!configMatch) return fail('tracking-domain-matches-config', '<script data-website="…"> matches siteConfig.domain', 'no `domain:` field in config/site.ts')
-      const configHost = configMatch[1].toLowerCase()
-      // Accept either a literal data-website="…" or `data-website={siteConfig.domain}` (string-interpolated).
-      const literal = layout.match(/data-website=["']([^"']+)["']/)
-      if (literal) {
-        const v = literal[1].toLowerCase()
-        return v === configHost
-          ? pass('tracking-domain-matches-config', '<script data-website="…"> matches siteConfig.domain', v)
-          : fail('tracking-domain-matches-config', '<script data-website="…"> matches siteConfig.domain', `data-website="${v}" ≠ siteConfig.domain="${configHost}"`)
+      if (layout) {
+        const literal = layout.match(/data-website=["']([^"']+)["']/)
+        if (literal) {
+          const v = literal[1].toLowerCase().replace(/^www\./, '')
+          if (v !== configHost) problems.push(`data-website="${literal[1]}" ≠ siteConfig.domain="${configHost}"`)
+        } else if (!/data-website=\{[^}]*siteConfig\.domain[^}]*\}/.test(layout)) {
+          problems.push('no `data-website` attribute in layout.tsx — tracking will not match any project in webcore')
+        }
       }
-      if (/data-website=\{[^}]*siteConfig\.domain[^}]*\}/.test(layout)) {
-        return pass('tracking-domain-matches-config', '<script data-website="…"> matches siteConfig.domain', 'bound to siteConfig.domain')
-      }
-      return fail('tracking-domain-matches-config', '<script data-website="…"> matches siteConfig.domain', 'no `data-website` attribute found in layout.tsx — tracking will not match any project in webcore')
+
+      return problems.length === 0
+        ? pass('domain-consistency', 'siteConfig.domain matches deploy URL + tracking data-website', configHost)
+        : fail('domain-consistency', 'siteConfig.domain matches deploy URL + tracking data-website', problems.join(' | '))
     },
   },
   {
@@ -1507,16 +1550,28 @@ const DESIGN: Check[] = [
   },
   {
     group: 'Blog', id: 'blog-post-cta-banner', name: 'Blog post has a WhatsApp CTA banner',
-    help: "Every article ends with a WhatsApp CTA so readers who finish a post can immediately convert.",
+    help: "Every article ends with a WhatsApp CTA so readers who finish a post can immediately convert — and it must be recognisably WhatsApp (official glyph icon + official green), not a bare brand-coloured link.",
     run: async (ctx) => {
       const c = await readProjectFile(ctx, 'app/[locale]/blog/[slug]/page.tsx')
       if (!c) return skip('blog-post-cta-banner', 'Blog post has a WhatsApp CTA banner', 'blog post page not found')
-      // Accept either a <WhatsAppButton …> or any link going to the redirect
-      // page from inside the post body.
-      const ok = /<WhatsAppButton\b|waRedirect\(|\/redirect-whatsapp-1/.test(c)
-      return ok
+      // (a) A CTA must exist: a <WhatsAppButton …> or a link to the redirect page.
+      const hasCta = /<WhatsAppButton\b|waRedirect\(|\/redirect-whatsapp-1/.test(c)
+      if (!hasCta) return fail('blog-post-cta-banner', 'Blog post has a WhatsApp CTA banner', 'no WhatsApp CTA in blog post — readers finish the article with no path to convert')
+
+      // The shared <WhatsAppButton> owns its own icon + green, so if the page
+      // delegates to it we trust the component and pass.
+      if (/<WhatsAppButton\b/.test(c)) return pass('blog-post-cta-banner', 'Blog post has a WhatsApp CTA banner')
+
+      // (b) A hand-rolled CTA must still be recognisable: the official WhatsApp
+      //     glyph (24×24 svg / WA path) AND the official green (#25D366 / .wa-btn).
+      const hasIcon = /<WhatsAppIcon\b/.test(c) || /<svg[^>]*viewBox=["']0 0 24 24["']/.test(c) || /<path[^>]*\bd=["']M1[0-9]\.\d{3}/.test(c)
+      const hasGreen = /\bwa-btn\b|\bbtn-wa\b|#25D366|var\(--wa-green\b/i.test(c)
+      const miss: string[] = []
+      if (!hasIcon) miss.push('official WhatsApp icon (svg glyph)')
+      if (!hasGreen) miss.push('official green (#25D366 / .wa-btn)')
+      return miss.length === 0
         ? pass('blog-post-cta-banner', 'Blog post has a WhatsApp CTA banner')
-        : fail('blog-post-cta-banner', 'Blog post has a WhatsApp CTA banner', 'no WhatsApp CTA in blog post — readers finish the article with no path to convert')
+        : fail('blog-post-cta-banner', 'Blog post has a WhatsApp CTA banner', `CTA present but not recognisable as WhatsApp — missing ${miss.join(' + ')}`)
     },
   },
   {
@@ -1658,6 +1713,35 @@ const DATABASE: Check[] = [
         : fail('db-blog-posts', '≥10 published blog posts', `only ${c.publishedBlogPosts} published post(s)`)
     },
   },
+  {
+    group: 'Blog', id: 'live-blog-renders', name: 'Live /blog page actually renders posts',
+    help: "Fetches the deployed /en/blog and confirms post cards are rendered, not the 'no posts yet' empty state. Catches the case where the DB has posts but the live site shows nothing — usually a siteConfig.domain mismatch (roller-shutter shipped with 10 DB posts and a /blog that rendered zero).",
+    run: async (ctx) => {
+      if (!ctx.info.deployUrl) return skip('live-blog-renders', 'Live /blog page actually renders posts', 'no deploy URL')
+      const url = `${ctx.info.deployUrl.replace(/\/$/, '')}/en/blog`
+      try {
+        const res = await fetch(url, { signal: AbortSignal.timeout(6000), cache: 'no-store' })
+        if (!res.ok) return fail('live-blog-renders', 'Live /blog page actually renders posts', `${url} returned ${res.status}`)
+        const html = await res.text()
+        // Count <a href="/<locale>/blog/<slug>"> links — each post card has at
+        // least one. /blog itself (no trailing slug) is excluded.
+        const postLinks = new Set<string>()
+        for (const m of html.matchAll(/href=["']\/[a-z]{2}\/blog\/([a-z0-9][a-z0-9-]*)["']/g)) postLinks.add(m[1])
+        if (postLinks.size > 0) return pass('live-blog-renders', 'Live /blog page actually renders posts', `${postLinks.size} post card(s) rendered`)
+        // No post links found — check whether the page is showing the empty state.
+        const empty = /no\s*post|tiada\s*post|tiada\s*artikel|暂无|沒有.*文章/i.test(html)
+        return fail(
+          'live-blog-renders',
+          'Live /blog page actually renders posts',
+          empty
+            ? `live /blog shows empty state (no posts) but DB has rows — siteConfig.domain probably doesn't match the website column`
+            : `live /blog rendered 0 post cards — check listing query and siteConfig.domain`,
+        )
+      } catch {
+        return fail('live-blog-renders', 'Live /blog page actually renders posts', `${url} unreachable`)
+      }
+    },
+  },
 ]
 
 const DEPLOYMENT: Check[] = [
@@ -1694,6 +1778,31 @@ const DEPLOYMENT: Check[] = [
       } catch {
         return fail('deploy-url-live', 'Deploy URL responds', `${url} unreachable`)
       }
+    },
+  },
+  {
+    group: 'Deployment', id: 'vercel-domain-match', name: 'siteConfig.domain is served by Vercel',
+    help: "Asks the Vercel API which domains the project actually serves and confirms siteConfig.domain is one of them. Catches a domain changed in another system (Vercel/DNS) that the repo still doesn't reflect — the failure mode where the site is unreachable but every repo-internal check passes. Skips when no VERCEL_TOKEN is available.",
+    run: async (ctx) => {
+      const configDomain = (ctx.info.domain ?? '').toLowerCase().replace(/^www\./, '')
+      if (!configDomain) return skip('vercel-domain-match', 'siteConfig.domain is served by Vercel', 'no domain in config/site.ts')
+
+      // .vercel/project.json is gitignored (absent in CI) — use it when present
+      // for the real projectName + teamId, else fall back to slug + env.
+      let teamId: string | undefined = process.env.VERCEL_TEAM_ID
+      let projectName = ctx.info.slug
+      const pj = await readProjectFile(ctx, '.vercel/project.json')
+      if (pj) { try { const j = JSON.parse(pj); teamId = j.orgId ?? teamId; projectName = j.projectName ?? projectName } catch { /* ignore */ } }
+
+      const result = await getProjectDomains(projectName, teamId)
+      if (result.skipped) return skip('vercel-domain-match', 'siteConfig.domain is served by Vercel', result.skipped)
+      if (!result.ok) return skip('vercel-domain-match', 'siteConfig.domain is served by Vercel', result.error)  // infra/auth → skip, don't fail
+      if (result.productionDomains.includes(configDomain)) {
+        return pass('vercel-domain-match', 'siteConfig.domain is served by Vercel', configDomain)
+      }
+      const actual = result.productionDomains.length ? result.productionDomains.join(', ') : '(no production domain assigned)'
+      return fail('vercel-domain-match', 'siteConfig.domain is served by Vercel',
+        `config/site.ts domain "${configDomain}" is NOT served by Vercel — Vercel serves: ${actual}. Update config/site.ts + deploy-url.txt + data-website (and the DB rows) to the real domain.`)
     },
   },
   {
@@ -1734,16 +1843,31 @@ const DEPLOYMENT: Check[] = [
 
 const QUALITY: Check[] = [
   {
-    group: 'Quality', id: 'no-hardcoded-phones', name: 'No hardcoded phone numbers in app/ or components/',
-    help: "No phone numbers hardcoded in code — every number comes from the database.",
+    group: 'Quality', id: 'no-hardcoded-phones', name: 'No hardcoded phone numbers in app/, components/, or messages/',
+    help: "No phone numbers hardcoded anywhere user-facing — every number comes from the database. Covers app/ + components/ source AND messages/*.json translation copy (those values render on the page, so a placeholder number there is just as visible).",
     run: async (ctx) => {
-      const hits = await findHardcodedPhones(ctx.info.projectDir)
-      if (hits.length === 0) return pass('no-hardcoded-phones', 'No hardcoded phone numbers in app/ or components/')
+      const codeHits = await findHardcodedPhones(ctx.info.projectDir)
+      const msgHits = (await findMessageLeaks(ctx.info.projectDir)).filter((h) => h.kind === 'phone')
+      const total = codeHits.length + msgHits.length
+      const name = 'No hardcoded phone numbers in app/, components/, or messages/'
+      if (total === 0) return pass('no-hardcoded-phones', name)
+      const where = codeHits.length
+        ? `${codeHits[0].file}:${codeHits[0].line} → ${codeHits[0].match}`
+        : `${msgHits[0].file} [${msgHits[0].key}] → ${msgHits[0].match}`
+      return fail('no-hardcoded-phones', name, `${total} hit(s) — e.g. ${where}`)
+    },
+  },
+  {
+    group: 'Quality', id: 'no-domains-in-copy', name: 'No domain/URL shown as visible text in copy',
+    help: "CLAUDE.md forbids displaying any domain or URL as visible text — all contact goes through WhatsApp redirect buttons. Translation (messages/*.json) values are always rendered on the page, so a domain like `example.my` in footer copyright or any other string is a visible-text leak. Code (app/, components/) is NOT scanned here: canonical URLs, metadataBase, and JSON-LD schema legitimately carry the domain in non-rendered markup.",
+    run: async (ctx) => {
+      const hits = (await findMessageLeaks(ctx.info.projectDir)).filter((h) => h.kind === 'domain')
+      if (hits.length === 0) return pass('no-domains-in-copy', 'No domain/URL shown as visible text in copy')
       const first = hits[0]
       return fail(
-        'no-hardcoded-phones',
-        'No hardcoded phone numbers in app/ or components/',
-        `${hits.length} hit(s) — e.g. ${first.file}:${first.line} → ${first.match}`,
+        'no-domains-in-copy',
+        'No domain/URL shown as visible text in copy',
+        `${hits.length} hit(s) — e.g. ${first.file} [${first.key}] → ${first.match}`,
       )
     },
   },

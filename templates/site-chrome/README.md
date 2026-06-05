@@ -1,0 +1,56 @@
+# templates/site-chrome — Canonical site chrome (single source of truth)
+
+These six components are the **canonical chrome** every Utopia site must use,
+unchanged in structure. They are brand-agnostic: brand name, nav labels, and
+tagline come from `messages/*.json` (next-intl) and `config/site.ts`; the only
+asset conventions are `/brand/logo-dark.png` (footer) and `/brand/bg-hero.jpg`
+(hero bg). Swap those assets per project — do not edit the component structure.
+
+| File | Role |
+|------|------|
+| `SiteHeader.tsx` | nav links + language switcher + WhatsApp CTA |
+| `SiteFooter.tsx` | quick links, locations grid, copyright, social |
+| `FomoBanner.tsx` | top sticky banner + live countdown (red/black) |
+| `PageStyles.tsx` | shared `<style>` block for every section (hero…final CTA) |
+| `LanguageSwitcher.tsx` | bordered flag pills (desktop) / dropdown (mobile) |
+| `WhatsAppButton.tsx` | official-green CTA routing through the redirect page |
+
+## How it's used
+
+- **New sites:** `npm run scaffold` (in `utopia-wizard/`) copies these into
+  `projects/{slug}/components/`. Editing a file here changes what every *future*
+  scaffold gets.
+- **Drift detection:** `cd utopia-wizard && npm run chrome:check` reports any
+  project whose chrome has diverged from these canonical files (normalised
+  comparison that ignores per-project brand strings / asset paths). Re-sync
+  intentionally — divergence is how broken chrome (e.g. a custom `BlogNav`) crept
+  into older projects.
+
+> This is **not** a runtime package — each project is its own per-folder Vercel
+> deploy, so the chrome is copied in, not imported. The drift check is what keeps
+> the copies honest. (To make it a true import-don't-copy dependency later would
+> require publishing to npm or a workspace monorepo + Vercel root-dir changes.)
+
+## Migrating a legacy site is a 3-layer refactor, not a file swap
+
+`npm run chrome:sync -- --only={slug} --write` copies the canonical files in, but
+on a heavily-divergent legacy site that is only **step 1**. A real migration
+(verified on `katilhospital-24jam`) has three layers, each caught by a different
+tool:
+
+1. **CSS tokens** — canonical chrome uses `--brand-orange` / `--ink` / `--gut`;
+   older sites use their own names (`--accent` / `--navy` / `--space-*`). The
+   gate's `no-undefined-css-vars` flags this. Fix with a small token-alias shim
+   in `globals.css` (map canonical → local), not by editing components.
+2. **Export API** — canonical components use **named** exports
+   (`export function WhatsAppButton`). A site importing them as **default**
+   (`import WhatsAppButton from …`) breaks every importer. The static gate does
+   NOT catch this — only `npm run build` does.
+3. **Leftover old nav** — pages may still render old `Navbar` / `Footer` /
+   `FomoBar`; those usages must be replaced with `SiteHeader` / `SiteFooter` /
+   `FomoBanner`.
+
+**Always run the gate AND a build after syncing.** Because of this cost, do NOT
+bulk-migrate: sites already scoring 90+ are usually customised on purpose and
+work — leave them. Sync is for new sites (via `scaffold`) and for a site you are
+already actively reworking.
