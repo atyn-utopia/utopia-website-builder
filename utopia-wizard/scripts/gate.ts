@@ -49,6 +49,12 @@ async function loadEnv(): Promise<void> {
 const args = process.argv.slice(2)
 const SOURCE_ONLY = args.includes('--source-only')
 const RATCHET = args.includes('--ratchet')
+// Regression-only: fail ONLY on a score drop vs the last snapshot, not on
+// absolute blocking failures. This is the correct mode for a PR gate — its job
+// is "don't make it worse", not "retroactively demand pre-existing legacy sites
+// be perfect". Absolute-blocking enforcement still lives at scaffold/self-check,
+// pre-commit, and the deploy gate. Implies --ratchet.
+const REGRESSION_ONLY = args.includes('--regression-only')
 const ALL = args.includes('--all')
 const JSON_OUT = args.includes('--json')
 const onlyArg = args.find((a) => a.startsWith('--only='))?.split('=')[1]
@@ -96,7 +102,9 @@ async function main() {
     return
   }
 
-  console.log(`gate: checking ${slugs.length} project(s)${SOURCE_ONLY ? ' (source-only)' : ''}${RATCHET ? ' +ratchet' : ''}\n`)
+  const ratchet = RATCHET || REGRESSION_ONLY
+  const mode = REGRESSION_ONLY ? ' (regression-only)' : SOURCE_ONLY ? ' (source-only)' : ratchet ? ' +ratchet' : ''
+  console.log(`gate: checking ${slugs.length} project(s)${mode}\n`)
 
   let failedProjects = 0
   const report: Array<{ slug: string; score: string; blocking: string[]; regressed?: string }> = []
@@ -112,7 +120,7 @@ async function main() {
     }
 
     let regressed: string | undefined
-    if (RATCHET) {
+    if (ratchet) {
       try {
         const prev = await readSnapshot(slug)
         if (prev && prev.total > 0) {
@@ -123,15 +131,18 @@ async function main() {
       } catch { /* no snapshot / no env → skip ratchet for this project */ }
     }
 
+    // Regression-only: a project fails ONLY on a score drop. Blocking failures
+    // are surfaced as warnings (legacy debt), not merge blockers.
+    const fails = REGRESSION_ONLY ? !!regressed : (blocking.length > 0 || !!regressed)
     const score = `${run.passed}/${run.total}`
-    const ok = blocking.length === 0 && !regressed
-    if (!ok) failedProjects++
+    if (fails) failedProjects++
     report.push({ slug, score, blocking, regressed })
 
-    const mark = ok ? '✓' : '✗'
+    const mark = fails ? '✗' : (blocking.length ? '⚠' : '✓')
     console.log(`  ${mark} ${slug.padEnd(32)} ${score}`)
     if (blocking.length) {
-      console.log(`      ${blocking.length} BLOCKING failure(s): ${blocking.join(', ')}`)
+      const tag = REGRESSION_ONLY ? `${blocking.length} blocking (warning, not blocking merge)` : `${blocking.length} BLOCKING failure(s)`
+      console.log(`      ${tag}: ${blocking.join(', ')}`)
     }
     if (regressed) console.log(`      SCORE REGRESSION: ${regressed}`)
   }
@@ -140,11 +151,12 @@ async function main() {
   if (JSON_OUT) console.log('GATE_JSON ' + JSON.stringify({ failedProjects, report }))
 
   if (failedProjects > 0) {
-    console.error(`gate: FAILED — ${failedProjects} project(s) have blocking failures or regressions.`)
+    const why = REGRESSION_ONLY ? 'score regression(s)' : 'blocking failures or regressions'
+    console.error(`gate: FAILED — ${failedProjects} project(s) have ${why}.`)
     console.error(`gate: see docs/guardrails.html for what each check id means.`)
     process.exit(1)
   }
-  console.log(`gate: PASS — all ${slugs.length} project(s) clear of blocking failures. ✓`)
+  console.log(`gate: PASS — all ${slugs.length} project(s) clear. ✓`)
 }
 
 main().catch((e) => {
