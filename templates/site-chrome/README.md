@@ -30,3 +30,27 @@ asset conventions are `/brand/logo-dark.png` (footer) and `/brand/bg-hero.jpg`
 > deploy, so the chrome is copied in, not imported. The drift check is what keeps
 > the copies honest. (To make it a true import-don't-copy dependency later would
 > require publishing to npm or a workspace monorepo + Vercel root-dir changes.)
+
+## Migrating a legacy site is a 3-layer refactor, not a file swap
+
+`npm run chrome:sync -- --only={slug} --write` copies the canonical files in, but
+on a heavily-divergent legacy site that is only **step 1**. A real migration
+(verified on `katilhospital-24jam`) has three layers, each caught by a different
+tool:
+
+1. **CSS tokens** — canonical chrome uses `--brand-orange` / `--ink` / `--gut`;
+   older sites use their own names (`--accent` / `--navy` / `--space-*`). The
+   gate's `no-undefined-css-vars` flags this. Fix with a small token-alias shim
+   in `globals.css` (map canonical → local), not by editing components.
+2. **Export API** — canonical components use **named** exports
+   (`export function WhatsAppButton`). A site importing them as **default**
+   (`import WhatsAppButton from …`) breaks every importer. The static gate does
+   NOT catch this — only `npm run build` does.
+3. **Leftover old nav** — pages may still render old `Navbar` / `Footer` /
+   `FomoBar`; those usages must be replaced with `SiteHeader` / `SiteFooter` /
+   `FomoBanner`.
+
+**Always run the gate AND a build after syncing.** Because of this cost, do NOT
+bulk-migrate: sites already scoring 90+ are usually customised on purpose and
+work — leave them. Sync is for new sites (via `scaffold`) and for a site you are
+already actively reworking.
