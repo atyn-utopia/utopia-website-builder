@@ -79,8 +79,14 @@ async function main() {
     .split('\n').map((s) => s.trim()).filter(Boolean)
     .filter((rel) => !EXCLUDE.some((re) => re.test(rel)))
 
+  // Chrome comes from the canonical template (single source of truth), not from
+  // the reference project — so editing templates/site-chrome/ updates new sites.
+  const CHROME = ['SiteHeader', 'SiteFooter', 'FomoBanner', 'PageStyles', 'LanguageSwitcher', 'WhatsAppButton']
+  const chromeRel = new Set(CHROME.map((c) => `components/${c}.tsx`))
+
   let copied = 0
   for (const rel of tracked) {
+    if (chromeRel.has(rel)) continue   // handled from the template below
     const src = path.join(refDir, rel)
     try { if (!(await stat(src)).isFile()) continue } catch { continue }
     const dst = path.join(outDir, rel)
@@ -88,7 +94,18 @@ async function main() {
     await writeFile(dst, await readFile(src))
     copied++
   }
-  console.log(`scaffold: copied ${copied} structural file(s) from ${REF} → projects/${slug}`)
+
+  const templateDir = path.resolve(process.cwd(), '..', 'templates', 'site-chrome')
+  let chromeCopied = 0
+  for (const c of CHROME) {
+    const src = path.join(templateDir, `${c}.tsx`)
+    if (!existsSync(src)) continue
+    const dst = path.join(outDir, 'components', `${c}.tsx`)
+    await mkdir(path.dirname(dst), { recursive: true })
+    await writeFile(dst, await readFile(src))
+    chromeCopied++
+  }
+  console.log(`scaffold: copied ${copied} structural file(s) from ${REF} + ${chromeCopied} chrome file(s) from templates/site-chrome → projects/${slug}`)
 
   // 2. Rename the product route folder: app/[locale]/excavator → app/[locale]/{productSlug}
   if (productSlug !== 'excavator') {
