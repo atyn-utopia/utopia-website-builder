@@ -21,11 +21,10 @@ export function LanguageSwitcher() {
     router.push(segments.join('/'));
   }
 
+  // Classes are .lsw-* and styled in globals.css with !important so element
+  // resets can't clobber them (wizard check: lsw-globals-css).
   return (
-    <div
-      className="lang-switcher inline-flex items-center gap-1 rounded-full border border-[#1C1F2A]/15 bg-white/90 px-1 py-1 text-xs font-semibold tracking-wide shadow-sm"
-      aria-label="Language"
-    >
+    <div className="lsw-switch" aria-label="Language">
       {locales.map((l) => (
         <a
           key={l.code}
@@ -34,11 +33,8 @@ export function LanguageSwitcher() {
             switchLocale(l.code);
           }}
           href="#"
-          className={
-            l.code === locale
-              ? 'rounded-full bg-[#F5B400] px-3 py-1 text-[#1C1F2A]'
-              : 'rounded-full px-3 py-1 text-[#1C1F2A]/70 hover:text-[#1C1F2A]'
-          }
+          className={l.code === locale ? 'lsw-option lsw-option--active' : 'lsw-option'}
+          aria-current={l.code === locale ? 'true' : undefined}
         >
           {l.label}
         </a>

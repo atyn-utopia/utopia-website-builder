@@ -2,8 +2,9 @@ import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
 import { getBlogPosts } from '@/lib/webcore';
 import Link from 'next/link';
-import BlogNav from '@/components/BlogNav';
-import BlogFooter from '@/components/BlogFooter';
+import FomoBanner from '@/components/FomoBanner';
+import SiteHeader from '@/components/SiteHeader';
+import SiteFooter from '@/components/SiteFooter';
 import BlogClickTracker from '@/components/tracking/BlogClickTracker';
 
 export async function generateMetadata({
@@ -45,7 +46,8 @@ export default async function BlogListingPage({
 
   return (
     <>
-      <BlogNav />
+      <FomoBanner />
+      <SiteHeader />
 
       <section className="blog-header">
         <div className="container">
@@ -103,7 +105,7 @@ export default async function BlogListingPage({
         </div>
       </section>
 
-      <BlogFooter />
+      <SiteFooter />
     </>
   );
 }

@@ -9,7 +9,9 @@
     "products": "高空车型号",
     "locations": "服务地区",
     "blog": "博客",
-    "ctaButton": "WhatsApp 联络我们"
+    "ctaButton": "WhatsApp 联络我们",
+    "calculator": "获取报价",
+    "whatsappCta": "WhatsApp 联络我们"
   },
   "fomoBanner": {
     "label": "今日促销倒计时",
@@ -47,7 +49,8 @@
     "cta": "WhatsApp 询价",
     "priceFromLabel": "起",
     "halfDayLabel": "半日",
-    "fullDayLabel": "全日"
+    "fullDayLabel": "全日",
+    "imageAltTemplate": "由 Skylift Malaysia 提供的 {model} 高空作业车租赁，含持证操作员"
   },
   "howItWorks": {
     "heading": "5 分钟预订，高空车当日送达",
@@ -189,6 +192,24 @@
       "机场机库灯具保养",
       "加油站顶棚作业",
       "学校礼堂天花重漆"
+    ],
+    "alts": [
+      "联邦大道广告牌安装",
+      "武吉加里尔体育场灯具更换",
+      "八打灵再也店铺招牌",
+      "仓库高架灯保养",
+      "KLCC 玻璃幕墙清洗",
+      "商场中庭吊灯保养",
+      "电信塔天线检测",
+      "工业烟囱检查",
+      "蕉赖屋顶排水沟清理",
+      "白沙罗住宅修剪树木",
+      "MBPJ 路灯合约",
+      "工厂排气扇更换",
+      "满家乐酒店外墙重漆",
+      "机场机库灯具保养",
+      "加油站顶棚作业",
+      "学校礼堂天花重漆"
     ]
   },
   "locations": {
@@ -253,7 +274,8 @@
     "heading": "预订高空车，操作员出动，傍晚前完工。",
     "subheading": "立即 WhatsApp——半日费率，持证操作员，吉隆坡与雪兰莪当日送达。",
     "cta": "WhatsApp 立即预订",
-    "eyebrow": "立刻锁定"
+    "eyebrow": "立刻锁定",
+    "bgAlt": "马来西亚黄昏时分高空作业车操作员完成高楼作业"
   },
   "footer": {
     "brandName": "Skylift Malaysia",
@@ -279,7 +301,8 @@
     "noPosts": "新文章即将上线。",
     "sharePre": "分享文章",
     "breadcrumbHome": "首页",
-    "breadcrumbBlog": "博客"
+    "breadcrumbBlog": "博客",
+    "ctaHeading": "工地需要高空作业车？交给我们。"
   },
   "location": {
     "h1Prefix": "",
@@ -321,5 +344,7 @@
     "products": "你好 Skylift Malaysia，我想询问高空车租赁的报价。",
     "location": "你好 Skylift Malaysia，我在 {location} 需要高空车租赁。",
     "blog": "你好 Skylift Malaysia，我看了你们的文章，想了解高空车租赁。"
-  }
+  },
+  "logoAlt": "Skylift Malaysia — 提供持证操作员的高空作业车与曲臂车租赁",
+  "imageAlt": "马来西亚工地上配备持证操作员的卡车式高空作业车"
 }

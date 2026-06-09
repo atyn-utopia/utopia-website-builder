@@ -6,14 +6,16 @@ import { useTranslations } from 'next-intl';
 import type { Product, BlogPost } from '@/lib/webcore';
 import { regionOrder, getLocationsByRegion } from '@/config/locations';
 import { siteConfig } from '@/config/site';
-import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { waRedirect } from '@/lib/waRedirect';
 import FomoBanner from '@/components/FomoBanner';
+import SiteHeader from '@/components/SiteHeader';
+import SiteFooter from '@/components/SiteFooter';
+import PageStyles from '@/components/PageStyles';
 
 type Props = {
   locale: string;
   products: Product[];
   recentPosts: BlogPost[];
-  waUrl: string;
 };
 
 // Construction-themed Pexels backgrounds for image sections
@@ -81,90 +83,6 @@ function GoogleG() {
   );
 }
 
-function SkyliftIcon() {
-  // Bucket-truck silhouette icon — clean, single-tone, boom + basket left,
-  // truck cab right. Optional yellow accent on the basket so the brand
-  // palette still reads.
-  return (
-    <svg
-      className="nav-logo-icon"
-      viewBox="0 0 64 48"
-      fill="none"
-      aria-hidden="true"
-    >
-      {/* basket / bucket — top-left */}
-      <path
-        d="M3 8 L3 18 L13 18 L13 8 Z M5 10 L11 10 L11 16 L5 16 Z"
-        fill="#1C1F2A"
-        fillRule="evenodd"
-      />
-      {/* yellow safety lip on the bucket */}
-      <rect x="3" y="8" width="10" height="2" fill="#F5B400" />
-      {/* boom upper segment — going down-right from basket */}
-      <path
-        d="M11 13 L26 22 L24 25.5 L9 16.5 Z"
-        fill="#1C1F2A"
-      />
-      {/* boom hinge knuckle */}
-      <circle cx="26" cy="22" r="2.4" fill="#1C1F2A" />
-      <circle cx="26" cy="22" r="0.8" fill="#F5B400" />
-      {/* boom lower segment — from hinge down to turntable */}
-      <path
-        d="M24.5 21 L31 30 L28 32 L21.5 23 Z"
-        fill="#1C1F2A"
-      />
-      {/* turntable / pedestal on flatbed */}
-      <rect x="26" y="29" width="8" height="4" rx="0.6" fill="#1C1F2A" />
-      {/* truck flatbed */}
-      <rect x="10" y="33" width="38" height="5" rx="0.6" fill="#1C1F2A" />
-      {/* truck cab — right side, sloped windscreen */}
-      <path
-        d="M48 33 L48 23 L54 23 L60 28 L60 33 Z"
-        fill="#1C1F2A"
-      />
-      {/* headlight notch */}
-      <rect x="58.5" y="30" width="1.4" height="1.4" fill="#F5B400" />
-      {/* under-chassis */}
-      <rect x="10" y="38" width="50" height="2" rx="0.4" fill="#1C1F2A" />
-      {/* wheels */}
-      <circle cx="18" cy="40" r="3.4" fill="#1C1F2A" />
-      <circle cx="18" cy="40" r="1.4" fill="#FFFFFF" />
-      <circle cx="52" cy="40" r="3.4" fill="#1C1F2A" />
-      <circle cx="52" cy="40" r="1.4" fill="#FFFFFF" />
-    </svg>
-  );
-}
-
-function BrandLogo() {
-  // Identical structure + spacing to the footer brand lockup,
-  // just rendered in charcoal so it reads on the off-white nav.
-  return (
-    <span className="brand-lockup brand-lockup--dark">
-      <svg className="brand-lockup-icon" viewBox="0 0 64 48" fill="none" aria-hidden="true">
-        <path d="M3 8 L3 18 L13 18 L13 8 Z M5 10 L11 10 L11 16 L5 16 Z" fill="currentColor" fillRule="evenodd" />
-        <rect x="3" y="8" width="10" height="2" fill="#F5B400" />
-        <path d="M11 13 L26 22 L24 25.5 L9 16.5 Z" fill="currentColor" />
-        <circle cx="26" cy="22" r="2.4" fill="currentColor" />
-        <circle cx="26" cy="22" r="0.8" fill="#F5B400" />
-        <path d="M24.5 21 L31 30 L28 32 L21.5 23 Z" fill="currentColor" />
-        <rect x="26" y="29" width="8" height="4" rx="0.6" fill="currentColor" />
-        <rect x="10" y="33" width="38" height="5" rx="0.6" fill="currentColor" />
-        <path d="M48 33 L48 23 L54 23 L60 28 L60 33 Z" fill="currentColor" />
-        <rect x="58.5" y="30" width="1.4" height="1.4" fill="#F5B400" />
-        <rect x="10" y="38" width="50" height="2" rx="0.4" fill="currentColor" />
-        <circle cx="18" cy="40" r="3.4" fill="currentColor" />
-        <circle cx="18" cy="40" r="1.4" fill="var(--off-white)" />
-        <circle cx="52" cy="40" r="3.4" fill="currentColor" />
-        <circle cx="52" cy="40" r="1.4" fill="var(--off-white)" />
-      </svg>
-      <span className="brand-lockup-text">
-        <strong>Skylift Malaysia</strong>
-        <small>SCAFFOLDING MALAYSIA SDN. BHD.</small>
-      </span>
-    </span>
-  );
-}
-
 function WhatsappGlyph() {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -179,8 +97,7 @@ function trackClick(label: string) {
   }
 }
 
-export default function HomePageClient({ locale, products, waUrl }: Props) {
-  const nav = useTranslations('nav');
+export default function HomePageClient({ locale, products }: Props) {
   const hero = useTranslations('hero');
   const usp = useTranslations('usp');
   const productsT = useTranslations('products');
@@ -240,35 +157,11 @@ export default function HomePageClient({ locale, products, waUrl }: Props) {
 
   return (
     <>
+      <PageStyles />
       {/* FOMO — charcoal background, yellow countdown */}
       <FomoBanner />
 
-      {/* NAV */}
-      <header className="nav-wrap">
-        <nav className="nav-pill" aria-label="Main">
-          <Link href={`/${locale}`} className="nav-brand" aria-label={nav('brandName')}>
-            <BrandLogo />
-          </Link>
-          <div className="nav-links">
-            <a href="#products">{nav('products')}</a>
-            <a href="#locations">{nav('locations')}</a>
-            <Link href={`/${locale}/blog`}>{nav('blog')}</Link>
-          </div>
-          <div className="nav-actions">
-            <LanguageSwitcher />
-            <a
-              href={waUrl}
-              target="_blank"
-              rel="noopener"
-              onClick={() => trackClick('whatsapp-nav')}
-              className="btn btn-wa btn-sm"
-            >
-              <WhatsappGlyph />
-              {nav('ctaButton')}
-            </a>
-          </div>
-        </nav>
-      </header>
+      <SiteHeader />
 
       {/* HERO */}
       <section className="hero">
@@ -280,10 +173,10 @@ export default function HomePageClient({ locale, products, waUrl }: Props) {
                 <span className="hl">{hero('h1').split(' ').slice(-1)[0]}</span>
               </h1>
               <h2 className="hero-sub">{hero('h2')}</h2>
-              <p className="hero-supporting">{hero('supporting')}</p>
+              <h5 className="hero-supporting body-h5">{hero('supporting')}</h5>
               <div className="hero-ctas">
                 <a
-                  href={waUrl}
+                  href={waRedirect(locale)}
                   target="_blank"
                   rel="noopener"
                   onClick={() => trackClick('whatsapp-hero')}
@@ -318,9 +211,9 @@ export default function HomePageClient({ locale, products, waUrl }: Props) {
 
       {/* USP BAR — 3 points */}
       <section className="usp-bar" aria-label="Key benefits">
-        <div className="usp-grid">
+        <div className="usp-grid usp-panel">
           {uspItems.map((item, i) => (
-            <div className="usp-card" key={i}>
+            <div className="usp-card usp-cell" key={i}>
               <div className="usp-icon" aria-hidden="true">
                 {String(i + 1).padStart(2, '0')}
               </div>
@@ -340,7 +233,7 @@ export default function HomePageClient({ locale, products, waUrl }: Props) {
           <div className="section-head">
             <span className="eyebrow">UNIT CATALOGUE</span>
             <h3>{productsT('heading')}</h3>
-            <p>{productsT('subheading')}</p>
+            <h5 className="body-h5">{productsT('subheading')}</h5>
           </div>
 
           {products.length === 0 ? (
@@ -354,7 +247,7 @@ export default function HomePageClient({ locale, products, waUrl }: Props) {
                 color: 'var(--ink-muted)',
               }}
             >
-              <p>Unit list loading from our database — please WhatsApp us for the full catalogue.</p>
+              <h5 className="body-h5">Unit list loading from our database — please WhatsApp us for the full catalogue.</h5>
             </div>
           ) : (
             <div className="products-grid">
@@ -374,7 +267,7 @@ export default function HomePageClient({ locale, products, waUrl }: Props) {
                     </div>
                     <div className="product-card-body">
                       <h4>{p.name}</h4>
-                      <p>{p.description}</p>
+                      <h5 className="body-h5">{p.description}</h5>
                       {(p.sale_price || p.rental_price) && (
                         <div className="product-price">
                           {shared('from')} RM{' '}
@@ -388,7 +281,7 @@ export default function HomePageClient({ locale, products, waUrl }: Props) {
                         ))}
                       </div>
                       <a
-                        href={waUrl}
+                        href={waRedirect(locale)}
                         target="_blank"
                         rel="noopener"
                         onClick={() => trackClick(`whatsapp-product-${p.slug}`)}
@@ -413,7 +306,7 @@ export default function HomePageClient({ locale, products, waUrl }: Props) {
           <div className="section-head">
             <span className="eyebrow">PROCESS</span>
             <h3>{how('heading')}</h3>
-            <p>{how('subheading')}</p>
+            <h5 className="body-h5">{how('subheading')}</h5>
           </div>
           <div className="steps-grid">
             {steps.map((s, i) => (
@@ -421,7 +314,7 @@ export default function HomePageClient({ locale, products, waUrl }: Props) {
                 <span className="step-tag">STEP {String(i + 1).padStart(2, '0')}</span>
                 <span className="step-num">{i + 1}</span>
                 <h4>{s.title}</h4>
-                <p>{s.description}</p>
+                <h5 className="body-h5">{s.description}</h5>
               </div>
             ))}
           </div>
@@ -437,13 +330,13 @@ export default function HomePageClient({ locale, products, waUrl }: Props) {
           <div className="section-head">
             <span className="eyebrow">SAFETY BRIEF</span>
             <h3>{risk('heading')}</h3>
-            <p>{risk('subheading')}</p>
+            <h5 className="body-h5">{risk('subheading')}</h5>
           </div>
           <ul className="risk-list">
             {riskPoints.map((p, i) => (
               <li key={i}>
                 <h4>{p.title}</h4>
-                <p>{p.description}</p>
+                <h5 className="body-h5">{p.description}</h5>
               </li>
             ))}
           </ul>
@@ -458,9 +351,9 @@ export default function HomePageClient({ locale, products, waUrl }: Props) {
         <div className="container">
           <span className="eyebrow eyebrow-light">{mid('eyebrow')}</span>
           <h3>{mid('heading')}</h3>
-          <p>{mid('subheading')}</p>
+          <h5 className="body-h5">{mid('subheading')}</h5>
           <a
-            href={waUrl}
+            href={waRedirect(locale)}
             target="_blank"
             rel="noopener"
             onClick={() => trackClick('whatsapp-mid')}
@@ -481,7 +374,7 @@ export default function HomePageClient({ locale, products, waUrl }: Props) {
             <span className="reviews-rating-badge">
               ★ {rev('rating')} · {rev('googleLabel')}
             </span>
-            <p>{rev('subheading')}</p>
+            <h5 className="body-h5">{rev('subheading')}</h5>
           </div>
           <div className="reviews-row">
             {reviewItems.map((r, i) => {
@@ -501,7 +394,7 @@ export default function HomePageClient({ locale, products, waUrl }: Props) {
                       Google
                     </span>
                   </div>
-                  <p className="review-body">&ldquo;{r.text}&rdquo;</p>
+                  <h5 className="review-body body-h5">&ldquo;{r.text}&rdquo;</h5>
                   <div className="review-meta">
                     <div className="review-avatar" aria-hidden="true">
                       {initials}
@@ -532,7 +425,7 @@ export default function HomePageClient({ locale, products, waUrl }: Props) {
                   {String(i + 1).padStart(2, '0')} / {String(whyItems.length).padStart(2, '0')}
                 </span>
                 <h4>{item.title}</h4>
-                <p>{item.description}</p>
+                <h5 className="body-h5">{item.description}</h5>
               </div>
             ))}
           </div>
@@ -545,7 +438,7 @@ export default function HomePageClient({ locale, products, waUrl }: Props) {
           <div className="section-head">
             <span className="eyebrow">PROJECT LOG</span>
             <h3>{gal('heading')}</h3>
-            <p>{gal('subheading')}</p>
+            <h5 className="body-h5">{gal('subheading')}</h5>
           </div>
           <div className="gallery-grid">
             {GALLERY_IMAGES.map((src, i) => (
@@ -566,7 +459,7 @@ export default function HomePageClient({ locale, products, waUrl }: Props) {
           <div className="section-head">
             <span className="eyebrow">COVERAGE MAP</span>
             <h3>{locs('heading')}</h3>
-            <p>{locs('subheading')}</p>
+            <h5 className="body-h5">{locs('subheading')}</h5>
           </div>
           <div className="state-accordion">
             {regionOrder.map((state) => {
@@ -626,9 +519,9 @@ export default function HomePageClient({ locale, products, waUrl }: Props) {
         <div className="container">
           <span className="eyebrow eyebrow-light">{fin('eyebrow')}</span>
           <h3>{fin('heading')}</h3>
-          <p>{fin('subheading')}</p>
+          <h5 className="body-h5">{fin('subheading')}</h5>
           <a
-            href={waUrl}
+            href={waRedirect(locale)}
             target="_blank"
             rel="noopener"
             onClick={() => trackClick('whatsapp-final')}
@@ -640,77 +533,11 @@ export default function HomePageClient({ locale, products, waUrl }: Props) {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="site-footer">
-        <div className="container">
-          <div className="footer-grid">
-            <div>
-              <div className="brand-lockup brand-lockup--light" style={{ marginBottom: 14 }}>
-                <svg className="brand-lockup-icon" viewBox="0 0 64 48" fill="none" aria-hidden="true">
-                  <path d="M3 8 L3 18 L13 18 L13 8 Z M5 10 L11 10 L11 16 L5 16 Z" fill="currentColor" fillRule="evenodd" />
-                  <rect x="3" y="8" width="10" height="2" fill="#F5B400" />
-                  <path d="M11 13 L26 22 L24 25.5 L9 16.5 Z" fill="currentColor" />
-                  <circle cx="26" cy="22" r="2.4" fill="currentColor" />
-                  <circle cx="26" cy="22" r="0.8" fill="#F5B400" />
-                  <path d="M24.5 21 L31 30 L28 32 L21.5 23 Z" fill="currentColor" />
-                  <rect x="26" y="29" width="8" height="4" rx="0.6" fill="currentColor" />
-                  <rect x="10" y="33" width="38" height="5" rx="0.6" fill="currentColor" />
-                  <path d="M48 33 L48 23 L54 23 L60 28 L60 33 Z" fill="currentColor" />
-                  <rect x="58.5" y="30" width="1.4" height="1.4" fill="#F5B400" />
-                  <rect x="10" y="38" width="50" height="2" rx="0.4" fill="currentColor" />
-                  <circle cx="18" cy="40" r="3.4" fill="currentColor" />
-                  <circle cx="18" cy="40" r="1.4" fill="var(--charcoal)" />
-                  <circle cx="52" cy="40" r="3.4" fill="currentColor" />
-                  <circle cx="52" cy="40" r="1.4" fill="var(--charcoal)" />
-                </svg>
-                <span className="brand-lockup-text">
-                  <strong>Skylift Malaysia</strong>
-                  <small>SCAFFOLDING MALAYSIA SDN. BHD.</small>
-                </span>
-              </div>
-              <p className="footer-tagline">{fo('tagline')}</p>
-              <div style={{ marginTop: 16 }}>
-                <LanguageSwitcher />
-              </div>
-            </div>
-            <div>
-              <h5>{fo('unitsHeading')}</h5>
-              <ul>
-                <li><a href="#products">20m Skylift</a></li>
-                <li><a href="#products">24m Skylift</a></li>
-              </ul>
-            </div>
-            <div>
-              <h5>{fo('topLocationsHeading')}</h5>
-              <ul>
-                <li><Link href={`/${locale}/skylift/kuala-lumpur`}>Kuala Lumpur</Link></li>
-                <li><Link href={`/${locale}/skylift/petaling-jaya`}>Petaling Jaya</Link></li>
-                <li><Link href={`/${locale}/skylift/shah-alam`}>Shah Alam</Link></li>
-                <li><Link href={`/${locale}/skylift/johor-bahru`}>Johor Bahru</Link></li>
-                <li><Link href={`/${locale}/skylift/george-town`}>George Town</Link></li>
-                <li><Link href={`/${locale}/skylift/ipoh`}>Ipoh</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h5>{fo('resourcesHeading')}</h5>
-              <ul>
-                <li><Link href={`/${locale}/blog`}>{fo('blog')}</Link></li>
-                <li><a href="#how">{fo('siteSafety')}</a></li>
-                <li><a href="#products">{fo('operatorCert')}</a></li>
-                <li><a href="#locations">{locs('viewAll')}</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <span>{fo('copyright')}</span>
-            <span>{fo('ssm')}</span>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
 
       {/* Floating WhatsApp FAB */}
       <a
-        href={waUrl}
+        href={waRedirect(locale)}
         target="_blank"
         rel="noopener"
         onClick={() => trackClick('whatsapp-fab')}

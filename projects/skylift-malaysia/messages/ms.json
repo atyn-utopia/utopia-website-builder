@@ -9,7 +9,9 @@
     "products": "Unit Skylift",
     "locations": "Lokasi",
     "blog": "Blog",
-    "ctaButton": "WhatsApp Kami"
+    "ctaButton": "WhatsApp Kami",
+    "calculator": "Dapatkan Sebut Harga",
+    "whatsappCta": "WhatsApp Kami"
   },
   "fomoBanner": {
     "label": "Promosi hari ini tamat dalam",
@@ -47,7 +49,8 @@
     "cta": "WhatsApp Sebut Harga",
     "priceFromLabel": "Mula",
     "halfDayLabel": "separuh hari",
-    "fullDayLabel": "sehari penuh"
+    "fullDayLabel": "sehari penuh",
+    "imageAltTemplate": "Sewa skylift {model} oleh Skylift Malaysia dengan operator bertauliah"
   },
   "howItWorks": {
     "heading": "5 Minit Tempah, Skylift Sampai Hari Sama",
@@ -189,6 +192,24 @@
       "Service lampu hangar lapangan terbang",
       "Kerja kanopi stesen minyak",
       "Cat semula siling dewan sekolah"
+    ],
+    "alts": [
+      "Pasang billboard Lebuhraya Persekutuan",
+      "Tukar lampu stadium, Bukit Jalil",
+      "Papan tanda kedai, Petaling Jaya",
+      "Service lampu high-bay gudang",
+      "Cuci fasad kaca, kawasan KLCC",
+      "Service candelier atrium kompleks",
+      "Pemeriksaan antena menara telco",
+      "Pemeriksaan cerobong industri",
+      "Bersih longkang bumbung, Cheras",
+      "Pemangkasan pokok, Damansara",
+      "Lampu jalan kontrak MBPJ",
+      "Tukar kipas ekzos kilang",
+      "Cat semula luar hotel, Mont Kiara",
+      "Service lampu hangar lapangan terbang",
+      "Kerja kanopi stesen minyak",
+      "Cat semula siling dewan sekolah"
     ]
   },
   "locations": {
@@ -253,7 +274,8 @@
     "heading": "Skylift Tempah. Operator Dihantar. Kerja Siap Sebelum Senja.",
     "subheading": "WhatsApp kami sekarang — kadar separuh hari, operator bertauliah, hantar hari sama seluruh KL & Selangor.",
     "cta": "WhatsApp Tempahan Sekarang",
-    "eyebrow": "Tempah Hari Ini"
+    "eyebrow": "Tempah Hari Ini",
+    "bgAlt": "Operator skylift menyiapkan kerja bangunan tinggi pada waktu senja di Malaysia"
   },
   "footer": {
     "brandName": "Skylift Malaysia",
@@ -279,7 +301,8 @@
     "noPosts": "Artikel baharu akan datang.",
     "sharePre": "Kongsi artikel ini",
     "breadcrumbHome": "Laman Utama",
-    "breadcrumbBlog": "Blog"
+    "breadcrumbBlog": "Blog",
+    "ctaHeading": "Perlu skylift di tapak? Kami uruskan."
   },
   "location": {
     "h1Prefix": "Sewa Skylift di",
@@ -318,5 +341,7 @@
     "products": "Hi Skylift Malaysia, saya nak sebut harga sewa skylift.",
     "location": "Hi Skylift Malaysia, saya perlukan sewa skylift di {location}.",
     "blog": "Hi Skylift Malaysia, saya baca artikel tuan dan nak tanya pasal sewa skylift."
-  }
+  },
+  "logoAlt": "Skylift Malaysia — sewa skylift dan boom lift dengan operator bertauliah",
+  "imageAlt": "Skylift atas lori dengan operator bertauliah di tapak kerja di Malaysia"
 }

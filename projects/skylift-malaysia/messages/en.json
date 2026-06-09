@@ -9,7 +9,9 @@
     "products": "Skylift Units",
     "locations": "Locations",
     "blog": "Blog",
-    "ctaButton": "WhatsApp Us"
+    "ctaButton": "WhatsApp Us",
+    "calculator": "Get a Quote",
+    "whatsappCta": "WhatsApp Us"
   },
   "fomoBanner": {
     "label": "Today's promo ends in",
@@ -47,7 +49,8 @@
     "cta": "Get a Quote",
     "priceFromLabel": "From",
     "halfDayLabel": "half-day",
-    "fullDayLabel": "full-day"
+    "fullDayLabel": "full-day",
+    "imageAltTemplate": "{model} skylift rental by Skylift Malaysia with certified operator"
   },
   "howItWorks": {
     "heading": "5 Minit Tempahan, Skylift Sampai Hari Sama",
@@ -189,6 +192,24 @@
       "Airport hangar lighting service",
       "Petrol station canopy works",
       "School hall ceiling repaint"
+    ],
+    "alts": [
+      "Billboard install along Federal Highway",
+      "Stadium floodlight replacement, Bukit Jalil",
+      "Shoplot signage, Petaling Jaya",
+      "Warehouse high-bay light service",
+      "Glass facade cleaning, KLCC area",
+      "Mall atrium chandelier service",
+      "Telecom tower antenna check",
+      "Industrial chimney inspection",
+      "Roof gutter clearance, Cheras",
+      "Tree trimming, Damansara residential",
+      "Street lighting MBPJ contract",
+      "Factory exhaust fan replacement",
+      "Hotel exterior re-paint, Mont Kiara",
+      "Airport hangar lighting service",
+      "Petrol station canopy works",
+      "School hall ceiling repaint"
     ]
   },
   "locations": {
@@ -253,7 +274,8 @@
     "heading": "Skylift Booked. Operator Dispatched. Job Done by Sundown.",
     "subheading": "WhatsApp us now — half-day pricing, certified operator, same-day delivery across KL & Selangor.",
     "cta": "WhatsApp Tempahan Sekarang",
-    "eyebrow": "Lock In Today"
+    "eyebrow": "Lock In Today",
+    "bgAlt": "Skylift operator completing a high-rise job at sunset in Malaysia"
   },
   "footer": {
     "brandName": "Skylift Malaysia",
@@ -279,7 +301,8 @@
     "noPosts": "New articles coming soon.",
     "sharePre": "Share this article",
     "breadcrumbHome": "Home",
-    "breadcrumbBlog": "Blog"
+    "breadcrumbBlog": "Blog",
+    "ctaHeading": "Need a skylift on site? Let's sort it."
   },
   "location": {
     "h1Prefix": "Skylift Rental in",
@@ -318,5 +341,7 @@
     "products": "Hi Skylift Malaysia, I'd like a quote for skylift rental.",
     "location": "Hi Skylift Malaysia, I need skylift rental in {location}.",
     "blog": "Hi Skylift Malaysia, I read your article and want to enquire about skylift rental."
-  }
+  },
+  "logoAlt": "Skylift Malaysia — skylift and boom lift rental with certified operator",
+  "imageAlt": "Truck-mounted skylift with a certified operator on a job site in Malaysia"
 }

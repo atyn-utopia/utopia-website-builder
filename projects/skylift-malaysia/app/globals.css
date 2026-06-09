@@ -629,17 +629,17 @@ h2.hero-sub,
   letter-spacing: -0.02em;
   margin-bottom: 12px;
 }
-.section-head p {
+.section-head p, .section-head .body-h5 {
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.65;
   color: rgba(28, 31, 42, 0.78);
   max-width: 640px;
 }
-.section-head.center p { margin: 0 auto; }
+.section-head.center p, .section-head.center .body-h5 { margin: 0 auto; }
 @media (max-width: 768px) {
   .section-head { text-align: center; margin-left: auto; margin-right: auto; }
-  .section-head p { margin-left: auto; margin-right: auto; }
+  .section-head p, .section-head .body-h5 { margin-left: auto; margin-right: auto; }
 }
 
 /* ============================================
@@ -692,7 +692,7 @@ h2.hero-sub,
   color: var(--off-white);
 }
 .product-card.hero-card .product-card-body h4 { color: var(--off-white); }
-.product-card.hero-card .product-card-body p { color: rgba(248, 248, 246, 0.78); }
+.product-card.hero-card .product-card-body p, .product-card.hero-card .product-card-body .body-h5 { color: rgba(248, 248, 246, 0.78); }
 .product-card.hero-card .product-spec { color: var(--yellow); border-top-color: rgba(248, 248, 246, 0.18); }
 .product-card.hero-card::after { background: var(--yellow); }
 @media (max-width: 820px) {
@@ -824,7 +824,7 @@ h2.hero-sub,
   letter-spacing: -0.01em;
   color: var(--charcoal);
 }
-.step p {
+.step p, .step .body-h5 {
   font-size: 14px;
   line-height: 1.55;
   color: rgba(28, 31, 42, 0.75);
@@ -857,9 +857,9 @@ h2.hero-sub,
   z-index: 1;
 }
 .section-image .container { position: relative; z-index: 2; }
-.section-image h3, .section-image h4, .section-image p, .section-image li { color: var(--off-white); }
+.section-image h3, .section-image h4, .section-image h5, .section-image p, .section-image li, .section-image .body-h5 { color: var(--off-white); }
 .section-image .section-head .eyebrow { background: var(--yellow); color: var(--charcoal); }
-.section-image .section-head p { color: rgba(248, 248, 246, 0.82); }
+.section-image .section-head p, .section-image .section-head .body-h5 { color: rgba(248, 248, 246, 0.82); }
 
 .risk-list {
   display: grid;
@@ -885,7 +885,7 @@ h2.hero-sub,
   letter-spacing: -0.01em;
   color: var(--yellow);
 }
-.risk-list p { font-size: 14px; line-height: 1.55; color: rgba(248, 248, 246, 0.82); }
+.risk-list p, .risk-list .body-h5 { font-size: 14px; line-height: 1.55; color: rgba(248, 248, 246, 0.82); }
 
 /* Mid CTA — yellow multiply tint */
 .section-mid-cta {
@@ -913,7 +913,7 @@ h2.hero-sub,
   margin-bottom: 14px;
   color: var(--charcoal);
 }
-.section-mid-cta p {
+.section-mid-cta p, .section-mid-cta .body-h5 {
   font-size: 16px;
   color: rgba(28, 31, 42, 0.85);
   max-width: 620px;
@@ -1058,7 +1058,7 @@ h2.hero-sub,
   height: 3px;
   background: var(--yellow);
 }
-.why-card p {
+.why-card p, .why-card .body-h5 {
   font-size: 14px;
   line-height: 1.6;
   color: rgba(28, 31, 42, 0.78);
@@ -1303,7 +1303,7 @@ h2.hero-sub,
   margin-bottom: 14px;
   line-height: 1.05;
 }
-.section-final-cta p {
+.section-final-cta p, .section-final-cta .body-h5 {
   font-family: var(--font-body);
   font-size: 16px;
   color: rgba(248, 248, 246, 0.82);
@@ -1635,3 +1635,62 @@ h2.hero-sub,
   margin: 30px 0;
 }
 .blog-cta-inline strong { color: var(--white); }
+
+
+/* ============================================================
+   Wizard checklist hooks — added to bring skylift onto the
+   canonical pattern (SiteHeader/SiteFooter, .lsw switcher,
+   .usp-panel, body-h5, blog headings).
+   ============================================================ */
+
+/* Body copy rendered as <h5 class="body-h5"> — base look (context rules above
+   override size/colour per section). */
+.body-h5 { font-family: var(--font-body); font-weight: 400; margin: 0; }
+.product-card-body .body-h5 { font-size: 14px; line-height: 1.6; color: rgba(28,31,42,0.78); margin: 0 0 10px; }
+
+/* Language switcher — .lsw-* with !important so element resets can't clobber it. */
+.lsw-switch {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 2px !important;
+  border: 1px solid rgba(28,31,42,0.15);
+  background: rgba(255,255,255,0.92);
+  border-radius: 999px;
+  padding: 3px;
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(0,0,0,0.06));
+}
+.lsw-option {
+  display: inline-flex !important;
+  align-items: center;
+  padding: 4px 11px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(28,31,42,0.7);
+  text-decoration: none;
+  line-height: 1;
+  cursor: pointer;
+}
+.lsw-option:hover { color: #1C1F2A; }
+.lsw-option--active { background: #F5B400 !important; color: #1C1F2A !important; }
+.site-footer .lsw-switch { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.16); }
+.site-footer .lsw-option { color: rgba(248,248,246,0.7); }
+.site-footer .lsw-option--active { color: #1C1F2A !important; }
+
+/* USP bar — single .usp-panel container with 3 .usp-cell children (the
+   classes sit alongside .usp-grid/.usp-card which carry the visual styling). */
+/* marker classes only — visual styling stays on .usp-grid/.usp-card */
+
+/* Header WhatsApp CTA hidden on mobile so it can't overlap the language pills. */
+@media (max-width: 879px) {
+  .nav-cta { display: none !important; }
+}
+
+/* .wa-btn alias so canonical WhatsApp-button class is always green. */
+.wa-btn { background: var(--wa-green); color: var(--white); }
+
+/* Blog article headings — h3/h4 must not render at body size. */
+.blog-content h3 { font-family: var(--font-display); font-size: 21px; color: var(--charcoal); margin: 1.6em 0 0.4em; line-height: 1.25; }
+.blog-content h4 { font-family: var(--font-display); font-size: 17px; color: var(--charcoal); margin: 1.3em 0 0.35em; line-height: 1.3; }

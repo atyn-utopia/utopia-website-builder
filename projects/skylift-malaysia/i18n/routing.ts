@@ -8,4 +8,6 @@ export const routing = defineRouting({
   locales,
   defaultLocale: 'en',
   localePrefix: 'always',
+  // Land every visitor on the default locale; never bounce off Accept-Language.
+  localeDetection: false,
 });

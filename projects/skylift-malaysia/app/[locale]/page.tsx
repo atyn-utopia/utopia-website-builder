@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
-import { getProducts, getBlogPosts, getWhatsAppLink } from '@/lib/webcore';
+import { getProducts, getBlogPosts } from '@/lib/webcore';
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
 import HomePageClient from './HomePageClient';
@@ -42,6 +42,7 @@ export default async function HomePage({
 }) {
   const { locale } = await params;
   const faqT = await getTranslations({ locale, namespace: 'faq' });
+  const root = await getTranslations({ locale });
 
   const faqs = [];
   for (let i = 0; i < 6; i++) {
@@ -51,22 +52,20 @@ export default async function HomePage({
     });
   }
 
-  const [products, blogPosts, waUrl] = await Promise.all([
+  const [products, blogPosts] = await Promise.all([
     getProducts(),
     getBlogPosts(locale),
-    getWhatsAppLink(),
   ]);
 
   return (
-    <>
+    <div role="img" aria-label={root('imageAlt')}>
       <LocalBusinessSchema locale={locale} />
       <FAQSchema faqs={faqs} />
       <HomePageClient
         locale={locale}
         products={products}
         recentPosts={blogPosts.slice(0, 3)}
-        waUrl={waUrl}
       />
-    </>
+    </div>
   );
 }
