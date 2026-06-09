@@ -37,6 +37,19 @@ export async function GET(request: NextRequest) {
   }
 
   // Find local URL with port scanning
+  // Deployed-wizard fallback: there is no projects/ filesystem in production,
+  // so the lookups above return nothing and every project would read "Building".
+  // Derive the deploy URL from the project's snapshot instead (deploy_url, else
+  // the configured domain), which the deployed monitor always has.
+  if (!deployUrl) {
+    try {
+      const { readSnapshot } = await import('@/lib/snapshotStore')
+      const snap = await readSnapshot(slug)
+      if (snap?.deploy_url) deployUrl = snap.deploy_url
+      else if (snap?.domain) deployUrl = `https://${snap.domain}`
+    } catch { /* no snapshot / no DB env */ }
+  }
+
   const localUrl = await findLocalUrl(projectDir)
 
   return NextResponse.json({ deployUrl, localUrl })
