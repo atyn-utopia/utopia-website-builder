@@ -10,7 +10,7 @@ import PageStyles from '@/components/PageStyles';
 import FomoBanner from '@/components/FomoBanner';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
-import HomePageClient from '@/components/HomePageClient';
+import LocationPageClient from './LocationPageClient';
 
 export function generateStaticParams() {
   const params: { locale: string; location: string }[] = [];
@@ -98,7 +98,7 @@ export default async function LocationPage({
       <FomoBanner locale={locale as 'en' | 'ms' | 'zh'} />
       <SiteHeader locale={locale as 'en' | 'ms' | 'zh'} />
 
-      <HomePageClient
+      <LocationPageClient
         cityName={loc.name}
         locationSlug={locationSlug}
         nearbyLocations={nearbyData}

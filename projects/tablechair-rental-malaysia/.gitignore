@@ -1,1 +1,6 @@
 .vercel
+node_modules
+.next
+tsconfig.tsbuildinfo
+brand_assets/
+temporary screenshots/

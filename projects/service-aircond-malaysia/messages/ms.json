@@ -41,9 +41,8 @@
     "servicesTitle": "Perkhidmatan",
     "locationsTitle": "Lokasi",
     "viewAll": "Lihat semua 38 bandar",
-    "phone": "012-345 6789",
     "ssm": "SSM Reg: 202X0XXXXX (XXXXXX-X)",
-    "copyright": "© {year} Encik Beku · serviceaircond.my"
+    "copyright": "© {year} Encik Beku"
   },
   "home": {
     "meta": {
@@ -171,7 +170,7 @@
       "step3Num": "03",
       "step3Title": "Siap",
       "step3Desc": "Aircond anda diservis, dibaiki, atau dipasang — dan kami kemas sebelum pergi.",
-      "cta": "Mula dengan Langkah 1 — WhatsApp Kami"
+      "cta": "Mula dengan WhatsApp"
     },
     "gallery": {
       "tag": "Hasil Sebenar",
@@ -233,7 +232,7 @@
       "headline": "Servis Aircond",
       "headlineHighlight": "di {city}",
       "subheadline": "WhatsApp Encik Beku sekarang dan kami akan aturkan tukang di {city} untuk anda hari ini.",
-      "cta": "WhatsApp Kami di {city}",
+      "cta": "WhatsApp {city}",
       "ctaSubtext": "Percuma untuk bertanya · Respons dalam 1 jam",
       "heroAlt": "Tukang aircond memberi ibu jari"
     },

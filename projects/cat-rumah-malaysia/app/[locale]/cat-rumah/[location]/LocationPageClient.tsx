@@ -28,17 +28,21 @@ const GoogleLogo = () => (
 
 // Product list mirrors HomePageClient so the location page shows the same
 // 9-card services grid as the homepage.
-const PRODUCT_KEYS = [
-  { key: 'interior', img: '/images/products/interior-1.jpg' },
-  { key: 'bedroom', img: '/images/products/bedroom-1.jpg' },
-  { key: 'kitchen', img: '/images/products/kitchen-1.jpg' },
-  { key: 'bathroom', img: '/images/products/bathroom-1.jpg' },
-  { key: 'exterior', img: '/images/products/exterior-1.jpg' },
-  { key: 'weathershield', img: '/images/products/exterior-2.jpg' },
-  { key: 'marble', img: '/images/products/marble-1.jpg' },
-  { key: 'texture', img: '/images/products/texture-1.jpg' },
-  { key: 'decor3d', img: '/images/products/decor3d-1.jpg' },
+const PRODUCT_KEYS: { key: string; img: string; unit: 'sqft' | 'flat' }[] = [
+  { key: 'interior', img: '/images/products/interior-1.jpg', unit: 'sqft' },
+  { key: 'bedroom', img: '/images/products/bedroom-1.jpg', unit: 'sqft' },
+  { key: 'kitchen', img: '/images/products/kitchen-1.jpg', unit: 'sqft' },
+  { key: 'bathroom', img: '/images/products/bathroom-1.jpg', unit: 'sqft' },
+  { key: 'exterior', img: '/images/products/exterior-1.jpg', unit: 'sqft' },
+  { key: 'weathershield', img: '/images/products/exterior-2.jpg', unit: 'sqft' },
+  { key: 'marble', img: '/images/products/marble-1.jpg', unit: 'flat' },
+  { key: 'texture', img: '/images/products/texture-1.jpg', unit: 'flat' },
+  { key: 'decor3d', img: '/images/products/decor3d-1.jpg', unit: 'flat' },
 ]
+
+// Drop the leading/trailing "from" word (Dari / From / 起) from a localized
+// price line — the fromLabel above already shows it.
+const stripFromWord = (s: string) => s.replace(/^(?:Dari|From)\s+/i, '').replace(/\s*起$/, '')
 
 // Calculator service rates — mirror catrumah.com.my (also mirrors homepage).
 type CalcMode = 'sqft' | 'package'
@@ -301,7 +305,7 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
                     <div className="mt-5 pt-4 flex items-center justify-between gap-3" style={{ borderTop: '1px solid var(--line)' }}>
                       <div className="flex flex-col leading-tight">
                         <span className="text-[10px] uppercase tracking-[0.16em]" style={{ color: 'var(--muted)', fontWeight: 500 }}>{tHomeProducts('fromLabel')}</span>
-                        <span className="text-[20px]" style={{ color: 'var(--brand-pink)', fontWeight: 700, letterSpacing: '-0.01em' }}>{tHomeProducts(`${p.key}.price`).replace(/^Dari\s+/i, '')}</span>
+                        <span className="text-[20px]" style={{ color: 'var(--brand-pink)', fontWeight: 700, letterSpacing: '-0.01em' }}>{stripFromWord(tHomeProducts(p.unit === 'sqft' ? 'priceFromSqft' : 'priceFromFlat', { price: tHomeProducts(`${p.key}.price`) }))}</span>
                       </div>
                       <WhatsAppClickTracker phoneNumber={phoneNumber} href={waLink} target="_blank" rel="noopener noreferrer" aria-label={tHomeProducts('bookNow')} className="shrink-0 inline-flex items-center justify-center rounded-full" style={{ background: '#25D366', color: '#fff', width: 44, height: 44, boxShadow: '0 6px 16px rgba(37, 211, 102, 0.30)' }}>
                         <WAIcon />

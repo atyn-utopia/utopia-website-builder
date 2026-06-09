@@ -35,7 +35,7 @@
     "h1Part2": "Malaysia",
     "h2": "Volvo EC200 dan EC400 — Harian, Mingguan, Bulanan",
     "supporting": "Hantar dalam 24 jam. Operator berpengalaman, harga telus, tiada caj tersembunyi.",
-    "ctaPrimary": "WhatsApp Sebut Harga Sekarang",
+    "ctaPrimary": "WhatsApp Sebut Harga",
     "ctaSecondary": "Kira anggaran sewa →",
     "imageAlt": "Excavator Volvo EC200 oren bersiap sedia di tapak bina Malaysia — Abang Excavator",
     "statModels": "Model Volvo",
@@ -92,7 +92,7 @@
     "priceMonthlyLabel": "Bulanan",
     "priceDaily": "Dari RM {price}",
     "priceMonthly": "Dari RM {price}",
-    "ctaTemplate": "Tempah {model} di WhatsApp",
+    "ctaTemplate": "Tempah {model}",
     "imageAltTemplate": "{model} excavator Volvo untuk sewa di Malaysia",
     "fallback": {
       "ec200": {
@@ -130,7 +130,7 @@
     "quotePrefix": "RM",
     "quoteSuffix": "Tidak termasuk operator dan pengangkutan.",
     "disclaimer": "Anggaran sahaja — WhatsApp untuk pengesahan rasmi.",
-    "ctaLabel": "WhatsApp Sahkan Sebut Harga"
+    "ctaLabel": "Sahkan Sebut Harga"
   },
   "process": {
     "eyebrow": "PROSES",
@@ -307,7 +307,7 @@
     "eyebrow": "LOCK-IN HARI INI",
     "h3": "Excavator Anda Boleh Tiba Esok Pagi",
     "body": "Hantar lokasi, model, dan tempoh sewa — kami balas dalam minit.",
-    "ctaLabel": "WhatsApp Abang Excavator Sekarang",
+    "ctaLabel": "WhatsApp Abang Excavator",
     "bgAlt": "Excavator Volvo bersedia untuk dihantar di tapak bina malam"
   },
   "footer": {

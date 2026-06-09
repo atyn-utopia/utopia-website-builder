@@ -464,153 +464,6 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
         </div>
       )}
 
-      {/* ============================================
-          3. HERO — skipped when heroProvided so page.tsx's canonical
-          single-h1/h2 hero is the only one (homepage). Location pages keep
-          this hero since they don't render their own.
-          ============================================ */}
-      {!heroProvided && (
-      <section
-        style={{
-          position: 'relative',
-          minHeight: '600px',
-          overflow: 'hidden',
-          background: 'linear-gradient(155deg, #0F1B3A 0%, #1B2D5B 45%, #2A4080 100%)',
-        }}
-      >
-        {/* Subtle radial accent glow */}
-        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 50% 60% at 70% 50%, rgba(244,123,32,0.08) 0%, transparent 70%)', pointerEvents: 'none' }} />
-        {/* Subtle grid pattern */}
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)', backgroundSize: '40px 40px', pointerEvents: 'none' }} />
-
-        <div
-          className="section-container"
-          style={{
-            position: 'relative',
-            zIndex: 1,
-            paddingTop: 'var(--space-3xl)',
-            paddingBottom: 'var(--space-3xl)',
-          }}
-        >
-          <div className="hero-split-grid" style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr',
-            gap: '48px',
-            alignItems: 'center',
-            minHeight: '500px',
-          }}>
-            {/* Left column — Text */}
-            <div className="fade-up">
-              <span
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  background: 'rgba(244,123,32,0.12)',
-                  border: '1px solid rgba(244,123,32,0.25)',
-                  color: 'rgba(255,255,255,0.9)',
-                  fontSize: '13px',
-                  fontWeight: 600,
-                  padding: '6px 16px',
-                  borderRadius: 'var(--radius-full)',
-                  marginBottom: 'var(--space-lg)',
-                }}
-              >
-                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--orange)', animation: 'fomoPulse 2s ease-in-out infinite' }} />
-                {t('hero.badge')}
-              </span>
-
-              <h1
-                style={{
-                  fontSize: 'clamp(34px, 5vw, 54px)',
-                  fontWeight: 800,
-                  lineHeight: 1.1,
-                  letterSpacing: '-0.025em',
-                  color: 'var(--white)',
-                  marginBottom: 'var(--space-lg)',
-                }}
-              >
-                {isLocationPage ? (
-                  <>{t('location.h1Prefix')}{' '}<span style={{ color: 'var(--orange)' }}>{cityName}</span>{' — '}{t('hero.h1Highlight')}</>
-                ) : (
-                  <>{t('hero.h1')}<br /><span style={{ color: 'var(--orange)' }}>{t('hero.h1Highlight')}</span>{' '}{t('hero.h1Suffix')}</>
-                )}
-              </h1>
-
-              <h2 style={{ fontSize: '17px', fontWeight: 400, lineHeight: 1.7, color: 'rgba(255,255,255,0.7)', marginBottom: 'var(--space-xl)', maxWidth: '460px' }}>
-                {t('hero.subheadline')}
-              </h2>
-
-              <div className="hero-cta-row" style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginBottom: 'var(--space-xl)' }}>
-                <a
-                  href={waHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="wa-btn"
-                  style={{ fontSize: '16px', padding: '14px 32px', boxShadow: '0 8px 28px rgba(37,211,102,0.3)' }}
-                >
-                  <WhatsAppIcon size={18} />
-                  {t('hero.ctaPrimary')}
-                </a>
-                <button
-                  onClick={scrollToProducts}
-                  className="ghost-btn"
-                  style={{ borderColor: 'rgba(255,255,255,0.3)', color: 'var(--white)', fontSize: '15px', padding: '12px 28px' }}
-                >
-                  {t('hero.ctaSecondary')}
-                </button>
-              </div>
-
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-                {['KKM Certified', '6-Month Warranty', 'Same-Day Delivery'].map((item) => (
-                  <span key={item} style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', color: 'rgba(255,255,255,0.7)', fontSize: '12px', fontWeight: 500, background: 'rgba(255,255,255,0.08)', padding: '5px 12px', borderRadius: 'var(--radius-full)', border: '1px solid rgba(255,255,255,0.1)' }}>
-                    <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="var(--orange)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="4 10 8 14 16 6" /></svg>
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Right column — Product image with stamps */}
-            <div className="hero-right-col" style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '420px' }}>
-              {/* Outer decorative ring */}
-              <div style={{ position: 'absolute', width: '380px', height: '380px', borderRadius: '50%', border: '1px dashed rgba(244,123,32,0.2)', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', pointerEvents: 'none' }} />
-              {/* Inner glow */}
-              <div style={{ position: 'absolute', width: '300px', height: '300px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(244,123,32,0.12) 0%, transparent 70%)', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', pointerEvents: 'none' }} />
-
-              {/* Main product image */}
-              <div className="hero-float" style={{ position: 'relative', zIndex: 2 }}>
-                <img
-                  src="https://static.wixstatic.com/media/d3104b_64b5d16422824a7384e5630d9b70c0ae~mv2.png"
-                  alt={t('products.name')}
-                  style={{ width: '340px', maxWidth: '90%', filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.4))', position: 'relative', zIndex: 1 }}
-                />
-              </div>
-
-              {/* Stamp: KKM Certified (top-left) */}
-              <div style={{ position: 'absolute', top: '8%', left: '5%', zIndex: 3, width: '76px', height: '76px', borderRadius: '50%', background: 'rgba(27,45,91,0.95)', border: '2px dashed rgba(244,123,32,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', color: 'white', fontSize: '10px', fontWeight: 700, lineHeight: 1.2, padding: '6px', transform: 'rotate(-8deg)', boxShadow: '0 4px 16px rgba(0,0,0,0.3)' }}>
-                KKM<br/>Certified
-              </div>
-
-              {/* Stamp: Same Day (top-right) */}
-              <div style={{ position: 'absolute', top: '5%', right: '8%', zIndex: 3, width: '76px', height: '76px', borderRadius: '50%', background: 'rgba(244,123,32,0.95)', border: '2px dashed rgba(255,255,255,0.5)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', color: 'white', fontSize: '10px', fontWeight: 700, lineHeight: 1.2, padding: '6px', transform: 'rotate(6deg)', boxShadow: '0 4px 16px rgba(0,0,0,0.3)' }}>
-                Same Day<br/>Delivery
-              </div>
-
-              {/* Stamp: 6-Month Warranty (bottom-right) */}
-              <div style={{ position: 'absolute', bottom: '10%', right: '5%', zIndex: 3, width: '76px', height: '76px', borderRadius: '50%', background: 'rgba(27,45,91,0.95)', border: '2px dashed rgba(244,123,32,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', color: 'white', fontSize: '10px', fontWeight: 700, lineHeight: 1.2, padding: '6px', transform: 'rotate(10deg)', boxShadow: '0 4px 16px rgba(0,0,0,0.3)' }}>
-                6-Month<br/>Warranty
-              </div>
-
-              {/* Stamp: RM400/mo (bottom-left) */}
-              <div style={{ position: 'absolute', bottom: '8%', left: '8%', zIndex: 3, width: '76px', height: '76px', borderRadius: '50%', background: 'rgba(244,123,32,0.95)', border: '2px dashed rgba(255,255,255,0.5)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', color: 'white', fontSize: '10px', fontWeight: 700, lineHeight: 1.2, padding: '6px', transform: 'rotate(-6deg)', boxShadow: '0 4px 16px rgba(0,0,0,0.3)' }}>
-                From<br/>RM400/mo
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      )}
 
       {/* ============================================
           4. STATS — Boxed USP Cards
@@ -834,7 +687,7 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
 
               {/* WhatsApp CTA */}
               <a
-                href={waHref}
+                href={waRedirect(locale)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="wa-btn"
@@ -1124,7 +977,7 @@ export default function HomePageClient({ cityName, locationSlug, nearbyLocations
             {t('midCta.subheading')}
           </h5>
           <a
-            href={waHref}
+            href={waRedirect(locale)}
             target="_blank"
             rel="noopener noreferrer"
             className="wa-btn"

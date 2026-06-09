@@ -26,7 +26,7 @@
     "eyebrow": "{monthUpper} PROMO",
     "body": "Up to 12% off daily rates — {month} promo ends in:",
     "countdownLabel": "Days : Hours : Minutes : Seconds",
-    "ctaLabel": "Lock in your quote"
+    "ctaLabel": "Lock in Quote"
   },
   "hero": {
     "eyebrow": "OPERATOR STANDBY 24/7",
@@ -92,7 +92,7 @@
     "priceMonthlyLabel": "Monthly",
     "priceDaily": "From RM {price}",
     "priceMonthly": "From RM {price}",
-    "ctaTemplate": "Book {model} on WhatsApp",
+    "ctaTemplate": "Book {model}",
     "imageAltTemplate": "{model} Volvo excavator available for rental in Malaysia",
     "fallback": {
       "ec200": {
@@ -130,7 +130,7 @@
     "quotePrefix": "RM",
     "quoteSuffix": "Excludes operator and transport.",
     "disclaimer": "Estimate only — WhatsApp us to confirm.",
-    "ctaLabel": "WhatsApp to Confirm Quote"
+    "ctaLabel": "WhatsApp Confirm Quote"
   },
   "process": {
     "eyebrow": "PROCESS",
@@ -307,7 +307,7 @@
     "eyebrow": "LOCK IT IN TODAY",
     "h3": "Your Excavator Can Arrive Tomorrow Morning",
     "body": "Send your site, model, and rental period — we reply in minutes.",
-    "ctaLabel": "WhatsApp Abang Excavator Now",
+    "ctaLabel": "WhatsApp Abang Excavator",
     "bgAlt": "Volvo excavator ready for night site delivery"
   },
   "footer": {

@@ -77,6 +77,10 @@ For the recommended design, provide:
 - Body font (clean sans)
 - Font size scale
 - Tracking and line-height recommendations
+- **Default line-heights (MANDATORY)** — `line-height: 1.2` for all headings (h1–h6) and `line-height: 1.4` for body text (p, li, blockquote, `.blog-content` p/li). Set in `globals.css`; only override per-component when there's a specific design reason.
+
+**Header & footer (MANDATORY default):**
+- Do NOT design a custom header/footer per project. Use the same `<SiteHeader />` + `<SiteFooter />` layout as `projects/sewa-excavator/components/` for every new site. Only the brand name, logo file, and locale-aware nav labels change.
 
 **Component styles:**
 - Card design (shadows, borders, radius)

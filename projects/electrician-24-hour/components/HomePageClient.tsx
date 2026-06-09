@@ -56,8 +56,8 @@ function trackClick(label: string) {
 export default function HomePageClient({ locale, products, recentPosts }: Props) {
   // Every WhatsApp CTA routes through the redirect page so the request hits the
   // server, the leads-mode logic picks the right phone for the live host, and
-  // the click is tracked before forwarding to wa.me.
-  const waHref = waRedirect(locale);
+  // the click is tracked before forwarding to wa.me. Each CTA builds its own
+  // redirect link inline so every product card and section converts independently.
   const usp = useTranslations('usp');
   const services = useTranslations('services');
   const how = useTranslations('howItWorks');
@@ -170,7 +170,7 @@ export default function HomePageClient({ locale, products, recentPosts }: Props)
                         </div>
                       )}
                       <a
-                        href={waHref}
+                        href={waRedirect(locale)}
                         target="_blank"
                         rel="noopener"
                         onClick={() => trackClick(`whatsapp-service-${p.slug}`)}
@@ -225,7 +225,7 @@ export default function HomePageClient({ locale, products, recentPosts }: Props)
           </p>
           <div style={{ textAlign: 'center' }}>
             <a
-              href={waHref}
+              href={waRedirect(locale)}
               target="_blank"
               rel="noopener"
               onClick={() => trackClick('whatsapp-emergency')}
@@ -273,7 +273,7 @@ export default function HomePageClient({ locale, products, recentPosts }: Props)
             {mid('subheading')}
           </p>
           <a
-            href={waHref}
+            href={waRedirect(locale)}
             target="_blank"
             rel="noopener"
             onClick={() => trackClick('whatsapp-mid')}
@@ -430,7 +430,7 @@ export default function HomePageClient({ locale, products, recentPosts }: Props)
           <h3>{fin('heading')}</h3>
           <p>{fin('subheading')}</p>
           <a
-            href={waHref}
+            href={waRedirect(locale)}
             target="_blank"
             rel="noopener"
             onClick={() => trackClick('whatsapp-final')}
@@ -443,7 +443,7 @@ export default function HomePageClient({ locale, products, recentPosts }: Props)
 
       {/* FAB WhatsApp */}
       <a
-        href={waHref}
+        href={waRedirect(locale)}
         target="_blank"
         rel="noopener"
         onClick={() => trackClick('whatsapp-fab')}

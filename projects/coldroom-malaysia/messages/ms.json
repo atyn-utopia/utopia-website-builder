@@ -3,14 +3,19 @@
     "title": "Sewa Cold Room Malaysia | HALAL, Penghantaran Hari Ini",
     "description": "Sewa cold room beku -18°C, freezer, chiller & stor sejuk di Malaysia. HALAL, penghantaran hari yang sama, 13 negeri. Sebut harga WhatsApp."
   },
+  "logoAlt": "Logo Cold Room Malaysia",
+  "imageAlt": "Sewa cold room berpenyaman di Malaysia",
   "nav": {
     "brandName": "Cold Room Malaysia",
+    "home": "Utama",
     "products": "Cold Room",
+    "calculator": "Kalkulator",
     "howItWorks": "Cara Kerja",
     "reviews": "Ulasan",
     "locations": "Lokasi",
     "faq": "Soalan Lazim",
     "blog": "Blog",
+    "whatsappCta": "WhatsApp Kami",
     "ctaShort": "Sebut Harga",
     "ctaButton": "Sebut Harga"
   },
@@ -73,7 +78,8 @@
     "eyebrow": "Logistik Rantaian Sejuk Termurah di Malaysia",
     "heading": "Perkhidmatan Sewa Cold Room Kami",
     "subheading": "Satu perkhidmatan sewa cold room dipercayai. Empat pilihan suhu untuk barang anda. Penghantaran hari yang sama di 13 negeri Semenanjung.",
-    "priceFrom": "Dari RM{price}",
+    "priceFrom": "Dari RM {price} / palet sehari",
+    "imageAltTemplate": "Sewa cold room {model} di Malaysia",
     "perPalletDay": "sehari / palet",
     "cta": "Sebut Harga",
     "tempOptionsLabel": "Pilihan Julat Suhu",
@@ -202,7 +208,21 @@
   "gallery": {
     "eyebrow": "Galeri Projek",
     "heading": "Cold Room Pelanggan Terkini",
-    "subheading": "Dari gudang makanan laut beku ke bilik freezer bakeri, projek Malaysia sebenar yang kami kuasakan."
+    "subheading": "Dari gudang makanan laut beku ke bilik freezer bakeri, projek Malaysia sebenar yang kami kuasakan.",
+    "alts": [
+      "Cold room storan beku walk-in dihantar ke gudang makanan Malaysia",
+      "Palet bertindan di dalam cold room berpenyaman -18°C",
+      "Juruteknik memasang unit cold room freezer di tapak",
+      "Bilik chiller HALAL-bersegregasi menyimpan produk tenusu",
+      "Makanan laut beku disimpan dalam cold room beku",
+      "Kontena stor sejuk modular di kawasan punggah",
+      "Dalaman bilik freezer bakeri menyimpan dulang doh pizza",
+      "Tolok suhu menunjukkan -18°C di dalam bilik storan beku",
+      "Bilik stor sejuk dipenuhi minuman dan farmaseutikal",
+      "Trak sejuk menghantar cold room mudah alih ke perniagaan",
+      "Pintu cold room bertebat dengan selak dan kedap keselamatan",
+      "Pandangan luas gudang cold room berpenyaman di Malaysia"
+    ]
   },
   "locationsSection": {
     "eyebrow": "Liputan Perkhidmatan",
@@ -255,6 +275,7 @@
     "eyebrow": "Sedia untuk Tempah?",
     "heading": "Dapatkan Sebut Harga Cold Room Dalam 5 Minit",
     "body": "WhatsApp pasukan kami. Beritahu barang, tarikh dan lokasi. Kami sebut harga di tempat dan hantar hari yang sama merentasi ke-13 negeri Semenanjung.",
+    "bgAlt": "Armada sewa cold room berpenyaman sedia untuk penghantaran hari yang sama di Malaysia",
     "cta": "WhatsApp Sekarang",
     "trustTags": [
       "Penghantaran hari ini",

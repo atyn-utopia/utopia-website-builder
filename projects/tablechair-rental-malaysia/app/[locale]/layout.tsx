@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import { OrganizationSchema } from '@/components/schema/OrganizationSchema'
+import { siteConfig } from '@/config/site'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -13,7 +14,7 @@ const inter = Inter({
   display: 'swap',
 })
 
-const SITE_URL = 'https://tablechair-rental-malaysia.vercel.app'
+const SITE_URL = siteConfig.url
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
@@ -65,7 +66,7 @@ export default async function LocaleLayout({
         <script
           defer
           src="https://webcore.utopiaai.my/t.js"
-          data-website="tablechair-rental-malaysia.vercel.app"
+          data-website={siteConfig.domain}
         />
       </head>
       <body className="bg-[#FFFEF8] text-[#111111] antialiased overflow-x-hidden">

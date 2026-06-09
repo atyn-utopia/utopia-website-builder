@@ -1,11 +1,40 @@
 {
   "nav": {
+    "home": "Utama",
+    "products": "Sewa Meja Kerusi",
+    "calculator": "Kira Sewaan",
     "services": "Perkhidmatan",
     "locations": "Lokasi",
     "gallery": "Galeri",
     "blog": "Blog",
     "contact": "Hubungi",
-    "whatsapp": "WhatsApp Kami"
+    "whatsapp": "WhatsApp Kami",
+    "whatsappCta": "WhatsApp Kami",
+    "logoAlt": "Kak Kenduri — Sewa Meja Dan Kerusi Hantar Sama Hari Seluruh Malaysia"
+  },
+  "imageAlt": "Sewa meja dan kerusi kenduri Kak Kenduri — susun atur lengkap di majlis Malaysia",
+  "logoAlt": "Kak Kenduri — Sewa Meja Dan Kerusi Hantar Sama Hari Seluruh Malaysia",
+  "products": {
+    "imageAltTemplate": "Sewa {model} Kak Kenduri — hantar sama hari ke majlis Malaysia"
+  },
+  "gallery": {
+    "alts": [
+      "Sewa meja bulat dan kerusi banquet untuk majlis kahwin di dewan komuniti Selangor",
+      "Khemah canopy 20x20 kaki dipasang di laman rumah untuk kenduri kahwin",
+      "Susun atur kerusi chiavari putih di majlis tunang dengan pelamin",
+      "Meja panjang buffet dengan kain skirting putih untuk majlis aqiqah",
+      "Pasukan Kak Kenduri pasang khemah transparent untuk majlis malam",
+      "Kerusi banquet bercushion disusun rapi di hotel ballroom",
+      "Air cooler industrial dipasang sebelah khemah luar pada waktu siang",
+      "Stesen catering dengan chafing dish dan dulang buffet majlis kahwin",
+      "Sofa pelamin gaya vintage di pentas perkahwinan",
+      "Mesin gula kapas pink dan biru di sudut majlis kanak-kanak",
+      "PA system dengan speaker dan mikrofon siap dipasang untuk majlis",
+      "Susun atur lengkap meja bulat dan kerusi banquet untuk kenduri 200 orang"
+    ]
+  },
+  "finalCta": {
+    "bgAlt": "Susun atur meja bulat dan kerusi banquet Kak Kenduri di majlis kahwin malam Malaysia"
   },
   "shared": {
     "brand": "Kak Kenduri",
@@ -15,6 +44,7 @@
     "whatsappMessageDefault": "Hi Kak Kenduri, saya nak tanya pasal sewa meja dan kerusi.",
     "whatsappMessageLocation": "Hi Kak Kenduri, saya nak tanya pasal sewa meja dan kerusi di {city}.",
     "priceFrom": "Dari RM3.60 sekerusi",
+    "priceDaily": "Dari RM {price}",
     "deliveryWindow": "Hantar sama hari",
     "ratingBadge": "Google · 4.9★ · 380+ ulasan",
     "reviewsLabel": "Dari ulasan Google sebenar",
@@ -95,37 +125,37 @@
         "name": "Kerusi Standard",
         "tagline": "Kerusi plastik asas yang setiap kenduri perlu.",
         "blurb": "Sewa kerusi standard yang ringan, boleh disusun, untuk kenduri, tahlil dan majlis belakang rumah. Kosong RM3.60 atau bersama sarung kain RM9.60 — kami hantar beratus biji, sama hari, seluruh Malaysia.",
-        "cta": "WhatsApp tempah kerusi standard"
+        "cta": "Tempah Kerusi Standard"
       },
       "banquetChair": {
         "name": "Kerusi Banquet",
         "tagline": "Bantal empuk, rangka besi — selesa gred hotel.",
         "blurb": "Sewa kerusi banquet untuk majlis perkahwinan, makan malam dan dinner korporat. Tempat duduk bercushion, dibasuh sebelum setiap penghantaran. Kosong RM14.40, bersarung reben RM21.60.",
-        "cta": "WhatsApp tempah kerusi banquet"
+        "cta": "Tempah Kerusi Banquet"
       },
       "chiavariChair": {
         "name": "Kerusi Chiavari",
         "tagline": "Kerusi majlis cantik yang anda selalu nampak di Instagram.",
         "blurb": "Sewa kerusi chiavari solid pada RM21.60 atau chiavari akrilik transparent RM28.80 — sesuai untuk gambar pelamin, meja pengantin dan majlis pertunangan mewah.",
-        "cta": "WhatsApp tempah kerusi chiavari"
+        "cta": "Tempah Kerusi Chiavari"
       },
       "longTable": {
         "name": "Meja Panjang / Buffet 6 kaki",
         "tagline": "Meja 6 kaki yang jadi nadi setiap buffet dan dapur.",
         "blurb": "Sewa meja panjang saiz standard 6 kaki. Tanpa kain RM72.00, bersama kain skirting RM86.40. Gabungkan dengan peralatan catering untuk setup buffet lengkap.",
-        "cta": "WhatsApp tempah meja panjang"
+        "cta": "Tempah Meja Panjang"
       },
       "roundTable": {
         "name": "Meja Bulat (10 orang)",
         "tagline": "Cukup untuk 10 tetamu — standard kenduri Malaysia.",
         "blurb": "Sewa meja bulat yang muat 10 tetamu — pilihan utama untuk majlis perkahwinan Melayu dan makan malam banquet Cina. Kosong RM72.00, bersama kain & overlay RM86.40.",
-        "cta": "WhatsApp tempah meja bulat"
+        "cta": "Tempah Meja Bulat"
       },
       "cocktailTable": {
         "name": "Meja Cocktail",
         "tagline": "Meja tinggi untuk berdiri, minuman selamat datang dan mingle.",
         "blurb": "Sewa meja cocktail pada RM86.40 termasuk sarung spandex putih — sesuai untuk foyer resepsi, networking korporat dan kawasan sambutan.",
-        "cta": "WhatsApp tempah meja cocktail"
+        "cta": "Tempah Meja Cocktail"
       }
     },
     "additional": {

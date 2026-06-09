@@ -1,11 +1,40 @@
 {
   "nav": {
+    "home": "首页",
+    "products": "桌椅出租",
+    "calculator": "租赁估算",
     "services": "服务",
     "locations": "地区",
     "gallery": "案例",
     "blog": "博客",
     "contact": "联系",
-    "whatsapp": "立即 WhatsApp"
+    "whatsapp": "立即 WhatsApp",
+    "whatsappCta": "立即 WhatsApp",
+    "logoAlt": "Kak Kenduri — 马来西亚当天送达的桌椅出租"
+  },
+  "imageAlt": "Kak Kenduri 桌椅出租 — 马来西亚宴会厅完整布置",
+  "logoAlt": "Kak Kenduri — 马来西亚当天送达的桌椅出租",
+  "products": {
+    "imageAltTemplate": "Kak Kenduri {model} 出租 — 马来西亚活动当天送达"
+  },
+  "gallery": {
+    "alts": [
+      "雪兰莪婚礼大厅的圆桌和宴会椅布置",
+      "住宅院子里搭建的 20x20 英尺帆布帐篷,为宴会做准备",
+      "订婚仪式上排列整齐的白色 Chiavari 椅与新人台",
+      "马来满月宴上铺白色裙边的长形自助餐桌",
+      "Kak Kenduri 团队为夜间婚宴搭建透明帐篷",
+      "酒店宴会厅内整齐排列的带软垫宴会椅",
+      "白天宴会户外帐篷旁安装的工业冷风机",
+      "婚宴上配备保温餐盘和自助餐盘的餐饮服务台",
+      "婚礼舞台上复古风格的新人沙发",
+      "儿童派对角落的粉色与蓝色棉花糖机",
+      "活动现场配齐的音响系统与麦克风",
+      "200 人马来宴会的圆桌与宴会椅完整布置"
+    ]
+  },
+  "finalCta": {
+    "bgAlt": "Kak Kenduri 在马来西亚夜间婚宴布置的圆桌与宴会椅"
   },
   "shared": {
     "brand": "Kak Kenduri",
@@ -15,6 +44,7 @@
     "whatsappMessageDefault": "你好 Kak Kenduri，我想了解桌椅出租。",
     "whatsappMessageLocation": "你好 Kak Kenduri，我想了解在{city}的桌椅出租。",
     "priceFrom": "每张椅 RM3.60 起",
+    "priceDaily": "RM {price} 起",
     "deliveryWindow": "当天送达",
     "ratingBadge": "Google · 4.9★ · 380+ 评价",
     "reviewsLabel": "来自真实 Google 评价",

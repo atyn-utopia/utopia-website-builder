@@ -44,17 +44,21 @@ function waRedirect(locale: string, message?: string, location?: string) {
 
 // 8 products — slug aligns with key in messages, image points to the brand
 // photo in /public/images/products.
-const productKeys = [
-  { key: 'interior', slug: 'interior', img: '/images/products/interior-1.jpg' },
-  { key: 'bedroom', slug: 'bedroom', img: '/images/products/bedroom-1.jpg' },
-  { key: 'kitchen', slug: 'kitchen', img: '/images/products/kitchen-1.jpg' },
-  { key: 'bathroom', slug: 'bathroom', img: '/images/products/bathroom-1.jpg' },
-  { key: 'exterior', slug: 'exterior', img: '/images/products/exterior-1.jpg' },
-  { key: 'weathershield', slug: 'weathershield', img: '/images/products/exterior-2.jpg' },
-  { key: 'marble', slug: 'marble', img: '/images/products/marble-1.jpg' },
-  { key: 'texture', slug: 'texture', img: '/images/products/texture-1.jpg' },
-  { key: 'decor3d', slug: 'decor3d', img: '/images/products/decor3d-1.jpg' },
+const productKeys: { key: string; slug: string; img: string; unit: 'sqft' | 'flat' }[] = [
+  { key: 'interior', slug: 'interior', img: '/images/products/interior-1.jpg', unit: 'sqft' },
+  { key: 'bedroom', slug: 'bedroom', img: '/images/products/bedroom-1.jpg', unit: 'sqft' },
+  { key: 'kitchen', slug: 'kitchen', img: '/images/products/kitchen-1.jpg', unit: 'sqft' },
+  { key: 'bathroom', slug: 'bathroom', img: '/images/products/bathroom-1.jpg', unit: 'sqft' },
+  { key: 'exterior', slug: 'exterior', img: '/images/products/exterior-1.jpg', unit: 'sqft' },
+  { key: 'weathershield', slug: 'weathershield', img: '/images/products/exterior-2.jpg', unit: 'sqft' },
+  { key: 'marble', slug: 'marble', img: '/images/products/marble-1.jpg', unit: 'flat' },
+  { key: 'texture', slug: 'texture', img: '/images/products/texture-1.jpg', unit: 'flat' },
+  { key: 'decor3d', slug: 'decor3d', img: '/images/products/decor3d-1.jpg', unit: 'flat' },
 ]
+
+// Drop the leading/trailing "from" word (Dari / From / 起) from a localized
+// price line — the fromLabel above already shows it.
+const stripFromWord = (s: string) => s.replace(/^(?:Dari|From)\s+/i, '').replace(/\s*起$/, '')
 
 // Why-choose reasons — each has a matching SVG icon name.
 const reasonItems: { key: string; icon: 'paint' | 'bolt' | 'shield' | 'tag' | 'badge' | 'pin' }[] = [
@@ -549,7 +553,7 @@ export default function HomePageClient({ phoneNumber }: Props) {
                             {t('products.fromLabel')}
                           </span>
                           <span className="text-[20px]" style={{ color: 'var(--brand-pink)', fontWeight: 700, letterSpacing: '-0.01em' }}>
-                            {t(`products.${p.key}.price`).replace(/^Dari\s+/i, '')}
+                            {stripFromWord(t(p.unit === 'sqft' ? 'products.priceFromSqft' : 'products.priceFromFlat', { price: t(`products.${p.key}.price`) }))}
                           </span>
                         </div>
                         <WhatsAppClickTracker

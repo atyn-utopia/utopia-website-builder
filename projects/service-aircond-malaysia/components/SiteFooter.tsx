@@ -51,9 +51,6 @@ export default async function SiteFooter({ locale }: { locale: Locale }) {
               >
                 {tFoot('whatsappUs')}
               </a>
-              <span className="text-xs font-normal" style={{ color: 'rgba(255,255,255,0.35)' }}>
-                {tFoot('phone')}
-              </span>
             </div>
           </div>
           <div>

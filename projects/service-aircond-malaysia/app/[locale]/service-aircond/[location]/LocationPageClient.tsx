@@ -36,6 +36,8 @@ const ChevronIcon = ({ open }: { open: boolean }) => (
   </svg>
 )
 
+const galleryImages = Array.from({ length: 15 }, (_, i) => `/images/gallery-${i + 1}.png`)
+
 function waRedirect(locale: string, message?: string, location?: string) {
   const params = new URLSearchParams()
   if (message) params.set('message', message)
@@ -80,6 +82,7 @@ type Props = {
 export default function LocationPageClient({ locale, locationSlug, cityName, phoneNumber, nearby }: Props) {
   const t = useTranslations('location')
   const homeReviews = useTranslations('home.reviews')
+  const homeGallery = useTranslations('home.gallery')
   const tUsp = useTranslations('home.usp')
 
   const waLink = waRedirect(locale, `Hi, I need aircond service in ${cityName}`, locationSlug)
@@ -243,6 +246,27 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
                     </h5>
                   </div>
                 </FadeSection>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── CUSTOMER GALLERY ── */}
+        <section className="py-16 px-0 overflow-hidden" style={{ background: '#fff' }} aria-label="Customer gallery">
+          <FadeSection>
+            <div className="text-center mb-8 px-6">
+              <h5 className="text-[11px] font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--brand-text-muted)' }}>{homeGallery('tag')}</h5>
+              <h3 className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--brand-navy)' }}>{homeGallery('heading')}</h3>
+            </div>
+          </FadeSection>
+          <div className="relative">
+            <div className="absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, #fff, transparent)' }} />
+            <div className="absolute right-0 top-0 bottom-0 w-20 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, #fff, transparent)' }} />
+            <div className="marquee-track">
+              {[...galleryImages, ...galleryImages].map((img, i) => (
+                <div key={i} className="shrink-0 w-44 h-44 md:w-52 md:h-52 rounded-xl overflow-hidden" style={{ boxShadow: '0 4px 16px rgba(27,58,92,0.08)' }}>
+                  <img src={img} alt={homeGallery('imageAlt', { number: (i % 15) + 1 })} className="w-full h-full object-cover" loading="lazy" />
+                </div>
               ))}
             </div>
           </div>

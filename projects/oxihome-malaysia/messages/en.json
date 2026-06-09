@@ -123,7 +123,7 @@
     "hero": {
       "h1": "Oxygen Machine in {city}",
       "sub": "4-hour same-day delivery to {city}. Rent from RM250/month — no deposit, no contracts.",
-      "cta": "WhatsApp Us in {city}"
+      "cta": "WhatsApp {city}"
     },
     "intro": "Looking for an oxygen machine in {city}? Oxihome delivers oxygen concentrators, emergency tanks, and oximeters directly to your door in {city} — within 4 hours of your order. Rent from RM250/month or buy outright with no hidden fees.",
     "why": {

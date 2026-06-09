@@ -41,9 +41,8 @@
     "servicesTitle": "Services",
     "locationsTitle": "Locations",
     "viewAll": "View all 38 cities",
-    "phone": "012-345 6789",
     "ssm": "SSM Reg: 202X0XXXXX (XXXXXX-X)",
-    "copyright": "© {year} Encik Beku · serviceaircond.my"
+    "copyright": "© {year} Encik Beku"
   },
   "home": {
     "meta": {
@@ -171,7 +170,7 @@
       "step3Num": "03",
       "step3Title": "Job Done",
       "step3Desc": "Your aircond is serviced, repaired, or installed — and we clean up before we leave.",
-      "cta": "Start with Step 1 — WhatsApp Us"
+      "cta": "Start with WhatsApp"
     },
     "gallery": {
       "tag": "Real Results",
@@ -233,7 +232,7 @@
       "headline": "Aircond Service",
       "headlineHighlight": "in {city}",
       "subheadline": "WhatsApp Encik Beku now and we will arrange a technician in {city} for you today.",
-      "cta": "WhatsApp Us in {city}",
+      "cta": "WhatsApp {city}",
       "ctaSubtext": "Free to ask · Reply within 1 hour",
       "heroAlt": "Aircond technician with thumbs up"
     },

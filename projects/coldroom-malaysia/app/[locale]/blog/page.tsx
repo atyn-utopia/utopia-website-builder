@@ -2,8 +2,10 @@ import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
 import { getBlogPosts } from '@/lib/webcore';
 import { BlogCard } from './BlogCard';
-import BlogNav from '@/components/BlogNav';
+import FomoBanner from '@/components/FomoBanner';
+import SiteHeader from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
+import PageStyles from '@/components/PageStyles';
 
 export async function generateMetadata({
   params,
@@ -45,7 +47,9 @@ export default async function BlogListingPage({
 
   return (
     <>
-      <BlogNav />
+      <PageStyles />
+      <FomoBanner />
+      <SiteHeader activeBlog />
 
       <section className="blog-header">
         <div className="section-container">

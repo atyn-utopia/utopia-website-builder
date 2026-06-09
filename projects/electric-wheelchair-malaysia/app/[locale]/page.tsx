@@ -7,7 +7,7 @@ import FomoBanner from '@/components/FomoBanner';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import PageStyles from '@/components/PageStyles';
-import HomePageClient from '@/components/HomePageClient';
+import HomePageClient from './HomePageClient';
 import { waRedirect } from '@/lib/waRedirect';
 
 // The wheelchair hero photo is hosted on the brand's Wix CDN (no public/brand

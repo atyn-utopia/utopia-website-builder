@@ -96,7 +96,7 @@ export default function LocationPageClient({
       {/* HERO — smaller, location-focused */}
       <section className="hero" style={{ padding: '80px 0 72px' }}>
         <div className="container">
-          <nav className="breadcrumbs" aria-label="Breadcrumb" style={{ color: 'rgba(255,255,255,0.7)' }}>
+          <nav className="breadcrumbs" aria-label="Breadcrumb" style={{ color: 'rgba(255,255,255,0.7)', textAlign: 'center' }}>
             <Link href={`/${locale}`} style={{ color: 'var(--gold)' }}>{t('breadcrumbHome')}</Link>
             <span className="sep">/</span>
             <Link href={`/${locale}#services`} style={{ color: 'var(--gold)' }}>{t('breadcrumbProduct')}</Link>

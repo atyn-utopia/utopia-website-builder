@@ -164,6 +164,13 @@ These rules apply to EVERY website. No exceptions.
 - Only the **color** changes between variants (primary, secondary, CTA)
 - Never mix rounded and square buttons on the same site
 
+## CTA Button Copy — Max 3 Words
+- Every clickable CTA button label is **3 words maximum** (e.g. `WhatsApp Us Now`, `Get a Quote`, `Book Now`). Punchy labels don't wrap on mobile.
+- **Count every word, "WhatsApp" included** — `WhatsApp for a Quote` is 4 words (too long); shorten to `WhatsApp for Quote`, `Get a Quote`, or similar. The button already carries the WhatsApp icon, so dropping "WhatsApp" from the label is fine.
+- Applies to **button labels only** — `cta`, `ctaButton`, `ctaPrimary`, `ctaSecondary`, `ctaLabel`, `ctaTemplate`, `whatsappCta`, `bookNow`, etc. It does **not** apply to CTA section headings, subtext/microcopy, badges/tags, image alt text, or sentence-style closing CTAs (those keep their full copy).
+- Enforced for `en` + `ms` (word-delimited). `zh` is exempt (CJK isn't space-delimited) but keep its labels equally compact.
+- The wizard checks this via `cta-button-word-limit`.
+
 ## No Phone Numbers or Domains on Site
 - Do NOT display any phone number or domain/URL as visible text anywhere on the website
 - All contact goes through WhatsApp redirect buttons only
@@ -178,6 +185,7 @@ These rules apply to EVERY website. No exceptions.
 - Always **re-check every image** to confirm it is the correct image for its context
 - No mismatched or placeholder images left behind
 - Add gradient overlay to improve text readability on image backgrounds
+- **Never convert image formats automatically.** PNGs stay PNG, JPEGs stay JPEG. Do NOT re-encode PNG → JPEG when "optimizing" or fixing other tasks — it flattens alpha (breaks transparent cutouts and logos) and has corrupted live images in real projects. Resize in place if needed, but keep the original format. If a file is genuinely too large (>5 MB), flag it to the user instead of silently converting.
 
 ## Customer Gallery Grid — No Blank Slots
 - The customer gallery grid must **never leave an empty / blank slot**. Every cell in the visible grid must contain an image
@@ -202,6 +210,24 @@ These rules apply to EVERY website. No exceptions.
 - H1 = main hero title. H2 = hero subtitle / supporting line underneath. Both belong to the hero section
 - All remaining section titles use H3–H6
 - Lint every page before marking design complete: H1 count must equal 1, H2 count must equal 1
+
+## Header & Footer — Default Template (sewa-excavator)
+- **Always use the same `<SiteHeader />` and `<SiteFooter />` layout as `projects/sewa-excavator/components/`.** This is the canonical chrome for every new site — nav links + language switcher + WhatsApp CTA in the header; footer with quick links, locations grid, copyright, social.
+- Do NOT design custom header/footer layouts per project. Copy `SiteHeader.tsx` + `SiteFooter.tsx` from sewa-excavator and only swap brand name, logo file path, and locale-aware nav labels.
+- Per-page nav variants (e.g. `BlogNav`) are forbidden — every public page (home, location, blog listing, blog article) renders the same `<SiteHeader />` + `<SiteFooter />` + `<FomoBanner />`.
+- The wizard checks this via `site-chrome-components`, `homepage-uses-site-header`, `location-page-chrome`, `blog-listing-chrome`, `blog-post-chrome`, `no-blognav-usage`.
+
+## Text Spacing — Default Line-Heights
+- **Headings (h1–h6): `line-height: 1.2`** — tight tracking suits display type and keeps multi-line headings compact.
+- **Body text (p, h5/h6 styled as body copy, list items, blockquote, blog content): `line-height: 1.4`** — comfortable reading without becoming airy.
+- Set these as defaults in the project's `globals.css` so every component inherits them. Component-level overrides are allowed only when there's a specific design reason (e.g. an oversized hero subtitle).
+- Apply identically to `.blog-content` headings + paragraphs so article body matches site type.
+
+```css
+/* globals.css — paste this near :root */
+h1, h2, h3, h4, h5, h6 { line-height: 1.2; }
+p, li, blockquote, .blog-content p, .blog-content li, .blog-content blockquote { line-height: 1.4; }
+```
 
 
 # Dynamic Location Pages

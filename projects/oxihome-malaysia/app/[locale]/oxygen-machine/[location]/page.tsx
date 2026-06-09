@@ -10,6 +10,7 @@ import SiteFooter from '@/components/SiteFooter'
 import FomoBanner from '@/components/FomoBanner'
 import PageStyles from '@/components/PageStyles'
 import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker'
+import { ReviewsCarousel } from '@/components/ReviewsCarousel'
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema'
 import { FAQSchema } from '@/components/schema/FAQSchema'
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema'
@@ -90,6 +91,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
   const t  = await getTranslations({ locale, namespace: 'location' })
   const tp = await getTranslations({ locale, namespace: 'products' })
   const tc = await getTranslations({ locale, namespace: 'common' })
+  const th = await getTranslations({ locale, namespace: 'home' })
 
   const nearbyLocs = getNearbyLocations(location)
 
@@ -102,6 +104,21 @@ export default async function LocationPage({ params }: { params: Promise<Params>
   ]
 
   const WIX = 'https://static.wixstatic.com/media'
+
+  const galleryImages = [
+    `${WIX}/d3104b_0f13a4f64be14a9fb1e74942a4af5ea1~mv2.png/v1/fill/w_400,h_400,al_c,q_85,enc_auto/g1.png`,
+    `${WIX}/d3104b_56d4ea78d863418c84ee73a8e8d58b75~mv2.png/v1/fill/w_400,h_400,al_c,q_85,enc_auto/g2.png`,
+    `${WIX}/d3104b_a88449d5f2c6425e87d6d4cd0b1fb239~mv2.png/v1/fill/w_400,h_400,al_c,q_85,enc_auto/g3.png`,
+    `${WIX}/d3104b_f9de524aaf8f4cd28c5b26a0b7d227b0~mv2.png/v1/fill/w_400,h_400,al_c,q_85,enc_auto/g4.png`,
+    `${WIX}/d3104b_5c58f3e9b77a4370a792bc65a616a00d~mv2.png/v1/fill/w_400,h_400,al_c,q_85,enc_auto/g5.png`,
+    `${WIX}/d3104b_73a24372e90d4d40b7e981043119bf7c~mv2.png/v1/fill/w_400,h_400,al_c,q_85,enc_auto/g6.png`,
+    `${WIX}/d3104b_01a2506e092745b5b7b60c6e01b80654~mv2.png/v1/fill/w_400,h_400,al_c,q_85,enc_auto/g7.png`,
+    `${WIX}/d3104b_f295d191dafe4cc4a944505733cf918c~mv2.png/v1/fill/w_400,h_400,al_c,q_85,enc_auto/g8.png`,
+    `${WIX}/d3104b_1795b71be2ec44b39163e5a7a63274f0~mv2.png/v1/fill/w_400,h_400,al_c,q_85,enc_auto/g9.png`,
+    `${WIX}/d3104b_d30845e269474972ab0469465d9e02c7~mv2.png/v1/fill/w_400,h_400,al_c,q_85,enc_auto/g10.png`,
+    `${WIX}/d3104b_027e3d0194b64821a1684a6df0456558~mv2.png/v1/fill/w_400,h_400,al_c,q_85,enc_auto/g11.png`,
+    `${WIX}/d3104b_27a7c0a3095348a0b5aab1f9fd0f18ce~mv2.png/v1/fill/w_400,h_400,al_c,q_85,enc_auto/g12.png`,
+  ]
 
   type Product = {
     id: string
@@ -418,6 +435,63 @@ export default async function LocationPage({ params }: { params: Promise<Params>
                   <h5 className="font-semibold text-white text-sm mb-1">{item.title}</h5>
                   <h5 className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.65)' }}>{item.desc}</h5>
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── REVIEWS (mirrors homepage) ── */}
+      <section className="py-20 overflow-hidden" style={{ background: 'var(--brand-surface)' }}>
+        <div className="max-w-5xl mx-auto px-6">
+          <h3 className="font-display text-3xl md:text-4xl text-center mb-12" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.02em' }}>
+            {locale === 'ms'
+              ? `Apa Kata Pelanggan di ${cityName}`
+              : locale === 'zh'
+              ? `${cityName}客户怎么说`
+              : `What Customers in ${cityName} Say`}
+          </h3>
+        </div>
+        <ReviewsCarousel reviews={[
+          { text: th('reviews.r1'), name: th('reviews.r1name'), city: th('reviews.r1city') },
+          { text: th('reviews.r2'), name: th('reviews.r2name'), city: th('reviews.r2city') },
+          { text: th('reviews.r3'), name: th('reviews.r3name'), city: th('reviews.r3city') },
+          { text: th('reviews.r4'), name: th('reviews.r4name'), city: th('reviews.r4city') },
+          { text: th('reviews.r5'), name: th('reviews.r5name'), city: th('reviews.r5city') },
+          { text: th('reviews.r6'), name: th('reviews.r6name'), city: th('reviews.r6city') },
+          { text: th('reviews.r7'), name: th('reviews.r7name'), city: th('reviews.r7city') },
+          { text: th('reviews.r8'), name: th('reviews.r8name'), city: th('reviews.r8city') },
+          { text: th('reviews.r9'), name: th('reviews.r9name'), city: th('reviews.r9city') },
+        ]} />
+      </section>
+
+      {/* ── CUSTOMER GALLERY (mirrors homepage) ── */}
+      <section className="py-20 px-6" style={{ background: 'var(--brand-surface)' }}>
+        <div className="max-w-6xl mx-auto">
+          <h3 className="font-display text-3xl md:text-4xl text-center mb-3" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.02em' }}>
+            {locale === 'ms' ? 'Galeri Pelanggan Kami' : locale === 'zh' ? '客户照片' : 'Customer Gallery'}
+          </h3>
+          <h5 className="text-center text-base mb-10 max-w-lg mx-auto" style={{ color: 'var(--brand-text-muted)' }}>
+            {locale === 'ms'
+              ? `Lihat bagaimana mesin oksigen Oxihome digunakan oleh keluarga di ${cityName} dan seluruh Malaysia.`
+              : locale === 'zh'
+              ? `看看${cityName}及马来西亚各地家庭如何使用Oxihome氧气机。`
+              : `See how Oxihome oxygen machines are used by families in ${cityName} and across Malaysia.`}
+          </h5>
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
+            {galleryImages.map((src, i) => (
+              <div
+                key={i}
+                className="aspect-square rounded-xl overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-lg"
+                style={{ boxShadow: '0 2px 8px rgba(10,37,53,0.08)' }}
+              >
+                <img
+                  src={src}
+                  alt={`Oxihome oxygen machine customer photo in ${cityName}, Malaysia`}
+                  width={400}
+                  height={400}
+                  className="w-full h-full object-cover"
+                />
               </div>
             ))}
           </div>

@@ -3,14 +3,19 @@
     "title": "Cold Room Rental Malaysia | HALAL, Same-Day Delivery",
     "description": "Rent -18°C frozen, freezer, chiller & cool-storage cold rooms in Malaysia. HALAL, same-day delivery, 13 states. Free WhatsApp quote."
   },
+  "logoAlt": "Cold Room Malaysia logo",
+  "imageAlt": "Refrigerated cold room rental in Malaysia",
   "nav": {
     "brandName": "Cold Room Malaysia",
+    "home": "Home",
     "products": "Cold Rooms",
+    "calculator": "Calculator",
     "howItWorks": "How It Works",
     "reviews": "Reviews",
     "locations": "Locations",
     "faq": "FAQ",
     "blog": "Blog",
+    "whatsappCta": "WhatsApp Us",
     "ctaShort": "WhatsApp Quote",
     "ctaButton": "WhatsApp Quote"
   },
@@ -73,7 +78,8 @@
     "eyebrow": "Cheapest Cold Chain Logistic in Malaysia",
     "heading": "Our Cold Room Rental Service",
     "subheading": "One trusted cold room rental service. Four temperature options to fit your goods. Same-day delivery across all 13 Peninsular states.",
-    "priceFrom": "From RM{price}",
+    "priceFrom": "From RM {price} / pallet per day",
+    "imageAltTemplate": "{model} cold room rental in Malaysia",
     "perPalletDay": "per pallet / day",
     "cta": "WhatsApp Quote",
     "tempOptionsLabel": "Available Temperature Ranges",
@@ -202,7 +208,21 @@
   "gallery": {
     "eyebrow": "Project Gallery",
     "heading": "Recent Customer Cold Rooms",
-    "subheading": "From frozen seafood warehouses to bakery freezer rooms, real Malaysian projects we've powered."
+    "subheading": "From frozen seafood warehouses to bakery freezer rooms, real Malaysian projects we've powered.",
+    "alts": [
+      "Walk-in frozen storage cold room delivered to a Malaysian food warehouse",
+      "Stacked pallets inside a -18°C refrigerated cold room",
+      "Technician installing a freezer cold room unit on-site",
+      "HALAL-segregated chiller room storing dairy products",
+      "Refrigerated seafood stored in a frozen cold room",
+      "Modular cold storage container parked at a loading bay",
+      "Interior of a bakery freezer room holding pizza dough trays",
+      "Temperature gauge showing -18°C inside a frozen storage room",
+      "Cool storage room stocked with beverages and pharmaceuticals",
+      "Cold truck delivering a portable cold room to a business",
+      "Insulated cold room door with safety latch and seal",
+      "Wide view of a refrigerated warehouse cold room in Malaysia"
+    ]
   },
   "locationsSection": {
     "eyebrow": "Service Coverage",
@@ -255,6 +275,7 @@
     "eyebrow": "Ready to Book?",
     "heading": "Get Your Cold Room Quote in 5 Minutes",
     "body": "WhatsApp the team. Tell us your goods, dates, and location. We'll quote on the spot and deliver the same day across all 13 Peninsular states.",
+    "bgAlt": "Refrigerated cold room rental fleet ready for same-day delivery in Malaysia",
     "cta": "WhatsApp Us Now",
     "trustTags": [
       "Same-day delivery",

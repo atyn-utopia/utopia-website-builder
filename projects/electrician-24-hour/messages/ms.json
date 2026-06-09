@@ -39,6 +39,11 @@
     "arrivalFlag": "SAMPAI 4 JAM",
     "imageAlt": "Juruelektrik ST-registered Electrician 24 Hours bersedia menjawab panggilan kecemasan wiring di Malaysia"
   },
+  "quickStrip": {
+    "text": "Juruelektrik berdaftar ST sedia siaga — purata balasan WhatsApp bawah 2 minit, siang atau malam.",
+    "ctaPrimary": "WhatsApp Sekarang",
+    "ctaSecondary": "Dapatkan Sebut Harga"
+  },
   "usp": {
     "items": [
       {
@@ -58,7 +63,7 @@
   "services": {
     "heading": "Servis Wiring Harian Kami",
     "subheading": "Wireman ST-registered. Alat ganti asli. Harga tetap dari RM60 se-kerja.",
-    "cta": "WhatsApp untuk Sebut Harga"
+    "cta": "WhatsApp Sebut Harga"
   },
   "products": {
     "imageAltTemplate": "Servis juruelektrik {model} oleh Electrician 24 Hours Malaysia"

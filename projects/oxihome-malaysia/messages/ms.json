@@ -123,7 +123,7 @@
     "hero": {
       "h1": "Mesin Oksigen di {city}",
       "sub": "Penghantaran hari sama 4 jam ke {city}. Sewa dari RM250/bulan — tiada deposit, tiada kontrak.",
-      "cta": "WhatsApp Kami di {city}"
+      "cta": "WhatsApp {city}"
     },
     "intro": "Mencari mesin oksigen di {city}? Oxihome menghantar oxygen concentrator, tangki kecemasan, dan oximeter terus ke pintu anda di {city} — dalam masa 4 jam selepas pesanan. Sewa dari RM250/bulan atau beli secara tunai tanpa yuran tersembunyi.",
     "why": {

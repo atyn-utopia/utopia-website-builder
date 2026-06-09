@@ -10,6 +10,7 @@ import { BlogPostingSchema } from '@/components/schema/BlogPostingSchema';
 import FomoBanner from '@/components/FomoBanner';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import WhatsAppButton from '@/components/WhatsAppButton';
 
 export async function generateMetadata({
   params,
@@ -97,16 +98,10 @@ export default async function BlogPostPage({
           chromeProvided
         />
       </article>
-      <aside style={{ maxWidth: 920, margin: '24px auto', padding: '20px 16px', background: '#0F172A', borderRadius: 16, textAlign: 'center', color: '#FFFFFF' }}>
-        <h3 style={{ margin: '0 0 10px' }}>{t('ctaBannerTitle')}</h3>
-        <a
-          href={waHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ display: 'inline-flex', gap: 8, alignItems: 'center', padding: '12px 22px', borderRadius: 9999, background: '#25D366', color: '#FFFFFF', fontWeight: 700, textDecoration: 'none' }}
-        >
-          {t('ctaBannerCta')}
-        </a>
+      <aside style={{ maxWidth: 920, margin: '24px auto', padding: '20px 16px', background: '#0F172A', borderRadius: 16, textAlign: 'center', color: '#FFFFFF', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
+        <h3 style={{ margin: 0 }}>{t('ctaBannerTitle')}</h3>
+        {/* Shared WhatsApp button: official glyph icon + official green (#25D366). */}
+        <WhatsAppButton href={waHref} label={t('ctaBannerCta')} variant="pill" />
       </aside>
       <SiteFooter />
     </>

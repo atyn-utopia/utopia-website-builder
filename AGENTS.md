@@ -1,0 +1,517 @@
+# SEO Website System
+
+# Project Overview
+
+This project builds SEO-driven product websites using reusable architecture.
+
+Primary example:
+electrician-24-hour.vercel.app
+
+Goals:
+
+- Highlight products and services clearly
+- Use strong SEO copywriting
+- Generate dynamic location pages
+- Store phone numbers in Supabase
+- Allow multiple websites to share the same database
+- Enable scalable generation of new SEO websites
+
+The system should scale to:
+
+- 100+ websites
+- hundreds of location pages
+- shared database infrastructure
+
+## Directory Structure
+- `agents/` — AI agent definitions and configurations
+- `templates/` — Content and page templates
+- `prompts/` — Prompt files for AI workflows
+- `brand_assets/` — Brand assets (logos, colors, fonts, guidelines)
+- `projects/` — Individual project files and outputs
+
+## Conventions
+- Keep prompts modular and reusable
+- Store brand guidelines in `brand_assets/` before starting a project
+- Each project gets its own subfolder under `projects/`
+
+
+# Technology Stack
+
+Frontend:
+Next.js (App Router)
+
+Styling:
+Tailwind CSS
+
+Database:
+Supabase
+
+Deployment:
+Vercel
+
+
+# Dynamic Product Data (CRITICAL)
+
+Product data on every website MUST be fetched dynamically from the Supabase `products` + `product_photos` tables. NEVER hardcode product lists in config files for display.
+
+## Rules
+1. Homepage and location pages query `products` WHERE `website = domain` AND `is_active = true` ORDER BY `sort_order`, joined with `product_photos`
+2. Reads MUST go through `lib/webcore.ts` with cache tags (see Webcore Data Layer section). NEVER use `export const revalidate = N` time-based ISR — invalidation flows from the webcore admin via webhook → `revalidateTag()`
+3. Grid layout must auto-adjust to any product count — use CSS grid auto-fill or responsive columns that handle 1, 6, or 20 products gracefully
+4. Adding a product in the database → it appears on the site automatically (within revalidate window)
+5. Setting `is_active = false` or deleting → it disappears automatically
+6. `config/products.ts` may exist ONLY as a fallback if Supabase is unreachable — it is NOT the source of truth
+7. Product images come from `product_photos.url` — never hardcode image URLs in frontend code
+
+## Database schema
+- `products`: id, website, parent_id, name, slug, description, sale_price, rental_price, sort_order, is_active
+- `product_photos`: product_id (FK), url
+
+
+# Webcore Data Layer (CRITICAL)
+
+Every site's data reads (products, phone numbers, blog posts) MUST go through a single `lib/webcore.ts` module that hits the Supabase REST API via `fetch()` with Next.js cache tags. This is the ONLY supported pattern. The webcore admin sends webhook POSTs after every mutation; the site's `/api/revalidate` route calls `revalidateTag()`; the cache invalidates without a redeploy.
+
+## Required files (every new site)
+
+1. `lib/webcore.ts` — exports `getProducts()`, `getPhoneNumber()`, `waLink()`, `getWhatsAppLink()`, plus `getBlogPosts()` / `getBlogPost()` etc. if the site has blog routes. Reference template: `projects/tablechair-rental-malaysia/lib/webcore.ts`.
+2. `app/api/revalidate/route.ts` — POST handler that validates the `x-webcore-secret` header against `WEBCORE_REVALIDATE_SECRET` env var, then calls `revalidateTag()` for each tag in the JSON body. Identical across all sites.
+
+## Rules
+
+1. Every fetch in `lib/webcore.ts` MUST use `fetch(url, { next: { tags: ['webcore-products' | 'webcore-phones' | 'webcore-blog'] }, headers: { apikey, Authorization } })`. Tag name MUST be one of those three exactly.
+2. NEVER create `lib/supabase.ts`, `lib/getProducts.ts`, `lib/getPhoneNumber.ts`, or `lib/getBlogPosts.ts`. The Supabase JS client is NOT cache-tag-aware and silently breaks invalidation.
+3. NEVER set `export const revalidate = N` on any page. Tag-based invalidation is the sole mechanism. (Exception: `export const revalidate = 0` paired with `export const dynamic = 'force-dynamic'` — for the WhatsApp redirect page, which must always re-execute.)
+4. Preserve the leads_mode logic in `getPhoneNumber()` (single / rotation / location / hybrid + weighted percentage selection) — see `Phone Numbers & Leads Mode` below.
+5. `WEBCORE_REVALIDATE_SECRET` env var MUST be set in each Vercel project before the webhook handler will work. Adding the env var alone does not invalidate running deployments — sites must be redeployed once.
+6. The webcore admin's Integrations panel MUST point at `https://<site>/api/revalidate` and store the same secret. Configure this once per domain.
+
+## Curl test (use to verify each new deploy)
+
+```
+curl -i -X POST https://<site>/api/revalidate \
+  -H "x-webcore-secret: <SECRET>" \
+  -H "content-type: application/json" \
+  -d '{"tags":["webcore-products"]}'
+```
+
+Expected: `200 {"revalidated":["webcore-products"]}`. `401` = secret mismatch. `500` = env var not set (or deployment hasn't picked it up). `404` = route handler missing.
+
+
+# Agent Team
+
+Alpha — System Architect  
+Designs the technical architecture.
+
+Cyclops — Database Engineer  
+Designs Supabase schema and database logic.
+
+Sora — SEO Strategist  
+Plans keyword structure, page hierarchy, and internal linking.
+
+Nana — Copywriter  
+Writes all website copy — homepage sections, location page copy for every target city, and meta copy.
+
+Kagura — UI Design Specialist
+Reviews existing site layouts for duplicates, researches fresh design inspiration, and proposes a unique visual direction for each new project.
+
+Kimmy — Technical Implementation Specialist
+Implements metadata, schema markup, alt text, SEO optimization, full i18n (translations, routing, language switcher), and WhatsApp redirect lead tracking pages.
+
+Hanabi — Blog Writer
+Generates SEO-optimized blog articles with proper heading hierarchy (H1→H2→H3→H4→p), images with alt text, internal backlinks, meta descriptions, and excerpts. Inserts articles into Supabase (blog_posts + blog_translations tables). Can run independently at any time after the website is deployed.
+
+Layla — QA & Deployment Specialist
+Verifies phone number system integration with the shared database, pushes code to GitHub, and deploys to Vercel. Runs after user confirms the website design.
+
+
+# Agent Workflow
+
+Agents are real subagents spawned via the Codex Agent tool — each runs as a separate subprocess with its own context. They are NOT role-play personas in the same session.
+
+## How to invoke an agent
+Use the Agent tool. Pass the contents of the agent's `.md` file as the prompt, plus the required project inputs.
+
+See `prompts/orchestrate.md` for the full invocation guide.
+See `prompts/new-website.md` for the step-by-step new project workflow.
+See `docs/full-website-setup.md` for the complete setup reference (MANDATORY — follow this for every new website).
+
+## IMPORTANT: New Website Flow Enforcement
+When the user asks to create a new website, you MUST follow `docs/full-website-setup.md` exactly. Do NOT skip steps, reorder steps, or improvise your own flow. Read the doc first, then execute step by step. Every checklist item must be completed before moving to the next step. Both user approval gates (Gate 1: design, Gate 2: content) are blocking — do not proceed without explicit user confirmation.
+
+## Execution order
+
+1. Alpha — design system architecture (confirms languages with user)
+2. Cyclops + Sora — run in parallel (both need Alpha's output)
+3. Nana — generate homepage + all location page copy (needs Alpha + Sora's output)
+4. Kagura + Kimmy — run in parallel (both need Nana's output)
+   Kagura — propose unique design direction (reviews existing sites, researches inspiration)
+   Kimmy — implement technical SEO + i18n + WhatsApp redirect
+   → run pre-review checklist (headings, mobile audit, orphaned text, images, colors)
+5. Cyclops — insert product details into Supabase (MANDATORY, before deploy)
+6. Hanabi — generate blog posts + insert into Supabase (MANDATORY, before deploy)
+   → user confirms design + content
+7. Layla — integration test → GitHub push → Vercel deploy (blog + products already live)
+
+
+# SEO Rules
+
+Every page must include:
+
+- clear H1 heading structure
+- keyword placement in headings
+- meta title
+- meta description
+- image alt text
+- schema markup when relevant
+- internal links
+
+Avoid duplicate content.
+
+Location pages must have unique copy.
+
+
+# Frontend Design Rules
+
+These rules apply to EVERY website. No exceptions.
+
+## Heading Hierarchy
+- One **H1** per page — the main title in the hero section
+- One **H2** per page — the subtitle in the hero section
+- All other section headings use **H3 through H6**
+- Never use multiple H1s or H2s on a single page
+- **Every block of body copy must sit under a heading** — no orphan / floating paragraphs. Each section, USP item, problem-agitation block, "How It Works" step, customer-review group, FAQ, location intro, etc. gets its own heading above the body text
+- **Keyword-bearing subheadings must NOT use H5 or H6.** Phrases that contain a primary or secondary keyword (product name, target location, intent phrase like "rental in Kuala Lumpur") sit in H3 or H4 on landing pages, or in H2–H4 on blog articles. Burying keywords in H5/H6 wastes ranking weight
+
+## Section Backgrounds
+- Use **image backgrounds** for some sections (hero, CTA, testimonials)
+- Not every section should be flat solid color — mix image backgrounds with overlays for visual depth
+
+## USP Bar
+- **3-point USP bar** immediately below the hero section on every homepage
+- Mandatory on every project
+
+## Buttons
+- All buttons must use the **same rounded button shape** across the entire site
+- Only the **color** changes between variants (primary, secondary, CTA)
+- Never mix rounded and square buttons on the same site
+
+## No Phone Numbers or Domains on Site
+- Do NOT display any phone number or domain/URL as visible text anywhere on the website
+- All contact goes through WhatsApp redirect buttons only
+
+## Mobile Layout (PRIMARY viewport)
+- Most users come from mobile — design for mobile FIRST
+- Most items should be **center-aligned** on mobile (headings, buttons, cards, icons)
+- Left-aligned body text is acceptable but headings, buttons, and standalone elements must center
+- Always review mobile layout before marking design as complete
+
+## Images
+- Always **re-check every image** to confirm it is the correct image for its context
+- No mismatched or placeholder images left behind
+- Add gradient overlay to improve text readability on image backgrounds
+
+## Hero Photo
+- **No watermarked or low-res stock images** — only clean, high-resolution sources (Pexels, Unsplash, or licensed brand assets)
+- **If the hero image has a transparent background (PNG/SVG cutout), do NOT wrap it in a container, card, or background box.** Place it freely in the layout so the cutout reads as a floating subject — no rectangle, border, shadow box, or coloured panel behind it
+- Container-bound treatment is only for full-bleed photographic heroes (non-transparent images)
+
+## Customer Gallery Grid — No Blank Slots
+- The customer gallery grid must **never leave an empty / blank slot**. Every cell in the visible grid must contain an image
+- Pick a column count that evenly divides the image count (e.g. 12 images → 3, 4, or 6 cols), or pad / trim the image list so the last row is fully filled
+- No half-empty last row, no gaps caused by `auto-fill` stranding items
+- Applies at every breakpoint — re-check desktop, tablet, and mobile columns
+
+## FOMO Banner — Countdown + Urgent Colour
+- FOMO banner at the very top of the page must include a **live countdown timer** (hours:minutes:seconds) that visibly ticks down
+- Banner background must be **red or black** (never brand-colour, never yellow/green) — urgency colour only
+- Text must remain readable on the chosen background (white or light text)
+- Banner stays sticky/visible at the top of the first viewport
+
+## WhatsApp CTA — Official Green Only
+- Every WhatsApp CTA button must use the **official WhatsApp green** (`#25D366`, hover `#1EBE57`)
+- Never theme WhatsApp buttons with brand colour, black, or any other tint — the green is an instantly-recognised affordance
+- Applies to nav CTA, hero CTA, inline CTAs, sticky / floating FAB, final CTA, and the blog article CTA banner
+- Icon inside the button stays white
+
+## Heading Hierarchy (reminder + enforcement)
+- Every page must have **exactly one H1** AND **exactly one H2** — do not ship a page that is missing either
+- H1 = main hero title. H2 = hero subtitle / supporting line underneath. Both belong to the hero section
+- All remaining section titles use H3–H6
+- Every body-copy block sits under a heading — lint zero orphan paragraphs
+- Keyword-bearing subheadings must be H3 or H4 (landing pages) / H2–H4 (blog articles) — lint zero keyword phrases in H5/H6
+- Lint every page before marking design complete: H1 count must equal 1, H2 count must equal 1, no `<p>` outside a heading-led block, no keyword phrases in H5/H6
+
+## Product Card Photos — MANDATORY
+- **Transparent / cutout product photos** (PNG with no background — e.g. a skylift, wheelchair, fan, bed isolated on white): use `object-fit: contain` with internal padding (`padding: 18px`) so the entire product silhouette is visible.
+- **Lifestyle / interior / non-product photos** (wall panel installed in a room, table set up at an event, kitchen with appliance installed): use `object-fit: cover` so the image fills the card frame — these images sell the *result*, not the product silhouette. Cropping the edges is fine; centring is what matters.
+- Pick ONE treatment per product family — never mix `cover` and `contain` cards in the same grid.
+- Product card descriptions: **max 15 words, max 2 lines.** Truncate with `-webkit-line-clamp: 2` to enforce. Long descriptions belong on a detail page, not a card.
+- All product cards in a grid must be **the same height** — use `display: flex; flex-direction: column` on the card so the CTA pins to the bottom regardless of description length.
+- Lint check before shipping: open every product card on a wide viewport — image treatment matches photo type, description fits in 2 lines, card heights are aligned.
+
+## USP Bar — NO Section Heading
+- The 3-point USP bar below the hero is a strip of icon+title+1-line-body cards. It must NOT have a section heading or eyebrow above it — the cards speak for themselves.
+- **Highlight the icon** — give it a tinted background pill, a 2px branded ring, or a layered gradient — never leave it as a flat outline. The icon is the first thing the eye lands on; make it the focal point of the card.
+- Layout must be visually balanced: equal-width cards, identical vertical padding, centered icon → centered title → centered body, consistent gaps. No ragged-right text, no misaligned icons.
+
+## Brand / Collaborator Logo Strip — MANDATORY
+- Every homepage must include a **brand / collaborator logo strip** directly below the hero (above or beside the USP bar) showing 4–8 partner, supplier, certification, or trusted-by logos.
+- Display logos as a single horizontal row on desktop, scroll-snap or wrap on mobile. Logos should be **muted grayscale by default** with a subtle hover-to-color effect — they support credibility, they don't compete with the hero.
+- If real partner logos are not yet available, use plausible category placeholders (e.g. "Featured in Property Insight", "BCI Asia member", "Certified by SIRIM") with consistent monochrome styling.
+
+## Customer Reviews — Google Reviews Treatment
+- Customer review sections must visually signal that reviews come from Google. Each review card includes:
+  - A **Google "G" logo** (full-colour multi-stroke G) in the top-right or beside the reviewer name
+  - The label **"Posted on Google"** or **"Google Review"** in small caps
+  - A **5-star rating row** rendered in Google yellow (`#FBBC04`)
+- The section header may also display an aggregate badge ("4.9 / 5 on Google Reviews" + the G logo) to reinforce credibility.
+
+## Special Section (Project-Unique) — MANDATORY
+- **Every website must include at least one bespoke "special section"** that is NOT in the standard section list (FOMO / Hero / USP / Products / Process / Why / Reviews / Gallery / FAQ / Locations / Final CTA / Footer).
+- The special section is what makes each site feel custom rather than templated. Pick ONE that suits the product:
+  - **Before / After slider** — installations, renovations, cleaning services, paint, dental, beauty, wraps
+  - **Inline calculator** — wall panel m²/sqft → estimated price, lorry sticker area → quote, motorcycle rental days → total
+  - **Style / variant chooser** — interactive visual picker (e.g. tap "Wood / Fluted / PVC / Acoustic" to swap a preview image)
+  - **Use-case showcase** — Living Room / Office / Bedroom / Restaurant tabs with curated photo + 1-line caption
+  - **Coverage / sizing guide** — Small (12 sqft) / Medium / Large packages with what each includes
+  - **Comparison table** — Our service vs DIY vs Other contractors, three columns of checkmarks
+- The special section sits between the Products section and the Process section, with its own eyebrow + H3 heading and an image background or branded-coloured panel to make it stand out.
+
+## Section Tagging (eyebrow above every heading) — MANDATORY
+- **Every section heading (H3–H6) must have at least one tag/eyebrow line directly above it.** No bare headings on any section.
+- The eyebrow is a short, ALL-CAPS mono label (e.g. `UNIT CATALOGUE`, `PROCESS`, `SAFETY BRIEF`, `CUSTOMER VOICE`, `LIVE NOW`, `LOCK IN TODAY`) that orients the reader before they read the heading.
+- Applies to homepage, location pages, blog listing, blog post pages — everywhere a section appears.
+- Use a consistent component / class (`.eyebrow` or `.section-head .eyebrow`) so the spacing and typography match site-wide.
+- For sections on dark or image backgrounds, apply a light variant (`.eyebrow-light`) but keep the yellow pill so the eyebrow remains the brand signal.
+- Mid-CTA, Final-CTA, Reviews, FAQ, and any section without a `.section-head` wrapper must STILL render an eyebrow above the heading.
+- Lint check before shipping: every `<h3>`, `<h4>`, `<h5>` rendered in a page section has a sibling `.eyebrow` (or equivalent tag) immediately preceding it.
+
+
+# Dynamic Location Pages
+
+Location pages follow this structure:
+
+/product/location
+
+Example:
+
+/cpap-machine/kuala-lumpur
+/cpap-machine/petaling-jaya
+/cpap-machine/shah-alam
+
+Each page must include:
+
+- unique introduction
+- location-specific keywords
+- FAQs
+- call-to-action
+- dynamic phone number from database
+
+## Location Coverage Requirements
+- Every project's `config/locations.ts` must contain **at least 10 sub-locations per state** that the project serves
+- Total location count across all states must be **between 150 and 180 locations**
+- Sub-locations must be real, populated towns/suburbs (never invented) — verify against reference
+- `generateStaticParams` must emit a page for every location, and every location must appear in the sitemap
+
+
+# Supabase Database Logic
+
+## Shared Database
+
+All projects use a single shared Supabase database. Credentials are stored in `/.env.local` at the repo root and symlinked into each project. Each project's `next.config.ts` loads env from the repo root via `loadEnvConfig` from `@next/env`.
+
+**NEVER create a separate Supabase project per website.** All websites share the same database and are distinguished by the `website` column.
+
+When setting up a new project:
+1. Symlink the root `.env.local` into the project: `ln -sf ../../.env.local .env.local`
+2. Add `loadEnvConfig(process.cwd() + '/../..')` to the project's `next.config.ts`
+3. Add the same env vars to Vercel for production via `vercel env add`
+
+## Phone Numbers & Leads Mode
+
+Phone numbers are stored in the `phone_numbers` table. The `company_websites` table has a `leads_mode` column that controls how numbers are selected.
+
+### 4 Leads Modes
+
+| Mode | Behavior | Use Case |
+|------|----------|----------|
+| `single` | One default number → always returned | New websites, single owner |
+| `rotation` | Multiple numbers → weighted random by `percentage` | Multiple sales agents |
+| `location` | Filter by `location_slug` → weighted random. Falls back to `all` | Regional sales teams |
+| `hybrid` | Location pages → location numbers. Other pages → `all` numbers | Regional + national agents |
+
+### How It Works
+
+1. User clicks WhatsApp → redirected to `/redirect-whatsapp-1?loc={slug}`
+2. Server reads domain from HTTP host header
+3. Fetches `leads_mode` from `company_websites` WHERE `domain = host`
+4. Fetches all active numbers from `phone_numbers` WHERE `website = host`
+5. Applies mode logic:
+   - **single**: Return first number
+   - **rotation**: Pick from all numbers by weighted `percentage`
+   - **location**: Filter by `location_slug`, pick by percentage. Falls back to `all`
+   - **hybrid**: Location pages use location numbers only. Homepage/blog use `all` numbers only
+6. Builds WhatsApp URL with `phone_number` + `whatsapp_text` from the selected row
+
+### phone_numbers Table Columns
+
+- `website` — Vercel domain (e.g. `electric-wheelchair-malaysia.vercel.app`)
+- `location_slug` — city slug or `'all'` for default
+- `phone_number` — full international format
+- `whatsapp_text` — pre-filled WhatsApp message
+- `percentage` — weight for random selection (relative, doesn't need to sum to 100)
+- `label` — `'default'` for initial number, agent name for additional numbers
+- `type` — `'default'` for initial setup, `'custom'` for additional numbers
+- `is_active` — boolean
+
+## Initial Phone Number Seeding (MANDATORY before deploy)
+
+When creating a new website, always:
+
+1. Insert one row in `phone_numbers`:
+```sql
+INSERT INTO phone_numbers (website, location_slug, phone_number, label, type, is_active, whatsapp_text, percentage)
+VALUES ('domain.vercel.app', 'all', '60XXXXXXXXX', 'default', 'default', true, 'Hi, saya berminat...', 100);
+```
+
+2. Ensure `company_websites` row exists with `leads_mode = 'single'` (default).
+
+3. Ask user to choose leads mode during project setup.
+
+The phone number should be provided by the user during project setup. If not provided, ask for it before deployment.
+
+## Blog Posts
+
+Blog posts are also stored in Supabase, scoped by website, and managed through the centralized Blog CMS (admin panel at `projects/admin/`).
+
+
+# Frontend Website Rules
+
+## Always Do First
+Invoke the `frontend-design` skill before writing any frontend code.
+
+## Reference Images
+
+If a reference image is provided:
+
+- match layout exactly
+- match spacing
+- match typography
+- match colors
+
+Do not add or improve design.
+
+If no reference image is provided:
+design from scratch with high craft.
+
+## Local Server
+
+Always run the site on localhost.
+
+Start the dev server:
+
+node serve.mjs
+
+Server runs at:
+
+http://localhost:3000
+
+Never screenshot file:/// URLs.
+
+## Screenshot Workflow
+
+Use Puppeteer to capture screenshots:
+
+node screenshot.mjs http://localhost:3000
+
+Screenshots are saved in:
+
+temporary screenshots/
+
+After screenshotting:
+
+- compare with reference
+- fix spacing differences
+- fix typography differences
+- fix color mismatches
+
+Perform at least **two comparison rounds**.
+
+
+# Brand Assets
+
+Always check the `brand_assets/` folder before designing.
+
+If assets exist:
+
+- use provided logos
+- use provided color palettes
+- use provided images
+
+Do not replace real assets with placeholders.
+
+## Logo Rules
+
+- The logo can be any design (text, graphic, combination — designer's choice)
+- The **icon** inside the logo MUST also be used as the **favicon** (`app/icon.svg`)
+- The icon must be consistent — the same icon appears in the logo and the favicon
+- Extract or design the icon so it works standalone at small sizes (16x16, 32x32)
+- If the user provides a logo with an icon element, isolate that icon for the favicon
+- If designing from scratch, design the icon first, then build the logo around it
+
+
+# Anti-Generic Design Guardrails
+
+## Colors
+Never use default Tailwind blue or indigo.
+
+Always choose custom brand colors.
+
+## Shadows
+Avoid flat shadows like shadow-md.
+
+Use layered shadows with color tint.
+
+## Typography — MANDATORY
+
+- Use **Inter** OR **Plus Jakarta Sans** site-wide. Do NOT use serif display fonts (Fraunces, Cormorant, Playfair, EB Garamond, etc.) — modern, geometric sans is the house style.
+- A single typeface across headings and body is acceptable when weights and tracking carry the hierarchy: H1/H2 in 700–800 with tight tracking (-0.02em to -0.04em), section headings in 600–700, body in 400–500 with generous line-height (1.6–1.75).
+- If two typefaces are needed, both must be sans (e.g. Plus Jakarta Sans for display + Inter for body). Never pair a serif with a sans.
+- JetBrains Mono (or other monospace) is allowed for eyebrow labels, code, and price/timer numerals only.
+- Large headings: tight tracking. Body: generous line-height. Apply consistently across all pages.
+
+## Gradients
+
+Layer multiple gradients and depth effects.
+
+## Animations
+
+Animate only:
+
+- transform
+- opacity
+
+Never use transition-all.
+
+## Interactive States
+
+Clickable elements must have:
+
+- hover state
+- focus state
+- active state
+
+## Images
+
+Add gradient overlay to improve readability.
+
+## Spacing
+
+Use consistent spacing tokens.
+
+## Depth
+
+Design surfaces with layering:
+
+base → elevated → floating

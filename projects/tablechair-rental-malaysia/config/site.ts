@@ -1,8 +1,12 @@
+// `domain` is the canonical live host — Supabase rows for products, blog
+// posts, phones, and company_websites are filtered on this exact string. Keep
+// it in sync with `deploy-url.txt` and the `data-website` attribute in
+// app/[locale]/layout.tsx — the checklist enforces this match.
 export const siteConfig = {
   brandName: 'Kak Kenduri',
   legalName: 'Kak Kenduri Sdn. Bhd.',
-  domain: 'tablechair-rental-malaysia.vercel.app',
-  url: 'https://tablechair-rental-malaysia.vercel.app',
+  domain: 'tablechair-rental-malaysia.utopiaai.my',
+  url: 'https://tablechair-rental-malaysia.utopiaai.my',
   productSlug: 'table-chair-rental',
   fallbackPhone: '60174287801',
   email: 'kerusimejamy@gmail.com',

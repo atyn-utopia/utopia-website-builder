@@ -21,7 +21,7 @@ export function LanguageSwitcher() {
   }
 
   return (
-    <div className="group" style={{ position: 'relative' }}>
+    <div className="lsw-root" style={{ position: 'relative' }}>
       <button
         aria-label="Switch language"
         style={{
@@ -65,7 +65,7 @@ export function LanguageSwitcher() {
           pointerEvents: 'none',
           transition: 'opacity 150ms cubic-bezier(0.16, 1, 0.3, 1), transform 150ms cubic-bezier(0.16, 1, 0.3, 1)',
         }}
-        className="lang-dropdown"
+        className="lsw-menu"
       >
         {Object.entries(localeLabels).map(([code, label]) => (
           <button
@@ -100,14 +100,6 @@ export function LanguageSwitcher() {
         ))}
       </div>
 
-      <style>{`
-        .group:hover .lang-dropdown,
-        .group:focus-within .lang-dropdown {
-          opacity: 1 !important;
-          transform: translateY(0) !important;
-          pointer-events: auto !important;
-        }
-      `}</style>
     </div>
   );
 }

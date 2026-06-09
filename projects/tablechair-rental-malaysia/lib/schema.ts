@@ -1,6 +1,7 @@
 import { LOCATIONS } from '@/config/locations'
+import { siteConfig } from '@/config/site'
 
-export const SITE_URL = 'https://tablechair-rental-malaysia.vercel.app'
+export const SITE_URL = siteConfig.url
 export const BRAND_NAME = 'Kak Kenduri'
 export const LEGAL_NAME = 'Kak Kenduri Sdn. Bhd.'
 export const BRAND_LOGO = `${SITE_URL}/brand/kak-kenduri-logo.png`
@@ -50,7 +51,10 @@ export function organizationSchema() {
     email: BRAND_EMAIL,
     telephone: BRAND_PHONE,
     address: BRAND_ADDRESS,
-    sameAs: [`https://wa.me/${BRAND_PHONE.replace('+', '')}`],
+    // Route the WhatsApp `sameAs` link through the redirect page so leads-mode
+    // routing and click tracking run server-side (any direct WhatsApp deep-link
+    // bypasses webcore — checklist rule `cta-uses-redirect-page` enforces this).
+    sameAs: [`${SITE_URL}/en/redirect-whatsapp-1`],
     contactPoint: [
       {
         '@type': 'ContactPoint',

@@ -204,12 +204,9 @@ export default function LocationPageClient({
   const stateNames = Object.keys(stateGroups).sort()
 
   const reviews = [
-    { text: 'Rented a Honda Vario 160 for a month and it was in perfect condition. Same-day delivery as promised. Will definitely rent again.', author: 'Ahmad R.', location: 'Petaling Jaya' },
-    { text: 'I needed a motorbike urgently for food delivery work. Sewa Motor delivered a Yamaha Y15ZR to my place the same day I messaged them on WhatsApp. Very reliable.', author: 'Wei Liang C.', location: 'Kuala Lumpur' },
-    { text: 'Budget-friendly and hassle-free. I rented the Modenas Kriss MR3 at RM30/day while my own bike was in the workshop. Great service and friendly team.', author: 'Priya S.', location: 'Shah Alam' },
-    { text: 'Saya sewa Honda Wave 125 untuk seminggu. Harga sangat berbaloi dan motor dalam keadaan baik. Highly recommend untuk sesiapa yang perlukan motor sementara.', author: 'Faizal M.', location: 'Ipoh' },
-    { text: 'Tourist here. Rented the NMax for a week to explore Penang. The bike was clean, well-maintained, and delivered right to my Airbnb. Best way to explore the island!', author: 'Sarah K.', location: 'Penang' },
-    { text: 'Grab rider here. My bike was in the workshop so I rented the Vario 160 for 2 weeks. Smooth ride, fuel-efficient, and the rental cost was way less than losing income.', author: 'Rizal A.', location: 'Johor Bahru' },
+    { text: tHome('reviews.review1'), author: tHome('reviews.review1Author'), location: tHome('reviews.review1Location') },
+    { text: tHome('reviews.review2'), author: tHome('reviews.review2Author'), location: tHome('reviews.review2Location') },
+    { text: tHome('reviews.review3'), author: tHome('reviews.review3Author'), location: tHome('reviews.review3Location') },
   ]
 
   return (

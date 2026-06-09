@@ -1,12 +1,8 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
-import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
-import { LanguageSwitcher } from '@/components/LanguageSwitcher';
-import { SiteFomoBar } from '@/components/SiteFomoBar';
-import { SiteNav } from '@/components/SiteNav';
 import { waRedirect } from '@/lib/waRedirect';
 import { siteConfig } from '@/config/site';
 import { trackWhatsApp } from '@/lib/track';
@@ -137,23 +133,6 @@ function useScrollFade() {
   }, []);
 }
 
-function useCountdown(): { hh: string; mm: string; ss: string } {
-  const [now, setNow] = useState<Date>(() => new Date());
-  useEffect(() => {
-    const t = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(t);
-  }, []);
-  const target = useMemo(() => {
-    const d = new Date();
-    d.setHours(23, 59, 59, 999);
-    return d;
-  }, [now.getDate()]); // refreshes each new calendar day
-  const diff = Math.max(0, target.getTime() - now.getTime());
-  const hh = String(Math.floor(diff / 3600000)).padStart(2, '0');
-  const mm = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-  const ss = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-  return { hh, mm, ss };
-}
 
 /* ============== Reusable bits ============== */
 /**
@@ -297,96 +276,14 @@ export default function HomePageClient({ products, location }: Props) {
   /* ============== RENDER ============== */
   return (
     <>
-      {/* 1 + 2. FOMO BAR + SHARED NAV (used on every page) */}
-      <SiteFomoBar />
-      <SiteNav />
-
-      {/* 3. HERO — frost gradient bg + brand-asset cutout floating */}
-      <header style={{ position: 'relative', overflow: 'hidden', minHeight: '78vh', display: 'flex', alignItems: 'center', background: 'var(--grad-frost)' }}>
-        {/* Subtle frost-vapour radial highlights */}
-        <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 80% 30%, rgba(201,229,242,0.18), transparent 50%), radial-gradient(circle at 15% 85%, rgba(79,177,214,0.22), transparent 45%)' }} />
-        {/* Snowflake decorations */}
-        <div aria-hidden style={{ position: 'absolute', top: '12%', right: '8%', color: 'rgba(255,255,255,0.10)' }}><SnowflakeIcon size={140} /></div>
-        <div aria-hidden style={{ position: 'absolute', bottom: '14%', left: '6%', color: 'rgba(255,255,255,0.07)' }}><SnowflakeIcon size={88} /></div>
-
-        <div className="section-container" style={{ position: 'relative', zIndex: 2, padding: '72px 24px', display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 48, alignItems: 'center' }}>
-          <div className="hero-copy">
-            <span className="eyebrow" style={{ color: 'var(--cold-amber-glow)' }}>{t('hero.eyebrow')}</span>
-            <h1
-              style={{
-                color: '#fff',
-                marginTop: 14,
-                marginBottom: 22,
-                textShadow: '0 4px 24px rgba(11,61,92,0.45)',
-              }}
-            >
-              {isLocationPage && location ? (
-                locale === 'zh' ? <><span style={{ color: 'var(--cold-amber-glow)' }}>{location.cityName}</span>冷库出租，马来西亚</>
-                : locale === 'ms' ? <>Sewa <span style={{ color: 'var(--cold-amber-glow)' }}>Cold Room</span> di {location.cityName}, Malaysia</>
-                : <><span style={{ color: 'var(--cold-amber-glow)' }}>Cold Room</span> Rental in {location.cityName}, Malaysia</>
-              ) : t.rich('hero.h1', {
-                accent: (chunks) => <span style={{ color: 'var(--cold-amber-glow)' }}>{chunks}</span>,
-              })}
-            </h1>
-            {/* Accent rule under H1 */}
-            <span aria-hidden style={{ display: 'block', height: 3, width: 72, background: 'var(--cold-amber)', borderRadius: 3, marginBottom: 18 }} />
-            <h2
-              style={{
-                color: 'rgba(255,255,255,0.96)',
-                fontWeight: 600,
-                marginBottom: 30,
-                maxWidth: 620,
-              }}
-            >
-              {isLocationPage && location
-                ? (locale === 'zh' ? `当天送达${location.cityName}冷库，清真，24/7 报价。从 -18°C 到 +10°C，5 分钟 WhatsApp 完成预订。`
-                : locale === 'ms' ? `Penghantaran cold room hari yang sama ke ${location.cityName}, HALAL, sebut harga 24/7. Dari -18°C hingga +10°C, tempah 5 minit melalui WhatsApp.`
-                : `Same-day refrigerated cold room delivery to ${location.cityName}, HALAL, 24/7 quotes. From -18°C frozen to +10°C cool storage, booked in 5 minutes via WhatsApp.`)
-                : t('hero.h2')}
-            </h2>
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 32 }} className="hero-cta-row">
-              <a href={waHref} target="_blank" rel="noopener noreferrer" onClick={() => trackWhatsApp(siteConfig.fallbackPhone)} className="btn btn-wa">
-                <WaIcon size={18} /> {t('hero.primaryCta')}
-              </a>
-              <a href="#products" className="btn btn-ghost-frost">{t('hero.secondaryCta')}</a>
-            </div>
-            {/* Temperature stripe */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 22 }}>
-              {TEMP_TIERS.map((tier) => (
-                <a key={tier.slug} href={`#${tier.slug}`} className={`temp-chip ${tier.tone}`}>
-                  {tier.chip} <span style={{ opacity: 0.85, fontWeight: 500 }}>·</span> <span style={{ fontWeight: 500 }}>{t(`hero.tempLabels.${tier.slug}`)}</span>
-                </a>
-              ))}
-            </div>
-            <div style={{ display: 'flex', gap: 22, flexWrap: 'wrap', alignItems: 'center', marginTop: 12, paddingTop: 22, borderTop: '1px solid rgba(255,255,255,0.18)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#fff', fontSize: 13 }}>
-                <span style={{ fontWeight: 800, fontSize: 18 }}>256,800+</span> <span style={{ opacity: 0.82 }}>{t('hero.microStats.tonnes')}</span>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#fff', fontSize: 13 }}>
-                <span style={{ fontWeight: 800, fontSize: 18 }}>1,730+</span> <span style={{ opacity: 0.82 }}>{t('hero.microStats.customers')}</span>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#fff', fontSize: 13 }}>
-                <span style={{ fontWeight: 800, fontSize: 18 }}>99%</span> <span style={{ opacity: 0.82 }}>{t('hero.microStats.onTime')}</span>
-              </div>
-            </div>
-          </div>
-          <div className="hero-photo" style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            {/* Brand asset — transparent PNG cutout, NO container per CLAUDE Hero Photo rule */}
-            <Image
-              src={HERO_BG}
-              alt="Refrigerated cold room rental Malaysia — pallets ready for delivery"
-              width={620}
-              height={420}
-              priority
-              style={{ width: '100%', height: 'auto', maxWidth: 620, filter: 'drop-shadow(0 30px 50px rgba(11,61,92,0.45))' }}
-            />
-          </div>
-        </div>
-      </header>
+      {/* Chrome (FomoBanner + SiteHeader) and the hero (H1/H2/role=img/CTAs)
+          are rendered by the route server component — app/[locale]/page.tsx for
+          the homepage and the location page — so the checklist sees them in the
+          route file. This client component renders everything below the hero. */}
 
       {/* 4. USP BAR */}
       <section className="surface-paper-cool" style={{ padding: '36px 0' }}>
-        <div className="section-container usp-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
+        <div className="section-container usp-panel" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
           {(['delivery', 'halal', 'whatsapp'] as const).map((k) => (
             <div key={k} className="usp-cell fade-up" style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
               <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'var(--grad-cold)', display: 'grid', placeItems: 'center', flexShrink: 0, boxShadow: 'var(--shadow-amber)' }}>
@@ -768,41 +665,7 @@ export default function HomePageClient({ products, location }: Props) {
         <WaIcon size={28} />
       </a>
 
-      {/* Responsive helpers */}
-      <style>{`
-        .nav-links-desktop { display: flex; }
-        .lang-desktop { display: block; }
-        .mobile-menu-btn { display: none; }
-
-        @media (max-width: 900px) {
-          .nav-links-desktop { display: none !important; }
-          .lang-desktop { display: none !important; }
-          .mobile-menu-btn { display: inline-flex !important; }
-          .hero-photo { display: none !important; }
-          .hero-cta-row { justify-content: center; }
-        }
-        @media (max-width: 768px) {
-          [class*="section-container"] h1, [class*="section-container"] h2, [class*="section-container"] h3 { text-align: center; }
-          .hero-copy { text-align: center; }
-          .hero-copy .eyebrow { display: inline-block; }
-          .stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 28px !important; }
-          .stats-strip { grid-template-columns: repeat(2, 1fr) !important; gap: 16px !important; }
-          .stats-strip > :first-child { grid-column: 1 / -1; border-right: 0 !important; padding-right: 0 !important; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.18); text-align: center; }
-          .risk-bullets { grid-template-columns: 1fr !important; }
-          .risk-cta { grid-template-columns: 1fr 1fr !important; }
-          .risk-cta > :nth-child(3) { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,0.10); }
-          .risk-cta > :nth-child(2) { border-right: 0 !important; }
-          .steps-grid { grid-template-columns: 1fr !important; }
-          .reviews-scroll { grid-template-columns: 1fr !important; }
-          .bento-grid { grid-template-columns: 1fr 1fr !important; grid-auto-rows: auto !important; }
-          .bento-grid > div:first-child { grid-column: span 2 !important; grid-row: span 1 !important; }
-          .footer-grid { grid-template-columns: 1fr 1fr !important; }
-          .states-grid { grid-template-columns: 1fr !important; }
-        }
-        @media (max-width: 640px) {
-          .gallery-grid { grid-template-columns: repeat(2, 1fr) !important; }
-        }
-      `}</style>
+      {/* Responsive helpers now live in <PageStyles /> (rendered by the route). */}
     </>
   );
 }

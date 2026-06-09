@@ -3,6 +3,10 @@ import { notFound } from 'next/navigation'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import PageShell from '@/components/PageShell'
+import PageStyles from '@/components/PageStyles'
+import FomoBanner from '@/components/FomoBanner'
+import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
 import { findLocation, LOCATIONS } from '@/config/locations'
 import { getLocationCopy } from '@/lib/locationCopy'
 import { getProducts } from '@/lib/webcore'
@@ -12,10 +16,10 @@ import {
   faqPageSchema,
   productSchemaForLocation,
 } from '@/lib/schema'
-import type { Locale } from '@/config/site'
+import { siteConfig, type Locale } from '@/config/site'
 
 
-const SITE_URL = 'https://tablechair-rental-malaysia.vercel.app'
+const SITE_URL = siteConfig.url
 const PRODUCT_SLUG = 'table-chair-rental'
 
 type Params = { locale: Locale; location: string }
@@ -87,6 +91,7 @@ export default async function LocationPage({
 
   return (
     <>
+      <PageStyles />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -129,6 +134,8 @@ export default async function LocationPage({
           }}
         />
       ))}
+      <FomoBanner locale={locale} />
+      <SiteHeader locale={locale} />
       <PageShell
         locale={locale}
         variant="location"
@@ -138,6 +145,7 @@ export default async function LocationPage({
         coreProducts={core}
         additionalProducts={additional}
       />
+      <SiteFooter locale={locale} />
     </>
   )
 }

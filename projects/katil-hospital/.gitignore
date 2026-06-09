@@ -1,9 +1,0 @@
-node_modules/
-.next/
-.env
-.env.local
-tsconfig.tsbuildinfo
-brand_assets/
-temporary screenshots/
-
-.vercel

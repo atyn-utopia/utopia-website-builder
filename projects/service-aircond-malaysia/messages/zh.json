@@ -41,9 +41,8 @@
     "servicesTitle": "服务",
     "locationsTitle": "服务地区",
     "viewAll": "查看全部38个城市",
-    "phone": "012-345 6789",
     "ssm": "SSM Reg: 202X0XXXXX (XXXXXX-X)",
-    "copyright": "© {year} Encik Beku · serviceaircond.my"
+    "copyright": "© {year} Encik Beku"
   },
   "home": {
     "meta": {

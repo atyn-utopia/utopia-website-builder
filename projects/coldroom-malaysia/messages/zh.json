@@ -3,14 +3,19 @@
     "title": "马来西亚冷库出租 | 清真，当天送达",
     "description": "租赁 -18°C 冷冻库、冷冻室、冷藏库与冷藏室，覆盖马来西亚 13 州。清真认证，当天送达。WhatsApp 免费报价。"
   },
+  "logoAlt": "马来西亚冷库标志",
+  "imageAlt": "马来西亚冷库出租",
   "nav": {
     "brandName": "马来西亚冷库",
+    "home": "首页",
     "products": "冷库",
+    "calculator": "计算器",
     "howItWorks": "服务流程",
     "reviews": "客户评价",
     "locations": "服务地点",
     "faq": "常见问题",
     "blog": "博客",
+    "whatsappCta": "WhatsApp 联系",
     "ctaShort": "WhatsApp 报价",
     "ctaButton": "WhatsApp 报价"
   },
@@ -73,7 +78,8 @@
     "eyebrow": "马来西亚最便宜冷链物流",
     "heading": "我们的冷库出租服务",
     "subheading": "一项可靠的冷库出租服务。四种温度选项满足您的货物需求。覆盖 13 个西马州属，当天送达。",
-    "priceFrom": "RM{price} 起",
+    "priceFrom": "RM {price} 起 / 每托盘每天",
+    "imageAltTemplate": "{model}冷库出租，马来西亚",
     "perPalletDay": "每托盘 / 天",
     "cta": "WhatsApp 报价",
     "tempOptionsLabel": "可选温度范围",
@@ -202,7 +208,21 @@
   "gallery": {
     "eyebrow": "项目展示",
     "heading": "近期客户冷库项目",
-    "subheading": "从冷冻海鲜仓到烘焙冷冻室，真实的马来西亚商家项目。"
+    "subheading": "从冷冻海鲜仓到烘焙冷冻室，真实的马来西亚商家项目。",
+    "alts": [
+      "步入式冷冻库交付至马来西亚食品仓库",
+      "-18°C 冷藏冷库内堆叠的托盘货物",
+      "技术人员在现场安装冷冻室单元",
+      "存放乳制品的清真隔离冷藏库",
+      "冷冻库内储存的冷冻海鲜",
+      "停在装卸区的模块化冷藏集装箱",
+      "存放披萨面团托盘的烘焙冷冻室内部",
+      "冷冻储存室内显示 -18°C 的温度计",
+      "存放饮料和药品的冷藏室",
+      "冷藏车将便携式冷库送至商家",
+      "带安全锁扣和密封条的隔热冷库门",
+      "马来西亚冷藏仓库冷库的广角视图"
+    ]
   },
   "locationsSection": {
     "eyebrow": "服务覆盖",
@@ -255,6 +275,7 @@
     "eyebrow": "准备预订？",
     "heading": "5 分钟内拿到您的冷库报价",
     "body": "WhatsApp 联系团队。告诉我们货物、日期和地点。我们当场报价，当天送达覆盖全部 13 个西马州属。",
+    "bgAlt": "随时可当天送达的马来西亚冷库租赁车队",
     "cta": "立即 WhatsApp",
     "trustTags": [
       "当天送达",

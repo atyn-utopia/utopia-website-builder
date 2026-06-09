@@ -33,11 +33,16 @@
     "h1Highlight": "Emergency Wiring & Repair",
     "h1Suffix": "Across Malaysia",
     "subheadline": "Same-day plug point, full rewiring, DB upgrade, ceiling fan & water heater. Our ST-registered team arrives within 4 hours — 7 days a week.",
-    "ctaPrimary": "WhatsApp an Electrician Now",
+    "ctaPrimary": "WhatsApp Electrician Now",
     "ctaSecondary": "See Services",
     "trustBadge": "ST Registered · Fully Insured · 4.9★ on Google",
     "arrivalFlag": "4-HOUR ARRIVAL",
     "imageAlt": "ST-registered 24-hour Electrician 24 Hours technician on a Malaysia emergency call-out"
+  },
+  "quickStrip": {
+    "text": "Live ST-registered electricians on standby — average WhatsApp reply under 2 minutes, day or night.",
+    "ctaPrimary": "WhatsApp Now",
+    "ctaSecondary": "Get a Quote"
   },
   "usp": {
     "items": [
@@ -58,7 +63,7 @@
   "services": {
     "heading": "Wiring Services We Handle Daily",
     "subheading": "ST-registered wiremen. Real parts. Fixed per-job pricing from RM60.",
-    "cta": "WhatsApp for a Fixed Quote"
+    "cta": "Get Fixed Quote"
   },
   "products": {
     "imageAltTemplate": "{model} electrical service by Electrician 24 Hours Malaysia"

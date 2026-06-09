@@ -1,11 +1,40 @@
 {
   "nav": {
+    "home": "Home",
+    "products": "Table & Chair Rental",
+    "calculator": "Rental Estimate",
     "services": "Services",
     "locations": "Locations",
     "gallery": "Gallery",
     "blog": "Blog",
     "contact": "Contact",
-    "whatsapp": "WhatsApp Now"
+    "whatsapp": "WhatsApp Now",
+    "whatsappCta": "WhatsApp Now",
+    "logoAlt": "Kak Kenduri — Same-Day Table and Chair Rental Across Malaysia"
+  },
+  "imageAlt": "Kak Kenduri table and chair rental — full kenduri set-up at a Malaysia wedding hall",
+  "logoAlt": "Kak Kenduri — Same-Day Table and Chair Rental Across Malaysia",
+  "products": {
+    "imageAltTemplate": "Rent {model} from Kak Kenduri — same-day delivery to Malaysia events"
+  },
+  "gallery": {
+    "alts": [
+      "Round tables and banquet chairs set up for a Selangor wedding hall",
+      "A 20x20 ft canopy pitched in a residential yard for a kenduri kahwin",
+      "White Chiavari chairs lined up at an engagement ceremony with pelamin",
+      "Long buffet tables draped in white skirting at an aqiqah event",
+      "Kak Kenduri crew installing a transparent canopy for an evening reception",
+      "Cushioned banquet chairs arranged neatly inside a hotel ballroom",
+      "Industrial air cooler positioned next to an outdoor tent during a daytime kenduri",
+      "Catering station with chafing dishes and buffet trays at a wedding",
+      "Vintage-style pelamin sofa on the wedding stage",
+      "Pink and blue cotton-candy machines at a kids party corner",
+      "PA system with speakers and microphones rigged for an event",
+      "Full layout of round tables and banquet chairs for a 200-pax kenduri"
+    ]
+  },
+  "finalCta": {
+    "bgAlt": "Round tables and banquet chairs set up by Kak Kenduri at a Malaysia evening wedding kenduri"
   },
   "shared": {
     "brand": "Kak Kenduri",
@@ -15,6 +44,7 @@
     "whatsappMessageDefault": "Hi Kak Kenduri, I'd like to rent tables and chairs.",
     "whatsappMessageLocation": "Hi Kak Kenduri, I'd like to rent tables and chairs in {city}.",
     "priceFrom": "From RM3.60 per chair",
+    "priceDaily": "From RM {price}",
     "deliveryWindow": "Same-day delivery",
     "ratingBadge": "Google · 4.9★ · 380+ reviews",
     "reviewsLabel": "From real Google reviews",
@@ -95,37 +125,37 @@
         "name": "Standard Chair",
         "tagline": "The workhorse plastic chair every kenduri needs.",
         "blurb": "Stackable, lightweight standard chair rental for kenduri, tahlil and backyard majlis. Plain at RM3.60 or with fabric cover at RM9.60 — we deliver by the hundred, same day, across Malaysia.",
-        "cta": "WhatsApp to book standard chair"
+        "cta": "Book Standard Chair"
       },
       "banquetChair": {
         "name": "Banquet Chair",
         "tagline": "Padded cushion, steel frame — hotel-grade comfort.",
         "blurb": "Banquet chair rental for wedding receptions, dinner majlis and corporate dinners. Cushioned seat, cleaned before every delivery. Plain at RM14.40, with ribbon cover at RM21.60.",
-        "cta": "WhatsApp to book banquet chair"
+        "cta": "Book Banquet Chair"
       },
       "chiavariChair": {
         "name": "Chiavari Chair",
         "tagline": "The elegant wedding chair you see on Instagram.",
         "blurb": "Solid Chiavari chair rental at RM21.60 or the transparent acrylic Chiavari at RM28.80 — perfect for pelamin photos, bridal tables and luxe engagement majlis. Available nationwide with same-day delivery.",
-        "cta": "WhatsApp to book chiavari chair"
+        "cta": "Book Chiavari Chair"
       },
       "longTable": {
         "name": "Long Table / Buffet 6ft",
         "tagline": "The 6-foot workhorse for buffet lines and prep.",
         "blurb": "Long table rental in standard 6ft size. Without cloth at RM72.00, with pleated skirting and cloth at RM86.40. Pair it with our catering gear for a full buffet setup.",
-        "cta": "WhatsApp to book long table"
+        "cta": "Book Long Table"
       },
       "roundTable": {
         "name": "Round Table (10-seater)",
         "tagline": "Seats 10 guests comfortably — the kenduri standard.",
         "blurb": "Round table rental that seats 10 guests — the go-to for Malay wedding receptions and Chinese banquet dinners. Plain at RM72.00, with cloth and overlay at RM86.40. Delivered stacked and ready.",
-        "cta": "WhatsApp to book round table"
+        "cta": "Book Round Table"
       },
       "cocktailTable": {
         "name": "Cocktail Table",
         "tagline": "High-top standing table for mingling and welcome drinks.",
         "blurb": "Cocktail table rental at RM86.40 including white spandex cover — perfect for reception foyers, corporate networking, and welcome areas. Delivered same day in KL, Selangor and Johor.",
-        "cta": "WhatsApp to book cocktail table"
+        "cta": "Book Cocktail Table"
       }
     },
     "additional": {
