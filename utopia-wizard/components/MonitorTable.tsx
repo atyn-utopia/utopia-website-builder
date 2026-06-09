@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useIsMobile } from '@/lib/useMediaQuery'
+import { scorePct } from '@/lib/score'
 import DeleteProjectModal from './DeleteProjectModal'
 import TrashIcon from './icons/TrashIcon'
 import SyncButton from './SyncButton'
@@ -160,14 +161,20 @@ function deployStatusOf(p: ProjectRow): DeployStatusInfo {
   if (!deploy || deploy.total === 0) {
     return { status: 'building', label: 'Building', color: 'skip' }
   }
-  if (deploy.passed === deploy.total) {
+  // Skip-tolerant: several Deployment checks legitimately SKIP in snapshot mode
+  // (vercel-linked needs .vercel/ which is gitignored; vercel-domain-match needs
+  // a VERCEL_TOKEN the CI scanner may lack). Treat skips as "not applicable" —
+  // Live means nothing is FAILING, not that every check ran, exactly like the
+  // score. Otherwise every live site flips to "Issue" the moment a check skips.
+  const failed = deploy.failed ?? (deploy.total - deploy.passed)
+  if (failed === 0 && deploy.passed > 0) {
     return { status: 'live', label: 'Live', color: 'pass' }
   }
   if (deploy.passed === 0) {
     return { status: 'building', label: 'Building', color: 'skip' }
   }
-  // At least one Deployment check passes but not all — usually means the
-  // live site is up but reading from the config fallback instead of the DB.
+  // Some Deployment checks pass, some fail — live but degraded (config fallback
+  // instead of DB, or a domain mismatch).
   return { status: 'issue', label: 'Issue', color: 'warn' }
 }
 
@@ -521,7 +528,7 @@ export default function MonitorTable() {
                     ))}
                     <Td align="center">
                       <span className={`uf-score ${scoreClass}`} style={{ fontSize: 12, padding: '5px 12px' }}>
-                        {p.passed} / {p.total}
+                        {scorePct(p.passed, p.failedCount)} / 100
                       </span>
                     </Td>
                     <Td align="center" compact>
@@ -799,7 +806,7 @@ function MobileCards({ projects, loading, onOpen, onDelete }: {
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'flex-end', flexShrink: 0 }}>
                 <span className={`uf-score ${scoreClass}`}>
-                  {p.passed} / {p.total}
+                  {scorePct(p.passed, p.failedCount)} / 100
                 </span>
                 <StatusPill info={deployStatusOf(p)} />
                 <span
