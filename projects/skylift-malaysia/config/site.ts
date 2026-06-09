@@ -1,6 +1,6 @@
 export const siteConfig = {
-  domain: 'skylift-my.utopiaai.my',
-  siteUrl: 'https://skylift-my.utopiaai.my',
+  domain: 'skyliftmalaysia.utopiaai.my',
+  siteUrl: 'https://skyliftmalaysia.utopiaai.my',
   brandName: 'Skylift Malaysia',
   tagline: 'Skylift Rental Malaysia — Same-Day Delivery, Trained Operator Included',
   productSlug: 'skylift',

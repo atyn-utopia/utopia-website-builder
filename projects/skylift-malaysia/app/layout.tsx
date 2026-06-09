@@ -5,5 +5,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 
 export const metadata = {
-  metadataBase: new URL('https://skylift-my.utopiaai.my'),
+  metadataBase: new URL('https://skyliftmalaysia.utopiaai.my'),
 };
