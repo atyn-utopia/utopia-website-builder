@@ -8,6 +8,24 @@
   "trustStrip": {
     "label": "Dipercayai jenama terkemuka Malaysia"
   },
+  "usp": {
+    "home": {
+      "title1": "Servis Kecemasan 24/7",
+      "desc1": "Bila-bila masa, setiap hari — pasukan kami bertindak balas dalam 60 minit.",
+      "title2": "50+ Kawasan Liputan",
+      "desc2": "Lembah Klang hingga Malaysia Timur — shutter anda, rangkaian kami.",
+      "title3": "15,000+ Premis Dilindungi",
+      "desc3": "Dua dekad pengalaman pemasangan kilang, gudang dan kedai."
+    },
+    "location": {
+      "title1": "24/7 di {city}",
+      "desc1": "Krew tempatan bertindak balas dalam masa sejam.",
+      "title2": "Tinjauan Tapak Percuma",
+      "desc2": "Pengukuran di tapak + sebut harga — tanpa obligasi.",
+      "title3": "Disokong Waranti",
+      "desc3": "Setiap pemasangan + pembaikan dilindungi waranti."
+    }
+  },
   "blog": {
     "title": "Tips & Berita Roller Shutter",
     "metaTitle": "Blog | Encik Roller Shutter",
@@ -352,7 +370,7 @@
   "finalCta": {
     "heading": "Sedia Untuk Melindungi Premis Anda?",
     "subheading": "Dapatkan sebut harga percuma dalam masa 30 minit. Pasukan pakar kami sedia membantu anda 24/7.",
-    "ctaButton": "WhatsApp Sekarang",
+    "ctaButton": "Sebut Harga Percuma",
     "supportingText": "Tiada komitmen. Tiada caj tersembunyi. Hanya perkhidmatan roller shutter terbaik di Malaysia.",
     "bgAlt": "Juruteknik Encik Roller Shutter menyiapkan pemasangan di tapak untuk pelanggan"
   },

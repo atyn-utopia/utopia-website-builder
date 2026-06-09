@@ -226,16 +226,16 @@ export default function HomePage() {
           <div className="max-w-6xl mx-auto px-6 py-8">
             <div className="usp-panel">
               <div className="usp-cell">
-                <h5 style={{ color: 'var(--brand-yellow)', fontSize: 16, fontWeight: 800, marginBottom: 4 }}>24/7 Emergency Service</h5>
-                <h5 className="body-h5" style={{ color: 'var(--brand-steel-light)', fontSize: 13, fontWeight: 400 }}>Anytime, any day — our team responds in under 60 minutes.</h5>
+                <h5 style={{ color: 'var(--brand-yellow)', fontSize: 16, fontWeight: 800, marginBottom: 4 }}>{t('usp.home.title1')}</h5>
+                <h5 className="body-h5" style={{ color: 'var(--brand-steel-light)', fontSize: 13, fontWeight: 400 }}>{t('usp.home.desc1')}</h5>
               </div>
               <div className="usp-cell">
-                <h5 style={{ color: 'var(--brand-yellow)', fontSize: 16, fontWeight: 800, marginBottom: 4 }}>50+ Coverage Areas</h5>
-                <h5 className="body-h5" style={{ color: 'var(--brand-steel-light)', fontSize: 13, fontWeight: 400 }}>Klang Valley to East Malaysia — your shutter, our network.</h5>
+                <h5 style={{ color: 'var(--brand-yellow)', fontSize: 16, fontWeight: 800, marginBottom: 4 }}>{t('usp.home.title2')}</h5>
+                <h5 className="body-h5" style={{ color: 'var(--brand-steel-light)', fontSize: 13, fontWeight: 400 }}>{t('usp.home.desc2')}</h5>
               </div>
               <div className="usp-cell">
-                <h5 style={{ color: 'var(--brand-yellow)', fontSize: 16, fontWeight: 800, marginBottom: 4 }}>15,000+ Premises Protected</h5>
-                <h5 className="body-h5" style={{ color: 'var(--brand-steel-light)', fontSize: 13, fontWeight: 400 }}>Two decades of factory, warehouse, and shop install experience.</h5>
+                <h5 style={{ color: 'var(--brand-yellow)', fontSize: 16, fontWeight: 800, marginBottom: 4 }}>{t('usp.home.title3')}</h5>
+                <h5 className="body-h5" style={{ color: 'var(--brand-steel-light)', fontSize: 13, fontWeight: 400 }}>{t('usp.home.desc3')}</h5>
               </div>
             </div>
           </div>
