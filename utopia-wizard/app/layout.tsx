@@ -3,6 +3,7 @@ import { Fira_Sans, JetBrains_Mono } from 'next/font/google'
 import ThemeToggle from '@/components/ThemeToggle'
 import LogoutButton from '@/components/LogoutButton'
 import RegisterSW from '@/components/RegisterSW'
+import TabNav from '@/components/TabNav'
 import './globals.css'
 
 const fira = Fira_Sans({
@@ -57,8 +58,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <LogoutButton />
         <div style={{
           display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'flex-start',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+          alignItems: 'center',
           minHeight: '100vh',
           // Top padding clears the floating Theme + Logout buttons, plus the
           // iOS safe-area inset so the buttons (and content) sit below the
@@ -68,6 +70,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           paddingBottom: 'calc(48px + env(safe-area-inset-bottom, 0px))',
           paddingLeft: 'calc(20px + env(safe-area-inset-left, 0px))',
         }}>
+          <TabNav />
           {children}
         </div>
         <RegisterSW />
