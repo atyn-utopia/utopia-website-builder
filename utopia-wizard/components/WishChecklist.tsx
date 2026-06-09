@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { scorePct } from '@/lib/score'
 
 interface CheckItem {
   id: string
@@ -129,8 +130,8 @@ export default function WishChecklist({ slug }: { slug: string }) {
           </span>
         </div>
         <div className={`uf-score ${scoreClass}`} style={{ padding: '6px 14px', fontSize: 14 }}>
-          <span style={{ fontSize: 20 }}>{data.passed}</span>
-          <span style={{ opacity: 0.5, fontSize: 13, marginLeft: 2 }}>/ {data.total}</span>
+          <span style={{ fontSize: 20 }}>{scorePct(data.passed, failed.length)}</span>
+          <span style={{ opacity: 0.5, fontSize: 13, marginLeft: 2 }}>/ 100</span>
         </div>
       </div>
 

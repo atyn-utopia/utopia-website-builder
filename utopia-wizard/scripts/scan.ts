@@ -19,6 +19,7 @@
 import { readdir, stat, readFile } from 'node:fs/promises'
 import { existsSync } from 'node:fs'
 import path from 'node:path'
+import { scorePct } from '../lib/score'
 
 // Load .env.local from the repo root before importing anything that reads env.
 async function loadEnv(): Promise<void> {
@@ -194,7 +195,7 @@ async function main(): Promise<void> {
       const payload = await buildPayloadForSlug(slug, projectsDir)
       const elapsed = Date.now() - t0
       console.log(
-        `  ✓ ${slug.padEnd(36)} ${String(payload.passed).padStart(2)}/${payload.total}` +
+        `  ✓ ${slug.padEnd(36)} ${String(scorePct(payload.passed, payload.failed_count)).padStart(3)}/100` +
         ` · live=${(payload.live_status as { status?: string }).status ?? '?'}` +
         ` · ${elapsed}ms`,
       )

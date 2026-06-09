@@ -22,6 +22,7 @@
 import { readdir, stat, readFile } from 'node:fs/promises'
 import { existsSync } from 'node:fs'
 import path from 'node:path'
+import { scorePct } from '../lib/score'
 
 // ── env load (same dance as scan.ts — modules read env at import time) ───────
 async function loadEnv(): Promise<void> {
@@ -123,10 +124,9 @@ async function main() {
     if (ratchet) {
       try {
         const prev = await readSnapshot(slug)
-        if (prev && prev.total > 0) {
-          const prevPct = Math.round((prev.passed / prev.total) * 100)
-          const curPct = Math.round((run.passed / run.total) * 100)
-          if (curPct < prevPct) regressed = `${curPct} < ${prevPct} (previous)`
+        if (prev && (prev.passed + prev.failed_count) > 0) {
+          const prevScore = scorePct(prev.passed, prev.failed_count)
+          if (run.score < prevScore) regressed = `${run.score} < ${prevScore} (previous)`
         }
       } catch { /* no snapshot / no env → skip ratchet for this project */ }
     }
@@ -134,7 +134,7 @@ async function main() {
     // Regression-only: a project fails ONLY on a score drop. Blocking failures
     // are surfaced as warnings (legacy debt), not merge blockers.
     const fails = REGRESSION_ONLY ? !!regressed : (blocking.length > 0 || !!regressed)
-    const score = `${run.passed}/${run.total}`
+    const score = `${run.score}/100`
     if (fails) failedProjects++
     report.push({ slug, score, blocking, regressed })
 

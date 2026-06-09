@@ -8,6 +8,24 @@
   "trustStrip": {
     "label": "Dipercayai jenama terkemuka Malaysia"
   },
+  "usp": {
+    "home": {
+      "title1": "Servis Kecemasan 24/7",
+      "desc1": "Bila-bila masa, setiap hari — pasukan kami bertindak balas dalam 60 minit.",
+      "title2": "50+ Kawasan Liputan",
+      "desc2": "Lembah Klang hingga Malaysia Timur — shutter anda, rangkaian kami.",
+      "title3": "15,000+ Premis Dilindungi",
+      "desc3": "Dua dekad pengalaman pemasangan kilang, gudang dan kedai."
+    },
+    "location": {
+      "title1": "24/7 di {city}",
+      "desc1": "Krew tempatan bertindak balas dalam masa sejam.",
+      "title2": "Tinjauan Tapak Percuma",
+      "desc2": "Pengukuran di tapak + sebut harga — tanpa obligasi.",
+      "title3": "Disokong Waranti",
+      "desc3": "Setiap pemasangan + pembaikan dilindungi waranti."
+    }
+  },
   "blog": {
     "title": "Tips & Berita Roller Shutter",
     "metaTitle": "Blog | Encik Roller Shutter",
@@ -52,7 +70,7 @@
     "subtitle": "Pasang, baiki & selenggara semua jenis pintu roller shutter untuk kilang, kedai dan gudang. Perkhidmatan kecemasan 24 jam, 7 hari seminggu di seluruh Malaysia.",
     "ctaPrimary": "WhatsApp Sekarang",
     "ctaPrimarySubtext": "Dapatkan Sebut Harga Percuma",
-    "ctaSecondary": "Lihat Jenis Roller Shutter Kami",
+    "ctaSecondary": "Lihat Jenis Shutter",
     "altText": "Pemasangan roller shutter untuk kilang di Malaysia"
   },
   "stats": {
@@ -88,7 +106,7 @@
           "Kos efektif — pilihan terbaik untuk bajet sederhana",
           "Sesuai untuk kilang, gudang & premis besar"
         ],
-        "cta": "WhatsApp Untuk Sebut Harga",
+        "cta": "WhatsApp Sebut Harga",
         "altText": "Roller shutter mild steel untuk kilang dan gudang"
       },
       "aluminium": {
@@ -99,7 +117,7 @@
           "Tahan karat & cuaca tropika Malaysia",
           "Rupa moden dan kemas untuk premis profesional"
         ],
-        "cta": "WhatsApp Untuk Sebut Harga",
+        "cta": "WhatsApp Sebut Harga",
         "altText": "Roller shutter aluminium untuk premis komersial"
       },
       "polycarbonate": {
@@ -110,7 +128,7 @@
           "Keselamatan setanding roller shutter keluli",
           "Kemasukan cahaya semula jadi — jimat elektrik"
         ],
-        "cta": "WhatsApp Untuk Sebut Harga",
+        "cta": "WhatsApp Sebut Harga",
         "altText": "Roller shutter polycarbonate transparent untuk kedai"
       },
       "fireRated": {
@@ -121,7 +139,7 @@
           "Menghalang api & asap merebak antara zon",
           "Wajib untuk kilang, gudang & bangunan komersial tertentu"
         ],
-        "cta": "WhatsApp Untuk Sebut Harga",
+        "cta": "WhatsApp Sebut Harga",
         "altText": "Roller shutter tahan api untuk pematuhan BOMBA"
       },
       "grille": {
@@ -132,7 +150,7 @@
           "Penglihatan ke dalam premis walaupun selepas waktu operasi",
           "Popular untuk kedai runcit, pasaraya & food court"
         ],
-        "cta": "WhatsApp Untuk Sebut Harga",
+        "cta": "WhatsApp Sebut Harga",
         "altText": "Roller shutter gril untuk kedai runcit"
       },
       "motorised": {
@@ -143,7 +161,7 @@
           "Sesuai untuk pintu besar kilang & gudang logistik",
           "Naik taraf dari manual ke automatik tersedia"
         ],
-        "cta": "WhatsApp Untuk Sebut Harga",
+        "cta": "WhatsApp Sebut Harga",
         "altText": "Roller shutter automatik bermotor untuk gudang"
       }
     }
@@ -352,7 +370,7 @@
   "finalCta": {
     "heading": "Sedia Untuk Melindungi Premis Anda?",
     "subheading": "Dapatkan sebut harga percuma dalam masa 30 minit. Pasukan pakar kami sedia membantu anda 24/7.",
-    "ctaButton": "WhatsApp Sekarang — Sebut Harga Percuma",
+    "ctaButton": "Sebut Harga Percuma",
     "supportingText": "Tiada komitmen. Tiada caj tersembunyi. Hanya perkhidmatan roller shutter terbaik di Malaysia.",
     "bgAlt": "Juruteknik Encik Roller Shutter menyiapkan pemasangan di tapak untuk pelanggan"
   },
