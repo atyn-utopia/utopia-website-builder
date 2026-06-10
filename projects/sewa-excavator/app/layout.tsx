@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://sewa-excavator.utopiaai.my'),
+  metadataBase: new URL('https://sewaexcavator.my'),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
