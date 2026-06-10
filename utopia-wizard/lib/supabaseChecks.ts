@@ -4,6 +4,7 @@ const SUPABASE_KEY =
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? process.env.SUPABASE_ANON_KEY ?? ''
 
 export const supabaseConfigured = !!(SUPABASE_URL && SUPABASE_KEY)
+const DB_SCHEMA = process.env.SUPABASE_DB_SCHEMA ?? 'webcore'
 
 interface CountOpts {
   table: string
@@ -17,6 +18,7 @@ export async function countRows({ table, filter }: CountOpts): Promise<number | 
       headers: {
         apikey: SUPABASE_KEY,
         Authorization: `Bearer ${SUPABASE_KEY}`,
+        'Accept-Profile': DB_SCHEMA,
         Prefer: 'count=exact',
         Range: '0-0',
       },
@@ -65,6 +67,7 @@ async function selectRows<T = unknown>({ table, filter, select }: RestOpts): Pro
       headers: {
         apikey: SUPABASE_KEY,
         Authorization: `Bearer ${SUPABASE_KEY}`,
+        'Accept-Profile': DB_SCHEMA,
       },
       signal: AbortSignal.timeout(8000),
       cache: 'no-store',
@@ -115,7 +118,7 @@ export async function findRegisteredDomainsByPhone(phone: string): Promise<strin
   if (!supabaseConfigured) return []
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/phone_numbers?phone_number=eq.${encodeURIComponent(phone)}&select=website`, {
-      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` },
+      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, 'Accept-Profile': DB_SCHEMA },
       signal: AbortSignal.timeout(5000),
       cache: 'no-store',
     })
@@ -137,7 +140,7 @@ export async function findRegisteredDomainsByKeyword(keyword: string): Promise<s
   try {
     const enc = encodeURIComponent(`*${keyword}*`)
     const res = await fetch(`${SUPABASE_URL}/rest/v1/company_websites?domain=ilike.${enc}&select=domain`, {
-      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` },
+      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, 'Accept-Profile': DB_SCHEMA },
       signal: AbortSignal.timeout(5000),
       cache: 'no-store',
     })

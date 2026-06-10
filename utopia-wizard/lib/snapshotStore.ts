@@ -9,6 +9,9 @@ const SUPABASE_URL =
 const ANON_KEY =
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? process.env.SUPABASE_ANON_KEY ?? ''
 const SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY ?? ''
+// Tables live in the `webcore` Postgres schema, not `public`. PostgREST exposes
+// it via the Accept-Profile (reads) / Content-Profile (writes) headers.
+const DB_SCHEMA = process.env.SUPABASE_DB_SCHEMA ?? 'webcore'
 
 export interface SnapshotRow {
   slug: string
@@ -49,7 +52,7 @@ function ensureWrite() {
 export async function readAllSnapshots(): Promise<SnapshotRow[]> {
   ensureRead()
   const res = await fetch(`${SUPABASE_URL}/rest/v1/monitor_snapshots?select=*&order=ran_at.desc`, {
-    headers: { apikey: ANON_KEY, Authorization: `Bearer ${ANON_KEY}` },
+    headers: { apikey: ANON_KEY, Authorization: `Bearer ${ANON_KEY}`, 'Accept-Profile': DB_SCHEMA },
     cache: 'no-store',
   })
   if (!res.ok) throw new Error(`readAllSnapshots: HTTP ${res.status}`)
@@ -61,7 +64,7 @@ export async function readSnapshot(slug: string): Promise<SnapshotRow | null> {
   const res = await fetch(
     `${SUPABASE_URL}/rest/v1/monitor_snapshots?slug=eq.${encodeURIComponent(slug)}&select=*&limit=1`,
     {
-      headers: { apikey: ANON_KEY, Authorization: `Bearer ${ANON_KEY}` },
+      headers: { apikey: ANON_KEY, Authorization: `Bearer ${ANON_KEY}`, 'Accept-Profile': DB_SCHEMA },
       cache: 'no-store',
     },
   )
@@ -78,6 +81,7 @@ export async function upsertSnapshot(row: Omit<SnapshotRow, 'ran_at'> & { ran_at
     headers: {
       apikey: SERVICE_ROLE_KEY,
       Authorization: `Bearer ${SERVICE_ROLE_KEY}`,
+      'Content-Profile': DB_SCHEMA,
       'Content-Type': 'application/json',
       Prefer: 'resolution=merge-duplicates,return=minimal',
     },
@@ -98,6 +102,7 @@ export async function deleteSnapshot(slug: string): Promise<boolean> {
       headers: {
         apikey: SERVICE_ROLE_KEY,
         Authorization: `Bearer ${SERVICE_ROLE_KEY}`,
+      'Content-Profile': DB_SCHEMA,
         Prefer: 'return=representation',
       },
     },
@@ -119,6 +124,7 @@ export async function deleteSnapshotsExcept(keepSlugs: string[]): Promise<number
     headers: {
       apikey: SERVICE_ROLE_KEY,
       Authorization: `Bearer ${SERVICE_ROLE_KEY}`,
+      'Content-Profile': DB_SCHEMA,
       Prefer: 'return=representation',
     },
   })

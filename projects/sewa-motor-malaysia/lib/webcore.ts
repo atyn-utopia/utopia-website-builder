@@ -19,6 +19,7 @@ async function webcoreFetch<T>(path: string, tag: WebcoreTag): Promise<T | null>
         apikey: SUPABASE_KEY,
         Authorization: `Bearer ${SUPABASE_KEY}`,
         Accept: 'application/json',
+        'Accept-Profile': 'webcore',
       },
       next: { tags: [tag] },
     })

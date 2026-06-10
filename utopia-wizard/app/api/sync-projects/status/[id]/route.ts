@@ -27,6 +27,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     headers: {
       apikey: SUPA_ANON,
       Authorization: `Bearer ${SUPA_ANON}`,
+      'Accept-Profile': process.env.SUPABASE_DB_SCHEMA ?? 'webcore',
     },
     cache: 'no-store',
   })

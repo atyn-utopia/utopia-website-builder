@@ -65,6 +65,9 @@ async function supaFetch<T>(path: string, init?: RequestInit): Promise<T | null>
         apikey: SUPA_ANON,
         Authorization: `Bearer ${SUPA_ANON}`,
         'Content-Type': 'application/json',
+        // Tables live in the `webcore` schema, not `public`.
+        'Accept-Profile': process.env.SUPABASE_DB_SCHEMA ?? 'webcore',
+        'Content-Profile': process.env.SUPABASE_DB_SCHEMA ?? 'webcore',
         ...(init?.headers ?? {}),
       },
       cache: 'no-store',
