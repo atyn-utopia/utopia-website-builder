@@ -365,9 +365,11 @@ export type Locale = (typeof locales)[number];
 export const routing = defineRouting({
   locales,
   defaultLocale: 'en',
-  // MANDATORY: every URL carries the locale prefix so `/` redirects to
-  // `/<defaultLocale>` instead of serving locale-detected content.
-  localePrefix: 'always',
+  // MANDATORY: 'as-needed' serves the default locale at `/` with NO prefix
+  // (clean URL — e.g. site.my/ is the default language, not site.my/ms) while
+  // non-default locales keep their prefix (/en, /zh). A prefixed default-locale
+  // URL (/ms) 301-redirects to `/`, so there's no duplicate content.
+  localePrefix: 'as-needed',
   // MANDATORY: disables browser Accept-Language autodetection. Without this,
   // a Malay-default site loses every visitor whose browser is set to English
   // — they get served the wrong language on the first hit. The default
@@ -376,7 +378,9 @@ export const routing = defineRouting({
 });
 ```
 
-**Default-language rule (MANDATORY).** Whichever locale is set as `defaultLocale`, every fresh visitor MUST land on that locale's page first — regardless of browser language. `localePrefix: 'always'` + `localeDetection: false` is what enforces this. Pick the default per project (MS for sewa-* / Malay-first brands, EN for English-first brands) and never leave `localeDetection` on its default (`true`).
+**Default-language rule (MANDATORY).** Whichever locale is set as `defaultLocale`, every fresh visitor MUST land on that locale's page first — regardless of browser language. `localePrefix: 'as-needed'` + `localeDetection: false` is what enforces this: `/` serves the default locale (no prefix, no detection), and `/<defaultLocale>` redirects to `/`. Pick the default per project (MS for sewa-* / Malay-first brands, EN for English-first brands) and never leave `localeDetection` on its default (`true`).
+
+**Locale-aware URLs (MANDATORY with `as-needed`).** Because the default locale has no prefix, every canonical / sitemap / hreflang URL must omit the `/<locale>` segment for the default locale. Use a `lib/localeHref.ts` helper (`locale === defaultLocale ? siteConfig.url : \`${siteConfig.url}/${locale}\``) and build all SEO URLs through it — never hardcode `${siteConfig.url}/${locale}`. The middleware matcher must be the broad form `['/((?!api|_next|_vercel|.*\\..*).*)']` so un-prefixed default-locale paths (e.g. `/product/city`) are handled.
 
 ### `i18n/request.ts`
 

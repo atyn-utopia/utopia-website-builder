@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
 import { routing } from '@/i18n/routing';
+import { localeHref } from '@/lib/localeHref';
 import { getBlogPosts } from '@/lib/webcore';
 import { waRedirect } from '@/lib/waRedirect';
 import { WhatsAppButton, WaIcon } from '@/components/WhatsAppButton';
@@ -20,13 +21,13 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'meta.blogListing' });
   const languages: Record<string, string> = Object.fromEntries(
-    routing.locales.map((l) => [l, `${siteConfig.url}/${l}/blog`]),
+    routing.locales.map((l) => [l, `${localeHref(l)}/blog`]),
   );
-  languages['x-default'] = `${siteConfig.url}/${routing.defaultLocale}/blog`;
+  languages['x-default'] = `${localeHref(routing.defaultLocale)}/blog`;
   return {
     title: t('title'),
     description: t('description'),
-    alternates: { canonical: `${siteConfig.url}/${locale}/blog`, languages },
+    alternates: { canonical: `${localeHref(locale)}/blog`, languages },
   };
 }
 

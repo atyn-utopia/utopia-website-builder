@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
 import { routing } from '@/i18n/routing';
+import { localeHref } from '@/lib/localeHref';
 import {
   locations,
   getLocationsByState,
@@ -61,14 +62,14 @@ export async function generateMetadata({
   const description = t('description', { location: loc.name, state: loc.state });
   const path = `/${siteConfig.productSlug}/${loc.slug}`;
   const languages: Record<string, string> = Object.fromEntries(
-    routing.locales.map((l) => [l, `${siteConfig.url}/${l}${path}`]),
+    routing.locales.map((l) => [l, `${localeHref(l)}${path}`]),
   );
-  languages['x-default'] = `${siteConfig.url}/${routing.defaultLocale}${path}`;
+  languages['x-default'] = `${localeHref(routing.defaultLocale)}${path}`;
   return {
     title,
     description,
-    alternates: { canonical: `${siteConfig.url}/${locale}${path}`, languages },
-    openGraph: { title, description, url: `${siteConfig.url}/${locale}${path}`, type: 'website' },
+    alternates: { canonical: `${localeHref(locale)}${path}`, languages },
+    openGraph: { title, description, url: `${localeHref(locale)}${path}`, type: 'website' },
   };
 }
 
@@ -167,9 +168,9 @@ export default async function LocationPage({
       <LocalBusinessSchema locale={locale} locationName={loc.name} locationSlug={loc.slug} state={loc.state} />
       <BreadcrumbSchema
         items={[
-          { name: tLocPage('breadcrumbHome'), url: `${siteConfig.url}/${locale}` },
-          { name: tLocPage('breadcrumbLocations'), url: `${siteConfig.url}/${locale}#locations` },
-          { name: loc.name, url: `${siteConfig.url}/${locale}/${siteConfig.productSlug}/${loc.slug}` },
+          { name: tLocPage('breadcrumbHome'), url: `${localeHref(locale)}` },
+          { name: tLocPage('breadcrumbLocations'), url: `${localeHref(locale)}#locations` },
+          { name: loc.name, url: `${localeHref(locale)}/${siteConfig.productSlug}/${loc.slug}` },
         ]}
       />
       {productCards.map((p) => (

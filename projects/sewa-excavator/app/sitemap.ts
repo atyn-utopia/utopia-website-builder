@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { siteConfig } from '@/config/site';
 import { routing } from '@/i18n/routing';
+import { localeHref } from '@/lib/localeHref';
 import { locations } from '@/config/locations';
 import { getBlogPosts } from '@/lib/webcore';
 
@@ -8,7 +9,7 @@ const PRODUCT_SLUG = siteConfig.productSlug;
 
 function alternates(path: string) {
   const languages = Object.fromEntries(
-    routing.locales.map((l) => [l, `${siteConfig.url}/${l}${path}`]),
+    routing.locales.map((l) => [l, `${localeHref(l)}${path}`]),
   );
   return { languages };
 }
@@ -19,7 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   for (const locale of routing.locales) {
     entries.push({
-      url: `${siteConfig.url}/${locale}`,
+      url: `${localeHref(locale)}`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 1.0,
@@ -31,7 +32,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const loc of locations) {
       const path = `/${PRODUCT_SLUG}/${loc.slug}`;
       entries.push({
-        url: `${siteConfig.url}/${locale}${path}`,
+        url: `${localeHref(locale)}${path}`,
         lastModified: now,
         changeFrequency: 'monthly',
         priority: 0.8,
@@ -42,7 +43,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   for (const locale of routing.locales) {
     entries.push({
-      url: `${siteConfig.url}/${locale}/blog`,
+      url: `${localeHref(locale)}/blog`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.7,
@@ -57,7 +58,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const lastMod = post.published_at ? new Date(post.published_at) : now;
       for (const locale of routing.locales) {
         entries.push({
-          url: `${siteConfig.url}/${locale}${path}`,
+          url: `${localeHref(locale)}${path}`,
           lastModified: lastMod,
           changeFrequency: 'monthly',
           priority: 0.6,

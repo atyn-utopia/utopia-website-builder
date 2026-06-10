@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
+import { localeHref } from '@/lib/localeHref';
 import { siteConfig } from '@/config/site';
 import { OrganizationSchema } from '@/components/schema/OrganizationSchema';
 import { WebSiteSchema } from '@/components/schema/WebSiteSchema';
@@ -40,21 +41,21 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'meta.home' });
   const languages: Record<string, string> = Object.fromEntries(
-    routing.locales.map((l) => [l, `${siteConfig.url}/${l}`]),
+    routing.locales.map((l) => [l, `${localeHref(l)}`]),
   );
-  languages['x-default'] = `${siteConfig.url}/${routing.defaultLocale}`;
+  languages['x-default'] = `${localeHref(routing.defaultLocale)}`;
 
   return {
     metadataBase: new URL(siteConfig.url),
     title: t('title'),
     description: t('description'),
     alternates: {
-      canonical: `${siteConfig.url}/${locale}`,
+      canonical: `${localeHref(locale)}`,
       languages,
     },
     openGraph: {
       type: 'website',
-      url: `${siteConfig.url}/${locale}`,
+      url: `${localeHref(locale)}`,
       siteName: siteConfig.brandName,
       title: t('title'),
       description: t('description'),

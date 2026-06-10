@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
 import { routing } from '@/i18n/routing';
+import { localeHref } from '@/lib/localeHref';
 import { locations, getLocationsByState, regionOrder, regionKeys, topCitySlugs } from '@/config/locations';
 import { getProducts } from '@/lib/webcore';
 import { waRedirect } from '@/lib/waRedirect';
@@ -26,14 +27,14 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'meta.home' });
   const languages: Record<string, string> = Object.fromEntries(
-    routing.locales.map((l) => [l, `${siteConfig.url}/${l}`]),
+    routing.locales.map((l) => [l, `${localeHref(l)}`]),
   );
-  languages['x-default'] = `${siteConfig.url}/${routing.defaultLocale}`;
+  languages['x-default'] = `${localeHref(routing.defaultLocale)}`;
   return {
     title: t('title'),
     description: t('description'),
     alternates: {
-      canonical: `${siteConfig.url}/${locale}`,
+      canonical: `${localeHref(locale)}`,
       languages,
     },
   };

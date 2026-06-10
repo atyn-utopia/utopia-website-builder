@@ -6,7 +6,7 @@ export type Locale = (typeof locales)[number];
 export const routing = defineRouting({
   locales,
   defaultLocale: 'ms',
-  localePrefix: 'always',
+  localePrefix: 'as-needed',
   // Disable browser-Accept-Language autodetection so every visitor lands on
   // `/ms` first regardless of their browser locale (checklist item #1).
   localeDetection: false,

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
 import { routing } from '@/i18n/routing';
+import { localeHref } from '@/lib/localeHref';
 import { getBlogPost, getBlogPostSlugs, getRecentBlogPosts } from '@/lib/webcore';
 import { waRedirect } from '@/lib/waRedirect';
 import { ArticleSchema } from '@/components/schema/ArticleSchema';
@@ -32,16 +33,16 @@ export async function generateMetadata({
   const tr = post.blog_translations[0];
   const path = `/blog/${slug}`;
   const languages: Record<string, string> = Object.fromEntries(
-    routing.locales.map((l) => [l, `${siteConfig.url}/${l}${path}`]),
+    routing.locales.map((l) => [l, `${localeHref(l)}${path}`]),
   );
-  languages['x-default'] = `${siteConfig.url}/${routing.defaultLocale}${path}`;
+  languages['x-default'] = `${localeHref(routing.defaultLocale)}${path}`;
   return {
     title: tr.meta_title || `${tr.title} | ${siteConfig.brandName}`,
     description: tr.meta_description || tr.excerpt,
-    alternates: { canonical: `${siteConfig.url}/${locale}${path}`, languages },
+    alternates: { canonical: `${localeHref(locale)}${path}`, languages },
     openGraph: {
       type: 'article', title: tr.title, description: tr.excerpt,
-      url: `${siteConfig.url}/${locale}${path}`,
+      url: `${localeHref(locale)}${path}`,
       images: post.cover_image_url ? [{ url: post.cover_image_url, width: 1200, height: 630 }] : undefined,
       publishedTime: post.published_at,
     },
@@ -76,9 +77,9 @@ export default async function BlogPostPage({
       />
       <BreadcrumbSchema
         items={[
-          { name: t('breadcrumbHome'), url: `${siteConfig.url}/${locale}` },
-          { name: t('breadcrumbBlog'), url: `${siteConfig.url}/${locale}/blog` },
-          { name: tr.title, url: `${siteConfig.url}/${locale}/blog/${slug}` },
+          { name: t('breadcrumbHome'), url: `${localeHref(locale)}` },
+          { name: t('breadcrumbBlog'), url: `${localeHref(locale)}/blog` },
+          { name: tr.title, url: `${localeHref(locale)}/blog/${slug}` },
         ]}
       />
 

@@ -564,7 +564,7 @@ const I18N: Check[] = [
   },
   {
     group: 'i18n', id: 'default-locale-enforced', name: 'Default locale always shown first',
-    help: "When you pick a default language, every visitor lands on it — no browser auto-detection override and the URL always carries the locale prefix.",
+    help: "When you pick a default language, every visitor lands on it — no browser auto-detection override. Use localePrefix 'always' (every URL prefixed) or 'as-needed' (default locale served at / with no prefix); both keep the default-first rule.",
     run: async (ctx) => {
       const c = await readProjectFile(ctx, 'i18n/routing.ts')
       if (!c) return fail('default-locale-enforced', 'Default locale always shown first', 'Missing i18n/routing.ts')
@@ -574,9 +574,11 @@ const I18N: Check[] = [
       }
       const defLoc = defMatch[1]
       const missing: string[] = []
-      // Force the locale prefix on every URL so `/` always redirects to
-      // `/<defaultLocale>` instead of serving locale-detected content.
-      if (!/localePrefix\s*:\s*['"]always['"]/.test(c)) missing.push("localePrefix: 'always'")
+      // `/` must serve the default locale with no browser detection. Two valid
+      // prefix strategies achieve this: 'always' (every URL prefixed, / → /xx) or
+      // 'as-needed' (default locale served at / with NO prefix; /xx redirects to
+      // /). Either is fine — what matters is the default-first + no-detection rule.
+      if (!/localePrefix\s*:\s*['"](always|as-needed)['"]/.test(c)) missing.push("localePrefix: 'always' or 'as-needed'")
       // Disable browser-language autodetection so a visitor with
       // Accept-Language: en doesn't bounce off a Malay-default site.
       if (!/localeDetection\s*:\s*false/.test(c)) missing.push('localeDetection: false')
