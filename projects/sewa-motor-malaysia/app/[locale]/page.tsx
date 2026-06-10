@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { seoAlternates } from '@/lib/seoAlternates'
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 import { siteConfig } from '@/config/site'
@@ -21,15 +22,7 @@ export async function generateMetadata({
   return {
     title: t('title'),
     description: t('description'),
-    alternates: {
-      canonical: url,
-      languages: {
-        en: `${siteConfig.siteUrl}/en`,
-        ms: `${siteConfig.siteUrl}/ms`,
-        zh: `${siteConfig.siteUrl}/zh`,
-        'x-default': `${siteConfig.siteUrl}/en`,
-      },
-    },
+    alternates: seoAlternates(locale),
     openGraph: {
       title: t('title'),
       description: t('description'),

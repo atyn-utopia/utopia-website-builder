@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { seoAlternates } from '@/lib/seoAlternates'
 import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { locations, getNearbyLocations } from '@/config/locations'
@@ -49,14 +50,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description,
-    alternates: {
-      canonical: canonicalUrl,
-      languages: {
-        en: `${baseUrl}/en/sewa-motor/${location}`,
-        zh: `${baseUrl}/zh/sewa-motor/${location}`,
-        'x-default': `${baseUrl}/en/sewa-motor/${location}`,
-      },
-    },
+    alternates: seoAlternates(locale, `/sewa-motor/${location}`),
     openGraph: {
       title,
       description,

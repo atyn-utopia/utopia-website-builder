@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { seoAlternates } from '@/lib/seoAlternates'
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
@@ -23,7 +24,7 @@ export async function generateMetadata({
   return {
     title: t('title'),
     description: t('description'),
-    alternates: { canonical: `${siteConfig.url}/${locale}/blog`, languages },
+    alternates: seoAlternates(locale, `/blog`),
   };
 }
 

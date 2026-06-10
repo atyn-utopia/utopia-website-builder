@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { seoAlternates } from '@/lib/seoAlternates'
 import { getTranslations } from 'next-intl/server'
 import { siteConfig } from '@/config/site'
 import { locations } from '@/config/locations'
@@ -40,15 +41,7 @@ export async function generateMetadata({
   return {
     title: t('meta.title'),
     description: t('meta.description'),
-    alternates: {
-      canonical: `https://oxihome.my/${locale}`,
-      languages: {
-        en: 'https://oxihome.my/en',
-        ms: 'https://oxihome.my/ms',
-        zh: 'https://oxihome.my/zh',
-        'x-default': 'https://oxihome.my/en',
-      },
-    },
+    alternates: seoAlternates(locale),
     openGraph: {
       title: t('meta.title'),
       description: t('meta.description'),

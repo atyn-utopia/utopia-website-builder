@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { seoAlternates } from '@/lib/seoAlternates'
 import Link from 'next/link'
 import { siteConfig } from '@/config/site'
 import { getBlogPosts } from '@/lib/webcore'
@@ -53,14 +54,7 @@ export async function generateMetadata({
   return {
     title: c.metaTitle,
     description: c.metaDescription,
-    alternates: {
-      canonical: url,
-      languages: {
-        en: `${siteConfig.siteUrl}/en/blog`,
-        ms: `${siteConfig.siteUrl}/ms/blog`,
-        zh: `${siteConfig.siteUrl}/zh/blog`,
-      },
-    },
+    alternates: seoAlternates(locale, `/blog`),
     openGraph: {
       title: c.metaTitle,
       description: c.metaDescription,

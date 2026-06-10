@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { seoAlternates } from '@/lib/seoAlternates'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { siteConfig } from '@/config/site'
 import { getPhoneNumber } from '@/lib/webcore'
@@ -22,15 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t('title'),
     description: t('description'),
-    alternates: {
-      canonical: `/${locale}`,
-      languages: {
-        ms: '/ms',
-        en: '/en',
-        zh: '/zh',
-        'x-default': '/ms',
-      },
-    },
+    alternates: seoAlternates(locale),
     openGraph: {
       title: t('title'),
       description: t('description'),

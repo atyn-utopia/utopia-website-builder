@@ -1,5 +1,6 @@
 // projects/skylift-malaysia/app/[locale]/layout.tsx
 import { Inter } from 'next/font/google';
+import { seoAlternates } from '@/lib/seoAlternates'
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -32,15 +33,7 @@ export async function generateMetadata({
     description: t('description'),
     metadataBase: new URL(baseUrl),
     icons: { icon: '/icon.svg' },
-    alternates: {
-      canonical: `${baseUrl}/${locale}`,
-      languages: {
-        en: `${baseUrl}/en`,
-        ms: `${baseUrl}/ms`,
-        zh: `${baseUrl}/zh`,
-        'x-default': `${baseUrl}/en`,
-      },
-    },
+    alternates: seoAlternates(locale),
     openGraph: {
       title: t('title'),
       description: t('description'),

@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server';
+import { seoAlternates } from '@/lib/seoAlternates'
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { siteConfig } from '@/config/site';
@@ -27,14 +28,7 @@ export async function generateMetadata({
   return {
     title: post.meta_title || post.title,
     description: post.meta_description || post.excerpt,
-    alternates: {
-      canonical: `${siteConfig.siteUrl}/${locale}/blog/${slug}`,
-      languages: {
-        en: `${siteConfig.siteUrl}/en/blog/${slug}`,
-        ms: `${siteConfig.siteUrl}/ms/blog/${slug}`,
-        zh: `${siteConfig.siteUrl}/zh/blog/${slug}`,
-      },
-    },
+    alternates: seoAlternates(locale, `/blog/${slug}`),
     openGraph: {
       title: post.meta_title || post.title,
       description: post.meta_description || post.excerpt,

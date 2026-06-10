@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { seoAlternates } from '@/lib/seoAlternates'
 import { Inter } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations } from 'next-intl/server'
@@ -58,10 +59,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       url: siteConfig.siteUrl,
       siteName: siteConfig.name,
     },
-    alternates: {
-      canonical: `/${locale}`,
-      languages: { en: '/en', ms: '/ms', zh: '/zh' },
-    },
+    alternates: seoAlternates(locale),
     robots: { index: true, follow: true },
     icons: { icon: '/icon.svg', shortcut: '/icon.svg', apple: '/icon.svg' },
   }

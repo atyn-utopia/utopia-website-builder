@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { seoAlternates } from '@/lib/seoAlternates'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations } from 'next-intl/server'
@@ -25,15 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
     description: t('description'),
     metadataBase: new URL(siteConfig.baseUrl),
-    alternates: {
-      canonical: `/${locale}`,
-      languages: {
-        en: '/en',
-        ms: '/ms',
-        zh: '/zh',
-        'x-default': '/en',
-      },
-    },
+    alternates: seoAlternates(locale),
     openGraph: {
       type: 'website',
       locale: locale === 'zh' ? 'zh_MY' : locale === 'ms' ? 'ms_MY' : 'en_MY',

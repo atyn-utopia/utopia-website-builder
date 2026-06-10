@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { seoAlternates } from '@/lib/seoAlternates'
 import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
@@ -39,7 +40,7 @@ export async function generateMetadata(
     metadataBase: new URL(SITE_URL),
     title: { default: t('title'), template: '%s | Kak Kenduri' },
     description: t('description'),
-    alternates: { canonical: `${SITE_URL}/${locale}`, languages },
+    alternates: seoAlternates(locale),
     verification: { google: 'tm0matiWoFe5vrz_jjCFkYpuL_iokve1Je2zV1ObdXc' },
   }
 }

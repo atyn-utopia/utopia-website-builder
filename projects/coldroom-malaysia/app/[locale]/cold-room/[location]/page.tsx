@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { seoAlternates } from '@/lib/seoAlternates'
 import { notFound } from 'next/navigation';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
@@ -75,7 +76,7 @@ export async function generateMetadata({
   return {
     title,
     description,
-    alternates: { canonical: url, languages },
+    alternates: seoAlternates(locale, `/${siteConfig.productSlug}/${loc.slug}`),
     openGraph: {
       type: 'website', url, title, description,
       siteName: siteConfig.brandName,

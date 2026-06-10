@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { seoAlternates } from '@/lib/seoAlternates'
 import { notFound } from 'next/navigation'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { locations, locationBySlug, cityDisplay } from '@/config/locations'
@@ -35,15 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     title: t('title', { city }),
     description: t('description', { city }),
     metadataBase: new URL(siteConfig.baseUrl),
-    alternates: {
-      canonical: `/${locale}/${siteConfig.productSlug}/${location}`,
-      languages: {
-        ms: `/ms/${siteConfig.productSlug}/${location}`,
-        en: `/en/${siteConfig.productSlug}/${location}`,
-        zh: `/zh/${siteConfig.productSlug}/${location}`,
-        'x-default': `/ms/${siteConfig.productSlug}/${location}`,
-      },
-    },
+    alternates: seoAlternates(locale, `/${siteConfig.productSlug}/${location}`),
     openGraph: {
       title: t('title', { city }),
       description: t('description', { city }),

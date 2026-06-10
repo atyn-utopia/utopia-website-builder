@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server'
+import { seoAlternates } from '@/lib/seoAlternates'
 import type { Metadata } from 'next'
 import { siteConfig } from '@/config/site'
 import { getPhoneNumber } from '@/lib/webcore'
@@ -26,14 +27,7 @@ export async function generateMetadata({
   return {
     title: t('title'),
     description: t('description'),
-    alternates: {
-      canonical: url,
-      languages: {
-        en: `${siteConfig.siteUrl}/en`,
-        ms: `${siteConfig.siteUrl}/ms`,
-        zh: `${siteConfig.siteUrl}/zh`,
-      },
-    },
+    alternates: seoAlternates(locale),
     openGraph: {
       title: t('title'),
       description: t('description'),

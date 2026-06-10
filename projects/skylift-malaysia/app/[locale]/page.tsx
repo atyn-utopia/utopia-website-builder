@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server';
+import { seoAlternates } from '@/lib/seoAlternates'
 import { siteConfig } from '@/config/site';
 import { getProducts, getBlogPosts } from '@/lib/webcore';
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
@@ -16,14 +17,7 @@ export async function generateMetadata({
   return {
     title: t('title'),
     description: t('description'),
-    alternates: {
-      canonical: url,
-      languages: {
-        en: `${siteConfig.siteUrl}/en`,
-        ms: `${siteConfig.siteUrl}/ms`,
-        zh: `${siteConfig.siteUrl}/zh`,
-      },
-    },
+    alternates: seoAlternates(locale),
     openGraph: {
       title: t('title'),
       description: t('description'),

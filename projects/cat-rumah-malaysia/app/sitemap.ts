@@ -1,44 +1,37 @@
 import { MetadataRoute } from 'next'
 import { locations } from '@/config/locations'
-import { locales } from '@/i18n/routing'
+import { routing } from '@/i18n/routing'
+import { localeAbs } from '@/lib/seoAlternates'
 
-const baseUrl = 'https://cat-rumah-malaysia.vercel.app'
+const langs = (path = '') => {
+  const m: Record<string, string> = {}
+  for (const l of routing.locales) m[l] = localeAbs(l, path)
+  m['x-default'] = localeAbs(routing.defaultLocale, path)
+  return m
+}
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = []
 
-  for (const locale of locales) {
+  for (const locale of routing.locales) {
     entries.push({
-      url: `${baseUrl}/${locale}`,
+      url: localeAbs(locale),
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: locale === 'ms' ? 1.0 : 0.9,
-      alternates: {
-        languages: {
-          ms: `${baseUrl}/ms`,
-          en: `${baseUrl}/en`,
-          zh: `${baseUrl}/zh`,
-          'x-default': `${baseUrl}/ms`,
-        },
-      },
+      priority: locale === routing.defaultLocale ? 1.0 : 0.9,
+      alternates: { languages: langs() },
     })
   }
 
-  for (const locale of locales) {
+  for (const locale of routing.locales) {
     for (const location of locations) {
+      const path = `/cat-rumah/${location.slug}`
       entries.push({
-        url: `${baseUrl}/${locale}/cat-rumah/${location.slug}`,
+        url: localeAbs(locale, path),
         lastModified: new Date(),
         changeFrequency: 'monthly',
-        priority: locale === 'ms' ? 0.8 : 0.7,
-        alternates: {
-          languages: {
-            ms: `${baseUrl}/ms/cat-rumah/${location.slug}`,
-            en: `${baseUrl}/en/cat-rumah/${location.slug}`,
-            zh: `${baseUrl}/zh/cat-rumah/${location.slug}`,
-            'x-default': `${baseUrl}/ms/cat-rumah/${location.slug}`,
-          },
-        },
+        priority: locale === routing.defaultLocale ? 0.8 : 0.7,
+        alternates: { languages: langs(path) },
       })
     }
   }

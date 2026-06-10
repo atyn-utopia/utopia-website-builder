@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server';
+import { seoAlternates } from '@/lib/seoAlternates'
 import { siteConfig } from '@/config/site';
 import { getBlogPosts } from '@/lib/webcore';
 import FomoBanner from '@/components/FomoBanner';
@@ -18,14 +19,7 @@ export async function generateMetadata({
   return {
     title: t('metaTitle'),
     description: t('metaDescription'),
-    alternates: {
-      canonical: `${baseUrl}/${locale}/blog`,
-      languages: {
-        en: `${baseUrl}/en/blog`,
-        ms: `${baseUrl}/ms/blog`,
-        zh: `${baseUrl}/zh/blog`,
-      },
-    },
+    alternates: seoAlternates(locale, `/blog`),
     openGraph: {
       title: t('metaTitle'),
       description: t('metaDescription'),

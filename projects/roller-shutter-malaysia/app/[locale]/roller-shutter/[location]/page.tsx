@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { seoAlternates } from '@/lib/seoAlternates'
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { locales } from '@/i18n/routing';
@@ -58,13 +59,7 @@ export async function generateMetadata({
   return {
     title: metaTitle,
     description: metaDescription,
-    alternates: {
-      canonical: `${baseUrl}/${locale}/roller-shutter/${location}`,
-      languages: {
-        ...alternates,
-        'x-default': `${baseUrl}/ms/roller-shutter/${location}`,
-      },
-    },
+    alternates: seoAlternates(locale, `/roller-shutter/${location}`),
     openGraph: {
       title: metaTitle,
       description: metaDescription,

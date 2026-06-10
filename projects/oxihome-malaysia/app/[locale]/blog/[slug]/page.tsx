@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { seoAlternates } from '@/lib/seoAlternates'
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
@@ -35,7 +36,7 @@ export async function generateMetadata({
   return {
     title: tr.meta_title || `${tr.title} | ${siteConfig.brandName}`,
     description: tr.meta_description || tr.excerpt,
-    alternates: { canonical: `${siteConfig.url}/${locale}${path}`, languages },
+    alternates: seoAlternates(locale, `${path}`),
     openGraph: {
       type: 'article', title: tr.title, description: tr.excerpt,
       url: `${siteConfig.url}/${locale}${path}`,

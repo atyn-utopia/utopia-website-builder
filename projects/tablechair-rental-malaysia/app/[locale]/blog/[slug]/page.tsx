@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { seoAlternates } from '@/lib/seoAlternates'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
@@ -54,9 +55,7 @@ export async function generateMetadata({
   return {
     title: tr.meta_title,
     description: tr.meta_description,
-    alternates: {
-      canonical: `${siteConfig.url}/${locale}/blog/${slug}`,
-    },
+    alternates: seoAlternates(locale, `/blog/${slug}`),
     openGraph: {
       title: tr.meta_title,
       description: tr.meta_description,

@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server';
+import { seoAlternates } from '@/lib/seoAlternates'
 import { siteConfig } from '@/config/site';
 import { getBlogPostBySlug, getBlogPosts } from '@/lib/webcore';
 import { waRedirect } from '@/lib/waRedirect';
@@ -21,9 +22,7 @@ export async function generateMetadata({
   return {
     title: post.meta_title || post.title,
     description: post.meta_description || post.excerpt,
-    alternates: {
-      canonical: `${siteConfig.siteUrl}/${locale}/blog/${slug}`,
-    },
+    alternates: seoAlternates(locale, `/blog/${slug}`),
     openGraph: {
       title: post.meta_title || post.title,
       description: post.meta_description || post.excerpt,

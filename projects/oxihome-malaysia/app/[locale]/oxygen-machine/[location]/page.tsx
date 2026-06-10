@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { seoAlternates } from '@/lib/seoAlternates'
 import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
@@ -58,15 +59,7 @@ export async function generateMetadata({
   return {
     title: t('meta.title', { city: cityName }),
     description: t('meta.description', { city: cityName }),
-    alternates: {
-      canonical: `https://oxihome.my/${locale}/oxygen-machine/${location}`,
-      languages: {
-        en: `https://oxihome.my/en/oxygen-machine/${location}`,
-        ms: `https://oxihome.my/ms/oxygen-machine/${location}`,
-        zh: `https://oxihome.my/zh/oxygen-machine/${location}`,
-        'x-default': `https://oxihome.my/en/oxygen-machine/${location}`,
-      },
-    },
+    alternates: seoAlternates(locale, `/oxygen-machine/${location}`),
     openGraph: {
       title: t('meta.title', { city: cityName }),
       description: t('meta.description', { city: cityName }),

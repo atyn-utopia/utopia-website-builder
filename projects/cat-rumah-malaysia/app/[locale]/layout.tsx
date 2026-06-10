@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { seoAlternates } from '@/lib/seoAlternates'
 import { Inter, Noto_Sans_SC } from 'next/font/google'
 import { NextIntlClientProvider, hasLocale } from 'next-intl'
 import { getMessages, setRequestLocale, getTranslations } from 'next-intl/server'
@@ -35,15 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       template: `%s | ${siteConfig.brandName}`,
     },
     description: t('description'),
-    alternates: {
-      canonical: `/${locale}`,
-      languages: {
-        ms: '/ms',
-        en: '/en',
-        zh: '/zh',
-        'x-default': '/ms',
-      },
-    },
+    alternates: seoAlternates(locale),
     openGraph: {
       type: 'website',
       locale: locale === 'zh' ? 'zh_MY' : locale === 'en' ? 'en_MY' : 'ms_MY',

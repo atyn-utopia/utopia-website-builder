@@ -1,4 +1,5 @@
 import { NextIntlClientProvider } from "next-intl";
+import { seoAlternates } from '@/lib/seoAlternates'
 import { getMessages, getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
@@ -37,15 +38,7 @@ export async function generateMetadata({
       template: `%s | ${siteConfig.brandName}`,
     },
     description: t("description"),
-    alternates: {
-      canonical: `${siteConfig.baseUrl}/${locale}`,
-      languages: {
-        en: `${siteConfig.baseUrl}/en`,
-        ms: `${siteConfig.baseUrl}/ms`,
-        zh: `${siteConfig.baseUrl}/zh`,
-        "x-default": `${siteConfig.baseUrl}/en`,
-      },
-    },
+    alternates: seoAlternates(locale),
     openGraph: {
       title: t("title"),
       description: t("description"),

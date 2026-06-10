@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server';
+import { seoAlternates } from '@/lib/seoAlternates'
 import { notFound } from 'next/navigation';
 import { siteConfig } from '@/config/site';
 import { locales } from '@/i18n/routing';
@@ -40,14 +41,7 @@ export async function generateMetadata({
   return {
     title,
     description,
-    alternates: {
-      canonical: url,
-      languages: {
-        en: `${siteConfig.siteUrl}/en/electric-wheelchair/${locationSlug}`,
-        ms: `${siteConfig.siteUrl}/ms/electric-wheelchair/${locationSlug}`,
-        zh: `${siteConfig.siteUrl}/zh/electric-wheelchair/${locationSlug}`,
-      },
-    },
+    alternates: seoAlternates(locale, `/electric-wheelchair/${locationSlug}`),
     openGraph: {
       title,
       description,
