@@ -289,7 +289,8 @@
     "cols": {
       "products": "Cold Room",
       "cities": "Bandar Utama",
-      "languages": "Bahasa"
+      "languages": "Bahasa",
+      "resources": "Sumber"
     },
     "quickLinks": "Pautan Pantas",
     "contact": "Hubungi",

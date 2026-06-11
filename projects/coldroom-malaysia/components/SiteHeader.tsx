@@ -37,7 +37,15 @@ export default function SiteHeader({ activeBlog = false }: { activeBlog?: boolea
     <>
       <nav className={`site-nav${scrolled ? ' scrolled' : ''}`}>
         <div className="section-container" style={{ display: 'flex', alignItems: 'center', gap: 24, height: 68 }}>
-          <Link href={`/${locale}`} style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }} aria-label={siteConfig.brandName}>
+          <button
+            aria-label="menu"
+            className="mobile-menu-btn"
+            onClick={() => setOpen((o) => !o)}
+            style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: 40, height: 40, borderRadius: 8, color: 'var(--frost-deep)', flexShrink: 0 }}
+          >
+            <MenuIcon open={open} />
+          </button>
+          <Link href={`/${locale}`} className="nav-logo" style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }} aria-label={siteConfig.brandName}>
             <BrandMark size={36} />
             <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.05 }}>
               <span style={{ fontWeight: 800, fontSize: 16, letterSpacing: '-0.02em', color: 'var(--frost-deep)', whiteSpace: 'nowrap' }}>{t('brandName')}</span>
@@ -61,8 +69,8 @@ export default function SiteHeader({ activeBlog = false }: { activeBlog?: boolea
               </Link>
             ))}
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <div className="lang-desktop"><LanguageSwitcher /></div>
+          <div className="nav-actions" style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
+            <div className="nav-lang"><LanguageSwitcher /></div>
             <a
               href={waHref}
               target="_blank"
@@ -73,14 +81,6 @@ export default function SiteHeader({ activeBlog = false }: { activeBlog?: boolea
             >
               <WaIcon size={14} /> {t('ctaShort')}
             </a>
-            <button
-              aria-label="menu"
-              className="mobile-menu-btn"
-              onClick={() => setOpen((o) => !o)}
-              style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: 40, height: 40, borderRadius: 8, color: 'var(--frost-deep)' }}
-            >
-              <MenuIcon open={open} />
-            </button>
           </div>
         </div>
         {/* Mobile drawer is an absolute child of the sticky nav, anchored at its

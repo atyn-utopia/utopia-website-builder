@@ -289,7 +289,8 @@
     "cols": {
       "products": "Cold Rooms",
       "cities": "Top Cities",
-      "languages": "Languages"
+      "languages": "Languages",
+      "resources": "Resources"
     },
     "quickLinks": "Quick Links",
     "contact": "Contact",

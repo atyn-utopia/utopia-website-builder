@@ -16,6 +16,9 @@ import { ProductSchema } from '@/components/schema/ProductSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
 
 const HERO_IMAGE = '/brand/hero.png';
+// Full-bleed cold-room scene behind the hero copy (sewa-excavator uses the same
+// photo-bg + overlay pattern). Darkened by the overlay below for text contrast.
+const HERO_SCENE = 'https://static.wixstatic.com/media/d3104b_390cb593d3624032ae4da7fe4603f080~mv2.jpg';
 
 const HERO_TIERS = [
   { slug: 'frozen-storage-minus-18', chip: '-18°C', tone: 'frost-deep' },
@@ -119,8 +122,12 @@ export default async function HomePage({
 
       {/* HERO — H1 + H2 + the image-role background live in the route file so
           the checklist sees them. Below the hero is <HomePageClient />. */}
-      <header style={{ position: 'relative', overflow: 'hidden', minHeight: '78vh', display: 'flex', alignItems: 'center', background: 'var(--grad-frost)' }}>
-        <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 80% 30%, rgba(201,229,242,0.18), transparent 50%), radial-gradient(circle at 15% 85%, rgba(79,177,214,0.22), transparent 45%)' }} />
+      <header style={{ position: 'relative', overflow: 'hidden', minHeight: '82vh', display: 'flex', alignItems: 'center', background: 'var(--steel-900)' }}>
+        {/* Full-bleed cold-room scene photo */}
+        <div aria-hidden style={{ position: 'absolute', inset: 0, backgroundImage: `url(${HERO_SCENE})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+        {/* Dark frost overlay so the white hero copy stays legible over the photo */}
+        <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'linear-gradient(100deg, rgba(11,61,92,0.94) 0%, rgba(11,61,92,0.78) 42%, rgba(19,24,34,0.55) 100%)' }} />
+        <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 80% 30%, rgba(79,177,214,0.18), transparent 55%)' }} />
         <div className="section-container" style={{ position: 'relative', zIndex: 2, padding: '72px 24px', display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 48, alignItems: 'center' }}>
           <div className="hero-copy">
             <span className="eyebrow" style={{ color: 'var(--cold-amber-glow)' }}>{t('hero.eyebrow')}</span>

@@ -18,9 +18,10 @@ export default function PageStyles() {
       .mobile-menu-btn { display: none; }
 
       @media (max-width: 900px) {
+        /* sewa-excavator mobile header order: burger (left) · logo (centre) · language (right) */
         .nav-links-desktop { display: none !important; }
-        .lang-desktop { display: none !important; }
-        .mobile-menu-btn { display: inline-flex !important; }
+        .mobile-menu-btn { display: inline-flex !important; order: -1; }
+        .nav-logo { flex: 1 1 auto !important; justify-content: center !important; }
         .hero-photo { display: none !important; }
         .hero-cta-row { justify-content: center; }
         .nav-cta { display: none !important; }
