@@ -253,8 +253,9 @@ p, li { line-height: var(--leading-relaxed); color: var(--steel-500); }
 /* Compact the banner on phones so it stays ~2 lines instead of sprawling
    (sewa-excavator shrinks its FOMO copy the same way on mobile). */
 @media (max-width: 640px) {
-  .fomo-bar .fomo-inner { padding: 7px 16px !important; gap: 8px 12px !important; font-size: 12px; flex-wrap: wrap; }
-  .fomo-bar .fomo-inner > div { font-size: 12px !important; gap: 6px !important; }
+  .fomo-bar .fomo-inner { padding: 5px 14px !important; gap: 6px 10px !important; flex-wrap: wrap; }
+  .fomo-bar .fomo-inner > div { font-size: 11.5px !important; gap: 6px !important; }
+  .fomo-bar .fomo-inner > a { font-size: 11.5px !important; }
 }
 
 @keyframes fomoFade { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }

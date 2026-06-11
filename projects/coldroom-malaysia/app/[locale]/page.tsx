@@ -15,11 +15,6 @@ import HomePageClient from '@/components/HomePageClient';
 import { ProductSchema } from '@/components/schema/ProductSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
 
-const HERO_IMAGE = '/brand/hero.png';
-// Full-bleed cold-room scene behind the hero copy (sewa-excavator uses the same
-// photo-bg + overlay pattern). Darkened by the overlay below for text contrast.
-const HERO_SCENE = 'https://static.wixstatic.com/media/d3104b_390cb593d3624032ae4da7fe4603f080~mv2.jpg';
-
 const HERO_TIERS = [
   { slug: 'frozen-storage-minus-18', chip: '-18°C', tone: 'frost-deep' },
   { slug: 'freezer-minus-5-to-minus-10', chip: '-10°C', tone: 'frost-mid' },
@@ -120,71 +115,48 @@ export default async function HomePage({
       <FomoBanner />
       <SiteHeader />
 
-      {/* HERO — H1 + H2 + the image-role background live in the route file so
-          the checklist sees them. Below the hero is <HomePageClient />. */}
-      <header style={{ position: 'relative', overflow: 'hidden', minHeight: '82vh', display: 'flex', alignItems: 'center', background: 'var(--steel-900)' }}>
-        {/* Full-bleed cold-room scene photo */}
-        <div aria-hidden style={{ position: 'absolute', inset: 0, backgroundImage: `url(${HERO_SCENE})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
-        {/* Dark frost overlay so the white hero copy stays legible over the photo */}
-        <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'linear-gradient(100deg, rgba(11,61,92,0.94) 0%, rgba(11,61,92,0.78) 42%, rgba(19,24,34,0.55) 100%)' }} />
-        <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 80% 30%, rgba(79,177,214,0.18), transparent 55%)' }} />
-        <div className="section-container" style={{ position: 'relative', zIndex: 2, padding: '72px 24px', display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 48, alignItems: 'center' }}>
-          <div className="hero-copy">
-            <span className="eyebrow" style={{ color: 'var(--cold-amber-glow)' }}>{t('hero.eyebrow')}</span>
-            <h1 style={{ color: '#fff', marginTop: 14, marginBottom: 22, textShadow: '0 4px 24px rgba(11,61,92,0.45)' }}>
-              {t.rich('hero.h1', { accent: (chunks) => <span style={{ color: 'var(--cold-amber-glow)' }}>{chunks}</span> })}
-            </h1>
-            <span aria-hidden className="hero-rule" style={{ display: 'block', height: 3, width: 72, background: 'var(--cold-amber)', borderRadius: 3, marginBottom: 18 }} />
-            <h2 style={{ color: 'rgba(255,255,255,0.96)', fontWeight: 600, marginBottom: 30, maxWidth: 620 }}>
-              {t('hero.h2')}
-            </h2>
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 22 }} className="hero-cta-row">
-              <TrackedWhatsAppLink href={waRedirect(locale)} className="btn btn-wa">
-                <WaIcon size={18} /> {t('hero.primaryCta')}
-              </TrackedWhatsAppLink>
-              <a href="#products" className="btn btn-ghost-frost">{t('hero.secondaryCta')}</a>
-            </div>
-            {/* Temperature tiers — top two are WhatsApp quick-rent CTAs */}
-            <div className="hero-chips" style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 22 }}>
-              <TrackedWhatsAppLink href={waRedirect(locale, '-18°C Frozen Storage')} className="temp-chip frost-deep">
-                -18°C <span style={{ fontWeight: 500 }}>{t('hero.tempLabels.frozen-storage-minus-18')}</span>
-              </TrackedWhatsAppLink>
-              <TrackedWhatsAppLink href={waRedirect(locale, '+4°C Chiller')} className="temp-chip frost-cool">
-                +4°C <span style={{ fontWeight: 500 }}>{t('hero.tempLabels.chiller-2-to-4')}</span>
-              </TrackedWhatsAppLink>
-              {HERO_TIERS.filter((x) => x.slug === 'freezer-minus-5-to-minus-10' || x.slug === 'cool-storage-7-to-10').map((tier) => (
-                <a key={tier.slug} href={`#${tier.slug}`} className={`temp-chip ${tier.tone}`}>
-                  {tier.chip} <span style={{ fontWeight: 500 }}>{t(`hero.tempLabels.${tier.slug}`)}</span>
-                </a>
-              ))}
-            </div>
-            <div className="hero-microstats" style={{ display: 'flex', gap: 22, flexWrap: 'wrap', alignItems: 'center', marginTop: 12, paddingTop: 22, borderTop: '1px solid rgba(255,255,255,0.18)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#fff', fontSize: 13 }}>
-                <span style={{ fontWeight: 800, fontSize: 18 }}>256,800+</span> <span style={{ opacity: 0.82 }}>{t('hero.microStats.tonnes')}</span>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#fff', fontSize: 13 }}>
-                <span style={{ fontWeight: 800, fontSize: 18 }}>1,730+</span> <span style={{ opacity: 0.82 }}>{t('hero.microStats.customers')}</span>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#fff', fontSize: 13 }}>
-                <span style={{ fontWeight: 800, fontSize: 18 }}>99%</span> <span style={{ opacity: 0.82 }}>{t('hero.microStats.onTime')}</span>
-              </div>
-            </div>
+      {/* HERO — centered single column on a clean frost gradient (no photo). */}
+      <header style={{ position: 'relative', overflow: 'hidden', minHeight: '72vh', display: 'flex', alignItems: 'center', background: 'var(--grad-frost)' }}>
+        <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 80% 30%, rgba(201,229,242,0.18), transparent 50%), radial-gradient(circle at 15% 85%, rgba(79,177,214,0.22), transparent 45%)' }} />
+        <div className="section-container hero-copy" style={{ position: 'relative', zIndex: 2, padding: '76px 24px', maxWidth: 860, margin: '0 auto', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <span className="eyebrow" style={{ color: 'var(--cold-amber-glow)' }}>{t('hero.eyebrow')}</span>
+          <h1 style={{ color: '#fff', marginTop: 14, marginBottom: 22, textShadow: '0 4px 24px rgba(11,61,92,0.45)' }}>
+            {t.rich('hero.h1', { accent: (chunks) => <span style={{ color: 'var(--cold-amber-glow)' }}>{chunks}</span> })}
+          </h1>
+          <span aria-hidden className="hero-rule" style={{ display: 'block', height: 3, width: 72, background: 'var(--cold-amber)', borderRadius: 3, marginBottom: 18, marginLeft: 'auto', marginRight: 'auto' }} />
+          <h2 style={{ color: 'rgba(255,255,255,0.96)', fontWeight: 600, marginBottom: 30, maxWidth: 640 }}>
+            {t('hero.h2')}
+          </h2>
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'center', marginBottom: 22 }} className="hero-cta-row">
+            <TrackedWhatsAppLink href={waRedirect(locale)} className="btn btn-wa">
+              <WaIcon size={18} /> {t('hero.primaryCta')}
+            </TrackedWhatsAppLink>
+            <a href="#products" className="btn btn-ghost-frost">{t('hero.secondaryCta')}</a>
           </div>
-          <div className="hero-photo" style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <div
-              role="img"
-              aria-label={t('imageAlt')}
-              style={{
-                width: '100%',
-                maxWidth: 620,
-                aspectRatio: '620 / 420',
-                backgroundImage: `url(${HERO_IMAGE})`,
-                backgroundSize: 'contain',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-                filter: 'drop-shadow(0 30px 50px rgba(11,61,92,0.45))',
-              }}
-            />
+          {/* Temperature tiers — top two are WhatsApp quick-rent CTAs */}
+          <div className="hero-chips" style={{ display: 'flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center', marginBottom: 22 }}>
+            <TrackedWhatsAppLink href={waRedirect(locale, '-18°C Frozen Storage')} className="temp-chip frost-deep">
+              -18°C <span style={{ fontWeight: 500 }}>{t('hero.tempLabels.frozen-storage-minus-18')}</span>
+            </TrackedWhatsAppLink>
+            <TrackedWhatsAppLink href={waRedirect(locale, '+4°C Chiller')} className="temp-chip frost-cool">
+              +4°C <span style={{ fontWeight: 500 }}>{t('hero.tempLabels.chiller-2-to-4')}</span>
+            </TrackedWhatsAppLink>
+            {HERO_TIERS.filter((x) => x.slug === 'freezer-minus-5-to-minus-10' || x.slug === 'cool-storage-7-to-10').map((tier) => (
+              <a key={tier.slug} href={`#${tier.slug}`} className={`temp-chip ${tier.tone}`}>
+                {tier.chip} <span style={{ fontWeight: 500 }}>{t(`hero.tempLabels.${tier.slug}`)}</span>
+              </a>
+            ))}
+          </div>
+          <div className="hero-microstats" style={{ display: 'flex', gap: 22, flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', marginTop: 12, paddingTop: 22, borderTop: '1px solid rgba(255,255,255,0.18)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#fff', fontSize: 13 }}>
+              <span style={{ fontWeight: 800, fontSize: 18 }}>256,800+</span> <span style={{ opacity: 0.82 }}>{t('hero.microStats.tonnes')}</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#fff', fontSize: 13 }}>
+              <span style={{ fontWeight: 800, fontSize: 18 }}>1,730+</span> <span style={{ opacity: 0.82 }}>{t('hero.microStats.customers')}</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#fff', fontSize: 13 }}>
+              <span style={{ fontWeight: 800, fontSize: 18 }}>99%</span> <span style={{ opacity: 0.82 }}>{t('hero.microStats.onTime')}</span>
+            </div>
           </div>
         </div>
       </header>

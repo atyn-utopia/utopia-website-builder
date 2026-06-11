@@ -631,7 +631,7 @@ export default function HomePageClient({ products, location }: Props) {
 
       {/* 15. FINAL CTA */}
       <section style={{ position: 'relative', padding: '90px 0', overflow: 'hidden' }}>
-        <div aria-hidden style={{ position: 'absolute', inset: 0, background: `url(${FINALCTA_BG}) center/cover no-repeat` }} />
+        <div role="img" aria-label={t('finalCta.bgAlt')} style={{ position: 'absolute', inset: 0, background: `url(${FINALCTA_BG}) center/cover no-repeat` }} />
         <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'var(--grad-hero)' }} />
         <div className="section-container" style={{ position: 'relative', textAlign: 'center', color: '#fff' }}>
           <div className="fade-up">
