@@ -70,12 +70,6 @@ export default async function HomePage({
   const tShared = await getTranslations({ locale, namespace: 'shared' })
   const waDefault = waRedirect(locale, tShared('whatsappMessageDefault'))
 
-  // Featured packages get a direct WhatsApp quick-rent chip in the hero so the
-  // top products carry an above-the-fold conversion path (every product card in
-  // the grid below also has its own WhatsApp CTA).
-  const featuredChipClass =
-    'inline-flex items-center gap-1.5 rounded-full bg-[#25D366] px-3.5 py-1.5 text-[13px] font-semibold text-white shadow-[0_6px_16px_-8px_rgba(37,211,102,0.6)] hover:bg-[#1EB85A]'
-
   return (
     <>
       <PageStyles />
@@ -153,47 +147,6 @@ export default async function HomePage({
                   {tHome('hero.secondaryCta')}
                 </Link>
               </div>
-
-              {core.length > 0 && (
-                <div className="mt-5 flex flex-wrap items-center gap-2">
-                  {core[0] && (
-                    <a
-                      href={waRedirect(locale, core[0].name)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={featuredChipClass}
-                      style={{ transition: 'background-color 180ms ease' }}
-                    >
-                      <span className="h-1.5 w-1.5 rounded-full bg-white" aria-hidden="true" />
-                      {core[0].name}
-                    </a>
-                  )}
-                  {core[1] && (
-                    <a
-                      href={waRedirect(locale, core[1].name)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={featuredChipClass}
-                      style={{ transition: 'background-color 180ms ease' }}
-                    >
-                      <span className="h-1.5 w-1.5 rounded-full bg-white" aria-hidden="true" />
-                      {core[1].name}
-                    </a>
-                  )}
-                  {core[2] && (
-                    <a
-                      href={waRedirect(locale, core[2].name)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={featuredChipClass}
-                      style={{ transition: 'background-color 180ms ease' }}
-                    >
-                      <span className="h-1.5 w-1.5 rounded-full bg-white" aria-hidden="true" />
-                      {core[2].name}
-                    </a>
-                  )}
-                </div>
-              )}
 
               <p className="mt-7 flex flex-wrap items-center gap-4 text-xs font-medium text-[#111111]/70">
                 <span>{tHome('hero.trust')}</span>
