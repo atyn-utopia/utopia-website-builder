@@ -16,6 +16,9 @@ import { ProductSchema } from '@/components/schema/ProductSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
 
 const HERO_IMAGE = '/brand/hero.png';
+// Full-bleed cold-room scene behind the hero copy (sewa-excavator uses the same
+// photo-bg + overlay pattern). Darkened by the overlay below for text contrast.
+const HERO_SCENE = 'https://static.wixstatic.com/media/d3104b_390cb593d3624032ae4da7fe4603f080~mv2.jpg';
 
 const HERO_TIERS = [
   { slug: 'frozen-storage-minus-18', chip: '-18°C', tone: 'frost-deep' },
@@ -119,15 +122,19 @@ export default async function HomePage({
 
       {/* HERO — H1 + H2 + the image-role background live in the route file so
           the checklist sees them. Below the hero is <HomePageClient />. */}
-      <header style={{ position: 'relative', overflow: 'hidden', minHeight: '78vh', display: 'flex', alignItems: 'center', background: 'var(--grad-frost)' }}>
-        <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 80% 30%, rgba(201,229,242,0.18), transparent 50%), radial-gradient(circle at 15% 85%, rgba(79,177,214,0.22), transparent 45%)' }} />
+      <header style={{ position: 'relative', overflow: 'hidden', minHeight: '82vh', display: 'flex', alignItems: 'center', background: 'var(--steel-900)' }}>
+        {/* Full-bleed cold-room scene photo */}
+        <div aria-hidden style={{ position: 'absolute', inset: 0, backgroundImage: `url(${HERO_SCENE})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+        {/* Dark frost overlay so the white hero copy stays legible over the photo */}
+        <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'linear-gradient(100deg, rgba(11,61,92,0.94) 0%, rgba(11,61,92,0.78) 42%, rgba(19,24,34,0.55) 100%)' }} />
+        <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 80% 30%, rgba(79,177,214,0.18), transparent 55%)' }} />
         <div className="section-container" style={{ position: 'relative', zIndex: 2, padding: '72px 24px', display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 48, alignItems: 'center' }}>
           <div className="hero-copy">
             <span className="eyebrow" style={{ color: 'var(--cold-amber-glow)' }}>{t('hero.eyebrow')}</span>
             <h1 style={{ color: '#fff', marginTop: 14, marginBottom: 22, textShadow: '0 4px 24px rgba(11,61,92,0.45)' }}>
               {t.rich('hero.h1', { accent: (chunks) => <span style={{ color: 'var(--cold-amber-glow)' }}>{chunks}</span> })}
             </h1>
-            <span aria-hidden style={{ display: 'block', height: 3, width: 72, background: 'var(--cold-amber)', borderRadius: 3, marginBottom: 18 }} />
+            <span aria-hidden className="hero-rule" style={{ display: 'block', height: 3, width: 72, background: 'var(--cold-amber)', borderRadius: 3, marginBottom: 18 }} />
             <h2 style={{ color: 'rgba(255,255,255,0.96)', fontWeight: 600, marginBottom: 30, maxWidth: 620 }}>
               {t('hero.h2')}
             </h2>
@@ -138,7 +145,7 @@ export default async function HomePage({
               <a href="#products" className="btn btn-ghost-frost">{t('hero.secondaryCta')}</a>
             </div>
             {/* Temperature tiers — top two are WhatsApp quick-rent CTAs */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 22 }}>
+            <div className="hero-chips" style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 22 }}>
               <TrackedWhatsAppLink href={waRedirect(locale, '-18°C Frozen Storage')} className="temp-chip frost-deep">
                 -18°C <span style={{ fontWeight: 500 }}>{t('hero.tempLabels.frozen-storage-minus-18')}</span>
               </TrackedWhatsAppLink>
@@ -151,7 +158,7 @@ export default async function HomePage({
                 </a>
               ))}
             </div>
-            <div style={{ display: 'flex', gap: 22, flexWrap: 'wrap', alignItems: 'center', marginTop: 12, paddingTop: 22, borderTop: '1px solid rgba(255,255,255,0.18)' }}>
+            <div className="hero-microstats" style={{ display: 'flex', gap: 22, flexWrap: 'wrap', alignItems: 'center', marginTop: 12, paddingTop: 22, borderTop: '1px solid rgba(255,255,255,0.18)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#fff', fontSize: 13 }}>
                 <span style={{ fontWeight: 800, fontSize: 18 }}>256,800+</span> <span style={{ opacity: 0.82 }}>{t('hero.microStats.tonnes')}</span>
               </div>

@@ -18,9 +18,9 @@ export default async function SiteFooter({ locale }: { locale: Locale }) {
     <footer id="contact" className="relative bg-[#0A0A0A] text-[#FFFEF8]">
       <div className="h-[3px] w-full bg-gradient-to-r from-transparent via-[#FDD835] to-transparent opacity-70" />
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <div className="grid gap-10 md:grid-cols-4">
+        <div className="grid gap-10 text-center md:grid-cols-4">
           <div className="md:col-span-1">
-            <p className="flex items-center gap-2.5">
+            <p className="flex items-center justify-center gap-2.5">
               <KKMark className="h-10 w-10" />
               <span className="text-lg font-extrabold tracking-tight">Kak Kenduri</span>
             </p>
@@ -66,7 +66,7 @@ export default async function SiteFooter({ locale }: { locale: Locale }) {
             <p className="mt-5 text-[15px] leading-[1.7] text-[#FFFEF8]/70">
               {tFoot('getInTouchSub')}
             </p>
-            <div className="mt-4">
+            <div className="mt-4 flex justify-center">
               <a
                 href={waDefault}
                 target="_blank"
@@ -77,12 +77,12 @@ export default async function SiteFooter({ locale }: { locale: Locale }) {
                 {tNav('whatsapp')}
               </a>
             </div>
-            <div className="mt-5">
+            <div className="mt-5 flex justify-center">
               <LanguageSwitcher />
             </div>
           </div>
         </div>
-        <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-[#FFFEF8]/15 pt-6 text-xs text-[#FFFEF8]/60 md:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-center gap-3 border-t border-[#FFFEF8]/15 pt-6 text-center text-xs text-[#FFFEF8]/60">
           <p>{tFoot('legal', { year: String(new Date().getFullYear()) })}</p>
         </div>
       </div>

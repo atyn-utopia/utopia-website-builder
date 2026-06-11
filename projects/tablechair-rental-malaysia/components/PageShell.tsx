@@ -410,21 +410,29 @@ export default async function PageShell({
                     </p>
                   )}
 
-                  <div className="mt-5 overflow-hidden rounded-2xl border border-[#FDD835]/25 bg-[#FFF9C4]/60 text-sm">
-                    <p className="flex items-center justify-between px-4 py-2.5">
-                      <span className="text-[#111111]/60">
-                        {tHome('products.plainLabel')}
-                      </span>
-                      <span className="font-semibold text-[#111111]">{rentalDisplay}</span>
-                    </p>
-                    <div className="h-px bg-[#FDD835]/35" />
-                    <p className="flex items-center justify-between px-4 py-2.5">
-                      <span className="text-[#111111]/60">
-                        {tHome('products.withCoverLabel')}
-                      </span>
-                      <span className="font-semibold text-[#111111]">{saleDisplay}</span>
-                    </p>
-                  </div>
+                  {(p.rental_price != null || p.sale_price != null) && (
+                    <div className="mt-5 overflow-hidden rounded-2xl border border-[#FDD835]/25 bg-[#FFF9C4]/60 text-sm">
+                      {p.rental_price != null && (
+                        <p className="flex items-center justify-between px-4 py-2.5">
+                          <span className="text-[#111111]/60">
+                            {tHome('products.plainLabel')}
+                          </span>
+                          <span className="font-semibold text-[#111111]">{rentalDisplay}</span>
+                        </p>
+                      )}
+                      {p.rental_price != null && p.sale_price != null && (
+                        <div className="h-px bg-[#FDD835]/35" />
+                      )}
+                      {p.sale_price != null && (
+                        <p className="flex items-center justify-between px-4 py-2.5">
+                          <span className="text-[#111111]/60">
+                            {tHome('products.withCoverLabel')}
+                          </span>
+                          <span className="font-semibold text-[#111111]">{saleDisplay}</span>
+                        </p>
+                      )}
+                    </div>
+                  )}
 
                   <div className="mt-auto pt-5">
                     <WAButton

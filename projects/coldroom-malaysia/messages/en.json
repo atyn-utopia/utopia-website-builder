@@ -78,7 +78,7 @@
     "eyebrow": "Cheapest Cold Chain Logistic in Malaysia",
     "heading": "Our Cold Room Rental Service",
     "subheading": "One trusted cold room rental service. Four temperature options to fit your goods. Same-day delivery across all 13 Peninsular states.",
-    "priceFrom": "From RM {price} / pallet per day",
+    "priceFrom": "From RM {price}",
     "imageAltTemplate": "{model} cold room rental in Malaysia",
     "perPalletDay": "per pallet / day",
     "cta": "WhatsApp Quote",
@@ -289,7 +289,8 @@
     "cols": {
       "products": "Cold Rooms",
       "cities": "Top Cities",
-      "languages": "Languages"
+      "languages": "Languages",
+      "resources": "Resources"
     },
     "quickLinks": "Quick Links",
     "contact": "Contact",

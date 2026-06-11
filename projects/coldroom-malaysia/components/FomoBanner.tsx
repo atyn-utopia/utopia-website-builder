@@ -32,7 +32,7 @@ export default function FomoBanner() {
   return (
     <div className="fomo-bar">
       <div
-        className="section-container"
+        className="section-container fomo-inner"
         style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, padding: '10px 24px', minHeight: 44 }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, color: '#fff', fontSize: 13, flex: 1, justifyContent: 'center' }}>

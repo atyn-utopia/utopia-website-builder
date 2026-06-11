@@ -78,7 +78,7 @@
     "eyebrow": "马来西亚最便宜冷链物流",
     "heading": "我们的冷库出租服务",
     "subheading": "一项可靠的冷库出租服务。四种温度选项满足您的货物需求。覆盖 13 个西马州属，当天送达。",
-    "priceFrom": "RM {price} 起 / 每托盘每天",
+    "priceFrom": "RM {price} 起",
     "imageAltTemplate": "{model}冷库出租，马来西亚",
     "perPalletDay": "每托盘 / 天",
     "cta": "WhatsApp 报价",
@@ -289,7 +289,8 @@
     "cols": {
       "products": "冷库",
       "cities": "主要城市",
-      "languages": "语言"
+      "languages": "语言",
+      "resources": "资源"
     },
     "quickLinks": "快速链接",
     "contact": "联系",

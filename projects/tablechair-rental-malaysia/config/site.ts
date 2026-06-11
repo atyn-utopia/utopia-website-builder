@@ -5,8 +5,8 @@
 export const siteConfig = {
   brandName: 'Kak Kenduri',
   legalName: 'Kak Kenduri Sdn. Bhd.',
-  domain: 'tablechair-rental-malaysia.utopiaai.my',
-  url: 'https://tablechair-rental-malaysia.utopiaai.my',
+  domain: 'tablechairrentals.my',
+  url: 'https://tablechairrentals.my',
   productSlug: 'table-chair-rental',
   fallbackPhone: '60174287801',
   email: 'kerusimejamy@gmail.com',

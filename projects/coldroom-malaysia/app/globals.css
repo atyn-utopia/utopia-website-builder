@@ -238,13 +238,24 @@ p, li { line-height: var(--leading-relaxed); color: var(--steel-500); }
 }
 
 /* ============================================
-   FOMO BANNER + NAV — both sticky, stacked
+   FOMO BANNER + NAV — banner scrolls away, nav sticks to the very top.
+   Matches sewa-excavator: the FOMO bar is a normal block at the top of the
+   page (visible in the first viewport) and scrolls off, while only the nav is
+   sticky at top:0. This avoids coupling the nav offset to the banner height —
+   on mobile the banner wraps to 2–3 lines, so a fixed --fomo-height offset
+   left the nav (and the mobile drawer) mis-positioned.
    ============================================ */
-.fomo-bar { background: var(--steel-900); border-bottom: 2px solid var(--cold-amber); position: sticky; top: 0; z-index: 60; }
-.site-nav { position: sticky; top: var(--fomo-height, 44px); z-index: 55; background: #fff; border-bottom: 1px solid var(--steel-100); }
+.fomo-bar { background: var(--steel-900); border-bottom: 2px solid var(--cold-amber); position: relative; z-index: 60; }
+.site-nav { position: sticky; top: 0; z-index: 55; background: #fff; border-bottom: 1px solid var(--steel-100); }
 .site-nav.scrolled { box-shadow: var(--shadow-nav); }
 .fomo-text-enter { animation: fomoFade 320ms var(--ease-out); }
 .fomo-countdown { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum'; font-weight: 700; letter-spacing: 0.04em; }
+/* Compact the banner on phones so it stays ~2 lines instead of sprawling
+   (sewa-excavator shrinks its FOMO copy the same way on mobile). */
+@media (max-width: 640px) {
+  .fomo-bar .fomo-inner { padding: 7px 16px !important; gap: 8px 12px !important; font-size: 12px; flex-wrap: wrap; }
+  .fomo-bar .fomo-inner > div { font-size: 12px !important; gap: 6px !important; }
+}
 
 @keyframes fomoFade { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
 
