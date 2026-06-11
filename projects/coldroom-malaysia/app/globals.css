@@ -162,6 +162,39 @@ p, li { line-height: var(--leading-relaxed); color: var(--steel-500); }
 }
 
 /* ============================================
+   HERO (two-column: copy left, warehouse photo right)
+   ============================================ */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 48px;
+  align-items: center;
+}
+.hero-text { text-align: left; }
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hero-visual img {
+  width: 100%;
+  height: auto;
+  max-width: 560px;
+  filter: drop-shadow(0 24px 40px rgba(11, 61, 92, 0.38));
+}
+
+/* Mobile: single centred column, photo below the copy */
+@media (max-width: 860px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 32px; max-width: 640px; margin-left: auto; margin-right: auto; }
+  .hero-text { text-align: center; }
+  .hero-text .hero-rule { margin-left: auto; margin-right: auto; }
+  .hero-text .hero-cta-row,
+  .hero-text .hero-chips,
+  .hero-text .hero-microstats { justify-content: center; }
+  .hero-visual img { max-width: 420px; }
+}
+
+/* ============================================
    LAYOUT
    ============================================ */
 .section-container {
