@@ -11,8 +11,8 @@ export default async function FomoBanner({ locale }: { locale: Locale }) {
   const waDefault = waRedirect(locale, tShared('whatsappMessageDefault'))
 
   return (
-    <div className="relative z-50 overflow-hidden bg-[#111111] py-2.5 text-center text-white">
-      <div className="mx-auto flex max-w-5xl items-center justify-center gap-3 px-4 text-[13px] sm:gap-5 sm:text-[14px]">
+    <div className="relative z-50 overflow-hidden bg-[#111111] py-2.5 text-left text-white">
+      <div className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 text-[13px] sm:gap-5 sm:text-[14px]">
         <p className="inline-flex items-center gap-2">
           <span className="relative flex h-2 w-2" aria-hidden="true">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#FDD835] opacity-75" />
