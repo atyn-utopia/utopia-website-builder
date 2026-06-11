@@ -587,6 +587,30 @@ const I18N: Check[] = [
         : fail('default-locale-enforced', 'Default locale always shown first', `defaultLocale=${defLoc} but missing: ${missing.join(', ')}`)
     },
   },
+  {
+    group: 'i18n', id: 'localeprefix-as-needed', name: "localePrefix is 'as-needed'",
+    help: "The convention: default locale served at / with NO prefix (site.my/ = default language), other locales prefixed (/en, /zh), and /<default> redirects to /. Set localePrefix: 'as-needed' in i18n/routing.ts.",
+    run: async (ctx) => {
+      const c = await readProjectFile(ctx, 'i18n/routing.ts')
+      if (!c) return skip('localeprefix-as-needed', "localePrefix is 'as-needed'", 'no i18n/routing.ts')
+      return /localePrefix\s*:\s*['"]as-needed['"]/.test(c)
+        ? pass('localeprefix-as-needed', "localePrefix is 'as-needed'")
+        : fail('localeprefix-as-needed', "localePrefix is 'as-needed'", "set localePrefix: 'as-needed' so the default locale is served at / with no prefix")
+    },
+  },
+  {
+    group: 'SEO', id: 'seo-locale-url-helper', name: 'SEO URLs built via the locale-URL helper',
+    help: "With localePrefix 'as-needed' the default locale has no prefix, so a hardcoded canonical/sitemap/og URL like `${base}/${locale}` points the default locale at a /xx URL that 301-redirects (a muddy SEO signal). Build all SEO URLs through lib/localeHref (localePath / localeAbs / seoAlternates) so the default locale drops its prefix.",
+    run: async (ctx) => {
+      // The precise regression: a canonical that inlines `${locale}` (relative
+      // `/${locale}` or absolute `${base}/${locale}`) instead of going through the
+      // helper — so the default locale's canonical points at a /xx redirect.
+      const bad = await grepProject(ctx, /canonical:\s*`[^`]*\$\{locale\}/)
+      return bad
+        ? fail('seo-locale-url-helper', 'SEO URLs built via the locale-URL helper', 'a canonical hardcodes `${...}/${locale}` — route it through lib/localeHref (seoAlternates) so the default locale is un-prefixed')
+        : pass('seo-locale-url-helper', 'SEO URLs built via the locale-URL helper')
+    },
+  },
 ]
 
 const WEBCORE: Check[] = [

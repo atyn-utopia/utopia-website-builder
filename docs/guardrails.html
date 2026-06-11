@@ -61,9 +61,9 @@
 </header>
 <div class="wrap">
   <div class="stats">
-    <div class="stat"><div class="n">101</div><div class="l">Total rules</div></div>
-    <div class="stat block"><div class="n">55</div><div class="l">Blocking</div></div>
-    <div class="stat adv"><div class="n">46</div><div class="l">Advisory</div></div>
+    <div class="stat"><div class="n">103</div><div class="l">Total rules</div></div>
+    <div class="stat block"><div class="n">56</div><div class="l">Blocking</div></div>
+    <div class="stat adv"><div class="n">47</div><div class="l">Advisory</div></div>
     <div class="stat"><div class="n">10</div><div class="l">Categories</div></div>
   </div>
 
@@ -103,7 +103,7 @@
       </table>
     </section>
     <section class="group" data-group="SEO">
-      <h2>SEO <span class="gcount">4 rules · 4 blocking</span></h2>
+      <h2>SEO <span class="gcount">5 rules · 4 blocking</span></h2>
       <table>
         <thead><tr><th>Severity</th><th>Rule</th><th>Check id</th><th>Doc</th></tr></thead>
         <tbody>
@@ -131,11 +131,17 @@
         <td><code>homepage-metadata</code></td>
         <td><a href="full-website-setup.md" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
+      <tr class="rule" data-sev="advisory" data-text="seo urls built via the locale-url helper seo-locale-url-helper">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">SEO URLs built via the locale-URL helper</td>
+        <td><code>seo-locale-url-helper</code></td>
+        <td><a href="website-building-flow.md#layout-build-process" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
         </tbody>
       </table>
     </section>
     <section class="group" data-group="i18n">
-      <h2>i18n <span class="gcount">5 rules · 5 blocking</span></h2>
+      <h2>i18n <span class="gcount">6 rules · 6 blocking</span></h2>
       <table>
         <thead><tr><th>Severity</th><th>Rule</th><th>Check id</th><th>Doc</th></tr></thead>
         <tbody>
@@ -167,6 +173,12 @@
         <td><span class="badge sev-block">BLOCKING</span></td>
         <td class="rule-name">Default locale always shown first</td>
         <td><code>default-locale-enforced</code></td>
+        <td><a href="full-website-setup.md#7-step-5--build-core-files" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="localeprefix is 'as-needed' localeprefix-as-needed">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">localePrefix is 'as-needed'</td>
+        <td><code>localeprefix-as-needed</code></td>
         <td><a href="full-website-setup.md#7-step-5--build-core-files" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
         </tbody>

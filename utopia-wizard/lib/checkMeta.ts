@@ -47,6 +47,7 @@ export const CHECK_META: CheckMeta[] = [
   { id: 'robots',                         group: 'SEO',        severity: 'blocking', doc: SETUP,  name: 'robots.txt generator' },
   { id: 'schema-components',              group: 'SEO',        severity: 'blocking', doc: SETUP,  name: 'Schema markup components' },
   { id: 'homepage-metadata',             group: 'SEO',        severity: 'blocking', doc: SETUP,  name: 'Homepage exports metadata' },
+  { id: 'seo-locale-url-helper',          group: 'SEO',        severity: 'advisory', doc: FLOW,   name: 'SEO URLs built via the locale-URL helper' },
 
   // ── i18n ───────────────────────────────────────────────────────────────────
   { id: 'i18n-routing',                   group: 'i18n',       severity: 'blocking', doc: CORE,   name: 'i18n routing config' },
@@ -54,6 +55,7 @@ export const CHECK_META: CheckMeta[] = [
   { id: 'translations',                   group: 'i18n',       severity: 'blocking', doc: CORE,   name: 'Translation files (en/ms/zh)' },
   { id: 'language-switcher',              group: 'i18n',       severity: 'blocking', doc: CORE,   name: 'Language switcher component' },
   { id: 'default-locale-enforced',        group: 'i18n',       severity: 'blocking', doc: CORE,   name: 'Default locale always shown first' },
+  { id: 'localeprefix-as-needed',         group: 'i18n',       severity: 'blocking', doc: CORE,   name: "localePrefix is 'as-needed'" },
 
   // ── Webcore data layer ───────────────────────────────────────────────────────
   { id: 'webcore-lib',                    group: 'Webcore data layer', severity: 'blocking', doc: SETUP, name: 'lib/webcore.ts exists' },

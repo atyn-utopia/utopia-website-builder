@@ -105,7 +105,14 @@ async function main() {
     await writeFile(dst, await readFile(src))
     chromeCopied++
   }
-  console.log(`scaffold: copied ${copied} structural file(s) from ${REF} + ${chromeCopied} chrome file(s) from templates/site-chrome → projects/${slug}`)
+  // Canonical locale-URL helper → lib/ (single source for SEO URLs; the
+  // seo-locale-url-helper check requires pages/sitemap go through it).
+  const helperSrc = path.join(templateDir, 'localeHref.ts')
+  if (existsSync(helperSrc)) {
+    await mkdir(path.join(outDir, 'lib'), { recursive: true })
+    await writeFile(path.join(outDir, 'lib', 'localeHref.ts'), await readFile(helperSrc))
+  }
+  console.log(`scaffold: copied ${copied} structural file(s) from ${REF} + ${chromeCopied} chrome + localeHref helper from templates/site-chrome → projects/${slug}`)
 
   // 2. Rename the product route folder: app/[locale]/excavator → app/[locale]/{productSlug}
   if (productSlug !== 'excavator') {
