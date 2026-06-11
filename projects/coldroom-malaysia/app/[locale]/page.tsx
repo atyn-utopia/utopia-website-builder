@@ -134,7 +134,7 @@ export default async function HomePage({
             <h1 style={{ color: '#fff', marginTop: 14, marginBottom: 22, textShadow: '0 4px 24px rgba(11,61,92,0.45)' }}>
               {t.rich('hero.h1', { accent: (chunks) => <span style={{ color: 'var(--cold-amber-glow)' }}>{chunks}</span> })}
             </h1>
-            <span aria-hidden style={{ display: 'block', height: 3, width: 72, background: 'var(--cold-amber)', borderRadius: 3, marginBottom: 18 }} />
+            <span aria-hidden className="hero-rule" style={{ display: 'block', height: 3, width: 72, background: 'var(--cold-amber)', borderRadius: 3, marginBottom: 18 }} />
             <h2 style={{ color: 'rgba(255,255,255,0.96)', fontWeight: 600, marginBottom: 30, maxWidth: 620 }}>
               {t('hero.h2')}
             </h2>
@@ -145,7 +145,7 @@ export default async function HomePage({
               <a href="#products" className="btn btn-ghost-frost">{t('hero.secondaryCta')}</a>
             </div>
             {/* Temperature tiers — top two are WhatsApp quick-rent CTAs */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 22 }}>
+            <div className="hero-chips" style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 22 }}>
               <TrackedWhatsAppLink href={waRedirect(locale, '-18°C Frozen Storage')} className="temp-chip frost-deep">
                 -18°C <span style={{ fontWeight: 500 }}>{t('hero.tempLabels.frozen-storage-minus-18')}</span>
               </TrackedWhatsAppLink>
@@ -158,7 +158,7 @@ export default async function HomePage({
                 </a>
               ))}
             </div>
-            <div style={{ display: 'flex', gap: 22, flexWrap: 'wrap', alignItems: 'center', marginTop: 12, paddingTop: 22, borderTop: '1px solid rgba(255,255,255,0.18)' }}>
+            <div className="hero-microstats" style={{ display: 'flex', gap: 22, flexWrap: 'wrap', alignItems: 'center', marginTop: 12, paddingTop: 22, borderTop: '1px solid rgba(255,255,255,0.18)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#fff', fontSize: 13 }}>
                 <span style={{ fontWeight: 800, fontSize: 18 }}>256,800+</span> <span style={{ opacity: 0.82 }}>{t('hero.microStats.tonnes')}</span>
               </div>

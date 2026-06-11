@@ -24,6 +24,11 @@ export default function PageStyles() {
         .nav-logo { flex: 1 1 auto !important; justify-content: center !important; }
         .hero-photo { display: none !important; }
         .hero-cta-row { justify-content: center; }
+        /* Centre the hero chip row + micro-stats on mobile so they match the
+           centred hero copy (sewa-excavator centres all hero elements). */
+        .hero-chips { justify-content: center !important; }
+        .hero-microstats { justify-content: center !important; }
+        .hero-rule { margin-left: auto !important; margin-right: auto !important; }
         .nav-cta { display: none !important; }
       }
       @media (max-width: 768px) {
@@ -31,6 +36,11 @@ export default function PageStyles() {
         .hero-copy { text-align: center; }
         .hero-copy .eyebrow { display: inline-block; }
         .usp-panel { grid-template-columns: 1fr !important; }
+        /* Centre each USP item (icon + text) on mobile instead of left-aligning,
+           and drop the desktop column-separator border/padding that would shift
+           the 2nd/3rd cells out of alignment when stacked. */
+        .usp-cell { justify-content: center !important; }
+        .usp-panel .usp-cell + .usp-cell { border-left: 0 !important; padding-left: 0 !important; }
         .stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 28px !important; }
         .stats-strip { grid-template-columns: repeat(2, 1fr) !important; gap: 16px !important; }
         .stats-strip > :first-child { grid-column: 1 / -1; border-right: 0 !important; padding-right: 0 !important; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.18); text-align: center; }
