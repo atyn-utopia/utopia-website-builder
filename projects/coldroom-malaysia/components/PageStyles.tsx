@@ -43,6 +43,9 @@ export default function PageStyles() {
         .bento-grid > div:first-child { grid-column: span 2 !important; grid-row: span 1 !important; }
         .footer-grid { grid-template-columns: 1fr 1fr !important; }
         .states-grid { grid-template-columns: 1fr !important; }
+        /* Product card: stack the price/visual side above the temp-options side
+           so the 2-col split doesn't overflow the viewport on phones. */
+        .service-split-grid { grid-template-columns: 1fr !important; }
       }
       @media (max-width: 640px) {
         .gallery-grid { grid-template-columns: repeat(2, 1fr) !important; }

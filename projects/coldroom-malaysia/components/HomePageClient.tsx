@@ -176,7 +176,7 @@ function ServiceCard({ product, locale, waHref }: { product: Product; locale: st
     <article
       ref={ref as React.Ref<HTMLElement>}
       id={product.slug}
-      className="card"
+      className="card service-split-grid"
       style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', overflow: 'hidden', border: 0, maxWidth: 1080, margin: '0 auto', boxShadow: 'var(--shadow-lg)' }}
     >
       {/* Visual side */}
