@@ -245,17 +245,24 @@ p, li { line-height: var(--leading-relaxed); color: var(--steel-500); }
    on mobile the banner wraps to 2–3 lines, so a fixed --fomo-height offset
    left the nav (and the mobile drawer) mis-positioned.
    ============================================ */
-.fomo-bar { background: var(--steel-900); border-bottom: 2px solid var(--cold-amber); position: relative; z-index: 60; }
+.fomo-bar { background: #E10600; position: relative; z-index: 60; }
+/* Two centred lines (sewa-excavator style): headline on its own line, then the
+   countdown + CTA together below. flex-wrap + 100% basis forces the wrap. */
+.fomo-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 16px; padding: 8px 20px; }
+.fomo-headline { text-align: center; color: rgba(255,255,255,0.92); font-size: 13px; font-weight: 500; line-height: 1.3; }
+.fomo-meta { display: inline-flex; align-items: center; gap: 16px; }
+.fomo-cta { color: #fff; font-weight: 700; font-size: 13px; white-space: nowrap; text-decoration: underline; text-underline-offset: 3px; }
 .site-nav { position: sticky; top: 0; z-index: 55; background: #fff; border-bottom: 1px solid var(--steel-100); }
 .site-nav.scrolled { box-shadow: var(--shadow-nav); }
 .fomo-text-enter { animation: fomoFade 320ms var(--ease-out); }
-.fomo-countdown { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum'; font-weight: 700; letter-spacing: 0.04em; }
-/* Compact the banner on phones so it stays ~2 lines instead of sprawling
-   (sewa-excavator shrinks its FOMO copy the same way on mobile). */
+.fomo-countdown { color: #fff; font-variant-numeric: tabular-nums; font-feature-settings: 'tnum'; font-weight: 700; font-size: 14px; letter-spacing: 0.06em; }
+/* Compact the banner on phones (sewa-excavator shrinks its FOMO copy the same
+   way on mobile) while keeping the two centred lines. */
 @media (max-width: 640px) {
-  .fomo-bar .fomo-inner { padding: 5px 14px !important; gap: 6px 10px !important; flex-wrap: wrap; }
-  .fomo-bar .fomo-inner > div { font-size: 11.5px !important; gap: 6px !important; }
-  .fomo-bar .fomo-inner > a { font-size: 11.5px !important; }
+  .fomo-inner { padding: 6px 14px; gap: 3px 12px; }
+  .fomo-headline { flex-basis: 100%; font-size: 11.5px; }
+  .fomo-countdown { font-size: 12.5px; }
+  .fomo-cta { font-size: 11.5px; }
 }
 
 @keyframes fomoFade { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
