@@ -2,29 +2,26 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { usePathname } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import LanguageSwitcher from './LanguageSwitcher';
 
 export default function SiteHeader() {
   const t = useTranslations('nav');
   const locale = useLocale();
-  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
 
-  // next/link doesn't scroll on a same-page hash click — handle it manually
-  // when we're already on the homepage. From other pages, let the Link navigate
-  // to /<locale>#id and the browser scrolls to it on load.
+  // next/link doesn't scroll on a same-page hash click. If the target section
+  // is present in the DOM (i.e. we're on the homepage), scroll to it manually.
+  // On other pages the section isn't present, so we let the Link navigate to
+  // /<locale>#id and the browser scrolls to it on load.
   const scrollToSection = (e: React.MouseEvent, id: string) => {
     close();
-    if (pathname === `/${locale}`) {
-      const el = document.getElementById(id);
-      if (el) {
-        e.preventDefault();
-        el.scrollIntoView({ behavior: 'smooth' });
-        window.history.replaceState(null, '', `/${locale}#${id}`);
-      }
+    const el = typeof document !== 'undefined' ? document.getElementById(id) : null;
+    if (el) {
+      e.preventDefault();
+      el.scrollIntoView({ behavior: 'smooth' });
+      window.history.replaceState(null, '', `/${locale}#${id}`);
     }
   };
 
