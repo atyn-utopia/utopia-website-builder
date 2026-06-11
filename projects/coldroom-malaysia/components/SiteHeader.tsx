@@ -83,24 +83,29 @@ export default function SiteHeader({ activeBlog = false }: { activeBlog?: boolea
             </button>
           </div>
         </div>
+        {/* Mobile drawer is an absolute child of the sticky nav, anchored at its
+            bottom edge (top: 100%). It follows the nav wherever it sticks, so it
+            can never be mis-offset by the FOMO banner height (sewa-excavator
+            attaches the drawer to the header the same way). */}
+        {open && (
+          <div
+            style={{
+              position: 'absolute', top: '100%', left: 0, right: 0,
+              background: '#fff', borderBottom: '1px solid var(--steel-100)',
+              boxShadow: 'var(--shadow-md)', padding: 12,
+              display: 'flex', flexDirection: 'column', gap: 4,
+              maxHeight: 'calc(100vh - 68px)', overflowY: 'auto',
+            }}
+          >
+            {links.map((l) => (
+              <Link key={l.href} href={l.href} onClick={() => setOpen(false)} style={{ padding: '12px 16px', fontSize: 15, fontWeight: 500, color: 'var(--steel-700)', borderRadius: 8 }}>
+                {l.label}
+              </Link>
+            ))}
+            <div style={{ padding: 8 }}><LanguageSwitcher /></div>
+          </div>
+        )}
       </nav>
-      {open && (
-        <div
-          style={{
-            position: 'fixed', top: 'calc(var(--fomo-height, 44px) + 68px)', left: 0, right: 0,
-            background: '#fff', borderBottom: '1px solid var(--steel-100)',
-            boxShadow: 'var(--shadow-md)', padding: 12, zIndex: 49,
-            display: 'flex', flexDirection: 'column', gap: 4,
-          }}
-        >
-          {links.map((l) => (
-            <Link key={l.href} href={l.href} onClick={() => setOpen(false)} style={{ padding: '12px 16px', fontSize: 15, fontWeight: 500, color: 'var(--steel-700)', borderRadius: 8 }}>
-              {l.label}
-            </Link>
-          ))}
-          <div style={{ padding: 8 }}><LanguageSwitcher /></div>
-        </div>
-      )}
       {/* Mobile hides the header WhatsApp CTA so it never overlaps the language
           dropdown. :global() so the rule reaches the .nav-cta <a> from styled-jsx. */}
       <style jsx>{`
