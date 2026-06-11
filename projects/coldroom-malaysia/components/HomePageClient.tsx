@@ -101,6 +101,16 @@ const GALLERY_IMAGES = [
   'https://static.wixstatic.com/media/d3104b_5c372c1c51b4438d90c64ec710ebaa4c~mv2.jpeg',
 ];
 
+// Wix media URLs point at the FULL-RES originals (multi-MB each). Request a sized,
+// compressed variant via Wix's on-the-fly transform so tiles load fast on mobile
+// instead of downloading 5-8 MB per cell. e.g. 7.7 MB -> ~120 KB at w_640.
+function wixFill(url: string, w: number, h: number, q = 80): string {
+  const i = url.indexOf('/media/');
+  if (i === -1) return url; // not a wix media url — leave untouched
+  const file = url.slice(i + '/media/'.length);
+  return `${url}/v1/fill/w_${w},h_${h},al_c,q_${q},enc_auto/${file}`;
+}
+
 type Tone = 'frost-deep' | 'frost-mid' | 'frost-cool' | 'frost-pale';
 const TEMP_TIERS: { slug: string; chip: string; tone: Tone }[] = [
   { slug: 'frozen-storage-minus-18',     chip: '-18°C',  tone: 'frost-deep' },
@@ -538,8 +548,8 @@ export default function HomePageClient({ products, location }: Props) {
           <div className="gallery-grid">
             {GALLERY_IMAGES.map((src, idx) => (
               <div key={idx} className={`gallery-tile ${idx % 2 === 0 ? 'tint-frost' : 'tint-amber'} fade-up`}>
-                {/* Plain img — Wix CDN delivers optimized variants already; bypass next/image optimizer */}
-                <img src={src} alt={`Cold room project ${idx + 1} — Malaysia HALAL cold storage`} loading="lazy" decoding="async" />
+                {/* Sized Wix variant (not the multi-MB original); bypass next/image optimizer */}
+                <img src={wixFill(src, 640, 480)} width={640} height={480} alt={`Cold room project ${idx + 1} — Malaysia HALAL cold storage`} loading="lazy" decoding="async" />
               </div>
             ))}
           </div>
