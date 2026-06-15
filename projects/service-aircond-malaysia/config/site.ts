@@ -11,7 +11,7 @@ export const siteConfig = {
   productSlug: 'service-aircond',
   productName: 'Aircond Service',
   fallbackPhone: '60174287801',
-  defaultLocale: 'en' as const,
+  defaultLocale: 'ms' as const,
   locales: ['en', 'ms', 'zh'] as const,
   emergency: false,
 }
