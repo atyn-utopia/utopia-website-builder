@@ -62,22 +62,45 @@ h1, h2, h3, h4 {
   }
 }
 
-/* ── WhatsApp pulse ── */
+/* ── WhatsApp CTA — breathing of the CI layered shadow (§5.3 WhatsApp
+   variant, green accent #25D366). Subtle intensify/relax, not a consumer
+   ring-pop, to match the operational motion brief (§6). ── */
 @keyframes wa-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.5), 0 4px 20px rgba(37,211,102,0.3); }
-  50% { box-shadow: 0 0 0 8px rgba(37,211,102,0), 0 4px 20px rgba(37,211,102,0.5); }
+  0%, 100% {
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.18) inset,
+      0 0 0 1px rgba(37,211,102,0.40),
+      0 4px 14px rgba(37,211,102,0.18),
+      0 8px 28px rgba(37,211,102,0.12);
+  }
+  50% {
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.18) inset,
+      0 0 0 1px rgba(37,211,102,0.55),
+      0 6px 20px rgba(37,211,102,0.32),
+      0 12px 36px rgba(37,211,102,0.20);
+  }
 }
-/* Buttons: 8px radius, text/icon never wrap or compress, easeOutExpo hover
-   that lifts (translateY) instead of zooming — CI §5.1 / §5.4 / §6.
-   .wa-btn is unlayered so it overrides Tailwind's rounded-* utilities. */
+/* CI WhatsApp button @ LG size (§5.2/§5.4): locked px dimensions so the label
+   never wraps and the glyph stays proportional; 8px radius; layered green
+   shadow; easeOutExpo lift on hover (§6). Unlayered → overrides Tailwind
+   rounded-*/text-*/padding utilities for a single consistent CTA spec. */
 .wa-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 28px;
+  font-size: 15px;
   border-radius: var(--r-button);
   white-space: nowrap;
   flex-shrink: 0;
-  animation: wa-pulse 2.4s ease-in-out infinite;
+  animation: wa-pulse 3s ease-in-out infinite;
   transition: transform var(--dur-hover) var(--ease);
 }
 .wa-btn:hover { transform: translateY(-1px); }
+.wa-btn svg { width: 20px; height: 20px; flex-shrink: 0; } /* LG icon, never compresses */
 @media (prefers-reduced-motion: reduce) { .wa-btn { animation: none; } }
 
 /* ── FOMO dot pulse ── */
