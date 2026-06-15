@@ -15,7 +15,7 @@
   --wa-green:           #25D366;
   --google-gold:        #FBBC04;
 
-  --font: var(--font-radio-canada), 'Radio Canada', system-ui, sans-serif;
+  --font: var(--font-wix), 'Wix Madefor Text', system-ui, sans-serif;
 
   /* ── Utopia CI structural tokens — radius + motion only. Colours and fonts
    *    stay this site's own (per the brand-kit application scope). ── */
