@@ -225,7 +225,7 @@ function ServiceCard({ product, locale, waHref }: { product: Product; locale: st
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => trackWhatsApp(siteConfig.fallbackPhone)}
-            className="btn btn-wa"
+            className="btn btn-wa wa-btn"
             style={{ marginTop: 16 }}
           >
             <WaIcon size={16} /> {t('cta')}
@@ -457,7 +457,7 @@ export default function HomePageClient({ products, location }: Props) {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackWhatsApp(siteConfig.fallbackPhone)}
-                className="btn btn-wa"
+                className="btn btn-wa wa-btn"
                 style={{ height: 44, fontSize: 13, padding: '0 22px', width: 'auto' }}
               >
                 <WaIcon size={16} /> {t('midCta.cta')}
@@ -648,7 +648,7 @@ export default function HomePageClient({ products, location }: Props) {
             <span className="eyebrow" style={{ color: 'var(--cold-amber-glow)' }}>{t('finalCta.eyebrow')}</span>
             <h3 style={{ color: '#fff', fontSize: 'var(--text-h3)', marginTop: 10 }}>{t('finalCta.heading')}</h3>
             <h5 className="body-text" style={{ color: 'rgba(255,255,255,0.88)', marginTop: 12, maxWidth: 580, margin: '12px auto 0' }}>{t('finalCta.body')}</h5>
-            <a href={waHref} target="_blank" rel="noopener noreferrer" onClick={() => trackWhatsApp(siteConfig.fallbackPhone)} className="btn btn-wa" style={{ marginTop: 24, height: 56, fontSize: 16 }}>
+            <a href={waHref} target="_blank" rel="noopener noreferrer" onClick={() => trackWhatsApp(siteConfig.fallbackPhone)} className="btn btn-wa wa-btn" style={{ marginTop: 24, height: 56, fontSize: 16 }}>
               <WaIcon size={20} /> {t('finalCta.cta')}
             </a>
             <div style={{ marginTop: 14, fontSize: 12, color: 'rgba(255,255,255,0.7)', display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>

@@ -1,4 +1,6 @@
 export const siteConfig = {
+  // Stable webcore identity (company_websites.id). Never changes on domain rename.
+  siteId: '6f92b670-ae39-4b9f-a89a-ffda21b7d5c1',
   // Canonical "website" key for the shared Supabase DB — products, blog_posts,
   // phone_numbers and company_websites rows are all stored under this value.
   domain: 'coldroomrental.my',

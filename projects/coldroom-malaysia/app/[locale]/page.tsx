@@ -129,7 +129,7 @@ export default async function HomePage({
               {t('hero.h2')}
             </h2>
             <div className="hero-cta-row" style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 22 }}>
-              <TrackedWhatsAppLink href={waRedirect(locale)} className="btn btn-wa">
+              <TrackedWhatsAppLink href={waRedirect(locale)} className="btn btn-wa wa-btn">
                 <WaIcon size={18} /> {t('hero.primaryCta')}
               </TrackedWhatsAppLink>
               <a href="#products" className="btn btn-ghost-frost">{t('hero.secondaryCta')}</a>

@@ -29,6 +29,91 @@ html, body {
   font-family: var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif;
 }
 
+/* ============================================================
+   Utopia brand-CI tokens + structural rules
+   (palette + fonts unchanged — see :root colours above)
+   ============================================================ */
+:root {
+  --r-button: 8px;
+  --r-card:   12px;
+  --r-pill:   999px;
+  --ease:        cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-hover:   220ms;
+  --dur-layout:  320ms;
+}
+
+/* Heading-weight fix — Tailwind v4 Preflight resets headings to
+   font-weight:inherit (→400), silently collapsing font-bold/extrabold on
+   section headings. These unlayered, body-prefixed rules win the cascade
+   race (a plain h1{} loses to Preflight). h5/h6 are body text here, left
+   alone. The hero subtitle is an <h2> with font-normal utility (higher
+   specificity), so it keeps its lighter weight automatically. */
+body h1 { font-weight: 800; }              /* hero title = extra-bold */
+body h3, body h4 { font-weight: 700; }     /* section headings = bold */
+/* NOTE: h2 is intentionally excluded. On this site the single <h2> per page
+   is the hero SUBTITLE, which carries a `font-normal` utility. An unlayered
+   `body h2` would beat that Tailwind utility (unlayered > @layer utilities)
+   and wrongly bold the subtitle. Section headings here are h3/h4, so they
+   are covered above; h2 stays light. */
+
+/* WhatsApp CTA — CI WhatsApp LG spec. Reusable class added alongside the
+   existing Tailwind classes on every WhatsApp CTA (hero, product cards,
+   final CTA, blog CTA, footer). Unlayered so it beats Tailwind's layered
+   utilities (rounded-full → 8px radius, etc.). Stays official green #25D366. */
+@keyframes wa-pulse {
+  0%,100% { box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset, 0 0 0 1px rgba(37,211,102,0.40), 0 4px 14px rgba(37,211,102,0.18), 0 8px 28px rgba(37,211,102,0.12); }
+  50%     { box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset, 0 0 0 1px rgba(37,211,102,0.55), 0 6px 20px rgba(37,211,102,0.32), 0 12px 36px rgba(37,211,102,0.20); }
+}
+.wa-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 48px; padding: 0 28px; font-size: 15px;
+  border-radius: var(--r-button); white-space: nowrap; flex-shrink: 0;
+  animation: wa-pulse 3s ease-in-out infinite;
+  transition: transform var(--dur-hover) var(--ease);
+}
+.wa-btn:hover { transform: translateY(-1px); }
+.wa-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+@media (prefers-reduced-motion: reduce) { .wa-btn { animation: none; } }
+
+/* Cards — CI 12px radius + operational hover (translateY + layered shadow
+   tinted with the site's own brand-primary #FDD835 = 253,216,53). Applied
+   to the product/additional/review cards via the .kk-card class added
+   alongside their existing Tailwind classes; unlayered so the radius beats
+   the rounded-[24px]/[20px]/[22px] utilities. */
+.kk-card {
+  border-radius: var(--r-card);
+  transition: transform var(--dur-hover) var(--ease),
+              box-shadow var(--dur-hover) var(--ease);
+}
+.kk-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 1px rgba(253,216,53,0.22), 0 4px 14px rgba(253,216,53,0.16), 0 8px 28px rgba(22,33,62,0.12);
+}
+
+/* Utopia AI build credit — CI button rules: 8px radius, icon never
+   compresses, easeOutExpo lift on hover. Mark carries Utopia's own gradient
+   (correct brand-mark usage); site palette/fonts unchanged. Lives here (not
+   in a <style jsx>) because SiteFooter is a server component using Tailwind. */
+.utopia-credit {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 12px;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: var(--r-button);
+  color: #CBD5E1; font-size: 12px; font-weight: 600;
+  text-decoration: none; white-space: nowrap; flex-shrink: 0;
+  transition: transform var(--dur-hover) var(--ease),
+              border-color var(--dur-hover) var(--ease),
+              background-color var(--dur-hover) var(--ease);
+}
+.utopia-credit:hover {
+  transform: translateY(-1px);
+  border-color: rgba(74,157,208,0.55);
+  background: rgba(39,116,174,0.12);
+}
+.utopia-credit-by { color: #94A3B8; }
+.utopia-credit-word { color: #F1F5F9; font-weight: 800; letter-spacing: -0.01em; }
+.utopia-tri { display: inline-block; flex-shrink: 0; }
+
 .no-scrollbar {
   scrollbar-width: none;
 }

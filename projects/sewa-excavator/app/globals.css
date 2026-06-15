@@ -64,6 +64,17 @@
   --dur-fast: 150ms;
   --dur: 240ms;
   --dur-slow: 420ms;
+
+  /* ── Utopia CI structural tokens — radius + motion only. Colours and fonts
+   *    stay this site's own (per the brand-kit application scope). The site's
+   *    existing radius and easing tokens are kept; these add the canonical
+   *    CI names used across the brand kit. ── */
+  --r-button: 8px;    /* buttons, inputs       (CI §5.1) */
+  --r-card:   12px;   /* cards, panels, modals (CI §5.1) */
+  --r-pill:   999px;  /* badges, pills, tags   (CI §5.1) */
+  --ease:        cubic-bezier(0.22, 1, 0.36, 1); /* easeOutExpo (CI §6) */
+  --dur-hover:   220ms;
+  --dur-layout:  320ms;
 }
 
 * { box-sizing: border-box; }
@@ -80,6 +91,16 @@ body {
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; height: auto; display: block; }
 button { font-family: inherit; }
+
+/* Heading weights. Tailwind v4 Preflight resets headings to
+   `font-weight: inherit` (→ 400), so font-bold/font-extrabold on bare section
+   headings silently collapsed to 400 (headings render light). The `body`
+   prefix raises specificity so these win deterministically. Hero title (h1) =
+   extra-bold; every other section heading (h2/h3/h4) = bold. The hero subtitle
+   stays lighter via the higher-specificity `.hero-text h2` rule in PageStyles.
+   h5/h6 are body text on this site — left untouched. */
+body h1 { font-weight: 800; }
+body h2, body h3, body h4 { font-weight: 700; }
 
 /* Eyebrow */
 .eyebrow {
@@ -141,8 +162,35 @@ button { font-family: inherit; }
   outline: 2px solid var(--brand-orange);
   outline-offset: 3px;
 }
-.btn-wa { background: var(--wa-green); color: #fff; box-shadow: var(--shadow-wa); }
-.btn-wa:hover { background: var(--wa-green-hover); }
+/* WhatsApp CTA → CI WhatsApp variant (§5.3, green accent #25D366). 8px CI
+   radius, never-wrap label, glyph never compresses, layered green shadow, and
+   the easeOutExpo lift on hover (§6). The icon (WaIcon) inherits currentColor
+   = white, so the glyph stays white inside the green button. */
+.btn-wa {
+  background: var(--wa-green);
+  color: #fff;
+  border-radius: var(--r-button);
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.18) inset,
+    0 0 0 1px rgba(37,211,102,0.40),
+    0 4px 14px rgba(37,211,102,0.18),
+    0 8px 28px rgba(37,211,102,0.12);
+  transition: transform var(--dur-hover) var(--ease),
+              box-shadow var(--dur-hover) var(--ease),
+              background-color var(--dur-hover) var(--ease);
+}
+.btn-wa:hover {
+  background: var(--wa-green-hover);
+  transform: translateY(-1px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.18) inset,
+    0 0 0 1px rgba(37,211,102,0.55),
+    0 6px 20px rgba(37,211,102,0.32),
+    0 12px 36px rgba(37,211,102,0.20);
+}
+.btn-wa svg { flex-shrink: 0; }
 .btn-primary { background: var(--gradient-orange); color: #fff; box-shadow: var(--shadow-orange); }
 .btn-primary:hover { background: var(--brand-orange-deep); }
 .btn-ghost { background: transparent; color: var(--brand-charcoal); border: 1.5px solid var(--line-strong); }
@@ -358,17 +406,23 @@ button { font-family: inherit; }
   display: flex; flex-direction: column;
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: var(--radius-card);
+  border-radius: var(--r-card);
   overflow: hidden;
   height: 100%;
-  transition: transform var(--dur) var(--ease-out),
-              box-shadow var(--dur) var(--ease-out),
-              border-color var(--dur) var(--ease-out);
+  transition: transform var(--dur-hover) var(--ease),
+              box-shadow var(--dur-hover) var(--ease),
+              border-color var(--dur-hover) var(--ease);
 }
+/* Operational hover: lift 1px + layered brand-tinted shadow. No scale/zoom
+   (CI §6 — bouncy/zoom hovers read as consumer; brand is operational).
+   Tint = brand orange #F26C1F (242,108,31). */
 .product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-1px);
   border-color: var(--brand-orange-ring);
+  box-shadow:
+    0 0 0 1px rgba(242,108,31,0.22),
+    0 4px 14px rgba(242,108,31,0.16),
+    0 8px 28px rgba(15,15,15,0.12);
 }
 
 /* Marquee for brand strip */

@@ -62,12 +62,9 @@ function WAButton({
       target="_blank"
       rel="noopener noreferrer"
       className={
-        'inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-[15px] font-semibold text-white shadow-[0_8px_20px_-8px_rgba(37,211,102,0.55)] hover:bg-[#1EB85A] focus:outline-none focus-visible:ring-4 focus-visible:ring-[#25D366]/40 ' +
+        'wa-btn inline-flex items-center justify-center gap-2 bg-[#25D366] text-[15px] font-semibold text-white hover:bg-[#1EB85A] focus:outline-none focus-visible:ring-4 focus-visible:ring-[#25D366]/40 ' +
         (className ?? '')
       }
-      style={{
-        transition: 'transform 200ms ease, background-color 200ms ease, box-shadow 200ms ease',
-      }}
     >
       <svg
         aria-hidden="true"
@@ -376,8 +373,7 @@ export default async function PageShell({
             return (
               <article
                 key={p.id}
-                className="flex h-full flex-col overflow-hidden rounded-[24px] border border-[#FDD835]/35 bg-[#FFFFFF] kk-card-shadow hover:-translate-y-0.5 hover:kk-card-shadow-hover"
-                style={{ transition: 'transform 220ms ease, box-shadow 220ms ease' }}
+                className="kk-card flex h-full flex-col overflow-hidden border border-[#FDD835]/35 bg-[#FFFFFF] kk-card-shadow"
               >
                 {imageUrl && (
                   <div
@@ -474,8 +470,7 @@ export default async function PageShell({
             return (
               <article
                 key={a.id}
-                className="flex h-full flex-col overflow-hidden rounded-[20px] border border-[#FDD835]/30 bg-[#FFFFFF] kk-card-shadow hover:-translate-y-0.5"
-                style={{ transition: 'transform 220ms ease, box-shadow 220ms ease' }}
+                className="kk-card flex h-full flex-col overflow-hidden border border-[#FDD835]/30 bg-[#FFFFFF] kk-card-shadow"
               >
                 {imageUrl && (
                   <div className="flex h-40 items-center justify-center bg-[#FFFEF8] p-3">
@@ -611,7 +606,7 @@ export default async function PageShell({
           {[1, 2, 3].map((n) => (
             <figure
               key={n}
-              className="flex h-full flex-col rounded-[22px] border border-[#FDD835]/30 bg-[#FFFFFF] p-6 sm:p-7 kk-card-shadow"
+              className="kk-card flex h-full flex-col border border-[#FDD835]/30 bg-[#FFFFFF] p-6 sm:p-7 kk-card-shadow"
             >
               <p className="mb-4 text-[#FBBC04]">★★★★★</p>
               <blockquote className="flex-1 text-[15px] leading-[1.7] text-[#111111]/80">
