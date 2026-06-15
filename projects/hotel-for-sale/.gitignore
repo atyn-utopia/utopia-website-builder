@@ -1,0 +1,27 @@
+# Raw artwork sources — optimized versions live in public/
+brand_assets/
+
+# One-shot insert/seed scripts written by agents (Cyclops/Hanabi)
+.blog-scripts/
+.cyclops-*/
+.hanabi-*/
+
+# Local screenshots produced during development
+temporary screenshots/
+
+# Build + IDE
+.next/
+node_modules/
+*.tsbuildinfo
+.vercel/
+.env.local
+.DS_Store
+.vercel
+/shot.mjs
+/ref-shot.mjs
+/ref-slices.mjs
+/ref-tail.mjs
+/reference screenshots/
+/temporary screenshots/
+/config/hotels.json
+/config/property-overrides.json
