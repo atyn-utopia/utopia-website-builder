@@ -59,7 +59,7 @@
       "badgeCities": "38 Bandar",
       "headline": "Servis Aircond Profesional",
       "headlineHighlight": "Di Seluruh Malaysia",
-      "subheadline": "Dari Kuala Lumpur ke Kota Kinabalu — tukang bertauliah ke pintu anda. Respons pantas. Harga berpatutan. Kualiti dijamin.",
+      "subheadline": "Dari KL sampai Kota Kinabalu — tukang bertauliah datang terus ke depan pintu rumah anda. Cepat, harga berpatutan, kerja kemas.",
       "cta": "WhatsApp Kami Sekarang",
       "ctaSubtext": "Percuma untuk bertanya · Respons dalam 1 jam",
       "heroAlt": "Tukang aircond memberi ibu jari",
@@ -71,21 +71,21 @@
     },
     "stats": {
       "customers": "10,000+",
-      "customersLabel": "Pelanggan Dilayan",
-      "response": "1-Jam",
-      "responseLabel": "Masa Respons",
+      "customersLabel": "Pelanggan Berpuas Hati",
+      "response": "1 Jam",
+      "responseLabel": "Maklum Balas",
       "rating": "5-Bintang",
-      "ratingLabel": "Purata Rating",
+      "ratingLabel": "Penilaian Purata",
       "experience": "8+ Tahun",
-      "experienceLabel": "Dalam Perniagaan"
+      "experienceLabel": "Pengalaman Servis"
     },
     "usp": {
       "usp1Title": "Servis Hari Sama",
-      "usp1Sub": "Tempah sebelum 2 petang, tukang sampai ke pintu anda hari ini.",
+      "usp1Sub": "Tempah sebelum 2 petang, tukang sampai ke rumah anda hari ini juga.",
       "usp2Title": "Tukang Bertauliah",
-      "usp2Sub": "Pakar aircond berlesen, berinsurans dan disahkan latar belakang.",
+      "usp2Sub": "Pakar aircond berlesen, berinsurans dan tapisan latar belakang lengkap.",
       "usp3Title": "Jaminan 30 Hari",
-      "usp3Sub": "Lawatan semula percuma jika ada masalah selepas servis."
+      "usp3Sub": "Ada masalah selepas servis? Kami datang semula, percuma."
     },
     "brands": {
       "label": "Jenama Yang Kami Servis"
@@ -160,16 +160,16 @@
     },
     "howItWorks": {
       "tag": "Proses Mudah",
-      "heading": "Tiga Langkah ke Rumah Sejuk",
+      "heading": "Rumah Sejuk Dalam Tiga Langkah",
       "step1Num": "01",
       "step1Title": "WhatsApp Kami",
-      "step1Desc": "Hantar mesej dengan lokasi anda dan servis yang diperlukan. Kami balas dalam beberapa minit.",
+      "step1Desc": "Bagitahu lokasi dan masalah aircond anda. Kami balas dalam beberapa minit.",
       "step2Num": "02",
-      "step2Title": "Kami Sahkan & Hantar",
-      "step2Desc": "Kami sahkan ketersediaan, beri anggaran harga, dan hantar tukang bertauliah.",
+      "step2Title": "Kami Aturkan Tukang",
+      "step2Desc": "Kami sahkan slot kosong, beri anggaran harga di awal, dan hantar tukang bertauliah ke rumah anda.",
       "step3Num": "03",
-      "step3Title": "Siap",
-      "step3Desc": "Aircond anda diservis, dibaiki, atau dipasang — dan kami kemas sebelum pergi.",
+      "step3Title": "Siap & Sejuk",
+      "step3Desc": "Aircond anda diservis, dibaiki atau dipasang — dan kami kemas semula sebelum balik.",
       "cta": "Mula dengan WhatsApp"
     },
     "gallery": {
@@ -208,18 +208,18 @@
       "cities": "bandar"
     },
     "midCta": {
-      "text": "Sedia untuk tempah? WhatsApp kami sekarang — respons dalam 1 jam.",
+      "text": "Nak tempah sekarang? WhatsApp kami — kami balas dalam masa 1 jam.",
       "button": "WhatsApp Encik Beku"
     },
     "guarantee": {
-      "text": "Jaminan Mutu Kerja 30 Hari — tak puas hati, kami datang balik percuma."
+      "text": "Jaminan Mutu Kerja 30 Hari — tak puas hati, kami datang semula tanpa caj."
     },
     "cta": {
-      "headline": "Aircond Anda Layak Lebih Baik.",
-      "headlineHighlight": "Anda Juga.",
-      "subheadline": "Sertai 10,000+ pelanggan yang percayakan Encik Beku untuk servis aircond yang pantas dan profesional di seluruh Malaysia.",
-      "button": "WhatsApp Encik Beku Sekarang",
-      "fine": "Respons dalam 1 jam · Tiada caj tersembunyi · 7 hari seminggu"
+      "headline": "Rumah Sejuk Bermula",
+      "headlineHighlight": "Hari Ini.",
+      "subheadline": "Sertai 10,000+ pelanggan yang dah percayakan Encik Beku untuk servis aircond yang pantas dan kemas di seluruh Malaysia.",
+      "button": "WhatsApp Encik Beku",
+      "fine": "Balas dalam 1 jam · Tiada caj tersembunyi · Buka 7 hari seminggu"
     }
   },
   "location": {
@@ -269,7 +269,7 @@
       "heading": "Perlu Servis Aircond di {city}?",
       "subheading": "WhatsApp Encik Beku sekarang dan kami akan aturkan tukang di {city} untuk anda hari ini.",
       "button": "WhatsApp Encik Beku di {city}",
-      "fine": "Pantas, profesional, dan jujur — begitulah cara kami."
+      "fine": "Pantas, profesional dan jujur — itu janji kami."
     },
     "breadcrumb": {
       "home": "Utama",
