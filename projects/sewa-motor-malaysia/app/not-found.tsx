@@ -3,7 +3,7 @@ import Link from 'next/link'
 export default function NotFound() {
   return (
     <html lang="en">
-      <body style={{ fontFamily: "'Wix Madefor Text', system-ui, sans-serif", margin: 0, background: '#F1F3F5' }}>
+      <body style={{ fontFamily: "'Inter', system-ui, sans-serif", margin: 0, background: '#F1F3F5' }}>
         <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }}>
           <div style={{ textAlign: 'center', maxWidth: '400px' }}>
             <div style={{ fontSize: '72px', fontWeight: 800, color: '#FF6B35', letterSpacing: '-0.03em', lineHeight: 1 }}>
