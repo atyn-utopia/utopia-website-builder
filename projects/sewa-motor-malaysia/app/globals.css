@@ -16,6 +16,15 @@
   --google-gold:        #FBBC04;
 
   --font: 'Inter', system-ui, sans-serif;
+
+  /* ── Utopia CI structural tokens — radius + motion only. Colours and fonts
+   *    stay this site's own (per the brand-kit application scope). ── */
+  --r-button: 8px;    /* buttons, inputs       (CI §5.1) */
+  --r-card:   12px;   /* cards, panels, modals (CI §5.1) */
+  --r-pill:   999px;  /* badges, pills, tags   (CI §5.1) */
+  --ease:        cubic-bezier(0.22, 1, 0.36, 1); /* easeOutExpo (CI §6) */
+  --dur-hover:   220ms;
+  --dur-layout:  320ms;
 }
 
 * { box-sizing: border-box; }
@@ -58,7 +67,17 @@ h1, h2, h3, h4 {
   0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.5), 0 4px 20px rgba(37,211,102,0.3); }
   50% { box-shadow: 0 0 0 8px rgba(37,211,102,0), 0 4px 20px rgba(37,211,102,0.5); }
 }
-.wa-btn { animation: wa-pulse 2.4s ease-in-out infinite; }
+/* Buttons: 8px radius, text/icon never wrap or compress, easeOutExpo hover
+   that lifts (translateY) instead of zooming — CI §5.1 / §5.4 / §6.
+   .wa-btn is unlayered so it overrides Tailwind's rounded-* utilities. */
+.wa-btn {
+  border-radius: var(--r-button);
+  white-space: nowrap;
+  flex-shrink: 0;
+  animation: wa-pulse 2.4s ease-in-out infinite;
+  transition: transform var(--dur-hover) var(--ease);
+}
+.wa-btn:hover { transform: translateY(-1px); }
 @media (prefers-reduced-motion: reduce) { .wa-btn { animation: none; } }
 
 /* ── FOMO dot pulse ── */
@@ -71,7 +90,7 @@ h1, h2, h3, h4 {
 /* ── Fade up on scroll ── */
 .fade-up {
   opacity: 0; transform: translateY(24px);
-  transition: opacity 0.55s ease, transform 0.55s ease;
+  transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
 }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
 @media (prefers-reduced-motion: reduce) { .fade-up { opacity: 1; transform: none; transition: none; } }
@@ -92,11 +111,11 @@ h1, h2, h3, h4 {
 /* ── Product card with top stripe ── */
 .product-card {
   background: #fff;
-  border-radius: 16px;
+  border-radius: var(--r-card);
   overflow: hidden;
   border: 1px solid var(--brand-border);
   position: relative;
-  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  transition: transform var(--dur-hover) var(--ease), box-shadow var(--dur-hover) var(--ease);
 }
 .product-card::before {
   content: '';
@@ -104,16 +123,21 @@ h1, h2, h3, h4 {
   height: 3px;
   background: linear-gradient(90deg, var(--brand-primary), var(--brand-coral));
 }
+/* Operational hover: lift 1px + layered colour-tinted shadow. No scale/zoom
+   (CI §6 — bouncy/zoom hovers read as consumer; brand is operational). */
 .product-card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 8px 32px rgba(255,107,53,0.12), 0 2px 8px rgba(22,33,62,0.06);
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 0 1px rgba(255,107,53,0.22),
+    0 4px 14px rgba(255,107,53,0.16),
+    0 8px 28px rgba(22,33,62,0.12);
 }
 
 /* ── Review card (glassmorphism) ── */
 .review-card {
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.10);
-  border-radius: 16px;
+  border-radius: var(--r-card);
   backdrop-filter: blur(6px);
 }
 
