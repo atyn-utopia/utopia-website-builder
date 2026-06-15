@@ -64,12 +64,12 @@ function waRedirect(locale: string, message?: string, location?: string) {
 
 /* ── Product key mapping ── */
 const productKeys = [
-  { id: 'honda-vario-160', key: 'hondaVario160', waMsg: 'Hi, I want to rent a Honda Vario 160. Please quote me.', image: 'https://static.wixstatic.com/media/d3104b_faf2c9b553024c99a574ba1c3f88f540~mv2.png' },
-  { id: 'yamaha-nmax-155', key: 'yamahaNMax155', waMsg: 'Hi, I want to rent a Yamaha NMax 155. Please quote me.', image: 'https://static.wixstatic.com/media/d3104b_aa0965363b834584b47f1d8151b3af0d~mv2.png' },
-  { id: 'honda-pcx-160', key: 'hondaPCX160', waMsg: 'Hi, I want to rent a Honda PCX 160. Please quote me.', image: 'https://static.wixstatic.com/media/d3104b_64644788b376433cab1adba0d3511c7c~mv2.png' },
-  { id: 'honda-wave-125', key: 'hondaWave125', waMsg: 'Hi, I want to rent a Honda Wave 125. Please quote me.', image: 'https://static.wixstatic.com/media/d3104b_5c25b842c6174b3789267ddcb6db06cf~mv2.png' },
-  { id: 'yamaha-y15zr', key: 'yamahaY15ZR', waMsg: 'Hi, I want to rent a Yamaha Y15ZR. Please quote me.', image: 'https://static.wixstatic.com/media/d3104b_bda6410cb3b14a8691845502dfa4fdc9~mv2.png' },
-  { id: 'modenas-kriss-mr3', key: 'modenasKrissMR3', waMsg: 'Hi, I want to rent a Modenas Kriss MR3. Please quote me.', image: 'https://static.wixstatic.com/media/d3104b_1365fb72ef5b40f6bbf0fe1a788ab721~mv2.png' },
+  { id: 'honda-vario-160', key: 'hondaVario160', model: 'Honda Vario 160', image: 'https://static.wixstatic.com/media/d3104b_faf2c9b553024c99a574ba1c3f88f540~mv2.png' },
+  { id: 'yamaha-nmax-155', key: 'yamahaNMax155', model: 'Yamaha NMax 155', image: 'https://static.wixstatic.com/media/d3104b_aa0965363b834584b47f1d8151b3af0d~mv2.png' },
+  { id: 'honda-pcx-160', key: 'hondaPCX160', model: 'Honda PCX 160', image: 'https://static.wixstatic.com/media/d3104b_64644788b376433cab1adba0d3511c7c~mv2.png' },
+  { id: 'honda-wave-125', key: 'hondaWave125', model: 'Honda Wave 125', image: 'https://static.wixstatic.com/media/d3104b_5c25b842c6174b3789267ddcb6db06cf~mv2.png' },
+  { id: 'yamaha-y15zr', key: 'yamahaY15ZR', model: 'Yamaha Y15ZR', image: 'https://static.wixstatic.com/media/d3104b_bda6410cb3b14a8691845502dfa4fdc9~mv2.png' },
+  { id: 'modenas-kriss-mr3', key: 'modenasKrissMR3', model: 'Modenas Kriss MR3', image: 'https://static.wixstatic.com/media/d3104b_1365fb72ef5b40f6bbf0fe1a788ab721~mv2.png' },
 ]
 
 const galleryImages = [
@@ -193,7 +193,7 @@ export default function LocationPageClient({
   const footer = useTranslations('footer')
   const s = useTranslations('shared')
 
-  const WA_LINK = waRedirect(locale, `Hi, I want to rent a motorcycle in ${displayName}. Please quote me.`, locationSlug)
+  const WA_LINK = waRedirect(locale, displayName, locationSlug)
 
   // Group locations by state (same as homepage)
   const stateGroups = locations.reduce<Record<string, typeof locations>>((acc, loc) => {
@@ -343,7 +343,7 @@ export default function LocationPageClient({
                             </div>
                           ))}
                         </div>
-                        <a href={waRedirect(locale, pk.waMsg + ' Location: ' + displayName, locationSlug)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg text-sm font-semibold text-white hover:opacity-90 w-full" style={{ background: 'var(--brand-primary)' }}>
+                        <a href={waRedirect(locale, `${pk.model} di ${displayName}`, locationSlug)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg text-sm font-semibold text-white hover:opacity-90 w-full" style={{ background: 'var(--brand-primary)' }}>
                           <WAIcon />{tProducts('cta')}
                         </a>
                       </div>
