@@ -2,7 +2,7 @@ export const siteConfig = {
   // Canonical "website" key for the shared Supabase DB — products, blog_posts,
   // phone_numbers and company_websites rows are all stored under this value.
   domain: 'coldroomrental.my',
-  siteUrl: 'https://coldroom-malaysia.utopiaai.my',
+  siteUrl: 'https://coldroomrental.my',
   brandName: 'Cold Room Malaysia',
   tagline: 'Cold Room Rental & Cold Chain Storage in Malaysia',
   productSlug: 'cold-room',

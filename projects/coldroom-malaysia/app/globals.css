@@ -176,10 +176,11 @@ p, li { line-height: var(--leading-relaxed); color: var(--steel-500); }
   justify-content: center;
   align-items: center;
 }
-.hero-visual img {
+.hero-visual-img {
   width: 100%;
-  height: auto;
   max-width: 560px;
+  aspect-ratio: 910 / 452;
+  background: url('/brand/hero-warehouse.png') center / contain no-repeat;
   filter: drop-shadow(0 24px 40px rgba(11, 61, 92, 0.38));
 }
 
@@ -191,7 +192,7 @@ p, li { line-height: var(--leading-relaxed); color: var(--steel-500); }
   .hero-text .hero-cta-row,
   .hero-text .hero-chips,
   .hero-text .hero-microstats { justify-content: center; }
-  .hero-visual img { max-width: 420px; }
+  .hero-visual-img { max-width: 420px; }
 }
 
 /* ============================================

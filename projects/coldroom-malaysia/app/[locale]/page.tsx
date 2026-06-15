@@ -161,7 +161,10 @@ export default async function HomePage({
             </div>
           </div>
           <div className="hero-visual">
-            <img src="/brand/hero-warehouse.png" width={910} height={452} alt={t('hero.imageAlt')} loading="eager" decoding="async" />
+            {/* Announced to screen readers via an ARIA image role + label (same
+                convention as the location-page hero). The transparent warehouse
+                cutout sits on the frost gradient via background:contain. */}
+            <div className="hero-visual-img" role="img" aria-label={t('hero.imageAlt')} />
           </div>
         </div>
       </header>
