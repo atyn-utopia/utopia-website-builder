@@ -3,15 +3,15 @@ import { seoAlternates } from '@/lib/seoAlternates'
 import { getMessages, getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
-import { Inter } from "next/font/google";
+import { Lato } from "next/font/google";
 import { OrganizationSchema } from "@/components/schema/OrganizationSchema";
 import { siteConfig } from "@/config/site";
 import type { Metadata } from "next";
 
-const inter = Inter({
+const lato = Lato({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-inter",
+  weight: ["400", "700", "900"],
+  variable: "--font-lato",
   display: "swap",
 });
 
@@ -60,7 +60,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={inter.variable}>
+    <html lang={locale} className={lato.variable}>
       <head>
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <script
@@ -69,7 +69,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           data-website={siteConfig.domain}
         />
       </head>
-      <body style={{ fontFamily: "var(--font-inter), Inter, sans-serif" }}>
+      <body style={{ fontFamily: "var(--font-lato), 'Lato', system-ui, sans-serif" }}>
         <NextIntlClientProvider messages={messages}>
           <OrganizationSchema />
           {children}
