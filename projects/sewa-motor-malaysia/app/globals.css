@@ -44,6 +44,15 @@ h1, h2, h3, h4 {
   line-height: 1.2;
   letter-spacing: -0.02em;
 }
+/* Heading weights. Tailwind v4 Preflight resets headings to
+   `font-weight: inherit` (→ 400) and lands at the same precedence as a plain
+   `h1{}` rule but later in source order, so font-bold/font-extrabold on
+   headings was collapsing to 400. The `body` prefix raises specificity so
+   these win deterministically. Hero title (h1) = extra-bold; every other
+   section heading (h2/h3/h4) = bold. The hero subtitle stays lighter via the
+   even-higher-specificity `.home-hero h2` rule in PageStyles. */
+body h1 { font-weight: 800; }
+body h2, body h3, body h4 { font-weight: 700; }
 /* h5/h6 wrap body text (keyword-driven heading rule). Keep them visually
    identical to the <p> they replaced — utility/custom classes control
    size/weight/margin; this guards against UA bolding + tight heading
