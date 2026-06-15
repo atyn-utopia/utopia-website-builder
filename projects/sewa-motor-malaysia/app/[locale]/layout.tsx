@@ -3,15 +3,15 @@ import { seoAlternates } from '@/lib/seoAlternates'
 import { getMessages, getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
-import { Overpass } from "next/font/google";
+import { Hanken_Grotesk } from "next/font/google";
 import { OrganizationSchema } from "@/components/schema/OrganizationSchema";
 import { siteConfig } from "@/config/site";
 import type { Metadata } from "next";
 
-const overpass = Overpass({
+const hankenGrotesk = Hanken_Grotesk({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-overpass",
+  variable: "--font-hanken",
   display: "swap",
 });
 
@@ -60,7 +60,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={overpass.variable}>
+    <html lang={locale} className={hankenGrotesk.variable}>
       <head>
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <script
@@ -69,7 +69,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           data-website={siteConfig.domain}
         />
       </head>
-      <body style={{ fontFamily: "var(--font-overpass), 'Overpass', system-ui, sans-serif" }}>
+      <body style={{ fontFamily: "var(--font-hanken), 'Hanken Grotesk', system-ui, sans-serif" }}>
         <NextIntlClientProvider messages={messages}>
           <OrganizationSchema />
           {children}
