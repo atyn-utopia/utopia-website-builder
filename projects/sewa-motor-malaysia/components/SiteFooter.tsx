@@ -43,6 +43,27 @@ export default function SiteFooter() {
       </div>
       <div className="site-footer-bar">
         <p>{t('copyright', { year })}</p>
+        <a
+          className="utopia-credit"
+          href="https://utopiagroup.com.my"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Built by Utopia AI"
+        >
+          <span className="utopia-credit-by">Built by</span>
+          <span className="utopia-credit-word">Utopia</span>
+          <svg className="utopia-tri" viewBox="0 0 64 56" width="11" height="10" aria-hidden="true">
+            <defs>
+              <linearGradient id="utopiaCreditGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#0054A6" />
+                <stop offset="60%" stopColor="#2774AE" />
+                <stop offset="100%" stopColor="#4A9DD0" />
+              </linearGradient>
+            </defs>
+            <polygon points="32,4 60,52 4,52" fill="url(#utopiaCreditGrad)" />
+          </svg>
+          <span className="utopia-credit-word">AI</span>
+        </a>
       </div>
       <style jsx>{`
         .site-footer { background: #0F172A; color: #E2E8F0; }
@@ -58,8 +79,30 @@ export default function SiteFooter() {
            scope class, so a scoped rule here never matched and the links
            fell back to the browser-default 16px (inconsistent with the
            13–15px footer text). Same workaround as .site-brand/.nav-cta. */
-        .site-footer-bar { border-top: 1px solid #1E293B; padding: 24px 20px; text-align: center; font-size: 12px; color: #94A3B8; }
+        .site-footer-bar { border-top: 1px solid #1E293B; padding: 22px 20px; display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; text-align: center; font-size: 12px; color: #94A3B8; }
         .site-footer-bar p { margin: 0; }
+        /* Utopia AI build credit — CI button rules: 8px radius, icon never
+           compresses, easeOutExpo lift on hover. Mark carries Utopia's own
+           gradient (correct brand-mark usage); site palette/fonts unchanged. */
+        .utopia-credit {
+          display: inline-flex; align-items: center; gap: 6px;
+          padding: 7px 12px;
+          border: 1px solid rgba(255,255,255,0.14);
+          border-radius: var(--r-button, 8px);
+          color: #CBD5E1; font-size: 12px; font-weight: 600;
+          text-decoration: none; white-space: nowrap; flex-shrink: 0;
+          transition: transform var(--dur-hover, 220ms) var(--ease, ease),
+                      border-color var(--dur-hover, 220ms) var(--ease, ease),
+                      background-color var(--dur-hover, 220ms) var(--ease, ease);
+        }
+        .utopia-credit:hover {
+          transform: translateY(-1px);
+          border-color: rgba(74,157,208,0.55);
+          background: rgba(39,116,174,0.12);
+        }
+        .utopia-credit-by { color: #64748B; }
+        .utopia-credit-word { color: #F1F5F9; font-weight: 800; letter-spacing: -0.01em; }
+        .utopia-tri { display: inline-block; flex-shrink: 0; }
         @media (max-width: 640px) {
           .site-footer-inner { padding: 48px 24px 32px; gap: 40px; text-align: center; }
           .footer-col { align-items: center; }
