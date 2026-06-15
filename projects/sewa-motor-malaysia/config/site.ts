@@ -8,9 +8,9 @@
 export const siteConfig = {
   name: 'Sewa Motor Malaysia',
   brandName: 'Sewa Motor Malaysia',
-  domain: 'sewa-motor-malaysia.utopiaai.my',
-  baseUrl: 'https://sewa-motor-malaysia.utopiaai.my',
-  siteUrl: 'https://sewa-motor-malaysia.utopiaai.my',
+  domain: 'motorsewa.com.my',
+  baseUrl: 'https://motorsewa.com.my',
+  siteUrl: 'https://motorsewa.com.my',
   productSlug: 'sewa-motor',
   fallbackPhone: '60174287801',
 }
