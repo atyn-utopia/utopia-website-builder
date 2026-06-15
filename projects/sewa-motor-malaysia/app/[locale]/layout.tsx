@@ -3,15 +3,15 @@ import { seoAlternates } from '@/lib/seoAlternates'
 import { getMessages, getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
-import { Hanken_Grotesk } from "next/font/google";
+import { Radio_Canada } from "next/font/google";
 import { OrganizationSchema } from "@/components/schema/OrganizationSchema";
 import { siteConfig } from "@/config/site";
 import type { Metadata } from "next";
 
-const hankenGrotesk = Hanken_Grotesk({
+const radioCanada = Radio_Canada({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-hanken",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-radio-canada",
   display: "swap",
 });
 
@@ -60,7 +60,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={hankenGrotesk.variable}>
+    <html lang={locale} className={radioCanada.variable}>
       <head>
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <script
@@ -69,7 +69,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           data-website={siteConfig.domain}
         />
       </head>
-      <body style={{ fontFamily: "var(--font-hanken), 'Hanken Grotesk', system-ui, sans-serif" }}>
+      <body style={{ fontFamily: "var(--font-radio-canada), 'Radio Canada', system-ui, sans-serif" }}>
         <NextIntlClientProvider messages={messages}>
           <OrganizationSchema />
           {children}
