@@ -45,7 +45,7 @@ export default function DoorOpening() {
           backgroundPosition: "right center",
           backgroundRepeat: "no-repeat",
           boxShadow:
-            "inset -30px 0 60px rgba(0,0,0,0.55), 20px 0 80px rgba(0,0,0,0.9)",
+            "inset -14px 0 28px rgba(0,0,0,0.3), 8px 0 36px rgba(0,0,0,0.45)",
         }}
       />
       <div
@@ -57,15 +57,7 @@ export default function DoorOpening() {
           backgroundPosition: "left center",
           backgroundRepeat: "no-repeat",
           boxShadow:
-            "inset 30px 0 60px rgba(0,0,0,0.55), -20px 0 80px rgba(0,0,0,0.9)",
-        }}
-      />
-      <div
-        className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-px"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(212,175,55,0) 0%, rgba(212,175,55,0.7) 30%, rgba(212,175,55,0.7) 70%, rgba(212,175,55,0) 100%)",
-          opacity: 1 - progress,
+            "inset 14px 0 28px rgba(0,0,0,0.3), -8px 0 36px rgba(0,0,0,0.45)",
         }}
       />
     </div>
