@@ -128,7 +128,7 @@ export default function RetrieveForm() {
         </p>
       )}
 
-      <div className="mt-10 pt-6 border-t border-ink-600 text-center">
+      <div className="mt-10 text-center">
         {!searchOpen ? (
           <button
             type="button"
