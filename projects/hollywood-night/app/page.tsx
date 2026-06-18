@@ -9,6 +9,7 @@ import AgendaTimeline from "./_components/agenda-timeline";
 import Countdown from "./_components/countdown";
 import FilmStrip from "./_components/film-strip";
 import MyTicketButton from "./_components/my-ticket-button";
+import LogoBackdrop from "./_components/logo-backdrop";
 
 export default function Home() {
   return (
@@ -234,6 +235,9 @@ export default function Home() {
             </p>
           </footer>
         </Reveal>
+
+        {/* ───────────── Logo backdrop (step & repeat) ───────────── */}
+        <LogoBackdrop />
       </main>
     </>
   );
