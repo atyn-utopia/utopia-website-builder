@@ -213,6 +213,17 @@ export default function RsvpForm() {
       >
         {loading ? "Sending invitation" : "Confirm RSVP"}
       </button>
+
+      <p className="text-center text-ivory-faint text-xs leading-relaxed">
+        Each phone number can register once. Trouble submitting? Contact{" "}
+        <a
+          href="tel:+60174287801"
+          className="text-gold-400 hover:text-gold-300 whitespace-nowrap transition-[color] duration-150"
+        >
+          017-428 7801
+        </a>{" "}
+        for help.
+      </p>
     </form>
     </>
   );

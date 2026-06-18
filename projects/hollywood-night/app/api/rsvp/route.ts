@@ -53,6 +53,49 @@ export async function POST(request: Request) {
   }
   const data = parsed.data;
 
+  // Each phone number may register only once — whether as a main guest or as a
+  // plus-one on someone else's entry.
+  async function phoneAlreadyUsed(phone: string): Promise<boolean> {
+    const { data: rows, error } = await supabaseAdmin
+      .from("guests")
+      .select("id")
+      .or(`phone.eq.${phone},plus_one_phone.eq.${phone}`)
+      .limit(1);
+    if (error) {
+      console.error("duplicate phone check failed", error.message);
+      return false; // best-effort: don't block legitimate users on a transient error
+    }
+    return (rows?.length ?? 0) > 0;
+  }
+
+  const HELP = "Need help? Contact 017-428 7801.";
+
+  if (await phoneAlreadyUsed(data.phone)) {
+    return NextResponse.json(
+      {
+        error: `This phone number has already registered. Each number can RSVP once. ${HELP}`,
+      },
+      { status: 409 }
+    );
+  }
+
+  if (data.attending && data.hasPlusOne && data.plusOnePhone) {
+    if (data.plusOnePhone === data.phone) {
+      return NextResponse.json(
+        { error: `Your plus-one's number must differ from your own. ${HELP}` },
+        { status: 409 }
+      );
+    }
+    if (await phoneAlreadyUsed(data.plusOnePhone)) {
+      return NextResponse.json(
+        {
+          error: `Your plus-one's phone number is already registered. Each number can RSVP once. ${HELP}`,
+        },
+        { status: 409 }
+      );
+    }
+  }
+
   const guestId = generateGuestId();
 
   const { data: guestRow, error: insertErr } = await supabaseAdmin
