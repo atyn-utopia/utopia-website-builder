@@ -74,7 +74,7 @@ export default function Home() {
               />
 
               <p className="text-[11px] md:text-xs uppercase tracking-[0.32em] text-gold-400 mb-7">
-                ◆ 31.07.2026 · Hollywood Red Carpet ◆
+                31.07.2026 · Hollywood Red Carpet
               </p>
 
               <MarqueeBulbs />
