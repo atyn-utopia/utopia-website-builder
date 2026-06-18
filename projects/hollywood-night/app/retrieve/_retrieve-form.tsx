@@ -381,7 +381,7 @@ function TicketCard({ ticket }: { ticket: Ticket }) {
         {/* QR / lucky number — below, in the black stub */}
         <div
           className="absolute inset-x-0 flex flex-col items-center text-center px-6"
-          style={{ top: "45%", bottom: "6%" }}
+          style={{ top: "52%", bottom: "6%" }}
         >
           {ticket.checkedIn && typeof ticket.luckyNumber === "number" ? (
             <div className="rise-in flex flex-col items-center">
