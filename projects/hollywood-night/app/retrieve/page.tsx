@@ -13,12 +13,12 @@ export default function RetrievePage() {
     <main className="bg-runway grain min-h-screen relative">
 
       <nav className="relative px-6 py-8 flex items-center justify-between max-w-6xl mx-auto">
-        <a href="/" className="block w-40 md:w-52">
+        <a href="/" className="block w-48 md:w-72">
           <Image
-            src="/logo.png"
-            alt="Hollywood Red Carpet"
-            width={480}
-            height={270}
+            src="/masthead-dinner.png"
+            alt="Utopia Group of Companies — Hollywood Red Carpet"
+            width={1600}
+            height={726}
             className="w-full h-auto"
           />
         </a>

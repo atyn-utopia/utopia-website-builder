@@ -7,6 +7,7 @@ import Reveal from "./_components/reveal";
 import DoorOpening from "./_components/door-opening";
 import RunwayRail from "./_components/runway-rail";
 import AgendaTimeline from "./_components/agenda-timeline";
+import Countdown from "./_components/countdown";
 
 export default function Home() {
   return (
@@ -150,10 +151,16 @@ export default function Home() {
               <h3 className="text-center font-display font-semibold text-3xl md:text-5xl text-champagne mb-4">
                 Claim Your Seat
               </h3>
-              <p className="text-center text-ivory-dim mb-12 leading-relaxed">
+              <p className="text-center text-ivory-dim mb-10 leading-relaxed">
                 Tickets are personal and non-transferable. A QR pass will be
                 emailed on confirmation.
               </p>
+              <div className="mb-12">
+                <p className="text-center text-[10px] uppercase tracking-[0.28em] text-gold-500 mb-5">
+                  ◆ Countdown to the Night
+                </p>
+                <Countdown />
+              </div>
               <RsvpForm />
             </div>
           </Reveal>

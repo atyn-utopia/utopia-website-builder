@@ -26,12 +26,12 @@ export default function AdminHeader({ stats }: { stats: Stats }) {
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5">
         <div className="flex items-center justify-between gap-4">
-          <a href="/admin" className="block w-28 md:w-40 shrink-0">
+          <a href="/admin" className="block w-40 md:w-56 shrink-0">
             <Image
-              src="/logo.png"
-              alt="Hollywood Red Carpet"
-              width={480}
-              height={270}
+              src="/masthead-dinner.png"
+              alt="Utopia Group of Companies — Hollywood Red Carpet"
+              width={1600}
+              height={726}
               className="w-full h-auto"
             />
           </a>

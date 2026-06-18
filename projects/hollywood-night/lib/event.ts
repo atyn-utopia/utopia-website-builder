@@ -4,6 +4,8 @@ export const EVENT = {
   dateISO: "2026-07-31",
   dateLabel: "Friday, 31 July 2026",
   timeLabel: "6:00 PM – 11:00 PM",
+  startsAt: "2026-07-31T18:00:00+08:00",
+  endsAt: "2026-07-31T23:30:00+08:00",
   venue: "Grand Ballroom, Sunway Putra Hotel",
   venueAddress: "100 Jalan Putra, 50350 Kuala Lumpur",
   dressCode: "Black Tie Glamour",

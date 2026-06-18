@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { toPng } from "html-to-image";
 import PhoneField from "../_components/phone-field";
+import AddToCalendar from "../_components/add-to-calendar";
 import { isValidMyPhone } from "@/lib/phone";
 
 type Ticket = {
@@ -107,6 +108,9 @@ export default function RetrieveForm() {
             Your ticket{tickets.length > 1 ? "s are" : " is"} below. A copy
             has also been sent to your email.
           </p>
+          <div className="mt-6">
+            <AddToCalendar />
+          </div>
         </div>
       )}
 
