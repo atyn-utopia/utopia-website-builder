@@ -15,6 +15,7 @@ type Ticket = {
   checkedIn: boolean;
   luckyNumber: number | null;
   guestName: string;
+  rsvpType: "staff" | "vip";
   qr: string;
 };
 
@@ -285,6 +286,7 @@ function TicketCard({ ticket }: { ticket: Ticket }) {
               textShadow: "0 2px 12px rgba(0,0,0,0.95)",
             }}
           >
+            {ticket.rsvpType === "vip" ? "VIP" : "Staff"} ·{" "}
             {ticket.kind === "plus_one" ? "Plus One" : "Main Guest"}
           </p>
           <h3
@@ -381,6 +383,7 @@ function TicketCard({ ticket }: { ticket: Ticket }) {
             className="uppercase text-gold-400 mb-1 text-[9px] tracking-[0.26em]"
             style={{ textShadow: "0 2px 10px rgba(0,0,0,0.95)" }}
           >
+            {ticket.rsvpType === "vip" ? "VIP" : "Staff"} ·{" "}
             {ticket.kind === "plus_one" ? "Plus One" : "Main Guest"}
           </p>
           <h3
