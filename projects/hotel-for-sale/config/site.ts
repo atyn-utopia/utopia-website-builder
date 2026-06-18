@@ -3,8 +3,8 @@ export const siteConfig = {
   legalName: 'Vivahomes Realty Sdn. Bhd.',
   agencyLicence: 'Agency E(1)1670',
   tagline: "Malaysia's Largest Complete Hotel For Sale Listing",
-  domain: 'hotel-for-sale.utopiaai.my',
-  url: 'https://hotel-for-sale.utopiaai.my',
+  domain: 'hotelforsale.my',
+  url: 'https://hotelforsale.my',
   // Pinned company_websites.id — a domain rename can never disconnect this site.
   siteId: '3fb8448c-77e5-483e-abf5-20bb83dcc433',
   // Catalogue route slug for hotel listing location pages: /hotel-for-sale/{city}

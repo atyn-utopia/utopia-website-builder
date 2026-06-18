@@ -87,7 +87,7 @@ export default async function LocaleLayout({
         <script
           defer
           src="https://webcore.utopiaai.my/t.js"
-          data-website="hotel-for-sale.utopiaai.my"
+          data-website="hotelforsale.my"
         />
       </head>
       <body>
