@@ -101,7 +101,7 @@ export default function RetrieveForm() {
           <p className="text-[10px] uppercase tracking-[0.32em] text-gold-500 mb-3">
             ◆ RSVP Confirmed
           </p>
-          <h2 className="font-display italic text-xl md:text-5xl text-champagne leading-tight">
+          <h2 className="font-display italic text-2xl md:text-5xl text-champagne leading-tight">
             You&apos;re on the list.
           </h2>
           <p className="text-ivory-dim text-sm md:text-base mt-3 leading-relaxed">
@@ -248,19 +248,16 @@ function TicketCard({ ticket }: { ticket: Ticket }) {
           style={{
             top: "9%",
             bottom: "9%",
-            right: "2.5%",
+            right: "6%",
             width: "27%",
-            background: "rgba(5,6,10,0.5)",
-            backdropFilter: "blur(2px)",
-            border: "0.12cqw solid rgba(212,175,55,0.45)",
           }}
         >
           <p
             className="uppercase text-gold-400"
             style={{
-              fontSize: "0.85cqw",
-              letterSpacing: "0.28em",
-              marginBottom: "0.5cqw",
+              fontSize: "0.7cqw",
+              letterSpacing: "0.26em",
+              marginBottom: "0.25cqw",
               textShadow: "0 2px 12px rgba(0,0,0,0.95)",
             }}
           >
@@ -269,8 +266,8 @@ function TicketCard({ ticket }: { ticket: Ticket }) {
           <h3
             className="font-display text-champagne leading-tight"
             style={{
-              fontSize: "2cqw",
-              marginBottom: "1cqw",
+              fontSize: "1.5cqw",
+              marginBottom: "0.5cqw",
               maxWidth: "100%",
               textShadow: "0 2px 16px rgba(0,0,0,0.95)",
             }}
@@ -318,7 +315,7 @@ function TicketCard({ ticket }: { ticket: Ticket }) {
             <div className="flex flex-col items-center">
               <div
                 className="bg-white border border-gold-500 shadow-[0_8px_24px_-6px_rgba(0,0,0,0.9)]"
-                style={{ padding: "0.6cqw" }}
+                style={{ padding: "0.6cqw", marginTop: "3px" }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img

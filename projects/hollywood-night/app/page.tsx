@@ -81,13 +81,13 @@ export default function Home() {
 
               <h1 className="sr-only">{EVENT.name}</h1>
 
-              <h2 className="font-display italic text-2xl md:text-6xl text-champagne my-6 leading-[1.1]">
+              <h2 className="font-display italic text-3xl md:text-6xl text-champagne my-6 leading-[1.05]">
                 You&apos;re Invited to the Annual Dinner
               </h2>
 
               <MarqueeBulbs />
 
-              <div className="mt-9 inline-flex flex-wrap items-center justify-center gap-3 md:gap-4 text-ivory-dim text-sm md:text-base">
+              <div className="mt-9 inline-flex flex-wrap items-center justify-center gap-3 md:gap-4 text-ivory-dim text-xs md:text-base">
                 <span>{EVENT.dateLabel}</span>
                 <span className="text-gold-500">◆</span>
                 <span>{EVENT.timeLabel}</span>
@@ -117,7 +117,7 @@ export default function Home() {
             <p className="text-center text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-4">
               ◆ The Evening
             </p>
-            <h3 className="text-center font-display font-semibold text-xl md:text-5xl text-champagne mb-14">
+            <h3 className="text-center font-display font-semibold text-2xl md:text-5xl text-champagne mb-14">
               A Night Under the Spotlight
             </h3>
 
@@ -153,10 +153,10 @@ export default function Home() {
             <p className="text-center text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-4">
               ◆ The Programme
             </p>
-            <h3 className="text-center font-display font-semibold text-xl md:text-5xl text-champagne mb-3">
+            <h3 className="text-center font-display font-semibold text-2xl md:text-5xl text-champagne mb-3">
               Tentative Run of Show
             </h3>
-            <p className="text-center text-ivory-dim mb-12 leading-relaxed">
+            <p className="text-center text-ivory-dim text-sm md:text-base mb-12 leading-relaxed">
               An evening of dining, masquerade games &amp; grand prizes.
             </p>
             <AgendaTimeline />
@@ -195,10 +195,10 @@ export default function Home() {
               <p className="text-center text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-4">
                 ◆ RSVP
               </p>
-              <h3 className="text-center font-display font-semibold text-xl md:text-5xl text-champagne mb-4">
+              <h3 className="text-center font-display font-semibold text-2xl md:text-5xl text-champagne mb-4">
                 Claim Your Seat
               </h3>
-              <p className="text-center text-ivory-dim mb-10 leading-relaxed">
+              <p className="text-center text-ivory-dim text-sm md:text-base mb-10 leading-relaxed">
                 Tickets are personal and non-transferable. A QR pass will be
                 sent on WhatsApp.
               </p>
