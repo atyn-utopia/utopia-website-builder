@@ -35,17 +35,17 @@ export default function Home() {
             className="runway-panel scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-20 pb-16 text-center"
           >
             <p className="text-[11px] md:text-xs uppercase tracking-[0.32em] text-gold-500 mb-8">
-              ◆ 16.05.2026 · Red Carpet Night ◆
+              ◆ 31.07.2026 · Hollywood Red Carpet ◆
             </p>
 
             <MarqueeBulbs />
 
             <div className="relative my-9 md:my-12 w-full max-w-3xl mx-auto">
               <Image
-                src="/logo.png"
-                alt="Hollywood Night — Red Carpet Annual Dinner by Utopia Group of Companies"
+                src="/masthead-dinner.png"
+                alt="Utopia Group of Companies — Hollywood Red Carpet"
                 width={1600}
-                height={900}
+                height={726}
                 priority
                 className="w-full h-auto drop-shadow-[0_0_40px_rgba(212,175,55,0.3)]"
               />

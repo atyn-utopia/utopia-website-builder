@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function RetrievePage() {
   return (
-    <main className="bg-stage grain min-h-screen relative">
+    <main className="bg-runway grain min-h-screen relative">
 
       <nav className="relative px-6 py-8 flex items-center justify-between max-w-6xl mx-auto">
         <a href="/" className="block w-40 md:w-52">

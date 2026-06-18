@@ -24,7 +24,7 @@ const jetbrains = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Hollywood Night — Annual Dinner RSVP",
   description:
-    "You're invited to the Hollywood Red Carpet Night. Annual Dinner · 16 May 2026 · 6:00 PM.",
+    "You're invited to the Hollywood Red Carpet annual dinner · 31 July 2026 · 6:00 PM · Grand Ballroom, Sunway Putra Hotel.",
   icons: {
     icon: [
       { url: "/icon-32.png", sizes: "32x32", type: "image/png" },
