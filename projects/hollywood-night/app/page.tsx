@@ -65,23 +65,8 @@ export default function Home() {
         <Reveal
           as="section"
           id="chapter-1"
-          className="relative overflow-hidden scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-24 pb-24 text-center min-h-screen flex flex-col items-center justify-center"
+          className="relative scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-24 pb-24 text-center min-h-screen flex flex-col items-center justify-center"
         >
-            {/* faint continuation of the splash image — blends this section into the image above */}
-            <div
-              aria-hidden
-              className="absolute inset-x-0 top-0 h-[72vh]"
-              style={{
-                backgroundImage: "url(/main-background.png)",
-                backgroundSize: "cover",
-                backgroundPosition: "center top",
-                opacity: 0.4,
-                maskImage:
-                  "linear-gradient(to bottom, #000 0%, transparent 88%)",
-                WebkitMaskImage:
-                  "linear-gradient(to bottom, #000 0%, transparent 88%)",
-              }}
-            />
             <div className="relative z-10 w-full max-w-3xl mx-auto">
               <Image
                 src="/masthead-dinner.png"
@@ -210,7 +195,7 @@ export default function Home() {
               className="absolute inset-0"
               style={{
                 background:
-                  "linear-gradient(180deg, #1C060B 0%, rgba(28,6,11,0.85) 14%, rgba(20,4,8,0.62) 50%, rgba(28,6,11,0.85) 86%, #1C060B 100%)",
+                  "linear-gradient(180deg, #1C060B 0%, rgba(28,6,11,0.92) 14%, rgba(20,4,8,0.78) 50%, rgba(28,6,11,0.92) 86%, #1C060B 100%)",
               }}
             />
             <div className="relative z-10 w-full max-w-2xl mx-auto">
