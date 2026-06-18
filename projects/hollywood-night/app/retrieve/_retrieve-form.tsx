@@ -272,8 +272,8 @@ function TicketCard({ ticket }: { ticket: Ticket }) {
           style={{
             top: "9%",
             bottom: "40%",
-            right: "2%",
-            width: "26%",
+            right: "0%",
+            width: "22%",
           }}
         >
           <p
@@ -376,7 +376,7 @@ function TicketCard({ ticket }: { ticket: Ticket }) {
         }}
       >
         {/* Details — top area, left-aligned over the image */}
-        <div className="absolute top-0 left-0 right-0 pl-[117px] pr-6 pt-6 text-left">
+        <div className="absolute top-0 left-0 right-0 px-6 pt-6 text-left">
           <p
             className="uppercase text-gold-400 mb-1 text-[9px] tracking-[0.26em]"
             style={{ textShadow: "0 2px 10px rgba(0,0,0,0.95)" }}
@@ -404,7 +404,7 @@ function TicketCard({ ticket }: { ticket: Ticket }) {
 
         {/* QR / lucky number — below, in the black stub */}
         <div
-          className="absolute inset-x-0 flex flex-col items-center text-center pl-[165px] pr-6"
+          className="absolute inset-x-0 flex flex-col items-center text-center px-6"
           style={{ top: "52%", bottom: "6%" }}
         >
           {ticket.checkedIn && typeof ticket.luckyNumber === "number" ? (

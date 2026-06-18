@@ -213,7 +213,7 @@ export default function Home() {
             <p className="font-display italic text-gold-300 text-xl mb-2">
               See you on the red carpet.
             </p>
-            <p className="text-ivory-faint text-xs uppercase tracking-[0.2em]">
+            <p className="text-ivory-faint text-[10px] md:text-xs uppercase tracking-[0.2em]">
               {EVENT.name} · {EVENT.dateLabel}
             </p>
             <p className="mt-6">

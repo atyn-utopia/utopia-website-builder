@@ -42,7 +42,7 @@ export default function RetrievePage() {
       </section>
 
       <footer className="relative px-6 py-16 text-center">
-        <p className="text-ivory-faint text-xs uppercase tracking-[0.2em]">
+        <p className="text-ivory-faint text-[10px] md:text-xs uppercase tracking-[0.2em]">
           {EVENT.name} · {EVENT.dateLabel}
         </p>
       </footer>
