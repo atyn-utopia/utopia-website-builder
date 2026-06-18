@@ -352,61 +352,50 @@ function TicketCard({ ticket }: { ticket: Ticket }) {
         }}
       >
         <div
-          className="absolute inset-x-0 bottom-0 flex flex-col"
-          style={{ top: "41%" }}
+          className="absolute inset-x-0 top-0 flex flex-col items-center justify-center text-center px-6"
+          style={{ height: "41%" }}
         >
-          <div className="px-6 pt-4">
-            <p className="text-[9px] uppercase tracking-[0.3em] text-gold-400 mb-2">
-              ◆ Hollywood Night · {ticket.kind === "plus_one" ? "Guest" : "Main"}
-            </p>
-            <p className="text-[9px] uppercase tracking-[0.22em] text-gold-600 mb-1">
-              Guest
-            </p>
-            <h3 className="font-display text-2xl text-champagne mb-1.5">
-              {ticket.holderName}
-            </h3>
-            <p className="font-mono text-[10px] text-gold-400 tracking-wider">
-              {ticket.ticketId}
-            </p>
-            {ticket.checkedIn && (
-              <p className="mt-3 inline-block text-[9px] uppercase tracking-[0.22em] text-success-emerald border border-success-emerald px-2.5 py-1">
-                ✓ Checked In
-              </p>
-            )}
-          </div>
-          <div className="flex flex-col items-center px-6 pt-5 pb-5">
-            {ticket.checkedIn && typeof ticket.luckyNumber === "number" ? (
-              <div className="text-center rise-in">
-                <p className="text-[9px] uppercase tracking-[0.32em] text-gold-500 mb-2">
-                  ◆ Lucky Draw Number ◆
-                </p>
-                <div className="inline-block bg-ink-black border-2 border-gold-500 px-8 py-6 shadow-[0_0_60px_-10px_rgba(212,175,55,0.45)]">
-                  <p className="font-mono font-black text-6xl text-gold-300 tabular-nums leading-none">
-                    {String(ticket.luckyNumber).padStart(3, "0")}
-                  </p>
-                </div>
-                <p
-                  className="mt-4 font-display italic text-gold-400 text-xs"
-                  style={{ letterSpacing: "0.18em" }}
-                >
-                  ADMITTED
+          <p
+            className="uppercase text-gold-400 mb-1 text-[9px] tracking-[0.26em]"
+            style={{ textShadow: "0 2px 10px rgba(0,0,0,0.95)" }}
+          >
+            {ticket.kind === "plus_one" ? "Plus One" : "Main Guest"}
+          </p>
+          <h3
+            className="font-display text-2xl text-champagne leading-tight mb-2"
+            style={{ textShadow: "0 2px 14px rgba(0,0,0,0.95)" }}
+          >
+            {ticket.holderName}
+          </h3>
+
+          {ticket.checkedIn && typeof ticket.luckyNumber === "number" ? (
+            <div className="rise-in flex flex-col items-center">
+              <div className="bg-ink-black/80 border-2 border-gold-500 px-6 py-3">
+                <p className="font-mono font-black text-4xl text-gold-300 tabular-nums leading-none">
+                  {String(ticket.luckyNumber).padStart(3, "0")}
                 </p>
               </div>
-            ) : (
-              <>
-                <div className="bg-white p-2.5 border border-gold-500">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={ticket.qr} alt="Ticket QR" className="w-28 h-28" />
-                </div>
-                <p
-                  className="mt-3 font-display italic text-gold-400 text-xs"
-                  style={{ letterSpacing: "0.18em" }}
-                >
-                  ADMIT ONE
-                </p>
-              </>
-            )}
-          </div>
+              <p
+                className="mt-2 uppercase text-success-emerald text-[9px] tracking-[0.22em]"
+                style={{ textShadow: "0 2px 10px rgba(0,0,0,0.95)" }}
+              >
+                ✓ Admitted
+              </p>
+            </div>
+          ) : (
+            <>
+              <div className="bg-white p-2 border border-gold-500">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={ticket.qr} alt="Ticket QR" className="w-24 h-24" />
+              </div>
+              <p
+                className="mt-1.5 font-mono text-gold-300 text-[9px] tracking-wider"
+                style={{ textShadow: "0 2px 10px rgba(0,0,0,0.95)" }}
+              >
+                {ticket.ticketId}
+              </p>
+            </>
+          )}
         </div>
       </div>
 
