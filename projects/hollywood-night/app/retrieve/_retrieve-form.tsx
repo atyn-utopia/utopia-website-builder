@@ -272,7 +272,7 @@ function TicketCard({ ticket }: { ticket: Ticket }) {
           style={{
             top: "9%",
             bottom: "40%",
-            right: "25px",
+            right: "30px",
             width: "22%",
           }}
         >
