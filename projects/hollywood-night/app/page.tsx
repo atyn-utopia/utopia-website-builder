@@ -5,183 +5,181 @@ import MarqueeBulbs from "./_components/marquee-bulbs";
 import TicketPreview from "./_components/ticket-preview";
 import Reveal from "./_components/reveal";
 import DoorOpening from "./_components/door-opening";
+import RunwayRail from "./_components/runway-rail";
 
 export default function Home() {
   return (
     <>
-    <DoorOpening />
-    <div className="h-screen bg-ink-black" aria-hidden />
+      <DoorOpening />
+      {/* Doors part to reveal the red carpet runway behind them */}
+      <div className="h-screen bg-runway" aria-hidden />
 
-    {/* Sticky "My Ticket" button — stays visible on scroll */}
-    <a
-      href="/retrieve"
-      className="fixed top-4 right-4 z-40 bg-ink-black/80 backdrop-blur-sm border border-gold-500/60 text-gold-300 px-4 py-2 uppercase tracking-[0.18em] text-[10px] md:text-[11px] font-medium transition-[transform,opacity,background-color] duration-200 hover:bg-gold-500/10 hover:border-gold-400 hover:-translate-y-0.5 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.9)]"
-    >
-      ◆ My Ticket
-    </a>
-
-    <main className="bg-stage grain min-h-screen relative overflow-hidden">
-
-      <section className="relative min-h-[92vh] flex flex-col items-center justify-center px-6 py-24 text-center">
-        <div
-          className="drift-glow absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse 65% 50% at 50% 30%, rgba(212,175,55,0.22) 0%, transparent 70%)",
-          }}
-        />
-        <div className="relative z-10 max-w-4xl">
-          <p
-            className="text-[11px] md:text-xs uppercase tracking-[0.32em] text-gold-500 mb-8 rise-in"
-            style={{ animationDelay: "200ms" }}
-          >
-            ◆ 16.05.2026 · Red Carpet Night ◆
-          </p>
-
-          <div className="rise-in" style={{ animationDelay: "350ms" }}>
-            <MarqueeBulbs />
-          </div>
-
-          <div
-            className="relative my-10 md:my-14 w-full max-w-3xl mx-auto rise-in"
-            style={{ animationDelay: "500ms" }}
-          >
-            <Image
-              src="/logo.png"
-              alt="Utopia Group of Companies — Hollywood Red Carpet"
-              width={1600}
-              height={900}
-              priority
-              className="w-full h-auto drop-shadow-[0_0_40px_rgba(212,175,55,0.3)]"
-            />
-          </div>
-
-          <p
-            className="font-display italic text-lg md:text-2xl text-gold-300 mb-8 rise-in"
-            style={{ animationDelay: "700ms" }}
-          >
-            You&apos;re Invited to the Annual Dinner
-          </p>
-
-          <div className="rise-in" style={{ animationDelay: "850ms" }}>
-            <MarqueeBulbs />
-          </div>
-
-          <div
-            className="mt-12 inline-flex flex-wrap items-center justify-center gap-3 md:gap-4 text-ivory-dim text-sm md:text-base rise-in"
-            style={{ animationDelay: "1000ms" }}
-          >
-            <span>{EVENT.dateLabel}</span>
-            <span className="text-gold-500">◆</span>
-            <span>{EVENT.timeLabel}</span>
-            <span className="text-gold-500">◆</span>
-            <span>{EVENT.venue}</span>
-          </div>
-
-          <div
-            className="mt-12 flex justify-center rise-in"
-            style={{ animationDelay: "1150ms" }}
-          >
-            <a
-              href="#rsvp"
-              className="inline-block bg-transparent border border-gold-500/70 text-gold-300 px-14 py-4 uppercase tracking-[0.28em] text-xs font-medium transition-[transform,opacity,background-color,border-color] duration-300 hover:bg-gold-500/10 hover:border-gold-400 hover:text-gold-200 hover:-translate-y-0.5"
-            >
-              RSVP Now
-            </a>
-          </div>
-        </div>
-
-        <div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-gold-500 text-xl rise-in"
-          style={{ animationDelay: "1400ms" }}
-          aria-hidden
-        >
-          <span className="block animate-[gentle-float_3s_ease-in-out_infinite]">
-            ▾
-          </span>
-        </div>
-      </section>
-
-      <div className="hairline w-full max-w-5xl mx-auto" />
-
-      <Reveal as="section" className="relative px-6 py-24 max-w-6xl mx-auto">
-        <p className="text-center text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-4">
-          ◆ The Evening
-        </p>
-        <h2 className="text-center font-display text-4xl md:text-5xl text-champagne mb-16">
-          A Night Under the Spotlight
-        </h2>
-        <div className="grid md:grid-cols-3 gap-6 stagger">
-          <DetailCard
-            label="Date"
-            primary={EVENT.dateLabel}
-            secondary={EVENT.timeLabel}
-          />
-          <DetailCard
-            label="Dress Code"
-            primary={EVENT.dressCode}
-            secondary="Come as a star"
-          />
-          <DetailCard
-            label="Venue"
-            primary={EVENT.venue}
-            secondary="To be announced"
-          />
-        </div>
-      </Reveal>
-
-      <Reveal as="section" className="relative px-6 py-20">
-        <p className="text-center text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-8">
-          ◆ Your Ticket Awaits
-        </p>
-        <div className="float-ticket">
-          <TicketPreview />
-        </div>
-      </Reveal>
-
-      <div className="hairline w-full max-w-5xl mx-auto" />
-
-      <Reveal
-        as="section"
-        className="relative px-6 py-24 max-w-3xl mx-auto"
+      {/* Sticky "My Ticket" button — stays visible on scroll */}
+      <a
+        href="/retrieve"
+        className="fixed top-4 right-4 z-40 bg-ink-black/80 backdrop-blur-sm border border-gold-500/60 text-gold-300 px-4 py-2 uppercase tracking-[0.18em] text-[10px] md:text-[11px] font-medium transition-[transform,opacity,background-color] duration-200 hover:bg-gold-500/10 hover:border-gold-400 hover:-translate-y-0.5 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.9)]"
       >
-        <div id="rsvp" className="scroll-mt-20" />
-        <p className="text-center text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-4">
-          ◆ RSVP
-        </p>
-        <h2 className="text-center font-display text-4xl md:text-5xl text-champagne mb-4">
-          Claim Your Seat
-        </h2>
-        <p className="text-center text-ivory-dim mb-12 leading-relaxed">
-          Tickets are personal and non-transferable. A QR pass will be emailed
-          on confirmation.
-        </p>
-        <RsvpForm />
-      </Reveal>
+        ◆ My Ticket
+      </a>
 
-      <Reveal as="footer" className="relative px-6 py-16 text-center">
-        <div className="flex justify-center gap-2 text-gold-400 text-lg mb-4">
-          <span>★</span>
-          <span>★</span>
-          <span>★</span>
-        </div>
-        <p className="font-display italic text-gold-300 text-xl mb-2">
-          See you on the red carpet.
-        </p>
-        <p className="text-ivory-faint text-xs uppercase tracking-[0.2em]">
-          {EVENT.name} · {EVENT.dateLabel}
-        </p>
-        <p className="mt-6">
-          <a
-            href="/retrieve"
-            className="text-ivory-faint text-xs uppercase tracking-[0.2em] hover:text-gold-400 transition-[transform,opacity] duration-200"
+      <main className="bg-runway grain min-h-screen relative overflow-hidden">
+        <RunwayRail />
+
+        <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-12 pb-24 space-y-8 md:space-y-12">
+
+          {/* ───────────── Chapter I — The Invitation (hero) ───────────── */}
+          <Reveal
+            as="section"
+            id="chapter-1"
+            className="runway-panel scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-20 pb-16 text-center"
           >
-            My Ticket →
-          </a>
-        </p>
-      </Reveal>
-    </main>
+            <ChapterNumeral value="I" />
+
+            <p className="text-[11px] md:text-xs uppercase tracking-[0.32em] text-gold-500 mb-8">
+              ◆ 16.05.2026 · Red Carpet Night ◆
+            </p>
+
+            <MarqueeBulbs />
+
+            <div className="relative my-9 md:my-12 w-full max-w-3xl mx-auto">
+              <Image
+                src="/logo.png"
+                alt="Hollywood Night — Red Carpet Annual Dinner by Utopia Group of Companies"
+                width={1600}
+                height={900}
+                priority
+                className="w-full h-auto drop-shadow-[0_0_40px_rgba(212,175,55,0.3)]"
+              />
+            </div>
+
+            <h1 className="sr-only">{EVENT.name}</h1>
+
+            <h2 className="font-display italic text-xl md:text-3xl text-gold-300 mb-8">
+              You&apos;re Invited to the Annual Dinner
+            </h2>
+
+            <MarqueeBulbs />
+
+            <div className="mt-10 inline-flex flex-wrap items-center justify-center gap-3 md:gap-4 text-ivory-dim text-sm md:text-base">
+              <span>{EVENT.dateLabel}</span>
+              <span className="text-gold-500">◆</span>
+              <span>{EVENT.timeLabel}</span>
+              <span className="text-gold-500">◆</span>
+              <span>{EVENT.venue}</span>
+            </div>
+
+            <div className="mt-10 flex justify-center">
+              <a
+                href="#chapter-3"
+                className="inline-block bg-transparent border border-gold-500/70 text-gold-300 px-14 py-4 uppercase tracking-[0.28em] text-xs font-medium transition-[transform,opacity,background-color,border-color] duration-300 hover:bg-gold-500/10 hover:border-gold-400 hover:text-gold-200 hover:-translate-y-0.5"
+              >
+                RSVP Now
+              </a>
+            </div>
+          </Reveal>
+
+          {/* ───────────── Chapter II — The Evening ───────────── */}
+          <Reveal
+            as="section"
+            id="chapter-2"
+            className="runway-panel scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-20 pb-16"
+          >
+            <ChapterNumeral value="II" />
+
+            <p className="text-center text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-4">
+              ◆ The Evening
+            </p>
+            <h3 className="text-center font-display text-3xl md:text-5xl text-champagne mb-14">
+              A Night Under the Spotlight
+            </h3>
+
+            <div className="grid md:grid-cols-3 gap-6 stagger">
+              <DetailCard
+                label="Date"
+                primary={EVENT.dateLabel}
+                secondary={EVENT.timeLabel}
+              />
+              <DetailCard
+                label="Dress Code"
+                primary={EVENT.dressCode}
+                secondary="Come as a star"
+              />
+              <DetailCard
+                label="Venue"
+                primary={EVENT.venue}
+                secondary={EVENT.venueAddress}
+              />
+            </div>
+
+            <div className="mt-16">
+              <p className="text-center text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-8">
+                ◆ Your Ticket Awaits
+              </p>
+              <div className="float-ticket">
+                <TicketPreview />
+              </div>
+            </div>
+          </Reveal>
+
+          {/* ───────────── Chapter III — RSVP ───────────── */}
+          <Reveal
+            as="section"
+            id="chapter-3"
+            className="runway-panel scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-20 pb-16"
+          >
+            <ChapterNumeral value="III" />
+
+            <div className="max-w-2xl mx-auto">
+              <p className="text-center text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-4">
+                ◆ RSVP
+              </p>
+              <h3 className="text-center font-display text-3xl md:text-5xl text-champagne mb-4">
+                Claim Your Seat
+              </h3>
+              <p className="text-center text-ivory-dim mb-12 leading-relaxed">
+                Tickets are personal and non-transferable. A QR pass will be
+                emailed on confirmation.
+              </p>
+              <RsvpForm />
+            </div>
+          </Reveal>
+
+          {/* ───────────── Closing ───────────── */}
+          <footer className="relative pt-10 pb-4 text-center">
+            <div className="flex justify-center gap-2 text-gold-400 text-lg mb-4">
+              <span>★</span>
+              <span>★</span>
+              <span>★</span>
+            </div>
+            <p className="font-display italic text-gold-300 text-xl mb-2">
+              See you on the red carpet.
+            </p>
+            <p className="text-ivory-faint text-xs uppercase tracking-[0.2em]">
+              {EVENT.name} · {EVENT.dateLabel}
+            </p>
+            <p className="mt-6">
+              <a
+                href="/retrieve"
+                className="text-ivory-faint text-xs uppercase tracking-[0.2em] hover:text-gold-400 transition-[transform,opacity] duration-200"
+              >
+                My Ticket →
+              </a>
+            </p>
+          </footer>
+        </div>
+      </main>
     </>
+  );
+}
+
+function ChapterNumeral({ value }: { value: string }) {
+  return (
+    <span
+      className="chapter-num pointer-events-none absolute -top-7 left-4 md:left-8 text-[5.5rem] md:text-[8rem]"
+      aria-hidden
+    >
+      {value}
+    </span>
   );
 }
 

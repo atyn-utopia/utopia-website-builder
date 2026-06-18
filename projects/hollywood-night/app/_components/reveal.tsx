@@ -7,6 +7,7 @@ type Props = {
   delay?: number;
   as?: keyof React.JSX.IntrinsicElements;
   className?: string;
+  id?: string;
 };
 
 export default function Reveal({
@@ -14,6 +15,7 @@ export default function Reveal({
   delay = 0,
   as = "div",
   className = "",
+  id,
 }: Props) {
   const ref = useRef<HTMLElement | null>(null);
   const [visible, setVisible] = useState(false);
@@ -38,6 +40,7 @@ export default function Reveal({
   return (
     <Tag
       ref={ref as unknown as React.Ref<HTMLElement>}
+      id={id}
       className={`reveal ${visible ? "reveal-in" : ""} ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >

@@ -1,7 +1,8 @@
 -- Hollywood Night RSVP — Supabase schema
--- Run this in the Supabase SQL editor for the new (separate) project.
---
--- Safe to re-run; uses IF NOT EXISTS throughout.
+-- Lives in the SHARED Supabase DB (mazdcaibvhyqglfctdul) alongside `webcore`.
+-- Run this whole file in that project's SQL editor. Safe to re-run; uses
+-- IF NOT EXISTS throughout. The final block exposes `hollywood` to PostgREST so
+-- the REST API can read it — without it queries return PGRST106 "Invalid schema".
 
 create schema if not exists hollywood;
 create extension if not exists "pgcrypto";
@@ -61,3 +62,11 @@ alter default privileges in schema hollywood
   grant all on tables to service_role;
 alter default privileges in schema hollywood
   grant all on sequences to service_role;
+
+-- ── Expose `hollywood` to PostgREST (the REST API) ──────────────────────────
+-- The shared DB currently exposes: public, graphql_public, webcore.
+-- This line is ADDITIVE — it keeps those and adds hollywood. Do NOT drop the
+-- others or you'll disconnect webcore (every live SEO site + the Fairy monitor).
+-- Equivalent to Dashboard → Settings → API → Exposed schemas → add "hollywood".
+alter role authenticator set pgrst.db_schemas = 'public, graphql_public, webcore, hollywood';
+notify pgrst, 'reload config';
