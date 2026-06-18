@@ -103,7 +103,7 @@ export default function RsvpForm() {
 
   if (result?.ok && !result.attending) {
     return (
-      <div className="bg-ink-800 border border-gold-500/30 shadow-card p-10 text-center rise-in">
+      <div className="glass p-10 text-center rise-in">
         <p className="text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-4">
           ◆ Noted
         </p>
@@ -122,7 +122,7 @@ export default function RsvpForm() {
       {loading && <LoadingScreen label="Sending your invitation" />}
     <form
       onSubmit={onSubmit}
-      className="bg-ink-800 border border-gold-500/20 shadow-card p-8 md:p-10 space-y-6"
+      className="glass p-8 md:p-10 space-y-7"
       noValidate
     >
       <Field label="Full name" name="name" required autoComplete="name" />
@@ -145,13 +145,13 @@ export default function RsvpForm() {
           name="companyName"
           required
           defaultValue=""
-          className="w-full bg-ink-700 border border-ink-600 text-ivory px-5 py-4 focus:border-gold-500 focus:ring-1 focus:ring-gold-500/40 outline-none appearance-none"
+          className="field-line w-full text-ivory px-0 py-3 outline-none appearance-none"
           style={{
             backgroundImage:
               "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%23D4AF37' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>\")",
             backgroundRepeat: "no-repeat",
-            backgroundPosition: "right 1.25rem center",
-            paddingRight: "3rem",
+            backgroundPosition: "right 0.25rem center",
+            paddingRight: "2rem",
           }}
         >
           <option value="" disabled>
@@ -244,7 +244,7 @@ function Field({
         required={required}
         placeholder={placeholder}
         autoComplete={autoComplete}
-        className="w-full bg-ink-700 border border-ink-600 text-ivory placeholder-ivory/30 px-5 py-4 focus:border-gold-500 focus:ring-1 focus:ring-gold-500/40 outline-none transition-[transform,opacity] duration-150"
+        className="field-line w-full text-ivory placeholder-ivory/25 px-0 py-3 outline-none"
       />
     </label>
   );
@@ -260,7 +260,7 @@ function Toggle({
   onChange: (v: boolean) => void;
 }) {
   return (
-    <div className="flex items-center justify-between gap-6 border-t border-ink-600 pt-5">
+    <div className="flex items-center justify-between gap-6 border-t border-gold-500/15 pt-5">
       <span className="text-ivory-dim text-sm">{label}</span>
       <button
         type="button"
@@ -270,7 +270,7 @@ function Toggle({
         className={`relative h-7 w-12 rounded-full border transition-[transform,opacity] duration-200 ${
           value
             ? "bg-gold-600 border-gold-400"
-            : "bg-ink-700 border-ink-600"
+            : "bg-white/5 border-gold-500/25"
         }`}
       >
         <span
@@ -310,7 +310,7 @@ function Segmented({
               className={`px-4 py-3 text-sm uppercase tracking-[0.12em] border transition-[transform,opacity] duration-200 ${
                 active
                   ? "bg-gold-500/10 border-gold-500 text-gold-300"
-                  : "bg-ink-700 border-ink-600 text-ivory-dim hover:border-gold-500/40"
+                  : "bg-white/5 border-gold-500/20 text-ivory-dim hover:border-gold-500/45"
               }`}
             >
               {opt.label}

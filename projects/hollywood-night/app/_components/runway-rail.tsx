@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 const CHAPTERS = [
   { id: "chapter-1", numeral: "I", label: "Invitation" },
   { id: "chapter-2", numeral: "II", label: "The Evening" },
-  { id: "chapter-3", numeral: "III", label: "RSVP" },
+  { id: "chapter-3", numeral: "III", label: "Programme" },
+  { id: "chapter-4", numeral: "IV", label: "RSVP" },
 ];
 
 /**

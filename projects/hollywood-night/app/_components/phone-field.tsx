@@ -36,8 +36,8 @@ export default function PhoneField({
           {label}
         </span>
       )}
-      <div className="flex items-stretch bg-ink-700 border border-ink-600 focus-within:border-gold-500 focus-within:ring-1 focus-within:ring-gold-500/40 transition-[transform,opacity] duration-150">
-        <span className="flex items-center justify-center px-4 text-gold-300 font-mono text-sm border-r border-ink-600 bg-ink-800 select-none">
+      <div className="flex items-stretch border-0 border-b border-gold-500/30 focus-within:border-gold-400 transition-colors duration-200">
+        <span className="flex items-center pr-3 mr-3 text-gold-300 font-mono text-sm border-r border-gold-500/25 select-none">
           +60
         </span>
         <input
@@ -49,7 +49,7 @@ export default function PhoneField({
           placeholder="12 345 6789"
           value={digits}
           onChange={(e) => update(e.target.value)}
-          className={`flex-1 bg-transparent text-ivory placeholder-ivory/30 px-4 ${padY} outline-none font-mono`}
+          className={`flex-1 bg-transparent text-ivory placeholder-ivory/25 px-0 ${padY} outline-none font-mono`}
         />
       </div>
       <input type="hidden" name={name} value={fullValue} />

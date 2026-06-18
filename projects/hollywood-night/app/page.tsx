@@ -6,6 +6,7 @@ import TicketPreview from "./_components/ticket-preview";
 import Reveal from "./_components/reveal";
 import DoorOpening from "./_components/door-opening";
 import RunwayRail from "./_components/runway-rail";
+import AgendaTimeline from "./_components/agenda-timeline";
 
 export default function Home() {
   return (
@@ -70,7 +71,7 @@ export default function Home() {
 
             <div className="mt-10 flex justify-center">
               <a
-                href="#chapter-3"
+                href="#chapter-4"
                 className="inline-block bg-transparent border border-gold-500/70 text-gold-300 px-14 py-4 uppercase tracking-[0.28em] text-xs font-medium transition-[transform,opacity,background-color,border-color] duration-300 hover:bg-gold-500/10 hover:border-gold-400 hover:text-gold-200 hover:-translate-y-0.5"
               >
                 RSVP Now
@@ -89,7 +90,7 @@ export default function Home() {
             <p className="text-center text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-4">
               ◆ The Evening
             </p>
-            <h3 className="text-center font-display text-3xl md:text-5xl text-champagne mb-14">
+            <h3 className="text-center font-display font-semibold text-3xl md:text-5xl text-champagne mb-14">
               A Night Under the Spotlight
             </h3>
 
@@ -121,7 +122,7 @@ export default function Home() {
             </div>
           </Reveal>
 
-          {/* ───────────── Chapter III — RSVP ───────────── */}
+          {/* ───────────── Chapter III — The Programme ───────────── */}
           <Reveal
             as="section"
             id="chapter-3"
@@ -129,11 +130,32 @@ export default function Home() {
           >
             <ChapterNumeral value="III" />
 
+            <p className="text-center text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-4">
+              ◆ The Programme
+            </p>
+            <h3 className="text-center font-display font-semibold text-3xl md:text-5xl text-champagne mb-3">
+              Tentative Run of Show
+            </h3>
+            <p className="text-center text-ivory-dim mb-12 leading-relaxed">
+              An evening of dining, masquerade games &amp; grand prizes. Timings
+              are indicative and may shift on the night.
+            </p>
+            <AgendaTimeline />
+          </Reveal>
+
+          {/* ───────────── Chapter IV — RSVP ───────────── */}
+          <Reveal
+            as="section"
+            id="chapter-4"
+            className="runway-panel scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-20 pb-16"
+          >
+            <ChapterNumeral value="IV" />
+
             <div className="max-w-2xl mx-auto">
               <p className="text-center text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-4">
                 ◆ RSVP
               </p>
-              <h3 className="text-center font-display text-3xl md:text-5xl text-champagne mb-4">
+              <h3 className="text-center font-display font-semibold text-3xl md:text-5xl text-champagne mb-4">
                 Claim Your Seat
               </h3>
               <p className="text-center text-ivory-dim mb-12 leading-relaxed">
@@ -193,7 +215,7 @@ function DetailCard({
   secondary: string;
 }) {
   return (
-    <div className="relative bg-ink-800 border border-gold-500/20 shadow-card p-8 text-center transition-[transform,opacity,border-color] duration-500 hover:-translate-y-1 hover:border-gold-500/50">
+    <div className="glass relative p-8 text-center transition-[transform,opacity,border-color] duration-500 hover:-translate-y-1 hover:border-gold-500/50">
       <span className="absolute top-2 left-2 w-4 h-4 border-l border-t border-gold-500" />
       <span className="absolute top-2 right-2 w-4 h-4 border-r border-t border-gold-500" />
       <span className="absolute bottom-2 left-2 w-4 h-4 border-l border-b border-gold-500" />
