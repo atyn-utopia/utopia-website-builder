@@ -222,7 +222,7 @@ export default function RsvpForm() {
           href="https://wa.me/60174287801?text=Hi%2C%20I%20need%20help%20with%20my%20Hollywood%20Night%20RSVP."
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1EBE57] text-white px-5 py-2.5 text-[11px] font-medium uppercase tracking-[0.18em] transition-[transform,background-color] duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]"
+          className="inline-flex items-center gap-2 rounded-full bg-[#25D366] hover:bg-[#1EBE57] text-white px-6 py-2.5 text-[11px] font-medium uppercase tracking-[0.18em] transition-[transform,background-color] duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]"
         >
           <svg
             viewBox="0 0 24 24"
