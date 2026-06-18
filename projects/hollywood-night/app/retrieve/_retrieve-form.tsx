@@ -101,7 +101,7 @@ export default function RetrieveForm() {
           <p className="text-[10px] uppercase tracking-[0.32em] text-gold-500 mb-3">
             ◆ RSVP Confirmed
           </p>
-          <h2 className="font-display italic text-3xl md:text-5xl text-champagne leading-tight">
+          <h2 className="font-display italic text-2xl md:text-5xl text-champagne leading-tight">
             You&apos;re on the list.
           </h2>
           <p className="text-ivory-dim text-sm md:text-base mt-3 leading-relaxed">
@@ -343,106 +343,69 @@ function TicketCard({ ticket }: { ticket: Ticket }) {
         </div>
       </div>
 
-      {/* Mobile: single portrait ticket image with name + QR overlaid on the stub */}
+      {/* Mobile: stacked vertical card over the ticket-mobile background */}
       <div
         ref={mobileRef}
-        className="md:hidden relative w-full shadow-ticket overflow-hidden"
-        style={{ aspectRatio: "6890 / 8906", containerType: "inline-size" }}
+        className="md:hidden relative border border-gold-500 shadow-ticket overflow-hidden grain bg-ink-black"
+        style={{
+          backgroundImage: "url(/ticket-mobile.png)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/ticket-mobile.png"
-          alt="Hollywood Red Carpet — Admit One ticket"
-          className="absolute inset-0 w-full h-full object-cover block"
-        />
-        <div
-          className="absolute flex flex-col items-center justify-center text-center"
-          style={{ top: "45%", bottom: "6%", left: "8%", right: "8%" }}
-        >
-          <p
-            className="uppercase text-gold-400"
-            style={{
-              fontSize: "3cqw",
-              letterSpacing: "0.28em",
-              marginBottom: "2cqw",
-              textShadow: "0 2px 12px rgba(0,0,0,0.95)",
-            }}
-          >
-            {ticket.kind === "plus_one" ? "Plus One" : "Main Guest"}
-          </p>
-          <h3
-            className="font-display text-champagne leading-tight"
-            style={{
-              fontSize: "7.5cqw",
-              marginBottom: "4cqw",
-              textShadow: "0 2px 16px rgba(0,0,0,0.95)",
-            }}
-          >
-            {displayName}
-          </h3>
-
-          {ticket.checkedIn && typeof ticket.luckyNumber === "number" ? (
-            <div className="rise-in flex flex-col items-center">
-              <p
-                className="uppercase text-gold-500"
-                style={{
-                  fontSize: "2.6cqw",
-                  letterSpacing: "0.28em",
-                  marginBottom: "1.5cqw",
-                  textShadow: "0 2px 12px rgba(0,0,0,0.95)",
-                }}
-              >
-                Lucky Number
+        <div className="flex flex-col">
+          <div className="p-8 border-b border-dashed border-gold-500/60">
+            <p className="text-[10px] uppercase tracking-[0.32em] text-gold-400 mb-3">
+              ◆ Hollywood Night · {ticket.kind === "plus_one" ? "Guest" : "Main"}
+            </p>
+            <p className="text-[10px] uppercase tracking-[0.22em] text-gold-600 mb-1">
+              Guest
+            </p>
+            <h3 className="font-display text-3xl text-champagne mb-4">
+              {ticket.holderName}
+            </h3>
+            <p className="font-mono text-xs text-gold-400 tracking-wider">
+              {ticket.ticketId}
+            </p>
+            {ticket.checkedIn && (
+              <p className="mt-4 inline-block text-[10px] uppercase tracking-[0.22em] text-success-emerald border border-success-emerald px-3 py-1">
+                ✓ Checked In
               </p>
-              <div
-                className="bg-ink-black/80 border-2 border-gold-500"
-                style={{ padding: "3cqw 5cqw" }}
-              >
+            )}
+          </div>
+          <div className="flex flex-col items-center justify-center p-8 bg-ink-black/40">
+            {ticket.checkedIn && typeof ticket.luckyNumber === "number" ? (
+              <div className="text-center rise-in">
+                <p className="text-[9px] uppercase tracking-[0.32em] text-gold-500 mb-2">
+                  ◆ Lucky Draw Number ◆
+                </p>
+                <div className="inline-block bg-ink-black border-2 border-gold-500 px-8 py-6 shadow-[0_0_60px_-10px_rgba(212,175,55,0.45)]">
+                  <p className="font-mono font-black text-6xl text-gold-300 tabular-nums leading-none">
+                    {String(ticket.luckyNumber).padStart(3, "0")}
+                  </p>
+                </div>
                 <p
-                  className="font-mono font-black text-gold-300 tabular-nums leading-none"
-                  style={{ fontSize: "12cqw" }}
+                  className="mt-4 font-display italic text-gold-400 text-xs"
+                  style={{ letterSpacing: "0.18em" }}
                 >
-                  {String(ticket.luckyNumber).padStart(3, "0")}
+                  ADMITTED
                 </p>
               </div>
-              <p
-                className="uppercase text-success-emerald border border-success-emerald"
-                style={{
-                  fontSize: "2.4cqw",
-                  letterSpacing: "0.22em",
-                  marginTop: "2.5cqw",
-                  padding: "0.6cqw 2cqw",
-                }}
-              >
-                ✓ Admitted
-              </p>
-            </div>
-          ) : (
-            <div className="flex flex-col items-center">
-              <div
-                className="bg-white border border-gold-500 shadow-[0_8px_24px_-6px_rgba(0,0,0,0.9)]"
-                style={{ padding: "2.2cqw" }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={ticket.qr}
-                  alt="Ticket QR"
-                  className="block"
-                  style={{ width: "40cqw", height: "40cqw" }}
-                />
-              </div>
-              <p
-                className="font-mono text-gold-300 tracking-wider"
-                style={{
-                  fontSize: "2.8cqw",
-                  marginTop: "2.5cqw",
-                  textShadow: "0 2px 12px rgba(0,0,0,0.95)",
-                }}
-              >
-                {ticket.ticketId}
-              </p>
-            </div>
-          )}
+            ) : (
+              <>
+                <div className="bg-white p-3 border border-gold-500">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={ticket.qr} alt="Ticket QR" className="w-40 h-40" />
+                </div>
+                <p
+                  className="mt-3 font-display italic text-gold-400 text-xs"
+                  style={{ letterSpacing: "0.18em" }}
+                >
+                  ADMIT ONE
+                </p>
+              </>
+            )}
+          </div>
         </div>
       </div>
 
