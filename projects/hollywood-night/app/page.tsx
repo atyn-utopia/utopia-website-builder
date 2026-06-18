@@ -2,7 +2,6 @@ import Image from "next/image";
 import { EVENT } from "@/lib/event";
 import RsvpForm from "./_components/rsvp-form";
 import MarqueeBulbs from "./_components/marquee-bulbs";
-import TicketPreview from "./_components/ticket-preview";
 import Reveal from "./_components/reveal";
 import DoorOpening from "./_components/door-opening";
 import RunwayRail from "./_components/runway-rail";
@@ -142,15 +141,6 @@ export default function Home() {
                 secondary={EVENT.venueAddress}
               />
             </div>
-
-            <div className="mt-16">
-              <p className="text-center text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-8">
-                ◆ Your Ticket Awaits
-              </p>
-              <div className="float-ticket">
-                <TicketPreview />
-              </div>
-            </div>
           </Reveal>
 
           {/* ───────────── Chapter III — The Programme ───────────── */}
@@ -207,7 +197,7 @@ export default function Home() {
               </h3>
               <p className="text-center text-ivory-dim mb-10 leading-relaxed">
                 Tickets are personal and non-transferable. A QR pass will be
-                emailed on confirmation.
+                sent on WhatsApp.
               </p>
               <div className="mb-12">
                 <p className="text-center text-[10px] uppercase tracking-[0.28em] text-gold-500 mb-5">

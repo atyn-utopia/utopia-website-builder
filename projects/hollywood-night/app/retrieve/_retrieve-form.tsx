@@ -230,43 +230,31 @@ function TicketCard({ ticket }: { ticket: Ticket }) {
           scales cleanly because each half owns its own box. */}
       <div
         ref={desktopRef}
-        className="hidden md:grid relative w-full shadow-ticket overflow-hidden"
+        className="hidden md:block relative w-full shadow-ticket overflow-hidden"
         style={{
-          aspectRatio: `${5421 + 2093} / 2734`,
-          gridTemplateColumns: "5421fr 2093fr",
+          aspectRatio: "7543 / 2734",
           containerType: "inline-size",
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/e-ticket-left.png"
-          alt="Hollywood Red Carpet"
-          className="w-full h-full object-cover block"
+          src="/ticket.png"
+          alt="Hollywood Red Carpet — Admit One ticket"
+          className="absolute inset-0 w-full h-full object-cover block"
         />
-        {/* dashed perforation between the two halves */}
+        {/* name + QR panel overlaid on the right of the ticket */}
         <div
-          aria-hidden
-          className="absolute pointer-events-none"
+          className="absolute flex flex-col items-center justify-center text-center"
           style={{
-            left: `${(5421 / (5421 + 2093)) * 100}%`,
-            top: "4%",
-            bottom: "4%",
-            width: 0,
-            borderLeft: "0.22cqw dashed rgba(212,175,55,0.75)",
-            transform: "translateX(-50%)",
+            top: "9%",
+            bottom: "9%",
+            right: "2.5%",
+            width: "27%",
+            background: "rgba(5,6,10,0.5)",
+            backdropFilter: "blur(2px)",
+            border: "0.12cqw solid rgba(212,175,55,0.45)",
           }}
-        />
-        <div className="relative">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/e-ticket-right.png"
-            alt=""
-            className="w-full h-full object-cover block"
-          />
-          <div
-            className="absolute flex flex-col items-center justify-center text-center"
-            style={{ top: "5%", bottom: "42%", left: "6%", right: "10%" }}
-          >
+        >
           <p
             className="uppercase text-gold-400"
             style={{
@@ -352,7 +340,6 @@ function TicketCard({ ticket }: { ticket: Ticket }) {
               </p>
             </div>
           )}
-          </div>
         </div>
       </div>
 
