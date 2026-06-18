@@ -33,48 +33,68 @@ export default function Home() {
           <Reveal
             as="section"
             id="chapter-1"
-            className="runway-panel scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-20 pb-16 text-center"
+            className="relative overflow-hidden scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-10 pb-20 text-center min-h-[86vh] flex flex-col items-center justify-center"
           >
-            <p className="text-[11px] md:text-xs uppercase tracking-[0.32em] text-gold-500 mb-8">
-              ◆ 31.07.2026 · Hollywood Red Carpet ◆
-            </p>
+            {/* photographic background */}
+            <div
+              aria-hidden
+              className="absolute inset-0"
+              style={{
+                backgroundImage: "url(/main-background.png)",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            />
+            {/* gradient overlay — readability + blend into the velvet runway */}
+            <div
+              aria-hidden
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(14,3,6,0.45) 0%, rgba(14,3,6,0.28) 38%, rgba(28,6,11,0.72) 78%, #1C060B 100%)",
+              }}
+            />
 
-            <MarqueeBulbs />
-
-            <div className="relative my-9 md:my-12 w-full max-w-3xl mx-auto">
+            <div className="relative z-10 w-full max-w-3xl mx-auto">
               <Image
                 src="/masthead-dinner.png"
                 alt="Utopia Group of Companies — Hollywood Red Carpet"
                 width={1600}
                 height={726}
                 priority
-                className="w-full h-auto drop-shadow-[0_0_40px_rgba(212,175,55,0.3)]"
+                className="w-40 sm:w-52 md:w-60 h-auto mx-auto mb-10 drop-shadow-[0_0_30px_rgba(212,175,55,0.35)]"
               />
-            </div>
 
-            <h1 className="sr-only">{EVENT.name}</h1>
+              <p className="text-[11px] md:text-xs uppercase tracking-[0.32em] text-gold-400 mb-7">
+                ◆ 31.07.2026 · Hollywood Red Carpet ◆
+              </p>
 
-            <h2 className="font-display italic text-xl md:text-3xl text-gold-300 mb-8">
-              You&apos;re Invited to the Annual Dinner
-            </h2>
+              <MarqueeBulbs />
 
-            <MarqueeBulbs />
+              <h1 className="sr-only">{EVENT.name}</h1>
 
-            <div className="mt-10 inline-flex flex-wrap items-center justify-center gap-3 md:gap-4 text-ivory-dim text-sm md:text-base">
-              <span>{EVENT.dateLabel}</span>
-              <span className="text-gold-500">◆</span>
-              <span>{EVENT.timeLabel}</span>
-              <span className="text-gold-500">◆</span>
-              <span>{EVENT.venue}</span>
-            </div>
+              <h2 className="font-display italic text-4xl md:text-6xl text-champagne my-7 leading-[1.05]">
+                You&apos;re Invited to the Annual Dinner
+              </h2>
 
-            <div className="mt-10 flex justify-center">
-              <a
-                href="#chapter-4"
-                className="inline-block bg-transparent border border-gold-500/70 text-gold-300 px-14 py-4 uppercase tracking-[0.28em] text-xs font-medium transition-[transform,opacity,background-color,border-color] duration-300 hover:bg-gold-500/10 hover:border-gold-400 hover:text-gold-200 hover:-translate-y-0.5"
-              >
-                RSVP Now
-              </a>
+              <MarqueeBulbs />
+
+              <div className="mt-9 inline-flex flex-wrap items-center justify-center gap-3 md:gap-4 text-ivory-dim text-sm md:text-base">
+                <span>{EVENT.dateLabel}</span>
+                <span className="text-gold-500">◆</span>
+                <span>{EVENT.timeLabel}</span>
+                <span className="text-gold-500">◆</span>
+                <span>{EVENT.venue}</span>
+              </div>
+
+              <div className="mt-10 flex justify-center">
+                <a
+                  href="#chapter-4"
+                  className="inline-block bg-transparent border border-gold-500/70 text-gold-300 px-14 py-4 uppercase tracking-[0.28em] text-xs font-medium transition-[transform,opacity,background-color,border-color] duration-300 hover:bg-gold-500/10 hover:border-gold-400 hover:text-gold-200 hover:-translate-y-0.5"
+                >
+                  RSVP Now
+                </a>
+              </div>
             </div>
           </Reveal>
 
@@ -142,9 +162,28 @@ export default function Home() {
           <Reveal
             as="section"
             id="chapter-4"
-            className="runway-panel scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-20 pb-16"
+            className="relative overflow-hidden scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-20 pb-16"
           >
-            <div className="max-w-2xl mx-auto">
+            {/* photographic background */}
+            <div
+              aria-hidden
+              className="absolute inset-0"
+              style={{
+                backgroundImage: "url(/form-background.png)",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            />
+            {/* gradient overlay — fades into the velvet at top & bottom */}
+            <div
+              aria-hidden
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(180deg, #1C060B 0%, rgba(28,6,11,0.82) 16%, rgba(20,4,8,0.68) 50%, rgba(28,6,11,0.82) 84%, #1C060B 100%)",
+              }}
+            />
+            <div className="relative z-10 max-w-2xl mx-auto">
               <p className="text-center text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-4">
                 ◆ RSVP
               </p>
