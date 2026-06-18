@@ -173,7 +173,7 @@ export default function LuckyDrawClient() {
 
   return (
     <main
-      className="min-h-screen bg-stage grain"
+      className="min-h-screen bg-runway grain"
       style={{ paddingTop: "env(safe-area-inset-top)" }}
     >
 
@@ -272,7 +272,7 @@ export default function LuckyDrawClient() {
         )}
 
         {history.length > 0 && (
-          <div className="mt-14 border-t border-ink-600 pt-10">
+          <div className="mt-14 border-t border-gold-500/15 pt-10">
             <p className="text-center text-[10px] uppercase tracking-[0.28em] text-gold-500 mb-6">
               ◆ Previously Drawn ({history.length})
             </p>
@@ -280,7 +280,7 @@ export default function LuckyDrawClient() {
               {history.map((d) => (
                 <li
                   key={d.ticketId}
-                  className="flex items-center justify-between gap-3 bg-ink-800 border border-ink-600 px-4 py-3"
+                  className="glass flex items-center justify-between gap-3 px-4 py-3"
                 >
                   <span className="font-mono font-black text-xl text-gold-400 tabular-nums shrink-0">
                     {String(d.luckyNumber ?? 0).padStart(3, "0")}

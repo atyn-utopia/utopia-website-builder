@@ -68,7 +68,7 @@ export async function POST(request: Request) {
     return (rows?.length ?? 0) > 0;
   }
 
-  const HELP = "Need help? Contact 017-428 7801.";
+  const HELP = "Need help? WhatsApp us at 017-428 7801.";
 
   if (await phoneAlreadyUsed(data.phone)) {
     return NextResponse.json(
