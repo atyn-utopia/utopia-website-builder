@@ -129,16 +129,19 @@ export default function Home() {
                 label="Date"
                 primary={EVENT.dateLabel}
                 secondary={EVENT.timeLabel}
+                icon={<DetailIcon name="date" />}
               />
               <DetailCard
                 label="Dress Code"
                 primary={EVENT.dressCode}
                 secondary="Come as a star"
+                icon={<DetailIcon name="dress" />}
               />
               <DetailCard
                 label="Venue"
                 primary={EVENT.venue}
                 secondary={EVENT.venueAddress}
+                icon={<DetailIcon name="venue" />}
               />
             </div>
           </Reveal>
@@ -240,22 +243,70 @@ function DetailCard({
   label,
   primary,
   secondary,
+  icon,
 }: {
   label: string;
   primary: string;
   secondary: string;
+  icon: React.ReactNode;
 }) {
   return (
-    <div className="glass relative p-8 text-center transition-[transform,opacity,border-color] duration-500 hover:-translate-y-1 hover:border-gold-500/50">
-      <span className="absolute top-2 left-2 w-4 h-4 border-l border-t border-gold-500" />
-      <span className="absolute top-2 right-2 w-4 h-4 border-r border-t border-gold-500" />
-      <span className="absolute bottom-2 left-2 w-4 h-4 border-l border-b border-gold-500" />
-      <span className="absolute bottom-2 right-2 w-4 h-4 border-r border-b border-gold-500" />
-      <p className="text-[10px] uppercase tracking-[0.28em] text-gold-500 mb-4">
+    <div className="group relative flex flex-col items-center justify-center text-center px-7 py-12 border border-gold-500/20 bg-gradient-to-b from-white/[0.05] to-white/[0.01] backdrop-blur-md shadow-[0_30px_70px_-45px_rgba(0,0,0,0.95)] transition-[transform,border-color] duration-500 hover:-translate-y-1.5 hover:border-gold-500/45">
+      <span className="mb-5 text-gold-400/90 transition-transform duration-500 group-hover:scale-110">
+        {icon}
+      </span>
+      <p className="text-[10px] uppercase tracking-[0.34em] text-gold-400 mb-3">
         {label}
       </p>
-      <p className="font-display text-2xl text-champagne mb-2">{primary}</p>
-      <p className="text-ivory-faint text-sm">{secondary}</p>
+      <span
+        aria-hidden
+        className="mb-5 block h-px w-8 bg-gradient-to-r from-transparent via-gold-500/60 to-transparent"
+      />
+      <p className="font-display text-2xl md:text-[1.7rem] text-champagne leading-snug">
+        {primary}
+      </p>
+      {secondary && (
+        <p className="mt-3 max-w-[15rem] text-ivory-faint text-[13px] leading-relaxed">
+          {secondary}
+        </p>
+      )}
     </div>
+  );
+}
+
+function DetailIcon({ name }: { name: "date" | "dress" | "venue" }) {
+  const common = {
+    width: 26,
+    height: 26,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.4,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    "aria-hidden": true,
+  };
+  if (name === "date") {
+    return (
+      <svg {...common}>
+        <rect x="3" y="4.5" width="18" height="16" rx="1.5" />
+        <path d="M3 9.5h18M8 2.5v4M16 2.5v4" />
+      </svg>
+    );
+  }
+  if (name === "dress") {
+    return (
+      <svg {...common}>
+        <path d="M3 7.5 11 12 3 16.5Z" />
+        <path d="M21 7.5 13 12 21 16.5Z" />
+        <rect x="10.5" y="9.8" width="3" height="4.4" rx="0.7" />
+      </svg>
+    );
+  }
+  return (
+    <svg {...common}>
+      <path d="M12 21c4-4.5 6.5-7.7 6.5-10.5a6.5 6.5 0 1 0-13 0C5.5 13.3 8 16.5 12 21Z" />
+      <circle cx="12" cy="10.5" r="2.4" />
+    </svg>
   );
 }
