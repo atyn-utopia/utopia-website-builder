@@ -7,6 +7,7 @@ import DoorOpening from "./_components/door-opening";
 import RunwayRail from "./_components/runway-rail";
 import AgendaTimeline from "./_components/agenda-timeline";
 import Countdown from "./_components/countdown";
+import FilmStrip from "./_components/film-strip";
 
 export default function Home() {
   return (
@@ -134,7 +135,7 @@ export default function Home() {
               <DetailCard
                 label="Dress Code"
                 primary={EVENT.dressCode}
-                secondary="Come as a star"
+                secondary="Dress to impress in your finest formal attire and get ready to shine like a star!"
                 icon={<DetailIcon name="dress" />}
               />
               <DetailCard
@@ -165,6 +166,9 @@ export default function Home() {
             <AgendaTimeline />
           </Reveal>
         </div>
+
+        {/* ───────────── Film strip (auto-scrolling) ───────────── */}
+        <FilmStrip />
 
         {/* ───────────── Chapter IV — RSVP (full-bleed) ───────────── */}
         <Reveal

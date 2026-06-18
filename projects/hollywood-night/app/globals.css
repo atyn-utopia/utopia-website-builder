@@ -260,6 +260,27 @@ h1, h2, h3, h4, .font-display {
   text-shadow: 0 0 14px var(--gold-glow);
 }
 
+/* ───────────────────────── Film strip ───────────────────────── */
+@keyframes film-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.film-track {
+  width: max-content;
+  animation: film-scroll 60s linear infinite;
+}
+/* sprocket perforations along the top & bottom of the strip */
+.film-perf {
+  height: 14px;
+  background: repeating-linear-gradient(
+    to right,
+    #ece0bb 0 12px,
+    #0a0a0a 12px 30px
+  );
+  background-position: 0 center;
+  opacity: 0.85;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation: none !important;
