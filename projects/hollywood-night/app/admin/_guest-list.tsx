@@ -153,7 +153,6 @@ export default function GuestList({
                     <th className="px-4 py-4">Contact</th>
                     <th className="px-4 py-4">Status</th>
                     <th className="px-4 py-4">Plus One</th>
-                    <th className="px-4 py-4">Transport</th>
                     <th className="px-4 py-4">Tickets</th>
                     <th className="px-4 py-4">RSVP&apos;d</th>
                     <th className="px-4 py-4">Actions</th>
@@ -190,9 +189,6 @@ export default function GuestList({
                       </td>
                       <td className="px-4 py-4 text-ivory-dim">
                         {g.has_plus_one ? g.plus_one_name ?? "—" : "—"}
-                      </td>
-                      <td className="px-4 py-4 text-ivory-dim">
-                        {g.transportation_required ? "Yes" : "—"}
                       </td>
                       <td className="px-4 py-4">
                         <TicketsList tickets={g.tickets ?? []} />
@@ -257,7 +253,6 @@ export default function GuestList({
                     {g.has_plus_one && (
                       <span>+1: {g.plus_one_name ?? "—"}</span>
                     )}
-                    {g.transportation_required && <span>Transport</span>}
                     <span className="ml-auto text-[10px]">
                       {new Date(g.created_at).toLocaleString()}
                     </span>
@@ -521,14 +516,6 @@ function EditModal({
             onChange={(e) => set("attending", e.target.checked)}
           />
           Attending
-        </label>
-        <label className="flex items-center gap-2 text-sm text-ivory-dim">
-          <input
-            type="checkbox"
-            checked={v.transportationRequired}
-            onChange={(e) => set("transportationRequired", e.target.checked)}
-          />
-          Needs transportation
         </label>
         <label className="flex items-center gap-2 text-sm text-ivory-dim">
           <input

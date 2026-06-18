@@ -20,7 +20,6 @@ export default function RsvpForm({
   const isVip = variant === "vip";
   const [attending, setAttending] = useState(true);
   const [hasPlusOne, setHasPlusOne] = useState(false);
-  const [transport, setTransport] = useState(false);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<SubmitResult | null>(null);
 
@@ -79,7 +78,7 @@ export default function RsvpForm({
       hasPlusOne,
       plusOneName,
       plusOnePhone,
-      transportationRequired: isVip ? false : transport,
+      transportationRequired: false,
       rsvpType: isVip ? "vip" : "staff",
     };
 
@@ -206,13 +205,6 @@ export default function RsvpForm({
             </div>
           )}
 
-          {!isVip && (
-            <Toggle
-              label="Need transportation to the venue?"
-              value={transport}
-              onChange={setTransport}
-            />
-          )}
         </>
       )}
 
