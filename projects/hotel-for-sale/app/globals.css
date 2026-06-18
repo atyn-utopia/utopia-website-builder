@@ -17,6 +17,7 @@
      --brand-navy-deep / --brand-charcoal = darkest surfaces (footer, agency band, seller). */
   --brand-navy: #16356B;
   --brand-navy-deep: #0F2A57;
+  --viva-green: #8DC63F;
   --section-alt: #F4F7FB;
 
   --brand-charcoal: #0A2540;
@@ -67,7 +68,8 @@
   --gut: clamp(12px, 1.2vw, 16px);
 
   --font-display: var(--font-sans), 'Inter', -apple-system, system-ui, sans-serif;
-  --font-mono-stack: var(--font-mono), ui-monospace, 'JetBrains Mono', Menlo, monospace;
+  /* "mono" stack now maps to the body font (Inter) — no monospace anywhere */
+  --font-mono-stack: var(--font-display);
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-emphasis: cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -582,14 +584,16 @@ body h2, body h3, body h4 { font-weight: 700 !important; }
 }
 .hotel-card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-slow) var(--ease-out); }
 .hotel-card:hover .hotel-card-media img { transform: scale(1.05); }
-/* watermark like the reference's "HotelForSale.my · For Sale" */
-.hotel-watermark {
-  position: absolute; top: 8px; right: 10px;
-  font-weight: 700; font-size: 11px; letter-spacing: -0.01em;
-  color: rgba(255,255,255,0.92);
-  text-shadow: 0 1px 4px rgba(0,0,0,0.45);
+/* Brand watermark (white logo) on the card image, like the reference.
+   Scoped tighter than `.hotel-card-media img` so the cover-fill rule
+   doesn't stretch the logo to fill the whole card. */
+.hotel-card-media img.hotel-watermark {
+  position: absolute; top: 9px; right: 10px;
+  height: 15px; width: auto;
+  object-fit: contain;
+  opacity: 0.95;
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.5));
 }
-.hotel-watermark .wm-for { color: var(--brand-orange); }
 .hotel-card-body { display: flex; flex-direction: column; gap: 7px; padding: 14px 16px 0; flex: 1; }
 .hotel-card-title { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; color: var(--brand-navy); margin: 0; line-height: 1.3;
   display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }

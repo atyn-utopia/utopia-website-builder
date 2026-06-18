@@ -1,24 +1,24 @@
 {
   "meta": {
     "home": {
-      "title": "马来西亚酒店出售 — 最大最完整酒店房源 | HotelForSale",
+      "title": "马来西亚酒店出售, 最大最完整酒店房源 | HotelForSale",
       "description": "浏览马来西亚最大的酒店出售房源。被低估、低于市场价的酒店、汽车旅馆及度假村，毛收益率高达13%，涵盖吉隆坡、槟城、柔佛、云顶等地。立即WhatsApp我们。"
     },
     "location": {
-      "title": "{location}酒店出售 — 被低估与高收益 | HotelForSale",
+      "title": "{location}酒店出售, 被低估与高收益 | HotelForSale",
       "description": "{state}{location}的酒店、汽车旅馆和度假村出售。低于市场价、高收益的投资机会。通过WhatsApp获取最新的{location}酒店房源。"
     },
     "blogListing": {
-      "title": "酒店投资指南 — HotelForSale 马来西亚博客",
-      "description": "关于在马来西亚购买酒店的指南与见解——收益率、估值、融资，以及投资被低估酒店、汽车旅馆和度假村的最佳州属。"
+      "title": "酒店投资指南, HotelForSale 马来西亚博客",
+      "description": "关于在马来西亚购买酒店的指南与见解, , 收益率、估值、融资，以及投资被低估酒店、汽车旅馆和度假村的最佳州属。"
     },
     "properties": {
-      "title": "马来西亚所有出售酒店 — 浏览房源 | HotelForSale",
+      "title": "马来西亚所有出售酒店, 浏览房源 | HotelForSale",
       "description": "浏览我们遍布马来西亚的酒店、汽车旅馆和度假村出售完整目录。按星级、价格区间、州属和价值筛选，找到您理想的酒店投资。"
     }
   },
   "nav": {
-    "logoAlt": "HotelForSale — 马来西亚最大最完整的酒店出售房源",
+    "logoAlt": "HotelForSale, 马来西亚最大最完整的酒店出售房源",
     "home": "首页",
     "properties": "酒店",
     "sell": "出售您的酒店",
@@ -30,7 +30,7 @@
   },
   "fomo": {
     "eyebrow": "{monthUpper} 热门优惠",
-    "body": "新增被低估酒店——{month}精选名单截止于：",
+    "body": "新增被低估酒店, , {month}精选名单截止于：",
     "countdownLabel": "天 : 时 : 分 : 秒",
     "ctaLabel": "查看热门名单"
   },
@@ -40,10 +40,10 @@
     "h1Highlight": "",
     "h1Part2": "",
     "h2": "最大最完整的酒店房源",
-    "supporting": "我们协助您搜寻马来西亚所有待售的度假村、汽车旅馆和酒店，回报高、被低估，且位于吉隆坡、槟城、新山、云顶等战略性地点！",
+    "supporting": "我们协助您搜寻马来西亚所有待售的度假村、汽车旅馆与酒店，回报高、价格低于市场。",
     "ctaPrimary": "立即 WhatsApp",
     "ctaSecondary": "查看所有酒店 →",
-    "imageAlt": "马来西亚豪华酒店出售——HotelForSale 精选房源",
+    "imageAlt": "马来西亚豪华酒店出售, , HotelForSale 精选房源",
     "statHotels": "已列酒店",
     "statStates": "覆盖州属",
     "statYield": "毛收益率",
@@ -107,7 +107,8 @@
     "h3": "我们的待售酒店",
     "intro": "我们的A级酒店热门房源低于市场价30%，每年可获得超过10%的毛收入。",
     "viewAll": "查看所有酒店",
-    "h3Accent": "热门名单！"
+    "h3Accent": "热门名单！",
+    "bannerText": "Grade-A 优质笋盘快速售出, 今日热门清单将在以下时间结束："
   },
   "hotelCard": {
     "onSale": "待售",
@@ -117,7 +118,7 @@
     "viewListing": "查看房源",
     "enquire": "咨询",
     "starsAria": "{count}星酒店",
-    "imageAlt": "{name} — {city}，{state}待售酒店",
+    "imageAlt": "{name}, {city}，{state}待售酒店",
     "starHotel": "{count}星酒店"
   },
   "process": {
@@ -151,7 +152,7 @@
       },
       {
         "title": "低于市场价",
-        "body": "每个房源都经过预先审核以确保被低估——通常低于市场价高达30%。"
+        "body": "每个房源都经过预先审核以确保被低估, , 通常低于市场价高达30%。"
       },
       {
         "title": "高收益投资",
@@ -240,7 +241,7 @@
   },
   "faq": {
     "eyebrow": "常见问题",
-    "h3": "在马来西亚购买酒店——常见问题",
+    "h3": "在马来西亚购买酒店, , 常见问题",
     "items": [
       {
         "q": "我如何在马来西亚购买待售酒店？",
@@ -252,7 +253,7 @@
       },
       {
         "q": "我能从一间酒店获得多少毛收益率？",
-        "a": "我们的A级待售酒店每年可获得高达13%的毛租金收益率。具体收益率取决于物业、地点和入住率——我们会分享每个房源的完整数据。"
+        "a": "我们的A级待售酒店每年可获得高达13%的毛租金收益率。具体收益率取决于物业、地点和入住率, , 我们会分享每个房源的完整数据。"
       },
       {
         "q": "外国人可以在马来西亚购买酒店吗？",
@@ -264,10 +265,10 @@
       },
       {
         "q": "哪些地区的酒店房源最多？",
-        "a": "我们覆盖马来西亚全部14个州属，其中以吉隆坡、槟城、新山、云顶高原和八打灵再也最为集中——但全国各地会定期出现新房源。"
+        "a": "我们覆盖马来西亚全部14个州属，其中以吉隆坡、槟城、新山、云顶高原和八打灵再也最为集中, , 但全国各地会定期出现新房源。"
       },
       {
-        "q": "我拥有一间酒店——你们能帮我出售吗？",
+        "q": "我拥有一间酒店, , 你们能帮我出售吗？",
         "a": "可以。联系我们，我们将从投资者网络中为您匹配潜在的酒店买家。许多卖家在几天内便收到认真的报价。挂牌没有任何义务。"
       },
       {
@@ -326,7 +327,8 @@
     "valueHighYield": "高收益（10%+）",
     "reset": "重置",
     "resultsCount": "{count} 间酒店可供选择",
-    "noResults": "没有酒店符合您的筛选条件。请尝试重置，或 WhatsApp 我们获取未上架的选择。"
+    "noResults": "没有酒店符合您的筛选条件。请尝试重置，或 WhatsApp 我们获取未上架的选择。",
+    "filtersToggle": "筛选"
   },
   "detail": {
     "breadcrumbHome": "首页",
@@ -360,10 +362,14 @@
     "closingHeadline": "最佳酒店优惠通常只持续14天",
     "closingBody": "在这间酒店售出之前，今天就联系我们。每月平均成交13间酒店。",
     "closingCta": "立即 WhatsApp",
-    "relatedHeading": "更多待售酒店"
+    "relatedHeading": "更多待售酒店",
+    "locationHeading": "物业位置",
+    "propertySizeLabel": "物业面积",
+    "unitTypeLabel": "单位类型",
+    "similarHeading": "相似的待售酒店"
   },
   "footer": {
-    "tagline": "HotelForSale — 马来西亚最大最完整的被低估酒店、汽车旅馆和度假村出售房源。",
+    "tagline": "HotelForSale, 马来西亚最大最完整的被低估酒店、汽车旅馆和度假村出售房源。",
     "agency": "Vivahomes Realty Sdn Bhd（代理 E(1)1670）",
     "address": "25-3 Jalan PJU 5/20E The Strand, Kota Damansara, 47810 Petaling Jaya, Selangor.",
     "exploreHeading": "探索",
@@ -407,5 +413,8 @@
   "agency": {
     "h3": "马来西亚顶级酒店销售代理",
     "sub": "马来西亚 #1 酒店出售代理 · Vivahomes Realty Sdn Bhd · 代理 E(1)1670"
+  },
+  "products": {
+    "imageAltTemplate": "马来西亚出售的 {model} 酒店"
   }
 }

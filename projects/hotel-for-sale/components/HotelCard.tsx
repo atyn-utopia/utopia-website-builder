@@ -34,9 +34,8 @@ export default function HotelCard({ h }: { h: HotelListing }) {
           loading="lazy"
           decoding="async"
         />
-        <span className="hotel-watermark" aria-hidden="true">
-          HotelForSale<span className="wm-for">.For</span> Sale
-        </span>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className="hotel-watermark" src="/brand/logo-dark.png" alt="HotelForSale.my" loading="lazy" />
       </div>
 
       <div className="hotel-card-body">

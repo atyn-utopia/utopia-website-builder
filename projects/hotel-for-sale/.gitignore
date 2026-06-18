@@ -23,5 +23,5 @@ node_modules/
 /ref-tail.mjs
 /reference screenshots/
 /temporary screenshots/
-/config/hotels.json
 /config/property-overrides.json
+/migrate-hotels.mjs

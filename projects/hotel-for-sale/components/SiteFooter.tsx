@@ -1,16 +1,5 @@
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
-import { siteConfig } from '@/config/site';
-
-const FOOTER_LOCATIONS = [
-  'kuala-lumpur', 'johor-bahru', 'george-town', 'kota-kinabalu',
-];
-const cityNameMap: Record<string, string> = {
-  'kuala-lumpur': 'Kuala Lumpur',
-  'johor-bahru': 'Johor Bahru',
-  'george-town': 'George Town',
-  'kota-kinabalu': 'Kota Kinabalu',
-};
 
 export default async function SiteFooter({ locale }: { locale: string }) {
   const t = await getTranslations({ locale, namespace: 'footer' });
@@ -29,9 +18,6 @@ export default async function SiteFooter({ locale }: { locale: string }) {
           <Link href={`/${locale}`}>{navT('home')}</Link>
           <Link href={`/${locale}/properties`}>{navT('properties')}</Link>
           <Link href={`/${locale}#sell`}>{navT('sell')}</Link>
-          {FOOTER_LOCATIONS.map((slug) => (
-            <Link key={slug} href={`/${locale}/${siteConfig.productSlug}/${slug}`}>{cityNameMap[slug]}</Link>
-          ))}
           <Link href={`/${locale}/blog`}>{t('blogLabel')}</Link>
         </nav>
 

@@ -1,7 +1,33 @@
 import { NextResponse } from 'next/server';
-import { revalidatePath } from 'next/cache';
-import { readHotels, upsertHotel, deleteHotel, nextHotelId } from '@/lib/hotelStore';
+import { revalidatePath, revalidateTag } from 'next/cache';
+import { readHotels, upsertHotel, deleteHotel, nextHotelId, HOTELS_TAG } from '@/lib/hotelStore';
 import { HotelListing } from '@/config/properties';
+
+function refresh() {
+  revalidateTag(HOTELS_TAG);
+  revalidatePath('/', 'layout');
+}
+
+// Simple admin password gate for write operations.
+const ADMIN_PASS = process.env.ADMIN_PASS ?? '8889';
+function authed(req: Request): boolean {
+  return req.headers.get('x-admin-pass') === ADMIN_PASS;
+}
+function unauthorized() {
+  return NextResponse.json({ ok: false, error: 'Unauthorized' }, { status: 401 });
+}
+
+const HOT_LIST_LIMIT = 5;
+// Returns an error message if adding this hotel to the Hot List would exceed the limit.
+async function hotListError(hotel: HotelListing): Promise<string | null> {
+  if (!hotel.hotListed) return null;
+  const all = await readHotels();
+  const others = all.filter((p) => p.id !== hotel.id && p.hotListed).length;
+  if (others >= HOT_LIST_LIMIT) {
+    return `Hot List is limited to ${HOT_LIST_LIMIT} hotels. Unset another hotel from the Hot List first.`;
+  }
+  return null;
+}
 
 export const dynamic = 'force-dynamic';
 
@@ -37,6 +63,7 @@ function normalize(input: Record<string, unknown>, id: string): HotelListing {
     rooms: num(input.rooms),
     tenure: (String(input.tenure) === 'Leasehold' ? 'Leasehold' : 'Freehold'),
     propertyType: String(input.propertyType || 'Hotel').trim(),
+    unitType: String(input.unitType || '').trim(),
     grossYield: num(input.grossYield),
     landSizeSqft: num(input.landSizeSqft),
     builtUpSqft: num(input.builtUpSqft),
@@ -44,6 +71,7 @@ function normalize(input: Record<string, unknown>, id: string): HotelListing {
     gallery: gallery.length ? gallery : [cover],
     shortDesc: String(input.shortDesc || '').trim(),
     description: String(input.description || '').trim(),
+    descriptionHtml: String(input.descriptionHtml || '').trim() || undefined,
     highlights: toLines(input.highlights),
     facilities: toLines(input.facilities),
     onSale: input.onSale !== false,
@@ -60,32 +88,39 @@ export async function GET() {
 
 // POST — create a new hotel (id auto-assigned unless provided).
 export async function POST(req: Request) {
+  if (!authed(req)) return unauthorized();
   let body: Record<string, unknown>;
   try { body = await req.json(); } catch { return NextResponse.json({ ok: false, error: 'Invalid JSON' }, { status: 400 }); }
   const id = (typeof body.id === 'string' && body.id.trim()) ? body.id.trim() : await nextHotelId();
   const hotel = normalize(body, id);
+  const hlErr = await hotListError(hotel);
+  if (hlErr) return NextResponse.json({ ok: false, error: hlErr }, { status: 400 });
   await upsertHotel(hotel);
-  revalidatePath('/', 'layout');
+  refresh();
   return NextResponse.json({ ok: true, hotel });
 }
 
 // PUT — update an existing hotel.
 export async function PUT(req: Request) {
+  if (!authed(req)) return unauthorized();
   let body: Record<string, unknown>;
   try { body = await req.json(); } catch { return NextResponse.json({ ok: false, error: 'Invalid JSON' }, { status: 400 }); }
   const id = String(body.id || '').trim();
   if (!id) return NextResponse.json({ ok: false, error: 'Missing id' }, { status: 400 });
   const hotel = normalize(body, id);
+  const hlErr = await hotListError(hotel);
+  if (hlErr) return NextResponse.json({ ok: false, error: hlErr }, { status: 400 });
   await upsertHotel(hotel);
-  revalidatePath('/', 'layout');
+  refresh();
   return NextResponse.json({ ok: true, hotel });
 }
 
 // DELETE — remove a hotel by ?id=
 export async function DELETE(req: Request) {
+  if (!authed(req)) return unauthorized();
   const id = new URL(req.url).searchParams.get('id');
   if (!id) return NextResponse.json({ ok: false, error: 'Missing id' }, { status: 400 });
   await deleteHotel(id);
-  revalidatePath('/', 'layout');
+  refresh();
   return NextResponse.json({ ok: true });
 }

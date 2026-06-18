@@ -1,24 +1,24 @@
 {
   "meta": {
     "home": {
-      "title": "Hotel For Sale Malaysia — Largest Complete Hotel Listing | HotelForSale",
+      "title": "Hotel For Sale Malaysia, Largest Complete Hotel Listing | HotelForSale",
       "description": "Browse Malaysia's largest hotel for sale listing. Undervalued, below-market hotels, motels & resorts with up to 13% gross yield in KL, Penang, Johor, Genting & more. WhatsApp us now."
     },
     "location": {
-      "title": "Hotels For Sale in {location} — Undervalue & High Yield | HotelForSale",
+      "title": "Hotels For Sale in {location}, Undervalue & High Yield | HotelForSale",
       "description": "Hotels, motels and resorts for sale in {location}, {state}. Below-market, high-yield investment opportunities. Get the latest {location} hotel listings on WhatsApp."
     },
     "blogListing": {
-      "title": "Hotel Investment Guides — HotelForSale Malaysia Blog",
-      "description": "Guides and insights on buying hotels in Malaysia — yields, valuations, financing and the best states to invest in undervalued hotels, motels and resorts."
+      "title": "Hotel Investment Guides, HotelForSale Malaysia Blog",
+      "description": "Guides and insights on buying hotels in Malaysia, yields, valuations, financing and the best states to invest in undervalued hotels, motels and resorts."
     },
     "properties": {
-      "title": "All Hotels For Sale in Malaysia — Browse Listings | HotelForSale",
+      "title": "All Hotels For Sale in Malaysia, Browse Listings | HotelForSale",
       "description": "Browse our full catalogue of hotels, motels and resorts for sale across Malaysia. Filter by star rating, price range, state and value to find your ideal hotel investment."
     }
   },
   "nav": {
-    "logoAlt": "HotelForSale — Malaysia's largest complete hotel for sale listing",
+    "logoAlt": "HotelForSale, Malaysia's largest complete hotel for sale listing",
     "home": "Home",
     "properties": "Hotels",
     "sell": "Sell Your Hotel",
@@ -30,7 +30,7 @@
   },
   "fomo": {
     "eyebrow": "{monthUpper} HOT DEALS",
-    "body": "New undervalued hotels added — {month} shortlist closes in:",
+    "body": "New undervalued hotels added, {month} shortlist closes in:",
     "countdownLabel": "Days : Hours : Minutes : Seconds",
     "ctaLabel": "View Hot List"
   },
@@ -40,10 +40,10 @@
     "h1Highlight": "",
     "h1Part2": "",
     "h2": "Largest Complete Hotel Listing",
-    "supporting": "We assist you in searching for all available Resorts, Motels, & Hotels for sale in Malaysia with high returns, undervalued properties, and in strategic locations such as Kuala Lumpur, Penang, Johor Bahru, Genting & more!",
+    "supporting": "We assist you in searching for all available Resorts, Motels & Hotels for sale in Malaysia, with high returns and undervalued properties.",
     "ctaPrimary": "WhatsApp Now",
     "ctaSecondary": "View All Hotels →",
-    "imageAlt": "Luxury hotel for sale in Malaysia — HotelForSale featured listing",
+    "imageAlt": "Luxury hotel for sale in Malaysia, HotelForSale featured listing",
     "statHotels": "Hotels Listed",
     "statStates": "States Covered",
     "statYield": "Gross Yield",
@@ -107,7 +107,8 @@
     "h3": "Our Hotel For Sale",
     "intro": "Our Grade-A Hotel Hot Listings are 30% below market value and fetches more than 10% gross revenue per year.",
     "viewAll": "View All Hotels",
-    "h3Accent": "Hot List!"
+    "h3Accent": "Hot List!",
+    "bannerText": "Grade-A deals selling fast, today’s hot list closes in:"
   },
   "hotelCard": {
     "onSale": "On Sale",
@@ -117,7 +118,7 @@
     "viewListing": "View Listing",
     "enquire": "Enquire",
     "starsAria": "{count}-star hotel",
-    "imageAlt": "{name} — {city}, {state} hotel for sale",
+    "imageAlt": "{name}, {city}, {state} hotel for sale",
     "starHotel": "{count}-Star Hotel"
   },
   "process": {
@@ -151,7 +152,7 @@
       },
       {
         "title": "Below-market pricing",
-        "body": "Every listing is pre-screened to be undervalued — typically up to 30% below market."
+        "body": "Every listing is pre-screened to be undervalued, typically up to 30% below market."
       },
       {
         "title": "High-yield investments",
@@ -240,7 +241,7 @@
   },
   "faq": {
     "eyebrow": "FAQ",
-    "h3": "Buying a Hotel in Malaysia — FAQ",
+    "h3": "Buying a Hotel in Malaysia, FAQ",
     "items": [
       {
         "q": "How do I buy a hotel for sale in Malaysia?",
@@ -252,7 +253,7 @@
       },
       {
         "q": "What gross yield can I expect from a hotel?",
-        "a": "Our Grade-A hotels for sale fetch a gross rental yield of up to 13% per year. The exact yield depends on the property, location and occupancy — we share the full numbers for each listing."
+        "a": "Our Grade-A hotels for sale fetch a gross rental yield of up to 13% per year. The exact yield depends on the property, location and occupancy, we share the full numbers for each listing."
       },
       {
         "q": "Can foreigners buy a hotel in Malaysia?",
@@ -264,10 +265,10 @@
       },
       {
         "q": "Which areas have the most hotel listings?",
-        "a": "We cover all 14 Malaysian states, with the strongest concentration in Kuala Lumpur, Penang, Johor Bahru, Genting Highlands and Petaling Jaya — but new listings appear nationwide regularly."
+        "a": "We cover all 14 Malaysian states, with the strongest concentration in Kuala Lumpur, Penang, Johor Bahru, Genting Highlands and Petaling Jaya, but new listings appear nationwide regularly."
       },
       {
-        "q": "I own a hotel — can you help me sell it?",
+        "q": "I own a hotel, can you help me sell it?",
         "a": "Yes. Contact us and we'll match you with potential hotel buyers from our investor network. Many sellers receive serious offers within a few days. There's no obligation to list."
       },
       {
@@ -326,7 +327,8 @@
     "valueHighYield": "High Yield (10%+)",
     "reset": "Reset",
     "resultsCount": "{count} hotels available",
-    "noResults": "No hotels match your filters. Try resetting them or WhatsApp us for off-list options."
+    "noResults": "No hotels match your filters. Try resetting them or WhatsApp us for off-list options.",
+    "filtersToggle": "Filters"
   },
   "detail": {
     "breadcrumbHome": "Home",
@@ -360,10 +362,14 @@
     "closingHeadline": "The Best Hotel Deals Usually Last 14 Days",
     "closingBody": "Contact us today before this hotel is gone. Average 13 hotels transacted every month.",
     "closingCta": "WhatsApp Us Now",
-    "relatedHeading": "More Hotels For Sale"
+    "relatedHeading": "More Hotels For Sale",
+    "locationHeading": "Property Location",
+    "propertySizeLabel": "Property Size",
+    "unitTypeLabel": "Unit Type",
+    "similarHeading": "Similar Hotels For Sale"
   },
   "footer": {
-    "tagline": "HotelForSale — Malaysia's largest complete listing of undervalue hotels, motels and resorts for sale.",
+    "tagline": "HotelForSale, Malaysia's largest complete listing of undervalue hotels, motels and resorts for sale.",
     "agency": "Vivahomes Realty Sdn Bhd (Agency E(1)1670)",
     "address": "25-3 Jalan PJU 5/20E The Strand, Kota Damansara, 47810 Petaling Jaya, Selangor.",
     "exploreHeading": "Explore",
@@ -407,5 +413,8 @@
   "agency": {
     "h3": "Malaysia Top Hotel Sales Agency",
     "sub": "#1 Hotel For Sale Agency in Malaysia · Vivahomes Realty Sdn Bhd · Agency E(1)1670"
+  },
+  "products": {
+    "imageAltTemplate": "Hotel {model} for sale in Malaysia"
   }
 }

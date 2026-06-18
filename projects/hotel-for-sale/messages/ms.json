@@ -1,24 +1,24 @@
 {
   "meta": {
     "home": {
-      "title": "Hotel Untuk Dijual Malaysia — Senarai Hotel Terlengkap Terbesar | HotelForSale",
+      "title": "Hotel Untuk Dijual Malaysia, Senarai Hotel Terlengkap Terbesar | HotelForSale",
       "description": "Layari senarai hotel untuk dijual terbesar di Malaysia. Hotel, motel & resort bawah nilai pasaran dengan hasil kasar sehingga 13% di KL, Pulau Pinang, Johor, Genting & banyak lagi. WhatsApp kami sekarang."
     },
     "location": {
-      "title": "Hotel Untuk Dijual di {location} — Bawah Nilai & Hasil Tinggi | HotelForSale",
+      "title": "Hotel Untuk Dijual di {location}, Bawah Nilai & Hasil Tinggi | HotelForSale",
       "description": "Hotel, motel dan resort untuk dijual di {location}, {state}. Peluang pelaburan bawah nilai pasaran dengan hasil tinggi. Dapatkan senarai hotel {location} terkini di WhatsApp."
     },
     "blogListing": {
-      "title": "Panduan Pelaburan Hotel — Blog HotelForSale Malaysia",
-      "description": "Panduan dan pandangan tentang membeli hotel di Malaysia — hasil, penilaian, pembiayaan dan negeri terbaik untuk melabur dalam hotel, motel dan resort bawah nilai."
+      "title": "Panduan Pelaburan Hotel, Blog HotelForSale Malaysia",
+      "description": "Panduan dan pandangan tentang membeli hotel di Malaysia, hasil, penilaian, pembiayaan dan negeri terbaik untuk melabur dalam hotel, motel dan resort bawah nilai."
     },
     "properties": {
-      "title": "Semua Hotel Untuk Dijual di Malaysia — Layari Senarai | HotelForSale",
+      "title": "Semua Hotel Untuk Dijual di Malaysia, Layari Senarai | HotelForSale",
       "description": "Layari katalog penuh kami hotel, motel dan resort untuk dijual di seluruh Malaysia. Tapis mengikut taraf bintang, julat harga, negeri dan nilai untuk mencari pelaburan hotel ideal anda."
     }
   },
   "nav": {
-    "logoAlt": "HotelForSale — senarai hotel untuk dijual terlengkap terbesar di Malaysia",
+    "logoAlt": "HotelForSale, senarai hotel untuk dijual terlengkap terbesar di Malaysia",
     "home": "Laman Utama",
     "properties": "Hotel",
     "sell": "Jual Hotel Anda",
@@ -30,7 +30,7 @@
   },
   "fomo": {
     "eyebrow": "TAWARAN HANGAT {monthUpper}",
-    "body": "Hotel bawah nilai baharu ditambah — senarai pendek {month} ditutup dalam:",
+    "body": "Hotel bawah nilai baharu ditambah, senarai pendek {month} ditutup dalam:",
     "countdownLabel": "Hari : Jam : Minit : Saat",
     "ctaLabel": "Lihat Senarai Hangat"
   },
@@ -40,10 +40,10 @@
     "h1Highlight": "",
     "h1Part2": "",
     "h2": "Senarai Hotel Terlengkap Terbesar",
-    "supporting": "Kami membantu anda mencari semua Resort, Motel & Hotel untuk dijual di Malaysia dengan pulangan tinggi, hartanah bawah nilai, dan di lokasi strategik seperti Kuala Lumpur, Pulau Pinang, Johor Bahru, Genting & banyak lagi!",
+    "supporting": "Kami membantu anda mencari semua Resort, Motel & Hotel untuk dijual di Malaysia, dengan pulangan tinggi dan hartanah bernilai rendah.",
     "ctaPrimary": "WhatsApp Sekarang",
     "ctaSecondary": "Lihat Semua Hotel →",
-    "imageAlt": "Hotel mewah untuk dijual di Malaysia — senarai pilihan HotelForSale",
+    "imageAlt": "Hotel mewah untuk dijual di Malaysia, senarai pilihan HotelForSale",
     "statHotels": "Hotel Disenaraikan",
     "statStates": "Negeri Diliputi",
     "statYield": "Hasil Kasar",
@@ -107,7 +107,8 @@
     "h3": "Hotel Untuk Dijual Kami",
     "intro": "Senarai Hangat Hotel Gred-A kami adalah 30% bawah nilai pasaran dan memperoleh lebih daripada 10% hasil kasar setahun.",
     "viewAll": "Lihat Semua Hotel",
-    "h3Accent": "Senarai Hangat!"
+    "h3Accent": "Senarai Hangat!",
+    "bannerText": "Tawaran Grade-A laku cepat, hot list hari ini ditutup dalam:"
   },
   "hotelCard": {
     "onSale": "Untuk Dijual",
@@ -117,7 +118,7 @@
     "viewListing": "Lihat Senarai",
     "enquire": "Tanya",
     "starsAria": "Hotel {count} bintang",
-    "imageAlt": "{name} — hotel untuk dijual di {city}, {state}",
+    "imageAlt": "{name}, hotel untuk dijual di {city}, {state}",
     "starHotel": "Hotel {count} Bintang"
   },
   "process": {
@@ -151,7 +152,7 @@
       },
       {
         "title": "Harga bawah pasaran",
-        "body": "Setiap senarai disaring terlebih dahulu untuk memastikan bawah nilai — biasanya sehingga 30% bawah pasaran."
+        "body": "Setiap senarai disaring terlebih dahulu untuk memastikan bawah nilai, biasanya sehingga 30% bawah pasaran."
       },
       {
         "title": "Pelaburan hasil tinggi",
@@ -240,7 +241,7 @@
   },
   "faq": {
     "eyebrow": "SOALAN LAZIM",
-    "h3": "Membeli Hotel di Malaysia — Soalan Lazim",
+    "h3": "Membeli Hotel di Malaysia, Soalan Lazim",
     "items": [
       {
         "q": "Bagaimana saya membeli hotel untuk dijual di Malaysia?",
@@ -252,7 +253,7 @@
       },
       {
         "q": "Hasil kasar apa yang boleh saya jangkakan daripada sebuah hotel?",
-        "a": "Hotel Gred-A kami untuk dijual memperoleh hasil sewa kasar sehingga 13% setahun. Hasil tepat bergantung kepada hartanah, lokasi dan kadar penghunian — kami berkongsi angka penuh untuk setiap senarai."
+        "a": "Hotel Gred-A kami untuk dijual memperoleh hasil sewa kasar sehingga 13% setahun. Hasil tepat bergantung kepada hartanah, lokasi dan kadar penghunian, kami berkongsi angka penuh untuk setiap senarai."
       },
       {
         "q": "Bolehkah warga asing membeli hotel di Malaysia?",
@@ -264,10 +265,10 @@
       },
       {
         "q": "Kawasan mana yang mempunyai senarai hotel terbanyak?",
-        "a": "Kami meliputi seluruh 14 negeri Malaysia, dengan tumpuan paling kuat di Kuala Lumpur, Pulau Pinang, Johor Bahru, Genting Highlands dan Petaling Jaya — tetapi senarai baharu muncul di seluruh negara secara berkala."
+        "a": "Kami meliputi seluruh 14 negeri Malaysia, dengan tumpuan paling kuat di Kuala Lumpur, Pulau Pinang, Johor Bahru, Genting Highlands dan Petaling Jaya, tetapi senarai baharu muncul di seluruh negara secara berkala."
       },
       {
-        "q": "Saya memiliki hotel — bolehkah anda membantu saya menjualnya?",
+        "q": "Saya memiliki hotel, bolehkah anda membantu saya menjualnya?",
         "a": "Ya. Hubungi kami dan kami akan memadankan anda dengan bakal pembeli hotel daripada rangkaian pelabur kami. Ramai penjual menerima tawaran serius dalam beberapa hari. Tiada kewajipan untuk menyenaraikan."
       },
       {
@@ -326,7 +327,8 @@
     "valueHighYield": "Hasil Tinggi (10%+)",
     "reset": "Set Semula",
     "resultsCount": "{count} hotel tersedia",
-    "noResults": "Tiada hotel sepadan dengan penapis anda. Cuba set semula atau WhatsApp kami untuk pilihan di luar senarai."
+    "noResults": "Tiada hotel sepadan dengan penapis anda. Cuba set semula atau WhatsApp kami untuk pilihan di luar senarai.",
+    "filtersToggle": "Penapis"
   },
   "detail": {
     "breadcrumbHome": "Laman Utama",
@@ -360,10 +362,14 @@
     "closingHeadline": "Tawaran Hotel Terbaik Biasanya Bertahan 14 Hari",
     "closingBody": "Hubungi kami hari ini sebelum hotel ini hilang. Purata 13 hotel diurus niaga setiap bulan.",
     "closingCta": "WhatsApp Kami",
-    "relatedHeading": "Lebih Banyak Hotel Untuk Dijual"
+    "relatedHeading": "Lebih Banyak Hotel Untuk Dijual",
+    "locationHeading": "Lokasi Hartanah",
+    "propertySizeLabel": "Saiz Hartanah",
+    "unitTypeLabel": "Jenis Unit",
+    "similarHeading": "Hotel Serupa untuk Dijual"
   },
   "footer": {
-    "tagline": "HotelForSale — senarai terlengkap terbesar di Malaysia untuk hotel, motel dan resort bawah nilai untuk dijual.",
+    "tagline": "HotelForSale, senarai terlengkap terbesar di Malaysia untuk hotel, motel dan resort bawah nilai untuk dijual.",
     "agency": "Vivahomes Realty Sdn Bhd (Agensi E(1)1670)",
     "address": "25-3 Jalan PJU 5/20E The Strand, Kota Damansara, 47810 Petaling Jaya, Selangor.",
     "exploreHeading": "Terokai",
@@ -407,5 +413,8 @@
   "agency": {
     "h3": "Agensi Jualan Hotel Terbaik Malaysia",
     "sub": "Agensi Hotel Untuk Dijual #1 di Malaysia · Vivahomes Realty Sdn Bhd · Agensi E(1)1670"
+  },
+  "products": {
+    "imageAltTemplate": "Hotel {model} untuk dijual di Malaysia"
   }
 }

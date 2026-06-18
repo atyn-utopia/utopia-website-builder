@@ -25,13 +25,15 @@ export interface HotelListing {
   rooms: number;
   tenure: 'Freehold' | 'Leasehold';
   propertyType: string;  // "Hotel" | "Resort" | "Motel" | "Hotel / Resort"
+  unitType?: string;     // e.g. "Corner lot", "Standalone"
   grossYield: number;    // % per year
   landSizeSqft: number;
   builtUpSqft: number;
   cover: string;
   gallery: string[];
   shortDesc: string;     // 1 line for cards
-  description: string;   // detail-page intro paragraph
+  description: string;   // detail-page intro paragraph (plain)
+  descriptionHtml?: string; // full rich-text body (Property Features / Highlights / Investment Details)
   highlights: string[];  // investment highlights (5)
   facilities: string[];
   onSale: boolean;
@@ -353,7 +355,7 @@ export const properties: HotelListing[] = [
 export const HOT_LISTED_IDS = ['h003', 'h002', 'h006', 'h001', 'h008'];
 
 export function pricePerRoom(h: HotelListing): number {
-  return Math.round(h.sellingPrice / h.rooms);
+  return h.rooms > 0 ? Math.round(h.sellingPrice / h.rooms) : 0;
 }
 
 export function discountPct(h: HotelListing): number {

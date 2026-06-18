@@ -13,6 +13,7 @@ import SiteFooter from '@/components/SiteFooter';
 import FomoBanner from '@/components/FomoBanner';
 import PageStyles from '@/components/PageStyles';
 import HotelCard from '@/components/HotelCard';
+import HotListBanner from '@/components/HotListBanner';
 import PropertiesCatalogClient from './properties/PropertiesCatalogClient';
 import CountUp from '@/components/CountUp';
 import { WhatsAppButton, WaIcon } from '@/components/WhatsAppButton';
@@ -37,15 +38,13 @@ export async function generateMetadata({
   };
 }
 
-const PARTNERS = ['CBRE', 'Marriott', 'IHG', 'HYATT', 'JLL', 'Booking.com', 'Knight Frank'];
-const COVERAGE_IMAGES = [
-  'photo-1566073771259-6a8506099945', 'photo-1564501049412-61c2a3083791',
-  'photo-1571896349842-33c89424de2d', 'photo-1582719478250-c89cae4dc85b',
-  'photo-1551882547-ff40c63fe5fa', 'photo-1542314831-068cd1dbfeeb',
-  'photo-1520250497591-112f2f40a3f4', 'photo-1611892440504-42a792e24d32',
-  'photo-1445019980597-93fa8acb246c', 'photo-1568084680786-a84f91d1153c',
-].map((id) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=520&q=70`);
-const SELLER_IMG = 'https://images.unsplash.com/photo-1556745757-8d76bdb6984b?auto=format&fit=crop&w=1100&q=75';
+const PARTNER_LOGOS: { src: string; name: string }[] = [
+  ['marriott', 'Marriott'], ['accor', 'Accor'], ['cbre', 'CBRE'], ['hyatt', 'Hyatt'],
+  ['ihg', 'IHG'], ['jll', 'JLL'], ['partner7', 'Booking.com'],
+].map(([file, name]) => ({ src: `/partners/${file}.png`, name }));
+// Customer gallery — real hotel photos (public/gallery). 15 fills the 5-col grid in 3 rows.
+const COVERAGE_IMAGES = Array.from({ length: 15 }, (_, i) => `/gallery/g${String(i + 1).padStart(2, '0')}.png`);
+const SELLER_IMG = '/brand/seller.png';
 
 export default async function HomePage({
   params,
@@ -86,6 +85,7 @@ export default async function HomePage({
 
       {/* HERO */}
       <section className="lp-hero">
+        <div className="lp-hero-bg" role="img" aria-label={tHero('bgAlt')} />
         <div className="container lp-hero-inner">
           <h1>
             {tHero('h1Prefix') ? <>{tHero('h1Prefix')}{' '}</> : null}
@@ -112,48 +112,51 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* PARTNERS */}
-      <section className="partners">
+      {/* USP BAR — single contained panel with 3 cells, directly below hero */}
+      <section className="usp-bar" aria-labelledby="usp-heading">
+        <h3 id="usp-heading" className="visually-hidden">{tUsp('srHeading')}</h3>
         <div className="container">
-          <h6 className="partners-title">{tHero('partnersTitle')}</h6>
-          <div className="partners-row">
-            {PARTNERS.map((p) => (<span key={p} className="partner-logo">{p}</span>))}
-          </div>
-        </div>
-      </section>
-
-      {/* USP 3-up */}
-      <section className="lp-section">
-        <div className="container">
-          <div className="usp3">
+          <div className="usp-panel">
             {uspItems.map((u, i) => (
-              <div key={i} className="usp3-card">
-                <span className="usp3-icon">
-                  {i === 0 && (
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 17l5-5 4 4 8-9" /><path d="M16 7h4v4" /><path d="M3 21h18" /></svg>
-                  )}
-                  {i === 1 && (
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7" /><path d="M21 4v5h-5" /></svg>
-                  )}
-                  {i === 2 && (
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 1v22" /><path d="M17 6.5C17 4.6 14.8 3.5 12 3.5S7 4.6 7 6.5 9 9.5 12 10s5 1.4 5 3.5-2.2 3.5-5 3.5-5-1.1-5-3" /></svg>
-                  )}
+              <div key={i} className="usp-cell">
+                <span className="usp-icon">
+                  {i === 0 && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 17l5-5 4 4 8-9" /><path d="M16 7h4v4" /><path d="M3 21h18" /></svg>)}
+                  {i === 1 && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7" /><path d="M21 4v5h-5" /></svg>)}
+                  {i === 2 && (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 1v22" /><path d="M17 6.5C17 4.6 14.8 3.5 12 3.5S7 4.6 7 6.5 9 9.5 12 10s5 1.4 5 3.5-2.2 3.5-5 3.5-5-1.1-5-3" /></svg>)}
                 </span>
-                <h3>{u.title}</h3>
-                <h5>{u.body}</h5>
+                <div className="usp-text">
+                  <h3>{u.title}</h3>
+                  <h5>{u.body}</h5>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* PARTNERS — scrolling logo marquee */}
+      <section className="partners">
+        <div className="container">
+          <h6 className="partners-title">{tHero('partnersTitle')}</h6>
+        </div>
+        <div className="partners-marquee no-scrollbar" aria-hidden="true">
+          <div className="marquee-track">
+            {[...PARTNER_LOGOS, ...PARTNER_LOGOS, ...PARTNER_LOGOS, ...PARTNER_LOGOS].map((p, i) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img key={i} className="partner-img" src={p.src} alt={`${p.name} — hotel industry partner`} loading="lazy" decoding="async" />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* HOT LIST — 5 hot-listed hotels */}
-      <section id="hotlist" className="lp-section alt">
+      <section id="hotlist" className="lp-section hotlist-section">
         <div className="container">
           <div className="lp-head">
             <h3>{tHot('h3')} <span className="accent">{tHot('h3Accent')}</span></h3>
             <h5 className="lp-sub">{tHot('intro')}</h5>
           </div>
+          <HotListBanner />
           <div className="hotlist-grid">
             {hotListed.map((h) => (<HotelCard key={h.id} h={h} />))}
           </div>
@@ -182,18 +185,20 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* AGENCY BAND */}
+      {/* AGENCY BAND — VivaHomes */}
       <section className="agencyband">
         <div className="container agencyband-inner">
-          <span className="agencyband-logo">VIVA<span>HOMES</span></span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img className="agencyband-logo-img" src="/brand/viva-logo.png" alt="Vivahomes Realty Sdn Bhd" />
+          <h5 className="agencyband-tagline">{tAgency('sub')}</h5>
           <h3>{tAgency('h3')}</h3>
-          <h5>{tAgency('sub')}</h5>
-          <div className="agencyband-badges">
-            {[0, 1, 2].map((i) => (
-              <span key={i} className="agencyband-badge">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 7 1-5.1 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9L2 9.3l7-1L12 2Z" /></svg>
-              </span>
-            ))}
+          <div className="agencyband-awards">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/award1.png" alt="iProperty.com Outstanding Real Estate Agency (Titanium) — Vivahomes Realty" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/award2.png" alt="iProperty.com Agents Advertising Award — Vivahomes Realty" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/award3.png" alt="StarProperty.my All-Star Agency — Vivahomes Realty" />
           </div>
         </div>
       </section>

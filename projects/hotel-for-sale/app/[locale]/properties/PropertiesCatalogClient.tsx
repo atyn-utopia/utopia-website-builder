@@ -5,10 +5,23 @@ import { useTranslations } from 'next-intl';
 import { HotelListing, PRICE_BANDS, discountPct } from '@/config/properties';
 import HotelCard from '@/components/HotelCard';
 
+// Condensed page list: 1 … current-1 current current+1 … last
+function pageItems(current: number, total: number): (number | '…')[] {
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+  const out: (number | '…')[] = [1];
+  const start = Math.max(2, current - 1);
+  const end = Math.min(total - 1, current + 1);
+  if (start > 2) out.push('…');
+  for (let p = start; p <= end; p++) out.push(p);
+  if (end < total - 1) out.push('…');
+  out.push(total);
+  return out;
+}
+
 export default function PropertiesCatalogClient({
   hotels,
   states,
-  pageSize = 6,
+  pageSize = 12,
 }: {
   hotels: HotelListing[];
   states: { slug: string; name: string }[];
@@ -20,6 +33,8 @@ export default function PropertiesCatalogClient({
   const [stateSlug, setStateSlug] = useState('all');
   const [value, setValue] = useState('all');
   const [page, setPage] = useState(1);
+  const [showFilters, setShowFilters] = useState(false);
+  const activeCount = [star, price, stateSlug, value].filter((v) => v !== 'all').length;
 
   const starOptions = useMemo(
     () => Array.from(new Set(hotels.map((h) => h.stars))).sort((a, b) => a - b),
@@ -56,6 +71,16 @@ export default function PropertiesCatalogClient({
 
   return (
     <>
+      <div className="catalog-bar">
+        <button type="button" className="filter-toggle" onClick={() => setShowFilters((v) => !v)} aria-expanded={showFilters}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M3 5h18M6 12h12M10 19h4" /></svg>
+          {t('filtersToggle')}
+          {activeCount > 0 && <span className="filter-count">{activeCount}</span>}
+        </button>
+        <h6 className="catalog-count">{t('resultsCount', { count: filtered.length })}</h6>
+      </div>
+
+      {showFilters && (
       <div className="catalog-filters" role="search">
         <label className="catalog-field">
           <span className="catalog-field-label">{t('filterStarLabel')}</span>
@@ -98,8 +123,7 @@ export default function PropertiesCatalogClient({
 
         <button type="button" className="catalog-reset" onClick={reset}>{t('reset')}</button>
       </div>
-
-      <h6 className="catalog-count">{t('resultsCount', { count: filtered.length })}</h6>
+      )}
 
       {filtered.length > 0 ? (
         <>
@@ -111,17 +135,21 @@ export default function PropertiesCatalogClient({
           {totalPages > 1 && (
             <nav className="catalog-pager" aria-label="Pagination">
               <button type="button" className="pager-btn" onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={safePage === 1} aria-label="Previous page">‹</button>
-              {Array.from({ length: totalPages }).map((_, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  className={`pager-btn ${safePage === i + 1 ? 'is-active' : ''}`}
-                  onClick={() => setPage(i + 1)}
-                  aria-current={safePage === i + 1 ? 'page' : undefined}
-                >
-                  {i + 1}
-                </button>
-              ))}
+              {pageItems(safePage, totalPages).map((it, i) =>
+                it === '…' ? (
+                  <span key={`g${i}`} className="pager-gap" aria-hidden="true">…</span>
+                ) : (
+                  <button
+                    key={it}
+                    type="button"
+                    className={`pager-btn ${safePage === it ? 'is-active' : ''}`}
+                    onClick={() => setPage(it as number)}
+                    aria-current={safePage === it ? 'page' : undefined}
+                  >
+                    {it}
+                  </button>
+                ),
+              )}
               <button type="button" className="pager-btn" onClick={() => setPage((p) => Math.min(totalPages, p + 1))} disabled={safePage === totalPages} aria-label="Next page">›</button>
             </nav>
           )}
@@ -131,44 +159,56 @@ export default function PropertiesCatalogClient({
       )}
 
       <style jsx>{`
+        .catalog-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+        .filter-toggle {
+          display: inline-flex; align-items: center; gap: 8px;
+          height: 40px; padding: 0 16px; border-radius: 9px;
+          background: #fff; border: 1px solid var(--line-strong); color: var(--brand-navy);
+          font-family: var(--font-display); font-weight: 600; font-size: 13.5px; cursor: pointer;
+          transition: border-color var(--dur) var(--ease-out);
+        }
+        .filter-toggle:hover { border-color: var(--brand-navy); }
+        .filter-toggle[aria-expanded="true"] { background: var(--brand-navy); color: #fff; border-color: var(--brand-navy); }
+        .filter-count { display: inline-grid; place-items: center; min-width: 19px; height: 19px; padding: 0 5px; border-radius: 999px; background: var(--brand-orange); color: #fff; font-size: 11px; font-weight: 700; }
+
+        /* Compact, subtle filter bar */
         .catalog-filters {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 12px;
+          gap: 8px;
           align-items: end;
-          background: #fff;
+          background: var(--brand-paper);
           border: 1px solid var(--line);
-          border-radius: var(--radius-card);
-          padding: 18px;
-          box-shadow: var(--shadow-sm);
-          margin-bottom: 22px;
+          border-radius: var(--radius-md);
+          padding: 12px;
+          margin-bottom: 18px;
         }
-        @media (min-width: 720px) { .catalog-filters { grid-template-columns: repeat(4, 1fr) auto; gap: 14px; } }
-        .catalog-field { display: flex; flex-direction: column; gap: 6px; }
+        @media (min-width: 720px) { .catalog-filters { grid-template-columns: repeat(4, 1fr) auto; gap: 10px; } }
+        .catalog-field { display: flex; flex-direction: column; gap: 4px; }
         .catalog-field-label {
-          font-family: var(--font-mono-stack); font-weight: 700; font-size: 10px;
-          letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint);
+          font-weight: 600; font-size: 10px;
+          letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-faint);
         }
         .catalog-field select {
-          height: 46px; padding: 0 14px; border-radius: var(--radius-btn);
-          border: 1.5px solid var(--line-strong); background: var(--brand-paper);
-          font-family: var(--font-display); font-size: 14px; font-weight: 500; color: var(--brand-charcoal);
+          height: 38px; padding: 0 12px; border-radius: 8px;
+          border: 1px solid var(--line-strong); background: #fff;
+          font-family: var(--font-display); font-size: 13px; font-weight: 500; color: var(--brand-charcoal);
           cursor: pointer; appearance: none;
-          background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%230A2540' stroke-width='2.5'><path d='M6 9l6 6 6-6'/></svg>");
-          background-repeat: no-repeat; background-position: right 12px center;
+          background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2.5'><path d='M6 9l6 6 6-6'/></svg>");
+          background-repeat: no-repeat; background-position: right 11px center;
         }
         .catalog-field select:focus-visible { outline: 2px solid var(--brand-orange); outline-offset: 2px; border-color: var(--brand-orange); }
         .catalog-reset {
-          height: 46px; padding: 0 22px; border-radius: var(--radius-btn);
-          background: var(--brand-charcoal); color: #fff; border: none; cursor: pointer;
-          font-family: var(--font-display); font-weight: 700; font-size: 14px;
-          transition: background var(--dur) var(--ease-out), transform var(--dur) var(--ease-out);
+          height: 38px; padding: 0 18px; border-radius: 8px;
+          background: #fff; color: var(--brand-navy); border: 1px solid var(--line-strong); cursor: pointer;
+          font-family: var(--font-display); font-weight: 600; font-size: 13px;
+          transition: border-color var(--dur) var(--ease-out), color var(--dur) var(--ease-out);
         }
-        .catalog-reset:hover { background: var(--brand-charcoal-2); transform: translateY(-1px); }
+        .catalog-reset:hover { border-color: var(--brand-navy); color: var(--brand-navy-deep); }
         .catalog-count {
-          font-family: var(--font-mono-stack); font-weight: 700; font-size: 12px;
-          letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted);
-          margin: 0 0 20px;
+          font-weight: 600; font-size: 12.5px;
+          letter-spacing: 0.02em; color: var(--ink-muted);
+          margin: 0;
         }
         .catalog-empty {
           text-align: center; color: var(--ink-muted); font-size: 16px; line-height: 1.7;
@@ -186,6 +226,7 @@ export default function PropertiesCatalogClient({
         .pager-btn:hover:not(:disabled) { border-color: var(--brand-navy); }
         .pager-btn.is-active { background: var(--brand-navy); border-color: var(--brand-navy); color: #fff; }
         .pager-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        .pager-gap { display: inline-flex; align-items: flex-end; padding: 0 4px; color: var(--ink-faint); font-weight: 700; }
       `}</style>
     </>
   );

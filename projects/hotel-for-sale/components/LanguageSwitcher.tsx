@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useLocale } from 'next-intl';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useEffect, useId, useRef, useState } from 'react';
 import { routing } from '@/i18n/routing';
 
@@ -67,9 +67,6 @@ function CircleFlag({ locale }: { locale: string }) {
 export default function LanguageSwitcher() {
   const currentLocale = useLocale();
   const pathname = usePathname() || '/';
-  const search = useSearchParams();
-  const qs = search?.toString();
-  const suffix = qs ? `?${qs}` : '';
   const rest = (() => {
     for (const l of routing.locales) {
       if (pathname === `/${l}`) return '';
@@ -103,7 +100,7 @@ export default function LanguageSwitcher() {
           return (
             <Link
               key={l}
-              href={`/${l}${rest}${suffix}`}
+              href={`/${l}${rest}`}
               hrefLang={l}
               lang={l}
               className={`lsw-item ${active ? 'is-active' : ''}`}
@@ -138,7 +135,7 @@ export default function LanguageSwitcher() {
             return (
               <Link
                 key={l}
-                href={`/${l}${rest}${suffix}`}
+                href={`/${l}${rest}`}
                 hrefLang={l}
                 lang={l}
                 role="menuitem"
