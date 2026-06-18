@@ -14,7 +14,7 @@ export default function FilmStrip() {
         {frames.map((n, i) => (
           <div
             key={`${n}-${i}`}
-            className="shrink-0 border border-black/80 bg-black overflow-hidden"
+            className="film-grain shrink-0 border border-black/80 bg-black overflow-hidden"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img

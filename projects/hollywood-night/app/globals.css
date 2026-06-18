@@ -271,14 +271,25 @@ h1, h2, h3, h4, .font-display {
 }
 /* sprocket perforations along the top & bottom of the strip */
 .film-perf {
-  height: 14px;
+  height: 8px;
   background: repeating-linear-gradient(
     to right,
-    #ece0bb 0 12px,
-    #0a0a0a 12px 30px
+    #ece0bb 0 6px,
+    #0a0a0a 6px 22px
   );
   background-position: 0 center;
   opacity: 0.85;
+}
+/* grainy/vintage overlay on each film frame */
+.film-grain { position: relative; }
+.film-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150'><filter id='fn'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23fn)' opacity='0.75'/></svg>");
+  opacity: 0.22;
+  mix-blend-mode: overlay;
 }
 
 @media (prefers-reduced-motion: reduce) {
