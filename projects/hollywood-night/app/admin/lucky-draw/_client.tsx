@@ -197,6 +197,15 @@ export default function LuckyDrawClient() {
           </div>
         </div>
 
+        <div className="flex justify-center mb-6">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/masthead-dinner.png"
+            alt="Utopia Group of Companies — Hollywood Red Carpet"
+            className="w-40 sm:w-52 h-auto drop-shadow-[0_0_24px_rgba(212,175,55,0.3)]"
+          />
+        </div>
+
         <p className="text-center text-[11px] uppercase tracking-[0.32em] text-gold-500 mb-3">
           ◆ Hollywood Night
         </p>
