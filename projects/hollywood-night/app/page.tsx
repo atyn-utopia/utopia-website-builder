@@ -81,7 +81,7 @@ export default function Home() {
 
               <h1 className="sr-only">{EVENT.name}</h1>
 
-              <h2 className="font-display italic text-3xl md:text-6xl text-champagne my-7 leading-[1.05]">
+              <h2 className="font-display italic text-2xl md:text-6xl text-champagne my-6 leading-[1.1]">
                 You&apos;re Invited to the Annual Dinner
               </h2>
 
@@ -117,7 +117,7 @@ export default function Home() {
             <p className="text-center text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-4">
               ◆ The Evening
             </p>
-            <h3 className="text-center font-display font-semibold text-2xl md:text-5xl text-champagne mb-14">
+            <h3 className="text-center font-display font-semibold text-xl md:text-5xl text-champagne mb-14">
               A Night Under the Spotlight
             </h3>
 
@@ -153,7 +153,7 @@ export default function Home() {
             <p className="text-center text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-4">
               ◆ The Programme
             </p>
-            <h3 className="text-center font-display font-semibold text-2xl md:text-5xl text-champagne mb-3">
+            <h3 className="text-center font-display font-semibold text-xl md:text-5xl text-champagne mb-3">
               Tentative Run of Show
             </h3>
             <p className="text-center text-ivory-dim mb-12 leading-relaxed">
@@ -195,7 +195,7 @@ export default function Home() {
               <p className="text-center text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-4">
                 ◆ RSVP
               </p>
-              <h3 className="text-center font-display font-semibold text-2xl md:text-5xl text-champagne mb-4">
+              <h3 className="text-center font-display font-semibold text-xl md:text-5xl text-champagne mb-4">
                 Claim Your Seat
               </h3>
               <p className="text-center text-ivory-dim mb-10 leading-relaxed">

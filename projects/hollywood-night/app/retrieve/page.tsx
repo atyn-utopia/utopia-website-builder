@@ -34,7 +34,7 @@ export default function RetrievePage() {
         <p className="text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-4">
           ◆ Ticket Retrieval
         </p>
-        <h1 className="font-display text-4xl md:text-6xl text-champagne mb-4">
+        <h1 className="font-display text-3xl md:text-6xl text-champagne mb-4">
           Find Your Ticket
         </h1>
         <p className="text-ivory-dim mb-12 leading-relaxed">

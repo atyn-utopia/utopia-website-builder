@@ -101,7 +101,7 @@ export default function RetrieveForm() {
           <p className="text-[10px] uppercase tracking-[0.32em] text-gold-500 mb-3">
             ◆ RSVP Confirmed
           </p>
-          <h2 className="font-display italic text-2xl md:text-5xl text-champagne leading-tight">
+          <h2 className="font-display italic text-xl md:text-5xl text-champagne leading-tight">
             You&apos;re on the list.
           </h2>
           <p className="text-ivory-dim text-sm md:text-base mt-3 leading-relaxed">
