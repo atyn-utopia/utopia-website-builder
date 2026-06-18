@@ -13,8 +13,6 @@ export default function Home() {
   return (
     <>
       <DoorOpening />
-      {/* Doors part to reveal the red carpet runway behind them */}
-      <div className="h-screen bg-runway" aria-hidden />
 
       {/* Sticky "My Ticket" button — stays visible on scroll */}
       <a
@@ -27,32 +25,41 @@ export default function Home() {
       <main className="bg-runway grain min-h-screen relative overflow-hidden">
         <RunwayRail />
 
-        {/* ───────────── Chapter I — The Invitation (full-bleed hero) ───────────── */}
+        {/* ───────────── Splash — the image the doors open onto ───────────── */}
+        <section className="relative min-h-screen w-full overflow-hidden">
+          <div
+            aria-hidden
+            className="absolute inset-0"
+            style={{
+              backgroundImage: "url(/main-background.png)",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(0,0,0,0.18) 0%, transparent 30%, transparent 60%, rgba(28,6,11,0.5) 85%, #1C060B 100%)",
+            }}
+          />
+          <div
+            className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 text-gold-300 text-2xl"
+            aria-hidden
+          >
+            <span className="block animate-[gentle-float_3s_ease-in-out_infinite]">
+              ▾
+            </span>
+          </div>
+        </section>
+
+        {/* ───────────── Chapter I — The Invitation ───────────── */}
         <Reveal
           as="section"
           id="chapter-1"
-          className="relative overflow-hidden scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-10 pb-24 text-center min-h-screen flex flex-col items-center justify-center"
+          className="relative scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-24 pb-24 text-center min-h-screen flex flex-col items-center justify-center"
         >
-            {/* photographic background */}
-            <div
-              aria-hidden
-              className="absolute inset-0"
-              style={{
-                backgroundImage: "url(/main-background.png)",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            />
-            {/* gradient overlay — readability + blend into the velvet runway */}
-            <div
-              aria-hidden
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(14,3,6,0.45) 0%, rgba(14,3,6,0.28) 38%, rgba(28,6,11,0.72) 78%, #1C060B 100%)",
-              }}
-            />
-
             <div className="relative z-10 w-full max-w-3xl mx-auto">
               <Image
                 src="/masthead-dinner.png"
@@ -181,7 +188,7 @@ export default function Home() {
               className="absolute inset-0"
               style={{
                 background:
-                  "linear-gradient(180deg, #1C060B 0%, rgba(28,6,11,0.82) 16%, rgba(20,4,8,0.68) 50%, rgba(28,6,11,0.82) 84%, #1C060B 100%)",
+                  "linear-gradient(180deg, #1C060B 0%, rgba(28,6,11,0.55) 14%, rgba(20,4,8,0.30) 50%, rgba(28,6,11,0.55) 86%, #1C060B 100%)",
               }}
             />
             <div className="relative z-10 w-full max-w-2xl mx-auto">
