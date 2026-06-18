@@ -374,7 +374,7 @@ function TicketCard({ ticket }: { ticket: Ticket }) {
               </p>
             )}
           </div>
-          <div className="flex-1 flex flex-col items-center justify-center px-6 pb-5">
+          <div className="flex flex-col items-center px-6 pt-5 pb-5">
             {ticket.checkedIn && typeof ticket.luckyNumber === "number" ? (
               <div className="text-center rise-in">
                 <p className="text-[9px] uppercase tracking-[0.32em] text-gold-500 mb-2">
