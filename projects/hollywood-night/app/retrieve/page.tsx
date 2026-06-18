@@ -12,8 +12,8 @@ export default function RetrievePage() {
   return (
     <main className="bg-runway grain min-h-screen relative">
 
-      <nav className="relative px-6 py-8 flex items-center justify-between max-w-6xl mx-auto">
-        <a href="/" className="block w-48 md:w-72">
+      <nav className="relative px-6 py-8 flex items-center justify-center max-w-6xl mx-auto">
+        <a href="/" className="block w-48 md:w-72" aria-label="Home">
           <Image
             src="/masthead-dinner.png"
             alt="Utopia Group of Companies — Hollywood Red Carpet"
@@ -21,12 +21,6 @@ export default function RetrievePage() {
             height={726}
             className="w-full h-auto"
           />
-        </a>
-        <a
-          href="/"
-          className="text-[11px] uppercase tracking-[0.2em] text-ivory-faint hover:text-gold-400 transition-[transform,opacity] duration-150"
-        >
-          ← Home
         </a>
       </nav>
 

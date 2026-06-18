@@ -108,18 +108,20 @@ export default function RetrieveForm() {
             Your ticket{tickets.length > 1 ? "s are" : " is"} below. A copy
             has also been sent to your email.
           </p>
-          <div className="mt-6">
-            <AddToCalendar />
-          </div>
         </div>
       )}
 
       {hasTickets && (
-        <div className="space-y-6 rise-in text-left">
-          {tickets.map((t) => (
-            <TicketCard key={t.ticketId} ticket={t} />
-          ))}
-        </div>
+        <>
+          <div className="space-y-6 rise-in text-left">
+            {tickets.map((t) => (
+              <TicketCard key={t.ticketId} ticket={t} />
+            ))}
+          </div>
+          <div className="mt-10 rise-in">
+            <AddToCalendar />
+          </div>
+        </>
       )}
 
       {searched && !hasTickets && (
@@ -207,11 +209,33 @@ function TicketCard({ ticket }: { ticket: Ticket }) {
     if (!node) return;
     setSaving(true);
     try {
-      const dataUrl = await toPng(node, {
+      // Make sure fonts + images are fully ready, otherwise the capture is blank.
+      try {
+        await document.fonts?.ready;
+      } catch {}
+      await Promise.all(
+        Array.from(node.querySelectorAll("img")).map((img) =>
+          img.complete && img.naturalWidth
+            ? Promise.resolve()
+            : new Promise<void>((resolve) => {
+                img.addEventListener("load", () => resolve(), { once: true });
+                img.addEventListener("error", () => resolve(), { once: true });
+              })
+        )
+      );
+
+      const opts = {
         pixelRatio: 3,
         cacheBust: true,
         backgroundColor: "#0b0b0f",
-      });
+      };
+      // html-to-image often returns a blank image on the first pass while it
+      // inlines the fonts/background images into its clone — render twice and
+      // keep the second result.
+      await toPng(node, opts);
+      await toPng(node, opts);
+      const dataUrl = await toPng(node, opts);
+
       const a = document.createElement("a");
       a.href = dataUrl;
       a.download = `hollywood-night-ticket-${ticket.ticketId}.png`;
@@ -247,9 +271,9 @@ function TicketCard({ ticket }: { ticket: Ticket }) {
           className="absolute flex flex-col items-center justify-center text-center"
           style={{
             top: "9%",
-            bottom: "9%",
-            right: "11%",
-            width: "27%",
+            bottom: "40%",
+            right: "2%",
+            width: "26%",
           }}
         >
           <p
@@ -322,7 +346,7 @@ function TicketCard({ ticket }: { ticket: Ticket }) {
                   src={ticket.qr}
                   alt="Ticket QR"
                   className="block"
-                  style={{ width: "12cqw", height: "12cqw" }}
+                  style={{ width: "11cqw", height: "11cqw" }}
                 />
               </div>
               <p
