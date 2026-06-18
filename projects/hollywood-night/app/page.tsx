@@ -134,7 +134,7 @@ export default function Home() {
               />
               <DetailCard
                 label="Dress Code"
-                primary={EVENT.dressCode}
+                primary="Hollywood Gala Night"
                 secondary="Dress to impress in your finest formal attire and get ready to shine like a star!"
                 icon={<DetailIcon name="dress" />}
               />
