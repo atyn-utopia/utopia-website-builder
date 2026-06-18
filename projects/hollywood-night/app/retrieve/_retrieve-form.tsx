@@ -105,8 +105,8 @@ export default function RetrieveForm() {
             You&apos;re on the list.
           </h2>
           <p className="text-ivory-dim text-sm md:text-base mt-3 leading-relaxed">
-            Your ticket{tickets.length > 1 ? "s are" : " is"} below. A copy
-            has also been sent to your email.
+            Please keep your QR ticket{tickets.length > 1 ? "s" : ""} — present{" "}
+            {tickets.length > 1 ? "them" : "it"} at the door for entry on the night.
           </p>
         </div>
       )}
