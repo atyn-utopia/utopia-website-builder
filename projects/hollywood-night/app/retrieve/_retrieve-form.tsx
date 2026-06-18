@@ -343,15 +343,19 @@ function TicketCard({ ticket }: { ticket: Ticket }) {
       {/* Mobile: stacked vertical card over the ticket-mobile background */}
       <div
         ref={mobileRef}
-        className="md:hidden relative border border-gold-500 shadow-ticket overflow-hidden grain bg-ink-black"
+        className="md:hidden relative w-full border border-gold-500 shadow-ticket overflow-hidden bg-ink-black"
         style={{
+          aspectRatio: "6890 / 8906",
           backgroundImage: "url(/ticket-mobile.png)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
-        <div className="flex flex-col">
-          <div className="p-6">
+        <div
+          className="absolute inset-x-0 bottom-0 flex flex-col"
+          style={{ top: "41%" }}
+        >
+          <div className="px-6 pt-4">
             <p className="text-[9px] uppercase tracking-[0.3em] text-gold-400 mb-2">
               ◆ Hollywood Night · {ticket.kind === "plus_one" ? "Guest" : "Main"}
             </p>
@@ -370,7 +374,7 @@ function TicketCard({ ticket }: { ticket: Ticket }) {
               </p>
             )}
           </div>
-          <div className="flex flex-col items-center justify-center p-8 bg-ink-black/40">
+          <div className="flex-1 flex flex-col items-center justify-center px-6 pb-5">
             {ticket.checkedIn && typeof ticket.luckyNumber === "number" ? (
               <div className="text-center rise-in">
                 <p className="text-[9px] uppercase tracking-[0.32em] text-gold-500 mb-2">
@@ -390,9 +394,9 @@ function TicketCard({ ticket }: { ticket: Ticket }) {
               </div>
             ) : (
               <>
-                <div className="bg-white p-3 border border-gold-500">
+                <div className="bg-white p-2.5 border border-gold-500">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={ticket.qr} alt="Ticket QR" className="w-40 h-40" />
+                  <img src={ticket.qr} alt="Ticket QR" className="w-28 h-28" />
                 </div>
                 <p
                   className="mt-3 font-display italic text-gold-400 text-xs"
