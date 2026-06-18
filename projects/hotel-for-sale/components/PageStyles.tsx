@@ -67,7 +67,7 @@ export default function PageStyles() {
       .lp-hero-statnum { font-size: 26px; font-weight: 700; color: var(--brand-navy); line-height: 1; }
       .lp-hero-statlabel { font-size: 12px; font-weight: 500; color: var(--ink-muted); margin-top: 4px; }
       /* PARTNERS */
-      .partners { position: relative; z-index: 1; margin-top: -1px; background: #fff; border-bottom: 1px solid var(--line); padding: 24px 0 26px; }
+      .partners { position: relative; z-index: 1; margin-top: -1px; background: linear-gradient(180deg, var(--section-alt), #fff); border-bottom: 1px solid var(--line); padding: 24px 0 26px; }
       .partners-title { text-align: center; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 18px; }
       .partners-marquee {
         overflow: hidden; padding: 4px 0;
