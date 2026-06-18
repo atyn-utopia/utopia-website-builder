@@ -206,7 +206,7 @@ export default function LuckyDrawClient() {
           />
         </div>
 
-        <h1 className="text-center font-display italic text-5xl md:text-7xl text-champagne mb-10 md:mb-14">
+        <h1 className="text-center font-display italic text-4xl md:text-7xl text-champagne mb-10 md:mb-14">
           Lucky Draw
         </h1>
 
@@ -218,7 +218,7 @@ export default function LuckyDrawClient() {
               <p className="text-[10px] uppercase tracking-[0.32em] text-gold-500 mb-2">
                 ◆ Winner
               </p>
-              <h2 className="font-display text-4xl md:text-6xl text-champagne mb-2 leading-tight">
+              <h2 className="font-display text-3xl md:text-6xl text-champagne mb-2 leading-tight">
                 {latest.guestName}
               </h2>
               {latest.company && (

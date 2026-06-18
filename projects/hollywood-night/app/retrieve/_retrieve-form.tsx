@@ -248,7 +248,7 @@ function TicketCard({ ticket }: { ticket: Ticket }) {
           style={{
             top: "9%",
             bottom: "9%",
-            right: "6%",
+            right: "11%",
             width: "27%",
           }}
         >
@@ -351,21 +351,21 @@ function TicketCard({ ticket }: { ticket: Ticket }) {
         }}
       >
         <div className="flex flex-col">
-          <div className="p-8 border-b border-dashed border-gold-500/60">
-            <p className="text-[10px] uppercase tracking-[0.32em] text-gold-400 mb-3">
+          <div className="p-6">
+            <p className="text-[9px] uppercase tracking-[0.3em] text-gold-400 mb-2">
               ◆ Hollywood Night · {ticket.kind === "plus_one" ? "Guest" : "Main"}
             </p>
-            <p className="text-[10px] uppercase tracking-[0.22em] text-gold-600 mb-1">
+            <p className="text-[9px] uppercase tracking-[0.22em] text-gold-600 mb-1">
               Guest
             </p>
-            <h3 className="font-display text-3xl text-champagne mb-4">
+            <h3 className="font-display text-2xl text-champagne mb-1.5">
               {ticket.holderName}
             </h3>
-            <p className="font-mono text-xs text-gold-400 tracking-wider">
+            <p className="font-mono text-[10px] text-gold-400 tracking-wider">
               {ticket.ticketId}
             </p>
             {ticket.checkedIn && (
-              <p className="mt-4 inline-block text-[10px] uppercase tracking-[0.22em] text-success-emerald border border-success-emerald px-3 py-1">
+              <p className="mt-3 inline-block text-[9px] uppercase tracking-[0.22em] text-success-emerald border border-success-emerald px-2.5 py-1">
                 ✓ Checked In
               </p>
             )}
