@@ -16,7 +16,6 @@ export default function PhoneField({
   name,
   required,
   initial = "",
-  size = "default",
 }: Props) {
   const [digits, setDigits] = useState(() =>
     sanitizeDigits(initial.replace(/^\+?60/, ""))
@@ -27,7 +26,7 @@ export default function PhoneField({
     setDigits(sanitizeDigits(raw).slice(0, 11));
   }
 
-  const padY = size === "compact" ? "py-3" : "py-4";
+  const padY = "py-3";
 
   return (
     <label className="block">
