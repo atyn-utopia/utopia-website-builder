@@ -47,7 +47,7 @@ export default function Home() {
               }}
             />
             <div
-              className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 text-gold-300 text-2xl"
+              className="hidden sm:block absolute bottom-10 left-1/2 -translate-x-1/2 z-10 text-gold-300 text-2xl"
               aria-hidden
             >
               <span className="block animate-[gentle-float_3s_ease-in-out_infinite]">
