@@ -34,8 +34,6 @@ export default function Home() {
             id="chapter-1"
             className="runway-panel scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-20 pb-16 text-center"
           >
-            <ChapterNumeral value="I" />
-
             <p className="text-[11px] md:text-xs uppercase tracking-[0.32em] text-gold-500 mb-8">
               ◆ 16.05.2026 · Red Carpet Night ◆
             </p>
@@ -85,8 +83,6 @@ export default function Home() {
             id="chapter-2"
             className="runway-panel scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-20 pb-16"
           >
-            <ChapterNumeral value="II" />
-
             <p className="text-center text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-4">
               ◆ The Evening
             </p>
@@ -128,8 +124,6 @@ export default function Home() {
             id="chapter-3"
             className="runway-panel scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-20 pb-16"
           >
-            <ChapterNumeral value="III" />
-
             <p className="text-center text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-4">
               ◆ The Programme
             </p>
@@ -149,8 +143,6 @@ export default function Home() {
             id="chapter-4"
             className="runway-panel scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-20 pb-16"
           >
-            <ChapterNumeral value="IV" />
-
             <div className="max-w-2xl mx-auto">
               <p className="text-center text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-4">
                 ◆ RSVP
@@ -191,17 +183,6 @@ export default function Home() {
         </div>
       </main>
     </>
-  );
-}
-
-function ChapterNumeral({ value }: { value: string }) {
-  return (
-    <span
-      className="chapter-num pointer-events-none absolute -top-7 left-4 md:left-8 text-[5.5rem] md:text-[8rem]"
-      aria-hidden
-    >
-      {value}
-    </span>
   );
 }
 

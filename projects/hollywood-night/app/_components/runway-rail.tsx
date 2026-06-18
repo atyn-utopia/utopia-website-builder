@@ -51,9 +51,9 @@ export default function RunwayRail() {
           data-active={active === i}
           className="rail-dot pointer-events-auto flex flex-col items-center gap-2 no-underline"
         >
-          <span className="text-lg">{c.numeral}</span>
+          <span className="h-1.5 w-1.5 rounded-full bg-current" />
           <span
-            className="text-[9px] uppercase tracking-[0.22em]"
+            className="text-[10px] uppercase tracking-[0.22em]"
             style={{ writingMode: "vertical-rl" }}
           >
             {c.label}
