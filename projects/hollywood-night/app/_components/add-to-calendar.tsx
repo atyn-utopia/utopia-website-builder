@@ -1,9 +1,4 @@
-import {
-  googleCalendarUrl,
-  outlookLiveUrl,
-  office365Url,
-  icsDataUrl,
-} from "@/lib/calendar";
+import { googleCalendarUrl, icsDataUrl } from "@/lib/calendar";
 
 /** "Add to Your Calendar" — blue CTA plus per-provider logo links. */
 export default function AddToCalendar({
@@ -42,26 +37,6 @@ export default function AddToCalendar({
         >
           <GoogleIcon />
         </a>
-        <a
-          href={outlookLiveUrl()}
-          target="_blank"
-          rel="noopener noreferrer"
-          title="Outlook.com"
-          aria-label="Add to Outlook.com"
-          className="opacity-80 hover:opacity-100 transition-opacity"
-        >
-          <OutlookIcon />
-        </a>
-        <a
-          href={office365Url()}
-          target="_blank"
-          rel="noopener noreferrer"
-          title="Office 365"
-          aria-label="Add to Office 365"
-          className="opacity-80 hover:opacity-100 transition-opacity"
-        >
-          <OutlookIcon />
-        </a>
       </div>
     </div>
   );
@@ -86,21 +61,3 @@ function GoogleIcon() {
   );
 }
 
-function OutlookIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
-      <rect x="2" y="4" width="20" height="16" rx="3" fill="#0F6CBD" />
-      <text
-        x="12"
-        y="16.5"
-        textAnchor="middle"
-        fontSize="12"
-        fontWeight="700"
-        fill="#fff"
-        fontFamily="Arial, sans-serif"
-      >
-        O
-      </text>
-    </svg>
-  );
-}
