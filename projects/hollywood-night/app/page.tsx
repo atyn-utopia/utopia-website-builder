@@ -27,14 +27,12 @@ export default function Home() {
       <main className="bg-runway grain min-h-screen relative overflow-hidden">
         <RunwayRail />
 
-        <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-12 pb-24 space-y-8 md:space-y-12">
-
-          {/* ───────────── Chapter I — The Invitation (hero) ───────────── */}
-          <Reveal
-            as="section"
-            id="chapter-1"
-            className="relative overflow-hidden scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-10 pb-20 text-center min-h-[86vh] flex flex-col items-center justify-center"
-          >
+        {/* ───────────── Chapter I — The Invitation (full-bleed hero) ───────────── */}
+        <Reveal
+          as="section"
+          id="chapter-1"
+          className="relative overflow-hidden scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-10 pb-24 text-center min-h-screen flex flex-col items-center justify-center"
+        >
             {/* photographic background */}
             <div
               aria-hidden
@@ -98,6 +96,8 @@ export default function Home() {
             </div>
           </Reveal>
 
+        <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-12 pt-10 md:pt-14 space-y-8 md:space-y-12">
+
           {/* ───────────── Chapter II — The Evening ───────────── */}
           <Reveal
             as="section"
@@ -157,13 +157,14 @@ export default function Home() {
             </p>
             <AgendaTimeline />
           </Reveal>
+        </div>
 
-          {/* ───────────── Chapter IV — RSVP ───────────── */}
-          <Reveal
-            as="section"
-            id="chapter-4"
-            className="relative overflow-hidden scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-20 pb-16"
-          >
+        {/* ───────────── Chapter IV — RSVP (full-bleed) ───────────── */}
+        <Reveal
+          as="section"
+          id="chapter-4"
+          className="relative overflow-hidden scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-24 pb-24 min-h-screen flex items-center justify-center"
+        >
             {/* photographic background */}
             <div
               aria-hidden
@@ -183,7 +184,7 @@ export default function Home() {
                   "linear-gradient(180deg, #1C060B 0%, rgba(28,6,11,0.82) 16%, rgba(20,4,8,0.68) 50%, rgba(28,6,11,0.82) 84%, #1C060B 100%)",
               }}
             />
-            <div className="relative z-10 max-w-2xl mx-auto">
+            <div className="relative z-10 w-full max-w-2xl mx-auto">
               <p className="text-center text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-4">
                 ◆ RSVP
               </p>
@@ -204,6 +205,7 @@ export default function Home() {
             </div>
           </Reveal>
 
+        <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-12 pb-24">
           {/* ───────────── Closing ───────────── */}
           <footer className="relative pt-10 pb-4 text-center">
             <div className="flex justify-center gap-2 text-gold-400 text-lg mb-4">
