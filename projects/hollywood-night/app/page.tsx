@@ -22,35 +22,42 @@ export default function Home() {
         ◆ My Ticket
       </a>
 
-      <main className="bg-runway grain min-h-screen relative overflow-hidden">
+      <main className="bg-runway grain min-h-screen relative overflow-x-clip">
         <RunwayRail />
 
-        {/* ───────────── Splash — the image the doors open onto ───────────── */}
-        <section className="relative min-h-screen w-full overflow-hidden">
-          <div
-            aria-hidden
-            className="absolute inset-0"
-            style={{
-              backgroundImage: "url(/main-background.png)",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          />
-          <div
-            aria-hidden
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(0,0,0,0.18) 0%, transparent 30%, transparent 60%, rgba(28,6,11,0.5) 85%, #1C060B 100%)",
-            }}
-          />
-          <div
-            className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 text-gold-300 text-2xl"
-            aria-hidden
-          >
-            <span className="block animate-[gentle-float_3s_ease-in-out_infinite]">
-              ▾
-            </span>
+        {/* ───────────── Splash — the image the doors open onto (pinned to linger) ───────────── */}
+        <section className="relative h-[155vh] w-full">
+          <div className="sticky top-0 h-screen w-full overflow-hidden">
+            {/* image fades out at the bottom into the shared velvet, blending into the next section */}
+            <div
+              aria-hidden
+              className="absolute inset-0"
+              style={{
+                backgroundImage: "url(/main-background.png)",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                maskImage:
+                  "linear-gradient(to bottom, #000 56%, transparent 96%)",
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, #000 56%, transparent 96%)",
+              }}
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(0,0,0,0.20) 0%, transparent 36%, transparent 100%)",
+              }}
+            />
+            <div
+              className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 text-gold-300 text-2xl"
+              aria-hidden
+            >
+              <span className="block animate-[gentle-float_3s_ease-in-out_infinite]">
+                ▾
+              </span>
+            </div>
           </div>
         </section>
 
@@ -58,8 +65,23 @@ export default function Home() {
         <Reveal
           as="section"
           id="chapter-1"
-          className="relative scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-24 pb-24 text-center min-h-screen flex flex-col items-center justify-center"
+          className="relative overflow-hidden scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-24 pb-24 text-center min-h-screen flex flex-col items-center justify-center"
         >
+            {/* faint continuation of the splash image — blends this section into the image above */}
+            <div
+              aria-hidden
+              className="absolute inset-x-0 top-0 h-[72vh]"
+              style={{
+                backgroundImage: "url(/main-background.png)",
+                backgroundSize: "cover",
+                backgroundPosition: "center top",
+                opacity: 0.4,
+                maskImage:
+                  "linear-gradient(to bottom, #000 0%, transparent 88%)",
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, #000 0%, transparent 88%)",
+              }}
+            />
             <div className="relative z-10 w-full max-w-3xl mx-auto">
               <Image
                 src="/masthead-dinner.png"
@@ -67,7 +89,7 @@ export default function Home() {
                 width={1600}
                 height={726}
                 priority
-                className="w-40 sm:w-52 md:w-60 h-auto mx-auto mb-10 drop-shadow-[0_0_30px_rgba(212,175,55,0.35)]"
+                className="w-72 sm:w-[26rem] md:w-[32rem] h-auto mx-auto mb-8 drop-shadow-[0_0_45px_rgba(212,175,55,0.45)]"
               />
 
               <p className="text-[11px] md:text-xs uppercase tracking-[0.32em] text-gold-400 mb-7">
@@ -170,7 +192,7 @@ export default function Home() {
         <Reveal
           as="section"
           id="chapter-4"
-          className="relative overflow-hidden scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-24 pb-24 min-h-screen flex items-center justify-center"
+          className="relative overflow-hidden scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-24 pb-16"
         >
             {/* photographic background */}
             <div
@@ -210,11 +232,9 @@ export default function Home() {
               </div>
               <RsvpForm />
             </div>
-          </Reveal>
 
-        <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-12 pb-24">
-          {/* ───────────── Closing ───────────── */}
-          <footer className="relative pt-10 pb-4 text-center">
+            {/* ───────────── Closing ───────────── */}
+            <footer className="relative z-10 mt-20 pt-10 text-center">
             <div className="flex justify-center gap-2 text-gold-400 text-lg mb-4">
               <span>★</span>
               <span>★</span>
@@ -235,7 +255,7 @@ export default function Home() {
               </a>
             </p>
           </footer>
-        </div>
+        </Reveal>
       </main>
     </>
   );

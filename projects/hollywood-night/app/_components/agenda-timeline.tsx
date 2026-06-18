@@ -1,10 +1,34 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import { AGENDA } from "@/lib/event";
 
 /** Run-of-show as a horizontal, scrollable line timeline. */
 export default function AgendaTimeline() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Translate vertical mouse-wheel into horizontal scroll while hovering,
+  // releasing to the page scroll once an edge is reached.
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      if (e.deltaY === 0) return;
+      const max = el.scrollWidth - el.clientWidth;
+      if (max <= 0) return;
+      const atStart = el.scrollLeft <= 0;
+      const atEnd = el.scrollLeft >= max - 1;
+      if ((e.deltaY < 0 && atStart) || (e.deltaY > 0 && atEnd)) return;
+      e.preventDefault();
+      el.scrollLeft += e.deltaY;
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, []);
+
   return (
     <div className="relative">
-      <div className="overflow-x-auto no-scrollbar">
+      <div ref={scrollRef} className="overflow-x-auto no-scrollbar">
         <ol className="flex min-w-max px-2 py-2">
           {AGENDA.map((item) => (
             <li
@@ -50,7 +74,7 @@ export default function AgendaTimeline() {
       </div>
 
       <p className="mt-6 text-center text-[10px] uppercase tracking-[0.22em] text-ivory-faint">
-        Swipe to explore the evening →
+        Scroll or swipe to explore the evening →
       </p>
     </div>
   );
