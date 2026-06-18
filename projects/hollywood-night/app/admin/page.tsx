@@ -19,6 +19,7 @@ export default async function AdminHome() {
     attending: rows
       .filter((g) => g.attending)
       .reduce((n, g) => n + 1 + (g.has_plus_one ? 1 : 0), 0),
+    notAttending: rows.filter((g) => !g.attending).length,
     totalTickets: allTickets.length,
     checkedIn: allTickets.filter((t) => t.checked_in).length,
     transport: rows.filter((g) => g.transportation_required).length,

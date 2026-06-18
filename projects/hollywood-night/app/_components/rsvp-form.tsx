@@ -96,7 +96,11 @@ export default function RsvpForm({
         return;
       }
       if (data.attending) {
-        router.push(`/retrieve?phone=${encodeURIComponent(phone)}&welcome=1`);
+        router.push(
+          `/retrieve?phone=${encodeURIComponent(phone)}&welcome=1${
+            isVip ? "&from=vip" : ""
+          }`
+        );
         return;
       }
       setResult({ ok: true, attending: false });

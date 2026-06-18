@@ -7,16 +7,20 @@ export const dynamic = "force-dynamic";
 export default async function AdminScanPage() {
   const { data: guests } = await supabaseAdmin
     .from("guests")
-    .select("id, attending, transportation_required");
+    .select("id, attending, has_plus_one, transportation_required");
   const { data: tickets } = await supabaseAdmin
     .from("tickets")
     .select("checked_in");
 
+  const rows = guests ?? [];
   const stats = {
-    attending: (guests ?? []).filter((g) => g.attending).length,
+    attending: rows
+      .filter((g) => g.attending)
+      .reduce((n, g) => n + 1 + (g.has_plus_one ? 1 : 0), 0),
+    notAttending: rows.filter((g) => !g.attending).length,
     totalTickets: (tickets ?? []).length,
     checkedIn: (tickets ?? []).filter((t) => t.checked_in).length,
-    transport: (guests ?? []).filter((g) => g.transportation_required).length,
+    transport: rows.filter((g) => g.transportation_required).length,
   };
 
   return (

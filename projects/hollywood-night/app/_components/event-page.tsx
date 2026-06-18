@@ -16,13 +16,14 @@ export default function EventPage({
 }: {
   variant?: "staff" | "vip";
 }) {
+  const retrieveHref = variant === "vip" ? "/retrieve?from=vip" : "/retrieve";
   return (
     <>
       <IntroLoader />
       <DoorOpening />
 
       {/* "My Ticket" button — hidden over the splash, appears after the first section */}
-      <MyTicketButton />
+      <MyTicketButton href={retrieveHref} />
 
       <main className="bg-runway grain min-h-screen relative overflow-x-clip">
         <RunwayRail />
@@ -224,7 +225,7 @@ export default function EventPage({
             </p>
             <p className="mt-6">
               <a
-                href="/retrieve"
+                href={retrieveHref}
                 className="text-ivory-faint text-xs uppercase tracking-[0.2em] hover:text-gold-400 transition-[transform,opacity] duration-200"
               >
                 My Ticket →

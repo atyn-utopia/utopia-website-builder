@@ -8,12 +8,18 @@ export const metadata = {
   title: `Retrieve Ticket — ${EVENT.name}`,
 };
 
-export default function RetrievePage() {
+export default async function RetrievePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ from?: string }>;
+}) {
+  const { from } = await searchParams;
+  const homeHref = from === "vip" ? "/vip" : "/";
   return (
     <main className="bg-runway grain min-h-screen relative">
 
       <nav className="relative px-6 pt-8 pb-2 md:py-8 flex items-center justify-center max-w-6xl mx-auto">
-        <a href="/" className="block w-48 md:w-72" aria-label="Home">
+        <a href={homeHref} className="block w-48 md:w-72" aria-label="Home">
           <Image
             src="/masthead-dinner.png"
             alt="Utopia Group of Companies — Hollywood Red Carpet"

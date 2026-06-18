@@ -6,6 +6,7 @@ import Scanner from "./_scanner";
 
 type Stats = {
   attending: number;
+  notAttending: number;
   totalTickets: number;
   checkedIn: number;
   transport: number;
@@ -21,6 +22,7 @@ export default function ScanClient({ initialStats }: { initialStats: Stats }) {
       const data = await res.json();
       setStats({
         attending: data.stats.attending,
+        notAttending: data.stats.notAttending,
         totalTickets: data.stats.totalTickets,
         checkedIn: data.stats.checkedIn,
         transport: data.stats.transport,

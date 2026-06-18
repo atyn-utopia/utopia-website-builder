@@ -8,6 +8,7 @@ type GuestWithTickets = GuestRow & { tickets: TicketRow[] };
 
 type Stats = {
   attending: number;
+  notAttending: number;
   totalTickets: number;
   checkedIn: number;
   transport: number;
@@ -51,6 +52,7 @@ export default function GuestList({
       setGuests(data.guests ?? []);
       setStats({
         attending: data.stats.attending,
+        notAttending: data.stats.notAttending,
         totalTickets: data.stats.totalTickets,
         checkedIn: data.stats.checkedIn,
         transport: data.stats.transport,
