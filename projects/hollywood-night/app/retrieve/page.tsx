@@ -12,7 +12,7 @@ export default function RetrievePage() {
   return (
     <main className="bg-runway grain min-h-screen relative">
 
-      <nav className="relative px-6 py-8 flex items-center justify-center max-w-6xl mx-auto">
+      <nav className="relative px-6 pt-8 pb-2 md:py-8 flex items-center justify-center max-w-6xl mx-auto">
         <a href="/" className="block w-48 md:w-72" aria-label="Home">
           <Image
             src="/masthead-dinner.png"
@@ -24,7 +24,7 @@ export default function RetrievePage() {
         </a>
       </nav>
 
-      <section className="relative px-6 py-16 max-w-2xl md:max-w-5xl mx-auto text-center">
+      <section className="relative px-6 pt-2 pb-16 md:py-16 max-w-2xl md:max-w-5xl mx-auto text-center">
         <p className="text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-4">
           ◆ Ticket Retrieval
         </p>
