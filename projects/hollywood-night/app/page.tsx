@@ -8,25 +8,21 @@ import RunwayRail from "./_components/runway-rail";
 import AgendaTimeline from "./_components/agenda-timeline";
 import Countdown from "./_components/countdown";
 import FilmStrip from "./_components/film-strip";
+import MyTicketButton from "./_components/my-ticket-button";
 
 export default function Home() {
   return (
     <>
       <DoorOpening />
 
-      {/* Sticky "My Ticket" button — stays visible on scroll */}
-      <a
-        href="/retrieve"
-        className="fixed top-4 right-4 z-40 bg-ink-black/80 backdrop-blur-sm border border-gold-500/60 text-gold-300 px-4 py-2 uppercase tracking-[0.18em] text-[10px] md:text-[11px] font-medium transition-[transform,opacity,background-color] duration-200 hover:bg-gold-500/10 hover:border-gold-400 hover:-translate-y-0.5 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.9)]"
-      >
-        ◆ My Ticket
-      </a>
+      {/* "My Ticket" button — hidden over the splash, appears after the first section */}
+      <MyTicketButton />
 
       <main className="bg-runway grain min-h-screen relative overflow-x-clip">
         <RunwayRail />
 
         {/* ───────────── Splash — the image the doors open onto (pinned to linger) ───────────── */}
-        <section className="relative h-[155vh] w-full">
+        <section id="hero-splash" className="relative h-[155vh] w-full">
           <div className="sticky top-0 h-screen w-full overflow-hidden">
             {/* image fades out at the bottom into the shared velvet, blending into the next section */}
             <div
@@ -143,6 +139,7 @@ export default function Home() {
                 primary={EVENT.venue}
                 secondary={EVENT.venueAddress}
                 icon={<DetailIcon name="venue" />}
+                twoLine
               />
             </div>
           </Reveal>
@@ -160,8 +157,7 @@ export default function Home() {
               Tentative Run of Show
             </h3>
             <p className="text-center text-ivory-dim mb-12 leading-relaxed">
-              An evening of dining, masquerade games &amp; grand prizes. Timings
-              are indicative and may shift on the night.
+              An evening of dining, masquerade games &amp; grand prizes.
             </p>
             <AgendaTimeline />
           </Reveal>
@@ -248,14 +244,16 @@ function DetailCard({
   primary,
   secondary,
   icon,
+  twoLine = false,
 }: {
   label: string;
   primary: string;
   secondary: string;
   icon: React.ReactNode;
+  twoLine?: boolean;
 }) {
   return (
-    <div className="group relative flex flex-col items-center justify-center text-center px-7 py-12 border border-gold-500/20 bg-gradient-to-b from-white/[0.05] to-white/[0.01] backdrop-blur-md shadow-[0_30px_70px_-45px_rgba(0,0,0,0.95)] transition-[transform,border-color] duration-500 hover:-translate-y-1.5 hover:border-gold-500/45">
+    <div className="group relative flex flex-col items-center justify-start text-center px-7 py-11 border border-gold-500/20 bg-gradient-to-b from-white/[0.05] to-white/[0.01] backdrop-blur-md shadow-[0_30px_70px_-45px_rgba(0,0,0,0.95)] transition-[transform,border-color] duration-500 hover:-translate-y-1.5 hover:border-gold-500/45">
       <span className="mb-5 text-gold-400/90 transition-transform duration-500 group-hover:scale-110">
         {icon}
       </span>
@@ -266,7 +264,11 @@ function DetailCard({
         aria-hidden
         className="mb-5 block h-px w-8 bg-gradient-to-r from-transparent via-gold-500/60 to-transparent"
       />
-      <p className="font-display text-2xl md:text-[1.7rem] text-champagne leading-snug">
+      <p
+        className={`font-display text-xl text-champagne leading-snug ${
+          twoLine ? "max-w-[12rem]" : "whitespace-nowrap"
+        }`}
+      >
         {primary}
       </p>
       {secondary && (
