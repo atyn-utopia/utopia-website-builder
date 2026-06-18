@@ -106,7 +106,7 @@ export default function GuestList({
   return (
     <>
       <AdminHeader stats={stats} />
-      <div className="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-10">
+      <div className="max-w-[1600px] mx-auto px-4 md:px-6 py-8 md:py-10">
         <div className="flex items-baseline justify-between gap-4 mb-6 md:mb-8 flex-wrap">
           <h1 className="font-display text-3xl md:text-4xl text-champagne">
             Guest List

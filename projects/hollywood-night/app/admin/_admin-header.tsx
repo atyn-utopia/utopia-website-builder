@@ -27,7 +27,7 @@ export default function AdminHeader({ stats }: { stats: Stats }) {
       className="border-b border-ink-600 bg-ink-800 sticky top-0 z-20"
       style={{ paddingTop: "env(safe-area-inset-top)" }}
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5">
+      <div className="max-w-[1600px] mx-auto px-4 md:px-6 py-4 md:py-5">
         <div className="flex items-center justify-between gap-4">
           <a href="/admin" className="block w-28 md:w-56 shrink-0">
             <Image
