@@ -9,6 +9,7 @@ import AgendaTimeline from "./agenda-timeline";
 import Countdown from "./countdown";
 import FilmStrip from "./film-strip";
 import MyTicketButton from "./my-ticket-button";
+import IntroLoader from "./intro-loader";
 
 export default function EventPage({
   variant = "staff",
@@ -17,6 +18,7 @@ export default function EventPage({
 }) {
   return (
     <>
+      <IntroLoader />
       <DoorOpening />
 
       {/* "My Ticket" button — hidden over the splash, appears after the first section */}
@@ -153,7 +155,7 @@ export default function EventPage({
               Tentative Run of Show
             </h3>
             <p className="text-center text-ivory-dim text-sm md:text-base mb-12 leading-relaxed">
-              An evening of dining, masquerade games &amp; grand prizes.
+              An evening of dining, games &amp; grand prizes.
             </p>
             <AgendaTimeline />
           </Reveal>
