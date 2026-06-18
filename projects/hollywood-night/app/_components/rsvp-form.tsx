@@ -11,8 +11,13 @@ type SubmitResult =
   | { ok: true; attending: boolean; ticketCount?: number; emailSent?: boolean }
   | { ok: false; error: string };
 
-export default function RsvpForm() {
+export default function RsvpForm({
+  variant = "staff",
+}: {
+  variant?: "staff" | "vip";
+}) {
   const router = useRouter();
+  const isVip = variant === "vip";
   const [attending, setAttending] = useState(true);
   const [hasPlusOne, setHasPlusOne] = useState(false);
   const [transport, setTransport] = useState(false);
@@ -36,7 +41,7 @@ export default function RsvpForm() {
       : null;
 
     // Client-side required checks
-    if (!name || !email || !companyName) {
+    if (!name || !email || (!isVip && !companyName)) {
       setResult({ ok: false, error: "Please fill all fields." });
       setLoading(false);
       return;
@@ -69,12 +74,13 @@ export default function RsvpForm() {
       name,
       phone,
       email,
-      companyName,
+      companyName: isVip ? "" : companyName,
       attending,
       hasPlusOne,
       plusOneName,
       plusOnePhone,
-      transportationRequired: transport,
+      transportationRequired: isVip ? false : transport,
+      rsvpType: isVip ? "vip" : "staff",
     };
 
     try {
@@ -137,33 +143,35 @@ export default function RsvpForm() {
         />
       </div>
 
-      <label className="block">
-        <span className="block text-[11px] uppercase tracking-[0.22em] text-gold-500 mb-2">
-          Company
-        </span>
-        <select
-          name="companyName"
-          required
-          defaultValue=""
-          className="field-line w-full text-ivory px-0 py-3 outline-none appearance-none"
-          style={{
-            backgroundImage:
-              "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%23D4AF37' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>\")",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "right 0.25rem center",
-            paddingRight: "2rem",
-          }}
-        >
-          <option value="" disabled>
-            Select your company…
-          </option>
-          {COMPANIES.map((c) => (
-            <option key={c} value={c} className="bg-ink-800 text-ivory">
-              {c}
+      {!isVip && (
+        <label className="block">
+          <span className="block text-[11px] uppercase tracking-[0.22em] text-gold-500 mb-2">
+            Company
+          </span>
+          <select
+            name="companyName"
+            required
+            defaultValue=""
+            className="field-line w-full text-ivory px-0 py-3 outline-none appearance-none"
+            style={{
+              backgroundImage:
+                "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%23D4AF37' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>\")",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "right 0.25rem center",
+              paddingRight: "2rem",
+            }}
+          >
+            <option value="" disabled>
+              Select your company…
             </option>
-          ))}
-        </select>
-      </label>
+            {COMPANIES.map((c) => (
+              <option key={c} value={c} className="bg-ink-800 text-ivory">
+                {c}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
 
       <Segmented
         label="Will you be attending?"
@@ -194,11 +202,13 @@ export default function RsvpForm() {
             </div>
           )}
 
-          <Toggle
-            label="Need transportation to the venue?"
-            value={transport}
-            onChange={setTransport}
-          />
+          {!isVip && (
+            <Toggle
+              label="Need transportation to the venue?"
+              value={transport}
+              onChange={setTransport}
+            />
+          )}
         </>
       )}
 

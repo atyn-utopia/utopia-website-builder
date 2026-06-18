@@ -82,6 +82,7 @@ export default function GuestList({
                 <thead className="bg-ink-800">
                   <tr className="text-left text-[10px] uppercase tracking-[0.22em] text-gold-500">
                     <th className="px-4 py-4">Name</th>
+                    <th className="px-4 py-4">Type</th>
                     <th className="px-4 py-4">Company</th>
                     <th className="px-4 py-4">Contact</th>
                     <th className="px-4 py-4">Status</th>
@@ -104,6 +105,9 @@ export default function GuestList({
                         <div className="font-mono text-[10px] text-gold-600 mt-0.5">
                           {g.guest_id}
                         </div>
+                      </td>
+                      <td className="px-4 py-4">
+                        <TypeChip type={g.rsvp_type} />
                       </td>
                       <td className="px-4 py-4 text-ivory-dim text-[12px]">
                         {g.company_name || "—"}
@@ -150,7 +154,10 @@ export default function GuestList({
                         {g.guest_id}
                       </div>
                     </div>
-                    <StatusChip attending={g.attending} />
+                    <div className="flex flex-col items-end gap-1">
+                      <StatusChip attending={g.attending} />
+                      <TypeChip type={g.rsvp_type} />
+                    </div>
                   </div>
                   {g.company_name && (
                     <div className="text-[11px] text-ivory-dim mb-2">
@@ -195,6 +202,21 @@ function StatusChip({ attending }: { attending: boolean }) {
   ) : (
     <span className="inline-block text-[10px] uppercase tracking-[0.2em] text-ivory-faint border border-ivory/20 px-2 py-1">
       Not Going
+    </span>
+  );
+}
+
+function TypeChip({ type }: { type?: string }) {
+  const vip = type === "vip";
+  return (
+    <span
+      className={`inline-block text-[9px] uppercase tracking-[0.18em] px-2 py-0.5 border ${
+        vip
+          ? "text-gold-300 border-gold-500 bg-gold-500/10"
+          : "text-ivory-faint border-ivory/20"
+      }`}
+    >
+      {vip ? "VIP" : "Staff"}
     </span>
   );
 }

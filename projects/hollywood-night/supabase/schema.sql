@@ -19,12 +19,17 @@ create table if not exists hollywood.guests (
   plus_one_name   text,
   plus_one_phone  text,
   transportation_required boolean not null default false,
+  rsvp_type       text not null default 'staff',
   created_at      timestamptz not null default now()
 );
 
 -- Migration for existing tables: add company_name if missing.
 alter table hollywood.guests
   add column if not exists company_name text not null default '';
+
+-- Migration: RSVP type — 'staff' (default homepage RSVP) or 'vip' (the /vip page).
+alter table hollywood.guests
+  add column if not exists rsvp_type text not null default 'staff';
 
 create index if not exists guests_phone_idx on hollywood.guests (phone);
 create index if not exists guests_email_idx on hollywood.guests (email);

@@ -20,13 +20,20 @@ const schema = z
     name: z.string().trim().min(2).max(120),
     phone: myPhone,
     email: z.string().trim().toLowerCase().email(),
-    companyName: z.enum(COMPANIES as unknown as [string, ...string[]]),
+    companyName: z.string().trim().max(160).optional().default(""),
     attending: z.boolean(),
     hasPlusOne: z.boolean(),
     plusOneName: z.string().trim().max(120).optional().nullable(),
     plusOnePhone: z.string().trim().max(30).optional().nullable(),
     transportationRequired: z.boolean(),
+    rsvpType: z.enum(["staff", "vip"]).default("staff"),
   })
+  .refine(
+    (v) =>
+      v.rsvpType === "vip" ||
+      (COMPANIES as readonly string[]).includes(v.companyName),
+    { message: "Please select your company", path: ["companyName"] }
+  )
   .refine(
     (v) => !v.hasPlusOne || (v.plusOneName && v.plusOneName.length >= 2),
     { message: "Plus-one name required", path: ["plusOneName"] }
@@ -98,22 +105,33 @@ export async function POST(request: Request) {
 
   const guestId = generateGuestId();
 
-  const { data: guestRow, error: insertErr } = await supabaseAdmin
+  const baseGuest = {
+    guest_id: guestId,
+    name: data.name,
+    phone: data.phone,
+    email: data.email,
+    company_name: data.companyName,
+    attending: data.attending,
+    has_plus_one: data.hasPlusOne,
+    plus_one_name: data.hasPlusOne ? data.plusOneName : null,
+    plus_one_phone: data.hasPlusOne ? data.plusOnePhone ?? null : null,
+    transportation_required: data.transportationRequired,
+  };
+
+  let { data: guestRow, error: insertErr } = await supabaseAdmin
     .from("guests")
-    .insert({
-      guest_id: guestId,
-      name: data.name,
-      phone: data.phone,
-      email: data.email,
-      company_name: data.companyName,
-      attending: data.attending,
-      has_plus_one: data.hasPlusOne,
-      plus_one_name: data.hasPlusOne ? data.plusOneName : null,
-      plus_one_phone: data.hasPlusOne ? data.plusOnePhone ?? null : null,
-      transportation_required: data.transportationRequired,
-    })
+    .insert({ ...baseGuest, rsvp_type: data.rsvpType })
     .select("*")
     .single();
+
+  // Fall back gracefully if the rsvp_type column hasn't been migrated yet.
+  if (insertErr && /rsvp_type/i.test(insertErr.message)) {
+    ({ data: guestRow, error: insertErr } = await supabaseAdmin
+      .from("guests")
+      .insert(baseGuest)
+      .select("*")
+      .single());
+  }
 
   if (insertErr || !guestRow) {
     return NextResponse.json(
