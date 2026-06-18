@@ -46,14 +46,6 @@ export default function Home() {
                   "linear-gradient(180deg, rgba(0,0,0,0.20) 0%, transparent 36%, transparent 100%)",
               }}
             />
-            <div
-              className="hidden lg:block absolute bottom-10 left-1/2 -translate-x-1/2 z-10 text-gold-300 text-2xl"
-              aria-hidden
-            >
-              <span className="block animate-[gentle-float_3s_ease-in-out_infinite]">
-                ▾
-              </span>
-            </div>
           </div>
         </section>
 
