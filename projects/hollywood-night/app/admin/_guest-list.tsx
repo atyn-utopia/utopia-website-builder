@@ -85,6 +85,7 @@ export default function GuestList({
         g.guest_id,
         g.plus_one_name,
         g.plus_one_phone,
+        ...(g.tickets ?? []).map((t) => t.ticket_id),
       ]
         .filter(Boolean)
         .some((v) => String(v).toLowerCase().includes(q));
@@ -156,7 +157,7 @@ export default function GuestList({
             type="search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search name, phone, email…"
+            placeholder="Search name, phone, email, ticket ID…"
             className="ml-auto w-full sm:w-72 bg-ink-700 border border-ink-600 text-ivory text-sm px-3 py-2 outline-none focus:border-gold-500 placeholder-ivory/30"
           />
         </div>
