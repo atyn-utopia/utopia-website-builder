@@ -2,7 +2,7 @@
 
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toPng } from "html-to-image";
 import PhoneField from "../_components/phone-field";
 import AddToCalendar from "../_components/add-to-calendar";
@@ -21,6 +21,7 @@ type Ticket = {
 
 export default function RetrieveForm() {
   const params = useSearchParams();
+  const router = useRouter();
   const initialPhone = params.get("phone") ?? "";
   const welcome = params.get("welcome") === "1";
   const autoRanRef = useRef(false);
@@ -94,6 +95,18 @@ export default function RetrieveForm() {
   }
 
   const hasTickets = tickets && tickets.length > 0;
+
+  // Once a VIP ticket is found, mark the URL so the masthead/home link
+  // returns to /vip — regardless of how the guest reached this page.
+  useEffect(() => {
+    if (!tickets || tickets.length === 0) return;
+    const isVip = tickets.some((t) => t.rsvpType === "vip");
+    if (isVip && params.get("from") !== "vip") {
+      const sp = new URLSearchParams(Array.from(params.entries()));
+      sp.set("from", "vip");
+      router.replace(`/retrieve?${sp.toString()}`, { scroll: false });
+    }
+  }, [tickets, params, router]);
 
   return (
     <>
