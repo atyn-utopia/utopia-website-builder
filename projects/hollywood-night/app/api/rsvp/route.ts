@@ -188,8 +188,9 @@ export async function POST(request: Request) {
   // WhatsApp confirmation push (best-effort — never blocks the RSVP).
   try {
     const origin = new URL(request.url).origin;
+    const fromParam = data.rsvpType === "vip" ? "&from=vip" : "";
     const retrieveFor = (p: string) =>
-      `${origin}/retrieve?phone=${encodeURIComponent(p)}`;
+      `${origin}/retrieve?phone=${encodeURIComponent(p)}${fromParam}`;
 
     await sendWhatsAppText(
       data.phone,
