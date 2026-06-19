@@ -32,7 +32,7 @@ export async function sendWhatsAppText(
         Authorization: `Bearer ${key}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ to, message_type: "text", body: { text } }),
+      body: JSON.stringify({ to, text }),
     });
 
     if (!res.ok) {
