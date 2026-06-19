@@ -188,10 +188,25 @@ export async function POST(request: Request) {
   // WhatsApp confirmation push (best-effort — never blocks the RSVP).
   try {
     const origin = new URL(request.url).origin;
-    const retrieveUrl = `${origin}/retrieve?phone=${encodeURIComponent(
-      data.phone
-    )}`;
-    await sendWhatsAppText(data.phone, buildRsvpWhatsApp(data.name, retrieveUrl));
+    const retrieveFor = (p: string) =>
+      `${origin}/retrieve?phone=${encodeURIComponent(p)}`;
+
+    await sendWhatsAppText(
+      data.phone,
+      buildRsvpWhatsApp(data.name, retrieveFor(data.phone))
+    );
+
+    // Also notify the plus-one on their own number, when provided.
+    if (data.hasPlusOne && data.plusOneName && data.plusOnePhone) {
+      await sendWhatsAppText(
+        data.plusOnePhone,
+        buildRsvpWhatsApp(
+          data.plusOneName,
+          retrieveFor(data.plusOnePhone),
+          data.name
+        )
+      );
+    }
   } catch (err) {
     console.error("whatsapp confirmation failed", err);
   }
