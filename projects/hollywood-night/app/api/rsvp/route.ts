@@ -5,6 +5,7 @@ import { generateGuestId, generateTicketId } from "@/lib/ids";
 import { qrDataUrl } from "@/lib/qr";
 import { renderTicketsPdf, type TicketPdfData } from "@/lib/ticket-pdf";
 import { sendTicketsEmail } from "@/lib/resend";
+import { sendWhatsAppText, buildRsvpWhatsApp } from "@/lib/replybox";
 import { COMPANIES } from "@/lib/companies";
 
 export const runtime = "nodejs";
@@ -182,6 +183,17 @@ export async function POST(request: Request) {
       { error: "Failed to create tickets", detail: ticketErr?.message },
       { status: 500 }
     );
+  }
+
+  // WhatsApp confirmation push (best-effort — never blocks the RSVP).
+  try {
+    const origin = new URL(request.url).origin;
+    const retrieveUrl = `${origin}/retrieve?phone=${encodeURIComponent(
+      data.phone
+    )}`;
+    await sendWhatsAppText(data.phone, buildRsvpWhatsApp(data.name, retrieveUrl));
+  } catch (err) {
+    console.error("whatsapp confirmation failed", err);
   }
 
   const ticketsForPdf: TicketPdfData[] = await Promise.all(
