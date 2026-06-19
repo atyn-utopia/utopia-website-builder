@@ -194,7 +194,7 @@ export async function POST(request: Request) {
 
     await sendWhatsAppText(
       data.phone,
-      buildRsvpWhatsApp(data.name, retrieveFor(data.phone))
+      buildRsvpWhatsApp(data.name, retrieveFor(data.phone), data.rsvpType)
     );
 
     // Also notify the plus-one on their own number, when provided.
@@ -204,7 +204,7 @@ export async function POST(request: Request) {
         buildRsvpWhatsApp(
           data.plusOneName,
           retrieveFor(data.plusOnePhone),
-          data.name
+          data.rsvpType
         )
       );
     }

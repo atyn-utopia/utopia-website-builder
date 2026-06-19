@@ -53,22 +53,20 @@ export async function sendWhatsAppText(
   }
 }
 
-/** Confirmation message sent to a guest after they finish registering.
- * Pass `hostName` to address a plus-one as that guest's invitee. */
+/** Confirmation message sent to a guest after they finish registering. */
 export function buildRsvpWhatsApp(
   name: string,
   retrieveUrl: string,
-  hostName?: string
+  rsvpType: "staff" | "vip" = "staff"
 ): string {
-  const intro = hostName
-    ? `Hi ${name}! 🎬 You're confirmed as ${hostName}'s guest for ${EVENT.name}.`
-    : `Hi ${name}! 🎬 You're confirmed for ${EVENT.name}.`;
+  const typeLabel = rsvpType === "vip" ? "VIP Guest" : "Staff Guest";
   return [
-    intro,
+    `Hi ${name}! 🎬 You're confirmed for *Utopia Hollywood Red Carpet Night.*`,
     "",
     `🗓 ${EVENT.dateLabel}`,
     `🕕 ${EVENT.timeLabel}`,
     `📍 ${EVENT.venue}`,
+    `👤 ${typeLabel}`,
     "",
     "View your e-ticket & QR code here:",
     retrieveUrl,
