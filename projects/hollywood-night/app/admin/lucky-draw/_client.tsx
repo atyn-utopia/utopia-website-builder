@@ -26,6 +26,7 @@ export default function LuckyDrawClient() {
   const [isMobile, setIsMobile] = useState(false);
   const [eligibleCount, setEligibleCount] = useState(0);
   const [drawnCount, setDrawnCount] = useState(0);
+  const [headerOpen, setHeaderOpen] = useState(true);
 
   const [latest, setLatest] = useState<Draw | null>(null);
   const [history, setHistory] = useState<Draw[]>([]);
@@ -178,24 +179,36 @@ export default function LuckyDrawClient() {
     >
 
       <div className="relative z-20 px-4 md:px-6 py-8 md:py-12 max-w-4xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <a
-            href="/admin"
-            className="text-[11px] uppercase tracking-[0.2em] text-ivory-faint hover:text-gold-400 transition-[transform,opacity] duration-150"
-          >
-            ← Admin
-          </a>
-          <div className="flex gap-4 md:gap-6 text-[10px] uppercase tracking-[0.18em]">
-            <div className="text-center">
-              <div className="font-mono text-xl text-ivory">{eligibleCount}</div>
-              <div className="text-ivory-faint">Eligible</div>
-            </div>
-            <div className="text-center">
-              <div className="font-mono text-xl text-gold-400">{drawnCount}</div>
-              <div className="text-ivory-faint">Drawn</div>
+        <button
+          onClick={() => setHeaderOpen((o) => !o)}
+          className="absolute top-3 right-4 z-30 text-[10px] uppercase tracking-[0.2em] text-ivory-faint hover:text-gold-400 transition-[opacity] duration-150"
+        >
+          {headerOpen ? "Hide ▲" : "Menu ▼"}
+        </button>
+        {headerOpen && (
+          <div className="flex items-center justify-between mb-8 pr-16">
+            <a
+              href="/admin"
+              className="text-[11px] uppercase tracking-[0.2em] text-ivory-faint hover:text-gold-400 transition-[transform,opacity] duration-150"
+            >
+              ← Admin
+            </a>
+            <div className="flex gap-4 md:gap-6 text-[10px] uppercase tracking-[0.18em]">
+              <div className="text-center">
+                <div className="font-mono text-xl text-ivory">
+                  {eligibleCount}
+                </div>
+                <div className="text-ivory-faint">Eligible</div>
+              </div>
+              <div className="text-center">
+                <div className="font-mono text-xl text-gold-400">
+                  {drawnCount}
+                </div>
+                <div className="text-ivory-faint">Drawn</div>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         <div className="flex justify-center mb-6">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -218,7 +231,7 @@ export default function LuckyDrawClient() {
               <p className="text-[10px] uppercase tracking-[0.32em] text-gold-500 mb-2">
                 ◆ Winner
               </p>
-              <h2 className="font-display text-3xl md:text-6xl text-champagne mb-2 leading-tight">
+              <h2 className="font-display text-2xl md:text-4xl text-champagne mb-2 leading-tight px-2 text-balance">
                 {latest.guestName}
               </h2>
               {latest.company && (
