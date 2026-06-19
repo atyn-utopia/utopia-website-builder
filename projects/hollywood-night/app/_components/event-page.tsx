@@ -80,8 +80,10 @@ export default function EventPage({
 
               <h1 className="sr-only">{EVENT.name}</h1>
 
-              <h2 className="font-display italic text-3xl md:text-6xl text-champagne my-6 leading-[1.05]">
-                You&apos;re Invited to the Annual Dinner
+              <h2 className="font-display italic text-3xl md:text-6xl text-champagne my-6 leading-[1.1]">
+                You&apos;re Invited to
+                <br />
+                the Annual Dinner
               </h2>
 
               <MarqueeBulbs />
