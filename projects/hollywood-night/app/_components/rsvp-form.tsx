@@ -136,7 +136,12 @@ export default function RsvpForm({
     >
       <Field label="Full name" name="name" required autoComplete="name" />
       <div className="grid md:grid-cols-2 gap-6">
-        <PhoneField label="Phone number" name="phone" required />
+        <PhoneField
+          label="Phone number"
+          name="phone"
+          required
+          hint="Please double-check — this number is your key to your ticket and entry."
+        />
         <Field
           label="Email address"
           name="email"

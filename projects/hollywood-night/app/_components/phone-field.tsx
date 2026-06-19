@@ -9,6 +9,7 @@ type Props = {
   required?: boolean;
   initial?: string;
   size?: "default" | "compact";
+  hint?: string;
 };
 
 export default function PhoneField({
@@ -16,6 +17,7 @@ export default function PhoneField({
   name,
   required,
   initial = "",
+  hint,
 }: Props) {
   const [digits, setDigits] = useState(() =>
     sanitizeDigits(initial.replace(/^\+?60/, ""))
@@ -51,6 +53,11 @@ export default function PhoneField({
           className={`flex-1 bg-transparent text-ivory placeholder-ivory/25 px-0 ${padY} outline-none font-mono`}
         />
       </div>
+      {hint && (
+        <span className="block mt-2 text-[11px] leading-snug text-gold-300/80">
+          {hint}
+        </span>
+      )}
       <input type="hidden" name={name} value={fullValue} />
     </label>
   );
