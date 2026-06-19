@@ -61,7 +61,9 @@ export function buildRsvpWhatsApp(
 ): string {
   const typeLabel = rsvpType === "vip" ? "VIP Guest" : "Staff Guest";
   return [
-    `Hi ${name}! 🎬 You're confirmed for *Utopia Hollywood Red Carpet Night.*`,
+    `Hi ${name}!`,
+    "",
+    "🎬 You're confirmed for *Utopia Hollywood Red Carpet Night.*",
     "",
     `🗓 ${EVENT.dateLabel}`,
     `🕕 ${EVENT.timeLabel}`,
