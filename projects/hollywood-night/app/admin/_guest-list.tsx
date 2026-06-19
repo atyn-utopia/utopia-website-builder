@@ -129,9 +129,17 @@ export default function GuestList({
           <h1 className="font-display text-3xl md:text-4xl text-champagne">
             Guest List
           </h1>
-          <span className="text-[10px] uppercase tracking-[0.22em] text-ivory-faint">
-            ◆ Live · updated {lastUpdated.toLocaleTimeString()}
-          </span>
+          <div className="flex items-center gap-4">
+            <span className="text-[10px] uppercase tracking-[0.22em] text-ivory-faint">
+              ◆ Live · updated {lastUpdated.toLocaleTimeString()}
+            </span>
+            <a
+              href="/api/admin/guests/export"
+              className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-gold-300 border border-gold-500/50 px-3 py-2 hover:bg-gold-500/10 hover:border-gold-400 transition-colors"
+            >
+              ⬇ Export PDF
+            </a>
+          </div>
         </div>
 
         <div className="flex flex-wrap items-center gap-2 mb-5">
