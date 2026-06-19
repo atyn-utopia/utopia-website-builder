@@ -198,6 +198,10 @@ export default function RetrieveForm() {
   );
 }
 
+function firstTwoWords(name: string): string {
+  return name.trim().split(/\s+/).filter(Boolean).slice(0, 2).join(" ");
+}
+
 function shortenName(name: string): string {
   const parts = name.trim().split(/\s+/).filter(Boolean);
   if (parts.length <= 2) return parts.join(" ");
@@ -403,7 +407,7 @@ function TicketCard({ ticket }: { ticket: Ticket }) {
             className="font-display text-2xl text-champagne leading-tight mb-1"
             style={{ textShadow: "0 2px 14px rgba(0,0,0,0.95)" }}
           >
-            {ticket.holderName}
+            {firstTwoWords(ticket.holderName)}
           </h3>
           <p
             className="font-mono text-gold-300 text-[10px] tracking-wider"
