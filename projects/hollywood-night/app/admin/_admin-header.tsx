@@ -2,7 +2,13 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+
+const NAV_LINKS = [
+  { href: "/admin", label: "Guests" },
+  { href: "/admin/scan", label: "Scanner" },
+  { href: "/admin/lucky-draw", label: "Draw" },
+];
 
 type Stats = {
   attending: number;
@@ -15,7 +21,11 @@ type Stats = {
 
 export default function AdminHeader({ stats }: { stats: Stats }) {
   const router = useRouter();
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
+
+  const isActive = (href: string) =>
+    href === "/admin" ? pathname === "/admin" : pathname.startsWith(href);
 
   async function logout() {
     await fetch("/api/admin/logout", { method: "POST" });
@@ -43,24 +53,19 @@ export default function AdminHeader({ stats }: { stats: Stats }) {
           {/* Desktop nav + logout */}
           <div className="hidden md:flex items-center gap-6">
             <nav className="flex gap-6 text-[11px] uppercase tracking-[0.18em]">
-              <a
-                href="/admin"
-                className="text-gold-300 hover:text-gold-400 transition-[transform,opacity] duration-150"
-              >
-                Guests
-              </a>
-              <a
-                href="/admin/scan"
-                className="text-ivory-dim hover:text-gold-400 transition-[transform,opacity] duration-150"
-              >
-                Scanner
-              </a>
-              <a
-                href="/admin/lucky-draw"
-                className="text-ivory-dim hover:text-gold-400 transition-[transform,opacity] duration-150"
-              >
-                Draw
-              </a>
+              {NAV_LINKS.map((l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  className={`transition-[transform,opacity] duration-150 ${
+                    isActive(l.href)
+                      ? "text-gold-300"
+                      : "text-ivory-dim hover:text-gold-400"
+                  }`}
+                >
+                  {l.label}
+                </a>
+              ))}
             </nav>
             <button
               onClick={logout}
@@ -87,15 +92,17 @@ export default function AdminHeader({ stats }: { stats: Stats }) {
         {/* Mobile menu */}
         {open && (
           <div className="md:hidden flex flex-col mt-3 pt-3 border-t border-ink-600 text-[12px] uppercase tracking-[0.18em]">
-            <a href="/admin" className="py-2 text-gold-300">
-              Guests
-            </a>
-            <a href="/admin/scan" className="py-2 text-ivory-dim">
-              Scanner
-            </a>
-            <a href="/admin/lucky-draw" className="py-2 text-ivory-dim">
-              Draw
-            </a>
+            {NAV_LINKS.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                className={`py-2 ${
+                  isActive(l.href) ? "text-gold-300" : "text-ivory-dim"
+                }`}
+              >
+                {l.label}
+              </a>
+            ))}
             <button
               onClick={logout}
               className="py-2 text-left text-ivory-faint"
