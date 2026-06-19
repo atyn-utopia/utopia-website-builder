@@ -1,51 +1,54 @@
 import { EVENT } from "./event";
 
-const BASE_URL =
-  process.env.REPLYBOX_BASE_URL ||
-  "https://replybox-54au9.ondigitalocean.app";
+// WhatsApp is sent through the shared Supabase edge function `send-message`,
+// which wraps ReplyBox server-side (channel + token live in the function).
+// Auth is the Supabase key we already have; no ReplyBox token in this app.
+const SEND_URL = process.env.NEXT_PUBLIC_SUPABASE_URL
+  ? `${process.env.NEXT_PUBLIC_SUPABASE_URL.replace(/\/$/, "")}/functions/v1/send-message`
+  : "";
 
 /**
- * Send a WhatsApp text via the ReplyBox public API. Best-effort: returns
- * { ok:false } (and logs) on missing config or any error — never throws, so an
- * RSVP is never blocked by WhatsApp delivery.
+ * Send a WhatsApp text. Best-effort: returns { ok:false } (and logs) on missing
+ * config or any error — never throws, so an RSVP is never blocked.
  */
 export async function sendWhatsAppText(
   to: string,
   text: string
 ): Promise<{ ok: boolean; error?: string }> {
-  const token = process.env.REPLYBOX_TOKEN;
-  const channelId = process.env.REPLYBOX_CHANNEL_ID;
-  if (!token || !channelId) {
+  const key =
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!SEND_URL || !key) {
     console.warn(
-      "ReplyBox not configured (REPLYBOX_TOKEN / REPLYBOX_CHANNEL_ID missing) — skipping WhatsApp."
+      "send-message not configured (NEXT_PUBLIC_SUPABASE_URL / Supabase key missing) — skipping WhatsApp."
     );
     return { ok: false, error: "not configured" };
   }
 
   try {
-    const res = await fetch(`${BASE_URL}/api/v1/public/messages`, {
+    const res = await fetch(SEND_URL, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${key}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        channelId,
-        to,
-        message_type: "text",
-        body: { text },
-      }),
+      body: JSON.stringify({ to, message_type: "text", body: { text } }),
     });
 
     if (!res.ok) {
-      const data = (await res.json().catch(() => ({}))) as { detail?: string };
-      const detail = data.detail ?? res.statusText;
-      console.error("ReplyBox send failed", res.status, detail);
+      const data = (await res.json().catch(() => ({}))) as {
+        detail?: unknown;
+      };
+      const detail =
+        typeof data.detail === "string"
+          ? data.detail
+          : JSON.stringify(data.detail ?? res.statusText);
+      console.error("send-message failed", res.status, detail);
       return { ok: false, error: `${res.status} ${detail}` };
     }
     return { ok: true };
   } catch (err) {
-    console.error("ReplyBox network error", err);
+    console.error("send-message network error", err);
     return { ok: false, error: "network" };
   }
 }
