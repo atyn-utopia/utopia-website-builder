@@ -27,6 +27,7 @@ export default function LuckyDrawClient() {
   const [eligibleCount, setEligibleCount] = useState(0);
   const [drawnCount, setDrawnCount] = useState(0);
   const [headerOpen, setHeaderOpen] = useState(true);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const [latest, setLatest] = useState<Draw | null>(null);
   const [history, setHistory] = useState<Draw[]>([]);
@@ -172,6 +173,22 @@ export default function LuckyDrawClient() {
     }
   }
 
+  useEffect(() => {
+    const onFsChange = () =>
+      setIsFullscreen(Boolean(document.fullscreenElement));
+    document.addEventListener("fullscreenchange", onFsChange);
+    return () => document.removeEventListener("fullscreenchange", onFsChange);
+  }, []);
+
+  function toggleFullscreen() {
+    if (typeof document === "undefined") return;
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen?.().catch(() => {});
+    } else {
+      document.exitFullscreen?.();
+    }
+  }
+
   return (
     <main
       className="min-h-screen bg-runway grain"
@@ -184,6 +201,12 @@ export default function LuckyDrawClient() {
           className="absolute top-3 right-4 z-30 text-[10px] uppercase tracking-[0.2em] text-ivory-faint hover:text-gold-400 transition-[opacity] duration-150"
         >
           {headerOpen ? "Hide ▲" : "Menu ▼"}
+        </button>
+        <button
+          onClick={toggleFullscreen}
+          className="absolute top-3 left-4 z-30 text-[10px] uppercase tracking-[0.2em] text-ivory-faint hover:text-gold-400 transition-[opacity] duration-150"
+        >
+          {isFullscreen ? "⤢ Exit" : "⤢ Fullscreen"}
         </button>
         {headerOpen && (
           <div className="flex items-center justify-between mb-8 pr-16">
