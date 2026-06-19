@@ -10,6 +10,7 @@ type Stats = {
   totalTickets: number;
   checkedIn: number;
   transport: number;
+  vip: number;
 };
 
 export default function ScanClient({ initialStats }: { initialStats: Stats }) {
@@ -26,6 +27,7 @@ export default function ScanClient({ initialStats }: { initialStats: Stats }) {
         totalTickets: data.stats.totalTickets,
         checkedIn: data.stats.checkedIn,
         transport: data.stats.transport,
+        vip: data.stats.vip,
       });
     } catch {}
   }, []);

@@ -12,6 +12,7 @@ type Stats = {
   totalTickets: number;
   checkedIn: number;
   transport: number;
+  vip: number;
 };
 
 type Payload = {
@@ -24,6 +25,7 @@ type Payload = {
     totalTickets: number;
     checkedIn: number;
     transport: number;
+    vip: number;
   };
 };
 
@@ -38,6 +40,7 @@ export default function GuestList({
   const [stats, setStats] = useState(initialStats);
   const [lastUpdated, setLastUpdated] = useState<Date>(new Date());
   const [filter, setFilter] = useState<"all" | "vip" | "staff">("all");
+  const [search, setSearch] = useState("");
   const [deleteTarget, setDeleteTarget] = useState<GuestWithTickets | null>(
     null
   );
@@ -56,6 +59,7 @@ export default function GuestList({
         totalTickets: data.stats.totalTickets,
         checkedIn: data.stats.checkedIn,
         transport: data.stats.transport,
+        vip: data.stats.vip,
       });
       setLastUpdated(new Date());
     } catch {}
@@ -68,10 +72,23 @@ export default function GuestList({
 
   const vipCount = guests.filter((g) => g.rsvp_type === "vip").length;
   const staffCount = guests.length - vipCount;
-  const shown =
-    filter === "all"
-      ? guests
-      : guests.filter((g) => (g.rsvp_type ?? "staff") === filter);
+  const q = search.trim().toLowerCase();
+  const shown = guests
+    .filter((g) => filter === "all" || (g.rsvp_type ?? "staff") === filter)
+    .filter((g) => {
+      if (!q) return true;
+      return [
+        g.name,
+        g.phone,
+        g.email,
+        g.company_name,
+        g.guest_id,
+        g.plus_one_name,
+        g.plus_one_phone,
+      ]
+        .filter(Boolean)
+        .some((v) => String(v).toLowerCase().includes(q));
+    });
 
   async function handleDelete() {
     if (!deleteTarget) return;
@@ -134,6 +151,13 @@ export default function GuestList({
             onClick={() => setFilter("staff")}
             label="Staff"
             count={staffCount}
+          />
+          <input
+            type="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search name, phone, email…"
+            className="ml-auto w-full sm:w-72 bg-ink-700 border border-ink-600 text-ivory text-sm px-3 py-2 outline-none focus:border-gold-500 placeholder-ivory/30"
           />
         </div>
 
@@ -279,6 +303,12 @@ export default function GuestList({
                 </article>
               ))}
             </div>
+
+            {shown.length === 0 && (
+              <p className="text-center text-ivory-faint italic py-10">
+                No guests match your search.
+              </p>
+            )}
           </>
         )}
       </div>

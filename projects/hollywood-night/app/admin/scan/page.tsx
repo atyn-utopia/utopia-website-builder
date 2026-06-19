@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 export default async function AdminScanPage() {
   const { data: guests } = await supabaseAdmin
     .from("guests")
-    .select("id, attending, has_plus_one, transportation_required");
+    .select("id, attending, has_plus_one, transportation_required, rsvp_type");
   const { data: tickets } = await supabaseAdmin
     .from("tickets")
     .select("checked_in");
@@ -18,6 +18,7 @@ export default async function AdminScanPage() {
       .filter((g) => g.attending)
       .reduce((n, g) => n + 1 + (g.has_plus_one ? 1 : 0), 0),
     notAttending: rows.filter((g) => !g.attending).length,
+    vip: rows.filter((g) => g.rsvp_type === "vip").length,
     totalTickets: (tickets ?? []).length,
     checkedIn: (tickets ?? []).filter((t) => t.checked_in).length,
     transport: rows.filter((g) => g.transportation_required).length,

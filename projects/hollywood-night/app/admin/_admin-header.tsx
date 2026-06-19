@@ -10,6 +10,7 @@ type Stats = {
   checkedIn: number;
   totalTickets: number;
   transport: number;
+  vip: number;
 };
 
 export default function AdminHeader({ stats }: { stats: Stats }) {
@@ -103,11 +104,16 @@ export default function AdminHeader({ stats }: { stats: Stats }) {
             </button>
           </div>
         )}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-6 mt-4 pt-4 border-t border-ink-600">
+        <div className="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-6 mt-4 pt-4 border-t border-ink-600">
           <Stat label="Attending" value={stats.attending} />
           <Stat label="Not Going" value={stats.notAttending} />
+          <Stat label="VIP" value={stats.vip} />
           <Stat label="Tickets" value={stats.totalTickets} />
           <Stat label="Checked In" value={stats.checkedIn} highlight />
+          <Stat
+            label="Not In"
+            value={Math.max(0, stats.totalTickets - stats.checkedIn)}
+          />
         </div>
       </div>
     </header>
