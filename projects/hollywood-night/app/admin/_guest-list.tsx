@@ -645,9 +645,19 @@ function TicketsList({ tickets }: { tickets: TicketRow[] }) {
             {t.ticket_id}
           </span>
           {t.checked_in ? (
-            <span className="text-[9px] uppercase tracking-[0.2em] text-ink-black bg-gold-500 px-1.5 py-0.5">
-              ✓ In
-            </span>
+            <>
+              <span className="text-[9px] uppercase tracking-[0.2em] text-ink-black bg-gold-500 px-1.5 py-0.5">
+                ✓ In
+              </span>
+              {typeof t.lucky_number === "number" && (
+                <span
+                  className="font-mono text-[10px] text-gold-300 tabular-nums"
+                  title="Lucky draw number"
+                >
+                  #{String(t.lucky_number).padStart(3, "0")}
+                </span>
+              )}
+            </>
           ) : (
             <span className="text-[9px] uppercase tracking-[0.2em] text-ivory-faint">
               Pending
