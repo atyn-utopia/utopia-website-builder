@@ -7,6 +7,9 @@ import { isValidMyPhone } from "@/lib/phone";
 import LoadingScreen from "./loading-screen";
 import PhoneField from "./phone-field";
 
+// VIP guests pick who invited them (stored in the company_name field).
+const INVITERS = ["Chok Chun Ynh", "Alvin Goon", "Vincent Goon"];
+
 type SubmitResult =
   | { ok: true; attending: boolean; ticketCount?: number; emailSent?: boolean }
   | { ok: false; error: string };
@@ -40,7 +43,7 @@ export default function RsvpForm({
       : null;
 
     // Client-side required checks
-    if (!name || !email || (!isVip && !companyName)) {
+    if (!name || !email || !companyName) {
       setResult({ ok: false, error: "Please fill all fields." });
       setLoading(false);
       return;
@@ -73,7 +76,7 @@ export default function RsvpForm({
       name,
       phone,
       email,
-      companyName: isVip ? "" : companyName,
+      companyName,
       attending,
       hasPlusOne,
       plusOneName,
@@ -173,6 +176,36 @@ export default function RsvpForm({
               Select your company…
             </option>
             {COMPANIES.map((c) => (
+              <option key={c} value={c} className="bg-ink-800 text-ivory">
+                {c}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
+
+      {isVip && (
+        <label className="block">
+          <span className="block text-[11px] uppercase tracking-[0.22em] text-gold-500 mb-2">
+            Invited By
+          </span>
+          <select
+            name="companyName"
+            required
+            defaultValue=""
+            className="field-line w-full text-ivory px-0 py-3 outline-none appearance-none"
+            style={{
+              backgroundImage:
+                "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%23D4AF37' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>\")",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "right 0.25rem center",
+              paddingRight: "2rem",
+            }}
+          >
+            <option value="" disabled>
+              Select who invited you…
+            </option>
+            {INVITERS.map((c) => (
               <option key={c} value={c} className="bg-ink-800 text-ivory">
                 {c}
               </option>
