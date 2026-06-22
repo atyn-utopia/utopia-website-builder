@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   const { data: guests, error } = await supabaseAdmin
     .from("guests")
-    .select("*, tickets(id)")
+    .select("*, tickets(id, checked_in, lucky_number)")
     .order("created_at", { ascending: false });
 
   if (error) {
@@ -29,6 +29,12 @@ export async function GET() {
     plus_one_name: g.plus_one_name,
     created_at: g.created_at,
     ticketCount: (g.tickets ?? []).length,
+    luckyNumbers: (g.tickets ?? [])
+      .filter(
+        (t: { checked_in: boolean; lucky_number: number | null }) =>
+          t.checked_in && typeof t.lucky_number === "number"
+      )
+      .map((t: { lucky_number: number }) => t.lucky_number),
   }));
 
   const now = new Date();

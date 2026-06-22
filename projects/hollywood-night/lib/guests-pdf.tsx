@@ -20,19 +20,21 @@ export type GuestPdfRow = {
   plus_one_name?: string | null;
   created_at: string;
   ticketCount: number;
+  luckyNumbers?: number[];
 };
 
 const COLS: { label: string; w: string }[] = [
   { label: "#", w: "4%" },
-  { label: "Name", w: "16%" },
-  { label: "Type", w: "7%" },
-  { label: "Company", w: "16%" },
-  { label: "Phone", w: "12%" },
-  { label: "Email", w: "18%" },
-  { label: "Going", w: "6%" },
-  { label: "Plus One", w: "13%" },
+  { label: "Name", w: "15%" },
+  { label: "Type", w: "6%" },
+  { label: "Company", w: "14%" },
+  { label: "Phone", w: "11%" },
+  { label: "Email", w: "16%" },
+  { label: "Going", w: "5%" },
+  { label: "Plus One", w: "12%" },
   { label: "Tix", w: "4%" },
-  { label: "RSVP'd", w: "4%" },
+  { label: "Lucky", w: "7%" },
+  { label: "RSVP'd", w: "6%" },
 ];
 
 const s = StyleSheet.create({
@@ -114,21 +116,28 @@ function GuestsDoc({
             wrap={false}
           >
             <Text style={[s.td, { width: "4%" }]}>{i + 1}</Text>
-            <Text style={[s.td, { width: "16%" }]}>{g.name}</Text>
-            <Text style={[s.td, { width: "7%" }]}>
+            <Text style={[s.td, { width: "15%" }]}>{g.name}</Text>
+            <Text style={[s.td, { width: "6%" }]}>
               {g.rsvp_type === "vip" ? "VIP" : "Staff"}
             </Text>
-            <Text style={[s.td, { width: "16%" }]}>{g.company_name || "—"}</Text>
-            <Text style={[s.td, { width: "12%" }]}>{g.phone}</Text>
-            <Text style={[s.td, { width: "18%" }]}>{g.email}</Text>
-            <Text style={[s.td, { width: "6%" }]}>
+            <Text style={[s.td, { width: "14%" }]}>{g.company_name || "—"}</Text>
+            <Text style={[s.td, { width: "11%" }]}>{g.phone}</Text>
+            <Text style={[s.td, { width: "16%" }]}>{g.email}</Text>
+            <Text style={[s.td, { width: "5%" }]}>
               {g.attending ? "Yes" : "No"}
             </Text>
-            <Text style={[s.td, { width: "13%" }]}>
+            <Text style={[s.td, { width: "12%" }]}>
               {g.has_plus_one ? g.plus_one_name || "—" : "—"}
             </Text>
             <Text style={[s.td, { width: "4%" }]}>{g.ticketCount}</Text>
-            <Text style={[s.td, { width: "4%" }]}>{fmtDate(g.created_at)}</Text>
+            <Text style={[s.td, { width: "7%" }]}>
+              {g.luckyNumbers && g.luckyNumbers.length
+                ? g.luckyNumbers
+                    .map((n) => String(n).padStart(3, "0"))
+                    .join(", ")
+                : "—"}
+            </Text>
+            <Text style={[s.td, { width: "6%" }]}>{fmtDate(g.created_at)}</Text>
           </View>
         ))}
       </Page>
