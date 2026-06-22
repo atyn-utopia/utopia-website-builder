@@ -183,6 +183,7 @@ export default function GuestList({
                     <th className="px-4 py-4">Name</th>
                     <th className="px-4 py-4">Type</th>
                     <th className="px-4 py-4">Company</th>
+                    <th className="px-4 py-4">Invited By</th>
                     <th className="px-4 py-4">Contact</th>
                     <th className="px-4 py-4">Status</th>
                     <th className="px-4 py-4">Plus One</th>
@@ -209,7 +210,10 @@ export default function GuestList({
                         <TypeChip type={g.rsvp_type} />
                       </td>
                       <td className="px-4 py-4 text-ivory-dim text-[12px]">
-                        {g.company_name || "—"}
+                        {g.rsvp_type === "vip" ? "—" : g.company_name || "—"}
+                      </td>
+                      <td className="px-4 py-4 text-ivory-dim text-[12px]">
+                        {g.rsvp_type === "vip" ? g.company_name || "—" : "—"}
                       </td>
                       <td className="px-4 py-4 font-mono text-[11px] text-ivory-dim">
                         <div>{g.phone}</div>
@@ -273,7 +277,9 @@ export default function GuestList({
                   </div>
                   {g.company_name && (
                     <div className="text-[11px] text-ivory-dim mb-2">
-                      {g.company_name}
+                      {g.rsvp_type === "vip"
+                        ? `Invited by ${g.company_name}`
+                        : g.company_name}
                     </div>
                   )}
                   <div className="grid grid-cols-1 gap-1 font-mono text-[11px] text-ivory-dim border-t border-ink-600 pt-2 mt-2">
