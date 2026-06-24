@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "scan": "tsx scripts/scan.ts",
+    "scan-repos": "tsx scripts/scan-repos.ts",
     "scaffold": "tsx scripts/scaffold-site.ts",
     "chrome:check": "tsx scripts/chrome-check.ts",
     "chrome:sync": "tsx scripts/chrome-sync.ts",

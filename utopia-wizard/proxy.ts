@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { AUTH_COOKIE, isAuthConfigured, verifyAuthToken } from '@/lib/auth'
 
-const PUBLIC_PREFIXES = ['/login', '/api/login']
+const PUBLIC_PREFIXES = ['/login', '/api/login', '/api/auth/github', '/api/auth/token-account']
 
 function isPublic(pathname: string): boolean {
   if (PUBLIC_PREFIXES.some((p) => pathname === p || pathname.startsWith(p + '/'))) return true

@@ -6,6 +6,8 @@ import { totalCheckCount } from '@/lib/checklist'
 import { dataMode, projectsDir } from '@/lib/dataSource'
 import { readAllSnapshots } from '@/lib/snapshotStore'
 import { getRegisteredDomains } from '@/lib/supabaseChecks'
+import { getProjectOwners } from '@/lib/wizardUsers'
+import { currentUser } from '@/lib/session'
 
 export const dynamic = 'force-dynamic'
 
@@ -23,17 +25,45 @@ function companyFromRegistered(registered: unknown): string | null {
   return null
 }
 
-export async function GET() {
-  if (dataMode() === 'snapshot') {
-    return serveFromSnapshots()
-  }
-  return serveLive()
+/** A project row carries its owner login (null = unowned legacy project). */
+interface Scopable {
+  slug: string
+  owner: string | null
 }
 
-async function serveLive() {
+/**
+ * Filter the project list to what the signed-in user should see.
+ *   - `showAll` (toggle), open mode (no user), or admin → everything
+ *   - otherwise → projects owned by the user, plus still-unowned ones so the
+ *     legacy backlog stays visible until someone claims it.
+ * Returns the filtered list + the viewer context for the client.
+ */
+async function scopeProjects<T extends Scopable>(
+  projects: T[],
+  showAll: boolean,
+): Promise<{ projects: T[]; viewer: string | null; isAdmin: boolean; scoped: boolean }> {
+  const user = await currentUser()
+  // No identity (open mode) → cannot scope; show all.
+  if (!user) return { projects, viewer: null, isAdmin: false, scoped: false }
+  if (showAll) {
+    return { projects, viewer: user.login, isAdmin: user.isAdmin, scoped: false }
+  }
+  const mine = projects.filter((p) => p.owner === user.login || p.owner == null)
+  return { projects: mine, viewer: user.login, isAdmin: user.isAdmin, scoped: true }
+}
+
+export async function GET(req: Request) {
+  const showAll = new URL(req.url).searchParams.get('all') === '1'
+  if (dataMode() === 'snapshot') {
+    return serveFromSnapshots(showAll)
+  }
+  return serveLive(showAll)
+}
+
+async function serveLive(showAll: boolean) {
   try {
     const dir = projectsDir()
-    const entries = await readdir(dir)
+    const [entries, owners] = await Promise.all([readdir(dir), getProjectOwners()])
 
     const slugs: { slug: string; createdAt: string }[] = []
     for (const slug of entries) {
@@ -57,6 +87,7 @@ async function serveLive() {
           } catch { /* leave null */ }
           return {
             slug,
+            owner: owners.get(slug) ?? null,
             domain: r.domain,
             productSlug: r.productSlug,
             deployUrl: r.deployUrl,
@@ -79,13 +110,18 @@ async function serveLive() {
       }),
     )
 
-    const projects = runs.filter(Boolean)
-    projects.sort((a, b) => new Date(b!.projectCreatedAt).getTime() - new Date(a!.projectCreatedAt).getTime())
+    const all = runs.filter((p): p is NonNullable<typeof p> => p !== null)
+    all.sort((a, b) => new Date(b.projectCreatedAt).getTime() - new Date(a.projectCreatedAt).getTime())
+
+    const { projects, viewer, isAdmin, scoped } = await scopeProjects(all, showAll)
 
     return NextResponse.json({
       projects,
       totalChecks: totalCheckCount(),
       mode: 'live',
+      viewer,
+      isAdmin,
+      scoped,
     })
   } catch (e) {
     return NextResponse.json(
@@ -95,11 +131,12 @@ async function serveLive() {
   }
 }
 
-async function serveFromSnapshots() {
+async function serveFromSnapshots(showAll: boolean) {
   try {
-    const rows = await readAllSnapshots()
-    const projects = rows.map((r) => ({
+    const [rows, owners] = await Promise.all([readAllSnapshots(), getProjectOwners()])
+    const all = rows.map((r) => ({
       slug: r.slug,
+      owner: owners.get(r.slug) ?? null,
       domain: r.domain,
       productSlug: r.product_slug,
       deployUrl: r.deploy_url,
@@ -119,11 +156,15 @@ async function serveFromSnapshots() {
       })),
       createdAt: r.project_created_at ?? r.ran_at,
     }))
+    const { projects, viewer, isAdmin, scoped } = await scopeProjects(all, showAll)
     return NextResponse.json({
       projects,
-      totalChecks: projects[0]?.total ?? 0,
+      totalChecks: all[0]?.total ?? 0,
       mode: 'snapshot',
       ranAt: rows[0]?.ran_at ?? null,
+      viewer,
+      isAdmin,
+      scoped,
     })
   } catch (e) {
     return NextResponse.json(

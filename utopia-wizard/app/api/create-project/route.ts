@@ -1,9 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { writeFile, mkdir, access } from 'fs/promises'
 import path from 'path'
+import { currentUser } from '@/lib/session'
+import { PASSCODE_LOGIN } from '@/lib/auth'
+import { setProjectOwner } from '@/lib/wizardUsers'
 
 export const maxDuration = 60
 export const runtime = 'nodejs'
+
+/**
+ * Record the creating user as the project's owner (drives the per-user
+ * checklist filter). No-op for passcode/open sessions, which have no real
+ * GitHub identity to attribute — those projects stay unowned until claimed.
+ */
+async function stampOwner(slug: string): Promise<void> {
+  try {
+    const user = await currentUser()
+    if (!user || user.login === PASSCODE_LOGIN) return
+    await setProjectOwner(slug, user.login, user.login)
+  } catch { /* ownership is best-effort; never block project creation */ }
+}
 
 function buildClaudeCommand(slug: string): string {
   return `claude "Using @CLAUDE.md files, generate the ${slug} website. Read projects/${slug}/inputs.md for the project brief."`
@@ -33,6 +49,10 @@ export async function POST(request: NextRequest) {
     }
 
     const repoRoot = path.resolve(process.cwd(), '..')
+
+    // Attribute the project to its creator before doing any filesystem work,
+    // so ownership is recorded even in snapshot (deployed) mode.
+    await stampOwner(slug)
 
     if (!(await projectsDirIsWritable(repoRoot))) {
       return NextResponse.json({

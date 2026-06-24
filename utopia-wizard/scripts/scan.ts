@@ -63,6 +63,7 @@ let findBlogHardcodedPhones!: typeof import('../lib/sourceScan').findBlogHardcod
 let checkLiveDbConnection!: typeof import('../lib/liveStatusCheck').checkLiveDbConnection
 let upsertSnapshot!: typeof import('../lib/snapshotStore').upsertSnapshot
 let deleteSnapshotsExcept!: typeof import('../lib/snapshotStore').deleteSnapshotsExcept
+let listAllActiveRepos!: typeof import('../lib/wizardUsers').listAllActiveRepos
 
 async function loadModules(): Promise<void> {
   const rc = await import('../lib/runChecklist')
@@ -82,6 +83,8 @@ async function loadModules(): Promise<void> {
   const st = await import('../lib/snapshotStore')
   upsertSnapshot = st.upsertSnapshot
   deleteSnapshotsExcept = st.deleteSnapshotsExcept
+  const wu = await import('../lib/wizardUsers')
+  listAllActiveRepos = wu.listAllActiveRepos
 }
 
 async function listProjectSlugs(projectsDir: string): Promise<string[]> {
@@ -213,7 +216,11 @@ async function main(): Promise<void> {
 
   if (!DRY && !ONLY && written.length > 0) {
     try {
-      const pruned = await deleteSnapshotsExcept(written)
+      // Keep connected-repo snapshots (written by scan-repos) — they aren't in
+      // the monorepo's projects/, so without this the prune would delete them.
+      const connected = await listAllActiveRepos().catch(() => [])
+      const keep = [...written, ...connected.map((r) => r.project_slug)]
+      const pruned = await deleteSnapshotsExcept(keep)
       if (pruned > 0) console.log(`scan: pruned ${pruned} snapshot(s) for removed projects`)
     } catch (err) {
       console.warn('scan: prune failed —', err instanceof Error ? err.message : err)

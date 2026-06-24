@@ -38,7 +38,7 @@ jobs:
         working-directory: utopia-wizard
         run: npm ci
 
-      - name: Run scanner
+      - name: Run scanner (monorepo projects)
         working-directory: utopia-wizard
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
@@ -51,3 +51,15 @@ jobs:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_TEAM_ID: ${{ secrets.VERCEL_TEAM_ID }}
         run: npm run scan
+
+      - name: Run scanner (connected repos — Phase B)
+        working-directory: utopia-wizard
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          # Decrypts each user's stored GitHub token so their repo can be cloned.
+          WIZARD_TOKEN_KEY: ${{ secrets.WIZARD_TOKEN_KEY }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_TEAM_ID: ${{ secrets.VERCEL_TEAM_ID }}
+        run: npm run scan-repos

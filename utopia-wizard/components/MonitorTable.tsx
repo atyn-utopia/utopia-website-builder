@@ -7,6 +7,7 @@ import { scorePct } from '@/lib/score'
 import DeleteProjectModal from './DeleteProjectModal'
 import TrashIcon from './icons/TrashIcon'
 import SyncButton from './SyncButton'
+import AccountSwitcher from './AccountSwitcher'
 
 interface GroupSummary {
   name: string
@@ -20,6 +21,8 @@ interface GroupSummary {
 
 interface ProjectRow {
   slug: string
+  /** GitHub login of the owner, or null for an unclaimed legacy project. */
+  owner: string | null
   domain: string | null
   productSlug: string | null
   deployUrl: string | null
@@ -86,6 +89,11 @@ function sortProjects(rows: ProjectRow[], key: SortKey, dir: SortDir): ProjectRo
 interface MonitorPayload {
   projects: ProjectRow[]
   totalChecks: number
+  /** Signed-in github login, `*` for passcode, or null in open mode. */
+  viewer?: string | null
+  isAdmin?: boolean
+  /** True when the list is filtered to the viewer's own projects. */
+  scoped?: boolean
 }
 
 const STATE_COLORS = {
@@ -186,6 +194,7 @@ export default function MonitorTable() {
   const [error, setError] = useState<string | null>(null)
   const [sortKey, setSortKey] = useState<SortKey>('created')
   const [sortDir, setSortDir] = useState<SortDir>('desc')
+  const [showAll, setShowAll] = useState(false)
   const [rescan, setRescan] = useState<RescanState>('idle')
   const [rescanMsg, setRescanMsg] = useState<string | null>(null)
   const [deleteTarget, setDeleteTarget] = useState<string | null>(null)
@@ -204,9 +213,11 @@ export default function MonitorTable() {
     })
   }
 
+  const checklistUrl = showAll ? '/api/checklist?all=1' : '/api/checklist'
+
   const refetch = async () => {
     try {
-      const res = await fetch('/api/checklist', { cache: 'no-store' })
+      const res = await fetch(checklistUrl, { cache: 'no-store' })
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
       const json: MonitorPayload = await res.json()
       setData(json)
@@ -216,11 +227,27 @@ export default function MonitorTable() {
     }
   }
 
+  // Claim / reassign a project's owner, then refresh the list.
+  const assignOwner = async (slug: string, login: string) => {
+    try {
+      const res = await fetch('/api/project-owner', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug, login }),
+      })
+      const body = (await res.json().catch(() => ({}))) as { error?: string }
+      if (!res.ok) { setError(body.error ?? 'Could not update owner.'); return }
+      await refetch()
+    } catch {
+      setError('Network error updating owner.')
+    }
+  }
+
   useEffect(() => {
     let mounted = true
     const load = async () => {
       try {
-        const res = await fetch('/api/checklist', { cache: 'no-store' })
+        const res = await fetch(checklistUrl, { cache: 'no-store' })
         if (!res.ok) throw new Error(`HTTP ${res.status}`)
         const json: MonitorPayload = await res.json()
         if (mounted) { setData(json); setError(null) }
@@ -233,7 +260,7 @@ export default function MonitorTable() {
     load()
     const t = setInterval(load, 30_000)
     return () => { mounted = false; clearInterval(t) }
-  }, [])
+  }, [checklistUrl])
 
   const triggerRescan = async () => {
     if (rescan === 'triggering' || rescan === 'running') return
@@ -289,6 +316,15 @@ export default function MonitorTable() {
   const projectCount = data?.projects.length ?? 0
   const liveCount = (data?.projects ?? []).filter((p) => deployStatusOf(p).status === 'live').length
 
+  // The "Mine / All" toggle only makes sense when a real GitHub identity is
+  // present. In open mode (viewer null) or passcode mode (viewer `*`) every
+  // project is always visible, so the toggle is hidden.
+  const viewer = data?.viewer ?? null
+  const canScope = !!viewer && viewer !== '*'
+  const isAdmin = !!data?.isAdmin || viewer === '*'
+  // Show the Owner column whenever someone is signed in (any identity).
+  const showOwnerCol = !!viewer
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 28, width: '100%' }}>
       {/* Header — brand mark + name + stats + CTA */}
@@ -341,7 +377,7 @@ export default function MonitorTable() {
             }}>
               {loading
                 ? 'Reading every project under projects/…'
-                : `${projectCount} project${projectCount === 1 ? '' : 's'} · ${liveCount} live · ${data?.totalChecks ?? 0} checks per project`}
+                : `${canScope && !showAll ? 'Your ' : ''}${projectCount} project${projectCount === 1 ? '' : 's'} · ${liveCount} live · ${data?.totalChecks ?? 0} checks per project${canScope ? (showAll ? ' · all teammates' : ` · @${viewer}`) : ''}`}
             </p>
           </div>
         </div>
@@ -356,6 +392,48 @@ export default function MonitorTable() {
           width: isMobile ? '100%' : 'auto',
           justifyContent: isMobile ? 'flex-start' : 'flex-end',
         }}>
+          {canScope && (
+            <div
+              role="group"
+              aria-label="Project visibility"
+              style={{
+                display: 'inline-flex',
+                border: '1px solid var(--border-soft)',
+                borderRadius: 'var(--radius-pill)',
+                overflow: 'hidden',
+                order: isMobile ? 3 : 0,
+              }}
+            >
+              {([
+                { key: false, label: 'Mine' },
+                { key: true, label: 'All' },
+              ] as const).map(({ key, label }) => {
+                const active = showAll === key
+                return (
+                  <button
+                    key={label}
+                    onClick={() => setShowAll(key)}
+                    style={{
+                      background: active ? 'var(--surface-hover)' : 'transparent',
+                      color: active ? 'var(--text-primary)' : 'var(--text-secondary)',
+                      border: 'none',
+                      padding: '8px 16px',
+                      fontSize: 13,
+                      fontWeight: 600,
+                      lineHeight: 1.2,
+                      cursor: 'pointer',
+                      fontFamily: 'var(--font-sans)',
+                      transition: 'all var(--transition-snap)',
+                      whiteSpace: 'nowrap',
+                    }}
+                    title={key ? "Show every teammate's projects" : 'Show only the projects you own'}
+                  >
+                    {label}
+                  </button>
+                )
+              })}
+            </div>
+          )}
           <SyncButton />
           <button
             onClick={triggerRescan}
@@ -401,6 +479,28 @@ export default function MonitorTable() {
               : rescan === 'error'      ? 'Rescan Failed'
               : 'Rescan Now'}
           </button>
+          {canScope && (
+            <button
+              onClick={() => router.push('/repos')}
+              style={{
+                background: 'transparent',
+                color: 'var(--text-secondary)',
+                border: '1px solid var(--border-soft)',
+                borderRadius: 'var(--radius-pill)',
+                padding: '9px 18px',
+                fontSize: 13,
+                fontWeight: 600,
+                lineHeight: 1.2,
+                cursor: 'pointer',
+                fontFamily: 'var(--font-sans)',
+                whiteSpace: 'nowrap',
+                order: isMobile ? 4 : 1,
+              }}
+              title="Connect your GitHub repos as projects"
+            >
+              ⚙ Repos
+            </button>
+          )}
           <button
             onClick={() => router.push('/new')}
             className="uf-btn-brand"
@@ -408,6 +508,7 @@ export default function MonitorTable() {
           >
             ✦ New Project
           </button>
+          <span style={{ order: isMobile ? 5 : 3 }}><AccountSwitcher /></span>
         </div>
       </header>
       <style jsx>{`
@@ -459,6 +560,7 @@ export default function MonitorTable() {
                   </span>
                 </Th>
                 <Th onBrand onSort={() => toggleSort('company')} sortDir={sortKey === 'company' ? sortDir : null}>Company</Th>
+                {showOwnerCol && <Th onBrand>Owner</Th>}
                 <Th onBrand onSort={() => toggleSort('created')} sortDir={sortKey === 'created' ? sortDir : null}>Created</Th>
                 <Th onBrand align="center" onSort={() => toggleSort('status')} sortDir={sortKey === 'status' ? sortDir : null}>Status</Th>
                 {groupNames.map((g) => <Th key={g} compact onBrand align="center">{g}</Th>)}
@@ -513,6 +615,17 @@ export default function MonitorTable() {
                         {p.company ?? '—'}
                       </span>
                     </Td>
+                    {showOwnerCol && (
+                      <Td>
+                        <OwnerCell
+                          owner={p.owner}
+                          viewer={viewer}
+                          isAdmin={isAdmin}
+                          canClaim={canScope}
+                          onAssign={(login) => assignOwner(p.slug, login)}
+                        />
+                      </Td>
+                    )}
                     <Td>
                       <span style={{ color: 'var(--text-muted)', fontSize: 12, fontVariantNumeric: 'tabular-nums' }}>
                         {formatCreated(p.projectCreatedAt ?? p.createdAt)}
@@ -699,6 +812,76 @@ function Td({ children, align = 'left', compact = false }: { children: React.Rea
     }}>
       {children}
     </td>
+  )
+}
+
+function OwnerCell({ owner, viewer, isAdmin, canClaim, onAssign }: {
+  owner: string | null
+  viewer: string | null
+  isAdmin: boolean
+  /** True when the viewer has a real GitHub login (can own a project). */
+  canClaim: boolean
+  onAssign: (login: string) => void
+}) {
+  const isMine = !!owner && owner === viewer
+
+  const reassign = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    const next = window.prompt(`Reassign "${owner ?? 'this project'}" to which GitHub login?`, owner ?? '')
+    if (next && next.trim()) onAssign(next.trim())
+  }
+
+  if (!owner) {
+    // Unowned legacy project.
+    if (canClaim) {
+      return (
+        <button
+          type="button"
+          onClick={(e) => { e.stopPropagation(); onAssign(viewer as string) }}
+          title="Claim this project as yours"
+          style={{
+            background: 'transparent',
+            border: '1px solid var(--border-soft)',
+            borderRadius: 'var(--radius-pill)',
+            padding: '4px 12px',
+            color: 'var(--text-secondary)',
+            fontSize: 11.5,
+            fontWeight: 600,
+            cursor: 'pointer',
+            fontFamily: 'var(--font-sans)',
+          }}
+        >
+          Claim
+        </button>
+      )
+    }
+    return (
+      <span
+        onClick={isAdmin ? reassign : undefined}
+        style={{ color: 'var(--text-quiet)', fontSize: 12, cursor: isAdmin ? 'pointer' : 'default' }}
+        title={isAdmin ? 'Assign an owner' : undefined}
+      >
+        — unowned
+      </span>
+    )
+  }
+
+  return (
+    <span
+      onClick={isAdmin ? reassign : undefined}
+      title={isAdmin ? 'Click to reassign' : undefined}
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 5,
+        fontSize: 12,
+        fontFamily: 'var(--font-mono)',
+        color: isMine ? 'var(--status-pass)' : 'var(--text-secondary)',
+        cursor: isAdmin ? 'pointer' : 'default',
+      }}
+    >
+      @{owner}{isMine && <span style={{ fontFamily: 'var(--font-sans)', fontSize: 10.5, color: 'var(--text-quiet)' }}>(you)</span>}
+    </span>
   )
 }
 
