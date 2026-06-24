@@ -247,10 +247,12 @@ export default function RsvpForm({
         ) : (
           <div className="border border-gold-500/20 bg-gold-500/[0.04] px-4 py-3">
             <p className="text-[13px] leading-relaxed text-ivory-dim">
-              <span className="text-gold-400">Kindly note —</span> for this
-              year&apos;s dinner, staff registrations are for the named guest
-              only and do not include a plus one. We sincerely appreciate your
-              kind understanding.
+              Please note that this year&apos;s Annual Dinner is for{" "}
+              <span className="font-semibold text-gold-300">
+                registered staff only
+              </span>
+              . No plus ones or guests are allowed. Thank you for your
+              understanding.
             </p>
           </div>
         ))}
