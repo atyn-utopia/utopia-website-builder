@@ -59,7 +59,7 @@ export default function EventPage({
         {/* ───────────── Chapter I — The Invitation ───────────── */}
         <Reveal
           as="section"
-          id="act-1"
+          id="invitation"
           className="relative scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-24 pb-24 text-center min-h-screen flex flex-col items-center justify-center"
         >
             <div className="relative z-10 w-full max-w-3xl mx-auto">
@@ -98,7 +98,7 @@ export default function EventPage({
 
               <div className="mt-10 flex justify-center">
                 <a
-                  href="#act-4"
+                  href="#rsvp"
                   className="inline-block bg-transparent border border-gold-500/70 text-gold-300 px-14 py-4 uppercase tracking-[0.28em] text-xs font-medium transition-[transform,opacity,background-color,border-color] duration-300 hover:bg-gold-500/10 hover:border-gold-400 hover:text-gold-200 hover:-translate-y-0.5"
                 >
                   RSVP Now
@@ -112,7 +112,7 @@ export default function EventPage({
           {/* ───────────── Chapter II — The Evening ───────────── */}
           <Reveal
             as="section"
-            id="act-2"
+            id="the-evening"
             className="runway-panel scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-20 pb-16"
           >
             <p className="text-center text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-4">
@@ -148,7 +148,7 @@ export default function EventPage({
           {/* ───────────── Chapter III — The Programme ───────────── */}
           <Reveal
             as="section"
-            id="act-3"
+            id="programme"
             className="runway-panel scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-20 pb-16"
           >
             <p className="text-center text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-4">
@@ -170,7 +170,7 @@ export default function EventPage({
         {/* ───────────── Chapter IV — RSVP (full-bleed) ───────────── */}
         <Reveal
           as="section"
-          id="act-4"
+          id="rsvp"
           className="relative overflow-hidden scroll-mt-8 px-6 sm:px-10 lg:px-16 pt-24 pb-16"
         >
             {/* photographic background */}

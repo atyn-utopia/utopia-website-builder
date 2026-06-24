@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 
 const CHAPTERS = [
-  { id: "act-1", numeral: "I", label: "Invitation" },
-  { id: "act-2", numeral: "II", label: "The Evening" },
-  { id: "act-3", numeral: "III", label: "Programme" },
-  { id: "act-4", numeral: "IV", label: "RSVP" },
+  { id: "invitation", numeral: "I", label: "Invitation" },
+  { id: "the-evening", numeral: "II", label: "The Evening" },
+  { id: "programme", numeral: "III", label: "Programme" },
+  { id: "rsvp", numeral: "IV", label: "RSVP" },
 ];
 
 /**
