@@ -224,27 +224,36 @@ export default function RsvpForm({
         onChange={(v) => setAttending(v === "yes")}
       />
 
-      {attending && (
-        <>
-          <Toggle
-            label="Bringing a plus one?"
-            value={hasPlusOne}
-            onChange={setHasPlusOne}
-          />
+      {attending &&
+        (isVip ? (
+          <>
+            <Toggle
+              label="Bringing a plus one?"
+              value={hasPlusOne}
+              onChange={setHasPlusOne}
+            />
 
-          {hasPlusOne && (
-            <div className="grid md:grid-cols-2 gap-6 rise-in">
-              <Field label="Plus one name" name="plusOneName" required />
-              <PhoneField
-                label="Plus one phone"
-                name="plusOnePhone"
-                required
-              />
-            </div>
-          )}
-
-        </>
-      )}
+            {hasPlusOne && (
+              <div className="grid md:grid-cols-2 gap-6 rise-in">
+                <Field label="Plus one name" name="plusOneName" required />
+                <PhoneField
+                  label="Plus one phone"
+                  name="plusOnePhone"
+                  required
+                />
+              </div>
+            )}
+          </>
+        ) : (
+          <div className="border border-gold-500/20 bg-gold-500/[0.04] px-4 py-3">
+            <p className="text-[13px] leading-relaxed text-ivory-dim">
+              <span className="text-gold-400">Kindly note —</span> for this
+              year&apos;s dinner, staff registrations are for the named guest
+              only and do not include a plus one. We sincerely appreciate your
+              kind understanding.
+            </p>
+          </div>
+        ))}
 
       {result?.ok === false && (
         <p className="text-error-crimson text-sm">{result.error}</p>
