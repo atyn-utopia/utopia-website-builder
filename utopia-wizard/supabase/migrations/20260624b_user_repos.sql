@@ -1,15 +1,19 @@
 -- Utopia Wizard — per-user connected repos (one project per repo)
 -- ----------------------------------------------------------------------------
--- Run once in the Supabase SQL Editor with `webcore` as the active schema.
--- Safe to re-run.
+-- Safe to re-run. MUST live in the `webcore` schema — objects are
+-- schema-qualified so they land there regardless of the editor's active schema.
+-- If you previously created this in `public`, run instead:
+--   alter table public.user_repos set schema webcore;
+--   notify pgrst, 'reload schema';
 --
 -- Each row = one GitHub repo a teammate has connected as a Utopia project.
 -- Phase B's scanner clones each active repo (with the user's token) and writes
 -- a snapshot keyed by project_slug; the wizard already reads snapshots.
 
 create extension if not exists "pgcrypto";
+create schema if not exists webcore;
 
-create table if not exists user_repos (
+create table if not exists webcore.user_repos (
   id              uuid primary key default gen_random_uuid(),
   github_login    text not null,
   repo_full_name  text not null,            -- "owner/name"
@@ -24,9 +28,9 @@ create table if not exists user_repos (
   unique (github_login, repo_full_name)
 );
 
-create index if not exists user_repos_login_idx on user_repos (github_login);
-create index if not exists user_repos_slug_idx  on user_repos (project_slug);
+create index if not exists user_repos_login_idx on webcore.user_repos (github_login);
+create index if not exists user_repos_slug_idx  on webcore.user_repos (project_slug);
 
 -- All access is server-side via the service-role key (the wizard scopes by the
 -- signed-in identity in the route handler). No anon policy → anon sees nothing.
-alter table user_repos enable row level security;
+alter table webcore.user_repos enable row level security;

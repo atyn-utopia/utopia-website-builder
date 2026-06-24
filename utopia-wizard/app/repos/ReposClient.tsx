@@ -26,6 +26,7 @@ export default function ReposClient() {
   const [query, setQuery] = useState('')
   const [loadingConnected, setLoadingConnected] = useState(true)
   const [loadingRepos, setLoadingRepos] = useState(false)
+  const [loadedRepos, setLoadedRepos] = useState(false)
   const [busy, setBusy] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
 
@@ -50,14 +51,17 @@ export default function ReposClient() {
       const body = await res.json()
       if (!res.ok) throw new Error(body.error ?? `HTTP ${res.status}`)
       setAvailable(body.repos ?? [])
+      setLoadedRepos(true)
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Failed to list GitHub repos.')
+      setLoadedRepos(true)
     } finally {
       setLoadingRepos(false)
     }
   }, [])
 
-  useEffect(() => { loadConnected() }, [loadConnected])
+  // Auto-load both lists on open.
+  useEffect(() => { loadConnected(); loadAvailable() }, [loadConnected, loadAvailable])
 
   const connectedNames = new Set(connected.map((r) => r.repo_full_name))
 
@@ -155,11 +159,9 @@ export default function ReposClient() {
       <section style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
           <span className="uf-eyebrow">Your GitHub repos</span>
-          {available.length === 0 && (
-            <button onClick={loadAvailable} disabled={loadingRepos} className="uf-btn-brand" style={{ padding: '8px 16px', fontSize: 12 }}>
-              {loadingRepos ? 'Loading…' : 'Load my repos'}
-            </button>
-          )}
+          <button onClick={loadAvailable} disabled={loadingRepos} style={{ background: 'transparent', border: '1px solid var(--border-soft)', color: 'var(--text-secondary)', borderRadius: 'var(--radius-pill)', padding: '7px 14px', fontSize: 12, fontWeight: 600, cursor: 'pointer' }}>
+            {loadingRepos ? 'Loading…' : 'Refresh'}
+          </button>
         </div>
 
         {available.length > 0 && (
@@ -169,6 +171,21 @@ export default function ReposClient() {
             placeholder="Filter repos…"
             style={{ background: 'var(--input-bg)', border: '1px solid var(--input-border)', borderRadius: 'var(--radius-pill)', padding: '9px 16px', color: 'var(--text-primary)', fontSize: 13, outline: 'none', width: '100%', fontFamily: 'var(--font-sans)' }}
           />
+        )}
+
+        {loadingRepos && available.length === 0 && (
+          <p style={{ color: 'var(--text-quiet)', fontSize: 13 }}>Loading your repos…</p>
+        )}
+
+        {loadedRepos && !loadingRepos && available.length === 0 && !error && (
+          <div className="uf-card" style={{ padding: '14px 16px', fontSize: 12.5, lineHeight: 1.55, color: 'var(--text-muted)' }}>
+            <strong style={{ color: 'var(--text-secondary)' }}>No repositories returned.</strong> Your GitHub
+            token likely has no repository access. Re-create it with{' '}
+            <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noreferrer" style={{ color: 'var(--text-secondary)', textDecoration: 'underline' }}>a fine-grained token</a>{' '}
+            granting <em>Repository access → All repositories</em> (or select the ones you want) and{' '}
+            <em>Repository permissions → Metadata: Read</em> (Contents: Read too, for scanning), then add the
+            account again via the switcher and refresh. A classic token with the <em>repo</em> scope also works.
+          </div>
         )}
 
         {filtered.map((r) => {

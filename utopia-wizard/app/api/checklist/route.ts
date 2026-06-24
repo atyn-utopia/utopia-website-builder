@@ -33,9 +33,10 @@ interface Scopable {
 
 /**
  * Filter the project list to what the signed-in user should see.
- *   - `showAll` (toggle), open mode (no user), or admin → everything
- *   - otherwise → projects owned by the user, plus still-unowned ones so the
- *     legacy backlog stays visible until someone claims it.
+ *   - `showAll` (toggle) or open mode (no user) → everything
+ *   - otherwise → strictly the projects this user owns. Unowned projects (e.g.
+ *     the monorepo backlog) are NOT shown in the per-user view — they only
+ *     appear under "All", so each teammate sees a clean, isolated list.
  * Returns the filtered list + the viewer context for the client.
  */
 async function scopeProjects<T extends Scopable>(
@@ -48,7 +49,7 @@ async function scopeProjects<T extends Scopable>(
   if (showAll) {
     return { projects, viewer: user.login, isAdmin: user.isAdmin, scoped: false }
   }
-  const mine = projects.filter((p) => p.owner === user.login || p.owner == null)
+  const mine = projects.filter((p) => p.owner === user.login)
   return { projects: mine, viewer: user.login, isAdmin: user.isAdmin, scoped: true }
 }
 
