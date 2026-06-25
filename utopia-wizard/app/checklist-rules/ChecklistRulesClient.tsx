@@ -32,6 +32,7 @@ export default function ChecklistRulesClient() {
   const [items, setItems] = useState<CheckItem[] | null>(null)
   const [meta, setMeta] = useState<{ repo: string; source: string } | null>(null)
   const [loadingItems, setLoadingItems] = useState(false)
+  const [mode, setMode] = useState<'default' | 'generated'>('default')
 
   const loadList = useCallback(async () => {
     try {
@@ -45,7 +46,19 @@ export default function ChecklistRulesClient() {
   useEffect(() => {
     loadList()
     fetch('/api/github/repos', { cache: 'no-store' }).then((r) => r.json()).then((b) => { if (b.ok) setRepos(b.repos ?? []) }).catch(() => {})
+    fetch('/api/checklists/mode', { cache: 'no-store' }).then((r) => r.json()).then((b) => setMode(b.mode === 'generated' ? 'generated' : 'default')).catch(() => {})
   }, [loadList])
+
+  const changeMode = async (m: 'default' | 'generated') => {
+    if (m === mode) return
+    setMode(m); setError(null); setNotice(null)
+    try {
+      const res = await fetch('/api/checklists/mode', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ mode: m }) })
+      const body = await res.json()
+      if (!res.ok) { setError(body.error ?? 'Could not change mode.'); setMode(m === 'generated' ? 'default' : 'generated'); return }
+      setNotice(m === 'generated' ? 'Switched to your generated checklist.' : 'Switched back to the default checklist.')
+    } catch { setError('Network error.'); setMode(m === 'generated' ? 'default' : 'generated') }
+  }
 
   const generate = async () => {
     if (!selectedRepo) { setError('Pick a repo first.'); return }
@@ -96,8 +109,31 @@ export default function ChecklistRulesClient() {
       {notice && <div className="uf-card" style={{ padding: '12px 16px', color: 'var(--status-pass)', fontSize: 13 }}>{notice}</div>}
 
       {viewer && viewer !== '*' && (
+        <section className="uf-card" style={{ padding: 18, display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <span className="uf-eyebrow">Active checklist</span>
+          <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+            <div role="group" aria-label="Active checklist" style={{ display: 'inline-flex', border: '1px solid var(--border-soft)', borderRadius: 'var(--radius-pill)', overflow: 'hidden' }}>
+              {([{ k: 'default', l: 'Default (built-in)' }, { k: 'generated', l: 'My generated' }] as const).map(({ k, l }) => (
+                <button key={k} onClick={() => changeMode(k)} disabled={k === 'generated' && !mine}
+                  title={k === 'generated' && !mine ? 'Generate your checklist first (below)' : undefined}
+                  style={{ background: mode === k ? 'var(--surface-hover)' : 'transparent', color: mode === k ? 'var(--text-primary)' : 'var(--text-secondary)', border: 'none', padding: '8px 16px', fontSize: 13, fontWeight: 600, cursor: (k === 'generated' && !mine) ? 'not-allowed' : 'pointer', opacity: (k === 'generated' && !mine) ? 0.5 : 1, fontFamily: 'var(--font-sans)' }}>
+                  {l}
+                </button>
+              ))}
+            </div>
+            <span style={{ fontSize: 12, color: 'var(--text-quiet)' }}>
+              {mode === 'generated' ? 'Your projects use your AI-derived rules.' : 'Your projects use the standard Utopia checklist.'}
+            </span>
+          </div>
+          <p style={{ margin: 0, fontSize: 11, color: 'var(--text-quiet)', lineHeight: 1.5 }}>
+            Note: switching to “My generated” takes effect once AI evaluation runs against your rules (coming with on-demand scoring). The default checklist scores your projects today.
+          </p>
+        </section>
+      )}
+
+      {viewer && viewer !== '*' && (
         <section className="uf-card" style={{ padding: 18, display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <span className="uf-eyebrow">Your checklist</span>
+          <span className="uf-eyebrow">Your generated checklist</span>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
             <select value={selectedRepo} onChange={(e) => setSelectedRepo(e.target.value)} style={selectStyle}>
               <option value="">{repos.length ? 'Select a repo…' : 'No repos (token needs repo access)'}</option>

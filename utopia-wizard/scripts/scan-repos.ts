@@ -65,6 +65,7 @@ type Mods = {
   getBlogRows: typeof import('../lib/supabaseChecks').getBlogRows
   getBlogContentRows: typeof import('../lib/supabaseChecks').getBlogContentRows
   getRegisteredDomains: typeof import('../lib/supabaseChecks').getRegisteredDomains
+  getWebsiteById: typeof import('../lib/supabaseChecks').getWebsiteById
   findHardcodedPhones: typeof import('../lib/sourceScan').findHardcodedPhones
   findBlogHardcodedPhones: typeof import('../lib/sourceScan').findBlogHardcodedPhones
   checkLiveDbConnection: typeof import('../lib/liveStatusCheck').checkLiveDbConnection
@@ -89,6 +90,7 @@ async function loadModules(): Promise<Mods> {
     getBlogRows: sc.getBlogRows,
     getBlogContentRows: sc.getBlogContentRows,
     getRegisteredDomains: sc.getRegisteredDomains,
+    getWebsiteById: sc.getWebsiteById,
     findHardcodedPhones: ss.findHardcodedPhones,
     findBlogHardcodedPhones: ss.findBlogHardcodedPhones,
     checkLiveDbConnection: ls.checkLiveDbConnection,
@@ -119,6 +121,15 @@ async function buildPayload(m: Mods, slug: string, parentDir: string) {
   ])
   const blogHardcoded = m.findBlogHardcodedPhones(blogContent)
 
+  // Resolve the CURRENT domain from the stable siteId (company_websites.id).
+  // config/site.ts can go stale after a domain rename — the siteId never does —
+  // so display the live domain when we can.
+  let currentDomain = info.domain
+  if (info.siteId) {
+    const site = await m.getWebsiteById(info.siteId).catch(() => null)
+    if (site?.domain) currentDomain = site.domain
+  }
+
   const candidateBaseUrls: string[] = []
   if (registered) for (const r of registered) candidateBaseUrls.push(`https://${r.domain}`)
   if (info.deployUrl) candidateBaseUrls.push(info.deployUrl)
@@ -139,7 +150,7 @@ async function buildPayload(m: Mods, slug: string, parentDir: string) {
     total: checklist.total,
     passed: checklist.passed,
     failed_count: checklist.failedCount,
-    domain: info.domain,
+    domain: currentDomain,
     product_slug: info.productSlug,
     fallback_phone: info.fallbackPhone,
     deploy_url: info.deployUrl,
@@ -155,6 +166,19 @@ async function buildPayload(m: Mods, slug: string, parentDir: string) {
     blog_hardcoded: blogHardcoded,
     live_status: liveStatus,
   }
+}
+
+/** Repo's created_at from GitHub — the real, stable "created" date. */
+async function repoCreatedAt(fullName: string, token: string): Promise<string | null> {
+  try {
+    const res = await fetch(`https://api.github.com/repos/${fullName}`, {
+      headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'User-Agent': 'utopia-wizard' },
+      signal: AbortSignal.timeout(10000),
+    })
+    if (!res.ok) return null
+    const j = (await res.json()) as { created_at?: string }
+    return j.created_at ?? null
+  } catch { return null }
 }
 
 /** Shallow-clone a repo into <workdir>/<slug> using the owner's token. */
@@ -202,6 +226,9 @@ async function main(): Promise<void> {
 
         await cloneRepo(repo.repo_full_name, repo.default_branch || 'main', token, workRoot, repo.project_slug)
         const payload = await buildPayload(m, repo.project_slug, workRoot)
+        // Use the GitHub repo's real creation date (not the fresh-clone mtime).
+        const createdAt = await repoCreatedAt(repo.repo_full_name, token)
+        if (createdAt) payload.project_created_at = createdAt
         const elapsed = Date.now() - t0
         console.log(`  ✓ ${label.padEnd(48)} ${String(scorePct(payload.passed, payload.failed_count)).padStart(3)}/100 · ${elapsed}ms`)
         if (!DRY) await m.upsertSnapshot(payload)

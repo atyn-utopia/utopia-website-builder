@@ -111,6 +111,39 @@ export interface WizardUser {
   is_admin: boolean
 }
 
+export type ChecklistMode = 'default' | 'generated'
+
+/** A user's active checklist mode ('default' built-in, or 'generated'). */
+export async function getChecklistMode(githubLogin: string): Promise<ChecklistMode> {
+  if (!writeConfigured) return 'default'
+  try {
+    const res = await fetch(
+      `${REST}/wizard_users?select=checklist_mode&github_login=eq.${encodeURIComponent(githubLogin)}&limit=1`,
+      { headers: { apikey: SERVICE_ROLE_KEY, Authorization: `Bearer ${SERVICE_ROLE_KEY}`, 'Accept-Profile': DB_SCHEMA }, cache: 'no-store', signal: AbortSignal.timeout(5000) },
+    )
+    if (!res.ok) return 'default'
+    const rows = (await res.json()) as { checklist_mode: string | null }[]
+    return rows[0]?.checklist_mode === 'generated' ? 'generated' : 'default'
+  } catch {
+    return 'default'
+  }
+}
+
+export async function setChecklistMode(githubLogin: string, mode: ChecklistMode): Promise<boolean> {
+  if (!writeConfigured) return false
+  try {
+    const res = await fetch(`${REST}/wizard_users?github_login=eq.${encodeURIComponent(githubLogin)}`, {
+      method: 'PATCH',
+      headers: writeHeaders({ Prefer: 'return=minimal' }),
+      body: JSON.stringify({ checklist_mode: mode }),
+      signal: AbortSignal.timeout(5000),
+    })
+    return res.ok
+  } catch {
+    return false
+  }
+}
+
 /** Set of admin logins (is_admin = true). Used to grant "see all" by default. */
 export async function getAdminLogins(): Promise<Set<string>> {
   const set = new Set<string>()
@@ -233,6 +266,18 @@ export async function connectUserRepo(params: {
   } catch {
     return false
   }
+}
+
+/** Remove any connected repo(s) + owner mapping for a project slug. Used by the
+ *  Danger Zone to stop tracking a project (GitHub repo + data untouched). */
+export async function untrackProject(slug: string): Promise<void> {
+  if (!writeConfigured) return
+  const del = (table: string, filter: string) =>
+    fetch(`${REST}/${table}?${filter}`, { method: 'DELETE', headers: writeHeaders({ Prefer: 'return=minimal' }), signal: AbortSignal.timeout(5000) }).catch(() => {})
+  await Promise.all([
+    del('user_repos', `project_slug=eq.${encodeURIComponent(slug)}`),
+    del('project_owners', `slug=eq.${encodeURIComponent(slug)}`),
+  ])
 }
 
 /** Disconnect a repo (hard delete) for a user. */

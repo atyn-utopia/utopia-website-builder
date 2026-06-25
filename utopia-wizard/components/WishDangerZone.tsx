@@ -32,19 +32,14 @@ export default function WishDangerZone({ slug }: { slug: string }) {
           lineHeight: 1.55,
           fontFamily: 'var(--font-sans)',
         }}>
-          Removes <code style={{
+          Stops tracking <code style={{
             background: 'var(--bg-input)',
             padding: '1px 6px',
             borderRadius: 4,
             fontFamily: 'var(--font-mono)',
             fontSize: 12,
-          }}>projects/{slug}/</code> from disk and clears the row in <code style={{
-            background: 'var(--bg-input)',
-            padding: '1px 6px',
-            borderRadius: 4,
-            fontFamily: 'var(--font-mono)',
-            fontSize: 12,
-          }}>monitor_snapshots</code>. Phones, products, and blog rows in Supabase are kept.
+          }}>{slug}</code> — disconnects the repo, clears its owner, and removes its checklist snapshot.
+          Your <strong>GitHub repo</strong> and Supabase data (phones, products, blog) are <strong>not</strong> touched. Reconnect it anytime in Repos.
         </p>
       </div>
       <button

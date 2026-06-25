@@ -4,6 +4,35 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 
 let pasteCounter = 0
 
+/** Read a File → base64 (no data: prefix), efficiently for large files. */
+function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader()
+    r.onload = () => {
+      const s = String(r.result)
+      resolve(s.slice(s.indexOf(',') + 1)) // strip "data:...;base64,"
+    }
+    r.onerror = () => reject(new Error('read failed'))
+    r.readAsDataURL(file)
+  })
+}
+
+/** Upload one asset straight to GitHub (browser → GitHub, bypasses Vercel). */
+async function putAssetToGitHub(token: string, repoFullName: string, branch: string, file: File): Promise<boolean> {
+  try {
+    const safe = file.name.replace(/[^A-Za-z0-9._-]+/g, '-').replace(/^-+|-+$/g, '') || 'asset'
+    const content = await fileToBase64(file)
+    const res = await fetch(`https://api.github.com/repos/${repoFullName}/contents/${encodeURIComponent(`brand_assets/${safe}`)}`, {
+      method: 'PUT',
+      headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: `chore: add brand_assets/${safe}`, content, branch }),
+    })
+    return res.ok
+  } catch {
+    return false
+  }
+}
+
 interface Result {
   slug: string
   repoFullName: string
@@ -20,6 +49,7 @@ export default function NewProjectForm() {
   const [visibility, setVisibility] = useState<'private' | 'public'>('private')
   const [files, setFiles] = useState<File[]>([])
   const [busy, setBusy] = useState(false)
+  const [progress, setProgress] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [result, setResult] = useState<Result | null>(null)
   const [copied, setCopied] = useState(false)
@@ -57,22 +87,47 @@ export default function NewProjectForm() {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (busy || !slug || !brief.trim()) return
-    setBusy(true); setError(null)
+
+    // Per-file guard. Files go client→GitHub directly, so the cap is GitHub's
+    // (Git LFS recommended above ~50 MB); we allow up to 30 MB.
+    const tooBig = files.find((f) => f.size > 30_000_000)
+    if (tooBig) {
+      setError(`"${tooBig.name}" is ${(tooBig.size / 1e6).toFixed(1)} MB — over the 30 MB per-file limit.`)
+      return
+    }
+
+    setBusy(true); setError(null); setProgress(null)
     try {
-      const fd = new FormData()
-      fd.set('name', name)
-      fd.set('slug', slug)
-      fd.set('brief', brief)
-      fd.set('visibility', visibility)
-      for (const f of files) fd.append('files', f)
-      const res = await fetch('/api/projects/create', { method: 'POST', body: fd })
-      const body = await res.json()
-      if (!res.ok) { setError(body.error ?? 'Could not create project.'); return }
-      setResult(body)
+      // 1. Create the repo + commit text seed (small JSON request).
+      const res = await fetch('/api/projects/create', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, slug, brief, visibility, asset_names: files.map((f) => f.name) }),
+      })
+      const text = await res.text()
+      let body: { error?: string } & Record<string, unknown> = {}
+      try { body = JSON.parse(text) } catch { /* non-JSON */ }
+      if (!res.ok) { setError(body.error ?? `Server error (HTTP ${res.status}).`); return }
+
+      const created = body as unknown as Result & { repoFullName: string; defaultBranch?: string }
+
+      // 2. Upload assets straight to GitHub from the browser (no Vercel limit).
+      if (files.length) {
+        setProgress('Preparing upload…')
+        const tk = await fetch('/api/projects/upload-token', { cache: 'no-store' }).then((r) => r.json())
+        if (!tk.ok || !tk.token) { setError('Repo created, but could not get an upload token — add assets to the repo manually.'); setResult(created); return }
+        const branch = created.defaultBranch || 'main'
+        for (let i = 0; i < files.length; i++) {
+          setProgress(`Uploading asset ${i + 1}/${files.length} (${(files[i].size / 1e6).toFixed(1)} MB)…`)
+          const ok = await putAssetToGitHub(tk.token, created.repoFullName, branch, files[i])
+          if (!ok) { setError(`Repo created, but asset "${files[i].name}" failed to upload. Add it to the repo manually.`); break }
+        }
+      }
+      setProgress(null)
+      setResult(created)
     } catch {
-      setError('Network error.')
+      setError('Network error — reload the page (you may be on a stale version) and try again.')
     } finally {
-      setBusy(false)
+      setBusy(false); setProgress(null)
     }
   }
 
@@ -158,7 +213,7 @@ export default function NewProjectForm() {
       </label>
 
       <button type="submit" disabled={busy || !slug || !brief.trim()} className="uf-btn-brand" style={{ padding: '11px 16px', marginTop: 4 }}>
-        {busy ? 'Creating repo…' : '✦ Create project repo'}
+        {busy ? (progress ?? 'Creating repo…') : '✦ Create project repo'}
       </button>
       <p style={{ margin: 0, fontSize: 11.5, color: 'var(--text-quiet)', lineHeight: 1.5 }}>
         Creates a {visibility} GitHub repo under your account, commits the brief + assets + CLAUDE.md, and connects it to your dashboard. Nothing is written to disk.

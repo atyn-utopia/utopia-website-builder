@@ -28,20 +28,23 @@ export async function POST(req: Request) {
     )
   }
 
-  const form = await req.formData().catch(() => null)
-  if (!form) return NextResponse.json({ ok: false, error: 'Invalid form.' }, { status: 400 })
+  // Small JSON body only — brand-asset bytes are uploaded separately (one file
+  // per request) so no single request hits the platform body limit.
+  const body = (await req.json().catch(() => null)) as {
+    name?: string; slug?: string; brief?: string; visibility?: string; asset_names?: string[]
+  } | null
+  if (!body) return NextResponse.json({ ok: false, error: 'Invalid request.' }, { status: 400 })
 
-  const name = (form.get('name') as string | null)?.trim() ?? ''
-  const brief = (form.get('brief') as string | null)?.trim() ?? ''
-  const slug = toSlug((form.get('slug') as string | null)?.trim() || name)
-  const isPrivate = (form.get('visibility') as string | null) !== 'public'
-  const files = form.getAll('files').filter((f): f is File => f instanceof File && f.size > 0)
+  const name = body.name?.trim() ?? ''
+  const brief = body.brief?.trim() ?? ''
+  const slug = toSlug(body.slug?.trim() || name)
+  const isPrivate = body.visibility !== 'public'
+  const assetNames = (body.asset_names ?? []).filter((n) => typeof n === 'string' && n)
 
   if (!slug) return NextResponse.json({ ok: false, error: 'A project name (or slug) is required.' }, { status: 400 })
   if (!brief) return NextResponse.json({ ok: false, error: 'A project brief is required.' }, { status: 400 })
 
-  // ── Assemble the seed files ──────────────────────────────────────────────
-  const assetNames = files.map((f) => f.name)
+  // ── Assemble the seed files (text only — assets uploaded after) ───────────
   const inputsMd = `# ${name || slug} — Project Inputs
 
 **Created:** ${new Date().toISOString()}
@@ -61,13 +64,7 @@ ${assetNames.length ? assetNames.map((n) => `- brand_assets/${n}`).join('\n') : 
   const claudeMd = await fetchRepoFileText(token, BUILDER_REPO, 'CLAUDE.md')
   if (claudeMd) seed.push({ path: 'CLAUDE.md', text: claudeMd })
 
-  // Brand assets (binary → base64).
-  for (const f of files) {
-    const buf = Buffer.from(await f.arrayBuffer())
-    seed.push({ path: `brand_assets/${f.name}`, base64: buf.toString('base64') })
-  }
-
-  // ── Create the repo + commit everything ──────────────────────────────────
+  // ── Create the repo + commit text seed ───────────────────────────────────
   let created
   try {
     created = await createProjectRepo(token, { slug, description: name || slug, private: isPrivate, files: seed })
@@ -98,6 +95,7 @@ claude "Using @CLAUDE.md, read inputs.md and everything in brand_assets/, then g
     ok: true,
     slug,
     repoFullName: created.repoFullName,
+    defaultBranch: created.defaultBranch,
     htmlUrl: created.htmlUrl,
     cloneUrl: created.cloneUrl,
     seededClaude: !!claudeMd,

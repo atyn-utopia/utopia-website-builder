@@ -43,6 +43,10 @@ const STATUS_RANK: Record<DeployStatus, number> = {
   down: 0,
 }
 
+function safeHost(url: string): string | null {
+  try { return new URL(url).host } catch { return null }
+}
+
 function formatCreated(iso: string | null): string {
   if (!iso) return '—'
   const d = new Date(iso)
@@ -494,17 +498,7 @@ export default function MonitorTable() {
                 borderBottom: '1px solid var(--brand-deep)',
               }}>
                 <Th onBrand align="right" compact>#</Th>
-                <Th onBrand onSort={() => toggleSort('slug')} sortDir={sortKey === 'slug' ? sortDir : null}>
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src="/utopia-wizard-bg.png"
-                      alt=""
-                      style={{ width: 16, height: 16, objectFit: 'contain', filter: 'brightness(0) invert(1)' }}
-                    />
-                    Project
-                  </span>
-                </Th>
+                <Th onBrand onSort={() => toggleSort('slug')} sortDir={sortKey === 'slug' ? sortDir : null}>Project</Th>
                 <Th onBrand onSort={() => toggleSort('company')} sortDir={sortKey === 'company' ? sortDir : null} width={170}>Company</Th>
                 {showOwnerCol && <Th onBrand width={150}>Owner</Th>}
                 <Th onBrand onSort={() => toggleSort('created')} sortDir={sortKey === 'created' ? sortDir : null}>Created</Th>
@@ -549,11 +543,14 @@ export default function MonitorTable() {
                     <Td>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                         <span style={{ color: 'var(--text-primary)', fontWeight: 600, fontSize: 13 }}>{p.slug}</span>
-                        {p.deployUrl && (
-                          <span style={{ color: 'var(--text-quiet)', fontSize: 10.5, fontFamily: 'var(--font-mono)' }}>
-                            {new URL(p.deployUrl).host}
-                          </span>
-                        )}
+                        {(() => {
+                          // Prefer the current domain (resolved from the stable siteId);
+                          // fall back to the deploy-URL host.
+                          const host = p.domain || (p.deployUrl ? safeHost(p.deployUrl) : null)
+                          return host ? (
+                            <span style={{ color: 'var(--text-quiet)', fontSize: 10.5, fontFamily: 'var(--font-mono)' }}>{host}</span>
+                          ) : null
+                        })()}
                       </div>
                     </Td>
                     <Td width={170}>

@@ -58,6 +58,35 @@ export async function fetchRepoFileText(token: string, repoFullName: string, pat
   } catch { return null }
 }
 
+/**
+ * Commit a single file to an existing repo branch (additive — keeps history).
+ * Used to upload brand assets one request at a time, so no single request hits
+ * the platform body limit. Sequential calls only (each builds on the prev ref).
+ */
+export async function commitFileToRepo(
+  token: string,
+  repoFullName: string,
+  branch: string,
+  path: string,
+  base64: string,
+): Promise<void> {
+  const full = repoFullName
+  const ref = await gh<{ object: { sha: string } }>(token, 'GET', `/repos/${full}/git/ref/heads/${branch}`)
+  const parent = ref.object.sha
+  const baseCommit = await gh<{ tree: { sha: string } }>(token, 'GET', `/repos/${full}/git/commits/${parent}`)
+  const blob = await gh<{ sha: string }>(token, 'POST', `/repos/${full}/git/blobs`, { content: base64, encoding: 'base64' })
+  const tree = await gh<{ sha: string }>(token, 'POST', `/repos/${full}/git/trees`, {
+    base_tree: baseCommit.tree.sha,
+    tree: [{ path, mode: '100644', type: 'blob', sha: blob.sha }],
+  })
+  const commit = await gh<{ sha: string }>(token, 'POST', `/repos/${full}/git/commits`, {
+    message: `chore: add ${path}`,
+    tree: tree.sha,
+    parents: [parent],
+  })
+  await gh(token, 'PATCH', `/repos/${full}/git/refs/heads/${branch}`, { sha: commit.sha })
+}
+
 export async function createProjectRepo(
   token: string,
   params: { slug: string; description?: string; private?: boolean; files: SeedFile[] },

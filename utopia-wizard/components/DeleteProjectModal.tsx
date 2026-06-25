@@ -17,7 +17,7 @@ export default function DeleteProjectModal({ slug, open, onClose, onDeleted }: D
   const [typed, setTyped] = useState('')
   const [state, setState] = useState<DeleteState>('idle')
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
-  const [result, setResult] = useState<{ folderDeleted: boolean; snapshotDeleted: boolean; folderError: string | null; snapshotError: string | null } | null>(null)
+  const [result, setResult] = useState<{ snapshotDeleted: boolean } | null>(null)
   const [mounted, setMounted] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -67,12 +67,7 @@ export default function DeleteProjectModal({ slug, open, onClose, onDeleted }: D
         setErrorMsg(json.error ?? `HTTP ${res.status}`)
         return
       }
-      setResult({
-        folderDeleted: json.folderDeleted,
-        snapshotDeleted: json.snapshotDeleted,
-        folderError: json.folderError,
-        snapshotError: json.snapshotError,
-      })
+      setResult({ snapshotDeleted: json.snapshotDeleted })
       setState('success')
       // Brief pause so the user sees the success state, then notify parent.
       setTimeout(() => onDeleted(), 900)
@@ -153,9 +148,9 @@ export default function DeleteProjectModal({ slug, open, onClose, onDeleted }: D
           color: 'var(--text-secondary)',
           lineHeight: 1.5,
         }}>
-          <li>• Removes <code style={{ fontFamily: 'var(--font-mono)', fontSize: 11.5 }}>projects/{slug}/</code> from disk</li>
-          <li>• Removes the row in <code style={{ fontFamily: 'var(--font-mono)', fontSize: 11.5 }}>monitor_snapshots</code></li>
-          <li style={{ color: 'var(--text-muted)' }}>• Phones / products / blog posts in Supabase are kept</li>
+          <li>• Disconnects the repo + clears its owner (stops scanning)</li>
+          <li>• Removes its checklist snapshot</li>
+          <li style={{ color: 'var(--text-muted)' }}>• GitHub repo + Supabase data (phones / products / blog) are kept</li>
         </ul>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
@@ -205,13 +200,7 @@ export default function DeleteProjectModal({ slug, open, onClose, onDeleted }: D
             fontSize: 12.5,
             lineHeight: 1.5,
           }}>
-            ✓ Folder {result.folderDeleted ? 'deleted' : 'not present'} · Snapshot {result.snapshotDeleted ? 'deleted' : 'not present'}
-            {(result.folderError || result.snapshotError) && (
-              <div style={{ marginTop: 6, color: 'var(--status-warn)' }}>
-                {result.folderError && <div>Folder warning: {result.folderError}</div>}
-                {result.snapshotError && <div>Snapshot warning: {result.snapshotError}</div>}
-              </div>
-            )}
+            ✓ Project untracked · Snapshot {result.snapshotDeleted ? 'removed' : 'not present'}
           </div>
         )}
 

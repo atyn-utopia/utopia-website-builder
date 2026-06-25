@@ -34,7 +34,9 @@ export default function TopBar() {
       }}
     >
       {/* Brand */}
-      <Link href="/" aria-label="Home" style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
+      <Link href="/" aria-label="Home" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, textDecoration: 'none', flexShrink: 0 }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/utopia-wizard-logo.png" alt="Utopia Wizard" style={{ width: 34, height: 34 }} />
         <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.15 }}>
           <span style={{ fontFamily: 'var(--font-sans)', fontSize: 15, fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>Utopia Wizard</span>
           <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>Website Builder &amp; Monitor</span>
