@@ -66,6 +66,7 @@ type Mods = {
   getBlogContentRows: typeof import('../lib/supabaseChecks').getBlogContentRows
   getRegisteredDomains: typeof import('../lib/supabaseChecks').getRegisteredDomains
   getWebsiteById: typeof import('../lib/supabaseChecks').getWebsiteById
+  getProjectDomains: typeof import('../lib/vercelDomains').getProjectDomains
   findHardcodedPhones: typeof import('../lib/sourceScan').findHardcodedPhones
   findBlogHardcodedPhones: typeof import('../lib/sourceScan').findBlogHardcodedPhones
   checkLiveDbConnection: typeof import('../lib/liveStatusCheck').checkLiveDbConnection
@@ -82,7 +83,9 @@ async function loadModules(): Promise<Mods> {
   const ls = await import('../lib/liveStatusCheck')
   const st = await import('../lib/snapshotStore')
   const wu = await import('../lib/wizardUsers')
+  const vd = await import('../lib/vercelDomains')
   return {
+    getProjectDomains: vd.getProjectDomains,
     runChecklist: rc.runChecklist,
     getExpandedProjectInfo: rc.getExpandedProjectInfo,
     getPhoneRows: sc.getPhoneRows,
@@ -121,16 +124,25 @@ async function buildPayload(m: Mods, slug: string, parentDir: string) {
   ])
   const blogHardcoded = m.findBlogHardcodedPhones(blogContent)
 
-  // Resolve the CURRENT domain from the stable siteId (company_websites.id).
-  // config/site.ts can go stale after a domain rename — the siteId never does —
-  // so display the live domain when we can.
+  // Centralised domain resolution, most authoritative first:
+  //   1. Vercel production domain (what's actually serving — by project name = slug)
+  //   2. company_websites via the stable siteId (survives renames)
+  //   3. config/site.ts (may be stale)
   let currentDomain = info.domain
   if (info.siteId) {
     const site = await m.getWebsiteById(info.siteId).catch(() => null)
     if (site?.domain) currentDomain = site.domain
   }
+  let vercelDomain: string | null = null
+  try {
+    const v = await m.getProjectDomains(slug, process.env.VERCEL_TEAM_ID ?? null)
+    if (v.ok && v.productionDomains.length) vercelDomain = v.productionDomains[0]
+  } catch { /* skip — fall through to siteId/config */ }
+  const resolvedDomain = vercelDomain ?? currentDomain
 
   const candidateBaseUrls: string[] = []
+  // Probe the resolved (authoritative) domain first, so "live" matches it.
+  if (resolvedDomain) candidateBaseUrls.push(`https://${resolvedDomain}`)
   if (registered) for (const r of registered) candidateBaseUrls.push(`https://${r.domain}`)
   if (info.deployUrl) candidateBaseUrls.push(info.deployUrl)
   for (const d of info.domainCandidates) {
@@ -150,7 +162,7 @@ async function buildPayload(m: Mods, slug: string, parentDir: string) {
     total: checklist.total,
     passed: checklist.passed,
     failed_count: checklist.failedCount,
-    domain: currentDomain,
+    domain: resolvedDomain,
     product_slug: info.productSlug,
     fallback_phone: info.fallbackPhone,
     deploy_url: info.deployUrl,
