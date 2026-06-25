@@ -1,7 +1,6 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 
 const OAUTH_ERRORS: Record<string, string> = {
   not_allowed: 'That GitHub account is not on the team allowlist.',
@@ -12,39 +11,10 @@ const OAUTH_ERRORS: Record<string, string> = {
 }
 
 export default function LoginForm() {
-  const [passcode, setPasscode] = useState('')
-  const [error, setError] = useState<string | null>(null)
-  const [loading, setLoading] = useState(false)
-  const router = useRouter()
   const sp = useSearchParams()
   const from = sp.get('from') || '/'
   const oauthError = sp.get('error')
   const githubHref = `/api/auth/github?from=${encodeURIComponent(from)}`
-
-  const submit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!passcode || loading) return
-    setLoading(true)
-    setError(null)
-    try {
-      const res = await fetch('/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ passcode }),
-      })
-      if (!res.ok) {
-        const body = (await res.json().catch(() => ({}))) as { error?: string }
-        setError(body.error ?? 'Wrong passcode.')
-        setLoading(false)
-        return
-      }
-      // Hard refresh so the middleware sees the new cookie immediately.
-      window.location.href = from
-    } catch {
-      setError('Network error — try again.')
-      setLoading(false)
-    }
-  }
 
   return (
     <main style={{
@@ -145,69 +115,6 @@ export default function LoginForm() {
           </svg>
           Sign in with GitHub
         </a>
-
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <span style={{ flex: 1, height: 1, background: 'var(--border-soft)' }} />
-          <span style={{ color: 'var(--text-quiet)', fontSize: 11 }}>or passcode</span>
-          <span style={{ flex: 1, height: 1, background: 'var(--border-soft)' }} />
-        </div>
-
-        <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <label style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-            <span style={{
-              color: 'var(--text-secondary)',
-              fontSize: 11,
-              fontWeight: 600,
-              letterSpacing: '0.4px',
-              textTransform: 'uppercase',
-            }}>
-              Passcode
-            </span>
-            <input
-              type="password"
-              value={passcode}
-              onChange={(e) => setPasscode(e.target.value)}
-              autoFocus
-              autoComplete="current-password"
-              placeholder="••••••••"
-              disabled={loading}
-              style={{
-                background: 'var(--input-bg)',
-                border: '1px solid var(--input-border)',
-                borderRadius: 'var(--radius-pill)',
-                padding: '10px 18px',
-                color: 'var(--text-primary)',
-                fontSize: 14,
-                fontFamily: 'var(--font-sans)',
-                outline: 'none',
-                width: '100%',
-                transition: 'border-color var(--transition-snap)',
-              }}
-              onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--input-border-focus)' }}
-              onBlur={(e) => { e.currentTarget.style.borderColor = 'var(--input-border)' }}
-            />
-          </label>
-
-          {error && (
-            <p style={{
-              color: 'var(--status-fail)',
-              fontSize: 12,
-              margin: 0,
-              lineHeight: 1.5,
-            }}>
-              {error}
-            </p>
-          )}
-
-          <button
-            type="submit"
-            disabled={!passcode || loading}
-            className="uf-btn-brand"
-            style={{ padding: '10px 14px' }}
-          >
-            {loading ? 'Checking…' : 'Continue →'}
-          </button>
-        </form>
       </div>
     </main>
   )

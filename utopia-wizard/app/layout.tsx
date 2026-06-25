@@ -1,9 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Fira_Sans, JetBrains_Mono } from 'next/font/google'
-import ThemeToggle from '@/components/ThemeToggle'
-import LogoutButton from '@/components/LogoutButton'
 import RegisterSW from '@/components/RegisterSW'
-import TabNav from '@/components/TabNav'
+import TopBar from '@/components/TopBar'
 import './globals.css'
 
 const fira = Fira_Sans({
@@ -54,23 +52,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${fira.variable} ${mono.variable}`}>
       <body>
-        <ThemeToggle />
-        <LogoutButton />
         <div style={{
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'flex-start',
           alignItems: 'center',
           minHeight: '100vh',
-          // Top padding clears the floating Theme + Logout buttons, plus the
-          // iOS safe-area inset so the buttons (and content) sit below the
+          // Top padding + iOS safe-area inset so the topbar sits below the
           // status bar / notch on installed PWAs.
-          paddingTop: 'calc(76px + env(safe-area-inset-top, 0px))',
+          paddingTop: 'calc(24px + env(safe-area-inset-top, 0px))',
           paddingRight: 'calc(20px + env(safe-area-inset-right, 0px))',
           paddingBottom: 'calc(48px + env(safe-area-inset-bottom, 0px))',
           paddingLeft: 'calc(20px + env(safe-area-inset-left, 0px))',
         }}>
-          <TabNav />
+          <TopBar />
           {children}
         </div>
         <RegisterSW />

@@ -1,7 +1,7 @@
 import { getProjectInfo, ProjectInfo } from './projectInfo'
 import { runChecksForProject, CheckGroup, totalCheckCount } from './checklist'
 import { scorePct } from './score'
-import { findRegisteredDomainsByPhone, findRegisteredDomainsByKeyword } from './supabaseChecks'
+import { findRegisteredDomainsByPhone, findRegisteredDomainsByKeyword, getWebsiteById } from './supabaseChecks'
 
 export interface ChecklistRun {
   slug: string
@@ -52,6 +52,17 @@ function slugKeywords(slug: string): string[] {
 
 async function expandCandidates(info: ProjectInfo): Promise<ProjectInfo> {
   const extras = new Set<string>()
+
+  // (0) siteId → company_websites.id lookup. The most reliable link: `id` is
+  // immutable, so this resolves the CURRENT live domain even after a rename
+  // that broke both the slug-keyword (a) and phone (b) paths below. Adding it
+  // to the candidate list keeps the data checks (products/phones/blog) green
+  // while the dedicated `db-site-id-domain` check separately flags that the
+  // repo's config/site.ts domain is now stale.
+  if (info.siteId) {
+    const row = await getWebsiteById(info.siteId)
+    if (row?.domain) extras.add(row.domain.toLowerCase())
+  }
 
   // (a) Slug keyword → company_websites ilike match. Reliably finds custom
   // domains like `electricwheelchairmalaysia.com.my` for slug

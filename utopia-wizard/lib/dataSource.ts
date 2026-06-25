@@ -1,34 +1,21 @@
 /**
- * Decides whether the API serves live scans (filesystem available) or
- * snapshots (deployed mode — projects/ doesn't exist).
+ * The wizard is fully GitHub/Supabase-driven — it never reads project files
+ * from local disk. All project data comes from monitor_snapshots (written by
+ * the connected-repo scanner, scan-repos). `dataMode` is therefore always
+ * 'snapshot'; the live/disk path has been removed.
  *
- *   UTOPIA_FAIRY_USE_SNAPSHOTS=1     → always snapshots, even if projects/ exists
- *   UTOPIA_FAIRY_USE_LIVE=1          → always live (errors if projects/ missing)
- *   default                          → live if projects/ exists, else snapshots
+ * `projectsDir()` only computes a path string (no filesystem access) and is
+ * kept for the few callers that still reference it.
  */
 
-import { existsSync } from 'node:fs'
 import path from 'node:path'
 
 export function projectsDir(): string {
-  // utopia-wizard/ → ../projects
   return path.resolve(process.cwd(), '..', 'projects')
 }
 
-export type DataMode = 'live' | 'snapshot'
-
-let cachedMode: DataMode | null = null
+export type DataMode = 'snapshot'
 
 export function dataMode(): DataMode {
-  if (cachedMode) return cachedMode
-  if (process.env.UTOPIA_FAIRY_USE_SNAPSHOTS === '1') {
-    cachedMode = 'snapshot'
-    return cachedMode
-  }
-  if (process.env.UTOPIA_FAIRY_USE_LIVE === '1') {
-    cachedMode = 'live'
-    return cachedMode
-  }
-  cachedMode = existsSync(projectsDir()) ? 'live' : 'snapshot'
-  return cachedMode
+  return 'snapshot'
 }

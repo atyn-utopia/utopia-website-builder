@@ -6,18 +6,7 @@
     "dev": "next dev --port 3001",
     "build": "next build",
     "start": "next start",
-    "scan": "tsx scripts/scan.ts",
-    "scan-repos": "tsx scripts/scan-repos.ts",
-    "scaffold": "tsx scripts/scaffold-site.ts",
-    "chrome:check": "tsx scripts/chrome-check.ts",
-    "chrome:sync": "tsx scripts/chrome-sync.ts",
-    "gate": "tsx scripts/gate.ts",
-    "guardrails": "tsx scripts/gen-guardrails.ts",
-    "check-meta:sync": "tsx scripts/check-meta-sync.ts",
-    "sync-listener": "tsx scripts/sync-listener.ts",
-    "sync-listener:install": "tsx scripts/sync-listener-install.ts install",
-    "sync-listener:uninstall": "tsx scripts/sync-listener-install.ts uninstall",
-    "sync-listener:status": "launchctl list | grep com.utopia-wizard.sync-listener || echo 'not loaded'"
+    "scan-repos": "tsx scripts/scan-repos.ts"
   },
   "dependencies": {
     "next": "16.2.1",

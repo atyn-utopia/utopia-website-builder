@@ -152,6 +152,39 @@ export async function findRegisteredDomainsByKeyword(keyword: string): Promise<s
   }
 }
 
+/**
+ * Resolve a site's CURRENT domain from its stable `company_websites.id`.
+ *
+ * The domain is mutable (it gets renamed in the webcore admin and cascades to
+ * the data tables), but `id` is the immutable primary key. So a repo that pins
+ * `siteId` can always find its live domain here, no matter how many times the
+ * domain was renamed — the case that silently broke sewa-motor / cat-rumah,
+ * where neither the folder-slug keyword nor a unique phone matched the new
+ * domain. Returns null on a missing row or any error (caller falls back to
+ * domain-based matching).
+ */
+export async function getWebsiteById(
+  siteId: string,
+): Promise<{ id: string; domain: string } | null> {
+  if (!supabaseConfigured || !siteId) return null
+  try {
+    const enc = encodeURIComponent(siteId)
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/company_websites?id=eq.${enc}&select=id,domain&limit=1`,
+      {
+        headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, 'Accept-Profile': DB_SCHEMA },
+        signal: AbortSignal.timeout(5000),
+        cache: 'no-store',
+      },
+    )
+    if (!res.ok) return null
+    const rows = (await res.json()) as { id: string; domain: string }[]
+    return rows[0] ?? null
+  } catch {
+    return null
+  }
+}
+
 export async function getRegisteredDomains(candidates: string[]): Promise<RegisteredDomain[] | null> {
   const dedup = Array.from(new Set(candidates)).filter(Boolean)
   if (dedup.length === 0) return []

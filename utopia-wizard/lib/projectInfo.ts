@@ -4,6 +4,10 @@ import path from 'path'
 export interface ProjectInfo {
   slug: string
   projectDir: string
+  /** Stable webcore identity — `company_websites.id`. Survives domain renames,
+   * so it (not `domain`) is the reliable repo↔webcore link. May be null on
+   * older sites that predate siteId or aren't registered yet. */
+  siteId: string | null
   domain: string | null
   productSlug: string | null
   fallbackPhone: string | null
@@ -29,6 +33,7 @@ function hostOf(url: string | null): string | null {
 
 export async function getProjectInfo(slug: string, projectsDir: string): Promise<ProjectInfo> {
   const projectDir = path.join(projectsDir, slug)
+  let siteId: string | null = null
   let domain: string | null = null
   let productSlug: string | null = null
   let dataWebsite: string | null = null
@@ -36,6 +41,7 @@ export async function getProjectInfo(slug: string, projectsDir: string): Promise
 
   try {
     const site = await readFile(path.join(projectDir, 'config', 'site.ts'), 'utf-8')
+    siteId = extractStringField(site, 'siteId')
     domain = extractStringField(site, 'domain')
     productSlug = extractStringField(site, 'productSlug')
     fallbackPhone = extractStringField(site, 'fallbackPhone')
@@ -74,6 +80,7 @@ export async function getProjectInfo(slug: string, projectsDir: string): Promise
   return {
     slug,
     projectDir,
+    siteId,
     domain,
     productSlug,
     fallbackPhone,

@@ -10,7 +10,6 @@ on:
   push:
     branches: [main]
     paths:
-      - 'projects/**'
       - 'utopia-wizard/**'
       - '.github/workflows/monitor-scan.yml'
   workflow_dispatch:
@@ -38,21 +37,7 @@ jobs:
         working-directory: utopia-wizard
         run: npm ci
 
-      - name: Run scanner (monorepo projects)
-        working-directory: utopia-wizard
-        env:
-          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-          # Lets vercel-domain-match run in CI exactly as it does locally —
-          # without these the check skips and CI snapshots score ~1 lower than a
-          # local scan, so the deployed wizard drifts from local. Add VERCEL_TOKEN
-          # + VERCEL_TEAM_ID as repo secrets for the two to stay in sync.
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_TEAM_ID: ${{ secrets.VERCEL_TEAM_ID }}
-        run: npm run scan
-
-      - name: Run scanner (connected repos — Phase B)
+      - name: Run scanner (connected repos)
         working-directory: utopia-wizard
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}

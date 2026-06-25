@@ -1,7 +1,7 @@
 import { readFile, access, readdir, stat } from 'fs/promises'
 import path from 'path'
 import type { ProjectInfo } from './projectInfo'
-import { getDomainCounts, getBlogContentRows, getPhoneRows, getRegisteredDomains, supabaseConfigured } from './supabaseChecks'
+import { getDomainCounts, getBlogContentRows, getPhoneRows, getRegisteredDomains, getWebsiteById, supabaseConfigured } from './supabaseChecks'
 import { findHardcodedPhones, findBlogHardcodedPhones, findMessageLeaks } from './sourceScan'
 import { checkLiveDbConnection } from './liveStatusCheck'
 import { getProjectDomains } from './vercelDomains'
@@ -1687,6 +1687,30 @@ const DESIGN: Check[] = [
 ]
 
 const DATABASE: Check[] = [
+  {
+    group: 'Database', id: 'db-site-id-domain', name: 'siteId pinned + matches webcore domain',
+    help: "config/site.ts pins the stable company_websites.id (siteId). The live domain is resolved FROM that id, so renaming the domain in the webcore admin can never silently disconnect the site. Fails if siteId is missing on a registered site (add it), if the id isn't found in webcore (wrong id / row deleted), or if webcore's current domain for that id no longer matches config/site.ts (a rename happened — update config + redeploy).",
+    run: async (ctx) => {
+      if (!supabaseConfigured) return skip('db-site-id-domain', 'siteId pinned + matches webcore domain', 'Supabase not configured')
+      const configDomain = (ctx.info.domain ?? '').toLowerCase().replace(/^www\./, '')
+      const siteId = ctx.info.siteId
+      if (!siteId) {
+        // Only nag when the site is actually registered; brand-new scaffolds
+        // with no company_websites row yet shouldn't fail this.
+        const c = await getDomainCounts(ctx.info.domainCandidates)
+        return c.companyWebsites && c.companyWebsites > 0
+          ? fail('db-site-id-domain', 'siteId pinned + matches webcore domain', 'no `siteId` in config/site.ts — pin company_websites.id so a domain rename can never disconnect this site')
+          : skip('db-site-id-domain', 'siteId pinned + matches webcore domain', 'no siteId and no webcore registration yet')
+      }
+      const row = await getWebsiteById(siteId)
+      if (!row) return fail('db-site-id-domain', 'siteId pinned + matches webcore domain', `siteId ${siteId} not found in company_websites — wrong id or row deleted`)
+      const dbDomain = row.domain.toLowerCase().replace(/^www\./, '')
+      if (!configDomain) return fail('db-site-id-domain', 'siteId pinned + matches webcore domain', `siteId resolves to "${dbDomain}" but config/site.ts has no domain`)
+      return dbDomain === configDomain
+        ? pass('db-site-id-domain', 'siteId pinned + matches webcore domain', `${siteId} → ${dbDomain}`)
+        : fail('db-site-id-domain', 'siteId pinned + matches webcore domain', `webcore renamed this site to "${dbDomain}" but config/site.ts still says "${configDomain}" — update domain + deploy-url.txt and redeploy`)
+    },
+  },
   {
     group: 'Database', id: 'db-company-website', name: 'company_websites row',
     help: "This site is registered in the company_websites table.",

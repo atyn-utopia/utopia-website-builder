@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState, useCallback } from 'react'
-import Link from 'next/link'
 
 interface ConnectedRepo {
   repo_full_name: string
@@ -109,11 +108,7 @@ export default function ReposClient() {
   )
 
   return (
-    <main style={{ width: '100%', maxWidth: 720, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 22 }}>
-      <Link href="/" style={{ color: 'var(--text-muted)', fontSize: 12, fontWeight: 500, alignSelf: 'flex-start' }}>
-        ← Back to dashboard
-      </Link>
-
+    <>
       <header style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
         <h1 style={{ fontFamily: 'var(--font-sans)', fontSize: 24, fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
           Connect your repos
@@ -213,6 +208,6 @@ export default function ReposClient() {
           )
         })}
       </section>
-    </main>
+    </>
   )
 }

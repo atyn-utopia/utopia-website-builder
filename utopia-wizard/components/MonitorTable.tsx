@@ -6,8 +6,6 @@ import { useIsMobile } from '@/lib/useMediaQuery'
 import { scorePct } from '@/lib/score'
 import DeleteProjectModal from './DeleteProjectModal'
 import TrashIcon from './icons/TrashIcon'
-import SyncButton from './SyncButton'
-import AccountSwitcher from './AccountSwitcher'
 
 interface GroupSummary {
   name: string
@@ -337,49 +335,28 @@ export default function MonitorTable() {
         paddingBottom: 20,
         borderBottom: '1px solid var(--border-soft)',
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/utopia-wizard-logo.png"
-            alt="Utopia Wizard"
-            className="uf-logo"
-            style={{
-              width: isMobile ? 48 : 56,
-              height: isMobile ? 48 : 56,
-              flexShrink: 0,
-            }}
-          />
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
-            <h1 style={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: isMobile ? 22 : 26,
-              fontWeight: 700,
-              color: 'var(--text-primary)',
-              letterSpacing: '-0.02em',
-              margin: 0,
-              lineHeight: 1.1,
-            }}>
-              Utopia Wizard
-            </h1>
-            <p style={{
-              color: 'var(--text-muted)',
-              fontSize: 12.5,
-              margin: 0,
-              lineHeight: 1.3,
-            }}>
-              Website Builder &amp; Monitor
-            </p>
-            <p style={{
-              color: 'var(--text-quiet)',
-              fontSize: 11.5,
-              margin: '4px 0 0',
-              lineHeight: 1.4,
-            }}>
-              {loading
-                ? 'Reading every project under projects/…'
-                : `${canScope && !showAll ? 'Your ' : ''}${projectCount} project${projectCount === 1 ? '' : 's'} · ${liveCount} live · ${data?.totalChecks ?? 0} checks per project${canScope ? (showAll ? ' · all teammates' : ` · @${viewer}`) : ''}`}
-            </p>
-          </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          <h1 style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: isMobile ? 18 : 20,
+            fontWeight: 700,
+            color: 'var(--text-primary)',
+            letterSpacing: '-0.01em',
+            margin: 0,
+            lineHeight: 1.15,
+          }}>
+            Monitor
+          </h1>
+          <p style={{
+            color: 'var(--text-quiet)',
+            fontSize: 12,
+            margin: 0,
+            lineHeight: 1.4,
+          }}>
+            {loading
+              ? 'Reading every project under projects/…'
+              : `${canScope && !showAll ? 'Your ' : ''}${projectCount} project${projectCount === 1 ? '' : 's'} · ${liveCount} live · ${data?.totalChecks ?? 0} checks per project${canScope ? (showAll ? ' · all teammates' : ` · @${viewer}`) : ''}`}
+          </p>
         </div>
         <div style={{
           display: 'flex',
@@ -434,7 +411,6 @@ export default function MonitorTable() {
               })}
             </div>
           )}
-          <SyncButton />
           <button
             onClick={triggerRescan}
             disabled={rescan === 'triggering' || rescan === 'running'}
@@ -479,36 +455,6 @@ export default function MonitorTable() {
               : rescan === 'error'      ? 'Rescan Failed'
               : 'Rescan Now'}
           </button>
-          {canScope && (
-            <button
-              onClick={() => router.push('/repos')}
-              style={{
-                background: 'transparent',
-                color: 'var(--text-secondary)',
-                border: '1px solid var(--border-soft)',
-                borderRadius: 'var(--radius-pill)',
-                padding: '9px 18px',
-                fontSize: 13,
-                fontWeight: 600,
-                lineHeight: 1.2,
-                cursor: 'pointer',
-                fontFamily: 'var(--font-sans)',
-                whiteSpace: 'nowrap',
-                order: isMobile ? 4 : 1,
-              }}
-              title="Connect your GitHub repos as projects"
-            >
-              ⚙ Repos
-            </button>
-          )}
-          <button
-            onClick={() => router.push('/new')}
-            className="uf-btn-brand"
-            style={{ lineHeight: 1.2, order: isMobile ? 1 : 2 }}
-          >
-            ✦ New Project
-          </button>
-          <span style={{ order: isMobile ? 5 : 3 }}><AccountSwitcher /></span>
         </div>
       </header>
       <style jsx>{`
@@ -559,13 +505,13 @@ export default function MonitorTable() {
                     Project
                   </span>
                 </Th>
-                <Th onBrand onSort={() => toggleSort('company')} sortDir={sortKey === 'company' ? sortDir : null}>Company</Th>
-                {showOwnerCol && <Th onBrand>Owner</Th>}
+                <Th onBrand onSort={() => toggleSort('company')} sortDir={sortKey === 'company' ? sortDir : null} width={170}>Company</Th>
+                {showOwnerCol && <Th onBrand width={150}>Owner</Th>}
                 <Th onBrand onSort={() => toggleSort('created')} sortDir={sortKey === 'created' ? sortDir : null}>Created</Th>
                 <Th onBrand align="center" onSort={() => toggleSort('status')} sortDir={sortKey === 'status' ? sortDir : null}>Status</Th>
                 {groupNames.map((g) => <Th key={g} compact onBrand align="center">{g}</Th>)}
-                <Th onBrand align="center" onSort={() => toggleSort('score')} sortDir={sortKey === 'score' ? sortDir : null}>Score</Th>
-                <Th onBrand align="center" compact><span style={{ opacity: 0 }}>Del</span></Th>
+                <Th onBrand align="center" onSort={() => toggleSort('score')} sortDir={sortKey === 'score' ? sortDir : null} stickyRight={44} pinShadow>Score</Th>
+                <Th onBrand align="center" compact stickyRight={0} width={44}><span style={{ opacity: 0 }}>Del</span></Th>
               </tr>
             </thead>
             <tbody>
@@ -610,13 +556,13 @@ export default function MonitorTable() {
                         )}
                       </div>
                     </Td>
-                    <Td>
-                      <span style={{ color: p.company ? 'var(--text-secondary)' : 'var(--text-quiet)', fontSize: 12 }}>
+                    <Td width={170}>
+                      <span style={{ display: 'block', color: p.company ? 'var(--text-secondary)' : 'var(--text-quiet)', fontSize: 12, maxWidth: 158, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={p.company ?? undefined}>
                         {p.company ?? '—'}
                       </span>
                     </Td>
                     {showOwnerCol && (
-                      <Td>
+                      <Td width={150}>
                         <OwnerCell
                           owner={p.owner}
                           viewer={viewer}
@@ -639,12 +585,12 @@ export default function MonitorTable() {
                         <GroupChip group={g} />
                       </Td>
                     ))}
-                    <Td align="center">
+                    <Td align="center" stickyRight={44} pinShadow rowBg={rowBg}>
                       <span className={`uf-score ${scoreClass}`} style={{ fontSize: 12, padding: '5px 12px' }}>
                         {scorePct(p.passed, p.failedCount)} / 100
                       </span>
                     </Td>
-                    <Td align="center" compact>
+                    <Td align="center" compact stickyRight={0} width={44} rowBg={rowBg}>
                       <button
                         type="button"
                         title={`Delete ${p.slug}`}
@@ -745,6 +691,9 @@ function Th({
   onBrand = false,
   onSort,
   sortDir = null,
+  stickyRight,
+  pinShadow = false,
+  width,
 }: {
   children: React.ReactNode
   align?: 'left' | 'right' | 'center'
@@ -752,6 +701,9 @@ function Th({
   onBrand?: boolean
   onSort?: () => void
   sortDir?: 'asc' | 'desc' | null
+  stickyRight?: number
+  pinShadow?: boolean
+  width?: number
 }) {
   const clickable = typeof onSort === 'function'
   return (
@@ -768,6 +720,11 @@ function Th({
         whiteSpace: 'nowrap',
         cursor: clickable ? 'pointer' : 'default',
         userSelect: clickable ? 'none' : 'auto',
+        ...(stickyRight !== undefined
+          ? { position: 'sticky', right: stickyRight, zIndex: 3, background: 'var(--brand)' }
+          : {}),
+        ...(pinShadow ? { boxShadow: 'inset 9px 0 9px -9px rgba(0,0,0,0.55)' } : {}),
+        ...(width ? { width, minWidth: width } : {}),
       }}
     >
       <span style={{
@@ -803,12 +760,19 @@ function Th({
   )
 }
 
-function Td({ children, align = 'left', compact = false }: { children: React.ReactNode; align?: 'left' | 'right' | 'center'; compact?: boolean }) {
+function Td({ children, align = 'left', compact = false, stickyRight, pinShadow = false, width, rowBg }: { children: React.ReactNode; align?: 'left' | 'right' | 'center'; compact?: boolean; stickyRight?: number; pinShadow?: boolean; width?: number; rowBg?: string }) {
   return (
     <td style={{
       textAlign: align,
       padding: compact ? '12px 8px' : '12px 14px',
       verticalAlign: 'middle',
+      ...(stickyRight !== undefined
+        // Opaque background so scrolling content doesn't show through. Layer the
+        // row tint over the card surface so pinned cells match tinted rows.
+        ? { position: 'sticky', right: stickyRight, zIndex: 1, background: `linear-gradient(${rowBg || 'transparent'}, ${rowBg || 'transparent'}), var(--bg-elevated)` }
+        : {}),
+      ...(pinShadow ? { boxShadow: 'inset 9px 0 9px -9px rgba(0,0,0,0.45)' } : {}),
+      ...(width ? { width, minWidth: width } : {}),
     }}>
       {children}
     </td>

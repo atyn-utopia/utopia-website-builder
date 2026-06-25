@@ -41,9 +41,12 @@ export default function AccountSwitcher() {
   const active = data?.active ?? null
   if (!active || active === '*') return null
 
-  const others = (data?.accounts ?? []).filter((a) => a !== active)
+  const accounts = data?.accounts ?? []
+  // The first account ever added in this browser is the "main" login.
+  const mainLogin = accounts[0] ?? null
 
   const switchTo = async (login: string) => {
+    if (login === active) return
     setBusy(true)
     try {
       const res = await fetch('/api/auth/switch', {
@@ -52,6 +55,25 @@ export default function AccountSwitcher() {
         body: JSON.stringify({ login }),
       })
       if (res.ok) { window.location.reload(); return }
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  const removeAccount = async (login: string) => {
+    if (!window.confirm(`Remove @${login} from this device's account list?`)) return
+    setBusy(true)
+    try {
+      const res = await fetch('/api/auth/remove-account', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ login }),
+      })
+      const body = await res.json().catch(() => ({}))
+      if (res.ok) {
+        if (body.signedOut) { window.location.href = '/login'; return }
+        window.location.reload(); return
+      }
     } finally {
       setBusy(false)
     }
@@ -122,35 +144,50 @@ export default function AccountSwitcher() {
           boxShadow: '0 12px 32px -12px rgba(0,0,0,0.35)', overflow: 'hidden',
           padding: '6px 0',
         }}>
-          {others.length > 0 && (
-            <>
-              <div style={{ padding: '6px 14px', fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.4px', color: 'var(--text-quiet)' }}>
-                Switch to
-              </div>
-              {others.map((a) => (
-                <button key={a} onClick={() => switchTo(a)} disabled={busy} style={itemStyle}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--surface-hover)' }}
-                  onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent' }}
+          <div style={{ padding: '6px 14px', fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.4px', color: 'var(--text-quiet)' }}>
+            Accounts
+          </div>
+          {accounts.map((a) => {
+            const isActive = a === active
+            const isMain = a === mainLogin
+            return (
+              <div key={a} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 10px 7px 14px' }}>
+                <button
+                  onClick={() => switchTo(a)}
+                  disabled={busy || isActive}
+                  title={isActive ? 'Current account' : `Switch to @${a}`}
+                  style={{
+                    flex: 1, display: 'flex', alignItems: 'center', gap: 7, minWidth: 0,
+                    background: 'transparent', border: 'none', padding: 0, textAlign: 'left',
+                    cursor: isActive ? 'default' : 'pointer', fontFamily: 'var(--font-sans)',
+                    fontSize: 13, color: 'var(--text-secondary)',
+                  }}
                 >
-                  @{a}
+                  <span style={{ color: isActive ? 'var(--status-pass)' : 'var(--text-quiet)', width: 12, display: 'inline-block' }}>{isActive ? '✓' : ''}</span>
+                  <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)' }}>@{a}</span>
+                  {isMain && <span style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.4px', textTransform: 'uppercase', color: 'var(--brand)', border: '1px solid var(--border-soft)', borderRadius: 5, padding: '1px 5px' }}>Main</span>}
                 </button>
-              ))}
-              <div style={{ height: 1, background: 'var(--border-soft)', margin: '6px 0' }} />
-            </>
-          )}
-          <a href="/api/auth/github?from=/" style={itemStyle}
-            onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--surface-hover)' }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent' }}
-          >
-            + Add another account
-          </a>
-          <p style={{ margin: 0, padding: '2px 14px 8px', fontSize: 10.5, lineHeight: 1.45, color: 'var(--text-quiet)' }}>
-            Tip: GitHub adds whichever account is logged in at github.com. To add
-            a different one, <a href="https://github.com/logout" target="_blank" rel="noreferrer" style={{ color: 'var(--text-secondary)', textDecoration: 'underline' }}>sign out of GitHub</a> (or use a private window) first, then click above.
-          </p>
-
-          <div style={{ height: 1, background: 'var(--border-soft)', margin: '2px 0 6px' }} />
-
+                {/* Main account can't be removed (it's the primary identity). */}
+                {!isMain && (
+                  <button
+                    onClick={() => removeAccount(a)}
+                    disabled={busy}
+                    title={`Remove @${a}`}
+                    aria-label={`Remove @${a}`}
+                    style={{ background: 'transparent', border: 'none', color: 'var(--text-quiet)', cursor: 'pointer', fontSize: 15, lineHeight: 1, padding: '0 4px' }}
+                    onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--status-fail)' }}
+                    onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-quiet)' }}
+                  >
+                    ×
+                  </button>
+                )}
+              </div>
+            )
+          })}
+          <div style={{ height: 1, background: 'var(--border-soft)', margin: '6px 0' }} />
+          <div style={{ padding: '6px 14px 2px', fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.4px', color: 'var(--text-quiet)' }}>
+            Add account
+          </div>
           {!tokenMode ? (
             <button onClick={() => { setTokenMode(true); setTokenErr(null) }} style={itemStyle}
               onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--surface-hover)' }}

@@ -1,11 +1,5 @@
 import { NextResponse } from 'next/server'
-import { readdir, stat } from 'fs/promises'
-import path from 'path'
-import { runChecklist, getExpandedProjectInfo } from '@/lib/runChecklist'
-import { totalCheckCount } from '@/lib/checklist'
-import { dataMode, projectsDir } from '@/lib/dataSource'
 import { readAllSnapshots } from '@/lib/snapshotStore'
-import { getRegisteredDomains } from '@/lib/supabaseChecks'
 import { getProjectOwners } from '@/lib/wizardUsers'
 import { currentUser } from '@/lib/session'
 
@@ -55,81 +49,7 @@ async function scopeProjects<T extends Scopable>(
 
 export async function GET(req: Request) {
   const showAll = new URL(req.url).searchParams.get('all') === '1'
-  if (dataMode() === 'snapshot') {
-    return serveFromSnapshots(showAll)
-  }
-  return serveLive(showAll)
-}
-
-async function serveLive(showAll: boolean) {
-  try {
-    const dir = projectsDir()
-    const [entries, owners] = await Promise.all([readdir(dir), getProjectOwners()])
-
-    const slugs: { slug: string; createdAt: string }[] = []
-    for (const slug of entries) {
-      try {
-        const s = await stat(path.join(dir, slug, 'inputs.md'))
-        slugs.push({ slug, createdAt: s.mtime.toISOString() })
-      } catch { /* not a project */ }
-    }
-
-    const runs = await Promise.all(
-      slugs.map(async ({ slug, createdAt }) => {
-        try {
-          const r = await runChecklist(slug, dir)
-          // Cheap parallel lookup for company name. Cached in supabaseChecks
-          // when invoked again for the wish-data endpoint.
-          let company: string | null = null
-          try {
-            const info = await getExpandedProjectInfo(slug, dir)
-            const reg = await getRegisteredDomains(info.domainCandidates)
-            company = companyFromRegistered(reg)
-          } catch { /* leave null */ }
-          return {
-            slug,
-            owner: owners.get(slug) ?? null,
-            domain: r.domain,
-            productSlug: r.productSlug,
-            deployUrl: r.deployUrl,
-            company,
-            projectCreatedAt: createdAt,
-            passed: r.passed,
-            total: r.total,
-            failedCount: r.failedCount,
-            groups: r.groups.map((g) => ({
-              name: g.name,
-              passed: g.items.filter((i) => i.status === 'pass').length,
-              failed: g.items.filter((i) => i.status === 'fail').length,
-              total: g.items.length,
-            })),
-            createdAt,
-          }
-        } catch {
-          return null
-        }
-      }),
-    )
-
-    const all = runs.filter((p): p is NonNullable<typeof p> => p !== null)
-    all.sort((a, b) => new Date(b.projectCreatedAt).getTime() - new Date(a.projectCreatedAt).getTime())
-
-    const { projects, viewer, isAdmin, scoped } = await scopeProjects(all, showAll)
-
-    return NextResponse.json({
-      projects,
-      totalChecks: totalCheckCount(),
-      mode: 'live',
-      viewer,
-      isAdmin,
-      scoped,
-    })
-  } catch (e) {
-    return NextResponse.json(
-      { projects: [], totalChecks: totalCheckCount(), mode: 'live', error: e instanceof Error ? e.message : 'unknown' },
-      { status: 500 },
-    )
-  }
+  return serveFromSnapshots(showAll)
 }
 
 async function serveFromSnapshots(showAll: boolean) {

@@ -69,6 +69,7 @@ type Mods = {
   findBlogHardcodedPhones: typeof import('../lib/sourceScan').findBlogHardcodedPhones
   checkLiveDbConnection: typeof import('../lib/liveStatusCheck').checkLiveDbConnection
   upsertSnapshot: typeof import('../lib/snapshotStore').upsertSnapshot
+  deleteSnapshotsExcept: typeof import('../lib/snapshotStore').deleteSnapshotsExcept
   listAllActiveRepos: typeof import('../lib/wizardUsers').listAllActiveRepos
   getUserToken: typeof import('../lib/wizardUsers').getUserToken
 }
@@ -92,6 +93,7 @@ async function loadModules(): Promise<Mods> {
     findBlogHardcodedPhones: ss.findBlogHardcodedPhones,
     checkLiveDbConnection: ls.checkLiveDbConnection,
     upsertSnapshot: st.upsertSnapshot,
+    deleteSnapshotsExcept: st.deleteSnapshotsExcept,
     listAllActiveRepos: wu.listAllActiveRepos,
     getUserToken: wu.getUserToken,
   }
@@ -213,6 +215,19 @@ async function main(): Promise<void> {
     }
   } finally {
     await rm(workRoot, { recursive: true, force: true }).catch(() => {})
+  }
+
+  // Prune snapshots for repos that are no longer connected (e.g. disconnected,
+  // or stale rows from the retired monorepo scanner). The dashboard then only
+  // ever reflects currently-connected repos. Skip on dry/--only runs.
+  if (!DRY && !ONLY) {
+    try {
+      const keep = repos.map((r) => r.project_slug)
+      const pruned = await m.deleteSnapshotsExcept(keep)
+      if (pruned > 0) console.log(`scan-repos: pruned ${pruned} stale snapshot(s)`)
+    } catch (err) {
+      console.warn('scan-repos: prune failed —', err instanceof Error ? err.message : err)
+    }
   }
 
   console.log(`scan-repos: done · ${ok} ok · ${fail} failed${DRY ? ' (dry run)' : ''}`)
