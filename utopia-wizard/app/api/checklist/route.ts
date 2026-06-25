@@ -75,6 +75,7 @@ async function serveFromSnapshots(showAll: boolean) {
         failed: g.items.filter((i) => i.status === 'fail').length,
         total: g.items.length,
       })),
+      liveStatus: (r.live_status as { status?: string } | null) ?? null,
       createdAt: r.project_created_at ?? r.ran_at,
     }))
     const { projects, viewer, isAdmin, scoped } = await scopeProjects(all, showAll)

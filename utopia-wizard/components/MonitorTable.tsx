@@ -30,6 +30,8 @@ interface ProjectRow {
   total: number
   failedCount: number
   groups: GroupSummary[]
+  /** Live-DB probe of the resolved domain — the authoritative liveness signal. */
+  liveStatus?: { status?: string } | null
   createdAt: string
 }
 
@@ -163,10 +165,17 @@ interface DeployStatusInfo {
 }
 
 function deployStatusOf(p: ProjectRow): DeployStatusInfo {
-  // Derive purely from the Deployment group so it works under snapshot mode
-  // (where deployUrl can be null because .vercel/project.json is gitignored
-  // and not present on the CI scanner). The Deployment group's checks
-  // already probe the live URL + live DB connection.
+  // Primary signal: the live-DB probe of the RESOLVED (authoritative) domain.
+  // This reflects whether the site actually responds — independent of config
+  // hygiene checks (stale deploy-url.txt / domain-match) that live in the
+  // Deployment group and would otherwise mislabel a live site as "Issue".
+  const live = p.liveStatus?.status
+  if (live === 'connected') return { status: 'live', label: 'Live', color: 'pass' }
+  if (live === 'fallback' || live === 'unexpected') return { status: 'issue', label: 'Live*', color: 'warn' }
+  if (live === 'no-response') return { status: 'down', label: 'Down', color: 'fail' }
+  if (live === 'no-target') return { status: 'building', label: 'Building', color: 'skip' }
+
+  // No live_status (older snapshot) → fall back to the Deployment group.
   const deploy = p.groups.find((g) => g.name === 'Deployment')
   if (!deploy || deploy.total === 0) {
     return { status: 'building', label: 'Building', color: 'skip' }
