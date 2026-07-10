@@ -33,6 +33,7 @@ const BLOGSTEP = 'full-website-setup.md#13-step-11--generate-blog-posts'
 const CORE = 'full-website-setup.md#7-step-5--build-core-files'
 const TRACK = 'full-website-setup.md#9-step-7--add-tracking'
 const DEPLOY = 'full-website-setup.md#16-step-14--deploy'
+const GOOGLE = 'full-website-setup.md#16b-step-15--google-integration-post-deploy-after-paid-domain-is-live'
 const FLOW = 'website-building-flow.md#layout-build-process'
 const RULES = '../CLAUDE.md'
 
@@ -71,6 +72,10 @@ export const CHECK_META: CheckMeta[] = [
   { id: 'whatsapp-click-track',           group: 'Tracking',   severity: 'blocking', doc: TRACK,  name: 'WhatsApp click tracked' },
   { id: 'product-impression-track',       group: 'Tracking',   severity: 'advisory', doc: TRACK,  name: 'Product impression tracked' },
   { id: 'blog-click-track',               group: 'Tracking',   severity: 'advisory', doc: TRACK,  name: 'Blog article click tracked' },
+
+  // ── Google Integration (post-deploy; on-site GTM only) ──────────────────────
+  { id: 'gtm-container',                  group: 'Google Integration', severity: 'advisory', doc: GOOGLE, name: 'GTM container snippet in layout' },
+  { id: 'gtm-noscript',                   group: 'Google Integration', severity: 'advisory', doc: GOOGLE, name: 'GTM noscript fallback in layout' },
 
   // ── Layout & Design ──────────────────────────────────────────────────────────
   { id: 'font-house-style',               group: 'Layout & Design', severity: 'advisory', doc: LAYOUT, name: 'Uses Inter or Plus Jakarta Sans' },
@@ -146,6 +151,7 @@ export const CHECK_META: CheckMeta[] = [
   { id: 'blog-content-toc-css',           group: 'Blog', severity: 'advisory', doc: BLOGSTEP, name: 'CSS styles the TOC (.blog-content nav / .toc)' },
 
   // ── Database ────────────────────────────────────────────────────────────────
+  { id: 'db-site-id-domain',              group: 'Database', severity: 'blocking', doc: SETUP, name: 'siteId pinned + matches webcore domain' },
   { id: 'db-company-website',             group: 'Database', severity: 'blocking', doc: SETUP, name: 'company_websites row' },
   { id: 'db-phone-number',                group: 'Database', severity: 'blocking', doc: SETUP, name: 'phone_numbers row (active)' },
   { id: 'db-products',                    group: 'Database', severity: 'blocking', doc: SETUP, name: 'Active products in Supabase' },

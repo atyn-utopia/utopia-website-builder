@@ -786,6 +786,39 @@ const TRACKING: Check[] = [
   },
 ]
 
+// Google Integration checks — the POST-DEPLOY Google/Ads layer (GA4 + GTM + GSC +
+// Ads conversion). Only the on-site GTM injection is verifiable from the repo;
+// the account-side pieces (GA4 property, Ads conversion, GSC domain property, and
+// the manual GA4 Signals / Ads counting+import toggles) live in Google and are
+// tracked in the runbook, not here. These are advisory: a site still in the build
+// phase legitimately has no GTM yet — it's injected only once the paid domain is live.
+const GOOGLE: Check[] = [
+  {
+    group: 'Google Integration', id: 'gtm-container', name: 'GTM container snippet in layout',
+    help: "Post-deploy: the Google Tag Manager container that fires GA4 and the whatsapp_click Ads conversion. Injected into the locale layout once the paid domain is live.",
+    run: async (ctx) => {
+      const c = await readProjectFile(ctx, 'app/[locale]/layout.tsx')
+      if (!c) return fail('gtm-container', 'GTM container snippet in layout', 'layout.tsx missing')
+      const hasLoader = /googletagmanager\.com\/gtm\.js/.test(c)
+      const id = c.match(/GTM-[A-Z0-9]+/)
+      return hasLoader && id
+        ? pass('gtm-container', 'GTM container snippet in layout', id[0])
+        : fail('gtm-container', 'GTM container snippet in layout', 'no googletagmanager.com/gtm.js + GTM-XXXX snippet — run the Google integration step after deploy')
+    },
+  },
+  {
+    group: 'Google Integration', id: 'gtm-noscript', name: 'GTM noscript fallback in layout',
+    help: "The <noscript> GTM iframe placed right after <body> so tracking still works without JavaScript.",
+    run: async (ctx) => {
+      const c = await readProjectFile(ctx, 'app/[locale]/layout.tsx')
+      if (!c) return fail('gtm-noscript', 'GTM noscript fallback in layout', 'layout.tsx missing')
+      return /googletagmanager\.com\/ns\.html/.test(c)
+        ? pass('gtm-noscript', 'GTM noscript fallback in layout')
+        : fail('gtm-noscript', 'GTM noscript fallback in layout', 'no googletagmanager.com/ns.html noscript iframe after <body>')
+    },
+  },
+]
+
 // Layout & Design checks — automated subset of docs/full-website-setup.md
 // "Layout & Design Checklist (MANDATORY before Gate 1)". Visual judgment items
 // (e.g. "headings on image-bg render white") are intentionally omitted.
@@ -2219,6 +2252,7 @@ const ALL_CHECKS: Check[] = [
   ...I18N,
   ...WEBCORE,
   ...TRACKING,
+  ...GOOGLE,
   ...DESIGN,
   ...DATABASE,
   ...DEPLOYMENT,
@@ -2234,6 +2268,7 @@ const GROUP_ORDER = [
   'i18n',
   'Webcore data layer',
   'Tracking',
+  'Google Integration',
   'Layout & Design',
   'Blog',
   'Database',
