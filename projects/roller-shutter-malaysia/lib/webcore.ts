@@ -90,7 +90,12 @@ async function getHostDomain(): Promise<string> {
   try {
     const h = await headers()
     const host = h.get('host') || h.get('x-forwarded-host') || ''
-    return host.replace(/:\d+$/, '')
+    // Strip port AND a leading `www.` — the site canonicalises to the www host
+    // (rollershutterdoors.my → www.rollershutterdoors.my), but the webcore
+    // phone_numbers / company_websites rows are keyed to the bare apex domain.
+    // Without this, the www host misses the DB lookup and falls back to the
+    // config placeholder number.
+    return host.replace(/:\d+$/, '').replace(/^www\./, '')
   } catch {
     return ''
   }
