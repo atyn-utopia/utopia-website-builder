@@ -1908,6 +1908,20 @@ const DEPLOYMENT: Check[] = [
         if (!baseUrls.includes(u)) baseUrls.push(u)
       }
 
+      // Also probe the www/apex counterpart of every candidate. Sites commonly
+      // canonicalise apex -> www (or vice versa); if the phone row is keyed to
+      // one host and the site serves the other, the lookup silently falls back
+      // to the config placeholder number. Probing both catches that mismatch
+      // even when the redirect chain would otherwise hide it.
+      for (const u of [...baseUrls]) {
+        try {
+          const url = new URL(u)
+          url.host = url.host.startsWith('www.') ? url.host.slice(4) : `www.${url.host}`
+          const alt = url.origin
+          if (!baseUrls.includes(alt)) baseUrls.push(alt)
+        } catch { /* non-URL deployUrl — skip */ }
+      }
+
       const dbPhones = (phones ?? []).filter((p) => p.is_active).map((p) => p.phone_number)
       const status = await checkLiveDbConnection({
         baseUrls: Array.from(new Set(baseUrls)),
