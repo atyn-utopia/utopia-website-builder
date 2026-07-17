@@ -77,12 +77,22 @@ async function expandCandidates(info: ProjectInfo): Promise<ProjectInfo> {
     }
   }
 
-  // (b) Fallback phone → phone_numbers lookup, but only when the phone is
-  // unique to ONE website. Shared/template phones (e.g. the same number
-  // across 6 sister sites) would otherwise pollute the candidate list.
+  // (b) Fallback phone → phone_numbers lookup. `fallbackPhone` is a *placeholder*
+  // that is frequently a shared operator number, so a unique phone→website match
+  // does NOT prove that website is THIS project's — e.g. roller-shutter-malaysia
+  // borrowed katilhospital's operator number `60174287801`, which is registered
+  // in phone_numbers under exactly one site (`katilhospitalmurah.com.my`), and the
+  // old `length === 1` guard therefore pulled that unrelated katilhospital domain
+  // into roller-shutter's candidate list. Only trust the phone match when the
+  // resolved domain is corroborated by a slug keyword (it plausibly belongs to
+  // this site). This keeps the "a site's own unique phone reveals its custom
+  // domain" case working while rejecting borrowed/shared numbers.
   if (info.fallbackPhone) {
     const byPhone = await findRegisteredDomainsByPhone(info.fallbackPhone)
-    if (byPhone.length === 1) extras.add(byPhone[0])
+    if (byPhone.length === 1) {
+      const stem = byPhone[0].toLowerCase().replace(/[^a-z0-9]/g, '')
+      if (slugKeywords(info.slug).some((kw) => stem.includes(kw))) extras.add(byPhone[0])
+    }
   }
 
   if (extras.size === 0) return info
