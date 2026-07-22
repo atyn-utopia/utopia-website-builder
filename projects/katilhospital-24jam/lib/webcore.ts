@@ -49,6 +49,13 @@ async function webcoreFetch<T>(path: string, tag: WebcoreTag): Promise<T | null>
  * Products
  * ============================================================ */
 
+export interface PriceLine {
+  label: string;
+  amount: number;
+  unit?: string;
+  note?: string;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -57,6 +64,7 @@ export interface Product {
   sale_price: number | null;
   rental_price: number | null;
   sort_order: number;
+  prices: PriceLine[];
   photos: { url: string }[];
 }
 
@@ -69,12 +77,13 @@ interface ProductRow {
   rental_price: number | null;
   sort_order: number | null;
   is_active: boolean;
+  prices: PriceLine[] | null;
   product_photos: { url: string }[] | { url: string } | null;
 }
 
 export async function getProducts(): Promise<Product[]> {
   const path =
-    `products?select=id,name,slug,description,sale_price,rental_price,sort_order,is_active,product_photos(url)` +
+    `products?select=id,name,slug,description,sale_price,rental_price,sort_order,is_active,prices,product_photos(url)` +
     `&website=eq.${encodeURIComponent(siteConfig.domain)}` +
     `&is_active=eq.true` +
     `&order=sort_order.asc`;
@@ -97,6 +106,7 @@ export async function getProducts(): Promise<Product[]> {
       sale_price: r.sale_price ?? null,
       rental_price: r.rental_price ?? null,
       sort_order: r.sort_order ?? 0,
+      prices: r.prices ?? [],
       photos,
     };
   });

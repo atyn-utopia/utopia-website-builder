@@ -53,6 +53,14 @@ export interface ProductPhoto {
   url: string
 }
 
+// An ordered, labeled price line for products with multiple/custom rates.
+export interface PriceLine {
+  label: string
+  amount: number
+  unit?: string
+  note?: string
+}
+
 export interface Product {
   id: string
   name: string
@@ -62,6 +70,7 @@ export interface Product {
   rental_price: number | null
   sort_order: number
   photos: ProductPhoto[]
+  prices: PriceLine[]
 }
 
 interface ProductRow {
@@ -73,11 +82,12 @@ interface ProductRow {
   rental_price: number | null
   sort_order: number | null
   product_photos: ProductPhoto[] | null
+  prices: PriceLine[] | null
 }
 
 export async function getProducts(): Promise<Product[]> {
   const path =
-    `products?select=id,name,slug,description,sale_price,rental_price,sort_order,product_photos(url)` +
+    `products?select=id,name,slug,description,sale_price,rental_price,sort_order,prices,product_photos(url)` +
     `&website=eq.${encodeURIComponent(siteConfig.domain)}` +
     `&is_active=eq.true` +
     `&order=sort_order.asc`
@@ -94,6 +104,7 @@ export async function getProducts(): Promise<Product[]> {
     rental_price: row.rental_price,
     sort_order: row.sort_order || 0,
     photos: Array.isArray(row.product_photos) ? row.product_photos : [],
+    prices: row.prices ?? [],
   }))
 }
 

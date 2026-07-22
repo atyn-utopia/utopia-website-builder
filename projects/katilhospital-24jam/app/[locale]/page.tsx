@@ -51,6 +51,7 @@ export default async function HomePage({
     description: p.description,
     rental_price: p.rental_price,
     sale_price: p.sale_price,
+    prices: p.prices ?? [],
     image: p.photos?.[0]?.url,
   }));
 

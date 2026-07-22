@@ -188,6 +188,13 @@ export interface ProductPhoto {
   url: string
 }
 
+export interface PriceLine {
+  label: string
+  amount: number
+  unit?: string
+  note?: string
+}
+
 export interface Product {
   id: string
   slug: string
@@ -197,16 +204,30 @@ export interface Product {
   rental_price: number | null
   sort_order: number | null
   product_photos: ProductPhoto[]
+  prices: PriceLine[]
+}
+
+interface ProductRow {
+  id: string
+  slug: string
+  name: string
+  description: string | null
+  sale_price: number | null
+  rental_price: number | null
+  sort_order: number | null
+  product_photos: ProductPhoto[]
+  prices: PriceLine[] | null
 }
 
 export async function getProducts(): Promise<Product[]> {
   const path =
-    `products?select=id,slug,name,description,sale_price,rental_price,sort_order,product_photos(url)` +
+    `products?select=id,slug,name,description,sale_price,rental_price,sort_order,product_photos(url),prices` +
     `&website=eq.${encodeURIComponent(siteConfig.domain)}` +
     `&is_active=eq.true` +
     `&order=sort_order.asc`
-  const data = await webcoreFetch<Product[]>(path, 'webcore-products')
-  return data ?? []
+  const data = await webcoreFetch<ProductRow[]>(path, 'webcore-products')
+  if (!data) return []
+  return data.map((p) => ({ ...p, prices: p.prices ?? [] }))
 }
 
 /* ============================================================

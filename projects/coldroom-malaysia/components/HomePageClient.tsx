@@ -8,6 +8,7 @@ import { siteConfig } from '@/config/site';
 import { trackWhatsApp } from '@/lib/track';
 import { useImpression } from '@/lib/useImpression';
 import { STATES, locations, type Location } from '@/config/locations';
+import type { PriceLine } from '@/lib/webcore';
 
 interface Product {
   id: string;
@@ -15,6 +16,7 @@ interface Product {
   slug: string;
   description: string | null;
   rental_price: number | null;
+  prices: PriceLine[] | null;
   product_photos: { url: string }[];
 }
 
@@ -202,14 +204,26 @@ function ServiceCard({ product, locale, waHref }: { product: Product; locale: st
           <p style={{ marginTop: 12, color: 'rgba(255,255,255,0.85)', fontSize: 14, lineHeight: 1.55 }}>{product.description}</p>
         </div>
         <div style={{ position: 'relative' }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
-            <span style={{ fontWeight: 800, fontSize: 34, color: '#fff', letterSpacing: '-0.02em' }}>
-              {t('priceFrom', { price: product.rental_price ?? 5 })}
-            </span>
-            <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.75)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>
-              {t('perPalletDay')}
-            </span>
-          </div>
+          {(product.prices ?? []).length > 0 ? (
+            <div className="product-prices price-list">
+              {(product.prices ?? []).map((line, i) => (
+                <div className="price-line" key={i}>
+                  {line.label}: RM {Number(line.amount).toLocaleString()}
+                  {line.unit ? ' / ' + line.unit : ''}
+                  {line.note ? <span className="price-note">{line.note}</span> : null}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
+              <span style={{ fontWeight: 800, fontSize: 34, color: '#fff', letterSpacing: '-0.02em' }}>
+                {t('priceFrom', { price: product.rental_price ?? 5 })}
+              </span>
+              <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.75)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>
+                {t('perPalletDay')}
+              </span>
+            </div>
+          )}
           <a
             href={waHref}
             target="_blank"

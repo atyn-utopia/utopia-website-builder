@@ -49,6 +49,14 @@ async function webcoreFetch<T>(path: string, tag: WebcoreTag): Promise<T | null>
  * Products
  * ============================================================ */
 
+// An ordered, labeled price line for products with multiple/custom rates.
+export interface PriceLine {
+  label: string
+  amount: number
+  unit?: string
+  note?: string
+}
+
 export interface Product {
   id: string
   name: string
@@ -60,9 +68,13 @@ export interface Product {
   is_active: boolean
   parent_id: string | null
   photos: { url: string }[]
+  prices: PriceLine[]
 }
 
-type ProductRow = Omit<Product, 'photos'> & { product_photos: { url: string }[] | null }
+type ProductRow = Omit<Product, 'photos' | 'prices'> & {
+  product_photos: { url: string }[] | null
+  prices: PriceLine[] | null
+}
 
 // Per database.md §1: the Air Balang add-on row lives in the same `products` table
 // as the three pakej tiers. We partition by slug — NOT by `rental_price !== null` —
@@ -91,6 +103,7 @@ export async function getProducts(): Promise<{ core: Product[]; additional: Prod
     is_active: p.is_active,
     parent_id: p.parent_id,
     photos: p.product_photos ?? [],
+    prices: p.prices ?? [],
   }))
 
   return {

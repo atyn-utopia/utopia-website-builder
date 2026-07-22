@@ -148,10 +148,22 @@ export default function LocationPageClient({
                   <div className="service-card-body">
                     <h4>{p.name} · {city}</h4>
                     <p>{p.description}</p>
-                    {p.sale_price && (
-                      <div className="service-price">
-                        <span>from</span> RM {Math.round(p.sale_price)}
+                    {p.prices.length > 0 ? (
+                      <div className="product-prices price-list">
+                        {p.prices.map((line, i) => (
+                          <div className="price-line" key={i}>
+                            {line.label}: RM {Number(line.amount).toLocaleString()}
+                            {line.unit ? ' / ' + line.unit : ''}
+                            {line.note ? <span className="price-note">{line.note}</span> : null}
+                          </div>
+                        ))}
                       </div>
+                    ) : (
+                      p.sale_price && (
+                        <div className="service-price">
+                          <span>from</span> RM {Math.round(p.sale_price)}
+                        </div>
+                      )
                     )}
                     <a
                       href={waHref}

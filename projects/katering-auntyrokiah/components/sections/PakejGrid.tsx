@@ -78,6 +78,7 @@ const STATIC_CORE: Product[] = [
     is_active: true,
     parent_id: null,
     photos: [],
+    prices: [],
   },
   {
     id: 'static-standard',
@@ -90,6 +91,7 @@ const STATIC_CORE: Product[] = [
     is_active: true,
     parent_id: null,
     photos: [],
+    prices: [],
   },
   {
     id: 'static-premium',
@@ -102,6 +104,7 @@ const STATIC_CORE: Product[] = [
     is_active: true,
     parent_id: null,
     photos: [],
+    prices: [],
   },
 ]
 
@@ -117,6 +120,7 @@ const STATIC_ADDON: Product[] = [
     is_active: true,
     parent_id: null,
     photos: [],
+    prices: [],
   },
 ]
 
@@ -192,7 +196,17 @@ export default function PakejGrid({
                 </li>
               ))}
             </ul>
-            {price != null ? (
+            {p.prices.length > 0 ? (
+              <div className="product-prices price-list">
+                {p.prices.map((line, i) => (
+                  <div className="price-line" key={i}>
+                    {line.label}: RM {Number(line.amount).toLocaleString()}
+                    {line.unit ? ' / ' + line.unit : ''}
+                    {line.note ? <span className="price-note">{line.note}</span> : null}
+                  </div>
+                ))}
+              </div>
+            ) : price != null ? (
               <div className="mt-2 inline-flex items-baseline gap-1 self-start rounded-xl bg-[var(--honey)] px-4 py-2 text-[24px] font-extrabold tabular leading-none text-[var(--forest-deep)]">
                 RM{price}
                 <small className="text-[12px] font-bold text-[var(--forest-deep)]/80">

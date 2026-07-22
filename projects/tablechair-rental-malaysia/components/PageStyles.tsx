@@ -21,6 +21,13 @@ export default function PageStyles() {
 
       /* CSS-bg layer for the hero (sits behind .container — see role="img" usage in page.tsx) */
       .hero-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+
+      /* Vertical labeled price list (webcore prices[] array) */
+      .product-prices.price-list { display: flex; flex-direction: column; align-items: stretch; padding: 4px 16px; text-align: left; }
+      .price-line { font-weight: 700; font-size: 15px; padding: 11px 0; border-bottom: 1px solid rgba(253,216,53,0.35); }
+      .price-line:last-child { border-bottom: none; }
+      .price-line:first-child { color: #F9A825; }
+      .price-note { display: block; margin-top: 3px; font-weight: 400; font-size: 11px; text-transform: none; color: rgba(17,17,17,0.6); }
     `}</style>
   )
 }

@@ -788,6 +788,34 @@ h2.hero-sub,
 }
 .product-card.hero-card .product-price small { color: rgba(248, 248, 246, 0.7); }
 
+/* Multi-line, labeled price list (webcore prices[] array) */
+.product-prices.price-list {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 4px 16px;
+  text-align: left;
+}
+.price-line {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+}
+.price-line:last-child { border-bottom: none; }
+.price-line:first-child { color: var(--yellow); }
+.price-note {
+  display: block;
+  margin-top: 3px;
+  font-weight: 400;
+  font-size: 11px;
+  text-transform: none;
+  color: var(--ink-muted);
+}
+.product-card.hero-card .price-line { border-bottom-color: rgba(248, 248, 246, 0.18); }
+.product-card.hero-card .price-note { color: rgba(248, 248, 246, 0.7); }
+
 /* ============================================
    How it works — isometric step row
    ============================================ */

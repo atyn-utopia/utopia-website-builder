@@ -2,6 +2,7 @@
 
 import { type CSSProperties } from 'react';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import type { PriceLine } from '@/lib/webcore';
 
 export interface ProductCardData {
   slug: string;
@@ -9,6 +10,7 @@ export interface ProductCardData {
   description?: string | null;
   rental_price?: number | null;
   sale_price?: number | null;
+  prices?: PriceLine[];
   image?: string;
 }
 
@@ -124,6 +126,20 @@ export default function ProductCard({
       {/* Price block + WhatsApp CTA grouped together at the bottom of the card. */}
       <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: 8 }}>
       {(() => {
+        const prices = product.prices ?? [];
+        if (prices.length > 0) {
+          return (
+            <div className="product-prices price-list">
+              {prices.map((line, i) => (
+                <div className="price-line" key={i}>
+                  {line.label}: RM {Number(line.amount).toLocaleString()}
+                  {line.unit ? ' / ' + line.unit : ''}
+                  {line.note ? <span className="price-note">{line.note}</span> : null}
+                </div>
+              ))}
+            </div>
+          );
+        }
         const L = priceLabels(locale);
         const hasAny = product.rental_price || product.sale_price;
         const blockStyle: CSSProperties = {
