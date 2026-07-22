@@ -23,6 +23,7 @@ async function webcoreFetch<T>(path: string, tag: WebcoreTag): Promise<T | null>
         Accept: 'application/json',
         'Accept-Profile': 'webcore',
       },
+      cache: 'force-cache',
       next: { tags: [tag] },
     });
     if (!res.ok) {
