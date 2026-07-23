@@ -1,7 +1,6 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import FomoBar from '@/components/FomoBar';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
@@ -12,8 +11,9 @@ import type { ProductCardData } from '@/components/ProductCard';
 interface Props {
   locale: string;
   products: ProductCardData[];
-  /** When true, skip internal FomoBar/Navbar/Footer — the server page renders
-   *  the canonical SiteHeader/SiteFooter/FomoBanner instead. */
+  /** When true, skip internal Navbar/Footer — the server page renders the
+   *  canonical SiteHeader/SiteFooter/FomoBanner instead. The single FOMO banner
+   *  is always the server-rendered <FomoBanner />; this client never renders one. */
   chromeProvided?: boolean;
 }
 
@@ -23,8 +23,6 @@ export default function HomePageClient({ locale, products, chromeProvided = fals
 
   return (
     <>
-      {!chromeProvided && <FomoBar />}
-
       {/* HEADER + HERO share the same gradient background so the floating pill nav blends with the hero */}
       <div
         style={{
