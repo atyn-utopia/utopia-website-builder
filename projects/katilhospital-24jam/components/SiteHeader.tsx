@@ -32,7 +32,7 @@ export default function SiteHeader() {
         {/* Logo */}
         <Link href={`/${locale}`} className="site-brand" aria-label={t('home')}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/logo/logo-dark.svg" alt="Katil Hospital 24 Jam" className="site-logo" />
+          <img src="/brand/logo/logo-dark.png" alt="Katil Hospital 24 Jam" className="site-logo" />
         </Link>
 
         {/* Desktop nav */}
@@ -103,7 +103,7 @@ export default function SiteHeader() {
           flex: 0 0 auto;
         }
         .site-logo {
-          height: 34px;
+          height: 54px;
           width: auto;
           display: block;
         }
