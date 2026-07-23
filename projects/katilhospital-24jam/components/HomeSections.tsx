@@ -173,6 +173,49 @@ const RED_STRIPE = (
   />
 );
 
+// Why-choose value props — each paired with a tasteful trust icon.
+// c1 = 24h delivery, c2 = transparent/fair pricing, c3 = deliver + install,
+// c4 = after-delivery support. Keys map to the `values` translation namespace.
+const VALUE_CARDS: { k: string; icon: React.ReactNode }[] = [
+  {
+    k: 'c1',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.9} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M3 6h10v9H3z" />
+        <path d="M13 9h4l4 4v2h-8" />
+        <circle cx="7" cy="18" r="1.8" />
+        <circle cx="17.5" cy="18" r="1.8" />
+      </svg>
+    ),
+  },
+  {
+    k: 'c2',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.9} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M20.6 12.5 12.5 20.6a1.6 1.6 0 0 1-2.3 0L3.4 13.8a1.6 1.6 0 0 1-.4-1V4.6A1.6 1.6 0 0 1 4.6 3h8.2c.37 0 .74.14 1 .4l6.8 6.8a1.6 1.6 0 0 1 0 2.3z" />
+        <circle cx="8" cy="8" r="1.4" />
+      </svg>
+    ),
+  },
+  {
+    k: 'c3',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.9} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M14.7 6.3a3.6 3.6 0 0 0-4.9 4.9L3 18l3 3 6.8-6.8a3.6 3.6 0 0 0 4.9-4.9l-2.5 2.5-2.1-2.1z" />
+      </svg>
+    ),
+  },
+  {
+    k: 'c4',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.9} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M21 11.5a7.5 7.5 0 0 1-10.8 6.7L4 20l1.3-4.1A7.5 7.5 0 1 1 21 11.5z" />
+        <path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01" />
+      </svg>
+    ),
+  },
+];
+
 interface Props {
   locale: string;
   products: ProductCardData[];
@@ -410,7 +453,7 @@ export default function HomeSections({ locale, products, location }: Props) {
             data-cols-desktop={desktopCols}
           >
             {renderProducts.map((p) => (
-              <ProductImpressionTracker key={p.slug} slug={p.slug}>
+              <ProductImpressionTracker key={p.slug} slug={p.slug} style={{ height: '100%' }}>
                 <ProductCard
                   product={p}
                   ctaLabel={productsT('cardCta')}
@@ -442,6 +485,7 @@ export default function HomeSections({ locale, products, location }: Props) {
       {/* SECTION 6 — Why Choose 24 Jam */}
       {RED_STRIPE}
       <section
+        id="why"
         style={{
           background: '#F0F4FA',
           padding: '72px 16px',
@@ -506,44 +550,12 @@ export default function HomeSections({ locale, products, location }: Props) {
             </p>
           </div>
 
-          {/* 4 value-prop cards */}
-          <div
-            style={{
-              display: 'grid',
-              gap: 18,
-              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            }}
-          >
-            {['c1', 'c2', 'c3', 'c4'].map((k, i) => (
-              <div
-                key={k}
-                style={{
-                  background: '#FFFFFF',
-                  borderRadius: 16,
-                  padding: 22,
-                  boxShadow:
-                    '0 4px 10px rgba(15,31,80,0.06), 0 18px 40px rgba(15,31,80,0.05)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 10,
-                }}
-              >
-                <div
-                  aria-hidden="true"
-                  style={{
-                    width: 44,
-                    height: 44,
-                    borderRadius: '50%',
-                    background: '#e63030',
-                    color: '#FFFFFF',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontWeight: 800,
-                    fontSize: 18,
-                  }}
-                >
-                  {i + 1}
+          {/* 4 value-prop cards — tasteful trust icons, equal-height, centered on mobile */}
+          <div className="kh-why-grid">
+            {VALUE_CARDS.map((card) => (
+              <div key={card.k} className="kh-why-card hover-lift">
+                <div aria-hidden="true" className="kh-why-icon">
+                  {card.icon}
                 </div>
                 <h4
                   style={{
@@ -554,7 +566,7 @@ export default function HomeSections({ locale, products, location }: Props) {
                     margin: 0,
                   }}
                 >
-                  {valuesT(`${k}.title`)}
+                  {valuesT(`${card.k}.title`)}
                 </h4>
                 <p
                   style={{
@@ -564,11 +576,62 @@ export default function HomeSections({ locale, products, location }: Props) {
                     margin: 0,
                   }}
                 >
-                  {valuesT(`${k}.body`)}
+                  {valuesT(`${card.k}.body`)}
                 </p>
               </div>
             ))}
           </div>
+          <style jsx>{`
+            .kh-why-grid {
+              display: grid;
+              gap: 18px;
+              grid-template-columns: 1fr;
+            }
+            @media (min-width: 520px) {
+              .kh-why-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+              }
+            }
+            .kh-why-card {
+              background: #ffffff;
+              border: 1px solid #e6edf6;
+              border-radius: 16px;
+              padding: 24px 22px;
+              box-shadow: 0 4px 10px rgba(15, 31, 80, 0.06),
+                0 18px 40px rgba(15, 31, 80, 0.05);
+              /* Equal height across each row of the grid. */
+              height: 100%;
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+              /* Center on mobile (primary viewport); switch to left on desktop. */
+              align-items: center;
+              text-align: center;
+            }
+            @media (min-width: 900px) {
+              .kh-why-card {
+                align-items: flex-start;
+                text-align: left;
+              }
+            }
+            .kh-why-icon {
+              width: 52px;
+              height: 52px;
+              border-radius: 14px;
+              background: linear-gradient(135deg, #fdecec 0%, #fbdada 100%);
+              border: 1px solid rgba(230, 48, 48, 0.18);
+              color: #e63030;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              flex: 0 0 52px;
+              box-shadow: 0 2px 8px rgba(230, 48, 48, 0.12);
+            }
+            .kh-why-icon :global(svg) {
+              width: 26px;
+              height: 26px;
+            }
+          `}</style>
         </div>
       </section>
 

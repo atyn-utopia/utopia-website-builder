@@ -38,8 +38,11 @@ export default function FomoBanner() {
   return (
     <div
       style={{
-        position: 'relative',
-        zIndex: 1,
+        // Sticky so the urgency banner stays pinned to the top of the viewport
+        // as the visitor scrolls (CLAUDE.md: FOMO banner sticky at the top).
+        position: 'sticky',
+        top: 0,
+        zIndex: 60,
         width: '100%',
         background: '#0A0A0A',
         color: '#FFFFFF',
@@ -59,7 +62,8 @@ export default function FomoBanner() {
           minHeight: 36,
         }}
       >
-        <span style={{ fontWeight: 600, fontSize: 13, letterSpacing: 0.1 }}>
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontWeight: 600, fontSize: 13, letterSpacing: 0.1 }}>
+          <span aria-hidden="true" className="fomo-live-dot" />
           {t('primary')}
         </span>
         <span
@@ -89,6 +93,25 @@ export default function FomoBanner() {
         </span>
       </div>
       <style jsx>{`
+        .fomo-live-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 9999px;
+          background: #ff4d4d;
+          box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.6);
+          animation: fomoLivePulse 1.6s ease-out infinite;
+        }
+        @keyframes fomoLivePulse {
+          0% {
+            box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.55);
+          }
+          70% {
+            box-shadow: 0 0 0 7px rgba(255, 77, 77, 0);
+          }
+          100% {
+            box-shadow: 0 0 0 0 rgba(255, 77, 77, 0);
+          }
+        }
         .fomo-chip {
           display: inline-flex;
           align-items: center;
