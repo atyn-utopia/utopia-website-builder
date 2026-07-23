@@ -1,6 +1,9 @@
 export const siteConfig = {
-  domain: 'katilhospital-24jam.utopiaai.my',
-  siteUrl: 'https://katilhospital-24jam.utopiaai.my',
+  // Stable company_websites.id — the live domain is resolved FROM this id, so a
+  // webcore domain rename can never silently disconnect the site.
+  siteId: 'f95e0778-15df-4d7f-ae06-cb9b2ab4150e',
+  domain: 'katilhospitalmurah.com.my',
+  siteUrl: 'https://katilhospitalmurah.com.my',
   brandName: 'Katil Hospital 24 Jam',
   legalName: 'Ibnu Sina Care Sdn. Bhd.',
   tagline: 'Sewa & Jual Katil Hospital 24 Jam di Seluruh Malaysia',
