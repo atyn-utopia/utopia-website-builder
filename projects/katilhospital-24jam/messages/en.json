@@ -12,13 +12,9 @@
     "whatsapp": "WhatsApp"
   },
   "fomo": {
-    "primary": "24-Hour offer ends in",
-    "secondary": "Delivered today to 159 towns — order before the clock runs out.",
-    "labels": {
-      "hrs": "Hrs",
-      "min": "Min",
-      "sec": "Sec"
-    }
+    "eyebrow": "{monthUpper} OFFER",
+    "body": "Free delivery & setup on every hospital bed rental this {month}.",
+    "ctaLabel": "Claim Offer"
   },
   "hero": {
     "h1": "Rent & Buy Hospital Beds — 24-Hour Delivery in Malaysia",

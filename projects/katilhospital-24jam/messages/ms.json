@@ -12,13 +12,9 @@
     "whatsapp": "WhatsApp"
   },
   "fomo": {
-    "primary": "Tawaran 24 Jam tamat dalam",
-    "secondary": "Hantar hari ini ke 159 bandar — tempah sebelum masa tamat.",
-    "labels": {
-      "hrs": "Jam",
-      "min": "Min",
-      "sec": "Saat"
-    }
+    "eyebrow": "TAWARAN {monthUpper}",
+    "body": "Penghantaran & pemasangan percuma untuk setiap sewaan katil hospital pada {month} ini.",
+    "ctaLabel": "Tuntut Tawaran"
   },
   "hero": {
     "h1": "Sewa & Jual Katil Hospital 24 Jam di Seluruh Malaysia",

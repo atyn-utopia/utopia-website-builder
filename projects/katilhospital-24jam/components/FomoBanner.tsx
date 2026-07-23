@@ -1,133 +1,73 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
+import { useLocale, useTranslations } from 'next-intl';
+import { waRedirect } from '@/lib/waRedirect';
 
-// Live countdown to end-of-day — ticking hours:minutes:seconds (CLAUDE.md
-// mandates a live countdown in the FOMO banner). This is the canonical
-// implementation; FomoBar re-exports it for backwards-compatible imports.
-function computeRemaining(): { h: string; m: string; s: string } {
-  const now = new Date();
-  const end = new Date(now);
-  end.setHours(23, 59, 59, 999);
-  let diff = Math.max(0, Math.floor((end.getTime() - now.getTime()) / 1000));
-  const hours = Math.floor(diff / 3600);
-  diff -= hours * 3600;
-  const minutes = Math.floor(diff / 60);
-  const seconds = diff - minutes * 60;
-  const pad = (n: number) => n.toString().padStart(2, '0');
-  return { h: pad(hours), m: pad(minutes), s: pad(seconds) };
+// Countdown target = last moment of the current month, so the "{month} promo"
+// copy stays aligned with the clock. When the month flips, a page reload picks
+// up the new month name + a fresh ~30-day clock.
+function endOfMonth(d: Date): Date {
+  return new Date(d.getFullYear(), d.getMonth() + 1, 0, 23, 59, 59, 999);
 }
+
+function diffParts(target: Date) {
+  const ms = Math.max(0, target.getTime() - Date.now());
+  const days = Math.floor(ms / 86_400_000);
+  const hours = Math.floor((ms % 86_400_000) / 3_600_000);
+  const minutes = Math.floor((ms % 3_600_000) / 60_000);
+  const seconds = Math.floor((ms % 60_000) / 1000);
+  return { days, hours, minutes, seconds };
+}
+
+const pad = (n: number) => String(n).padStart(2, '0');
+
+const INTL_LOCALE: Record<string, string> = { en: 'en-US', ms: 'ms-MY', zh: 'zh-CN' };
 
 export default function FomoBanner() {
   const t = useTranslations('fomo');
-  const [time, setTime] = useState<{ h: string; m: string; s: string } | null>(null);
+  const locale = useLocale();
+  const [parts, setParts] = useState<{ days: number; hours: number; minutes: number; seconds: number } | null>(null);
 
-  // Countdown timer: re-compute the remaining seconds every 1000ms so the
-  // banner visibly ticks down.
+  // Render-time month name so the banner copy matches the countdown month.
+  const { month, monthUpper } = useMemo(() => {
+    const intlLocale = INTL_LOCALE[locale] ?? locale;
+    const m = new Intl.DateTimeFormat(intlLocale, { month: 'long' }).format(new Date());
+    return { month: m, monthUpper: m.toUpperCase() };
+  }, [locale]);
+
   useEffect(() => {
-    setTime(computeRemaining());
-    const id = setInterval(() => setTime(computeRemaining()), 1000);
+    const tick = () => setParts(diffParts(endOfMonth(new Date())));
+    tick();
+    const id = setInterval(tick, 1000);
     return () => clearInterval(id);
   }, []);
 
-  const labelHrs = t('labels.hrs');
-  const labelMin = t('labels.min');
-  const labelSec = t('labels.sec');
-
   return (
-    <div
-      style={{
-        // Sticky so the urgency banner stays pinned to the top of the viewport
-        // as the visitor scrolls (CLAUDE.md: FOMO banner sticky at the top).
-        position: 'sticky',
-        top: 0,
-        zIndex: 60,
-        width: '100%',
-        background: '#0A0A0A',
-        color: '#FFFFFF',
-        borderBottom: '1px solid rgba(255,255,255,0.08)',
-      }}
-    >
-      <div
-        style={{
-          maxWidth: 1280,
-          margin: '0 auto',
-          padding: '8px 16px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexWrap: 'wrap',
-          gap: 10,
-          minHeight: 36,
-        }}
-      >
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontWeight: 600, fontSize: 13, letterSpacing: 0.1 }}>
-          <span aria-hidden="true" className="fomo-live-dot" />
-          {t('primary')}
+    <div className="fomo-bar">
+      <div className="fomo-inner">
+        <span className="fomo-tag">{t('eyebrow', { month, monthUpper })}</span>
+        <span className="fomo-body">{t('body', { month, monthUpper })}</span>
+        <span aria-live="polite" className={`fomo-clock ${parts ? 'is-ready' : ''}`}>
+          {parts ? (
+            <>
+              <span>{pad(parts.days)}</span>
+              <span className="fomo-sep">:</span>
+              <span>{pad(parts.hours)}</span>
+              <span className="fomo-sep">:</span>
+              <span>{pad(parts.minutes)}</span>
+              <span className="fomo-sep">:</span>
+              <span>{pad(parts.seconds)}</span>
+            </>
+          ) : (
+            <span style={{ visibility: 'hidden' }}>00 : 00 : 00 : 00</span>
+          )}
         </span>
-        <span
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 6,
-            fontVariantNumeric: 'tabular-nums',
-            fontWeight: 700,
-            fontSize: 14,
-          }}
-        >
-          <span className="fomo-chip">
-            {time ? time.h : '00'}
-            <span className="fomo-chip-label">{labelHrs}</span>
-          </span>
-          <span>:</span>
-          <span className="fomo-chip">
-            {time ? time.m : '00'}
-            <span className="fomo-chip-label">{labelMin}</span>
-          </span>
-          <span>:</span>
-          <span className="fomo-chip">
-            {time ? time.s : '00'}
-            <span className="fomo-chip-label">{labelSec}</span>
-          </span>
-        </span>
+        <Link href={waRedirect(locale)} className="fomo-link" target="_blank" rel="noopener noreferrer">
+          {t('ctaLabel')} →
+        </Link>
       </div>
-      <style jsx>{`
-        .fomo-live-dot {
-          width: 8px;
-          height: 8px;
-          border-radius: 9999px;
-          background: #ff4d4d;
-          box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.6);
-          animation: fomoLivePulse 1.6s ease-out infinite;
-        }
-        @keyframes fomoLivePulse {
-          0% {
-            box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.55);
-          }
-          70% {
-            box-shadow: 0 0 0 7px rgba(255, 77, 77, 0);
-          }
-          100% {
-            box-shadow: 0 0 0 0 rgba(255, 77, 77, 0);
-          }
-        }
-        .fomo-chip {
-          display: inline-flex;
-          align-items: center;
-          gap: 4px;
-          padding: 2px 8px;
-          border-radius: 6px;
-          background: rgba(255, 255, 255, 0.16);
-        }
-        .fomo-chip-label {
-          font-size: 10px;
-          font-weight: 500;
-          opacity: 0.85;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-        }
-      `}</style>
     </div>
   );
 }

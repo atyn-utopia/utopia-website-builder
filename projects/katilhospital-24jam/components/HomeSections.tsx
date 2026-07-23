@@ -492,50 +492,13 @@ export default function HomeSections({ locale, products, location }: Props) {
           borderTop: '1px solid #E2E8F0',
         }}
       >
-        <div
-          style={{
-            maxWidth: 1240,
-            margin: '0 auto',
-            display: 'grid',
-            gap: 40,
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            alignItems: 'center',
-          }}
-        >
-          {/* Mascot + intro column */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-            <div
-              style={{
-                position: 'relative',
-                width: 240,
-                height: 240,
-                maxWidth: '60%',
-                aspectRatio: '1',
-                borderRadius: '50%',
-                background:
-                  'radial-gradient(circle at 50% 40%, #dceef8 0%, #b9d8ec 100%)',
-                overflow: 'hidden',
-                boxShadow:
-                  '0 18px 40px -12px rgba(28,58,106,0.25), 0 6px 14px rgba(28,58,106,0.10)',
-                border: '4px solid #FFFFFF',
-                marginBottom: 32,
-              }}
-            >
-              <img
-                src="/brand/hero/doctor-mascot.png"
-                alt="Doktor Katil Hospital 24 Jam"
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'contain',
-                  objectPosition: 'center bottom',
-                  display: 'block',
-                }}
-              />
-            </div>
-            <SectionEyebrow>{valuesT('eyebrow')}</SectionEyebrow>
+        <div style={{ maxWidth: 1120, margin: '0 auto' }}>
+          {/* Centered header — eyebrow pill + H3 + intro (mascot image removed) */}
+          <div style={{ textAlign: 'center', maxWidth: 640, margin: '0 auto 40px' }}>
+            <span className="kh-eyebrow-pill">
+              <span aria-hidden="true" className="kh-eyebrow-dot" />
+              {valuesT('eyebrow')}
+            </span>
             <H3 centered>{valuesT('h3')}</H3>
             <p
               style={{
@@ -543,14 +506,13 @@ export default function HomeSections({ locale, products, location }: Props) {
                 color: 'rgba(28,58,106,0.65)',
                 fontSize: 15,
                 lineHeight: 1.65,
-                maxWidth: 420,
               }}
             >
               {valuesT('intro')}
             </p>
           </div>
 
-          {/* 4 value-prop cards — tasteful trust icons, equal-height, centered on mobile */}
+          {/* Full-width trust-card grid — tasteful icons, equal-height, centered */}
           <div className="kh-why-grid">
             {VALUE_CARDS.map((card) => (
               <div key={card.k} className="kh-why-card hover-lift">
@@ -582,37 +544,55 @@ export default function HomeSections({ locale, products, location }: Props) {
             ))}
           </div>
           <style jsx>{`
+            .kh-eyebrow-pill {
+              display: inline-flex;
+              align-items: center;
+              gap: 8px;
+              padding: 6px 14px;
+              border-radius: 9999px;
+              background: rgba(230, 48, 48, 0.1);
+              color: #e63030;
+              font-size: 12px;
+              font-weight: 700;
+              letter-spacing: 1.2px;
+              text-transform: uppercase;
+              margin-bottom: 6px;
+            }
+            .kh-eyebrow-dot {
+              width: 7px;
+              height: 7px;
+              border-radius: 9999px;
+              background: #e63030;
+            }
             .kh-why-grid {
               display: grid;
               gap: 18px;
               grid-template-columns: 1fr;
             }
-            @media (min-width: 520px) {
+            @media (min-width: 560px) {
               .kh-why-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
+              }
+            }
+            @media (min-width: 960px) {
+              .kh-why-grid {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
               }
             }
             .kh-why-card {
               background: #ffffff;
               border: 1px solid #e6edf6;
               border-radius: 16px;
-              padding: 24px 22px;
+              padding: 26px 22px;
               box-shadow: 0 4px 10px rgba(15, 31, 80, 0.06),
                 0 18px 40px rgba(15, 31, 80, 0.05);
               /* Equal height across each row of the grid. */
               height: 100%;
               display: flex;
               flex-direction: column;
-              gap: 12px;
-              /* Center on mobile (primary viewport); switch to left on desktop. */
               align-items: center;
               text-align: center;
-            }
-            @media (min-width: 900px) {
-              .kh-why-card {
-                align-items: flex-start;
-                text-align: left;
-              }
+              gap: 12px;
             }
             .kh-why-icon {
               width: 52px;

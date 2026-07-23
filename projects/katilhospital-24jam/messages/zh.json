@@ -12,13 +12,9 @@
     "whatsapp": "WhatsApp"
   },
   "fomo": {
-    "primary": "24小时优惠倒计时",
-    "secondary": "当天送达全马159个城镇 — 请在倒计时结束前预订。",
-    "labels": {
-      "hrs": "时",
-      "min": "分",
-      "sec": "秒"
-    }
+    "eyebrow": "{monthUpper} 优惠",
+    "body": "{month}租用任何医院病床，免费送货与安装。",
+    "ctaLabel": "领取优惠"
   },
   "hero": {
     "h1": "租用和购买医院病床 — 全马24小时送货服务",
