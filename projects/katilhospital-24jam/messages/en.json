@@ -42,10 +42,10 @@
     "intro": "Manual and electric hospital beds, foam mattresses, anti-decubitus air mattresses, oxygen concentrators, wheelchairs, and CPAP machines — all available for rent or purchase with 24-hour delivery.",
     "cardCta": "Ask on WhatsApp",
     "eyebrow": "Rent & Buy Catalogue",
-    "imageAltTemplate": "{model} hospital bed from Katil Hospital 24 Jam — rent or buy across Malaysia"
+    "imageAltTemplate": "{model} hospital bed from Katil Hospital Murah — rent or buy across Malaysia"
   },
   "values": {
-    "h3": "Why Choose Katil Hospital 24 Jam",
+    "h3": "Why Choose Katil Hospital Murah",
     "intro": "We understand home care cannot wait. Here is why hundreds of Malaysian families trust us.",
     "c1": {
       "title": "24-Hour Delivery",
@@ -97,7 +97,7 @@
       "Caregiver adjusting an electric hospital bed for an elderly patient",
       "Hospital bed with side rails installed for fall prevention",
       "Hospital bed and IV pole bundle for home care",
-      "Katil Hospital 24 Jam crew completing same-day setup"
+      "Katil Hospital Murah crew completing same-day setup"
     ]
   },
   "googleReview": {
@@ -155,11 +155,11 @@
     "subtitle": "Our team is on standby 24 hours a day — delivered, set up, and done before the next day.",
     "cta": "Chat WhatsApp Now",
     "eyebrow": "Act Now",
-    "bgAlt": "Katil Hospital 24 Jam 24-hour delivery and setup of a hospital bed at a Malaysian home"
+    "bgAlt": "Katil Hospital Murah 24-hour delivery and setup of a hospital bed at a Malaysian home"
   },
   "footer": {
     "brand": {
-      "heading": "Katil Hospital 24 Jam",
+      "heading": "Katil Hospital Murah",
       "tagline": "Rent & buy hospital beds, anti-decubitus mattresses, and care equipment — delivered within 24 hours across Malaysia."
     },
     "products": {
@@ -172,7 +172,7 @@
     "language": {
       "heading": "Language"
     },
-    "copyright": "© 2026 Katil Hospital 24 Jam. All rights reserved."
+    "copyright": "© 2026 Katil Hospital Murah. All rights reserved."
   },
   "location": {
     "breadcrumb": {
@@ -199,7 +199,7 @@
     "tocTitle": "Table of Contents",
     "ctaBannerTitle": "Need a hospital bed today?",
     "ctaBannerCta": "Chat WhatsApp",
-    "metaTitle": "Blog — Katil Hospital 24 Jam",
+    "metaTitle": "Blog — Katil Hospital Murah",
     "metaDescription": "Guides on choosing hospital beds, anti-decubitus mattresses, and home-care equipment for families in Malaysia."
   },
   "languageSwitcher": {
@@ -225,6 +225,6 @@
     "empty": "Your area not listed?",
     "emptyCta": "Confirm Coverage"
   },
-  "logoAlt": "Katil Hospital 24 Jam — Hospital Bed Rental & Sale Across Malaysia",
-  "imageAlt": "Katil Hospital 24 Jam team delivering and installing a hospital bed in a Malaysian home"
+  "logoAlt": "Katil Hospital Murah — Hospital Bed Rental & Sale Across Malaysia",
+  "imageAlt": "Katil Hospital Murah team delivering and installing a hospital bed in a Malaysian home"
 }

@@ -63,11 +63,11 @@ export default function Navbar() {
         >
           <img
             src="/brand/logo/logo-dark.svg"
-            alt="Katil Hospital 24 Jam logo"
+            alt="Katil Hospital Murah logo"
             style={{ height: 34, width: 'auto', display: 'block' }}
           />
           <span style={{ display: 'none' }} className="brand-word">
-            Katil Hospital 24 Jam
+            Katil Hospital Murah
           </span>
         </a>
 

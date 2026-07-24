@@ -32,7 +32,7 @@ export default function SiteHeader() {
         {/* Logo */}
         <Link href={`/${locale}`} className="site-brand" aria-label={t('home')}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/logo/logo-dark.png" alt="Katil Hospital 24 Jam" className="site-logo" />
+          <img src="/brand/logo/logo-dark.png" alt="Katil Hospital Murah" className="site-logo" />
         </Link>
 
         {/* Desktop nav */}

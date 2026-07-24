@@ -27,7 +27,7 @@ export default function SiteFooter() {
       <div className="site-footer-inner">
         <div className="footer-top">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/logo/logo-dark.png" alt="Katil Hospital 24 Jam" className="footer-logo" />
+          <img src="/brand/logo/logo-dark.png" alt="Katil Hospital Murah" className="footer-logo" />
           <nav className="footer-nav" aria-label="Footer">
             {links.map((l) => (
               <Link key={l.href} href={l.href}>

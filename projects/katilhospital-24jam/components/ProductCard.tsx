@@ -72,7 +72,7 @@ export default function ProductCard({
         {product.image ? (
           <img
             src={product.image}
-            alt={`${product.name} — Katil Hospital 24 Jam`}
+            alt={`${product.name} — Katil Hospital Murah`}
             style={{
               width: '100%',
               height: '100%',

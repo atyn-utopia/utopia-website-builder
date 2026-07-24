@@ -784,7 +784,7 @@ export default function HomeSections({ locale, products, location }: Props) {
               >
                 <img
                   src={`/brand/reviews/review-${n}.jpg`}
-                  alt={`Ulasan pelanggan Katil Hospital 24 Jam ${n}`}
+                  alt={`Ulasan pelanggan Katil Hospital Murah ${n}`}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   loading="lazy"
                 />

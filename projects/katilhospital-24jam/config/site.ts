@@ -4,14 +4,14 @@ export const siteConfig = {
   siteId: 'f95e0778-15df-4d7f-ae06-cb9b2ab4150e',
   domain: 'katilhospitalmurah.com.my',
   siteUrl: 'https://katilhospitalmurah.com.my',
-  brandName: 'Katil Hospital 24 Jam',
+  brandName: 'Katil Hospital Murah',
   legalName: 'Ibnu Sina Care Sdn. Bhd.',
   tagline: 'Sewa & Jual Katil Hospital 24 Jam di Seluruh Malaysia',
   productSlug: 'katil-hospital',
   productName: 'Katil Hospital',
   fallbackPhone: '60174287801',
   fallbackWaTextMs:
-    'Hi, saya berminat dengan perkhidmatan sewa / beli katil hospital dari Katil Hospital 24 Jam. Boleh bantu?',
+    'Hi, saya berminat dengan perkhidmatan sewa / beli katil hospital dari Katil Hospital Murah. Boleh bantu?',
   defaultLocale: 'ms' as const,
   locales: ['ms', 'en', 'zh'] as const,
   palette: {

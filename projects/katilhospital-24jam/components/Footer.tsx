@@ -86,7 +86,7 @@ export default function Footer() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <img
               src="/brand/logo/logo-light.svg"
-              alt="Katil Hospital 24 Jam"
+              alt="Katil Hospital Murah"
               style={{ height: 30, width: 'auto' }}
             />
           </div>
