@@ -126,6 +126,14 @@ export default function SiteFooter() {
           font-size: 12.5px;
           font-weight: 600;
           color: rgba(28, 58, 106, 0.7);
+          text-decoration: none;
+          border-radius: var(--r-button);
+          transition: transform var(--dur-hover) var(--ease),
+            opacity var(--dur-hover) var(--ease);
+        }
+        .utopia-credit:hover {
+          transform: translateY(-1px);
+          opacity: 0.85;
         }
         .utopia-credit__word {
           font-weight: 700;
@@ -133,6 +141,7 @@ export default function SiteFooter() {
         }
         .utopia-credit__mark {
           display: inline-block;
+          flex: none;
         }
         @media (max-width: 767px) {
           .site-footer {

@@ -40,6 +40,15 @@
   --whatsapp-hover: #1EBE57;
   --google-gold: #FBBC04;
 
+  /* Utopia CI structural tokens — radius + motion only (palette/fonts stay per-project).
+     Consumed by the "Built by Utopia AI" credit; do NOT force --r-button onto existing CTAs. */
+  --r-button: 8px;
+  --r-card: 12px;
+  --r-pill: 999px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-hover: 220ms;
+  --dur-layout: 320ms;
+
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
   --gradient-navy: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
