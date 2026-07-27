@@ -240,5 +240,10 @@
     "twentyFourSeven": "24/7",
     "stRegistered": "ST 注册",
     "fixedPrice": "固定价格"
+  },
+  "redirect": {
+    "heading": "正在打开 WhatsApp…",
+    "subtext": "正在为您连接 Electrician 24 Hours 团队。",
+    "fallback": "如果没有自动跳转，请点击这里"
   }
 }

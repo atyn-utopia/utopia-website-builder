@@ -240,5 +240,10 @@
     "twentyFourSeven": "24/7",
     "stRegistered": "ST Berdaftar",
     "fixedPrice": "Harga Tetap"
+  },
+  "redirect": {
+    "heading": "Membuka WhatsApp…",
+    "subtext": "Anda sedang dihubungkan ke pasukan Electrician 24 Hours.",
+    "fallback": "Klik di sini jika tidak berpindah"
   }
 }
