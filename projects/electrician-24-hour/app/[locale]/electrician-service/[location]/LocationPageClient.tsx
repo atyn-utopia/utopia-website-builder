@@ -130,7 +130,7 @@ export default function LocationPageClient({
           <div className="section-head">
             <span className="eyebrow">{city}</span>
             <h3>{services('heading')}</h3>
-            <p>{services('subheading')}</p>
+            <h5 className="body-text">{services('subheading')}</h5>
           </div>
           <div className="service-grid">
             {products.map((p) => {
@@ -147,7 +147,7 @@ export default function LocationPageClient({
                   </div>
                   <div className="service-card-body">
                     <h4>{p.name} · {city}</h4>
-                    <p>{p.description}</p>
+                    <h5 className="body-text">{p.description}</h5>
                     {p.prices.length > 0 ? (
                       <div className="product-prices price-list">
                         {p.prices.map((line, i) => (
@@ -190,7 +190,7 @@ export default function LocationPageClient({
             <div className="section-head">
               <span className="eyebrow">Coverage</span>
               <h3>{t('nearbyTitle')}</h3>
-              <p>{t('nearbySubtitle')}</p>
+              <h5 className="body-text">{t('nearbySubtitle')}</h5>
             </div>
             <div className="loc-grid" style={{ maxWidth: 820, margin: '0 auto' }}>
               {nearby.map((n) => (
@@ -229,7 +229,7 @@ export default function LocationPageClient({
       <section className="cta-band">
         <div className="container">
           <h3>{fin('heading')}</h3>
-          <p>{fin('subheading')}</p>
+          <h5 className="body-text">{fin('subheading')}</h5>
           <a
             href={waHref}
             target="_blank"

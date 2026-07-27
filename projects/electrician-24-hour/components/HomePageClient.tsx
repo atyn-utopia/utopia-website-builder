@@ -132,7 +132,7 @@ export default function HomePageClient({ locale, products, recentPosts }: Props)
           <div className="section-head">
             <span className="eyebrow">{siteConfig.productName}</span>
             <h3>{services('heading')}</h3>
-            <p>{services('subheading')}</p>
+            <h5 className="body-text">{services('subheading')}</h5>
           </div>
 
           {products.length === 0 ? (
@@ -145,7 +145,7 @@ export default function HomePageClient({ locale, products, recentPosts }: Props)
                 color: 'var(--ink-muted)',
               }}
             >
-              <p>Service list loading from our database — please WhatsApp us for the full menu.</p>
+              <h5 className="body-text">Service list loading from our database — please WhatsApp us for the full menu.</h5>
             </div>
           ) : (
             <div className="service-grid">
@@ -163,7 +163,7 @@ export default function HomePageClient({ locale, products, recentPosts }: Props)
                     </div>
                     <div className="service-card-body">
                       <h4>{p.name}</h4>
-                      <p>{p.description}</p>
+                      <h5 className="body-text">{p.description}</h5>
                       {p.prices.length > 0 ? (
                         <div className="product-prices price-list">
                           {p.prices.map((line, i) => (
@@ -206,14 +206,14 @@ export default function HomePageClient({ locale, products, recentPosts }: Props)
           <div className="section-head">
             <span className="eyebrow">3-Step Process</span>
             <h3>{how('heading')}</h3>
-            <p>{how('subheading')}</p>
+            <h5 className="body-text">{how('subheading')}</h5>
           </div>
           <div className="steps-grid">
             {steps.map((s, i) => (
               <div className="step" key={i}>
                 <div className="step-num">{i + 1}</div>
                 <h4>{s.title}</h4>
-                <p>{s.description}</p>
+                <h5 className="body-text">{s.description}</h5>
               </div>
             ))}
           </div>
@@ -232,9 +232,9 @@ export default function HomePageClient({ locale, products, recentPosts }: Props)
               <li key={i}>{pt}</li>
             ))}
           </ul>
-          <p style={{ textAlign: 'center', maxWidth: 720, margin: '0 auto 22px', color: 'rgba(255,255,255,0.82)', lineHeight: 1.7 }}>
+          <h5 className="body-text" style={{ textAlign: 'center', maxWidth: 720, margin: '0 auto 22px', color: 'rgba(255,255,255,0.82)', lineHeight: 1.7 }}>
             {emerg('solution')}
-          </p>
+          </h5>
           <div style={{ textAlign: 'center' }}>
             <a
               href={waRedirect(locale)}
@@ -255,7 +255,7 @@ export default function HomePageClient({ locale, products, recentPosts }: Props)
           <div className="section-head">
             <span className="eyebrow">Real Site Photos</span>
             <h3>{gal('heading')}</h3>
-            <p>{gal('subheading')}</p>
+            <h5 className="body-text">{gal('subheading')}</h5>
           </div>
           <div className="gallery-grid">
             {GALLERY_IMAGES.map((src, i) => (
@@ -281,9 +281,9 @@ export default function HomePageClient({ locale, products, recentPosts }: Props)
           <h3 style={{ color: 'var(--white)', fontSize: 'clamp(24px, 3.5vw, 36px)', marginBottom: 12 }}>
             {mid('heading')}
           </h3>
-          <p style={{ color: 'rgba(255,255,255,0.85)', maxWidth: 640, margin: '0 auto 22px', lineHeight: 1.7 }}>
+          <h5 className="body-text" style={{ color: 'rgba(255,255,255,0.85)', maxWidth: 640, margin: '0 auto 22px', lineHeight: 1.7 }}>
             {mid('subheading')}
-          </p>
+          </h5>
           <a
             href={waRedirect(locale)}
             target="_blank"
@@ -304,7 +304,7 @@ export default function HomePageClient({ locale, products, recentPosts }: Props)
               ★ {rev('rating')} on Google
             </span>
             <h3>{rev('heading')}</h3>
-            <p>{rev('subheading')}</p>
+            <h5 className="body-text">{rev('subheading')}</h5>
           </div>
           <div className="reviews-grid">
             {reviewItems.map((r, i) => {
@@ -324,7 +324,7 @@ export default function HomePageClient({ locale, products, recentPosts }: Props)
                       Google
                     </span>
                   </div>
-                  <p className="review-body">&ldquo;{r.text}&rdquo;</p>
+                  <h5 className="review-body body-text">&ldquo;{r.text}&rdquo;</h5>
                   <div className="review-meta">
                     <div className="review-avatar" aria-hidden="true">{initials}</div>
                     <div>
@@ -345,7 +345,7 @@ export default function HomePageClient({ locale, products, recentPosts }: Props)
           <div className="section-head">
             <span className="eyebrow">Coverage Across Malaysia</span>
             <h3>{locs('heading')}</h3>
-            <p>{locs('subheading')}</p>
+            <h5 className="body-text">{locs('subheading')}</h5>
           </div>
           <div className="state-groups">
             {regionOrder.map((state) => {
@@ -408,7 +408,7 @@ export default function HomePageClient({ locale, products, recentPosts }: Props)
                       })}
                     </span>
                     <h4>{post.title}</h4>
-                    <p>{post.excerpt}</p>
+                    <h5 className="body-text">{post.excerpt}</h5>
                     <span className="blog-card-more">{blogT('readMore')} →</span>
                   </div>
                 </Link>
@@ -440,7 +440,7 @@ export default function HomePageClient({ locale, products, recentPosts }: Props)
       <section className="cta-band">
         <div className="container">
           <h3>{fin('heading')}</h3>
-          <p>{fin('subheading')}</p>
+          <h5 className="body-text">{fin('subheading')}</h5>
           <a
             href={waRedirect(locale)}
             target="_blank"

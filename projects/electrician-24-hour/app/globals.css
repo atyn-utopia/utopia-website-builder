@@ -104,6 +104,7 @@ img, svg { display: block; max-width: 100%; height: auto; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
 h1, h2, h3, h4, h5, h6 { font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; color: var(--navy); }
+.body-text { font-weight: 400; letter-spacing: normal; line-height: 1.55; }
 
 /* ============================================
    LAYOUT
@@ -437,7 +438,7 @@ h2.hero-sub,
   margin-bottom: 10px;
 }
 .section-head h3 { font-size: clamp(26px, 3.5vw, 40px); margin-bottom: 12px; }
-.section-head p { color: var(--ink-muted); max-width: 640px; margin: 0 auto; font-size: 16px; }
+.section-head h5 { color: var(--ink-muted); max-width: 640px; margin: 0 auto; font-size: 16px; }
 
 /* ============================================
    Service cards (Supabase-driven)
@@ -465,7 +466,7 @@ h2.hero-sub,
 .service-card:hover .service-card-img img { transform: scale(1.06); }
 .service-card-body { padding: 20px; display: flex; flex-direction: column; gap: 10px; flex-grow: 1; }
 .service-card h4 { font-size: 18px; color: var(--navy); }
-.service-card p { font-size: 14px; color: var(--ink-muted); line-height: 1.55; flex-grow: 1; }
+.service-card h5 { font-size: 14px; color: var(--ink-muted); line-height: 1.55; flex-grow: 1; }
 .service-price {
   display: flex; align-items: baseline; gap: 6px;
   font-size: 20px; font-weight: 800; color: var(--blue-deep);
@@ -520,7 +521,7 @@ h2.hero-sub,
   box-shadow: var(--shadow-gold);
 }
 .step h4 { font-size: 20px; color: var(--navy); margin-bottom: 8px; }
-.step p { font-size: 14.5px; color: var(--ink-muted); line-height: 1.65; }
+.step h5 { font-size: 14.5px; color: var(--ink-muted); line-height: 1.65; }
 
 /* ============================================
    Dark band — emergency
@@ -539,7 +540,7 @@ h2.hero-sub,
   pointer-events: none;
 }
 .dark-band .section-head h3 { color: var(--white); }
-.dark-band .section-head p { color: rgba(255, 255, 255, 0.75); }
+.dark-band .section-head h5 { color: rgba(255, 255, 255, 0.75); }
 
 .emergency-list {
   display: grid;
@@ -801,7 +802,7 @@ h2.hero-sub,
   bottom: 0;
 }
 .cta-band h3 { color: var(--white); font-size: clamp(26px, 4vw, 40px); margin-bottom: 14px; }
-.cta-band p { color: rgba(255, 255, 255, 0.82); max-width: 620px; margin: 0 auto 26px; }
+.cta-band h5 { color: rgba(255, 255, 255, 0.82); max-width: 620px; margin: 0 auto 26px; }
 
 /* ============================================
    Footer
@@ -870,7 +871,7 @@ h2.hero-sub,
 .blog-card-body { padding: 22px; display: flex; flex-direction: column; gap: 8px; flex-grow: 1; }
 .blog-card-date { font-size: 12.5px; color: var(--ink-muted); font-weight: 600; }
 .blog-card h3 { font-size: 19px; color: var(--navy); line-height: 1.35; }
-.blog-card p { font-size: 14.5px; color: var(--ink-muted); line-height: 1.6; flex-grow: 1; }
+.blog-card h5 { font-size: 14.5px; color: var(--ink-muted); line-height: 1.6; flex-grow: 1; }
 .blog-card-more { font-size: 13px; font-weight: 800; color: var(--gold-dark); text-transform: uppercase; letter-spacing: 0.06em; }
 
 .blog-article {
