@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import ProductCard, { ProductCardData } from '@/components/ProductCard';
 import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker';
@@ -383,7 +383,7 @@ export default function HomeSections({ locale, products, location }: Props) {
           }
           .kh-usp-label {
             font-size: 15px;
-            font-weight: 700;
+            font-weight: 400;
             color: #1c3a6a;
             line-height: 1.3;
           }
@@ -495,10 +495,7 @@ export default function HomeSections({ locale, products, location }: Props) {
         <div style={{ maxWidth: 1120, margin: '0 auto' }}>
           {/* Centered header — eyebrow pill + H3 + intro (mascot image removed) */}
           <div style={{ textAlign: 'center', maxWidth: 640, margin: '0 auto 40px' }}>
-            <span className="kh-eyebrow-pill">
-              <span aria-hidden="true" className="kh-eyebrow-dot" />
-              {valuesT('eyebrow')}
-            </span>
+            <SectionEyebrow>{valuesT('eyebrow')}</SectionEyebrow>
             <H3 centered>{valuesT('h3')}</H3>
             <p
               style={{
@@ -522,7 +519,7 @@ export default function HomeSections({ locale, products, location }: Props) {
                 <h4
                   style={{
                     fontSize: 17,
-                    fontWeight: 700,
+                    fontWeight: 400,
                     color: '#1c3a6a',
                     lineHeight: 1.3,
                     margin: 0,
@@ -544,26 +541,6 @@ export default function HomeSections({ locale, products, location }: Props) {
             ))}
           </div>
           <style jsx>{`
-            .kh-eyebrow-pill {
-              display: inline-flex;
-              align-items: center;
-              gap: 8px;
-              padding: 6px 14px;
-              border-radius: 9999px;
-              background: rgba(230, 48, 48, 0.1);
-              color: #e63030;
-              font-size: 12px;
-              font-weight: 700;
-              letter-spacing: 1.2px;
-              text-transform: uppercase;
-              margin-bottom: 6px;
-            }
-            .kh-eyebrow-dot {
-              width: 7px;
-              height: 7px;
-              border-radius: 9999px;
-              background: #e63030;
-            }
             .kh-why-grid {
               display: grid;
               gap: 18px;
@@ -628,11 +605,11 @@ export default function HomeSections({ locale, products, location }: Props) {
             <SectionEyebrow>{location.city}</SectionEyebrow>
             <h3
               style={{
-                fontSize: 28,
-                fontWeight: 800,
+                fontSize: 'clamp(1.6rem, 3vw, 2.4rem)',
+                fontWeight: 400,
                 color: '#1c3a6a',
-                letterSpacing: -0.4,
-                lineHeight: 1.25,
+                letterSpacing: '-0.025em',
+                lineHeight: 1.2,
                 margin: '8px 0 14px',
               }}
             >
@@ -664,73 +641,114 @@ export default function HomeSections({ locale, products, location }: Props) {
         <div style={{ maxWidth: 1040, margin: '0 auto', textAlign: 'center' }}>
           <SectionEyebrow>{howT('eyebrow')}</SectionEyebrow>
           <H3 centered>{howT('h3')}</H3>
-          <div
-            style={{
-              marginTop: 40,
-              display: 'grid',
-              gap: 20,
-              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-              position: 'relative',
-            }}
-          >
+          {/* Connected step flow — cards linked by arrows: → left-to-right on
+              desktop, ↓ stacked on mobile (arrow rotates, never overflows). */}
+          <div className="kh-flow">
             {['s1', 's2', 's3'].map((s, i) => (
-              <div
-                key={s}
-                style={{
-                  background: '#FFFFFF',
-                  borderRadius: 16,
-                  padding: '28px 22px',
-                  boxShadow:
-                    '0 4px 10px rgba(15,31,80,0.06), 0 18px 40px rgba(15,31,80,0.05)',
-                  border: '1px solid #E2E8F0',
-                  textAlign: 'center',
-                  position: 'relative',
-                  zIndex: 1,
-                }}
-              >
-                <div
-                  aria-hidden="true"
-                  style={{
-                    width: 64,
-                    height: 64,
-                    borderRadius: '50%',
-                    background: '#e63030',
-                    color: '#FFFFFF',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontWeight: 800,
-                    fontSize: 28,
-                    margin: '0 auto 16px',
-                    boxShadow: 'inset 0 0 0 2px rgba(255,255,255,0.35)',
-                  }}
-                >
-                  {i + 1}
+              <Fragment key={s}>
+                <div className="kh-flow-card">
+                  <div aria-hidden="true" className="kh-flow-num">
+                    {i + 1}
+                  </div>
+                  <h4
+                    style={{
+                      fontSize: 18,
+                      fontWeight: 400,
+                      color: '#1c3a6a',
+                      margin: 0,
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {/* Strip any leading "1." / "1、" / "1)" prefix — the red
+                        number circle is the single source of the step number. */}
+                    {howT(`${s}.title`).replace(/^\s*\d+\s*[.、:)-]\s*/, '')}
+                  </h4>
+                  <p
+                    style={{
+                      fontSize: 14,
+                      color: 'rgba(28,58,106,0.65)',
+                      lineHeight: 1.65,
+                      margin: 0,
+                    }}
+                  >
+                    {howT(`${s}.body`)}
+                  </p>
                 </div>
-                <h4
-                  style={{
-                    fontSize: 18,
-                    fontWeight: 700,
-                    color: '#1c3a6a',
-                    margin: '0 0 8px',
-                    lineHeight: 1.3,
-                  }}
-                >
-                  {howT(`${s}.title`)}
-                </h4>
-                <p
-                  style={{
-                    fontSize: 14,
-                    color: 'rgba(28,58,106,0.65)',
-                    lineHeight: 1.65,
-                    margin: 0,
-                  }}
-                >
-                  {howT(`${s}.body`)}
-                </p>
-              </div>
+                {i < 2 && (
+                  <div className="kh-flow-arrow" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="4" y1="12" x2="20" y2="12" />
+                      <polyline points="14 6 20 12 14 18" />
+                    </svg>
+                  </div>
+                )}
+              </Fragment>
             ))}
           </div>
+          <style jsx>{`
+            .kh-flow {
+              margin-top: 40px;
+              display: flex;
+              flex-direction: column;
+              align-items: stretch;
+              gap: 12px;
+            }
+            .kh-flow-card {
+              flex: 1 1 0;
+              background: #ffffff;
+              border: 1px solid #e2e8f0;
+              border-radius: 16px;
+              padding: 28px 22px;
+              box-shadow: 0 4px 10px rgba(15, 31, 80, 0.06),
+                0 18px 40px rgba(15, 31, 80, 0.05);
+              text-align: center;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 10px;
+            }
+            .kh-flow-num {
+              width: 56px;
+              height: 56px;
+              border-radius: 50%;
+              background: #e63030;
+              color: #ffffff;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-weight: 800;
+              font-size: 24px;
+              box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.35),
+                0 6px 16px rgba(230, 48, 48, 0.28);
+            }
+            .kh-flow-arrow {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: #e63030;
+              flex: 0 0 auto;
+            }
+            .kh-flow-arrow :global(svg) {
+              width: 26px;
+              height: 26px;
+              transform: rotate(90deg); /* mobile: points down between stacked cards */
+            }
+            @media (min-width: 820px) {
+              .kh-flow {
+                flex-direction: row;
+                align-items: stretch;
+                gap: 8px;
+              }
+              .kh-flow-arrow {
+                padding: 0 4px;
+              }
+              .kh-flow-arrow :global(svg) {
+                width: 30px;
+                height: 30px;
+                transform: rotate(0deg); /* desktop: points right between cards */
+              }
+            }
+          `}</style>
         </div>
       </section>
 
@@ -1018,11 +1036,11 @@ export default function HomeSections({ locale, products, location }: Props) {
           </p>
           <h3
             style={{
-              fontSize: 32,
-              fontWeight: 800,
+              fontSize: 'clamp(1.6rem, 3vw, 2.4rem)',
+              fontWeight: 400,
               color: '#FFFFFF',
-              letterSpacing: -0.5,
-              lineHeight: 1.25,
+              letterSpacing: '-0.025em',
+              lineHeight: 1.2,
               margin: '0 0 14px',
             }}
           >
@@ -1056,10 +1074,10 @@ function H3({ children, centered }: { children: React.ReactNode; centered?: bool
   return (
     <h3
       style={{
-        fontSize: 30,
-        fontWeight: 800,
+        fontSize: 'clamp(1.6rem, 3vw, 2.4rem)',
+        fontWeight: 400,
         color: '#1c3a6a',
-        letterSpacing: -0.4,
+        letterSpacing: '-0.025em',
         lineHeight: 1.2,
         margin: '6px 0 0',
         textAlign: centered ? 'center' : 'left',
@@ -1070,13 +1088,19 @@ function H3({ children, centered }: { children: React.ReactNode; centered?: bool
   );
 }
 
+// Single source of truth for the section eyebrow — a tinted red pill with a
+// red dot + uppercase red label. Used by every section (and the hero aligns to
+// the same tokens) so all eyebrows read as one consistent component.
 function SectionEyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <div
+    <span
       style={{
         display: 'inline-flex',
         alignItems: 'center',
         gap: 8,
+        padding: '6px 14px',
+        borderRadius: 9999,
+        background: 'rgba(230,48,48,0.10)',
         fontSize: 12,
         letterSpacing: 1.2,
         textTransform: 'uppercase',
@@ -1086,10 +1110,10 @@ function SectionEyebrow({ children }: { children: React.ReactNode }) {
     >
       <span
         aria-hidden="true"
-        style={{ width: 8, height: 8, background: '#e63030', borderRadius: '50%' }}
+        style={{ width: 7, height: 7, background: '#e63030', borderRadius: '50%', flex: '0 0 auto' }}
       />
       <span>{typeof children === 'string' ? children : ''}</span>
-    </div>
+    </span>
   );
 }
 

@@ -82,7 +82,7 @@ export default async function BlogPostPage({
         <span>{post.title}</span>
       </nav>
       <header style={{ maxWidth: 920, margin: '0 auto', padding: '8px 16px 8px' }}>
-        <h1 style={{ fontSize: 'clamp(28px, 4.5vw, 44px)', fontWeight: 800, margin: '0 0 12px' }}>
+        <h1 style={{ fontSize: 'clamp(28px, 4.5vw, 44px)', fontWeight: 400, margin: '0 0 12px', letterSpacing: '-0.025em' }}>
           {post.title}
         </h1>
         <p style={{ margin: 0, opacity: 0.7 }}>

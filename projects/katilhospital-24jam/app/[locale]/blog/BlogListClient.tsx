@@ -49,9 +49,9 @@ export default function BlogListClient({ posts, chromeProvided = false }: Props)
             <h1
               style={{
                 fontSize: 'clamp(28px, 4vw, 44px)',
-                fontWeight: 800,
+                fontWeight: 400,
                 color: '#FFFFFF',
-                letterSpacing: -0.5,
+                letterSpacing: '-0.025em',
                 margin: '0 0 10px',
                 lineHeight: 1.2,
               }}
@@ -61,7 +61,7 @@ export default function BlogListClient({ posts, chromeProvided = false }: Props)
             <h2
               style={{
                 fontSize: 16,
-                fontWeight: 500,
+                fontWeight: 400,
                 color: 'rgba(255,255,255,0.88)',
                 margin: 0,
                 lineHeight: 1.6,
@@ -140,7 +140,7 @@ export default function BlogListClient({ posts, chromeProvided = false }: Props)
                       <h3
                         style={{
                           fontSize: 19,
-                          fontWeight: 700,
+                          fontWeight: 400,
                           color: '#1c3a6a',
                           lineHeight: 1.3,
                           margin: '0 0 10px',
@@ -194,7 +194,7 @@ export default function BlogListClient({ posts, chromeProvided = false }: Props)
           <h3
             style={{
               fontSize: 'clamp(20px, 3vw, 28px)',
-              fontWeight: 800,
+              fontWeight: 400,
               color: '#FFFFFF',
               margin: '0 0 18px',
             }}
