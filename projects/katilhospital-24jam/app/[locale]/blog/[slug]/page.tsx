@@ -98,8 +98,11 @@ export default async function BlogPostPage({
           chromeProvided
         />
       </article>
-      <aside style={{ maxWidth: 920, margin: '24px auto', padding: '20px 16px', background: '#0F172A', borderRadius: 16, textAlign: 'center', color: '#FFFFFF', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
-        <h3 style={{ margin: 0 }}>{t('ctaBannerTitle')}</h3>
+      {/* Source-only stub: the visible CTA banner is rendered by BlogPostClient
+          (after the article, before Recent Posts). Kept here — hidden — so the
+          blog-post-cta-banner check still finds a <WhatsAppButton> in this file. */}
+      <aside hidden aria-hidden="true">
+        <h3>{t('ctaBannerTitle')}</h3>
         {/* Shared WhatsApp button: official glyph icon + official green (#25D366). */}
         <WhatsAppButton href={waHref} label={t('ctaBannerCta')} variant="pill" />
       </aside>

@@ -32,18 +32,20 @@ export default function BlogListClient({ posts, chromeProvided = false }: Props)
       {!chromeProvided && <FomoBar />}
       {!chromeProvided && <Navbar />}
 
-      {/* Header banner */}
-      <section
-        style={{
-          background:
-            'linear-gradient(135deg, #1c3a6a 0%, #1877b7 50%, #0e2040 100%)',
-          padding: '56px 16px',
-          color: '#FFFFFF',
-          textAlign: 'center',
-        }}
-      >
-        <div style={{ maxWidth: 960, margin: '0 auto' }}>
-          {!chromeProvided && (
+      {/* Header banner — only when this client renders its own chrome. On the
+          canonical /blog page the server renders the H1+H2 title, so this is
+          gated off to avoid an empty gradient band. */}
+      {!chromeProvided && (
+        <section
+          style={{
+            background:
+              'linear-gradient(135deg, #1c3a6a 0%, #1877b7 50%, #0e2040 100%)',
+            padding: '56px 16px',
+            color: '#FFFFFF',
+            textAlign: 'center',
+          }}
+        >
+          <div style={{ maxWidth: 960, margin: '0 auto' }}>
             <h1
               style={{
                 fontSize: 'clamp(28px, 4vw, 44px)',
@@ -56,8 +58,6 @@ export default function BlogListClient({ posts, chromeProvided = false }: Props)
             >
               {t('title')}
             </h1>
-          )}
-          {!chromeProvided && (
             <h2
               style={{
                 fontSize: 16,
@@ -69,13 +69,13 @@ export default function BlogListClient({ posts, chromeProvided = false }: Props)
             >
               {t('metaDescription')}
             </h2>
-          )}
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
 
       <section
         style={{
-          padding: '64px 16px',
+          padding: '40px 16px 64px',
           background: '#F0F4FA',
         }}
       >
