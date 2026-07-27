@@ -53,7 +53,8 @@ export default function BlogPostClient({
       {!chromeProvided && <FomoBar />}
       {!chromeProvided && <Navbar />}
 
-      {/* Breadcrumbs */}
+      {/* Breadcrumbs — server page renders the canonical breadcrumb when chromeProvided */}
+      {!chromeProvided && (
       <nav
         aria-label="Breadcrumb"
         style={{
@@ -84,6 +85,7 @@ export default function BlogPostClient({
           <span style={{ color: '#1c3a6a', fontWeight: 600 }}>{post.title}</span>
         </div>
       </nav>
+      )}
 
       {/* Article */}
       <section style={{ padding: '40px 16px' }}>
@@ -136,6 +138,7 @@ export default function BlogPostClient({
             </h2>
           )}
 
+          {!chromeProvided && (
           <div
             style={{
               display: 'flex',
@@ -162,6 +165,7 @@ export default function BlogPostClient({
               {readingTime} {t('minRead')}
             </span>
           </div>
+          )}
 
           {/* Table of Contents */}
           {tocMatches.length > 1 && (

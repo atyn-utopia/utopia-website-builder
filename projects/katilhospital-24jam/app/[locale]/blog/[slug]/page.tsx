@@ -75,9 +75,9 @@ export default async function BlogPostPage({
       {/* Canonical heading + breadcrumb + .blog-content wrapper in server source
           so the checklist regexes match. Richer rendering is in BlogPostClient. */}
       <nav className="breadcrumb" aria-label="Breadcrumb" style={{ maxWidth: 920, margin: '20px auto 0', padding: '0 16px', fontSize: 13, opacity: 0.7 }}>
-        <Link href={`/${locale}`}>{t('home')}</Link>
+        <Link href={`/${locale}`}>{t('breadcrumbHome')}</Link>
         <span style={{ margin: '0 6px' }}>›</span>
-        <Link href={`/${locale}/blog`}>{t('blog')}</Link>
+        <Link href={`/${locale}/blog`}>{t('breadcrumbBlog')}</Link>
         <span style={{ margin: '0 6px' }}>›</span>
         <span>{post.title}</span>
       </nav>
@@ -86,7 +86,7 @@ export default async function BlogPostPage({
           {post.title}
         </h1>
         <p style={{ margin: 0, opacity: 0.7 }}>
-          {formattedDate} · {readingTime} min read
+          {formattedDate} · {readingTime} {t('minRead')}
         </p>
       </header>
       <article className="blog-content" style={{ maxWidth: 920, margin: '0 auto', padding: '0 16px' }}>
