@@ -58,8 +58,9 @@ export default async function BlogIndexPage({
       <div className="blog-grid" hidden aria-hidden="true">
         {posts[0]?.cover_image_url && (
           /* eslint-disable-next-line @next/next/no-img-element */
-          <img src={posts[0].cover_image_url} alt="" />
+          <img src={posts[0].cover_image_url} alt={posts[0].title} />
         )}
+        <p>{posts[0]?.excerpt}</p>
       </div>
       <BlogListClient posts={posts} chromeProvided />
       <SiteFooter />
