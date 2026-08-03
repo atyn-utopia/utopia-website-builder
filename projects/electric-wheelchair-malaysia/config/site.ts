@@ -6,6 +6,8 @@
 export const siteConfig = {
   domain: 'electricwheelchairmalaysia.com.my',
   siteUrl: 'https://electricwheelchairmalaysia.com.my',
+  // Pinned company_websites.id — a domain rename can never disconnect this site.
+  siteId: '4f4f38a0-bcb3-4452-9f38-baad16e79358',
   brandName: 'Electric Wheelchair Malaysia',
   tagline: 'Electric Wheelchair Rental & Sales in Malaysia',
   productSlug: 'electric-wheelchair',

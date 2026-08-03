@@ -7,6 +7,8 @@ export const siteConfig = {
   legalName: 'Kak Kenduri Sdn. Bhd.',
   domain: 'tablechairrentals.my',
   url: 'https://tablechairrentals.my',
+  // Pinned company_websites.id — a domain rename can never disconnect this site.
+  siteId: 'be0bbd1e-1089-4791-9403-3d4031b042a3',
   productSlug: 'table-chair-rental',
   fallbackPhone: '60174287801',
   email: 'kerusimejamy@gmail.com',
