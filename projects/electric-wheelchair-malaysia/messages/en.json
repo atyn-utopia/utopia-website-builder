@@ -285,5 +285,10 @@
     "freeDelivery": "Free Delivery",
     "kkmCertified": "KKM Certified",
     "sixMonthWarranty": "6-Month Warranty"
+  },
+  "redirect": {
+    "heading": "Opening WhatsApp…",
+    "subtext": "Connecting you to the Electric Wheelchair Malaysia team.",
+    "fallback": "Click here if it doesn't redirect"
   }
 }

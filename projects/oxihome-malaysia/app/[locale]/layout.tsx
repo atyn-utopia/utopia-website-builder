@@ -86,10 +86,9 @@ export default async function LocaleLayout({ children, params }: Props) {
     <html lang={locale} className={inter.variable}>
       <head>
         <OrganizationSchema />
-        <link rel="alternate" hrefLang="en" href={`${siteConfig.siteUrl}/en`} />
-        <link rel="alternate" hrefLang="ms" href={`${siteConfig.siteUrl}/ms`} />
-        <link rel="alternate" hrefLang="zh" href={`${siteConfig.siteUrl}/zh`} />
-        <link rel="alternate" hrefLang="x-default" href={`${siteConfig.siteUrl}/en`} />
+        {/* hreflang/canonical come from generateMetadata -> seoAlternates, which
+            is per-page. Hardcoding <link rel="alternate"> here would stamp the
+            HOMEPAGE alternates onto every location/blog page as well. */}
               <script defer src="https://webcore.utopiaai.my/t.js" data-website="oksigen.com.my"></script>
       </head>
       <body className="antialiased" style={{ fontFamily: 'var(--font-body)', color: 'var(--brand-text)', background: 'var(--brand-white)' }}>

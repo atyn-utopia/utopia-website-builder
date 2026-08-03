@@ -226,5 +226,10 @@
     "emptyCta": "WhatsApp 确认覆盖范围"
   },
   "logoAlt": "Katil Hospital Murah — 全马来西亚医院病床租赁与销售",
-  "imageAlt": "Katil Hospital Murah 团队在马来西亚住家送货并安装医院病床"
+  "imageAlt": "Katil Hospital Murah 团队在马来西亚住家送货并安装医院病床",
+  "redirect": {
+    "heading": "正在开启 WhatsApp…",
+    "subtext": "正在为您连接 Katil Hospital Murah 团队。",
+    "fallback": "如果没有自动跳转，请点击这里"
+  }
 }

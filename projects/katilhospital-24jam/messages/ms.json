@@ -226,5 +226,10 @@
     "emptyCta": "Sahkan Liputan"
   },
   "logoAlt": "Katil Hospital Murah — Sewa & Jual Katil Hospital Seluruh Malaysia",
-  "imageAlt": "Pasukan Katil Hospital Murah menghantar dan memasang katil hospital di rumah pelanggan"
+  "imageAlt": "Pasukan Katil Hospital Murah menghantar dan memasang katil hospital di rumah pelanggan",
+  "redirect": {
+    "heading": "Membuka WhatsApp…",
+    "subtext": "Menghubungkan anda dengan pasukan Katil Hospital Murah.",
+    "fallback": "Klik di sini jika tidak dialihkan"
+  }
 }

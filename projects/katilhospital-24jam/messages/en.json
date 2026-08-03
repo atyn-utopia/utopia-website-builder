@@ -226,5 +226,10 @@
     "emptyCta": "Confirm Coverage"
   },
   "logoAlt": "Katil Hospital Murah — Hospital Bed Rental & Sale Across Malaysia",
-  "imageAlt": "Katil Hospital Murah team delivering and installing a hospital bed in a Malaysian home"
+  "imageAlt": "Katil Hospital Murah team delivering and installing a hospital bed in a Malaysian home",
+  "redirect": {
+    "heading": "Opening WhatsApp…",
+    "subtext": "Connecting you to the Katil Hospital Murah team.",
+    "fallback": "Click here if it doesn't redirect"
+  }
 }

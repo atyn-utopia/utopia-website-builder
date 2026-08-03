@@ -269,5 +269,10 @@
       "sub": "立即 WhatsApp Kak Kenduri — 我们确认可用性、发送报价并锁定当天送达。",
       "button": "立即 WhatsApp"
     }
+  },
+  "redirect": {
+    "heading": "正在开启 WhatsApp…",
+    "subtext": "正在为您连接 Kak Kenduri 团队。",
+    "fallback": "如果没有自动跳转，请点击这里"
   }
 }

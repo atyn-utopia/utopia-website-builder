@@ -11,7 +11,7 @@ export const siteConfig = {
   // The client's own WhatsApp number. Must stay a REAL client number — a
   // placeholder here silently swallows leads if the DB lookup ever falls back.
   fallbackPhone: '60165770899',
-  defaultLocale: 'en' as const,
+  defaultLocale: 'ms' as const,
   locales: ['en', 'ms', 'zh'] as const,
   whatsappMessages: {
     en: 'Hi Oxihome, I would like to rent an oxygen machine.',
