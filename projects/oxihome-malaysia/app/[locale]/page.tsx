@@ -181,8 +181,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         />
 
         <div className="relative max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center w-full">
-          {/* Text column */}
-          <div className="z-10">
+          {/* Text column — centered on mobile (primary viewport), left from md up */}
+          <div className="z-10 text-center md:text-left">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-6"
               style={{ background: 'rgba(21,160,192,0.15)', color: 'var(--brand-primary-lt)', border: '1px solid rgba(21,160,192,0.3)' }}>
@@ -197,7 +197,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               {t('hero.h1')}
             </h1>
 
-            <h5 className="text-[14px] md:text-[clamp(0.95rem,1.1vw,1.0625rem)] font-normal leading-[1.7] mb-8 max-w-md" style={{ color: 'rgba(255,255,255,0.75)' }}>
+            <h5 className="text-[14px] md:text-[clamp(0.95rem,1.1vw,1.0625rem)] font-normal leading-[1.7] mb-8 max-w-md mx-auto md:mx-0" style={{ color: 'rgba(255,255,255,0.75)' }}>
               {t('hero.sub')}
             </h5>
 
@@ -213,7 +213,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </a>
 
             {/* Trust indicators */}
-            <div className="flex flex-wrap gap-4 mt-7">
+            <div className="flex flex-wrap gap-4 mt-7 justify-center md:justify-start">
               {[tc('noDeposit'), tc('sameDayDelivery')].map(tag => (
                 <div key={tag} className="flex items-center gap-1.5 text-sm" style={{ color: 'rgba(255,255,255,0.65)' }}>
                   <CheckIcon />
@@ -401,7 +401,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             {products.map((product) => (
               <div
                 key={product.id}
-                className="relative flex flex-col rounded-2xl p-6 transition-transform hover:-translate-y-1"
+                className="relative flex flex-col rounded-2xl p-6 transition-transform hover:-translate-y-1 text-center sm:text-left"
                 style={{
                   background: 'var(--brand-white)',
                   boxShadow: product.highlight
@@ -432,17 +432,19 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   />
                 </div>
 
-                <h3 className="font-display text-lg font-bold leading-[1.2] mb-2" style={{ color: 'var(--brand-dark)', minHeight: '3.5rem' }}>
+                {/* min-heights keep the 2-/4-col grids aligned, but on mobile's
+                    single column they are just dead space under the title. */}
+                <h3 className="font-display text-lg font-bold leading-[1.2] mb-2 sm:min-h-[3.5rem]" style={{ color: 'var(--brand-dark)' }}>
                   {product.name}
                 </h3>
-                <h5 className="text-[14px] md:text-[16px] font-normal leading-[1.4] flex-1 mb-4" style={{ color: 'var(--brand-text-muted)', minHeight: '4rem' }}>
+                <h5 className="text-[14px] md:text-[16px] font-normal leading-[1.4] flex-1 mb-4 sm:min-h-[4rem]" style={{ color: 'var(--brand-text-muted)' }}>
                   {product.desc}
                 </h5>
 
                 {/* Pricing */}
                 <div className="space-y-1.5 mb-4">
                   {product.rentPrice && (
-                    <div className="flex items-baseline gap-2">
+                    <div className="flex items-baseline gap-2 justify-center sm:justify-start">
                       <span className="text-xl font-bold" style={{ color: 'var(--brand-primary)' }}>{product.rentPrice}</span>
                       {product.marketPrice && (
                         <span className="text-xs line-through" style={{ color: 'var(--brand-text-muted)' }}>{product.marketPrice}</span>
@@ -450,7 +452,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     </div>
                   )}
                   {product.buyPrice && (
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 justify-center sm:justify-start">
                       <span className="text-sm font-semibold" style={{ color: 'var(--brand-accent)' }}>
                         {tc('buyAt')} {product.buyPrice}
                       </span>
@@ -467,7 +469,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     </h5>
                   )}
                   {product.extras && product.extras.map(e => (
-                    <h5 key={e} className="flex items-center gap-1.5 text-xs font-medium" style={{ color: 'var(--brand-primary)' }}>
+                    <h5 key={e} className="flex items-center gap-1.5 text-xs font-medium justify-center sm:justify-start" style={{ color: 'var(--brand-primary)' }}>
                       <CheckIcon /> {e}
                     </h5>
                   ))}
@@ -501,7 +503,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               { num: '02', title: t('how.step2Title'), desc: t('how.step2Desc'), icon: '📋' },
               { num: '03', title: t('how.step3Title'), desc: t('how.step3Desc'), icon: '🚚' },
             ].map(step => (
-              <div key={step.num} className="relative flex flex-col items-start rounded-2xl p-7" style={{ background: 'var(--brand-dark-mid)' }}>
+              <div key={step.num} className="relative flex flex-col items-center md:items-start text-center md:text-left rounded-2xl p-7" style={{ background: 'var(--brand-dark-mid)' }}>
                 {/* Step number */}
                 <div
                   className="w-12 h-12 rounded-2xl flex items-center justify-center font-bold text-lg text-white mb-4"
@@ -584,7 +586,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           />
         </div>
         <div className="relative max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          <div>
+          <div className="text-center md:text-left">
             <h3 className="font-display text-[24px] md:text-[clamp(1.6rem,3vw,2.4rem)] font-extrabold leading-[1.2] text-white mb-6" style={{ letterSpacing: '-0.025em' }}>
               {t('why.h2')}
             </h3>
