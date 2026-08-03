@@ -8,7 +8,9 @@ export const siteConfig = {
   // Pinned company_websites.id — a domain rename can never disconnect this site.
   siteId: '4f4358f6-9a94-4c1c-b02f-1687fa92ed8c',
   productSlug: 'oxygen-machine',
-  fallbackPhone: '60123456789',
+  // The client's own WhatsApp number. Must stay a REAL client number — a
+  // placeholder here silently swallows leads if the DB lookup ever falls back.
+  fallbackPhone: '60165770899',
   defaultLocale: 'en' as const,
   locales: ['en', 'ms', 'zh'] as const,
   whatsappMessages: {
