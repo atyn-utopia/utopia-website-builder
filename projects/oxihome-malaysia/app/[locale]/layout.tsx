@@ -10,6 +10,7 @@ import { OrganizationSchema } from '@/components/schema/OrganizationSchema'
 import { siteConfig } from '@/config/site'
 import { getPhoneNumber, waLink } from '@/lib/webcore'
 import '../globals.css'
+import FomoBanner from '@/components/FomoBanner'
 
 const inter = Inter({
   variable: '--font-inter',
@@ -94,9 +95,20 @@ export default async function LocaleLayout({ children, params }: Props) {
       <body className="antialiased" style={{ fontFamily: 'var(--font-body)', color: 'var(--brand-text)', background: 'var(--brand-white)' }}>
         <NextIntlClientProvider messages={messages}>
 
+          {/* ── STICKY TOP STACK ──
+              FomoBanner and the header used to be two separate `sticky top-0
+              z-50` elements — the banner is rendered after the header in DOM
+              order, so it pinned to the same 0px offset and painted over the
+              header's top 44px, clipping the logo on every page. Sticking the
+              pair as ONE container makes them stack: banner above, header
+              below, both fully visible, and the offset stays correct when the
+              banner wraps to two lines on mobile. */}
+          <div className="sticky top-0 z-50">
+          <FomoBanner />
+
           {/* ── HEADER ── */}
           <header
-            className="sticky top-0 z-50 border-b"
+            className="border-b"
             style={{ background: 'rgba(255,255,255,0.97)', backdropFilter: 'blur(8px)', borderColor: 'var(--brand-border)' }}
           >
             <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
@@ -141,6 +153,7 @@ export default async function LocaleLayout({ children, params }: Props) {
               </div>
             </div>
           </header>
+          </div>
 
           {children}
         </NextIntlClientProvider>

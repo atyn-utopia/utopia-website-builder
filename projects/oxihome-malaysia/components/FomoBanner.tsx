@@ -44,7 +44,10 @@ export default function FomoBanner() {
 
   return (
     <div
-      className="sticky top-0 z-50 w-full flex items-center justify-center gap-x-3 gap-y-1 px-4 py-2 text-white text-xs sm:text-sm font-semibold flex-wrap text-center"
+      /* Positioning is owned by the sticky stack wrapper in [locale]/layout.tsx
+         that holds this banner + the header. Do NOT re-add `sticky top-0` here:
+         two separately-sticky siblings both pin to 0px and overlap. */
+      className="w-full flex items-center justify-center gap-x-3 gap-y-1 px-4 py-2 text-white text-xs sm:text-sm font-semibold flex-wrap text-center"
       style={{ background: '#C0392B' }}
     >
       <span className="font-bold uppercase tracking-wide">{copy.eyebrow}</span>

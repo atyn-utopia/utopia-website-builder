@@ -8,7 +8,6 @@ import { siteConfig } from '@/config/site'
 import { getPhoneNumber, waLink } from '@/lib/webcore'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
-import FomoBanner from '@/components/FomoBanner'
 import PageStyles from '@/components/PageStyles'
 import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker'
 import { ReviewsCarousel } from '@/components/ReviewsCarousel'
@@ -178,7 +177,6 @@ export default async function LocationPage({ params }: { params: Promise<Params>
 
   return (
     <>
-      <FomoBanner />
       <SiteHeader />
       <PageStyles />
       <main>

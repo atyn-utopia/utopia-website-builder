@@ -10,7 +10,6 @@ import { waRedirect } from '@/lib/waRedirect';
 import { ArticleSchema } from '@/components/schema/ArticleSchema';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
-import FomoBanner from '@/components/FomoBanner';
 
 export async function generateStaticParams() {
   const slugs = await getBlogPostSlugs();
@@ -65,7 +64,6 @@ export default async function BlogPostPage({
 
   return (
     <main style={{ background: '#ffffff', minHeight: '100vh' }}>
-      <FomoBanner />
       <SiteHeader />
       <ArticleSchema
         locale={locale}

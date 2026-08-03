@@ -6,7 +6,6 @@ import { locations } from '@/config/locations'
 import { getPhoneNumber, waLink } from '@/lib/webcore'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
-import FomoBanner from '@/components/FomoBanner'
 import PageStyles from '@/components/PageStyles'
 import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker'
 import { ProductSchema } from '@/components/schema/ProductSchema'
@@ -150,7 +149,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
-      <FomoBanner />
       <SiteHeader />
       <PageStyles />
       <main>
@@ -348,6 +346,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <CountdownStrip
         waLink={`/${locale}/redirect-whatsapp-1`}
         label={locale === 'ms' ? '⚡ Tawaran Hari Ini Tamat Dalam:' : locale === 'zh' ? '⚡ 今日优惠倒计时：' : '⚡ Today\'s delivery slots close in:'}
+        cta={locale === 'ms' ? 'Tuntut Sekarang →' : locale === 'zh' ? '立即领取 →' : 'Claim Now →'}
       />
 
       {/* ── STATS / USP BAR ── */}
@@ -669,7 +668,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                       {state}
                       <span className="h-px flex-1" style={{ background: 'var(--brand-border)' }} />
                     </h3>
-                    <div className="flex flex-wrap gap-2">
+                    {/* Centre the pills on mobile: at 390px each pill is its own
+                        row, so left-alignment leaves a ragged right edge under a
+                        centred state heading. Left-align from sm upward, where
+                        several pills share a row and ragged-right reads fine. */}
+                    <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
                       {sorted.map(loc => (
                         <a
                           key={loc.slug}
