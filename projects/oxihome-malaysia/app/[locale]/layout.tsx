@@ -99,7 +99,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         <link rel="alternate" hrefLang="ms" href={`${siteConfig.siteUrl}/ms`} />
         <link rel="alternate" hrefLang="zh" href={`${siteConfig.siteUrl}/zh`} />
         <link rel="alternate" hrefLang="x-default" href={`${siteConfig.siteUrl}/en`} />
-              <script defer src="https://webcore.utopiaai.my/t.js" data-website="oxihome-malaysia.utopiaai.my"></script>
+              <script defer src="https://webcore.utopiaai.my/t.js" data-website="oksigen.com.my"></script>
       </head>
       <body className="antialiased" style={{ fontFamily: 'var(--font-body)', color: 'var(--brand-text)', background: 'var(--brand-white)' }}>
         <NextIntlClientProvider messages={messages}>

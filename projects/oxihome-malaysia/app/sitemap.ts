@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 import { locations } from '@/config/locations'
 
-const BASE_URL = 'https://oxihome.my'
+const BASE_URL = 'https://oksigen.com.my'
 const locales = ['en', 'ms', 'zh'] as const
 
 export default function sitemap(): MetadataRoute.Sitemap {

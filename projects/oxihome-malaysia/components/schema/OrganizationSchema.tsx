@@ -3,8 +3,8 @@ export function OrganizationSchema() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Oxihome Malaysia',
-    url: 'https://oxihome.my',
-    logo: 'https://oxihome.my/logo.svg',
+    url: 'https://oksigen.com.my',
+    logo: 'https://oksigen.com.my/logo.svg',
     description: "Malaysia's dedicated home oxygen equipment provider. Rent or buy oxygen machines with 4-hour same-day delivery across 127 locations.",
     contactPoint: {
       '@type': 'ContactPoint',

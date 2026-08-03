@@ -63,8 +63,8 @@ export async function generateMetadata({
     openGraph: {
       title: t('meta.title', { city: cityName }),
       description: t('meta.description', { city: cityName }),
-      url: `https://oxihome.my/${locale}/oxygen-machine/${location}`,
-      images: [{ url: 'https://oxihome.my/og-image.jpg', width: 1200, height: 630, alt: t('meta.ogImageAlt', { city: cityName }) }],
+      url: `https://oksigen.com.my/${locale}/oxygen-machine/${location}`,
+      images: [{ url: 'https://oksigen.com.my/og-image.jpg', width: 1200, height: 630, alt: t('meta.ogImageAlt', { city: cityName }) }],
     },
     robots: { index: true, follow: true },
   }
@@ -221,10 +221,10 @@ export default async function LocationPage({ params }: { params: Promise<Params>
                 <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
                 {stateName}
               </div>
-              <h1 className="font-display text-4xl md:text-5xl leading-tight text-white mb-4" style={{ letterSpacing: '-0.02em' }}>
+              <h1 className="font-display text-[28px] md:text-[clamp(2.25rem,5.5vw,4.5rem)] font-extrabold leading-[1.02] text-white mb-4" style={{ letterSpacing: '-0.035em' }}>
                 {t('hero.h1', { city: cityName })}
               </h1>
-              <h5 className="text-base leading-relaxed mb-6 max-w-md" style={{ color: 'rgba(255,255,255,0.75)' }}>
+              <h5 className="text-[14px] md:text-[clamp(0.95rem,1.1vw,1.0625rem)] font-normal leading-[1.7] mb-6 max-w-md" style={{ color: 'rgba(255,255,255,0.75)' }}>
                 {t('hero.sub', { city: cityName })}
               </h5>
               <a href={`/${locale}/redirect-whatsapp-1`}
@@ -311,7 +311,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
       {/* ── INTRO PARAGRAPH ── */}
       <section className="py-12 px-6" style={{ background: 'var(--brand-surface)' }}>
         <div className="max-w-3xl mx-auto text-center">
-          <h5 className="text-lg leading-relaxed" style={{ color: 'var(--brand-text)' }}>
+          <h5 className="text-[14px] md:text-[clamp(0.98rem,1.2vw,1.08rem)] font-normal leading-[1.6]" style={{ color: 'var(--brand-text)' }}>
             {t('intro', { city: cityName })}
           </h5>
         </div>
@@ -353,10 +353,10 @@ export default async function LocationPage({ params }: { params: Promise<Params>
                 <div className="w-full aspect-square rounded-xl overflow-hidden mb-4" style={{ background: 'var(--brand-primary-xs)' }}>
                   <img src={product.image} alt={product.imageAlt} width={320} height={320} className="w-full h-full object-contain p-2" />
                 </div>
-                <h3 className="font-display text-lg leading-tight mb-2" style={{ color: 'var(--brand-dark)', minHeight: '3.5rem' }}>
+                <h3 className="font-display text-lg font-bold leading-[1.2] mb-2" style={{ color: 'var(--brand-dark)', minHeight: '3.5rem' }}>
                   {product.name}
                 </h3>
-                <h5 className="text-sm leading-relaxed flex-1 mb-4" style={{ color: 'var(--brand-text-muted)', minHeight: '4rem' }}>
+                <h5 className="text-[14px] md:text-[16px] font-normal leading-[1.4] flex-1 mb-4" style={{ color: 'var(--brand-text-muted)', minHeight: '4rem' }}>
                   {product.desc}
                 </h5>
                 <div className="space-y-1.5 mb-4">
@@ -408,7 +408,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
           <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(10,37,53,0.96) 0%, rgba(13,51,71,0.92) 100%)' }} />
         </div>
         <div className="relative max-w-5xl mx-auto">
-          <h2 className="font-display text-3xl md:text-4xl text-white mb-8" style={{ letterSpacing: '-0.02em' }}>
+          <h2 className="font-display text-[24px] md:text-[clamp(1.6rem,3vw,2.4rem)] font-extrabold leading-[1.2] text-white mb-8" style={{ letterSpacing: '-0.025em' }}>
             {t('why.h2', { city: cityName })}
           </h2>
           <div className="grid sm:grid-cols-2 gap-5">
@@ -426,7 +426,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
                 <CheckIcon />
                 <div>
                   <h5 className="font-semibold text-white text-sm mb-1">{item.title}</h5>
-                  <h5 className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.65)' }}>{item.desc}</h5>
+                  <h5 className="text-[14px] md:text-[16px] font-normal leading-[1.4]" style={{ color: 'rgba(255,255,255,0.65)' }}>{item.desc}</h5>
                 </div>
               </div>
             ))}
@@ -437,7 +437,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
       {/* ── REVIEWS (mirrors homepage) ── */}
       <section className="py-20 overflow-hidden" style={{ background: 'var(--brand-surface)' }}>
         <div className="max-w-5xl mx-auto px-6">
-          <h3 className="font-display text-3xl md:text-4xl text-center mb-12" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.02em' }}>
+          <h3 className="font-display text-[24px] md:text-[clamp(1.6rem,3vw,2.4rem)] font-extrabold leading-[1.2] text-center mb-12" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.025em' }}>
             {locale === 'ms'
               ? `Apa Kata Pelanggan di ${cityName}`
               : locale === 'zh'
@@ -461,10 +461,10 @@ export default async function LocationPage({ params }: { params: Promise<Params>
       {/* ── CUSTOMER GALLERY (mirrors homepage) ── */}
       <section className="py-20 px-6" style={{ background: 'var(--brand-surface)' }}>
         <div className="max-w-6xl mx-auto">
-          <h3 className="font-display text-3xl md:text-4xl text-center mb-3" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.02em' }}>
+          <h3 className="font-display text-[24px] md:text-[clamp(1.6rem,3vw,2.4rem)] font-extrabold leading-[1.2] text-center mb-3" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.025em' }}>
             {locale === 'ms' ? 'Galeri Pelanggan Kami' : locale === 'zh' ? '客户照片' : 'Customer Gallery'}
           </h3>
-          <h5 className="text-center text-base mb-10 max-w-lg mx-auto" style={{ color: 'var(--brand-text-muted)' }}>
+          <h5 className="text-center text-[14px] md:text-[clamp(0.98rem,1.2vw,1.08rem)] font-normal leading-[1.6] mb-10 max-w-lg mx-auto" style={{ color: 'var(--brand-text-muted)' }}>
             {locale === 'ms'
               ? `Lihat bagaimana mesin oksigen Oxihome digunakan oleh keluarga di ${cityName} dan seluruh Malaysia.`
               : locale === 'zh'
@@ -494,7 +494,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
       {/* ── FAQ ── */}
       <section className="py-16 px-6" style={{ background: 'var(--brand-surface)' }}>
         <div className="max-w-3xl mx-auto">
-          <h2 className="font-display text-3xl text-center mb-10" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.02em' }}>
+          <h2 className="font-display text-[24px] md:text-[clamp(1.6rem,3vw,2.4rem)] font-extrabold leading-[1.2] text-center mb-10" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.025em' }}>
             {t('faq.h2', { city: cityName })}
           </h2>
           <div className="space-y-3">
@@ -526,7 +526,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
       {nearbyLocs.length > 0 && (
         <section className="py-12 px-6">
           <div className="max-w-5xl mx-auto">
-            <h3 className="font-display text-2xl mb-6 text-center" style={{ color: 'var(--brand-dark)' }}>
+            <h3 className="font-display text-[24px] md:text-[clamp(1.6rem,3vw,2.4rem)] font-extrabold leading-[1.2] mb-6 text-center" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.025em' }}>
               {t('nearby.h3')}
             </h3>
             <div className="flex flex-wrap justify-center gap-3">
@@ -552,10 +552,10 @@ export default async function LocationPage({ params }: { params: Promise<Params>
       {/* ── FINAL CTA ── */}
       <section className="py-16 px-6 text-center" style={{ background: 'var(--brand-primary)' }}>
         <div className="max-w-2xl mx-auto">
-          <h2 className="font-display text-3xl md:text-4xl text-white mb-3" style={{ letterSpacing: '-0.02em' }}>
+          <h2 className="font-display text-[24px] md:text-[clamp(1.6rem,3vw,2.4rem)] font-extrabold leading-[1.2] text-white mb-3" style={{ letterSpacing: '-0.025em' }}>
             {t('cta.h2', { city: cityName })}
           </h2>
-          <h5 className="text-base leading-relaxed mb-7" style={{ color: 'rgba(255,255,255,0.8)' }}>
+          <h5 className="text-[14px] md:text-[clamp(0.98rem,1.2vw,1.08rem)] font-normal leading-[1.6] mb-7" style={{ color: 'rgba(255,255,255,0.8)' }}>
             {t('cta.sub', { city: cityName })}
           </h5>
           <a

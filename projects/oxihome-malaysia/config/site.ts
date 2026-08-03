@@ -2,9 +2,9 @@ export const siteConfig = {
   name: 'Oxihome Malaysia',
   brandName: 'Oxihome Malaysia',
   legalName: 'Ibnu Sina Care Sdn. Bhd.',
-  domain: 'oxihome-malaysia.utopiaai.my',
-  siteUrl: 'https://oxihome-malaysia.utopiaai.my',
-  url: 'https://oxihome-malaysia.utopiaai.my',
+  domain: 'oksigen.com.my',
+  siteUrl: 'https://oksigen.com.my',
+  url: 'https://oksigen.com.my',
   // Pinned company_websites.id — a domain rename can never disconnect this site.
   siteId: '4f4358f6-9a94-4c1c-b02f-1687fa92ed8c',
   productSlug: 'oxygen-machine',

@@ -45,8 +45,8 @@ export async function generateMetadata({
     openGraph: {
       title: t('meta.title'),
       description: t('meta.description'),
-      url: `https://oxihome.my/${locale}`,
-      images: [{ url: 'https://oxihome.my/og-image.jpg', width: 1200, height: 630, alt: t('meta.ogImageAlt') }],
+      url: `https://oksigen.com.my/${locale}`,
+      images: [{ url: 'https://oksigen.com.my/og-image.jpg', width: 1200, height: 630, alt: t('meta.ogImageAlt') }],
     },
   }
 }
@@ -191,13 +191,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </div>
 
             <h1
-              className="font-display text-5xl md:text-6xl leading-tight mb-5 text-white"
-              style={{ letterSpacing: '-0.02em' }}
+              className="font-display text-[28px] md:text-[clamp(2.25rem,5.5vw,4.5rem)] font-extrabold leading-[1.02] mb-5 text-white"
+              style={{ letterSpacing: '-0.035em' }}
             >
               {t('hero.h1')}
             </h1>
 
-            <h5 className="text-lg leading-relaxed mb-8 max-w-md" style={{ color: 'rgba(255,255,255,0.75)' }}>
+            <h5 className="text-[14px] md:text-[clamp(0.95rem,1.1vw,1.0625rem)] font-normal leading-[1.7] mb-8 max-w-md" style={{ color: 'rgba(255,255,255,0.75)' }}>
               {t('hero.sub')}
             </h5>
 
@@ -378,7 +378,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           >
             {locale === 'ms' ? 'Penting' : locale === 'zh' ? '重要提醒' : 'Important'}
           </span>
-          <h2 className="font-display text-4xl md:text-5xl text-white mb-6" style={{ letterSpacing: '-0.02em' }}>
+          <h2 className="font-display text-[24px] md:text-[clamp(1.6rem,3vw,2.4rem)] font-extrabold leading-[1.2] text-white mb-6" style={{ letterSpacing: '-0.025em' }}>
             {t('risk.h2')}
           </h2>
           <div className="space-y-4 text-lg leading-relaxed" style={{ color: 'rgba(255,255,255,0.75)' }}>
@@ -394,7 +394,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* ── PRODUCTS ── */}
       <section id="products" className="py-20 px-6" style={{ background: 'var(--brand-surface)' }}>
         <div className="max-w-6xl mx-auto">
-          <h3 className="font-display text-4xl text-center mb-12" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.02em' }}>
+          <h3 className="font-display text-[24px] md:text-[clamp(1.6rem,3vw,2.4rem)] font-extrabold leading-[1.2] text-center mb-12" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.025em' }}>
             {t('products.h2')}
           </h3>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -432,10 +432,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   />
                 </div>
 
-                <h3 className="font-display text-lg leading-tight mb-2" style={{ color: 'var(--brand-dark)', minHeight: '3.5rem' }}>
+                <h3 className="font-display text-lg font-bold leading-[1.2] mb-2" style={{ color: 'var(--brand-dark)', minHeight: '3.5rem' }}>
                   {product.name}
                 </h3>
-                <h5 className="text-sm leading-relaxed flex-1 mb-4" style={{ color: 'var(--brand-text-muted)', minHeight: '4rem' }}>
+                <h5 className="text-[14px] md:text-[16px] font-normal leading-[1.4] flex-1 mb-4" style={{ color: 'var(--brand-text-muted)', minHeight: '4rem' }}>
                   {product.desc}
                 </h5>
 
@@ -492,7 +492,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* ── HOW IT WORKS ── */}
       <section className="py-20 px-6" style={{ background: 'var(--brand-dark)' }}>
         <div className="max-w-5xl mx-auto">
-          <h3 className="font-display text-4xl text-center mb-14" style={{ color: 'var(--brand-white)', letterSpacing: '-0.02em' }}>
+          <h3 className="font-display text-[24px] md:text-[clamp(1.6rem,3vw,2.4rem)] font-extrabold leading-[1.2] text-center mb-14" style={{ color: 'var(--brand-white)', letterSpacing: '-0.025em' }}>
             {t('how.h2')}
           </h3>
           <div className="grid md:grid-cols-3 gap-8">
@@ -509,8 +509,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 >
                   {step.num}
                 </div>
-                <h3 className="font-display text-xl mb-2" style={{ color: 'var(--brand-white)' }}>{step.title}</h3>
-                <h5 className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>{step.desc}</h5>
+                <h3 className="font-display text-xl font-bold leading-[1.2] mb-2" style={{ color: 'var(--brand-white)' }}>{step.title}</h3>
+                <h5 className="text-[14px] md:text-[16px] font-normal leading-[1.4]" style={{ color: 'rgba(255,255,255,0.6)' }}>{step.desc}</h5>
               </div>
             ))}
           </div>
@@ -520,7 +520,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* ── REVIEWS ── */}
       <section className="py-20 overflow-hidden" style={{ background: 'var(--brand-surface)' }}>
         <div className="max-w-5xl mx-auto px-6">
-          <h3 className="font-display text-4xl text-center mb-12" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.02em' }}>
+          <h3 className="font-display text-[24px] md:text-[clamp(1.6rem,3vw,2.4rem)] font-extrabold leading-[1.2] text-center mb-12" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.025em' }}>
             {t('reviews.h2')}
           </h3>
         </div>
@@ -540,10 +540,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* ── CUSTOMER GALLERY ── */}
       <section className="py-20 px-6" style={{ background: 'var(--brand-surface)' }}>
         <div className="max-w-6xl mx-auto">
-          <h3 className="font-display text-4xl text-center mb-3" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.02em' }}>
+          <h3 className="font-display text-[24px] md:text-[clamp(1.6rem,3vw,2.4rem)] font-extrabold leading-[1.2] text-center mb-3" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.025em' }}>
             {locale === 'ms' ? 'Galeri Pelanggan Kami' : locale === 'zh' ? '客户照片' : 'Customer Gallery'}
           </h3>
-          <h5 className="text-center text-base mb-10 max-w-lg mx-auto" style={{ color: 'var(--brand-text-muted)' }}>
+          <h5 className="text-center text-[14px] md:text-[clamp(0.98rem,1.2vw,1.08rem)] font-normal leading-[1.6] mb-10 max-w-lg mx-auto" style={{ color: 'var(--brand-text-muted)' }}>
             {locale === 'ms'
               ? 'Lihat bagaimana mesin oksigen Oxihome digunakan oleh keluarga di seluruh Malaysia.'
               : locale === 'zh'
@@ -585,7 +585,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
         <div className="relative max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <h3 className="font-display text-4xl md:text-5xl text-white mb-6" style={{ letterSpacing: '-0.02em' }}>
+            <h3 className="font-display text-[24px] md:text-[clamp(1.6rem,3vw,2.4rem)] font-extrabold leading-[1.2] text-white mb-6" style={{ letterSpacing: '-0.025em' }}>
               {t('why.h2')}
             </h3>
             <div className="space-y-4 text-base leading-relaxed" style={{ color: 'rgba(255,255,255,0.75)' }}>
@@ -627,10 +627,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* ── LOCATIONS ── */}
       <section id="locations" className="py-20 px-6" style={{ background: 'var(--brand-surface)' }}>
         <div className="max-w-6xl mx-auto">
-          <h3 className="font-display text-4xl text-center mb-3" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.02em' }}>
+          <h3 className="font-display text-[24px] md:text-[clamp(1.6rem,3vw,2.4rem)] font-extrabold leading-[1.2] text-center mb-3" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.025em' }}>
             {t('locations.h2')}
           </h3>
-          <h5 className="text-center text-base mb-10 max-w-xl mx-auto" style={{ color: 'var(--brand-text-muted)' }}>
+          <h5 className="text-center text-[14px] md:text-[clamp(0.98rem,1.2vw,1.08rem)] font-normal leading-[1.6] mb-10 max-w-xl mx-auto" style={{ color: 'var(--brand-text-muted)' }}>
             {t('locations.sub')}
           </h5>
           {/* Group by state */}
@@ -695,7 +695,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* ── FAQ ── */}
       <section className="py-20 px-6">
         <div className="max-w-3xl mx-auto">
-          <h3 className="font-display text-4xl text-center mb-12" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.02em' }}>
+          <h3 className="font-display text-[24px] md:text-[clamp(1.6rem,3vw,2.4rem)] font-extrabold leading-[1.2] text-center mb-12" style={{ color: 'var(--brand-dark)', letterSpacing: '-0.025em' }}>
             {t('faq.h2')}
           </h3>
           <div className="space-y-3">
@@ -758,10 +758,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
           {/* CTA text */}
           <div className="flex flex-col justify-center text-center">
-            <h3 className="font-display text-4xl md:text-5xl text-white mb-4" style={{ letterSpacing: '-0.02em' }}>
+            <h3 className="font-display text-[24px] md:text-[clamp(1.6rem,3vw,2.4rem)] font-extrabold leading-[1.2] text-white mb-4" style={{ letterSpacing: '-0.025em' }}>
               {t('cta.h2')}
             </h3>
-            <h5 className="text-base leading-relaxed mb-8" style={{ color: 'rgba(255,255,255,0.75)' }}>
+            <h5 className="text-[14px] md:text-[clamp(0.98rem,1.2vw,1.08rem)] font-normal leading-[1.6] mb-8" style={{ color: 'rgba(255,255,255,0.75)' }}>
               {t('cta.sub')}
             </h5>
             <div>

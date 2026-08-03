@@ -11,7 +11,7 @@ export function LocalBusinessSchema({ cityName, stateName, locationSlug, locale,
     '@context': 'https://schema.org',
     '@type': 'MedicalBusiness',
     name: `Oxihome Malaysia - ${cityName}`,
-    url: `https://oxihome.my/${locale}/oxygen-machine/${locationSlug}`,
+    url: `https://oksigen.com.my/${locale}/oxygen-machine/${locationSlug}`,
     description: `Oxygen machine rental and sales in ${cityName}, Malaysia. 4-hour same-day delivery. Rent from RM250/month.`,
     telephone: phoneNumber,
     areaServed: {
@@ -25,7 +25,7 @@ export function LocalBusinessSchema({ cityName, stateName, locationSlug, locale,
     parentOrganization: {
       '@type': 'Organization',
       name: 'Oxihome Malaysia',
-      url: 'https://oxihome.my',
+      url: 'https://oksigen.com.my',
     },
   }
 
