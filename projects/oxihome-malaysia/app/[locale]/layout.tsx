@@ -8,7 +8,6 @@ import { routing } from '@/i18n/routing'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { OrganizationSchema } from '@/components/schema/OrganizationSchema'
 import { siteConfig } from '@/config/site'
-import { footerLocations } from '@/config/locations'
 import { getPhoneNumber, waLink } from '@/lib/webcore'
 import '../globals.css'
 
@@ -69,20 +68,12 @@ export function generateStaticParams() {
   return routing.locales.map(locale => ({ locale }))
 }
 
-const footerProducts = [
-  'OxiHome Mesin 5L',
-  'Tangki Oksigen Kecemasan',
-  'Pakej Combo Jimat',
-  'Pulse Oximeter',
-]
-
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params
   if (!routing.locales.includes(locale as 'en' | 'ms' | 'zh')) notFound()
 
   const messages = await getMessages()
   const t  = await getTranslations({ locale, namespace: 'nav' })
-  const tf = await getTranslations({ locale, namespace: 'footer' })
   const { phone } = await getPhoneNumber('all')
 
   const navLinks = [
@@ -153,83 +144,6 @@ export default async function LocaleLayout({ children, params }: Props) {
           </header>
 
           {children}
-
-          {/* ── FOOTER ── */}
-          <footer className="text-white py-14 px-6" style={{ background: 'var(--brand-dark)' }}>
-            <div className="max-w-6xl mx-auto">
-              <div className="grid md:grid-cols-4 gap-10 mb-10">
-                {/* Brand col */}
-                <div className="md:col-span-2">
-                  <div className="flex items-center gap-2.5 mb-4">
-                    <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.12)' }}>
-                      <OxiIcon />
-                    </div>
-                    <span className="font-display text-xl text-white leading-none tracking-tight">
-                      Oxi<span style={{ color: 'var(--brand-primary-lt)' }}>home</span>
-                      <span className="text-sm font-normal ml-0.5 text-slate-400" style={{ fontFamily: 'var(--font-body)' }}>.my</span>
-                    </span>
-                  </div>
-                  <p className="text-sm leading-relaxed max-w-xs" style={{ color: 'var(--brand-text-muted)' }}>
-                    {tf('tagline')}
-                  </p>
-                  <a
-                    href={`/${locale}/redirect-whatsapp-1`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 mt-5 text-sm font-semibold transition-opacity hover:opacity-80"
-                    style={{ color: WA_GREEN }}
-                  >
-                    <WAIcon />
-                    {tf('whatsapp')}
-                  </a>
-                </div>
-
-                {/* Products */}
-                <div>
-                  <h3 className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: 'var(--brand-primary-lt)' }}>
-                    {tf('productsCol')}
-                  </h3>
-                  <ul className="space-y-2.5 text-sm" style={{ color: 'var(--brand-text-muted)' }}>
-                    {footerProducts.map(p => (
-                      <li key={p}>
-                        <a href={`/${locale}#products`} className="hover:text-white transition-colors">{p}</a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Locations */}
-                <div>
-                  <h3 className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: 'var(--brand-primary-lt)' }}>
-                    {tf('locationsCol')}
-                  </h3>
-                  <ul className="space-y-2.5 text-sm" style={{ color: 'var(--brand-text-muted)' }}>
-                    {footerLocations.map(loc => (
-                      <li key={loc.slug}>
-                        <a href={`/${locale}/oxygen-machine/${loc.slug}`} className="hover:text-white transition-colors">
-                          {loc.displayName}
-                        </a>
-                      </li>
-                    ))}
-                    <li>
-                      <a href={`/${locale}#locations`} className="font-medium transition-colors hover:text-white" style={{ color: 'var(--brand-primary-lt)' }}>
-                        {tf('viewAll')}
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="border-t pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm" style={{ borderColor: 'rgba(255,255,255,0.08)', color: 'var(--brand-text-muted)' }}>
-                <p>© {new Date().getFullYear()} {tf('copyright')}</p>
-                <div className="flex gap-6">
-                  <a href={`/${locale}#products`}  className="hover:text-white transition-colors">{tf('productsCol')}</a>
-                  <a href={`/${locale}#locations`} className="hover:text-white transition-colors">{tf('locationsCol')}</a>
-                </div>
-              </div>
-            </div>
-          </footer>
-
         </NextIntlClientProvider>
       </body>
     </html>
