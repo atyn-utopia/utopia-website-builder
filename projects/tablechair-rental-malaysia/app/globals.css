@@ -17,6 +17,34 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
+:root {
+  /* Utopia CI structural tokens — radius + motion only. Palette, fonts and
+     existing button shapes stay per-project; do NOT force --r-button onto the
+     pill CTAs this site already uses. Consumed by the "Built by Utopia AI"
+     credit and the footer nav hover. */
+  --r-button: 8px;
+  --r-card: 12px;
+  --r-pill: 999px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-hover: 220ms;
+  --dur-layout: 320ms;
+}
+
+/* "Built by Utopia AI" footer credit (Utopia CI element — inherits footer text colour) */
+.utopia-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: inherit;
+  text-decoration: none;
+  border-radius: var(--r-button);
+  transition: transform var(--dur-hover) var(--ease), opacity var(--dur-hover) var(--ease);
+}
+.utopia-credit:hover { transform: translateY(-1px); opacity: 0.85; }
+.utopia-credit__mark { flex: none; }
+
 html, body {
   background: #FFFEF8;
   color: #111111;
