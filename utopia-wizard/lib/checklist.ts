@@ -115,6 +115,33 @@ async function concatTsxInDir(ctx: Ctx, relDir: string): Promise<string> {
   return out
 }
 
+// Chrome + presentational components whose source must NOT be folded into the
+// homepage body. SiteHeader/SiteFooter carry their own WhatsApp CTA on every
+// page, so counting them would make any homepage look converted.
+const CHROME_COMPONENTS =
+  /^(SiteHeader|SiteFooter|FomoBanner|FomoCountdown|LanguageSwitcher|NavCtaGlobalStyle|PageStyles|Ornaments)$/
+
+// The homepage as actually rendered: app/[locale]/*.tsx plus the source of the
+// non-chrome `@/components/*` it imports. Most sites delegate the product grid
+// to PageShell / HomePageClient, so reading only app/[locale] sees the hero and
+// nothing else — every product card's CTA is invisible to the check.
+// One level deep: the page's own imports, not their transitive imports.
+async function concatHomepageSource(ctx: Ctx): Promise<string> {
+  const pageSrc = await concatTsxInDir(ctx, 'app/[locale]')
+  if (!pageSrc) return ''
+  let out = pageSrc.replace(/<SiteHeader\b[^>]*\/?>|<SiteFooter\b[^>]*\/?>/g, '')
+  const seen = new Set<string>()
+  for (const m of pageSrc.matchAll(/from\s+['"]@\/components\/([A-Za-z0-9_\-/]+)['"]/g)) {
+    const rel = m[1]
+    const base = rel.split('/').pop() as string
+    if (seen.has(rel) || CHROME_COMPONENTS.test(base)) continue
+    seen.add(rel)
+    const c = await readFileCached(ctx, path.join(ctx.info.projectDir, 'components', `${rel}.tsx`))
+    if (c) out += '\n' + c
+  }
+  return out
+}
+
 // ── Heading keyword coverage (informational) ───────────────────────────────
 // Resolves each homepage <h3>{tVar('key')} to its messages/ms.json string and
 // reports how many section headings carry a primary keyword. This is a soft
@@ -1011,12 +1038,14 @@ const DESIGN: Check[] = [
     group: 'Layout & Design', id: 'homepage-product-ctas', name: 'Homepage has enough WhatsApp CTAs (≥3)',
     help: "Each product/service card on the homepage should have a WhatsApp CTA routing through /redirect-whatsapp-1. Pages with only the hero CTA leave every product card without a way to convert — roller-shutter shipped with 1 CTA total.",
     run: async (ctx) => {
-      const c = await concatTsxInDir(ctx, 'app/[locale]')
-      if (!c) return skip('homepage-product-ctas', 'Homepage has enough WhatsApp CTAs (≥3)', 'homepage files missing')
+      // Homepage as rendered: app/[locale] plus the non-chrome components it
+      // imports — the product grid usually lives in PageShell / HomePageClient,
+      // and reading only app/[locale] sees the hero CTA and nothing else.
+      const body = await concatHomepageSource(ctx)
+      if (!body) return skip('homepage-product-ctas', 'Homepage has enough WhatsApp CTAs (≥3)', 'homepage files missing')
       // Count all forms of CTA that route through the redirect page or use the
-      // shared WhatsAppButton. We strip <SiteHeader> / <SiteFooter> usages first
-      // so the header/footer's own CTAs don't inflate the count.
-      const body = c.replace(/<SiteHeader\b[^>]*\/?>|<SiteFooter\b[^>]*\/?>/g, '')
+      // shared WhatsAppButton. SiteHeader/SiteFooter are excluded by
+      // concatHomepageSource so the chrome's own CTA can't inflate the count.
       const ctas = countOccurrences(body, /waRedirect\(|<WhatsAppButton\b|\/redirect-whatsapp-1/)
       return ctas >= 3
         ? pass('homepage-product-ctas', 'Homepage has enough WhatsApp CTAs (≥3)', `${ctas} CTAs on homepage`)
