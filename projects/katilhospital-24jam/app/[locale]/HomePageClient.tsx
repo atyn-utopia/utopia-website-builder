@@ -87,7 +87,7 @@ export default function HomePageClient({ locale, products, chromeProvided = fals
             <h1
               style={{
                 fontSize: 'clamp(28px, 5vw, 44px)',
-                fontWeight: 400,
+                fontWeight: 700,
                 color: '#1c3a6a',
                 letterSpacing: '-0.025em',
                 lineHeight: 1.2,

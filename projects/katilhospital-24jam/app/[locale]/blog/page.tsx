@@ -46,7 +46,7 @@ export default async function BlogIndexPage({
       {/* Canonical H1 + H2 (page title). The single visible, styled card grid
           — all posts, equal-height covers — is rendered by BlogListClient below. */}
       <section style={{ padding: '44px 16px 8px', textAlign: 'center' }}>
-        <h1 style={{ fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 400, margin: 0, color: '#1c3a6a', letterSpacing: '-0.025em' }}>
+        <h1 style={{ fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 700, margin: 0, color: '#1c3a6a', letterSpacing: '-0.025em' }}>
           {t('title')}
         </h1>
         <h2 style={{ fontSize: 16, fontWeight: 400, margin: '10px auto 0', maxWidth: 620, color: 'rgba(28,58,106,0.7)', lineHeight: 1.5 }}>

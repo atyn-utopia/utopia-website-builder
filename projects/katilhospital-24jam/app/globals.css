@@ -132,9 +132,10 @@ a {
 }
 
 /* ============================================
-   BASE HEADINGS — all headings render Regular (400), line-height 1.2
-   (matches the air-compressor reference). Inline weights on individual
-   headings are set to 400 too; class-styled labels keep their own weight.
+   BASE HEADINGS — line-height 1.2. Base weight stays Regular (400) so body
+   copy that lives in h5/h6 tags (the no-bare-<p> rule) doesn't render bold.
+   Actual section/card TITLES set font-weight: 700 inline or via their own
+   class — see HomeSections, ProductCard, the page clients and .blog-content.
    ============================================ */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
@@ -305,9 +306,9 @@ h1, h2, h3, h4, h5, h6 {
    ============================================ */
 /* Heading scale — distinct sizes so h2 > h3 > h4 read as a clear hierarchy.
    scroll-margin-top keeps anchor jumps clear of the sticky FOMO bar. */
-.blog-content h2 { font-size: 28px; font-weight: 400; color: var(--navy); margin: 2em 0 0.5em; line-height: 1.2; letter-spacing: -0.01em; scroll-margin-top: 90px; }
-.blog-content h3 { font-size: 23px; font-weight: 400; color: var(--navy); margin: 1.5em 0 0.5em; line-height: 1.25; scroll-margin-top: 90px; }
-.blog-content h4 { font-size: 19px; font-weight: 400; color: var(--navy); margin: 1.3em 0 0.4em; line-height: 1.3; scroll-margin-top: 90px; }
+.blog-content h2 { font-size: 28px; font-weight: 700; color: var(--navy); margin: 2em 0 0.5em; line-height: 1.2; letter-spacing: -0.01em; scroll-margin-top: 90px; }
+.blog-content h3 { font-size: 23px; font-weight: 700; color: var(--navy); margin: 1.5em 0 0.5em; line-height: 1.25; scroll-margin-top: 90px; }
+.blog-content h4 { font-size: 19px; font-weight: 700; color: var(--navy); margin: 1.3em 0 0.4em; line-height: 1.3; scroll-margin-top: 90px; }
 .blog-content p { font-size: 16px; line-height: 1.7; margin: 0 0 1.15em; color: var(--text); }
 .blog-content img { max-width: 100%; height: auto; border-radius: var(--radius-lg); margin: 1.5em 0; }
 .blog-content ul, .blog-content ol { margin: 1.1em 0; padding-left: 1.4em; }
@@ -553,7 +554,7 @@ h1, h2, h3, h4, h5, h6 {
 .blog-content nav h4 {
   margin: 0 0 12px;
   font-size: 12px;
-  font-weight: 400;
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent, #e63030);

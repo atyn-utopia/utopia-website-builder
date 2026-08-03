@@ -102,7 +102,7 @@ export default function BlogPostClient({
             <h1
               style={{
                 fontSize: 'clamp(26px, 4vw, 38px)',
-                fontWeight: 400,
+                fontWeight: 700,
                 color: '#1c3a6a',
                 lineHeight: 1.2,
                 letterSpacing: '-0.025em',
@@ -178,7 +178,7 @@ export default function BlogPostClient({
           <h3
             style={{
               fontSize: 'clamp(20px, 3vw, 28px)',
-              fontWeight: 400,
+              fontWeight: 700,
               color: '#FFFFFF',
               margin: '0 0 18px',
             }}
@@ -206,7 +206,7 @@ export default function BlogPostClient({
             <h3
               style={{
                 fontSize: 24,
-                fontWeight: 400,
+                fontWeight: 700,
                 color: '#1c3a6a',
                 margin: '0 0 20px',
                 textAlign: 'center',
@@ -251,7 +251,7 @@ export default function BlogPostClient({
                     <h4
                       style={{
                         fontSize: 16,
-                        fontWeight: 400,
+                        fontWeight: 700,
                         color: '#1c3a6a',
                         lineHeight: 1.35,
                         margin: 0,

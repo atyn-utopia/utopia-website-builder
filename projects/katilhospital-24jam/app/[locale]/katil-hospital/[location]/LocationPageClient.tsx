@@ -125,7 +125,7 @@ export default function LocationPageClient({
             <h1
               style={{
                 fontSize: 'clamp(28px, 5vw, 44px)',
-                fontWeight: 400,
+                fontWeight: 700,
                 color: '#1c3a6a',
                 letterSpacing: '-0.025em',
                 lineHeight: 1.2,
@@ -293,7 +293,7 @@ export default function LocationPageClient({
             <h3
               style={{
                 fontSize: 'clamp(1.6rem, 3vw, 2.4rem)',
-                fontWeight: 400,
+                fontWeight: 700,
                 color: '#1c3a6a',
                 letterSpacing: '-0.025em',
                 margin: '0 0 10px',

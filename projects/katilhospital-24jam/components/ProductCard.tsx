@@ -93,7 +93,7 @@ export default function ProductCard({
         <h4
           style={{
             fontSize: 16.5,
-            fontWeight: 400,
+            fontWeight: 700,
             color: '#1c3a6a',
             letterSpacing: -0.2,
             lineHeight: 1.3,

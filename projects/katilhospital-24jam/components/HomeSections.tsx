@@ -383,7 +383,7 @@ export default function HomeSections({ locale, products, location }: Props) {
           }
           .kh-usp-label {
             font-size: 15px;
-            font-weight: 400;
+            font-weight: 700;
             color: #1c3a6a;
             line-height: 1.3;
           }
@@ -519,7 +519,7 @@ export default function HomeSections({ locale, products, location }: Props) {
                 <h4
                   style={{
                     fontSize: 17,
-                    fontWeight: 400,
+                    fontWeight: 700,
                     color: '#1c3a6a',
                     lineHeight: 1.3,
                     margin: 0,
@@ -606,7 +606,7 @@ export default function HomeSections({ locale, products, location }: Props) {
             <h3
               style={{
                 fontSize: 'clamp(1.6rem, 3vw, 2.4rem)',
-                fontWeight: 400,
+                fontWeight: 700,
                 color: '#1c3a6a',
                 letterSpacing: '-0.025em',
                 lineHeight: 1.2,
@@ -653,7 +653,7 @@ export default function HomeSections({ locale, products, location }: Props) {
                   <h4
                     style={{
                       fontSize: 18,
-                      fontWeight: 400,
+                      fontWeight: 700,
                       color: '#1c3a6a',
                       margin: 0,
                       lineHeight: 1.3,
@@ -1037,7 +1037,7 @@ export default function HomeSections({ locale, products, location }: Props) {
           <h3
             style={{
               fontSize: 'clamp(1.6rem, 3vw, 2.4rem)',
-              fontWeight: 400,
+              fontWeight: 700,
               color: '#FFFFFF',
               letterSpacing: '-0.025em',
               lineHeight: 1.2,
@@ -1075,7 +1075,7 @@ function H3({ children, centered }: { children: React.ReactNode; centered?: bool
     <h3
       style={{
         fontSize: 'clamp(1.6rem, 3vw, 2.4rem)',
-        fontWeight: 400,
+        fontWeight: 700,
         color: '#1c3a6a',
         letterSpacing: '-0.025em',
         lineHeight: 1.2,
