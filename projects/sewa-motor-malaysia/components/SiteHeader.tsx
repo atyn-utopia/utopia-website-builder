@@ -7,6 +7,7 @@ import LanguageSwitcher from './LanguageSwitcher';
 
 export default function SiteHeader() {
   const t = useTranslations('nav');
+  const tShared = useTranslations('shared');
   const locale = useLocale();
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
@@ -14,7 +15,7 @@ export default function SiteHeader() {
   return (
     <header className="site-header">
       <div className="site-header-inner">
-        <Link href={`/${locale}`} className="site-brand" aria-label="Sewa Motor Malaysia homepage">
+        <Link href={`/${locale}`} className="site-brand" aria-label={tShared('logoAlt')}>
           <span className="site-brand-icon" aria-hidden="true">
             <svg viewBox="0 0 32 32" width="32" height="32">
               <circle cx="9" cy="22" r="5" fill="#fff" />

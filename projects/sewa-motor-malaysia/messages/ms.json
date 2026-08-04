@@ -8,10 +8,6 @@
     "whatsapp": "WhatsApp Kami",
     "whatsappCta": "WhatsApp"
   },
-  "shared": {
-    "logoAlt": "Logo Sewa Motor Malaysia",
-    "imageAlt": "Imej hiasan tema motosikal"
-  },
   "gallery": {
     "alts": [
       "Honda Vario 160 dihantar di Petaling Jaya",
@@ -30,6 +26,8 @@
     "bookNow": "Tempah Sekarang"
   },
   "shared": {
+    "logoAlt": "Logo Sewa Motor Malaysia",
+    "imageAlt": "Imej hiasan tema motosikal",
     "freeToAsk": "Percuma untuk bertanya · Balas dalam 1 jam",
     "safetyNote": "Armada selamat · Sokongan kerosakan 30 hari",
     "stats": {

@@ -8,10 +8,6 @@
     "whatsapp": "立即WhatsApp",
     "whatsappCta": "WhatsApp"
   },
-  "shared": {
-    "logoAlt": "Sewa Motor Malaysia 标志",
-    "imageAlt": "电单车租赁装饰图像"
-  },
   "gallery": {
     "alts": [
       "Honda Vario 160 在八打灵再也送达",
@@ -30,6 +26,8 @@
     "bookNow": "立即预订"
   },
   "shared": {
+    "logoAlt": "Sewa Motor Malaysia 标志",
+    "imageAlt": "电单车租赁装饰图像",
     "freeToAsk": "免费咨询 · 1小时内回复",
     "safetyNote": "安全检测车队 · 30天故障保障",
     "stats": {

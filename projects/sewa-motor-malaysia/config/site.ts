@@ -6,11 +6,13 @@
 // Note: `sewamotor.my` is a separate Wix site we do not own; do not point this
 // at that host.
 export const siteConfig = {
+  // Stable webcore identity (company_websites.id). Never changes on domain rename.
+  siteId: 'a5f352c9-920d-4918-a1cd-7b13ada4a4a2',
   name: 'Sewa Motor Malaysia',
   brandName: 'Sewa Motor Malaysia',
-  domain: 'sewa-motor-malaysia.utopiaai.my',
-  baseUrl: 'https://sewa-motor-malaysia.utopiaai.my',
-  siteUrl: 'https://sewa-motor-malaysia.utopiaai.my',
+  domain: 'motorsewa.com.my',
+  baseUrl: 'https://motorsewa.com.my',
+  siteUrl: 'https://motorsewa.com.my',
   productSlug: 'sewa-motor',
-  fallbackPhone: '60174287801',
+  fallbackPhone: '601126699011',
 }
