@@ -127,11 +127,17 @@ async function getPhoneRows(domain: string): Promise<PhoneRow[]> {
   return rows ?? []
 }
 
-function toResult(row: PhoneRow | undefined, mode: LeadsMode, _domain: string): PhoneResult {
+function toResult(row: PhoneRow | undefined, mode: LeadsMode, domain: string): PhoneResult {
   if (!row) return fallbackResult()
+  // Always prefix the domain the lead came from, so an operator running several
+  // sites (or one number registered against several domains) can tell which site
+  // produced the enquiry. Any greeting already stored in whatsapp_text is dropped
+  // first, otherwise the message double-greets ("Hi domain.my, Hi Brand, ...").
+  const raw = row.whatsapp_text || FALLBACK_WA_TEXT
+  const body = raw.replace(/^\s*(hi|hello|hai|salam|assalamualaikum)\b[^,]{0,40},\s*/i, '')
   return {
     phone: row.phone_number,
-    whatsappText: row.whatsapp_text || FALLBACK_WA_TEXT,
+    whatsappText: `Hi ${domain}, ${body}`,
     source: 'database',
     mode,
   }
