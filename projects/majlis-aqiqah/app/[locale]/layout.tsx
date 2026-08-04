@@ -50,6 +50,10 @@ export async function generateMetadata({
     metadataBase: new URL(siteConfig.url),
     title: t('title'),
     description: t('description'),
+    // Search Console URL-prefix property ownership. The bundle's injector only
+    // rewrites static HTML, so on Next.js this goes through the Metadata API,
+    // which renders <meta name="google-site-verification" …> into every page.
+    verification: { google: 'VHxICXeiVl1Fec_gbMwRtR8OYZjoq0TvcPQiXBIUmPA' },
     alternates: {
       canonical: `${localeAbs(locale)}`,
       languages,
@@ -87,6 +91,17 @@ export default async function LocaleLayout({
     <html lang={locale} className={`${inter.variable} ${serif.variable}`}>
       <head>
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        {/* Google Tag Manager */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WKVL7GXN');`,
+          }}
+        />
+        {/* End Google Tag Manager */}
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script
           defer
@@ -95,6 +110,16 @@ export default async function LocaleLayout({
         />
       </head>
       <body>
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-WKVL7GXN"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
+        {/* End Google Tag Manager (noscript) */}
         <NextIntlClientProvider messages={messages} locale={locale}>
           <OrganizationSchema />
           <WebSiteSchema locale={locale} />
