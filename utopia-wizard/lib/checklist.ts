@@ -1,7 +1,7 @@
 import { readFile, access, readdir, stat } from 'fs/promises'
 import path from 'path'
 import type { ProjectInfo } from './projectInfo'
-import { getDomainCounts, getBlogContentRows, getPhoneRows, getRegisteredDomains, getWebsiteById, supabaseConfigured } from './supabaseChecks'
+import { getDomainCounts, getBlogContentRows, getPhoneRows, getRegisteredDomains, getWebsiteById, supabaseConfigured, getPhoneRowsForExactDomain, getAllPhoneOwners,} from './supabaseChecks'
 import { findHardcodedPhones, findBlogHardcodedPhones, findMessageLeaks } from './sourceScan'
 import { checkLiveDbConnection } from './liveStatusCheck'
 import { getProjectDomains } from './vercelDomains'
@@ -140,6 +140,29 @@ async function concatHomepageSource(ctx: Ctx): Promise<string> {
     if (c) out += '\n' + c
   }
   return out
+}
+
+/** Fetch the live redirect page and parse the wa.me phone + decoded ?text=.
+ *  Probes the locale-less path first, then /ms and /en, since default-locale
+ *  routing differs per site (oxihome serves ms at /, most serve en at /). */
+async function livePrefill(domain: string): Promise<{ phone: string; text: string } | null> {
+  for (const path of ['', '/ms', '/en', '/zh']) {
+    try {
+      const res = await fetch(`https://${domain}${path}/redirect-whatsapp-1`, {
+        signal: AbortSignal.timeout(8000),
+        cache: 'no-store',
+        redirect: 'follow',
+      })
+      if (!res.ok) continue
+      const html = await res.text()
+      const m = html.match(/wa\.me\/(\d+)(?:\?text=([^"'\\\s<]*))?/)
+      if (!m) continue
+      let text = ''
+      try { text = m[2] ? decodeURIComponent(m[2]) : '' } catch { text = m[2] ?? '' }
+      return { phone: m[1], text }
+    } catch { /* try next path */ }
+  }
+  return null
 }
 
 // ── Heading keyword coverage (informational) ───────────────────────────────
@@ -1303,7 +1326,13 @@ const DESIGN: Check[] = [
       if (!slug) return skip('location-page-chrome', 'Location page renders SiteHeader + SiteFooter + FomoBanner', 'unknown productSlug')
       const c = await readProjectFile(ctx, `app/[locale]/${slug}/[location]/page.tsx`)
       if (!c) return skip('location-page-chrome', 'Location page renders SiteHeader + SiteFooter + FomoBanner', 'location page not found')
-      const missing = (['SiteHeader', 'SiteFooter', 'FomoBanner'] as const).filter((tag) => !new RegExp(`<${tag}\\b`).test(c))
+      // Chrome rendered by app/[locale]/layout.tsx applies to every page
+      // beneath it — that is better than repeating it per page, not worse.
+      // oxihome moved <FomoBanner /> into the layout to fix a sticky-overlap
+      // bug and these checks read it as 'missing'.
+      const layoutSrc = (await readProjectFile(ctx, 'app/[locale]/layout.tsx')) ?? ''
+      const chrome = c + '\n' + layoutSrc
+      const missing = (['SiteHeader', 'SiteFooter', 'FomoBanner'] as const).filter((tag) => !new RegExp(`<${tag}\\b`).test(chrome))
       return missing.length === 0
         ? pass('location-page-chrome', 'Location page renders SiteHeader + SiteFooter + FomoBanner')
         : fail('location-page-chrome', 'Location page renders SiteHeader + SiteFooter + FomoBanner', `missing: ${missing.join(', ')}`)
@@ -1315,7 +1344,13 @@ const DESIGN: Check[] = [
     run: async (ctx) => {
       const c = await readProjectFile(ctx, 'app/[locale]/blog/page.tsx')
       if (!c) return skip('blog-listing-chrome', 'Blog listing renders SiteHeader + SiteFooter + FomoBanner', 'blog listing not found')
-      const missing = (['SiteHeader', 'SiteFooter', 'FomoBanner'] as const).filter((tag) => !new RegExp(`<${tag}\\b`).test(c))
+      // Chrome rendered by app/[locale]/layout.tsx applies to every page
+      // beneath it — that is better than repeating it per page, not worse.
+      // oxihome moved <FomoBanner /> into the layout to fix a sticky-overlap
+      // bug and these checks read it as 'missing'.
+      const layoutSrc = (await readProjectFile(ctx, 'app/[locale]/layout.tsx')) ?? ''
+      const chrome = c + '\n' + layoutSrc
+      const missing = (['SiteHeader', 'SiteFooter', 'FomoBanner'] as const).filter((tag) => !new RegExp(`<${tag}\\b`).test(chrome))
       return missing.length === 0
         ? pass('blog-listing-chrome', 'Blog listing renders SiteHeader + SiteFooter + FomoBanner')
         : fail('blog-listing-chrome', 'Blog listing renders SiteHeader + SiteFooter + FomoBanner', `missing: ${missing.join(', ')}`)
@@ -1327,7 +1362,13 @@ const DESIGN: Check[] = [
     run: async (ctx) => {
       const c = await readProjectFile(ctx, 'app/[locale]/blog/[slug]/page.tsx')
       if (!c) return skip('blog-post-chrome', 'Blog post renders SiteHeader + SiteFooter + FomoBanner', 'blog post page not found')
-      const missing = (['SiteHeader', 'SiteFooter', 'FomoBanner'] as const).filter((tag) => !new RegExp(`<${tag}\\b`).test(c))
+      // Chrome rendered by app/[locale]/layout.tsx applies to every page
+      // beneath it — that is better than repeating it per page, not worse.
+      // oxihome moved <FomoBanner /> into the layout to fix a sticky-overlap
+      // bug and these checks read it as 'missing'.
+      const layoutSrc = (await readProjectFile(ctx, 'app/[locale]/layout.tsx')) ?? ''
+      const chrome = c + '\n' + layoutSrc
+      const missing = (['SiteHeader', 'SiteFooter', 'FomoBanner'] as const).filter((tag) => !new RegExp(`<${tag}\\b`).test(chrome))
       return missing.length === 0
         ? pass('blog-post-chrome', 'Blog post renders SiteHeader + SiteFooter + FomoBanner')
         : fail('blog-post-chrome', 'Blog post renders SiteHeader + SiteFooter + FomoBanner', `missing: ${missing.join(', ')}`)
@@ -1965,9 +2006,71 @@ const DEPLOYMENT: Check[] = [
       return fail('live-db-connected', 'Live site reads phone from Supabase', status.detail)
     },
   },
+  {
+    group: 'Deployment', id: 'live-phone-is-own-number', name: 'Live phone belongs to THIS site',
+    help: "Fetches the live redirect page and compares the wa.me number against the phone_numbers rows for this site's OWN domain only. live-db-connected matches against a WIDENED candidate domain list (expanded by fallback-phone and slug-keyword lookups), so a number belonging to a different site in the fleet can satisfy it — that is exactly how 24hourelectrician.my scored 100/100 while serving another client's number from a stale Data Cache entry. Redeploying does NOT clear that cache; only revalidateTag does.",
+    run: async (ctx) => {
+      const NAME = 'Live phone belongs to THIS site'
+      if (!supabaseConfigured) return skip('live-phone-is-own-number', NAME, 'Supabase not configured')
+      const domain = ctx.info.domain
+      if (!domain) return skip('live-phone-is-own-number', NAME, 'no domain in config/site.ts')
+      const rows = await getPhoneRowsForExactDomain(domain)
+      if (rows == null) return skip('live-phone-is-own-number', NAME, 'phone lookup failed')
+      const own = rows.filter((r) => r.is_active).map((r) => r.phone_number)
+      if (own.length === 0) return fail('live-phone-is-own-number', NAME, `no active phone_numbers row for ${domain}`)
+
+      const live = await livePrefill(domain)
+      if (!live) return fail('live-phone-is-own-number', NAME, `redirect page on https://${domain} returned no wa.me link`)
+      return own.includes(live.phone)
+        ? pass('live-phone-is-own-number', NAME, `live=${live.phone}`)
+        : fail('live-phone-is-own-number', NAME, `live site serves ${live.phone} but ${domain} owns ${own.join(', ')} — stale webcore Data Cache? purge webcore-phones via /api/revalidate (a redeploy alone will NOT clear it)`)
+    },
+  },
+  {
+    group: 'Deployment', id: 'wa-prefill-carries-domain', name: 'WhatsApp prefill names the originating domain',
+    help: "The prefilled WhatsApp message must open with this site's domain, so an operator can tell which site produced a lead — one number is often registered against several domains. Also fails on a double greeting (\"Hi domain.my, Hi Brand, ...\"), which happens when whatsapp_text already starts with a greeting and the code prefixes another.",
+    run: async (ctx) => {
+      const NAME = 'WhatsApp prefill names the originating domain'
+      const domain = ctx.info.domain
+      if (!domain) return skip('wa-prefill-carries-domain', NAME, 'no domain in config/site.ts')
+      const live = await livePrefill(domain)
+      if (!live) return skip('wa-prefill-carries-domain', NAME, 'redirect page returned no wa.me link')
+      if (!live.text) return fail('wa-prefill-carries-domain', NAME, 'wa.me link carries no ?text= prefill at all')
+      if (!live.text.includes(domain)) return fail('wa-prefill-carries-domain', NAME, `prefill does not name the domain — "${live.text.slice(0, 70)}"`)
+      const greets = (live.text.match(/\b(hi|hello|hai|salam|assalamualaikum)\b/gi) ?? []).length
+      return greets > 1
+        ? fail('wa-prefill-carries-domain', NAME, `prefill greets ${greets}x — "${live.text.slice(0, 70)}"`)
+        : pass('wa-prefill-carries-domain', NAME, `"${live.text.slice(0, 48)}…"`)
+    },
+  },
 ]
 
 const QUALITY: Check[] = [
+  {
+    group: 'Quality', id: 'fallback-phone-is-own', name: 'fallbackPhone is this client\'s own number',
+    help: "config/site.ts fallbackPhone must be THIS client's number. A fallback pointing at another site in the fleet is worse than none: when the DB lookup misses, leads route silently to the wrong business instead of failing visibly. 60174287801 (katilhospital) had been copy-pasted into seven projects as a default.",
+    run: async (ctx) => {
+      const NAME = "fallbackPhone is this client's own number"
+      if (!supabaseConfigured) return skip('fallback-phone-is-own', NAME, 'Supabase not configured')
+      const fb = ctx.info.fallbackPhone
+      const domain = ctx.info.domain
+      if (!fb) return skip('fallback-phone-is-own', NAME, 'no fallbackPhone in config/site.ts')
+      if (!domain) return skip('fallback-phone-is-own', NAME, 'no domain in config/site.ts')
+      const own = await getPhoneRowsForExactDomain(domain)
+      if (own == null) return skip('fallback-phone-is-own', NAME, 'phone lookup failed')
+      const ownNumbers = own.map((r) => r.phone_number)
+      if (ownNumbers.includes(fb)) return pass('fallback-phone-is-own', NAME, fb)
+
+      const all = await getAllPhoneOwners()
+      const otherOwners = Array.from(new Set((all ?? []).filter((r) => r.phone_number === fb && r.website !== domain).map((r) => r.website)))
+      if (otherOwners.length > 0) {
+        return fail('fallback-phone-is-own', NAME, `fallback ${fb} belongs to ${otherOwners.slice(0, 3).join(', ')} — a DB miss would route this site's leads to another client`)
+      }
+      return ownNumbers.length === 0
+        ? fail('fallback-phone-is-own', NAME, `fallback ${fb} but ${domain} has no phone_numbers row to compare against`)
+        : fail('fallback-phone-is-own', NAME, `fallback ${fb} is not among ${domain}'s own numbers (${ownNumbers.join(', ')})`)
+    },
+  },
   {
     group: 'Quality', id: 'no-hardcoded-phones', name: 'No hardcoded phone numbers in app/, components/, or messages/',
     help: "No phone numbers hardcoded anywhere user-facing — every number comes from the database. Covers app/ + components/ source AND messages/*.json translation copy (those values render on the page, so a placeholder number there is just as visible).",

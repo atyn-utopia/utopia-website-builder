@@ -288,3 +288,29 @@ export async function getDomainCounts(candidates: string[]): Promise<DomainCount
   cache.set(key, { ts: Date.now(), promise })
   return promise
 }
+
+/**
+ * Phone rows for ONE exact domain — deliberately NOT the widened candidate set
+ * used elsewhere. The candidate list is expanded by fallback-phone and
+ * slug-keyword matching, which means a number belonging to a DIFFERENT site in
+ * the fleet can satisfy a "does the live phone come from the DB" test. Checks
+ * that verify lead routing must key on the site's own domain only.
+ */
+export async function getPhoneRowsForExactDomain(domain: string): Promise<PhoneRow[] | null> {
+  if (!domain) return []
+  return selectRows<PhoneRow>({
+    table: 'phone_numbers',
+    filter: `website=eq.${encodeURIComponent(domain)}`,
+    select: 'phone_number,label,location_slug,whatsapp_text,percentage,type,is_active',
+  })
+}
+
+/** Every (website, phone_number) pair in the fleet — used to detect a fallback
+ *  number that actually belongs to another client's site. */
+export async function getAllPhoneOwners(): Promise<{ website: string; phone_number: string }[] | null> {
+  return selectRows<{ website: string; phone_number: string }>({
+    table: 'phone_numbers',
+    filter: 'is_active=eq.true',
+    select: 'website,phone_number',
+  })
+}

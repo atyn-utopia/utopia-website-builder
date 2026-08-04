@@ -161,9 +161,12 @@ export const CHECK_META: CheckMeta[] = [
   { id: 'deploy-url-live',                group: 'Deployment', severity: 'blocking', doc: DEPLOY, name: 'Deploy URL responds' },
   { id: 'vercel-domain-match',            group: 'Deployment', severity: 'blocking', doc: DEPLOY, name: 'siteConfig.domain is served by Vercel' },
   { id: 'live-db-connected',              group: 'Deployment', severity: 'blocking', doc: DEPLOY, name: 'Live site reads phone from Supabase' },
+  { id: 'live-phone-is-own-number',       group: 'Deployment', severity: 'blocking', doc: DEPLOY, name: 'Live phone belongs to THIS site' },
+  { id: 'wa-prefill-carries-domain',      group: 'Deployment', severity: 'blocking', doc: DEPLOY, name: 'WhatsApp prefill names the originating domain' },
 
   // ── Quality ─────────────────────────────────────────────────────────────────
   { id: 'no-hardcoded-phones',            group: 'Quality', severity: 'blocking', doc: RULES, name: 'No hardcoded phone numbers in app/, components/, or messages/' },
+  { id: 'fallback-phone-is-own',          group: 'Quality', severity: 'blocking', doc: RULES, name: "fallbackPhone is this client's own number" },
   { id: 'no-domains-in-copy',             group: 'Quality', severity: 'blocking', doc: RULES, name: 'No domain/URL shown as visible text in copy' },
 ]
 
