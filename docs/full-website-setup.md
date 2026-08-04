@@ -94,8 +94,12 @@ Project Inputs Checklist:
 
 ## 3. Step 1 — Create Project Folder
 
-**Preferred: scaffold from the canonical reference (starts at ~96/100, zero blocking failures).**
-Instead of an empty folder, clone the `sewa-excavator` skeleton — chrome, PageStyles,
+**Preferred: scaffold from the canonical reference (every structural check passes on day one).**
+A fresh scaffold still has two blocking failures — `db-blog-posts` and `fallback-phone-is-own` —
+because no Supabase rows exist for the new domain yet; they clear once Cyclops seeds the phone
+and Hanabi seeds the blog. Structure is what the scaffold guarantees, not DB state.
+Instead of an empty folder, clone the `water-tank-malaysia` skeleton — chrome, PageStyles,
+WhatsApp redirect page, blog listing + article,
 i18n, schema, and tracking come pre-correct, so whole guardrail failure classes
 (`site-chrome`, `homepage-h1-h2`, `page-styles`, `i18n-routing`, `schema-components`)
 are prevented by construction:
@@ -114,7 +118,7 @@ project-unique special section** as TODO — those are the agent pipeline's job
 
 > Manual fallback (not recommended): `mkdir -p projects/{project-slug}` and save
 > inputs to `projects/{project-slug}/inputs.md`, then scaffold the Next.js app by
-> hand in Step 3. You lose the 96/100 baseline and must build the chrome correctly yourself.
+> hand in Step 3. You lose that structural baseline and must build the chrome correctly yourself.
 
 ### The guardrail gate applies from here on
 
@@ -354,6 +358,8 @@ export const siteConfig = {
 };
 ```
 
+> **`fallbackPhone` MUST be the client's own number — never a shared Utopia/operator test number.** `fallbackPhone` is what the site serves whenever the Supabase phone lookup returns nothing (missing row, host mismatch, DB down). If you reuse one operator number across sites, a single lookup miss silently puts *your* number on a client's live site — and the same number showing under multiple sites makes the wizard's phone panel ambiguous. One real client number per site; if you truly don't have it yet, use an obviously-fake sentinel (e.g. `60000000000`) so a fallback is visible, not a live personal line.
+
 ### `i18n/routing.ts`
 
 ```ts
@@ -466,9 +472,15 @@ export default async function LocaleLayout({
 
 ### `lib/getPhoneNumber.ts`
 
-This file handles all 4 leads modes. Copy from `projects/electric-wheelchair-malaysia/lib/getPhoneNumber.ts` and update:
-- `FALLBACK_PHONE` — set to the user's phone number
+This file handles all 4 leads modes. Copy from `projects/electric-wheelchair-malaysia/lib/getPhoneNumber.ts` (or `lib/webcore.ts`) and update:
+- `FALLBACK_PHONE` — set to the **client's** phone number (see the `fallbackPhone` note above — never a shared operator number)
 - `FALLBACK_WA_TEXT` — set to the default WhatsApp message
+
+> **`getHostDomain()` MUST normalise the host — strip the port AND a leading `www.`:**
+> ```ts
+> return host.replace(/:\d+$/, '').replace(/^www\./, '')
+> ```
+> Sites canonicalise apex → `www.` (or vice versa), so the runtime host is often `www.<domain>` while the `phone_numbers` / `company_websites` rows are keyed to the **bare apex**. Without stripping `www.`, the lookup misses and the site silently falls back to `fallbackPhone`. This bit `roller-shutter` (served the operator's number on the live `www.` host). The canonical reference `projects/water-tank-malaysia/lib/webcore.ts` already does this, so scaffolded sites inherit it — don't remove it.
 
 ### `lib/waRedirect.ts`
 
@@ -558,6 +570,73 @@ Create `en.json`, `ms.json`, `zh.json` with sections:
 - `faq` — FAQ section
 - `footer` — footer text, copyright
 - `blog` — blog listing/post labels (title, readMore, noPosts, breadcrumbHome, breadcrumbBlog, publishedOn, minRead, recentPosts, metaTitle, metaDescription)
+
+### Utopia Brand CI — Footer Credit + Structural Tokens (MANDATORY on every site)
+
+Insert the Utopia Corporate CI **elements** into every site. **Scope is deliberately narrow** — this is a build-credit + structural tokens, **NOT a Utopia reskin.** The site keeps its **own palette, fonts, and button *shape*.** Do not recolour anything blue, do not swap fonts.
+
+**1. Structural tokens — add to `globals.css` `:root` (radius + motion ONLY):**
+
+```css
+:root {
+  /* Utopia CI structural tokens — radius + motion only (palette/fonts stay per-project) */
+  --r-button: 8px;
+  --r-card: 12px;
+  --r-pill: 999px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-hover: 220ms;
+  --dur-layout: 320ms;
+}
+```
+
+> ⚠️ **Do NOT retrofit `--r-button` onto existing CTAs.** If the site already uses pill / `rounded-full` buttons (e.g. cat-rumah), forcing 8px changes the client's design. Define the tokens; only the credit link and any *new* Utopia-CI elements consume them. Existing buttons keep their current shape.
+
+**2. "Built by Utopia AI" footer credit — add to the shared `SiteFooter.tsx`** (alongside the copyright line, once per page):
+
+```tsx
+<a
+  className="utopia-credit"
+  href="https://utopiagroup.com.my"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <span>Built by</span>
+  <span className="utopia-credit__word">Utopia</span>
+  <svg className="utopia-credit__mark" width="14" height="12" viewBox="0 0 64 56" aria-hidden="true">
+    <defs>
+      <linearGradient id="utopiaCreditGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stopColor="#0054A6" />
+        <stop offset="50%" stopColor="#2774AE" />
+        <stop offset="100%" stopColor="#4A9DD0" />
+      </linearGradient>
+    </defs>
+    <polygon points="32,4 60,52 4,52" fill="url(#utopiaCreditGrad)" />
+  </svg>
+  <span className="utopia-credit__word">AI</span>
+</a>
+```
+
+**3. Credit styles — add to `globals.css`** (consumes the tokens above; easeOutExpo hover lift, icon never compresses):
+
+```css
+.utopia-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: inherit;              /* inherits the site's own footer text colour */
+  text-decoration: none;
+  border-radius: var(--r-button);
+  transition: transform var(--dur-hover) var(--ease), opacity var(--dur-hover) var(--ease);
+}
+.utopia-credit:hover { transform: translateY(-1px); opacity: 0.85; }
+.utopia-credit__mark { flex: none; }   /* triangle icon must never compress */
+```
+
+**Reference implementation:** `atyn-utopia/sewa-motor-malaysia` (extracted deploy repo) — `components/SiteFooter.tsx` credit block + `globals.css` token block. The full CI spec is `brand_assets/utopia-brand-kit/CI.md` (locked v1.5.1) when present.
+
+For an **already-live site** ("apply the brand CI to X"), this is the same two-part change (tokens + footer credit); on extracted per-site repos it needs a **redeploy** (`vercel --prod`) to go live, not just a push.
 
 ---
 
@@ -738,6 +817,7 @@ Every item below MUST be verified on the running site. These rules come from rea
 - [ ] **DO NOT convert image formats automatically.** Keep PNGs as PNG and JPEGs as JPEG — don't change formats when fixing tasks. Re-encoding PNG → JPEG flattens alpha (breaks transparent cutouts) and has broken images in real projects. If a file is genuinely too large for the web (>5 MB) flag it for the user; do not silently re-encode it.
 - [ ] For any asset >5 MB, use plain `<img loading="lazy" decoding="async">` — `<Image>` from `next/image` silently rejects huge files and leaves blank gaps in galleries / product cards.
 - [ ] Add `projects/{slug}/.gitignore` excluding `brand_assets/` and `temporary screenshots/` — raw artwork must not enter git.
+- [ ] **Utopia Brand CI elements inserted** — "Built by Utopia AI" credit in `SiteFooter` + `--r-*`/`--ease`/`--dur-*` tokens in `globals.css` (Step 5 → "Utopia Brand CI"). Elements only — site keeps its own palette, fonts, and button shape; do not force `--r-button` onto existing pill CTAs.
 
 #### Typography
 - [ ] Body font is **Inter** site-wide. Not Plus Jakarta Sans, not the default Tailwind stack.
@@ -1016,6 +1096,46 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY={anon_key}
 
 ---
 
+## 16b. Step 15 — Google Integration (POST-DEPLOY, after paid domain is live)
+
+> **Runs LAST — only after the site's PAID domain is connected on Vercel with DNS pointed there.** Never against a `*.vercel.app` preview URL: Google properties are keyed to the URL you submit, and re-keying later means duplicate properties + split data.
+
+This sets up the site's **Google/Ads** layer — GA4 + GTM + Google Search Console + Google Ads conversion import. It is **separate** from the Utopia Webcore `t.js` tracking added in Step 7 (`docs/tracking-guide.md`); that's internal analytics, this is Google.
+
+**Owned by Gloo** (Analytics & Growth Specialist), driven by the **`google-integration` skill**, which wraps the internal automation bundle at `google-automation-INTERNAL` (an additional working directory, wired to Utopia's shared Google account with live credentials on the machine).
+
+### Prerequisites (block until all true)
+- [ ] Paid domain live: `curl -I https://www.<domain>/` → 200
+- [ ] DNS nameservers on Vercel (`vercel domains ls`) — required for the GSC Domain property
+- [ ] Every WhatsApp CTA routes through a `/redirect-whatsapp-1/` page (the `whatsapp_click` conversion fires there; direct `wa.me/` links are NOT tracked)
+- [ ] Sitemap reachable at `https://www.<domain>/sitemap.xml`
+
+### Run it
+Spawn **Gloo** with the contents of `agents/gloo.md` + the paid domain, project dir, and supported locales. Gloo reads the bundle's own `SKILL.md` / `MANUAL-STEPS.md` (source of truth for flags) and runs the 5 phases:
+
+1. **Phase 1 — GSC Domain property** (no deploy)
+2. **Phase 2 — GA4 property** (no deploy) → captures Measurement ID `G-XXXX` + numeric property id
+3. **Phase 3 — GTM container + inject snippet** → **DEPLOY** after
+4. **Phase 4 — GSC URL-prefix** (init → **DEPLOY** → finalize; **repeat per locale**)
+5. **Phase 5 — Ads conversion import** (no deploy, no 24h wait)
+
+Deploy Phases 3 and 4 **separately** (own checkpoint each). For extracted per-site repos with no Vercel git integration, a `git push` does NOT deploy — run `vercel --prod` so the snippet/meta tag goes live before finalizing.
+
+### Residual manual clicks (~3–4 min — genuinely no API — hand back to the user)
+1. **REQUIRED — GA4** → Admin → Data collection → ON: Google Signals + User-provided data (after Phase 2)
+2. **REQUIRED — Ads** → conversion action → Count → "One" (after Phase 5)
+3. **REQUIRED — Ads** → Data manager → GA4 → ON: "Import app and web metrics" (after Phase 5)
+4. *(optional)* GTM → Container Settings → Consent Overview (BETA)
+
+Screenshots: https://websitebuilder.utopiaai.my/google (§04).
+
+> 🔒 The bundle's `credentials/` are LIVE Google keys. They live only at `~/.google-credentials` — never commit, print, or forward them. If exposed, rotate immediately.
+
+### End state
+GA4 property + GTM container + GSC properties (1 Domain + 1 URL-prefix per locale) + 1 Ads conversion action. Per-site config written to `google-automation-INTERNAL/configs/<domain>.json`.
+
+---
+
 ## 17. Final Checklist
 
 Before calling the website "done", verify everything:
@@ -1069,9 +1189,18 @@ Before calling the website "done", verify everything:
 - [ ] **No phone numbers or domain names** displayed as visible text
 - [ ] **Mobile center-aligned** — headings, buttons, cards, icons centered on mobile
 - [ ] **All images verified** — every image matches its context, no placeholders left
+- [ ] **Utopia Brand CI applied** — "Built by Utopia AI" footer credit in `SiteFooter` + `--r-*`/`--ease`/`--dur-*` structural tokens in `globals.css`. Site keeps its own palette/fonts/button-shape (no reskin, no forced 8px radius on existing pill buttons).
 
 ### Deployment
 - [ ] Code pushed to GitHub
 - [ ] Deployed to Vercel
 - [ ] Env vars set on Vercel
 - [ ] Live URL accessible and working
+
+### Google Integration (post-deploy — only after PAID domain is live)
+- [ ] GA4 property created (Measurement ID + numeric property id recorded)
+- [ ] GTM container created + snippet injected + redeployed (GTM loads on live site)
+- [ ] GSC properties: 1 Domain + 1 URL-prefix per locale, sitemaps submitted
+- [ ] Ads conversion action imported (`whatsapp_click`)
+- [ ] Residual manual toggles done: GA4 Google Signals + User-provided data; Ads counting `One`; Ads "Import app and web metrics" ON
+- [ ] Per-site config written to `google-automation-INTERNAL/configs/<domain>.json`

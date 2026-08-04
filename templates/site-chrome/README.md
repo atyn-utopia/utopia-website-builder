@@ -1,7 +1,10 @@
 # templates/site-chrome — Canonical site chrome (single source of truth)
 
 These six components are the **canonical chrome** every Utopia site must use,
-unchanged in structure. They are brand-agnostic: brand name, nav labels, and
+unchanged in structure. They are taken from **`projects/water-tank-malaysia`**,
+the default layout reference (see CLAUDE.md → "Default Layout Template"). The
+older `sewa-excavator` chrome — dark footer with a locations grid and social
+buttons — is superseded; do not copy chrome out of an older project. They are brand-agnostic: brand name, nav labels, and
 tagline come from `messages/*.json` (next-intl) and `config/site.ts`; the only
 asset conventions are `/brand/logo-dark.png` (footer) and `/brand/bg-hero.jpg`
 (hero bg). Swap those assets per project — do not edit the component structure.
@@ -9,7 +12,7 @@ asset conventions are `/brand/logo-dark.png` (footer) and `/brand/bg-hero.jpg`
 | File | Role |
 |------|------|
 | `SiteHeader.tsx` | nav links + language switcher + WhatsApp CTA |
-| `SiteFooter.tsx` | quick links, locations grid, copyright, social |
+| `SiteFooter.tsx` | flat minimal footer — logo + horizontal nav + divider + copyright + "Built by Utopia" credit |
 | `FomoBanner.tsx` | top sticky banner + live countdown (red/black) |
 | `PageStyles.tsx` | shared `<style>` block for every section (hero…final CTA) |
 | `LanguageSwitcher.tsx` | bordered flag pills (desktop) / dropdown (mobile) |
@@ -20,7 +23,7 @@ asset conventions are `/brand/logo-dark.png` (footer) and `/brand/bg-hero.jpg`
 - **New sites:** `npm run scaffold` (in `utopia-wizard/`) copies these into
   `projects/{slug}/components/`. Editing a file here changes what every *future*
   scaffold gets.
-- **Drift detection:** `cd utopia-wizard && npm run chrome:check` reports any
+- **Drift detection:** `cd utopia-wizard && npx tsx scripts/chrome-check.ts` reports any
   project whose chrome has diverged from these canonical files (normalised
   comparison that ignores per-project brand strings / asset paths). Re-sync
   intentionally — divergence is how broken chrome (e.g. a custom `BlogNav`) crept

@@ -19,7 +19,7 @@ export default function SiteHeader() {
         <nav className="site-nav site-nav--desktop" aria-label="Primary">
           <Link href={`/${locale}`}>{t('home')}</Link>
           <Link href={`/${locale}#products`}>{t('products')}</Link>
-          <Link href={`/${locale}#calculator`}>{t('calculator')}</Link>
+          <Link href={`/${locale}#packages`}>{t('packages')}</Link>
           <Link href={`/${locale}#locations`}>{t('locations')}</Link>
           <Link href={`/${locale}/blog`}>{t('blog')}</Link>
         </nav>
@@ -50,7 +50,7 @@ export default function SiteHeader() {
         <nav className="site-mobile-nav" aria-label="Mobile primary">
           <Link href={`/${locale}`} onClick={close}>{t('home')}</Link>
           <Link href={`/${locale}#products`} onClick={close}>{t('products')}</Link>
-          <Link href={`/${locale}#calculator`} onClick={close}>{t('calculator')}</Link>
+          <Link href={`/${locale}#packages`} onClick={close}>{t('packages')}</Link>
           <Link href={`/${locale}#locations`} onClick={close}>{t('locations')}</Link>
           <Link href={`/${locale}/blog`} onClick={close}>{t('blog')}</Link>
         </nav>

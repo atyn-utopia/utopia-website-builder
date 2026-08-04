@@ -6,7 +6,8 @@
  *     --product="Cleaning Service" --product-slug=cleaning \
  *     --domain=cleaning-malaysia.vercel.app --phone=60123456789
  *
- * Clones projects/sewa-excavator (the canonical chrome + PageStyles + i18n +
+ * Clones projects/water-tank-malaysia (the canonical chrome + redirect page +
+ * blog listing/article + PageStyles + i18n +
  * schema + tracking skeleton) into projects/{slug}, then fixes the machine-
  * critical bits so the new site starts ALREADY PASSING the structural guardrails:
  *   - config/site.ts        → new domain / brand / product / phone
@@ -28,7 +29,7 @@ import { readFile, writeFile, mkdir, rename, stat } from 'node:fs/promises'
 import { existsSync } from 'node:fs'
 import path from 'node:path'
 
-const REF = 'sewa-excavator'
+const REF = 'water-tank-malaysia'
 
 function arg(name: string): string | undefined {
   return process.argv.find((a) => a.startsWith(`--${name}=`))?.split('=').slice(1).join('=')
@@ -114,11 +115,20 @@ async function main() {
   }
   console.log(`scaffold: copied ${copied} structural file(s) from ${REF} + ${chromeCopied} chrome + localeHref helper from templates/site-chrome → projects/${slug}`)
 
-  // 2. Rename the product route folder: app/[locale]/excavator → app/[locale]/{productSlug}
-  if (productSlug !== 'excavator') {
-    const from = path.join(outDir, 'app', '[locale]', 'excavator')
+  // 2. Rename the product route folder → app/[locale]/{productSlug}.
+  // Read the source folder from the reference's own productSlug rather than
+  // hardcoding it: this silently no-opped when REF changed from sewa-excavator
+  // ('excavator') to water-tank-malaysia ('water-tank'), leaving every new site
+  // serving its product pages under the reference's slug.
+  const refCfg = await readFile(path.join(refDir, 'config', 'site.ts'), 'utf-8')
+  const refProductSlug = refCfg.match(/productSlug\s*:\s*['"](.*?)['"]/)?.[1]
+  if (!refProductSlug) die(`could not read productSlug from ${REF}/config/site.ts`)
+  if (productSlug !== refProductSlug) {
+    const from = path.join(outDir, 'app', '[locale]', refProductSlug)
     const to = path.join(outDir, 'app', '[locale]', productSlug)
-    if (existsSync(from)) { await rename(from, to); console.log(`scaffold: route folder → app/[locale]/${productSlug}/`) }
+    if (!existsSync(from)) die(`expected reference route app/[locale]/${refProductSlug}/ not found`)
+    await rename(from, to)
+    console.log(`scaffold: route folder app/[locale]/${refProductSlug}/ → app/[locale]/${productSlug}/`)
   }
 
   // 3. Rewrite config/site.ts (machine-critical — what every page reads)
@@ -130,24 +140,50 @@ async function main() {
       if (re.test(cfg)) cfg = cfg.replace(re, `$1'${val.replace(/'/g, "\\'")}'`)
     }
     set('domain', domain!)
+    // Both spellings exist across the fleet: sewa-excavator used `siteUrl`,
+    // water-tank-malaysia uses `url`. set() no-ops on a key that isn't present,
+    // so writing both is safe — and missing one leaves the new site pointing its
+    // canonical/OG URLs at the reference project's domain.
     set('siteUrl', `https://${domain}`)
+    set('url', `https://${domain}`)
     set('brandName', brand!)
     set('productSlug', productSlug!)
     set('productName', product!)
     set('fallbackPhone', phone)
+    // Drop the reference's pinned siteId. It is that project's
+    // company_websites.id — copying it would point the new site's webcore
+    // identity at the REFERENCE site, which is exactly the cross-wiring the pin
+    // exists to prevent. It gets pinned for real once the webcore row exists
+    // (docs/full-website-setup.md → Supabase seeding).
+    cfg = cfg.replace(/^[ \t]*\/\/[^\n]*\n(?=[ \t]*siteId\s*:)/m, '')
+             .replace(/^[ \t]*siteId\s*:\s*['"][^'"]*['"],[ \t]*\n/m, '')
+    // Same for the comment above fallbackPhone — it names the REFERENCE site's
+    // company ("TANKPRO's own WhatsApp number…"), which is actively misleading
+    // sitting above a different client's number.
+    cfg = cfg.replace(/^[ \t]*\/\/[^\n]*\n(?=[ \t]*fallbackPhone\s*:)/m, '')
     await writeFile(siteCfgPath, cfg)
-    console.log('scaffold: config/site.ts rewritten')
+    console.log('scaffold: config/site.ts rewritten (siteId cleared — pin it after webcore registration)')
   }
 
-  // 4. data-website tracking attribute → new domain (regardless of which ref
-  //    alias it pointed at), in both layouts.
+  // 4. Rewrite the two places a layout can still name the reference's domain:
+  //    the data-website tracking attribute, and metadataBase (which Next uses to
+  //    absolutise every canonical + OG URL — left unrewritten, a new site
+  //    advertises the reference project's domain to search engines).
   for (const rel of ['app/[locale]/layout.tsx', 'app/layout.tsx']) {
     const p = path.join(outDir, rel)
     if (existsSync(p)) {
       const t = (await readFile(p, 'utf-8'))
         .replace(/data-website=["'][^"']*["']/g, `data-website="${domain}"`)
+        .replace(/new URL\((['"])https?:\/\/[^'"]*\1\)/g, `new URL('https://${domain}')`)
       await writeFile(p, t)
     }
+  }
+
+  // 4b. package.json still carries the reference's name after a raw copy.
+  const pkgPath = path.join(outDir, 'package.json')
+  if (existsSync(pkgPath)) {
+    const pkg = await readFile(pkgPath, 'utf-8')
+    await writeFile(pkgPath, pkg.replace(/("name"\s*:\s*")[^"]*(")/, `$1${slug}$2`))
   }
 
   // 5. Fresh inputs.md stub (makes the project discoverable + starts the pipeline)

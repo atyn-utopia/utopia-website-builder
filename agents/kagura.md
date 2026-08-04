@@ -80,7 +80,9 @@ For the recommended design, provide:
 - **Default line-heights (MANDATORY)** — `line-height: 1.2` for all headings (h1–h6) and `line-height: 1.4` for body text (p, li, blockquote, `.blog-content` p/li). Set in `globals.css`; only override per-component when there's a specific design reason.
 
 **Header & footer (MANDATORY default):**
-- Do NOT design a custom header/footer per project. Use the same `<SiteHeader />` + `<SiteFooter />` layout as `projects/sewa-excavator/components/` for every new site. Only the brand name, logo file, and locale-aware nav labels change.
+- Do NOT design a custom header/footer per project. Use the same `<SiteHeader />` + `<SiteFooter />` layout as `projects/water-tank-malaysia/components/` for every new site. Only the brand name, logo file, colour tokens, and locale-aware nav labels change.
+- The same applies to the WhatsApp redirect page (`app/[locale]/redirect-whatsapp-1/`), the blog listing (`app/[locale]/blog/page.tsx`) and the blog article page (`app/[locale]/blog/[slug]/page.tsx`) — all four are copied from water-tank-malaysia, never redesigned. The footer is the flat minimal style (logo + horizontal nav + divider + copyright), NOT the older dark sewa-excavator footer with the locations grid and social buttons.
+- Your design freedom is the page *body* — hero, product grid, the project-unique special section — not the shared chrome.
 
 **Component styles:**
 - Card design (shadows, borders, radius)

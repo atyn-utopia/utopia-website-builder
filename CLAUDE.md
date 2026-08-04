@@ -94,6 +94,9 @@ Generates SEO-optimized blog articles with proper heading hierarchy (H1→H2→H
 Layla — QA & Deployment Specialist
 Verifies phone number system integration with the shared database, pushes code to GitHub, and deploys to Vercel. Runs after user confirms the website design.
 
+Gloo — Analytics & Growth Specialist (Google Integration)
+Sets up the site's Google footprint — GA4 + GTM + Google Search Console + Google Ads conversion import — via the internal automation bundle (`google-automation-INTERNAL`). Runs LAST, after Layla deploys and the site's PAID domain is live. Separate from the Utopia Webcore `t.js` analytics; this is the Google/Ads layer. Driven by the `google-integration` skill.
+
 
 # Agent Workflow
 
@@ -122,6 +125,7 @@ When the user asks to create a new website, you MUST follow `docs/full-website-s
 6. Hanabi — generate blog posts + insert into Supabase (MANDATORY, before deploy)
    → user confirms design + content
 7. Layla — integration test → GitHub push → Vercel deploy (blog + products already live)
+8. Gloo — Google integration (GA4 + GTM + GSC + Ads) — POST-DEPLOY, only after the PAID domain is live on Vercel. Uses the `google-integration` skill / `google-automation-INTERNAL` bundle.
 
 
 # SEO Rules
@@ -211,11 +215,29 @@ These rules apply to EVERY website. No exceptions.
 - All remaining section titles use H3–H6
 - Lint every page before marking design complete: H1 count must equal 1, H2 count must equal 1
 
-## Header & Footer — Default Template (sewa-excavator)
-- **Always use the same `<SiteHeader />` and `<SiteFooter />` layout as `projects/sewa-excavator/components/`.** This is the canonical chrome for every new site — nav links + language switcher + WhatsApp CTA in the header; footer with quick links, locations grid, copyright, social.
-- Do NOT design custom header/footer layouts per project. Copy `SiteHeader.tsx` + `SiteFooter.tsx` from sewa-excavator and only swap brand name, logo file path, and locale-aware nav labels.
+## Default Layout Template — `water-tank-malaysia`
+
+**`projects/water-tank-malaysia` is the canonical reference for every new site.** Copy these five surfaces from it and change only the brand name, logo file path, colour tokens, and locale-aware labels. Do NOT design per-project variants of any of them.
+
+| Surface | Copy from | What it already gets right |
+|---|---|---|
+| Header | `components/SiteHeader.tsx` | desktop nav + burger, `LanguageSwitcher`, WhatsApp CTA (`.nav-cta`), mobile-hidden CTA |
+| Footer | `components/SiteFooter.tsx` | flat minimal footer — logo + horizontal nav + divider + copyright, "Built by Utopia" credit |
+| WhatsApp redirect | `app/[locale]/redirect-whatsapp-1/` | see below — the most important one |
+| Blog listing | `app/[locale]/blog/page.tsx` | full chrome, breadcrumb, one h1 + one h2, `.blog-card` grid |
+| Blog article | `app/[locale]/blog/[slug]/page.tsx` | full chrome, `ArticleSchema` + `BreadcrumbSchema`, locale canonical + hreflang, `.blog-content` |
+
+**The redirect page is the one to never simplify.** Each line in it exists because something broke without it:
+- resolves the phone **server-side** and renders a real `wa.me` link into the HTML — a client-side handoff to the webcore endpoint fails the live DB check and breaks with JS disabled
+- `page_slug` routing from `?page=` or the `Referer` path, so per-page numbers work
+- `preferredRegion = 'sin1'` — the default US-East region pushed cold starts past the 7s liveness probe
+- `robots: { index: false, follow: false }`, `dynamic = 'force-dynamic'`, `revalidate = 0`
+- branded interstitial with a spinner and a plain `<a>` fallback for no-JS
+
 - Per-page nav variants (e.g. `BlogNav`) are forbidden — every public page (home, location, blog listing, blog article) renders the same `<SiteHeader />` + `<SiteFooter />` + `<FomoBanner />`.
+- Older projects still show the previous reference (`sewa-excavator`, dark footer with locations grid + social). When they disagree, **water-tank wins** — don't copy chrome out of an older site.
 - The wizard checks this via `site-chrome-components`, `homepage-uses-site-header`, `location-page-chrome`, `blog-listing-chrome`, `blog-post-chrome`, `no-blognav-usage`.
+- **`SiteFooter` must carry the "Built by Utopia AI" brand-CI credit** + the Utopia structural tokens (`--r-button/-card/-pill`, `--ease`, `--dur-*`) in `globals.css`. This is the CI *element* insertion only — keep the site's own palette, fonts, and button shape (no Utopia reskin, no forcing 8px radius onto existing pill buttons). See `docs/full-website-setup.md` → Step 5 → "Utopia Brand CI".
 
 ## Text Spacing — Default Line-Heights
 - **Headings (h1–h6): `line-height: 1.2`** — tight tracking suits display type and keeps multi-line headings compact.
