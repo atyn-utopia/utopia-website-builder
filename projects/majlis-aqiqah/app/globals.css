@@ -387,7 +387,7 @@ button { font-family: inherit; }
   .lsw-toggle { display: none !important; }
   .lsw-trigger { display: inline-flex; }
 }
-.section-head h3 { font-size: clamp(1.625rem, 3vw, 2.25rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; color: var(--brand-emerald); margin: 0; }
+.section-head h3 { font-size: 30px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; color: var(--brand-emerald); margin: 0; }
 /* Mobile section titles — 18px flat. This MUST sit after the base rule above:
    an identical-specificity override earlier in the file loses the cascade, which
    is why the first attempt at this had no effect. */
