@@ -87,12 +87,38 @@ export default async function LocaleLayout({ children, params }: Props) {
     <html lang={locale} className={inter.variable}>
       <head>
         <OrganizationSchema />
+        <meta
+          name="google-site-verification"
+          content="zP_suLyZc6nLeiuLT335Uq9NzwqQek0GOJNstUgW21M"
+        />
         {/* hreflang/canonical come from generateMetadata -> seoAlternates, which
             is per-page. Hardcoding <link rel="alternate"> here would stamp the
             HOMEPAGE alternates onto every location/blog page as well. */}
               <script defer src="https://webcore.utopiaai.my/t.js" data-website="oksigen.com.my"></script>
+        {/* Google Tag Manager */}
+        <script
+          id="gtm-base"
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PL8DBJJS');`,
+          }}
+        />
+        {/* End Google Tag Manager */}
       </head>
       <body className="antialiased" style={{ fontFamily: 'var(--font-body)', color: 'var(--brand-text)', background: 'var(--brand-white)' }}>
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-PL8DBJJS"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
+        {/* End Google Tag Manager (noscript) */}
         <NextIntlClientProvider messages={messages}>
 
           {/* ── STICKY TOP STACK ──
