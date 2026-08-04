@@ -13,7 +13,11 @@ export const siteConfig = {
   tagline: '24-Hour Emergency Electrician & Wiring Service Malaysia',
   productSlug: 'electrician-service',
   productName: 'Electrician Service',
-  fallbackPhone: '60174287801',
+  // This client's OWN WhatsApp number, matching the phone_numbers row for
+  // 24hourelectrician.my. It previously held 60174287801, which belongs to a
+  // DIFFERENT site in the fleet (katilhospital) — a fallback pointing at
+  // another client silently misroutes leads whenever the DB lookup misses.
+  fallbackPhone: '60168522633',
   defaultLocale: 'en',
   locales: ['en', 'ms', 'zh'] as const,
   emergency: true,
