@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="14" fill="#0C5B45"/>
+  <!-- Crescent moon — the mark from the Majlis Aqiqah logo -->
+  <path d="M30 5 A27 27 0 1 0 30 59 A20.5 20.5 0 1 1 30 5 Z" fill="#C79A4B"/>
+  <!-- Star -->
+  <path d="M45 13 l1.7 3.6 3.9.5-2.9 2.7.8 3.9L45 21.9l-3.5 1.8.8-3.9-2.9-2.7 3.9-.5Z" fill="#E3C489"/>
+  <!-- Baby in the cradle -->
+  <circle cx="34" cy="29" r="5.4" fill="#E3C489"/>
+  <!-- Cradle basket -->
+  <path d="M18 34 H52 A17 17 0 0 1 18 34 Z" fill="#FBF7EF"/>
+  <!-- Rocker -->
+  <path d="M13 52 Q35 60 57 52" stroke="#C79A4B" stroke-width="4" stroke-linecap="round" fill="none"/>
+</svg>

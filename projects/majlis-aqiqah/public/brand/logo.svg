@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 72" role="img" aria-label="Electrician 24 Hours">
+  <defs>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0B63CE"/>
+      <stop offset="100%" stop-color="#0A3A82"/>
+    </linearGradient>
+    <linearGradient id="bolt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F9B419"/>
+      <stop offset="100%" stop-color="#E69A00"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Icon mark: ring + lightning bolt -->
+  <g transform="translate(4,4)">
+    <circle cx="32" cy="32" r="28" fill="none" stroke="url(#ring)" stroke-width="5"/>
+    <!-- tiny 24 overlay top-right -->
+    <g transform="translate(44,6)">
+      <rect x="0" y="0" width="24" height="16" rx="8" fill="#0A3A82"/>
+      <text x="12" y="12" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="800" fill="#F9B419">24</text>
+    </g>
+    <path
+      d="M36 8 L18 36 L29 36 L26 58 L46 28 L34 28 Z"
+      fill="url(#bolt)"
+      stroke="#B97900"
+      stroke-width="0.8"
+      stroke-linejoin="round"
+    />
+  </g>
+
+  <!-- Wordmark -->
+  <g transform="translate(84, 0)" font-family="Inter, Arial, sans-serif">
+    <text x="0" y="30" font-size="22" font-weight="800" letter-spacing="-0.5" fill="#0A3A82">ELECTRICIAN</text>
+    <text x="0" y="54" font-size="14" font-weight="700" letter-spacing="4" fill="#546588">24 HOURS · MY</text>
+  </g>
+</svg>

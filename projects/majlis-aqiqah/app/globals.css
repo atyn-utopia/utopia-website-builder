@@ -1,0 +1,521 @@
+@import "tailwindcss";
+
+:root {
+  /* Brand — Majlis Aqiqah. Palette lifted from the client logo:
+     emerald wordmark + antique-gold crescent, cradle and lantern. */
+  --brand-gold: #C79A4B;
+  --brand-gold-deep: #A87C33;
+  --brand-gold-bright: #E3C489;
+  --brand-gold-pale: #FBF3E4;
+  --brand-gold-ring: rgba(199, 154, 75, 0.30);
+  --brand-gold-glow: rgba(199, 154, 75, 0.45);
+
+  --brand-emerald: #0C5B45;
+  --brand-emerald-2: #0A4A38;
+  --brand-forest: #073A2C;
+  --brand-forest-2: #10634C;
+
+  --brand-grey: #6B7280;
+  --brand-grey-light: #E4E7E4;
+  --brand-grey-soft: #F4F2EC;
+  --brand-white: #FFFFFF;
+  --brand-paper: #FBF7EF;
+
+  --ink: #16241E;
+  --ink-muted: #4A5A52;
+  --ink-faint: #93A099;
+  --line: rgba(12, 91, 69, 0.12);
+  --line-strong: rgba(12, 91, 69, 0.22);
+  --line-on-dark: rgba(255, 255, 255, 0.10);
+  --line-on-dark-strong: rgba(255, 255, 255, 0.18);
+
+  --wa-green: #25D366;
+  --wa-green-hover: #1EBE57;
+  --google-yellow: #FBBC04;
+  --alert-red: #E10600;
+  --alert-red-dark: #B30500;
+
+  --gradient-gold: linear-gradient(135deg, #E3C489 0%, #C79A4B 45%, #A87C33 100%);
+  --gradient-emerald: linear-gradient(180deg, #0C5B45 0%, #073A2C 100%);
+  --gradient-hero-glow: radial-gradient(60% 80% at 80% 65%, rgba(199,154,75,0.32) 0%, rgba(199,154,75,0) 70%);
+
+  --shadow-sm: 0 1px 2px rgba(7,58,44,0.06);
+  --shadow-md: 0 4px 14px rgba(7,58,44,0.09), 0 2px 4px rgba(7,58,44,0.05);
+  --shadow-lg: 0 16px 36px rgba(7,58,44,0.14), 0 4px 10px rgba(7,58,44,0.07);
+  --shadow-xl: 0 28px 60px rgba(7,58,44,0.20), 0 8px 18px rgba(7,58,44,0.10);
+  --shadow-gold: 0 14px 36px rgba(199,154,75,0.34), 0 4px 12px rgba(168,124,51,0.22);
+  --shadow-wa: 0 12px 28px rgba(37,211,102,0.32), 0 4px 10px rgba(37,211,102,0.18);
+
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-card: 18px;
+  --radius-btn: 12px;
+  --radius-pill: 9999px;
+
+  --section-y: clamp(64px, 9vw, 112px);
+  --max-w: 1440px;
+  --gut: clamp(12px, 1.2vw, 16px);
+
+  --font-display: var(--font-inter), 'Inter', -apple-system, system-ui, sans-serif;
+  --font-serif: var(--font-serif-face), 'Noto Serif Display', Georgia, 'Times New Roman', serif;
+
+  /* Signature shape — the mihrab arch. One token so every masked element matches. */
+  --arch: 48% 48% var(--radius-card) var(--radius-card) / 34% 34% var(--radius-card) var(--radius-card);
+  --arch-sm: 48% 48% 10px 10px / 34% 34% 10px 10px;
+
+  /* Signature texture — girih / khatam octagram tessellation on an 80px tile.
+     Replaces the engineering blueprint grid inherited from the scaffold. */
+  --girih: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23E3C489' stroke-width='1'><rect x='16' y='16' width='48' height='48'/><rect x='16' y='16' width='48' height='48' transform='rotate(45 40 40)'/><circle cx='40' cy='40' r='4'/><rect x='-24' y='-24' width='48' height='48'/><rect x='56' y='56' width='48' height='48'/></g></svg>");
+  /* Same tessellation drawn in deep gold — legible as a watermark on cream and
+     white surfaces, where the bright-gold stroke above disappears. */
+  --girih-deep: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23A87C33' stroke-width='1'><rect x='16' y='16' width='48' height='48'/><rect x='16' y='16' width='48' height='48' transform='rotate(45 40 40)'/><circle cx='40' cy='40' r='4'/><rect x='-24' y='-24' width='48' height='48'/><rect x='56' y='56' width='48' height='48'/></g></svg>");
+  /* Single arabesque flourish — sits under a card title as a rule ornament. */
+  --flourish: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='84' height='10' viewBox='0 0 84 10'><g fill='none' stroke='%23C79A4B' stroke-width='1.1'><path d='M2 5 H30 M54 5 H82'/><rect x='37' y='0.9' width='8.2' height='8.2'/><rect x='37' y='0.9' width='8.2' height='8.2' transform='rotate(45 41.1 5)'/></g></svg>");
+
+  /* Micro-label typography — replaces the excavator scaffold's JetBrains Mono role. */
+  --label-tracking: 0.16em;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-emphasis: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-fast: 150ms;
+  --dur: 240ms;
+  --dur-slow: 420ms;
+
+  /* Utopia CI structural tokens — radius + motion only (palette/fonts stay per-project) */
+  --r-button: 8px;
+  --r-card: 12px;
+  --r-pill: 999px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-hover: 220ms;
+  --dur-layout: 320ms;
+}
+
+/* Text spacing defaults — headings tight, body comfortable */
+h1, h2, h3, h4, h5, h6 { line-height: 1.2; }
+p, li, blockquote,
+.blog-content p, .blog-content li, .blog-content blockquote { line-height: 1.4; }
+
+/* Display serif for true headings; h4–h6 are used as body copy across this
+   site (heading level is keyword-driven, not size-driven) so they keep Inter. */
+h1, h2, h3 { font-family: var(--font-serif); font-weight: 700; }
+
+/* "Built by Utopia AI" footer credit */
+.utopia-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: inherit;
+  text-decoration: none;
+  border-radius: var(--r-button);
+  transition: transform var(--dur-hover) var(--ease), opacity var(--dur-hover) var(--ease);
+}
+.utopia-credit:hover { transform: translateY(-1px); opacity: 0.85; }
+.utopia-credit__mark { flex: none; }
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  /* Cream is the page ground — it is the paper the kenduri invitation is
+     printed on. White is reserved for elevated card surfaces. */
+  background: var(--brand-paper);
+  color: var(--ink);
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; height: auto; display: block; }
+button { font-family: inherit; }
+
+/* Eyebrow */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: var(--label-tracking);
+  text-transform: uppercase;
+  color: var(--brand-gold-deep);
+  background: var(--brand-gold-pale);
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--brand-gold-ring);
+  line-height: 1;
+}
+.eyebrow::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand-gold);
+  box-shadow: 0 0 0 3px rgba(199, 154, 75, 0.20);
+  flex-shrink: 0;
+}
+.eyebrow-light {
+  color: #E3C489;
+  background: rgba(199, 154, 75, 0.10);
+  border-color: rgba(199, 154, 75, 0.35);
+}
+
+/* Buttons — single shape, only colour varies */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 52px;
+  padding: 0 28px;
+  border-radius: var(--radius-btn);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1;
+  letter-spacing: -0.005em;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform var(--dur) var(--ease-out),
+              box-shadow var(--dur) var(--ease-out),
+              background-color var(--dur) var(--ease-out),
+              border-color var(--dur) var(--ease-out);
+}
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn:focus-visible {
+  outline: 2px solid var(--brand-gold);
+  outline-offset: 3px;
+}
+.btn-wa { background: var(--wa-green); color: #fff; box-shadow: var(--shadow-wa); }
+.btn-wa:hover { background: var(--wa-green-hover); }
+.btn-primary { background: var(--gradient-gold); color: #fff; box-shadow: var(--shadow-gold); }
+.btn-primary:hover { background: var(--brand-gold-deep); }
+.btn-ghost { background: transparent; color: var(--brand-emerald); border: 1.5px solid var(--line-strong); }
+.btn-ghost:hover { border-color: var(--brand-emerald); }
+
+/* Screen-reader-only utility for SEO/a11y headings */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0);
+  white-space: nowrap; border: 0;
+}
+
+/* Header layout — moved here from <style jsx> so the rules apply before
+   styled-jsx hydrates. Without these the desktop nav AND the mobile drawer
+   both flash visible on first paint. */
+.site-header { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,0.92); backdrop-filter: saturate(180%) blur(10px); -webkit-backdrop-filter: saturate(180%) blur(10px); border-bottom: 1px solid var(--line); }
+.site-header-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px var(--gut); min-height: 60px; }
+.site-nav { display: inline-flex; gap: 24px; flex-wrap: nowrap; }
+.site-nav a { color: var(--ink); font-weight: 600; font-size: 14px; white-space: nowrap; }
+.site-nav--desktop { display: none; }
+.site-actions { display: inline-flex; align-items: center; gap: 10px; }
+.site-mobile-drawer { display: none; background: #fff; border-top: 1px solid var(--line); padding: 14px var(--gut) 18px; }
+.site-mobile-drawer.is-open { display: block; }
+.site-burger { display: inline-flex; flex-direction: column; justify-content: center; gap: 4px; width: 38px; height: 38px; padding: 0 8px; background: transparent; border: 1px solid var(--line-strong); border-radius: 10px; cursor: pointer; }
+.site-burger span { display: block; height: 2px; width: 100%; background: var(--brand-emerald); border-radius: 2px; }
+@media (min-width: 880px) {
+  .site-nav--desktop { display: inline-flex; }
+  .site-burger { display: none; }
+  .site-mobile-drawer { display: none !important; }
+}
+
+/* FOMO banner */
+.fomo-bar { background: var(--alert-red); color: #fff; font-family: var(--font-display); }
+.fomo-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; padding: 10px var(--gut); font-size: 13px; line-height: 1.4; }
+.fomo-tag { font-family: var(--font-display); font-weight: 700; font-size: 10.5px; letter-spacing: var(--label-tracking); text-transform: uppercase; background: rgba(255,255,255,0.18); padding: 4px 8px; border-radius: 999px; }
+.fomo-body { font-weight: 500; text-align: center; }
+/* Tabular figures keep the countdown from jittering now that it is set in Inter. */
+.fomo-clock { font-family: var(--font-display); font-variant-numeric: tabular-nums; font-weight: 700; font-size: 15px; letter-spacing: 0.04em; display: inline-flex; gap: 6px; align-items: center; }
+.fomo-sep { opacity: 0.6; }
+.fomo-link { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; font-size: 13px; }
+
+/* Mobile: smaller CTAs + auto-width eyebrows + roomier side gutters */
+@media (max-width: 879px) {
+  :root { --gut: 20px; }
+  .container { padding-inline: 20px; }
+  .btn { height: 44px; padding: 0 16px; font-size: 12.5px; gap: 8px; white-space: nowrap; }
+  .eyebrow { align-self: center; font-size: 10.5px; padding: 6px 11px; }
+  /* Package price ledger — 15px/10px is the floor at which the serif figure and
+     its label stay legible; the two columns still clear 390px without wrapping. */
+  .price-value { font-size: 15px !important; white-space: nowrap; }
+  .price-label { font-size: 10px !important; }
+  .price-cell { padding: 4px 6px !important; gap: 5px !important; }
+  .product-cta { font-size: 12.5px !important; padding: 0 14px !important; }
+  .fomo-inner { gap: 6px 10px; padding: 6px 16px; font-size: 11.5px; line-height: 1.3; }
+  .fomo-tag { font-size: 9.5px; padding: 3px 7px; letter-spacing: 0.14em; }
+  .fomo-body { font-size: 11px; flex-basis: 100%; }
+  .fomo-clock { font-size: 12.5px; gap: 4px; }
+  .fomo-link { font-size: 11.5px; }
+  .hero-logo { width: clamp(215px, 62vw, 310px) !important; margin: 0 auto !important; }
+  .section-head p { font-size: 0.875rem; }
+  /* The eyebrow pill must stay on ONE line — the English string
+     ("Complete Aqiqah Packages Across Malaysia") was wrapping to two. */
+  .eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.085em;
+    padding: 6px 11px;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+}
+.btn-ghost-light { background: transparent; color: #fff; border: 1.5px solid var(--line-on-dark-strong); }
+.btn-ghost-light:hover { border-color: rgba(255, 255, 255, 0.6); }
+@media (max-width: 640px) {
+  .btn { width: 100%; height: 56px; font-size: 16px; }
+}
+
+/* Sections */
+.section { padding: var(--section-y) 0; }
+.container {
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: var(--gut);
+}
+.section-head { text-align: center; max-width: none; margin-inline: auto; margin-bottom: 48px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.section-head h3 { max-width: none; white-space: normal; text-wrap: balance; }
+
+/* Language switcher — kept in globals so layout rules always win */
+.lsw-toggle {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center;
+  gap: 6px;
+}
+.lsw-item {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px 0 8px;
+  border-radius: 999px;
+  background: #FFFFFF;
+  border: 1.5px solid var(--line-strong);
+  color: var(--brand-emerald);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color var(--dur) var(--ease-out),
+              background-color var(--dur) var(--ease-out),
+              color var(--dur) var(--ease-out),
+              box-shadow var(--dur) var(--ease-out);
+}
+.lsw-flag {
+  display: inline-block !important;
+  flex-shrink: 0;
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+}
+.lsw-label { display: inline-block; flex-shrink: 0; line-height: 1; white-space: nowrap; }
+.lsw-item:hover { border-color: rgba(7, 58, 44, 0.35); background: var(--brand-grey-soft); }
+.lsw-item.is-active {
+  background: var(--brand-emerald);
+  border-color: var(--brand-emerald);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(7, 58, 44, 0.18);
+}
+.lsw-item.is-active:hover { background: var(--brand-emerald-2); border-color: var(--brand-emerald-2); color: #FFFFFF; }
+
+/* Dropdown wrapper + trigger (mobile only) */
+.lsw { position: relative; display: inline-flex; }
+.lsw-trigger {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 12px 0 8px;
+  background: #FFFFFF;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--brand-emerald);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  cursor: pointer;
+}
+.lsw-trigger-label { display: inline-block; line-height: 1; }
+.lsw-caret { opacity: 0.6; transition: transform var(--dur) var(--ease-out); }
+.lsw-trigger[aria-expanded="true"] .lsw-caret { transform: rotate(180deg); }
+.lsw-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 140px;
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 18px 40px -12px rgba(7,58,44,0.25);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  z-index: 60;
+}
+.lsw-menu-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: var(--brand-emerald);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.lsw-menu-item:hover { background: var(--brand-grey-soft); }
+.lsw-menu-item.is-active { background: var(--brand-emerald); color: #fff; }
+
+@media (max-width: 879px) {
+  .lsw-toggle { display: none !important; }
+  .lsw-trigger { display: inline-flex; }
+}
+.section-head h3 { font-size: clamp(1.625rem, 3vw, 2.25rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; color: var(--brand-emerald); margin: 0; }
+/* Mobile section titles — 18px flat. This MUST sit after the base rule above:
+   an identical-specificity override earlier in the file loses the cascade, which
+   is why the first attempt at this had no effect. */
+@media (max-width: 879px) {
+  .section-head h3 { font-size: 18px; }
+}
+.section-head p { font-size: clamp(1rem, 1.25vw, 1.125rem); line-height: 1.7; color: var(--ink-muted); margin: 0; }
+
+/* Girih / khatam tessellation for dark sections. The pattern rides on a
+   pseudo-element rather than a tinted SVG so its opacity is tunable in one
+   place. Replaces the 56px engineering blueprint grid from the scaffold. */
+.bg-girih, .bg-girih-glow {
+  position: relative;
+  background-color: var(--brand-emerald);
+}
+.bg-girih-glow { background-image: var(--gradient-hero-glow); }
+.bg-girih::before, .bg-girih-glow::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  background-image: var(--girih);
+  background-size: 80px 80px;
+  background-position: center;
+  opacity: 0.14;
+  pointer-events: none;
+}
+.bg-girih > .container, .bg-girih-glow > .container { position: relative; z-index: 1; }
+
+/* Ornament divider — gold rub-el-hizb / diamond motif, echoing the lantern
+   fretwork in the logo mark. Replaces the reference site's excavator tread. */
+.tread-divider {
+  height: 24px; width: 100%;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='24' viewBox='0 0 64 24'><g fill='%23C79A4B' opacity='0.30'><path d='M16 4 L22 12 L16 20 L10 12 Z'/><path d='M48 4 L54 12 L48 20 L42 12 Z'/><circle cx='32' cy='12' r='2.5'/><circle cx='0' cy='12' r='2.5'/><circle cx='64' cy='12' r='2.5'/></g></svg>");
+  background-repeat: repeat-x; background-size: 64px 24px;
+}
+.tread-divider-on-dark {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='24' viewBox='0 0 64 24'><g fill='%23E3C489' opacity='0.50'><path d='M16 4 L22 12 L16 20 L10 12 Z'/><path d='M48 4 L54 12 L48 20 L42 12 Z'/><circle cx='32' cy='12' r='2.5'/><circle cx='0' cy='12' r='2.5'/><circle cx='64' cy='12' r='2.5'/></g></svg>");
+}
+
+/* Cards */
+.product-card {
+  display: flex; flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  height: 100%;
+  transition: transform var(--dur) var(--ease-out),
+              box-shadow var(--dur) var(--ease-out),
+              border-color var(--dur) var(--ease-out);
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--brand-gold-ring);
+}
+
+/* Marquee for brand strip */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track { animation: marquee 40s linear infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+/* Blog content */
+.blog-content h2 { font-size: 28px; font-weight: 700; color: var(--brand-emerald); margin: 2em 0 0.5em; line-height: 1.25; letter-spacing: -0.02em; }
+/* h2 = major article section (emerald display). h3 = sub-section inside one —
+   deliberately smaller and ink-coloured so an article with 10+ sections still
+   reads as a hierarchy instead of a flat run of emerald headings. */
+.blog-content h3 { font-size: 19px; font-weight: 700; color: var(--ink); margin: 1.5em 0 0.4em; line-height: 1.35; letter-spacing: -0.01em; }
+.blog-content h4 { font-size: 17px; font-weight: 600; color: var(--ink-muted); margin: 1.25em 0 0.35em; line-height: 1.35; }
+.blog-content p { font-size: 16px; line-height: 1.75; margin: 0 0 1em; color: var(--ink); }
+.blog-content img { max-width: 100%; height: auto; border-radius: var(--radius-md); margin: 1.5em 0; }
+.blog-content ul, .blog-content ol { margin: 1em 0; padding-left: 1.5em; }
+.blog-content li { margin: 0.5em 0; line-height: 1.7; }
+.blog-content blockquote { border-left: 4px solid var(--brand-gold); padding: 1em 1.5em; margin: 1.5em 0; background: var(--brand-gold-pale); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.blog-content a { color: var(--brand-gold-deep); text-decoration: underline; }
+.blog-content a:hover { opacity: 0.8; }
+
+/* Table of contents — applies to <div class="toc"> blocks the blog writer
+   emits, and to any <nav> inside the article body. */
+.toc,
+.blog-content nav {
+  background: #F8F8F8;
+  border-left: 4px solid var(--brand-gold);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  margin: 0 0 28px;
+}
+.toc h2, .toc h3, .toc h4,
+.blog-content nav h2,
+.blog-content nav h3,
+.blog-content nav h4 {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brand-gold-deep);
+}
+.toc ul, .toc ol,
+.blog-content nav ul,
+.blog-content nav ol {
+  margin: 0;
+  padding-left: 1.25em;
+  list-style: disc;
+  line-height: 1.9;
+}
+.toc li,
+.blog-content nav li {
+  margin: 0.15em 0;
+}
+.toc a,
+.blog-content nav a {
+  color: var(--brand-emerald);
+  text-decoration: none;
+}
+.toc a:hover,
+.blog-content nav a:hover {
+  color: var(--brand-gold-deep);
+  text-decoration: underline;
+}
+
+/* Scrollbar utilities */
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Focus visibility */
+:focus-visible { outline: 2px solid var(--brand-gold); outline-offset: 2px; }

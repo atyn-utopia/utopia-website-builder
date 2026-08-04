@@ -1,0 +1,395 @@
+{
+  "meta": {
+    "home": {
+      "title": "Aqiqah Package Malaysia | Affordable Halal Aqiqah",
+      "description": "Affordable, complete aqiqah packages across Malaysia. We handle livestock, syariah slaughter, cooking, packing and distribution. WhatsApp us for pricing."
+    },
+    "location": {
+      "title": "Aqiqah Package {location} | Affordable Aqiqah",
+      "description": "Affordable aqiqah packages in {location}, {state}. Syariah slaughter, cooking and delivery to your home. WhatsApp us for today's price."
+    },
+    "blogListing": {
+      "title": "Aqiqah Guides Malaysia | Majlis Aqiqah Blog",
+      "description": "Complete aqiqah guides: the ruling, how many head, the best timing, doa and meat distribution. Practical tips for Muslim families in Malaysia."
+    }
+  },
+  "nav": {
+    "logoAlt": "Majlis Aqiqah — complete, affordable aqiqah packages in Malaysia",
+    "home": "Home",
+    "products": "Aqiqah Packages",
+    "calculator": "Package Finder",
+    "locations": "Locations",
+    "blog": "Aqiqah Guides",
+    "whatsappCta": "WhatsApp Now"
+  },
+  "fomo": {
+    "eyebrow": "{monthUpper} AQIQAH PACKAGE PROMO",
+    "body": "{month} aqiqah slots are almost full — bookings close in:",
+    "countdownLabel": "Days : Hours : Minutes : Seconds",
+    "ctaLabel": "Book Aqiqah Now"
+  },
+  "hero": {
+    "eyebrow": "COMPLETE AQIQAH PACKAGES ACROSS MALAYSIA",
+    "h1Part1": "Affordable, Complete",
+    "h1Highlight": "Aqiqah Packages",
+    "h1Part2": "in Malaysia",
+    "h2": "A Full Aqiqah Service from Slaughter and Cooking to Distribution for Your Family",
+    "tagline": "We Complete Your Aqiqah Ceremony",
+    "supporting": "Livestock selection, syariah slaughter, cooking, packing and distribution — all handled for you.",
+    "ctaPrimary": "Book Aqiqah Now",
+    "ctaSecondary": "View Aqiqah Packages",
+    "imageAlt": "A Malay Muslim family — father in a blue baju melayu, mother in a white hijab and their young son — smiling together with gold lanterns and ketupat, celebrating an aqiqah",
+    "floatTagTitle": "100% Syariah-Compliant",
+    "floatTagSub": "Slaughter overseen by a certified slaughterman",
+    "statFamilies": "Families Served",
+    "statStates": "States Covered",
+    "statHalal": "Syariah Compliant",
+    "bgAlt": "Malay Muslim family in baju melayu and hijab serving rendang, ketupat and satay at an aqiqah kenduri table"
+  },
+  "marquee": {
+    "items": [
+      "Aqiqah Cooked Ready",
+      "Syariah Slaughter",
+      "Healthy Livestock",
+      "Transparent Aqiqah Pricing",
+      "Nationwide Delivery",
+      "Distribution to Asnaf",
+      "Book Aqiqah Online",
+      "Doa & Cukur Jambul"
+    ]
+  },
+  "usp": {
+    "srHeading": "Why Malaysian Families Choose Our Complete Aqiqah Packages",
+    "items": [
+      {
+        "title": "Affordable Aqiqah Packages",
+        "body": "Transparent aqiqah pricing with no hidden charges, sized for every family."
+      },
+      {
+        "title": "Certified Aqiqah Slaughter",
+        "body": "Every animal slaughtered by a certified slaughterman following syariah guidance."
+      },
+      {
+        "title": "Book Aqiqah Online",
+        "body": "Book over WhatsApp and we handle everything until the meat arrives."
+      }
+    ]
+  },
+  "products": {
+    "eyebrow": "AQIQAH PACKAGES 2026",
+    "h3": "Goat & Sheep Aqiqah Packages for Every Family",
+    "intro": "Transparent aqiqah package prices — from slaughter to doorstep delivery.",
+    "note": "Every aqiqah goat weighs 14–16kg and feeds roughly 50 people. Each slaughter is recorded on video together with the doa, with photographs before and after showing the child’s name — sent to you as confirmation.",
+    "addOns": "Add-ons: additional catering and canopy packages are available to suit your majlis — WhatsApp us for details.",
+    "priceHeadLabel": "Price / head",
+    "priceHead": "From RM {price}",
+    "portionsLabel": "Estimated servings",
+    "tagDefault": "Aqiqah Package",
+    "ctaLabel": "Get Aqiqah Price",
+    "imageAltTemplate": "{model} — cooked aqiqah dish ready to be delivered for your family's ceremony",
+    "fallback": {
+      "items": [
+        {
+          "slug": "pakej-aqiqah-a",
+          "name": "Package A — Cooked Goat",
+          "eyebrow": "READY COOKED · GULAI OR CURRY",
+          "description": "Aqiqah goat cooked and delivered to your door.",
+          "price": 1500,
+          "portions": "±50 servings",
+          "includes": [
+            "Goat 14–16kg",
+            "Cooked: gulai or curry",
+            "Delivery across KL & Selangor"
+          ]
+        },
+        {
+          "slug": "pakej-aqiqah-b",
+          "name": "Package B — Whole Roast Goat",
+          "eyebrow": "WHOLE ROAST · 2 OPTIONS",
+          "description": "Whole roast aqiqah goat, two serving options.",
+          "price": 2000,
+          "portions": "±50 servings",
+          "includes": [
+            "Whole roast goat 14–16kg",
+            "Mashed potato, coleslaw, black pepper sauce",
+            "Delivery across KL & Selangor"
+          ]
+        },
+        {
+          "slug": "pakej-aqiqah-c",
+          "name": "Package C — Roast & Catering for 50",
+          "eyebrow": "ROAST + CATERING SET A",
+          "description": "Roast goat with full catering for 50 guests.",
+          "price": 2750,
+          "portions": "±50 servings",
+          "includes": [
+            "Everything in Package B",
+            "Catering Set A — 50 guests",
+            "Steamed rice & spiced fried chicken",
+            "Masak lemak nenas with salted fish",
+            "Ulam, sambal belacan & watermelon",
+            "Cordial + disposable cutlery"
+          ]
+        },
+        {
+          "slug": "pakej-aqiqah-d",
+          "name": "Package D — Complete with Canopy",
+          "eyebrow": "ROAST + CATERING + CANOPY",
+          "description": "A complete majlis — the food and the marquee.",
+          "price": 3500,
+          "portions": "±50 servings",
+          "includes": [
+            "Everything in Package C",
+            "Full Canopy Set A3",
+            "Ready to receive your guests"
+          ]
+        }
+      ]
+    },
+    "includesLabel": "What the package includes"
+  },
+  "calculator": {
+    "eyebrow": "AQIQAH PACKAGE FINDER",
+    "h3": "Choose Your Aqiqah Package by Your Baby's Gender",
+    "intro": "Two goats for a boy's aqiqah, one for a girl's — find your aqiqah package in seconds.",
+    "genderLabel": "Baby's gender",
+    "tierLabel": "Aqiqah package",
+    "childrenLabel": "Number of children",
+    "genders": {
+      "lelaki": "Baby Boy",
+      "perempuan": "Baby Girl"
+    },
+    "tiers": {
+      "a": "Package A",
+      "b": "Package B",
+      "c": "Package C",
+      "d": "Package D"
+    },
+    "headCount": "{count, plural, one {# goat} other {# goats}}",
+    "quoteLabel": "Estimated aqiqah package",
+    "quoteFromLabel": "From",
+    "quotePrefix": "RM",
+    "quoteSuffix": "Estimate for your child's complete aqiqah.",
+    "disclaimer": "Estimate only — please WhatsApp us to confirm your aqiqah price.",
+    "ctaLabel": "WhatsApp Us Now",
+    "increaseLabel": "Add another child",
+    "decreaseLabel": "Remove a child"
+  },
+  "process": {
+    "eyebrow": "THE 4-STEP AQIQAH PROCESS",
+    "h3": "How to Book an Aqiqah Package in 4 Simple Steps",
+    "bgAlt": "Cooks' hands stirring a pan of curry beside a large boiling stockpot in the aqiqah kitchen",
+    "steps": [
+      {
+        "title": "Choose Your Aqiqah Package",
+        "body": "WhatsApp us your child's name, gender and the date of your aqiqah."
+      },
+      {
+        "title": "Syariah-Compliant Aqiqah Slaughter",
+        "body": "A certified slaughterman performs the slaughter following syariah guidance."
+      },
+      {
+        "title": "Aqiqah Meat Cooked & Packed",
+        "body": "The meat is cooked as kurma, rendang or sup, then neatly packed."
+      },
+      {
+        "title": "Aqiqah Delivery & Distribution",
+        "body": "We deliver to your home or distribute to asnaf on your behalf."
+      }
+    ]
+  },
+  "whyUs": {
+    "eyebrow": "WHY CHOOSE OUR AQIQAH SERVICE",
+    "h3": "Why Families Across Malaysia Trust Our Aqiqah Packages",
+    "bgAlt": "A healthy herd of brown, black and white goats grazing on green pasture at the farm",
+    "items": [
+      {
+        "title": "Healthy Aqiqah Livestock of Age",
+        "body": "Every animal is checked healthy and old enough before slaughter."
+      },
+      {
+        "title": "Certified Aqiqah Slaughterman",
+        "body": "The slaughter follows syariah guidance and is done by experienced hands."
+      },
+      {
+        "title": "Transparent Aqiqah Pricing",
+        "body": "One quoted price, with no hidden charges after your booking is confirmed."
+      },
+      {
+        "title": "Aqiqah Distribution to Asnaf",
+        "body": "Aqiqah meat can be distributed to asnaf and orphanages for you."
+      }
+    ]
+  },
+  "reviews": {
+    "eyebrow": "AQIQAH PACKAGE REVIEWS",
+    "h3": "Families Who Completed Their Aqiqah With Us",
+    "aggregate": "Feedback from families who have completed their aqiqah with us",
+    "postedOn": "Customer feedback",
+    "bgAlt": "Five Malay family members in traditional dress talking warmly at a table laid with dates and kuih",
+    "items": [
+      {
+        "name": "Nurul Ain Zulkifli",
+        "suburb": "Bandar Baru Bangi, Selangor",
+        "stars": 5,
+        "body": "Two goats for our baby boy's aqiqah, cooked as kurma and rendang. Everything arrived hot and there was plenty for the whole family. One WhatsApp chat and it was sorted."
+      },
+      {
+        "name": "Muhammad Faiz Abdullah",
+        "suburb": "Setiawangsa, Kuala Lumpur",
+        "stars": 5,
+        "body": "It was our first aqiqah and I asked a lot of questions — every one was answered patiently. The slaughter followed syariah and we received photos as confirmation."
+      },
+      {
+        "name": "Siti Hajar Ismail",
+        "suburb": "Bukit Mertajam, Penang",
+        "stars": 5,
+        "body": "We chose the asnaf package because we live far from our hometown. The aqiqah meat went to an orphanage and the photo report reached us the same day."
+      },
+      {
+        "name": "Amirul Hakim Rosli",
+        "suburb": "Kota Bharu, Kelantan",
+        "stars": 4,
+        "body": "The aqiqah package price was reasonable and the cooking was genuinely good. Delivery ran a little late, though they told us in advance."
+      },
+      {
+        "name": "Nadia Farhana Zainal",
+        "suburb": "Skudai, Johor",
+        "stars": 5,
+        "body": "Our aqiqah and cukur jambul were arranged together. The doa, the food and the packing were all tidy — we only had to welcome our guests."
+      },
+      {
+        "name": "Zulkarnain Ahmad",
+        "suburb": "Kota Kinabalu, Sabah",
+        "stars": 5,
+        "body": "I expected booking an aqiqah from Sabah to be difficult, but it was smooth. The slaughter date was confirmed early and the meat arrived on schedule."
+      }
+    ]
+  },
+  "gallery": {
+    "eyebrow": "AQIQAH CEREMONY GALLERY",
+    "h3": "Kambing Golek & Aqiqah Feasts We Have Prepared",
+    "intro": "Whole roast goat, spiced platters and the aqiqah dishes we prepare for ceremonies across Malaysia.",
+    "alts": [
+      "Whole kambing golek served on a round wooden board, garnished with lime slices and a carving knife for an aqiqah ceremony",
+      "Kambing golek turning slowly on a steel rotisserie above glowing wood embers",
+      "Whole roast goat on a white platter with a bowl of green salad and fresh rosemary on a wooden table",
+      "Layered goat meat browning on a rotisserie spit with wood flames blazing beneath",
+      "Rack of roast goat ribs showered with chilli flakes, oregano and salt on a dark wooden board",
+      "Kambing golek leg on spiced rice in a copper platter beside a serving dome and bread basket",
+      "Two hands serving a plate of herb-dusted roast goat ribs to guests at a ceremony",
+      "Overhead view of a large platter of goat meat over rice with fried aubergine, lemon slices and side sauces",
+      "Olive oil poured over a plate of grilled goat cutlets with a wedge of lime",
+      "Close-up of a tender goat shank on spiced rice in a copper tray garnished with rosemary",
+      "Rack of kambing golek plated upright on a white dish with a glass of spiced gravy and chilli garnish",
+      "A full aqiqah spread of goat meat over yellow rice with hummus, flatbread and spiced eggs"
+    ]
+  },
+  "faq": {
+    "eyebrow": "AQIQAH FAQ",
+    "h3": "Frequently Asked Questions About Aqiqah Packages",
+    "items": [
+      {
+        "q": "How much does an aqiqah package cost for a boy and for a girl?",
+        "a": "Our aqiqah packages in Malaysia start from RM 1,500 per head for Package A (a cooked goat), rising to RM 3,500 per head for Package D, which includes catering and a canopy. An aqiqah for a boy calls for 2 head and for a girl 1, so the final total is worked out per head. WhatsApp us for a formal quote on the package you choose."
+      },
+      {
+        "q": "How many goats are needed for a boy's aqiqah?",
+        "a": "Following the sunnah, a boy's aqiqah is 2 goats or sheep and a girl's is 1. The majority of scholars hold that the aqiqah remains valid if parents can only afford one animal for a boy. Our package finder works out the head count automatically for every family in Malaysia."
+      },
+      {
+        "q": "Does the aqiqah package include cooking and delivery?",
+        "a": "Yes. Our cooked aqiqah packages cover the slaughter, cleaning, cooking as kurma, rendang or sup, packing and delivery to your home in Malaysia. If you only want raw meat, choose the basic package and we deliver it butchered and neatly packed."
+      },
+      {
+        "q": "When is the best time to perform an aqiqah?",
+        "a": "Aqiqah — also spelled akikah, and often typed aqeeqah by English-first parents — is most encouraged on the seventh day after birth, together with the hair shaving and the naming. If the seventh day does not suit, the fourteenth or twenty-first day is also accepted. Many families in Malaysia pick the nearest weekend so relatives can attend."
+      },
+      {
+        "q": "What is the difference between aqiqah and korban?",
+        "a": "Aqiqah is a sunnah of gratitude for the birth of a child and can be performed at any point in the year. Korban is performed specifically on Hari Raya Aidiladha and the days of tasyrik. Both involve a slaughter, but the intention, timing and ruling differ — we handle aqiqah all year round in Malaysia."
+      },
+      {
+        "q": "Can I book an aqiqah online from overseas?",
+        "a": "Yes. Many parents living abroad book their aqiqah online and we arrange the slaughter, cooking and distribution on their behalf in Malaysia. You will receive photos and a short video as confirmation once the aqiqah is complete."
+      },
+      {
+        "q": "Is the aqiqah goat slaughtered according to syariah?",
+        "a": "Yes. Every animal is slaughtered by a certified slaughterman following syariah guidance, with the correct recitation and method. The livestock is selected healthy and of age before slaughter, and the whole process is carried out at our slaughter partner's premises in Malaysia."
+      },
+      {
+        "q": "Can the aqiqah meat be distributed to asnaf on my behalf?",
+        "a": "Yes. Our sedekah asnaf package slaughters the animal and distributes the entire aqiqah meat to asnaf, suraus and orphanages in Malaysia. We provide a short photo report so you know where your aqiqah meat went."
+      }
+    ]
+  },
+  "locations": {
+    "eyebrow": "AQIQAH SERVICE COVERAGE",
+    "h3": "Aqiqah Packages Across Every State in Malaysia",
+    "intro": "Pick your area for local aqiqah package and delivery details.",
+    "topCitiesLabel": "Top cities",
+    "stateLabels": {
+      "klangValley": "Klang Valley",
+      "selangor": "Selangor",
+      "negeriSembilan": "Negeri Sembilan",
+      "melaka": "Melaka",
+      "johor": "Johor",
+      "perak": "Perak",
+      "penang": "Penang",
+      "kedah": "Kedah",
+      "perlis": "Perlis",
+      "kelantan": "Kelantan",
+      "terengganu": "Terengganu",
+      "pahang": "Pahang",
+      "sabah": "Sabah",
+      "sarawak": "Sarawak",
+      "labuan": "Labuan"
+    }
+  },
+  "location": {
+    "breadcrumbHome": "Home",
+    "breadcrumbLocations": "Aqiqah Packages",
+    "h1Template": "Aqiqah Package in {location}",
+    "h2Template": "Complete Aqiqah Service from Slaughter and Cooking to Distribution for Families in {location}, {state}",
+    "introTemplate": "Complete aqiqah packages with delivery across every area of {location}, {state}.",
+    "nearbyEyebrow": "NEARBY AQIQAH AREAS",
+    "nearbyHeading": "Aqiqah Packages in Areas Near {location}"
+  },
+  "finalCta": {
+    "eyebrow": "BOOK YOUR AQIQAH PACKAGE TODAY",
+    "h3": "Complete Your Child's Aqiqah Sunnah Today",
+    "body": "Send us your child's name, gender and ceremony date — we handle the rest.",
+    "ctaLabel": "Book Aqiqah Now",
+    "bgAlt": "A festive aqiqah kenduri spread — ketupat on a glass dish with chicken curry and kuah lodeh on a blue gingham cloth"
+  },
+  "footer": {
+    "tagline": "Majlis Aqiqah — complete, affordable and syariah-compliant aqiqah packages for families across Malaysia.",
+    "productsHeading": "Aqiqah Packages",
+    "productsLinks": [
+      "Package A — Cooked",
+      "Package B — Whole Roast",
+      "Package C — Roast & Catering",
+      "Package D — With Canopy"
+    ],
+    "locationsHeading": "Key Areas",
+    "resourcesHeading": "Resources",
+    "blogLabel": "Aqiqah Guides",
+    "faqLabel": "Aqiqah FAQ",
+    "copyright": "© 2026 Majlis Aqiqah. All rights reserved. Powered by Utopia Group of Companies"
+  },
+  "blog": {
+    "title": "Aqiqah Guides & Ceremony Tips",
+    "subtitle": "Complete Guides for Families Planning an Aqiqah Ceremony",
+    "description": "Complete aqiqah guides — the ruling, how many goats, the best timing, the doa, and practical tips for planning your child's aqiqah ceremony.",
+    "readMore": "Read the aqiqah guide",
+    "noPosts": "No aqiqah guides have been published yet.",
+    "breadcrumbHome": "Home",
+    "breadcrumbBlog": "Aqiqah Guides",
+    "publishedOn": "Published on",
+    "minRead": "min read",
+    "recentPosts": "Latest aqiqah guides",
+    "ctaBannerTitle": "Ready to Complete Your Child's Aqiqah?",
+    "ctaBannerBody": "WhatsApp us for a complete aqiqah package and today's pricing.",
+    "ctaBannerLabel": "Book Aqiqah Now"
+  }
+}
