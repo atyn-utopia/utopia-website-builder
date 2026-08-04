@@ -22,7 +22,7 @@ export default function PageStyles() {
            96px lead-in just pushes it below the fold. Start the hero close to
            the header and keep the breathing room at the bottom instead. */
         @media (max-width: 879px) {
-          .hero { padding: 18px 0 64px; }
+          .hero { padding: 36px 0 64px; }
           .hero-grid { gap: 28px; }
           /* Step the display type down on phones — the clamp minimums were tuned
              for desktop and left the H1 running to three tall lines. */
