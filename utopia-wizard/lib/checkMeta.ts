@@ -166,6 +166,7 @@ export const CHECK_META: CheckMeta[] = [
 
   // ── Quality ─────────────────────────────────────────────────────────────────
   { id: 'no-hardcoded-phones',            group: 'Quality', severity: 'blocking', doc: RULES, name: 'No hardcoded phone numbers in app/, components/, or messages/' },
+  { id: 'wa-prefill-domain-in-source',     group: 'Quality', severity: 'blocking', doc: RULES, name: 'webcore builds the WhatsApp prefill with the domain' },
   { id: 'fallback-phone-is-own',          group: 'Quality', severity: 'blocking', doc: RULES, name: "fallbackPhone is this client's own number" },
   { id: 'no-domains-in-copy',             group: 'Quality', severity: 'blocking', doc: RULES, name: 'No domain/URL shown as visible text in copy' },
 ]

@@ -2047,6 +2047,31 @@ const DEPLOYMENT: Check[] = [
 
 const QUALITY: Check[] = [
   {
+    group: 'Quality', id: 'wa-prefill-domain-in-source', name: 'webcore builds the WhatsApp prefill with the domain',
+    help: "Static counterpart to wa-prefill-carries-domain. That check probes the LIVE site, so it lives in the Deployment group and is dropped by `gate.ts --source-only` — the pre-commit mode. Without this, a lib/webcore.ts that discards the domain can be committed and only fails after it is already serving traffic. Verifies toResult() composes whatsappText from the domain rather than returning row.whatsapp_text verbatim. 24hourelectrician.my and tablechairrentals.my both shipped the discarding version, taking the domain as `_domain`.",
+    run: async (ctx) => {
+      const NAME = 'webcore builds the WhatsApp prefill with the domain'
+      const c = await readProjectFile(ctx, 'lib/webcore.ts')
+      if (c == null) return skip('wa-prefill-domain-in-source', NAME, 'no lib/webcore.ts')
+      const fn = c.match(/function toResult\([\s\S]*?\n\}/)
+      if (!fn) return skip('wa-prefill-domain-in-source', NAME, 'no toResult() in lib/webcore.ts')
+      const body = fn[0]
+
+      // The domain param being underscore-prefixed is the tell that it is unused.
+      const sig = body.match(/function toResult\(([^)]*)\)/)?.[1] ?? ''
+      const lastParam = sig.split(',').pop()?.trim() ?? ''
+      if (/^_/.test(lastParam)) {
+        return fail('wa-prefill-domain-in-source', NAME, `toResult() takes the domain as \`${lastParam.split(':')[0]}\` and discards it — the prefill will not name the site`)
+      }
+      const assign = body.match(/whatsappText:\s*([^,\n]*)/)?.[1] ?? ''
+      const paramName = lastParam.split(':')[0].trim()
+      const usesDomain = assign.includes('${' + paramName + '}') || /\$\{(domain|host)\}/.test(assign) || /\bbody\b/.test(assign)
+      return usesDomain
+        ? pass('wa-prefill-domain-in-source', NAME, assign.trim().slice(0, 46))
+        : fail('wa-prefill-domain-in-source', NAME, `whatsappText is built as \`${assign.trim().slice(0, 50)}\` — no domain in it`)
+    },
+  },
+  {
     group: 'Quality', id: 'fallback-phone-is-own', name: 'fallbackPhone is this client\'s own number',
     help: "config/site.ts fallbackPhone must be THIS client's number. A fallback pointing at another site in the fleet is worse than none: when the DB lookup misses, leads route silently to the wrong business instead of failing visibly. 60174287801 (katilhospital) had been copy-pasted into seven projects as a default.",
     run: async (ctx) => {
