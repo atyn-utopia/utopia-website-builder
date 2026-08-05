@@ -57,7 +57,7 @@ const GALLERY_IMAGES = [
   '/gallery/12.jpg',
 ];
 
-const HERO_IMG = '/brand/hero-photo.jpg';
+const HERO_IMG = '/brand/hero-photo.png';
 const FINAL_CTA_BG = '/bg/final-cta.jpg';
 
 function GoogleG({ size = 22 }: { size?: number }) {
@@ -222,7 +222,7 @@ export default async function HomePage({
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <span className="hero-image-frame">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={HERO_IMG} alt={tHero('imageAlt')} width={1600} height={1137} className="hero-image-img" />
+              <img src={HERO_IMG} alt={tHero('imageAlt')} width={1024} height={1536} className="hero-image-img" />
             </span>
             <span className="hero-float-tag">
               <span className="hero-float-tag__mark" aria-hidden="true">
