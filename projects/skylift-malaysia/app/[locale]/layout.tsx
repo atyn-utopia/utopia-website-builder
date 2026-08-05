@@ -77,7 +77,7 @@ export default async function LocaleLayout({
         <script
           defer
           src="https://webcore.utopiaai.my/t.js"
-          data-website="skyliftmalaysia.utopiaai.my"
+          data-website={siteConfig.domain}
         />
       </head>
       <body style={{ fontFamily: 'var(--font-inter), Inter, sans-serif' }}>
