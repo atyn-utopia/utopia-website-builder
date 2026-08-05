@@ -55,6 +55,12 @@ async function webcoreFetch<T>(path: string, tag: WebcoreTag): Promise<T | null>
 // and the placeholder was getting served verbatim to real customers.
 const FALLBACK_PHONE = process.env.PHONE_FALLBACK ?? siteConfig.fallbackPhone
 const FALLBACK_WA_TEXT = 'Hi, I need aircond service.'
+// Mirrors the `Hi <domain>, ` prefix that toResult() puts on the Supabase
+// path. Without it a failed webcore read produced an unattributable
+// message — several sites share one WhatsApp number, so the domain is the
+// operator's only signal for which site the lead came from.
+const FALLBACK_WA_TEXT_ATTRIBUTED = `Hi ${siteConfig.domain}, ${FALLBACK_WA_TEXT}`
+
 
 type LeadsMode = 'single' | 'rotation' | 'location' | 'hybrid'
 
@@ -129,7 +135,7 @@ async function getPhoneRows(domain: string): Promise<PhoneRow[]> {
 function fallbackResult(): PhoneResult {
   return {
     phone: FALLBACK_PHONE,
-    whatsappText: FALLBACK_WA_TEXT,
+    whatsappText: FALLBACK_WA_TEXT_ATTRIBUTED,
     source: 'fallback',
     mode: 'fallback',
   }
