@@ -275,5 +275,10 @@
       "home": "首页",
       "locations": "服务地区"
     }
+  },
+  "redirect": {
+    "heading": "正在打开 WhatsApp…",
+    "subtext": "正在为您连接 Encik Beku 团队。",
+    "fallback": "如果没有自动跳转，请点击这里"
   }
 }

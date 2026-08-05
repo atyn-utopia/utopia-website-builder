@@ -270,5 +270,10 @@
       "q10": "Adakah anda menawarkan sewa skuter di {city}?",
       "a10": "Ya. Honda Vario 160, Yamaha NMax 155, dan Honda PCX 160 semuanya adalah skuter automatik yang tersedia untuk disewa di {city}. Sewa skuter bermula dari RM50/hari dengan penghantaran hari sama."
     }
+  },
+  "redirect": {
+    "heading": "Membuka WhatsApp…",
+    "subtext": "Anda sedang dihubungkan ke pasukan Sewa Motor Malaysia.",
+    "fallback": "Klik di sini jika tidak berpindah"
   }
 }

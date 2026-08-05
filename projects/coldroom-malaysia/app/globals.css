@@ -489,3 +489,46 @@ p, li { line-height: var(--leading-relaxed); color: var(--steel-500); }
 .bg-steel-900 { background: var(--steel-900); }
 .bg-amber { background: var(--cold-amber); }
 .bg-wa { background: var(--wa-green); }
+
+/* ── Body copy in heading tags ──────────────────────────────────────────
+   Per the SEO rule, every visible string on a public page sits in a heading
+   element rather than a bare <p>. These are h5/h6 carrying body copy, so
+   they must not inherit heading size or weight. The margin mirrors the
+   browser's default <p> margin (1em 0) that these elements replaced, so
+   section rhythm is unchanged; inline margins still override it. */
+h5.body-text,
+h6.body-text {
+  font-size: inherit;
+  font-weight: 400;
+  line-height: 1.4;
+  margin: 1em 0;
+}
+
+/* ── Utopia brand CI ────────────────────────────────────────────────────
+   Structural tokens + the "Built by Utopia AI" footer credit. This is the
+   CI *element* insertion only — the site keeps its own palette, fonts and
+   button shape. Nothing below re-themes existing components; the radius /
+   motion tokens are opt-in and are consumed by .utopia-credit alone unless
+   a component references them explicitly. */
+:root {
+  --r-button: 8px;
+  --r-card: 12px;
+  --r-pill: 999px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-hover: 220ms;
+  --dur-layout: 320ms;
+}
+
+.utopia-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: inherit;
+  text-decoration: none;
+  border-radius: var(--r-button);
+  transition: transform var(--dur-hover) var(--ease), opacity var(--dur-hover) var(--ease);
+}
+.utopia-credit:hover { transform: translateY(-1px); opacity: 0.85; }
+.utopia-credit__mark { flex: none; }

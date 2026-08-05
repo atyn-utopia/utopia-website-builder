@@ -270,5 +270,10 @@
       "q10": "Do you offer scooter rental in {city}?",
       "a10": "Yes. The Honda Vario 160, Yamaha NMax 155, and Honda PCX 160 are all automatic scooters available for rent in {city}. Scooter rental starts from RM50/day with same-day delivery."
     }
+  },
+  "redirect": {
+    "heading": "Opening WhatsApp…",
+    "subtext": "Connecting you to the Sewa Motor Malaysia team.",
+    "fallback": "Click here if it doesn't redirect"
   }
 }

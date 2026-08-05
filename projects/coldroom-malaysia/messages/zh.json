@@ -315,5 +315,10 @@
     "noPosts": "暂无文章，请稍后再来。",
     "breadcrumbHome": "首页",
     "breadcrumbBlog": "博客"
+  },
+  "redirect": {
+    "heading": "正在打开 WhatsApp…",
+    "subtext": "正在为您连接 Cold Room Malaysia 团队。",
+    "fallback": "如果没有自动跳转，请点击这里"
   }
 }

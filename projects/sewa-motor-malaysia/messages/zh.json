@@ -268,5 +268,10 @@
       "q10": "在{city}有踏板车出租吗？",
       "a10": "有。Honda Vario 160、Yamaha NMax 155和Honda PCX 160都是可在{city}租赁的自动挡踏板车。踏板车出租RM50/天起，支持当天送达。"
     }
+  },
+  "redirect": {
+    "heading": "正在打开 WhatsApp…",
+    "subtext": "正在为您连接 Sewa Motor Malaysia 团队。",
+    "fallback": "如果没有自动跳转，请点击这里"
   }
 }

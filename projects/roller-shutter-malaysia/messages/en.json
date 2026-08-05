@@ -799,5 +799,10 @@
       "intro": "Sandakan is Sabah's second largest city and a major industrial port town, historically known for timber and palm oil export and today home to a busy commercial waterfront, fish processing plants and the Batu Sapi industrial estate. The constant movement of goods through Sandakan port creates high demand for heavy-duty roller shutters at warehouses, cold storage facilities and export yards. We serve Sandakan and the surrounding Kinabatangan-Telupid corridor with 24-hour cover.",
       "closingCta": "Warehouse or business in Sandakan? WhatsApp us now for heavy-duty roller shutter installation and repair in Sabah."
     }
+  },
+  "redirect": {
+    "heading": "Opening WhatsApp…",
+    "subtext": "Connecting you to the Encik Roller Shutter team.",
+    "fallback": "Click here if it doesn't redirect"
   }
 }

@@ -232,7 +232,7 @@ export default function HomePageClient({ locale, products, chromeProvided = fals
           </div>
         </div>
 
-        <style jsx>{`
+        <style>{`
           .kh-hero-copy {
             text-align: center;
           }

@@ -61,6 +61,13 @@ interface PhoneRow {
   percentage: number | null
   label: string | null
   location_slug: string | null
+  page_slug: string | null
+}
+
+// A row is "site-wide" when it isn't pinned to a specific page. Rows that
+// predate the page_slug column (null) are treated as site-wide too.
+function isSiteWide(row: PhoneRow): boolean {
+  return !row.page_slug || row.page_slug === 'all'
 }
 
 export interface PhoneResult {
@@ -109,7 +116,7 @@ async function getLeadsMode(domain: string): Promise<LeadsMode> {
 async function getPhoneRows(domain: string): Promise<PhoneRow[]> {
   if (!domain) return []
   const path =
-    `phone_numbers?select=phone_number,whatsapp_text,percentage,label,location_slug` +
+    `phone_numbers?select=phone_number,whatsapp_text,percentage,label,location_slug,page_slug` +
     `&website=eq.${encodeURIComponent(domain)}` +
     `&is_active=eq.true`
   const data = await webcoreFetch<PhoneRow[]>(path, 'webcore-phones')
@@ -136,10 +143,27 @@ function toResult(row: PhoneRow | undefined, mode: LeadsMode, host: string): Pho
   }
 }
 
-export async function getPhoneNumber(locationSlug?: string): Promise<PhoneResult> {
+export async function getPhoneNumber(
+  locationSlug?: string,
+  pageSlug?: string,
+): Promise<PhoneResult> {
   try {
     const domain = await getHostDomain()
-    const [mode, rows] = await Promise.all([getLeadsMode(domain), getPhoneRows(domain)])
+    const [mode, allRows] = await Promise.all([getLeadsMode(domain), getPhoneRows(domain)])
+    if (allRows.length === 0) return fallbackResult()
+
+    // Resolution order (mirrors webcore /phone-numbers/resolve):
+    //   page  →  location  →  all  →  default.
+    // A page-pinned number wins first when we know the originating page, and
+    // never leaks into the site-wide leads_mode pool below.
+    if (pageSlug && pageSlug !== 'all') {
+      const pageRows = allRows.filter((r) => r.page_slug === pageSlug)
+      if (pageRows.length > 0) return toResult(pickWeighted(pageRows), mode, domain)
+    }
+
+    // leads_mode logic runs only over site-wide rows so per-page numbers
+    // don't dilute the homepage rotation.
+    const rows = allRows.filter(isSiteWide)
     if (rows.length === 0) return fallbackResult()
 
     const defaultRow = findDefaultRow(rows)

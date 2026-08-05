@@ -346,5 +346,10 @@
     "h2Template": "Volvo EC200 and EC400 for Your Project in {state}",
     "nearbyHeading": "Excavator rental near {location}",
     "nearbyEyebrow": "NEARBY AREAS"
+  },
+  "redirect": {
+    "heading": "Opening WhatsApp…",
+    "subtext": "Connecting you to the Abang Excavator team.",
+    "fallback": "Click here if it doesn't redirect"
   }
 }

@@ -64,7 +64,7 @@ export default function SiteFooter() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .site-footer {
           background: #EEF5FB;
           padding: 44px 0 32px;
@@ -93,13 +93,13 @@ export default function SiteFooter() {
           flex-wrap: wrap;
           gap: 12px 26px;
         }
-        .footer-nav :global(a) {
+        .footer-nav a {
           color: #1c3a6a;
           font-weight: 600;
           font-size: 14.5px;
           transition: color 150ms cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .footer-nav :global(a:hover) {
+        .footer-nav a:hover {
           color: #e63030;
         }
         .footer-line {

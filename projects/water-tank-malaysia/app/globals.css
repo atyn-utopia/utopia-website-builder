@@ -206,7 +206,11 @@ button { font-family: inherit; }
 .fomo-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; padding: 10px var(--gut); font-size: 13px; line-height: 1.4; }
 .fomo-tag { font-family: var(--font-mono-stack); font-weight: 700; font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; background: rgba(255,255,255,0.18); padding: 4px 8px; border-radius: 999px; }
 .fomo-body { font-weight: 500; text-align: center; }
-.fomo-clock { font-family: var(--font-mono-stack); font-weight: 700; font-size: 15px; letter-spacing: 0.04em; display: inline-flex; gap: 6px; align-items: center; }
+.fomo-clock { font-family: var(--font-mono-stack); font-weight: 700; font-size: 15px; letter-spacing: 0.04em; display: inline-flex; gap: 6px; align-items: center;
+  /* Hidden (but still laid out) until the client tick lands, so the banner
+     never reflows on hydration and no placeholder 00:00:00:00 flashes. */
+  opacity: 0; transition: opacity 160ms ease-out; }
+.fomo-clock.is-ready { opacity: 1; }
 .fomo-sep { opacity: 0.6; }
 .fomo-link { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; font-size: 13px; }
 

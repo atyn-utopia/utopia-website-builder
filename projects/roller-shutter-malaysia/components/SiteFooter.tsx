@@ -1,92 +1,82 @@
 'use client'
 
-import { useLocale, useTranslations } from 'next-intl'
-import LanguageSwitcher from '@/components/LanguageSwitcher'
-import { waRedirect } from '@/lib/waRedirect'
+// Flat minimal footer — the fleet default (reference: water-tank-malaysia).
+// Logo + horizontal nav, divider, then copyright + the "Built by Utopia AI"
+// brand-CI credit.
+//
+// Replaces the previous 4-column dark footer (brand + tagline + its own
+// WhatsApp CTA / Services / Product Types / Areas, with a LanguageSwitcher in
+// the bottom bar). The default layout drops the footer CTA and the footer
+// language switcher — SiteHeader already carries both — and drops the column
+// <h4>s that competed with the page heading hierarchy.
+//
+// Palette stays Encik Roller Shutter's own gunmetal + yellow; the logo lockup
+// is white-on-dark, so this footer keeps the brand's dark surface. The CI is a
+// structural element only, not a reskin.
 
-function WAIcon({ size = 18 }: { size?: number }) {
-  return (
-    <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor" aria-hidden="true">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.549 4.107 1.508 5.839L.057 23.179c-.083.334.232.633.556.522l5.493-1.757A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.9c-1.888 0-3.661-.519-5.175-1.425l-.371-.22-3.842 1.229 1.167-3.77-.242-.389A9.877 9.877 0 012.1 12C2.1 6.534 6.534 2.1 12 2.1S21.9 6.534 21.9 12 17.466 21.9 12 21.9z" />
-    </svg>
-  )
-}
+import Link from 'next/link'
+import { useLocale, useTranslations } from 'next-intl'
 
 export default function SiteFooter() {
   const locale = useLocale()
   const navT = useTranslations('nav')
   const footT = useTranslations('footer')
-  const waHref = waRedirect(locale)
+
+  const linkClass =
+    'text-[14.5px] font-semibold text-white/80 transition-colors hover:text-[var(--brand-yellow)]'
 
   return (
-    <footer style={{ background: '#151719' }} className="py-12 px-6">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-          <div>
-            <div className="mb-3">
-              <img
-                src="/brand-assets/logo-roller-shutter.png"
-                alt={navT('logoAlt')}
-                style={{ width: 200, height: 'auto', display: 'block' }}
-              />
-            </div>
-            <h6 className="body-h6 text-xs font-normal mb-4" style={{ color: 'var(--brand-steel-light)', lineHeight: '1.7' }}>{footT('tagline')}</h6>
-            <a
-              href={waHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="wa-btn inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold text-white"
-              onClick={() => {
-                if (typeof window !== 'undefined' && typeof window.uwc === 'function') {
-                  window.uwc('click', { label: 'whatsapp-footer' })
-                }
-              }}
-            >
-              <WAIcon size={14} />
-              {navT('whatsappCta')}
-            </a>
-          </div>
+    <footer style={{ background: 'var(--brand-gunmetal)' }} className="px-6 py-11">
+      <div className="mx-auto max-w-6xl">
+        <div className="flex flex-col items-center justify-between gap-5 md:flex-row md:gap-8">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/brand-assets/logo-roller-shutter.png"
+            alt={navT('logoAlt')}
+            style={{ width: 176, height: 'auto' }}
+            className="block"
+          />
 
-          <div>
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-white mb-3">{footT('services.heading')}</h4>
-            <ul className="space-y-1.5">
-              {[0, 1, 2, 3, 4].map((i) => (
-                <li key={i}>
-                  <span className="text-xs font-normal" style={{ color: 'var(--brand-steel-light)' }}>{footT(`services.items.${i}`)}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-white mb-3">{footT('productTypes.heading')}</h4>
-            <ul className="space-y-1.5">
-              {[0, 1, 2, 3, 4, 5].map((i) => (
-                <li key={i}>
-                  <span className="text-xs font-normal" style={{ color: 'var(--brand-steel-light)' }}>{footT(`productTypes.items.${i}`)}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-white mb-3">{footT('areas.heading')}</h4>
-            <ul className="space-y-1.5">
-              {[0, 1, 2, 3, 4, 5].map((i) => (
-                <li key={i}>
-                  <span className="text-xs font-normal" style={{ color: 'var(--brand-steel-light)' }}>{footT(`areas.items.${i}`)}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <nav className="flex flex-wrap justify-center gap-x-7 gap-y-3" aria-label="Footer">
+            <Link href={`/${locale}`} className={linkClass}>{navT('home')}</Link>
+            <a href={`/${locale}#products`} className={linkClass}>{navT('products')}</a>
+            <a href={`/${locale}#how-it-works`} className={linkClass}>{navT('howItWorks')}</a>
+            <a href={`/${locale}#locations`} className={linkClass}>{navT('locations')}</a>
+            <Link href={`/${locale}/blog`} className={linkClass}>{navT('blog')}</Link>
+            <a href={`/${locale}#faq`} className={linkClass}>{navT('faq')}</a>
+          </nav>
         </div>
 
-        <div className="pt-6" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-            <h6 className="body-h6 text-xs font-normal" style={{ color: 'var(--brand-steel)' }}>{footT('copyright')}</h6>
-            <LanguageSwitcher />
-          </div>
+        <div className="mt-7 h-px w-full bg-white/15" aria-hidden="true" />
+
+        <div className="mt-6 flex flex-col items-center justify-between gap-3 text-center md:flex-row md:text-left">
+          <h6
+            className="m-0 text-xs font-normal"
+            style={{ color: 'var(--brand-steel-light)' }}
+          >
+            {footT('copyright')}
+          </h6>
+          <a
+            className="utopia-credit"
+            style={{ color: 'var(--brand-steel-light)' }}
+            href="https://utopiagroup.com.my"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>Built by</span>
+            <span className="utopia-credit__word">Utopia</span>
+            <svg className="utopia-credit__mark" width="14" height="12" viewBox="0 0 64 56" aria-hidden="true">
+              <defs>
+                <linearGradient id="utopiaCreditGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#0054A6" />
+                  <stop offset="50%" stopColor="#2774AE" />
+                  <stop offset="100%" stopColor="#4A9DD0" />
+                </linearGradient>
+              </defs>
+              <polygon points="32,4 60,52 4,52" fill="url(#utopiaCreditGrad)" />
+            </svg>
+            <span className="utopia-credit__word">AI</span>
+          </a>
         </div>
       </div>
     </footer>

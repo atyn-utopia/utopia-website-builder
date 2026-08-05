@@ -70,9 +70,15 @@ export default async function HomePage({
             </Link>
           </div>
           <div className="home-hero-media">
+            {/* width/height are the asset's real intrinsic size (3125²). They
+                give the box an aspect ratio before the image loads — without
+                them the hero photo was 0px tall on first paint and the stats
+                strip + USP panel below it jumped down once it arrived. */}
             <img
               src="https://static.wixstatic.com/media/d3104b_9219aed8e59e4a0d9ee86be2066ff532~mv2.png"
               alt={hero('imageAlt')}
+              width={3125}
+              height={3125}
               className="home-hero-photo"
             />
             <div className="home-hero-stamp" aria-hidden="true">

@@ -346,5 +346,10 @@
     "h2Template": "Volvo EC200 dan EC400 untuk Projek Anda di {state}",
     "nearbyHeading": "Sewa excavator berdekatan {location}",
     "nearbyEyebrow": "KAWASAN BERDEKATAN"
+  },
+  "redirect": {
+    "heading": "Membuka WhatsApp…",
+    "subtext": "Anda sedang dihubungkan ke pasukan Abang Excavator.",
+    "fallback": "Klik di sini jika tidak berpindah"
   }
 }

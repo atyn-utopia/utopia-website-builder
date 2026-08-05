@@ -254,7 +254,10 @@ export default function LocationPageClient({
               </div>
               {/* Hero image */}
               <div className="relative flex justify-center md:justify-end">
-                <img src="https://static.wixstatic.com/media/d3104b_9219aed8e59e4a0d9ee86be2066ff532~mv2.png" alt={`Motorcycle rental ${displayName}`} className="w-64 sm:w-72 md:w-[360px] lg:w-[420px]" style={{ display: 'block', filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.3))', marginBottom: '-40px' }} />
+                {/* width/height = the asset's real intrinsic size (3125²), so the
+                    box has an aspect ratio before the image loads and the content
+                    below doesn't jump. Same fix as the homepage hero. */}
+                <img src="https://static.wixstatic.com/media/d3104b_9219aed8e59e4a0d9ee86be2066ff532~mv2.png" alt={`Motorcycle rental ${displayName}`} width={3125} height={3125} className="w-64 sm:w-72 md:w-[360px] lg:w-[420px] h-auto" style={{ display: 'block', filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.3))', marginBottom: '-40px' }} />
                 {/* Parallelogram price stamp */}
                 <div className="absolute top-4 right-0 md:right-4 px-4 py-2 z-10" style={{ background: 'var(--brand-primary)', transform: 'skewX(-6deg)', boxShadow: '0 4px 16px rgba(255,107,53,0.35)' }}>
                   <div style={{ transform: 'skewX(6deg)' }} className="text-center">

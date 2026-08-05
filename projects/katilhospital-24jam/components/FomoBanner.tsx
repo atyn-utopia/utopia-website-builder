@@ -49,20 +49,20 @@ export default function FomoBanner() {
       <div className="fomo-inner">
         <span className="fomo-tag">{t('eyebrow', { month, monthUpper })}</span>
         <span className="fomo-body">{t('body', { month, monthUpper })}</span>
+        {/* The clock only exists after hydration (Date.now() can't be rendered
+            on the server). The placeholder therefore mirrors the real markup
+            exactly — four boxed segments and three separators — so it reserves
+            the same width. A single collapsed placeholder span used to reserve
+            ~26px against the real ~180px, and the centred banner visibly
+            reflowed on every page load. */}
         <span aria-live="polite" className={`fomo-clock ${parts ? 'is-ready' : ''}`}>
-          {parts ? (
-            <>
-              <span>{pad(parts.days)}</span>
-              <span className="fomo-sep">:</span>
-              <span>{pad(parts.hours)}</span>
-              <span className="fomo-sep">:</span>
-              <span>{pad(parts.minutes)}</span>
-              <span className="fomo-sep">:</span>
-              <span>{pad(parts.seconds)}</span>
-            </>
-          ) : (
-            <span style={{ visibility: 'hidden' }}>00 : 00 : 00 : 00</span>
-          )}
+          <span>{parts ? pad(parts.days) : '00'}</span>
+          <span className="fomo-sep">:</span>
+          <span>{parts ? pad(parts.hours) : '00'}</span>
+          <span className="fomo-sep">:</span>
+          <span>{parts ? pad(parts.minutes) : '00'}</span>
+          <span className="fomo-sep">:</span>
+          <span>{parts ? pad(parts.seconds) : '00'}</span>
         </span>
         <Link href={waRedirect(locale)} className="fomo-link" target="_blank" rel="noopener noreferrer">
           {t('ctaLabel')} →

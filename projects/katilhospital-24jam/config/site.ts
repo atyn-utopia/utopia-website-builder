@@ -9,7 +9,10 @@ export const siteConfig = {
   tagline: 'Sewa & Jual Katil Hospital 24 Jam di Seluruh Malaysia',
   productSlug: 'katil-hospital',
   productName: 'Katil Hospital',
-  fallbackPhone: '60174287801',
+  // Mirrors the `default` phone_numbers row for katilhospitalmurah.com.my.
+  // Was 60174287801 — that is airkelapa.my's line, so any Supabase blip
+  // surfaced a second, wrong "default" number to visitors.
+  fallbackPhone: '60173291488',
   fallbackWaTextMs:
     'Hi, saya berminat dengan perkhidmatan sewa / beli katil hospital dari Katil Hospital Murah. Boleh bantu?',
   defaultLocale: 'ms' as const,

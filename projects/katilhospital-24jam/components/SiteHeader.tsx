@@ -80,7 +80,7 @@ export default function SiteHeader() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .site-header {
           position: relative;
           z-index: 40;
@@ -112,7 +112,7 @@ export default function SiteHeader() {
           gap: 24px;
           flex-wrap: nowrap;
         }
-        .site-nav :global(a) {
+        .site-nav a {
           color: #334155;
           font-weight: 600;
           font-size: 14px;
@@ -120,7 +120,7 @@ export default function SiteHeader() {
           white-space: nowrap;
           transition: color 150ms cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .site-nav :global(a:hover) {
+        .site-nav a:hover {
           color: #e63030;
         }
         .site-nav--desktop {
@@ -178,7 +178,7 @@ export default function SiteHeader() {
           display: flex;
           flex-direction: column;
         }
-        .site-mobile-nav :global(a) {
+        .site-mobile-nav a {
           padding: 13px 4px;
           font-weight: 700;
           font-size: 15px;
@@ -186,7 +186,7 @@ export default function SiteHeader() {
           color: #1c3a6a;
           border-bottom: 1px solid #E2E8F0;
         }
-        .site-mobile-nav :global(a:last-child) {
+        .site-mobile-nav a:last-child {
           border-bottom: none;
         }
         .site-mobile-actions {

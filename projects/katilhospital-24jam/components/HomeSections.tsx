@@ -344,7 +344,7 @@ export default function HomeSections({ locale, products, location }: Props) {
             </div>
           ))}
         </div>
-        <style jsx>{`
+        <style>{`
           .kh-usp-grid {
             max-width: 1240px;
             margin: 0 auto;
@@ -464,7 +464,7 @@ export default function HomeSections({ locale, products, location }: Props) {
               </ProductImpressionTracker>
             ))}
           </div>
-          <style jsx>{`
+          <style>{`
             .kh-product-grid {
               --cols: 1;
             }
@@ -540,7 +540,7 @@ export default function HomeSections({ locale, products, location }: Props) {
               </div>
             ))}
           </div>
-          <style jsx>{`
+          <style>{`
             .kh-why-grid {
               display: grid;
               gap: 18px;
@@ -584,7 +584,7 @@ export default function HomeSections({ locale, products, location }: Props) {
               flex: 0 0 52px;
               box-shadow: 0 2px 8px rgba(230, 48, 48, 0.12);
             }
-            .kh-why-icon :global(svg) {
+            .kh-why-icon svg {
               width: 26px;
               height: 26px;
             }
@@ -685,7 +685,7 @@ export default function HomeSections({ locale, products, location }: Props) {
               </Fragment>
             ))}
           </div>
-          <style jsx>{`
+          <style>{`
             .kh-flow {
               margin-top: 40px;
               display: flex;
@@ -728,7 +728,7 @@ export default function HomeSections({ locale, products, location }: Props) {
               color: #e63030;
               flex: 0 0 auto;
             }
-            .kh-flow-arrow :global(svg) {
+            .kh-flow-arrow svg {
               width: 26px;
               height: 26px;
               transform: rotate(90deg); /* mobile: points down between stacked cards */
@@ -742,7 +742,7 @@ export default function HomeSections({ locale, products, location }: Props) {
               .kh-flow-arrow {
                 padding: 0 4px;
               }
-              .kh-flow-arrow :global(svg) {
+              .kh-flow-arrow svg {
                 width: 30px;
                 height: 30px;
                 transform: rotate(0deg); /* desktop: points right between cards */
@@ -809,9 +809,9 @@ export default function HomeSections({ locale, products, location }: Props) {
               </div>
             ))}
           </div>
-          <style jsx>{`
+          <style>{`
             @media (min-width: 700px) {
-              :global(.kh-gallery) {
+              .kh-gallery {
                 grid-template-columns: repeat(4, 1fr) !important;
               }
             }

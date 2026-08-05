@@ -1,21 +1,16 @@
+// Flat minimal footer — the fleet default (reference: water-tank-malaysia).
+// Logo + horizontal nav, divider, then copyright + the "Built by Utopia AI"
+// brand-CI credit. No card container, no link columns, no social buttons and
+// no footer CTA.
+//
+// Replaces the previous 2-up dark footer (brand block + tagline + accent rule
+// beside a Products / Cities / Resources column group).
+//
+// Palette stays Cold Room Malaysia's own frost + amber — the CI is a structural
+// element only, not a reskin. Uses existing nav.* / footer.* keys.
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { BrandMark } from '@/components/BrandMark';
-import { siteConfig } from '@/config/site';
-import { locations } from '@/config/locations';
-
-// Footer layout mirrors the canonical sewa-excavator SiteFooter: a brand block
-// (logo + tagline) beside a column group (Products / Top Locations / Resources),
-// centred on mobile, with a bottom copyright bar. Re-themed to the cold-chain
-// palette (steel-900 surface, cold-amber accent).
-const FOOTER_TIERS = [
-  'frozen-storage-minus-18',
-  'freezer-minus-5-to-minus-10',
-  'chiller-2-to-4',
-  'cool-storage-7-to-10',
-];
-
-const FOOTER_CITIES = ['bukit-bintang', 'petaling-jaya', 'shah-alam', 'johor-bahru', 'george-town', 'ipoh'];
 
 export async function SiteFooter({ locale }: { locale: string }) {
   const t = await getTranslations({ locale });
@@ -24,85 +19,81 @@ export async function SiteFooter({ locale }: { locale: string }) {
     <footer className="site-footer">
       <div className="section-container">
         <div className="footer-top">
-          <div className="footer-brand">
-            <Link href={`/${locale}`} className="footer-mark" aria-label={t('nav.brandName')}>
-              <BrandMark size={40} />
-              <span className="footer-brand-name">{t('nav.brandName')}</span>
-            </Link>
-            <p className="footer-tag">{t('footer.tagline')}</p>
-            <span aria-hidden className="footer-accent" />
-          </div>
+          <Link href={`/${locale}`} className="footer-mark" aria-label={t('nav.brandName')}>
+            <BrandMark size={38} />
+            <span className="footer-brand-name">{t('nav.brandName')}</span>
+          </Link>
 
-          <div className="footer-cols">
-            <div>
-              <h6>{t('footer.cols.products')}</h6>
-              <ul>
-                {FOOTER_TIERS.map((slug) => (
-                  <li key={slug}>
-                    <Link href={`/${locale}#cold-room-rental`}>{t(`hero.tempLabels.${slug}`)}</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h6>{t('footer.cols.cities')}</h6>
-              <ul>
-                {FOOTER_CITIES.map((slug) => {
-                  const c = locations.find((l) => l.slug === slug);
-                  if (!c) return null;
-                  const display = locale === 'zh' ? c.name_zh : locale === 'ms' ? (c.name_ms ?? c.name) : c.name;
-                  return (
-                    <li key={slug}>
-                      <Link href={`/${locale}/${siteConfig.productSlug}/${slug}`}>{display}</Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-            <div>
-              <h6>{t('footer.cols.resources')}</h6>
-              <ul>
-                <li><Link href={`/${locale}/blog`}>{t('nav.blog')}</Link></li>
-                <li><Link href={`/${locale}#faq`}>{t('nav.faq')}</Link></li>
-                <li><Link href={`/${locale}#locations`}>{t('nav.locations')}</Link></li>
-              </ul>
-            </div>
-          </div>
+          <nav className="footer-nav" aria-label="Footer">
+            <Link href={`/${locale}`}>{t('nav.home')}</Link>
+            <Link href={`/${locale}#cold-room-rental`}>{t('nav.products')}</Link>
+            <Link href={`/${locale}#how-it-works`}>{t('nav.howItWorks')}</Link>
+            <Link href={`/${locale}#locations`}>{t('nav.locations')}</Link>
+            <Link href={`/${locale}/blog`}>{t('nav.blog')}</Link>
+            <Link href={`/${locale}#faq`}>{t('nav.faq')}</Link>
+          </nav>
         </div>
 
+        <div className="footer-line" aria-hidden="true" />
+
         <div className="footer-bottom">
-          <p className="footer-copy">© {new Date().getFullYear()} {t('nav.brandName')}. {t('footer.rights')}</p>
-          <p className="footer-copy">{t('footer.poweredBy')}</p>
+          <h6 className="footer-copy">
+            © {new Date().getFullYear()} {t('nav.brandName')}. {t('footer.rights')}
+          </h6>
+          <a
+            className="utopia-credit"
+            href="https://utopiagroup.com.my"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>Built by</span>
+            <span className="utopia-credit__word">Utopia</span>
+            <svg className="utopia-credit__mark" width="14" height="12" viewBox="0 0 64 56" aria-hidden="true">
+              <defs>
+                <linearGradient id="utopiaCreditGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#0054A6" />
+                  <stop offset="50%" stopColor="#2774AE" />
+                  <stop offset="100%" stopColor="#4A9DD0" />
+                </linearGradient>
+              </defs>
+              <polygon points="32,4 60,52 4,52" fill="url(#utopiaCreditGrad)" />
+            </svg>
+            <span className="utopia-credit__word">AI</span>
+          </a>
         </div>
       </div>
 
       <style>{`
-        .site-footer { background: var(--steel-900); color: rgba(255,255,255,0.7); padding: 72px 0 32px; }
-        .footer-top { display: grid; grid-template-columns: 1fr; gap: 40px; }
-        @media (min-width: 768px) { .footer-top { grid-template-columns: 1fr 2fr; gap: 64px; } }
-        .footer-brand { display: flex; flex-direction: column; gap: 16px; max-width: 340px; }
+        .site-footer {
+          background: var(--frost-mist);
+          color: var(--steel-700);
+          padding: 44px 0 32px;
+          border-top: 1px solid var(--steel-100);
+        }
+        .footer-top {
+          display: flex; align-items: center; justify-content: space-between;
+          flex-wrap: wrap; gap: 20px 32px;
+        }
         .footer-mark { display: inline-flex; align-items: center; gap: 10px; }
-        .footer-brand-name { font-weight: 800; color: #fff; font-size: 18px; letter-spacing: -0.02em; }
-        .footer-tag { margin: 0; color: rgba(255,255,255,0.6); font-size: 14px; line-height: 1.6; }
-        .footer-accent { display: block; height: 2px; width: 60px; background: var(--cold-amber); border-radius: 2px; }
-        .footer-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 28px; }
-        .footer-cols h6 { font-weight: 700; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; margin: 0 0 14px; }
-        .footer-cols ul { list-style: none; padding: 0; margin: 0; }
-        .footer-cols li { margin-bottom: 10px; }
-        .footer-cols a { color: rgba(255,255,255,0.7); font-size: 14px; transition: color 200ms var(--ease-out); }
-        .footer-cols a:hover { color: var(--cold-amber-glow); }
-        .footer-bottom { margin-top: 56px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.10); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 12px; color: rgba(255,255,255,0.5); }
-        .footer-copy { margin: 0; }
+        .footer-brand-name { font-weight: 800; color: var(--frost-deep); font-size: 17px; letter-spacing: -0.02em; }
+        .footer-nav { display: flex; flex-wrap: wrap; gap: 12px 26px; }
+        .footer-nav a {
+          color: var(--steel-700); font-weight: 600; font-size: 14.5px;
+          transition: color var(--dur-hover) var(--ease);
+        }
+        .footer-nav a:hover { color: var(--cold-amber-dark); }
+        .footer-line { height: 1px; background: var(--steel-100); margin: 24px 0; }
+        .footer-bottom {
+          display: flex; align-items: center; justify-content: space-between;
+          flex-wrap: wrap; gap: 12px 24px;
+        }
+        .footer-copy { margin: 0; font-size: 12.5px; font-weight: 400; color: var(--steel-500); }
+        .utopia-credit { color: var(--steel-500); }
         @media (max-width: 767px) {
-          .site-footer { padding: 48px 0 24px; }
-          .footer-top { gap: 28px; }
-          .footer-top, .footer-brand, .footer-bottom { text-align: center; align-items: center; }
-          .footer-brand { max-width: none; gap: 12px; }
-          .footer-mark { justify-content: center; }
-          .footer-accent { align-self: center; }
-          .footer-cols { display: block; column-count: 2; column-gap: 24px; text-align: center; }
-          .footer-cols > div { break-inside: avoid; display: inline-block; width: 100%; margin: 0 0 24px; }
-          .footer-bottom { margin-top: 32px; padding-top: 18px; justify-content: center; }
+          .site-footer { padding: 32px 0 24px; }
+          .footer-top { flex-direction: column; text-align: center; gap: 18px; }
+          .footer-nav { justify-content: center; }
+          .footer-bottom { flex-direction: column; text-align: center; }
         }
       `}</style>
     </footer>

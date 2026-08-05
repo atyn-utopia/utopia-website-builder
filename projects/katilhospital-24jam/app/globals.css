@@ -430,6 +430,13 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  /* Hidden (but still laid out) until the client tick lands, so the banner
+     never reflows on hydration and no placeholder 00:00:00:00 flashes. */
+  opacity: 0;
+  transition: opacity 160ms ease-out;
+}
+.fomo-clock.is-ready {
+  opacity: 1;
 }
 .fomo-clock > span:not(.fomo-sep) {
   font-family: ui-monospace, "SF Mono", "Menlo", monospace;

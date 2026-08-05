@@ -64,7 +64,7 @@ export default function SiteHeader() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .site-header {
           position: sticky; top: 0; z-index: 40;
           background: rgba(255,255,255,0.92);
@@ -83,7 +83,7 @@ export default function SiteHeader() {
         .site-nav a:hover { color: var(--brand-accent); }
         .site-nav--desktop { display: none; }
         .site-actions { display: inline-flex; align-items: center; gap: 10px; }
-        :global(.nav-cta) {
+        .nav-cta {
           height: 42px;
           padding: 0 18px;
           font-size: 13px;
@@ -99,7 +99,7 @@ export default function SiteHeader() {
           box-shadow: 0 6px 18px rgba(37, 211, 102, 0.28);
           transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
         }
-        :global(.nav-cta):hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(37, 211, 102, 0.40); }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(37, 211, 102, 0.40); }
         .nav-cta-label { display: inline; }
         .site-burger { display: inline-flex; flex-direction: column; justify-content: center; gap: 4px; width: 38px; height: 38px; padding: 0 8px; background: transparent; border: 1px solid var(--line-strong); border-radius: 10px; cursor: pointer; }
         .site-burger span { display: block; height: 2px; width: 100%; background: var(--ink); border-radius: 2px; transition: transform 0.18s ease, opacity 0.18s ease; }
@@ -112,13 +112,13 @@ export default function SiteHeader() {
         .site-mobile-nav a { padding: 13px 4px; font-weight: 700; font-size: 15px; color: var(--ink); border-bottom: 1px solid var(--line); }
         .site-mobile-nav a:last-child { border-bottom: none; }
         .site-mobile-actions { display: flex; flex-direction: column; gap: 12px; padding-top: 16px; margin-top: 12px; border-top: 1px solid var(--line); }
-        .site-mobile-actions :global(.lsw-toggle) { justify-content: center; }
-        .site-mobile-actions :global(.btn) { width: 100%; }
+        .site-mobile-actions .lsw-toggle { justify-content: center; }
+        .site-mobile-actions .btn { width: 100%; }
         @media (min-width: 880px) { .site-nav--desktop { display: inline-flex; } .site-burger { display: none; } .site-mobile-drawer { display: none !important; } }
         @media (max-width: 879px) {
-          :global(.nav-cta) { display: none !important; }
+          .nav-cta { display: none !important; }
           .site-actions__lang { display: inline-flex; }
-          .site-mobile-actions :global(.btn-wa) { display: none; }
+          .site-mobile-actions .btn-wa { display: none; }
         }
       `}</style>
     </header>

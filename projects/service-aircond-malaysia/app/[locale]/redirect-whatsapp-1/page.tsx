@@ -8,6 +8,11 @@ export const metadata: Metadata = {
 }
 
 export const dynamic = 'force-dynamic'
+export const revalidate = 0
+// Pin to Singapore so the function sits near Supabase's Cloudflare-KUL edge.
+// Default iad1 (US East) round-trip is ~250ms each way and pushes the page's
+// cold-start past the wizard's 7s liveness probe.
+export const preferredRegion = 'sin1'
 
 // Locale prefixes we strip when deriving a page_slug from a path. Kept in sync
 // with the site's configured locales.
@@ -33,12 +38,14 @@ async function resolvePageSlug(explicit?: string): Promise<string | undefined> {
 
 type Props = {
   params: Promise<{ locale: string }>
-  searchParams: Promise<{ location?: string; message?: string; page?: string }>
+  searchParams: Promise<{ location?: string; loc?: string; message?: string; page?: string }>
 }
 
 export default async function RedirectWhatsAppPage({ searchParams }: Props) {
-  const { location, message, page } = await searchParams
-  const locationSlug = location ?? 'all'
+  const { location, loc, message, page } = await searchParams
+  // This site's own links pass `location=`; `loc=` is the fleet-wide name used
+  // by the reference redirect page. Accept both so either link shape routes.
+  const locationSlug = location ?? loc ?? 'all'
   const pageSlug = await resolvePageSlug(page)
   const { phone, whatsappText } = await getPhoneNumber(locationSlug, pageSlug)
   const url = waLink(phone, message ?? whatsappText)

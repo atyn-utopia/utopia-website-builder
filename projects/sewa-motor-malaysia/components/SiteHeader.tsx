@@ -85,7 +85,7 @@ export default function SiteHeader() {
         </nav>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .site-header {
           position: sticky; top: 0; z-index: 40;
           background: rgba(255, 255, 255, 0.94);
@@ -124,7 +124,7 @@ export default function SiteHeader() {
           .site-mobile-drawer { display: none !important; }
         }
         @media (max-width: 879px) {
-          :global(.nav-cta) { display: none !important; }
+          .nav-cta { display: none !important; }
         }
         @media (max-width: 640px) {
           .site-brand-text { display: none; }

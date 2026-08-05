@@ -35,7 +35,13 @@
     "description": "Kontraktor cat rumah profesional di seluruh Malaysia. Cat dinding dalam & luar, siling, epoxy lantai, dan pagar. Jenama premium Nippon, Jotun, Dulux.",
     "whatsappUs": "WhatsApp Kami",
     "productsHeading": "Servis",
-    "productsLinks": ["Cat Dinding Dalaman", "Cat Luar Rumah", "Cat Siling", "Cat Epoxy Lantai", "Cat Pagar Rumah"],
+    "productsLinks": [
+      "Cat Dinding Dalaman",
+      "Cat Luar Rumah",
+      "Cat Siling",
+      "Cat Epoxy Lantai",
+      "Cat Pagar Rumah"
+    ],
     "locationsHeading": "Lokasi Utama",
     "resourcesHeading": "Sumber",
     "blogLabel": "Blog",
@@ -172,12 +178,30 @@
     "whyChoose": {
       "tag": "KELEBIHAN KAMI",
       "heading": "Kenapa Pilih Cat Rumah Malaysia",
-      "reason1": { "title": "Jenama Premium Sahaja", "description": "Kami hanya pakai Nippon Paint, Jotun dan Dulux — bukan cat ekonomi murah." },
-      "reason2": { "title": "Siap Sepantas 5 Jam", "description": "Untuk kerja bilik atau ruang tamu, rumah anda siap dicat dalam sehari." },
-      "reason3": { "title": "Quote Percuma, Tiada Ikatan", "description": "Lawatan tapak dan sebut harga tetap tanpa caj awal." },
-      "reason4": { "title": "Jaminan Kepuasan", "description": "Calar atau tompok dalam 12 bulan? Kami cat semula percuma." },
-      "reason5": { "title": "Kontraktor Bertauliah", "description": "Pasukan berlesen dengan 8+ tahun pengalaman dalam industri." },
-      "reason6": { "title": "Liputan Seluruh Malaysia", "description": "Dari KL ke Pulau Pinang, kami sampai ke pintu rumah anda." }
+      "reason1": {
+        "title": "Jenama Premium Sahaja",
+        "description": "Kami hanya pakai Nippon Paint, Jotun dan Dulux — bukan cat ekonomi murah."
+      },
+      "reason2": {
+        "title": "Siap Sepantas 5 Jam",
+        "description": "Untuk kerja bilik atau ruang tamu, rumah anda siap dicat dalam sehari."
+      },
+      "reason3": {
+        "title": "Quote Percuma, Tiada Ikatan",
+        "description": "Lawatan tapak dan sebut harga tetap tanpa caj awal."
+      },
+      "reason4": {
+        "title": "Jaminan Kepuasan",
+        "description": "Calar atau tompok dalam 12 bulan? Kami cat semula percuma."
+      },
+      "reason5": {
+        "title": "Kontraktor Bertauliah",
+        "description": "Pasukan berlesen dengan 8+ tahun pengalaman dalam industri."
+      },
+      "reason6": {
+        "title": "Liputan Seluruh Malaysia",
+        "description": "Dari KL ke Pulau Pinang, kami sampai ke pintu rumah anda."
+      }
     },
     "howItWorks": {
       "tag": "3 LANGKAH SAHAJA",
@@ -321,7 +345,9 @@
       "button": "WhatsApp Cat Rumah Malaysia",
       "fine": "Quote percuma · Jaminan 12 bulan."
     },
-    "breadcrumb": { "home": "Utama" }
+    "breadcrumb": {
+      "home": "Utama"
+    }
   },
   "blog": {
     "meta": {
@@ -337,5 +363,10 @@
     "ctaHeading": "Sedia Untuk Rumah Baru?",
     "ctaSubheading": "Dapatkan quote percuma dalam 1 jam.",
     "ctaButton": "WhatsApp Kami Sekarang"
+  },
+  "redirect": {
+    "heading": "Membuka WhatsApp…",
+    "subtext": "Anda sedang dihubungkan ke pasukan Cat Rumah Malaysia.",
+    "fallback": "Klik di sini jika tidak berpindah"
   }
 }

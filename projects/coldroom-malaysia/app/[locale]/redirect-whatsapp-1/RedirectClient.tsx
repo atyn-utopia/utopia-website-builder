@@ -1,23 +1,63 @@
 'use client';
+
+// Branded interstitial — the fleet default (reference: water-tank-malaysia).
+// Logo + spinner + localised copy, with a plain <a> fallback so the handoff
+// still works with JS disabled or when the automatic redirect is blocked.
+//
+// Replaces the previous unbranded screen with hardcoded English copy. The
+// webcore click beacon still fires before the handoff, as it did before.
+
 import { useEffect } from 'react';
+import { useTranslations } from 'next-intl';
+import { BrandMark } from '@/components/BrandMark';
 
 export default function RedirectClient({ url, phone }: { url: string; phone: string }) {
+  const t = useTranslations('redirect');
+
   useEffect(() => {
     if (typeof window !== 'undefined' && window.uwc) {
       try { window.uwc('click', { label: `whatsapp-${phone}` }); } catch {}
     }
-    const t = setTimeout(() => { window.location.href = url; }, 60);
-    return () => clearTimeout(t);
+    const timer = setTimeout(() => { window.location.href = url; }, 60);
+    return () => clearTimeout(timer);
   }, [url, phone]);
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Inter, sans-serif' }}>
-      <div style={{ textAlign: 'center' }}>
-        <p style={{ marginBottom: '12px' }}>Opening WhatsApp...</p>
-        <a href={url} style={{ color: '#25D366', fontWeight: 600, fontSize: '16px' }}>
-          Click here if it did not open
-        </a>
+    <div className="redir-overlay">
+      <div className="redir-inner">
+        <span className="redir-lockup">
+          <BrandMark size={44} />
+          <span className="redir-wordmark">Cold Room Malaysia</span>
+        </span>
+        <div className="redir-spinner" aria-hidden="true" />
+        <h1 className="redir-heading">{t('heading')}</h1>
+        <p className="redir-subtext">{t('subtext')}</p>
+        <a href={url} className="redir-fallback">{t('fallback')}</a>
       </div>
+
+      <style>{`
+        .redir-overlay {
+          position: fixed; inset: 0; z-index: 9999;
+          background: var(--frost-ice, #F4FAFD);
+          display: flex; align-items: center; justify-content: center;
+          padding: 24px;
+          font-family: Inter, system-ui, sans-serif;
+        }
+        .redir-inner { text-align: center; max-width: 400px; }
+        .redir-lockup { display: inline-flex; align-items: center; gap: 10px; margin: 0 auto 1.5rem; }
+        .redir-wordmark { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.02em; color: var(--frost-deep, #0B3D5C); }
+        .redir-spinner { width: 48px; height: 48px; margin: 0 auto 1.5rem; position: relative; }
+        .redir-spinner::before {
+          content: ''; position: absolute; inset: 0; border-radius: 50%;
+          border: 3px solid rgba(37, 211, 102, 0.2); border-top-color: #25D366;
+          animation: redir-spin 0.8s linear infinite;
+        }
+        @keyframes redir-spin { to { transform: rotate(360deg); } }
+        .redir-heading { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em; color: var(--steel-900, #131822); margin: 0 0 0.5rem; line-height: 1.2; }
+        .redir-subtext { font-size: 0.9rem; color: var(--steel-500, #4D5868); margin: 0 0 1.5rem; line-height: 1.4; }
+        .redir-fallback { font-size: 0.85rem; color: #25D366; font-weight: 600; text-decoration: none; }
+        .redir-fallback:hover { text-decoration: underline; }
+      `}</style>
     </div>
   );
 }

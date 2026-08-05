@@ -35,7 +35,13 @@
     "description": "Professional house painting contractor across Malaysia. Interior, exterior, ceiling, epoxy floor, and fence painting using Nippon, Jotun, and Dulux premium paints.",
     "whatsappUs": "WhatsApp Us",
     "productsHeading": "Services",
-    "productsLinks": ["Interior Wall Painting", "Exterior House Painting", "Ceiling Painting", "Epoxy Floor Paint", "Fence Painting"],
+    "productsLinks": [
+      "Interior Wall Painting",
+      "Exterior House Painting",
+      "Ceiling Painting",
+      "Epoxy Floor Paint",
+      "Fence Painting"
+    ],
     "locationsHeading": "Key Locations",
     "resourcesHeading": "Resources",
     "blogLabel": "Blog",
@@ -83,15 +89,51 @@
       "tag": "OUR SERVICES",
       "heading": "8 House Painting Services",
       "subheading": "From living room to exterior — one team, one guarantee for every surface.",
-      "interior": { "title": "Interior Wall Painting", "description": "Living rooms, hallways, and accent walls — premium Nippon Odour-less with neat finishing.", "price": "3.50" },
-      "bedroom": { "title": "Bedroom Painting", "description": "Pastel or warm tones for better sleep. Surface prep and masking included.", "price": "3.50" },
-      "kitchen": { "title": "Kitchen Painting", "description": "Oil-based or emulsion paints that resist heat and grease, and wipe clean easily.", "price": "3.50" },
-      "bathroom": { "title": "Bathroom Painting", "description": "Anti-fungal, humidity-resistant — Jotun Drygolin or Dulux Easycare.", "price": "3.50" },
-      "exterior": { "title": "Exterior House Painting", "description": "Built for Malaysian weather — pressure wash included free.", "price": "3.50" },
-      "weathershield": { "title": "Weathershield Premium", "description": "Jotun Jotashield or Nippon Weatherbond — 7–10 year guarantee.", "price": "4.50" },
-      "marble": { "title": "Marble Painting", "description": "Luxury marble effect on interior walls. Every wall unique, no two alike.", "price": "2,250" },
-      "texture": { "title": "Texture Painting", "description": "Modern concrete texture for accent walls. Industrial premium look.", "price": "2,500" },
-      "decor3d": { "title": "3D Decorative Wall", "description": "Embossed 3D panel finish — monstera, geometric, or organic motifs.", "price": "3,500" },
+      "interior": {
+        "title": "Interior Wall Painting",
+        "description": "Living rooms, hallways, and accent walls — premium Nippon Odour-less with neat finishing.",
+        "price": "3.50"
+      },
+      "bedroom": {
+        "title": "Bedroom Painting",
+        "description": "Pastel or warm tones for better sleep. Surface prep and masking included.",
+        "price": "3.50"
+      },
+      "kitchen": {
+        "title": "Kitchen Painting",
+        "description": "Oil-based or emulsion paints that resist heat and grease, and wipe clean easily.",
+        "price": "3.50"
+      },
+      "bathroom": {
+        "title": "Bathroom Painting",
+        "description": "Anti-fungal, humidity-resistant — Jotun Drygolin or Dulux Easycare.",
+        "price": "3.50"
+      },
+      "exterior": {
+        "title": "Exterior House Painting",
+        "description": "Built for Malaysian weather — pressure wash included free.",
+        "price": "3.50"
+      },
+      "weathershield": {
+        "title": "Weathershield Premium",
+        "description": "Jotun Jotashield or Nippon Weatherbond — 7–10 year guarantee.",
+        "price": "4.50"
+      },
+      "marble": {
+        "title": "Marble Painting",
+        "description": "Luxury marble effect on interior walls. Every wall unique, no two alike.",
+        "price": "2,250"
+      },
+      "texture": {
+        "title": "Texture Painting",
+        "description": "Modern concrete texture for accent walls. Industrial premium look.",
+        "price": "2,500"
+      },
+      "decor3d": {
+        "title": "3D Decorative Wall",
+        "description": "Embossed 3D panel finish — monstera, geometric, or organic motifs.",
+        "price": "3,500"
+      },
       "bookNow": "Get a Quote",
       "fromLabel": "From",
       "priceFromSqft": "From RM {price}/sqft",
@@ -136,12 +178,30 @@
     "whyChoose": {
       "tag": "WHY US",
       "heading": "Why Choose Cat Rumah Malaysia",
-      "reason1": { "title": "Premium Brands Only", "description": "We use Nippon Paint, Jotun, and Dulux — never cheap economy paints." },
-      "reason2": { "title": "Done in 5 Hours", "description": "For bedroom or living room work, your home is repainted the same day." },
-      "reason3": { "title": "Free Quote, No Strings", "description": "Site visits and fixed quotes with no upfront charges." },
-      "reason4": { "title": "Satisfaction Guarantee", "description": "Scratches or peeling within 12 months? We repaint for free." },
-      "reason5": { "title": "Certified Contractors", "description": "Licensed team with 8+ years of industry experience." },
-      "reason6": { "title": "Malaysia-Wide Coverage", "description": "From KL to Penang, we come to your doorstep." }
+      "reason1": {
+        "title": "Premium Brands Only",
+        "description": "We use Nippon Paint, Jotun, and Dulux — never cheap economy paints."
+      },
+      "reason2": {
+        "title": "Done in 5 Hours",
+        "description": "For bedroom or living room work, your home is repainted the same day."
+      },
+      "reason3": {
+        "title": "Free Quote, No Strings",
+        "description": "Site visits and fixed quotes with no upfront charges."
+      },
+      "reason4": {
+        "title": "Satisfaction Guarantee",
+        "description": "Scratches or peeling within 12 months? We repaint for free."
+      },
+      "reason5": {
+        "title": "Certified Contractors",
+        "description": "Licensed team with 8+ years of industry experience."
+      },
+      "reason6": {
+        "title": "Malaysia-Wide Coverage",
+        "description": "From KL to Penang, we come to your doorstep."
+      }
     },
     "howItWorks": {
       "tag": "3 SIMPLE STEPS",
@@ -285,7 +345,9 @@
       "button": "WhatsApp Cat Rumah Malaysia",
       "fine": "Free quote · 12-month warranty."
     },
-    "breadcrumb": { "home": "Home" }
+    "breadcrumb": {
+      "home": "Home"
+    }
   },
   "blog": {
     "meta": {
@@ -301,5 +363,10 @@
     "ctaHeading": "Ready for a newer home?",
     "ctaSubheading": "Get a free quote within 1 hour.",
     "ctaButton": "WhatsApp Us Now"
+  },
+  "redirect": {
+    "heading": "Opening WhatsApp…",
+    "subtext": "Connecting you to the Cat Rumah Malaysia team.",
+    "fallback": "Click here if it doesn't redirect"
   }
 }

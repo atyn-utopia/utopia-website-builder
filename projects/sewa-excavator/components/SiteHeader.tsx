@@ -63,7 +63,7 @@ export default function SiteHeader() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .site-header {
           position: sticky; top: 0; z-index: 40;
           background: rgba(255,255,255,0.92);
@@ -95,13 +95,13 @@ export default function SiteHeader() {
         .site-mobile-nav a { padding: 13px 4px; font-weight: 700; font-size: 15px; color: var(--brand-charcoal); border-bottom: 1px solid var(--line); }
         .site-mobile-nav a:last-child { border-bottom: none; }
         .site-mobile-actions { display: flex; flex-direction: column; gap: 12px; padding-top: 16px; margin-top: 12px; border-top: 1px solid var(--line); }
-        .site-mobile-actions :global(.lsw-toggle) { justify-content: center; }
-        .site-mobile-actions :global(.btn) { width: 100%; }
+        .site-mobile-actions .lsw-toggle { justify-content: center; }
+        .site-mobile-actions .btn { width: 100%; }
         @media (min-width: 880px) { .site-nav--desktop { display: inline-flex; } .site-burger { display: none; } .site-mobile-drawer { display: none !important; } }
         @media (max-width: 879px) {
-          :global(.nav-cta) { display: none !important; }
+          .nav-cta { display: none !important; }
           .site-actions__lang { display: inline-flex; }
-          .site-mobile-actions :global(.btn-wa) { display: none; }
+          .site-mobile-actions .btn-wa { display: none; }
         }
       `}</style>
     </header>

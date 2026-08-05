@@ -249,7 +249,7 @@ export default function LocationPageClient({
           </div>
         </div>
 
-        <style jsx>{`
+        <style>{`
           .kh-hero-copy {
             text-align: center;
           }
