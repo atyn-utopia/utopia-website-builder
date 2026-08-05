@@ -15,7 +15,9 @@
   --wa-green:           #25D366;
   --google-gold:        #FBBC04;
 
-  --font: 'Inter', system-ui, sans-serif;
+  /* --font-inter is set by next/font in app/[locale]/layout.tsx and carries a
+     metric-matched fallback face, so the swap doesn't reflow the hero. */
+  --font: var(--font-inter), 'Inter', system-ui, sans-serif;
 }
 
 * { box-sizing: border-box; }

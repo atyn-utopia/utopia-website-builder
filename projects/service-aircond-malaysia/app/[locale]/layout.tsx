@@ -1,10 +1,23 @@
 import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 import { seoAlternates } from '@/lib/seoAlternates'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import { siteConfig } from '@/config/site'
+
+// Self-hosted via next/font rather than a Google Fonts <link>. The stylesheet
+// link shipped Inter with display=swap and no metric-matched fallback, so the
+// hero H1 rendered in system-ui, then rewrapped when Inter arrived and shoved
+// the whole page down ~34px (CLS 0.125). next/font emits a size-adjusted
+// fallback face, so the swap no longer changes layout.
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  display: 'swap',
+  variable: '--font-inter',
+})
 
 type Props = {
   children: React.ReactNode
@@ -47,12 +60,9 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages()
 
   return (
-    <html lang={locale} dir="ltr">
+    <html lang={locale} dir="ltr" className={inter.variable}>
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
         <script defer src="https://webcore.utopiaai.my/t.js" data-website={siteConfig.domain}></script>
         {/* Google Tag Manager */}
         <script
