@@ -496,7 +496,10 @@ h1, h2, h3, h4 {
   gap: 6px;
   font-size: 13px;
   font-weight: 600;
-  color: inherit;
+  /* No `color` here on purpose. An unlayered `color: inherit` outranks every
+     Tailwind text-colour utility (unlayered always beats @layer), so a footer
+     styling the credit with a class silently inherited the body colour —
+     dark-on-dark and invisible. Each footer sets its own colour. */
   text-decoration: none;
   border-radius: var(--r-button);
   transition: transform var(--dur-hover) var(--ease), opacity var(--dur-hover) var(--ease);

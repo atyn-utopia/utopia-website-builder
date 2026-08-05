@@ -47,8 +47,12 @@ export default async function SiteFooter({ locale }: { locale: Locale }) {
           <h6 className="m-0 text-xs font-normal text-white/55">
             {tFoot('copyright', { year })}
           </h6>
+          {/* Colour set inline, not with a Tailwind class: the shared
+              .utopia-credit rule in globals.css is unlayered and outranks
+              @layer utilities, so a text-* class here silently lost. */}
           <a
-            className="utopia-credit text-white/70"
+            className="utopia-credit"
+            style={{ color: 'rgba(255,255,255,0.82)' }}
             href="https://utopiagroup.com.my"
             target="_blank"
             rel="noopener noreferrer"

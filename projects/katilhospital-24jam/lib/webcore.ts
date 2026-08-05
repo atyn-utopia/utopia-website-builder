@@ -123,7 +123,7 @@ const FALLBACK_WA_TEXT = siteConfig.fallbackWaTextMs;
 // path. Without it a failed webcore read produced an unattributable
 // message — several sites share one WhatsApp number, so the domain is the
 // operator's only signal for which site the lead came from.
-const FALLBACK_WA_TEXT_ATTRIBUTED = `Hi ${siteConfig.domain}, ${FALLBACK_WA_TEXT}`;
+const FALLBACK_WA_TEXT_ATTRIBUTED = `Hi ${siteConfig.domain}, ${FALLBACK_WA_TEXT.replace(/^\s*(hi|hello|hai|salam|assalamualaikum)\b[^,]{0,40},\s*/i, '')}`;
 
 
 type LeadsMode = 'single' | 'rotation' | 'location' | 'hybrid';

@@ -112,7 +112,7 @@ const FALLBACK_WA_TEXT =
 // path. Without it a failed webcore read produced an unattributable
 // message — several sites share one WhatsApp number, so the domain is the
 // operator's only signal for which site the lead came from.
-const FALLBACK_WA_TEXT_ATTRIBUTED = `Hi ${siteConfig.domain}, ${FALLBACK_WA_TEXT}`
+const FALLBACK_WA_TEXT_ATTRIBUTED = `Hi ${siteConfig.domain}, ${FALLBACK_WA_TEXT.replace(/^\s*(hi|hello|hai|salam|assalamualaikum)\b[^,]{0,40},\s*/i, '')}`
 
 
 type LeadsMode = 'single' | 'rotation' | 'location' | 'hybrid'
@@ -197,9 +197,12 @@ function fallbackResult(): PhoneResult {
 function toResult(row: PhoneRow | undefined, mode: LeadsMode, host: string): PhoneResult {
   if (!row) return fallbackResult()
   const text = row.whatsapp_text || FALLBACK_WA_TEXT
+  // Drop any greeting already stored in whatsapp_text, otherwise the
+  // message double-greets ("Hi domain.my, Hi Brand, ...").
+  const body = text.replace(/^\s*(hi|hello|hai|salam|assalamualaikum)\b[^,]{0,40},\s*/i, '')
   return {
     phone: row.phone_number,
-    whatsappText: `Hi ${host}, ${text}`,
+    whatsappText: `Hi ${host}, ${body}`,
     source: 'database',
     mode,
   }
