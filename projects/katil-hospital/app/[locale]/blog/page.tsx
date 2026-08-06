@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { localeHref } from '@/lib/localeHref';
+import { ogImages } from '@/lib/ogImage';
 import { getBlogPosts } from '@/lib/webcore';
 
 import SiteHeader from '@/components/SiteHeader';
@@ -29,6 +30,13 @@ export async function generateMetadata({
     title: t('title'),
     description: t('description'),
     alternates: { canonical: `${localeHref(locale)}/blog`, languages },
+    openGraph: {
+      type: 'website',
+      url: `${localeHref(locale)}/blog`,
+      title: t('title'),
+      description: t('description'),
+      images: ogImages(locale),
+    },
   };
 }
 

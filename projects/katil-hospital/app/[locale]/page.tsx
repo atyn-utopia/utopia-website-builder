@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
 import { localeHref } from '@/lib/localeHref';
+import { ogImages } from '@/lib/ogImage';
 import { routing } from '@/i18n/routing';
 import { waRedirect } from '@/lib/waRedirect';
 import { getProducts } from '@/lib/webcore';
@@ -39,6 +40,13 @@ export async function generateMetadata({
     title: t('title'),
     description: t('description'),
     alternates: { canonical: localeHref(locale), languages },
+    openGraph: {
+      type: 'website',
+      url: localeHref(locale),
+      title: t('title'),
+      description: t('description'),
+      images: ogImages(locale),
+    },
   };
 }
 
@@ -165,7 +173,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
       <main className="bg-white text-gray-800">
         {/* ========== HERO ========== */}
-        <section className="hero-gradient pt-8 pb-12 md:pt-16 md:pb-20 relative overflow-hidden">
+        <section className="hero hero-gradient pt-8 pb-12 md:pt-16 md:pb-20 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div className="text-center md:text-left">
@@ -246,7 +254,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   className="rounded-2xl shadow-2xl w-full object-cover"
                   loading="eager"
                 />
-                <div className="absolute -bottom-4 left-4 right-4 bg-white rounded-xl shadow-lg p-4 flex justify-around text-center">
+                <div className="hero-stats absolute -bottom-4 left-4 right-4 bg-white rounded-xl shadow-lg p-4 flex justify-around text-center">
                   <span>
                     <Counter target={1247} className="stat-num text-teal-700 counter block" />
                     <span className="text-xs text-gray-500 font-medium">{t('stats.reviews')}</span>

@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { localeHref } from '@/lib/localeHref';
 import { siteConfig } from '@/config/site';
+import { ogImages } from '@/lib/ogImage';
 import { OrganizationSchema } from '@/components/schema/OrganizationSchema';
 import { WebSiteSchema } from '@/components/schema/WebSiteSchema';
 
@@ -60,6 +61,7 @@ export async function generateMetadata({
       siteName: siteConfig.brandName,
       title: t('title'),
       description: t('description'),
+      images: ogImages(locale),
       locale: OG_LOCALE[locale] || 'ms_MY',
       alternateLocale: routing.locales.filter((l) => l !== locale).map((l) => OG_LOCALE[l]),
     },

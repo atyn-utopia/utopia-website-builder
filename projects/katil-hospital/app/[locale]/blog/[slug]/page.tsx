@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { localeHref } from '@/lib/localeHref';
+import { ogImages } from '@/lib/ogImage';
 import { waRedirect } from '@/lib/waRedirect';
 import { getBlogPost, getBlogPostSlugs, getRecentBlogPosts } from '@/lib/webcore';
 
@@ -46,7 +47,7 @@ export async function generateMetadata({
       title: tr.meta_title || tr.title,
       description: tr.meta_description || tr.excerpt,
       url: `${localeHref(locale)}${path}`,
-      ...(post.cover_image_url ? { images: [post.cover_image_url] } : {}),
+      images: post.cover_image_url ? [post.cover_image_url] : ogImages(locale),
     },
   };
 }
