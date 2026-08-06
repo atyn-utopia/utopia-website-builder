@@ -1,0 +1,411 @@
+{
+  "nav": {
+    "logoAlt": "Ibnu Sina Care logo — hospital bed supplier Malaysia",
+    "logoTagline": "HOSPITAL BEDS MALAYSIA",
+    "home": "Home",
+    "products": "Products",
+    "rentBuy": "Rent / Buy",
+    "showroom": "Showrooms",
+    "faq": "FAQ",
+    "blog": "Blog",
+    "whatsappCta": "WhatsApp Us",
+    "whatsappCtaLong": "WhatsApp Us Now",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "locations": "Locations",
+    "calculator": "Calculator"
+  },
+  "fomo": {
+    "eyebrow": "OFFER ENDS IN",
+    "body": "{month} promo: zero deposit + free delivery in KL & Selangor",
+    "ctaLabel": "Book Now"
+  },
+  "hero": {
+    "badge": "Care For Your Loved Ones",
+    "titleLine1": "Rent A Hospital Bed",
+    "titleHighlight": "From RM139/Month",
+    "subtitle": "Hospital-grade comfort at home for your parents and the people you love.",
+    "bullets": "✓ 2-Hour Delivery   ✓ Zero Deposit   ✓ Buyback Guarantee",
+    "ctaPrimary": "WhatsApp Us Now",
+    "ctaSecondary": "Contact Us",
+    "imageAlt": "Malaysian daughter caring for her mother resting in a hospital bed at home",
+    "trust": {
+      "kkm": "KKM Certified",
+      "mda": "MDA Approved",
+      "resmed": "ResMed Authorized",
+      "since": "Since 2016"
+    },
+    "stats": {
+      "reviews": "Positive Reviews",
+      "showrooms": "Showrooms",
+      "delivery": "Hour Delivery"
+    }
+  },
+  "usp": {
+    "deliveryTitle": "2-Hour Delivery",
+    "deliverySub": "KL & Selangor",
+    "depositTitle": "Zero Deposit",
+    "depositSub": "Pay on delivery",
+    "buybackTitle": "50% Buyback",
+    "buybackSub": "Exclusive guarantee"
+  },
+  "emotional": {
+    "badge": "Why A Hospital Bed At Home?",
+    "titleLine1": "They Once Cared For Us.",
+    "titleHighlight": "Now It's Our Turn.",
+    "body": "Every parent deserves the best comfort. A hospital bed at home isn't just equipment — it's the care you give them every single day.",
+    "card1Title": "Elderly Care",
+    "card1Desc": "Comfort for the parents you love",
+    "card2Title": "Stroke Patients",
+    "card2Desc": "Purpose-built beds for stroke recovery",
+    "card3Title": "Post-Surgery",
+    "card3Desc": "Comfortable recovery at home",
+    "card4Title": "Palliative Care",
+    "card4Desc": "The best quality of life at home"
+  },
+  "how": {
+    "badge": "Simple & Fast",
+    "title": "Just 3 Steps —",
+    "titleHighlight": "Done!",
+    "imageAlt": "Ibnu Sina Care team installing a hospital bed in a customer's home",
+    "step1Title": "WhatsApp Us",
+    "step1Desc": "Tell us what you need — stroke patient, elderly parent, post-surgery recovery. We'll help you pick the right bed.",
+    "step2Title": "We Deliver & Install",
+    "step2Desc": "2-hour delivery in KL/Selangor. Our team assembles it in your home. Zero deposit — pay when it arrives.",
+    "step3Title": "Free Training",
+    "step3Desc": "We teach your family how to use the bed properly, with 24/7 support whenever you need it.",
+    "cta": "WhatsApp Us Now"
+  },
+  "comfort": {
+    "badge": "Comfort & Dignity",
+    "titleLead": "Let Them Rest With",
+    "titleHighlight": "Comfort & Dignity",
+    "body": "A hospital bed at home lets your loved one sit upright to eat, read, and be part of family life — without pain or discomfort.",
+    "imageAlt": "Elderly father reading the Quran in a hospital bed with his son beside him",
+    "point1": "Cuts bedsore risk by up to 80%",
+    "point2": "Head elevation supports easier breathing",
+    "point3": "Less strain on carers — no manual lifting",
+    "point4": "Safer eating upright — helps prevent choking"
+  },
+  "why": {
+    "badge": "Why Ibnu Sina Care?",
+    "titleLine1": "More Than Selling Beds.",
+    "titleHighlight": "We Care For Your Family.",
+    "exclusiveTag": "EXCLUSIVE",
+    "card1Title": "2-Hour Delivery",
+    "card1Desc": "KL & Selangor. The fastest in Malaysia — we arrive before you have time to worry.",
+    "card2Title": "5 Showrooms",
+    "card2Desc": "KL, Penang, Melaka, Johor & Langkawi. Come see and try before you buy.",
+    "card3Title": "50% Buyback Guarantee",
+    "card3Desc": "Don't need it anymore? We buy it back at 50%. No risk. No loss.",
+    "card4Title": "Zero Deposit",
+    "card4Desc": "Pay on delivery. COD — no deposit, no risk.",
+    "card5Title": "24/7 Support",
+    "card5Desc": "WhatsApp us anytime. Our team is always ready to help.",
+    "card6Title": "Free Training",
+    "card6Desc": "We teach you how to use the bed properly, so your family cares with confidence."
+  },
+  "products": {
+    "badge": "Hospital Bed Range",
+    "title": "Pick The Right One For",
+    "titleHighlight": "Your Loved Ones",
+    "note": "Every bed includes a 2-year warranty, free training & 24/7 support",
+    "imageAltTemplate": "{model} hospital bed from Ibnu Sina Care",
+    "cta": "WhatsApp To Order",
+    "popular": "⭐ MOST POPULAR",
+    "perMonth": "/month",
+    "orBuy": "or",
+    "buyOutright": "to buy outright",
+    "items": {
+      "standard-2-fungsi": {
+        "name": "Standard 2-Function",
+        "tag": "VALUE",
+        "desc": "Ideal for elderly care & short-term recovery",
+        "f1": "Head & leg adjustment",
+        "f2": "150kg capacity",
+        "f3": "Rust-resistant steel frame",
+        "f4": "2-year warranty"
+      },
+      "premium-3-fungsi": {
+        "name": "Premium 3-Function",
+        "tag": "",
+        "desc": "For stroke patients & long-term care",
+        "f1": "Head, leg & height adjustment",
+        "f2": "180kg capacity",
+        "f3": "Less strain on the carer",
+        "f4": "Rent-to-own available",
+        "f5": "2-year warranty"
+      },
+      "ultra-6-fungsi-elektrik": {
+        "name": "Ultra 6-Function Electric",
+        "tag": "PREMIUM",
+        "desc": "Full control with a remote",
+        "f1": "Fully electric remote control",
+        "f2": "Automatic left/right turning",
+        "f3": "Commode & hair-washing basin",
+        "f4": "200kg capacity",
+        "f5": "2-year warranty"
+      }
+    },
+    "priceFrom": "From RM {price}"
+  },
+  "buyback": {
+    "badge": "🛡️ Exclusive — Only At Ibnu Sina Care",
+    "title": "50% Buyback",
+    "titleHighlight": "Guarantee",
+    "body": "Don't need it anymore? We buy your bed back at 50% of the original price — guaranteed. No other supplier dares to offer this.",
+    "stat1Value": "50%",
+    "stat1Label": "Buyback Price",
+    "stat2Value": "0",
+    "stat2Label": "Risk To You",
+    "stat3Value": "100%",
+    "stat3Label": "Peace Of Mind",
+    "cta": "Ask About Buyback"
+  },
+  "addons": {
+    "badge": "Add-Ons & Accessories",
+    "title": "Complete The Care",
+    "titleHighlight": "At Home",
+    "cta": "WhatsApp",
+    "items": {
+      "tilam-ripple": {
+        "name": "Ripple Mattress",
+        "desc": "Prevents bedsores with alternating pressure",
+        "price": "RM179"
+      },
+      "tilam-kalis-air": {
+        "name": "PVC Waterproof Mattress",
+        "desc": "Easy to clean, long lasting, 100% waterproof",
+        "price": "RM349"
+      },
+      "kerusi-roda": {
+        "name": "Wheelchair",
+        "desc": "Lightweight, folds easily, multiple sizes",
+        "price": "From RM299"
+      },
+      "oxygen-concentrator": {
+        "name": "Oxygen Concentrator",
+        "desc": "Continuous oxygen supply at home",
+        "price": "From RM1,499"
+      }
+    },
+    "cpapTitle": "CPAP & ResMed — Authorised Dealer",
+    "cpapDesc": "Ibnu Sina Care is an authorised ResMed dealer in Malaysia. CPAP machines for sleep apnea treatment — rent or buy.",
+    "cpapCta": "Ask CPAP Price"
+  },
+  "delivery": {
+    "badge": "Delivery Coverage",
+    "title": "We Deliver",
+    "titleHighlight": "Nationwide",
+    "tier1Time": "2 Hours",
+    "tier1Area": "KL & Selangor",
+    "tier1Note": "The fastest in Malaysia. 98% on time.",
+    "tier2Time": "6-12 Hours",
+    "tier2Area": "Melaka, N. Sembilan, Perak, Johor, Penang",
+    "tier2Note": "Same-day express delivery.",
+    "tier3Time": "24 Hours",
+    "tier3Area": "Sabah, Sarawak & the rest of Malaysia",
+    "tier3Note": "Including Langkawi, Labuan & rural areas."
+  },
+  "showroom": {
+    "badge": "Come And Try It",
+    "title": "5 Showrooms",
+    "titleHighlight": "Across Malaysia",
+    "note": "We believe you should see and feel it before you decide.",
+    "imageAlt": "Ibnu Sina Care showroom with hospital beds, wheelchairs and medical equipment",
+    "cta": "Book Appointment",
+    "klName": "Kuala Lumpur",
+    "klSub": "HQ — Head Office",
+    "klDesc": "Our largest showroom. Plenty of models to try.",
+    "penangName": "Penang",
+    "penangDesc": "Covering the north — Penang, Kedah & Perak.",
+    "melakaName": "Melaka",
+    "melakaDesc": "Serving the south — Melaka & Negeri Sembilan.",
+    "johorName": "Johor Bahru",
+    "johorDesc": "Covering all of Johor and the southern region.",
+    "langkawiName": "Langkawi",
+    "langkawiDesc": "The only supplier with a showroom in Langkawi."
+  },
+  "reviews": {
+    "badge": "⭐ 4.9/5 — 1,247+ Reviews",
+    "title": "What Our",
+    "titleHighlight": "Customers Say",
+    "avatarAltTemplate": "Profile photo of {name}",
+    "items": [
+      {
+        "name": "Puan Fatimah",
+        "city": "Kuala Lumpur",
+        "quote": "Arrived in 1 hour 45 minutes! Fully assembled, and they showed us how to use it. My mum is very comfortable. Thank you Ibnu Sina Care."
+      },
+      {
+        "name": "Encik Azman",
+        "city": "Shah Alam",
+        "quote": "Dad had a stroke and needed a bed urgently. Called in the afternoon, it arrived that night. Fair price, hospital quality."
+      },
+      {
+        "name": "Puan Siti Aminah",
+        "city": "Melaka",
+        "quote": "Rented for just 3 months after surgery. Easy process, zero deposit. Returned it when we were done — they bought it back!"
+      },
+      {
+        "name": "Haji Ismail",
+        "city": "Johor Bahru",
+        "quote": "Bought the 3-function bed for my wife. Over a year later it still looks new. The 2-year warranty gives real peace of mind."
+      },
+      {
+        "name": "Nurul Izzah",
+        "city": "Penang",
+        "quote": "Visited the Penang showroom, staff were so helpful. Explained every function. My mother loves the electric bed."
+      },
+      {
+        "name": "Encik Razak",
+        "city": "Petaling Jaya",
+        "quote": "Compared 5 companies — Ibnu Sina Care was the cheapest and fastest, plus a buyback guarantee. No brainer."
+      },
+      {
+        "name": "Puan Rohani",
+        "city": "Subang Jaya",
+        "quote": "The 24/7 support is real. They reply on WhatsApp even at midnight. Staff patiently explained the ripple mattress. Highly recommend!"
+      },
+      {
+        "name": "Ahmad Faiz",
+        "city": "Klang",
+        "quote": "My grandmother is 87. This bed made her life so much easier — she can sit up, eat, watch TV. Care in the form of comfort."
+      },
+      {
+        "name": "Puan Haslinda",
+        "city": "Langkawi",
+        "quote": "There's even a showroom in Langkawi! Didn't expect that. Came to look, bought on the spot. Same-day delivery. Excellent!"
+      },
+      {
+        "name": "Encik Sulaiman",
+        "city": "Ipoh",
+        "quote": "Rent-to-own is great value. Pay a little at a time and it ends up being yours. No burden, and mum is comfortable."
+      }
+    ]
+  },
+  "faq": {
+    "badge": "Frequently Asked",
+    "title": "Answers To",
+    "titleHighlight": "Your Questions",
+    "items": [
+      {
+        "q": "How much does it cost to rent a hospital bed?",
+        "a": "Rental starts from RM139/month for a 2-function bed, RM229/month for 3-function, and RM649/month for the 6-function electric bed. Every price includes a 2-year warranty and free training."
+      },
+      {
+        "q": "How long does delivery take?",
+        "a": "2 hours for KL & Selangor, 6-12 hours for Melaka, Johor, Penang, Perak and Negeri Sembilan, and 24 hours for the rest of Malaysia including Sabah & Sarawak."
+      },
+      {
+        "q": "What is the 50% buyback guarantee?",
+        "a": "When you buy a bed from us and no longer need it, we buy it back at 50% of the original purchase price. It's an exclusive guarantee from Ibnu Sina Care — no other company offers this."
+      },
+      {
+        "q": "Do I need to pay a deposit?",
+        "a": "No! We are zero deposit. Pay when the bed arrives — COD (Cash On Delivery). There's no risk at all for you."
+      },
+      {
+        "q": "Is there a rent-to-own option?",
+        "a": "Yes! You can start by renting, and your rental payments count towards the purchase price. Once it's paid off, the bed is yours. No burden, and no large upfront payment."
+      },
+      {
+        "q": "Manual or electric bed — which is better?",
+        "a": "Manual beds (2 & 3-function) suit patients who can still move a little, or short-term care. The electric bed (6-function) is best for fully bedridden patients — the remote control means the carer never has to lift the patient manually."
+      },
+      {
+        "q": "Is installation included?",
+        "a": "Installation carries a minimal charge. Our team delivers, assembles, and gives FREE usage training — so your family feels confident caring for the patient."
+      },
+      {
+        "q": "Who is a hospital bed suitable for?",
+        "a": "It suits elderly people who need support, stroke patients, post-surgery patients, bedridden patients, and palliative care at home. A hospital bed helps reduce bedsore risk, makes breathing easier, and takes strain off the carer."
+      },
+      {
+        "q": "Does Ibnu Sina Care hold certifications and licences?",
+        "a": "Yes! We hold KKM (Ministry of Health Malaysia) certification and meet Medical Device Authority (MDA) standards. We are also an authorised ResMed dealer for CPAP machines in Malaysia, operating since 2016."
+      },
+      {
+        "q": "Can I visit a showroom?",
+        "a": "Of course! We have 5 showrooms in KL, Penang, Melaka, Johor Bahru and Langkawi. Just come by — see, feel and try every model before deciding. WhatsApp us to book an appointment."
+      }
+    ]
+  },
+  "finalCta": {
+    "title": "Care For The Ones Who",
+    "titleHighlight": "Cared For Us.",
+    "body": "One WhatsApp message — we'll help pick the right bed for your loved one. 2-hour delivery, zero deposit.",
+    "ctaPrimary": "WhatsApp Us Now",
+    "ctaSecondary": "Contact Us",
+    "bgAlt": "Dark teal gradient background of the Ibnu Sina Care call-to-action section"
+  },
+  "gallery": {
+    "alts": [
+      "Malaysian daughter caring for her mother resting in a hospital bed at home",
+      "Elderly father reading the Quran in a hospital bed with his son beside him",
+      "Ibnu Sina Care team installing a hospital bed in a customer's home",
+      "Ibnu Sina Care showroom with hospital beds, wheelchairs and medical equipment"
+    ]
+  },
+  "footer": {
+    "blurb": "Supplying hospital beds across Malaysia since 2016. 5 showrooms, 2-hour delivery, 50% buyback guarantee. Care for the ones you love.",
+    "quickLinks": "Quick Links",
+    "contactUs": "Contact Us",
+    "showroomLine": "5 Showrooms: KL, Penang, Melaka, Johor, Langkawi",
+    "copyright": "© 2016-2026 Ibnu Sina Care Sdn Bhd. All rights reserved.",
+    "tagline": "Hospital Bed Supplier Malaysia 🇲🇾"
+  },
+  "location": {
+    "breadcrumbHome": "Home",
+    "heroBadge": "Serving Your Area",
+    "titleTemplate": "Hospital Bed Rental {location}",
+    "subtitleTemplate": "Fast delivery to {location}, {state} — zero deposit, fully assembled, free training.",
+    "introTemplate": "Ibnu Sina Care supplies hospital beds to families in {location} and across {state}. Whether you're caring for an elderly parent, a stroke patient, or someone recovering from surgery, we'll help you choose the right bed and deliver it straight to your door.",
+    "whyTitle": "Why Families In {location} Choose Us",
+    "coverageTitle": "Nearby Areas",
+    "faqTitle": "{location} Frequently Asked Questions",
+    "faq1Q": "How long is delivery to {location}?",
+    "faq1A": "For {location}, our team confirms the fastest delivery slot over WhatsApp — usually same day within the Klang Valley and within 24 hours everywhere else in Malaysia.",
+    "faq2Q": "Is there a delivery charge to {location}?",
+    "faq2A": "Delivery charges depend on distance. WhatsApp us your full address in {location} and we'll give you the final price before you commit.",
+    "faq3Q": "Can I rent short-term in {location}?",
+    "faq3A": "Yes. Monthly rental starts at RM139 and you can return the bed once you no longer need it. Rental payments can also count towards a purchase if you choose rent-to-own.",
+    "ctaTitle": "Need A Hospital Bed In {location}?",
+    "ctaBody": "WhatsApp us now — we'll confirm stock, pricing and a delivery slot for {location} within minutes.",
+    "cta": "WhatsApp Us Now"
+  },
+  "blog": {
+    "title": "Hospital Bed Blog",
+    "subtitle": "Home care guides, tips on choosing a hospital bed, and advice for family carers.",
+    "breadcrumbHome": "Home",
+    "breadcrumbBlog": "Blog",
+    "readMore": "Read Article",
+    "empty": "No articles published yet. Please check back soon.",
+    "backToBlog": "Back To Blog",
+    "readingTimeTemplate": "{minutes} min read",
+    "relatedTitle": "More Articles",
+    "coverAltTemplate": "Cover image for the article: {title}",
+    "ctaTitle": "Need A Hospital Bed Urgently?",
+    "ctaBody": "Our team will help pick the right bed and deliver it to your home. Zero deposit.",
+    "ctaLabel": "WhatsApp Us Now"
+  },
+  "redirect": {
+    "heading": "Connecting you to WhatsApp…",
+    "subtext": "We're opening WhatsApp for you. This will only take a moment.",
+    "fallback": "Tap here if you aren't redirected automatically"
+  },
+  "meta": {
+    "home": {
+      "title": "Hospital Bed Rental & Sales Malaysia | Ibnu Sina Care",
+      "description": "Rent a hospital bed from RM139/month. 2-hour delivery in KL & Selangor. 5 showrooms nationwide. 50% buyback guarantee. Zero deposit. Ibnu Sina Care Sdn Bhd."
+    },
+    "blog": {
+      "title": "Hospital Bed & Home Care Blog | Ibnu Sina Care",
+      "description": "Guides on choosing a hospital bed and caring for elderly and stroke patients at home, from the Ibnu Sina Care team."
+    },
+    "location": {
+      "titleTemplate": "Hospital Bed Rental {location} | Ibnu Sina Care",
+      "descriptionTemplate": "Rent a hospital bed in {location}, {state} from RM139/month. Fast delivery, zero deposit, fully assembled with free training. WhatsApp Ibnu Sina Care."
+    }
+  }
+}

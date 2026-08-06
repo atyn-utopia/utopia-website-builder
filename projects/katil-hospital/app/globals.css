@@ -1,0 +1,580 @@
+@import 'tailwindcss';
+
+/*
+ * Ibnu Sina Care — design system ported verbatim from the original static
+ * landing page (reference/static-site.html). Colours, fonts and every custom
+ * class below are a 1:1 carry-over so the Next.js rebuild renders identically.
+ *
+ * Type note: the static page used `font-800` / `font-900` utility classes,
+ * which are NOT real Tailwind utilities — Preflight resets heading weight to
+ * `inherit`, so every heading actually renders at weight 400. That light Rubik
+ * look IS the shipped design, so it is reproduced here rather than "fixed".
+ */
+
+@theme {
+  /* next/font injects --font-rubik / --font-jakarta on <html>; these aliases
+     are what every rule below (and Tailwind's font-heading / font-body
+     utilities) resolves through. */
+  --font-heading: var(--font-rubik), 'Rubik', ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-jakarta), 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand: #0f766e;
+  --color-brand-dark: #115e59;
+  --color-brand-deep: #134e4a;
+  --color-brand-light: #14b8a6;
+  --color-brand-accent: #d97706;
+  --color-wa: #25d366;
+  --color-wa-hover: #1da851;
+}
+
+:root {
+  /* Utopia structural tokens (brand-CI element insertion — radius + motion
+     only; the palette, fonts and button shapes stay this site's own). */
+  --r-button: 0.75rem;
+  --r-card: 1rem;
+  --r-pill: 9999px;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 0.15s;
+  --dur: 0.3s;
+  --dur-slow: 0.7s;
+
+  --wa-green: #25d366;
+  --wa-green-hover: #1da851;
+
+  /* Height reserved below the footer for the fixed mobile CTA bar. */
+  --mobile-cta-h: 72px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: #fff;
+  color: #1f2937;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+/* CLAUDE.md text-spacing defaults.
+   These MUST live in @layer base. Tailwind v4 emits its utilities inside
+   `@layer utilities`, and per the CSS cascade an UNLAYERED rule beats any
+   layered one regardless of specificity — so an unlayered `h1..h6` rule here
+   would silently defeat every `text-xs` / `text-3xl` / `text-white` utility on
+   the page. Preflight already resets heading font-size/weight to `inherit`, so
+   only the line-heights belong here. */
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.2;
+  }
+
+  p,
+  li,
+  blockquote,
+  .blog-content p,
+  .blog-content li,
+  .blog-content blockquote {
+    line-height: 1.4;
+  }
+}
+
+/* ── Static-page carry-overs ─────────────────────────────────────────────── */
+
+/* Sticky mobile CTA bar.
+   It is position:fixed, so it sits on top of the page and would cover the last
+   ~72px of the footer. Pages that render it must also render
+   `.mobile-cta-spacer` after the footer to reserve that height in normal flow. */
+.mobile-cta-bar {
+  display: flex;
+  /* Clear the iOS home indicator so the button isn't half under it. */
+  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+}
+.mobile-cta-spacer {
+  display: block;
+  height: calc(var(--mobile-cta-h) + env(safe-area-inset-bottom, 0px));
+}
+@media (min-width: 768px) {
+  .mobile-cta-bar,
+  .mobile-cta-spacer {
+    display: none;
+  }
+}
+
+/* Shine sweep on primary buttons */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 20%;
+  height: 200%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: skewX(-25deg);
+  transition: none;
+}
+.btn-shine:hover::after {
+  animation: shine 0.6s ease-in-out;
+}
+@keyframes shine {
+  0% {
+    left: -60%;
+  }
+  100% {
+    left: 120%;
+  }
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  filter: blur(4px);
+  transition:
+    opacity var(--dur-slow) ease,
+    transform var(--dur-slow) ease,
+    filter var(--dur-slow) ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}
+
+/* Pulsing floating WhatsApp FAB */
+.pulse-wa {
+  animation: pulseWa 2s infinite;
+}
+@keyframes pulseWa {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+/* FAQ accordion */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+.faq-item.open .faq-answer {
+  max-height: 500px;
+}
+.faq-item.open .faq-chevron {
+  transform: rotate(180deg);
+}
+.faq-chevron {
+  transition: transform var(--dur) ease;
+}
+
+/* Testimonial marquee */
+.testimonial-track {
+  display: flex;
+  gap: 16px;
+  animation: scrollTestimonials 40s linear infinite;
+}
+.testimonial-track:hover {
+  animation-play-state: paused;
+}
+@keyframes scrollTestimonials {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.counter {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Card hover lift */
+.card-hover {
+  transition:
+    transform var(--dur) ease,
+    box-shadow var(--dur) ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(15, 118, 110, 0.12);
+}
+
+.hero-gradient {
+  background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 30%, #fff 60%, #fef3c7 100%);
+}
+
+.badge-popular {
+  background: linear-gradient(135deg, #0f766e, #14b8a6);
+}
+
+.showroom-gradient {
+  background: linear-gradient(135deg, #134e4a 0%, #0f766e 100%);
+}
+
+/* ── USP bar ─────────────────────────────────────────────────────────────
+   One contained panel with 3 cells (house rule), styled to sit under the hero
+   in the same teal/amber language as the rest of the page. */
+.usp-panel {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: #fff;
+  border: 1px solid #ccfbf1;
+  border-radius: var(--r-card);
+  box-shadow: 0 8px 30px rgba(15, 118, 110, 0.08);
+  overflow: hidden;
+}
+.usp-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  padding: 18px 12px;
+  border-right: 1px solid #f0fdfa;
+}
+.usp-cell:last-child {
+  border-right: none;
+}
+.usp-cell svg {
+  color: #0f766e;
+}
+.usp-cell .usp-title {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  color: #115e59;
+}
+.usp-cell .usp-sub {
+  font-size: 11px;
+  color: #6b7280;
+}
+@media (max-width: 480px) {
+  .usp-cell {
+    padding: 14px 6px;
+  }
+  .usp-cell .usp-title {
+    font-size: 12px;
+  }
+  .usp-cell .usp-sub {
+    font-size: 10px;
+  }
+}
+
+/* ── FOMO banner ────────────────────────────────────────────────────────── */
+.fomo-bar {
+  background: #b91c1c;
+  color: #fff;
+}
+.fomo-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px 12px;
+  padding: 7px 16px;
+  font-size: 12.5px;
+  text-align: center;
+}
+.fomo-tag {
+  font-family: var(--font-heading);
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: var(--r-pill);
+  padding: 2px 10px;
+  letter-spacing: 0.03em;
+}
+.fomo-clock {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.fomo-sep {
+  opacity: 0.6;
+  padding: 0 1px;
+}
+.fomo-link {
+  color: #fde68a;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.fomo-link:hover {
+  color: #fff;
+}
+@media (max-width: 640px) {
+  .fomo-inner {
+    font-size: 11px;
+    gap: 4px 8px;
+    padding: 6px 10px;
+  }
+  .fomo-body {
+    display: none;
+  }
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+/* The header WhatsApp button is hidden on mobile so it can't collide with the
+   language switcher — the sticky bottom CTA bar covers that job there. */
+@media (max-width: 767px) {
+  .nav-cta {
+    display: none !important;
+  }
+}
+
+/* ── Language switcher ──────────────────────────────────────────────────────
+   Lives here (not in a component <style> block) with !important so element
+   resets and Preflight can never flatten the flag pills. */
+.lsw {
+  position: relative;
+  display: inline-flex !important;
+}
+.lsw-toggle {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+.lsw-item {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 5px 10px !important;
+  border: 1px solid #ccfbf1 !important;
+  border-radius: var(--r-pill) !important;
+  background: #fff !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: #115e59 !important;
+  line-height: 1 !important;
+  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.lsw-item:hover {
+  border-color: #5eead4 !important;
+}
+.lsw-item.is-active {
+  background: #f0fdfa !important;
+  border-color: #14b8a6 !important;
+}
+.lsw-flag {
+  display: block !important;
+  flex: 0 0 auto !important;
+}
+.lsw-label {
+  display: inline !important;
+}
+/* Desktop shows the three pills inline; mobile collapses to a dropdown. */
+.lsw-trigger {
+  display: none !important;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid #ccfbf1;
+  border-radius: var(--r-pill);
+  background: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  color: #115e59;
+  cursor: pointer;
+}
+.lsw-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 60;
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: var(--r-card);
+  box-shadow: 0 12px 30px rgba(15, 118, 110, 0.14);
+  min-width: 116px;
+}
+.lsw-menu.is-open {
+  display: flex;
+}
+.lsw-caret {
+  color: #6b7280;
+}
+@media (max-width: 767px) {
+  .lsw-toggle {
+    display: none !important;
+  }
+  .lsw-trigger {
+    display: inline-flex !important;
+  }
+}
+
+/* ── Blog ───────────────────────────────────────────────────────────────── */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 24px;
+}
+@media (min-width: 640px) {
+  .blog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .blog-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid #f3f4f6;
+  border-radius: var(--r-card);
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(15, 118, 110, 0.04);
+  transition:
+    transform var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+.blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(15, 118, 110, 0.12);
+}
+
+.blog-content {
+  color: #374151;
+  font-size: 16px;
+}
+.blog-content h2 {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 600;
+  color: #134e4a;
+  line-height: 1.2;
+  margin: 2rem 0 0.75rem;
+}
+.blog-content h3 {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 600;
+  color: #115e59;
+  line-height: 1.2;
+  margin: 1.6rem 0 0.6rem;
+}
+.blog-content h4 {
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 600;
+  color: #115e59;
+  line-height: 1.2;
+  margin: 1.3rem 0 0.5rem;
+}
+.blog-content p {
+  font-size: 16px;
+  line-height: 1.4;
+  margin: 0 0 1rem;
+}
+.blog-content ul,
+.blog-content ol {
+  margin: 0 0 1.1rem;
+  padding-left: 1.4rem;
+  list-style: disc;
+}
+.blog-content ol {
+  list-style: decimal;
+}
+.blog-content li {
+  margin-bottom: 0.4rem;
+  line-height: 1.4;
+}
+.blog-content a {
+  color: #0f766e;
+  font-weight: 600;
+  text-decoration: underline;
+}
+.blog-content a:hover {
+  color: #d97706;
+}
+.blog-content img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-card);
+  margin: 1.5rem 0;
+}
+.blog-content strong {
+  color: #115e59;
+  font-weight: 700;
+}
+.blog-content blockquote {
+  border-left: 3px solid #14b8a6;
+  padding-left: 1rem;
+  margin: 1.25rem 0;
+  color: #4b5563;
+  font-style: italic;
+}
+.blog-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+  font-size: 14.5px;
+}
+.blog-content th,
+.blog-content td {
+  border: 1px solid #e5e7eb;
+  padding: 8px 10px;
+  text-align: left;
+}
+.blog-content th {
+  background: #f0fdfa;
+  color: #115e59;
+}
+/* Table of contents rendered inside article HTML */
+.blog-content nav {
+  background: #f0fdfa;
+  border: 1px solid #ccfbf1;
+  border-radius: var(--r-card);
+  padding: 16px 18px;
+  margin: 0 0 1.75rem;
+}
+.blog-content nav ul,
+.blog-content nav ol {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+.blog-content nav a {
+  text-decoration: none;
+  color: #0f766e;
+}
+.blog-content nav a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,13 @@
+import { defineRouting } from 'next-intl/routing';
+
+export const locales = ['ms', 'en', 'zh'] as const;
+export type Locale = (typeof locales)[number];
+
+export const routing = defineRouting({
+  locales,
+  defaultLocale: 'ms',
+  localePrefix: 'as-needed',
+  // Force every fresh visitor to Malay regardless of the browser's
+  // Accept-Language header — this is a Malay-first audience.
+  localeDetection: false,
+});

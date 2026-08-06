@@ -1,0 +1,411 @@
+{
+  "nav": {
+    "logoAlt": "Logo Ibnu Sina Care — pembekal katil hospital Malaysia",
+    "logoTagline": "KATIL HOSPITAL MALAYSIA",
+    "home": "Utama",
+    "products": "Produk",
+    "rentBuy": "Sewa / Beli",
+    "showroom": "Showroom",
+    "faq": "FAQ",
+    "blog": "Blog",
+    "whatsappCta": "WhatsApp Kami",
+    "whatsappCtaLong": "WhatsApp Kami Sekarang",
+    "openMenu": "Buka menu",
+    "closeMenu": "Tutup menu",
+    "locations": "Lokasi",
+    "calculator": "Kalkulator"
+  },
+  "fomo": {
+    "eyebrow": "TAWARAN TAMAT",
+    "body": "Promosi {month}: zero deposit + penghantaran percuma KL & Selangor",
+    "ctaLabel": "Tempah Sekarang"
+  },
+  "hero": {
+    "badge": "Jaga Yang Tersayang",
+    "titleLine1": "Sewa Katil Hospital",
+    "titleHighlight": "Dari RM139/Bulan",
+    "subtitle": "Keselesaan hospital di rumah untuk ibu bapa & orang tersayang anda.",
+    "bullets": "✓ Penghantaran 2 Jam   ✓ Zero Deposit   ✓ Jaminan Beli Balik",
+    "ctaPrimary": "WhatsApp Kami Sekarang",
+    "ctaSecondary": "Hubungi Kami",
+    "imageAlt": "Anak perempuan Melayu menjaga ibu yang rehat di katil hospital di rumah",
+    "trust": {
+      "kkm": "KKM Certified",
+      "mda": "MDA Approved",
+      "resmed": "ResMed Authorized",
+      "since": "Sejak 2016"
+    },
+    "stats": {
+      "reviews": "Ulasan Positif",
+      "showrooms": "Showroom",
+      "delivery": "Jam Penghantaran"
+    }
+  },
+  "usp": {
+    "deliveryTitle": "Penghantaran 2 Jam",
+    "deliverySub": "KL & Selangor",
+    "depositTitle": "Zero Deposit",
+    "depositSub": "Bayar bila terima",
+    "buybackTitle": "Beli Balik 50%",
+    "buybackSub": "Jaminan eksklusif"
+  },
+  "emotional": {
+    "badge": "Mengapa Katil Hospital di Rumah?",
+    "titleLine1": "Mereka Pernah Jaga Kita.",
+    "titleHighlight": "Kini Giliran Kita Jaga Mereka.",
+    "body": "Setiap ibu bapa layak mendapat keselesaan terbaik. Katil hospital di rumah bukan sekadar peralatan — ia adalah kasih sayang yang anda berikan setiap hari.",
+    "card1Title": "Penjagaan Warga Emas",
+    "card1Desc": "Keselesaan untuk ibu & ayah tersayang",
+    "card2Title": "Pesakit Strok",
+    "card2Desc": "Katil khas untuk pemulihan strok",
+    "card3Title": "Selepas Pembedahan",
+    "card3Desc": "Pemulihan yang selesa di rumah",
+    "card4Title": "Penjagaan Paliatif",
+    "card4Desc": "Kualiti hidup terbaik di rumah"
+  },
+  "how": {
+    "badge": "Mudah & Pantas",
+    "title": "3 Langkah Je —",
+    "titleHighlight": "Siap!",
+    "imageAlt": "Pasukan Ibnu Sina Care memasang katil hospital di rumah pelanggan",
+    "step1Title": "WhatsApp Kami",
+    "step1Desc": "Beritahu kami keperluan anda — pesakit strok, warga emas, selepas pembedahan. Kami bantu pilihkan yang paling sesuai.",
+    "step2Title": "Kami Hantar & Pasang",
+    "step2Desc": "Penghantaran 2 jam (KL/Selangor). Pasukan kami pasang siap di rumah anda. Zero deposit — bayar bila terima.",
+    "step3Title": "Latihan Percuma",
+    "step3Desc": "Kami ajar keluarga anda cara guna katil dengan betul. Sokongan 24/7 bila-bila masa anda perlukan.",
+    "cta": "WhatsApp Kami Sekarang"
+  },
+  "comfort": {
+    "badge": "Keselesaan & Maruah",
+    "titleLead": "Biar Mereka Rehat Dengan",
+    "titleHighlight": "Keselesaan & Maruah",
+    "body": "Katil hospital di rumah membolehkan orang tersayang anda duduk tegak untuk makan, baca Al-Quran, dan berinteraksi dengan keluarga — tanpa rasa sakit atau ketidakselesaan.",
+    "imageAlt": "Bapa tua membaca Al-Quran di katil hospital dengan anaknya di sebelah",
+    "point1": "Kurangkan risiko bedsore sehingga 80%",
+    "point2": "Elevasi kepala bantu pernafasan lebih baik",
+    "point3": "Kurangkan beban penjaga — tak perlu angkat secara manual",
+    "point4": "Makan lebih selamat dalam posisi duduk — cegah tersedak"
+  },
+  "why": {
+    "badge": "Kenapa Ibnu Sina Care?",
+    "titleLine1": "Bukan Sekadar Jual Katil.",
+    "titleHighlight": "Kami Jaga Keluarga Anda.",
+    "exclusiveTag": "EKSKLUSIF",
+    "card1Title": "Penghantaran 2 Jam",
+    "card1Desc": "KL & Selangor. Paling pantas di Malaysia. Kami sampai sebelum anda sempat risau.",
+    "card2Title": "5 Showroom",
+    "card2Desc": "KL, Penang, Melaka, Johor & Langkawi. Datang tengok & cuba sendiri sebelum beli.",
+    "card3Title": "Jaminan Beli Balik 50%",
+    "card3Desc": "Tak perlu lagi? Kami beli balik pada 50% harga. Tiada risiko. Tiada rugi.",
+    "card4Title": "Zero Deposit",
+    "card4Desc": "Bayar bila terima. COD — tiada deposit, tiada risiko.",
+    "card5Title": "Sokongan 24/7",
+    "card5Desc": "WhatsApp kami bila-bila masa. Pasukan kami sentiasa sedia membantu.",
+    "card6Title": "Latihan Percuma",
+    "card6Desc": "Kami ajar cara guna katil dengan betul. Keluarga anda lebih yakin menjaga."
+  },
+  "products": {
+    "badge": "Pilihan Katil Hospital",
+    "title": "Pilih Yang Sesuai Untuk",
+    "titleHighlight": "Orang Tersayang",
+    "note": "Semua katil termasuk waranti 2 tahun, latihan percuma & sokongan 24/7",
+    "imageAltTemplate": "Katil hospital {model} dari Ibnu Sina Care",
+    "cta": "WhatsApp Untuk Tempah",
+    "popular": "⭐ PALING POPULAR",
+    "perMonth": "/bulan",
+    "orBuy": "atau",
+    "buyOutright": "beli terus",
+    "items": {
+      "standard-2-fungsi": {
+        "name": "Standard 2-Fungsi",
+        "tag": "JIMAT",
+        "desc": "Sesuai untuk warga emas & pemulihan jangka pendek",
+        "f1": "Laras kepala & kaki",
+        "f2": "Kapasiti 150kg",
+        "f3": "Rangka keluli tahan karat",
+        "f4": "Waranti 2 tahun"
+      },
+      "premium-3-fungsi": {
+        "name": "Premium 3-Fungsi",
+        "tag": "",
+        "desc": "Untuk pesakit strok & penjagaan jangka panjang",
+        "f1": "Laras kepala, kaki & ketinggian",
+        "f2": "Kapasiti 180kg",
+        "f3": "Kurangkan beban penjaga",
+        "f4": "Sewa-untuk-milik tersedia",
+        "f5": "Waranti 2 tahun"
+      },
+      "ultra-6-fungsi-elektrik": {
+        "name": "Ultra 6-Fungsi Elektrik",
+        "tag": "PREMIUM",
+        "desc": "Kawalan penuh dengan remote control",
+        "f1": "Remote control elektrik penuh",
+        "f2": "Pusing kiri/kanan automatik",
+        "f3": "Commode & basin cuci rambut",
+        "f4": "Kapasiti 200kg",
+        "f5": "Waranti 2 tahun"
+      }
+    },
+    "priceFrom": "Dari RM {price}"
+  },
+  "buyback": {
+    "badge": "🛡️ Eksklusif — Hanya Di Ibnu Sina Care",
+    "title": "Jaminan Beli Balik",
+    "titleHighlight": "50%",
+    "body": "Tak perlu lagi? Kami beli balik katil anda pada 50% harga asal — dijamin. Tiada pembekal lain yang berani buat begini.",
+    "stat1Value": "50%",
+    "stat1Label": "Harga Beli Balik",
+    "stat2Value": "0",
+    "stat2Label": "Risiko Anda",
+    "stat3Value": "100%",
+    "stat3Label": "Ketenangan Hati",
+    "cta": "Tanya Beli Balik"
+  },
+  "addons": {
+    "badge": "Tambahan & Aksesori",
+    "title": "Lengkapkan Penjagaan",
+    "titleHighlight": "Di Rumah",
+    "cta": "WhatsApp",
+    "items": {
+      "tilam-ripple": {
+        "name": "Tilam Ripple",
+        "desc": "Cegah bedsore dengan tekanan berselang-seli",
+        "price": "RM179"
+      },
+      "tilam-kalis-air": {
+        "name": "Tilam Kalis Air PVC",
+        "desc": "Mudah cuci, tahan lama, 100% kalis air",
+        "price": "RM349"
+      },
+      "kerusi-roda": {
+        "name": "Kerusi Roda",
+        "desc": "Ringan, mudah lipat, pelbagai saiz",
+        "price": "Dari RM299"
+      },
+      "oxygen-concentrator": {
+        "name": "Oxygen Concentrator",
+        "desc": "Bekalan oksigen berterusan di rumah",
+        "price": "Dari RM1,499"
+      }
+    },
+    "cpapTitle": "CPAP & ResMed — Pengedar Sah",
+    "cpapDesc": "Ibnu Sina Care adalah pengedar sah ResMed di Malaysia. Mesin CPAP untuk rawatan sleep apnea — sewa atau beli.",
+    "cpapCta": "Tanya Harga CPAP"
+  },
+  "delivery": {
+    "badge": "Liputan Penghantaran",
+    "title": "Penghantaran Ke",
+    "titleHighlight": "Seluruh Malaysia",
+    "tier1Time": "2 Jam",
+    "tier1Area": "KL & Selangor",
+    "tier1Note": "Paling pantas di Malaysia. 98% tepat masa.",
+    "tier2Time": "6-12 Jam",
+    "tier2Area": "Melaka, N. Sembilan, Perak, Johor, Penang",
+    "tier2Note": "Penghantaran express hari yang sama.",
+    "tier3Time": "24 Jam",
+    "tier3Area": "Sabah, Sarawak & Seluruh Malaysia",
+    "tier3Note": "Termasuk Langkawi, Labuan & kawasan pedalaman."
+  },
+  "showroom": {
+    "badge": "Datang & Cuba Sendiri",
+    "title": "5 Showroom",
+    "titleHighlight": "Seluruh Malaysia",
+    "note": "Kami percaya — tengok & rasa sendiri sebelum membuat keputusan.",
+    "imageAlt": "Showroom Ibnu Sina Care dengan katil hospital, kerusi roda dan peralatan perubatan",
+    "cta": "Buat Temujanji",
+    "klName": "Kuala Lumpur",
+    "klSub": "HQ — Ibu Pejabat",
+    "klDesc": "Showroom terbesar kami. Pelbagai model untuk dicuba.",
+    "penangName": "Pulau Pinang",
+    "penangDesc": "Meliputi kawasan utara — Penang, Kedah & Perak.",
+    "melakaName": "Melaka",
+    "melakaDesc": "Servis kawasan selatan — Melaka & Negeri Sembilan.",
+    "johorName": "Johor Bahru",
+    "johorDesc": "Meliputi seluruh Johor & kawasan selatan.",
+    "langkawiName": "Langkawi",
+    "langkawiDesc": "Satu-satunya pembekal dengan showroom di Langkawi."
+  },
+  "reviews": {
+    "badge": "⭐ 4.9/5 — 1,247+ Ulasan",
+    "title": "Apa Kata",
+    "titleHighlight": "Pelanggan Kami",
+    "avatarAltTemplate": "Gambar profil {name}",
+    "items": [
+      {
+        "name": "Puan Fatimah",
+        "city": "Kuala Lumpur",
+        "quote": "Sampai dalam 1 jam 45 minit! Pasang siap, ajar cara guna. Mak saya sangat selesa. Terima kasih Ibnu Sina Care."
+      },
+      {
+        "name": "Encik Azman",
+        "city": "Shah Alam",
+        "quote": "Ayah stroke, perlukan katil segera. Hubungi petang, malam dah sampai. Harga berpatutan, kualiti hospital."
+      },
+      {
+        "name": "Puan Siti Aminah",
+        "city": "Melaka",
+        "quote": "Sewa 3 bulan je lepas pembedahan. Proses senang, zero deposit. Dah siap terus pulangkan — mereka beli balik!"
+      },
+      {
+        "name": "Haji Ismail",
+        "city": "Johor Bahru",
+        "quote": "Beli katil 3-fungsi untuk isteri. Dah setahun lebih — masih macam baru. Waranti 2 tahun bagi ketenangan hati."
+      },
+      {
+        "name": "Nurul Izzah",
+        "city": "Penang",
+        "quote": "Datang showroom Penang, staff sangat helpful. Explain semua fungsi. Ibu saya suka sangat katil elektrik tu."
+      },
+      {
+        "name": "Encik Razak",
+        "city": "Petaling Jaya",
+        "quote": "Bandingkan 5 syarikat — Ibnu Sina Care paling murah & paling cepat. Siap ada jaminan beli balik. No brainer."
+      },
+      {
+        "name": "Puan Rohani",
+        "city": "Subang Jaya",
+        "quote": "Support 24/7 betul-betul. WhatsApp tengah malam pun reply. Staff sabar explain pasal tilam ripple. Highly recommend!"
+      },
+      {
+        "name": "Ahmad Faiz",
+        "city": "Klang",
+        "quote": "Nenek umur 87 tahun. Katil ni buat hidup dia lebih senang — boleh duduk, makan, tengok TV. Kasih sayang dalam bentuk keselesaan."
+      },
+      {
+        "name": "Puan Haslinda",
+        "city": "Langkawi",
+        "quote": "Kat Langkawi pun ada showroom! Tak sangka. Datang tengok, terus beli. Delivery same day. Terbaik!"
+      },
+      {
+        "name": "Encik Sulaiman",
+        "city": "Ipoh",
+        "quote": "Rent-to-own sangat berbaloi. Bayar sikit-sikit, end up jadi milik sendiri. Tak terbeban, mak pun selesa."
+      }
+    ]
+  },
+  "faq": {
+    "badge": "Soalan Lazim",
+    "title": "Jawapan Untuk",
+    "titleHighlight": "Soalan Anda",
+    "items": [
+      {
+        "q": "Berapa harga sewa katil hospital?",
+        "a": "Sewa bermula dari RM139/bulan untuk katil 2-fungsi, RM229/bulan untuk 3-fungsi, dan RM649/bulan untuk katil elektrik 6-fungsi. Semua harga termasuk waranti 2 tahun dan latihan percuma."
+      },
+      {
+        "q": "Berapa lama penghantaran?",
+        "a": "2 jam untuk KL & Selangor, 6-12 jam untuk Melaka, Johor, Penang, Perak, N. Sembilan, dan 24 jam untuk seluruh Malaysia termasuk Sabah & Sarawak."
+      },
+      {
+        "q": "Apa itu jaminan beli balik 50%?",
+        "a": "Bila anda beli katil dari kami dan sudah tak perlu lagi, kami akan beli balik pada 50% harga pembelian asal. Ini jaminan eksklusif hanya dari Ibnu Sina Care — tiada syarikat lain yang tawarkan ini."
+      },
+      {
+        "q": "Perlu bayar deposit?",
+        "a": "Tidak! Kami zero deposit. Bayar bila katil sampai — COD (Cash On Delivery). Tiada risiko langsung untuk anda."
+      },
+      {
+        "q": "Ada pilihan sewa-untuk-milik (rent-to-own)?",
+        "a": "Ya! Anda boleh mula dengan menyewa dan bayaran sewa akan dikira sebagai sebahagian daripada harga pembelian. Bila dah cukup bayar, katil jadi milik anda. Tak terbeban, tak perlu keluar duit banyak sekaligus."
+      },
+      {
+        "q": "Katil manual atau elektrik — mana lebih baik?",
+        "a": "Katil manual (2 & 3-fungsi) sesuai untuk pesakit yang masih boleh bergerak sedikit atau penjagaan jangka pendek. Katil elektrik (6-fungsi) paling sesuai untuk pesakit terlantar sepenuhnya — remote control memudahkan penjaga tanpa perlu angkat pesakit secara manual."
+      },
+      {
+        "q": "Pemasangan termasuk ke?",
+        "a": "Pemasangan ada caj minimum. Pasukan kami akan hantar, pasang, dan latihan penggunaan PERCUMA — supaya keluarga anda yakin dan selesa menjaga pesakit."
+      },
+      {
+        "q": "Katil hospital sesuai untuk siapa?",
+        "a": "Sesuai untuk warga emas yang memerlukan sokongan, pesakit strok, pesakit selepas pembedahan, pesakit terlantar, dan untuk penjagaan paliatif di rumah. Katil hospital membantu mengurangkan risiko bedsore, memudahkan pernafasan, dan membantu penjaga."
+      },
+      {
+        "q": "Ibnu Sina Care ada sijil & lesen?",
+        "a": "Ya! Kami memegang sijil KKM (Kementerian Kesihatan Malaysia) dan lulus piawaian Medical Device Authority (MDA). Kami juga pengedar sah ResMed untuk mesin CPAP di Malaysia. Beroperasi sejak 2016."
+      },
+      {
+        "q": "Boleh datang tengok di showroom?",
+        "a": "Sudah tentu! Kami ada 5 showroom di KL, Penang, Melaka, Johor Bahru, dan Langkawi. Datang je — boleh tengok, rasa, dan cuba semua model sebelum buat keputusan. WhatsApp kami untuk buat temujanji."
+      }
+    ]
+  },
+  "finalCta": {
+    "title": "Jaga Mereka Yang Pernah",
+    "titleHighlight": "Jaga Kita.",
+    "body": "Satu WhatsApp je — kami bantu pilihkan katil yang paling sesuai untuk orang tersayang anda. Penghantaran 2 jam, zero deposit.",
+    "ctaPrimary": "WhatsApp Kami Sekarang",
+    "ctaSecondary": "Hubungi Kami",
+    "bgAlt": "Latar belakang kecerunan teal gelap seksyen ajakan bertindak Ibnu Sina Care"
+  },
+  "gallery": {
+    "alts": [
+      "Anak perempuan Melayu menjaga ibu yang rehat di katil hospital di rumah",
+      "Bapa tua membaca Al-Quran di katil hospital dengan anaknya di sebelah",
+      "Pasukan Ibnu Sina Care memasang katil hospital di rumah pelanggan",
+      "Showroom Ibnu Sina Care dengan katil hospital, kerusi roda dan peralatan perubatan"
+    ]
+  },
+  "footer": {
+    "blurb": "Pembekal katil hospital di Malaysia sejak 2016. 5 showroom, penghantaran 2 jam, jaminan beli balik 50%. Jaga yang tersayang.",
+    "quickLinks": "Pautan Pantas",
+    "contactUs": "Hubungi Kami",
+    "showroomLine": "5 Showroom: KL, Penang, Melaka, Johor, Langkawi",
+    "copyright": "© 2016-2026 Ibnu Sina Care Sdn Bhd. Hak cipta terpelihara.",
+    "tagline": "Pembekal Katil Hospital Malaysia 🇲🇾"
+  },
+  "location": {
+    "breadcrumbHome": "Utama",
+    "heroBadge": "Servis Kawasan Anda",
+    "titleTemplate": "Sewa Katil Hospital {location}",
+    "subtitleTemplate": "Penghantaran pantas ke {location}, {state} — zero deposit, pasang siap, latihan percuma.",
+    "introTemplate": "Ibnu Sina Care membekalkan katil hospital untuk keluarga di {location} dan sekitar {state}. Sama ada anda menjaga warga emas, pesakit strok, atau pesakit yang baru selesai pembedahan, kami bantu pilihkan katil yang paling sesuai dan hantar terus ke rumah anda.",
+    "whyTitle": "Kenapa Keluarga {location} Pilih Kami",
+    "coverageTitle": "Kawasan Berdekatan",
+    "faqTitle": "Soalan Lazim {location}",
+    "faq1Q": "Berapa lama penghantaran ke {location}?",
+    "faq1A": "Untuk {location}, pasukan kami akan sahkan slot penghantaran terpantas melalui WhatsApp — biasanya hari yang sama untuk kawasan Lembah Klang dan dalam 24 jam untuk seluruh Malaysia.",
+    "faq2Q": "Ada caj penghantaran ke {location}?",
+    "faq2A": "Caj penghantaran bergantung pada jarak. WhatsApp kami dengan alamat penuh anda di {location} dan kami berikan harga muktamad sebelum anda buat keputusan.",
+    "faq3Q": "Boleh sewa jangka pendek di {location}?",
+    "faq3A": "Boleh. Sewa bulanan bermula dari RM139 dan anda boleh pulangkan bila sudah tidak perlu. Bayaran sewa juga boleh dikira ke arah pembelian jika anda pilih sewa-untuk-milik.",
+    "ctaTitle": "Perlukan Katil Hospital Di {location}?",
+    "ctaBody": "WhatsApp kami sekarang — kami sahkan stok, harga dan slot penghantaran ke {location} dalam beberapa minit.",
+    "cta": "WhatsApp Kami Sekarang"
+  },
+  "blog": {
+    "title": "Blog Katil Hospital",
+    "subtitle": "Panduan penjagaan di rumah, tips memilih katil hospital, dan nasihat untuk penjaga keluarga.",
+    "breadcrumbHome": "Utama",
+    "breadcrumbBlog": "Blog",
+    "readMore": "Baca Artikel",
+    "empty": "Belum ada artikel diterbitkan. Sila kembali tidak lama lagi.",
+    "backToBlog": "Kembali ke Blog",
+    "readingTimeTemplate": "{minutes} minit bacaan",
+    "relatedTitle": "Artikel Lain",
+    "coverAltTemplate": "Gambar utama artikel: {title}",
+    "ctaTitle": "Perlukan Katil Hospital Segera?",
+    "ctaBody": "Pasukan kami bantu pilihkan katil yang sesuai dan hantar ke rumah anda. Zero deposit.",
+    "ctaLabel": "WhatsApp Kami Sekarang"
+  },
+  "redirect": {
+    "heading": "Menyambungkan ke WhatsApp…",
+    "subtext": "Kami sedang membuka WhatsApp untuk anda. Tunggu sekejap.",
+    "fallback": "Tekan di sini jika tidak berpindah automatik"
+  },
+  "meta": {
+    "home": {
+      "title": "Sewa & Beli Katil Hospital Malaysia | Ibnu Sina Care",
+      "description": "Sewa katil hospital dari RM139/bulan. Penghantaran 2 jam KL & Selangor. 5 showroom seluruh Malaysia. Jaminan beli balik 50%. Zero deposit. Ibnu Sina Care Sdn Bhd."
+    },
+    "blog": {
+      "title": "Blog Katil Hospital & Penjagaan Di Rumah | Ibnu Sina Care",
+      "description": "Panduan memilih katil hospital, tips penjagaan warga emas dan pesakit strok di rumah, daripada pasukan Ibnu Sina Care."
+    },
+    "location": {
+      "titleTemplate": "Sewa Katil Hospital {location} | Ibnu Sina Care",
+      "descriptionTemplate": "Sewa katil hospital di {location}, {state} dari RM139/bulan. Penghantaran pantas, zero deposit, pasang siap & latihan percuma. WhatsApp Ibnu Sina Care."
+    }
+  }
+}
