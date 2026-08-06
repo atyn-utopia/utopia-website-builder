@@ -545,6 +545,69 @@ const SEO: Check[] = [
     },
   },
   {
+    // Presence of the PNGs is the easy half. The half that actually breaks is
+    // coverage: Next replaces a parent's `openGraph` WHOLESALE when a child
+    // page defines its own, so a site routinely ends up with a share card on
+    // the homepage and none on location or blog pages. So this walks every file
+    // that defines openGraph and requires each one to spread ogImages().
+    group: 'SEO', id: 'og-image-per-locale', name: 'Social share card (og:image) per locale',
+    help: "A link with no og:image renders as a bare text card in WhatsApp/Facebook/X. Needs public/og-{locale}.png for every locale AND ogImages() spread into every page that defines openGraph — inheriting from the layout does not work, so a card on the homepage alone still fails. Generate with `node scripts/og-shot.mjs` (Step 8b). They are screenshots: rerun after any hero change or they go stale silently.",
+    run: async (ctx) => {
+      const id = 'og-image-per-locale'
+      const name = 'Social share card (og:image) per locale'
+
+      const locales = (['ms', 'en', 'zh'] as const).filter((l) =>
+        ctx.fileCache.has(path.join(ctx.info.projectDir, `messages/${l}.json`)) || true,
+      )
+      const present: string[] = []
+      const missing: string[] = []
+      for (const l of locales) {
+        if (await fileExists(ctx, `messages/${l}.json`)) {
+          ;(await fileExists(ctx, `public/og-${l}.png`)) ? present.push(l) : missing.push(l)
+        }
+      }
+      if (!present.length && !missing.length) return skip(id, name, 'no messages/*.json to derive locales from')
+      if (missing.length) {
+        return fail(id, name, `missing public/og-${missing.join('.png, public/og-')}.png — run \`node scripts/og-shot.mjs\` (Step 8b)`)
+      }
+
+      if (!(await fileExists(ctx, 'lib/ogImage.ts'))) {
+        return fail(id, name, 'cards exist but lib/ogImage.ts is missing — copy it from templates/site-chrome/')
+      }
+
+      // Every file declaring openGraph must also reference ogImages.
+      // `covered` is counted too: cards on disk that nothing references would
+      // otherwise pass vacuously, which is exactly how a presence-only check
+      // gets gamed.
+      const uncovered: string[] = []
+      let covered = 0
+      const walk = async (dir: string): Promise<void> => {
+        let entries
+        try { entries = await readdir(dir, { withFileTypes: true }) } catch { return }
+        for (const e of entries) {
+          if (SKIP_DIRS.has(e.name) || e.name.startsWith('.')) continue
+          const p = path.join(dir, e.name)
+          if (e.isDirectory()) { await walk(p); continue }
+          if (!e.name.endsWith('.tsx') && !e.name.endsWith('.ts')) continue
+          const c = await readFileCached(ctx, p)
+          if (c && /openGraph\s*:/.test(c)) {
+            if (/ogImages?\s*\(/.test(c)) covered++
+            else uncovered.push(path.relative(ctx.info.projectDir, p))
+          }
+        }
+      }
+      await walk(path.join(ctx.info.projectDir, 'app'))
+
+      if (uncovered.length) {
+        return fail(id, name, `openGraph without ogImages() in ${uncovered.length} file(s): ${uncovered.slice(0, 3).join(', ')}${uncovered.length > 3 ? ' …' : ''} — Next replaces a parent's openGraph wholesale, so these pages share as bare text`)
+      }
+      if (!covered) {
+        return fail(id, name, 'cards exist but no page references ogImages() — nothing actually emits og:image')
+      }
+      return pass(id, name, `${present.length} locale cards, ${covered} openGraph blocks covered`)
+    },
+  },
+  {
     group: 'SEO', id: 'schema-components', name: 'Schema markup components',
     help: "Structured data so Google can show rich snippets in search results.",
     run: async (ctx) => {

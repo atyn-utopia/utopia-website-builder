@@ -840,6 +840,43 @@ Screenshots saved to `temporary screenshots/`.
 2. Fix spacing, typography, color mismatches
 3. Screenshot again and verify fixes
 
+### 8b. Generate the social share cards (MANDATORY — owned by Kimmy)
+
+A link with no `og:image` renders as a bare text card in WhatsApp, Facebook and
+X. Only 7 of 28 projects had one before this became a step, and the canonical
+reference had none — so a site could pass every other check and still share as
+plain text.
+
+The card is a 1200x630 screenshot of the hero, one per locale. It runs **here**,
+not with Kimmy's other metadata work, because it needs a built site being served.
+
+```bash
+cd projects/{project-slug}
+npm run build && npm run start      # one shell
+node scripts/og-shot.mjs            # another
+```
+
+Prerequisites Kimmy should already have done (Step 5/6): `lib/ogImage.ts` and
+`scripts/og-shot.mjs` copied from `templates/site-chrome/`, `metadataBase` set,
+and `ogImages(locale)` spread into **every** page that defines `openGraph` —
+layout, location, blog listing, blog article. Next replaces a parent's
+`openGraph` wholesale, so inheriting does not work.
+
+Then verify, in this order:
+
+- [ ] **Look at every PNG.** Correct dimensions do not mean a good card — check
+      nothing is sliced mid-text and the logo, H1 and CTA are intact.
+- [ ] Restart the server before testing the URLs: `next start` snapshots
+      `public/` at boot, so cards written while it runs return **404** until it
+      restarts. (`pkill -f "next start"` will not match it — the process is
+      named `next-server`; use `lsof -ti:<PORT> | xargs kill -9`.)
+- [ ] `curl -sI localhost:<PORT>/og-{locale}.png` → 200 `image/png` for each.
+- [ ] Each locale's HTML carries its own card: `curl -s localhost:<PORT>/<prefix> | grep og:image`.
+
+> These are screenshots, so they go stale **silently** — the site looks right and
+> only the shared link is wrong. Rerun `node scripts/og-shot.mjs` after any hero
+> copy, image, or palette change, and before any redeploy that touched the hero.
+
 Check:
 - Desktop + mobile layouts
 - All page types (homepage, location, blog listing, blog post)
@@ -1240,6 +1277,11 @@ Before calling the website "done", verify everything:
 - [ ] robots.txt allows crawling
 - [ ] Image alt text on all images
 - [ ] Internal links between pages
+- [ ] **`og:image` on every page type, in every locale** — `public/og-{locale}.png`
+      exists, returns 200, and the tag appears on the homepage, a location page,
+      the blog listing AND a blog article (Next replaces a parent's `openGraph`
+      wholesale, so a card on the homepage alone is the common failure)
+- [ ] Cards regenerated if the hero changed since they were last shot
 
 ### i18n
 - [ ] Language switcher works (EN / MS / ZH)

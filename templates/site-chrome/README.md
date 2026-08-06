@@ -17,6 +17,22 @@ asset conventions are `/brand/logo-dark.png` (footer) and `/brand/bg-hero.jpg`
 | `PageStyles.tsx` | shared `<style>` block for every section (hero…final CTA) |
 | `LanguageSwitcher.tsx` | bordered flag pills (desktop) / dropdown (mobile) |
 | `WhatsAppButton.tsx` | official-green CTA routing through the redirect page |
+| `ogImage.ts` | → `lib/ogImage.ts` — social share card URLs, per locale |
+| `og-shot.mjs` | → `scripts/og-shot.mjs` — generates the cards from the hero |
+
+## Social share card (`ogImage.ts` + `og-shot.mjs`)
+
+A shared link with no `og:image` renders as a bare text card. Most of the fleet
+shipped that way — only 7 of 28 projects had a card at all — so these two files
+are part of the canonical chrome, not an optional extra.
+
+`og-shot.mjs` needs three per-project edits at the top (locales, port, and any
+hero-foot element a 630 crop would slice). Its header comment explains why each
+line exists; read it before changing the capture logic.
+
+Owned by **Kimmy** (metadata). Generated at Step 8, when a built site is already
+being served for screenshot review. Verified by the wizard check
+`og-image-per-locale` and by Layla before deploy.
 
 ## How it's used
 

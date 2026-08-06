@@ -46,6 +46,7 @@ export const CHECK_META: CheckMeta[] = [
   // ── SEO ────────────────────────────────────────────────────────────────────
   { id: 'sitemap',                        group: 'SEO',        severity: 'blocking', doc: SETUP,  name: 'Sitemap generator' },
   { id: 'robots',                         group: 'SEO',        severity: 'blocking', doc: SETUP,  name: 'robots.txt generator' },
+  { id: 'og-image-per-locale',            group: 'SEO',        severity: 'blocking', doc: SETUP,  name: 'Social share card (og:image) per locale' },
   { id: 'schema-components',              group: 'SEO',        severity: 'blocking', doc: SETUP,  name: 'Schema markup components' },
   { id: 'homepage-metadata',             group: 'SEO',        severity: 'blocking', doc: SETUP,  name: 'Homepage exports metadata' },
   { id: 'seo-locale-url-helper',          group: 'SEO',        severity: 'advisory', doc: FLOW,   name: 'SEO URLs built via the locale-URL helper' },

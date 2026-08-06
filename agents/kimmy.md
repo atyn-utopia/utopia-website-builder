@@ -48,7 +48,41 @@ export async function generateMetadata({ params }) {
 - Dynamic title using city name and primary keyword
 - Dynamic description using Nana's meta description
 - Canonical URL using locale + product + location slugs
-- OG image if available
+
+#### 1b. Social share card — `og:image` (MANDATORY, every page, every locale)
+
+A link with no `og:image` renders as a bare text card when pasted into WhatsApp,
+Facebook or X. This was missed across most of the fleet — only 7 of 28 projects
+had a card at all — because it used to read "OG image if available". It is not
+optional.
+
+The card is a **1200x630 screenshot of the hero section**, one per locale.
+
+1. Copy `templates/site-chrome/ogImage.ts` → `lib/ogImage.ts` and
+   `templates/site-chrome/og-shot.mjs` → `scripts/og-shot.mjs`. Edit the three
+   config values at the top of the script (locales + prefixes, port, and any
+   hero-foot element a 630 crop would slice mid-text).
+2. Set `metadataBase` in `app/[locale]/layout.tsx`, or the card URL resolves
+   relative and scrapers reject it.
+3. Spread `ogImages(locale)` into the `openGraph` of **every page that defines
+   one** — layout, location page, blog listing, blog article. Next.js replaces a
+   parent's `openGraph` wholesale when a child sets its own, so inheriting does
+   NOT work. Missing this is how a site ends up with a card on the homepage and
+   none anywhere else. Add `twitter: { card: 'summary_large_image', images: … }`
+   alongside it.
+4. A blog post's own `cover_image_url` wins; the hero card is the fallback so a
+   shared article is never a bare text card.
+
+The PNGs are generated at **Step 8**, when a built site is already being served
+for screenshot review — the script needs a running server. After generating,
+**look at the images**: correct dimensions do not mean a good card. Check that
+nothing is sliced mid-text and the logo, H1 and CTA are intact.
+
+Because they are screenshots they go stale silently — the site looks right and
+only the shared link is wrong. Rerun `node scripts/og-shot.mjs` after any hero
+copy, image, or palette change.
+
+Verified by the wizard check `og-image-per-locale` and by Layla before deploy.
 
 #### 2. hreflang tags
 For every page, output the correct `<link rel="alternate" hreflang="...">` tags:
