@@ -26,9 +26,31 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { execFile } from 'node:child_process'
 import { promisify } from 'node:util'
+import { lookup } from 'node:dns/promises'
 import { scorePct } from '../lib/score'
 
 const exec = promisify(execFile)
+
+/**
+ * Does this hostname have a DNS record? Used to reject Vercel-listed domains
+ * that are attached to a project but point nowhere. Deliberately DNS and not
+ * HTTP: a DNS miss means the domain cannot serve traffic at all, whereas an
+ * HTTP failure is often transient and would make snapshots flap.
+ */
+const dnsCache = new Map<string, boolean>()
+async function domainResolves(host: string): Promise<boolean> {
+  const cached = dnsCache.get(host)
+  if (cached !== undefined) return cached
+  let ok = false
+  try {
+    await lookup(host)
+    ok = true
+  } catch {
+    ok = false
+  }
+  dnsCache.set(host, ok)
+  return ok
+}
 const DRY = process.argv.includes('--dry')
 const ONLY = process.argv.find((a) => a.startsWith('--only='))?.split('=')[1]
 
@@ -136,7 +158,20 @@ async function buildPayload(m: Mods, slug: string, parentDir: string) {
   let vercelDomain: string | null = null
   try {
     const v = await m.getProjectDomains(slug, process.env.VERCEL_TEAM_ID ?? null)
-    if (v.ok && v.productionDomains.length) vercelDomain = v.productionDomains[0]
+    // Take the first production domain that actually RESOLVES, not just the
+    // first one listed. Vercel is ranked most-authoritative on the grounds that
+    // it reflects "what's actually serving", but the lookup is by project name
+    // = slug, and a slug does not always map to the project serving the site.
+    // skylift-malaysia has three Vercel projects; the one named after the slug
+    // holds `skylift-malaysia.utopiaai.my`, which has no DNS record at all, so
+    // the monitor reported a dead domain while the site ran fine elsewhere.
+    // A domain with no DNS can never serve traffic — that is an unambiguous
+    // disqualifier, not a flakiness signal, so it is safe to skip.
+    if (v.ok && v.productionDomains.length) {
+      for (const d of v.productionDomains) {
+        if (await domainResolves(d)) { vercelDomain = d; break }
+      }
+    }
   } catch { /* skip — fall through to siteId/config */ }
   const resolvedDomain = vercelDomain ?? currentDomain
 
