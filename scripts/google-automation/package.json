@@ -1,0 +1,13 @@
+{
+  "name": "google-automation",
+  "version": "0.1.0",
+  "description": "Automated Google integration for Utopia Group sites: GTM, GA4, GSC",
+  "type": "module",
+  "scripts": {
+    "gtm": "node gtm-setup.mjs"
+  },
+  "dependencies": {
+    "google-ads-api": "^23.0.0",
+    "googleapis": "^144.0.0"
+  }
+}

@@ -47,6 +47,11 @@ Step 10:  Hanabi  — Generate 10+ blog articles + insert into Supabase (MANDATO
 
 Step 12:  Seed phone number + register website in company_websites
 Step 13:  Layla   — QA verification → GitHub push → Vercel deploy
+
+── POST-DEPLOY: only after the PAID domain is live on Vercel (DNS pointed there) ──
+
+Step 14:  Gloo    — Google integration: GA4 + GTM + GSC + Ads conversion import
+                    (needs: paid domain live, project dir, supported locales)
 ```
 
 Steps 3 agents (Cyclops + Sora) run in parallel after Alpha.
@@ -67,6 +72,7 @@ Both GATE 1 and GATE 2 must pass before Layla deploys.
 | Cyclops (Part 2) | 9 | Product list from config/products.ts or reference-research.md, Vercel domain, Supabase service role key |
 | Hanabi  | 10 | Website domain, brand name, product niche, target languages, keyword list (optional), Supabase service role key |
 | Layla   | 13 | Completed website project, Supabase credentials, GitHub repo URL, Vercel project details |
+| Gloo    | 14 | Live **paid** domain, project dir under `projects/`, supported locales, deploy method (git vs `vercel --prod`). Post-deploy only — paid domain must resolve 200 with DNS on Vercel. |
 
 ## Collecting outputs
 
@@ -84,6 +90,8 @@ projects/{project-name}/
 ```
 
 Layla does not produce a document — she runs integration tests, pushes to GitHub, and deploys to Vercel.
+
+Gloo does not produce a document either — she runs the Google integration (GA4 + GTM + GSC + Ads) via the `google-integration` skill / `scripts/google-automation/` bundle and reports the created IDs + outstanding manual toggles. The per-site config is written to `scripts/google-automation/configs/<domain>.json`. **Gloo runs only after the paid domain is live** — never against a `*.vercel.app` preview URL.
 
 ## Parallelism
 

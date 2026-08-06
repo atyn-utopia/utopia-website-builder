@@ -1,0 +1,13 @@
+{
+  "domain": "coldroomrental.my",
+  "containerId": "GTM-P67RCHX8",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-YKXC5LNV51",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-07-09T09:44:28.051Z"
+}

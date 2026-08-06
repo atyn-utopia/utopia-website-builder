@@ -1,0 +1,21 @@
+{
+  "domain": "sewaboomlift.my",
+  "containerId": "GTM-W426F2MV",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-XJHHF5P719",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-08-03T04:01:00.143Z",
+  "gsc": {
+    "siteUrl": "https://www.sewaboomlift.my/",
+    "token": "<meta name=\"google-site-verification\" content=\"ZcZYqVhQraHuc8G3PzpGFIAfoA_iNBqa2-wwQFWMJX8\" />",
+    "initAt": "2026-08-03T04:03:21.888Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-08-03T04:11:58.315Z"
+  }
+}

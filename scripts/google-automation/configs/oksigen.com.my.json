@@ -1,0 +1,31 @@
+{
+  "domain": "oksigen.com.my",
+  "containerId": "GTM-PL8DBJJS",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-LQFTRJF9ER",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-08-03T15:07:11.695Z",
+  "gsc": {
+    "siteUrl": "https://oksigen.com.my/",
+    "token": "<meta name=\"google-site-verification\" content=\"zP_suLyZc6nLeiuLT335Uq9NzwqQek0GOJNstUgW21M\" />",
+    "initAt": "2026-08-04T01:16:13.758Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-08-04T01:19:26.463Z"
+  },
+  "ga4": {
+    "accountId": "153453478",
+    "accountName": "Utopia 1st Analytics",
+    "propertyId": "548132069",
+    "propertyName": "properties/548132069",
+    "measurementId": "G-LQFTRJF9ER",
+    "streamName": "properties/548132069/dataStreams/15373534871",
+    "siteUrl": "https://oksigen.com.my",
+    "createdAt": "2026-08-03T15:05:40.016Z"
+  }
+}

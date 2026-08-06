@@ -1,0 +1,21 @@
+{
+  "domain": "airkelapa.my",
+  "containerId": "GTM-NCZQSVFQ",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-JGGE80ZYMT",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-08-04T09:34:29.670Z",
+  "gsc": {
+    "siteUrl": "https://airkelapa.my/zh/",
+    "token": "<meta name=\"google-site-verification\" content=\"aZkO_t-ULVyJ66Jh0IfP9qIdNmU1Wg_SowpZix5yoHI\" />",
+    "initAt": "2026-08-04T09:37:43.505Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-08-04T09:43:05.146Z"
+  }
+}

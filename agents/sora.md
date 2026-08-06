@@ -25,6 +25,27 @@ Identify the core money keyword and its variants:
 - Long-tail: e.g. "CPAP machine same day delivery Malaysia"
 - Location-modifier pattern: e.g. "CPAP machine [city]"
 
+**Your keywords get verified against real Google search volume before Nana
+writes anything** (Step B2 — `keyword-volume.mjs`). Two things follow from that:
+
+1. **Put head terms under a heading that says primary / money / head term** —
+   e.g. `### 1.2 Primary money keywords`. The gate blocks on the keywords in
+   that section and only that section. Without such a heading nothing can fail,
+   and the check silently becomes decorative.
+2. **Keep head terms separate from long-tail and blog topics.** Zero volume on a
+   long-tail phrase is fine; on a head term it means the whole site gets rebuilt.
+   Don't file "panduan sewa excavator pertama kali" as a money keyword — it's a
+   blog title.
+
+Mark keywords you deliberately do NOT target under a heading containing "do not
+chase" so they're excluded from the check rather than reported as failures.
+
+Expect to revise: the gate has found real head terms with no volume (`khidmat
+aqiqah`, `tempah aqiqah`) and real ranking errors (a plan ranked `pakej aqiqah`
+at 110/mo as #1 while `harga kambing aqiqah` at 480/mo sat lower). If the
+orchestrator hands you volume numbers, re-rank the plan to match them and record
+the figures in the document.
+
 ### 2. Page hierarchy
 Map keywords to pages:
 ```
@@ -76,3 +97,5 @@ Return a structured SEO plan document. Be specific — give actual keyword strin
 - All location keywords must follow the exact slug format from Alpha's location list
 - Avoid keyword cannibalization between homepage and location pages
 - Every recommendation must have a clear SEO reason
+- Head terms go under a primary/money-keyword heading — the Step B2 gate depends on it
+- Write keywords as inline code, **bold**, or plain list items; all three are parsed

@@ -1,0 +1,21 @@
+{
+  "domain": "aircondsamsung.my",
+  "containerId": "GTM-TMJ93T68",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-1X2CHN4S7C",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-08-05T08:06:09.195Z",
+  "gsc": {
+    "siteUrl": "https://aircondsamsung.my/",
+    "token": "<meta name=\"google-site-verification\" content=\"rBrpA6XQheI24BDj_ZR1f8ElX61lZ0mvQ9WIbWp61Zg\" />",
+    "initAt": "2026-08-05T08:06:09.576Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-08-05T08:09:05.054Z"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "domain": "stickerlori.com.my",
+  "ga4": {
+    "accountId": "153453478",
+    "accountName": "Utopia 1st Analytics",
+    "propertyId": "536802881",
+    "propertyName": "properties/536802881",
+    "measurementId": "G-9YE4CH739M",
+    "streamName": "properties/536802881/dataStreams/14839918513",
+    "siteUrl": "https://www.stickerlori.com.my",
+    "createdAt": "2026-05-08T08:14:43.134Z"
+  },
+  "gsc": {
+    "siteUrl": "https://www.stickerlori.com.my/",
+    "token": "<meta name=\"google-site-verification\" content=\"5baq7Gt4Ep2KjQm4AHX48UrTpcLYDucVw4giEY4bnHY\" />",
+    "initAt": "2026-05-08T09:16:11.676Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-05-08T09:19:45.131Z"
+  }
+}

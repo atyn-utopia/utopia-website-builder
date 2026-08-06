@@ -1,0 +1,21 @@
+{
+  "domain": "majlisaqiqah.my",
+  "containerId": "GTM-WKVL7GXN",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-9HG0M51F7E",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-08-04T09:44:26.964Z",
+  "gsc": {
+    "siteUrl": "https://majlisaqiqah.my/zh/",
+    "token": "<meta name=\"google-site-verification\" content=\"VHxICXeiVl1Fec_gbMwRtR8OYZjoq0TvcPQiXBIUmPA\" />",
+    "initAt": "2026-08-04T09:50:49.548Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-08-04T09:51:10.099Z"
+  }
+}

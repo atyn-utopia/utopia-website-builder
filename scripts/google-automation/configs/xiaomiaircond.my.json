@@ -1,0 +1,21 @@
+{
+  "domain": "xiaomiaircond.my",
+  "containerId": "GTM-WPNSDMZB",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-M9MRCSGX7Q",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-08-04T08:23:19.513Z",
+  "gsc": {
+    "siteUrl": "https://xiaomiaircond.my/",
+    "token": "<meta name=\"google-site-verification\" content=\"T1CKYe1zmwyERMPBgB84oUYawMP07GnDi6nupqGCi5Y\" />",
+    "initAt": "2026-08-04T08:25:36.009Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-08-04T08:28:13.610Z"
+  }
+}

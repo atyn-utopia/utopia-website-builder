@@ -95,7 +95,7 @@ Layla — QA & Deployment Specialist
 Verifies phone number system integration with the shared database, pushes code to GitHub, and deploys to Vercel. Runs after user confirms the website design.
 
 Gloo — Analytics & Growth Specialist (Google Integration)
-Sets up the site's Google footprint — GA4 + GTM + Google Search Console + Google Ads conversion import — via the internal automation bundle (`google-automation-INTERNAL`). Runs LAST, after Layla deploys and the site's PAID domain is live. Separate from the Utopia Webcore `t.js` analytics; this is the Google/Ads layer. Driven by the `google-integration` skill.
+Sets up the site's Google footprint — GA4 + GTM + Google Search Console + Google Ads conversion import — via the internal automation bundle (`scripts/google-automation/`). Runs LAST, after Layla deploys and the site's PAID domain is live. Separate from the Utopia Webcore `t.js` analytics; this is the Google/Ads layer. Driven by the `google-integration` skill.
 
 
 # Agent Workflow
@@ -116,6 +116,10 @@ When the user asks to create a new website, you MUST follow `docs/full-website-s
 
 1. Alpha — design system architecture (confirms languages with user)
 2. Cyclops + Sora — run in parallel (both need Alpha's output)
+2b. **Keyword volume gate (MANDATORY, blocking)** — verify Sora's head terms against
+   real Google search volume before any copy is written. `keyword-volume.mjs --plan
+   <seo-plan.md>`; a head term with no volume propagates into every H1, meta title
+   and slug on the site. See the `keyword-research` skill.
 3. Nana — generate homepage + all location page copy (needs Alpha + Sora's output)
 4. Kagura + Kimmy — run in parallel (both need Nana's output)
    Kagura — propose unique design direction (reviews existing sites, researches inspiration)
@@ -125,7 +129,11 @@ When the user asks to create a new website, you MUST follow `docs/full-website-s
 6. Hanabi — generate blog posts + insert into Supabase (MANDATORY, before deploy)
    → user confirms design + content
 7. Layla — integration test → GitHub push → Vercel deploy (blog + products already live)
-8. Gloo — Google integration (GA4 + GTM + GSC + Ads) — POST-DEPLOY, only after the PAID domain is live on Vercel. Uses the `google-integration` skill / `google-automation-INTERNAL` bundle.
+8. Gloo — Google integration (GA4 + GTM + GSC + Ads) — POST-DEPLOY, only after the PAID domain is live on Vercel. Uses the `google-integration` skill / `scripts/google-automation/` bundle.
+9. **Keyword audit (T+60 days, recurring)** — `gsc-keyword-audit.mjs` compares the plan
+   against real Search Console impressions: which planned keywords got zero, which
+   unplanned queries are ranking, which sit in striking distance. Feed findings back
+   into `seo-plan.md`. See the `keyword-research` skill.
 
 
 # SEO Rules

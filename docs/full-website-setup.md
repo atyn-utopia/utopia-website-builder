@@ -149,10 +149,61 @@ Step A:  Alpha (System Architect)
             ↓
 Step B:  Cyclops (Database) ∥ Sora (SEO)     ← parallel
             ↓
+Step B2: KEYWORD VOLUME GATE                 ← blocking, see below
+            ↓
 Step C:  Nana (Copywriter)
             ↓
 Step D:  Kagura (UI Design) ∥ Kimmy (Tech)   ← parallel
 ```
+
+### Step B2 — Keyword Volume Gate (MANDATORY, blocking)
+
+Sora produces keywords from model knowledge, not from search data. Nothing
+downstream questions them: Nana writes every H1 from the plan, Kimmy builds
+every meta title and slug from it, Hanabi picks blog topics from it. A head
+term nobody searches therefore propagates into the whole site, and by the time
+Search Console could reveal it (4–8 weeks post-launch) the fix costs a slug
+migration and a 301 map.
+
+Verify the plan against real Google search volume **before Nana writes a word**:
+
+```bash
+cd scripts/google-automation
+
+# review what will be checked (no API call)
+node keyword-volume.mjs --plan ../../Documents/GitHub/utopia-website-builder/projects/{slug}/seo-plan.md --list
+
+# the gate — exits non-zero if a HEAD term has no volume
+node keyword-volume.mjs --plan .../projects/{slug}/seo-plan.md --lang ms
+node keyword-volume.mjs --plan .../projects/{slug}/seo-plan.md --lang en
+```
+
+**Reading the result:**
+
+| Tier | Zero volume means | Action |
+|---|---|---|
+| `head` | Fatal — every page inherits this term | Stop. Fix `seo-plan.md`, re-run the gate. |
+| `long-tail` | Normal and expected | No action. The page still catches the query. |
+| location templates (`{location}`) | Not measured at all | By design — low per-city volume is the long-tail play. |
+
+Keyword Planner reports `0` for anything under its disclosure threshold, so `0`
+means "under ~10/mo in this market", not literally nobody.
+
+**When a head term is dead**, find the live synonym rather than guessing again:
+
+```bash
+node keyword-volume.mjs --ideas "pakej aqiqah" --lang ms
+```
+
+Then edit `seo-plan.md` and re-run until the gate passes. Record the numbers in
+the plan so Nana, Kimmy and Hanabi inherit verified terms.
+
+> Requires the head terms to sit under a heading Sora marks as primary (e.g.
+> `### 1.2 Primary money keywords`). If the script warns that no head-term
+> section was found, nothing can fail the gate — fix the plan's headings or pass
+> the head terms explicitly with `--keywords`.
+
+See `.claude/skills/keyword-research/SKILL.md` for full flag reference.
 
 ### Agent Details
 
@@ -1102,7 +1153,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY={anon_key}
 
 This sets up the site's **Google/Ads** layer — GA4 + GTM + Google Search Console + Google Ads conversion import. It is **separate** from the Utopia Webcore `t.js` tracking added in Step 7 (`docs/tracking-guide.md`); that's internal analytics, this is Google.
 
-**Owned by Gloo** (Analytics & Growth Specialist), driven by the **`google-integration` skill**, which wraps the internal automation bundle at `google-automation-INTERNAL` (an additional working directory, wired to Utopia's shared Google account with live credentials on the machine).
+**Owned by Gloo** (Analytics & Growth Specialist), driven by the **`google-integration` skill**, which drives the scripts at `scripts/google-automation/` (wired to Utopia's shared Google account; credentials are read at runtime from `~/.google-credentials`, never from the repo).
 
 ### Prerequisites (block until all true)
 - [ ] Paid domain live: `curl -I https://www.<domain>/` → 200
@@ -1111,7 +1162,7 @@ This sets up the site's **Google/Ads** layer — GA4 + GTM + Google Search Conso
 - [ ] Sitemap reachable at `https://www.<domain>/sitemap.xml`
 
 ### Run it
-Spawn **Gloo** with the contents of `agents/gloo.md` + the paid domain, project dir, and supported locales. Gloo reads the bundle's own `SKILL.md` / `MANUAL-STEPS.md` (source of truth for flags) and runs the 5 phases:
+Spawn **Gloo** with the contents of `agents/gloo.md` + the paid domain, project dir, and supported locales. Gloo reads `scripts/google-automation/`'s own `SKILL.md` / `MANUAL-STEPS.md` (source of truth for flags) and runs the 5 phases:
 
 1. **Phase 1 — GSC Domain property** (no deploy)
 2. **Phase 2 — GA4 property** (no deploy) → captures Measurement ID `G-XXXX` + numeric property id
@@ -1129,10 +1180,44 @@ Deploy Phases 3 and 4 **separately** (own checkpoint each). For extracted per-si
 
 Screenshots: https://websitebuilder.utopiaai.my/google (§04).
 
-> 🔒 The bundle's `credentials/` are LIVE Google keys. They live only at `~/.google-credentials` — never commit, print, or forward them. If exposed, rotate immediately.
+> 🔒 The files at `~/.google-credentials/` are LIVE Google keys — never commit, print, or forward them. If exposed, rotate immediately.
 
 ### End state
-GA4 property + GTM container + GSC properties (1 Domain + 1 URL-prefix per locale) + 1 Ads conversion action. Per-site config written to `google-automation-INTERNAL/configs/<domain>.json`.
+GA4 property + GTM container + GSC properties (1 Domain + 1 URL-prefix per locale) + 1 Ads conversion action. Per-site config written to `scripts/google-automation/configs/<domain>.json`.
+
+---
+
+## 16c. Step 16 — Keyword Audit (T+60 days, recurring)
+
+Step B2 verified the plan against Ads *estimates*. This closes the loop with what
+Google actually did. Search Console needs **~4 weeks minimum** before query data
+is meaningful; 60 days is the first useful read.
+
+Without this step, GSC query data is collected and never looked at — the plan is
+never corrected, and queries the site ranks for by accident are never harvested.
+
+```bash
+cd scripts/google-automation
+
+node gsc-keyword-audit.mjs \
+  --domain <paid-domain> \
+  --days 60 \
+  --plan ../../Documents/GitHub/utopia-website-builder/projects/{slug}/seo-plan.md \
+  --pages \
+  --out ../../Documents/GitHub/utopia-website-builder/projects/{slug}/keyword-audit.md
+```
+
+The report has four sections, each with a different owner:
+
+| Section | Means | Action |
+|---|---|---|
+| Planned keywords with impressions | The plan worked | Leave alone |
+| **Planned keywords with ZERO impressions** | Plan missed, or page not indexed | Check GSC → Indexing → Pages first. Not-indexed is a crawl problem; indexed-with-zero is a keyword problem. |
+| **Unplanned queries with impressions** | Ranking by accident | Cheapest wins available — fold into headings + give to Hanabi as blog topics |
+| **Striking distance (position 5–20)** | Ranking, not clicking | One targeted blog post moves these fastest — hand to Hanabi |
+
+Re-run quarterly. Feed confirmed findings back into `seo-plan.md` so the next
+site in the same vertical starts from measured terms instead of guesses.
 
 ---
 
@@ -1203,4 +1288,4 @@ Before calling the website "done", verify everything:
 - [ ] GSC properties: 1 Domain + 1 URL-prefix per locale, sitemaps submitted
 - [ ] Ads conversion action imported (`whatsapp_click`)
 - [ ] Residual manual toggles done: GA4 Google Signals + User-provided data; Ads counting `One`; Ads "Import app and web metrics" ON
-- [ ] Per-site config written to `google-automation-INTERNAL/configs/<domain>.json`
+- [ ] Per-site config written to `scripts/google-automation/configs/<domain>.json`
