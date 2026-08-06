@@ -14,69 +14,131 @@ This document is the source of truth for Nana (copywriter), Kimmy (technical SEO
 
 ## 1. Keyword Map
 
+> **Volumes measured 2026-08-06** — Google Ads Keyword Planner, geo Malaysia (2458),
+> avg monthly searches. Verify with
+> `node scripts/google-automation/keyword-volume.mjs --plan <this file> --lang ms`.
+> Pushed to webcore (`GET /api/public/keywords?website=sewaexcavator.my`).
+>
+> The original "Volume tier" column was an estimate written without data, and it was
+> wrong often enough to matter: **15 of 22 Malay head terms had no measurable volume**,
+> including almost the entire product line. Those are demoted below, and the terms
+> people actually search are added in §1.1b.
+>
+> `0` means "under Keyword Planner's disclosure threshold (~10/mo in MY)", not
+> literally nobody. That is fine for a long-tail phrase and fatal for a head term.
+
 ### 1.1 Bahasa Melayu (`ms`) — primary market keyword set
 
-| Keyword | Intent | Volume tier | Target page type |
-|---|---|---|---|
-| `sewa excavator` | commercial | high | homepage |
-| `sewa excavator malaysia` | commercial | high | homepage |
-| `sewa excavator murah` | commercial | high | homepage |
-| `harga sewa excavator` | commercial-info | high | homepage + blog |
-| `sewa excavator harian` | commercial | mid | homepage (USP / calculator) |
-| `sewa excavator bulanan` | commercial | mid | homepage (USP / calculator) |
-| `sewa excavator mingguan` | commercial | mid | homepage (calculator) |
-| `sewa volvo excavator` | commercial | mid | homepage (products section) |
-| `sewa volvo ec200` | commercial | mid | homepage (product card) |
-| `sewa volvo ec400` | commercial | mid | homepage (product card) |
-| `sewa excavator 20 tan` | commercial | mid | homepage |
-| `sewa excavator 40 tan` | commercial | mid | homepage |
-| `sewa excavator dengan operator` | commercial-long | mid | homepage + blog |
-| `sewa excavator tanpa operator` | commercial-long | low | homepage FAQ |
-| `sewa excavator untuk kontraktor` | commercial-long | low | homepage |
-| `sewa excavator tapak bina` | commercial-long | low | homepage + blog |
-| `sewa excavator {location}` | commercial-long | per-location | `/excavator/[location]` |
-| `kadar sewa excavator {location}` | commercial-long | per-location | `/excavator/[location]` (FAQ) |
-| `harga sewa excavator murah` | informational | mid | blog |
-| `cara pilih excavator yang sesuai` | informational | mid | blog |
-| `excavator volvo ec200 vs ec400` | informational | mid | blog (variant comparison) |
-| `panduan sewa excavator pertama kali` | informational | low | blog |
-| `sewa excavator no.1 malaysia` | navigational | low | homepage (brand) |
-| `abang excavator` | navigational | low | homepage (brand) |
+**Head terms — these carry the H1, meta title and slugs.**
 
-### 1.2 English (`en`) — secondary, expat + B2B contractor traffic
+| Keyword | Intent | Vol/mo | Trend | Target page type |
+|---|---|---:|---|---|
+| `sewa excavator` | commercial | **210** | ↑ +33% | homepage H1 |
+| `harga sewa excavator` | commercial-info | **20** | flat | homepage + blog |
+| `sewa excavator malaysia` | commercial | **10** | ↓ -67% | homepage |
+| `sewa excavator murah` | commercial | **10** | ↓ -67% | homepage |
+| `sewa excavator harian` | commercial | **10** | ↓ -100% | homepage (calculator) |
+| `sewa excavator bulanan` | commercial | **10** | ↓ -33% | homepage (calculator) |
+| `abang excavator` | navigational | **10** | — | homepage (brand) |
 
-| Keyword | Intent | Volume tier | Target page type |
-|---|---|---|---|
-| `excavator rental malaysia` | commercial | high | homepage |
-| `excavator rental` | commercial | high | homepage |
-| `cheap excavator rental` | commercial | mid | homepage |
-| `excavator rental price` | commercial-info | mid | homepage + blog |
-| `daily excavator rental` | commercial | mid | homepage (USP / calculator) |
-| `monthly excavator rental` | commercial | mid | homepage (USP / calculator) |
-| `weekly excavator rental` | commercial | mid | homepage (calculator) |
-| `volvo excavator rental` | commercial | mid | homepage (products) |
-| `volvo ec200 rental` | commercial | mid | homepage (product card) |
-| `volvo ec400 rental` | commercial | mid | homepage (product card) |
-| `20 ton excavator rental` | commercial | mid | homepage |
-| `40 ton excavator rental` | commercial | mid | homepage |
-| `excavator with operator rental` | commercial-long | mid | homepage + blog |
-| `excavator rental for contractors` | commercial-long | low | homepage |
-| `construction site excavator rental` | commercial-long | low | homepage + blog |
-| `excavator rental {location}` | commercial-long | per-location | `/excavator/[location]` |
-| `excavator hire {location}` | commercial-long | per-location | `/excavator/[location]` (FAQ) |
-| `excavator daily rental rate` | informational | mid | blog |
-| `how to choose the right excavator` | informational | mid | blog |
-| `volvo ec200 vs ec400` | informational | mid | blog (variant comparison) |
-| `excavator rental guide malaysia` | informational | low | blog |
-| `abang excavator` | navigational | low | homepage (brand) |
+### 1.1a Demoted — no measurable volume
+
+Keep as body copy at most; never as an H1, meta title, slug or "money keyword".
+This heading is load-bearing: the volume gate reads it and stops treating these as
+head terms, so do not fold this table back into §1.1.
+
+| Keyword | Vol/mo | Note |
+|---|---:|---|
+| `sewa volvo excavator` | 0 | wrong word order — use `excavator volvo` (170), see §1.1b |
+| `sewa volvo ec200` | 0 | the bare model `volvo ec200` does have volume (10) |
+| `sewa volvo ec400` | 0 | the bare model `volvo ec400` does have volume (10) |
+| `sewa excavator mingguan` | 0 | weekly framing is not searched; daily and monthly are |
+| `sewa excavator 20 tan` | 0 | tonnage phrasing is not how buyers search in MS |
+| `sewa excavator 40 tan` | 0 | ditto |
+| `sewa excavator dengan operator` | 0 | keep as an FAQ answer, not a target |
+| `sewa excavator tanpa operator` | 0 | ditto |
+| `sewa excavator untuk kontraktor` | 0 | audience framing, not a search phrase |
+| `sewa excavator tapak bina` | 0 | ditto |
+| `harga sewa excavator murah` | 0 | stacked modifiers; `harga sewa excavator` (20) is the real one |
+| `cara pilih excavator yang sesuai` | 0 | blog title, not a keyword |
+| `excavator volvo ec200 vs ec400` | 0 | blog title; `volvo ec200` / `volvo ec400` carry the volume |
+| `panduan sewa excavator pertama kali` | 0 | blog title, not a keyword |
+| `sewa excavator no.1 malaysia` | 0 | slogan, not a search phrase |
+
+### 1.1c Location pattern
+
+Never gated — low per-city volume is the point of 150+ pages.
+`sewa excavator {location}` · `kadar sewa excavator {location}` → `/excavator/[location]`
+
+### 1.1b Discovered — real demand the original plan missed
+
+Found via `keyword-volume.mjs --ideas`. **`sewa backhoe` outranks the site's own head
+term**, and mini-excavator demand is entirely unserved.
+
+| Keyword | Vol/mo | Trend | Recommended use |
+|---|---:|---|---|
+| `sewa backhoe` | **320** | ↑ +28% | biggest single opportunity — needs its own product/section; currently absent from the site |
+| `excavator volvo` | **170** | flat | products section heading — replaces `sewa volvo excavator` (0) |
+| `sewa mini excavator` | **90** | ↑ +26% | unserved segment; product card + location-page mention |
+| `sewa excavator sehari` | **70** | flat | 7× `sewa excavator harian` (10) — prefer "sehari" in calculator copy |
+| `sewa jentera berat` | **30** | flat | category-level term; useful in intro copy + blog |
+| `volvo ec200` | **10** | ↓ -50% | product card title (bare model, no `sewa` prefix) |
+| `volvo ec400` | **10** | ↑ +50% | product card title |
+| `kadar sewa excavator` | **10** | flat | FAQ heading |
+
+### 1.2 English (`en`) — reclassify: this is NOT the secondary market
+
+> **`excavator rental` (260/mo) outranks `sewa excavator` (210/mo).** The site's default
+> locale is `ms` and the whole `/en` tree was planned as secondary — the data says the
+> English tree deserves equal weight, not second billing. Worth deciding deliberately
+> rather than inheriting the original assumption.
+
+| Keyword | Intent | Vol/mo | Trend | Target page type |
+|---|---|---:|---|---|
+| `excavator rental` | commercial | **260** | ↑ +41% | `/en` homepage H1 |
+| `excavator rental malaysia` | commercial | **50** | flat | `/en` homepage |
+| `excavator rental price` | commercial-info | **20** | ↑ +67% | `/en` homepage + blog |
+| `cheap excavator rental` | commercial | **10** | — | `/en` homepage |
+| `monthly excavator rental` | commercial | **10** | ↓ -100% | `/en` (calculator) |
+| `20 ton excavator rental` | commercial | **10** | ↓ -100% | `/en` homepage |
+| `how to choose the right excavator` | informational | **10** | — | blog |
+
+### 1.2a Demoted — no measurable volume (`en`)
+
+`daily excavator rental` · `weekly excavator rental` · `volvo excavator rental` ·
+`volvo ec200 rental` · `volvo ec400 rental` · `40 ton excavator rental` ·
+`excavator with operator rental` · `excavator rental for contractors` ·
+`construction site excavator rental` · `excavator daily rental rate` ·
+`volvo ec200 vs ec400` · `excavator rental guide malaysia`
+
+**Location pattern:** `excavator rental {location}` · `excavator hire {location}`
+
+### 1.2b Discovered — English demand the plan missed
+
+| Keyword | Vol/mo | Recommended use |
+|---|---:|---|
+| `excavator on rent` | **260** | equal to `excavator rental` — worth a heading variant |
+| `mini excavator rental` | **140** | unserved, mirrors `sewa mini excavator` (90) |
+| `compact excavator rental` | **140** | same segment, different wording |
+| `excavator rental near me` | **70** | "near me" intent → location pages should target it |
+| `rent digger near me` | **70** | "digger" is a real MY search token, absent from the plan |
+| `long reach excavator rental` | **20** | equipment variant, unserved |
 
 ### 1.3 Chinese (`zh`) — Mandarin-reading Chinese contractor segment
 
-| Keyword | Intent | Volume tier | Target page type |
-|---|---|---|---|
-| `挖掘机出租` | commercial | high | homepage |
-| `马来西亚挖掘机出租` | commercial | high | homepage |
-| `挖土机出租` | commercial | high | homepage |
+> **Measured 2026-08-06: only 2 of 19 ZH keywords have any volume** — `挖掘机出租` (10)
+> and `挖土机出租` (10). Everything else, including all the "high tier" entries below,
+> returned 0. Treat `/zh` as an accessibility/parity tree, not a traffic channel, and do
+> not invest further copy effort here.
+>
+> ZH keywords are **not** stored in webcore — the keyword store accepts only `en` and
+> `ms`, so this table is the only record of them.
+
+| Keyword | Intent | Vol/mo | Target page type |
+|---|---|---:|---|
+| `挖掘机出租` | commercial | **10** | homepage H1 |
+| `挖土机出租` | commercial | **10** | homepage |
+| `马来西亚挖掘机出租` | commercial | 0 | demoted — body copy only |
 | `便宜挖掘机出租` | commercial | mid | homepage |
 | `挖掘机出租价格` | commercial-info | mid | homepage + blog |
 | `挖掘机日租` | commercial | mid | homepage (USP / calculator) |
