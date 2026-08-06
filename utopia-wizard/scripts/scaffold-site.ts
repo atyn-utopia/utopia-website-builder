@@ -106,14 +106,42 @@ async function main() {
     await writeFile(dst, await readFile(src))
     chromeCopied++
   }
-  // Canonical locale-URL helper → lib/ (single source for SEO URLs; the
-  // seo-locale-url-helper check requires pages/sitemap go through it).
-  const helperSrc = path.join(templateDir, 'localeHref.ts')
-  if (existsSync(helperSrc)) {
-    await mkdir(path.join(outDir, 'lib'), { recursive: true })
-    await writeFile(path.join(outDir, 'lib', 'localeHref.ts'), await readFile(helperSrc))
+  // Canonical non-component files from the template, each with its own
+  // destination. Keep this table in sync with templates/site-chrome/README.md —
+  // a file added to the template but not listed here silently never reaches a
+  // new project, which is how og:image was missing from 21 of 28 sites.
+  const TEMPLATE_FILES: [src: string, dest: string][] = [
+    // single source for SEO URLs; the seo-locale-url-helper check requires
+    // pages/sitemap go through it
+    ['localeHref.ts', 'lib/localeHref.ts'],
+    // social share card: URL helper + the generator (Step 8b, og-image-per-locale)
+    ['ogImage.ts', 'lib/ogImage.ts'],
+    ['og-shot.mjs', 'scripts/og-shot.mjs'],
+  ]
+  let helpersCopied = 0
+  for (const [src, dest] of TEMPLATE_FILES) {
+    const abs = path.join(templateDir, src)
+    if (!existsSync(abs)) continue
+    const dst = path.join(outDir, dest)
+    await mkdir(path.dirname(dst), { recursive: true })
+    await writeFile(dst, await readFile(abs))
+    helpersCopied++
   }
-  console.log(`scaffold: copied ${copied} structural file(s) from ${REF} + ${chromeCopied} chrome + localeHref helper from templates/site-chrome → projects/${slug}`)
+
+  // og-shot.mjs talks to the project's own dev server, so its PORT must match
+  // the `start` script. The template ships 3000; without this the very first
+  // run fails with a connection refused for a reason nobody would guess.
+  const ogShot = path.join(outDir, 'scripts', 'og-shot.mjs')
+  if (existsSync(ogShot)) {
+    const pkg = JSON.parse(await readFile(path.join(outDir, 'package.json'), 'utf8'))
+    const port = /-p\s+(\d+)|--port[= ](\d+)/.exec(pkg.scripts?.start ?? '')
+    const num = port?.[1] ?? port?.[2]
+    if (num) {
+      const body = await readFile(ogShot, 'utf8')
+      await writeFile(ogShot, body.replace(/^const PORT = \d+;/m, `const PORT = ${num};`))
+    }
+  }
+  console.log(`scaffold: copied ${copied} structural file(s) from ${REF} + ${chromeCopied} chrome + ${helpersCopied} helper(s) from templates/site-chrome → projects/${slug}`)
 
   // 2. Rename the product route folder → app/[locale]/{productSlug}.
   // Read the source folder from the reference's own productSlug rather than

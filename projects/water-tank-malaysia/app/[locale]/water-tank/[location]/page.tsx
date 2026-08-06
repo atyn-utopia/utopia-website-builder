@@ -5,6 +5,7 @@ import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
 import { routing } from '@/i18n/routing';
 import { localeHref } from '@/lib/localeHref';
+import { ogImages } from '@/lib/ogImage';
 import {
   locations,
   getLocationsByState,
@@ -74,7 +75,8 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical: `${localeHref(locale)}${path}`, languages },
-    openGraph: { title, description, url: `${localeHref(locale)}${path}`, type: 'website' },
+    openGraph: { title, description, url: `${localeHref(locale)}${path}`, type: 'website', images: ogImages(locale) },
+    twitter: { card: 'summary_large_image', images: ogImages(locale) },
   };
 }
 
