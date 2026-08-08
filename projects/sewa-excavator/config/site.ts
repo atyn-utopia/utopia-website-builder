@@ -1,4 +1,6 @@
 export const siteConfig = {
+  // Stable webcore identity (company_websites.id). Never changes on domain rename.
+  siteId: '757196d4-c728-47a9-b6b3-283e6937d34a',
   brandName: 'Abang Excavator',
   legalName: 'Utopia Group of Companies',
   tagline: 'Sewa Excavator No.1 Malaysia',

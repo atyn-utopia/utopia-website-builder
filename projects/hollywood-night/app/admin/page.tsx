@@ -16,7 +16,11 @@ export default async function AdminHome() {
   const allTickets = rows.flatMap((g) => g.tickets ?? []);
 
   const initialStats = {
-    attending: rows.filter((g) => g.attending).length,
+    attending: rows
+      .filter((g) => g.attending)
+      .reduce((n, g) => n + 1 + (g.has_plus_one ? 1 : 0), 0),
+    notAttending: rows.filter((g) => !g.attending).length,
+    vip: rows.filter((g) => g.rsvp_type === "vip").length,
     totalTickets: allTickets.length,
     checkedIn: allTickets.filter((t) => t.checked_in).length,
     transport: rows.filter((g) => g.transportation_required).length,

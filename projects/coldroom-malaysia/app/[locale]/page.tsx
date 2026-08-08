@@ -15,11 +15,6 @@ import HomePageClient from '@/components/HomePageClient';
 import { ProductSchema } from '@/components/schema/ProductSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
 
-const HERO_IMAGE = '/brand/hero.png';
-// Full-bleed cold-room scene behind the hero copy (sewa-excavator uses the same
-// photo-bg + overlay pattern). Darkened by the overlay below for text contrast.
-const HERO_SCENE = 'https://static.wixstatic.com/media/d3104b_390cb593d3624032ae4da7fe4603f080~mv2.jpg';
-
 const HERO_TIERS = [
   { slug: 'frozen-storage-minus-18', chip: '-18°C', tone: 'frost-deep' },
   { slug: 'freezer-minus-5-to-minus-10', chip: '-10°C', tone: 'frost-mid' },
@@ -120,26 +115,21 @@ export default async function HomePage({
       <FomoBanner />
       <SiteHeader />
 
-      {/* HERO — H1 + H2 + the image-role background live in the route file so
-          the checklist sees them. Below the hero is <HomePageClient />. */}
-      <header style={{ position: 'relative', overflow: 'hidden', minHeight: '82vh', display: 'flex', alignItems: 'center', background: 'var(--steel-900)' }}>
-        {/* Full-bleed cold-room scene photo */}
-        <div aria-hidden style={{ position: 'absolute', inset: 0, backgroundImage: `url(${HERO_SCENE})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
-        {/* Dark frost overlay so the white hero copy stays legible over the photo */}
-        <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'linear-gradient(100deg, rgba(11,61,92,0.94) 0%, rgba(11,61,92,0.78) 42%, rgba(19,24,34,0.55) 100%)' }} />
-        <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 80% 30%, rgba(79,177,214,0.18), transparent 55%)' }} />
-        <div className="section-container" style={{ position: 'relative', zIndex: 2, padding: '72px 24px', display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 48, alignItems: 'center' }}>
-          <div className="hero-copy">
+      {/* HERO — two-column on desktop (copy left, warehouse photo right); stacks centered on mobile. */}
+      <header style={{ position: 'relative', overflow: 'hidden', minHeight: '72vh', display: 'flex', alignItems: 'center', background: 'var(--grad-frost)' }}>
+        <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 80% 30%, rgba(201,229,242,0.18), transparent 50%), radial-gradient(circle at 15% 85%, rgba(79,177,214,0.22), transparent 45%)' }} />
+        <div className="section-container hero-grid" style={{ position: 'relative', zIndex: 2, padding: '76px 24px' }}>
+          <div className="hero-text">
             <span className="eyebrow" style={{ color: 'var(--cold-amber-glow)' }}>{t('hero.eyebrow')}</span>
             <h1 style={{ color: '#fff', marginTop: 14, marginBottom: 22, textShadow: '0 4px 24px rgba(11,61,92,0.45)' }}>
               {t.rich('hero.h1', { accent: (chunks) => <span style={{ color: 'var(--cold-amber-glow)' }}>{chunks}</span> })}
             </h1>
             <span aria-hidden className="hero-rule" style={{ display: 'block', height: 3, width: 72, background: 'var(--cold-amber)', borderRadius: 3, marginBottom: 18 }} />
-            <h2 style={{ color: 'rgba(255,255,255,0.96)', fontWeight: 600, marginBottom: 30, maxWidth: 620 }}>
+            <h2 style={{ color: 'rgba(255,255,255,0.96)', fontWeight: 600, marginBottom: 30, maxWidth: 640 }}>
               {t('hero.h2')}
             </h2>
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 22 }} className="hero-cta-row">
-              <TrackedWhatsAppLink href={waRedirect(locale)} className="btn btn-wa">
+            <div className="hero-cta-row" style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 22 }}>
+              <TrackedWhatsAppLink href={waRedirect(locale)} className="btn btn-wa wa-btn">
                 <WaIcon size={18} /> {t('hero.primaryCta')}
               </TrackedWhatsAppLink>
               <a href="#products" className="btn btn-ghost-frost">{t('hero.secondaryCta')}</a>
@@ -170,21 +160,11 @@ export default async function HomePage({
               </div>
             </div>
           </div>
-          <div className="hero-photo" style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <div
-              role="img"
-              aria-label={t('imageAlt')}
-              style={{
-                width: '100%',
-                maxWidth: 620,
-                aspectRatio: '620 / 420',
-                backgroundImage: `url(${HERO_IMAGE})`,
-                backgroundSize: 'contain',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-                filter: 'drop-shadow(0 30px 50px rgba(11,61,92,0.45))',
-              }}
-            />
+          <div className="hero-visual">
+            {/* Announced to screen readers via an ARIA image role + label (same
+                convention as the location-page hero). The transparent warehouse
+                cutout sits on the frost gradient via background:contain. */}
+            <div className="hero-visual-img" role="img" aria-label={t('hero.imageAlt')} />
           </div>
         </div>
       </header>

@@ -32,7 +32,7 @@ export default async function LocaleLayout({
         <script
           defer
           src="https://webcore.utopiaai.my/t.js"
-          data-website="coldroom-malaysia.utopiaai.my"
+          data-website="coldroomrental.my"
         ></script>
       </head>
       <body style={{ fontFamily: 'var(--font-inter), Inter, sans-serif' }}>

@@ -226,8 +226,7 @@ export default async function BlogPostPage({
             href={waHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-[15px] font-semibold text-white shadow-[0_8px_20px_-8px_rgba(37,211,102,0.55)] hover:bg-[#1EB85A]"
-            style={{ transition: 'background-color 200ms ease' }}
+            className="wa-btn inline-flex items-center gap-2 bg-[#25D366] text-[15px] font-semibold text-white hover:bg-[#1EB85A]"
           >
             <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
               <path d="M20.52 3.48A11.86 11.86 0 0 0 12.04 0C5.47 0 .12 5.35.12 11.92c0 2.1.55 4.15 1.6 5.96L0 24l6.28-1.65a11.9 11.9 0 0 0 5.75 1.47h.01c6.57 0 11.93-5.35 11.93-11.92 0-3.19-1.24-6.18-3.45-8.42z" />

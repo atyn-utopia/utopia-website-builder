@@ -162,7 +162,7 @@ export default async function LocationPage({
               {heroH2}
             </h2>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 22 }} className="hero-cta-row">
-              <TrackedWhatsAppLink href={waRedirect(locale, undefined, loc.slug)} className="btn btn-wa">
+              <TrackedWhatsAppLink href={waRedirect(locale, undefined, loc.slug)} className="btn btn-wa wa-btn">
                 <WaIcon size={18} /> {t('hero.primaryCta')}
               </TrackedWhatsAppLink>
               <a href="#products" className="btn btn-ghost-frost">{t('hero.secondaryCta')}</a>

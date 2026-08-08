@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Inter, JetBrains_Mono } from "next/font/google";
+import { Cormorant_Garamond, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const playfair = Playfair_Display({
+const cormorant = Cormorant_Garamond({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["600", "700", "900"],
+  weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
 });
 
@@ -24,7 +24,7 @@ const jetbrains = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Hollywood Night — Annual Dinner RSVP",
   description:
-    "You're invited to the Hollywood Red Carpet Night. Annual Dinner · 16 May 2026 · 6:00 PM.",
+    "You're invited to the Hollywood Red Carpet annual dinner · 31 July 2026 · 6:00 PM · Grand Ballroom, Sunway Putra Hotel.",
   icons: {
     icon: [
       { url: "/icon-32.png", sizes: "32x32", type: "image/png" },
@@ -46,7 +46,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${inter.variable} ${jetbrains.variable} h-full antialiased`}
+      className={`${cormorant.variable} ${inter.variable} ${jetbrains.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-ink-900 text-ivory">
         {children}

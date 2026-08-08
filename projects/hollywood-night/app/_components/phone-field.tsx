@@ -9,6 +9,7 @@ type Props = {
   required?: boolean;
   initial?: string;
   size?: "default" | "compact";
+  hint?: string;
 };
 
 export default function PhoneField({
@@ -16,7 +17,7 @@ export default function PhoneField({
   name,
   required,
   initial = "",
-  size = "default",
+  hint,
 }: Props) {
   const [digits, setDigits] = useState(() =>
     sanitizeDigits(initial.replace(/^\+?60/, ""))
@@ -27,7 +28,7 @@ export default function PhoneField({
     setDigits(sanitizeDigits(raw).slice(0, 11));
   }
 
-  const padY = size === "compact" ? "py-3" : "py-4";
+  const padY = "py-3";
 
   return (
     <label className="block">
@@ -36,8 +37,8 @@ export default function PhoneField({
           {label}
         </span>
       )}
-      <div className="flex items-stretch bg-ink-700 border border-ink-600 focus-within:border-gold-500 focus-within:ring-1 focus-within:ring-gold-500/40 transition-[transform,opacity] duration-150">
-        <span className="flex items-center justify-center px-4 text-gold-300 font-mono text-sm border-r border-ink-600 bg-ink-800 select-none">
+      <div className="flex items-stretch border-0 border-b border-gold-500/30 focus-within:border-gold-400 transition-colors duration-200">
+        <span className="flex items-center pr-3 mr-3 text-gold-300 font-mono text-sm border-r border-gold-500/25 select-none">
           +60
         </span>
         <input
@@ -49,9 +50,14 @@ export default function PhoneField({
           placeholder="12 345 6789"
           value={digits}
           onChange={(e) => update(e.target.value)}
-          className={`flex-1 bg-transparent text-ivory placeholder-ivory/30 px-4 ${padY} outline-none font-mono`}
+          className={`flex-1 bg-transparent text-ivory placeholder-ivory/25 px-0 ${padY} outline-none font-mono`}
         />
       </div>
+      {hint && (
+        <span className="block mt-2 text-[11px] leading-snug text-gold-300/80">
+          {hint}
+        </span>
+      )}
       <input type="hidden" name={name} value={fullValue} />
     </label>
   );

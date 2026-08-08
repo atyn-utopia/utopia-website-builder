@@ -31,7 +31,7 @@ export async function sendTicketsEmail({
   const html = `
   <div style="background:#05060A;padding:40px 20px;font-family:'Helvetica Neue',Arial,sans-serif;color:#FBF7EC;">
     <div style="max-width:560px;margin:0 auto;background:#0B0D14;border:1px solid rgba(212,175,55,0.3);padding:40px;">
-      <p style="font-size:11px;letter-spacing:0.28em;text-transform:uppercase;color:#D4AF37;margin:0 0 16px 0;">◆ 16.05.2026 · Red Carpet Night</p>
+      <p style="font-size:11px;letter-spacing:0.28em;text-transform:uppercase;color:#D4AF37;margin:0 0 16px 0;">◆ 31.07.2026 · Hollywood Red Carpet</p>
       <h1 style="font-family:Georgia,serif;font-size:32px;color:#F6EBD0;margin:0 0 8px 0;font-style:italic;">You're on the list, ${escapeHtml(guestName)}.</h1>
       <p style="color:rgba(251,247,236,0.72);line-height:1.7;font-size:15px;margin:16px 0;">
         Welcome to <strong style="color:#F4DC86;">${EVENT.name}</strong> — ${EVENT.subtitle}.

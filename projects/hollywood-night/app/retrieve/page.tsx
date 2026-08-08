@@ -8,36 +8,36 @@ export const metadata = {
   title: `Retrieve Ticket — ${EVENT.name}`,
 };
 
-export default function RetrievePage() {
+export default async function RetrievePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ from?: string }>;
+}) {
+  const { from } = await searchParams;
+  const homeHref = from === "vip" ? "/vip" : "/";
   return (
-    <main className="bg-stage grain min-h-screen relative">
+    <main className="bg-runway grain min-h-screen relative">
 
-      <nav className="relative px-6 py-8 flex items-center justify-between max-w-6xl mx-auto">
-        <a href="/" className="block w-40 md:w-52">
+      <nav className="relative px-6 pt-8 pb-2 md:py-8 flex items-center justify-center max-w-6xl mx-auto">
+        <a href={homeHref} className="block w-48 md:w-72" aria-label="Home">
           <Image
-            src="/logo.png"
-            alt="Hollywood Red Carpet"
-            width={480}
-            height={270}
+            src="/masthead-dinner.png"
+            alt="Utopia Group of Companies — Hollywood Red Carpet"
+            width={1600}
+            height={726}
             className="w-full h-auto"
           />
         </a>
-        <a
-          href="/"
-          className="text-[11px] uppercase tracking-[0.2em] text-ivory-faint hover:text-gold-400 transition-[transform,opacity] duration-150"
-        >
-          ← Home
-        </a>
       </nav>
 
-      <section className="relative px-6 py-16 max-w-2xl md:max-w-5xl mx-auto text-center">
+      <section className="relative px-6 pt-2 pb-16 md:py-16 max-w-2xl md:max-w-5xl mx-auto text-center">
         <p className="text-[11px] uppercase tracking-[0.28em] text-gold-500 mb-4">
           ◆ Ticket Retrieval
         </p>
-        <h1 className="font-display text-5xl md:text-6xl text-champagne mb-4">
+        <h1 className="font-display text-4xl md:text-6xl text-champagne mb-4">
           Find Your Ticket
         </h1>
-        <p className="text-ivory-dim mb-12 leading-relaxed">
+        <p className="text-ivory-dim text-sm md:text-base mb-12 leading-relaxed">
           Enter the phone number you used to RSVP and we&apos;ll reveal your
           ticket{"(s)"}.
         </p>
@@ -48,7 +48,7 @@ export default function RetrievePage() {
       </section>
 
       <footer className="relative px-6 py-16 text-center">
-        <p className="text-ivory-faint text-xs uppercase tracking-[0.2em]">
+        <p className="text-ivory-faint text-[10px] md:text-xs uppercase tracking-[0.2em]">
           {EVENT.name} · {EVENT.dateLabel}
         </p>
       </footer>

@@ -58,6 +58,7 @@ export async function POST(request: Request) {
         checkedIn: t.checked_in,
         luckyNumber: t.checked_in ? t.lucky_number : null,
         guestName: g.name,
+        rsvpType: g.rsvp_type === "vip" ? "vip" : "staff",
       })
     )
   );

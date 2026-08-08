@@ -35,15 +35,16 @@ export default function PageStyles() {
         [class*="section-container"] h1, [class*="section-container"] h2, [class*="section-container"] h3 { text-align: center; }
         .hero-copy { text-align: center; }
         .hero-copy .eyebrow { display: inline-block; }
-        .usp-panel { grid-template-columns: 1fr !important; }
-        /* Centre each USP item (icon + text) on mobile instead of left-aligning,
-           and drop the desktop column-separator border/padding that would shift
-           the 2nd/3rd cells out of alignment when stacked. */
-        .usp-cell { justify-content: center !important; }
+        .usp-panel { grid-template-columns: 1fr !important; gap: 26px !important; }
+        /* Stack the icon ABOVE the text and centre each USP item — a clean
+           vertical feature block instead of left-aligned icon + text rows. */
+        .usp-cell { flex-direction: column !important; text-align: center; gap: 10px !important; }
         .usp-panel .usp-cell + .usp-cell { border-left: 0 !important; padding-left: 0 !important; }
         .stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 28px !important; }
-        .stats-strip { grid-template-columns: repeat(2, 1fr) !important; gap: 16px !important; }
-        .stats-strip > :first-child { grid-column: 1 / -1; border-right: 0 !important; padding-right: 0 !important; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.18); text-align: center; }
+        /* Centre each stat (number + label) in the 2×2 mobile grid. */
+        .stats-strip { grid-template-columns: repeat(2, 1fr) !important; gap: 26px 16px !important; }
+        .stats-strip > div { align-items: center; text-align: center; }
+        .stats-strip > :first-child { grid-column: 1 / -1; border-right: 0 !important; padding-right: 0 !important; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.18); text-align: center; }
         .risk-bullets { grid-template-columns: 1fr !important; }
         .risk-cta { grid-template-columns: 1fr 1fr !important; }
         .risk-cta > :nth-child(3) { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,0.10); }

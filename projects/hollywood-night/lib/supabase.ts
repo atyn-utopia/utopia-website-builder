@@ -26,6 +26,7 @@ export type GuestRow = {
   plus_one_name: string | null;
   plus_one_phone: string | null;
   transportation_required: boolean;
+  rsvp_type: "staff" | "vip";
   created_at: string;
 };
 

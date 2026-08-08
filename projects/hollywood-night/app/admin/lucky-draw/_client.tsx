@@ -26,6 +26,8 @@ export default function LuckyDrawClient() {
   const [isMobile, setIsMobile] = useState(false);
   const [eligibleCount, setEligibleCount] = useState(0);
   const [drawnCount, setDrawnCount] = useState(0);
+  const [headerOpen, setHeaderOpen] = useState(true);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const [latest, setLatest] = useState<Draw | null>(null);
   const [history, setHistory] = useState<Draw[]>([]);
@@ -171,36 +173,76 @@ export default function LuckyDrawClient() {
     }
   }
 
+  useEffect(() => {
+    const onFsChange = () =>
+      setIsFullscreen(Boolean(document.fullscreenElement));
+    document.addEventListener("fullscreenchange", onFsChange);
+    return () => document.removeEventListener("fullscreenchange", onFsChange);
+  }, []);
+
+  function toggleFullscreen() {
+    if (typeof document === "undefined") return;
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen?.().catch(() => {});
+    } else {
+      document.exitFullscreen?.();
+    }
+  }
+
   return (
     <main
-      className="min-h-screen bg-stage grain"
+      className="min-h-screen bg-runway grain"
       style={{ paddingTop: "env(safe-area-inset-top)" }}
     >
 
       <div className="relative z-20 px-4 md:px-6 py-8 md:py-12 max-w-4xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <a
-            href="/admin"
-            className="text-[11px] uppercase tracking-[0.2em] text-ivory-faint hover:text-gold-400 transition-[transform,opacity] duration-150"
-          >
-            ← Admin
-          </a>
-          <div className="flex gap-4 md:gap-6 text-[10px] uppercase tracking-[0.18em]">
-            <div className="text-center">
-              <div className="font-mono text-xl text-ivory">{eligibleCount}</div>
-              <div className="text-ivory-faint">Eligible</div>
-            </div>
-            <div className="text-center">
-              <div className="font-mono text-xl text-gold-400">{drawnCount}</div>
-              <div className="text-ivory-faint">Drawn</div>
+        <button
+          onClick={() => setHeaderOpen((o) => !o)}
+          className="absolute top-3 right-4 z-30 text-[10px] uppercase tracking-[0.2em] text-ivory-faint hover:text-gold-400 transition-[opacity] duration-150"
+        >
+          {headerOpen ? "Hide ▲" : "Menu ▼"}
+        </button>
+        <button
+          onClick={toggleFullscreen}
+          className="absolute top-3 left-4 z-30 text-[10px] uppercase tracking-[0.2em] text-ivory-faint hover:text-gold-400 transition-[opacity] duration-150"
+        >
+          {isFullscreen ? "⤢ Exit" : "⤢ Fullscreen"}
+        </button>
+        {headerOpen && (
+          <div className="flex items-center justify-between mb-8 pr-16">
+            <a
+              href="/admin"
+              className="text-[11px] uppercase tracking-[0.2em] text-ivory-faint hover:text-gold-400 transition-[transform,opacity] duration-150"
+            >
+              ← Admin
+            </a>
+            <div className="flex gap-4 md:gap-6 text-[10px] uppercase tracking-[0.18em]">
+              <div className="text-center">
+                <div className="font-mono text-xl text-ivory">
+                  {eligibleCount}
+                </div>
+                <div className="text-ivory-faint">Eligible</div>
+              </div>
+              <div className="text-center">
+                <div className="font-mono text-xl text-gold-400">
+                  {drawnCount}
+                </div>
+                <div className="text-ivory-faint">Drawn</div>
+              </div>
             </div>
           </div>
+        )}
+
+        <div className="flex justify-center mb-6">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/masthead-dinner.png"
+            alt="Utopia Group of Companies — Hollywood Red Carpet"
+            className="w-40 sm:w-52 h-auto drop-shadow-[0_0_24px_rgba(212,175,55,0.3)]"
+          />
         </div>
 
-        <p className="text-center text-[11px] uppercase tracking-[0.32em] text-gold-500 mb-3">
-          ◆ Hollywood Night
-        </p>
-        <h1 className="text-center font-display italic text-5xl md:text-7xl text-champagne mb-10 md:mb-14">
+        <h1 className="text-center font-display italic text-4xl md:text-7xl text-champagne mb-10 md:mb-14">
           Lucky Draw
         </h1>
 
@@ -212,7 +254,7 @@ export default function LuckyDrawClient() {
               <p className="text-[10px] uppercase tracking-[0.32em] text-gold-500 mb-2">
                 ◆ Winner
               </p>
-              <h2 className="font-display text-4xl md:text-6xl text-champagne mb-2 leading-tight">
+              <h2 className="font-display text-2xl md:text-4xl text-champagne mb-2 leading-tight px-2 text-balance">
                 {latest.guestName}
               </h2>
               {latest.company && (
@@ -272,7 +314,7 @@ export default function LuckyDrawClient() {
         )}
 
         {history.length > 0 && (
-          <div className="mt-14 border-t border-ink-600 pt-10">
+          <div className="mt-14 border-t border-gold-500/15 pt-10">
             <p className="text-center text-[10px] uppercase tracking-[0.28em] text-gold-500 mb-6">
               ◆ Previously Drawn ({history.length})
             </p>
@@ -280,7 +322,7 @@ export default function LuckyDrawClient() {
               {history.map((d) => (
                 <li
                   key={d.ticketId}
-                  className="flex items-center justify-between gap-3 bg-ink-800 border border-ink-600 px-4 py-3"
+                  className="glass flex items-center justify-between gap-3 px-4 py-3"
                 >
                   <span className="font-mono font-black text-xl text-gold-400 tabular-nums shrink-0">
                     {String(d.luckyNumber ?? 0).padStart(3, "0")}

@@ -49,14 +49,27 @@ export default function PageStyles() {
         color: rgba(255,255,255,0.85);
         line-height: 1.55;
       }
+      /* Hero CTA = CI WhatsApp button @ LG (§5.2–5.4): flex + glyph, locked
+         px dimensions, 8px radius, breathing layered green shadow, lift on
+         hover. Matches the .wa-btn CTAs elsewhere on the site. */
       .home-hero-cta {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
         background: #25D366; color: #fff;
-        font-weight: 700; font-size: 16px;
-        padding: 14px 30px;
-        border-radius: 999px;
+        font-weight: 700; font-size: 15px;
+        min-height: 48px;
+        padding: 0 28px;
+        border-radius: var(--r-button, 8px);
         text-decoration: none;
+        white-space: nowrap;
+        animation: wa-pulse 3s ease-in-out infinite;
+        transition: transform var(--dur-hover, 220ms) var(--ease, ease);
       }
+      .home-hero-cta:hover { transform: translateY(-1px); }
+      .home-hero-cta svg { width: 20px; height: 20px; flex-shrink: 0; }
+      @media (prefers-reduced-motion: reduce) { .home-hero-cta { animation: none; } }
       .home-hero-media {
         position: relative;
         display: flex; align-items: center; justify-content: center;

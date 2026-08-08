@@ -66,10 +66,10 @@ export default async function LocaleLayout({ children, params }: Props) {
         <script
           defer
           src="https://webcore.utopiaai.my/t.js"
-          data-website="sewa-motor-malaysia.utopiaai.my"
+          data-website={siteConfig.domain}
         />
       </head>
-      <body style={{ fontFamily: "var(--font-inter), Inter, sans-serif" }}>
+      <body style={{ fontFamily: "var(--font-inter), 'Inter', system-ui, sans-serif" }}>
         <NextIntlClientProvider messages={messages}>
           <OrganizationSchema />
           {children}

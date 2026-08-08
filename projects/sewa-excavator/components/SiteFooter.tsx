@@ -73,6 +73,27 @@ export default async function SiteFooter({ locale }: { locale: string }) {
 
         <div className="footer-bottom">
           <p className="footer-copy">{t('copyright')}</p>
+          <a
+            className="utopia-credit"
+            href="https://utopiagroup.com.my"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Built by Utopia AI"
+          >
+            <span className="utopia-credit-by">Built by</span>
+            <span className="utopia-credit-word">Utopia</span>
+            <svg className="utopia-tri" viewBox="0 0 64 56" width="11" height="10" aria-hidden="true">
+              <defs>
+                <linearGradient id="utopiaCreditGradExc" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#0054A6" />
+                  <stop offset="60%" stopColor="#2774AE" />
+                  <stop offset="100%" stopColor="#4A9DD0" />
+                </linearGradient>
+              </defs>
+              <polygon points="32,4 60,52 4,52" fill="url(#utopiaCreditGradExc)" />
+            </svg>
+            <span className="utopia-credit-word">AI</span>
+          </a>
         </div>
       </div>
 
@@ -121,12 +142,37 @@ export default async function SiteFooter({ locale }: { locale: string }) {
           padding-top: 24px;
           border-top: 1px solid var(--brand-steel);
           display: flex;
-          flex-direction: column;
-          gap: 8px;
+          align-items: center;
+          justify-content: center;
+          gap: 16px;
+          flex-wrap: wrap;
+          text-align: center;
           font-size: 12px;
           color: #9ca3af;
         }
         .footer-copy { margin: 0; }
+        /* Utopia AI build credit — CI button rules: 8px radius, icon never
+           compresses, easeOutExpo lift on hover. Mark carries Utopia's own
+           gradient (correct brand-mark usage); site palette/fonts unchanged. */
+        .utopia-credit {
+          display: inline-flex; align-items: center; gap: 6px;
+          padding: 7px 12px;
+          border: 1px solid rgba(255,255,255,0.14);
+          border-radius: var(--r-button, 8px);
+          color: #cbd5d8; font-size: 12px; font-weight: 600;
+          text-decoration: none; white-space: nowrap; flex-shrink: 0;
+          transition: transform var(--dur-hover, 220ms) var(--ease, ease),
+                      border-color var(--dur-hover, 220ms) var(--ease, ease),
+                      background-color var(--dur-hover, 220ms) var(--ease, ease);
+        }
+        .utopia-credit:hover {
+          transform: translateY(-1px);
+          border-color: rgba(74,157,208,0.55);
+          background: rgba(39,116,174,0.12);
+        }
+        .utopia-credit-by { color: #6b7280; }
+        .utopia-credit-word { color: #f1f5f9; font-weight: 800; letter-spacing: -0.01em; }
+        .utopia-tri { display: inline-block; flex-shrink: 0; }
         .footer-states { margin: 0; font-family: var(--font-mono-stack); letter-spacing: 0.04em; }
         @media (max-width: 767px) {
           .site-footer { padding: 48px 0 24px; }

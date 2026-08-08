@@ -90,6 +90,30 @@ export default async function SiteFooter({ locale }: { locale: Locale }) {
           style={{ borderColor: 'rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.3)' }}
         >
           <p>{tFoot('copyright', { year })}</p>
+          {/* Utopia AI build credit — CI button: 8px radius, easeOutExpo lift
+              on hover. The mark carries Utopia's own gradient (correct
+              brand-mark usage); the site palette/fonts stay unchanged. */}
+          <a
+            className="utopia-credit"
+            href="https://utopiagroup.com.my"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Built by Utopia AI"
+          >
+            <span className="utopia-credit-by">Built by</span>
+            <span className="utopia-credit-word">Utopia</span>
+            <svg className="utopia-tri" viewBox="0 0 64 56" width="11" height="10" aria-hidden="true">
+              <defs>
+                <linearGradient id="utopiaCreditGradAircond" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#0054A6" />
+                  <stop offset="60%" stopColor="#2774AE" />
+                  <stop offset="100%" stopColor="#4A9DD0" />
+                </linearGradient>
+              </defs>
+              <polygon points="32,4 60,52 4,52" fill="url(#utopiaCreditGradAircond)" />
+            </svg>
+            <span className="utopia-credit-word">AI</span>
+          </a>
         </div>
       </div>
     </footer>

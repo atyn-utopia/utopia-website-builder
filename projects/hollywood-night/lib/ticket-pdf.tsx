@@ -170,7 +170,7 @@ function TicketDoc({ tickets }: { tickets: TicketPdfData[] }) {
       <Page size="A5" orientation="landscape" style={styles.page}>
         <View style={styles.header}>
           <Text style={styles.brand}>Hollywood</Text>
-          <Text style={styles.brandSub}>Red Carpet Night</Text>
+          <Text style={styles.brandSub}>Hollywood Red Carpet</Text>
         </View>
 
         {tickets.map((t) => (

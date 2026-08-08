@@ -20,7 +20,10 @@ export async function GET() {
 
   const totalTickets = ticketStats?.length ?? 0;
   const checkedIn = ticketStats?.filter((t) => t.checked_in).length ?? 0;
-  const attending = guests?.filter((g) => g.attending).length ?? 0;
+  const attending =
+    guests
+      ?.filter((g) => g.attending)
+      .reduce((n, g) => n + 1 + (g.has_plus_one ? 1 : 0), 0) ?? 0;
   const notAttending = guests?.filter((g) => !g.attending).length ?? 0;
   const transport = guests?.filter((g) => g.transportation_required).length ?? 0;
 

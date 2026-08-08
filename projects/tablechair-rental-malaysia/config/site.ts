@@ -3,6 +3,8 @@
 // it in sync with `deploy-url.txt` and the `data-website` attribute in
 // app/[locale]/layout.tsx — the checklist enforces this match.
 export const siteConfig = {
+  // Stable webcore identity (company_websites.id). Never changes on domain rename.
+  siteId: 'be0bbd1e-1089-4791-9403-3d4031b042a3',
   brandName: 'Kak Kenduri',
   legalName: 'Kak Kenduri Sdn. Bhd.',
   domain: 'tablechairrentals.my',

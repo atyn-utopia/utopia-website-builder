@@ -183,9 +183,19 @@ function toResult(row: PhoneRow | undefined, mode: LeadsMode, host: string): Pho
 
 export async function getPhoneNumber(locationSlug?: string): Promise<PhoneResult> {
   try {
-    const domain = await getHostDomain()
-    const [mode, rows] = await Promise.all([getLeadsMode(domain), getPhoneRows(domain)])
+    const host = await getHostDomain()
+    // phone_numbers / company_websites rows are keyed by the project's canonical
+    // website id (siteConfig.domain). When the site is served from a different
+    // host (staging, preview, or an aliased domain), the host lookup misses — so
+    // fall back to siteConfig.domain instead of returning the hardcoded number.
+    let domain = host
+    let rows = await getPhoneRows(domain)
+    if (rows.length === 0 && siteConfig.domain && siteConfig.domain !== host) {
+      domain = siteConfig.domain
+      rows = await getPhoneRows(domain)
+    }
     if (rows.length === 0) return fallbackResult()
+    const mode = await getLeadsMode(domain)
 
     const defaultRow = findDefaultRow(rows)
 

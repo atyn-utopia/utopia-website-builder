@@ -20,7 +20,7 @@
   --color-success-emerald: #5FD39F;
   --color-error-crimson: #9E1B1B;
 
-  --font-display: "Playfair Display", ui-serif, Georgia, serif;
+  --font-display: "Cormorant Garamond", ui-serif, Georgia, serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
@@ -46,9 +46,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, .font-display {
+h1, h2, h3, h4, .font-display {
   font-family: var(--font-display);
-  letter-spacing: -0.02em;
+  font-weight: 500;
+  letter-spacing: -0.005em;
 }
 
 .text-ivory-dim   { color: var(--ivory-dim); }
@@ -173,6 +174,123 @@ h1, h2, h3, .font-display {
 .stagger > *:nth-child(4) { animation-delay: 400ms; }
 .stagger > *:nth-child(5) { animation-delay: 500ms; }
 .stagger > *:nth-child(6) { animation-delay: 600ms; }
+
+/* ───────────────────────── Red Carpet Runway ───────────────────────── */
+
+/* Velvet runway: deep desaturated carpet red, darkened edges so the centre
+   reads as a lit runway, a gold spotlight pooling from the top, and a fine
+   vertical "pile" texture. Kept deep + restrained to avoid a CNY red/gold look. */
+.bg-runway {
+  background-color: #240509;
+  background-image:
+    linear-gradient(90deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0) 17%, rgba(0,0,0,0) 83%, rgba(0,0,0,0.72) 100%),
+    radial-gradient(ellipse 72% 42% at 50% -4%, rgba(212,175,55,0.15) 0%, transparent 60%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.016) 0 1px, transparent 1px 4px),
+    linear-gradient(180deg, #45101A 0%, #300A12 48%, #1C060B 100%);
+  background-attachment: fixed, fixed, scroll, fixed;
+}
+
+/* Chapters now breathe directly on the velvet — no slab. Kept as a positioning
+   context for the chapter numerals. */
+.runway-panel {
+  position: relative;
+}
+
+/* Translucent "glass" surface for cards + the RSVP form floating on velvet. */
+.glass {
+  background: linear-gradient(165deg, rgba(4,5,9,0.88), rgba(4,5,9,0.72));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212,175,55,0.22);
+  box-shadow:
+    0 34px 80px -44px rgba(0,0,0,0.92),
+    inset 0 1px 0 rgba(244,220,134,0.08);
+}
+
+/* Elegant underline-style form field. */
+.field-line {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(212,175,55,0.3);
+  border-radius: 0;
+  transition: border-color 220ms ease, box-shadow 220ms ease;
+}
+.field-line:focus {
+  outline: none;
+  border-bottom-color: var(--color-gold-400);
+  box-shadow: 0 1px 0 0 var(--color-gold-400);
+}
+
+/* Thin gold hairline divider between chapters. */
+.chapter-rule {
+  height: 1px;
+  width: 6rem;
+  margin: 0 auto;
+  background: linear-gradient(90deg, transparent, rgba(212,175,55,0.55), transparent);
+}
+
+/* Big outlined roman numeral marking each chapter. */
+.chapter-num {
+  font-family: var(--font-display);
+  font-weight: 900;
+  line-height: 0.78;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(212,175,55,0.5);
+  text-shadow: 0 2px 30px rgba(212,175,55,0.15);
+  user-select: none;
+}
+
+/* Stanchion rail markers (desktop). */
+.rail-line {
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(212,175,55,0.45) 12%, rgba(212,175,55,0.45) 88%, transparent);
+}
+.rail-dot {
+  position: relative;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  color: var(--ivory-faint);
+  transition: color 300ms ease, transform 300ms ease;
+}
+.rail-dot[data-active="true"] {
+  color: var(--color-gold-300);
+  transform: scale(1.25);
+  text-shadow: 0 0 14px var(--gold-glow);
+}
+
+/* ───────────────────────── Film strip ───────────────────────── */
+@keyframes film-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.film-track {
+  width: max-content;
+  animation: film-scroll 60s linear infinite;
+}
+/* sprocket perforations along the top & bottom of the strip */
+.film-perf {
+  height: 8px;
+  background: repeating-linear-gradient(
+    to right,
+    #ece0bb 0 6px,
+    #0a0a0a 6px 22px
+  );
+  background-position: 0 center;
+  opacity: 0.85;
+}
+/* grainy/vintage overlay on each film frame */
+.film-grain { position: relative; }
+.film-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150'><filter id='fn'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23fn)' opacity='0.75'/></svg>");
+  opacity: 0.22;
+  mix-blend-mode: overlay;
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

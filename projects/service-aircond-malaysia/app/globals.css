@@ -16,6 +16,15 @@
   --google-gold:        #FBBC04;
 
   --font: 'Inter', system-ui, sans-serif;
+
+  /* ── Utopia CI structural tokens — radius + motion only. Colours and fonts
+   *    stay this site's own (per the brand-kit application scope). ── */
+  --r-button: 8px;    /* buttons, inputs       (CI §5.1) */
+  --r-card:   12px;   /* cards, panels, modals (CI §5.1) */
+  --r-pill:   999px;  /* badges, pills, tags   (CI §5.1) */
+  --ease:        cubic-bezier(0.22, 1, 0.36, 1); /* easeOutExpo (CI §6) */
+  --dur-hover:   220ms;
+  --dur-layout:  320ms;
 }
 
 * { box-sizing: border-box; }
@@ -35,17 +44,59 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
   letter-spacing: -0.02em;
 }
+/* Heading weights. Tailwind v4 Preflight resets headings to
+   `font-weight: inherit` (→ 400), so font-bold/font-extrabold on section
+   headings was silently collapsing to 400 (headings render light). The
+   `body` prefix raises specificity so these win deterministically. Hero
+   title (h1) = extra-bold; every other section heading (h2/h3/h4) = bold.
+   h5/h6 are body text here and are intentionally left untouched. */
+body h1 { font-weight: 800; }
+body h2, body h3, body h4 { font-weight: 700; }
 
 .dot-texture {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ccircle cx='2' cy='2' r='1.2' fill='%231B3A5C' fill-opacity='0.04'/%3E%3C/svg%3E");
 }
 
+/* ── WhatsApp CTA — breathing of the CI layered shadow (§5.3 WhatsApp
+   variant, green accent #25D366). Subtle intensify/relax, not a consumer
+   ring-pop, to match the operational motion brief (§6). ── */
 @keyframes wa-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.5), 0 4px 20px rgba(37,211,102,0.3); }
-  50% { box-shadow: 0 0 0 8px rgba(37,211,102,0), 0 4px 20px rgba(37,211,102,0.5); }
+  0%, 100% {
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.18) inset,
+      0 0 0 1px rgba(37,211,102,0.40),
+      0 4px 14px rgba(37,211,102,0.18),
+      0 8px 28px rgba(37,211,102,0.12);
+  }
+  50% {
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.18) inset,
+      0 0 0 1px rgba(37,211,102,0.55),
+      0 6px 20px rgba(37,211,102,0.32),
+      0 12px 36px rgba(37,211,102,0.20);
+  }
 }
-.wa-btn { animation: wa-pulse 2.4s ease-in-out infinite; }
-@media (prefers-reduced-motion: reduce) { .wa-btn { animation: none; } }
+/* CI WhatsApp button @ LG size (§5.2/§5.4): locked px dimensions so the label
+   never wraps and the glyph stays proportional; 8px radius; layered green
+   shadow; easeOutExpo lift on hover (§6). Scoped to :not(.nav-cta) so the
+   header CTA keeps its own pill sizing (header is out of scope). */
+.wa-btn:not(.nav-cta) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 28px;
+  font-size: 15px;
+  border-radius: var(--r-button);
+  white-space: nowrap;
+  flex-shrink: 0;
+  animation: wa-pulse 3s ease-in-out infinite;
+  transition: transform var(--dur-hover) var(--ease);
+}
+.wa-btn:not(.nav-cta):hover { transform: translateY(-1px); }
+.wa-btn:not(.nav-cta) svg { width: 20px; height: 20px; flex-shrink: 0; } /* LG icon, never compresses */
+@media (prefers-reduced-motion: reduce) { .wa-btn:not(.nav-cta) { animation: none; } }
 
 .stat-number { font-weight: 800; color: var(--brand-yellow); letter-spacing: -0.03em; }
 
@@ -65,7 +116,7 @@ h1, h2, h3, h4, h5, h6 {
 .review-card {
   background: rgba(255,255,255,0.07);
   border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 16px;
+  border-radius: var(--r-card);
   backdrop-filter: blur(4px);
 }
 
@@ -93,14 +144,20 @@ h1, h2, h3, h4, h5, h6 {
 
 .product-card {
   background: #fff;
-  border-radius: 16px;
+  border-radius: var(--r-card);
   overflow: hidden;
   border: 1px solid var(--brand-border);
-  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  transition: transform var(--dur-hover) var(--ease), box-shadow var(--dur-hover) var(--ease);
 }
+/* Operational hover: lift 1px + layered colour-tinted shadow (brand navy).
+   No scale/zoom (CI §6 — bouncy/zoom hovers read as consumer; brand is
+   operational). */
 .product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 32px rgba(27,58,92,0.12);
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 0 1px rgba(27,58,92,0.22),
+    0 4px 14px rgba(27,58,92,0.16),
+    0 8px 28px rgba(27,58,92,0.12);
 }
 
 /* ── FOMO urgency banner ── */
@@ -166,6 +223,37 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 9999px;
   overflow: hidden;
 }
+
+/* ── Utopia AI build credit (footer bottom bar) — CI button rules: 8px
+   radius, icon never compresses, easeOutExpo lift on hover. The triangle
+   mark carries Utopia's own gradient (correct brand-mark usage); the site
+   palette/fonts are unchanged. Lives in globals.css because SiteFooter has
+   no styled-jsx / dedicated CSS file. */
+.utopia-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: var(--r-button);
+  color: #CBD5E1;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: transform var(--dur-hover) var(--ease),
+              border-color var(--dur-hover) var(--ease),
+              background-color var(--dur-hover) var(--ease);
+}
+.utopia-credit:hover {
+  transform: translateY(-1px);
+  border-color: rgba(74,157,208,0.55);
+  background: rgba(39,116,174,0.12);
+}
+.utopia-credit-by { color: #64748B; }
+.utopia-credit-word { color: #F1F5F9; font-weight: 800; letter-spacing: -0.01em; }
+.utopia-tri { display: inline-block; flex-shrink: 0; }
 
 /* USP panel — single container with three .usp-cell children, not three cards. */
 .usp-panel {

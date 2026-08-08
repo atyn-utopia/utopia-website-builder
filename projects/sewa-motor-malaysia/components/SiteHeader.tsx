@@ -11,6 +11,20 @@ export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
 
+  // next/link doesn't scroll on a same-page hash click. If the target section
+  // is present in the DOM (i.e. we're on the homepage), scroll to it manually.
+  // On other pages the section isn't present, so we let the Link navigate to
+  // /<locale>#id and the browser scrolls to it on load.
+  const scrollToSection = (e: React.MouseEvent, id: string) => {
+    close();
+    const el = typeof document !== 'undefined' ? document.getElementById(id) : null;
+    if (el) {
+      e.preventDefault();
+      el.scrollIntoView({ behavior: 'smooth' });
+      window.history.replaceState(null, '', `/${locale}#${id}`);
+    }
+  };
+
   return (
     <header className="site-header">
       <div className="site-header-inner">
@@ -29,8 +43,8 @@ export default function SiteHeader() {
         </Link>
         <nav className="site-nav site-nav--desktop" aria-label="Primary">
           <Link href={`/${locale}`}>{t('home')}</Link>
-          <Link href={`/${locale}#products`}>{t('products')}</Link>
-          <Link href={`/${locale}#locations`}>{t('locations')}</Link>
+          <Link href={`/${locale}#products`} onClick={(e) => scrollToSection(e, 'products')}>{t('products')}</Link>
+          <Link href={`/${locale}#locations`} onClick={(e) => scrollToSection(e, 'locations')}>{t('locations')}</Link>
           <Link href={`/${locale}/blog`}>{t('blog')}</Link>
         </nav>
 
@@ -78,8 +92,8 @@ export default function SiteHeader() {
       <div id="site-nav-mobile" className={`site-mobile-drawer ${open ? 'is-open' : ''}`} aria-hidden={!open}>
         <nav className="site-mobile-nav" aria-label="Mobile primary">
           <Link href={`/${locale}`} onClick={close}>{t('home')}</Link>
-          <Link href={`/${locale}#products`} onClick={close}>{t('products')}</Link>
-          <Link href={`/${locale}#locations`} onClick={close}>{t('locations')}</Link>
+          <Link href={`/${locale}#products`} onClick={(e) => scrollToSection(e, 'products')}>{t('products')}</Link>
+          <Link href={`/${locale}#locations`} onClick={(e) => scrollToSection(e, 'locations')}>{t('locations')}</Link>
           <Link href={`/${locale}/blog`} onClick={close}>{t('blog')}</Link>
         </nav>
       </div>

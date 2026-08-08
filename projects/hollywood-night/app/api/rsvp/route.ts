@@ -5,6 +5,7 @@ import { generateGuestId, generateTicketId } from "@/lib/ids";
 import { qrDataUrl } from "@/lib/qr";
 import { renderTicketsPdf, type TicketPdfData } from "@/lib/ticket-pdf";
 import { sendTicketsEmail } from "@/lib/resend";
+import { sendWhatsAppText, buildRsvpWhatsApp } from "@/lib/replybox";
 import { COMPANIES } from "@/lib/companies";
 
 export const runtime = "nodejs";
@@ -20,13 +21,20 @@ const schema = z
     name: z.string().trim().min(2).max(120),
     phone: myPhone,
     email: z.string().trim().toLowerCase().email(),
-    companyName: z.enum(COMPANIES as unknown as [string, ...string[]]),
+    companyName: z.string().trim().max(160).optional().default(""),
     attending: z.boolean(),
     hasPlusOne: z.boolean(),
     plusOneName: z.string().trim().max(120).optional().nullable(),
     plusOnePhone: z.string().trim().max(30).optional().nullable(),
     transportationRequired: z.boolean(),
+    rsvpType: z.enum(["staff", "vip"]).default("staff"),
   })
+  .refine(
+    (v) =>
+      v.rsvpType === "vip" ||
+      (COMPANIES as readonly string[]).includes(v.companyName),
+    { message: "Please select your company", path: ["companyName"] }
+  )
   .refine(
     (v) => !v.hasPlusOne || (v.plusOneName && v.plusOneName.length >= 2),
     { message: "Plus-one name required", path: ["plusOneName"] }
@@ -53,24 +61,78 @@ export async function POST(request: Request) {
   }
   const data = parsed.data;
 
+  // Each phone number may register only once — whether as a main guest or as a
+  // plus-one on someone else's entry.
+  async function phoneAlreadyUsed(phone: string): Promise<boolean> {
+    const { data: rows, error } = await supabaseAdmin
+      .from("guests")
+      .select("id")
+      .or(`phone.eq.${phone},plus_one_phone.eq.${phone}`)
+      .limit(1);
+    if (error) {
+      console.error("duplicate phone check failed", error.message);
+      return false; // best-effort: don't block legitimate users on a transient error
+    }
+    return (rows?.length ?? 0) > 0;
+  }
+
+  const HELP = "Need help? WhatsApp us at 017-428 7801.";
+
+  if (await phoneAlreadyUsed(data.phone)) {
+    return NextResponse.json(
+      {
+        error: `This phone number has already registered. Each number can RSVP once. ${HELP}`,
+      },
+      { status: 409 }
+    );
+  }
+
+  if (data.attending && data.hasPlusOne && data.plusOnePhone) {
+    if (data.plusOnePhone === data.phone) {
+      return NextResponse.json(
+        { error: `Your plus-one's number must differ from your own. ${HELP}` },
+        { status: 409 }
+      );
+    }
+    if (await phoneAlreadyUsed(data.plusOnePhone)) {
+      return NextResponse.json(
+        {
+          error: `Your plus-one's phone number is already registered. Each number can RSVP once. ${HELP}`,
+        },
+        { status: 409 }
+      );
+    }
+  }
+
   const guestId = generateGuestId();
 
-  const { data: guestRow, error: insertErr } = await supabaseAdmin
+  const baseGuest = {
+    guest_id: guestId,
+    name: data.name,
+    phone: data.phone,
+    email: data.email,
+    company_name: data.companyName,
+    attending: data.attending,
+    has_plus_one: data.hasPlusOne,
+    plus_one_name: data.hasPlusOne ? data.plusOneName : null,
+    plus_one_phone: data.hasPlusOne ? data.plusOnePhone ?? null : null,
+    transportation_required: data.transportationRequired,
+  };
+
+  let { data: guestRow, error: insertErr } = await supabaseAdmin
     .from("guests")
-    .insert({
-      guest_id: guestId,
-      name: data.name,
-      phone: data.phone,
-      email: data.email,
-      company_name: data.companyName,
-      attending: data.attending,
-      has_plus_one: data.hasPlusOne,
-      plus_one_name: data.hasPlusOne ? data.plusOneName : null,
-      plus_one_phone: data.hasPlusOne ? data.plusOnePhone ?? null : null,
-      transportation_required: data.transportationRequired,
-    })
+    .insert({ ...baseGuest, rsvp_type: data.rsvpType })
     .select("*")
     .single();
+
+  // Fall back gracefully if the rsvp_type column hasn't been migrated yet.
+  if (insertErr && /rsvp_type/i.test(insertErr.message)) {
+    ({ data: guestRow, error: insertErr } = await supabaseAdmin
+      .from("guests")
+      .insert(baseGuest)
+      .select("*")
+      .single());
+  }
 
   if (insertErr || !guestRow) {
     return NextResponse.json(
@@ -121,6 +183,33 @@ export async function POST(request: Request) {
       { error: "Failed to create tickets", detail: ticketErr?.message },
       { status: 500 }
     );
+  }
+
+  // WhatsApp confirmation push (best-effort — never blocks the RSVP).
+  try {
+    const origin = new URL(request.url).origin;
+    const fromParam = data.rsvpType === "vip" ? "&from=vip" : "";
+    const retrieveFor = (p: string) =>
+      `${origin}/retrieve?phone=${encodeURIComponent(p)}${fromParam}`;
+
+    await sendWhatsAppText(
+      data.phone,
+      buildRsvpWhatsApp(data.name, retrieveFor(data.phone), data.rsvpType)
+    );
+
+    // Also notify the plus-one on their own number, when provided.
+    if (data.hasPlusOne && data.plusOneName && data.plusOnePhone) {
+      await sendWhatsAppText(
+        data.plusOnePhone,
+        buildRsvpWhatsApp(
+          data.plusOneName,
+          retrieveFor(data.plusOnePhone),
+          data.rsvpType
+        )
+      );
+    }
+  } catch (err) {
+    console.error("whatsapp confirmation failed", err);
   }
 
   const ticketsForPdf: TicketPdfData[] = await Promise.all(

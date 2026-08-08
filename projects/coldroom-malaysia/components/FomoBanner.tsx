@@ -31,26 +31,20 @@ export default function FomoBanner() {
 
   return (
     <div className="fomo-bar">
-      <div
-        className="section-container fomo-inner"
-        style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, padding: '10px 24px', minHeight: 44 }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, color: '#fff', fontSize: 13, flex: 1, justifyContent: 'center' }}>
-          <span style={{ display: 'inline-block', width: 8, height: 8, borderRadius: '50%', background: 'var(--cold-amber)', boxShadow: '0 0 0 4px rgba(240,138,28,0.25)' }} />
-          <span style={{ fontWeight: 600 }}>{t('headline')}</span>
-          <span aria-live="polite" className="fomo-countdown" style={{ color: 'var(--cold-amber-glow)', marginLeft: 8 }}>
-            {hh}:{mm}:{ss}
-          </span>
-        </div>
-        <a
-          href={waHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => trackWhatsApp(siteConfig.fallbackPhone)}
-          style={{ color: 'var(--cold-amber-glow)', fontSize: 13, fontWeight: 700, whiteSpace: 'nowrap', textDecoration: 'underline', textUnderlineOffset: 3 }}
-        >
-          {t('bookNow')}
-        </a>
+      <div className="section-container fomo-inner">
+        <span className="fomo-headline">{t('headline')}</span>
+        <span className="fomo-meta">
+          <span aria-live="polite" className="fomo-countdown">{hh} : {mm} : {ss}</span>
+          <a
+            href={waHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackWhatsApp(siteConfig.fallbackPhone)}
+            className="fomo-cta"
+          >
+            {t('bookNow')}
+          </a>
+        </span>
       </div>
     </div>
   );
