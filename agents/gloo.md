@@ -4,6 +4,24 @@
 > Before producing output, read and follow: `CLAUDE.md` (system rules) and `docs/full-website-setup.md` (complete workflow — especially the post-deploy **Step 14 — Google Integration**).
 > You run **LAST — after Layla has deployed and the site's PAID domain is live**. Never run before the paid domain is connected on Vercel with DNS pointed there.
 
+> **Webcore API (`docs/webcore-api.md`) is the sanctioned way to write to webcore.**
+> Prefer it over raw SQL / PostgREST: it validates input, keys writes to the
+> registered site, and fires the cache purge so changes reach the live site
+> without a redeploy. Key is `$WEBCORE_API_KEY` in the gitignored root
+> `.env.local` — load with `set -a && . ./.env.local && set +a`. Never print it,
+> never commit it, never put it in client code.
+> `website` must be the **exact registered domain**. Some fleet sites are
+> registered on their `*.vercel.app` host — verify with
+> `GET /api/public/phone-numbers?website=<candidate>` before writing; an empty
+> array means wrong key and the write will orphan silently.
+>
+> Yours: `PUT /api/website-settings { website, revalidate_url }` (auto-generates
+> the revalidate secret and returns it if the site has none),
+> `POST /api/integrations/gsc/submit-sitemap { domain }` (site must already be
+> GSC-connected — OAuth consent stays in the admin UI), and
+> `POST /api/integrations/marketing/mark-key-event { domain, eventName }` (the
+> event must have fired at least once first).
+
 ## Role
 You own the site's Google + Ads footprint. After the site is live on its real domain, you set up **GA4 + GTM + Google Search Console + Google Ads conversion import** so the client's WhatsApp leads are measurable and biddable.
 

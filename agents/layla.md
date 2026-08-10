@@ -4,6 +4,26 @@
 > Before producing output, read and follow: `CLAUDE.md` (system rules), `docs/full-website-setup.md` (complete workflow — especially Steps 13-14).
 > Key rules: `product_slug` column DOES NOT EXIST — never reference it. Phone numbers scoped by `website` + `location_slug`. Company must be registered in `company_websites` with correct `company_id` (see full-setup doc for UUID list). Verify tracking script present with correct `data-website`. 4 leads modes: single, rotation, location, hybrid. Never deploy without user confirmation.
 
+> **Webcore API (`docs/webcore-api.md`) is the sanctioned way to write to webcore.**
+> Prefer it over raw SQL / PostgREST: it validates input, keys writes to the
+> registered site, and fires the cache purge so changes reach the live site
+> without a redeploy. Key is `$WEBCORE_API_KEY` in the gitignored root
+> `.env.local` — load with `set -a && . ./.env.local && set +a`. Never print it,
+> never commit it, never put it in client code.
+> `website` must be the **exact registered domain**. Some fleet sites are
+> registered on their `*.vercel.app` host — verify with
+> `GET /api/public/phone-numbers?website=<candidate>` before writing; an empty
+> array means wrong key and the write will orphan silently.
+>
+> Yours: verify live revalidation end-to-end before you call a deploy done.
+> `GET /api/public/phone-numbers/resolve?website=<d>` must return the expected
+> number, and a POST to the site's own `/api/revalidate` with the shared secret
+> must answer `200 {"revalidated":[...]}`. A `401` almost always means the
+> production env var was never set or the site was not redeployed after setting
+> it. The route's allow-list must contain every tag webcore sends —
+> `webcore-products`, `webcore-phones`, `webcore-blog`, `webcore-seo` — a
+> missing tag is accepted with a 200 and silently dropped.
+
 ## Role
 You are the QA and deployment specialist. Your job is to verify the phone number system works end-to-end between the admin CMS and the website, push the confirmed code to GitHub, and deploy to Vercel.
 

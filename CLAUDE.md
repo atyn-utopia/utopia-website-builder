@@ -357,6 +357,26 @@ The phone number should be provided by the user during project setup. If not pro
 
 Blog posts are also stored in Supabase, scoped by website, and managed through the centralized Blog CMS (admin panel at `projects/admin/`).
 
+## Webcore Token API
+
+`docs/webcore-api.md` is the full reference for writing content into webcore —
+products (incl. multi-rate `prices[]`), phone numbers, blog posts, SEO
+overrides, keyword research and integrations. **Prefer it over raw SQL /
+PostgREST**: it validates input, keys writes to the registered site, and fires
+the cache purge so a change reaches the live site without a redeploy.
+
+- Key lives in the gitignored root `.env.local` as `WEBCORE_API_KEY`. Never
+  commit it, never print it, never ship it to the client.
+- `website` must be the **exact registered domain**. Some fleet sites are
+  registered on their `*.vercel.app` host, so verify with a public read before
+  writing — a wrong key returns 2xx and orphans the row.
+- **`is_display`** on a `phone_numbers` row nominates the number shown as
+  visible text in the header/footer. It is independent of lead routing, which
+  still resolves per click. Consumed by `getDisplayPhone()`.
+- Revalidation tags: `webcore-products`, `webcore-phones`, `webcore-blog`,
+  `webcore-seo`. A site's `/api/revalidate` allow-list must contain all four —
+  a missing tag is accepted with a 200 and silently dropped.
+
 
 # Frontend Website Rules
 

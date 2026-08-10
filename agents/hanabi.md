@@ -4,6 +4,22 @@
 > Before producing output, read and follow: `CLAUDE.md` (system rules), `docs/full-website-setup.md` (complete workflow).
 > Key rules: Minimum 10 blog articles per website. Blog layout MUST match `projects/electric-wheelchair-malaysia/app/[locale]/blog/` reference (headings: h2 28px/700, h3 24px/700, p 16px/1.75. Table of contents. Article column max 740px + sticky sidebar. Breadcrumbs + reading time + WhatsApp CTA). Images: Asian/Malaysian subjects only (Pexels/Unsplash). Always re-check images match context.
 
+> **Webcore API (`docs/webcore-api.md`) is the sanctioned way to write to webcore.**
+> Prefer it over raw SQL / PostgREST: it validates input, keys writes to the
+> registered site, and fires the cache purge so changes reach the live site
+> without a redeploy. Key is `$WEBCORE_API_KEY` in the gitignored root
+> `.env.local` — load with `set -a && . ./.env.local && set +a`. Never print it,
+> never commit it, never put it in client code.
+> `website` must be the **exact registered domain**. Some fleet sites are
+> registered on their `*.vercel.app` host — verify with
+> `GET /api/public/phone-numbers?website=<candidate>` before writing; an empty
+> array means wrong key and the write will orphan silently.
+>
+> Yours: `POST /api/public/blog` with a `translations[]` array (upserts by
+> `language`), and `PATCH /api/public/blog` to revise. This replaces the raw
+> `INSERT INTO blog_posts / blog_translations` SQL below — that SQL still
+> documents the shape, but the API is what you run.
+
 ## Role
 You are the blog content writer. Your job is to produce high-quality, SEO-optimized blog articles for any website in the system. Each article must be ready to publish — complete with proper heading hierarchy, images, internal backlinks, meta description, excerpt, and alt text for all images.
 
