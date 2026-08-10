@@ -89,7 +89,8 @@ For anything with more than one rate send `prices` instead of the single
 ```
 GET    /api/public/phone-numbers?website=<d>[&location=<slug>]
 GET    /api/public/phone-numbers/resolve?website=<d>[&location=<slug>][&page=/<path>]
-POST   /api/public/phone-numbers   { website, phone_number, whatsapp_text, location_slug?='all', page_slug?='all', percentage?, label? }
+GET    /api/public/phone-numbers/display?website=<d>[&page=/<path>]
+POST   /api/public/phone-numbers   { website, phone_number, whatsapp_text, location_slug?='all', page_slug?='all', percentage?, label?, is_display? }
 PATCH  /api/public/phone-numbers   { id, ...fields }   # the admin type='default' row is read-only here
 DELETE /api/public/phone-numbers   { id }
 ```
@@ -98,20 +99,37 @@ DELETE /api/public/phone-numbers   { id }
   (should total 100 per pool).
 - **Per-page numbers**: `page_slug` (`all` = site-wide). Each row carries its
   own `whatsapp_text`, so per-page copy rides with the number.
-- **Resolution order**: page → location → `all` → admin default.
+- **`/resolve` order**: page → location → `all` → admin default.
+
+### Two different questions — get this right
+
+| What you are doing | Endpoint |
+|---|---|
+| Printing digits (header, footer, `tel:` with the number visible, schema.org) | **`/display`** |
+| A CTA with no digits shown ("WhatsApp us", "Call us") | `/whatsapp-redirect`, `/resolve` |
+
+`/resolve` and `/whatsapp-redirect` answer *"who receives this lead"* and rotate
+per click. Printing them means the digits change between page loads. `/display`
+answers *"what does this page show"* and is deterministic:
+**page display number → site-wide display number → admin default**, with
+`source` naming the tier that answered.
 
 ### `is_display` — the published number
 
-Rows also carry **`is_display`**, which is *not* in the upstream doc but is
-returned by the API and is a real column. It nominates the single number shown
-as **text** in the header/footer, independent of lead routing: a rotation pool
-can spread clicks across agents while exactly one number is the published,
-dialable one.
-
-- Consumed by `getDisplayPhone()` in a site's `lib/webcore.ts`.
-- Never consulted by `getPhoneNumber()` — routing is unaffected.
+- Unique per **`(website, page_slug)`** — *not* per site. `POST`/`PATCH` with
+  `is_display: true` claims it and unticks the sibling that held it.
+- A page always keeps one, so unticking the only number on a page is a no-op,
+  and a page with a single number is its own display number without any tick.
+- Independent of routing: a rotation pool can spread clicks across agents while
+  exactly one number is the published, dialable one.
 - Ticking it on a different row changes the visible number with no code change
-  and no redeploy (the `webcore-phones` purge carries it through).
+  and no redeploy — the `webcore-phones` purge carries it through.
+
+**Because it is keyed per page, the page is part of the question.** A site
+implementation that picks "the row where `is_display` is true" without scoping
+to the page will grab an arbitrary page's number once any per-page display
+number exists. In this fleet that is `getDisplayPhone(page)` in
+`lib/webcore.ts`, which calls `/display` and passes the locale-stripped path.
 
 ### WhatsApp CTA — link, don't bake
 

@@ -370,9 +370,14 @@ the cache purge so a change reaches the live site without a redeploy.
 - `website` must be the **exact registered domain**. Some fleet sites are
   registered on their `*.vercel.app` host, so verify with a public read before
   writing — a wrong key returns 2xx and orphans the row.
-- **`is_display`** on a `phone_numbers` row nominates the number shown as
-  visible text in the header/footer. It is independent of lead routing, which
-  still resolves per click. Consumed by `getDisplayPhone()`.
+- **Printed digits vs CTA are different questions.** Anything that shows the
+  number as text (header, footer, visible `tel:`, schema.org) reads
+  `GET /api/public/phone-numbers/display` — deterministic. Anything that just
+  says "WhatsApp us" routes through the redirect / `/resolve`, which rotates per
+  click. Printing a `/resolve` number makes the digits change between loads.
+- **`is_display`** nominates the published number and is unique per
+  **`(website, page_slug)`**, not per site — so the page is part of the query.
+  Consumed by `getDisplayPhone(page)`; never by `getPhoneNumber()`.
 - Revalidation tags: `webcore-products`, `webcore-phones`, `webcore-blog`,
   `webcore-seo`. A site's `/api/revalidate` allow-list must contain all four —
   a missing tag is accepted with a 200 and silently dropped.
