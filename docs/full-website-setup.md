@@ -936,6 +936,12 @@ Every item below MUST be verified on the running site. These rules come from rea
 - [ ] One contained `.usp-panel` (dark charcoal, brand-shadow, rounded corners) with 3 `.usp-cell` children separated by interior dividers — NOT three separate cards.
 - [ ] Icons are 32 px inside 72 px rounded-square chips with an orange-gradient fill. Icons must semantically match: delivery → truck/excavator silhouette, expert operator → hard-hat, transparent pricing → money/credit-card with RM glyph (NOT a generic map pin).
 
+#### Process / steps section (MANDATORY)
+- [ ] The numbered 1-2-3 steps section closes with a **CTA** — WhatsApp button + one line of supporting copy — on the homepage **and** every location page. Step 1 is almost always "WhatsApp us", so a section with no button wastes the highest-intent moment on the page.
+- [ ] Button uses official WhatsApp green (`#25D366`), label **max 3 words**, same rounded shape as every other button on the site.
+- [ ] Location-page variant passes the town to the redirect — `waRedirect(locale, undefined, loc.slug)` — so the lead is attributed to that location.
+- [ ] Block is centred at every breakpoint (one action for the whole section, not a per-card control).
+
 #### Pricing display
 - [ ] Every price string in `messages/*.json` uses the localized 'From' prefix: MS `Dari RM {price}`, EN `From RM {price}`, ZH `RM {price} 起`.
 - [ ] Product cards show Daily and Monthly prices side-by-side in a bordered panel with a vertical divider — never single-price.

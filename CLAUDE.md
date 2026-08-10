@@ -171,6 +171,13 @@ These rules apply to EVERY website. No exceptions.
 - **3-point USP bar** immediately below the hero section on every homepage
 - Mandatory on every project
 
+## Process / Steps Section — CTA Required
+- The numbered **1-2-3 steps section must close with a CTA** (WhatsApp button + one line of supporting copy). **Mandatory on every project**, on the homepage *and* every location page.
+- Reason: step 1 is almost always "WhatsApp us your details" — a section that tells the reader to act and then gives them nothing to click wastes the highest-intent moment on the page.
+- The button follows the normal CTA rules: official WhatsApp green (`#25D366`), label **max 3 words**, same rounded shape as every other button.
+- Location-page variant must pass the town through to the redirect (`waRedirect(locale, undefined, loc.slug)`) so the lead is attributed to that location.
+- Centre the block at every breakpoint — it is one action for the whole section, not a per-card control.
+
 ## Buttons
 - All buttons must use the **same rounded button shape** across the entire site
 - Only the **color** changes between variants (primary, secondary, CTA)
