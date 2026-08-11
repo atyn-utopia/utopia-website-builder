@@ -112,6 +112,29 @@ export default function SiteHeader() {
           {t('whatsappCtaLong')}
         </WhatsAppButton>
       </div>
+
+      {/*
+        Component-scoped declaration of the mobile hide rule, in the canonical
+        chrome form. `.nav-cta` is applied by <WhatsAppButton>, a CHILD
+        component, so styled-jsx's automatic scoping would rewrite the selector
+        to a hash class that never matches it — `:global()` is what makes the
+        rule reach the button at all. That is the mistake this pattern exists to
+        prevent, and the wizard checks for it.
+
+        This does NOT stand alone: styled-jsx in a client component is not
+        emitted into the compiled stylesheet (verified — deleting the
+        globals.css rule leaves the CSS bundle with no `.nav-cta` media rule),
+        so it only applies after hydration. app/globals.css carries the same
+        rule and is what actually hides the button on first paint and with JS
+        disabled. Keep both.
+      */}
+      <style jsx>{`
+        @media (max-width: 767px) {
+          :global(.nav-cta) {
+            display: none !important;
+          }
+        }
+      `}</style>
     </header>
   );
 }

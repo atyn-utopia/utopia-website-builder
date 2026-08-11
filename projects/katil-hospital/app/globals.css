@@ -344,7 +344,14 @@ h6,
 
 /* ── Header ─────────────────────────────────────────────────────────────── */
 /* The header WhatsApp button is hidden on mobile so it can't collide with the
-   language switcher — the sticky bottom CTA bar covers that job there. */
+   language switcher — the sticky bottom CTA bar carries that CTA there.
+   
+   This rule is the AUTHORITATIVE one and must stay here. SiteHeader also
+   declares it via styled-jsx `:global(.nav-cta)` (the canonical chrome
+   pattern), but styled-jsx in a client component is verifiably NOT emitted
+   into the compiled stylesheet — removing this block and rebuilding leaves the
+   CSS bundle with no `.nav-cta` media rule at all. Relying on styled-jsx alone
+   would show the button until hydration, and forever with JS disabled. */
 @media (max-width: 767px) {
   .nav-cta {
     display: none !important;
