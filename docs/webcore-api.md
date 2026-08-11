@@ -192,6 +192,21 @@ CSV/TSV export as one string. `mode: 'replace'` clears existing rows first
 (default merges). An empty response means no research has been pushed yet —
 that is a gap to fill, not a reason to invent keywords.
 
+**Two behaviours that will mislead you if you don't know them:**
+
+- **`language` is `en` or `ms` ONLY, and anything else is silently coerced —
+  not rejected.** Pushing `zh` rows for a trilingual site returns `200` with the
+  full `saved` count, and the rows land labelled `en`. Measured on
+  lighttower.my: 5 Chinese terms pushed as `zh`, all stored as `en`, volumes
+  intact. Consequences: a `?language=en` read for a trilingual site can contain
+  CJK terms, and a `?language=zh` read returns nothing even though the research
+  exists. Check the distribution after any multilingual push rather than
+  trusting `saved`.
+- **The plain `GET` is CDN-cached and can serve a stale empty result for
+  minutes after a successful write.** Append a cache-buster
+  (`&_=$(date +%s)`) plus `Cache-Control: no-cache` when verifying a push, or
+  you will conclude the write failed when it did not.
+
 ## 7. Integrations — `integrations:write`
 
 OAuth connect stays in the admin UI (needs human consent); these run after.
