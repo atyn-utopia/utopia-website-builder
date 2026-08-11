@@ -1,0 +1,21 @@
+{
+  "domain": "hisenseaircond.my",
+  "containerId": "GTM-T6S77VG3",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-YP548G83G1",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-08-11T03:19:54.600Z",
+  "gsc": {
+    "siteUrl": "https://hisenseaircond.my/zh/",
+    "token": "<meta name=\"google-site-verification\" content=\"jsi4YXxAlBVNUAyKIYYrCLZz2P0zu_Rx1apjz42P5d0\" />",
+    "initAt": "2026-08-11T03:23:28.144Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-08-11T03:23:32.217Z"
+  }
+}
