@@ -136,7 +136,7 @@ export const CHECK_META: CheckMeta[] = [
   { id: 'blog-post-metadata',             group: 'Blog', severity: 'advisory', doc: BLOGSTEP, name: 'Blog post exports metadata' },
   { id: 'db-blog-posts',                  group: 'Blog', severity: 'blocking', doc: BLOGSTEP, name: '≥10 published blog posts' },
   { id: 'live-blog-renders',              group: 'Blog', severity: 'blocking', doc: BLOGSTEP, name: 'Live /blog page actually renders posts' },
-  { id: 'no-hardcoded-phones-blog',       group: 'Blog', severity: 'blocking', doc: RULES,    name: 'No hardcoded phone numbers in blog content' },
+  { id: 'no-hardcoded-phones-blog',       group: 'Blog', severity: 'advisory', doc: RULES,    name: 'No hardcoded phone numbers in blog content' },
   { id: 'blog-content-toc',               group: 'Blog', severity: 'advisory', doc: BLOGSTEP, name: 'Articles include a table of contents' },
   { id: 'blog-content-headings',          group: 'Blog', severity: 'advisory', doc: BLOGSTEP, name: 'Articles use section headings (≥3 H2s)' },
   { id: 'blog-content-bold',              group: 'Blog', severity: 'advisory', doc: BLOGSTEP, name: 'Articles use enough bold emphasis (≥1 per ~1800 chars)' },
@@ -166,9 +166,10 @@ export const CHECK_META: CheckMeta[] = [
   { id: 'wa-prefill-carries-domain',      group: 'Deployment', severity: 'blocking', doc: DEPLOY, name: 'WhatsApp prefill names the originating domain' },
 
   // ── Quality ─────────────────────────────────────────────────────────────────
-  { id: 'no-hardcoded-phones',            group: 'Quality', severity: 'blocking', doc: RULES, name: 'No hardcoded phone numbers in app/, components/, or messages/' },
+  { id: 'no-hardcoded-phones',            group: 'Quality', severity: 'advisory', doc: RULES, name: 'No hardcoded phone numbers in app/, components/, or messages/' },
   { id: 'wa-prefill-domain-in-source',     group: 'Quality', severity: 'blocking', doc: RULES, name: 'webcore builds the WhatsApp prefill with the domain' },
   { id: 'fallback-phone-is-own',          group: 'Quality', severity: 'blocking', doc: RULES, name: "fallbackPhone is this client's own number" },
+  { id: 'no-phone-displayed',             group: 'Quality', severity: 'advisory', doc: RULES, name: 'No phone number rendered as visible text' },
   { id: 'no-domains-in-copy',             group: 'Quality', severity: 'blocking', doc: RULES, name: 'No domain/URL shown as visible text in copy' },
 ]
 

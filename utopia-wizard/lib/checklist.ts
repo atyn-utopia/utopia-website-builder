@@ -2205,6 +2205,39 @@ const QUALITY: Check[] = [
     },
   },
   {
+    // The blind spot `no-hardcoded-phones` structurally cannot see. That scan
+    // looks for phone-shaped LITERALS; a number fetched from Supabase at
+    // request time and rendered into the header/footer leaves no literal
+    // behind, so the source is clean and the number is still on the page.
+    // (Real example: light-tower-rental's <ContactNumber> — a tel: link in the
+    // chrome of every page, digits from getDisplayPhone(), zero scan hits.)
+    // Advisory, because a client can insist on showing their number; the point
+    // is that it shows up as a decision rather than passing unnoticed.
+    group: 'Quality', id: 'no-phone-displayed', name: 'No phone number rendered as visible text',
+    help: "CLAUDE.md routes all contact through WhatsApp, so a phone number shouldn't appear as visible text. This catches what the hardcoded-number scan can't: a DB-sourced number rendered into the page — a tel: link, or getDisplayPhone()/formatPhoneDisplay() called from a component. lib/ and config/ are skipped (they define the helpers and hold the sanctioned fallback), as is the redirect page.",
+    run: async (ctx) => {
+      const id = 'no-phone-displayed'
+      const name = 'No phone number rendered as visible text'
+      const hits = await scanProjectFiles(
+        ctx,
+        ['.tsx', '.jsx'],
+        (rel) => rel.startsWith('lib/') || rel.startsWith('config/') || rel.includes('redirect-whatsapp-1'),
+        (text) => {
+          // A tappable number is the unambiguous case.
+          const tel = text.match(/href=\{?[`'"]tel:[^`'"}\s]{0,40}/)
+          if (tel) return tel[0].slice(0, 60)
+          // Digits straight from the DB into JSX — no literal, still visible.
+          const helper = text.match(/\b(?:getDisplayPhone|formatPhoneDisplay)\s*\(/)
+          if (helper) return `${helper[0]} — renders the number into the page`
+          return null
+        },
+      )
+      if (hits.length === 0) return pass(id, name)
+      const first = hits[0]
+      return fail(id, name, `${hits.length} file(s) show a phone number — e.g. ${first.file}: ${first.sample}`)
+    },
+  },
+  {
     group: 'Blog', id: 'no-hardcoded-phones-blog', name: 'No hardcoded phone numbers in blog content',
     help: "Advisory — a hardcoded number in blog content is allowed; this reports which posts carry one. Links routed through the redirect still pick the right number from Supabase.",
     run: async (ctx) => {
