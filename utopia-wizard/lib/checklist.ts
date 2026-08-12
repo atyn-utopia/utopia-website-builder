@@ -1835,13 +1835,29 @@ const DATABASE: Check[] = [
         const res = await fetch(url, { signal: AbortSignal.timeout(6000), cache: 'no-store' })
         if (!res.ok) return fail('live-blog-renders', 'Live /blog page actually renders posts', `${url} returned ${res.status}`)
         const html = await res.text()
-        // Count <a href="/<locale>/blog/<slug>"> links — each post card has at
+        // Count <a href="[/<locale>]/blog/<slug>"> links — each post card has at
         // least one. /blog itself (no trailing slug) is excluded.
+        //
+        // The locale segment is OPTIONAL. next-intl's `localePrefix: 'as-needed'`
+        // (the fleet default) leaves the default locale UNPREFIXED, so a correct
+        // site links to /blog/<slug>, not /en/blog/<slug>. Requiring the prefix
+        // made this blocking check fail on every such site while 15 posts were
+        // rendering, and the failure text blamed siteConfig.domain — so the
+        // "fix" was to corrupt a correct domain value.
         const postLinks = new Set<string>()
-        for (const m of html.matchAll(/href=["']\/[a-z]{2}\/blog\/([a-z0-9][a-z0-9-]*)["']/g)) postLinks.add(m[1])
+        for (const m of html.matchAll(/href=["']\/(?:[a-z]{2}\/)?blog\/([a-z0-9][a-z0-9-]*)["']/g)) postLinks.add(m[1])
         if (postLinks.size > 0) return pass('live-blog-renders', 'Live /blog page actually renders posts', `${postLinks.size} post card(s) rendered`)
         // No post links found — check whether the page is showing the empty state.
-        const empty = /no\s*post|tiada\s*post|tiada\s*artikel|暂无|沒有.*文章/i.test(html)
+        //
+        // Scoped to RENDERED text: next-intl serialises the whole message
+        // catalogue into __NEXT_DATA__, so the `noPosts` string ("No articles
+        // published yet.") is present in the HTML of every page regardless of
+        // what rendered. Matching raw HTML reported "empty state" on a page
+        // showing a full grid of posts.
+        const rendered = html
+          .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+          .replace(/<[^>]+>/g, ' ')
+        const empty = /no\s*post|no\s*articles|tiada\s*post|tiada\s*artikel|暂无|沒有.*文章/i.test(rendered)
         return fail(
           'live-blog-renders',
           'Live /blog page actually renders posts',
@@ -1970,7 +1986,7 @@ const DEPLOYMENT: Check[] = [
 const QUALITY: Check[] = [
   {
     group: 'Quality', id: 'no-hardcoded-phones', name: 'No hardcoded phone numbers in app/, components/, or messages/',
-    help: "No phone numbers hardcoded anywhere user-facing — every number comes from the database. Covers app/ + components/ source AND messages/*.json translation copy (those values render on the page, so a placeholder number there is just as visible).",
+    help: "Advisory — a hardcoded number is allowed; this reports where they are so you can confirm each one is intentional. Numbers that come from the database still rotate per location and per leads-mode; a hardcoded one does not. Covers app/ + components/ source AND messages/*.json translation copy (those values render on the page, so a placeholder number there is just as visible).",
     run: async (ctx) => {
       const codeHits = await findHardcodedPhones(ctx.info.projectDir)
       const msgHits = (await findMessageLeaks(ctx.info.projectDir)).filter((h) => h.kind === 'phone')
@@ -1999,7 +2015,7 @@ const QUALITY: Check[] = [
   },
   {
     group: 'Blog', id: 'no-hardcoded-phones-blog', name: 'No hardcoded phone numbers in blog content',
-    help: "No phone numbers hardcoded in blog post content — every link goes through the redirect.",
+    help: "Advisory — a hardcoded number in blog content is allowed; this reports which posts carry one. Links routed through the redirect still pick the right number from Supabase.",
     run: async (ctx) => {
       if (!supabaseConfigured) return skip('no-hardcoded-phones-blog', 'No hardcoded phone numbers in blog content', 'Supabase not configured')
       if (ctx.info.domainCandidates.length === 0) return skip('no-hardcoded-phones-blog', 'No hardcoded phone numbers in blog content', 'unknown domain')
