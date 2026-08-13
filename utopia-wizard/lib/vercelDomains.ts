@@ -50,6 +50,30 @@ export function hasVercelToken(): Promise<boolean> {
 }
 
 /**
+ * Auto-generated Vercel aliases: every project gets `<project>.vercel.app` and,
+ * on this team, `<project>*.utopiaai.my`. They are always verified and always
+ * resolve, so callers that take "the first production domain" would forever
+ * pick one over the paid domain the client actually bought — which is exactly
+ * how the monitor came to show `tablechair-rental-malaysia.utopiaai.my` for a
+ * site whose config, DB row and Vercel alias list all say `tablechairrentals.my`.
+ */
+const PLATFORM_SUFFIXES = ['.vercel.app', '.utopiaai.my']
+
+export function isPlatformDomain(host: string): boolean {
+  const h = host.toLowerCase()
+  return PLATFORM_SUFFIXES.some((s) => h.endsWith(s))
+}
+
+/**
+ * Custom domains first, platform aliases after — order preserved within each
+ * group. The aliases stay in the list: a site with no custom domain yet is
+ * legitimately served by one.
+ */
+function rankDomains(list: string[]): string[] {
+  return [...list.filter((d) => !isPlatformDomain(d)), ...list.filter(isPlatformDomain)]
+}
+
+/**
  * @param projectNameOrId  project slug (preferred) or prj_… id
  * @param teamId           team_… (optional)
  */
@@ -70,10 +94,12 @@ export async function getProjectDomains(
     const domains = data.domains ?? []
     const norm = (h: string) => h.toLowerCase().replace(/^www\./, '')
     const allDomains = domains.map((d) => norm(d.name))
-    const productionDomains = domains
-      .filter((d) => d.verified && !d.redirect && !d.gitBranch)
-      .map((d) => norm(d.name))
-    return { ok: true, productionDomains, allDomains }
+    // norm() strips `www.`, which can collide an apex with its www twin — dedupe
+    // before ranking so a caller taking [0] can't land on a duplicate.
+    const production = Array.from(new Set(
+      domains.filter((d) => d.verified && !d.redirect && !d.gitBranch).map((d) => norm(d.name)),
+    ))
+    return { ok: true, productionDomains: rankDomains(production), allDomains }
   } catch (e: any) {
     return { ok: false, productionDomains: [], allDomains: [], error: e?.name === 'TimeoutError' ? 'Vercel API timeout' : `Vercel API error: ${e?.message ?? e}` }
   }
