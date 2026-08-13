@@ -113,6 +113,9 @@ export const CHECK_META: CheckMeta[] = [
   { id: 'header-mobile-wa-hidden',        group: 'Layout & Design', severity: 'advisory', doc: LAYOUT, name: 'Mobile header hides .nav-cta' },
   { id: 'usp-panel-class-used',           group: 'Layout & Design', severity: 'advisory', doc: LAYOUT, name: 'USP bar uses single .usp-panel container' },
   { id: 'project-gitignore',              group: 'Layout & Design', severity: 'advisory', doc: LAYOUT, name: 'Project .gitignore excludes brand_assets/ + temporary screenshots/' },
+  // Advisory for now: every existing project trips it on real but small bugs
+  // (schema /logo.png, /og/ms.png). Promote to blocking once the fleet is clean.
+  { id: 'public-assets-exist',            group: 'Layout & Design', severity: 'advisory', doc: LAYOUT, name: 'Referenced public/ assets exist' },
   { id: 'cta-uses-redirect-page',         group: 'Layout & Design', severity: 'blocking', doc: LAYOUT, name: 'Every CTA routes through /redirect-whatsapp-1' },
   { id: 'domain-consistency',             group: 'Layout & Design', severity: 'blocking', doc: LAYOUT, name: 'siteConfig.domain matches deploy URL + tracking data-website' },
   { id: 'cta-opens-new-tab',              group: 'Layout & Design', severity: 'advisory', doc: LAYOUT, name: 'CTA links to redirect page open in new tab' },

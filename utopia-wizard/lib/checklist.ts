@@ -1566,6 +1566,54 @@ const DESIGN: Check[] = [
     },
   },
 
+  // A referenced asset that has no file is completely silent: `next build`
+  // succeeds, every other check still passes, and the page ships with a broken
+  // image. It bites hardest when assets are moved or a design is ported.
+  {
+    group: 'Layout & Design', id: 'public-assets-exist', name: 'Referenced public/ assets exist',
+    help: "Every local image path used in code has a real file under public/. A missing one still builds and still scores — it just renders a broken image.",
+    run: async (ctx) => {
+      // Directory-agnostic on purpose: the fleet uses brand/, gallery/, images/,
+      // products/, bg/, usp/, photos/, reviews/, badges/ and root-level files,
+      // so enumerating them silently skipped projects.
+      //
+      // The lookbehind keeps us to paths written as a literal (quote, backtick,
+      // paren, or right after a `${SITE}` interpolation), so a remote URL like
+      // https://cdn.example.com/images/x.jpg is not mistaken for a local asset —
+      // its /images sits mid-string, not against the opening quote.
+      const ASSET_RE = /(?<=["'`(}])\/[A-Za-z0-9._-]+(?:\/[A-Za-z0-9._@-]+)*\.(?:png|jpe?g|svg|webp|avif|gif)/g
+      // Routes that generate an image rather than serve a file from public/.
+      const GENERATED = /^\/(?:api|_next)\//
+      const hits = await scanProjectFiles(ctx, ['.tsx', '.ts', '.css'], () => false, (text) => {
+        const m = (text.match(ASSET_RE) ?? []).filter((a) => !GENERATED.test(a))
+        return m.length ? [...new Set(m)].join('\n') : null
+      })
+
+      const refs = new Map<string, string>()   // asset path -> first file referencing it
+      for (const h of hits) {
+        for (const asset of h.sample.split('\n')) if (!refs.has(asset)) refs.set(asset, h.file)
+      }
+      if (refs.size === 0) {
+        return skip('public-assets-exist', 'Referenced public/ assets exist', 'no local asset references found')
+      }
+
+      const missing: string[] = []
+      for (const [asset, file] of refs) {
+        const rel = asset.replace(/^\//, '')
+        // Next's file-based metadata (app/icon.svg, app/favicon.ico,
+        // app/opengraph-image.png …) is served from the route root but lives
+        // under app/, not public/ — so an asset resolves from either.
+        const found = (await fileExists(ctx, path.join('public', rel)))
+          || (await fileExists(ctx, path.join('app', rel)))
+        if (!found) missing.push(`${asset} (${file})`)
+      }
+      return missing.length === 0
+        ? pass('public-assets-exist', 'Referenced public/ assets exist', `${refs.size} reference(s) all resolve`)
+        : fail('public-assets-exist', 'Referenced public/ assets exist',
+            `${missing.length} of ${refs.size} missing — ${missing.slice(0, 3).join(', ')}`)
+    },
+  },
+
   // Project hygiene — raw artwork must not enter git
   {
     group: 'Layout & Design', id: 'project-gitignore', name: 'Project .gitignore excludes brand_assets/ + temporary screenshots/',
