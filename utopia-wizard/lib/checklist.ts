@@ -1519,14 +1519,33 @@ const DESIGN: Check[] = [
   // Styled-jsx pitfalls
   {
     group: 'Layout & Design', id: 'nav-cta-global-scope', name: 'Styled-jsx targets .nav-cta via :global(...)',
-    help: "Styled-jsx scope hack so the .nav-cta rule actually reaches the WhatsApp button.",
+    help: "A .nav-cta rule written inside a <style jsx> block needs :global(...), because styled-jsx's scope hash never reaches the class WhatsAppButton renders. The same rule in a plain <style> or globals.css needs no wrapper — there is no hash to escape.",
     run: async (ctx) => {
       const usesNavCta = await grepProject(ctx, /className=["'][^"']*\bnav-cta\b/, ['.tsx'])
       if (!usesNavCta) return skip('nav-cta-global-scope', 'Styled-jsx targets .nav-cta via :global(...)', 'no .nav-cta class used')
-      const ok = await grepProject(ctx, /:global\(\.nav-cta\)/, ['.tsx'])
-      return ok
-        ? pass('nav-cta-global-scope', 'Styled-jsx targets .nav-cta via :global(...)')
-        : fail('nav-cta-global-scope', 'Styled-jsx targets .nav-cta via :global(...)', 'a `.nav-cta` rule inside <style jsx> will silently miss WhatsAppButton — wrap with :global(.nav-cta)')
+
+      // The hazard is not "the project uses styled-jsx somewhere" — it is
+      // specifically a .nav-cta rule sitting INSIDE a styled-jsx block. So read
+      // the block contents rather than the file. Testing at file or project
+      // level produced false failures on sites that had already moved the
+      // header CSS to a plain <style> but still used styled-jsx elsewhere,
+      // which pushed them back toward the very pattern that ships header CSS
+      // in the JS bundle and reflows the page on hydration.
+      const STYLED_JSX_BLOCK = /<style\s+jsx[^>]*>\s*\{`([\s\S]*?)`\}/g
+      const offenders = await scanProjectFiles(ctx, ['.tsx'], () => false, (text) => {
+        for (const m of text.matchAll(STYLED_JSX_BLOCK)) {
+          const css = m[1]
+          if (/(^|[\s,{])\.nav-cta\b/m.test(css) && !/:global\(\s*\.nav-cta/.test(css)) {
+            return '.nav-cta rule inside <style jsx> without :global(...)'
+          }
+        }
+        return null
+      })
+
+      return offenders.length === 0
+        ? pass('nav-cta-global-scope', 'Styled-jsx targets .nav-cta via :global(...)', 'no unscoped .nav-cta rule inside a styled-jsx block')
+        : fail('nav-cta-global-scope', 'Styled-jsx targets .nav-cta via :global(...)',
+            `${offenders.map((o) => o.file).join(', ')} — a bare \`.nav-cta\` inside <style jsx> silently misses WhatsAppButton; wrap with :global(.nav-cta)`)
     },
   },
   {
@@ -2253,36 +2272,40 @@ const QUALITY: Check[] = [
     },
   },
   {
-    // The blind spot `no-hardcoded-phones` structurally cannot see. That scan
-    // looks for phone-shaped LITERALS; a number fetched from Supabase at
-    // request time and rendered into the header/footer leaves no literal
-    // behind, so the source is clean and the number is still on the page.
-    // (Real example: light-tower-rental's <ContactNumber> — a tel: link in the
-    // chrome of every page, digits from getDisplayPhone(), zero scan hits.)
-    // Advisory, because a client can insist on showing their number; the point
-    // is that it shows up as a decision rather than passing unnoticed.
-    group: 'Quality', id: 'no-phone-displayed', name: 'No phone number rendered as visible text',
-    help: "CLAUDE.md routes all contact through WhatsApp, so a phone number shouldn't appear as visible text. This catches what the hardcoded-number scan can't: a DB-sourced number rendered into the page — a tel: link, or getDisplayPhone()/formatPhoneDisplay() called from a component. lib/ and config/ are skipped (they define the helpers and hold the sanctioned fallback), as is the redirect page.",
+    // Showing the number in the header/footer is now the DEFAULT chrome
+    // (templates/site-chrome/ContactNumber.tsx), so the question is no longer
+    // "is a number visible" — it is "where do the visible digits come from".
+    //
+    // The blind spot `no-hardcoded-phones` structurally cannot see is the
+    // inverse of this one: that scan looks for phone-shaped LITERALS, so a
+    // DB-sourced number leaves nothing to match. This check looks at what
+    // reaches the page — a tel: link — and fails only when its digits are
+    // baked into the JSX instead of coming from getDisplayPhone().
+    //
+    // A baked number cannot follow a leads_mode change, a per-page display
+    // number, or a client swapping their line: it needs a code edit and a
+    // redeploy, and it silently disagrees with what the redirect routes to.
+    // Advisory: a site with no visible number at all still passes.
+    group: 'Quality', id: 'display-phone-db-backed', name: 'Displayed phone number comes from the database',
+    help: "The header/footer contact number is canonical chrome (ContactNumber.tsx), and its digits must come from getDisplayPhone() — webcore's /display endpoint, which is deterministic and keyed per (website, page_slug). This fails when a component renders a tel: link with the number hardcoded in the JSX, because that copy can't follow a number change without a redeploy and will drift from what /redirect-whatsapp-1 routes to. lib/ and config/ are skipped (they define the helper and hold the sanctioned fallback), as is the redirect page. A site that shows no number at all passes.",
     run: async (ctx) => {
-      const id = 'no-phone-displayed'
-      const name = 'No phone number rendered as visible text'
+      const id = 'display-phone-db-backed'
+      const name = 'Displayed phone number comes from the database'
       const hits = await scanProjectFiles(
         ctx,
         ['.tsx', '.jsx'],
         (rel) => rel.startsWith('lib/') || rel.startsWith('config/') || rel.includes('redirect-whatsapp-1'),
         (text) => {
-          // A tappable number is the unambiguous case.
-          const tel = text.match(/href=\{?[`'"]tel:[^`'"}\s]{0,40}/)
-          if (tel) return tel[0].slice(0, 60)
-          // Digits straight from the DB into JSX — no literal, still visible.
-          const helper = text.match(/\b(?:getDisplayPhone|formatPhoneDisplay)\s*\(/)
-          if (helper) return `${helper[0]} — renders the number into the page`
-          return null
+          // Only a tel: whose digits are literal in the source. A template
+          // interpolation (`tel:+${phone}`) or any expression is the correct
+          // DB-backed form and is deliberately not matched.
+          const baked = text.match(/href=\s*\{?\s*[`'"]tel:\+?[\d\s()-]{7,}[`'"]/)
+          return baked ? baked[0].slice(0, 60) : null
         },
       )
       if (hits.length === 0) return pass(id, name)
       const first = hits[0]
-      return fail(id, name, `${hits.length} file(s) show a phone number — e.g. ${first.file}: ${first.sample}`)
+      return fail(id, name, `${hits.length} file(s) print a hardcoded number — e.g. ${first.file}: ${first.sample}`)
     },
   },
   {
