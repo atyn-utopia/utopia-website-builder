@@ -11,14 +11,46 @@ asset conventions are `/brand/logo-dark.png` (footer) and `/brand/bg-hero.jpg`
 
 | File | Role |
 |------|------|
-| `SiteHeader.tsx` | nav links + language switcher + WhatsApp CTA |
-| `SiteFooter.tsx` | flat minimal footer — logo + horizontal nav + divider + copyright + "Built by Utopia" credit |
+| `SiteHeader.tsx` | nav links + language switcher + contact number + WhatsApp CTA |
+| `SiteFooter.tsx` | flat minimal footer — logo + horizontal nav + contact number + divider + copyright + "Built by Utopia" credit |
+| `ContactNumber.tsx` | availability label + tappable `tel:`, digits from `getDisplayPhone(page)` |
+| `contact-number.css` | → paste into `app/globals.css` — styles for the above |
 | `FomoBanner.tsx` | top sticky banner + live countdown (red/black) |
 | `PageStyles.tsx` | shared `<style>` block for every section (hero…final CTA) |
 | `LanguageSwitcher.tsx` | bordered flag pills (desktop) / dropdown (mobile) |
 | `WhatsAppButton.tsx` | official-green CTA routing through the redirect page |
 | `ogImage.ts` | → `lib/ogImage.ts` — social share card URLs, per locale |
 | `og-shot.mjs` | → `scripts/og-shot.mjs` — generates the cards from the hero |
+
+## Contact number (`ContactNumber.tsx` + `contact-number.css`)
+
+The header and footer print the site's number. Three things are load-bearing:
+
+1. **The digits come from `getDisplayPhone(page)`** — webcore's `/display`
+   endpoint, which is deterministic. Never `/resolve` or `/whatsapp-redirect`:
+   those rotate per click, so printed digits would change between page loads.
+   Lead ROUTING is untouched — every WhatsApp CTA still goes through
+   `/redirect-whatsapp-1`.
+2. **The page path is part of the query.** `is_display` is unique per
+   `(website, page_slug)`, not per site, so every page passes its own
+   locale-stripped path. Omitting it asks for the site-wide tier.
+3. **Its CSS lives in `globals.css`, not styled-jsx.** The element is rendered
+   on the server and handed to the client `SiteHeader` as a `contact` prop, so
+   that component's scoped styles cannot reach it. (`SiteHeader` itself uses a
+   plain `<style>` tag rather than `<style jsx>` for a related reason —
+   styled-jsx in a client component ships its CSS inside the JS bundle and
+   flashes the header unstyled before hydration.)
+
+Type is token-driven: `var(--font-heading, var(--font-display, inherit))`, so
+the number wears **the site's** font. Never hardcode a family.
+
+Needs, per project: `lib/webcore.ts` exporting `getDisplayPhone` +
+`formatPhoneDisplay` with `is_display` in the `phone_numbers` select, and a
+`contact.availability` key in every locale. `npm run scaffold` brings all of
+this along from `water-tank-malaysia`.
+
+Legacy sites without a `ContactNumber.tsx` are **not** reported as drifted —
+adoption is a per-project call (see `OPTIONAL` in `chrome-check.ts`).
 
 ## Social share card (`ogImage.ts` + `og-shot.mjs`)
 

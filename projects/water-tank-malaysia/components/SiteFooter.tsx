@@ -1,7 +1,15 @@
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
+import ContactNumber from './ContactNumber';
 
-export default async function SiteFooter({ locale }: { locale: string }) {
+export default async function SiteFooter({
+  locale,
+  page,
+}: {
+  locale: string;
+  /** Locale-stripped path, forwarded to ContactNumber — see that component. */
+  page?: string;
+}) {
   const t = await getTranslations({ locale, namespace: 'footer' });
   const navT = await getTranslations({ locale, namespace: 'nav' });
 
@@ -19,6 +27,7 @@ export default async function SiteFooter({ locale }: { locale: string }) {
             <Link href={`/${locale}/blog`}>{navT('blog')}</Link>
             <Link href={`/${locale}#faq`}>{t('faqLabel')}</Link>
           </nav>
+          <ContactNumber locale={locale} page={page} className="contact-number--footer" />
         </div>
 
         <div className="footer-line" aria-hidden="true" />
@@ -49,7 +58,19 @@ export default async function SiteFooter({ locale }: { locale: string }) {
       </div>
 
       <style>{`
-        .site-footer { background: #EEF5FB; padding: 44px 0 32px; border-top: 1px solid #E1EEFA; }
+        /* Colour comes from the SITE's palette, never from this file.
+           --brand-orange is the fleet's primary-accent token name (kept even on
+           sites whose accent is blue or green), so the color-mix defaults tint
+           the panel with whatever that site's accent actually is — a project
+           that defines nothing still gets a footer in its own colours.
+           Override any --footer-* token in globals.css to depart from that; a
+           dark footer needs --footer-bg plus the two ink tokens. */
+        .site-footer {
+          --_tint: var(--footer-tint, var(--brand-orange, #5B6B7F));
+          background: var(--footer-bg, color-mix(in srgb, var(--_tint) 8%, #FFFFFF));
+          border-top: 1px solid var(--footer-border, color-mix(in srgb, var(--_tint) 14%, #FFFFFF));
+          padding: 44px 0 32px;
+        }
         .footer-top {
           display: flex; align-items: center; justify-content: space-between;
           flex-wrap: wrap; gap: 20px 32px;
@@ -57,16 +78,17 @@ export default async function SiteFooter({ locale }: { locale: string }) {
         .footer-logo { width: 152px; height: auto; object-fit: contain; }
         .footer-nav { display: flex; flex-wrap: wrap; gap: 12px 26px; }
         .footer-nav a {
-          color: var(--brand-charcoal); font-weight: 600; font-size: 14.5px;
+          color: var(--footer-ink, var(--brand-charcoal)); font-weight: 600; font-size: 14.5px;
           transition: color var(--dur) var(--ease-out);
         }
-        .footer-nav a:hover { color: var(--brand-orange); }
-        .footer-line { height: 1px; background: #DCE9F6; margin: 24px 0; }
+        .footer-nav a:hover { color: var(--footer-link-hover, var(--brand-orange)); }
+        .footer-line { height: 1px; background: var(--footer-rule, color-mix(in srgb, var(--_tint) 18%, #FFFFFF)); margin: 24px 0; }
         .footer-bottom {
           display: flex; align-items: center; justify-content: space-between;
           flex-wrap: wrap; gap: 12px 24px;
         }
-        .footer-copy { margin: 0; font-size: 12.5px; color: var(--ink-muted); }
+        .footer-copy { margin: 0; font-size: 12.5px; color: var(--footer-ink-muted, var(--ink-muted)); }
+        .utopia-credit { color: var(--footer-ink, var(--brand-charcoal)); }
         @media (max-width: 767px) {
           .site-footer { padding: 32px 0 24px; }
           .footer-top { flex-direction: column; text-align: center; gap: 18px; }

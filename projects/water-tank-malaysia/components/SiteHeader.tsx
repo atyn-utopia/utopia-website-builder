@@ -7,7 +7,15 @@ import LanguageSwitcher from './LanguageSwitcher';
 import { WhatsAppButton, WaIcon } from './WhatsAppButton';
 import { waRedirect } from '@/lib/waRedirect';
 
-export default function SiteHeader() {
+/**
+ * `contact` is a ReactNode, not a phone string, because the number is resolved
+ * server-side (DB-backed) and this is a client component. Passing the already
+ * rendered element in as a prop keeps the fetch on the server.
+ *
+ * Every page renders it as `<SiteHeader contact={<ContactNumber locale={locale}
+ * page="/…" />} />` — the page path matters, `is_display` is keyed per page.
+ */
+export default function SiteHeader({ contact }: { contact?: React.ReactNode }) {
   const t = useTranslations('nav');
   const locale = useLocale();
   const [open, setOpen] = useState(false);
@@ -38,6 +46,7 @@ export default function SiteHeader() {
         </button>
 
         <div className="site-actions">
+          {contact}
           <div className="site-actions__lang"><LanguageSwitcher /></div>
           <WhatsAppButton href={waRedirect(locale)} label="nav" className="btn btn-wa nav-cta">
             <WaIcon size={16} />
@@ -55,7 +64,14 @@ export default function SiteHeader() {
           <Link href={`/${locale}/blog`} onClick={close}>{t('blog')}</Link>
         </nav>
         <div className="site-mobile-actions">
-          <LanguageSwitcher />
+          {/* Switcher and number share one row — switcher left, number hard
+              right. Wrapped rather than laid out on .site-mobile-actions
+              directly so the WhatsApp button below stays its own full-width
+              block instead of being pulled into the row. */}
+          <div className="site-mobile-row">
+            <LanguageSwitcher />
+            {contact}
+          </div>
           <WhatsAppButton href={waRedirect(locale)} label="nav-mobile" className="btn btn-wa">
             <WaIcon size={16} />
             {t('whatsappCta')}
@@ -63,6 +79,10 @@ export default function SiteHeader() {
         </div>
       </div>
 
+      {/* Plain <style>, NOT <style jsx>: styled-jsx in a client component ships
+          its CSS inside the JS bundle, which flashes the header unstyled before
+          hydration. It also cannot reach `contact` — that element is rendered on
+          the server and passed in as a prop. */}
       <style>{`
         .site-header {
           position: sticky; top: 0; z-index: 40;
@@ -95,6 +115,7 @@ export default function SiteHeader() {
         .site-mobile-nav a { padding: 13px 4px; font-weight: 700; font-size: 15px; color: var(--brand-charcoal); border-bottom: 1px solid var(--line); }
         .site-mobile-nav a:last-child { border-bottom: none; }
         .site-mobile-actions { display: flex; flex-direction: column; gap: 12px; padding-top: 16px; margin-top: 12px; border-top: 1px solid var(--line); }
+        .site-mobile-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
         .site-mobile-actions .lsw-toggle { justify-content: center; }
         .site-mobile-actions .btn { width: 100%; }
         @media (min-width: 880px) { .site-nav--desktop { display: inline-flex; } .site-burger { display: none; } .site-mobile-drawer { display: none !important; } }

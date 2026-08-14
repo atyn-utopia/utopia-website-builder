@@ -979,8 +979,14 @@ Every item below MUST be verified on the running site. These rules come from rea
 
 #### Header / Footer (every page)
 - [ ] Every public page (home, location, blog listing, blog article) renders `<FomoBanner />`, `<SiteHeader />`, and `<SiteFooter />` — NEVER a per-page nav variant like `BlogNav`.
-- [ ] Header brand logo / brand text is HIDDEN — nav links + language switcher + WA CTA only.
-- [ ] Footer logo uses the variant designed for the dark footer bg (white wordmark file, e.g. `abang-excavator-dark.png`). Confirm the wordmark is visible — if the logo looks invisible, you picked the wrong variant.
+- [ ] Header brand logo / brand text is HIDDEN — nav links + language switcher + contact number + WA CTA only.
+- [ ] **Contact number in header AND footer** — `components/ContactNumber.tsx` copied from `templates/site-chrome/`, rendered as `<SiteHeader contact={<ContactNumber locale={locale} page="…" />} />` and `<SiteFooter locale={locale} page="…" />` on **every** page. Pass that page's locale-stripped path (`/`, `/blog`, `` `/${siteConfig.productSlug}/${loc.slug}` ``) — `is_display` is unique per `(website, page_slug)`, so a wrong/absent path can print another page's number.
+- [ ] `lib/webcore.ts` exports `getDisplayPhone()` + `formatPhoneDisplay()`, and `getPhoneRows`'s `select=` includes `is_display` (the direct-read fallback needs the column).
+- [ ] `contact.availability` key exists in every locale (`Tersedia 24/7` / `Available 24/7` / `24/7 全天候`) — a missing key renders the raw key as the label.
+- [ ] `templates/site-chrome/contact-number.css` pasted into `app/globals.css` — NOT into a styled-jsx block. The element is server-rendered and passed into the client `SiteHeader` as a prop, so scoped styles never reach it. Leave the `var(--font-heading, var(--font-display, inherit))` chain alone: the number takes **this site's** font, so never hardcode a family.
+- [ ] Seed a `phone_numbers` row with `is_display: true` before Gate 1, or the chrome falls back to `siteConfig.fallbackPhone` — which must already be the client's own number, never a shared operator line.
+- [ ] **Footer colour derives from this site's palette** — `SiteFooter` tints itself from the primary accent via `color-mix`, so the panel is a pale wash of the brand, not a fixed blue. Do not paste hex values from another project. Override with `--footer-bg` / `--footer-border` / `--footer-rule` in `globals.css` only if the derived tint is wrong for the brand.
+- [ ] Footer logo matches the panel it sits on. The default panel is a **light** wash, so use the dark/colour wordmark, e.g. `tankpro-dark.png` — the `-dark` suffix names the *ink*, not the background. A white-wordmark variant disappears on it. If the site wants a **dark** footer, set `--footer-bg` plus `--footer-ink` and `--footer-ink-muted`, then use the white wordmark.
 - [ ] All `nav.*` translation keys exist in all locales: `home, products, calculator, locations, blog, whatsappCta`. Missing key renders the raw key (e.g. "nav.home") on the live site.
 
 #### Location pages — must equal homepage layout (MANDATORY)
@@ -1319,7 +1325,9 @@ Before calling the website "done", verify everything:
 - [ ] **3-point USP bar** immediately below hero section
 - [ ] **All buttons same rounded shape** — only color varies
 - [ ] **CTA button labels ≤3 words** (WhatsApp counts) — `en` + `ms`
-- [ ] **No phone numbers or domain names** displayed as visible text
+- [ ] **Contact number in header + footer** — `<ContactNumber />` in both, digits from `getDisplayPhone(page)`, real page path passed on every page. Nowhere else on the site.
+- [ ] **No hardcoded number anywhere** — no phone-shaped literal in JSX, copy, or a `tel:` href (wizard: `display-phone-db-backed`)
+- [ ] **No domain names** displayed as visible text
 - [ ] **Mobile center-aligned** — headings, buttons, cards, icons centered on mobile
 - [ ] **All images verified** — every image matches its context, no placeholders left
 - [ ] **Utopia Brand CI applied** — "Built by Utopia AI" footer credit in `SiteFooter` + `--r-*`/`--ease`/`--dur-*` structural tokens in `globals.css`. Site keeps its own palette/fonts/button-shape (no reskin, no forced 8px radius on existing pill buttons).

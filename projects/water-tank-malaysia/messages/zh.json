@@ -23,6 +23,9 @@
     "whatsappCta": "WhatsApp 报价",
     "calculator": "配套优惠"
   },
+  "contact": {
+    "availability": "24/7 全天候"
+  },
   "fomo": {
     "eyebrow": "{monthUpper} 促销",
     "body": "水箱+水泵+滤水器配套最高省 RM 300 — {month} 促销倒计时：",

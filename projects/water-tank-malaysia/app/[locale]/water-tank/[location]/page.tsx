@@ -22,6 +22,7 @@ import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
 import SiteHeader from '@/components/SiteHeader';
+import ContactNumber from '@/components/ContactNumber';
 import SiteFooter from '@/components/SiteFooter';
 import FomoBanner from '@/components/FomoBanner';
 import MarketingMarquee from '@/components/MarketingMarquee';
@@ -197,7 +198,7 @@ export default async function LocationPage({
   return (
     <>
       <FomoBanner />
-      <SiteHeader />
+      <SiteHeader contact={<ContactNumber locale={locale} page={`/${siteConfig.productSlug}/${loc.slug}`} />} />
 
       <LocalBusinessSchema locale={locale} locationName={loc.name} locationSlug={loc.slug} state={loc.state} />
       <BreadcrumbSchema
@@ -600,7 +601,7 @@ export default async function LocationPage({
         </div>
       </section>
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} page={`/${siteConfig.productSlug}/${loc.slug}`} />
 
       <PageStyles />
       <style>{`

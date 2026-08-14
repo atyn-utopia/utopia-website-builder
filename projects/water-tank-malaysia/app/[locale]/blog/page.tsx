@@ -9,6 +9,7 @@ import { getBlogPosts } from '@/lib/webcore';
 import { waRedirect } from '@/lib/waRedirect';
 import { WhatsAppButton, WaIcon } from '@/components/WhatsAppButton';
 import SiteHeader from '@/components/SiteHeader';
+import ContactNumber from '@/components/ContactNumber';
 import SiteFooter from '@/components/SiteFooter';
 import FomoBanner from '@/components/FomoBanner';
 import BlogLinkTracker from '@/components/tracking/BlogLinkTracker';
@@ -43,7 +44,7 @@ export default async function BlogListing({
   return (
     <>
       <FomoBanner />
-      <SiteHeader />
+      <SiteHeader contact={<ContactNumber locale={locale} page="/blog" />} />
 
       <section className="blog-hero">
         <div className="blog-hero-bg" aria-hidden="true" />
@@ -100,7 +101,7 @@ export default async function BlogListing({
         </div>
       </section>
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} page="/blog" />
 
       <style>{`
         .blog-hero { position: relative; color: #fff; padding: 56px 0 64px; overflow: hidden; }

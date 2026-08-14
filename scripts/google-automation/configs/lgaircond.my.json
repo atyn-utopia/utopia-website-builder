@@ -1,0 +1,21 @@
+{
+  "domain": "lgaircond.my",
+  "containerId": "GTM-MJFDC9NL",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-NZKV19XJX9",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-08-13T10:11:37.886Z",
+  "gsc": {
+    "siteUrl": "https://lgaircond.my/",
+    "token": "<meta name=\"google-site-verification\" content=\"YdcwovRfMrjo_4y4PqTNyn9niQC1adruVHdTcRw3408\" />",
+    "initAt": "2026-08-13T10:13:25.286Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-08-13T10:14:47.899Z"
+  }
+}

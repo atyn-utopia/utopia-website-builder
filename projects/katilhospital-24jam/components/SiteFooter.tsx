@@ -125,7 +125,9 @@ export default function SiteFooter() {
           gap: 5px;
           font-size: 12.5px;
           font-weight: 600;
-          color: rgba(28, 58, 106, 0.7);
+          /* Full opacity: at 0.7 this landed on 4.45:1 against the footer,
+             just under the 4.5:1 WCAG AA floor for normal-size text. */
+          color: rgb(28, 58, 106);
           text-decoration: none;
           border-radius: var(--r-button);
           transition: transform var(--dur-hover) var(--ease),

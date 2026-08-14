@@ -190,9 +190,14 @@ These rules apply to EVERY website. No exceptions.
 - Enforced for `en` + `ms` (word-delimited). `zh` is exempt (CJK isn't space-delimited) but keep its labels equally compact.
 - The wizard checks this via `cta-button-word-limit`.
 
-## No Phone Numbers or Domains on Site
-- Do NOT display any phone number or domain/URL as visible text anywhere on the website
-- All contact goes through WhatsApp redirect buttons only
+## Phone Number — Header + Footer Only, Always From the Database
+- The site **shows its contact number in the header and the footer**, and nowhere else. This is the canonical `<ContactNumber />` (availability label + tappable number) — see the layout table below.
+- The digits **must** come from `getDisplayPhone(page)` (webcore's `/display` endpoint). Never hardcode a number into JSX, copy, or a `tel:` href — a baked number can't follow a `leads_mode` change or a client swapping their line, and it silently disagrees with what the redirect routes to.
+- `/display` is deterministic (page display number → site-wide display number → admin default). Do **not** print `/resolve` or `/whatsapp-redirect` — those rotate per click, so the digits would change between page loads.
+- Pass the locale-stripped page path (`page="/"`, `` page={`/${siteConfig.productSlug}/${loc.slug}`} ``): `is_display` is unique per `(website, page_slug)`, so the page is part of the query.
+- **Lead routing is unchanged.** Every WhatsApp CTA still goes through `/redirect-whatsapp-1`. Only this display element bypasses attribution — a tap-to-call isn't tracked, which is the cost of showing the number at all.
+- Do NOT display any domain/URL as visible text anywhere on the website.
+- The wizard checks this via `display-phone-db-backed`.
 
 ## Mobile Layout (PRIMARY viewport)
 - Most users come from mobile — design for mobile FIRST
@@ -232,12 +237,13 @@ These rules apply to EVERY website. No exceptions.
 
 ## Default Layout Template — `water-tank-malaysia`
 
-**`projects/water-tank-malaysia` is the canonical reference for every new site.** Copy these five surfaces from it and change only the brand name, logo file path, colour tokens, and locale-aware labels. Do NOT design per-project variants of any of them.
+**`projects/water-tank-malaysia` is the canonical reference for every new site.** Copy these six surfaces from it and change only the brand name, logo file path, colour tokens, and locale-aware labels. Do NOT design per-project variants of any of them.
 
 | Surface | Copy from | What it already gets right |
 |---|---|---|
-| Header | `components/SiteHeader.tsx` | desktop nav + burger, `LanguageSwitcher`, WhatsApp CTA (`.nav-cta`), mobile-hidden CTA |
-| Footer | `components/SiteFooter.tsx` | flat minimal footer — logo + horizontal nav + divider + copyright, "Built by Utopia" credit |
+| Header | `components/SiteHeader.tsx` | desktop nav + burger, `LanguageSwitcher`, contact number, WhatsApp CTA (`.nav-cta`), mobile-hidden CTA |
+| Footer | `components/SiteFooter.tsx` | flat minimal footer — logo + horizontal nav + contact number + divider + copyright, "Built by Utopia" credit; **colour derives from the site's own palette** (see below) |
+| Contact number | `components/ContactNumber.tsx` | availability label + tappable `tel:`, digits from `getDisplayPhone(page)`; rendered in **both** header and footer |
 | WhatsApp redirect | `app/[locale]/redirect-whatsapp-1/` | see below — the most important one |
 | Blog listing | `app/[locale]/blog/page.tsx` | full chrome, breadcrumb, one h1 + one h2, `.blog-card` grid |
 | Blog article | `app/[locale]/blog/[slug]/page.tsx` | full chrome, `ArticleSchema` + `BreadcrumbSchema`, locale canonical + hreflang, `.blog-content` |
@@ -249,9 +255,15 @@ These rules apply to EVERY website. No exceptions.
 - `robots: { index: false, follow: false }`, `dynamic = 'force-dynamic'`, `revalidate = 0`
 - branded interstitial with a spinner and a plain `<a>` fallback for no-JS
 
-- Per-page nav variants (e.g. `BlogNav`) are forbidden — every public page (home, location, blog listing, blog article) renders the same `<SiteHeader />` + `<SiteFooter />` + `<FomoBanner />`.
+- Per-page nav variants (e.g. `BlogNav`) are forbidden — every public page (home, location, blog listing, blog article) renders the same `<SiteHeader contact={<ContactNumber locale={locale} page="…" />} />` + `<SiteFooter locale={locale} page="…" />` + `<FomoBanner />`. Pass the real page path on both — `is_display` is keyed per page.
+- **`ContactNumber` takes the site's own type, not the chrome's.** Its styles live in `globals.css` (canonical copy: `templates/site-chrome/contact-number.css`) and set `font-family: var(--font-heading, var(--font-display, inherit))` — whichever font token the project defines wins, and a project defining neither inherits its own body font. Never hardcode a family there. Same for colour: `--brand-charcoal` / `--ink-muted` with plain fallbacks.
+- The CSS is in `globals.css`, **not** a styled-jsx block, because the element is rendered on the server and passed into the client `SiteHeader` as a `contact` prop — scoped styles in that component would never reach it. `SiteHeader` uses a plain `<style>` tag for the same family of reason (styled-jsx in a client component ships its CSS in the JS bundle and flashes unstyled).
 - Older projects still show the previous reference (`sewa-excavator`, dark footer with locations grid + social). When they disagree, **water-tank wins** — don't copy chrome out of an older site.
 - The wizard checks this via `site-chrome-components`, `homepage-uses-site-header`, `location-page-chrome`, `blog-listing-chrome`, `blog-post-chrome`, `no-blognav-usage`.
+- **The footer's colour comes from the site's palette, never from the chrome.** `SiteFooter` hardcodes no colour: it tints itself from the site's primary accent (`--brand-orange` — the fleet's token name for the primary, kept even on sites whose accent is blue or green) via `color-mix`, so a project that defines nothing still gets a footer in its own colours. Measured: water-tank's blue yields `#ECF4FC`, a forest-green brand `#EDF2F0`, terracotta `#F9F1EE`, purple `#F1EEF5`.
+  - Five override tokens in `globals.css` depart from the default: `--footer-bg`, `--footer-border`, `--footer-rule`, `--footer-ink`, `--footer-ink-muted` (plus `--footer-tint` to tint from something other than the accent, and `--footer-link-hover`).
+  - **A dark footer needs three of them** — `--footer-bg` plus both ink tokens — and nothing else changes. The contact number follows the same two ink tokens.
+  - **This applies to every site, ours and any client repo we're fixing.** Never paste another site's footer hex values into a project.
 - **`SiteFooter` must carry the "Built by Utopia AI" brand-CI credit** + the Utopia structural tokens (`--r-button/-card/-pill`, `--ease`, `--dur-*`) in `globals.css`. This is the CI *element* insertion only — keep the site's own palette, fonts, and button shape (no Utopia reskin, no forcing 8px radius onto existing pill buttons). See `docs/full-website-setup.md` → Step 5 → "Utopia Brand CI".
 
 ## Text Spacing — Default Line-Heights

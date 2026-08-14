@@ -1,0 +1,21 @@
+{
+  "domain": "mideaaircond.my",
+  "containerId": "GTM-5ZXXGR47",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-KN1BSL0LMZ",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-08-06T09:55:49.538Z",
+  "gsc": {
+    "siteUrl": "https://mideaaircond.my/",
+    "token": "<meta name=\"google-site-verification\" content=\"dfisDsgu6skHvEKMKjrRhfirlxNPGDz1oVcpXv07fHc\" />",
+    "initAt": "2026-08-06T09:57:45.749Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-08-06T10:00:21.182Z"
+  }
+}

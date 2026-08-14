@@ -13,6 +13,10 @@ const SUPABASE_KEY =
 
 export type WebcoreTag = 'webcore-products' | 'webcore-phones' | 'webcore-blog';
 
+// Webcore's public read API. CORS-open and key-free, so it is safe to call from
+// the server without shipping any credential.
+const WEBCORE_PUBLIC_BASE = 'https://webcore.utopiaai.my';
+
 // 6s hard timeout per Supabase request. Without this the default undici
 // headers timeout is 5 minutes, which on a slow link between Vercel iad1
 // build machines and Supabase's Cloudflare-KUL edge can hang `next build`
@@ -148,6 +152,9 @@ interface PhoneRow {
   label: string | null;
   location_slug: string | null;
   page_slug: string | null;
+  // Nominates the number this page PRINTS. Unique per (website, page_slug),
+  // not per site — see getDisplayPhone.
+  is_display: boolean | null;
 }
 
 // A row is "site-wide" when it isn't pinned to a specific page. Rows that
@@ -202,7 +209,7 @@ async function getLeadsMode(domain: string): Promise<LeadsMode> {
 async function getPhoneRows(domain: string): Promise<PhoneRow[]> {
   if (!domain) return [];
   const path =
-    `phone_numbers?select=phone_number,whatsapp_text,percentage,label,location_slug,page_slug` +
+    `phone_numbers?select=phone_number,whatsapp_text,percentage,label,location_slug,page_slug,is_display` +
     `&website=eq.${encodeURIComponent(domain)}` +
     `&is_active=eq.true`;
   const data = await webcoreFetch<PhoneRow[]>(path, 'webcore-phones');
@@ -293,6 +300,91 @@ export async function getPhoneNumber(
 export function waLink(phone: string, message?: string): string {
   const query = message ? `?text=${encodeURIComponent(message)}` : '';
   return `https://wa.me/${phone}${query}`;
+}
+
+/* Display phone — the number the chrome PRINTS (header + footer)
+ *
+ * Deliberately separate from getPhoneNumber(). Two different questions:
+ *
+ *   who RECEIVES this lead   -> getPhoneNumber() / the redirect page (rotates)
+ *   what this page SHOWS     -> getDisplayPhone() (deterministic)
+ *
+ * Printing a rotating number would change the digits between page loads.
+ */
+
+/**
+ * Which number this PAGE prints, via webcore's dedicated /display endpoint.
+ *
+ * /display is deterministic — page display number -> site-wide display number
+ * -> admin default. `is_display` is unique per (website, page_slug), NOT per
+ * site, so the page has to be part of the question. No page = site-wide tier.
+ */
+async function fetchDisplayPhone(page?: string): Promise<string | null> {
+  const url =
+    `${WEBCORE_PUBLIC_BASE}/api/public/phone-numbers/display` +
+    `?website=${encodeURIComponent(siteConfig.domain)}` +
+    (page ? `&page=${encodeURIComponent(page)}` : '');
+
+  // Same discipline as webcoreFetch: cacheable + tagged so a webcore-phones
+  // purge refreshes it, and raced against a timeout rather than an AbortSignal
+  // (a signal opts the response out of the Data Cache and breaks tag purging).
+  const request = fetch(url, {
+    headers: { Accept: 'application/json' },
+    cache: 'force-cache',
+    next: { tags: ['webcore-phones'] },
+  }).catch(() => null);
+
+  const res = await Promise.race([
+    request,
+    new Promise<null>((resolve) => setTimeout(() => resolve(null), WEBCORE_FETCH_TIMEOUT_MS)),
+  ]);
+  if (!res || !res.ok) return null;
+
+  const data = (await res.json().catch(() => null)) as { phone_number?: string } | null;
+  return data?.phone_number || null;
+}
+
+export async function getDisplayPhone(page?: string): Promise<string> {
+  const viaApi = await fetchDisplayPhone(page);
+  if (viaApi) return viaApi;
+
+  // Fallback if the public API is unreachable: read the rows directly and
+  // reproduce its precedence. Page-scoped display row -> site-wide display row
+  // -> the 'default' label -> any site-wide row.
+  try {
+    const rows = await getPhoneRows(siteConfig.domain);
+    if (rows.length === 0) return FALLBACK_PHONE;
+    const pageSlug = page ? page.replace(/^\/+|\/+$/g, '') : '';
+    const row =
+      (pageSlug
+        ? rows.find((r) => r.is_display === true && (r.page_slug ?? 'all') === pageSlug)
+        : undefined) ??
+      rows.find((r) => r.is_display === true && (r.page_slug ?? 'all') === 'all') ??
+      findDefaultRow(rows) ??
+      rows.find((r) => (r.location_slug ?? 'all') === 'all') ??
+      rows[0];
+    return row.phone_number || FALLBACK_PHONE;
+  } catch {
+    return FALLBACK_PHONE;
+  }
+}
+
+/**
+ * `60109633551` -> `010-963 3551`. Malaysian mobile display convention: drop the
+ * 60 country code, restore the leading 0, then 3-4 split on the subscriber part.
+ * Anything that does not match falls back to the raw digits rather than
+ * mangling an unexpected format.
+ */
+export function formatPhoneDisplay(raw: string): string {
+  const digits = (raw || '').replace(/\D/g, '');
+  const local = digits.startsWith('60') ? '0' + digits.slice(2) : digits;
+  const m = local.match(/^(01\d)(\d{3})(\d{4})$/); // 10-digit mobile
+  if (m) return `${m[1]}-${m[2]} ${m[3]}`;
+  const m11 = local.match(/^(01\d)(\d{4})(\d{4})$/); // 11-digit mobile
+  if (m11) return `${m11[1]}-${m11[2]} ${m11[3]}`;
+  const fixed = local.match(/^(0\d)(\d{4})(\d{4})$/); // fixed line
+  if (fixed) return `${fixed[1]}-${fixed[2]} ${fixed[3]}`;
+  return local || raw;
 }
 
 /* Blog */

@@ -13,6 +13,7 @@ import { ArticleSchema } from '@/components/schema/ArticleSchema';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 import { WhatsAppButton, WaIcon } from '@/components/WhatsAppButton';
 import SiteHeader from '@/components/SiteHeader';
+import ContactNumber from '@/components/ContactNumber';
 import SiteFooter from '@/components/SiteFooter';
 import FomoBanner from '@/components/FomoBanner';
 
@@ -77,7 +78,7 @@ export default async function BlogPostPage({
   return (
     <>
       <FomoBanner />
-      <SiteHeader />
+      <SiteHeader contact={<ContactNumber locale={locale} page={`/blog/${slug}`} />} />
       <ArticleSchema
         locale={locale}
         slug={slug}
@@ -146,7 +147,7 @@ export default async function BlogPostPage({
         </div>
       </article>
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} page={`/blog/${slug}`} />
 
       <style>{`
         .post-header { padding: 56px 0 32px; background: var(--brand-paper); border-bottom: 1px solid var(--line); }
