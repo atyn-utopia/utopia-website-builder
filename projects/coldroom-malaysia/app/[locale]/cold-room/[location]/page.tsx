@@ -18,6 +18,7 @@ import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
 import { ProductSchema } from '@/components/schema/ProductSchema';
+import { ogImages } from '@/lib/ogImage';
 
 const HERO_IMAGE = '/brand/hero.png';
 
@@ -81,7 +82,9 @@ export async function generateMetadata({
       type: 'website', url, title, description,
       siteName: siteConfig.brandName,
       locale: locale === 'ms' ? 'ms_MY' : locale === 'zh' ? 'zh_CN' : 'en_MY',
-      images: [{ url: `${siteConfig.siteUrl}/og-image.jpg`, width: 1200, height: 630, alt: title }],
+      // Was a hardcoded /og-image.jpg that does not exist in public/ — the
+      // card 404'd. Now the per-locale hero screenshot.
+      images: ogImages(locale, title),
     },
     twitter: { card: 'summary_large_image', title, description },
     robots: { index: true, follow: true },

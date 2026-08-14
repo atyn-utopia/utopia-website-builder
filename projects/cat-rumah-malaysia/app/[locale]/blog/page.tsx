@@ -9,6 +9,7 @@ import FomoBanner from '@/components/FomoBanner'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import type { Locale } from '@/i18n/routing'
+import { ogImages } from '@/lib/ogImage'
 
 export async function generateMetadata({
   params,
@@ -22,7 +23,7 @@ export async function generateMetadata({
     title: t('title'),
     description: t('description'),
     alternates: seoAlternates(locale, '/blog'),
-    openGraph: { title: t('title'), description: t('description'), url, siteName: siteConfig.brandName, type: 'website' },
+    openGraph: { title: t('title'), description: t('description'), url, siteName: siteConfig.brandName, type: 'website', images: ogImages(locale) },
   }
 }
 

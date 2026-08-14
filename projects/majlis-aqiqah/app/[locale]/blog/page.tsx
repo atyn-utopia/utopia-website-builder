@@ -5,7 +5,7 @@ import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
 import { routing } from '@/i18n/routing';
 import { localeAbs, localePath } from '@/lib/localeHref';
-import { ogImage } from '@/lib/ogImage';
+import { ogImages } from '@/lib/ogImage';
 import { getBlogPosts } from '@/lib/webcore';
 import { waRedirect } from '@/lib/waRedirect';
 import { WhatsAppButton, WaIcon } from '@/components/WhatsAppButton';
@@ -35,7 +35,7 @@ export async function generateMetadata({
       description: t('description'),
       url: `${localeAbs(locale)}/blog`,
       siteName: siteConfig.brandName,
-      images: [ogImage(t('title'))],
+      images: ogImages(locale, t('title')),
     },
   };
 }

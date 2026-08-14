@@ -6,6 +6,7 @@ import FomoBanner from '@/components/FomoBanner';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import BlogLinkTracker from '@/components/tracking/BlogLinkTracker';
+import { ogImages } from '@/lib/ogImage';
 
 export async function generateMetadata({
   params,
@@ -26,6 +27,7 @@ export async function generateMetadata({
       url: `${baseUrl}/${locale}/blog`,
       siteName: siteConfig.brandName,
       type: 'website',
+      images: ogImages(locale),
     },
   };
 }

@@ -6,6 +6,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import { siteConfig } from '@/config/site'
+import { ogImages } from '@/lib/ogImage'
 
 // Self-hosted via next/font rather than a Google Fonts <link>. The stylesheet
 // link shipped Inter with display=swap and no metric-matched fallback, so the
@@ -45,6 +46,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       locale: locale === 'zh' ? 'zh_MY' : locale === 'ms' ? 'ms_MY' : 'en_MY',
       url: `${siteConfig.baseUrl}/${locale}`,
       siteName: siteConfig.brandName,
+      images: ogImages(locale),
     },
     robots: { index: true, follow: true },
   }

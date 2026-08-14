@@ -11,6 +11,7 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import { siteConfig, type Locale } from '@/config/site'
 import { waRedirect } from '@/lib/waRedirect'
+import { ogImages } from '@/lib/ogImage'
 
 type Params = { locale: Locale; slug: string }
 
@@ -59,7 +60,9 @@ export async function generateMetadata({
     openGraph: {
       title: tr.meta_title,
       description: tr.meta_description,
-      images: post.cover_image_url ? [{ url: post.cover_image_url }] : [],
+      // An article with its own cover art shares better than the generic hero
+      // card; fall back to the locale card when it has none.
+      images: post.cover_image_url ? [{ url: post.cover_image_url }] : ogImages(locale),
     },
   }
 }

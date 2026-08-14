@@ -17,6 +17,7 @@ import {
   productSchemaForLocation,
 } from '@/lib/schema'
 import { siteConfig, type Locale } from '@/config/site'
+import { ogImages } from '@/lib/ogImage'
 
 
 const SITE_URL = siteConfig.url
@@ -64,6 +65,7 @@ export async function generateMetadata(
       title: t('meta.title', { city }),
       description: t('meta.description', { city }),
       locale: locale === 'en' ? 'en_MY' : locale === 'ms' ? 'ms_MY' : 'zh_CN',
+      images: ogImages(locale),
     },
     robots: { index: true, follow: true },
   }

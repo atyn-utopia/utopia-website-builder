@@ -12,6 +12,7 @@ import { ProductSchema } from '@/components/schema/ProductSchema'
 import { FAQSchema } from '@/components/schema/FAQSchema'
 import { ReviewsCarousel } from '@/components/ReviewsCarousel'
 import { CountdownStrip } from '@/components/CountdownStrip'
+import { ogImages } from '@/lib/ogImage';
 
 const WA_GREEN = '#25D366'
 
@@ -45,7 +46,9 @@ export async function generateMetadata({
       title: t('meta.title'),
       description: t('meta.description'),
       url: `https://oksigen.com.my/${locale}`,
-      images: [{ url: 'https://oksigen.com.my/og-image.jpg', width: 1200, height: 630, alt: t('meta.ogImageAlt') }],
+      // Was a hardcoded /og-image.jpg that does not exist in public/ — the
+      // card 404'd. Now the per-locale hero screenshot.
+      images: ogImages(locale, t('meta.ogImageAlt')),
     },
   }
 }

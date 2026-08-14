@@ -15,6 +15,7 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import PageStyles from '@/components/PageStyles'
 import LocationPageClient from './LocationPageClient'
+import { ogImages } from '@/lib/ogImage'
 
 type Props = {
   params: Promise<{ locale: string; location: string }>
@@ -58,14 +59,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: siteConfig.brandName,
       locale: locale === 'zh' ? 'zh_CN' : 'en_MY',
       type: 'website',
-      images: [
-        {
-          url: `${baseUrl}/og-image.jpg`,
-          width: 1200,
-          height: 630,
-          alt: `Motor rental in ${displayName}, Malaysia`,
-        },
-      ],
+      // Was a hardcoded /og-image.jpg that does not exist in public/ — the
+      // card 404'd. Now the per-locale hero screenshot.
+      images: ogImages(locale, `Motor rental in ${displayName}, Malaysia`),
     },
     twitter: {
       card: 'summary_large_image',

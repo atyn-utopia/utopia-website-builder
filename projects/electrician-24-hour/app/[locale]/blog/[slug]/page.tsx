@@ -10,6 +10,7 @@ import SiteFooter from '@/components/SiteFooter';
 import FomoBanner from '@/components/FomoBanner';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 import BlogLinkTracker from '@/components/tracking/BlogLinkTracker';
+import { ogImages } from '@/lib/ogImage';
 
 export async function generateMetadata({
   params,
@@ -29,7 +30,9 @@ export async function generateMetadata({
       url: `${siteConfig.siteUrl}/${locale}/blog/${slug}`,
       siteName: siteConfig.brandName,
       type: 'article',
-      images: post.cover_image_url ? [post.cover_image_url] : [],
+      // An article with its own cover art shares better than the generic hero
+      // card; fall back to the locale card when it has none.
+      images: post.cover_image_url ? [post.cover_image_url] : ogImages(locale),
     },
   };
 }

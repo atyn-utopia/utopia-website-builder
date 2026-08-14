@@ -11,6 +11,7 @@ import FomoBanner from '@/components/FomoBanner';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import { ogImages } from '@/lib/ogImage';
 
 export async function generateMetadata({
   params,
@@ -31,7 +32,9 @@ export async function generateMetadata({
       url: `${siteConfig.siteUrl}/${locale}/blog/${slug}`,
       type: 'article',
       locale: m('ogLocale'),
-      images: post.cover_image_url ? [{ url: post.cover_image_url }] : [],
+      // An article with its own cover art shares better than the generic hero
+      // card; fall back to the locale card when it has none.
+      images: post.cover_image_url ? [{ url: post.cover_image_url }] : ogImages(locale),
     },
     twitter: { card: 'summary_large_image' },
   };

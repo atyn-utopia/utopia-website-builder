@@ -6,6 +6,7 @@ import BlogListClient from './BlogListClient';
 import FomoBanner from '@/components/FomoBanner';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import { ogImages } from '@/lib/ogImage';
 
 export async function generateMetadata({
   params,
@@ -26,6 +27,7 @@ export async function generateMetadata({
       type: 'website',
       locale: m('ogLocale'),
       siteName: siteConfig.brandName,
+      images: ogImages(locale),
     },
   };
 }

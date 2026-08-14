@@ -14,6 +14,7 @@ import { ReviewsCarousel } from '@/components/ReviewsCarousel'
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema'
 import { FAQSchema } from '@/components/schema/FAQSchema'
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema'
+import { ogImages } from '@/lib/ogImage';
 
 const WA_GREEN = '#25D366'
 
@@ -63,7 +64,9 @@ export async function generateMetadata({
       title: t('meta.title', { city: cityName }),
       description: t('meta.description', { city: cityName }),
       url: `https://oksigen.com.my/${locale}/oxygen-machine/${location}`,
-      images: [{ url: 'https://oksigen.com.my/og-image.jpg', width: 1200, height: 630, alt: t('meta.ogImageAlt', { city: cityName }) }],
+      // Was a hardcoded /og-image.jpg that does not exist in public/ — the
+      // card 404'd. Now the per-locale hero screenshot.
+      images: ogImages(locale, t('meta.ogImageAlt', { city: cityName })),
     },
     robots: { index: true, follow: true },
   }

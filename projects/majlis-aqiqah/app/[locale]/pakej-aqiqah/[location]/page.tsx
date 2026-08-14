@@ -6,7 +6,7 @@ import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
 import { routing } from '@/i18n/routing';
 import { localeAbs, localePath } from '@/lib/localeHref';
-import { ogImage } from '@/lib/ogImage';
+import { ogImages } from '@/lib/ogImage';
 import {
   locations,
   getLocationsByState,
@@ -36,7 +36,7 @@ const GALLERY_IMAGES = [
   '/gallery/9.jpg', '/gallery/10.jpg', '/gallery/11.jpg', '/gallery/12.jpg',
 ];
 const BRAND_LOGO_ON_DARK = '/brand/majlis-aqiqah-dark.png';
-const HERO_OPERATOR_PHOTO = '/brand/hero-photo.jpg';
+const HERO_OPERATOR_PHOTO = '/brand/hero-photo.png';
 const FINAL_CTA_BG = '/bg/final-cta.jpg';
 
 // Build the top cities at build time; the rest render on first request and
@@ -76,7 +76,7 @@ export async function generateMetadata({
       url: `${localeAbs(locale)}${path}`,
       type: 'website',
       siteName: siteConfig.brandName,
-      images: [ogImage(title)],
+      images: ogImages(locale, title),
     },
   };
 }
@@ -241,7 +241,7 @@ export default async function LocationPage({
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <span className="hero-image-frame">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={HERO_OPERATOR_PHOTO} alt={tHero('imageAlt')} width={1600} height={1137} className="hero-image-img" />
+              <img src={HERO_OPERATOR_PHOTO} alt={tHero('imageAlt')} width={1024} height={1536} className="hero-image-img" />
             </span>
             <span className="hero-float-tag">
               <span className="hero-float-tag__mark" aria-hidden="true">

@@ -6,7 +6,7 @@ import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
 import { routing } from '@/i18n/routing';
 import { localeAbs, localePath } from '@/lib/localeHref';
-import { ogImage } from '@/lib/ogImage';
+import { ogImages } from '@/lib/ogImage';
 import { localizeArticleHtml } from '@/lib/articleHtml';
 import { getBlogPost, getBlogPostSlugs, getRecentBlogPosts } from '@/lib/webcore';
 import { waRedirect } from '@/lib/waRedirect';
@@ -46,7 +46,11 @@ export async function generateMetadata({
       type: 'article', title: tr.title, description: tr.excerpt,
       url: `${localeAbs(locale)}${path}`,
       siteName: siteConfig.brandName,
-      images: [ogImage(tr.title, post.cover_image_url)],
+      // An article with its own cover art shares better than the generic hero
+      // card; fall back to the locale card when it has none.
+      images: post.cover_image_url
+        ? [{ url: post.cover_image_url, alt: tr.title }]
+        : ogImages(locale, tr.title),
       publishedTime: post.published_at,
     },
   };

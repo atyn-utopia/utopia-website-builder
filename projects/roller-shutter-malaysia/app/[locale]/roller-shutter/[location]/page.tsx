@@ -13,6 +13,7 @@ import PageStyles from '@/components/PageStyles';
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
+import { ogImages } from '@/lib/ogImage';
 
 type Params = { locale: string; location: string };
 
@@ -67,6 +68,7 @@ export async function generateMetadata({
       siteName: siteConfig.brandName,
       locale: locale,
       type: 'website',
+      images: ogImages(locale),
     },
     robots: {
       index: true,

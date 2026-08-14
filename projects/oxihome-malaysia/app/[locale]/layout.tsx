@@ -11,6 +11,7 @@ import { siteConfig } from '@/config/site'
 import { getPhoneNumber, waLink } from '@/lib/webcore'
 import '../globals.css'
 import FomoBanner from '@/components/FomoBanner'
+import { ogImages } from '@/lib/ogImage';
 
 const inter = Inter({
   variable: '--font-inter',
@@ -58,6 +59,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       locale: localeNames[locale] ?? 'en_MY',
       url: siteConfig.siteUrl,
       siteName: siteConfig.name,
+      images: ogImages(locale),
     },
     alternates: seoAlternates(locale),
     robots: { index: true, follow: true },

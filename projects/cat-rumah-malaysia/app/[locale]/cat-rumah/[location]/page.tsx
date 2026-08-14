@@ -15,6 +15,7 @@ import SiteFooter from '@/components/SiteFooter'
 import PageStyles from '@/components/PageStyles'
 import WhatsAppClickTracker from '@/components/tracking/WhatsAppClickTracker'
 import LocationPageClient from './LocationPageClient'
+import { ogImages } from '@/lib/ogImage'
 
 type Params = { locale: string; location: string }
 
@@ -44,6 +45,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       siteName: siteConfig.brandName,
       locale: locale === 'zh' ? 'zh_MY' : locale === 'en' ? 'en_MY' : 'ms_MY',
       type: 'website',
+      images: ogImages(locale),
     },
     robots: { index: true, follow: true },
   }

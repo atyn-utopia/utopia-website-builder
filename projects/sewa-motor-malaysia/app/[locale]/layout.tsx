@@ -7,6 +7,7 @@ import { Inter } from "next/font/google";
 import { OrganizationSchema } from "@/components/schema/OrganizationSchema";
 import { siteConfig } from "@/config/site";
 import type { Metadata } from "next";
+import { ogImages } from '@/lib/ogImage'
 
 const inter = Inter({
   subsets: ["latin"],
@@ -46,6 +47,7 @@ export async function generateMetadata({
       siteName: siteConfig.brandName,
       locale: locale === "zh" ? "zh_CN" : "en_MY",
       type: "website",
+      images: ogImages(locale),
     },
   };
 }

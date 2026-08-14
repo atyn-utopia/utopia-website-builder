@@ -5,7 +5,7 @@ import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { localeAbs } from '@/lib/localeHref';
-import { ogImage } from '@/lib/ogImage';
+import { ogImages } from '@/lib/ogImage';
 import { siteConfig } from '@/config/site';
 import { OrganizationSchema } from '@/components/schema/OrganizationSchema';
 import { WebSiteSchema } from '@/components/schema/WebSiteSchema';
@@ -66,11 +66,11 @@ export async function generateMetadata({
       description: t('description'),
       locale: OG_LOCALE[locale] || 'ms_MY',
       alternateLocale: routing.locales.filter((l) => l !== locale).map((l) => OG_LOCALE[l]),
-      images: [ogImage(t('title'))],
+      images: ogImages(locale, t('title')),
     },
     // Inherited by every page; title/description fall through from each page's
     // own metadata, so only the card type + image need declaring here.
-    twitter: { card: 'summary_large_image', images: [siteConfig.ogImage] },
+    twitter: { card: 'summary_large_image', images: ogImages(locale, t('title')) },
   };
 }
 

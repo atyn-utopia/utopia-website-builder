@@ -6,6 +6,7 @@ import { routing } from '@/i18n/routing';
 import { OrganizationSchema } from '@/components/schema/OrganizationSchema';
 import { siteConfig } from '@/config/site';
 import type { Metadata } from 'next';
+import { ogImages } from '@/lib/ogImage';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -30,6 +31,7 @@ export async function generateMetadata({
       type: 'website',
       url: siteConfig.siteUrl,
       siteName: siteConfig.brandName,
+      images: ogImages(locale),
     },
     twitter: {
       card: 'summary_large_image',

@@ -10,6 +10,7 @@ import SiteFooter from '@/components/SiteFooter';
 import PageStyles from '@/components/PageStyles';
 import HomePageClient from './HomePageClient';
 import { waRedirect } from '@/lib/waRedirect';
+import { ogImages } from '@/lib/ogImage';
 
 // The wheelchair hero photo is hosted on the brand's Wix CDN (no public/brand
 // dir exists in this project). HomePageClient already references the same URL
@@ -38,6 +39,7 @@ export async function generateMetadata({
       siteName: siteConfig.brandName,
       type: 'website',
       locale: locale === 'ms' ? 'ms_MY' : locale === 'zh' ? 'zh_CN' : 'en_MY',
+      images: ogImages(locale),
     },
   };
 }
