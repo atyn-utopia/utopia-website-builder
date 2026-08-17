@@ -61,9 +61,9 @@
 </header>
 <div class="wrap">
   <div class="stats">
-    <div class="stat"><div class="n">112</div><div class="l">Total rules</div></div>
-    <div class="stat block"><div class="n">60</div><div class="l">Blocking</div></div>
-    <div class="stat adv"><div class="n">52</div><div class="l">Advisory</div></div>
+    <div class="stat"><div class="n">115</div><div class="l">Total rules</div></div>
+    <div class="stat block"><div class="n">62</div><div class="l">Blocking</div></div>
+    <div class="stat adv"><div class="n">53</div><div class="l">Advisory</div></div>
     <div class="stat"><div class="n">11</div><div class="l">Categories</div></div>
   </div>
 
@@ -85,13 +85,13 @@
         <td><span class="badge sev-adv">advisory</span></td>
         <td class="rule-name">GTM container snippet in layout</td>
         <td><code>gtm-container</code></td>
-        <td><a href="full-website-setup.md#16b-step-15--google-integration-post-deploy-after-paid-domain-is-live" target="_blank" rel="noopener">docs ↗</a></td>
+        <td><a href="google-integration.md" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
       <tr class="rule" data-sev="advisory" data-text="gtm noscript fallback in layout gtm-noscript">
         <td><span class="badge sev-adv">advisory</span></td>
         <td class="rule-name">GTM noscript fallback in layout</td>
         <td><code>gtm-noscript</code></td>
-        <td><a href="full-website-setup.md#16b-step-15--google-integration-post-deploy-after-paid-domain-is-live" target="_blank" rel="noopener">docs ↗</a></td>
+        <td><a href="google-integration.md" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
         </tbody>
       </table>
@@ -293,7 +293,7 @@
       </table>
     </section>
     <section class="group" data-group="Layout &amp; Design">
-      <h2>Layout &amp; Design <span class="gcount">40 rules · 17 blocking</span></h2>
+      <h2>Layout &amp; Design <span class="gcount">41 rules · 17 blocking</span></h2>
       <table>
         <thead><tr><th>Severity</th><th>Rule</th><th>Check id</th><th>Doc</th></tr></thead>
         <tbody>
@@ -537,6 +537,12 @@
         <td><code>price-from-prefix</code></td>
         <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
+      <tr class="rule" data-sev="advisory" data-text="referenced public/ assets exist public-assets-exist">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Referenced public/ assets exist</td>
+        <td><code>public-assets-exist</code></td>
+        <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
         </tbody>
       </table>
     </section>
@@ -723,7 +729,7 @@
       </table>
     </section>
     <section class="group" data-group="Database">
-      <h2>Database <span class="gcount">4 rules · 4 blocking</span></h2>
+      <h2>Database <span class="gcount">5 rules · 5 blocking</span></h2>
       <table>
         <thead><tr><th>Severity</th><th>Rule</th><th>Check id</th><th>Doc</th></tr></thead>
         <tbody>
@@ -745,6 +751,12 @@
         <td><code>db-phone-number</code></td>
         <td><a href="full-website-setup.md" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
+      <tr class="rule" data-sev="blocking" data-text="exactly one default phone number db-single-default-phone">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">Exactly one default phone number</td>
+        <td><code>db-single-default-phone</code></td>
+        <td><a href="full-website-setup.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
       <tr class="rule" data-sev="blocking" data-text="active products in supabase db-products">
         <td><span class="badge sev-block">BLOCKING</span></td>
         <td class="rule-name">Active products in Supabase</td>
@@ -755,7 +767,7 @@
       </table>
     </section>
     <section class="group" data-group="Deployment">
-      <h2>Deployment <span class="gcount">6 rules · 6 blocking</span></h2>
+      <h2>Deployment <span class="gcount">7 rules · 7 blocking</span></h2>
       <table>
         <thead><tr><th>Severity</th><th>Rule</th><th>Check id</th><th>Doc</th></tr></thead>
         <tbody>
@@ -775,6 +787,12 @@
         <td><span class="badge sev-block">BLOCKING</span></td>
         <td class="rule-name">siteConfig.domain is served by Vercel</td>
         <td><code>vercel-domain-match</code></td>
+        <td><a href="full-website-setup.md#16-step-14--deploy" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="blocking" data-text="one main domain, and config/site.ts matches it single-main-domain">
+        <td><span class="badge sev-block">BLOCKING</span></td>
+        <td class="rule-name">One main domain, and config/site.ts matches it</td>
+        <td><code>single-main-domain</code></td>
         <td><a href="full-website-setup.md#16-step-14--deploy" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
       <tr class="rule" data-sev="blocking" data-text="live site reads phone from supabase live-db-connected">
@@ -821,10 +839,10 @@
         <td><code>fallback-phone-is-own</code></td>
         <td><a href="../CLAUDE.md" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
-      <tr class="rule" data-sev="advisory" data-text="no phone number rendered as visible text no-phone-displayed">
+      <tr class="rule" data-sev="advisory" data-text="displayed phone number comes from the database display-phone-db-backed">
         <td><span class="badge sev-adv">advisory</span></td>
-        <td class="rule-name">No phone number rendered as visible text</td>
-        <td><code>no-phone-displayed</code></td>
+        <td class="rule-name">Displayed phone number comes from the database</td>
+        <td><code>display-phone-db-backed</code></td>
         <td><a href="../CLAUDE.md" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
       <tr class="rule" data-sev="blocking" data-text="no domain/url shown as visible text in copy no-domains-in-copy">

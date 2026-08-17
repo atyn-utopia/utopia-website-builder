@@ -15,7 +15,7 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import PageStyles from '@/components/PageStyles'
 import LocationPageClient from './LocationPageClient'
-import { ogImages } from '@/lib/ogImage'
+import { ogImages, ogImage } from '@/lib/ogImage'
 
 type Props = {
   params: Promise<{ locale: string; location: string }>
@@ -67,7 +67,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: 'summary_large_image',
       title,
       description,
-      images: [`${baseUrl}/og-image.jpg`],
+      // Same per-locale hero screenshot as openGraph above. This still pointed
+      // at the /og-image.jpg that does not exist in public/, so the Twitter
+      // card 404'd while the OG card beside it worked.
+      images: ogImages(locale, `Motor rental in ${displayName}, Malaysia`),
     },
     robots: {
       index: true,
@@ -107,7 +110,10 @@ export default async function LocationPage({ params }: Props) {
     return {
     name: tProducts(`${key}.name` as any),
     description: tProducts(`${key}.description` as any),
-    image: `${siteConfig.baseUrl}/og-image.jpg`,
+    // Was /og-image.jpg, which does not exist in public/. Product schema needs
+    // an image that resolves; the per-locale hero card is the only one this
+    // site ships. A real per-product photo would be better.
+    image: ogImage(locale).url,
     priceDaily: p.priceDailyNum,
     priceWeekly: p.priceWeeklyNum,
     priceMonthly: p.priceMonthlyNum,
