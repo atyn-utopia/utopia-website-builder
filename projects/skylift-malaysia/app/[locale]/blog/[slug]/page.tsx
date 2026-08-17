@@ -10,6 +10,7 @@ import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import BlogClickTracker from '@/components/tracking/BlogClickTracker';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
+import { ogImages } from '@/lib/ogImage';
 
 export async function generateMetadata({
   params,
@@ -19,18 +20,26 @@ export async function generateMetadata({
   const { locale, slug } = await params;
   const post = await getBlogPostBySlug(slug, locale);
   if (!post) return { title: 'Not Found' };
+  const title = post.meta_title || post.title;
+  const description = post.meta_description || post.excerpt;
+  // The article's own cover when it has one, else the site hero card — an empty
+  // array meant articles without a cover shared with no image at all.
+  const images = post.cover_image_url ? [post.cover_image_url] : ogImages(locale);
   return {
-    title: post.meta_title || post.title,
-    description: post.meta_description || post.excerpt,
+    title,
+    description,
     alternates: seoAlternates(locale, `/blog/${slug}`),
     openGraph: {
-      title: post.meta_title || post.title,
-      description: post.meta_description || post.excerpt,
+      title,
+      description,
       url: `${siteConfig.siteUrl}/${locale}/blog/${slug}`,
       siteName: siteConfig.brandName,
       type: 'article',
-      images: post.cover_image_url ? [post.cover_image_url] : [],
+      images,
     },
+    // Without this the article inherits the layout's twitter block, so X/Twitter
+    // showed the site-wide title and hero card instead of the article's own.
+    twitter: { card: 'summary_large_image', title, description, images },
   };
 }
 

@@ -13,13 +13,13 @@ export function BreadcrumbSchema({ locale, cityName, locationSlug }: Props) {
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: `https://oxihome.my/${locale}`,
+        item: `https://oksigen.com.my/${locale}`,
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: `Oxygen Machine in ${cityName}`,
-        item: `https://oxihome.my/${locale}/oxygen-machine/${locationSlug}`,
+        item: `https://oksigen.com.my/${locale}/oxygen-machine/${locationSlug}`,
       },
     ],
   }

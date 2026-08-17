@@ -1,5 +1,16 @@
 'use client';
 
+// Flat minimal footer — the fleet default (reference: water-tank-malaysia).
+// Logo + horizontal nav, divider, then copyright + the "Built by Utopia AI"
+// brand-CI credit.
+//
+// Replaces the previous 3-column dark footer (brand + tagline / Quick Links /
+// Top Locations). Also adds the brand-CI credit, which this site was missing
+// entirely.
+//
+// Palette stays Sewa Motor Malaysia's own navy + orange; the CI is a
+// structural element only, not a reskin.
+
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 
@@ -12,10 +23,10 @@ export default function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="site-footer-inner">
-        <div className="footer-col">
-          <div className="footer-brand">
+        <div className="footer-top">
+          <span className="footer-brand">
             <span className="footer-brand-icon" aria-hidden="true">
-              <svg viewBox="0 0 32 32" width="28" height="28">
+              <svg viewBox="0 0 32 32" width="24" height="24">
                 <circle cx="9" cy="22" r="5" fill="#fff" />
                 <circle cx="9" cy="22" r="2" fill="#FF6B35" />
                 <circle cx="23" cy="22" r="5" fill="#fff" />
@@ -25,47 +36,42 @@ export default function SiteFooter() {
               </svg>
             </span>
             <span className="footer-brand-text">Sewa Motor Malaysia</span>
-          </div>
-          <h5 className="footer-tagline">{t('tagline')}</h5>
+          </span>
+
+          <nav className="footer-nav" aria-label="Footer">
+            <Link href={`/${locale}`}>{nav('home')}</Link>
+            <Link href={`/${locale}#products`}>{nav('products')}</Link>
+            <Link href={`/${locale}#locations`}>{nav('locations')}</Link>
+            <Link href={`/${locale}/blog`}>{nav('blog')}</Link>
+          </nav>
         </div>
-        <div className="footer-col">
-          <p className="footer-heading">{t('quickLinks')}</p>
-          <Link href={`/${locale}`}>{nav('home')}</Link>
-          <Link href={`/${locale}#products`}>{nav('products')}</Link>
-          <Link href={`/${locale}/blog`}>{nav('blog')}</Link>
-        </div>
-        <div className="footer-col">
-          <p className="footer-heading">{t('topLocations')}</p>
-          <Link href={`/${locale}/sewa-motor/kuala-lumpur`}>Kuala Lumpur</Link>
-          <Link href={`/${locale}/sewa-motor/petaling-jaya`}>Petaling Jaya</Link>
-          <Link href={`/${locale}/sewa-motor/shah-alam`}>Shah Alam</Link>
+
+        <div className="footer-line" aria-hidden="true" />
+
+        <div className="footer-bottom">
+          <h6 className="footer-copy">{t('copyright', { year })}</h6>
+          <a
+            className="utopia-credit"
+            href="https://utopiagroup.com.my"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>Built by</span>
+            <span className="utopia-credit__word">Utopia</span>
+            <svg className="utopia-credit__mark" width="14" height="12" viewBox="0 0 64 56" aria-hidden="true">
+              <defs>
+                <linearGradient id="utopiaCreditGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#0054A6" />
+                  <stop offset="50%" stopColor="#2774AE" />
+                  <stop offset="100%" stopColor="#4A9DD0" />
+                </linearGradient>
+              </defs>
+              <polygon points="32,4 60,52 4,52" fill="url(#utopiaCreditGrad)" />
+            </svg>
+            <span className="utopia-credit__word">AI</span>
+          </a>
         </div>
       </div>
-      <div className="site-footer-bar">
-        <p>{t('copyright', { year })}</p>
-      </div>
-      <style jsx>{`
-        .site-footer { background: #0F172A; color: #E2E8F0; }
-        .site-footer-inner { max-width: 1200px; margin: 0 auto; padding: 72px 24px 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 56px; }
-        .footer-col { display: flex; flex-direction: column; gap: 16px; }
-        .footer-brand { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 4px; }
-        .footer-brand-icon { display: inline-flex; width: 32px; height: 32px; border-radius: 9px; background: var(--brand-primary, #FF6B35); align-items: center; justify-content: center; flex-shrink: 0; }
-        .footer-brand-text { font-weight: 800; font-size: 15px; color: #fff; letter-spacing: -0.01em; }
-        .footer-tagline { color: #94A3B8; font-size: 14px; line-height: 1.7; margin: 0; max-width: 30ch; }
-        .footer-heading { font-weight: 700; font-size: 13px; color: #fff; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 8px; }
-        /* .footer-col a styled in globals.css — the footer links are
-           next/link <Link> elements, which don't receive styled-jsx's
-           scope class, so a scoped rule here never matched and the links
-           fell back to the browser-default 16px (inconsistent with the
-           13–15px footer text). Same workaround as .site-brand/.nav-cta. */
-        .site-footer-bar { border-top: 1px solid #1E293B; padding: 24px 20px; text-align: center; font-size: 12px; color: #94A3B8; }
-        .site-footer-bar p { margin: 0; }
-        @media (max-width: 640px) {
-          .site-footer-inner { padding: 48px 24px 32px; gap: 40px; text-align: center; }
-          .footer-col { align-items: center; }
-          .footer-tagline { max-width: none; }
-        }
-      `}</style>
     </footer>
   );
 }

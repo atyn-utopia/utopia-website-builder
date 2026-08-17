@@ -7,6 +7,7 @@ import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import FomoBanner from '@/components/FomoBanner';
 import BlogLinkTracker from '@/components/tracking/BlogLinkTracker';
+import { ogImages } from '@/lib/ogImage';
 
 export async function generateMetadata({
   params,
@@ -25,6 +26,7 @@ export async function generateMetadata({
       url: `${siteConfig.siteUrl}/${locale}/blog`,
       siteName: siteConfig.brandName,
       type: 'website',
+      images: ogImages(locale),
     },
   };
 }
@@ -64,7 +66,7 @@ export default async function BlogListingPage({
                 color: 'var(--ink-muted)',
               }}
             >
-              <p>{t('noPosts')}</p>
+              <h5 className="body-text">{t('noPosts')}</h5>
             </div>
           ) : (
             <div className="blog-grid">
@@ -90,7 +92,7 @@ export default async function BlogListingPage({
                     <div className="blog-card-body">
                       <span className="blog-card-date">{date}</span>
                       <h3>{post.title}</h3>
-                      <p>{post.excerpt}</p>
+                      <h5 className="body-text">{post.excerpt}</h5>
                       <span className="blog-card-more">{t('readMore')} →</span>
                     </div>
                   </BlogLinkTracker>

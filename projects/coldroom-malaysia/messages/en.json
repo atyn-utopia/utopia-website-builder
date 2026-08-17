@@ -315,5 +315,10 @@
     "noPosts": "No posts yet. Check back soon.",
     "breadcrumbHome": "Home",
     "breadcrumbBlog": "Blog"
+  },
+  "redirect": {
+    "heading": "Opening WhatsApp…",
+    "subtext": "Connecting you to the Cold Room Malaysia team.",
+    "fallback": "Click here if it doesn't redirect"
   }
 }

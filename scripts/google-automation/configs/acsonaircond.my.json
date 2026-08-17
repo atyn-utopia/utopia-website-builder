@@ -1,0 +1,21 @@
+{
+  "domain": "acsonaircond.my",
+  "containerId": "GTM-PMRH2FLW",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-36SEBHBHSW",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-08-13T07:35:03.632Z",
+  "gsc": {
+    "siteUrl": "https://acsonaircond.my/zh/",
+    "token": "<meta name=\"google-site-verification\" content=\"JPTE-czAC7_RnKOWwBWvFLOdEseTG5Sm1H2UmNxDtKU\" />",
+    "initAt": "2026-08-13T07:37:22.536Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-08-13T07:40:59.085Z"
+  }
+}

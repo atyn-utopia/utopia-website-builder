@@ -77,7 +77,7 @@ export default function LocationPageClient({
       {/* SECTION 3 — HERO */}
       <section
         style={{
-          padding: 'clamp(96px, 12vw, 132px) 16px 32px',
+          padding: 'clamp(28px, 5vw, 44px) 16px 32px',
           background:
             'radial-gradient(circle at 70% 20%, rgba(143,184,224,0.25), transparent 60%), #FFFFFF',
         }}
@@ -93,18 +93,19 @@ export default function LocationPageClient({
           }}
         >
           <div className="kh-hero-copy">
+            {/* Hero eyebrow — same pill tokens as <SectionEyebrow> for consistency. */}
             <div
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: 8,
-                padding: '6px 12px',
+                padding: '6px 14px',
                 borderRadius: 9999,
-                background: '#FDECEC',
-                color: '#c01e1e',
+                background: 'rgba(230,48,48,0.10)',
+                color: '#e63030',
                 fontSize: 12,
                 fontWeight: 700,
-                letterSpacing: 0.4,
+                letterSpacing: 1.2,
                 textTransform: 'uppercase',
                 marginBottom: 18,
               }}
@@ -112,21 +113,22 @@ export default function LocationPageClient({
               <span
                 aria-hidden="true"
                 style={{
-                  width: 8,
-                  height: 8,
+                  width: 7,
+                  height: 7,
                   background: '#e63030',
                   borderRadius: '50%',
+                  flex: '0 0 auto',
                 }}
               />
               {location.name} · 24 Jam
             </div>
             <h1
               style={{
-                fontSize: 'clamp(28px, 5vw, 48px)',
-                fontWeight: 800,
+                fontSize: 'clamp(28px, 5vw, 44px)',
+                fontWeight: 700,
                 color: '#1c3a6a',
-                letterSpacing: -0.8,
-                lineHeight: 1.1,
+                letterSpacing: '-0.025em',
+                lineHeight: 1.2,
                 margin: '0 0 16px',
               }}
             >
@@ -135,7 +137,7 @@ export default function LocationPageClient({
             <h2
               style={{
                 fontSize: 'clamp(16px, 1.6vw, 20px)',
-                fontWeight: 500,
+                fontWeight: 400,
                 color: '#334155',
                 lineHeight: 1.55,
                 margin: '0 0 24px',
@@ -247,7 +249,7 @@ export default function LocationPageClient({
           </div>
         </div>
 
-        <style jsx>{`
+        <style>{`
           .kh-hero-copy {
             text-align: center;
           }
@@ -290,10 +292,10 @@ export default function LocationPageClient({
           <div style={{ maxWidth: 1040, margin: '0 auto', textAlign: 'center' }}>
             <h3
               style={{
-                fontSize: 26,
-                fontWeight: 800,
+                fontSize: 'clamp(1.6rem, 3vw, 2.4rem)',
+                fontWeight: 700,
                 color: '#1c3a6a',
-                letterSpacing: -0.3,
+                letterSpacing: '-0.025em',
                 margin: '0 0 10px',
               }}
             >

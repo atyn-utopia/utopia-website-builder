@@ -12,13 +12,9 @@
     "whatsapp": "WhatsApp"
   },
   "fomo": {
-    "primary": "24小时优惠倒计时",
-    "secondary": "当天送达全马159个城镇 — 请在倒计时结束前预订。",
-    "labels": {
-      "hrs": "时",
-      "min": "分",
-      "sec": "秒"
-    }
+    "eyebrow": "{monthUpper} 优惠",
+    "body": "{month}租用任何医院病床，免费送货与安装。",
+    "ctaLabel": "领取优惠"
   },
   "hero": {
     "h1": "租用和购买医院病床 — 全马24小时送货服务",
@@ -46,10 +42,10 @@
     "intro": "手动与电动病床、医用床垫、防褥疮气垫床、制氧机、轮椅及CPAP呼吸机 — 全部支持租用或购买，24小时送达。",
     "cardCta": "WhatsApp 咨询",
     "eyebrow": "租赁与购买目录",
-    "imageAltTemplate": "{model} 医院病床 — Katil Hospital 24 Jam 全马来西亚租赁/销售"
+    "imageAltTemplate": "{model} 医院病床 — Katil Hospital Murah 全马来西亚租赁/销售"
   },
   "values": {
-    "h3": "为什么选择 Katil Hospital 24 Jam",
+    "h3": "为什么选择 Katil Hospital Murah",
     "intro": "我们明白居家照护不能等待。这就是数百个马来西亚家庭信赖我们的原因。",
     "c1": {
       "title": "24小时送达",
@@ -101,7 +97,7 @@
       "护理者为长者调节电动医院病床",
       "配有护栏的医院病床用于防跌",
       "医院病床和点滴架捆绑用于居家护理",
-      "Katil Hospital 24 Jam 团队完成当日安装"
+      "Katil Hospital Murah 团队完成当日安装"
     ]
   },
   "googleReview": {
@@ -159,11 +155,11 @@
     "subtitle": "我们的团队全天候待命 — 在隔天前完成送达与安装。",
     "cta": "立即 WhatsApp 联系",
     "eyebrow": "立即行动",
-    "bgAlt": "Katil Hospital 24 Jam 全马来西亚 24 小时医院病床送货及安装"
+    "bgAlt": "Katil Hospital Murah 全马来西亚 24 小时医院病床送货及安装"
   },
   "footer": {
     "brand": {
-      "heading": "Katil Hospital 24 Jam",
+      "heading": "Katil Hospital Murah",
       "tagline": "租售病床、防褥疮床垫及护理设备 — 全马24小时送达。"
     },
     "products": {
@@ -176,7 +172,7 @@
     "language": {
       "heading": "语言"
     },
-    "copyright": "© 2026 Katil Hospital 24 Jam. 版权所有。"
+    "copyright": "© 2026 Katil Hospital Murah. 版权所有。"
   },
   "location": {
     "breadcrumb": {
@@ -203,7 +199,7 @@
     "tocTitle": "目录",
     "ctaBannerTitle": "今天就需要病床？",
     "ctaBannerCta": "立即 WhatsApp",
-    "metaTitle": "博客 — Katil Hospital 24 Jam",
+    "metaTitle": "博客 — Katil Hospital Murah",
     "metaDescription": "关于选购病床、防褥疮床垫及居家照护设备的指南，专为全马家庭而设。"
   },
   "languageSwitcher": {
@@ -229,6 +225,11 @@
     "empty": "您的地区未列出?",
     "emptyCta": "WhatsApp 确认覆盖范围"
   },
-  "logoAlt": "Katil Hospital 24 Jam — 全马来西亚医院病床租赁与销售",
-  "imageAlt": "Katil Hospital 24 Jam 团队在马来西亚住家送货并安装医院病床"
+  "logoAlt": "Katil Hospital Murah — 全马来西亚医院病床租赁与销售",
+  "imageAlt": "Katil Hospital Murah 团队在马来西亚住家送货并安装医院病床",
+  "redirect": {
+    "heading": "正在开启 WhatsApp…",
+    "subtext": "正在为您连接 Katil Hospital Murah 团队。",
+    "fallback": "如果没有自动跳转，请点击这里"
+  }
 }

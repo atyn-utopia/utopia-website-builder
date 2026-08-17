@@ -7,6 +7,7 @@ import BlogLinkTracker from '@/components/tracking/BlogLinkTracker'
 import FomoBanner from '@/components/FomoBanner'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
+import { ogImages } from '@/lib/ogImage'
 
 const BLOG_COPY = {
   en: {
@@ -62,6 +63,7 @@ export async function generateMetadata({
       url,
       siteName: siteConfig.brandName,
       type: 'website',
+      images: ogImages(locale),
     },
   }
 }

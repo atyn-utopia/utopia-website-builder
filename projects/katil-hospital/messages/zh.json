@@ -1,0 +1,411 @@
+{
+  "nav": {
+    "logoAlt": "Ibnu Sina Care 标志 — 马来西亚医疗病床供应商",
+    "logoTagline": "马来西亚医疗病床",
+    "home": "首页",
+    "products": "产品",
+    "rentBuy": "租借 / 购买",
+    "showroom": "展示厅",
+    "faq": "常见问题",
+    "blog": "部落格",
+    "whatsappCta": "WhatsApp 我们",
+    "whatsappCtaLong": "立即 WhatsApp 我们",
+    "openMenu": "打开菜单",
+    "closeMenu": "关闭菜单",
+    "locations": "服务地区",
+    "calculator": "计算器"
+  },
+  "fomo": {
+    "eyebrow": "优惠倒数",
+    "body": "{month}优惠：零订金 + 吉隆坡与雪兰莪免费送货",
+    "ctaLabel": "立即预订"
+  },
+  "hero": {
+    "badge": "照顾您所爱的人",
+    "titleLine1": "租借医疗病床",
+    "titleHighlight": "每月 RM139 起",
+    "subtitle": "在家也能享有医院级的舒适，让父母与至亲安心休养。",
+    "bullets": "✓ 2 小时送达   ✓ 零订金   ✓ 回购保证",
+    "ctaPrimary": "立即 WhatsApp",
+    "ctaSecondary": "联络我们",
+    "imageAlt": "马来西亚女儿在家中照顾躺在医疗病床上休息的母亲",
+    "trust": {
+      "kkm": "KKM 认证",
+      "mda": "MDA 批准",
+      "resmed": "ResMed 授权",
+      "since": "自 2016 年"
+    },
+    "stats": {
+      "reviews": "正面评价",
+      "showrooms": "间展示厅",
+      "delivery": "小时送达"
+    }
+  },
+  "usp": {
+    "deliveryTitle": "2 小时送达",
+    "deliverySub": "吉隆坡与雪兰莪",
+    "depositTitle": "零订金",
+    "depositSub": "货到才付款",
+    "buybackTitle": "50% 回购",
+    "buybackSub": "独家保证"
+  },
+  "emotional": {
+    "badge": "为什么要在家用医疗病床？",
+    "titleLine1": "他们曾经照顾我们。",
+    "titleHighlight": "现在轮到我们照顾他们。",
+    "body": "每一位父母都值得最好的舒适。家中的医疗病床不只是器材 — 它是您每天付出的爱与照顾。",
+    "card1Title": "长者护理",
+    "card1Desc": "给挚爱父母的舒适",
+    "card2Title": "中风病患",
+    "card2Desc": "专为中风康复设计的病床",
+    "card3Title": "手术后康复",
+    "card3Desc": "在家舒适地复原",
+    "card4Title": "安宁疗护",
+    "card4Desc": "在家享有最佳生活品质"
+  },
+  "how": {
+    "badge": "简单又快速",
+    "title": "只需 3 个步骤 —",
+    "titleHighlight": "搞定！",
+    "imageAlt": "Ibnu Sina Care 团队在客户家中安装医疗病床",
+    "step1Title": "WhatsApp 我们",
+    "step1Desc": "告诉我们您的需求 — 中风病患、年长父母、手术后康复。我们协助您挑选最合适的病床。",
+    "step2Title": "我们送货与安装",
+    "step2Desc": "吉隆坡／雪兰莪 2 小时送达。团队上门安装完成。零订金 — 货到才付款。",
+    "step3Title": "免费培训",
+    "step3Desc": "我们教您的家人正确使用病床，并提供 24/7 全天候支援。",
+    "cta": "立即 WhatsApp"
+  },
+  "comfort": {
+    "badge": "舒适与尊严",
+    "titleLead": "让他们休养得有",
+    "titleHighlight": "舒适与尊严",
+    "body": "家中的医疗病床让至亲能坐直用餐、阅读，并与家人互动 — 不再感到疼痛或不适。",
+    "imageAlt": "年长父亲在医疗病床上阅读可兰经，儿子陪伴在旁",
+    "point1": "降低褥疮风险高达 80%",
+    "point2": "抬高头部有助于顺畅呼吸",
+    "point3": "减轻看护负担 — 无需人手搬抬",
+    "point4": "坐直进食更安全 — 减少呛噎风险"
+  },
+  "why": {
+    "badge": "为什么选择 Ibnu Sina Care？",
+    "titleLine1": "不只是卖病床。",
+    "titleHighlight": "我们照顾您的家人。",
+    "exclusiveTag": "独家",
+    "card1Title": "2 小时送达",
+    "card1Desc": "吉隆坡与雪兰莪。全马最快 — 在您来不及担心之前我们已经到了。",
+    "card2Title": "5 间展示厅",
+    "card2Desc": "吉隆坡、槟城、马六甲、柔佛与浮罗交怡。购买前欢迎亲自试用。",
+    "card3Title": "50% 回购保证",
+    "card3Desc": "不再需要了？我们以原价 50% 回购。零风险，不亏损。",
+    "card4Title": "零订金",
+    "card4Desc": "货到才付款。COD — 无需订金，毫无风险。",
+    "card5Title": "24/7 支援",
+    "card5Desc": "随时 WhatsApp 我们。团队随时准备协助。",
+    "card6Title": "免费培训",
+    "card6Desc": "我们教您正确使用病床，让家人照顾起来更有信心。"
+  },
+  "products": {
+    "badge": "医疗病床系列",
+    "title": "为至亲挑选",
+    "titleHighlight": "最合适的一张",
+    "note": "所有病床均含 2 年保固、免费培训与 24/7 支援",
+    "imageAltTemplate": "Ibnu Sina Care {model} 医疗病床",
+    "cta": "WhatsApp 订购",
+    "popular": "⭐ 最受欢迎",
+    "perMonth": "/月",
+    "orBuy": "或",
+    "buyOutright": "直接购买",
+    "items": {
+      "standard-2-fungsi": {
+        "name": "标准型 2 功能",
+        "tag": "超值",
+        "desc": "适合长者护理与短期康复",
+        "f1": "头部与腿部可调",
+        "f2": "承重 150 公斤",
+        "f3": "防锈钢制框架",
+        "f4": "2 年保固"
+      },
+      "premium-3-fungsi": {
+        "name": "高级型 3 功能",
+        "tag": "",
+        "desc": "适合中风病患与长期护理",
+        "f1": "头部、腿部与高度可调",
+        "f2": "承重 180 公斤",
+        "f3": "减轻看护负担",
+        "f4": "可选择租转购",
+        "f5": "2 年保固"
+      },
+      "ultra-6-fungsi-elektrik": {
+        "name": "旗舰型 6 功能电动",
+        "tag": "尊贵",
+        "desc": "遥控器全方位操控",
+        "f1": "全电动遥控操作",
+        "f2": "自动左右翻身",
+        "f3": "附便盆与洗头盆",
+        "f4": "承重 200 公斤",
+        "f5": "2 年保固"
+      }
+    },
+    "priceFrom": "RM {price} 起"
+  },
+  "buyback": {
+    "badge": "🛡️ 独家 — 只在 Ibnu Sina Care",
+    "title": "50% 回购",
+    "titleHighlight": "保证",
+    "body": "不再需要了？我们以原价的 50% 回购您的病床 — 保证做到。没有其他供应商敢这么承诺。",
+    "stat1Value": "50%",
+    "stat1Label": "回购价格",
+    "stat2Value": "0",
+    "stat2Label": "您的风险",
+    "stat3Value": "100%",
+    "stat3Label": "安心保障",
+    "cta": "咨询回购保证"
+  },
+  "addons": {
+    "badge": "配件与附加品",
+    "title": "让居家照护",
+    "titleHighlight": "更完善",
+    "cta": "WhatsApp",
+    "items": {
+      "tilam-ripple": {
+        "name": "气垫床垫",
+        "desc": "交替式气压，有效预防褥疮",
+        "price": "RM179"
+      },
+      "tilam-kalis-air": {
+        "name": "PVC 防水床垫",
+        "desc": "易清洗、耐用、100% 防水",
+        "price": "RM349"
+      },
+      "kerusi-roda": {
+        "name": "轮椅",
+        "desc": "轻便易折叠，多种尺寸可选",
+        "price": "RM299 起"
+      },
+      "oxygen-concentrator": {
+        "name": "制氧机",
+        "desc": "居家持续供氧",
+        "price": "RM1,499 起"
+      }
+    },
+    "cpapTitle": "CPAP 与 ResMed — 授权经销商",
+    "cpapDesc": "Ibnu Sina Care 是 ResMed 在马来西亚的授权经销商。治疗睡眠呼吸中止症的 CPAP 呼吸机 — 可租可买。",
+    "cpapCta": "咨询 CPAP 价格"
+  },
+  "delivery": {
+    "badge": "送货范围",
+    "title": "送货服务遍及",
+    "titleHighlight": "全马来西亚",
+    "tier1Time": "2 小时",
+    "tier1Area": "吉隆坡与雪兰莪",
+    "tier1Note": "全马最快，98% 准时送达。",
+    "tier2Time": "6-12 小时",
+    "tier2Area": "马六甲、森美兰、霹雳、柔佛、槟城",
+    "tier2Note": "当天快速送达。",
+    "tier3Time": "24 小时",
+    "tier3Area": "沙巴、砂拉越及全马各地",
+    "tier3Note": "包括浮罗交怡、纳闽及偏远地区。"
+  },
+  "showroom": {
+    "badge": "欢迎亲自体验",
+    "title": "5 间展示厅",
+    "titleHighlight": "遍布全马",
+    "note": "我们相信 — 亲眼看、亲手试，再做决定。",
+    "imageAlt": "Ibnu Sina Care 展示厅内的医疗病床、轮椅与医疗器材",
+    "cta": "预约参观",
+    "klName": "吉隆坡",
+    "klSub": "总部",
+    "klDesc": "我们最大的展示厅，多款型号可供试用。",
+    "penangName": "槟城",
+    "penangDesc": "服务北马地区 — 槟城、吉打与霹雳。",
+    "melakaName": "马六甲",
+    "melakaDesc": "服务南马地区 — 马六甲与森美兰。",
+    "johorName": "新山",
+    "johorDesc": "服务整个柔佛与南马地区。",
+    "langkawiName": "浮罗交怡",
+    "langkawiDesc": "唯一在浮罗交怡设有展示厅的供应商。"
+  },
+  "reviews": {
+    "badge": "⭐ 4.9/5 — 1,247+ 则评价",
+    "title": "客户",
+    "titleHighlight": "怎么说",
+    "avatarAltTemplate": "{name} 的头像",
+    "items": [
+      {
+        "name": "Puan Fatimah",
+        "city": "吉隆坡",
+        "quote": "1 小时 45 分钟就送到了！安装完成还教我们怎么用。妈妈躺得很舒服，谢谢 Ibnu Sina Care。"
+      },
+      {
+        "name": "Encik Azman",
+        "city": "莎阿南",
+        "quote": "爸爸中风急需病床。下午联络，当晚就送到。价格合理，品质媲美医院。"
+      },
+      {
+        "name": "Puan Siti Aminah",
+        "city": "马六甲",
+        "quote": "手术后只租了 3 个月。流程简单，零订金。用完退还 — 他们真的回购了！"
+      },
+      {
+        "name": "Haji Ismail",
+        "city": "新山",
+        "quote": "为太太买了 3 功能病床。用了一年多依然像新的一样。2 年保固让人非常安心。"
+      },
+      {
+        "name": "Nurul Izzah",
+        "city": "槟城",
+        "quote": "去了槟城展示厅，店员非常热心，每个功能都解释清楚。妈妈很喜欢那张电动病床。"
+      },
+      {
+        "name": "Encik Razak",
+        "city": "八打灵再也",
+        "quote": "比较了 5 家公司 — Ibnu Sina Care 最便宜也最快，还有回购保证。不用考虑了。"
+      },
+      {
+        "name": "Puan Rohani",
+        "city": "梳邦再也",
+        "quote": "24/7 支援是真的。半夜 WhatsApp 也有回覆。店员很有耐心地解释气垫床垫，强力推荐！"
+      },
+      {
+        "name": "Ahmad Faiz",
+        "city": "巴生",
+        "quote": "奶奶 87 岁了。这张病床让她的生活轻松许多 — 能坐起来、吃饭、看电视。这就是用舒适表达的爱。"
+      },
+      {
+        "name": "Puan Haslinda",
+        "city": "浮罗交怡",
+        "quote": "浮罗交怡竟然也有展示厅！去看了就直接买，当天送到。太棒了！"
+      },
+      {
+        "name": "Encik Sulaiman",
+        "city": "怡保",
+        "quote": "租转购非常划算。慢慢分期付款，最后病床就是自己的了。没有负担，妈妈也睡得舒服。"
+      }
+    ]
+  },
+  "faq": {
+    "badge": "常见问题",
+    "title": "解答您的",
+    "titleHighlight": "疑问",
+    "items": [
+      {
+        "q": "租借医疗病床要多少钱？",
+        "a": "2 功能病床每月 RM139 起，3 功能每月 RM229，6 功能电动病床每月 RM649。所有价格均含 2 年保固与免费使用培训。"
+      },
+      {
+        "q": "送货需要多久？",
+        "a": "吉隆坡与雪兰莪 2 小时；马六甲、柔佛、槟城、霹雳、森美兰 6-12 小时；全马其他地区（包括沙巴与砂拉越）24 小时内送达。"
+      },
+      {
+        "q": "什么是 50% 回购保证？",
+        "a": "当您向我们购买病床后不再需要时，我们会以原购买价的 50% 回购。这是 Ibnu Sina Care 的独家保证 — 没有其他公司提供。"
+      },
+      {
+        "q": "需要付订金吗？",
+        "a": "不需要！我们是零订金。病床送到时才付款 — COD（货到付款）。对您完全没有风险。"
+      },
+      {
+        "q": "有租转购（rent-to-own）的选择吗？",
+        "a": "有！您可以先租借，租金会计入购买价格。付满之后病床就归您所有。没有负担，也不需要一次拿出一大笔钱。"
+      },
+      {
+        "q": "手动还是电动病床比较好？",
+        "a": "手动病床（2 与 3 功能）适合还能稍微活动的病患或短期护理。电动病床（6 功能）最适合完全卧床的病患 — 遥控操作让看护无需人手搬抬病患。"
+      },
+      {
+        "q": "有包含安装吗？",
+        "a": "安装收取最低费用。我们的团队会送货、安装，并提供免费使用培训 — 让您的家人有信心且安心地照顾病患。"
+      },
+      {
+        "q": "医疗病床适合什么人使用？",
+        "a": "适合需要支撑的长者、中风病患、手术后病患、长期卧床病患，以及居家安宁疗护。医疗病床有助于降低褥疮风险、让呼吸更顺畅，并减轻看护负担。"
+      },
+      {
+        "q": "Ibnu Sina Care 有认证与执照吗？",
+        "a": "有！我们持有 KKM（马来西亚卫生部）认证，并符合医疗器材管理局（MDA）标准。我们也是 ResMed CPAP 呼吸机在马来西亚的授权经销商，自 2016 年营运至今。"
+      },
+      {
+        "q": "可以到展示厅参观吗？",
+        "a": "当然可以！我们在吉隆坡、槟城、马六甲、新山与浮罗交怡设有 5 间展示厅。欢迎前来 — 决定前可以亲眼看、亲手试用所有型号。WhatsApp 我们预约。"
+      }
+    ]
+  },
+  "finalCta": {
+    "title": "照顾那些曾经",
+    "titleHighlight": "照顾我们的人。",
+    "body": "一则 WhatsApp 讯息 — 我们协助您为至亲挑选最合适的病床。2 小时送达，零订金。",
+    "ctaPrimary": "立即 WhatsApp",
+    "ctaSecondary": "联络我们",
+    "bgAlt": "Ibnu Sina Care 行动呼吁区块的深青色渐层背景"
+  },
+  "gallery": {
+    "alts": [
+      "马来西亚女儿在家中照顾躺在医疗病床上休息的母亲",
+      "年长父亲在医疗病床上阅读可兰经，儿子陪伴在旁",
+      "Ibnu Sina Care 团队在客户家中安装医疗病床",
+      "Ibnu Sina Care 展示厅内的医疗病床、轮椅与医疗器材"
+    ]
+  },
+  "footer": {
+    "blurb": "自 2016 年起供应全马医疗病床。5 间展示厅、2 小时送达、50% 回购保证。照顾您所爱的人。",
+    "quickLinks": "快速链接",
+    "contactUs": "联络我们",
+    "showroomLine": "5 间展示厅：吉隆坡、槟城、马六甲、柔佛、浮罗交怡",
+    "copyright": "© 2016-2026 Ibnu Sina Care Sdn Bhd. 版权所有。",
+    "tagline": "马来西亚医疗病床供应商 🇲🇾"
+  },
+  "location": {
+    "breadcrumbHome": "首页",
+    "heroBadge": "服务您的地区",
+    "titleTemplate": "{location}医疗病床租借",
+    "subtitleTemplate": "快速送达{state}{location} — 零订金、安装完成、免费培训。",
+    "introTemplate": "Ibnu Sina Care 为{location}及{state}一带的家庭供应医疗病床。无论您照顾的是年长父母、中风病患，还是手术后康复的家人，我们都会协助您挑选合适的病床并直接送到府上。",
+    "whyTitle": "{location}的家庭为何选择我们",
+    "coverageTitle": "邻近地区",
+    "faqTitle": "{location}常见问题",
+    "faq1Q": "送到{location}需要多久？",
+    "faq1A": "针对{location}，我们的团队会透过 WhatsApp 确认最快的送货时段 — 巴生谷一带通常当天送达，全马其他地区则在 24 小时内。",
+    "faq2Q": "送到{location}有送货费吗？",
+    "faq2A": "送货费依距离而定。请 WhatsApp 我们您在{location}的完整地址，我们会在您决定前提供最终报价。",
+    "faq3Q": "在{location}可以短期租借吗？",
+    "faq3A": "可以。月租从 RM139 起，不再需要时即可退还。若选择租转购，租金也可计入购买价格。",
+    "ctaTitle": "在{location}需要医疗病床吗？",
+    "ctaBody": "立即 WhatsApp 我们 — 几分钟内即可确认{location}的库存、价格与送货时段。",
+    "cta": "立即 WhatsApp"
+  },
+  "blog": {
+    "title": "医疗病床部落格",
+    "subtitle": "居家照护指南、医疗病床选购技巧，以及给家庭看护者的建议。",
+    "breadcrumbHome": "首页",
+    "breadcrumbBlog": "部落格",
+    "readMore": "阅读文章",
+    "empty": "目前尚未发布文章，请稍后再回来查看。",
+    "backToBlog": "返回部落格",
+    "readingTimeTemplate": "阅读约 {minutes} 分钟",
+    "relatedTitle": "更多文章",
+    "coverAltTemplate": "文章封面图：{title}",
+    "ctaTitle": "急需医疗病床吗？",
+    "ctaBody": "我们的团队会协助挑选合适的病床并送到您家。零订金。",
+    "ctaLabel": "立即 WhatsApp"
+  },
+  "redirect": {
+    "heading": "正在为您接通 WhatsApp…",
+    "subtext": "我们正在为您开启 WhatsApp，请稍候。",
+    "fallback": "若未自动跳转，请点击这里"
+  },
+  "meta": {
+    "home": {
+      "title": "马来西亚医疗病床租借与购买 | Ibnu Sina Care",
+      "description": "医疗病床月租 RM139 起。吉隆坡与雪兰莪 2 小时送达，全马 5 间展示厅，50% 回购保证，零订金。Ibnu Sina Care Sdn Bhd。"
+    },
+    "blog": {
+      "title": "医疗病床与居家照护部落格 | Ibnu Sina Care",
+      "description": "Ibnu Sina Care 团队分享医疗病床选购指南，以及在家照顾长者与中风病患的实用建议。"
+    },
+    "location": {
+      "titleTemplate": "{location}医疗病床租借 | Ibnu Sina Care",
+      "descriptionTemplate": "在{state}{location}租借医疗病床，月租 RM139 起。快速送达、零订金、安装完成并提供免费培训。WhatsApp Ibnu Sina Care。"
+    }
+  }
+}

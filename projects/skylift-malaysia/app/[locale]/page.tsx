@@ -5,6 +5,7 @@ import { getProducts, getBlogPosts } from '@/lib/webcore';
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
 import HomePageClient from './HomePageClient';
+import { ogImages } from '@/lib/ogImage';
 
 export async function generateMetadata({
   params,
@@ -25,6 +26,7 @@ export async function generateMetadata({
       siteName: siteConfig.brandName,
       type: 'website',
       locale: locale === 'ms' ? 'ms_MY' : locale === 'zh' ? 'zh_CN' : 'en_MY',
+      images: ogImages(locale),
     },
   };
 }

@@ -18,6 +18,7 @@ import { LOCATIONS } from '@/config/locations'
 import { HERO_IMAGE } from '@/config/products'
 import { siteConfig, type Locale } from '@/config/site'
 import { waRedirect } from '@/lib/waRedirect'
+import { ogImages } from '@/lib/ogImage'
 
 const SITE_URL = siteConfig.url
 
@@ -49,6 +50,7 @@ export async function generateMetadata(
       title: t('title'),
       description: t('description'),
       locale: locale === 'en' ? 'en_MY' : locale === 'ms' ? 'ms_MY' : 'zh_CN',
+      images: ogImages(locale),
     },
     robots: { index: true, follow: true },
   }

@@ -1,0 +1,44 @@
+{
+  "domain": "tablechairrentals.my",
+  "canonicalHost": "https://tablechairrentals.my",
+  "containerId": "GTM-N3R9ZLNS",
+  "gtmAccountId": "6000211475",
+  "gtmContainerNumericId": "260135234",
+  "ga4MeasurementId": "G-MM2J5SVF2C",
+  "ga4PropertyId": "541291689",
+  "adsCustomerId": "1933757591",
+  "adsConversionActionId": "7678666753",
+  "adsConversionActionName": "tablechairrentals.my (web) whatsapp_click",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-08-03T04:27:53.827Z",
+  "gsc": {
+    "domainProperty": "sc-domain:tablechairrentals.my",
+    "urlPrefixProperties": [
+      "https://tablechairrentals.my/",
+      "https://tablechairrentals.my/ms/",
+      "https://tablechairrentals.my/zh/"
+    ],
+    "siteUrl": "https://tablechairrentals.my/",
+    "token": "<meta name=\"google-site-verification\" content=\"tFkZWpZtxxVnhX9wJCZ_EvT2k5oodZLRsuOxvlY1rok\" />",
+    "initAt": "2026-08-03T04:33:18.861Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-08-03T04:37:19.456Z",
+    "sitemap": "https://tablechairrentals.my/sitemap.xml",
+    "sitemapSubmittedTo": [
+      "sc-domain:tablechairrentals.my",
+      "https://tablechairrentals.my/"
+    ],
+    "bulkIndexingPending": true
+  },
+  "notes": {
+    "reusedJuneSetup": "2026-08-03: kept the pre-existing 2026-06-11 GA4 property 541291689 (G-MM2J5SVF2C) and its already-configured Ads action 7678666753 (ENABLED/CONTACT/ONE_PER_CLICK/primary). The duplicate property created on 2026-08-03 (548128522 / G-ZZNRWGFLLS) was soft-deleted; its orphan Ads action 7707034950 remains HIDDEN because the Ads API rejects status REMOVED on conversion actions.",
+    "localeUrlShape": "next-intl localePrefix=as-needed — default locale en is served at / with no prefix; /en/* 307-redirects away. URL-prefix set is /, /ms, /zh.",
+    "wwwNotRedirecting": "Both apex and www return 200; nothing is keyed to www. Vercel domain config decision owned by the team lead."
+  }
+}

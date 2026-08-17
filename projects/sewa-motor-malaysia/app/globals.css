@@ -303,15 +303,66 @@ h1, h2, h3, h4 {
 /* ── Footer quick-link / location links — kept in globals because they
  *    are next/link <Link> elements and styled-jsx in SiteFooter doesn't
  *    scope rules through them (they'd fall back to the default 16px). */
-.footer-col a {
-  color: #CBD5E1;
-  font-size: 14px;
-  line-height: 1.4;
-  padding: 3px 0;
-  text-decoration: none;
-  transition: color 0.2s;
+/* ── Flat minimal footer (components/SiteFooter.tsx) ─────────────────────
+ * Lives here rather than in a <style jsx> block because the footer nav is
+ * built from next/link <Link> elements, which don't receive styled-jsx's
+ * scope class — a scoped rule never matched and the links fell back to the
+ * browser-default 16px. Same workaround as .site-brand / .nav-cta. */
+.site-footer { background: #0F172A; color: #E2E8F0; }
+.site-footer-inner { max-width: 1200px; margin: 0 auto; padding: 44px 24px 32px; }
+
+.site-footer .footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px 32px;
 }
-.footer-col a:hover { color: #fff; }
+.site-footer .footer-brand { display: inline-flex; align-items: center; gap: 10px; }
+.site-footer .footer-brand-icon {
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--brand-primary, #FF6B35);
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.site-footer .footer-brand-text {
+  font-weight: 800;
+  font-size: 16px;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.site-footer .footer-nav { display: flex; flex-wrap: wrap; gap: 12px 26px; }
+.site-footer .footer-nav a {
+  color: rgba(226, 232, 240, 0.82);
+  font-weight: 600;
+  font-size: 14.5px;
+  text-decoration: none;
+  transition: color var(--dur-hover) var(--ease);
+}
+.site-footer .footer-nav a:hover { color: var(--brand-primary, #FF6B35); }
+
+.site-footer .footer-line { height: 1px; background: #1E293B; margin: 24px 0; }
+.site-footer .footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+}
+.site-footer .footer-copy { margin: 0; font-size: 12.5px; font-weight: 400; color: #94A3B8; }
+.site-footer .utopia-credit { color: #94A3B8; }
+
+@media (max-width: 767px) {
+  .site-footer-inner { padding: 32px 24px 24px; }
+  .site-footer .footer-top { flex-direction: column; text-align: center; gap: 18px; }
+  .site-footer .footer-nav { justify-content: center; }
+  .site-footer .footer-bottom { flex-direction: column; text-align: center; }
+}
 
 /* ── Blog article typography (`.blog-content` is the wrapper around the
  *    DB-stored HTML body). Without these rules every heading, list, and
@@ -423,3 +474,35 @@ h1, h2, h3, h4 {
   color: #E85A25;
   text-decoration: underline;
 }
+
+/* ── Utopia brand CI ────────────────────────────────────────────────────
+   Structural tokens + the "Built by Utopia AI" footer credit. This is the
+   CI *element* insertion only — the site keeps its own palette, fonts and
+   button shape. Nothing below re-themes existing components; the radius /
+   motion tokens are opt-in and are consumed by .utopia-credit alone unless
+   a component references them explicitly. */
+:root {
+  --r-button: 8px;
+  --r-card: 12px;
+  --r-pill: 999px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-hover: 220ms;
+  --dur-layout: 320ms;
+}
+
+.utopia-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  /* No `color` here on purpose. An unlayered `color: inherit` outranks every
+     Tailwind text-colour utility (unlayered always beats @layer), so a footer
+     styling the credit with a class silently inherited the body colour —
+     dark-on-dark and invisible. Each footer sets its own colour. */
+  text-decoration: none;
+  border-radius: var(--r-button);
+  transition: transform var(--dur-hover) var(--ease), opacity var(--dur-hover) var(--ease);
+}
+.utopia-credit:hover { transform: translateY(-1px); opacity: 0.85; }
+.utopia-credit__mark { flex: none; }

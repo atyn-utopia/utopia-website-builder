@@ -1,0 +1,21 @@
+{
+  "domain": "water-tank.my",
+  "containerId": "GTM-W43NZZK8",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-GQX6NGF3KF",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-07-27T03:03:59.390Z",
+  "gsc": {
+    "siteUrl": "https://water-tank.my/zh/",
+    "token": "<meta name=\"google-site-verification\" content=\"2KI8U4m2xIT4pxGOgBFb617QkVyUqZNj_W4niF0idu8\" />",
+    "initAt": "2026-07-27T03:26:34.656Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-07-27T03:31:05.430Z"
+  }
+}

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import ProductCard, { ProductCardData } from '@/components/ProductCard';
 import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker';
@@ -344,7 +344,7 @@ export default function HomeSections({ locale, products, location }: Props) {
             </div>
           ))}
         </div>
-        <style jsx>{`
+        <style>{`
           .kh-usp-grid {
             max-width: 1240px;
             margin: 0 auto;
@@ -464,7 +464,7 @@ export default function HomeSections({ locale, products, location }: Props) {
               </ProductImpressionTracker>
             ))}
           </div>
-          <style jsx>{`
+          <style>{`
             .kh-product-grid {
               --cols: 1;
             }
@@ -492,49 +492,9 @@ export default function HomeSections({ locale, products, location }: Props) {
           borderTop: '1px solid #E2E8F0',
         }}
       >
-        <div
-          style={{
-            maxWidth: 1240,
-            margin: '0 auto',
-            display: 'grid',
-            gap: 40,
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            alignItems: 'center',
-          }}
-        >
-          {/* Mascot + intro column */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-            <div
-              style={{
-                position: 'relative',
-                width: 240,
-                height: 240,
-                maxWidth: '60%',
-                aspectRatio: '1',
-                borderRadius: '50%',
-                background:
-                  'radial-gradient(circle at 50% 40%, #dceef8 0%, #b9d8ec 100%)',
-                overflow: 'hidden',
-                boxShadow:
-                  '0 18px 40px -12px rgba(28,58,106,0.25), 0 6px 14px rgba(28,58,106,0.10)',
-                border: '4px solid #FFFFFF',
-                marginBottom: 32,
-              }}
-            >
-              <img
-                src="/brand/hero/doctor-mascot.png"
-                alt="Doktor Katil Hospital 24 Jam"
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'contain',
-                  objectPosition: 'center bottom',
-                  display: 'block',
-                }}
-              />
-            </div>
+        <div style={{ maxWidth: 1120, margin: '0 auto' }}>
+          {/* Centered header — eyebrow pill + H3 + intro (mascot image removed) */}
+          <div style={{ textAlign: 'center', maxWidth: 640, margin: '0 auto 40px' }}>
             <SectionEyebrow>{valuesT('eyebrow')}</SectionEyebrow>
             <H3 centered>{valuesT('h3')}</H3>
             <p
@@ -543,14 +503,13 @@ export default function HomeSections({ locale, products, location }: Props) {
                 color: 'rgba(28,58,106,0.65)',
                 fontSize: 15,
                 lineHeight: 1.65,
-                maxWidth: 420,
               }}
             >
               {valuesT('intro')}
             </p>
           </div>
 
-          {/* 4 value-prop cards — tasteful trust icons, equal-height, centered on mobile */}
+          {/* Full-width trust-card grid — tasteful icons, equal-height, centered */}
           <div className="kh-why-grid">
             {VALUE_CARDS.map((card) => (
               <div key={card.k} className="kh-why-card hover-lift">
@@ -581,38 +540,36 @@ export default function HomeSections({ locale, products, location }: Props) {
               </div>
             ))}
           </div>
-          <style jsx>{`
+          <style>{`
             .kh-why-grid {
               display: grid;
               gap: 18px;
               grid-template-columns: 1fr;
             }
-            @media (min-width: 520px) {
+            @media (min-width: 560px) {
               .kh-why-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
+              }
+            }
+            @media (min-width: 960px) {
+              .kh-why-grid {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
               }
             }
             .kh-why-card {
               background: #ffffff;
               border: 1px solid #e6edf6;
               border-radius: 16px;
-              padding: 24px 22px;
+              padding: 26px 22px;
               box-shadow: 0 4px 10px rgba(15, 31, 80, 0.06),
                 0 18px 40px rgba(15, 31, 80, 0.05);
               /* Equal height across each row of the grid. */
               height: 100%;
               display: flex;
               flex-direction: column;
-              gap: 12px;
-              /* Center on mobile (primary viewport); switch to left on desktop. */
               align-items: center;
               text-align: center;
-            }
-            @media (min-width: 900px) {
-              .kh-why-card {
-                align-items: flex-start;
-                text-align: left;
-              }
+              gap: 12px;
             }
             .kh-why-icon {
               width: 52px;
@@ -627,7 +584,7 @@ export default function HomeSections({ locale, products, location }: Props) {
               flex: 0 0 52px;
               box-shadow: 0 2px 8px rgba(230, 48, 48, 0.12);
             }
-            .kh-why-icon :global(svg) {
+            .kh-why-icon svg {
               width: 26px;
               height: 26px;
             }
@@ -648,11 +605,11 @@ export default function HomeSections({ locale, products, location }: Props) {
             <SectionEyebrow>{location.city}</SectionEyebrow>
             <h3
               style={{
-                fontSize: 28,
-                fontWeight: 800,
+                fontSize: 'clamp(1.6rem, 3vw, 2.4rem)',
+                fontWeight: 700,
                 color: '#1c3a6a',
-                letterSpacing: -0.4,
-                lineHeight: 1.25,
+                letterSpacing: '-0.025em',
+                lineHeight: 1.2,
                 margin: '8px 0 14px',
               }}
             >
@@ -684,73 +641,114 @@ export default function HomeSections({ locale, products, location }: Props) {
         <div style={{ maxWidth: 1040, margin: '0 auto', textAlign: 'center' }}>
           <SectionEyebrow>{howT('eyebrow')}</SectionEyebrow>
           <H3 centered>{howT('h3')}</H3>
-          <div
-            style={{
-              marginTop: 40,
-              display: 'grid',
-              gap: 20,
-              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-              position: 'relative',
-            }}
-          >
+          {/* Connected step flow — cards linked by arrows: → left-to-right on
+              desktop, ↓ stacked on mobile (arrow rotates, never overflows). */}
+          <div className="kh-flow">
             {['s1', 's2', 's3'].map((s, i) => (
-              <div
-                key={s}
-                style={{
-                  background: '#FFFFFF',
-                  borderRadius: 16,
-                  padding: '28px 22px',
-                  boxShadow:
-                    '0 4px 10px rgba(15,31,80,0.06), 0 18px 40px rgba(15,31,80,0.05)',
-                  border: '1px solid #E2E8F0',
-                  textAlign: 'center',
-                  position: 'relative',
-                  zIndex: 1,
-                }}
-              >
-                <div
-                  aria-hidden="true"
-                  style={{
-                    width: 64,
-                    height: 64,
-                    borderRadius: '50%',
-                    background: '#e63030',
-                    color: '#FFFFFF',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontWeight: 800,
-                    fontSize: 28,
-                    margin: '0 auto 16px',
-                    boxShadow: 'inset 0 0 0 2px rgba(255,255,255,0.35)',
-                  }}
-                >
-                  {i + 1}
+              <Fragment key={s}>
+                <div className="kh-flow-card">
+                  <div aria-hidden="true" className="kh-flow-num">
+                    {i + 1}
+                  </div>
+                  <h4
+                    style={{
+                      fontSize: 18,
+                      fontWeight: 700,
+                      color: '#1c3a6a',
+                      margin: 0,
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {/* Strip any leading "1." / "1、" / "1)" prefix — the red
+                        number circle is the single source of the step number. */}
+                    {howT(`${s}.title`).replace(/^\s*\d+\s*[.、:)-]\s*/, '')}
+                  </h4>
+                  <p
+                    style={{
+                      fontSize: 14,
+                      color: 'rgba(28,58,106,0.65)',
+                      lineHeight: 1.65,
+                      margin: 0,
+                    }}
+                  >
+                    {howT(`${s}.body`)}
+                  </p>
                 </div>
-                <h4
-                  style={{
-                    fontSize: 18,
-                    fontWeight: 700,
-                    color: '#1c3a6a',
-                    margin: '0 0 8px',
-                    lineHeight: 1.3,
-                  }}
-                >
-                  {howT(`${s}.title`)}
-                </h4>
-                <p
-                  style={{
-                    fontSize: 14,
-                    color: 'rgba(28,58,106,0.65)',
-                    lineHeight: 1.65,
-                    margin: 0,
-                  }}
-                >
-                  {howT(`${s}.body`)}
-                </p>
-              </div>
+                {i < 2 && (
+                  <div className="kh-flow-arrow" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="4" y1="12" x2="20" y2="12" />
+                      <polyline points="14 6 20 12 14 18" />
+                    </svg>
+                  </div>
+                )}
+              </Fragment>
             ))}
           </div>
+          <style>{`
+            .kh-flow {
+              margin-top: 40px;
+              display: flex;
+              flex-direction: column;
+              align-items: stretch;
+              gap: 12px;
+            }
+            .kh-flow-card {
+              flex: 1 1 0;
+              background: #ffffff;
+              border: 1px solid #e2e8f0;
+              border-radius: 16px;
+              padding: 28px 22px;
+              box-shadow: 0 4px 10px rgba(15, 31, 80, 0.06),
+                0 18px 40px rgba(15, 31, 80, 0.05);
+              text-align: center;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 10px;
+            }
+            .kh-flow-num {
+              width: 56px;
+              height: 56px;
+              border-radius: 50%;
+              background: #e63030;
+              color: #ffffff;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-weight: 800;
+              font-size: 24px;
+              box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.35),
+                0 6px 16px rgba(230, 48, 48, 0.28);
+            }
+            .kh-flow-arrow {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: #e63030;
+              flex: 0 0 auto;
+            }
+            .kh-flow-arrow svg {
+              width: 26px;
+              height: 26px;
+              transform: rotate(90deg); /* mobile: points down between stacked cards */
+            }
+            @media (min-width: 820px) {
+              .kh-flow {
+                flex-direction: row;
+                align-items: stretch;
+                gap: 8px;
+              }
+              .kh-flow-arrow {
+                padding: 0 4px;
+              }
+              .kh-flow-arrow svg {
+                width: 30px;
+                height: 30px;
+                transform: rotate(0deg); /* desktop: points right between cards */
+              }
+            }
+          `}</style>
         </div>
       </section>
 
@@ -804,16 +802,16 @@ export default function HomeSections({ locale, products, location }: Props) {
               >
                 <img
                   src={`/brand/reviews/review-${n}.jpg`}
-                  alt={`Ulasan pelanggan Katil Hospital 24 Jam ${n}`}
+                  alt={`Ulasan pelanggan Katil Hospital Murah ${n}`}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   loading="lazy"
                 />
               </div>
             ))}
           </div>
-          <style jsx>{`
+          <style>{`
             @media (min-width: 700px) {
-              :global(.kh-gallery) {
+              .kh-gallery {
                 grid-template-columns: repeat(4, 1fr) !important;
               }
             }
@@ -1038,11 +1036,11 @@ export default function HomeSections({ locale, products, location }: Props) {
           </p>
           <h3
             style={{
-              fontSize: 32,
-              fontWeight: 800,
+              fontSize: 'clamp(1.6rem, 3vw, 2.4rem)',
+              fontWeight: 700,
               color: '#FFFFFF',
-              letterSpacing: -0.5,
-              lineHeight: 1.25,
+              letterSpacing: '-0.025em',
+              lineHeight: 1.2,
               margin: '0 0 14px',
             }}
           >
@@ -1076,10 +1074,10 @@ function H3({ children, centered }: { children: React.ReactNode; centered?: bool
   return (
     <h3
       style={{
-        fontSize: 30,
-        fontWeight: 800,
+        fontSize: 'clamp(1.6rem, 3vw, 2.4rem)',
+        fontWeight: 700,
         color: '#1c3a6a',
-        letterSpacing: -0.4,
+        letterSpacing: '-0.025em',
         lineHeight: 1.2,
         margin: '6px 0 0',
         textAlign: centered ? 'center' : 'left',
@@ -1090,13 +1088,19 @@ function H3({ children, centered }: { children: React.ReactNode; centered?: bool
   );
 }
 
+// Single source of truth for the section eyebrow — a tinted red pill with a
+// red dot + uppercase red label. Used by every section (and the hero aligns to
+// the same tokens) so all eyebrows read as one consistent component.
 function SectionEyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <div
+    <span
       style={{
         display: 'inline-flex',
         alignItems: 'center',
         gap: 8,
+        padding: '6px 14px',
+        borderRadius: 9999,
+        background: 'rgba(230,48,48,0.10)',
         fontSize: 12,
         letterSpacing: 1.2,
         textTransform: 'uppercase',
@@ -1106,10 +1110,10 @@ function SectionEyebrow({ children }: { children: React.ReactNode }) {
     >
       <span
         aria-hidden="true"
-        style={{ width: 8, height: 8, background: '#e63030', borderRadius: '50%' }}
+        style={{ width: 7, height: 7, background: '#e63030', borderRadius: '50%', flex: '0 0 auto' }}
       />
       <span>{typeof children === 'string' ? children : ''}</span>
-    </div>
+    </span>
   );
 }
 

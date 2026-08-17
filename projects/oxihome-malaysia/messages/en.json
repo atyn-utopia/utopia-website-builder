@@ -267,5 +267,10 @@
   "process": {
     "bgAlt": "Oxygen machine being set up at a Malaysian home"
   },
-  "imageAlt": "Oxihome oxygen machine ready for home delivery in Malaysia"
+  "imageAlt": "Oxihome oxygen machine ready for home delivery in Malaysia",
+  "redirect": {
+    "heading": "Opening WhatsApp…",
+    "subtext": "Connecting you to the Oxihome Malaysia team.",
+    "fallback": "Click here if it doesn't redirect"
+  }
 }

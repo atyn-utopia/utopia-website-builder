@@ -799,5 +799,10 @@
       "intro": "山打根是沙巴东海岸的重要商业港口城市，以棕榈油、木材和水产品加工业著称。Batu Sapi工业区和港口周边仓储设施对重型工业卷帘门需求强劲，市区商业场所也需可靠的安全防护。",
       "closingCta": "山打根的场所需要卷帘门？WhatsApp我们获取免费报价，24小时专业服务。"
     }
+  },
+  "redirect": {
+    "heading": "正在打开 WhatsApp…",
+    "subtext": "正在为您连接 Encik Roller Shutter 团队。",
+    "fallback": "如果没有自动跳转，请点击这里"
   }
 }

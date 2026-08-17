@@ -14,6 +14,7 @@ import PageStyles from '@/components/PageStyles';
 import HomePageClient from '@/components/HomePageClient';
 import { ProductSchema } from '@/components/schema/ProductSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
+import { ogImages } from '@/lib/ogImage';
 
 const HERO_IMAGE = '/brand/hero.png';
 // Full-bleed cold-room scene behind the hero copy (sewa-excavator uses the same
@@ -68,7 +69,9 @@ export async function generateMetadata({
       description: meta.description,
       siteName: siteConfig.brandName,
       locale: meta.ogLocale,
-      images: [{ url: `${siteConfig.siteUrl}/og-image.jpg`, width: 1200, height: 630, alt: meta.title }],
+      // Was a hardcoded /og-image.jpg that does not exist in public/ — the
+      // card 404'd. Now the per-locale hero screenshot.
+      images: ogImages(locale, meta.title),
     },
     twitter: {
       card: 'summary_large_image',

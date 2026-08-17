@@ -4,6 +4,24 @@
 > Before producing output, read and follow: `CLAUDE.md` (system rules), `docs/full-website-setup.md` (complete workflow).
 > Key rules: All websites share ONE Supabase database (scoped by `website` column). `product_slug` column has been REMOVED — never reference it. Products table: id, website, parent_id, name, slug, description, sale_price, rental_price, sort_order, is_active. Phone numbers in `phone_numbers` table. Company registration in `company_websites` table with `company_id` and `leads_mode`.
 
+> **Webcore API (`docs/webcore-api.md`) is the sanctioned way to write to webcore.**
+> Prefer it over raw SQL / PostgREST: it validates input, keys writes to the
+> registered site, and fires the cache purge so changes reach the live site
+> without a redeploy. Key is `$WEBCORE_API_KEY` in the gitignored root
+> `.env.local` — load with `set -a && . ./.env.local && set +a`. Never print it,
+> never commit it, never put it in client code.
+> `website` must be the **exact registered domain**. Some fleet sites are
+> registered on their `*.vercel.app` host — verify with
+> `GET /api/public/phone-numbers?website=<candidate>` before writing; an empty
+> array means wrong key and the write will orphan silently.
+>
+> Yours: `POST/PATCH /api/public/products` (incl. multi-rate `prices[]`) and
+> `POST/PATCH /api/public/phone-numbers`. Register the site FIRST with
+> `POST /api/public/sites` — pushing a product does not register it.
+> **`is_display`** on a phone row nominates the number shown as TEXT in the
+> header/footer; it is independent of lead routing, which still resolves per
+> click via `page -> location -> all -> default`.
+
 ## Role
 You are the database engineer. Your job is to design the Supabase schema and write all database logic for this project.
 

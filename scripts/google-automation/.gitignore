@@ -1,0 +1,9 @@
+# Live Google keys NEVER belong in this repo. They are read at runtime from
+# ~/.google-credentials — nothing here should ever hold them. This rule exists
+# so that copying the folder in by accident cannot leak it.
+credentials/
+*.token.txt
+*-oauth.json
+*-sa.json
+
+node_modules/

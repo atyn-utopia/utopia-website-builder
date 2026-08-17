@@ -8,10 +8,6 @@
     "whatsapp": "WhatsApp Kami",
     "whatsappCta": "WhatsApp"
   },
-  "shared": {
-    "logoAlt": "Logo Sewa Motor Malaysia",
-    "imageAlt": "Imej hiasan tema motosikal"
-  },
   "gallery": {
     "alts": [
       "Honda Vario 160 dihantar di Petaling Jaya",
@@ -30,6 +26,8 @@
     "bookNow": "Tempah Sekarang"
   },
   "shared": {
+    "logoAlt": "Logo Sewa Motor Malaysia",
+    "imageAlt": "Imej hiasan tema motosikal",
     "freeToAsk": "Percuma untuk bertanya · Balas dalam 1 jam",
     "safetyNote": "Armada selamat · Sokongan kerosakan 30 hari",
     "stats": {
@@ -272,5 +270,10 @@
       "q10": "Adakah anda menawarkan sewa skuter di {city}?",
       "a10": "Ya. Honda Vario 160, Yamaha NMax 155, dan Honda PCX 160 semuanya adalah skuter automatik yang tersedia untuk disewa di {city}. Sewa skuter bermula dari RM50/hari dengan penghantaran hari sama."
     }
+  },
+  "redirect": {
+    "heading": "Membuka WhatsApp…",
+    "subtext": "Anda sedang dihubungkan ke pasukan Sewa Motor Malaysia.",
+    "fallback": "Klik di sini jika tidak berpindah"
   }
 }

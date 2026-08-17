@@ -1,4 +1,5 @@
 import { siteConfig } from "@/config/site";
+import { ogImage } from "@/lib/ogImage";
 
 export function LocalBusinessSchema({
   locationName,
@@ -19,7 +20,10 @@ export function LocalBusinessSchema({
     description: `Motorcycle rental service in ${locationName}, ${state}, Malaysia. Daily, weekly, and monthly motorbike rentals.`,
     url: `${siteConfig.siteUrl}/${locale}/sewa-motor/${locationSlug}`,
     telephone: `+${siteConfig.fallbackPhone}`,
-    image: `${siteConfig.siteUrl}/og-image.jpg`,
+    // Was /og-image.jpg, which does not exist in public/ — the only cards are
+    // the per-locale hero screenshots. ogImage() falls back to the default
+    // locale for anything unknown.
+    image: ogImage(locale).url,
     address: {
       "@type": "PostalAddress",
       addressLocality: locationName,

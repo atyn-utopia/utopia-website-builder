@@ -7,6 +7,7 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import { siteConfig } from '@/config/site'
 import '../globals.css'
+import { ogImages } from '@/lib/ogImage'
 
 const inter = Inter({
   subsets: ['latin', 'latin-ext'],
@@ -42,6 +43,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       locale: locale === 'zh' ? 'zh_MY' : locale === 'en' ? 'en_MY' : 'ms_MY',
       url: `${siteConfig.baseUrl}/${locale}`,
       siteName: siteConfig.brandName,
+      images: ogImages(locale),
     },
     robots: { index: true, follow: true },
   }

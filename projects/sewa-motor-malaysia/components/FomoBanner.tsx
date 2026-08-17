@@ -51,7 +51,7 @@ export default function FomoBanner() {
           {t('bookNow')} →
         </Link>
       </div>
-      <style jsx>{`
+      <style>{`
         .fomo-bar { background: #B91C1C; color: #fff; font-size: 13px; padding: 8px 16px; }
         .fomo-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
         .fomo-dot {

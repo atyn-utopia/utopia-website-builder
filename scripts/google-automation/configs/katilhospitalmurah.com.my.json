@@ -1,0 +1,41 @@
+{
+  "domain": "katilhospitalmurah.com.my",
+  "containerId": "GTM-PTJS6QKQ",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-BMDTB2BXL6",
+  "ga4": {
+    "accountId": "153453478",
+    "accountName": "Utopia 1st Analytics",
+    "propertyId": "537278715",
+    "propertyName": "properties/537278715",
+    "measurementId": "G-BMDTB2BXL6",
+    "siteUrl": "https://www.katilhospitalmurah.com.my"
+  },
+  "events": [
+    { "redirectPath": "/redirect-whatsapp-1", "eventName": "whatsapp_click" }
+  ],
+  "gsc": {
+    "domainProperty": "sc-domain:katilhospitalmurah.com.my",
+    "verified": true,
+    "verifiedVia": "DNS TXT (auto-added to Vercel DNS, scope chokchunynh)",
+    "sitemapSubmitted": "https://www.katilhospitalmurah.com.my/sitemap.xml",
+    "urlPrefixProperties": "SKIPPED — needs verify-meta-tag deploy (out of scope); Domain property covers sitemap/coverage",
+    "createdAt": "2026-07-27"
+  },
+  "ads": {
+    "customerId": "1933757591",
+    "mode": "no-mcc",
+    "ga4AdsLink": "created",
+    "keyEventFix": "whatsapp_click was NOT a Key Event on property 537278715 (pre-existing property, ga4-create never ran here); registered it via keyEvents.create ONCE_PER_EVENT (properties/537278715/keyEvents/15329945719) to unblock the auto-import",
+    "conversionAction": {
+      "name": "katilhospitalmurah.com.my (web) whatsapp_click",
+      "id": "7698585068",
+      "status": "ENABLED",
+      "category": "CONTACT",
+      "primaryForGoal": true,
+      "lookbackDays": 90
+    },
+    "createdAt": "2026-07-27"
+  },
+  "note": "GTM container GTM-PTJS6QKQ pre-existed and is published (live v3, wired to G-BMDTB2BXL6). 2026-07-23: reused for on-site injection; a duplicate GA4 property (546845464/G-0WLTZVJM25) accidentally created same day was trashed. 2026-07-27 (Gloo): added GSC Domain property (verified + sitemap), registered whatsapp_click Key Event on 537278715 (was missing — blocked Ads import), created GA4->Ads link, and Ads conversion action 7698585068 auto-imported + activated. Residual manual UI toggles still owed: GA4 Signals+user-data, Ads count Every->One, Ads 'Import app and web metrics' ON."
+}

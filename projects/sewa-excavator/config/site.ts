@@ -6,7 +6,10 @@ export const siteConfig = {
   url: 'https://sewaexcavator.my',
   productSlug: 'excavator',
   productName: 'Excavator Rental',
-  fallbackPhone: '60174287801',
+  // Mirrors the `default` phone_numbers row for sewaexcavator.my. Only used
+  // when the Supabase read fails — must stay this client's own number so a
+  // DB blip can never route leads to another client's line.
+  fallbackPhone: '60103772237',
   defaultLocale: 'ms' as const,
   locales: ['ms', 'en', 'zh'] as const,
   whatsappMessages: {

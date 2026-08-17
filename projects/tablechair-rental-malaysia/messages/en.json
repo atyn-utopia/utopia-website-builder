@@ -269,5 +269,10 @@
       "sub": "WhatsApp Kak Kenduri now — we'll confirm availability, send a quote and lock in same-day delivery.",
       "button": "WhatsApp Now"
     }
+  },
+  "redirect": {
+    "heading": "Opening WhatsApp…",
+    "subtext": "Connecting you to the Kak Kenduri team.",
+    "fallback": "Click here if it doesn't redirect"
   }
 }

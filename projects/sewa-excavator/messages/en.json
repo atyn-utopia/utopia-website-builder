@@ -2,7 +2,7 @@
   "meta": {
     "home": {
       "title": "Excavator Rental Malaysia — Volvo EC200 & EC400 | Abang Excavator",
-      "description": "Rent a Volvo EC200 or EC400 excavator at the best daily, weekly, and monthly rates in Malaysia. Instant quote via WhatsApp — Abang Excavator."
+      "description": "Excavator rental Malaysia — Volvo EC200 & EC400 at the best daily and monthly rates. Transparent excavator rental price, instant WhatsApp quote."
     },
     "location": {
       "title": "Excavator Rental in {location} — Volvo EC200 & EC400 | Abang Excavator",
@@ -33,7 +33,7 @@
     "h1Part1": "Excavator Rental,",
     "h1Highlight": "No.1",
     "h1Part2": "In Malaysia",
-    "h2": "Volvo EC200 and EC400 — Daily, Weekly, Monthly Hire",
+    "h2": "Volvo EC200 and EC400 Excavator Rental — Daily or Monthly",
     "supporting": "Delivered in 24 hours. Experienced operators, transparent rates, no hidden fees.",
     "ctaPrimary": "WhatsApp Quote Now",
     "ctaSecondary": "Estimate rental cost →",
@@ -346,5 +346,10 @@
     "h2Template": "Volvo EC200 and EC400 for Your Project in {state}",
     "nearbyHeading": "Excavator rental near {location}",
     "nearbyEyebrow": "NEARBY AREAS"
+  },
+  "redirect": {
+    "heading": "Opening WhatsApp…",
+    "subtext": "Connecting you to the Abang Excavator team.",
+    "fallback": "Click here if it doesn't redirect"
   }
 }

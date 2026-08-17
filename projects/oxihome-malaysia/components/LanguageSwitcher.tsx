@@ -17,11 +17,17 @@ export function LanguageSwitcher({ currentLocale }: { currentLocale?: string } =
   const activeLocale = currentLocale ?? locale
 
   function switchLocale(next: string) {
-    // Replace the current locale prefix in the pathname
-    const segments = pathname.split('/')
-    // segments[0] = '', segments[1] = locale
-    segments[1] = next
-    router.push(segments.join('/'))
+    // localePrefix is 'as-needed', so the default locale (ms) has NO prefix in
+    // the URL. Strip a leading segment only when it really is a locale, then
+    // re-prefix only for non-default locales — otherwise switching from an
+    // unprefixed page like /oxygen-machine/kuala-lumpur would eat the product
+    // segment instead of adding a locale.
+    const segments = pathname.split('/') // segments[0] is always ''
+    const known = routing.locales as readonly string[]
+    const rest = known.includes(segments[1]) ? segments.slice(2) : segments.slice(1)
+    const path = rest.join('/')
+    const prefix = next === routing.defaultLocale ? '' : `/${next}`
+    router.push(`${prefix}/${path}`.replace(/\/+$/, '') || '/')
   }
 
   return (

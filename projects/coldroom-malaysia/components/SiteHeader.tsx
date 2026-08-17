@@ -107,10 +107,10 @@ export default function SiteHeader({ activeBlog = false }: { activeBlog?: boolea
         )}
       </nav>
       {/* Mobile hides the header WhatsApp CTA so it never overlaps the language
-          dropdown. :global() so the rule reaches the .nav-cta <a> from styled-jsx. */}
-      <style jsx>{`
+          dropdown.  so the rule reaches the .nav-cta <a> from styled-jsx. */}
+      <style>{`
         @media (max-width: 900px) {
-          :global(.nav-cta) { display: none !important; }
+          .nav-cta { display: none !important; }
         }
       `}</style>
     </>

@@ -12,6 +12,7 @@ import FomoBanner from '@/components/FomoBanner';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import PageStyles from '@/components/PageStyles';
+import { ogImages } from '@/lib/ogImage';
 
 export async function generateMetadata({
   params,
@@ -31,8 +32,9 @@ export async function generateMetadata({
       type: 'website',
       locale: t('ogLocale'),
       siteName: siteConfig.brandName,
+      images: ogImages(locale),
     },
-    twitter: { card: 'summary_large_image' },
+    twitter: { card: 'summary_large_image', images: ogImages(locale) },
   };
 }
 
@@ -51,6 +53,7 @@ export default async function HomePage({
     description: p.description,
     rental_price: p.rental_price,
     sale_price: p.sale_price,
+    prices: p.prices ?? [],
     image: p.photos?.[0]?.url,
   }));
 

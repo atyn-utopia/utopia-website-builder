@@ -1,0 +1,13 @@
+{
+  "domain": "sewaforklift.my",
+  "containerId": "GTM-MGH3G4C4",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-W7EE8QBN7J",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-06-30T01:37:02.883Z"
+}

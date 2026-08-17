@@ -61,7 +61,30 @@
   --duration-fast: 150ms;
   --duration-normal: 250ms;
   --duration-slow: 400ms;
+
+  /* Utopia CI structural tokens — radius + motion only (palette/fonts stay per-project) */
+  --r-button: 8px;
+  --r-card: 12px;
+  --r-pill: 999px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-hover: 220ms;
+  --dur-layout: 320ms;
 }
+
+/* "Built by Utopia AI" footer credit (Utopia CI element — inherits footer text colour) */
+.utopia-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: inherit;
+  text-decoration: none;
+  border-radius: var(--r-button);
+  transition: transform var(--dur-hover) var(--ease), opacity var(--dur-hover) var(--ease);
+}
+.utopia-credit:hover { transform: translateY(-1px); opacity: 0.85; }
+.utopia-credit__mark { flex: none; }
 
 /* ============================================
    RESET & BASE
@@ -81,6 +104,7 @@ img, svg { display: block; max-width: 100%; height: auto; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
 h1, h2, h3, h4, h5, h6 { font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; color: var(--navy); }
+.body-text { font-weight: 400; letter-spacing: normal; line-height: 1.55; }
 
 /* ============================================
    LAYOUT
@@ -103,11 +127,13 @@ h1, h2, h3, h4, h5, h6 { font-weight: 800; letter-spacing: -0.02em; line-height:
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 14px 26px;
+  gap: 9px;
+  height: 52px;
+  padding: 0 26px;
   font-weight: 700;
   font-size: 15px;
-  letter-spacing: 0;
+  letter-spacing: -0.01em;
+  border: 1px solid transparent;
   border-radius: var(--radius-full);
   transition: transform var(--duration-normal) var(--ease-out),
               box-shadow var(--duration-normal) var(--ease-out),
@@ -121,19 +147,27 @@ h1, h2, h3, h4, h5, h6 { font-weight: 800; letter-spacing: -0.02em; line-height:
 .btn-primary {
   background: var(--grad-gold);
   color: var(--navy);
-  box-shadow: var(--shadow-gold);
+  box-shadow: 0 12px 28px -10px rgba(249, 180, 25, 0.55);
 }
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 40px rgba(249, 180, 25, 0.45);
-}
+.btn-primary:hover { box-shadow: 0 16px 34px -10px rgba(249, 180, 25, 0.66); }
 
 .btn-wa {
   background: var(--wa-green);
   color: var(--white);
-  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+  box-shadow: 0 12px 28px -10px rgba(37, 211, 102, 0.55);
 }
-.btn-wa:hover { background: var(--wa-green-dark); transform: translateY(-2px); }
+.btn-wa:hover { background: var(--wa-green-dark); box-shadow: 0 16px 34px -10px rgba(37, 211, 102, 0.62); }
+/* White WhatsApp glyph before every WhatsApp CTA label (matches air-compressor.my).
+   Single source of truth — any .btn-wa gets the icon; spaced by .btn's gap. */
+.btn-wa::before {
+  content: "";
+  flex: none;
+  width: 18px;
+  height: 18px;
+  background-color: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20d='M.057%2024l1.687-6.163a11.867%2011.867%200%200%201-1.587-5.946C.16%205.335%205.495%200%2012.05%200a11.817%2011.817%200%200%201%208.413%203.488%2011.824%2011.824%200%200%201%203.48%208.414c-.003%206.557-5.338%2011.892-11.893%2011.892a11.9%2011.9%200%200%201-5.688-1.448L.057%2024zm6.597-3.807c1.676.995%203.276%201.591%205.392%201.592%205.448%200%209.886-4.434%209.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452%200-9.887%204.434-9.889%209.884a9.86%209.86%200%200%200%201.51%205.26l-.999%203.648%203.978-1.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941%201.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198%200-.52.074-.792.372s-1.04%201.016-1.04%202.479%201.065%202.876%201.213%203.074c.149.198%202.095%203.2%205.076%204.487.709.306%201.263.489%201.694.626.712.226%201.36.194%201.872.118.571-.085%201.758-.719%202.006-1.413.248-.695.248-1.29.173-1.414z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20d='M.057%2024l1.687-6.163a11.867%2011.867%200%200%201-1.587-5.946C.16%205.335%205.495%200%2012.05%200a11.817%2011.817%200%200%201%208.413%203.488%2011.824%2011.824%200%200%201%203.48%208.414c-.003%206.557-5.338%2011.892-11.893%2011.892a11.9%2011.9%200%200%201-5.688-1.448L.057%2024zm6.597-3.807c1.676.995%203.276%201.591%205.392%201.592%205.448%200%209.886-4.434%209.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452%200-9.887%204.434-9.889%209.884a9.86%209.86%200%200%200%201.51%205.26l-.999%203.648%203.978-1.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941%201.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198%200-.52.074-.792.372s-1.04%201.016-1.04%202.479%201.065%202.876%201.213%203.074c.149.198%202.095%203.2%205.076%204.487.709.306%201.263.489%201.694.626.712.226%201.36.194%201.872.118.571-.085%201.758-.719%202.006-1.413.248-.695.248-1.29.173-1.414z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
 
 .btn-outline {
   background: rgba(255, 255, 255, 0.08);
@@ -141,17 +175,23 @@ h1, h2, h3, h4, h5, h6 { font-weight: 800; letter-spacing: -0.02em; line-height:
   border: 1.5px solid rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(8px);
 }
-.btn-outline:hover { background: rgba(255, 255, 255, 0.18); transform: translateY(-2px); }
+.btn-outline:hover { background: rgba(255, 255, 255, 0.18); border-color: rgba(255, 255, 255, 0.65); }
 
 .btn-ghost {
   background: var(--white);
   color: var(--blue-deep);
   border: 1.5px solid var(--blue);
 }
-.btn-ghost:hover { background: var(--ice); transform: translateY(-2px); }
+.btn-ghost:hover { background: var(--ice); border-color: var(--blue-deep); }
 
-.btn-lg { padding: 18px 34px; font-size: 16px; }
-.btn-sm { padding: 10px 18px; font-size: 14px; }
+.btn-lg { height: 56px; padding: 0 34px; font-size: 16px; }
+.btn-sm { height: 44px; padding: 0 18px; font-size: 14px; }
+
+/* Match air-compressor.my: compact CTA metrics on small screens. */
+@media (max-width: 640px) {
+  .btn { height: 46px; padding: 0 18px; font-size: 14px; }
+  .btn-lg { height: 50px; font-size: 15px; }
+}
 
 /* ============================================
    FOMO banner — urgency red with countdown
@@ -398,7 +438,7 @@ h2.hero-sub,
   margin-bottom: 10px;
 }
 .section-head h3 { font-size: clamp(26px, 3.5vw, 40px); margin-bottom: 12px; }
-.section-head p { color: var(--ink-muted); max-width: 640px; margin: 0 auto; font-size: 16px; }
+.section-head h5 { color: var(--ink-muted); max-width: 640px; margin: 0 auto; font-size: 16px; }
 
 /* ============================================
    Service cards (Supabase-driven)
@@ -426,12 +466,30 @@ h2.hero-sub,
 .service-card:hover .service-card-img img { transform: scale(1.06); }
 .service-card-body { padding: 20px; display: flex; flex-direction: column; gap: 10px; flex-grow: 1; }
 .service-card h4 { font-size: 18px; color: var(--navy); }
-.service-card p { font-size: 14px; color: var(--ink-muted); line-height: 1.55; flex-grow: 1; }
+.service-card h5 { font-size: 14px; color: var(--ink-muted); line-height: 1.55; flex-grow: 1; }
 .service-price {
   display: flex; align-items: baseline; gap: 6px;
   font-size: 20px; font-weight: 800; color: var(--blue-deep);
 }
 .service-price span { font-size: 12px; font-weight: 600; color: var(--ink-muted); }
+
+/* Multi-line labeled prices (webcore prices array) — vertical list */
+.product-prices.price-list {
+  display: flex; flex-direction: column; align-items: stretch;
+  padding: 4px 16px; text-align: left;
+}
+.price-line {
+  font-weight: 700; font-size: 15px;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(10, 58, 130, 0.10);
+}
+.price-line:last-child { border-bottom: none; }
+.price-line:first-child { color: var(--blue-deep); }
+.price-note {
+  display: block; margin-top: 3px;
+  font-weight: 400; font-size: 11px;
+  text-transform: none; color: var(--ink-muted);
+}
 
 /* ============================================
    Steps
@@ -463,7 +521,7 @@ h2.hero-sub,
   box-shadow: var(--shadow-gold);
 }
 .step h4 { font-size: 20px; color: var(--navy); margin-bottom: 8px; }
-.step p { font-size: 14.5px; color: var(--ink-muted); line-height: 1.65; }
+.step h5 { font-size: 14.5px; color: var(--ink-muted); line-height: 1.65; }
 
 /* ============================================
    Dark band — emergency
@@ -482,7 +540,7 @@ h2.hero-sub,
   pointer-events: none;
 }
 .dark-band .section-head h3 { color: var(--white); }
-.dark-band .section-head p { color: rgba(255, 255, 255, 0.75); }
+.dark-band .section-head h5 { color: rgba(255, 255, 255, 0.75); }
 
 .emergency-list {
   display: grid;
@@ -744,28 +802,14 @@ h2.hero-sub,
   bottom: 0;
 }
 .cta-band h3 { color: var(--white); font-size: clamp(26px, 4vw, 40px); margin-bottom: 14px; }
-.cta-band p { color: rgba(255, 255, 255, 0.82); max-width: 620px; margin: 0 auto 26px; }
+.cta-band h5 { color: rgba(255, 255, 255, 0.82); max-width: 620px; margin: 0 auto 26px; }
 
 /* ============================================
    Footer
    ============================================ */
-.site-footer { background: var(--navy); color: rgba(255, 255, 255, 0.78); padding: 60px 0 30px; }
-.footer-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 40px; margin-bottom: 36px; }
-@media (max-width: 820px) { .footer-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; } }
-.footer-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; color: var(--white); font-weight: 800; }
-@media (max-width: 820px) { .footer-brand { justify-content: center; } }
-.footer-brand img { height: 38px; }
-.site-footer h5 { color: var(--white); font-size: 15px; margin-bottom: 14px; }
-.site-footer ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-.site-footer a { font-size: 14px; color: rgba(255, 255, 255, 0.7); }
-.site-footer a:hover { color: var(--gold); }
-.footer-bottom {
-  padding-top: 22px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  font-size: 13px; color: rgba(255, 255, 255, 0.55);
-  display: flex; justify-content: space-between; gap: 14px;
-}
-@media (max-width: 820px) { .footer-bottom { flex-direction: column; text-align: center; } }
+/* Footer chrome is fully self-styled inside components/SiteFooter.tsx
+   (flat minimal water-tank style). No global footer rules — keeping them
+   here would fight the component's own <style> block. */
 
 /* ============================================
    Floating WhatsApp (mobile)
@@ -827,7 +871,7 @@ h2.hero-sub,
 .blog-card-body { padding: 22px; display: flex; flex-direction: column; gap: 8px; flex-grow: 1; }
 .blog-card-date { font-size: 12.5px; color: var(--ink-muted); font-weight: 600; }
 .blog-card h3 { font-size: 19px; color: var(--navy); line-height: 1.35; }
-.blog-card p { font-size: 14.5px; color: var(--ink-muted); line-height: 1.6; flex-grow: 1; }
+.blog-card h5 { font-size: 14.5px; color: var(--ink-muted); line-height: 1.6; flex-grow: 1; }
 .blog-card-more { font-size: 13px; font-weight: 800; color: var(--gold-dark); text-transform: uppercase; letter-spacing: 0.06em; }
 
 .blog-article {

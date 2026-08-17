@@ -8,10 +8,6 @@
     "whatsapp": "立即WhatsApp",
     "whatsappCta": "WhatsApp"
   },
-  "shared": {
-    "logoAlt": "Sewa Motor Malaysia 标志",
-    "imageAlt": "电单车租赁装饰图像"
-  },
   "gallery": {
     "alts": [
       "Honda Vario 160 在八打灵再也送达",
@@ -30,6 +26,8 @@
     "bookNow": "立即预订"
   },
   "shared": {
+    "logoAlt": "Sewa Motor Malaysia 标志",
+    "imageAlt": "电单车租赁装饰图像",
     "freeToAsk": "免费咨询 · 1小时内回复",
     "safetyNote": "安全检测车队 · 30天故障保障",
     "stats": {
@@ -270,5 +268,10 @@
       "q10": "在{city}有踏板车出租吗？",
       "a10": "有。Honda Vario 160、Yamaha NMax 155和Honda PCX 160都是可在{city}租赁的自动挡踏板车。踏板车出租RM50/天起，支持当天送达。"
     }
+  },
+  "redirect": {
+    "heading": "正在打开 WhatsApp…",
+    "subtext": "正在为您连接 Sewa Motor Malaysia 团队。",
+    "fallback": "如果没有自动跳转，请点击这里"
   }
 }

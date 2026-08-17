@@ -11,6 +11,7 @@ import PageStyles from '@/components/PageStyles'
 import FomoBanner from '@/components/FomoBanner'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
+import { ogImages } from '@/lib/ogImage'
 
 type Params = { locale: string; location: string }
 
@@ -47,6 +48,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       siteName: siteConfig.brandName,
       locale: locale === 'zh' ? 'zh_MY' : locale === 'ms' ? 'ms_MY' : 'en_MY',
       type: 'website',
+      images: ogImages(locale),
     },
     robots: { index: true, follow: true },
   }

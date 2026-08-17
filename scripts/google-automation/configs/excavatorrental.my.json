@@ -1,0 +1,13 @@
+{
+  "domain": "excavatorrental.my",
+  "containerId": "GTM-KTJRCFFM",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-0TLHYQSL8C",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-06-25T09:33:40.424Z"
+}

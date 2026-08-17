@@ -11,6 +11,7 @@ import NavCtaGlobalStyle from '@/components/NavCtaGlobalStyle';
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
 import { ProductSchema } from '@/components/schema/ProductSchema';
+import { ogImages } from '@/lib/ogImage';
 
 export async function generateMetadata({
   params,
@@ -37,6 +38,7 @@ export async function generateMetadata({
       siteName: siteConfig.brandName,
       locale: locale,
       type: 'website',
+      images: ogImages(locale),
     },
     robots: {
       index: true,

@@ -267,5 +267,10 @@
   "process": {
     "bgAlt": "Mesin oksigen sedang dipasang di rumah di Malaysia"
   },
-  "imageAlt": "Mesin oksigen Oxihome sedia untuk penghantaran ke rumah di Malaysia"
+  "imageAlt": "Mesin oksigen Oxihome sedia untuk penghantaran ke rumah di Malaysia",
+  "redirect": {
+    "heading": "Membuka WhatsApp…",
+    "subtext": "Menghubungkan anda dengan pasukan Oxihome Malaysia.",
+    "fallback": "Klik di sini jika tidak dialihkan"
+  }
 }

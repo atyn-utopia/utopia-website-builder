@@ -268,12 +268,24 @@ export default function HomePageClient({ locale, products }: Props) {
                     <div className="product-card-body">
                       <h4>{p.name}</h4>
                       <h5 className="body-h5">{p.description}</h5>
-                      {(p.sale_price || p.rental_price) && (
-                        <div className="product-price">
-                          {shared('from')} RM{' '}
-                          {Math.round(p.sale_price || p.rental_price || 0)}
-                          <small>{shared('perDay')}</small>
+                      {p.prices.length > 0 ? (
+                        <div className="product-prices price-list">
+                          {p.prices.map((line, i) => (
+                            <div className="price-line" key={i}>
+                              {line.label}: RM {Number(line.amount).toLocaleString()}
+                              {line.unit ? ' / ' + line.unit : ''}
+                              {line.note ? <span className="price-note">{line.note}</span> : null}
+                            </div>
+                          ))}
                         </div>
+                      ) : (
+                        (p.sale_price || p.rental_price) && (
+                          <div className="product-price">
+                            {shared('from')} RM{' '}
+                            {Math.round(p.sale_price || p.rental_price || 0)}
+                            <small>{shared('perDay')}</small>
+                          </div>
+                        )
                       )}
                       <div className="product-spec">
                         {specsFor(p.slug).map((s) => (

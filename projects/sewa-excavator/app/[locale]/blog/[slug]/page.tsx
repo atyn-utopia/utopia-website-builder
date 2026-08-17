@@ -6,6 +6,7 @@ import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
 import { routing } from '@/i18n/routing';
 import { localeHref } from '@/lib/localeHref';
+import { ogImages } from '@/lib/ogImage';
 import { getBlogPost, getBlogPostSlugs, getRecentBlogPosts } from '@/lib/webcore';
 import { waRedirect } from '@/lib/waRedirect';
 import { ArticleSchema } from '@/components/schema/ArticleSchema';
@@ -43,8 +44,18 @@ export async function generateMetadata({
     openGraph: {
       type: 'article', title: tr.title, description: tr.excerpt,
       url: `${localeHref(locale)}${path}`,
-      images: post.cover_image_url ? [{ url: post.cover_image_url, width: 1200, height: 630 }] : undefined,
+      // An article's own cover wins; the hero card is the fallback so a shared
+      // post never renders as a bare text card.
+      images: post.cover_image_url
+        ? [{ url: post.cover_image_url, width: 1200, height: 630 }]
+        : ogImages(locale),
       publishedTime: post.published_at,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      images: post.cover_image_url
+        ? [{ url: post.cover_image_url, width: 1200, height: 630 }]
+        : ogImages(locale),
     },
   };
 }

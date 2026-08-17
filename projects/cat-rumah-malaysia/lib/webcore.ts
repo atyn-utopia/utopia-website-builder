@@ -30,6 +30,7 @@ async function webcoreFetch<T>(path: string, tag: WebcoreTag): Promise<T | null>
         Accept: 'application/json',
         'Accept-Profile': 'webcore',
       },
+      cache: 'force-cache',
       next: { tags: [tag] },
     })
     if (!res.ok) {
@@ -51,6 +52,12 @@ async function webcoreFetch<T>(path: string, tag: WebcoreTag): Promise<T | null>
 
 const FALLBACK_PHONE = process.env.PHONE_FALLBACK ?? siteConfig.fallbackPhone
 const FALLBACK_WA_TEXT = 'Hi, saya berminat untuk servis cat rumah.'
+// Mirrors the `Hi <domain>, ` prefix that toResult() puts on the Supabase
+// path. Without it a failed webcore read produced an unattributable
+// message — several sites share one WhatsApp number, so the domain is the
+// operator's only signal for which site the lead came from.
+const FALLBACK_WA_TEXT_ATTRIBUTED = `Hi ${siteConfig.domain}, ${FALLBACK_WA_TEXT.replace(/^\s*(hi|hello|hai|salam|assalamualaikum)\b[^,]{0,40},\s*/i, '')}`
+
 
 type LeadsMode = 'single' | 'rotation' | 'location' | 'hybrid'
 
@@ -60,6 +67,13 @@ interface PhoneRow {
   percentage: number | null
   label: string | null
   location_slug: string | null
+  page_slug: string | null
+}
+
+// A row is "site-wide" when it isn't pinned to a specific page. Rows that
+// predate the page_slug column (null) are treated as site-wide too.
+function isSiteWide(row: PhoneRow): boolean {
+  return !row.page_slug || row.page_slug === 'all'
 }
 
 export interface PhoneResult {
@@ -108,7 +122,7 @@ async function getLeadsMode(domain: string): Promise<LeadsMode> {
 async function getPhoneRows(domain: string): Promise<PhoneRow[]> {
   if (!domain) return []
   const path =
-    `phone_numbers?select=phone_number,whatsapp_text,percentage,label,location_slug` +
+    `phone_numbers?select=phone_number,whatsapp_text,percentage,label,location_slug,page_slug` +
     `&website=eq.${encodeURIComponent(domain)}` +
     `&is_active=eq.true`
   const data = await webcoreFetch<PhoneRow[]>(path, 'webcore-phones')
@@ -118,7 +132,7 @@ async function getPhoneRows(domain: string): Promise<PhoneRow[]> {
 function fallbackResult(): PhoneResult {
   return {
     phone: FALLBACK_PHONE,
-    whatsappText: FALLBACK_WA_TEXT,
+    whatsappText: FALLBACK_WA_TEXT_ATTRIBUTED,
     source: 'fallback',
     mode: 'fallback',
   }
@@ -127,18 +141,38 @@ function fallbackResult(): PhoneResult {
 function toResult(row: PhoneRow | undefined, mode: LeadsMode, host: string): PhoneResult {
   if (!row) return fallbackResult()
   const text = row.whatsapp_text || FALLBACK_WA_TEXT
+  // Drop any greeting already stored in whatsapp_text, otherwise the
+  // message double-greets ("Hi domain.my, Hi Brand, ...").
+  const body = text.replace(/^\s*(hi|hello|hai|salam|assalamualaikum)\b[^,]{0,40},\s*/i, '')
   return {
     phone: row.phone_number,
-    whatsappText: `Hi ${host}, ${text}`,
+    whatsappText: `Hi ${host}, ${body}`,
     source: 'database',
     mode,
   }
 }
 
-export async function getPhoneNumber(locationSlug?: string): Promise<PhoneResult> {
+export async function getPhoneNumber(
+  locationSlug?: string,
+  pageSlug?: string,
+): Promise<PhoneResult> {
   try {
     const domain = await getHostDomain()
-    const [mode, rows] = await Promise.all([getLeadsMode(domain), getPhoneRows(domain)])
+    const [mode, allRows] = await Promise.all([getLeadsMode(domain), getPhoneRows(domain)])
+    if (allRows.length === 0) return fallbackResult()
+
+    // Resolution order (mirrors webcore /phone-numbers/resolve):
+    //   page  →  location  →  all  →  default.
+    // A page-pinned number wins first when we know the originating page, and
+    // never leaks into the site-wide leads_mode pool below.
+    if (pageSlug && pageSlug !== 'all') {
+      const pageRows = allRows.filter((r) => r.page_slug === pageSlug)
+      if (pageRows.length > 0) return toResult(pickWeighted(pageRows), mode, domain)
+    }
+
+    // leads_mode logic runs only over site-wide rows so per-page numbers
+    // don't dilute the homepage rotation.
+    const rows = allRows.filter(isSiteWide)
     if (rows.length === 0) return fallbackResult()
 
     const defaultRow = findDefaultRow(rows)
@@ -188,6 +222,13 @@ export interface ProductPhoto {
   url: string
 }
 
+export interface PriceLine {
+  label: string
+  amount: number
+  unit?: string
+  note?: string
+}
+
 export interface Product {
   id: string
   slug: string
@@ -197,16 +238,30 @@ export interface Product {
   rental_price: number | null
   sort_order: number | null
   product_photos: ProductPhoto[]
+  prices: PriceLine[]
+}
+
+interface ProductRow {
+  id: string
+  slug: string
+  name: string
+  description: string | null
+  sale_price: number | null
+  rental_price: number | null
+  sort_order: number | null
+  product_photos: ProductPhoto[]
+  prices: PriceLine[] | null
 }
 
 export async function getProducts(): Promise<Product[]> {
   const path =
-    `products?select=id,slug,name,description,sale_price,rental_price,sort_order,product_photos(url)` +
+    `products?select=id,slug,name,description,sale_price,rental_price,sort_order,product_photos(url),prices` +
     `&website=eq.${encodeURIComponent(siteConfig.domain)}` +
     `&is_active=eq.true` +
     `&order=sort_order.asc`
-  const data = await webcoreFetch<Product[]>(path, 'webcore-products')
-  return data ?? []
+  const data = await webcoreFetch<ProductRow[]>(path, 'webcore-products')
+  if (!data) return []
+  return data.map((p) => ({ ...p, prices: p.prices ?? [] }))
 }
 
 /* ============================================================

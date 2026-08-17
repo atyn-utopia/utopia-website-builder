@@ -1,0 +1,21 @@
+{
+  "domain": "skylift-rental.my",
+  "containerId": "GTM-5XW7ZXLZ",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-3TMTJCX1X6",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-08-13T09:29:05.737Z",
+  "gsc": {
+    "siteUrl": "https://www.skylift-rental.my/",
+    "token": "<meta name=\"google-site-verification\" content=\"gFpI0rMTras-hi6hFz0OUEGv2UwOdEsoyW9Vzr6wYAg\" />",
+    "initAt": "2026-08-13T09:30:45.912Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-08-13T09:32:24.890Z"
+  }
+}

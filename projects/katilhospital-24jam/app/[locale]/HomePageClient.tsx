@@ -36,7 +36,7 @@ export default function HomePageClient({ locale, products, chromeProvided = fals
         {/* SECTION 3 — HERO */}
         <section
           style={{
-            padding: 'clamp(96px, 12vw, 132px) 16px 72px',
+            padding: 'clamp(40px, 6vw, 64px) 16px 72px',
             background: 'transparent',
           }}
         >
@@ -52,18 +52,21 @@ export default function HomePageClient({ locale, products, chromeProvided = fals
         >
           {/* Left — copy */}
           <div className="kh-hero-copy">
+            {/* Hero eyebrow — same pill tokens as the section <SectionEyebrow>
+                (tinted red bg, 7px red dot, uppercase red label) for one
+                consistent eyebrow across hero + all sections. */}
             <div
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: 8,
-                padding: '6px 12px',
+                padding: '6px 14px',
                 borderRadius: 9999,
-                background: '#FDECEC',
-                color: '#c01e1e',
+                background: 'rgba(230,48,48,0.10)',
+                color: '#e63030',
                 fontSize: 12,
                 fontWeight: 700,
-                letterSpacing: 0.4,
+                letterSpacing: 1.2,
                 textTransform: 'uppercase',
                 marginBottom: 18,
               }}
@@ -71,10 +74,11 @@ export default function HomePageClient({ locale, products, chromeProvided = fals
               <span
                 aria-hidden="true"
                 style={{
-                  width: 8,
-                  height: 8,
+                  width: 7,
+                  height: 7,
                   background: '#e63030',
                   borderRadius: '50%',
+                  flex: '0 0 auto',
                 }}
               />
               Sewa · Jual · Hantar 24 Jam
@@ -82,11 +86,11 @@ export default function HomePageClient({ locale, products, chromeProvided = fals
 
             <h1
               style={{
-                fontSize: 'clamp(30px, 5vw, 54px)',
-                fontWeight: 800,
+                fontSize: 'clamp(28px, 5vw, 44px)',
+                fontWeight: 700,
                 color: '#1c3a6a',
-                letterSpacing: -0.8,
-                lineHeight: 1.1,
+                letterSpacing: '-0.025em',
+                lineHeight: 1.2,
                 margin: '0 0 16px',
               }}
             >
@@ -95,7 +99,7 @@ export default function HomePageClient({ locale, products, chromeProvided = fals
             <h2
               style={{
                 fontSize: 'clamp(16px, 1.6vw, 20px)',
-                fontWeight: 500,
+                fontWeight: 400,
                 color: '#334155',
                 lineHeight: 1.55,
                 margin: '0 0 24px',
@@ -228,7 +232,7 @@ export default function HomePageClient({ locale, products, chromeProvided = fals
           </div>
         </div>
 
-        <style jsx>{`
+        <style>{`
           .kh-hero-copy {
             text-align: center;
           }

@@ -1,0 +1,21 @@
+{
+  "domain": "cat-rumah.my",
+  "containerId": "GTM-PHSK7V3Q",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-41591VMHEE",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-07-07T03:02:57.220Z",
+  "gsc": {
+    "siteUrl": "https://cat-rumah.my/",
+    "token": "<meta name=\"google-site-verification\" content=\"v1SkS39MLMftyge-bcqjhZlsqJVpjUm72VQPHc-mQgc\" />",
+    "initAt": "2026-07-07T03:03:12.600Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-07-08T01:38:20.260Z"
+  }
+}

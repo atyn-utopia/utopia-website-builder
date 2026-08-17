@@ -346,5 +346,10 @@
     "h2Template": "沃尔沃 EC200 与 EC400，助力 {state} 项目",
     "nearbyHeading": "{location} 附近挖掘机出租",
     "nearbyEyebrow": "附近地区"
+  },
+  "redirect": {
+    "heading": "正在打开 WhatsApp…",
+    "subtext": "正在为您连接 Abang Excavator 团队。",
+    "fallback": "如果没有自动跳转，请点击这里"
   }
 }

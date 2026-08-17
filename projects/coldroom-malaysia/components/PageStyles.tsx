@@ -13,6 +13,33 @@ export default function PageStyles() {
         color: inherit;
       }
 
+      /* Multi-line labeled prices (webcore prices array) — vertical list.
+         Rendered on the dark frost gradient card, so colours are tuned for
+         white-on-dark: light divider, amber accent line, muted white note. */
+      .product-prices.price-list {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 4px 16px;
+        text-align: left;
+      }
+      .price-line {
+        font-weight: 700;
+        font-size: 15px;
+        padding: 11px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      }
+      .price-line:last-child { border-bottom: none; }
+      .price-line:first-child { color: var(--cold-amber-glow); }
+      .price-note {
+        display: block;
+        margin-top: 3px;
+        font-weight: 400;
+        font-size: 11px;
+        text-transform: none;
+        color: rgba(255, 255, 255, 0.72);
+      }
+
       .nav-links-desktop { display: flex; }
       .lang-desktop { display: block; }
       .mobile-menu-btn { display: none; }

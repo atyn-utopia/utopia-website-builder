@@ -35,7 +35,13 @@
     "description": "马来西亚专业房屋油漆承包商。室内、室外、天花板、环氧地板和围栏油漆。立邦、Jotun、多乐士高级品牌。",
     "whatsappUs": "WhatsApp 我们",
     "productsHeading": "服务",
-    "productsLinks": ["室内墙壁油漆", "室外油漆", "天花板油漆", "环氧地板漆", "围栏油漆"],
+    "productsLinks": [
+      "室内墙壁油漆",
+      "室外油漆",
+      "天花板油漆",
+      "环氧地板漆",
+      "围栏油漆"
+    ],
     "locationsHeading": "主要地区",
     "resourcesHeading": "资源",
     "blogLabel": "博客",
@@ -83,15 +89,51 @@
       "tag": "我们的服务",
       "heading": "8项房屋油漆服务",
       "subheading": "从客厅到外墙 — 一支团队，一项保证。",
-      "interior": { "title": "室内墙壁油漆", "description": "客厅、走廊与重点墙 — 立邦无味高级漆，细致完工。", "price": "3.50" },
-      "bedroom": { "title": "卧室油漆", "description": "粉彩或暖色调，让睡眠更安稳。含表面处理与遮蔽。", "price": "3.50" },
-      "kitchen": { "title": "厨房油漆", "description": "耐油耐热的油性或乳胶漆，易于清洁。", "price": "3.50" },
-      "bathroom": { "title": "浴室油漆", "description": "防霉防潮 — Jotun Drygolin 或 Dulux Easycare。", "price": "3.50" },
-      "exterior": { "title": "外墙油漆", "description": "为马来西亚气候设计 — 含免费高压清洗。", "price": "3.50" },
-      "weathershield": { "title": "高级耐候漆", "description": "Jotun Jotashield 或立邦 Weatherbond — 7–10年保修。", "price": "4.50" },
-      "marble": { "title": "大理石漆", "description": "室内墙的奢华大理石效果。每面墙独一无二。", "price": "2,250" },
-      "texture": { "title": "纹理漆", "description": "现代仿混凝土纹理，工业风高级感。", "price": "2,500" },
-      "decor3d": { "title": "3D 装饰墙", "description": "立体浮雕墙板 — 龟背叶、几何或有机图案。", "price": "3,500" },
+      "interior": {
+        "title": "室内墙壁油漆",
+        "description": "客厅、走廊与重点墙 — 立邦无味高级漆，细致完工。",
+        "price": "3.50"
+      },
+      "bedroom": {
+        "title": "卧室油漆",
+        "description": "粉彩或暖色调，让睡眠更安稳。含表面处理与遮蔽。",
+        "price": "3.50"
+      },
+      "kitchen": {
+        "title": "厨房油漆",
+        "description": "耐油耐热的油性或乳胶漆，易于清洁。",
+        "price": "3.50"
+      },
+      "bathroom": {
+        "title": "浴室油漆",
+        "description": "防霉防潮 — Jotun Drygolin 或 Dulux Easycare。",
+        "price": "3.50"
+      },
+      "exterior": {
+        "title": "外墙油漆",
+        "description": "为马来西亚气候设计 — 含免费高压清洗。",
+        "price": "3.50"
+      },
+      "weathershield": {
+        "title": "高级耐候漆",
+        "description": "Jotun Jotashield 或立邦 Weatherbond — 7–10年保修。",
+        "price": "4.50"
+      },
+      "marble": {
+        "title": "大理石漆",
+        "description": "室内墙的奢华大理石效果。每面墙独一无二。",
+        "price": "2,250"
+      },
+      "texture": {
+        "title": "纹理漆",
+        "description": "现代仿混凝土纹理，工业风高级感。",
+        "price": "2,500"
+      },
+      "decor3d": {
+        "title": "3D 装饰墙",
+        "description": "立体浮雕墙板 — 龟背叶、几何或有机图案。",
+        "price": "3,500"
+      },
       "bookNow": "立即询价",
       "fromLabel": "起",
       "priceFromSqft": "RM {price}/sqft 起",
@@ -136,12 +178,30 @@
     "whyChoose": {
       "tag": "为什么选我们",
       "heading": "为什么选择 Cat Rumah Malaysia",
-      "reason1": { "title": "仅用高级品牌", "description": "我们仅使用立邦、Jotun和多乐士 — 绝非廉价漆。" },
-      "reason2": { "title": "5小时完成", "description": "卧室或客厅工作 — 您当天就能搬回新家。" },
-      "reason3": { "title": "免费报价，无任何承诺", "description": "免费现场考察，价格固定无预付。" },
-      "reason4": { "title": "满意保证", "description": "12个月内出现刮痕或脱落？免费重新油漆。" },
-      "reason5": { "title": "持牌承包商", "description": "8年以上行业经验的持牌团队。" },
-      "reason6": { "title": "全马来西亚覆盖", "description": "从吉隆坡到槟城 — 我们送上门服务。" }
+      "reason1": {
+        "title": "仅用高级品牌",
+        "description": "我们仅使用立邦、Jotun和多乐士 — 绝非廉价漆。"
+      },
+      "reason2": {
+        "title": "5小时完成",
+        "description": "卧室或客厅工作 — 您当天就能搬回新家。"
+      },
+      "reason3": {
+        "title": "免费报价，无任何承诺",
+        "description": "免费现场考察，价格固定无预付。"
+      },
+      "reason4": {
+        "title": "满意保证",
+        "description": "12个月内出现刮痕或脱落？免费重新油漆。"
+      },
+      "reason5": {
+        "title": "持牌承包商",
+        "description": "8年以上行业经验的持牌团队。"
+      },
+      "reason6": {
+        "title": "全马来西亚覆盖",
+        "description": "从吉隆坡到槟城 — 我们送上门服务。"
+      }
     },
     "howItWorks": {
       "tag": "3步预订",
@@ -285,7 +345,9 @@
       "button": "WhatsApp Cat Rumah Malaysia",
       "fine": "免费报价 · 12个月保修。"
     },
-    "breadcrumb": { "home": "首页" }
+    "breadcrumb": {
+      "home": "首页"
+    }
   },
   "blog": {
     "meta": {
@@ -301,5 +363,10 @@
     "ctaHeading": "准备好焕新家居？",
     "ctaSubheading": "1小时内获得免费报价。",
     "ctaButton": "立即 WhatsApp 我们"
+  },
+  "redirect": {
+    "heading": "正在打开 WhatsApp…",
+    "subtext": "正在为您连接 Cat Rumah Malaysia 团队。",
+    "fallback": "如果没有自动跳转，请点击这里"
   }
 }

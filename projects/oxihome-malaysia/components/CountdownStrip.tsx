@@ -11,7 +11,18 @@ function getSecondsUntilMidnight() {
   return Math.max(0, Math.floor((midnight.getTime() - now.getTime()) / 1000))
 }
 
-export function CountdownStrip({ waLink, label }: { waLink: string; label: string }) {
+// `label` and `cta` are both passed in already localised — the CTA used to be a
+// hardcoded English "Claim Now →", which shipped untranslated on the /ms and
+// /zh pages next to a translated label.
+export function CountdownStrip({
+  waLink,
+  label,
+  cta,
+}: {
+  waLink: string
+  label: string
+  cta: string
+}) {
   const [secs, setSecs] = useState<number | null>(null)
 
   useEffect(() => {
@@ -49,7 +60,7 @@ export function CountdownStrip({ waLink, label }: { waLink: string; label: strin
         className="ml-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold transition-opacity hover:opacity-90"
         style={{ background: WA_GREEN, color: 'white' }}
       >
-        Claim Now →
+        {cta}
       </a>
     </div>
   )

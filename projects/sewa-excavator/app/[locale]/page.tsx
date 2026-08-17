@@ -116,6 +116,7 @@ export default async function HomePage({
       name: 'Volvo EC200',
       description: core.find((p) => p.slug === 'volvo-ec200')?.description ?? fallbackEc200.description,
       rentalPrice: core.find((p) => p.slug === 'volvo-ec200')?.rental_price ?? fallbackEc200.price,
+      prices: core.find((p) => p.slug === 'volvo-ec200')?.prices ?? [],
       eyebrow: fallbackEc200.eyebrow,
       image: core.find((p) => p.slug === 'volvo-ec200')?.photos[0]?.url ?? '/products/volvo-ec200.png',
     },
@@ -124,6 +125,7 @@ export default async function HomePage({
       name: 'Volvo EC400',
       description: core.find((p) => p.slug === 'volvo-ec400')?.description ?? fallbackEc400.description,
       rentalPrice: core.find((p) => p.slug === 'volvo-ec400')?.rental_price ?? fallbackEc400.price,
+      prices: core.find((p) => p.slug === 'volvo-ec400')?.prices ?? [],
       eyebrow: fallbackEc400.eyebrow,
       image: core.find((p) => p.slug === 'volvo-ec400')?.photos[0]?.url ?? '/products/volvo-ec400.png',
     },
@@ -292,17 +294,29 @@ export default async function HomePage({
                   <div className="product-body">
                     <h4 className="product-title">{p.name}</h4>
                     <h5 className="product-desc">{p.description}</h5>
-                    <div className="product-prices">
-                      <div className="price-cell">
-                        <span className="price-label">{tProducts('priceDailyLabel')}</span>
-                        <span className="price-value">{tProducts('priceDaily', { price: Number(p.rentalPrice).toLocaleString() })}</span>
+                    {p.prices.length > 0 ? (
+                      <div className="product-prices price-list">
+                        {p.prices.map((line, i) => (
+                          <div className="price-line" key={i}>
+                            {line.label}: RM {Number(line.amount).toLocaleString()}
+                            {line.unit ? ' / ' + line.unit : ''}
+                            {line.note ? <span className="price-note">{line.note}</span> : null}
+                          </div>
+                        ))}
                       </div>
-                      <div className="price-divider" aria-hidden="true" />
-                      <div className="price-cell">
-                        <span className="price-label">{tProducts('priceMonthlyLabel')}</span>
-                        <span className="price-value">{tProducts('priceMonthly', { price: Number(monthly).toLocaleString() })}</span>
+                    ) : (
+                      <div className="product-prices">
+                        <div className="price-cell">
+                          <span className="price-label">{tProducts('priceDailyLabel')}</span>
+                          <span className="price-value">{tProducts('priceDaily', { price: Number(p.rentalPrice).toLocaleString() })}</span>
+                        </div>
+                        <div className="price-divider" aria-hidden="true" />
+                        <div className="price-cell">
+                          <span className="price-label">{tProducts('priceMonthlyLabel')}</span>
+                          <span className="price-value">{tProducts('priceMonthly', { price: Number(monthly).toLocaleString() })}</span>
+                        </div>
                       </div>
-                    </div>
+                    )}
                     <WhatsAppButton
                       href={waRedirect(locale, `${p.name} — ${tProducts('priceDaily', { price: String(p.rentalPrice) })}`)}
                       label={`product-${p.slug}`}

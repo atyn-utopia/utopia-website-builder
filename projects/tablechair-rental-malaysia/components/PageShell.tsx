@@ -410,7 +410,19 @@ export default async function PageShell({
                     </p>
                   )}
 
-                  {(p.rental_price != null || p.sale_price != null) && (
+                  {p.prices.length > 0 ? (
+                    <div className="mt-5 overflow-hidden rounded-2xl border border-[#FDD835]/25 bg-[#FFF9C4]/60">
+                      <div className="product-prices price-list">
+                        {p.prices.map((line, i) => (
+                          <div className="price-line" key={i}>
+                            {line.label}: RM {Number(line.amount).toLocaleString()}
+                            {line.unit ? ' / ' + line.unit : ''}
+                            {line.note ? <span className="price-note">{line.note}</span> : null}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (p.rental_price != null || p.sale_price != null) ? (
                     <div className="mt-5 overflow-hidden rounded-2xl border border-[#FDD835]/25 bg-[#FFF9C4]/60 text-sm">
                       {p.rental_price != null && (
                         <p className="flex items-center justify-between px-4 py-2.5">
@@ -432,7 +444,7 @@ export default async function PageShell({
                         </p>
                       )}
                     </div>
-                  )}
+                  ) : null}
 
                   <div className="mt-auto pt-5">
                     <WAButton

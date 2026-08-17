@@ -1,0 +1,21 @@
+{
+  "domain": "sewakatilhospital.my",
+  "containerId": "GTM-P323MPG9",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-9E64KV7M0R",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-08-06T04:46:04.580Z",
+  "gsc": {
+    "siteUrl": "https://www.sewakatilhospital.my/",
+    "token": "<meta name=\"google-site-verification\" content=\"ow94y87IUiNAn2e9qZm8_RxwRbONjCnjstlNWNEWhvY\" />",
+    "initAt": "2026-08-06T04:50:04.090Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-08-06T04:51:55.590Z"
+  }
+}

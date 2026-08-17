@@ -181,7 +181,11 @@ button { font-family: inherit; }
 .fomo-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; padding: 10px var(--gut); font-size: 13px; line-height: 1.4; }
 .fomo-tag { font-family: var(--font-mono-stack); font-weight: 700; font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; background: rgba(255,255,255,0.18); padding: 4px 8px; border-radius: 999px; }
 .fomo-body { font-weight: 500; text-align: center; }
-.fomo-clock { font-family: var(--font-mono-stack); font-weight: 700; font-size: 15px; letter-spacing: 0.04em; display: inline-flex; gap: 6px; align-items: center; }
+.fomo-clock { font-family: var(--font-mono-stack); font-weight: 700; font-size: 15px; letter-spacing: 0.04em; display: inline-flex; gap: 6px; align-items: center;
+  /* Hidden (but still laid out) until the client tick lands, so the banner
+     never reflows on hydration and no placeholder 00:00:00:00 flashes. */
+  opacity: 0; transition: opacity 160ms ease-out; }
+.fomo-clock.is-ready { opacity: 1; }
 .fomo-sep { opacity: 0.6; }
 .fomo-link { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; font-size: 13px; }
 
@@ -462,3 +466,35 @@ button { font-family: inherit; }
 
 /* Focus visibility */
 :focus-visible { outline: 2px solid var(--brand-orange); outline-offset: 2px; }
+
+/* ── Utopia brand CI ────────────────────────────────────────────────────
+   Structural tokens + the "Built by Utopia AI" footer credit. This is the
+   CI *element* insertion only — the site keeps its own palette, fonts and
+   button shape. Nothing below re-themes existing components; the radius /
+   motion tokens are opt-in and are consumed by .utopia-credit alone unless
+   a component references them explicitly. */
+:root {
+  --r-button: 8px;
+  --r-card: 12px;
+  --r-pill: 999px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-hover: 220ms;
+  --dur-layout: 320ms;
+}
+
+.utopia-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  /* No `color` here on purpose. An unlayered `color: inherit` outranks every
+     Tailwind text-colour utility (unlayered always beats @layer), so a footer
+     styling the credit with a class silently inherited the body colour —
+     dark-on-dark and invisible. Each footer sets its own colour. */
+  text-decoration: none;
+  border-radius: var(--r-button);
+  transition: transform var(--dur-hover) var(--ease), opacity var(--dur-hover) var(--ease);
+}
+.utopia-credit:hover { transform: translateY(-1px); opacity: 0.85; }
+.utopia-credit__mark { flex: none; }

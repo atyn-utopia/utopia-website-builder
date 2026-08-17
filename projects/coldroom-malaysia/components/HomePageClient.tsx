@@ -8,6 +8,7 @@ import { siteConfig } from '@/config/site';
 import { trackWhatsApp } from '@/lib/track';
 import { useImpression } from '@/lib/useImpression';
 import { STATES, locations, type Location } from '@/config/locations';
+import type { PriceLine } from '@/lib/webcore';
 
 interface Product {
   id: string;
@@ -15,6 +16,7 @@ interface Product {
   slug: string;
   description: string | null;
   rental_price: number | null;
+  prices: PriceLine[] | null;
   product_photos: { url: string }[];
 }
 
@@ -199,17 +201,29 @@ function ServiceCard({ product, locale, waHref }: { product: Product; locale: st
         <div style={{ position: 'relative' }}>
           <span className="eyebrow" style={{ color: 'var(--cold-amber-glow)' }}>{t('eyebrow')}</span>
           <h4 style={{ color: '#fff', marginTop: 12, fontSize: 26, fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.15 }}>{product.name}</h4>
-          <p style={{ marginTop: 12, color: 'rgba(255,255,255,0.85)', fontSize: 14, lineHeight: 1.55 }}>{product.description}</p>
+          <h6 className="body-text" style={{ marginTop: 12, color: 'rgba(255,255,255,0.85)', fontSize: 14, lineHeight: 1.55 }}>{product.description}</h6>
         </div>
         <div style={{ position: 'relative' }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
-            <span style={{ fontWeight: 800, fontSize: 34, color: '#fff', letterSpacing: '-0.02em' }}>
-              {t('priceFrom', { price: product.rental_price ?? 5 })}
-            </span>
-            <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.75)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>
-              {t('perPalletDay')}
-            </span>
-          </div>
+          {(product.prices ?? []).length > 0 ? (
+            <div className="product-prices price-list">
+              {(product.prices ?? []).map((line, i) => (
+                <div className="price-line" key={i}>
+                  {line.label}: RM {Number(line.amount).toLocaleString()}
+                  {line.unit ? ' / ' + line.unit : ''}
+                  {line.note ? <span className="price-note">{line.note}</span> : null}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
+              <span style={{ fontWeight: 800, fontSize: 34, color: '#fff', letterSpacing: '-0.02em' }}>
+                {t('priceFrom', { price: product.rental_price ?? 5 })}
+              </span>
+              <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.75)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>
+                {t('perPalletDay')}
+              </span>
+            </div>
+          )}
           <a
             href={waHref}
             target="_blank"
@@ -327,7 +341,7 @@ export default function HomePageClient({ products, location }: Props) {
           <div className="fade-up" style={{ textAlign: 'center', marginBottom: 32 }}>
             <span className="eyebrow">{t('products.eyebrow')}</span>
             <h3 style={{ marginTop: 6 }}>{t('products.heading')}</h3>
-            <p style={{ maxWidth: 600, margin: '10px auto 0', color: 'var(--steel-500)' }}>{t('products.subheading')}</p>
+            <h5 className="body-text" style={{ maxWidth: 600, margin: '10px auto 0', color: 'var(--steel-500)' }}>{t('products.subheading')}</h5>
           </div>
           <div className="fade-up">
             {products.map((product) => (
@@ -363,7 +377,7 @@ export default function HomePageClient({ products, location }: Props) {
                   0{n}
                 </span>
                 <h4 style={{ fontSize: 18 }}>{t(`howItWorks.steps.${n - 1}.title`)}</h4>
-                <p style={{ marginTop: 8, fontSize: 14, color: 'var(--steel-500)' }}>{t(`howItWorks.steps.${n - 1}.body`)}</p>
+                <h6 className="body-text" style={{ marginTop: 8, fontSize: 14, color: 'var(--steel-500)' }}>{t(`howItWorks.steps.${n - 1}.body`)}</h6>
               </div>
             ))}
           </div>
@@ -385,7 +399,7 @@ export default function HomePageClient({ products, location }: Props) {
           <div className="fade-up" style={{ textAlign: 'center', marginBottom: 36 }}>
             <span className="eyebrow" style={{ color: 'var(--cold-amber-glow)' }}>{t('risk.eyebrow')}</span>
             <h3 style={{ marginTop: 8, color: '#fff' }}>{t('risk.heading')}</h3>
-            <p style={{ marginTop: 14, color: 'rgba(255,255,255,0.85)', maxWidth: 680, margin: '14px auto 0' }}>{t('risk.body')}</p>
+            <h5 className="body-text" style={{ marginTop: 14, color: 'rgba(255,255,255,0.85)', maxWidth: 680, margin: '14px auto 0' }}>{t('risk.body')}</h5>
           </div>
 
           {/* 2x2 bullet grid */}
@@ -485,7 +499,7 @@ export default function HomePageClient({ products, location }: Props) {
                   <GoogleG size={16} />
                 </div>
                 <div style={{ display: 'flex', gap: 2, marginBottom: 8 }}>{Array.from({ length: 5 }).map((_, j) => <StarIcon key={j} />)}</div>
-                <p style={{ fontSize: 13, color: 'var(--steel-500)', lineHeight: 1.6 }}>"{t(`reviews.items.${i}.body`)}"</p>
+                <h6 className="body-text" style={{ fontSize: 13, color: 'var(--steel-500)', lineHeight: 1.6 }}>"{t(`reviews.items.${i}.body`)}"</h6>
                 <div style={{ marginTop: 12, display: 'flex', alignItems: 'center', gap: 8 }}>
                   <span className="temp-chip frost-pale" style={{ fontSize: 11, padding: '4px 10px' }}>{REVIEW_TIER_TAGS[i]}</span>
                   <span style={{ fontSize: 11, color: 'var(--success)', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 4 }}><CheckIcon /> Verified</span>
@@ -509,7 +523,7 @@ export default function HomePageClient({ products, location }: Props) {
               <div>
                 <span className="temp-chip frost-mid">{t('whyChoose.featured.badge')}</span>
                 <h4 style={{ color: '#fff', marginTop: 14, fontSize: 26 }}>{t('whyChoose.featured.title')}</h4>
-                <p style={{ color: 'rgba(255,255,255,0.78)', marginTop: 12, fontSize: 15 }}>{t('whyChoose.featured.body')}</p>
+                <h6 className="body-text" style={{ color: 'rgba(255,255,255,0.78)', marginTop: 12, fontSize: 15 }}>{t('whyChoose.featured.body')}</h6>
               </div>
               <div style={{ display: 'flex', gap: 10, marginTop: 16 }}>
                 <span className="temp-chip frost-pale" style={{ fontSize: 11 }}>JAKIM</span>
@@ -520,7 +534,7 @@ export default function HomePageClient({ products, location }: Props) {
               <div key={i} className="fade-up" style={{ background: 'var(--steel-700)', border: '1px solid rgba(43,169,181,0.18)', borderRadius: 'var(--radius-xl)', padding: 22 }}>
                 <div style={{ width: 44, height: 44, borderRadius: 'var(--radius-md)', background: 'var(--grad-cold)', display: 'grid', placeItems: 'center', color: '#fff', fontWeight: 800 }}>{['⚡', '💬', '🚚', '🧊'][i]}</div>
                 <h4 style={{ color: '#fff', marginTop: 14, fontSize: 16 }}>{t(`whyChoose.tiles.${i}.title`)}</h4>
-                <p style={{ color: 'rgba(255,255,255,0.72)', marginTop: 6, fontSize: 13 }}>{t(`whyChoose.tiles.${i}.body`)}</p>
+                <h6 className="body-text" style={{ color: 'rgba(255,255,255,0.72)', marginTop: 6, fontSize: 13 }}>{t(`whyChoose.tiles.${i}.body`)}</h6>
               </div>
             ))}
           </div>
@@ -533,7 +547,7 @@ export default function HomePageClient({ products, location }: Props) {
           <div className="fade-up" style={{ textAlign: 'center', marginBottom: 32 }}>
             <span className="eyebrow">{t('gallery.eyebrow')}</span>
             <h3 style={{ fontSize: 'var(--text-h3)', marginTop: 8 }}>{t('gallery.heading')}</h3>
-            <p style={{ maxWidth: 600, margin: '12px auto 0', color: 'var(--steel-500)' }}>{t('gallery.subheading')}</p>
+            <h5 className="body-text" style={{ maxWidth: 600, margin: '12px auto 0', color: 'var(--steel-500)' }}>{t('gallery.subheading')}</h5>
           </div>
           <div className="gallery-grid">
             {GALLERY_IMAGES.map((src, idx) => (
@@ -552,7 +566,7 @@ export default function HomePageClient({ products, location }: Props) {
           <div className="fade-up" style={{ textAlign: 'center', marginBottom: 36 }}>
             <span className="eyebrow">{t('locationsSection.eyebrow')}</span>
             <h3 style={{ fontSize: 'var(--text-h3)', marginTop: 8 }}>{t('locationsSection.heading')}</h3>
-            <p style={{ maxWidth: 600, margin: '12px auto 0', color: 'var(--steel-500)' }}>{t('locationsSection.subheading')}</p>
+            <h5 className="body-text" style={{ maxWidth: 600, margin: '12px auto 0', color: 'var(--steel-500)' }}>{t('locationsSection.subheading')}</h5>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16 }} className="states-grid">
             {stateGroups.map(({ state, items }) => (
@@ -621,7 +635,7 @@ export default function HomePageClient({ products, location }: Props) {
                   <span style={{ fontSize: 22, color: 'var(--cold-amber)', fontWeight: 700, transform: openFaq === i ? 'rotate(45deg)' : 'none', transition: 'transform 200ms var(--ease-out)' }}>+</span>
                 </button>
                 <div className="accordion-content" data-open={openFaq === i ? 'true' : 'false'}>
-                  <p style={{ padding: '0 22px 18px', fontSize: 14, color: 'var(--steel-500)', lineHeight: 1.7 }}>{t(`faq.items.${i}.a`)}</p>
+                  <h6 className="body-text" style={{ padding: '0 22px 18px', fontSize: 14, color: 'var(--steel-500)', lineHeight: 1.7 }}>{t(`faq.items.${i}.a`)}</h6>
                 </div>
               </div>
             ))}
@@ -637,7 +651,7 @@ export default function HomePageClient({ products, location }: Props) {
           <div className="fade-up">
             <span className="eyebrow" style={{ color: 'var(--cold-amber-glow)' }}>{t('finalCta.eyebrow')}</span>
             <h3 style={{ color: '#fff', fontSize: 'var(--text-h3)', marginTop: 10 }}>{t('finalCta.heading')}</h3>
-            <p style={{ color: 'rgba(255,255,255,0.88)', marginTop: 12, maxWidth: 580, margin: '12px auto 0' }}>{t('finalCta.body')}</p>
+            <h5 className="body-text" style={{ color: 'rgba(255,255,255,0.88)', marginTop: 12, maxWidth: 580, margin: '12px auto 0' }}>{t('finalCta.body')}</h5>
             <a href={waHref} target="_blank" rel="noopener noreferrer" onClick={() => trackWhatsApp(siteConfig.fallbackPhone)} className="btn btn-wa" style={{ marginTop: 24, height: 56, fontSize: 16 }}>
               <WaIcon size={20} /> {t('finalCta.cta')}
             </a>

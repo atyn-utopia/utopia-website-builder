@@ -1,0 +1,21 @@
+{
+  "domain": "aircondpanasonic.my",
+  "containerId": "GTM-PK3XTX52",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-1JZD2S4LKK",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-08-05T09:50:32.238Z",
+  "gsc": {
+    "siteUrl": "https://aircondpanasonic.my/zh/",
+    "token": "<meta name=\"google-site-verification\" content=\"RtrH2734k6wDFUnXnJr_IMGtlwpap9sGecWtscFjJE4\" />",
+    "initAt": "2026-08-05T09:52:59.845Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-08-05T09:54:41.495Z"
+  }
+}

@@ -1,8 +1,14 @@
 import { MetadataRoute } from 'next'
 import { locations } from '@/config/locations'
+import { routing } from '@/i18n/routing'
+import { localeAbs } from '@/lib/seoAlternates'
 
-const BASE_URL = 'https://oxihome.my'
-const locales = ['en', 'ms', 'zh'] as const
+const locales = routing.locales
+
+// localeAbs drops the prefix for the default locale (ms), so every entry is
+// the canonical URL — not one that 308-redirects.
+const altsFor = (path = '') =>
+  Object.fromEntries(locales.map((l) => [l, localeAbs(l, path)]))
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = []
@@ -10,35 +16,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Homepage variants
   for (const locale of locales) {
     entries.push({
-      url: `${BASE_URL}/${locale}`,
+      url: localeAbs(locale),
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 1.0,
-      alternates: {
-        languages: {
-          en: `${BASE_URL}/en`,
-          ms: `${BASE_URL}/ms`,
-          zh: `${BASE_URL}/zh`,
-        },
-      },
+      alternates: { languages: altsFor() },
     })
   }
 
   // Location pages
   for (const location of locations) {
+    const path = `/oxygen-machine/${location.slug}`
     for (const locale of locales) {
       entries.push({
-        url: `${BASE_URL}/${locale}/oxygen-machine/${location.slug}`,
+        url: localeAbs(locale, path),
         lastModified: new Date(),
         changeFrequency: 'monthly',
         priority: 0.8,
-        alternates: {
-          languages: {
-            en: `${BASE_URL}/en/oxygen-machine/${location.slug}`,
-            ms: `${BASE_URL}/ms/oxygen-machine/${location.slug}`,
-            zh: `${BASE_URL}/zh/oxygen-machine/${location.slug}`,
-          },
-        },
+        alternates: { languages: altsFor(path) },
       })
     }
   }

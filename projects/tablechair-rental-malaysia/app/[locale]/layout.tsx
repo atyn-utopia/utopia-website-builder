@@ -41,7 +41,10 @@ export async function generateMetadata(
     title: { default: t('title'), template: '%s | Kak Kenduri' },
     description: t('description'),
     alternates: seoAlternates(locale),
-    verification: { google: 'tm0matiWoFe5vrz_jjCFkYpuL_iokve1Je2zV1ObdXc' },
+    // Search Console ownership — this one token verifies the root, /ms and /zh
+    // URL-prefix properties. The domain property is verified by DNS TXT instead,
+    // so it does not depend on this tag.
+    verification: { google: 'tFkZWpZtxxVnhX9wJCZ_EvT2k5oodZLRsuOxvlY1rok' },
   }
 }
 
@@ -64,6 +67,18 @@ export default async function LocaleLayout({
     <html lang={locale} className={inter.variable}>
       <head>
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        {/* Google Tag Manager */}
+        <script
+          id="gtm-base"
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-N3R9ZLNS');`,
+          }}
+        />
+        {/* End Google Tag Manager */}
         <script
           defer
           src="https://webcore.utopiaai.my/t.js"
@@ -71,6 +86,16 @@ export default async function LocaleLayout({
         />
       </head>
       <body className="bg-[#FFFEF8] text-[#111111] antialiased overflow-x-hidden">
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-N3R9ZLNS"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
+        {/* End Google Tag Manager (noscript) */}
         <NextIntlClientProvider locale={locale} messages={messages}>
           <OrganizationSchema />
           {children}

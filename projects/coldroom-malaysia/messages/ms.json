@@ -315,5 +315,10 @@
     "noPosts": "Tiada pos lagi. Sila kembali tidak lama lagi.",
     "breadcrumbHome": "Laman Utama",
     "breadcrumbBlog": "Blog"
+  },
+  "redirect": {
+    "heading": "Membuka WhatsApp…",
+    "subtext": "Anda sedang dihubungkan ke pasukan Cold Room Malaysia.",
+    "fallback": "Klik di sini jika tidak berpindah"
   }
 }

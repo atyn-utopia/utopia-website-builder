@@ -4,6 +4,26 @@
 > Before producing output, read and follow: `CLAUDE.md` (system rules), `docs/full-website-setup.md` (complete workflow — especially Steps 13-14).
 > Key rules: `product_slug` column DOES NOT EXIST — never reference it. Phone numbers scoped by `website` + `location_slug`. Company must be registered in `company_websites` with correct `company_id` (see full-setup doc for UUID list). Verify tracking script present with correct `data-website`. 4 leads modes: single, rotation, location, hybrid. Never deploy without user confirmation.
 
+> **Webcore API (`docs/webcore-api.md`) is the sanctioned way to write to webcore.**
+> Prefer it over raw SQL / PostgREST: it validates input, keys writes to the
+> registered site, and fires the cache purge so changes reach the live site
+> without a redeploy. Key is `$WEBCORE_API_KEY` in the gitignored root
+> `.env.local` — load with `set -a && . ./.env.local && set +a`. Never print it,
+> never commit it, never put it in client code.
+> `website` must be the **exact registered domain**. Some fleet sites are
+> registered on their `*.vercel.app` host — verify with
+> `GET /api/public/phone-numbers?website=<candidate>` before writing; an empty
+> array means wrong key and the write will orphan silently.
+>
+> Yours: verify live revalidation end-to-end before you call a deploy done.
+> `GET /api/public/phone-numbers/resolve?website=<d>` must return the expected
+> number, and a POST to the site's own `/api/revalidate` with the shared secret
+> must answer `200 {"revalidated":[...]}`. A `401` almost always means the
+> production env var was never set or the site was not redeployed after setting
+> it. The route's allow-list must contain every tag webcore sends —
+> `webcore-products`, `webcore-phones`, `webcore-blog`, `webcore-seo` — a
+> missing tag is accepted with a 200 and silently dropped.
+
 ## Role
 You are the QA and deployment specialist. Your job is to verify the phone number system works end-to-end between the admin CMS and the website, push the confirmed code to GitHub, and deploy to Vercel.
 
@@ -175,3 +195,23 @@ cd utopia-wizard && npm run gate -- --ratchet {slug}
 `--ratchet` also fails if the project's score dropped below its last snapshot —
 a deploy must never lower quality. The complete rule list is in
 [docs/guardrails.html](../docs/guardrails.html).
+
+### Social share card check (MANDATORY — after deploy, against the live domain)
+
+The gate checks the card exists in the repo; only the live domain proves it is
+actually served. A shared link with no `og:image` renders as a bare text card.
+
+```bash
+for L in ms en zh; do
+  curl -s -o /dev/null -w "og-$L.png -> %{http_code} %{content_type}\n" \
+    "https://<domain>/og-$L.png"
+done
+curl -s https://<domain>/ | grep -o 'og:image[^>]*'
+```
+
+- [ ] Every `og-{locale}.png` returns **200 `image/png`**
+- [ ] The homepage, a location page, the blog listing AND a blog article each
+      carry an `og:image` — a card on the homepage alone is the usual failure,
+      because Next replaces a parent's `openGraph` wholesale
+- [ ] If the hero changed in this release, the cards were regenerated — they are
+      screenshots and go stale silently (`node scripts/og-shot.mjs`)

@@ -12,6 +12,7 @@ import FomoBanner from '@/components/FomoBanner';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import LocationPageClient from './LocationPageClient';
+import { ogImages } from '@/lib/ogImage';
 
 export function generateStaticParams() {
   const params: { locale: string; location: string }[] = [];
@@ -49,6 +50,7 @@ export async function generateMetadata({
       siteName: siteConfig.brandName,
       type: 'website',
       locale: locale === 'ms' ? 'ms_MY' : locale === 'zh' ? 'zh_CN' : 'en_MY',
+      images: ogImages(locale),
     },
   };
 }

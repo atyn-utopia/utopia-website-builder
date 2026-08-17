@@ -1,0 +1,49 @@
+{
+  "domain": "sewagenset.my",
+  "containerId": "GTM-WD7R4HRJ",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-VR81NMMHL5",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-06-18T08:26:22.460Z",
+  "gsc": {
+    "siteUrl": "https://sewagenset.my/",
+    "token": "<meta name=\"google-site-verification\" content=\"_Sq3RG-PzA4cGEx2i5k0wrq-ewtg11Kg0ex2swvIJcs\" />",
+    "initAt": "2026-06-18T09:05:55.293Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-06-18T09:12:24.491Z",
+    "urlPrefixes": [
+      "https://sewagenset.my/",
+      "https://sewagenset.my/en/",
+      "https://sewagenset.my/zh/"
+    ],
+    "domainProperty": "sc-domain:sewagenset.my",
+    "ownerEmail": "utopiacoliving@gmail.com",
+    "sitemapSubmitted": "https://sewagenset.my/sitemap.xml",
+    "indexedUrls": 141
+  },
+  "ads": {
+    "customerId": "1933757591",
+    "ga4PropertyId": "542226895",
+    "event": "whatsapp_click",
+    "conversionActionId": "7653205356",
+    "conversionActionName": "sewagenset.my (web) whatsapp_click",
+    "status": "ENABLED",
+    "category": "CONTACT",
+    "primaryForGoal": true,
+    "lookbackDays": 90,
+    "countingType": "ONE_PER_CLICK",
+    "importedAt": "2026-06-18T00:00:00.000Z",
+    "importAppAndWebMetrics": true,
+    "manualStepsRemaining": [],
+    "manualStepsCompleted": [
+      "Ads UI: toggled ON 'Import app and web metrics' on the GA4 link (2026-06-18)",
+      "Ads UI: changed counting EVERY -> ONE_PER_CLICK, verified via API counting_type=2 (2026-06-18)"
+    ]
+  }
+}

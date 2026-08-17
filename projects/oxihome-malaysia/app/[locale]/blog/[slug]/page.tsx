@@ -10,7 +10,7 @@ import { waRedirect } from '@/lib/waRedirect';
 import { ArticleSchema } from '@/components/schema/ArticleSchema';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
-import FomoBanner from '@/components/FomoBanner';
+import { ogImages } from '@/lib/ogImage';
 
 export async function generateStaticParams() {
   const slugs = await getBlogPostSlugs();
@@ -40,7 +40,11 @@ export async function generateMetadata({
     openGraph: {
       type: 'article', title: tr.title, description: tr.excerpt,
       url: `${siteConfig.url}/${locale}${path}`,
-      images: post.cover_image_url ? [{ url: post.cover_image_url, width: 1200, height: 630 }] : undefined,
+      // An article with its own cover art shares better than the generic hero
+      // card; fall back to the locale card when it has none.
+      images: post.cover_image_url
+        ? [{ url: post.cover_image_url, width: 1200, height: 630 }]
+        : ogImages(locale),
       publishedTime: post.published_at,
     },
   };
@@ -65,7 +69,6 @@ export default async function BlogPostPage({
 
   return (
     <main style={{ background: '#ffffff', minHeight: '100vh' }}>
-      <FomoBanner />
       <SiteHeader />
       <ArticleSchema
         locale={locale}

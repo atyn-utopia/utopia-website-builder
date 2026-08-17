@@ -1,65 +1,82 @@
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
-import { siteConfig } from '@/config/site';
-import { locations } from '@/config/locations';
-
-const FOOTER_CITY_SLUGS = [
-  'kuala-lumpur',
-  'petaling-jaya',
-  'shah-alam',
-  'johor-bahru',
-  'george-town',
-  'ipoh',
-  'kota-kinabalu',
-  'kuching',
-];
 
 export default async function SiteFooter({ locale }: { locale: string }) {
   const t = await getTranslations({ locale, namespace: 'footer' });
   const nav = await getTranslations({ locale, namespace: 'nav' });
 
-  const footerCities = FOOTER_CITY_SLUGS
-    .map((slug) => locations.find((l) => l.slug === slug))
-    .filter(Boolean) as typeof locations;
-
   return (
     <footer className="site-footer">
       <div className="container">
-        <div className="footer-grid">
-          <div>
-            <div className="footer-brand">
-              <img src="/brand/logo-light.svg" alt={nav('logoAlt')} />
-            </div>
-            <p style={{ fontSize: 14, lineHeight: 1.65, maxWidth: 340 }}>{t('tagline')}</p>
-          </div>
-          <div>
-            <h5>{t('quickLinks')}</h5>
-            <ul>
-              <li><Link href={`/${locale}#services`}>{nav('services')}</Link></li>
-              <li><Link href={`/${locale}#how`}>{nav('howItWorks')}</Link></li>
-              <li><Link href={`/${locale}#gallery`}>{nav('gallery')}</Link></li>
-              <li><Link href={`/${locale}#reviews`}>{nav('reviews')}</Link></li>
-              <li><Link href={`/${locale}/blog`}>{nav('blog')}</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h5>{t('coverage')}</h5>
-            <ul>
-              {footerCities.map((l) => (
-                <li key={l.slug}>
-                  <Link href={`/${locale}/${siteConfig.productSlug}/${l.slug}`}>
-                    {l.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div className="footer-top">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/brand/logo.svg" alt={nav('logoAlt')} className="footer-logo" />
+          <nav className="footer-nav" aria-label="Footer">
+            <Link href={`/${locale}`}>{nav('home')}</Link>
+            <Link href={`/${locale}#services`}>{nav('services')}</Link>
+            <Link href={`/${locale}#how`}>{nav('howItWorks')}</Link>
+            <Link href={`/${locale}#reviews`}>{nav('reviews')}</Link>
+            <Link href={`/${locale}#locations`}>{nav('locations')}</Link>
+            <Link href={`/${locale}/blog`}>{nav('blog')}</Link>
+          </nav>
         </div>
+
+        <div className="footer-line" aria-hidden="true" />
+
         <div className="footer-bottom">
-          <span>{t('copyright')}</span>
-          <span>{t('ssm')}</span>
+          <p className="footer-copy">{t('copyright')}</p>
+          <a
+            className="utopia-credit"
+            href="https://utopiagroup.com.my"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>Built by</span>
+            <span className="utopia-credit__word">Utopia</span>
+            <svg className="utopia-credit__mark" width="14" height="12" viewBox="0 0 64 56" aria-hidden="true">
+              <defs>
+                <linearGradient id="utopiaCreditGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#0054A6" />
+                  <stop offset="50%" stopColor="#2774AE" />
+                  <stop offset="100%" stopColor="#4A9DD0" />
+                </linearGradient>
+              </defs>
+              <polygon points="32,4 60,52 4,52" fill="url(#utopiaCreditGrad)" />
+            </svg>
+            <span className="utopia-credit__word">AI</span>
+          </a>
         </div>
       </div>
+
+      <style>{`
+        .site-footer { background: var(--ice); padding: 44px 0 32px; border-top: 1px solid #E3E9F2; }
+        .footer-top {
+          display: flex; align-items: center; justify-content: space-between;
+          flex-wrap: wrap; gap: 20px 32px;
+        }
+        .footer-logo { width: 168px; height: auto; object-fit: contain; }
+        .footer-nav { display: flex; flex-wrap: wrap; gap: 12px 26px; }
+        .footer-nav a {
+          color: var(--ink); font-weight: 600; font-size: 14.5px;
+          transition: color var(--duration-fast) var(--ease-out);
+        }
+        .footer-nav a:hover { color: var(--blue); }
+        .footer-line { height: 1px; background: #E3E9F2; margin: 24px 0; }
+        .footer-bottom {
+          display: flex; align-items: center; justify-content: space-between;
+          flex-wrap: wrap; gap: 12px 24px;
+        }
+        .footer-copy { margin: 0; font-size: 12.5px; color: var(--ink-muted); }
+        /* .utopia-credit is the Utopia CI element — styled canonically in globals.css
+           (border-radius: var(--r-button); transform+opacity hover, color: inherit).
+           Do not restyle it here. */
+        @media (max-width: 767px) {
+          .site-footer { padding: 32px 0 24px; }
+          .footer-top { flex-direction: column; text-align: center; gap: 18px; }
+          .footer-nav { justify-content: center; }
+          .footer-bottom { flex-direction: column; text-align: center; }
+        }
+      `}</style>
     </footer>
   );
 }

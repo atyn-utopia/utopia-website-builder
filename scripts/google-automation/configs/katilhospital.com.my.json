@@ -1,0 +1,21 @@
+{
+  "domain": "katilhospital.com.my",
+  "containerId": "GTM-5KG7QXMP",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-WX1E6HRTP5",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-05-25T03:30:30.234Z",
+  "gsc": {
+    "siteUrl": "https://www.katilhospital.com.my/zh/",
+    "token": "<meta name=\"google-site-verification\" content=\"vlC_eWIECBm8rKInL0KGpmo_xJwJZNFANIaHAjwBMT0\" />",
+    "initAt": "2026-05-25T03:43:14.068Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-05-25T03:47:00.809Z"
+  }
+}

@@ -39,11 +39,6 @@
     "arrivalFlag": "4-HOUR ARRIVAL",
     "imageAlt": "ST-registered 24-hour Electrician 24 Hours technician on a Malaysia emergency call-out"
   },
-  "quickStrip": {
-    "text": "Live ST-registered electricians on standby — average WhatsApp reply under 2 minutes, day or night.",
-    "ctaPrimary": "WhatsApp Now",
-    "ctaSecondary": "Get a Quote"
-  },
   "usp": {
     "items": [
       {
@@ -245,5 +240,10 @@
     "twentyFourSeven": "24/7",
     "stRegistered": "ST Registered",
     "fixedPrice": "Fixed Pricing"
+  },
+  "redirect": {
+    "heading": "Opening WhatsApp…",
+    "subtext": "Connecting you to the Electrician 24 Hours team.",
+    "fallback": "Click here if it doesn't redirect"
   }
 }

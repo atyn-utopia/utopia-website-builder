@@ -8,6 +8,7 @@ import { routing } from '@/i18n/routing';
 import { siteConfig } from '@/config/site';
 import { OrganizationSchema } from '@/components/schema/OrganizationSchema';
 import type { Metadata } from 'next';
+import { ogImages } from '@/lib/ogImage';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -47,11 +48,13 @@ export async function generateMetadata({
           l !==
           (locale === 'ms' ? 'ms_MY' : locale === 'zh' ? 'zh_MY' : 'en_MY')
       ),
+      images: ogImages(locale),
     },
     twitter: {
       card: 'summary_large_image',
       title: t('title'),
       description: t('description'),
+      images: ogImages(locale),
     },
   };
 }
@@ -77,7 +80,7 @@ export default async function LocaleLayout({
         <script
           defer
           src="https://webcore.utopiaai.my/t.js"
-          data-website="skyliftmalaysia.utopiaai.my"
+          data-website={siteConfig.domain}
         />
       </head>
       <body style={{ fontFamily: 'var(--font-inter), Inter, sans-serif' }}>

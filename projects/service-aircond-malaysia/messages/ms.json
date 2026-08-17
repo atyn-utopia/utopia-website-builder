@@ -275,5 +275,10 @@
       "home": "Utama",
       "locations": "Lokasi"
     }
+  },
+  "redirect": {
+    "heading": "Membuka WhatsApp…",
+    "subtext": "Anda sedang dihubungkan ke pasukan Encik Beku.",
+    "fallback": "Klik di sini jika tidak berpindah"
   }
 }

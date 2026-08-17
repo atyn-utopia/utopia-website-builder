@@ -7,6 +7,7 @@ import LanguageSwitcher from './LanguageSwitcher';
 
 export default function SiteHeader() {
   const t = useTranslations('nav');
+  const tShared = useTranslations('shared');
   const locale = useLocale();
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
@@ -14,7 +15,7 @@ export default function SiteHeader() {
   return (
     <header className="site-header">
       <div className="site-header-inner">
-        <Link href={`/${locale}`} className="site-brand" aria-label="Sewa Motor Malaysia homepage">
+        <Link href={`/${locale}`} className="site-brand" aria-label={tShared('logoAlt')}>
           <span className="site-brand-icon" aria-hidden="true">
             <svg viewBox="0 0 32 32" width="32" height="32">
               <circle cx="9" cy="22" r="5" fill="#fff" />
@@ -84,7 +85,7 @@ export default function SiteHeader() {
         </nav>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .site-header {
           position: sticky; top: 0; z-index: 40;
           background: rgba(255, 255, 255, 0.94);
@@ -123,7 +124,7 @@ export default function SiteHeader() {
           .site-mobile-drawer { display: none !important; }
         }
         @media (max-width: 879px) {
-          :global(.nav-cta) { display: none !important; }
+          .nav-cta { display: none !important; }
         }
         @media (max-width: 640px) {
           .site-brand-text { display: none; }

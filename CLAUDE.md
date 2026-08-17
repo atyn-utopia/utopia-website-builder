@@ -94,6 +94,9 @@ Generates SEO-optimized blog articles with proper heading hierarchy (H1→H2→H
 Layla — QA & Deployment Specialist
 Verifies phone number system integration with the shared database, pushes code to GitHub, and deploys to Vercel. Runs after user confirms the website design.
 
+Gloo — Analytics & Growth Specialist (Google Integration)
+Sets up the site's Google footprint — GA4 + GTM + Google Search Console + Google Ads conversion import — via the internal automation bundle (`scripts/google-automation/`). Runs LAST, after Layla deploys and the site's PAID domain is live. Separate from the Utopia Webcore `t.js` analytics; this is the Google/Ads layer. Driven by the `google-integration` skill.
+
 
 # Agent Workflow
 
@@ -113,6 +116,10 @@ When the user asks to create a new website, you MUST follow `docs/full-website-s
 
 1. Alpha — design system architecture (confirms languages with user)
 2. Cyclops + Sora — run in parallel (both need Alpha's output)
+2b. **Keyword volume gate (MANDATORY, blocking)** — verify Sora's head terms against
+   real Google search volume before any copy is written. `keyword-volume.mjs --plan
+   <seo-plan.md>`; a head term with no volume propagates into every H1, meta title
+   and slug on the site. See the `keyword-research` skill.
 3. Nana — generate homepage + all location page copy (needs Alpha + Sora's output)
 4. Kagura + Kimmy — run in parallel (both need Nana's output)
    Kagura — propose unique design direction (reviews existing sites, researches inspiration)
@@ -122,6 +129,11 @@ When the user asks to create a new website, you MUST follow `docs/full-website-s
 6. Hanabi — generate blog posts + insert into Supabase (MANDATORY, before deploy)
    → user confirms design + content
 7. Layla — integration test → GitHub push → Vercel deploy (blog + products already live)
+8. Gloo — Google integration (GA4 + GTM + GSC + Ads) — POST-DEPLOY, only after the PAID domain is live on Vercel. Uses the `google-integration` skill / `scripts/google-automation/` bundle.
+9. **Keyword audit (T+60 days, recurring)** — `gsc-keyword-audit.mjs` compares the plan
+   against real Search Console impressions: which planned keywords got zero, which
+   unplanned queries are ranking, which sit in striking distance. Feed findings back
+   into `seo-plan.md`. See the `keyword-research` skill.
 
 
 # SEO Rules
@@ -159,6 +171,13 @@ These rules apply to EVERY website. No exceptions.
 - **3-point USP bar** immediately below the hero section on every homepage
 - Mandatory on every project
 
+## Process / Steps Section — CTA Required
+- The numbered **1-2-3 steps section must close with a CTA** (WhatsApp button + one line of supporting copy). **Mandatory on every project**, on the homepage *and* every location page.
+- Reason: step 1 is almost always "WhatsApp us your details" — a section that tells the reader to act and then gives them nothing to click wastes the highest-intent moment on the page.
+- The button follows the normal CTA rules: official WhatsApp green (`#25D366`), label **max 3 words**, same rounded shape as every other button.
+- Location-page variant must pass the town through to the redirect (`waRedirect(locale, undefined, loc.slug)`) so the lead is attributed to that location.
+- Centre the block at every breakpoint — it is one action for the whole section, not a per-card control.
+
 ## Buttons
 - All buttons must use the **same rounded button shape** across the entire site
 - Only the **color** changes between variants (primary, secondary, CTA)
@@ -171,9 +190,14 @@ These rules apply to EVERY website. No exceptions.
 - Enforced for `en` + `ms` (word-delimited). `zh` is exempt (CJK isn't space-delimited) but keep its labels equally compact.
 - The wizard checks this via `cta-button-word-limit`.
 
-## No Phone Numbers or Domains on Site
-- Do NOT display any phone number or domain/URL as visible text anywhere on the website
-- All contact goes through WhatsApp redirect buttons only
+## Phone Number — Header + Footer Only, Always From the Database
+- The site **shows its contact number in the header and the footer**, and nowhere else. This is the canonical `<ContactNumber />` (availability label + tappable number) — see the layout table below.
+- The digits **must** come from `getDisplayPhone(page)` (webcore's `/display` endpoint). Never hardcode a number into JSX, copy, or a `tel:` href — a baked number can't follow a `leads_mode` change or a client swapping their line, and it silently disagrees with what the redirect routes to.
+- `/display` is deterministic (page display number → site-wide display number → admin default). Do **not** print `/resolve` or `/whatsapp-redirect` — those rotate per click, so the digits would change between page loads.
+- Pass the locale-stripped page path (`page="/"`, `` page={`/${siteConfig.productSlug}/${loc.slug}`} ``): `is_display` is unique per `(website, page_slug)`, so the page is part of the query.
+- **Lead routing is unchanged.** Every WhatsApp CTA still goes through `/redirect-whatsapp-1`. Only this display element bypasses attribution — a tap-to-call isn't tracked, which is the cost of showing the number at all.
+- Do NOT display any domain/URL as visible text anywhere on the website.
+- The wizard checks this via `display-phone-db-backed`.
 
 ## Mobile Layout (PRIMARY viewport)
 - Most users come from mobile — design for mobile FIRST
@@ -211,11 +235,36 @@ These rules apply to EVERY website. No exceptions.
 - All remaining section titles use H3–H6
 - Lint every page before marking design complete: H1 count must equal 1, H2 count must equal 1
 
-## Header & Footer — Default Template (sewa-excavator)
-- **Always use the same `<SiteHeader />` and `<SiteFooter />` layout as `projects/sewa-excavator/components/`.** This is the canonical chrome for every new site — nav links + language switcher + WhatsApp CTA in the header; footer with quick links, locations grid, copyright, social.
-- Do NOT design custom header/footer layouts per project. Copy `SiteHeader.tsx` + `SiteFooter.tsx` from sewa-excavator and only swap brand name, logo file path, and locale-aware nav labels.
-- Per-page nav variants (e.g. `BlogNav`) are forbidden — every public page (home, location, blog listing, blog article) renders the same `<SiteHeader />` + `<SiteFooter />` + `<FomoBanner />`.
+## Default Layout Template — `water-tank-malaysia`
+
+**`projects/water-tank-malaysia` is the canonical reference for every new site.** Copy these six surfaces from it and change only the brand name, logo file path, colour tokens, and locale-aware labels. Do NOT design per-project variants of any of them.
+
+| Surface | Copy from | What it already gets right |
+|---|---|---|
+| Header | `components/SiteHeader.tsx` | desktop nav + burger, `LanguageSwitcher`, contact number, WhatsApp CTA (`.nav-cta`), mobile-hidden CTA |
+| Footer | `components/SiteFooter.tsx` | flat minimal footer — logo + horizontal nav + contact number + divider + copyright, "Built by Utopia" credit; **colour derives from the site's own palette** (see below) |
+| Contact number | `components/ContactNumber.tsx` | availability label + tappable `tel:`, digits from `getDisplayPhone(page)`; rendered in **both** header and footer |
+| WhatsApp redirect | `app/[locale]/redirect-whatsapp-1/` | see below — the most important one |
+| Blog listing | `app/[locale]/blog/page.tsx` | full chrome, breadcrumb, one h1 + one h2, `.blog-card` grid |
+| Blog article | `app/[locale]/blog/[slug]/page.tsx` | full chrome, `ArticleSchema` + `BreadcrumbSchema`, locale canonical + hreflang, `.blog-content` |
+
+**The redirect page is the one to never simplify.** Each line in it exists because something broke without it:
+- resolves the phone **server-side** and renders a real `wa.me` link into the HTML — a client-side handoff to the webcore endpoint fails the live DB check and breaks with JS disabled
+- `page_slug` routing from `?page=` or the `Referer` path, so per-page numbers work
+- `preferredRegion = 'sin1'` — the default US-East region pushed cold starts past the 7s liveness probe
+- `robots: { index: false, follow: false }`, `dynamic = 'force-dynamic'`, `revalidate = 0`
+- branded interstitial with a spinner and a plain `<a>` fallback for no-JS
+
+- Per-page nav variants (e.g. `BlogNav`) are forbidden — every public page (home, location, blog listing, blog article) renders the same `<SiteHeader contact={<ContactNumber locale={locale} page="…" />} />` + `<SiteFooter locale={locale} page="…" />` + `<FomoBanner />`. Pass the real page path on both — `is_display` is keyed per page.
+- **`ContactNumber` takes the site's own type, not the chrome's.** Its styles live in `globals.css` (canonical copy: `templates/site-chrome/contact-number.css`) and set `font-family: var(--font-heading, var(--font-display, inherit))` — whichever font token the project defines wins, and a project defining neither inherits its own body font. Never hardcode a family there. Same for colour: `--brand-charcoal` / `--ink-muted` with plain fallbacks.
+- The CSS is in `globals.css`, **not** a styled-jsx block, because the element is rendered on the server and passed into the client `SiteHeader` as a `contact` prop — scoped styles in that component would never reach it. `SiteHeader` uses a plain `<style>` tag for the same family of reason (styled-jsx in a client component ships its CSS in the JS bundle and flashes unstyled).
+- Older projects still show the previous reference (`sewa-excavator`, dark footer with locations grid + social). When they disagree, **water-tank wins** — don't copy chrome out of an older site.
 - The wizard checks this via `site-chrome-components`, `homepage-uses-site-header`, `location-page-chrome`, `blog-listing-chrome`, `blog-post-chrome`, `no-blognav-usage`.
+- **The footer's colour comes from the site's palette, never from the chrome.** `SiteFooter` hardcodes no colour: it tints itself from the site's primary accent (`--brand-orange` — the fleet's token name for the primary, kept even on sites whose accent is blue or green) via `color-mix`, so a project that defines nothing still gets a footer in its own colours. Measured: water-tank's blue yields `#ECF4FC`, a forest-green brand `#EDF2F0`, terracotta `#F9F1EE`, purple `#F1EEF5`.
+  - Five override tokens in `globals.css` depart from the default: `--footer-bg`, `--footer-border`, `--footer-rule`, `--footer-ink`, `--footer-ink-muted` (plus `--footer-tint` to tint from something other than the accent, and `--footer-link-hover`).
+  - **A dark footer needs three of them** — `--footer-bg` plus both ink tokens — and nothing else changes. The contact number follows the same two ink tokens.
+  - **This applies to every site, ours and any client repo we're fixing.** Never paste another site's footer hex values into a project.
+- **`SiteFooter` must carry the "Built by Utopia AI" brand-CI credit** + the Utopia structural tokens (`--r-button/-card/-pill`, `--ease`, `--dur-*`) in `globals.css`. This is the CI *element* insertion only — keep the site's own palette, fonts, and button shape (no Utopia reskin, no forcing 8px radius onto existing pill buttons). See `docs/full-website-setup.md` → Step 5 → "Utopia Brand CI".
 
 ## Text Spacing — Default Line-Heights
 - **Headings (h1–h6): `line-height: 1.2`** — tight tracking suits display type and keeps multi-line headings compact.
@@ -326,6 +375,31 @@ The phone number should be provided by the user during project setup. If not pro
 ## Blog Posts
 
 Blog posts are also stored in Supabase, scoped by website, and managed through the centralized Blog CMS (admin panel at `projects/admin/`).
+
+## Webcore Token API
+
+`docs/webcore-api.md` is the full reference for writing content into webcore —
+products (incl. multi-rate `prices[]`), phone numbers, blog posts, SEO
+overrides, keyword research and integrations. **Prefer it over raw SQL /
+PostgREST**: it validates input, keys writes to the registered site, and fires
+the cache purge so a change reaches the live site without a redeploy.
+
+- Key lives in the gitignored root `.env.local` as `WEBCORE_API_KEY`. Never
+  commit it, never print it, never ship it to the client.
+- `website` must be the **exact registered domain**. Some fleet sites are
+  registered on their `*.vercel.app` host, so verify with a public read before
+  writing — a wrong key returns 2xx and orphans the row.
+- **Printed digits vs CTA are different questions.** Anything that shows the
+  number as text (header, footer, visible `tel:`, schema.org) reads
+  `GET /api/public/phone-numbers/display` — deterministic. Anything that just
+  says "WhatsApp us" routes through the redirect / `/resolve`, which rotates per
+  click. Printing a `/resolve` number makes the digits change between loads.
+- **`is_display`** nominates the published number and is unique per
+  **`(website, page_slug)`**, not per site — so the page is part of the query.
+  Consumed by `getDisplayPhone(page)`; never by `getPhoneNumber()`.
+- Revalidation tags: `webcore-products`, `webcore-phones`, `webcore-blog`,
+  `webcore-seo`. A site's `/api/revalidate` allow-list must contain all four —
+  a missing tag is accepted with a 200 and silently dropped.
 
 
 # Frontend Website Rules

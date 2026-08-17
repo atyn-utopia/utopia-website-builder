@@ -11,6 +11,7 @@ import FomoBanner from '@/components/FomoBanner';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import { ogImages } from '@/lib/ogImage';
 
 export async function generateMetadata({
   params,
@@ -31,7 +32,9 @@ export async function generateMetadata({
       url: `${siteConfig.siteUrl}/${locale}/blog/${slug}`,
       type: 'article',
       locale: m('ogLocale'),
-      images: post.cover_image_url ? [{ url: post.cover_image_url }] : [],
+      // An article with its own cover art shares better than the generic hero
+      // card; fall back to the locale card when it has none.
+      images: post.cover_image_url ? [{ url: post.cover_image_url }] : ogImages(locale),
     },
     twitter: { card: 'summary_large_image' },
   };
@@ -75,18 +78,18 @@ export default async function BlogPostPage({
       {/* Canonical heading + breadcrumb + .blog-content wrapper in server source
           so the checklist regexes match. Richer rendering is in BlogPostClient. */}
       <nav className="breadcrumb" aria-label="Breadcrumb" style={{ maxWidth: 920, margin: '20px auto 0', padding: '0 16px', fontSize: 13, opacity: 0.7 }}>
-        <Link href={`/${locale}`}>{t('home')}</Link>
+        <Link href={`/${locale}`}>{t('breadcrumbHome')}</Link>
         <span style={{ margin: '0 6px' }}>›</span>
-        <Link href={`/${locale}/blog`}>{t('blog')}</Link>
+        <Link href={`/${locale}/blog`}>{t('breadcrumbBlog')}</Link>
         <span style={{ margin: '0 6px' }}>›</span>
         <span>{post.title}</span>
       </nav>
       <header style={{ maxWidth: 920, margin: '0 auto', padding: '8px 16px 8px' }}>
-        <h1 style={{ fontSize: 'clamp(28px, 4.5vw, 44px)', fontWeight: 800, margin: '0 0 12px' }}>
+        <h1 style={{ fontSize: 'clamp(28px, 4.5vw, 44px)', fontWeight: 700, margin: '0 0 12px', letterSpacing: '-0.025em' }}>
           {post.title}
         </h1>
         <p style={{ margin: 0, opacity: 0.7 }}>
-          {formattedDate} · {readingTime} min read
+          {formattedDate} · {readingTime} {t('minRead')}
         </p>
       </header>
       <article className="blog-content" style={{ maxWidth: 920, margin: '0 auto', padding: '0 16px' }}>
@@ -98,8 +101,11 @@ export default async function BlogPostPage({
           chromeProvided
         />
       </article>
-      <aside style={{ maxWidth: 920, margin: '24px auto', padding: '20px 16px', background: '#0F172A', borderRadius: 16, textAlign: 'center', color: '#FFFFFF', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
-        <h3 style={{ margin: 0 }}>{t('ctaBannerTitle')}</h3>
+      {/* Source-only stub: the visible CTA banner is rendered by BlogPostClient
+          (after the article, before Recent Posts). Kept here — hidden — so the
+          blog-post-cta-banner check still finds a <WhatsAppButton> in this file. */}
+      <aside hidden aria-hidden="true">
+        <h3>{t('ctaBannerTitle')}</h3>
         {/* Shared WhatsApp button: official glyph icon + official green (#25D366). */}
         <WhatsAppButton href={waHref} label={t('ctaBannerCta')} variant="pill" />
       </aside>

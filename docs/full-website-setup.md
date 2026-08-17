@@ -94,8 +94,12 @@ Project Inputs Checklist:
 
 ## 3. Step 1 — Create Project Folder
 
-**Preferred: scaffold from the canonical reference (starts at ~96/100, zero blocking failures).**
-Instead of an empty folder, clone the `sewa-excavator` skeleton — chrome, PageStyles,
+**Preferred: scaffold from the canonical reference (every structural check passes on day one).**
+A fresh scaffold still has two blocking failures — `db-blog-posts` and `fallback-phone-is-own` —
+because no Supabase rows exist for the new domain yet; they clear once Cyclops seeds the phone
+and Hanabi seeds the blog. Structure is what the scaffold guarantees, not DB state.
+Instead of an empty folder, clone the `water-tank-malaysia` skeleton — chrome, PageStyles,
+WhatsApp redirect page, blog listing + article,
 i18n, schema, and tracking come pre-correct, so whole guardrail failure classes
 (`site-chrome`, `homepage-h1-h2`, `page-styles`, `i18n-routing`, `schema-components`)
 are prevented by construction:
@@ -114,7 +118,7 @@ project-unique special section** as TODO — those are the agent pipeline's job
 
 > Manual fallback (not recommended): `mkdir -p projects/{project-slug}` and save
 > inputs to `projects/{project-slug}/inputs.md`, then scaffold the Next.js app by
-> hand in Step 3. You lose the 96/100 baseline and must build the chrome correctly yourself.
+> hand in Step 3. You lose that structural baseline and must build the chrome correctly yourself.
 
 ### The guardrail gate applies from here on
 
@@ -145,10 +149,61 @@ Step A:  Alpha (System Architect)
             ↓
 Step B:  Cyclops (Database) ∥ Sora (SEO)     ← parallel
             ↓
+Step B2: KEYWORD VOLUME GATE                 ← blocking, see below
+            ↓
 Step C:  Nana (Copywriter)
             ↓
 Step D:  Kagura (UI Design) ∥ Kimmy (Tech)   ← parallel
 ```
+
+### Step B2 — Keyword Volume Gate (MANDATORY, blocking)
+
+Sora produces keywords from model knowledge, not from search data. Nothing
+downstream questions them: Nana writes every H1 from the plan, Kimmy builds
+every meta title and slug from it, Hanabi picks blog topics from it. A head
+term nobody searches therefore propagates into the whole site, and by the time
+Search Console could reveal it (4–8 weeks post-launch) the fix costs a slug
+migration and a 301 map.
+
+Verify the plan against real Google search volume **before Nana writes a word**:
+
+```bash
+cd scripts/google-automation
+
+# review what will be checked (no API call)
+node keyword-volume.mjs --plan ../../Documents/GitHub/utopia-website-builder/projects/{slug}/seo-plan.md --list
+
+# the gate — exits non-zero if a HEAD term has no volume
+node keyword-volume.mjs --plan .../projects/{slug}/seo-plan.md --lang ms
+node keyword-volume.mjs --plan .../projects/{slug}/seo-plan.md --lang en
+```
+
+**Reading the result:**
+
+| Tier | Zero volume means | Action |
+|---|---|---|
+| `head` | Fatal — every page inherits this term | Stop. Fix `seo-plan.md`, re-run the gate. |
+| `long-tail` | Normal and expected | No action. The page still catches the query. |
+| location templates (`{location}`) | Not measured at all | By design — low per-city volume is the long-tail play. |
+
+Keyword Planner reports `0` for anything under its disclosure threshold, so `0`
+means "under ~10/mo in this market", not literally nobody.
+
+**When a head term is dead**, find the live synonym rather than guessing again:
+
+```bash
+node keyword-volume.mjs --ideas "pakej aqiqah" --lang ms
+```
+
+Then edit `seo-plan.md` and re-run until the gate passes. Record the numbers in
+the plan so Nana, Kimmy and Hanabi inherit verified terms.
+
+> Requires the head terms to sit under a heading Sora marks as primary (e.g.
+> `### 1.2 Primary money keywords`). If the script warns that no head-term
+> section was found, nothing can fail the gate — fix the plan's headings or pass
+> the head terms explicitly with `--keywords`.
+
+See `.claude/skills/keyword-research/SKILL.md` for full flag reference.
 
 ### Agent Details
 
@@ -354,6 +409,8 @@ export const siteConfig = {
 };
 ```
 
+> **`fallbackPhone` MUST be the client's own number — never a shared Utopia/operator test number.** `fallbackPhone` is what the site serves whenever the Supabase phone lookup returns nothing (missing row, host mismatch, DB down). If you reuse one operator number across sites, a single lookup miss silently puts *your* number on a client's live site — and the same number showing under multiple sites makes the wizard's phone panel ambiguous. One real client number per site; if you truly don't have it yet, use an obviously-fake sentinel (e.g. `60000000000`) so a fallback is visible, not a live personal line.
+
 ### `i18n/routing.ts`
 
 ```ts
@@ -466,9 +523,15 @@ export default async function LocaleLayout({
 
 ### `lib/getPhoneNumber.ts`
 
-This file handles all 4 leads modes. Copy from `projects/electric-wheelchair-malaysia/lib/getPhoneNumber.ts` and update:
-- `FALLBACK_PHONE` — set to the user's phone number
+This file handles all 4 leads modes. Copy from `projects/electric-wheelchair-malaysia/lib/getPhoneNumber.ts` (or `lib/webcore.ts`) and update:
+- `FALLBACK_PHONE` — set to the **client's** phone number (see the `fallbackPhone` note above — never a shared operator number)
 - `FALLBACK_WA_TEXT` — set to the default WhatsApp message
+
+> **`getHostDomain()` MUST normalise the host — strip the port AND a leading `www.`:**
+> ```ts
+> return host.replace(/:\d+$/, '').replace(/^www\./, '')
+> ```
+> Sites canonicalise apex → `www.` (or vice versa), so the runtime host is often `www.<domain>` while the `phone_numbers` / `company_websites` rows are keyed to the **bare apex**. Without stripping `www.`, the lookup misses and the site silently falls back to `fallbackPhone`. This bit `roller-shutter` (served the operator's number on the live `www.` host). The canonical reference `projects/water-tank-malaysia/lib/webcore.ts` already does this, so scaffolded sites inherit it — don't remove it.
 
 ### `lib/waRedirect.ts`
 
@@ -558,6 +621,73 @@ Create `en.json`, `ms.json`, `zh.json` with sections:
 - `faq` — FAQ section
 - `footer` — footer text, copyright
 - `blog` — blog listing/post labels (title, readMore, noPosts, breadcrumbHome, breadcrumbBlog, publishedOn, minRead, recentPosts, metaTitle, metaDescription)
+
+### Utopia Brand CI — Footer Credit + Structural Tokens (MANDATORY on every site)
+
+Insert the Utopia Corporate CI **elements** into every site. **Scope is deliberately narrow** — this is a build-credit + structural tokens, **NOT a Utopia reskin.** The site keeps its **own palette, fonts, and button *shape*.** Do not recolour anything blue, do not swap fonts.
+
+**1. Structural tokens — add to `globals.css` `:root` (radius + motion ONLY):**
+
+```css
+:root {
+  /* Utopia CI structural tokens — radius + motion only (palette/fonts stay per-project) */
+  --r-button: 8px;
+  --r-card: 12px;
+  --r-pill: 999px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-hover: 220ms;
+  --dur-layout: 320ms;
+}
+```
+
+> ⚠️ **Do NOT retrofit `--r-button` onto existing CTAs.** If the site already uses pill / `rounded-full` buttons (e.g. cat-rumah), forcing 8px changes the client's design. Define the tokens; only the credit link and any *new* Utopia-CI elements consume them. Existing buttons keep their current shape.
+
+**2. "Built by Utopia AI" footer credit — add to the shared `SiteFooter.tsx`** (alongside the copyright line, once per page):
+
+```tsx
+<a
+  className="utopia-credit"
+  href="https://utopiagroup.com.my"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <span>Built by</span>
+  <span className="utopia-credit__word">Utopia</span>
+  <svg className="utopia-credit__mark" width="14" height="12" viewBox="0 0 64 56" aria-hidden="true">
+    <defs>
+      <linearGradient id="utopiaCreditGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stopColor="#0054A6" />
+        <stop offset="50%" stopColor="#2774AE" />
+        <stop offset="100%" stopColor="#4A9DD0" />
+      </linearGradient>
+    </defs>
+    <polygon points="32,4 60,52 4,52" fill="url(#utopiaCreditGrad)" />
+  </svg>
+  <span className="utopia-credit__word">AI</span>
+</a>
+```
+
+**3. Credit styles — add to `globals.css`** (consumes the tokens above; easeOutExpo hover lift, icon never compresses):
+
+```css
+.utopia-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: inherit;              /* inherits the site's own footer text colour */
+  text-decoration: none;
+  border-radius: var(--r-button);
+  transition: transform var(--dur-hover) var(--ease), opacity var(--dur-hover) var(--ease);
+}
+.utopia-credit:hover { transform: translateY(-1px); opacity: 0.85; }
+.utopia-credit__mark { flex: none; }   /* triangle icon must never compress */
+```
+
+**Reference implementation:** `atyn-utopia/sewa-motor-malaysia` (extracted deploy repo) — `components/SiteFooter.tsx` credit block + `globals.css` token block. The full CI spec is `brand_assets/utopia-brand-kit/CI.md` (locked v1.5.1) when present.
+
+For an **already-live site** ("apply the brand CI to X"), this is the same two-part change (tokens + footer credit); on extracted per-site repos it needs a **redeploy** (`vercel --prod`) to go live, not just a push.
 
 ---
 
@@ -710,6 +840,43 @@ Screenshots saved to `temporary screenshots/`.
 2. Fix spacing, typography, color mismatches
 3. Screenshot again and verify fixes
 
+### 8b. Generate the social share cards (MANDATORY — owned by Kimmy)
+
+A link with no `og:image` renders as a bare text card in WhatsApp, Facebook and
+X. Only 7 of 28 projects had one before this became a step, and the canonical
+reference had none — so a site could pass every other check and still share as
+plain text.
+
+The card is a 1200x630 screenshot of the hero, one per locale. It runs **here**,
+not with Kimmy's other metadata work, because it needs a built site being served.
+
+```bash
+cd projects/{project-slug}
+npm run build && npm run start      # one shell
+node scripts/og-shot.mjs            # another
+```
+
+Prerequisites Kimmy should already have done (Step 5/6): `lib/ogImage.ts` and
+`scripts/og-shot.mjs` copied from `templates/site-chrome/`, `metadataBase` set,
+and `ogImages(locale)` spread into **every** page that defines `openGraph` —
+layout, location, blog listing, blog article. Next replaces a parent's
+`openGraph` wholesale, so inheriting does not work.
+
+Then verify, in this order:
+
+- [ ] **Look at every PNG.** Correct dimensions do not mean a good card — check
+      nothing is sliced mid-text and the logo, H1 and CTA are intact.
+- [ ] Restart the server before testing the URLs: `next start` snapshots
+      `public/` at boot, so cards written while it runs return **404** until it
+      restarts. (`pkill -f "next start"` will not match it — the process is
+      named `next-server`; use `lsof -ti:<PORT> | xargs kill -9`.)
+- [ ] `curl -sI localhost:<PORT>/og-{locale}.png` → 200 `image/png` for each.
+- [ ] Each locale's HTML carries its own card: `curl -s localhost:<PORT>/<prefix> | grep og:image`.
+
+> These are screenshots, so they go stale **silently** — the site looks right and
+> only the shared link is wrong. Rerun `node scripts/og-shot.mjs` after any hero
+> copy, image, or palette change, and before any redeploy that touched the hero.
+
 Check:
 - Desktop + mobile layouts
 - All page types (homepage, location, blog listing, blog post)
@@ -738,6 +905,7 @@ Every item below MUST be verified on the running site. These rules come from rea
 - [ ] **DO NOT convert image formats automatically.** Keep PNGs as PNG and JPEGs as JPEG — don't change formats when fixing tasks. Re-encoding PNG → JPEG flattens alpha (breaks transparent cutouts) and has broken images in real projects. If a file is genuinely too large for the web (>5 MB) flag it for the user; do not silently re-encode it.
 - [ ] For any asset >5 MB, use plain `<img loading="lazy" decoding="async">` — `<Image>` from `next/image` silently rejects huge files and leaves blank gaps in galleries / product cards.
 - [ ] Add `projects/{slug}/.gitignore` excluding `brand_assets/` and `temporary screenshots/` — raw artwork must not enter git.
+- [ ] **Utopia Brand CI elements inserted** — "Built by Utopia AI" credit in `SiteFooter` + `--r-*`/`--ease`/`--dur-*` tokens in `globals.css` (Step 5 → "Utopia Brand CI"). Elements only — site keeps its own palette, fonts, and button shape; do not force `--r-button` onto existing pill CTAs.
 
 #### Typography
 - [ ] Body font is **Inter** site-wide. Not Plus Jakarta Sans, not the default Tailwind stack.
@@ -767,6 +935,12 @@ Every item below MUST be verified on the running site. These rules come from rea
 - [ ] No section heading on the USP bar — go straight to 3 USP cells.
 - [ ] One contained `.usp-panel` (dark charcoal, brand-shadow, rounded corners) with 3 `.usp-cell` children separated by interior dividers — NOT three separate cards.
 - [ ] Icons are 32 px inside 72 px rounded-square chips with an orange-gradient fill. Icons must semantically match: delivery → truck/excavator silhouette, expert operator → hard-hat, transparent pricing → money/credit-card with RM glyph (NOT a generic map pin).
+
+#### Process / steps section (MANDATORY)
+- [ ] The numbered 1-2-3 steps section closes with a **CTA** — WhatsApp button + one line of supporting copy — on the homepage **and** every location page. Step 1 is almost always "WhatsApp us", so a section with no button wastes the highest-intent moment on the page.
+- [ ] Button uses official WhatsApp green (`#25D366`), label **max 3 words**, same rounded shape as every other button on the site.
+- [ ] Location-page variant passes the town to the redirect — `waRedirect(locale, undefined, loc.slug)` — so the lead is attributed to that location.
+- [ ] Block is centred at every breakpoint (one action for the whole section, not a per-card control).
 
 #### Pricing display
 - [ ] Every price string in `messages/*.json` uses the localized 'From' prefix: MS `Dari RM {price}`, EN `From RM {price}`, ZH `RM {price} 起`.
@@ -805,8 +979,14 @@ Every item below MUST be verified on the running site. These rules come from rea
 
 #### Header / Footer (every page)
 - [ ] Every public page (home, location, blog listing, blog article) renders `<FomoBanner />`, `<SiteHeader />`, and `<SiteFooter />` — NEVER a per-page nav variant like `BlogNav`.
-- [ ] Header brand logo / brand text is HIDDEN — nav links + language switcher + WA CTA only.
-- [ ] Footer logo uses the variant designed for the dark footer bg (white wordmark file, e.g. `abang-excavator-dark.png`). Confirm the wordmark is visible — if the logo looks invisible, you picked the wrong variant.
+- [ ] Header brand logo / brand text is HIDDEN — nav links + language switcher + contact number + WA CTA only.
+- [ ] **Contact number in header AND footer** — `components/ContactNumber.tsx` copied from `templates/site-chrome/`, rendered as `<SiteHeader contact={<ContactNumber locale={locale} page="…" />} />` and `<SiteFooter locale={locale} page="…" />` on **every** page. Pass that page's locale-stripped path (`/`, `/blog`, `` `/${siteConfig.productSlug}/${loc.slug}` ``) — `is_display` is unique per `(website, page_slug)`, so a wrong/absent path can print another page's number.
+- [ ] `lib/webcore.ts` exports `getDisplayPhone()` + `formatPhoneDisplay()`, and `getPhoneRows`'s `select=` includes `is_display` (the direct-read fallback needs the column).
+- [ ] `contact.availability` key exists in every locale (`Tersedia 24/7` / `Available 24/7` / `24/7 全天候`) — a missing key renders the raw key as the label.
+- [ ] `templates/site-chrome/contact-number.css` pasted into `app/globals.css` — NOT into a styled-jsx block. The element is server-rendered and passed into the client `SiteHeader` as a prop, so scoped styles never reach it. Leave the `var(--font-heading, var(--font-display, inherit))` chain alone: the number takes **this site's** font, so never hardcode a family.
+- [ ] Seed a `phone_numbers` row with `is_display: true` before Gate 1, or the chrome falls back to `siteConfig.fallbackPhone` — which must already be the client's own number, never a shared operator line.
+- [ ] **Footer colour derives from this site's palette** — `SiteFooter` tints itself from the primary accent via `color-mix`, so the panel is a pale wash of the brand, not a fixed blue. Do not paste hex values from another project. Override with `--footer-bg` / `--footer-border` / `--footer-rule` in `globals.css` only if the derived tint is wrong for the brand.
+- [ ] Footer logo matches the panel it sits on. The default panel is a **light** wash, so use the dark/colour wordmark, e.g. `tankpro-dark.png` — the `-dark` suffix names the *ink*, not the background. A white-wordmark variant disappears on it. If the site wants a **dark** footer, set `--footer-bg` plus `--footer-ink` and `--footer-ink-muted`, then use the white wordmark.
 - [ ] All `nav.*` translation keys exist in all locales: `home, products, calculator, locations, blog, whatsappCta`. Missing key renders the raw key (e.g. "nav.home") on the live site.
 
 #### Location pages — must equal homepage layout (MANDATORY)
@@ -1016,6 +1196,80 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY={anon_key}
 
 ---
 
+## 16b. Step 15 — Google Integration (POST-DEPLOY, after paid domain is live)
+
+> **Runs LAST — only after the site's PAID domain is connected on Vercel with DNS pointed there.** Never against a `*.vercel.app` preview URL: Google properties are keyed to the URL you submit, and re-keying later means duplicate properties + split data.
+
+This sets up the site's **Google/Ads** layer — GA4 + GTM + Google Search Console + Google Ads conversion import. It is **separate** from the Utopia Webcore `t.js` tracking added in Step 7 (`docs/tracking-guide.md`); that's internal analytics, this is Google.
+
+**Owned by Gloo** (Analytics & Growth Specialist), driven by the **`google-integration` skill**, which drives the scripts at `scripts/google-automation/` (wired to Utopia's shared Google account; credentials are read at runtime from `~/.google-credentials`, never from the repo).
+
+### Prerequisites (block until all true)
+- [ ] Paid domain live: `curl -I https://www.<domain>/` → 200
+- [ ] DNS nameservers on Vercel (`vercel domains ls`) — required for the GSC Domain property
+- [ ] Every WhatsApp CTA routes through a `/redirect-whatsapp-1/` page (the `whatsapp_click` conversion fires there; direct `wa.me/` links are NOT tracked)
+- [ ] Sitemap reachable at `https://www.<domain>/sitemap.xml`
+
+### Run it
+Spawn **Gloo** with the contents of `agents/gloo.md` + the paid domain, project dir, and supported locales. Gloo reads `scripts/google-automation/`'s own `SKILL.md` / `MANUAL-STEPS.md` (source of truth for flags) and runs the 5 phases:
+
+1. **Phase 1 — GSC Domain property** (no deploy)
+2. **Phase 2 — GA4 property** (no deploy) → captures Measurement ID `G-XXXX` + numeric property id
+3. **Phase 3 — GTM container + inject snippet** → **DEPLOY** after
+4. **Phase 4 — GSC URL-prefix** (init → **DEPLOY** → finalize; **repeat per locale**)
+5. **Phase 5 — Ads conversion import** (no deploy, no 24h wait)
+
+Deploy Phases 3 and 4 **separately** (own checkpoint each). For extracted per-site repos with no Vercel git integration, a `git push` does NOT deploy — run `vercel --prod` so the snippet/meta tag goes live before finalizing.
+
+### Residual manual clicks (~3–4 min — genuinely no API — hand back to the user)
+1. **REQUIRED — GA4** → Admin → Data collection → ON: Google Signals + User-provided data (after Phase 2)
+2. **REQUIRED — Ads** → conversion action → Count → "One" (after Phase 5)
+3. **REQUIRED — Ads** → Data manager → GA4 → ON: "Import app and web metrics" (after Phase 5)
+4. *(optional)* GTM → Container Settings → Consent Overview (BETA)
+
+Screenshots: https://websitebuilder.utopiaai.my/google (§04).
+
+> 🔒 The files at `~/.google-credentials/` are LIVE Google keys — never commit, print, or forward them. If exposed, rotate immediately.
+
+### End state
+GA4 property + GTM container + GSC properties (1 Domain + 1 URL-prefix per locale) + 1 Ads conversion action. Per-site config written to `scripts/google-automation/configs/<domain>.json`.
+
+---
+
+## 16c. Step 16 — Keyword Audit (T+60 days, recurring)
+
+Step B2 verified the plan against Ads *estimates*. This closes the loop with what
+Google actually did. Search Console needs **~4 weeks minimum** before query data
+is meaningful; 60 days is the first useful read.
+
+Without this step, GSC query data is collected and never looked at — the plan is
+never corrected, and queries the site ranks for by accident are never harvested.
+
+```bash
+cd scripts/google-automation
+
+node gsc-keyword-audit.mjs \
+  --domain <paid-domain> \
+  --days 60 \
+  --plan ../../Documents/GitHub/utopia-website-builder/projects/{slug}/seo-plan.md \
+  --pages \
+  --out ../../Documents/GitHub/utopia-website-builder/projects/{slug}/keyword-audit.md
+```
+
+The report has four sections, each with a different owner:
+
+| Section | Means | Action |
+|---|---|---|
+| Planned keywords with impressions | The plan worked | Leave alone |
+| **Planned keywords with ZERO impressions** | Plan missed, or page not indexed | Check GSC → Indexing → Pages first. Not-indexed is a crawl problem; indexed-with-zero is a keyword problem. |
+| **Unplanned queries with impressions** | Ranking by accident | Cheapest wins available — fold into headings + give to Hanabi as blog topics |
+| **Striking distance (position 5–20)** | Ranking, not clicking | One targeted blog post moves these fastest — hand to Hanabi |
+
+Re-run quarterly. Feed confirmed findings back into `seo-plan.md` so the next
+site in the same vertical starts from measured terms instead of guesses.
+
+---
+
 ## 17. Final Checklist
 
 Before calling the website "done", verify everything:
@@ -1035,6 +1289,11 @@ Before calling the website "done", verify everything:
 - [ ] robots.txt allows crawling
 - [ ] Image alt text on all images
 - [ ] Internal links between pages
+- [ ] **`og:image` on every page type, in every locale** — `public/og-{locale}.png`
+      exists, returns 200, and the tag appears on the homepage, a location page,
+      the blog listing AND a blog article (Next replaces a parent's `openGraph`
+      wholesale, so a card on the homepage alone is the common failure)
+- [ ] Cards regenerated if the hero changed since they were last shot
 
 ### i18n
 - [ ] Language switcher works (EN / MS / ZH)
@@ -1066,12 +1325,23 @@ Before calling the website "done", verify everything:
 - [ ] **3-point USP bar** immediately below hero section
 - [ ] **All buttons same rounded shape** — only color varies
 - [ ] **CTA button labels ≤3 words** (WhatsApp counts) — `en` + `ms`
-- [ ] **No phone numbers or domain names** displayed as visible text
+- [ ] **Contact number in header + footer** — `<ContactNumber />` in both, digits from `getDisplayPhone(page)`, real page path passed on every page. Nowhere else on the site.
+- [ ] **No hardcoded number anywhere** — no phone-shaped literal in JSX, copy, or a `tel:` href (wizard: `display-phone-db-backed`)
+- [ ] **No domain names** displayed as visible text
 - [ ] **Mobile center-aligned** — headings, buttons, cards, icons centered on mobile
 - [ ] **All images verified** — every image matches its context, no placeholders left
+- [ ] **Utopia Brand CI applied** — "Built by Utopia AI" footer credit in `SiteFooter` + `--r-*`/`--ease`/`--dur-*` structural tokens in `globals.css`. Site keeps its own palette/fonts/button-shape (no reskin, no forced 8px radius on existing pill buttons).
 
 ### Deployment
 - [ ] Code pushed to GitHub
 - [ ] Deployed to Vercel
 - [ ] Env vars set on Vercel
 - [ ] Live URL accessible and working
+
+### Google Integration (post-deploy — only after PAID domain is live)
+- [ ] GA4 property created (Measurement ID + numeric property id recorded)
+- [ ] GTM container created + snippet injected + redeployed (GTM loads on live site)
+- [ ] GSC properties: 1 Domain + 1 URL-prefix per locale, sitemaps submitted
+- [ ] Ads conversion action imported (`whatsapp_click`)
+- [ ] Residual manual toggles done: GA4 Google Signals + User-provided data; Ads counting `One`; Ads "Import app and web metrics" ON
+- [ ] Per-site config written to `scripts/google-automation/configs/<domain>.json`

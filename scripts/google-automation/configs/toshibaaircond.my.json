@@ -1,0 +1,21 @@
+{
+  "domain": "toshibaaircond.my",
+  "containerId": "GTM-NQW88LM9",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-SWRLFB2D6E",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-08-04T09:45:21.439Z",
+  "gsc": {
+    "siteUrl": "https://www.toshibaaircond.my/zh/",
+    "token": "<meta name=\"google-site-verification\" content=\"5cjMifaqime1s1EoUHDpG_rCio8qRWv_A1KBCgYTiIA\" />",
+    "initAt": "2026-08-04T09:47:32.325Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-08-04T09:49:45.882Z"
+  }
+}

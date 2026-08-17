@@ -1,0 +1,395 @@
+{
+  "meta": {
+    "home": {
+      "title": "马来西亚 Aqiqah 配套 | 实惠清真 Aqiqah 服务",
+      "description": "全马 Aqiqah 配套服务，价格实惠。我们负责选羊、按教法宰杀、烹煮、包装与派送，让您安心完成孩子的 Aqiqah 仪式。欢迎 WhatsApp 询价。"
+    },
+    "location": {
+      "title": "{location} Aqiqah 配套 | 实惠清真宰羊服务",
+      "description": "{location}（{state}）Aqiqah 配套，价格实惠。按伊斯兰教法宰杀、烹煮、包装并送到您家。欢迎 WhatsApp 查询 Aqiqah 价格。"
+    },
+    "blogListing": {
+      "title": "马来西亚 Aqiqah 指南 | Majlis Aqiqah 博客",
+      "description": "完整的 Aqiqah 指南：教法依据、需要几只羊、最佳时间、祈祷文与肉食分配。为马来西亚穆斯林家庭提供实用建议。"
+    }
+  },
+  "nav": {
+    "logoAlt": "Majlis Aqiqah — 全马实惠完整的 Aqiqah 配套服务",
+    "home": "首页",
+    "products": "Aqiqah 配套",
+    "calculator": "配套查询",
+    "locations": "服务地区",
+    "blog": "Aqiqah 指南",
+    "whatsappCta": "立即 WhatsApp"
+  },
+  "fomo": {
+    "eyebrow": "{monthUpper} AQIQAH 配套优惠",
+    "body": "{month} 的 Aqiqah 仪式档期即将额满 — 预订倒数：",
+    "countdownLabel": "天 : 时 : 分 : 秒",
+    "ctaLabel": "立即预订 Aqiqah"
+  },
+  "hero": {
+    "eyebrow": "全马 AQIQAH 配套服务",
+    "h1Part1": "马来西亚 Aqiqah 配套",
+    "h1Highlight": "价格实惠",
+    "h1Part2": "一站式完成",
+    "h2": "从选羊、按伊斯兰教法宰杀、烹煮到派送，我们为您完成整场 Aqiqah 仪式",
+    "tagline": "让您的 Aqiqah 圆满完成",
+    "supporting": "选羊、宰杀、烹煮、包装与派送，全程由我们为您安排妥当。",
+    "ctaPrimary": "立即预订 Aqiqah",
+    "ctaSecondary": "查看 Aqiqah 配套",
+    "imageAlt": "一家马来穆斯林——身穿浅蓝色马来传统服装的父亲、戴米色头巾的母亲与身着蕾丝礼服的婴儿——一同坐在米色花艺背景前，欢庆 Aqiqah 仪式",
+    "floatTagTitle": "100% 符合教法",
+    "floatTagSub": "由持证屠宰师全程监督",
+    "statFamilies": "服务家庭",
+    "statStates": "覆盖州属",
+    "statHalal": "符合教法",
+    "bgAlt": "身穿马来传统服装与头巾的穆斯林家庭在 Aqiqah 宴席长桌旁分享仁当、马来粽与沙嗲"
+  },
+  "marquee": {
+    "items": [
+      "Aqiqah 熟食配套",
+      "依教法宰杀",
+      "羊只健康",
+      "Aqiqah 价格透明",
+      "全马派送",
+      "分发予贫困者",
+      "线上预订 Aqiqah",
+      "祈祷与剃发仪式"
+    ]
+  },
+  "usp": {
+    "srHeading": "马来西亚家庭选择我们完整 Aqiqah 配套的原因",
+    "items": [
+      {
+        "title": "实惠的 Aqiqah 配套",
+        "body": "Aqiqah 价格透明，没有隐藏收费，适合每个家庭的预算。"
+      },
+      {
+        "title": "持证 Aqiqah 宰杀",
+        "body": "每一只羊都由持证师傅依照伊斯兰教法宰杀。"
+      },
+      {
+        "title": "线上预订 Aqiqah",
+        "body": "透过 WhatsApp 预订，之后一切由我们安排到肉品送达。"
+      }
+    ]
+  },
+  "products": {
+    "eyebrow": "2026 AQIQAH 配套选择",
+    "h3": "适合每个家庭的山羊与绵羊 Aqiqah 配套",
+    "intro": "Aqiqah 配套价格透明 — 从宰杀到送达一次搞定。",
+    "note": "每只 Aqiqah 羊重 14–16 公斤，约可供 50 人食用。每次宰牲都会录制视频并诵读祈祷文，另附上写有孩子姓名的宰前与宰后照片，作为凭证发送给您。",
+    "addOns": "附加选项：可另加餐饮配套与帐篷配套，以配合您的仪式需求 — 请 WhatsApp 联系我们了解详情。",
+    "priceHeadLabel": "每只价格",
+    "priceHead": "RM {price} 起",
+    "portionsLabel": "预计份数",
+    "tagDefault": "Aqiqah 配套",
+    "ctaLabel": "查询 Aqiqah 价格",
+    "imageAltTemplate": "{model} — 已备妥待送的 Aqiqah 餐点，供家庭仪式使用",
+    "fallback": {
+      "items": [
+        {
+          "slug": "pakej-aqiqah-a",
+          "name": "配套 A — 熟食羊肉",
+          "eyebrow": "已烹调 · 咖喱或马来风味",
+          "description": "Aqiqah 羊肉已烹调，直送到您府上。",
+          "price": 1500,
+          "portions": "约 50 人份",
+          "includes": [
+            "羊只 14–16 公斤",
+            "已烹调：马来咖喱或印度咖喱",
+            "吉隆坡与雪兰莪送餐"
+          ]
+        },
+        {
+          "slug": "pakej-aqiqah-b",
+          "name": "配套 B — 全羊烧烤",
+          "eyebrow": "全羊烧烤 · 两种选择",
+          "description": "Aqiqah 全羊烧烤，两种供餐方式。",
+          "price": 2000,
+          "portions": "约 50 人份",
+          "includes": [
+            "全羊烧烤 14–16 公斤",
+            "薯泥、凉拌卷心菜、黑胡椒酱",
+            "吉隆坡与雪兰莪送餐"
+          ]
+        },
+        {
+          "slug": "pakej-aqiqah-c",
+          "name": "配套 C — 烧烤加 50 人餐饮",
+          "eyebrow": "烧烤 + 餐饮套餐 A",
+          "description": "全羊烧烤加 50 人份完整餐饮。",
+          "price": 2750,
+          "portions": "约 50 人份",
+          "includes": [
+            "包含配套 B 全部内容",
+            "餐饮套餐 A — 50 人份",
+            "白饭与香料炸鸡",
+            "黄梨咸鱼椰浆煮",
+            "生菜、叁巴酱与西瓜",
+            "甜饮 + 一次性餐具"
+          ]
+        },
+        {
+          "slug": "pakej-aqiqah-d",
+          "name": "配套 D — 含帐篷全套",
+          "eyebrow": "烧烤 + 餐饮 + 帐篷",
+          "description": "完整仪式 — 餐饮与宾客帐篷一应俱全。",
+          "price": 3500,
+          "portions": "约 50 人份",
+          "includes": [
+            "包含配套 C 全部内容",
+            "完整 A3 帐篷组",
+            "随时迎接宾客"
+          ]
+        }
+      ]
+    },
+    "includesLabel": "配套包含"
+  },
+  "calculator": {
+    "eyebrow": "AQIQAH 配套查询",
+    "h3": "根据宝宝性别选择 Aqiqah 配套",
+    "intro": "男婴 Aqiqah 两只、女婴一只 — 几秒钟找到合适的 Aqiqah 配套。",
+    "genderLabel": "宝宝性别",
+    "tierLabel": "Aqiqah 配套",
+    "childrenLabel": "孩子人数",
+    "genders": {
+      "lelaki": "男宝宝",
+      "perempuan": "女宝宝"
+    },
+    "tiers": {
+      "a": "配套 A",
+      "b": "配套 B",
+      "c": "配套 C",
+      "d": "配套 D"
+    },
+    "headCount": "{count} 只羊",
+    "quoteLabel": "Aqiqah 配套预估",
+    "quoteFromLabel": "起价",
+    "quotePrefix": "RM",
+    "quoteSuffix": "此为您孩子整场 Aqiqah 的预估价格。",
+    "disclaimer": "仅供参考 — 请透过 WhatsApp 确认 Aqiqah 实际价格。",
+    "ctaLabel": "WhatsApp 联系我们",
+    "increaseLabel": "增加孩子人数",
+    "decreaseLabel": "减少孩子人数"
+  },
+  "process": {
+    "eyebrow": "AQIQAH 四步流程",
+    "h3": "四个步骤预订 Aqiqah 配套",
+    "bgAlt": "厨师双手在锅中搅拌咖喱，一旁的大汤锅正在炉上沸腾，准备 Aqiqah 餐点",
+    "steps": [
+      {
+        "title": "选择 Aqiqah 配套",
+        "body": "透过 WhatsApp 告诉我们孩子的名字、性别与仪式日期。"
+      },
+      {
+        "title": "依教法进行 Aqiqah 宰杀",
+        "body": "由持证师傅依照伊斯兰教法完成宰杀。"
+      },
+      {
+        "title": "Aqiqah 肉品烹煮与包装",
+        "body": "羊肉烹煮成 kurma、仁当或汤品，再仔细分装。"
+      },
+      {
+        "title": "Aqiqah 派送与分发",
+        "body": "送到您家，或由我们代您分发给贫困者。"
+      }
+    ]
+  },
+  "whyUs": {
+    "eyebrow": "为什么选择我们的 AQIQAH 服务",
+    "h3": "全马家庭信赖我们 Aqiqah 配套的原因",
+    "bgAlt": "一群健康的棕色、黑色与白色山羊在农场绿草地上吃草",
+    "items": [
+      {
+        "title": "Aqiqah 羊只健康足龄",
+        "body": "每一只羊在宰杀前都经过健康与年龄检查。"
+      },
+      {
+        "title": "持证 Aqiqah 宰杀师傅",
+        "body": "宰杀由经验丰富的持证师傅依教法进行。"
+      },
+      {
+        "title": "Aqiqah 配套价格透明",
+        "body": "一次报价，确认订单后没有任何隐藏收费。"
+      },
+      {
+        "title": "Aqiqah 分发予贫困者",
+        "body": "Aqiqah 肉品可代您分发给贫困者与孤儿院。"
+      }
+    ]
+  },
+  "reviews": {
+    "eyebrow": "AQIQAH 配套客户评价",
+    "h3": "与我们一起完成 Aqiqah 的家庭",
+    "aggregate": "来自已与我们完成 Aqiqah 的家庭的真实回馈",
+    "postedOn": "客户回馈",
+    "bgAlt": "五位身穿马来传统服装的家人围坐桌旁谈笑，桌上摆着椰枣与糕点",
+    "items": [
+      {
+        "name": "Nurul Ain Zulkifli",
+        "suburb": "Bandar Baru Bangi, Selangor",
+        "stars": 5,
+        "body": "男宝宝的 Aqiqah 用了两只羊，烹煮成 kurma 与仁当。送到时还是热的，份量足够所有亲戚。一通 WhatsApp 就搞定。"
+      },
+      {
+        "name": "Muhammad Faiz Abdullah",
+        "suburb": "Setiawangsa, Kuala Lumpur",
+        "stars": 5,
+        "body": "第一次办 Aqiqah，问了很多问题都获得耐心解答。宰杀依教法进行，也收到照片作为确认。"
+      },
+      {
+        "name": "Siti Hajar Ismail",
+        "suburb": "Bukit Mertajam, Penang",
+        "stars": 5,
+        "body": "因为离家乡远，我们选了捐赠配套。Aqiqah 肉品送到孤儿院，照片报告当天就收到了。"
+      },
+      {
+        "name": "Amirul Hakim Rosli",
+        "suburb": "Kota Bharu, Kelantan",
+        "stars": 4,
+        "body": "Aqiqah 配套价格合理，味道也真的不错。派送时间稍微延迟，不过他们有事先通知。"
+      },
+      {
+        "name": "Nadia Farhana Zainal",
+        "suburb": "Skudai, Johor",
+        "stars": 5,
+        "body": "Aqiqah 与剃发仪式一起安排。祈祷、餐点与包装都很整齐，我们只需要招呼客人。"
+      },
+      {
+        "name": "Zulkarnain Ahmad",
+        "suburb": "Kota Kinabalu, Sabah",
+        "stars": 5,
+        "body": "本以为在沙巴预订 Aqiqah 会很麻烦，结果非常顺利。宰杀日期提早确认，肉品也准时送达。"
+      }
+    ]
+  },
+  "gallery": {
+    "eyebrow": "AQIQAH 仪式相册",
+    "h3": "我们承办过的 Kambing Golek 烤全羊与 Aqiqah 宴席",
+    "intro": "我们在全马各地承办的 Aqiqah 仪式上，刚从炭火上取下的烤全羊。",
+    "alts": [
+      "户外 Aqiqah 仪式上，两只烤全羊并排在钢制炭火烤架上烘烤",
+      "烤全羊特写，羊皮烤至金黄油亮，背景为绿意庭园",
+      "户外承办现场，整只羊在炭盘上方的旋转烤架上转动",
+      "两只划刀纹的烤全羊在遮篷下的烤架上烘烤",
+      "整只 kambing golek 架在不锈钢烤叉上，下方是炽热的炭火盘",
+      "特写：油亮的烤羊皮在炭火上烤至酥脆",
+      "整只烤全羊以新鲜番芫荽点缀，在烤架上等待上桌",
+      "切好的烤全羊肉块整齐盛在铝箔餐盘中，以番芫荽装饰",
+      "户外 Aqiqah 承办现场，两只羊在烤架上烘烤，工作人员正在布置餐桌",
+      "整只羊在露天炭坑上烘烤，四周烟雾缭绕",
+      "两只烤全羊架在大型不锈钢旋转烤架上，下方铺满炭砖",
+      "烤全羊架在烤叉上，旁边是铝箔上的烤蔬菜、番茄与玉米"
+    ]
+  },
+  "faq": {
+    "eyebrow": "AQIQAH 常见问题",
+    "h3": "关于 Aqiqah 配套的常见问题",
+    "items": [
+      {
+        "q": "男宝宝与女宝宝的 Aqiqah 配套价格是多少？",
+        "a": "我们在 Malaysia 的 Aqiqah 配套每只从配套 A（熟食羊肉）的 RM 1,500 起，至含餐饮与帐篷的配套 D 每只 RM 3,500。男宝宝的 Aqiqah 需要两只，女宝宝一只，因此总价按只数计算。欢迎 WhatsApp 我们索取您所选配套的正式报价。"
+      },
+      {
+        "q": "男宝宝的 Aqiqah 需要几只羊？",
+        "a": "依照圣行，男宝宝的 Aqiqah 是两只山羊或绵羊，女宝宝则是一只。多数学者认为，若父母只能负担一只，男宝宝的 Aqiqah 依然有效。我们的配套查询工具会自动为 Malaysia 的每个家庭计算所需只数。"
+      },
+      {
+        "q": "Aqiqah 配套是否包含烹煮与派送？",
+        "a": "是的。我们的熟食 Aqiqah 配套涵盖宰杀、清洗、烹煮成 kurma、仁当或汤品、包装，并送到您在 Malaysia 的家。若您只需要生肉，请选择基本配套，我们会将分切包装好的肉品送达。"
+      },
+      {
+        "q": "什么时候举行 Aqiqah 最合适？",
+        "a": "Aqiqah（马来文标准拼法为 akikah）最受鼓励在婴儿出生后第七天举行，同时进行剃发与命名。若第七天不方便，第十四天或第二十一天同样被接受。Malaysia 的许多家庭会选择最靠近的周末，方便亲友出席。"
+      },
+      {
+        "q": "Aqiqah 与 Korban 有什么分别？",
+        "a": "Aqiqah 是为孩子出生而感恩的圣行，全年任何时候都可以举行。Korban 则专门在哈芝节及其后的三天进行。两者都涉及宰牲，但意图、时间与教法规定不同 — 我们在 Malaysia 全年承办 Aqiqah。"
+      },
+      {
+        "q": "我人在国外，可以线上预订 Aqiqah 吗？",
+        "a": "可以。许多旅居海外的父母都选择线上预订，由我们在 Malaysia 代为安排宰杀、烹煮与分发。仪式完成后，您会收到照片与简短影片作为确认。"
+      },
+      {
+        "q": "Aqiqah 的羊只是否依照伊斯兰教法宰杀？",
+        "a": "是的。每一只羊都由持证师傅依照教法宰杀，诵念与手法皆符合规范。羊只在宰杀前会挑选健康且足龄的个体，整个流程在我们位于 Malaysia 的合作屠宰场进行。"
+      },
+      {
+        "q": "可以代我把 Aqiqah 肉品分发给贫困者吗？",
+        "a": "可以。我们的捐赠配套会完成宰杀，并将整份 Aqiqah 肉品分发给 Malaysia 的贫困者、祈祷所与孤儿院。我们也会提供简短的照片报告，让您知道肉品送到哪里。"
+      }
+    ]
+  },
+  "locations": {
+    "eyebrow": "AQIQAH 服务范围",
+    "h3": "覆盖马来西亚各州的 Aqiqah 配套",
+    "intro": "选择您的地区，查看当地 Aqiqah 配套与派送详情。",
+    "topCitiesLabel": "主要城市",
+    "stateLabels": {
+      "klangValley": "巴生谷",
+      "selangor": "雪兰莪",
+      "negeriSembilan": "森美兰",
+      "melaka": "马六甲",
+      "johor": "柔佛",
+      "perak": "霹雳",
+      "penang": "槟城",
+      "kedah": "吉打",
+      "perlis": "玻璃市",
+      "kelantan": "吉兰丹",
+      "terengganu": "登嘉楼",
+      "pahang": "彭亨",
+      "sabah": "沙巴",
+      "sarawak": "砂拉越",
+      "labuan": "纳闽"
+    }
+  },
+  "location": {
+    "breadcrumbHome": "首页",
+    "breadcrumbLocations": "Aqiqah 配套",
+    "h1Template": "{location} Aqiqah 配套",
+    "h2Template": "为 {state} {location} 的家庭提供宰杀、烹煮与派送的完整 Aqiqah 服务",
+    "introTemplate": "完整的 Aqiqah 配套，派送范围涵盖 {state} {location} 全区。",
+    "nearbyEyebrow": "邻近 AQIQAH 服务地区",
+    "nearbyHeading": "{location} 邻近地区的 Aqiqah 配套"
+  },
+  "finalCta": {
+    "eyebrow": "今天就预订 AQIQAH 配套",
+    "h3": "今天就为孩子完成 Aqiqah 圣行",
+    "body": "把孩子的名字、性别与仪式日期告诉我们，其余交给我们处理。",
+    "ctaLabel": "立即预订 Aqiqah",
+    "bgAlt": "丰盛的 Aqiqah 宴席 — 玻璃盘上的马来粽、鸡肉咖喱与椰浆蔬菜汤，铺着蓝色格纹桌布"
+  },
+  "footer": {
+    "tagline": "Majlis Aqiqah — 为全马家庭提供完整、实惠且符合教法的 Aqiqah 配套。",
+    "productsHeading": "Aqiqah 配套",
+    "productsLinks": [
+      "配套 A — 熟食",
+      "配套 B — 全羊烧烤",
+      "配套 C — 烧烤加餐饮",
+      "配套 D — 含帐篷"
+    ],
+    "locationsHeading": "主要地区",
+    "resourcesHeading": "资源",
+    "blogLabel": "Aqiqah 指南",
+    "faqLabel": "Aqiqah 常见问题",
+    "copyright": "© 2026 Majlis Aqiqah. 版权所有。由 Utopia Group of Companies 提供技术支持"
+  },
+  "blog": {
+    "title": "Aqiqah 指南与仪式贴士",
+    "subtitle": "为筹办 Aqiqah 仪式的家庭准备的完整指南",
+    "description": "完整的 Aqiqah 指南 — 教法规定、羊只数量、最佳时机、祈祷文，以及筹办孩子 Aqiqah 仪式的实用建议。",
+    "readMore": "阅读 Aqiqah 指南",
+    "noPosts": "目前尚未发布 Aqiqah 指南。",
+    "breadcrumbHome": "首页",
+    "breadcrumbBlog": "Aqiqah 指南",
+    "publishedOn": "发布于",
+    "minRead": "分钟阅读",
+    "recentPosts": "最新 Aqiqah 指南",
+    "ctaBannerTitle": "准备好为孩子完成 Aqiqah 了吗？",
+    "ctaBannerBody": "WhatsApp 我们，了解完整 Aqiqah 配套与最新价格。",
+    "ctaBannerLabel": "立即预订 Aqiqah"
+  }
+}

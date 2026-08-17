@@ -1,0 +1,21 @@
+{
+  "domain": "lighttower.my",
+  "containerId": "GTM-WNGKTGLT",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-DCBP0TV1JP",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-08-11T01:53:26.226Z",
+  "gsc": {
+    "siteUrl": "https://lighttower.my/",
+    "token": "<meta name=\"google-site-verification\" content=\"d73aOt07kKtj7VktGH9xuBf4-3Gt1L6auSEZy4dhelw\" />",
+    "initAt": "2026-08-11T01:56:13.731Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-08-11T02:00:43.937Z"
+  }
+}

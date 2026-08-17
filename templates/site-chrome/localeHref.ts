@@ -24,6 +24,20 @@ export function localeAbs(locale: string, path = ''): string {
   return `https://${siteConfig.domain}` + seg(locale) + path;
 }
 
+/**
+ * Absolute locale BASE url — `localeAbs(locale)` with no path.
+ *
+ * Kept because the reference project's pages (and every site scaffolded from an
+ * older reference) build SEO URLs as `` `${localeHref(locale)}${path}` ``. The
+ * scaffold overwrites lib/localeHref.ts with THIS file, so dropping the export
+ * breaks every one of those call sites at typecheck — which it silently did
+ * until Aug 2026. Derived from `siteConfig.domain` rather than `.url`/`.siteUrl`
+ * because only `domain` is guaranteed present across the fleet.
+ */
+export function localeHref(locale: string): string {
+  return localeAbs(locale);
+}
+
 /** Ready-to-spread `{ canonical, languages }` for generateMetadata().alternates (relative). */
 export function seoAlternates(locale: string, path = '') {
   const languages: Record<string, string> = {};

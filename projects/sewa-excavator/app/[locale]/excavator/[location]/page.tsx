@@ -6,6 +6,7 @@ import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
 import { routing } from '@/i18n/routing';
 import { localeHref } from '@/lib/localeHref';
+import { ogImages } from '@/lib/ogImage';
 import {
   locations,
   getLocationsByState,
@@ -69,7 +70,8 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical: `${localeHref(locale)}${path}`, languages },
-    openGraph: { title, description, url: `${localeHref(locale)}${path}`, type: 'website' },
+    openGraph: { title, description, url: `${localeHref(locale)}${path}`, type: 'website', images: ogImages(locale) },
+    twitter: { card: 'summary_large_image', images: ogImages(locale) },
   };
 }
 
@@ -129,6 +131,7 @@ export default async function LocationPage({
       name: 'Volvo EC200',
       description: core.find((p) => p.slug === 'volvo-ec200')?.description ?? fallbackEc200.description,
       rentalPrice: core.find((p) => p.slug === 'volvo-ec200')?.rental_price ?? fallbackEc200.price,
+      prices: core.find((p) => p.slug === 'volvo-ec200')?.prices ?? [],
       eyebrow: fallbackEc200.eyebrow,
       image: core.find((p) => p.slug === 'volvo-ec200')?.photos[0]?.url ?? '/products/volvo-ec200.png',
     },
@@ -137,6 +140,7 @@ export default async function LocationPage({
       name: 'Volvo EC400',
       description: core.find((p) => p.slug === 'volvo-ec400')?.description ?? fallbackEc400.description,
       rentalPrice: core.find((p) => p.slug === 'volvo-ec400')?.rental_price ?? fallbackEc400.price,
+      prices: core.find((p) => p.slug === 'volvo-ec400')?.prices ?? [],
       eyebrow: fallbackEc400.eyebrow,
       image: core.find((p) => p.slug === 'volvo-ec400')?.photos[0]?.url ?? '/products/volvo-ec400.png',
     },
@@ -294,17 +298,29 @@ export default async function LocationPage({
                   <div className="product-body">
                     <h4 className="product-title">{p.name}</h4>
                     <h5 className="product-desc">{p.description}</h5>
-                    <div className="product-prices">
-                      <div className="price-cell">
-                        <span className="price-label">{tProducts('priceDailyLabel')}</span>
-                        <span className="price-value">{tProducts('priceDaily', { price: Number(p.rentalPrice).toLocaleString() })}</span>
+                    {p.prices.length > 0 ? (
+                      <div className="product-prices price-list">
+                        {p.prices.map((line, i) => (
+                          <div className="price-line" key={i}>
+                            {line.label}: RM {Number(line.amount).toLocaleString()}
+                            {line.unit ? ' / ' + line.unit : ''}
+                            {line.note ? <span className="price-note">{line.note}</span> : null}
+                          </div>
+                        ))}
                       </div>
-                      <div className="price-divider" aria-hidden="true" />
-                      <div className="price-cell">
-                        <span className="price-label">{tProducts('priceMonthlyLabel')}</span>
-                        <span className="price-value">{tProducts('priceMonthly', { price: Number(monthly).toLocaleString() })}</span>
+                    ) : (
+                      <div className="product-prices">
+                        <div className="price-cell">
+                          <span className="price-label">{tProducts('priceDailyLabel')}</span>
+                          <span className="price-value">{tProducts('priceDaily', { price: Number(p.rentalPrice).toLocaleString() })}</span>
+                        </div>
+                        <div className="price-divider" aria-hidden="true" />
+                        <div className="price-cell">
+                          <span className="price-label">{tProducts('priceMonthlyLabel')}</span>
+                          <span className="price-value">{tProducts('priceMonthly', { price: Number(monthly).toLocaleString() })}</span>
+                        </div>
                       </div>
-                    </div>
+                    )}
                     <WhatsAppButton href={waRedirect(locale, `${p.name} di ${loc.name}`, loc.slug)} label={`product-${p.slug}-${loc.slug}`} className="btn btn-wa product-cta">
                       <WaIcon size={16} />
                       {tProducts('ctaTemplate', { model: p.name })}

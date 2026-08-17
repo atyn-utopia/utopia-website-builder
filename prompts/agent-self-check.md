@@ -37,10 +37,14 @@ Paste this block into every **builder** agent's task prompt (Kimmy, Kagura, Nana
   (`no-undefined-css-vars`).
 - Every WhatsApp CTA routes through `/{locale}/redirect-whatsapp-1` and uses
   `#25D366` (`cta-uses-redirect-page`, `whatsapp-green`).
-- No hardcoded phone numbers or visible domains anywhere
-  (`no-hardcoded-phones`, `no-domains-in-copy`).
+- No visible domain or URL anywhere in rendered copy (`no-domains-in-copy`).
+  Hardcoded phone numbers are advisory, not blocking (`no-hardcoded-phones`,
+  `no-hardcoded-phones-blog`) — prefer the DB number so rotation and
+  per-location routing keep working, but a hardcoded one will not fail the gate.
+  Showing a number on the page at all is also advisory (`no-phone-displayed`)
+  — a `tel:` link or a DB-sourced number in the chrome is reported, not blocked.
 - Never re-encode PNG → JPEG. Keep image formats as-is.
 - Use ICU substitution `t('key', { price })` — never `.replace('{price}', …)`
   (`no-replace-icu`).
 
-The full list of 100 rules (54 blocking, 46 advisory) lives in **docs/guardrails.html**.
+The full list of 112 rules (60 blocking, 52 advisory) lives in **docs/guardrails.html**.

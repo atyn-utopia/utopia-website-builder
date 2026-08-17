@@ -1,0 +1,21 @@
+{
+  "domain": "sewaexcavator.my",
+  "containerId": "GTM-MRVPKVWX",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-YBCR40R2TR",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-08-04T06:50:52.167Z",
+  "gsc": {
+    "siteUrl": "https://sewaexcavator.my/zh/",
+    "token": "<meta name=\"google-site-verification\" content=\"J1Ui4xIilRwlxiJLIKfRwBWBBNxFUdkajPmqROIoEV0\" />",
+    "initAt": "2026-08-04T07:06:36.848Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-08-04T07:06:41.087Z"
+  }
+}

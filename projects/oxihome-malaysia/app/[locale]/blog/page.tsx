@@ -7,7 +7,6 @@ import { routing } from '@/i18n/routing';
 import { getBlogPosts } from '@/lib/webcore';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
-import FomoBanner from '@/components/FomoBanner';
 import BlogLinkTracker from '@/components/tracking/BlogLinkTracker';
 
 export async function generateMetadata({
@@ -40,7 +39,6 @@ export default async function BlogListing({
 
   return (
     <main style={{ minHeight: '100vh', background: '#ffffff' }}>
-      <FomoBanner />
       <SiteHeader />
 
       {/* Hero */}

@@ -269,5 +269,10 @@
       "sub": "WhatsApp Kak Kenduri sekarang — kami sahkan ketersediaan, hantar sebutharga dan kunci penghantaran sama hari.",
       "button": "WhatsApp Kami"
     }
+  },
+  "redirect": {
+    "heading": "Membuka WhatsApp…",
+    "subtext": "Menghubungkan anda dengan pasukan Kak Kenduri.",
+    "fallback": "Klik di sini jika tidak dialihkan"
   }
 }

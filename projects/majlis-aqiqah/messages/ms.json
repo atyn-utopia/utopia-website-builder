@@ -1,0 +1,395 @@
+{
+  "meta": {
+    "home": {
+      "title": "Pakej Aqiqah Murah & Lengkap Malaysia | Majlis Aqiqah",
+      "description": "Pakej aqiqah murah dan lengkap seluruh Malaysia. Kami uruskan kambing, sembelih ikut syariah, masak, bungkus dan agih. WhatsApp untuk harga."
+    },
+    "location": {
+      "title": "Pakej Aqiqah {location} | Aqiqah Murah Siap Masak",
+      "description": "Pakej aqiqah murah di {location}, {state}. Sembelih syariah, masak dan hantar ke rumah anda. WhatsApp untuk harga hari ini."
+    },
+    "blogListing": {
+      "title": "Panduan Aqiqah Malaysia | Blog Majlis Aqiqah",
+      "description": "Panduan aqiqah lengkap: hukum, bilangan ekor, masa terbaik, doa dan agihan daging. Tips praktikal untuk keluarga Muslim di Malaysia."
+    }
+  },
+  "nav": {
+    "logoAlt": "Majlis Aqiqah — pakej aqiqah lengkap dan mampu milik Malaysia",
+    "home": "Utama",
+    "products": "Pakej Aqiqah",
+    "calculator": "Pemilih Pakej",
+    "locations": "Lokasi",
+    "blog": "Panduan Aqiqah",
+    "whatsappCta": "WhatsApp Sekarang"
+  },
+  "fomo": {
+    "eyebrow": "PROMO PAKEJ AQIQAH {monthUpper}",
+    "body": "Slot majlis aqiqah {month} hampir penuh — tempahan ditutup dalam:",
+    "countdownLabel": "Hari : Jam : Minit : Saat",
+    "ctaLabel": "Tempah Aqiqah Sekarang"
+  },
+  "hero": {
+    "eyebrow": "PAKEJ AQIQAH LENGKAP SELURUH MALAYSIA",
+    "h1Part1": "Pakej Aqiqah",
+    "h1Highlight": "Murah & Lengkap",
+    "h1Part2": "Seluruh Malaysia",
+    "h2": "Khidmat Aqiqah Lengkap dari Sembelih, Masak dan Agih untuk Keluarga Anda",
+    "tagline": "Kami Melengkapkan Majlis Aqiqah Anda",
+    "supporting": "Pilih kambing, sembelih ikut syariah, masak, bungkus dan agih — semuanya kami uruskan.",
+    "ctaPrimary": "Tempah Aqiqah Sekarang",
+    "ctaSecondary": "Lihat Pakej Aqiqah",
+    "imageAlt": "Keluarga Muslim Melayu — bapa berbaju melayu biru muda, ibu bertudung krim dan bayi mereka berbaju renda — duduk bersama di pelamin berhias bunga krim pada majlis aqiqah",
+    "floatTagTitle": "100% Patuh Syariah",
+    "floatTagSub": "Sembelihan diselia penyembelih bertauliah",
+    "statFamilies": "Keluarga Dilayan",
+    "statStates": "Negeri Diliputi",
+    "statHalal": "Patuh Syariah",
+    "bgAlt": "Keluarga Muslim berbaju melayu dan bertudung menghidang rendang, ketupat dan satay di meja kenduri aqiqah"
+  },
+  "marquee": {
+    "items": [
+      "Aqiqah Siap Masak",
+      "Sembelih Ikut Syariah",
+      "Kambing Sihat",
+      "Harga Aqiqah Telus",
+      "Hantar Seluruh Malaysia",
+      "Agih Kepada Asnaf",
+      "Tempah Aqiqah Online",
+      "Doa & Cukur Jambul"
+    ]
+  },
+  "usp": {
+    "srHeading": "Kelebihan Pakej Aqiqah Lengkap untuk Keluarga Malaysia",
+    "items": [
+      {
+        "title": "Pakej Aqiqah Mampu Milik",
+        "body": "Harga aqiqah telus, tanpa caj tersembunyi, sesuai untuk setiap keluarga."
+      },
+      {
+        "title": "Sembelih Aqiqah Bertauliah",
+        "body": "Setiap ekor disembelih penyembelih bertauliah mengikut panduan syariah."
+      },
+      {
+        "title": "Tempah Aqiqah Secara Online",
+        "body": "Tempah aqiqah melalui WhatsApp, kami uruskan sehingga daging sampai."
+      }
+    ]
+  },
+  "products": {
+    "eyebrow": "PILIHAN PAKEJ AQIQAH 2026",
+    "h3": "Pakej Aqiqah Kambing & Biri-Biri untuk Setiap Keluarga",
+    "intro": "Harga pakej aqiqah yang mampu milik — lengkap dari sembelih hingga hantar.",
+    "note": "Setiap kambing aqiqah seberat 14–16kg dan mencukupi untuk kira-kira 50 orang makan. Setiap sembelihan dirakam video bersama doa, serta gambar sebelum dan selepas sembelih bersama nama anak — dihantar kepada anda sebagai pengesahan.",
+    "addOns": "Tambahan: pakej katering dan pakej kanopi tersedia mengikut keperluan majlis anda — WhatsApp kami untuk butiran.",
+    "priceHeadLabel": "Harga / ekor",
+    "priceHead": "Dari RM {price}",
+    "portionsLabel": "Anggaran hidangan",
+    "tagDefault": "Pakej Aqiqah",
+    "ctaLabel": "Dapatkan Harga Aqiqah",
+    "imageAltTemplate": "{model} — hidangan aqiqah siap dihantar untuk majlis keluarga anda",
+    "fallback": {
+      "items": [
+        {
+          "slug": "pakej-aqiqah-a",
+          "name": "Pakej A — Kambing Siap Masak",
+          "eyebrow": "SIAP MASAK · GULAI ATAU KARI",
+          "description": "Kambing aqiqah siap masak, terus ke rumah anda.",
+          "price": 1500,
+          "portions": "±50 orang makan",
+          "includes": [
+            "Kambing 14–16kg",
+            "Siap masak: gulai atau kari",
+            "Penghantaran KL & Selangor"
+          ]
+        },
+        {
+          "slug": "pakej-aqiqah-b",
+          "name": "Pakej B — Kambing Golek",
+          "eyebrow": "KAMBING GOLEK · 2 PILIHAN",
+          "description": "Kambing aqiqah golek, dua pilihan hidangan.",
+          "price": 2000,
+          "portions": "±50 orang makan",
+          "includes": [
+            "Kambing golek 14–16kg",
+            "Mashed potato, coleslaw, black pepper sauce",
+            "Penghantaran KL & Selangor"
+          ]
+        },
+        {
+          "slug": "pakej-aqiqah-c",
+          "name": "Pakej C — Golek & Katering 50 Pax",
+          "eyebrow": "GOLEK + KATERING SET A",
+          "description": "Golek bersama katering penuh untuk 50 orang.",
+          "price": 2750,
+          "portions": "±50 orang makan",
+          "includes": [
+            "Semua dalam Pakej B",
+            "Katering Set A — 50 orang",
+            "Nasi putih & ayam goreng berempah",
+            "Masak lemak nenas ikan masin",
+            "Ulam, sambal belacan & tembikai",
+            "Air kordial + peralatan pakai buang"
+          ]
+        },
+        {
+          "slug": "pakej-aqiqah-d",
+          "name": "Pakej D — Lengkap dengan Kanopi",
+          "eyebrow": "GOLEK + KATERING + KANOPI",
+          "description": "Majlis lengkap — hidangan dan khemah tetamu.",
+          "price": 3500,
+          "portions": "±50 orang makan",
+          "includes": [
+            "Semua dalam Pakej C",
+            "Kanopi Set A3 lengkap",
+            "Sedia untuk sambut tetamu"
+          ]
+        }
+      ]
+    },
+    "includesLabel": "Termasuk dalam pakej"
+  },
+  "calculator": {
+    "eyebrow": "PEMILIH PAKEJ AQIQAH",
+    "h3": "Pilih Pakej Aqiqah Ikut Jantina Bayi Anda",
+    "intro": "Aqiqah anak lelaki 2 ekor, aqiqah anak perempuan 1 ekor — pilih pakej aqiqah anda dalam beberapa saat.",
+    "genderLabel": "Jantina bayi",
+    "tierLabel": "Pakej aqiqah",
+    "childrenLabel": "Bilangan anak",
+    "genders": {
+      "lelaki": "Bayi Lelaki",
+      "perempuan": "Bayi Perempuan"
+    },
+    "tiers": {
+      "a": "Pakej A",
+      "b": "Pakej B",
+      "c": "Pakej C",
+      "d": "Pakej D"
+    },
+    "headCount": "{count} ekor kambing",
+    "quoteLabel": "Anggaran pakej aqiqah",
+    "quoteFromLabel": "Dari",
+    "quotePrefix": "RM",
+    "quoteSuffix": "Anggaran untuk keseluruhan aqiqah anak anda.",
+    "disclaimer": "Anggaran sahaja — sila WhatsApp untuk pengesahan harga aqiqah.",
+    "ctaLabel": "WhatsApp Kami Sekarang",
+    "increaseLabel": "Tambah bilangan anak",
+    "decreaseLabel": "Kurangkan bilangan anak"
+  },
+  "process": {
+    "eyebrow": "PROSES AQIQAH 4 LANGKAH",
+    "h3": "Cara Tempah Pakej Aqiqah dalam 4 Langkah Mudah",
+    "bgAlt": "Tangan tukang masak mengacau kuah kari dalam kuali sambil periuk besar mendidih di dapur aqiqah",
+    "steps": [
+      {
+        "title": "Pilih Pakej Aqiqah & Tarikh Majlis",
+        "body": "WhatsApp kami nama anak, jantina dan tarikh majlis aqiqah anda."
+      },
+      {
+        "title": "Sembelih Aqiqah Mengikut Syariah",
+        "body": "Penyembelih bertauliah menyembelih kambing sihat mengikut panduan syariah."
+      },
+      {
+        "title": "Masak & Bungkus Hidangan Aqiqah",
+        "body": "Daging dimasak kurma, rendang atau sup, kemudian dipek kemas."
+      },
+      {
+        "title": "Hantar & Agih Daging Aqiqah",
+        "body": "Kami hantar ke rumah anda atau agih kepada asnaf bagi pihak anda."
+      }
+    ]
+  },
+  "whyUs": {
+    "eyebrow": "KENAPA PILIH KHIDMAT AQIQAH KAMI",
+    "h3": "Kenapa Ibu Bapa di Malaysia Percayakan Pakej Aqiqah Kami",
+    "bgAlt": "Kawanan kambing sihat berwarna perang, hitam dan putih meragut di padang rumput ladang",
+    "items": [
+      {
+        "title": "Kambing Aqiqah Sihat & Cukup Umur",
+        "body": "Setiap ekor diperiksa sihat dan cukup umur sebelum disembelih."
+      },
+      {
+        "title": "Penyembelih Aqiqah Bertauliah",
+        "body": "Sembelihan dilakukan mengikut panduan syariah oleh penyembelih berpengalaman."
+      },
+      {
+        "title": "Harga Pakej Aqiqah Telus",
+        "body": "Satu harga sebut, tiada caj tersembunyi selepas tempahan disahkan."
+      },
+      {
+        "title": "Agihan Aqiqah Kepada Asnaf",
+        "body": "Daging aqiqah boleh diagih kepada asnaf dan rumah anak yatim."
+      }
+    ]
+  },
+  "reviews": {
+    "eyebrow": "ULASAN PELANGGAN PAKEJ AQIQAH",
+    "h3": "Kisah Keluarga yang Sempurnakan Aqiqah Bersama Kami",
+    "aggregate": "Maklum balas keluarga yang telah menyempurnakan aqiqah bersama kami",
+    "postedOn": "Maklum balas pelanggan",
+    "bgAlt": "Lima ahli keluarga Melayu berbaju tradisional berbual mesra di meja dihidang kurma dan kuih",
+    "items": [
+      {
+        "name": "Nurul Ain Zulkifli",
+        "suburb": "Bandar Baru Bangi, Selangor",
+        "stars": 5,
+        "body": "Aqiqah anak lelaki kami dua ekor, siap masak kurma dan rendang. Semua sampai panas dan cukup untuk saudara-mara. Urusan senang, cuma WhatsApp sahaja."
+      },
+      {
+        "name": "Muhammad Faiz Abdullah",
+        "suburb": "Setiawangsa, Kuala Lumpur",
+        "stars": 5,
+        "body": "Pertama kali uruskan aqiqah, banyak soalan saya tanya dan semuanya dijawab dengan sabar. Sembelihan dibuat ikut syariah dan kami dapat gambar sebagai pengesahan."
+      },
+      {
+        "name": "Siti Hajar Ismail",
+        "suburb": "Bukit Mertajam, Pulau Pinang",
+        "stars": 5,
+        "body": "Kami pilih pakej sedekah asnaf sebab tinggal jauh dari kampung. Daging aqiqah diagih ke rumah anak yatim dan laporan fotonya sampai hari yang sama."
+      },
+      {
+        "name": "Amirul Hakim Rosli",
+        "suburb": "Kota Bharu, Kelantan",
+        "stars": 4,
+        "body": "Harga pakej aqiqah berpatutan dan rasa masakan memang sedap. Penghantaran lewat sedikit dari masa dijanji, tetapi pihak mereka maklumkan awal."
+      },
+      {
+        "name": "Nadia Farhana Zainal",
+        "suburb": "Skudai, Johor",
+        "stars": 5,
+        "body": "Majlis aqiqah dan cukur jambul kami diuruskan sekali gus. Doa, hidangan dan pembungkusan semua kemas, kami cuma perlu sambut tetamu."
+      },
+      {
+        "name": "Zulkarnain Ahmad",
+        "suburb": "Kota Kinabalu, Sabah",
+        "stars": 5,
+        "body": "Ingatkan susah tempah aqiqah dari Sabah, rupanya lancar sahaja. Tarikh sembelihan disahkan awal dan daging sampai ikut jadual."
+      }
+    ]
+  },
+  "gallery": {
+    "eyebrow": "GALERI MAJLIS AQIQAH",
+    "h3": "Galeri Kambing Golek & Hidangan Aqiqah Pelanggan",
+    "intro": "Kambing golek utuh terus dari bara arang di majlis aqiqah yang kami kendalikan di seluruh Malaysia.",
+    "alts": [
+      "Dua ekor kambing golek dipanggang bersebelahan di atas pemanggang arang besi pada majlis aqiqah di luar rumah",
+      "Dekat sekali kambing golek utuh di atas pemutar, kulitnya perang keemasan dengan latar taman hijau",
+      "Kambing utuh berputar di atas pemanggang golek di atas dulang arang pada gerai katering luar",
+      "Dua ekor kambing golek berkulit bercarik dipanggang di atas pemutar di bawah khemah",
+      "Kambing golek utuh di atas pemutar keluli tahan karat di atas dulang bara arang yang menyala",
+      "Dekat sekali kulit kambing panggang berkilat menjadi rangup di atas bara arang",
+      "Kambing golek utuh dihias daun pasli segar, sedia dihidang di atas pemanggang",
+      "Potongan kambing golek disusun dalam dulang aluminium berhias daun pasli",
+      "Gerai katering aqiqah luar dengan dua ekor kambing dipanggang sementara krew menyiapkan meja",
+      "Kambing utuh dipanggang di atas lubang arang terbuka dengan asap berkepul di sekelilingnya",
+      "Dua ekor kambing golek di atas pemanggang putar keluli besar di atas hamparan arang briket",
+      "Kambing golek di atas pemutar bersebelahan sayur panggang, tomato dan jagung di atas kerajang"
+    ]
+  },
+  "faq": {
+    "eyebrow": "SOALAN LAZIM PAKEJ AQIQAH",
+    "h3": "Soalan Lazim Tentang Aqiqah dan Pakej Aqiqah Kami",
+    "items": [
+      {
+        "q": "Berapa harga pakej aqiqah untuk anak lelaki dan anak perempuan?",
+        "a": "Harga pakej aqiqah kami di Malaysia bermula dari RM 1,500 seekor untuk Pakej A (kambing siap masak), sehingga RM 3,500 seekor untuk Pakej D yang lengkap dengan katering dan kanopi. Aqiqah anak lelaki memerlukan 2 ekor dan anak perempuan 1 ekor, jadi jumlah akhir dikira mengikut bilangan ekor. WhatsApp kami untuk sebut harga rasmi mengikut pakej pilihan anda."
+      },
+      {
+        "q": "Aqiqah anak lelaki berapa ekor kambing?",
+        "a": "Mengikut sunnah, aqiqah anak lelaki adalah 2 ekor kambing atau biri-biri manakala anak perempuan 1 ekor. Majoriti ulama berpendapat aqiqah tetap sah walaupun ibu bapa hanya mampu seekor untuk anak lelaki. Pemilih pakej aqiqah kami mengira bilangan ekor secara automatik untuk setiap keluarga di Malaysia."
+      },
+      {
+        "q": "Adakah pakej aqiqah ini termasuk masak dan hantar?",
+        "a": "Ya. Pakej aqiqah siap masak kami merangkumi sembelihan, pembersihan, masakan kurma, rendang atau sup, pembungkusan dan penghantaran ke rumah anda di Malaysia. Jika anda hanya mahu daging mentah, pilih pakej asas dan kami hantar daging yang telah dilapah dan dipek kemas."
+      },
+      {
+        "q": "Bilakah masa terbaik untuk buat aqiqah?",
+        "a": "Aqiqah — atau akikah dalam ejaan Bahasa Melayu standard — paling afdal dilakukan pada hari ketujuh selepas kelahiran, bersekali dengan cukur jambul dan pemberian nama. Jika hari ketujuh tidak sesuai, hari ke-14 atau ke-21 juga diterima. Ramai keluarga di Malaysia memilih hujung minggu terdekat supaya saudara-mara dapat hadir."
+      },
+      {
+        "q": "Apakah beza aqiqah dan korban?",
+        "a": "Aqiqah ialah sunnah kesyukuran atas kelahiran seorang anak dan boleh dilakukan pada bila-bila masa sepanjang tahun. Korban pula dilakukan khusus pada Hari Raya Aidiladha dan hari tasyrik. Kedua-duanya melibatkan sembelihan, tetapi niat, waktu dan hukumnya berbeza — kami menguruskan aqiqah sepanjang tahun di Malaysia."
+      },
+      {
+        "q": "Bolehkah saya tempah aqiqah secara online dari luar negara?",
+        "a": "Boleh. Ramai perantau menempah aqiqah secara online dan kami uruskan sembelihan, masakan serta agihan bagi pihak mereka di Malaysia. Anda akan menerima gambar dan rakaman ringkas sebagai pengesahan selepas majlis aqiqah selesai."
+      },
+      {
+        "q": "Adakah kambing aqiqah disembelih mengikut syariah?",
+        "a": "Ya. Setiap ekor disembelih oleh penyembelih bertauliah mengikut panduan syariah, lengkap dengan bacaan dan kaedah sembelihan yang betul. Kambing dipilih sihat dan cukup umur sebelum sembelihan, dan seluruh proses dijalankan di premis rakan sembelihan kami di Malaysia."
+      },
+      {
+        "q": "Bolehkah daging aqiqah diagihkan kepada asnaf bagi pihak saya?",
+        "a": "Boleh. Pakej sedekah asnaf kami menyembelih dan mengagihkan keseluruhan daging aqiqah kepada asnaf, surau dan rumah anak yatim di Malaysia. Kami sediakan laporan foto ringkas supaya anda tahu ke mana daging aqiqah anda disalurkan."
+      }
+    ]
+  },
+  "locations": {
+    "eyebrow": "KAWASAN KHIDMAT AQIQAH",
+    "h3": "Pakej Aqiqah di Seluruh Negeri di Malaysia",
+    "intro": "Pilih kawasan anda untuk maklumat pakej aqiqah dan penghantaran setempat.",
+    "topCitiesLabel": "Bandar utama",
+    "stateLabels": {
+      "klangValley": "Lembah Klang",
+      "selangor": "Selangor",
+      "negeriSembilan": "Negeri Sembilan",
+      "melaka": "Melaka",
+      "johor": "Johor",
+      "perak": "Perak",
+      "penang": "Pulau Pinang",
+      "kedah": "Kedah",
+      "perlis": "Perlis",
+      "kelantan": "Kelantan",
+      "terengganu": "Terengganu",
+      "pahang": "Pahang",
+      "sabah": "Sabah",
+      "sarawak": "Sarawak",
+      "labuan": "Labuan"
+    }
+  },
+  "location": {
+    "breadcrumbHome": "Utama",
+    "breadcrumbLocations": "Pakej Aqiqah",
+    "h1Template": "Pakej Aqiqah {location}",
+    "h2Template": "Khidmat Aqiqah Sembelih, Masak dan Agih untuk Keluarga di {location}, {state}",
+    "introTemplate": "Pakej aqiqah lengkap dengan penghantaran ke seluruh kawasan {location}, {state}.",
+    "nearbyEyebrow": "KAWASAN AQIQAH BERDEKATAN",
+    "nearbyHeading": "Pakej Aqiqah di Kawasan Berdekatan {location}"
+  },
+  "finalCta": {
+    "eyebrow": "TEMPAH PAKEJ AQIQAH HARI INI",
+    "h3": "Sempurnakan Sunnah Aqiqah Anak Anda Hari Ini",
+    "body": "Hantar nama anak, jantina dan tarikh majlis — kami uruskan selebihnya.",
+    "ctaLabel": "Tempah Aqiqah Sekarang",
+    "bgAlt": "Hidangan kenduri aqiqah — ketupat di pinggan kaca bersama kari ayam dan kuah lodeh di alas meja berpetak biru"
+  },
+  "footer": {
+    "tagline": "Majlis Aqiqah — pakej aqiqah lengkap, mampu milik dan patuh syariah untuk keluarga di seluruh Malaysia.",
+    "productsHeading": "Pakej Aqiqah",
+    "productsLinks": [
+      "Pakej A — Siap Masak",
+      "Pakej B — Kambing Golek",
+      "Pakej C — Golek & Katering",
+      "Pakej D — Lengkap Kanopi"
+    ],
+    "locationsHeading": "Kawasan Utama",
+    "resourcesHeading": "Sumber",
+    "blogLabel": "Panduan Aqiqah",
+    "faqLabel": "Soalan Lazim Aqiqah",
+    "copyright": "© 2026 Majlis Aqiqah. Hak cipta terpelihara. Dikuasakan oleh Utopia Group of Companies"
+  },
+  "blog": {
+    "title": "Panduan Aqiqah & Tips Majlis Aqiqah",
+    "subtitle": "Panduan Lengkap untuk Keluarga yang Merancang Majlis Aqiqah",
+    "description": "Panduan aqiqah lengkap — hukum aqiqah, bilangan kambing, masa terbaik, doa dan tips menguruskan majlis aqiqah anak anda dengan mudah.",
+    "readMore": "Baca panduan aqiqah",
+    "noPosts": "Belum ada panduan aqiqah diterbitkan.",
+    "breadcrumbHome": "Utama",
+    "breadcrumbBlog": "Panduan Aqiqah",
+    "publishedOn": "Disiarkan pada",
+    "minRead": "min baca",
+    "recentPosts": "Panduan aqiqah terkini",
+    "ctaBannerTitle": "Sedia Menyempurnakan Aqiqah Anak Anda?",
+    "ctaBannerBody": "WhatsApp kami untuk pakej aqiqah lengkap dan harga terkini.",
+    "ctaBannerLabel": "Tempah Aqiqah Sekarang"
+  }
+}

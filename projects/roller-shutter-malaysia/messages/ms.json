@@ -799,5 +799,10 @@
       "intro": "Sandakan di pantai timur Sabah ialah pelabuhan industri yang terkenal dengan industri pemprosesan makanan laut terbesar di Malaysia, dengan kawasan industri di sepanjang Jalan Buli Sim Sim dan kawasan perindustrian Mile 4 yang menampung kilang-kilang pemprosesan udang, ikan, dan produk sawit untuk eksport. Bandar Sandakan juga mempunyai kawasan perniagaan aktif di sekitar Bandar Kim Fung dan Wisma Sandakan yang memerlukan roller shutter yang tahan iklim lembap pesisir pantai. Kami menyediakan perkhidmatan roller shutter untuk semua premis di Sandakan.",
       "closingCta": "Hubungi kami melalui WhatsApp untuk perkhidmatan roller shutter di Sandakan dan kawasan industri perikanan Mile 4!"
     }
+  },
+  "redirect": {
+    "heading": "Membuka WhatsApp…",
+    "subtext": "Anda sedang dihubungkan ke pasukan Encik Roller Shutter.",
+    "fallback": "Klik di sini jika tidak berpindah"
   }
 }

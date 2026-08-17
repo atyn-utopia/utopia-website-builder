@@ -1,0 +1,64 @@
+{
+  "domain": "electricwheelchairmalaysia.com.my",
+  "containerId": "GTM-5DGDX4J3",
+  "gtmAccountId": "6000211475",
+  "gtmContainerNumericId": "260135218",
+  "ga4MeasurementId": "G-V3E69RE017",
+  "ga4": {
+    "accountName": "Utopia 1st Analytics",
+    "propertyId": "548101104",
+    "propertyName": "properties/548101104",
+    "measurementId": "G-V3E69RE017",
+    "siteUrl": "https://electricwheelchairmalaysia.com.my",
+    "dataRetention": "14 months",
+    "keyEvents": ["whatsapp_click"],
+    "createdAt": "2026-08-03T03:57:00.000Z"
+  },
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-08-03T03:59:59.595Z",
+  "gsc": {
+    "siteUrl": "https://electricwheelchairmalaysia.com.my/",
+    "token": "<meta name=\"google-site-verification\" content=\"ZSx5ytFyv-IzijpwtqdVD1r0-HCtRjR1qSTZcaVJal8\" />",
+    "initAt": "2026-08-03T04:02:40.046Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-08-03T04:12:05.222Z",
+    "domainProperty": "sc-domain:electricwheelchairmalaysia.com.my",
+    "urlPrefixProperties": [
+      "https://electricwheelchairmalaysia.com.my/",
+      "https://electricwheelchairmalaysia.com.my/ms/",
+      "https://electricwheelchairmalaysia.com.my/zh/"
+    ],
+    "sitemap": "https://electricwheelchairmalaysia.com.my/sitemap.xml",
+    "sitemapSubmittedTo": [
+      "sc-domain:electricwheelchairmalaysia.com.my",
+      "https://electricwheelchairmalaysia.com.my/"
+    ],
+    "note": "CANONICAL HOST IS THE APEX, NOT www — www.electricwheelchairmalaysia.com.my 307-redirects to the apex, so every Google property is keyed to https://electricwheelchairmalaysia.com.my/ (same convention as 24hourelectrician.my / water-tank.my). localePrefix=as-needed (en at /, ms at /ms, zh at /zh); /en/* redirects to /*. The /ms/ and /zh/ URL-prefix properties reject the root sitemap (sitemap path must sit under the prefix), so only the Domain + canonical / properties carry the full multi-locale sitemap. Bulk indexing requested 211/288 URLs before the daily Indexing API quota (~200/day/project); the remainder is re-runnable next day via gsc-submit.mjs --finalize on the canonical URL."
+  },
+  "ads": {
+    "customerId": "1933757591",
+    "conversionActionId": "7706747492",
+    "conversionActionName": "electricwheelchairmalaysia.com.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "status": "ENABLED",
+    "category": "CONTACT",
+    "primaryForGoal": true,
+    "lookbackWindow": "90d",
+    "countingType": "EVERY (needs manual UI flip to ONE_PER_CLICK)",
+    "linkedGa4Property": "548101104"
+  },
+  "note": "2026-08-03 (Gloo run). Next.js App Router project — it has ZERO static .html files, so the bundle's inject-gtm-snippet.mjs and gsc-submit.mjs --init both found 0 files and injected nothing. The GTM snippet (head script + body noscript) and the GSC verification meta tag were instead placed by hand in projects/electric-wheelchair-malaysia/app/[locale]/layout.tsx, following the established fleet pattern in water-tank-malaysia + electrician-24-hour. Any future re-run on a Next.js site in this monorepo must do the same. Also note gsc-add-domain-property.mjs needs --vercel-scope chokchunynh — the script default 'chokchunynh-4497s-projects' is not a valid team slug.",
+  "outstandingManualToggles": [
+    "GA4 -> Admin -> Data collection -> turn ON Google signals",
+    "GA4 -> Admin -> Data collection -> turn ON User ID and user-provided data",
+    "Ads -> Goals -> Conversions -> this action -> Count -> One",
+    "Ads -> Tools -> Data manager / Linked accounts -> GA4 -> toggle ON 'Import app and web metrics'",
+    "(optional) GTM -> Container Settings -> Enable consent overview (BETA)"
+  ]
+}

@@ -10,6 +10,7 @@ import SiteFooter from '@/components/SiteFooter';
 import FomoBanner from '@/components/FomoBanner';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 import BlogLinkTracker from '@/components/tracking/BlogLinkTracker';
+import { ogImages } from '@/lib/ogImage';
 
 export async function generateMetadata({
   params,
@@ -29,7 +30,9 @@ export async function generateMetadata({
       url: `${siteConfig.siteUrl}/${locale}/blog/${slug}`,
       siteName: siteConfig.brandName,
       type: 'article',
-      images: post.cover_image_url ? [post.cover_image_url] : [],
+      // An article with its own cover art shares better than the generic hero
+      // card; fall back to the locale card when it has none.
+      images: post.cover_image_url ? [post.cover_image_url] : ogImages(locale),
     },
   };
 }
@@ -131,9 +134,9 @@ export default async function BlogPostPage({
 
           <div className="blog-cta-inline">
             <strong>⚡ Need an electrician right now?</strong>
-            <p style={{ margin: '10px 0 16px', color: 'rgba(255,255,255,0.85)' }}>
+            <h5 className="body-text" style={{ margin: '10px 0 16px', color: 'rgba(255,255,255,0.85)' }}>
               ST-registered, 4-hour arrival, 24/7 dispatch across Malaysia.
-            </p>
+            </h5>
             <a
               href={waHref}
               target="_blank"
@@ -174,7 +177,7 @@ export default async function BlogPostPage({
                   </div>
                   <div className="blog-card-body">
                     <h3>{p.title}</h3>
-                    <p>{p.excerpt}</p>
+                    <h5 className="body-text">{p.excerpt}</h5>
                     <span className="blog-card-more">{t('readMore')} →</span>
                   </div>
                 </BlogLinkTracker>

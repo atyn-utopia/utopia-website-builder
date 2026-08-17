@@ -40,6 +40,15 @@
   --whatsapp-hover: #1EBE57;
   --google-gold: #FBBC04;
 
+  /* Utopia CI structural tokens — radius + motion only (palette/fonts stay per-project).
+     Consumed by the "Built by Utopia AI" credit; do NOT force --r-button onto existing CTAs. */
+  --r-button: 8px;
+  --r-card: 12px;
+  --r-pill: 999px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-hover: 220ms;
+  --dur-layout: 320ms;
+
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
   --gradient-navy: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
@@ -120,6 +129,17 @@ img {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* ============================================
+   BASE HEADINGS — line-height 1.2. Base weight stays Regular (400) so body
+   copy that lives in h5/h6 tags (the no-bare-<p> rule) doesn't render bold.
+   Actual section/card TITLES set font-weight: 700 inline or via their own
+   class — see HomeSections, ProductCard, the page clients and .blog-content.
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  line-height: 1.2;
 }
 
 /* ============================================
@@ -284,21 +304,28 @@ a {
    BLOG CONTENT STYLES — copied from EWM,
    accent swapped to primary red (#e63030)
    ============================================ */
-.blog-content h2 { font-size: 28px; font-weight: 700; color: var(--navy); margin: 2em 0 0.5em; line-height: 1.25; }
-.blog-content h3 { font-size: 24px; font-weight: 700; color: var(--navy); margin: 1.5em 0 0.5em; line-height: 1.3; }
-.blog-content p { font-size: 16px; line-height: 1.75; margin: 0 0 1em; color: var(--text); }
+/* Heading scale — distinct sizes so h2 > h3 > h4 read as a clear hierarchy.
+   scroll-margin-top keeps anchor jumps clear of the sticky FOMO bar. */
+.blog-content h2 { font-size: 28px; font-weight: 700; color: var(--navy); margin: 2em 0 0.5em; line-height: 1.2; letter-spacing: -0.01em; scroll-margin-top: 90px; }
+.blog-content h3 { font-size: 23px; font-weight: 700; color: var(--navy); margin: 1.5em 0 0.5em; line-height: 1.25; scroll-margin-top: 90px; }
+.blog-content h4 { font-size: 19px; font-weight: 700; color: var(--navy); margin: 1.3em 0 0.4em; line-height: 1.3; scroll-margin-top: 90px; }
+.blog-content p { font-size: 16px; line-height: 1.7; margin: 0 0 1.15em; color: var(--text); }
 .blog-content img { max-width: 100%; height: auto; border-radius: var(--radius-lg); margin: 1.5em 0; }
-.blog-content ul, .blog-content ol { margin: 1em 0; padding-left: 1.5em; }
-.blog-content li { margin: 0.5em 0; line-height: 1.6; }
+.blog-content ul, .blog-content ol { margin: 1.1em 0; padding-left: 1.4em; }
+.blog-content ul { list-style: disc; }
+.blog-content ol { list-style: decimal; }
+.blog-content li { margin: 0.5em 0; line-height: 1.6; color: var(--text); }
+.blog-content li::marker { color: var(--accent); }
 .blog-content blockquote {
-  border-left: 4px solid var(--primary);
-  padding: 1em 1.5em;
+  border-left: 4px solid var(--accent);
+  padding: 0.75em 1.25em;
   margin: 1.5em 0;
-  background: var(--primary-pale);
+  background: var(--accent-pale);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  color: var(--text);
 }
-.blog-content a { color: var(--primary); text-decoration: underline; }
-.blog-content a:hover { opacity: 0.8; }
+.blog-content a { color: var(--brand); text-decoration: underline; text-underline-offset: 2px; transition: color var(--duration-fast) var(--ease-out); }
+.blog-content a:hover { color: var(--accent); }
 
 /* Comparison tables inside blog content */
 .blog-content table {
@@ -360,18 +387,92 @@ a {
 }
 
 /* ============================================
-   FOMO BANNER ANIMATION
+   FOMO BANNER — urgent red bar + live end-of-month countdown, white text
+   (ported from the air-compressor site; sticky at the top for katil)
    ============================================ */
-@keyframes fomoPulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+.fomo-bar {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: linear-gradient(90deg, #B91C1C 0%, #DC2626 50%, #B91C1C 100%);
+  color: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
-@keyframes fomoSlideIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+.fomo-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  padding: 9px 16px;
+  text-align: center;
 }
-.fomo-text-enter {
-  animation: fomoSlideIn 0.4s var(--ease-out) forwards;
+.fomo-tag {
+  font-family: ui-monospace, "SF Mono", "Menlo", monospace;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: rgba(0, 0, 0, 0.22);
+  color: #fff;
+  padding: 3px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.fomo-body {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+}
+.fomo-clock {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  /* Hidden (but still laid out) until the client tick lands, so the banner
+     never reflows on hydration and no placeholder 00:00:00:00 flashes. */
+  opacity: 0;
+  transition: opacity 160ms ease-out;
+}
+.fomo-clock.is-ready {
+  opacity: 1;
+}
+.fomo-clock > span:not(.fomo-sep) {
+  font-family: ui-monospace, "SF Mono", "Menlo", monospace;
+  font-weight: 700;
+  font-size: 12.5px;
+  background: rgba(0, 0, 0, 0.28);
+  color: #fff;
+  padding: 3px 6px;
+  border-radius: 6px;
+  min-width: 26px;
+  text-align: center;
+}
+.fomo-sep {
+  font-weight: 700;
+  opacity: 0.7;
+  font-size: 12px;
+}
+.fomo-link {
+  font-weight: 700;
+  font-size: 12.5px;
+  color: #fff;
+  white-space: nowrap;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.fomo-link:hover {
+  opacity: 0.85;
+}
+@media (max-width: 767px) {
+  .fomo-inner {
+    gap: 6px 10px;
+    padding: 8px 14px;
+  }
+  .fomo-body {
+    display: none;
+  }
 }
 
 /* ============================================
@@ -441,48 +542,59 @@ a {
   .nav-cta { display: none !important; }
 }
 
-/* ── Blog table of contents (matches .blog-content nav + standalone .toc). ── */
+/* ── Blog table of contents (matches .blog-content nav + standalone .toc). ──
+   Reads as an intentional card: tinted box, red accent rail, uppercase heading,
+   indented links in brand navy with a clear hover. ── */
 .toc,
 .blog-content nav {
-  background: #F6F8FB;
-  border: 1px solid rgba(42, 95, 176, 0.18);
-  border-left: 4px solid var(--primary, #E11C1C);
-  border-radius: 12px;
-  padding: 18px 22px;
-  margin: 0 0 28px;
+  background: #F6F9FC;
+  border: 1px solid #E2E8F0;
+  border-left: 4px solid var(--accent, #e63030);
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin: 0 0 32px;
+  box-shadow: 0 1px 2px rgba(15, 31, 80, 0.04), 0 10px 24px rgba(15, 31, 80, 0.04);
 }
 .toc h2, .toc h3, .toc h4,
 .blog-content nav h2,
 .blog-content nav h3,
 .blog-content nav h4 {
-  margin: 0 0 10px;
-  font-size: 13px;
+  margin: 0 0 12px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--primary, #E11C1C);
+  color: var(--accent, #e63030);
 }
 .toc ul, .toc ol,
 .blog-content nav ul,
 .blog-content nav ol {
   margin: 0;
-  padding-left: 1.25em;
+  padding-left: 1.2em;
   list-style: disc;
-  line-height: 1.9;
+  line-height: 1.85;
 }
 .toc li,
 .blog-content nav li {
-  margin: 0.15em 0;
+  margin: 0.2em 0;
+  color: var(--text);
+}
+.toc li::marker,
+.blog-content nav li::marker {
+  color: var(--soft-steel, #8FB8E0);
 }
 .toc a,
 .blog-content nav a {
-  color: #0F172A;
+  color: var(--navy, #1c3a6a);
+  font-weight: 600;
   text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out);
 }
 .toc a:hover,
 .blog-content nav a:hover {
-  color: var(--primary, #E11C1C);
+  color: var(--accent, #e63030);
   text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 /* ── Blog listing card grid — checklist enforces `blog-grid` class or repeat() ── */

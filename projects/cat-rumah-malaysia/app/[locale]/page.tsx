@@ -14,6 +14,7 @@ import PageStyles from '@/components/PageStyles'
 import WhatsAppClickTracker from '@/components/tracking/WhatsAppClickTracker'
 import HomePageClient from './HomePageClient'
 import type { Locale } from '@/i18n/routing'
+import { ogImages } from '@/lib/ogImage'
 
 type Props = { params: Promise<{ locale: string }> }
 
@@ -31,6 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: siteConfig.brandName,
       locale: locale === 'zh' ? 'zh_MY' : locale === 'en' ? 'en_MY' : 'ms_MY',
       type: 'website',
+      images: ogImages(locale),
     },
   }
 }

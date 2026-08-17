@@ -1,0 +1,570 @@
+@import "tailwindcss";
+
+:root {
+  /* Brand — TANKPRO Malaysia (blue palette; token names kept for template compatibility) */
+  --brand-orange: #0E7BD6;
+  --brand-orange-deep: #0A5AA8;
+  --brand-orange-bright: #35B4F0;
+  --brand-orange-pale: #E8F3FC;
+  --brand-orange-ring: rgba(14, 123, 214, 0.28);
+  --brand-orange-glow: rgba(14, 123, 214, 0.45);
+
+  --brand-charcoal: #0A2540;
+  --brand-charcoal-2: #0E2E4D;
+  --brand-steel: #1C3D5A;
+  --brand-steel-2: #2A4F70;
+
+  --brand-grey: #6B7280;
+  --brand-grey-light: #E5E7EB;
+  --brand-grey-soft: #F3F4F6;
+  --brand-white: #FFFFFF;
+  --brand-paper: #FAFAFA;
+
+  --ink: #0F0F0F;
+  --ink-muted: #4B5563;
+  --ink-faint: #9CA3AF;
+  --line: rgba(15, 15, 15, 0.10);
+  --line-strong: rgba(15, 15, 15, 0.18);
+  --line-on-dark: rgba(255, 255, 255, 0.10);
+  --line-on-dark-strong: rgba(255, 255, 255, 0.18);
+
+  --wa-green: #25D366;
+  --wa-green-hover: #1EBE57;
+  --google-yellow: #FBBC04;
+  --alert-red: #E10600;
+  --alert-red-dark: #B30500;
+
+  --gradient-orange: linear-gradient(135deg, #35B4F0 0%, #0E7BD6 45%, #0A5AA8 100%);
+  --gradient-charcoal: linear-gradient(180deg, #0E2E4D 0%, #0A2540 100%);
+  --gradient-hero-glow: radial-gradient(60% 80% at 80% 65%, rgba(53,180,240,0.30) 0%, rgba(53,180,240,0) 70%);
+
+  --shadow-sm: 0 1px 2px rgba(15,15,15,0.06);
+  --shadow-md: 0 4px 14px rgba(15,15,15,0.08), 0 2px 4px rgba(15,15,15,0.04);
+  --shadow-lg: 0 16px 36px rgba(15,15,15,0.12), 0 4px 10px rgba(15,15,15,0.06);
+  --shadow-xl: 0 28px 60px rgba(15,15,15,0.18), 0 8px 18px rgba(15,15,15,0.08);
+  --shadow-orange: 0 14px 36px rgba(14,123,214,0.32), 0 4px 12px rgba(14,123,214,0.20);
+  --shadow-wa: 0 12px 28px rgba(37,211,102,0.32), 0 4px 10px rgba(37,211,102,0.18);
+
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-card: 18px;
+  --radius-btn: 12px;
+  --radius-pill: 9999px;
+
+  --section-y: clamp(64px, 9vw, 112px);
+  --max-w: 1440px;
+  --gut: clamp(12px, 1.2vw, 16px);
+
+  --font-display: var(--font-inter), 'Inter', -apple-system, system-ui, sans-serif;
+  --font-mono-stack: var(--font-mono), ui-monospace, 'JetBrains Mono', Menlo, monospace;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-emphasis: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-fast: 150ms;
+  --dur: 240ms;
+  --dur-slow: 420ms;
+
+  /* Utopia CI structural tokens — radius + motion only (palette/fonts stay per-project) */
+  --r-button: 8px;
+  --r-card: 12px;
+  --r-pill: 999px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-hover: 220ms;
+  --dur-layout: 320ms;
+}
+
+/* "Built by Utopia AI" footer credit (Utopia CI element — inherits footer text colour) */
+.utopia-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: inherit;
+  text-decoration: none;
+  border-radius: var(--r-button);
+  transition: transform var(--dur-hover) var(--ease), opacity var(--dur-hover) var(--ease);
+}
+.utopia-credit:hover { transform: translateY(-1px); opacity: 0.85; }
+.utopia-credit__mark { flex: none; }
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: #FFFFFF;
+  color: var(--ink);
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; height: auto; display: block; }
+button { font-family: inherit; }
+
+/* Eyebrow */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono-stack);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brand-orange-deep);
+  background: var(--brand-orange-pale);
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--brand-orange-ring);
+  line-height: 1;
+}
+.eyebrow::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand-orange);
+  box-shadow: 0 0 0 3px rgba(14, 123, 214, 0.20);
+  flex-shrink: 0;
+}
+.eyebrow-light {
+  color: #BFE3FF;
+  background: rgba(14, 123, 214, 0.10);
+  border-color: rgba(14, 123, 214, 0.35);
+}
+
+/* Buttons — single shape, only colour varies */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 52px;
+  padding: 0 28px;
+  border-radius: var(--radius-btn);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1;
+  letter-spacing: -0.005em;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform var(--dur) var(--ease-out),
+              box-shadow var(--dur) var(--ease-out),
+              background-color var(--dur) var(--ease-out),
+              border-color var(--dur) var(--ease-out);
+}
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn:focus-visible {
+  outline: 2px solid var(--brand-orange);
+  outline-offset: 3px;
+}
+.btn-wa { background: var(--wa-green); color: #fff; box-shadow: var(--shadow-wa); }
+.btn-wa:hover { background: var(--wa-green-hover); }
+.btn-primary { background: var(--gradient-orange); color: #fff; box-shadow: var(--shadow-orange); }
+.btn-primary:hover { background: var(--brand-orange-deep); }
+.btn-ghost { background: transparent; color: var(--brand-charcoal); border: 1.5px solid var(--line-strong); }
+.btn-ghost:hover { border-color: var(--brand-charcoal); }
+
+/* Screen-reader-only utility for SEO/a11y headings */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0);
+  white-space: nowrap; border: 0;
+}
+
+/* Header layout — moved here from <style jsx> so the rules apply before
+   styled-jsx hydrates. Without these the desktop nav AND the mobile drawer
+   both flash visible on first paint. */
+.site-header { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,0.92); backdrop-filter: saturate(180%) blur(10px); -webkit-backdrop-filter: saturate(180%) blur(10px); border-bottom: 1px solid var(--line); }
+/* padding-block only — horizontal inset already comes from .container, so nav text
+   lines up with the hero heading (both hug the container edge). */
+.site-header-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; min-height: 60px; }
+.site-nav { display: inline-flex; gap: 24px; flex-wrap: nowrap; }
+.site-nav a { color: var(--ink); font-weight: 600; font-size: 14px; white-space: nowrap; }
+.site-nav--desktop { display: none; }
+.site-actions { display: inline-flex; align-items: center; gap: 10px; }
+.site-mobile-drawer { display: none; background: #fff; border-top: 1px solid var(--line); padding: 14px var(--gut) 18px; }
+.site-mobile-drawer.is-open { display: block; }
+.site-burger { display: inline-flex; flex-direction: column; justify-content: center; gap: 4px; width: 38px; height: 38px; padding: 0 8px; background: transparent; border: 1px solid var(--line-strong); border-radius: 10px; cursor: pointer; }
+.site-burger span { display: block; height: 2px; width: 100%; background: var(--brand-charcoal); border-radius: 2px; }
+@media (min-width: 880px) {
+  .site-nav--desktop { display: inline-flex; }
+  .site-burger { display: none; }
+  .site-mobile-drawer { display: none !important; }
+}
+
+/* FOMO banner */
+.fomo-bar { background: var(--alert-red); color: #fff; font-family: var(--font-display); }
+.fomo-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; padding: 10px var(--gut); font-size: 13px; line-height: 1.4; }
+.fomo-tag { font-family: var(--font-mono-stack); font-weight: 700; font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; background: rgba(255,255,255,0.18); padding: 4px 8px; border-radius: 999px; }
+.fomo-body { font-weight: 500; text-align: center; }
+.fomo-clock { font-family: var(--font-mono-stack); font-weight: 700; font-size: 15px; letter-spacing: 0.04em; display: inline-flex; gap: 6px; align-items: center;
+  /* Hidden (but still laid out) until the client tick lands, so the banner
+     never reflows on hydration and no placeholder 00:00:00:00 flashes. */
+  opacity: 0; transition: opacity 160ms ease-out; }
+.fomo-clock.is-ready { opacity: 1; }
+.fomo-sep { opacity: 0.6; }
+.fomo-link { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; font-size: 13px; }
+
+/* Mobile: smaller CTAs + auto-width eyebrows + roomier side gutters */
+@media (max-width: 879px) {
+  :root { --gut: 20px; }
+  .container { padding-inline: 20px; }
+  .btn { height: 44px; padding: 0 16px; font-size: 12.5px; gap: 8px; white-space: nowrap; }
+  .eyebrow { align-self: center; font-size: 10.5px; padding: 6px 11px; }
+  .price-value { font-size: 26px !important; white-space: nowrap; }
+  .price-label { font-size: 9px !important; }
+  .price-cell { padding: 0 !important; gap: 2px !important; }
+  .product-cta { font-size: 12.5px !important; padding: 0 14px !important; }
+  .fomo-inner { gap: 6px 10px; padding: 6px 16px; font-size: 11.5px; line-height: 1.3; }
+  .fomo-tag { font-size: 9.5px; padding: 3px 7px; letter-spacing: 0.14em; }
+  .fomo-body { font-size: 11px; flex-basis: 100%; }
+  .fomo-clock { font-size: 12.5px; gap: 4px; }
+  .fomo-link { font-size: 11.5px; }
+  .hero-logo { width: clamp(180px, 50vw, 280px) !important; margin: 6px auto 14px !important; }
+}
+.btn-ghost-light { background: transparent; color: #fff; border: 1.5px solid var(--line-on-dark-strong); }
+.btn-ghost-light:hover { border-color: rgba(255, 255, 255, 0.6); }
+@media (max-width: 640px) {
+  .btn { width: 100%; height: 56px; font-size: 16px; }
+}
+
+/* Sections */
+.section { padding: var(--section-y) 0; }
+.container {
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: var(--gut);
+}
+.section-head { text-align: center; max-width: none; margin-inline: auto; margin-bottom: 48px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.section-head h3 { max-width: none; white-space: normal; text-wrap: balance; }
+
+/* Language switcher — kept in globals so layout rules always win */
+.lsw-toggle {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center;
+  gap: 6px;
+}
+.lsw-item {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px 0 8px;
+  border-radius: 999px;
+  background: #FFFFFF;
+  border: 1.5px solid var(--line-strong);
+  color: var(--brand-charcoal);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color var(--dur) var(--ease-out),
+              background-color var(--dur) var(--ease-out),
+              color var(--dur) var(--ease-out),
+              box-shadow var(--dur) var(--ease-out);
+}
+.lsw-flag {
+  display: inline-block !important;
+  flex-shrink: 0;
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+}
+.lsw-label { display: inline-block; flex-shrink: 0; line-height: 1; white-space: nowrap; }
+.lsw-item:hover { border-color: rgba(15, 15, 15, 0.35); background: var(--brand-grey-soft); }
+.lsw-item.is-active {
+  background: var(--brand-charcoal);
+  border-color: var(--brand-charcoal);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(15, 15, 15, 0.18);
+}
+.lsw-item.is-active:hover { background: var(--brand-charcoal-2); border-color: var(--brand-charcoal-2); color: #FFFFFF; }
+
+/* Dropdown wrapper + trigger (mobile only) */
+.lsw { position: relative; display: inline-flex; }
+.lsw-trigger {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 12px 0 8px;
+  background: #FFFFFF;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--brand-charcoal);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  cursor: pointer;
+}
+.lsw-trigger-label { display: inline-block; line-height: 1; }
+.lsw-caret { opacity: 0.6; transition: transform var(--dur) var(--ease-out); }
+.lsw-trigger[aria-expanded="true"] .lsw-caret { transform: rotate(180deg); }
+.lsw-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 140px;
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 18px 40px -12px rgba(15,15,15,0.25);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  z-index: 60;
+}
+.lsw-menu-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: var(--brand-charcoal);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.lsw-menu-item:hover { background: var(--brand-grey-soft); }
+.lsw-menu-item.is-active { background: var(--brand-charcoal); color: #fff; }
+
+@media (max-width: 879px) {
+  .lsw-toggle { display: none !important; }
+  .lsw-trigger { display: inline-flex; }
+}
+.section-head h3 { font-size: clamp(1.625rem, 3vw, 2.25rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; color: var(--brand-charcoal); margin: 0; }
+.section-head p { font-size: clamp(1rem, 1.25vw, 1.125rem); line-height: 1.7; color: var(--ink-muted); margin: 0; }
+
+/* Blueprint grid for dark sections */
+.bg-blueprint {
+  background-color: var(--brand-charcoal);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px, 56px 56px;
+}
+.bg-blueprint-glow {
+  background-color: var(--brand-charcoal);
+  background-image:
+    var(--gradient-hero-glow),
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: auto, 56px 56px, 56px 56px;
+}
+
+/* Tread divider */
+.tread-divider {
+  height: 24px; width: 100%;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='24' viewBox='0 0 64 24'><rect x='2' y='6' width='12' height='12' rx='2' fill='%23F26C1F' opacity='0.22'/><rect x='18' y='6' width='12' height='12' rx='2' fill='%23F26C1F' opacity='0.22'/><rect x='34' y='6' width='12' height='12' rx='2' fill='%23F26C1F' opacity='0.22'/><rect x='50' y='6' width='12' height='12' rx='2' fill='%23F26C1F' opacity='0.22'/></svg>");
+  background-repeat: repeat-x; background-size: 64px 24px;
+}
+.tread-divider-on-dark {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='24' viewBox='0 0 64 24'><rect x='2' y='6' width='12' height='12' rx='2' fill='%23F26C1F' opacity='0.42'/><rect x='18' y='6' width='12' height='12' rx='2' fill='%23F26C1F' opacity='0.42'/><rect x='34' y='6' width='12' height='12' rx='2' fill='%23F26C1F' opacity='0.42'/><rect x='50' y='6' width='12' height='12' rx='2' fill='%23F26C1F' opacity='0.42'/></svg>");
+}
+
+/* Cards */
+.product-card {
+  display: flex; flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  height: 100%;
+  transition: transform var(--dur) var(--ease-out),
+              box-shadow var(--dur) var(--ease-out),
+              border-color var(--dur) var(--ease-out);
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--brand-orange-ring);
+}
+
+/* Marquee for brand strip */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track { animation: marquee 40s linear infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+/* Blog content */
+.blog-content h2 { font-size: 28px; font-weight: 700; color: var(--brand-charcoal); margin: 2em 0 0.5em; line-height: 1.25; letter-spacing: -0.02em; }
+.blog-content h3 { font-size: 22px; font-weight: 700; color: var(--brand-charcoal); margin: 1.5em 0 0.5em; line-height: 1.3; letter-spacing: -0.015em; }
+.blog-content p { font-size: 16px; line-height: 1.75; margin: 0 0 1em; color: var(--ink); }
+.blog-content img { max-width: 100%; height: auto; border-radius: var(--radius-md); margin: 1.5em 0; }
+.blog-content ul { list-style: disc; margin: 1em 0; padding-left: 1.5em; }
+.blog-content ol { list-style: decimal; margin: 1em 0; padding-left: 1.5em; }
+.blog-content li { display: list-item; margin: 0.5em 0; line-height: 1.7; }
+.blog-content li::marker { color: var(--brand-orange); }
+.blog-content h4 { font-size: 18px; font-weight: 700; color: var(--brand-charcoal); margin: 1.3em 0 0.4em; line-height: 1.35; }
+.blog-content strong, .blog-content b { font-weight: 700; color: var(--brand-charcoal); }
+.blog-content blockquote { border-left: 4px solid var(--brand-orange); padding: 1em 1.5em; margin: 1.5em 0; background: var(--brand-orange-pale); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.blog-content a { color: var(--brand-orange-deep); text-decoration: underline; }
+.blog-content a:hover { opacity: 0.8; }
+
+/* Table of contents — applies to <div class="toc"> blocks the blog writer
+   emits, and to any <nav> inside the article body. */
+.toc,
+.blog-content nav {
+  background: #F8F8F8;
+  border-left: 4px solid var(--brand-orange);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  margin: 0 0 28px;
+}
+.toc h2, .toc h3, .toc h4,
+.blog-content nav h2,
+.blog-content nav h3,
+.blog-content nav h4 {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brand-orange-deep);
+}
+.toc ul, .toc ol,
+.blog-content nav ul,
+.blog-content nav ol {
+  margin: 0;
+  padding-left: 1.25em;
+  list-style: disc;
+  line-height: 1.9;
+}
+.toc li,
+.blog-content nav li {
+  margin: 0.15em 0;
+}
+.toc a,
+.blog-content nav a {
+  color: var(--brand-charcoal);
+  text-decoration: none;
+}
+.toc a:hover,
+.blog-content nav a:hover {
+  color: var(--brand-orange-deep);
+  text-decoration: underline;
+}
+
+/* Scrollbar utilities */
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Live ops ticker */
+@keyframes ops-rotate {
+  0%, 30% { transform: translateY(0); }
+  33%, 63% { transform: translateY(-100%); }
+  66%, 96% { transform: translateY(-200%); }
+  99%, 100% { transform: translateY(0); }
+}
+.ops-ticker { height: 16px; overflow: hidden; }
+.ops-ticker-inner {
+  font-family: var(--font-mono-stack);
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+  animation: ops-rotate 12s steps(3, end) infinite;
+}
+.ops-ticker-row { height: 16px; }
+
+/* Focus visibility */
+:focus-visible { outline: 2px solid var(--brand-orange); outline-offset: 2px; }
+
+/* ── Contact number (header + footer) ──────────────────────────────────────
+   Canonical copy: templates/site-chrome/contact-number.css.
+
+   It does NOT live in a styled-jsx block inside ContactNumber: the element is
+   passed into the client SiteHeader as a `contact` prop, so that component's
+   scoped styles never reach it.
+
+   Type is deliberately token-driven, not fixed. `--font-heading` /
+   `--font-display` are the two names in use across the fleet; whichever the
+   site defines wins, and a site that defines neither inherits its own body
+   font. Never hardcode a family here — the font is the site's, not the
+   chrome's. Colours work the same way: the fallbacks are only there so the
+   block is never invisible on a project that hasn't defined a token yet. */
+
+.contact-number {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+  line-height: 1.15;
+  text-decoration: none;
+  transition: opacity var(--dur-hover, 220ms) var(--ease, ease);
+}
+.contact-number:hover { opacity: 0.78; }
+.contact-number:focus-visible {
+  outline: 2px solid var(--brand-orange, currentColor);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.contact-number-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--ink-muted, #4B5563);
+  white-space: nowrap;
+}
+.contact-number-value {
+  font-family: var(--font-heading, var(--font-display, inherit));
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--brand-charcoal, var(--ink, #111));
+  white-space: nowrap;
+}
+
+/* Header: the desktop instance hides on mobile — the drawer carries its own
+   copy, so showing both would duplicate the number on small screens. */
+/* Extra separation from the language pills — the .site-actions gap alone left
+   the number reading as part of the switcher group. */
+.site-actions .contact-number { margin-right: 14px; }
+@media (max-width: 879px) {
+  .site-actions .contact-number { display: none; }
+}
+/* Right-aligned, sitting beside the language switcher on one row. Set here
+   rather than in SiteHeader's styled-jsx: the element is passed into that
+   client component as a prop, so its scoped styles never reach it. */
+.site-mobile-actions .contact-number { align-items: flex-end; text-align: right; }
+@media (min-width: 880px) {
+  .site-mobile-actions .contact-number { display: none; }
+}
+
+/* Footer sits on the pale panel; centred on mobile with the rest of the chrome. */
+.contact-number--footer .contact-number-value {
+  font-size: 19px;
+  color: var(--footer-ink, var(--brand-charcoal, var(--ink, #111)));
+}
+.contact-number--footer .contact-number-label {
+  color: var(--footer-ink-muted, var(--ink-muted, #4B5563));
+}
+@media (max-width: 879px) {
+  .contact-number--footer { align-items: center; }
+}

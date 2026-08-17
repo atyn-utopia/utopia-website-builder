@@ -12,13 +12,9 @@
     "whatsapp": "WhatsApp"
   },
   "fomo": {
-    "primary": "Tawaran 24 Jam tamat dalam",
-    "secondary": "Hantar hari ini ke 159 bandar — tempah sebelum masa tamat.",
-    "labels": {
-      "hrs": "Jam",
-      "min": "Min",
-      "sec": "Saat"
-    }
+    "eyebrow": "TAWARAN {monthUpper}",
+    "body": "Penghantaran & pemasangan percuma untuk setiap sewaan katil hospital pada {month} ini.",
+    "ctaLabel": "Tuntut Tawaran"
   },
   "hero": {
     "h1": "Sewa & Jual Katil Hospital 24 Jam di Seluruh Malaysia",
@@ -46,10 +42,10 @@
     "intro": "Katil hospital manual dan elektrik, tilam hospital, tilam angin anti-decubitus, mesin oksigen, kerusi roda, dan mesin CPAP — semua boleh disewa atau dibeli dengan penghantaran 24 jam.",
     "cardCta": "Lihat di WhatsApp",
     "eyebrow": "Katalog Sewa & Beli",
-    "imageAltTemplate": "Katil hospital {model} daripada Katil Hospital 24 Jam — sewa atau beli seluruh Malaysia"
+    "imageAltTemplate": "Katil hospital {model} daripada Katil Hospital Murah — sewa atau beli seluruh Malaysia"
   },
   "values": {
-    "h3": "Kenapa Pilih Katil Hospital 24 Jam",
+    "h3": "Kenapa Pilih Katil Hospital Murah",
     "intro": "Kami faham penjagaan di rumah tidak boleh tunggu. Inilah sebabnya ratusan keluarga Malaysia percayakan kami.",
     "c1": {
       "title": "Penghantaran 24 Jam",
@@ -101,7 +97,7 @@
       "Penjaga melaraskan katil hospital elektrik untuk pesakit warga emas",
       "Katil hospital dengan pagar sisi dipasang untuk pencegahan jatuh",
       "Bundle katil hospital dan tiang IV untuk penjagaan di rumah",
-      "Krew Katil Hospital 24 Jam menyiapkan pemasangan hari sama"
+      "Krew Katil Hospital Murah menyiapkan pemasangan hari sama"
     ]
   },
   "googleReview": {
@@ -159,11 +155,11 @@
     "subtitle": "Pasukan kami standby 24 jam — hantar, pasang, dan selesai sebelum hari berikutnya.",
     "cta": "WhatsApp Kami Sekarang",
     "eyebrow": "Bertindak Sekarang",
-    "bgAlt": "Penghantaran dan pemasangan katil hospital 24 jam Katil Hospital 24 Jam di rumah di Malaysia"
+    "bgAlt": "Penghantaran dan pemasangan katil hospital 24 jam Katil Hospital Murah di rumah di Malaysia"
   },
   "footer": {
     "brand": {
-      "heading": "Katil Hospital 24 Jam",
+      "heading": "Katil Hospital Murah",
       "tagline": "Sewa & jual katil hospital, tilam anti-decubitus dan peralatan penjagaan — hantar dalam 24 jam ke seluruh Malaysia."
     },
     "products": {
@@ -176,7 +172,7 @@
     "language": {
       "heading": "Bahasa"
     },
-    "copyright": "© 2026 Katil Hospital 24 Jam. Hakcipta terpelihara."
+    "copyright": "© 2026 Katil Hospital Murah. Hakcipta terpelihara."
   },
   "location": {
     "breadcrumb": {
@@ -203,7 +199,7 @@
     "tocTitle": "Kandungan",
     "ctaBannerTitle": "Perlukan katil hospital hari ini?",
     "ctaBannerCta": "WhatsApp Kami",
-    "metaTitle": "Blog — Katil Hospital 24 Jam",
+    "metaTitle": "Blog — Katil Hospital Murah",
     "metaDescription": "Panduan memilih katil hospital, tilam angin, dan peralatan penjagaan di rumah untuk keluarga di Malaysia."
   },
   "languageSwitcher": {
@@ -213,7 +209,7 @@
   },
   "metadata": {
     "home": {
-      "title": "Katil Hospital 24 Jam — Sewa & Jual di Malaysia",
+      "title": "Katil Hospital Murah — Sewa & Jual di Malaysia",
       "description": "Sewa atau beli katil hospital manual & elektrik dengan penghantaran 24 jam ke 159 bandar di Malaysia. Tilam angin & mesin oksigen juga tersedia."
     },
     "location": {
@@ -229,6 +225,11 @@
     "empty": "Kawasan anda tidak tersenarai?",
     "emptyCta": "Sahkan Liputan"
   },
-  "logoAlt": "Katil Hospital 24 Jam — Sewa & Jual Katil Hospital Seluruh Malaysia",
-  "imageAlt": "Pasukan Katil Hospital 24 Jam menghantar dan memasang katil hospital di rumah pelanggan"
+  "logoAlt": "Katil Hospital Murah — Sewa & Jual Katil Hospital Seluruh Malaysia",
+  "imageAlt": "Pasukan Katil Hospital Murah menghantar dan memasang katil hospital di rumah pelanggan",
+  "redirect": {
+    "heading": "Membuka WhatsApp…",
+    "subtext": "Menghubungkan anda dengan pasukan Katil Hospital Murah.",
+    "fallback": "Klik di sini jika tidak dialihkan"
+  }
 }

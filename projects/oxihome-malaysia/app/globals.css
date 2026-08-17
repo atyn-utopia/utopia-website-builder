@@ -14,6 +14,16 @@
   --brand-border:     #D2E8EE;
   --brand-surface:    #F4FAFB;
   --brand-white:      #FFFFFF;
+
+  /* Utopia CI structural tokens — radius + motion only. Palette, fonts and
+     existing button shapes stay per-project; do NOT force --r-button onto CTAs
+     that are already pills. Consumed by the "Built by Utopia AI" credit. */
+  --r-button: 8px;
+  --r-card: 12px;
+  --r-pill: 999px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-hover: 220ms;
+  --dur-layout: 320ms;
   --wa-green:         #25D366;
 
   /* Fonts (--font-inter is injected at runtime by next/font; alias the
@@ -67,14 +77,40 @@
   --marquee-duration: 30s;
 }
 
+/* "Built by Utopia AI" footer credit (Utopia CI element — inherits footer text colour) */
+.utopia-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: inherit;
+  text-decoration: none;
+  border-radius: var(--r-button);
+  transition: transform var(--dur-hover) var(--ease), opacity var(--dur-hover) var(--ease);
+}
+.utopia-credit:hover { transform: translateY(-1px); opacity: 0.85; }
+.utopia-credit__mark { flex: none; }
+
 * { box-sizing: border-box; }
 
 h1, h3, h4 { font-weight: 700; }
 h2 { font-weight: 600; }
 /* h5/h6 are used to wrap body text (keyword-driven heading rule). Keep them
    visually identical to the <p> they replaced — utility classes still control
-   size/weight via Tailwind preflight, this just guards against UA bolding. */
-h5, h6 { font-size: inherit; font-weight: inherit; line-height: inherit; margin: 0; }
+   size/weight via Tailwind preflight, this just guards against UA bolding.
+
+   Do NOT re-add `margin: 0` here. This block is UNLAYERED, and unlayered CSS
+   beats everything in Tailwind v4's @layer utilities no matter the specificity
+   — so `margin: 0` here silently killed every mb-* utility on every h5/h6 on
+   the site, which is all the body copy. Preflight already zeroes these margins
+   from @layer base, so the default is unchanged and mb-8/mb-4 now win. */
+h5, h6 { font-size: inherit; font-weight: inherit; line-height: inherit; }
+
+/* air-compressor type scale — heading + body defaults */
+h1, h2, h3, h4 { line-height: 1.2; }
+body { font-size: 16px; }
+p, li, blockquote { line-height: 1.4; }
 
 html { scroll-behavior: smooth; }
 

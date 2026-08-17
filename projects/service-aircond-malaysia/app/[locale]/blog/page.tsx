@@ -8,6 +8,7 @@ import FomoBanner from '@/components/FomoBanner'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import type { Locale as AppLocale } from '@/i18n/routing'
+import { ogImages } from '@/lib/ogImage'
 
 const BLOG_COPY = {
   en: {
@@ -61,6 +62,7 @@ export async function generateMetadata({
       url,
       siteName: siteConfig.brandName,
       type: 'website',
+      images: ogImages(locale),
     },
   }
 }

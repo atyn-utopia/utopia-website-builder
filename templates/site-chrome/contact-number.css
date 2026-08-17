@@ -1,0 +1,75 @@
+/* ── Contact number (header + footer) ──────────────────────────────────────
+   Paste this block into the project's app/globals.css.
+
+   It does NOT live in a styled-jsx block inside ContactNumber: the element is
+   passed into the client SiteHeader as a `contact` prop, so that component's
+   scoped styles never reach it.
+
+   Type is deliberately token-driven, not fixed. `--font-heading` /
+   `--font-display` are the two names in use across the fleet; whichever the
+   site defines wins, and a site that defines neither inherits its own body
+   font. Never hardcode a family here — the font is the site's, not the
+   chrome's. Colours work the same way: the fallbacks are only there so the
+   block is never invisible on a project that hasn't defined a token yet. */
+
+.contact-number {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+  line-height: 1.15;
+  text-decoration: none;
+  transition: opacity var(--dur-hover, 220ms) var(--ease, ease);
+}
+.contact-number:hover { opacity: 0.78; }
+.contact-number:focus-visible {
+  outline: 2px solid var(--brand-orange, currentColor);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.contact-number-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--ink-muted, #4B5563);
+  white-space: nowrap;
+}
+.contact-number-value {
+  font-family: var(--font-heading, var(--font-display, inherit));
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--brand-charcoal, var(--ink, #111));
+  white-space: nowrap;
+}
+
+/* Header: the desktop instance hides on mobile — the drawer carries its own
+   copy, so showing both would duplicate the number on small screens. */
+/* Extra separation from the language pills — the .site-actions gap alone left
+   the number reading as part of the switcher group. */
+.site-actions .contact-number { margin-right: 14px; }
+@media (max-width: 879px) {
+  .site-actions .contact-number { display: none; }
+}
+/* Right-aligned, sitting beside the language switcher on one row. Set here
+   rather than in SiteHeader's styled-jsx: the element is passed into that
+   client component as a prop, so its scoped styles never reach it. */
+.site-mobile-actions .contact-number { align-items: flex-end; text-align: right; }
+@media (min-width: 880px) {
+  .site-mobile-actions .contact-number { display: none; }
+}
+
+/* Footer instance takes the FOOTER's ink tokens, not the header's, so a project
+   that sets --footer-bg to something dark can set --footer-ink to match and the
+   number follows without touching this file. Falls through to the same defaults
+   as the header when a project defines neither. */
+.contact-number--footer .contact-number-value {
+  font-size: 19px;
+  color: var(--footer-ink, var(--brand-charcoal, var(--ink, #111)));
+}
+.contact-number--footer .contact-number-label {
+  color: var(--footer-ink-muted, var(--ink-muted, #4B5563));
+}
+@media (max-width: 879px) {
+  .contact-number--footer { align-items: center; }
+}

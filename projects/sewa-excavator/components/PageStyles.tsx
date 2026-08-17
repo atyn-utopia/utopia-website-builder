@@ -294,6 +294,35 @@ export default function PageStyles() {
           letter-spacing: -0.01em;
         }
         .price-cell:first-child .price-value { color: var(--brand-orange); }
+
+        /* Multi-line labeled prices (webcore prices array) — vertical list */
+        .product-prices.price-list {
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+          padding: 4px 16px;
+          text-align: left;
+        }
+        .price-line {
+          font-family: var(--font-mono-stack);
+          font-weight: 700;
+          font-size: 15px;
+          letter-spacing: -0.01em;
+          color: var(--brand-charcoal);
+          padding: 11px 0;
+          border-bottom: 1px solid var(--line);
+        }
+        .price-line:last-child { border-bottom: none; }
+        .price-line:first-child { color: var(--brand-orange); }
+        .price-note {
+          display: block;
+          margin-top: 3px;
+          font-weight: 400;
+          font-size: 11px;
+          letter-spacing: 0.02em;
+          text-transform: none;
+          color: var(--ink-muted);
+        }
         .product-cta { margin-top: auto; }
 
         /* CALC SECTION */

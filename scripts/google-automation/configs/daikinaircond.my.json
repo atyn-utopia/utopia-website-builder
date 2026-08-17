@@ -1,0 +1,21 @@
+{
+  "domain": "daikinaircond.my",
+  "containerId": "GTM-N5BW97JN",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-W5D2SSWWZY",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-08-12T01:26:51.984Z",
+  "gsc": {
+    "siteUrl": "https://daikinaircond.my/",
+    "token": "<meta name=\"google-site-verification\" content=\"PFNyIIn2L64887xnwPFNPPMifbpfG7wgCxqRQbJxLdI\" />",
+    "initAt": "2026-08-12T01:33:36.001Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-08-12T01:36:18.977Z"
+  }
+}

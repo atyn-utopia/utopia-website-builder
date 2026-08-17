@@ -10,6 +10,7 @@ import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import PageStyles from '@/components/PageStyles';
 import HomePageClient from '@/components/HomePageClient';
+import { ogImages } from '@/lib/ogImage';
 
 export async function generateMetadata({
   params,
@@ -30,6 +31,7 @@ export async function generateMetadata({
       siteName: siteConfig.brandName,
       type: 'website',
       locale: locale === 'ms' ? 'ms_MY' : locale === 'zh' ? 'zh_CN' : 'en_MY',
+      images: ogImages(locale),
     },
   };
 }
@@ -43,8 +45,6 @@ export default async function HomePage({
   const faqT = await getTranslations({ locale, namespace: 'faq' });
   const hero = await getTranslations({ locale, namespace: 'hero' });
   const fomo = await getTranslations({ locale, namespace: 'fomoBanner' });
-  const finalCtaT = await getTranslations({ locale, namespace: 'finalCta' });
-  const strip = await getTranslations({ locale, namespace: 'quickStrip' });
 
   const faqs = [];
   for (let i = 0; i < 6; i++) {
@@ -107,37 +107,6 @@ export default async function HomePage({
                 loading="eager"
               />
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Quick-contact urgency strip — standby electricians, dual WhatsApp
-          entry (immediate chat + quote) directly under the hero. */}
-      <section className="section" style={{ paddingTop: 28, paddingBottom: 28 }}>
-        <div
-          className="container"
-          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, textAlign: 'center' }}
-        >
-          <h5 className="body-h5" style={{ maxWidth: 680, margin: 0 }}>
-            {strip('text')}
-          </h5>
-          <div className="hero-ctas" style={{ justifyContent: 'center' }}>
-            <a
-              href={waRedirect(locale)}
-              target="_blank"
-              rel="noopener"
-              className="btn btn-wa btn-lg"
-            >
-              {strip('ctaPrimary')}
-            </a>
-            <a
-              href={waRedirect(locale)}
-              target="_blank"
-              rel="noopener"
-              className="btn btn-outline btn-lg"
-            >
-              {strip('ctaSecondary')}
-            </a>
           </div>
         </div>
       </section>

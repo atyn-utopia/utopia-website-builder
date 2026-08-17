@@ -93,8 +93,8 @@ export default function FomoBanner({ locale }: { locale: Locale }) {
           {t('bookNow')} <span aria-hidden="true">→</span>
         </a>
       </div>
-      <style jsx>{`
-        :global(.fomo-dot) {
+      <style>{`
+        .fomo-dot {
           animation: fomoPulse 1.6s ease-out infinite;
         }
         @keyframes fomoPulse {

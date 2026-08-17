@@ -37,23 +37,13 @@ export default function BlogPostClient({
   const locale = useLocale();
   const waHref = waRedirect(locale);
 
-  // Simple TOC extraction — H2s from content
-  const tocMatches: { id: string; text: string }[] = [];
-  const re = /<h2[^>]*>([\s\S]*?)<\/h2>/gi;
-  let m;
-  let i = 0;
-  while ((m = re.exec(post.content)) !== null) {
-    const text = m[1].replace(/<[^>]*>/g, '').trim();
-    const id = `h-${i++}`;
-    tocMatches.push({ id, text });
-  }
-
   return (
     <>
       {!chromeProvided && <FomoBar />}
       {!chromeProvided && <Navbar />}
 
-      {/* Breadcrumbs */}
+      {/* Breadcrumbs — server page renders the canonical breadcrumb when chromeProvided */}
+      {!chromeProvided && (
       <nav
         aria-label="Breadcrumb"
         style={{
@@ -84,6 +74,7 @@ export default function BlogPostClient({
           <span style={{ color: '#1c3a6a', fontWeight: 600 }}>{post.title}</span>
         </div>
       </nav>
+      )}
 
       {/* Article */}
       <section style={{ padding: '40px 16px' }}>
@@ -111,10 +102,10 @@ export default function BlogPostClient({
             <h1
               style={{
                 fontSize: 'clamp(26px, 4vw, 38px)',
-                fontWeight: 800,
+                fontWeight: 700,
                 color: '#1c3a6a',
                 lineHeight: 1.2,
-                letterSpacing: -0.4,
+                letterSpacing: '-0.025em',
                 margin: '0 0 14px',
               }}
             >
@@ -126,7 +117,7 @@ export default function BlogPostClient({
             <h2
               style={{
                 fontSize: 17,
-                fontWeight: 500,
+                fontWeight: 400,
                 color: '#334155',
                 lineHeight: 1.6,
                 margin: '0 0 20px',
@@ -136,6 +127,7 @@ export default function BlogPostClient({
             </h2>
           )}
 
+          {!chromeProvided && (
           <div
             style={{
               display: 'flex',
@@ -162,43 +154,11 @@ export default function BlogPostClient({
               {readingTime} {t('minRead')}
             </span>
           </div>
-
-          {/* Table of Contents */}
-          {tocMatches.length > 1 && (
-            <nav
-              aria-label="Table of contents"
-              style={{
-                background: '#F0F4FA',
-                border: '1px solid #E2E8F0',
-                borderLeft: '4px solid #e63030',
-                padding: '16px 18px',
-                borderRadius: 12,
-                marginBottom: 28,
-              }}
-            >
-              <h3
-                style={{
-                  fontSize: 14,
-                  fontWeight: 700,
-                  color: '#1c3a6a',
-                  margin: '0 0 8px',
-                  textTransform: 'uppercase',
-                  letterSpacing: 0.5,
-                }}
-              >
-                {t('tocTitle')}
-              </h3>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                {tocMatches.map((toc) => (
-                  <li key={toc.id} style={{ padding: '4px 0', fontSize: 14 }}>
-                    <span style={{ color: '#1c3a6a' }}>▸</span>{' '}
-                    <span style={{ color: '#334155' }}>{toc.text}</span>
-                  </li>
-                ))}
-              </ul>
-            </nav>
           )}
 
+          {/* TOC is authored inside the DB content (<nav> with correct in-page
+              anchors) and rendered by .blog-content below — no client-generated
+              duplicate. */}
           <div
             className="blog-content"
             dangerouslySetInnerHTML={{ __html: post.content }}
@@ -218,7 +178,7 @@ export default function BlogPostClient({
           <h3
             style={{
               fontSize: 'clamp(20px, 3vw, 28px)',
-              fontWeight: 800,
+              fontWeight: 700,
               color: '#FFFFFF',
               margin: '0 0 18px',
             }}
@@ -246,7 +206,7 @@ export default function BlogPostClient({
             <h3
               style={{
                 fontSize: 24,
-                fontWeight: 800,
+                fontWeight: 700,
                 color: '#1c3a6a',
                 margin: '0 0 20px',
                 textAlign: 'center',
