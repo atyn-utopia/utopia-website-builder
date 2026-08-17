@@ -13,3 +13,37 @@ projects/*/temporary screenshots/
 # Per-project local insert scripts produced by agents (Cyclops/Hanabi)
 projects/*/.cyclops-*/
 projects/*/.hanabi-*/
+
+# ── Per-site repos cloned into the tree ──────────────────────────────────
+# Each of these is its OWN git repository with its own GitHub remote, and all
+# of them are fully pushed — nothing here is unsaved. They are ignored rather
+# than committed because `git add` on a nested repo records a gitlink with no
+# content: a fresh clone of this monorepo would get empty directories. If they
+# should genuinely live here, add them deliberately with `git submodule add`
+# (which records the remote URL in .gitmodules) instead of a plain `git add`.
+projects/acson-aircond/
+projects/boom-lift-rental/
+projects/daikin-aircond/
+projects/haier-aircond/
+projects/hisense-aircond/
+projects/lg-aircond/
+projects/light-tower-rental/
+projects/little-star-big-star/
+projects/midea-aircond/
+projects/panasonic-aircond/
+projects/samsung-aircond/
+projects/skylift-rental/
+projects/toshiba-aircond/
+projects/utopia-wizard/
+projects/waterproofing-my/
+projects/xiaomi-aircond/
+
+# Symlink to a checkout outside this repo — committing it would store an
+# absolute path that resolves only on one machine.
+projects/air-kelapa
+
+# Stray root-level duplicates of projects/majlis-aqiqah and
+# projects/water-tank-malaysia. Both are nested repos; the real copies live
+# under projects/. Left ignored rather than deleted — that is the owner's call.
+/majlis-aqiqah/
+/water-tank-malaysia/
