@@ -1,0 +1,13 @@
+{
+  "domain": "reno.my",
+  "containerId": "GTM-T22CFTX5",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-DL7Y28W4VJ",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-08-19T03:29:07.123Z"
+}

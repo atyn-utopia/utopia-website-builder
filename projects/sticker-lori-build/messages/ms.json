@@ -1,0 +1,347 @@
+{
+  "meta": {
+    "home": {
+      "title": "Supply & Install Water Tank, Pam & Penapis Air Malaysia — TANKPRO",
+      "description": "TANKPRO supply dan install water tank, water pump, dan penapis air untuk rumah landed di seluruh Malaysia. Harga telus, jenama disahkan SIRIM. WhatsApp untuk sebut harga."
+    },
+    "location": {
+      "title": "Supply & Install Water Tank {location} — TANKPRO Malaysia",
+      "description": "Pemasangan water tank, water pump, dan penapis air di {location}, {state}. Pakej combo tangki + pam + penapis untuk rumah landed. WhatsApp TANKPRO untuk sebut harga."
+    },
+    "blogListing": {
+      "title": "Panduan Water Tank & Pam Air — Blog TANKPRO Malaysia",
+      "description": "Panduan dan tips tentang water tank, water pump, dan penapis air untuk rumah landed di Malaysia. Pilih tangki, pam, dan penapis yang betul untuk rumah anda."
+    }
+  },
+  "nav": {
+    "logoAlt": "TANKPRO Malaysia — Supply & Install Water Tank, Pam & Penapis Air",
+    "home": "Utama",
+    "products": "Produk",
+    "packages": "Pakej Combo",
+    "locations": "Lokasi",
+    "blog": "Blog",
+    "whatsappCta": "WhatsApp Sebut Harga",
+    "calculator": "Pakej Combo"
+  },
+  "contact": {
+    "availability": "Tersedia 24/7"
+  },
+  "fomo": {
+    "eyebrow": "PROMO {monthUpper}",
+    "body": "Jimat sehingga RM 300 untuk pakej combo water tank + pam + penapis — promo {month} berakhir dalam:",
+    "countdownLabel": "Hari : Jam : Minit : Saat",
+    "ctaLabel": "Dapatkan Sebut Harga"
+  },
+  "hero": {
+    "eyebrow": "SUPPLY & INSTALL WATER TANK",
+    "h1Part1": "Supply & Install",
+    "h1Highlight": "Water Tank",
+    "h1Part2": "Pam & Penapis Air Malaysia",
+    "h2": "Tangki Air, Water Pump, dan Penapis Air untuk Rumah Landed",
+    "supporting": "Satu pakej lengkap — tangki, pam, dan penapis dipasang oleh juruteknik pakar. Jenama King Kong, Grundfos, Hitachi, disahkan SIRIM.",
+    "ctaPrimary": "WhatsApp Sebut Harga",
+    "ctaSecondary": "Lihat Pakej →",
+    "statProducts": "Kategori Produk",
+    "statStates": "Negeri Diliputi",
+    "statInstall": "Pemasangan Pakar",
+    "imageAlt": "Pemasangan water tank King Kong stainless steel di rumah landed Malaysia — TANKPRO",
+    "bgAlt": "Tangki air dan water pump dipasang di luar rumah landed Malaysia"
+  },
+  "marquee": {
+    "items": [
+      "Supply & Install",
+      "Water Tank",
+      "Water Pump",
+      "Penapis Air",
+      "Jenama SIRIM",
+      "King Kong · Grundfos",
+      "Harga Telus",
+      "Seluruh Malaysia"
+    ]
+  },
+  "brandStrip": {
+    "eyebrow": "JENAMA WATER TANK & PAM DIPERCAYAI",
+    "items": [
+      "King Kong Stainless Steel",
+      "Grundfos Water Pump",
+      "Hitachi Water Pump",
+      "Tsunami Water Pump",
+      "Disahkan SIRIM Malaysia",
+      "Penapis Air 6-Lapisan"
+    ]
+  },
+  "usp": {
+    "items": [
+      {
+        "title": "Supply & Install Lengkap",
+        "body": "Satu pakej — tangki, pam, dan penapis dibekal dan dipasang oleh pasukan kami. Tak perlu cari kontraktor berasingan."
+      },
+      {
+        "title": "Jenama Terjamin",
+        "body": "King Kong, Grundfos, Hitachi, Tsunami — semua disahkan SIRIM dan datang dengan waranti."
+      },
+      {
+        "title": "Harga Telus",
+        "body": "Harga pakej tetap disebut awal. Tiada caj tersembunyi selepas pemasangan."
+      }
+    ],
+    "srHeading": "Water Tank & Pam Air Dipercayai Seluruh Malaysia"
+  },
+  "products": {
+    "eyebrow": "KATALOG WATER TANK & PAM",
+    "h3": "Pilih Water Tank, Pam, atau Penapis Air Anda",
+    "intro": "Semua unit supply dan install lengkap. Pilih tangki, pam, penapis, atau ambil pakej combo untuk jimat lebih.",
+    "priceFrom": "Dari RM {price}",
+    "ctaTemplate": "Tempah Sekarang",
+    "imageAltTemplate": "Pemasangan {model} untuk rumah landed Malaysia"
+  },
+  "combo": {
+    "eyebrow": "PAKEJ COMBO WATER TANK",
+    "h3": "Pakej Combo Tangki, Pam, dan Penapis Air",
+    "intro": "Jimat bila ambil tangki, pam, dan penapis sekali gus — semua dipasang serentak oleh pasukan TANKPRO.",
+    "note": "Supply + Install disertakan",
+    "ctaLabel": "Tempah Pakej",
+    "items": [
+      {
+        "name": "Combo Hitachi 200W",
+        "spec": "King Kong 1000L + Hitachi 200W + Penapis 6-Lapisan",
+        "price": "RM 5,411",
+        "tag": "Paling Popular"
+      },
+      {
+        "name": "Combo Hitachi 250W",
+        "spec": "King Kong 1000L + Hitachi 250W + Penapis 6-Lapisan",
+        "price": "RM 5,712",
+        "tag": "Tekanan Kuat"
+      },
+      {
+        "name": "Pakej Tangki King Kong",
+        "spec": "King Kong Stainless Steel 1000L — supply & install",
+        "price": "RM 2,914",
+        "tag": "Nilai Terbaik"
+      }
+    ],
+    "bgAlt": "Pakej lengkap tangki air, water pump, dan penapis air dipasang di sisi rumah landed"
+  },
+  "process": {
+    "eyebrow": "PROSES PEMASANGAN WATER TANK",
+    "h3": "Cara Pasang Water Tank dalam 4 Langkah",
+    "steps": [
+      {
+        "title": "WhatsApp Kami",
+        "body": "Hantar gambar ruang tangki dan keperluan air anda — kami balas dalam minit."
+      },
+      {
+        "title": "Tinjauan & Sebut Harga Percuma",
+        "body": "Pasukan kami tinjau tapak rumah landed anda dan beri sebut harga tetap tanpa caj tersembunyi."
+      },
+      {
+        "title": "Pemasangan Profesional",
+        "body": "Juruteknik pasang tangki, pam, dan penapis mengikut standard — kemas dan selamat."
+      },
+      {
+        "title": "Nikmati Air Bersih Bertekanan",
+        "body": "Air mengalir kuat dan bersih ke seluruh rumah. Waranti dan sokongan selepas pemasangan."
+      }
+    ],
+    "bgAlt": "Juruteknik memasang water pump dan tangki air di rumah landed"
+  },
+  "whyUs": {
+    "eyebrow": "KENAPA PILIH WATER TANK TANKPRO",
+    "h3": "Kenapa Pemilik Rumah Pilih Water Tank TANKPRO",
+    "items": [
+      {
+        "title": "Pemasangan Satu Hari",
+        "body": "Kebanyakan pemasangan tangki dan pam siap dalam sehari tanpa kerja tambahan untuk anda."
+      },
+      {
+        "title": "Jenama Asli & Waranti",
+        "body": "King Kong, Grundfos, Hitachi, Tsunami — unit asli dengan waranti pengeluar penuh."
+      },
+      {
+        "title": "Juruteknik Berpengalaman",
+        "body": "Pasukan pemasangan terlatih, biasa dengan sistem air rumah landed di seluruh Malaysia."
+      },
+      {
+        "title": "Sokongan Selepas Jualan",
+        "body": "Ada masalah tekanan atau paip? WhatsApp kami — kami bantu selepas pemasangan."
+      }
+    ],
+    "bgAlt": "Water tank stainless steel King Kong dipasang di rumah landed"
+  },
+  "reviews": {
+    "eyebrow": "ULASAN PELANGGAN WATER TANK",
+    "h3": "4.9 / 5 Ulasan Water Tank di Google",
+    "aggregate": "4.9 / 5 daripada 213 ulasan Google",
+    "postedOn": "Disiarkan di Google",
+    "items": [
+      {
+        "name": "Faizal Rahman",
+        "suburb": "Kajang, Selangor",
+        "stars": 5,
+        "body": "Pasang combo King Kong 1000L dengan pam Hitachi 250W. Tekanan air naik banyak, shower tingkat atas dah kuat. Pemasangan kemas, siap dalam sehari."
+      },
+      {
+        "name": "Tan Mei Ling",
+        "suburb": "Bukit Mertajam, Pulau Pinang",
+        "stars": 5,
+        "body": "Air rumah dulu lemah waktu pagi. Lepas pasang tangki dan water pump Grundfos, terus stabil. Team datang tinjau dulu, harga telus."
+      },
+      {
+        "name": "Suresh Kumar",
+        "suburb": "Seremban, Negeri Sembilan",
+        "stars": 5,
+        "body": "Penapis air 6-lapisan buat air jernih, hilang bau klorin. Combo lagi berbaloi berbanding beli asing-asing. Recommended untuk rumah landed."
+      },
+      {
+        "name": "Nurul Huda",
+        "suburb": "Kota Bharu, Kelantan",
+        "stars": 5,
+        "body": "Tangki lama dah karat, TANKPRO tolong buang dan pasang King Kong stainless steel baru. Kerja bersih, juruteknik sopan."
+      },
+      {
+        "name": "Wong Kar Hoe",
+        "suburb": "Skudai, Johor",
+        "stars": 5,
+        "body": "Beli combo Hitachi 200W untuk rumah teres dua tingkat. Sebut harga tepat, tiada caj tambah. Air simpanan cukup masa paip potong."
+      },
+      {
+        "name": "Amirul Asyraf",
+        "suburb": "Ipoh, Perak",
+        "stars": 5,
+        "body": "Grundfos 1Hp memang power. Bekalan air seluruh rumah laju sekarang. Warranty ada, senang nak follow up melalui WhatsApp."
+      }
+    ],
+    "bgAlt": "Juruteknik memasang tangki air dan pam di rumah landed Malaysia"
+  },
+  "gallery": {
+    "eyebrow": "GALERI PEMASANGAN WATER TANK",
+    "h3": "Pemasangan Water Tank & Pam Air di Rumah Landed",
+    "intro": "Hasil pemasangan tangki, pam, dan penapis air kami di rumah landed seluruh Malaysia.",
+    "alts": [
+      "Dua juruteknik TANKPRO memasang tangki air King Kong stainless steel di bumbung rumah landed",
+      "Juruteknik menyambung paip water pump ke sistem bekalan air rumah",
+      "Penapis air 6-lapisan (enam tabung) dipasang di dinding luar rumah",
+      "Tangki air King Kong stainless steel 1000L di bumbung rumah kawasan perumahan",
+      "Water pump dipasang kemas di dinding rumah dengan paip tembaga",
+      "Pakej lengkap tangki air, pam, dan penapis di sisi rumah landed berhalaman",
+      "Sistem penapisan air besar — tangki air, pam, dan enam tabung penapis",
+      "Juruteknik TANKPRO memeriksa tekanan water pump yang baru dipasang",
+      "Air bersih dituang ke dalam gelas dari paip dapur selepas pemasangan penapis air",
+      "Tangki air stainless steel di bumbung ketika senja di kawasan perumahan",
+      "Juruteknik TANKPRO tiba dengan van perkhidmatan untuk pemasangan tangki air",
+      "Perbandingan tangki air lama berkarat dengan tangki air stainless steel baharu"
+    ]
+  },
+  "faq": {
+    "eyebrow": "SOALAN LAZIM WATER TANK",
+    "h3": "Soalan Lazim Water Tank & Pam Air",
+    "items": [
+      {
+        "q": "Saiz water tank apa sesuai untuk rumah landed?",
+        "a": "Untuk rumah landed biasa, tangki 1000L seperti King Kong stainless steel 1000L (RM 2,914 supply & install) sudah memadai untuk simpanan air keluarga. Kami boleh cadang saiz lebih besar semasa tinjauan tapak."
+      },
+      {
+        "q": "Berapa lama pemasangan water tank dan pam air?",
+        "a": "Kebanyakan pemasangan tangki dan water pump siap dalam sehari. Pakej combo tangki + pam + penapis juga biasanya selesai dalam satu lawatan."
+      },
+      {
+        "q": "Adakah water tank dan pam ada waranti?",
+        "a": "Ya. Semua jenama — King Kong, Grundfos, Hitachi, Tsunami — datang dengan waranti pengeluar. Kami juga beri sokongan selepas pemasangan melalui WhatsApp."
+      },
+      {
+        "q": "Water pump mana lebih baik — Tsunami atau Grundfos?",
+        "a": "Tsunami (dari RM 1,800 supply & install) sesuai untuk bajet dan rumah biasa. Grundfos (dari RM 3,600) lebih senyap dan tahan lama untuk rumah besar atau tekanan tinggi. Kami bantu pilih ikut keperluan."
+      },
+      {
+        "q": "Apa yang penapis air 6-lapisan buang?",
+        "a": "Penapis 6-lapisan menapis sedimen, karat, klorin, bau, dan kekotoran halus sebelum air masuk rumah. Ia melindungi paip, water heater, dan menjadikan air lebih jernih."
+      },
+      {
+        "q": "Berapa jimat kalau ambil pakej combo?",
+        "a": "Pakej combo tangki + pam + penapis (dari RM 5,411) lebih jimat berbanding beli dan pasang setiap item berasingan, dan semua dipasang serentak dalam satu lawatan."
+      },
+      {
+        "q": "Adakah anda supply dan install seluruh Malaysia?",
+        "a": "Ya, kami supply dan install water tank, water pump, dan penapis air di seluruh Semenanjung, Sabah, dan Sarawak. WhatsApp lokasi anda untuk sahkan liputan dan sebut harga."
+      },
+      {
+        "q": "Adakah anda buang tangki air lama?",
+        "a": "Boleh. Pasukan kami boleh tanggal dan buang tangki lama yang karat atau bocor sebelum memasang unit King Kong stainless steel baru. Beritahu kami semasa tinjauan tapak."
+      }
+    ]
+  },
+  "locations": {
+    "eyebrow": "LIPUTAN WATER TANK MALAYSIA",
+    "h3": "Supply & Install Water Tank Seluruh Malaysia",
+    "intro": "Kami supply dan install water tank, water pump, dan penapis air untuk rumah landed di seluruh 14 negeri Malaysia.",
+    "topCitiesLabel": "Bandar Utama",
+    "stateLabels": {
+      "klangValley": "Lembah Klang",
+      "selangor": "Selangor",
+      "negeriSembilan": "Negeri Sembilan",
+      "melaka": "Melaka",
+      "johor": "Johor",
+      "perak": "Perak",
+      "penang": "Pulau Pinang",
+      "kedah": "Kedah",
+      "perlis": "Perlis",
+      "kelantan": "Kelantan",
+      "terengganu": "Terengganu",
+      "pahang": "Pahang",
+      "sabah": "Sabah",
+      "sarawak": "Sarawak",
+      "labuan": "Labuan"
+    }
+  },
+  "finalCta": {
+    "eyebrow": "SEBUT HARGA WATER TANK PERCUMA",
+    "h3": "Pasang Water Tank Anda Hari Ini",
+    "body": "Hantar gambar ruang tangki dan keperluan air rumah landed anda — kami beri sebut harga tetap dalam minit.",
+    "ctaLabel": "WhatsApp Sebut Harga",
+    "bgAlt": "Tangki air dan water pump dipasang di rumah landed pada waktu senja"
+  },
+  "footer": {
+    "tagline": "TANKPRO Malaysia — supply dan install water tank, water pump, dan penapis air untuk rumah landed. Jenama SIRIM, harga telus.",
+    "productsHeading": "Produk",
+    "productsLinks": [
+      "Water Tank",
+      "Water Pump",
+      "Water Filter",
+      "Pakej Combo"
+    ],
+    "locationsHeading": "Lokasi Utama",
+    "resourcesHeading": "Sumber",
+    "blogLabel": "Blog",
+    "faqLabel": "Soalan Lazim",
+    "copyright": "© 2026 TANKPRO Malaysia. Hak cipta terpelihara. Dikuasakan oleh Utopia Group of Companies"
+  },
+  "blog": {
+    "title": "Blog TANKPRO Malaysia",
+    "subtitle": "Panduan water tank, pam air, dan penapis air untuk rumah landed",
+    "readMore": "Baca selanjutnya",
+    "noPosts": "Belum ada artikel diterbitkan.",
+    "breadcrumbHome": "Laman Utama",
+    "breadcrumbBlog": "Blog",
+    "publishedOn": "Disiarkan pada",
+    "minRead": "min baca",
+    "recentPosts": "Artikel terkini",
+    "ctaBannerTitle": "Sedia pasang water tank di rumah anda?",
+    "ctaBannerBody": "WhatsApp TANKPRO sekarang untuk sebut harga supply & install segera.",
+    "ctaBannerLabel": "WhatsApp Sebut Harga"
+  },
+  "location": {
+    "breadcrumbHome": "Laman Utama",
+    "breadcrumbLocations": "Lokasi",
+    "introTemplate": "Supply dan install water tank, water pump, dan penapis air di {location}, {state}. Pakej combo untuk rumah landed, harga telus, WhatsApp untuk sebut harga.",
+    "h1Template": "Supply & Install Water Tank di {location}",
+    "h2Template": "Water Pump dan Penapis Air untuk Rumah Landed di {state}",
+    "nearbyHeading": "Pemasangan Water Tank Berhampiran {location}",
+    "nearbyEyebrow": "WATER TANK KAWASAN BERDEKATAN"
+  },
+  "redirect": {
+    "heading": "Membuka WhatsApp…",
+    "subtext": "Anda sedang dihubungkan ke pasukan TANKPRO Malaysia.",
+    "fallback": "Klik di sini jika tidak berpindah"
+  }
+}

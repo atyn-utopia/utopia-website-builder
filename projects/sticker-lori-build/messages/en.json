@@ -1,0 +1,347 @@
+{
+  "meta": {
+    "home": {
+      "title": "Supply & Install Water Tank, Pump & Filter Malaysia — TANKPRO",
+      "description": "TANKPRO supplies and installs water tanks, water pumps, and water filters for landed houses across Malaysia. Transparent pricing, SIRIM-certified brands. WhatsApp for a quote."
+    },
+    "location": {
+      "title": "Supply & Install Water Tank in {location} — TANKPRO Malaysia",
+      "description": "Water tank, water pump, and water filter installation in {location}, {state}. Tank + pump + filter combos for landed houses. WhatsApp TANKPRO for a quote."
+    },
+    "blogListing": {
+      "title": "Water Tank & Pump Guides — TANKPRO Malaysia Blog",
+      "description": "Guides and tips on water tanks, water pumps, and water filters for landed houses in Malaysia. Choose the right tank, pump, and filter setup for your home."
+    }
+  },
+  "nav": {
+    "logoAlt": "TANKPRO Malaysia — Supply & Install Water Tank, Pump & Filter",
+    "home": "Home",
+    "products": "Products",
+    "packages": "Combo Packages",
+    "locations": "Locations",
+    "blog": "Blog",
+    "whatsappCta": "WhatsApp for Quote",
+    "calculator": "Combo Packages"
+  },
+  "contact": {
+    "availability": "Available 24/7"
+  },
+  "fomo": {
+    "eyebrow": "PROMO {monthUpper}",
+    "body": "Save up to RM 300 on a water tank + pump + filter combo — {month} promo ends in:",
+    "countdownLabel": "Days : Hours : Minutes : Seconds",
+    "ctaLabel": "Get a Quote"
+  },
+  "hero": {
+    "eyebrow": "SUPPLY & INSTALL WATER TANK",
+    "h1Part1": "Supply & Install",
+    "h1Highlight": "Water Tank",
+    "h1Part2": "Pump & Filter Malaysia",
+    "h2": "Water Tanks, Pumps, and Filters for Landed Houses",
+    "supporting": "One complete package — tank, pump, and filter installed by expert technicians. King Kong, Grundfos, Hitachi, SIRIM-certified.",
+    "ctaPrimary": "WhatsApp for Quote",
+    "ctaSecondary": "See Packages →",
+    "statProducts": "Product Categories",
+    "statStates": "States Covered",
+    "statInstall": "Expert Installation",
+    "imageAlt": "King Kong stainless steel water tank installation on a Malaysian landed house — TANKPRO",
+    "bgAlt": "Water tank and water pump installed outside a Malaysian landed house"
+  },
+  "marquee": {
+    "items": [
+      "Supply & Install",
+      "Water Tank",
+      "Water Pump",
+      "Water Filter",
+      "SIRIM-Certified",
+      "King Kong · Grundfos",
+      "Transparent Pricing",
+      "Across Malaysia"
+    ]
+  },
+  "brandStrip": {
+    "eyebrow": "TRUSTED WATER TANK & PUMP BRANDS",
+    "items": [
+      "King Kong Stainless Steel",
+      "Grundfos Water Pump",
+      "Hitachi Water Pump",
+      "Tsunami Water Pump",
+      "SIRIM-Certified Malaysia",
+      "6-Layer Water Filter"
+    ]
+  },
+  "usp": {
+    "items": [
+      {
+        "title": "Complete Supply & Install",
+        "body": "One package — tank, pump, and filter supplied and installed by our team. No chasing separate contractors."
+      },
+      {
+        "title": "Trusted Brands",
+        "body": "King Kong, Grundfos, Hitachi, Tsunami — all SIRIM-certified and backed by warranty."
+      },
+      {
+        "title": "Transparent Pricing",
+        "body": "Fixed package prices quoted upfront. No hidden charges after installation."
+      }
+    ],
+    "srHeading": "Water Tanks & Pumps Trusted Across Malaysia"
+  },
+  "products": {
+    "eyebrow": "WATER TANK & PUMP CATALOG",
+    "h3": "Choose Your Water Tank, Pump, or Filter",
+    "intro": "Every unit is supplied and installed complete. Pick a tank, pump, filter, or grab a combo package to save more.",
+    "priceFrom": "From RM {price}",
+    "ctaTemplate": "Order Now",
+    "imageAltTemplate": "{model} installation for a Malaysian landed house"
+  },
+  "combo": {
+    "eyebrow": "WATER TANK COMBO PACKAGES",
+    "h3": "Combo Packages — Tank, Pump, and Filter",
+    "intro": "Save when you take the tank, pump, and filter together — all installed in one visit by the TANKPRO team.",
+    "note": "Supply + Install included",
+    "ctaLabel": "Order Package",
+    "items": [
+      {
+        "name": "Hitachi 200W Combo",
+        "spec": "King Kong 1000L + Hitachi 200W + 6-Layer Filter",
+        "price": "RM 5,411",
+        "tag": "Most Popular"
+      },
+      {
+        "name": "Hitachi 250W Combo",
+        "spec": "King Kong 1000L + Hitachi 250W + 6-Layer Filter",
+        "price": "RM 5,712",
+        "tag": "Strong Pressure"
+      },
+      {
+        "name": "King Kong Tank Package",
+        "spec": "King Kong Stainless Steel 1000L — supply & install",
+        "price": "RM 2,914",
+        "tag": "Best Value"
+      }
+    ],
+    "bgAlt": "Complete water tank, pump, and filter package installed at the side of a landed house"
+  },
+  "process": {
+    "eyebrow": "WATER TANK INSTALLATION PROCESS",
+    "h3": "Install Your Water Tank in 4 Steps",
+    "steps": [
+      {
+        "title": "WhatsApp Us",
+        "body": "Send photos of your tank space and your water needs — we reply in minutes."
+      },
+      {
+        "title": "Free Site Survey & Quote",
+        "body": "Our team surveys your landed house and gives a fixed quote with no hidden charges."
+      },
+      {
+        "title": "Professional Installation",
+        "body": "Technicians install the tank, pump, and filter to standard — neat and safe."
+      },
+      {
+        "title": "Enjoy Clean, Strong Water",
+        "body": "Water flows strong and clean throughout your home. Warranty and after-install support included."
+      }
+    ],
+    "bgAlt": "Technician installing a water pump and water tank at a landed house"
+  },
+  "whyUs": {
+    "eyebrow": "WHY CHOOSE WATER TANK TANKPRO",
+    "h3": "Why Homeowners Choose Water Tank TANKPRO",
+    "items": [
+      {
+        "title": "Same-Day Installation",
+        "body": "Most tank and pump installs are done in a single day with no extra work for you."
+      },
+      {
+        "title": "Genuine Brands & Warranty",
+        "body": "King Kong, Grundfos, Hitachi, Tsunami — genuine units with full manufacturer warranty."
+      },
+      {
+        "title": "Experienced Technicians",
+        "body": "Trained install teams familiar with landed-house water systems across Malaysia."
+      },
+      {
+        "title": "After-Sales Support",
+        "body": "Pressure or piping issue? WhatsApp us — we support you after installation."
+      }
+    ],
+    "bgAlt": "King Kong stainless steel water tank installed at a landed house"
+  },
+  "reviews": {
+    "eyebrow": "WATER TANK CUSTOMER REVIEWS",
+    "h3": "4.9 / 5 on Google Water Tank Reviews",
+    "aggregate": "4.9 / 5 from 213 Google reviews",
+    "postedOn": "Posted on Google",
+    "items": [
+      {
+        "name": "Faizal Rahman",
+        "suburb": "Kajang, Selangor",
+        "stars": 5,
+        "body": "Installed the King Kong 1000L combo with a Hitachi 250W pump. Water pressure jumped, the upstairs shower is strong now. Neat install, done in a day."
+      },
+      {
+        "name": "Tan Mei Ling",
+        "suburb": "Bukit Mertajam, Penang",
+        "stars": 5,
+        "body": "Our water was weak in the mornings. After the tank and Grundfos pump went in, it's stable. The team surveyed first, pricing was transparent."
+      },
+      {
+        "name": "Suresh Kumar",
+        "suburb": "Seremban, Negeri Sembilan",
+        "stars": 5,
+        "body": "The 6-layer filter made the water clear and killed the chlorine smell. The combo was better value than buying each part separately. Recommended for landed houses."
+      },
+      {
+        "name": "Nurul Huda",
+        "suburb": "Kota Bharu, Kelantan",
+        "stars": 5,
+        "body": "Our old tank was rusty. TANKPRO removed it and installed a new King Kong stainless steel tank. Clean work, polite technicians."
+      },
+      {
+        "name": "Wong Kar Hoe",
+        "suburb": "Skudai, Johor",
+        "stars": 5,
+        "body": "Bought the Hitachi 200W combo for a double-storey terrace. The quote was exact, no add-ons. Plenty of stored water when supply is cut."
+      },
+      {
+        "name": "Amirul Asyraf",
+        "suburb": "Ipoh, Perak",
+        "stars": 5,
+        "body": "The Grundfos 1Hp is powerful. Water flows fast through the whole house now. Warranty is there, easy to follow up over WhatsApp."
+      }
+    ],
+    "bgAlt": "Technician installing a water tank and pump at a Malaysian landed house"
+  },
+  "gallery": {
+    "eyebrow": "WATER TANK INSTALLATION GALLERY",
+    "h3": "Water Tank & Pump Installs on Landed Houses",
+    "intro": "Our tank, pump, and filter installations on landed houses across Malaysia.",
+    "alts": [
+      "Two TANKPRO technicians installing a King Kong stainless steel water tank on a landed-house rooftop",
+      "Technician connecting the water pump piping to the home water supply",
+      "6-layer outdoor water filter with six cartridges mounted on a house wall",
+      "King Kong stainless steel 1000L water tank on a rooftop over a housing estate",
+      "Water pump neatly installed on a house wall with copper piping",
+      "Complete water tank, pump, and filter package at the side of a landed house",
+      "Large water filtration setup with a tank, pump, and six filter cartridges",
+      "TANKPRO technician checking the pressure gauge on a newly installed water pump",
+      "Clean water pouring into a glass from the kitchen tap after water filter installation",
+      "Stainless steel water tank on a rooftop at golden hour over a housing estate",
+      "TANKPRO technician arriving with the service van for a water tank installation",
+      "Before and after: an old rusty tank beside a new stainless steel water tank"
+    ]
+  },
+  "faq": {
+    "eyebrow": "WATER TANK FAQ",
+    "h3": "Water Tank & Water Pump FAQ",
+    "items": [
+      {
+        "q": "What water tank size suits a landed house?",
+        "a": "For a typical landed house, a 1000L tank like the King Kong stainless steel 1000L (RM 2,914 supply & install) is enough for family water storage. We can recommend a larger size during the site survey."
+      },
+      {
+        "q": "How long does water tank and pump installation take?",
+        "a": "Most water tank and water pump installs are done in a single day. A tank + pump + filter combo package usually finishes in one visit too."
+      },
+      {
+        "q": "Do the water tank and pump come with warranty?",
+        "a": "Yes. Every brand — King Kong, Grundfos, Hitachi, Tsunami — comes with a manufacturer warranty. We also provide after-install support over WhatsApp."
+      },
+      {
+        "q": "Which water pump is better — Tsunami or Grundfos?",
+        "a": "Tsunami (from RM 1,800 supply & install) suits budgets and standard homes. Grundfos (from RM 3,600) is quieter and more durable for larger homes or high pressure. We'll help you choose based on your needs."
+      },
+      {
+        "q": "What does the 6-layer water filter remove?",
+        "a": "The 6-layer filter removes sediment, rust, chlorine, odour, and fine impurities before water enters your home. It protects your piping and water heater and makes water clearer."
+      },
+      {
+        "q": "How much do I save with a combo package?",
+        "a": "A tank + pump + filter combo (from RM 5,411) costs less than buying and installing each item separately, and everything is installed together in one visit."
+      },
+      {
+        "q": "Do you supply and install across Malaysia?",
+        "a": "Yes, we supply and install water tanks, water pumps, and water filters across Peninsular Malaysia, Sabah, and Sarawak. WhatsApp your location to confirm coverage and get a quote."
+      },
+      {
+        "q": "Do you remove old water tanks?",
+        "a": "Yes. Our team can detach and remove a rusty or leaking old tank before installing a new King Kong stainless steel unit. Let us know during the site survey."
+      }
+    ]
+  },
+  "locations": {
+    "eyebrow": "WATER TANK COVERAGE MALAYSIA",
+    "h3": "Supply & Install Water Tank Across Malaysia",
+    "intro": "We supply and install water tanks, water pumps, and water filters for landed houses across all 14 Malaysian states.",
+    "topCitiesLabel": "Top Cities",
+    "stateLabels": {
+      "klangValley": "Klang Valley",
+      "selangor": "Selangor",
+      "negeriSembilan": "Negeri Sembilan",
+      "melaka": "Melaka",
+      "johor": "Johor",
+      "perak": "Perak",
+      "penang": "Penang",
+      "kedah": "Kedah",
+      "perlis": "Perlis",
+      "kelantan": "Kelantan",
+      "terengganu": "Terengganu",
+      "pahang": "Pahang",
+      "sabah": "Sabah",
+      "sarawak": "Sarawak",
+      "labuan": "Labuan"
+    }
+  },
+  "finalCta": {
+    "eyebrow": "FREE WATER TANK QUOTE",
+    "h3": "Install Your Water Tank Today",
+    "body": "Send photos of your tank space and your landed-house water needs — we give a fixed quote in minutes.",
+    "ctaLabel": "WhatsApp for Quote",
+    "bgAlt": "Water tank and water pump installed at a landed house at dusk"
+  },
+  "footer": {
+    "tagline": "TANKPRO Malaysia — supply and install water tanks, water pumps, and water filters for landed houses. SIRIM-certified brands, transparent pricing.",
+    "productsHeading": "Products",
+    "productsLinks": [
+      "Water Tank",
+      "Water Pump",
+      "Water Filter",
+      "Combo Package"
+    ],
+    "locationsHeading": "Top Locations",
+    "resourcesHeading": "Resources",
+    "blogLabel": "Blog",
+    "faqLabel": "FAQ",
+    "copyright": "© 2026 TANKPRO Malaysia. All rights reserved. Powered by Utopia Group of Companies"
+  },
+  "blog": {
+    "title": "TANKPRO Malaysia Blog",
+    "subtitle": "Water tank, pump, and filter guides for landed houses",
+    "readMore": "Read more",
+    "noPosts": "No articles published yet.",
+    "breadcrumbHome": "Home",
+    "breadcrumbBlog": "Blog",
+    "publishedOn": "Published on",
+    "minRead": "min read",
+    "recentPosts": "Recent articles",
+    "ctaBannerTitle": "Ready to install a water tank at home?",
+    "ctaBannerBody": "WhatsApp TANKPRO now for an instant supply & install quote.",
+    "ctaBannerLabel": "WhatsApp for Quote"
+  },
+  "location": {
+    "breadcrumbHome": "Home",
+    "breadcrumbLocations": "Locations",
+    "introTemplate": "Supply and install water tanks, water pumps, and water filters in {location}, {state}. Combos for landed houses, transparent pricing, WhatsApp for a quote.",
+    "h1Template": "Supply & Install Water Tank in {location}",
+    "h2Template": "Water Pump and Water Filter for Landed Houses in {state}",
+    "nearbyHeading": "Water Tank Installation Near {location}",
+    "nearbyEyebrow": "WATER TANK NEARBY AREAS"
+  },
+  "redirect": {
+    "heading": "Opening WhatsApp…",
+    "subtext": "Connecting you to the TANKPRO Malaysia team.",
+    "fallback": "Click here if it doesn't redirect"
+  }
+}

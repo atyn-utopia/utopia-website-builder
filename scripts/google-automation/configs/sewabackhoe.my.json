@@ -1,0 +1,13 @@
+{
+  "domain": "sewabackhoe.my",
+  "containerId": "GTM-WZKJ2G52",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-1XY3828KZE",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-08-19T09:09:24.394Z"
+}

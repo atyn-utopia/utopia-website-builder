@@ -1,0 +1,347 @@
+{
+  "meta": {
+    "home": {
+      "title": "马来西亚水箱、水泵及滤水器供应安装 — TANKPRO",
+      "description": "TANKPRO 为马来西亚各地有地房屋供应及安装水箱、水泵和滤水器。价格透明，品牌通过 SIRIM 认证。WhatsApp 索取报价。"
+    },
+    "location": {
+      "title": "{location} 水箱供应安装 — TANKPRO 马来西亚",
+      "description": "在 {state} 的 {location} 供应安装水箱、水泵和滤水器。适合有地房屋的水箱+水泵+滤水器配套。WhatsApp 联系 TANKPRO 索取报价。"
+    },
+    "blogListing": {
+      "title": "水箱与水泵指南 — TANKPRO 马来西亚博客",
+      "description": "马来西亚有地房屋水箱、水泵和滤水器指南与贴士。为您的家选对水箱、水泵和滤水器配套。"
+    }
+  },
+  "nav": {
+    "logoAlt": "TANKPRO 马来西亚 — 水箱、水泵及滤水器供应安装",
+    "home": "首页",
+    "products": "产品",
+    "packages": "配套",
+    "locations": "地区",
+    "blog": "博客",
+    "whatsappCta": "WhatsApp 报价",
+    "calculator": "配套优惠"
+  },
+  "contact": {
+    "availability": "24/7 全天候"
+  },
+  "fomo": {
+    "eyebrow": "{monthUpper} 促销",
+    "body": "水箱+水泵+滤水器配套最高省 RM 300 — {month} 促销倒计时：",
+    "countdownLabel": "天 : 时 : 分 : 秒",
+    "ctaLabel": "索取报价"
+  },
+  "hero": {
+    "eyebrow": "水箱供应安装",
+    "h1Part1": "供应安装",
+    "h1Highlight": "水箱",
+    "h1Part2": "水泵与滤水器 马来西亚",
+    "h2": "为有地房屋供应水箱、水泵和滤水器",
+    "supporting": "一站式配套 — 水箱、水泵、滤水器由专业技师安装。King Kong、Grundfos、Hitachi 品牌，通过 SIRIM 认证。",
+    "ctaPrimary": "WhatsApp 报价",
+    "ctaSecondary": "查看配套 →",
+    "statProducts": "产品类别",
+    "statStates": "覆盖州属",
+    "statInstall": "专业安装",
+    "imageAlt": "在马来西亚有地房屋安装 King Kong 不锈钢水箱 — TANKPRO",
+    "bgAlt": "在马来西亚有地房屋外安装的水箱和水泵"
+  },
+  "marquee": {
+    "items": [
+      "供应安装",
+      "水箱",
+      "水泵",
+      "滤水器",
+      "SIRIM 认证",
+      "King Kong · Grundfos",
+      "价格透明",
+      "覆盖全马"
+    ]
+  },
+  "brandStrip": {
+    "eyebrow": "值得信赖的水箱与水泵品牌",
+    "items": [
+      "King Kong 不锈钢水箱",
+      "Grundfos 水泵",
+      "Hitachi 水泵",
+      "Tsunami 水泵",
+      "SIRIM 马来西亚认证",
+      "6 层滤水器"
+    ]
+  },
+  "usp": {
+    "items": [
+      {
+        "title": "完整供应安装",
+        "body": "一个配套 — 水箱、水泵、滤水器由我们团队供应并安装，无需另找承包商。"
+      },
+      {
+        "title": "值得信赖的品牌",
+        "body": "King Kong、Grundfos、Hitachi、Tsunami — 均通过 SIRIM 认证并附保修。"
+      },
+      {
+        "title": "价格透明",
+        "body": "配套价格事先固定报价，安装后绝无隐藏收费。"
+      }
+    ],
+    "srHeading": "全马信赖的水箱与水泵"
+  },
+  "products": {
+    "eyebrow": "水箱与水泵目录",
+    "h3": "选择您的水箱、水泵或滤水器",
+    "intro": "所有产品均含完整供应安装。可选水箱、水泵、滤水器，或选配套省更多。",
+    "priceFrom": "RM {price} 起",
+    "ctaTemplate": "立即订购",
+    "imageAltTemplate": "为马来西亚有地房屋安装 {model}"
+  },
+  "combo": {
+    "eyebrow": "水箱配套",
+    "h3": "配套 — 水箱、水泵与滤水器",
+    "intro": "水箱、水泵、滤水器一起选更省 — 由 TANKPRO 团队一次上门全部安装。",
+    "note": "含供应 + 安装",
+    "ctaLabel": "订购配套",
+    "items": [
+      {
+        "name": "Hitachi 200W 配套",
+        "spec": "King Kong 1000L + Hitachi 200W + 6 层滤水器",
+        "price": "RM 5,411",
+        "tag": "最受欢迎"
+      },
+      {
+        "name": "Hitachi 250W 配套",
+        "spec": "King Kong 1000L + Hitachi 250W + 6 层滤水器",
+        "price": "RM 5,712",
+        "tag": "水压强劲"
+      },
+      {
+        "name": "King Kong 水箱配套",
+        "spec": "King Kong 不锈钢 1000L — 供应安装",
+        "price": "RM 2,914",
+        "tag": "超值之选"
+      }
+    ],
+    "bgAlt": "安装在有地住宅旁的水塔、水泵与滤水器完整配套"
+  },
+  "process": {
+    "eyebrow": "水箱安装流程",
+    "h3": "四步安装您的水箱",
+    "steps": [
+      {
+        "title": "WhatsApp 联系我们",
+        "body": "发送水箱安装空间照片和用水需求 — 我们几分钟内回复。"
+      },
+      {
+        "title": "免费实地勘察与报价",
+        "body": "团队勘察您的有地房屋并提供固定报价，绝无隐藏收费。"
+      },
+      {
+        "title": "专业安装",
+        "body": "技师按标准安装水箱、水泵和滤水器 — 整洁又安全。"
+      },
+      {
+        "title": "享受洁净强劲水流",
+        "body": "全屋水流强劲洁净。含保修与安装后支持。"
+      }
+    ],
+    "bgAlt": "技师在有地房屋安装水泵和水箱"
+  },
+  "whyUs": {
+    "eyebrow": "为何选择 TANKPRO 水箱",
+    "h3": "屋主为何选择 TANKPRO 水箱",
+    "items": [
+      {
+        "title": "当天完成安装",
+        "body": "多数水箱和水泵安装当天完成，您无需额外操心。"
+      },
+      {
+        "title": "正品品牌与保修",
+        "body": "King Kong、Grundfos、Hitachi、Tsunami — 正品并附完整厂家保修。"
+      },
+      {
+        "title": "经验丰富的技师",
+        "body": "熟悉全马有地房屋供水系统的专业安装团队。"
+      },
+      {
+        "title": "售后支持",
+        "body": "水压或水管问题？WhatsApp 我们 — 安装后持续支持。"
+      }
+    ],
+    "bgAlt": "在有地房屋安装的 King Kong 不锈钢水箱"
+  },
+  "reviews": {
+    "eyebrow": "水箱客户评价",
+    "h3": "Google 水箱评价 4.9 / 5",
+    "aggregate": "213 则 Google 评价中获 4.9 / 5",
+    "postedOn": "发布于 Google",
+    "items": [
+      {
+        "name": "Faizal Rahman",
+        "suburb": "Kajang, Selangor",
+        "stars": 5,
+        "body": "安装了 King Kong 1000L 配套配 Hitachi 250W 水泵。水压大幅提升，楼上花洒现在很强。安装整洁，一天完成。"
+      },
+      {
+        "name": "Tan Mei Ling",
+        "suburb": "Bukit Mertajam, Penang",
+        "stars": 5,
+        "body": "以前早上水很弱。装了水箱和 Grundfos 水泵后就稳定了。团队先来勘察，价格透明。"
+      },
+      {
+        "name": "Suresh Kumar",
+        "suburb": "Seremban, Negeri Sembilan",
+        "stars": 5,
+        "body": "6 层滤水器让水变清澈，去除了氯味。配套比分开买更划算。推荐给有地房屋。"
+      },
+      {
+        "name": "Nurul Huda",
+        "suburb": "Kota Bharu, Kelantan",
+        "stars": 5,
+        "body": "旧水箱生锈了。TANKPRO 帮忙拆除并安装全新 King Kong 不锈钢水箱。做工干净，技师有礼。"
+      },
+      {
+        "name": "Wong Kar Hoe",
+        "suburb": "Skudai, Johor",
+        "stars": 5,
+        "body": "为双层排屋买了 Hitachi 200W 配套。报价准确，没有额外收费。停水时储水充足。"
+      },
+      {
+        "name": "Amirul Asyraf",
+        "suburb": "Ipoh, Perak",
+        "stars": 5,
+        "body": "Grundfos 1Hp 很强劲。现在全屋水流快。有保修，通过 WhatsApp 跟进很方便。"
+      }
+    ],
+    "bgAlt": "技师在马来西亚有地房屋安装水箱和水泵"
+  },
+  "gallery": {
+    "eyebrow": "水箱安装作品集",
+    "h3": "有地房屋水箱与水泵安装实景",
+    "intro": "我们在全马有地房屋的水箱、水泵和滤水器安装成果。",
+    "alts": [
+      "两名 TANKPRO 技术员在有地住宅屋顶安装 King Kong 不锈钢水塔",
+      "技术员将水泵管道连接到住家供水系统",
+      "安装在住家外墙的六层户外滤水器（六支滤芯）",
+      "俯瞰住宅区、屋顶上的 King Kong 不锈钢 1000L 水塔",
+      "以铜管整齐安装在住家外墙的水泵",
+      "有地住宅旁的水塔、水泵与滤水器完整配套",
+      "大型滤水系统——水塔、水泵与六支滤芯",
+      "TANKPRO 技术员检查新安装水泵的压力表",
+      "安装滤水器后从厨房水龙头倒出的清澈饮用水",
+      "黄昏时分住宅区屋顶上的不锈钢水塔",
+      "TANKPRO 技术员开着服务车前来安装水塔",
+      "对比图：生锈的旧水塔与全新的不锈钢水塔"
+    ]
+  },
+  "faq": {
+    "eyebrow": "水箱常见问题",
+    "h3": "水箱与水泵常见问题",
+    "items": [
+      {
+        "q": "有地房屋适合多大的水箱？",
+        "a": "一般有地房屋，1000L 水箱如 King Kong 不锈钢 1000L（供应安装 RM 2,914）已足够全家储水。我们可在实地勘察时建议更大容量。"
+      },
+      {
+        "q": "水箱和水泵安装需要多久？",
+        "a": "多数水箱和水泵安装当天完成。水箱+水泵+滤水器配套通常也在一次上门中完成。"
+      },
+      {
+        "q": "水箱和水泵有保修吗？",
+        "a": "有。King Kong、Grundfos、Hitachi、Tsunami 等所有品牌均附厂家保修。我们也通过 WhatsApp 提供安装后支持。"
+      },
+      {
+        "q": "水泵选 Tsunami 还是 Grundfos 好？",
+        "a": "Tsunami（供应安装 RM 1,800 起）适合预算型和一般房屋。Grundfos（RM 3,600 起）更安静耐用，适合大房屋或高水压需求。我们会按需协助选择。"
+      },
+      {
+        "q": "6 层滤水器能过滤什么？",
+        "a": "6 层滤水器在水进入房屋前过滤沉淀物、铁锈、氯、异味和细微杂质，保护水管和热水器，让水更清澈。"
+      },
+      {
+        "q": "选配套能省多少？",
+        "a": "水箱+水泵+滤水器配套（RM 5,411 起）比逐件购买安装更省，而且一次上门全部装好。"
+      },
+      {
+        "q": "你们全马都供应安装吗？",
+        "a": "是的，我们在西马、沙巴和砂拉越各地供应安装水箱、水泵和滤水器。WhatsApp 告知您的地点以确认覆盖并索取报价。"
+      },
+      {
+        "q": "你们会拆除旧水箱吗？",
+        "a": "可以。在安装全新 King Kong 不锈钢水箱前，我们团队可拆除并清走生锈或漏水的旧水箱。请在实地勘察时告知我们。"
+      }
+    ]
+  },
+  "locations": {
+    "eyebrow": "水箱覆盖全马",
+    "h3": "全马水箱供应安装",
+    "intro": "我们为马来西亚全 14 州的有地房屋供应安装水箱、水泵和滤水器。",
+    "topCitiesLabel": "主要城市",
+    "stateLabels": {
+      "klangValley": "巴生谷",
+      "selangor": "雪兰莪",
+      "negeriSembilan": "森美兰",
+      "melaka": "马六甲",
+      "johor": "柔佛",
+      "perak": "霹雳",
+      "penang": "槟城",
+      "kedah": "吉打",
+      "perlis": "玻璃市",
+      "kelantan": "吉兰丹",
+      "terengganu": "登嘉楼",
+      "pahang": "彭亨",
+      "sabah": "沙巴",
+      "sarawak": "砂拉越",
+      "labuan": "纳闽"
+    }
+  },
+  "finalCta": {
+    "eyebrow": "免费水箱报价",
+    "h3": "今天就安装您的水箱",
+    "body": "发送水箱安装空间照片和有地房屋用水需求 — 我们几分钟内提供固定报价。",
+    "ctaLabel": "WhatsApp 报价",
+    "bgAlt": "黄昏时分在有地房屋安装的水箱和水泵"
+  },
+  "footer": {
+    "tagline": "TANKPRO 马来西亚 — 为有地房屋供应安装水箱、水泵和滤水器。SIRIM 认证品牌，价格透明。",
+    "productsHeading": "产品",
+    "productsLinks": [
+      "水箱",
+      "水泵",
+      "滤水器",
+      "配套"
+    ],
+    "locationsHeading": "主要地区",
+    "resourcesHeading": "资源",
+    "blogLabel": "博客",
+    "faqLabel": "常见问题",
+    "copyright": "© 2026 TANKPRO Malaysia. 版权所有。由 Utopia Group of Companies 提供支持"
+  },
+  "blog": {
+    "title": "TANKPRO 马来西亚博客",
+    "subtitle": "有地房屋水箱、水泵和滤水器指南",
+    "readMore": "阅读更多",
+    "noPosts": "暂无发布文章。",
+    "breadcrumbHome": "首页",
+    "breadcrumbBlog": "博客",
+    "publishedOn": "发布于",
+    "minRead": "分钟阅读",
+    "recentPosts": "近期文章",
+    "ctaBannerTitle": "准备好在家安装水箱了吗？",
+    "ctaBannerBody": "立即 WhatsApp TANKPRO 索取供应安装即时报价。",
+    "ctaBannerLabel": "WhatsApp 报价"
+  },
+  "location": {
+    "breadcrumbHome": "首页",
+    "breadcrumbLocations": "地区",
+    "introTemplate": "在 {state} 的 {location} 供应安装水箱、水泵和滤水器。适合有地房屋的配套，价格透明，WhatsApp 索取报价。",
+    "h1Template": "{location} 水箱供应安装",
+    "h2Template": "{state} 有地房屋水泵与滤水器",
+    "nearbyHeading": "{location} 附近水箱安装",
+    "nearbyEyebrow": "附近地区"
+  },
+  "redirect": {
+    "heading": "正在打开 WhatsApp…",
+    "subtext": "正在为您连接 TANKPRO Malaysia 团队。",
+    "fallback": "如果没有自动跳转，请点击这里"
+  }
+}

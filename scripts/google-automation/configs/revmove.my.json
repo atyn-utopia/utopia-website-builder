@@ -1,0 +1,13 @@
+{
+  "domain": "revmove.my",
+  "containerId": "GTM-PB7GJKLJ",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-2R3HLJE06S",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-08-19T09:06:31.463Z"
+}
