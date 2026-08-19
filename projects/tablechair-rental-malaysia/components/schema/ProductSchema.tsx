@@ -15,7 +15,7 @@ export function ProductSchema({ name, description, locale }: ProductSchemaProps)
     provider: { '@type': 'LocalBusiness', name: siteConfig.brandName },
     areaServed: { '@type': 'Country', name: 'Malaysia' },
     url: `${siteConfig.url}/${locale}`,
-    image: `${siteConfig.url}/og-image.jpg`,
+    image: `${siteConfig.url}/og-${locale}.png`,
     offers: [
       {
         '@type': 'Offer',

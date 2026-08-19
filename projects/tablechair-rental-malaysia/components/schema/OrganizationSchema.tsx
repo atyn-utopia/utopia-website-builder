@@ -7,7 +7,8 @@ export function OrganizationSchema() {
     name: siteConfig.brandName,
     legalName: siteConfig.legalName,
     url: siteConfig.url,
-    logo: `${siteConfig.url}/logo.png`,
+    // /logo.png never existed. The real wordmark is public/kak-kenduri-logo.png.
+    logo: `${siteConfig.url}/kak-kenduri-logo.png`,
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: `+${siteConfig.fallbackPhone}`,

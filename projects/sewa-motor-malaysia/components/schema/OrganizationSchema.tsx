@@ -6,7 +6,9 @@ export function OrganizationSchema() {
     "@type": "Organization",
     name: siteConfig.brandName,
     url: siteConfig.siteUrl,
-    logo: `${siteConfig.siteUrl}/logo.png`,
+    // /logo.png never existed in public/. app/icon.svg is served at /icon.svg
+    // by the App Router, so this resolves instead of 404ing in JSON-LD.
+    logo: `${siteConfig.siteUrl}/icon.svg`,
     description:
       "Motorcycle rental service across 128 locations in Malaysia. Daily, weekly, and monthly rentals.",
     areaServed: {

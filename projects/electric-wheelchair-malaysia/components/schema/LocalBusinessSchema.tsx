@@ -32,7 +32,7 @@ export function LocalBusinessSchema({
     },
     priceRange: 'RM400 - RM3200',
     openingHours: 'Mo-Sa 09:00-18:00',
-    image: `${siteConfig.siteUrl}/og-image.jpg`,
+    image: `${siteConfig.siteUrl}/og-${locale}.png`,
   };
 
   return (

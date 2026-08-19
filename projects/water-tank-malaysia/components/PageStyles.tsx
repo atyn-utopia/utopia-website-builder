@@ -435,13 +435,13 @@ export default function PageStyles() {
           background: linear-gradient(180deg, rgba(15,15,15,0.78) 0%, rgba(15,15,15,0.72) 100%);
         }
         .section-bg-process {
-          background-image: url('/bg/bg-3.webp');
+          background-image: url('/brand/combo-bg.png');
           background-size: cover;
           background-position: center;
           color: #fff;
         }
         .section-bg-reviews {
-          background-image: url('/bg/bg-4.png');
+          background-image: url('/brand/final-cta.png');
           background-size: cover;
           background-position: center;
           color: #fff;

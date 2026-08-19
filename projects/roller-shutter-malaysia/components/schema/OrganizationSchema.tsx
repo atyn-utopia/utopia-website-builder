@@ -8,7 +8,7 @@ export function OrganizationSchema() {
     '@type': 'Organization',
     name: siteConfig.brandName,
     url: baseUrl,
-    logo: `${baseUrl}/images/logo.png`,
+    logo: `${baseUrl}/icon.svg`,
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: `+${siteConfig.fallbackPhone}`,

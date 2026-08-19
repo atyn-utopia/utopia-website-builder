@@ -4,7 +4,7 @@ import { siteConfig } from '@/config/site'
 export const SITE_URL = siteConfig.url
 export const BRAND_NAME = 'Kak Kenduri'
 export const LEGAL_NAME = 'Kak Kenduri Sdn. Bhd.'
-export const BRAND_LOGO = `${SITE_URL}/brand/kak-kenduri-logo.png`
+export const BRAND_LOGO = `${SITE_URL}/kak-kenduri-logo.png`
 export const BRAND_PHONE = '+60174287801'
 export const BRAND_EMAIL = 'kerusimejamy@gmail.com'
 export const BRAND_PRICE_RANGE = 'RM3.60 - RM86.40'

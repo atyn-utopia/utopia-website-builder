@@ -77,7 +77,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title: meta.title,
       description: meta.description,
-      images: [`${siteConfig.siteUrl}/og-image.jpg`],
+      images: [`${siteConfig.siteUrl}/og-${locale}.png`],
     },
     robots: { index: true, follow: true },
   };

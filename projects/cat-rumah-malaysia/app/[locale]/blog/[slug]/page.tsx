@@ -88,7 +88,7 @@ export default async function BlogPostPage({
             publisher: {
               '@type': 'Organization',
               name: siteConfig.brandName,
-              logo: { '@type': 'ImageObject', url: `${siteConfig.siteUrl}/favicon.svg` },
+              logo: { '@type': 'ImageObject', url: `${siteConfig.siteUrl}/icon.svg` },
             },
             inLanguage: locale,
           }),

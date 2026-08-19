@@ -17,7 +17,7 @@ export function ProductSchema({ name, description, locale }: ProductSchemaProps)
       name: siteConfig.brandName,
     },
     url: `${siteConfig.siteUrl}/${locale}`,
-    image: `${siteConfig.siteUrl}/og-image.jpg`,
+    image: `${siteConfig.siteUrl}/og-${locale}.png`,
     offers: [
       {
         '@type': 'Offer',

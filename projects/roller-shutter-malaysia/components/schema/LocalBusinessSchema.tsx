@@ -22,7 +22,7 @@ export function LocalBusinessSchema({
     '@type': 'LocalBusiness',
     '@id': `${url}#localbusiness`,
     name: `${siteConfig.brandName} — ${displayCity}`,
-    image: `${baseUrl}/images/roller-shutter-hero.jpg`,
+    image: `${baseUrl}/images/hero-worker.jpg`,
     url: url,
     telephone: `+${siteConfig.fallbackPhone}`,
     address: {

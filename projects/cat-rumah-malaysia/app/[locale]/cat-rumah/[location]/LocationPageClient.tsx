@@ -476,7 +476,7 @@ export default function LocationPageClient({ locale, locationSlug, cityName, pho
       {/* FINAL CTA */}
       <section
         className="relative py-20 px-6 text-center text-white overflow-hidden"
-        style={{ backgroundImage: 'linear-gradient(rgba(20,28,48,0.88), rgba(20,28,48,0.88)), url(/images/bg-cta.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}
+        style={{ backgroundImage: 'linear-gradient(rgba(20,28,48,0.88), rgba(20,28,48,0.88)), url(/images/painters/painter-bg.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}
       >
         <div className="absolute inset-0 hero-bg" role="img" aria-label={t('cta.heading', { city: cityName })} style={{ pointerEvents: 'none' }} />
         <div className="relative max-w-3xl mx-auto">

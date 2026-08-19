@@ -7,7 +7,7 @@ export function OrganizationSchema() {
     name: siteConfig.brandName,
     legalName: siteConfig.legalName,
     url: siteConfig.url,
-    logo: `${siteConfig.url}/logo.png`,
+    logo: `${siteConfig.url}/icon.svg`,
     description: siteConfig.tagline,
     areaServed: { '@type': 'Country', name: 'Malaysia' },
   };

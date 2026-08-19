@@ -23,7 +23,7 @@ export function ProductSchema({
     description: description ?? `${name} rental in Malaysia.`,
     brand: { '@type': 'Brand', name: 'Volvo' },
     manufacturer: { '@type': 'Organization', name: 'Volvo Construction Equipment' },
-    image: image ?? `${siteConfig.url}/og/ms.png`,
+    image: image ?? `${siteConfig.url}/og-ms.png`,
     offers: {
       '@type': 'Offer',
       price: rentalPrice ?? undefined,

@@ -94,7 +94,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
         className="relative overflow-hidden"
         style={{
           background:
-            'linear-gradient(135deg, rgba(20,28,48,0.92) 0%, rgba(20,28,48,0.88) 50%, rgba(20,28,48,0.94) 100%), url(/images/hero-bg.jpg) center/cover no-repeat',
+            'linear-gradient(135deg, rgba(20,28,48,0.92) 0%, rgba(20,28,48,0.88) 50%, rgba(20,28,48,0.94) 100%), url(/images/painters/painter-bg.jpg) center/cover no-repeat',
         }}
       >
         <div className="hero-bg" role="img" aria-label={imageAlt} style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }} />

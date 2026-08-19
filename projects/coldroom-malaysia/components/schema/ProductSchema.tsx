@@ -28,7 +28,7 @@ export function ProductSchema({
     description,
     brand: { '@type': 'Brand', name: siteConfig.brandName },
     url: productUrl,
-    image: imageUrl || `${siteConfig.siteUrl}/og-image.jpg`,
+    image: imageUrl || `${siteConfig.siteUrl}/og-${locale}.png`,
     offers: {
       '@type': 'Offer',
       priceCurrency: 'MYR',

@@ -27,7 +27,9 @@ export function LocalBusinessSchema({
     areaServed: { '@type': 'Country', name: 'Malaysia' },
     priceRange: siteConfig.priceRange,
     openingHours: 'Mo-Su 08:00-22:00',
-    image: `${siteConfig.url}/og-image.jpg`,
+    // /og-image.jpg never existed in public/. The per-locale share cards do,
+    // and this component already receives the locale.
+    image: `${siteConfig.url}/og-${locale}.png`,
   }
   return (
     <script

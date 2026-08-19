@@ -32,7 +32,7 @@ export function LocalBusinessSchema({
     },
     priceRange: 'RM3.50 - RM12.00 / sqft',
     openingHours: 'Mo-Su 09:00-21:00',
-    image: `${siteConfig.siteUrl}/og-image.jpg`,
+    image: `${siteConfig.siteUrl}/og-${locale}.png`,
   };
 
   return (

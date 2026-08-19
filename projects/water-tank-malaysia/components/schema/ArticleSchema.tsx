@@ -20,14 +20,14 @@ export function ArticleSchema({
     '@type': 'Article',
     headline: title,
     description: excerpt,
-    image: coverImage ? [coverImage] : [`${siteConfig.url}/og/${locale}.png`],
+    image: coverImage ? [coverImage] : [`${siteConfig.url}/og-${locale}.png`],
     datePublished: publishedAt,
     dateModified: publishedAt,
     author: { '@type': 'Organization', name: siteConfig.brandName },
     publisher: {
       '@type': 'Organization',
       name: siteConfig.brandName,
-      logo: { '@type': 'ImageObject', url: `${siteConfig.url}/logo.png` },
+      logo: { '@type': 'ImageObject', url: `${siteConfig.url}/icon.svg` },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
