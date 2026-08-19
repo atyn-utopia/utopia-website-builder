@@ -4,7 +4,8 @@ export function OrganizationSchema() {
     '@type': 'Organization',
     name: 'Oxihome Malaysia',
     url: 'https://oksigen.com.my',
-    logo: 'https://oksigen.com.my/logo.svg',
+    // /logo.svg has never existed. app/icon.svg is served at /icon.svg.
+    logo: 'https://oksigen.com.my/icon.svg',
     description: "Malaysia's dedicated home oxygen equipment provider. Rent or buy oxygen machines with 4-hour same-day delivery across 127 locations.",
     contactPoint: {
       '@type': 'ContactPoint',
