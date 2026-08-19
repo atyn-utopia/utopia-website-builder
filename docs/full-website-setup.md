@@ -1146,22 +1146,42 @@ Company UUIDs (from `companies` table):
 
 | Company | UUID |
 |---------|------|
-| Encik Beku Aircond Sdn. Bhd. | `16e62068-365d-4907-b7f0-763a173d8afa` |
 | Butik Glam & Lux Sdn. Bhd. | `215139a6-8ac7-449e-8310-0a38ccc8d579` |
-| Mobile Wheeler Sdn. Bhd. | `23bd0372-9f4b-4410-ae56-a8aecd54ea90` |
-| Mandiri Sdn. Bhd. | `374c1201-246f-41bf-b59a-a04efab47eaa` |
-| Pulse Pilates Sdn. Bhd. | `3f5087b3-6b0f-441a-a864-49b82f8335a4` |
-| Jom Vend Sdn. Bhd. | `6961d264-61e6-49ac-93f5-70daf1687106` |
-| Scaffolding Malaysia Sdn. Bhd. | `7c15d93f-c2f7-488d-b38c-4b85d65a06d1` |
 | Cold Truck Malaysia Sdn. Bhd. | `99e92ff1-d776-4154-9346-426e3cb91936` |
-| Rev Move Sdn. Bhd. | `9e5a0a86-55cb-4754-93fd-f80dccb2a17a` |
-| Kak Kenduri Sdn. Bhd. | `ce95071b-e575-4983-bdd4-66910f45fe34` |
-| Merry Elderly Care Sdn. Bhd. | `d4a9e4ba-a1da-4548-a45f-526579c56b6d` |
+| Encik Beku Aircond Sdn. Bhd. | `16e62068-365d-4907-b7f0-763a173d8afa` |
+| Encik Skylift & Crane Sdn. Bhd. | `74acbd4f-156c-46a7-924a-a6298ba4ef24` |
+| Encik Sticker Printing Sdn. Bhd. | `42d6e364-b88a-4a63-9461-25afb0bab314` |
+| Encik Towing Malaysia Sdn Bhd | `cfbadc24-2a7d-4aa4-bac1-d9e8a99e268a` |
 | Ibnu Sina Care Sdn. Bhd. | `d6cc8f48-ea42-4420-b9d6-73ca63263be0` |
-| Rev Move Utara Sdn. Bhd. | `ef7b3fec-68d7-4153-bf2e-39c5d8621592` |
-| Rev Bike Sdn. Bhd. | `eff0fecf-ef85-449a-bd68-dac176945700` |
-| Utopia Holiday Sdn. Bhd. | `f58f6527-88fd-44bd-9c4d-9dbf59cd0c4c` |
+| Jom Vend Sdn. Bhd. | `6961d264-61e6-49ac-93f5-70daf1687106` |
+| Kak Kenduri Sdn. Bhd. | `ce95071b-e575-4983-bdd4-66910f45fe34` |
+| Mandiri Sdn. Bhd. | `374c1201-246f-41bf-b59a-a04efab47eaa` |
+| Merry Elderly Care Sdn. Bhd. | `d4a9e4ba-a1da-4548-a45f-526579c56b6d` |
+| Mobile Wheeler Sdn. Bhd. | `23bd0372-9f4b-4410-ae56-a8aecd54ea90` |
 | Outsource | `f81da9e5-3896-4a98-abe1-247252c81258` |
+| Pulse Pilates Sdn. Bhd. | `3f5087b3-6b0f-441a-a864-49b82f8335a4` |
+| Rev Bike Sdn. Bhd. | `eff0fecf-ef85-449a-bd68-dac176945700` |
+| Rev Move Sdn. Bhd. | `9e5a0a86-55cb-4754-93fd-f80dccb2a17a` |
+| Rev Move Utara Sdn. Bhd. | `ef7b3fec-68d7-4153-bf2e-39c5d8621592` |
+| Scaffolding Malaysia Sdn. Bhd. | `7c15d93f-c2f7-488d-b38c-4b85d65a06d1` |
+| Sewa Skylift Malaysia | `90e3be11-1149-4736-9adb-faed1f856836` |
+| Utopia Group | `d1336df4-fba2-4895-b450-f0c69acc9511` |
+| Utopia Holiday Sdn. Bhd. | `f58f6527-88fd-44bd-9c4d-9dbf59cd0c4c` |
+| Vivahomes Realty Sdn. Bhd. | `e531a296-3ef6-4406-80ef-291fabd214a3` |
+
+> **This table goes stale — verify against the database before registering a
+> site.** It listed 16 companies while the database held 22, so a real company
+> (`Encik Sticker Printing Sdn. Bhd.`) looked missing and nearly had a duplicate
+> created for it. `POST /api/public/sites` takes a company *name* and creates one
+> silently if it does not match, so a typo or a stale list becomes a stray row in
+> the shared fleet DB. Check first:
+>
+> ```bash
+> curl -s "$NEXT_PUBLIC_SUPABASE_URL/rest/v1/companies?select=id,name&order=name" \
+>   -H "apikey: $SUPABASE_SERVICE_ROLE_KEY" -H "Accept-Profile: webcore"
+> ```
+> If the client's company is genuinely absent, ask the user whether to create it
+> or use the closest existing entry — never decide that silently.
 
 ### Verify
 - WhatsApp redirect works on the live site
