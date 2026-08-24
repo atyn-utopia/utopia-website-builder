@@ -1,0 +1,42 @@
+{
+  "domain": "lorrysticker.my",
+  "containerId": "GTM-5JXWTNFC",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-9KY7BCNS2W",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-08-24T06:53:32.655Z",
+  "gsc": {
+    "siteUrl": "https://lorrysticker.my/zh/",
+    "token": "<meta name=\"google-site-verification\" content=\"STqJUEUIzDGovBzwma3Cx_rV_K_DYrOiUfXfyPhu2tE\" />",
+    "initAt": "2026-08-24T06:55:44.249Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-08-24T06:59:03.209Z",
+    "properties": [
+      "sc-domain:lorrysticker.my",
+      "https://lorrysticker.my/",
+      "https://lorrysticker.my/ms/",
+      "https://lorrysticker.my/zh/"
+    ]
+  },
+  "ga4": {
+    "accountId": "153453478",
+    "accountName": "Utopia 1st Analytics",
+    "propertyId": "551157995",
+    "propertyName": "properties/551157995",
+    "measurementId": "G-9KY7BCNS2W",
+    "siteUrl": "https://lorrysticker.my",
+    "createdAt": "2026-08-24T06:53:32.655Z"
+  },
+  "ads": {
+    "customerId": "1933757591",
+    "conversionActionId": "7731623711",
+    "conversionActionName": "lorrysticker.my (web) whatsapp_click",
+    "event": "whatsapp_click"
+  }
+}
