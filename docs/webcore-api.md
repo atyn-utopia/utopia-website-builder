@@ -197,7 +197,19 @@ CSV/TSV export as one string. `mode: 'replace'` clears existing rows first
 (default merges). An empty response means no research has been pushed yet —
 that is a gap to fill, not a reason to invent keywords.
 
-**Two behaviours that will mislead you if you don't know them:**
+**Four behaviours that will mislead you if you don't know them:**
+
+- **The POST body field is `rows`, not `keywords`.** `keywords` is the *GET
+  response* field name, and sending it on a POST is accepted with `200` and
+  `{"saved": 0}` — the rows are dropped while `primary_keywords` /
+  `secondary_keywords` in the same body still land. The partial success reads
+  like a validation quirk rather than a wrong field name.
+- **`primary_keywords` and `secondary_keywords` are capped at 32 each, and the
+  overflow is dropped from the TAIL with no error or `truncated` count.**
+  Measured on coldroomrental.my: 60 sent, 32 stored, both arrays. Order the
+  lists by priority before pushing, and interleave locales — an en-then-ms list
+  longer than 32 silently loses the entire Malay tail. The `rows` array has no
+  such cap (51 rows stored fine) and does report `truncated`.
 
 - **`language` is `en` or `ms` ONLY, and anything else is silently coerced —
   not rejected.** Pushing `zh` rows for a trilingual site returns `200` with the
