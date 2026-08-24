@@ -22,11 +22,16 @@ and integrations. Every agent that puts content into a site goes through this.
 ### The vercel.app trap
 
 The upstream doc says never send a `*.vercel.app` deploy URL as `website`. That
-is correct **for a site registered on its paid domain**. Several sites in this
-fleet were registered on their `*.vercel.app` host and their real data lives
-under that key — `light-tower-rental.vercel.app` is one. For those, the
-vercel.app host *is* the registered domain and sending the paid domain is what
-would orphan the write.
+is correct **for a site registered on its paid domain**. A couple of sites in
+this fleet were registered on a `*.vercel.app` name and their data lives under
+that key — for those, sending the paid domain is what would orphan the write.
+
+But treat that as damage, not as a pattern: **48 of the 51 registered sites use
+a paid domain.** A `*.vercel.app` key almost always means the site was
+registered before its domain was settled and still needs migrating. Note also
+that this Vercel team serves deployments on **`*.utopiaai.my`**, so a
+`{slug}.vercel.app` host usually **404s** — registering under one pins the rows
+to a name that never serves the site.
 
 Check before writing, never assume:
 

@@ -78,7 +78,13 @@ Project Inputs Checklist:
 
 [ ] Product name (e.g. "Electric Wheelchair")
 [ ] Product slug (e.g. "electric-wheelchair")
-[ ] Domain (e.g. "electric-wheelchair-malaysia.vercel.app")
+[ ] Domain — the PAID domain (e.g. "electric-wheelchair.my"). MANDATORY.
+      This becomes the webcore row key for every product, phone number and blog
+      post, so changing it later means re-keying all of them by hand.
+      48 of the 51 registered sites run on a paid domain — a *.vercel.app value
+      is the exception, not the convention. And do NOT guess one: this Vercel
+      team serves deployments on *.utopiaai.my, so {slug}.vercel.app 404s.
+      If the paid domain genuinely is not decided yet, see the note in Step 2.
 [ ] Brand name (e.g. "Electric Wheelchair Malaysia")
 [ ] Target country (e.g. Malaysia)
 [ ] Target locations list (city names + slugs)
@@ -108,8 +114,15 @@ are prevented by construction:
 cd utopia-wizard && npm run scaffold -- \
   --slug={project-slug} --brand="{Brand Name}" \
   --product="{Product Name}" --product-slug={product-slug} \
-  --domain={project-slug}.vercel.app --phone=60XXXXXXXXX
+  --domain={paid-domain} --phone=60XXXXXXXXX
 ```
+
+> `--domain` is required and is no longer guessed. It used to default to
+> `{slug}.vercel.app`; that guess reached `config/site.ts`, every canonical /
+> sitemap / og:image URL, AND the webcore row key — so one unverified value
+> silently pointed a whole site's SEO at a 404 host and pinned its database rows
+> to a name nobody could serve. Check the real production host with
+> `vercel project ls` ("Latest Production URL").
 
 This writes `projects/{project-slug}/` with a correct structure + an `inputs.md` stub.
 It deliberately leaves **copy, brand assets, the real locations list, and the
@@ -204,6 +217,19 @@ the plan so Nana, Kimmy and Hanabi inherit verified terms.
 > the head terms explicitly with `--keywords`.
 
 See `.claude/skills/keyword-research/SKILL.md` for full flag reference.
+
+> **If the paid domain is not decided yet, do not register the site in webcore
+> at Step 2.** Scaffold with the intended domain so the code is consistent, but
+> have Cyclops hold the `POST /api/public/sites` + phone/product seeding until
+> the domain is settled or the first deploy reveals the real host. Registering
+> early keys every row to a name you then have to migrate — see
+> `projects/sticker-lori-malaysia/DOMAIN-MIGRATION.md` for what that costs
+> (22 rows across 5 tables, plus a gate check that fails until it is done).
+>
+> `config/site.ts` separates the two concerns for exactly this reason:
+> `domain` = the webcore row key, `url` = where the site is actually served.
+> Never change `domain` alone to make them match — that orphans every row while
+> the site keeps returning 200 with empty sections.
 
 ### Agent Details
 
