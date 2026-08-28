@@ -35,9 +35,13 @@
 //   5. The GA4 event has fired at least once (Google needs to see the event
 //      before the conversion will report any data)
 
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, writeFileSync, mkdirSync } from 'node:fs';
 import { homedir } from 'node:os';
-import { join } from 'node:path';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const CONFIGS_DIR = join(__dirname, 'configs');
 
 const args = Object.fromEntries(
   process.argv.slice(2).reduce((acc, arg, i, all) => {
@@ -201,6 +205,43 @@ const existing = await customer.query(`
     AND conversion_action.google_analytics_4_settings.property_id = ${ga4PropertyId}
 `);
 
+// Persist the `ads` block into configs/<domain>.json. Phase 6
+// (finalize-manual-toggles.mjs) reads customerId + conversionActionId from
+// here, and silently skips both Ads toggles when the block is absent — so
+// writing it is part of this phase, not a copy-paste chore left to the human.
+// Merges into whatever ga4-create.mjs / gsc-submit.mjs already wrote.
+function writeAdsConfig(conversionAction) {
+  const path = join(CONFIGS_DIR, `${domain}.json`);
+  let cfg = {};
+  if (existsSync(path)) {
+    try {
+      cfg = JSON.parse(readFileSync(path, 'utf8'));
+    } catch (e) {
+      console.log(`   ⚠️  configs/${domain}.json is not valid JSON (${e.message}) — not overwriting it.`);
+      console.log(`      Add this by hand so Phase 6 can run:`);
+      console.log(`      "ads": { "customerId": "${customerId}", "conversionActionId": "${conversionAction.id}" }`);
+      return;
+    }
+  } else {
+    console.log(`   ℹ️  No configs/${domain}.json yet (ga4-create.mjs normally writes it) — creating one.`);
+  }
+
+  cfg.domain ??= domain;
+  cfg.ads = {
+    ...(cfg.ads || {}),
+    customerId: String(customerId),
+    ga4PropertyId: String(ga4PropertyId),
+    conversionActionId: String(conversionAction.id),
+    conversionActionName: conversionAction.name,
+    event: eventName,
+    importedAt: new Date().toISOString(),
+  };
+
+  mkdirSync(CONFIGS_DIR, { recursive: true });
+  writeFileSync(path, JSON.stringify(cfg, null, 2) + '\n');
+  console.log(`   ✓ Wrote ads block to configs/${domain}.json (Phase 6 reads it from there)`);
+}
+
 async function activateAutoImportedAction(conversionAction) {
   // Google auto-imports with status=HIDDEN, category=DEFAULT, primary_for_goal=false,
   // counting_type=EVERY, lookback=30d. Update to match the canonical Utopia
@@ -208,8 +249,8 @@ async function activateAutoImportedAction(conversionAction) {
   //   status=ENABLED, category=CONTACT, primary_for_goal=true, lookback=90d
   //
   // counting_type is IMMUTABLE on auto-imported GOOGLE_ANALYTICS_4_CUSTOM actions.
-  // It stays EVERY. To change to ONE_PER_CLICK the user must do it manually in
-  // Ads UI (Edit conversion → Count → "One").
+  // It stays EVERY here. Phase 6 (finalize-manual-toggles.mjs) flips it to
+  // ONE_PER_CLICK through the Ads UI, which is the only path that works.
   await customer.conversionActions.update([{
     resource_name: conversionAction.resource_name,
     status: enums.ConversionActionStatus.ENABLED,
@@ -218,8 +259,8 @@ async function activateAutoImportedAction(conversionAction) {
     click_through_lookback_window_days: 90,
   }]);
   console.log(`   ✓ Activated: ENABLED + CONTACT + primary + 90d lookback`);
-  console.log(`   ℹ️  counting_type stays EVERY (immutable via API).`);
-  console.log(`      To change to ONE_PER_CLICK: Ads UI → Edit conversion → Count → "One"`);
+  console.log(`   ℹ️  counting_type stays EVERY (immutable via API) — Phase 6 flips it.`);
+  writeAdsConfig(conversionAction);
 }
 
 if (existing.length > 0) {
@@ -250,22 +291,14 @@ if (existing.length > 0) {
 
 console.log('\n✅ Conversion import complete.');
 console.log('\n' + '─'.repeat(64));
-console.log('⚠️  MANUAL STEPS REMAINING (Ads UI — these are NOT exposed in any API):');
+console.log('ℹ️  2 toggles still pending (counting Every→One + Import app and web metrics)');
+console.log('   — both are API-impossible but AUTOMATED in Phase 6:');
 console.log('─'.repeat(64));
-console.log('  1. Toggle ON "Import app and web metrics"');
-console.log('     Open: https://ads.google.com → switch to customer ' + customerId);
-console.log('           → Tools → Linked accounts → Google Analytics 4');
-console.log('           → click the linked property (' + domain + ')');
-console.log('           → toggle ON "Import app and web metrics"');
-console.log('     (Audiences toggle is already ON — script set during link creation.)');
+console.log('     node finalize-manual-toggles.mjs --domain ' + domain);
 console.log('');
-console.log('  2. REQUIRED — Change counting to ONE_PER_CLICK');
-console.log('     Goals → Conversions → click "' + domain + ' (web) ' + eventName + '"');
-console.log('           → Edit settings → Count → change "Every" to "One" → save');
-console.log('     (Auto-imported conversions have counting_type=EVERY which is');
-console.log('      IMMUTABLE via API. UI is the only way to flip to ONE_PER_CLICK.');
-console.log('      This is the canonical Utopia setting (ONE_PER_CLICK = cleaner Smart');
-console.log('      Bidding signal) — NOT optional, do it for every site.)\n');
+console.log('     The ads block it needs is already in configs/' + domain + '.json —');
+console.log('     written above. Idempotent; the counting change is Ads-API-verified');
+console.log('     after the click. Manual fallback documented in MANUAL-STEPS.md.\n');
 console.log('💡 Visibility:');
 console.log('   - Conversion appears in Google Ads → Goals → Conversions → Summary');
 console.log('   - First reported data shows once the event fires AND a user converts via an ad');
