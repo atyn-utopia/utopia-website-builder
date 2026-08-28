@@ -22,11 +22,12 @@
     "propertyId": "538738787"
   },
   "ads": {
-    "customerId": "1933757591",
+    "customerId": "1447147919",
     "ga4PropertyId": "538738787",
-    "conversionActionId": "7623289591",
+    "conversionActionId": "7690970308",
     "conversionActionName": "katilhospital.com.my (web) whatsapp_click",
     "event": "whatsapp_click",
-    "backfilledAt": "2026-08-28"
+    "backfilledAt": "2026-08-28",
+    "note": "GA4 property 538738787 is linked to Ads customer 1447147919, so THAT is the live conversion. A stale ENABLED duplicate (7623289591) also exists on 1933757591 from an earlier link."
   }
 }
