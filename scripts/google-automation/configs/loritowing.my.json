@@ -1,0 +1,17 @@
+{
+  "domain": "loritowing.my",
+  "ga4": {
+    "propertyId": "548867992",
+    "measurementId": "G-RFZGE0TPMW"
+  },
+  "containerId": "GTM-59FNV7HB",
+  "gtmAccountId": "6000211475",
+  "ads": {
+    "customerId": "1933757591",
+    "ga4PropertyId": "548867992",
+    "conversionActionId": "7712240314",
+    "conversionActionName": "loritowing.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "backfilledAt": "2026-08-28"
+  }
+}

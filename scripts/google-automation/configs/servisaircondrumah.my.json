@@ -1,0 +1,17 @@
+{
+  "domain": "servisaircondrumah.my",
+  "ga4": {
+    "propertyId": "540365050",
+    "measurementId": "G-GNTEX6XQ7Y"
+  },
+  "containerId": "GTM-5XJJ4HFN",
+  "gtmAccountId": "6000211475",
+  "ads": {
+    "customerId": "1933757591",
+    "ga4PropertyId": "540365050",
+    "conversionActionId": "7678236674",
+    "conversionActionName": "servisaircondrumah.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "backfilledAt": "2026-08-28"
+  }
+}

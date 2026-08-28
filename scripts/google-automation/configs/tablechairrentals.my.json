@@ -38,7 +38,18 @@
   },
   "notes": {
     "reusedJuneSetup": "2026-08-03: kept the pre-existing 2026-06-11 GA4 property 541291689 (G-MM2J5SVF2C) and its already-configured Ads action 7678666753 (ENABLED/CONTACT/ONE_PER_CLICK/primary). The duplicate property created on 2026-08-03 (548128522 / G-ZZNRWGFLLS) was soft-deleted; its orphan Ads action 7707034950 remains HIDDEN because the Ads API rejects status REMOVED on conversion actions.",
-    "localeUrlShape": "next-intl localePrefix=as-needed — default locale en is served at / with no prefix; /en/* 307-redirects away. URL-prefix set is /, /ms, /zh.",
+    "localeUrlShape": "next-intl localePrefix=as-needed \u2014 default locale en is served at / with no prefix; /en/* 307-redirects away. URL-prefix set is /, /ms, /zh.",
     "wwwNotRedirecting": "Both apex and www return 200; nothing is keyed to www. Vercel domain config decision owned by the team lead."
+  },
+  "ga4": {
+    "propertyId": "541291689"
+  },
+  "ads": {
+    "customerId": "1933757591",
+    "ga4PropertyId": "541291689",
+    "conversionActionId": "7678666753",
+    "conversionActionName": "tablechairrentals.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "backfilledAt": "2026-08-28"
   }
 }

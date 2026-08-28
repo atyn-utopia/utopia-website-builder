@@ -12,14 +12,17 @@
     "siteUrl": "https://www.katilhospitalmurah.com.my"
   },
   "events": [
-    { "redirectPath": "/redirect-whatsapp-1", "eventName": "whatsapp_click" }
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
   ],
   "gsc": {
     "domainProperty": "sc-domain:katilhospitalmurah.com.my",
     "verified": true,
     "verifiedVia": "DNS TXT (auto-added to Vercel DNS, scope chokchunynh)",
     "sitemapSubmitted": "https://www.katilhospitalmurah.com.my/sitemap.xml",
-    "urlPrefixProperties": "SKIPPED — needs verify-meta-tag deploy (out of scope); Domain property covers sitemap/coverage",
+    "urlPrefixProperties": "SKIPPED \u2014 needs verify-meta-tag deploy (out of scope); Domain property covers sitemap/coverage",
     "createdAt": "2026-07-27"
   },
   "ads": {
@@ -35,7 +38,12 @@
       "primaryForGoal": true,
       "lookbackDays": 90
     },
-    "createdAt": "2026-07-27"
+    "createdAt": "2026-07-27",
+    "ga4PropertyId": "537278715",
+    "conversionActionId": "7698585068",
+    "conversionActionName": "katilhospitalmurah.com.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "backfilledAt": "2026-08-28"
   },
-  "note": "GTM container GTM-PTJS6QKQ pre-existed and is published (live v3, wired to G-BMDTB2BXL6). 2026-07-23: reused for on-site injection; a duplicate GA4 property (546845464/G-0WLTZVJM25) accidentally created same day was trashed. 2026-07-27 (Gloo): added GSC Domain property (verified + sitemap), registered whatsapp_click Key Event on 537278715 (was missing — blocked Ads import), created GA4->Ads link, and Ads conversion action 7698585068 auto-imported + activated. Residual manual UI toggles still owed: GA4 Signals+user-data, Ads count Every->One, Ads 'Import app and web metrics' ON."
+  "note": "GTM container GTM-PTJS6QKQ pre-existed and is published (live v3, wired to G-BMDTB2BXL6). 2026-07-23: reused for on-site injection; a duplicate GA4 property (546845464/G-0WLTZVJM25) accidentally created same day was trashed. 2026-07-27 (Gloo): added GSC Domain property (verified + sitemap), registered whatsapp_click Key Event on 537278715 (was missing \u2014 blocked Ads import), created GA4->Ads link, and Ads conversion action 7698585068 auto-imported + activated. Residual manual UI toggles still owed: GA4 Signals+user-data, Ads count Every->One, Ads 'Import app and web metrics' ON."
 }

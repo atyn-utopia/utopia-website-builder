@@ -1,0 +1,17 @@
+{
+  "domain": "towerlight.my",
+  "ga4": {
+    "propertyId": "549614213",
+    "measurementId": "G-PPKT2FFHKG"
+  },
+  "containerId": "GTM-PQKH33JM",
+  "gtmAccountId": "6000211475",
+  "ads": {
+    "customerId": "1933757591",
+    "ga4PropertyId": "549614213",
+    "conversionActionId": "7717894928",
+    "conversionActionName": "towerlight.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "backfilledAt": "2026-08-28"
+  }
+}

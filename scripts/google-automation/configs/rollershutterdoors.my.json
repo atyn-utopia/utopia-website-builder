@@ -1,0 +1,17 @@
+{
+  "domain": "rollershutterdoors.my",
+  "ga4": {
+    "propertyId": "540374950",
+    "measurementId": "G-BNX0QNLWEN"
+  },
+  "containerId": "GTM-TX7ZBHT6",
+  "gtmAccountId": "6000211475",
+  "ads": {
+    "customerId": "1933757591",
+    "ga4PropertyId": "540374950",
+    "conversionActionId": "7678232831",
+    "conversionActionName": "rollershutterdoors.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "backfilledAt": "2026-08-28"
+  }
+}

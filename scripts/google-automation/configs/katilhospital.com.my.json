@@ -17,5 +17,16 @@
     "verified": true,
     "verificationMethod": "META",
     "verifiedAt": "2026-05-25T03:47:00.809Z"
+  },
+  "ga4": {
+    "propertyId": "538738787"
+  },
+  "ads": {
+    "customerId": "1933757591",
+    "ga4PropertyId": "538738787",
+    "conversionActionId": "7623289591",
+    "conversionActionName": "katilhospital.com.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "backfilledAt": "2026-08-28"
   }
 }

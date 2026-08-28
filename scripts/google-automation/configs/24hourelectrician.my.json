@@ -32,8 +32,11 @@
       "https://24hourelectrician.my/zh/"
     ],
     "sitemap": "https://24hourelectrician.my/sitemap.xml",
-    "sitemapSubmittedTo": ["sc-domain:24hourelectrician.my", "https://24hourelectrician.my/"],
-    "note": "localePrefix=as-needed (en at /, ms at /ms, zh at /zh). /ms/ and /zh/ url-prefix properties reject the root sitemap (path must sit under the prefix) — Domain + canonical / properties carry the full multi-locale sitemap. Bulk-indexing requested 201/513 URLs before daily Indexing API quota; remainder re-runnable next day."
+    "sitemapSubmittedTo": [
+      "sc-domain:24hourelectrician.my",
+      "https://24hourelectrician.my/"
+    ],
+    "note": "localePrefix=as-needed (en at /, ms at /ms, zh at /zh). /ms/ and /zh/ url-prefix properties reject the root sitemap (path must sit under the prefix) \u2014 Domain + canonical / properties carry the full multi-locale sitemap. Bulk-indexing requested 201/513 URLs before daily Indexing API quota; remainder re-runnable next day."
   },
   "ads": {
     "customerId": "1933757591",

@@ -1,0 +1,17 @@
+{
+  "domain": "speedlimitdevice.my",
+  "ga4": {
+    "propertyId": "547407805",
+    "measurementId": "G-PWNVW39XN3"
+  },
+  "containerId": "GTM-N4RM8SVG",
+  "gtmAccountId": "6000211475",
+  "ads": {
+    "customerId": "1933757591",
+    "ga4PropertyId": "547407805",
+    "conversionActionId": "7700360568",
+    "conversionActionName": "speedlimitdevice.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "backfilledAt": "2026-08-28"
+  }
+}

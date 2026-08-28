@@ -17,5 +17,16 @@
     "verified": true,
     "verificationMethod": "META",
     "verifiedAt": "2026-07-27T03:31:05.430Z"
+  },
+  "ga4": {
+    "propertyId": "547057879"
+  },
+  "ads": {
+    "customerId": "1933757591",
+    "ga4PropertyId": "547057879",
+    "conversionActionId": "7698952930",
+    "conversionActionName": "water-tank.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "backfilledAt": "2026-08-28"
   }
 }

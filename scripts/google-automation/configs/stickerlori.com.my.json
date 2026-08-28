@@ -17,5 +17,15 @@
     "verified": true,
     "verificationMethod": "META",
     "verifiedAt": "2026-05-08T09:19:45.131Z"
+  },
+  "containerId": "GTM-569PDF36",
+  "gtmAccountId": "6000211475",
+  "ads": {
+    "customerId": "1933757591",
+    "ga4PropertyId": "536802881",
+    "conversionActionId": "7606599543",
+    "conversionActionName": "stickerlori.com.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "backfilledAt": "2026-08-28"
   }
 }

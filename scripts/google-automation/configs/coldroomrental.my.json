@@ -9,5 +9,16 @@
       "eventName": "whatsapp_click"
     }
   ],
-  "createdAt": "2026-07-09T09:44:28.051Z"
+  "createdAt": "2026-07-09T09:44:28.051Z",
+  "ga4": {
+    "propertyId": "544922669"
+  },
+  "ads": {
+    "customerId": "1933757591",
+    "ga4PropertyId": "544922669",
+    "conversionActionId": "7678240535",
+    "conversionActionName": "coldroomrental.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "backfilledAt": "2026-08-28"
+  }
 }

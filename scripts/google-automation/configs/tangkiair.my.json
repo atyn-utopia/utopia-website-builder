@@ -1,0 +1,17 @@
+{
+  "domain": "tangkiair.my",
+  "ga4": {
+    "propertyId": "547974756",
+    "measurementId": "G-3PJJ6BW2CJ"
+  },
+  "containerId": "GTM-MWMN69NF",
+  "gtmAccountId": "6000211475",
+  "ads": {
+    "customerId": "1933757591",
+    "ga4PropertyId": "547974756",
+    "conversionActionId": "7703477219",
+    "conversionActionName": "tangkiair.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "backfilledAt": "2026-08-28"
+  }
+}

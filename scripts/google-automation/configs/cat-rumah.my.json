@@ -17,5 +17,16 @@
     "verified": true,
     "verificationMethod": "META",
     "verifiedAt": "2026-07-08T01:38:20.260Z"
+  },
+  "ga4": {
+    "propertyId": "544476112"
+  },
+  "ads": {
+    "customerId": "1933757591",
+    "ga4PropertyId": "544476112",
+    "conversionActionId": "7675764715",
+    "conversionActionName": "cat-rumah.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "backfilledAt": "2026-08-28"
   }
 }

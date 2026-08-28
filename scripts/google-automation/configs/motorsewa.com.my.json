@@ -1,0 +1,15 @@
+{
+  "domain": "motorsewa.com.my",
+  "ga4": {
+    "propertyId": "540391198",
+    "measurementId": "G-RZ4W19K6NY"
+  },
+  "ads": {
+    "customerId": "1933757591",
+    "ga4PropertyId": "540391198",
+    "conversionActionId": "7678610769",
+    "conversionActionName": "motorsewa.com.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "backfilledAt": "2026-08-28"
+  }
+}

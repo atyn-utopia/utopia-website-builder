@@ -1,0 +1,17 @@
+{
+  "domain": "electricwheelchairmalaysia.my",
+  "ga4": {
+    "propertyId": "549951175",
+    "measurementId": "G-4SYE57MVVH"
+  },
+  "containerId": "GTM-NHNQP887",
+  "gtmAccountId": "6000211475",
+  "ads": {
+    "customerId": "1447147919",
+    "ga4PropertyId": "549951175",
+    "conversionActionId": "7720139252",
+    "conversionActionName": "electricwheelchairmalaysia.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "backfilledAt": "2026-08-28"
+  }
+}
