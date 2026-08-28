@@ -199,17 +199,13 @@ async function main() {
   console.log(`  Config saved:   ${configPath}`);
 
   console.log('\n' + '─'.repeat(64));
-  console.log('⚠️  2 MANUAL TOGGLES LEFT (GA4 API keeps these behind manual consent):');
+  console.log('ℹ️  2 toggles still OFF (Signals + user-provided data) — AUTOMATED in Phase 6:');
   console.log('─'.repeat(64));
-  console.log(`  Open: https://analytics.google.com → pick property: ${domain}`);
-  console.log('  Admin → Data collection and modification → Data collection, then:');
-  console.log('');
-  console.log('  [ ] 1. Google signals data collection → "Turn on" → acknowledge');
-  console.log('  [ ] 2. User ID and user-provided data collection → "Turn on" → acknowledge');
-  console.log('');
-  console.log('  (Takes ~20 seconds total. Only needed once per new property.)');
+  console.log(`  node finalize-manual-toggles.mjs --domain ${domain}`);
+  console.log('  (run it after Phase 5 / ads-import — it does GA4 + Ads toggles in one pass,');
+  console.log('   idempotent + API-verified. Manual fallback documented in MANUAL-STEPS.md.)');
 
-  console.log(`\n💡 Next: node gtm-setup.mjs --domain ${domain} --ga4-id ${measurementId}\n`);
+  console.log(`\n💡 Next: node gtm-setup.mjs --domain ${domain} --ga4-id ${measurementId} --skip-extras\n`);
 
   rl.close();
 }

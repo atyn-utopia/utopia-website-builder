@@ -42,10 +42,10 @@ PHASE 1 — GSC Domain property (fully automated, no deploy needed) ← REORDERE
   • Position rationale: pure DNS TXT, no <head> modification, no deploy — runs first
     so the property is registered even if a later phase fails
 
-PHASE 2 — GA4 (automated + 1 manual toggle batch)
+PHASE 2 — GA4 (fully automated; its 2 toggles are now Phase 6)
   • node ga4-create.mjs --domain <newdomain>
-  • Manual: GA4 → Admin → Data collection → toggle Google Signals + User-provided data (~20s)
   • Produces the Measurement ID (G-XXXX) needed by Phase 3
+  • Google Signals + User-provided data stay OFF here — Phase 6 flips them
 
 PHASE 3 — GTM (fully automated, requires deploy)
   • node gtm-setup.mjs --domain <newdomain> --ga4-id <G-XXXX>
@@ -71,9 +71,23 @@ PHASE 5 — Google Ads conversion import (AUTOMATED as of 2026-05-25)
   • Run AFTER Phase 2 (GA4 has property + Key Event registered).
   • Conversion will only START REPORTING DATA once event fires in production
     (typically a few hours to a day after deploy).
+  • Writes the "ads" block into configs/<newdomain>.json (customerId, ga4PropertyId,
+    conversionActionId, conversionActionName, event) — Phase 6 reads it from there.
+
+PHASE 6 — The 4 no-API toggles (AUTOMATED as of 2026-07-29 — was the manual ~3–4 min)
+  • node finalize-manual-toggles.mjs --domain <newdomain>
+  • Flips: GA4 Signals ON, GA4 user-provided data ON (+auto-detect),
+    Ads counting Every→One-per-click, Ads "Import app and web metrics" ON
+  • GA4 steps try the Admin API as the USER OAuth first (the service account is
+    what failed before), then fall back to Playwright. Both Ads steps are
+    Playwright-only — no API field exists for either.
+  • Idempotent: reads current state first, skips what's already set, verifies
+    through the API where one exists. Screenshot proofs in _screenshots/<domain>/.
+  • Needs the one-time `node finalize-manual-toggles.mjs --login` on this machine.
+  • Manual fallback if it can't run: "Per-new-site Manual Steps" below.
 ```
 
-End state per site: GA4 property + GTM container + 4 GSC properties (1 Domain + 3 URL-prefix) + 1 Ads conversion action.
+End state per site: GA4 property + GTM container + 4 GSC properties (1 Domain + 3 URL-prefix) + 1 Ads conversion action, with all four consent/counting toggles set.
 
 ---
 
@@ -96,11 +110,15 @@ Already completed ✅:
 
 ---
 
-## 📋 Per-new-site Manual Steps
+## 📋 Per-new-site Manual Steps — now the FALLBACK for Phase 6
 
-These clicks remain even after all scripts are built. All other steps are automated.
+> **As of 2026-07-29 you should not need this section.** `finalize-manual-toggles.mjs`
+> (Phase 6) drives a real browser and flips all of these for you. Do them by hand only
+> when Phase 6 can't run — no Playwright browser installed, expired Google session that
+> can't be re-logged, or a Google UI change that broke a selector. The GTM Consent
+> Overview toggle below is the one item Phase 6 does **not** cover (and it's optional).
 
-### After `ga4-create.mjs` runs — 2 toggles (~20 seconds)
+### After `ga4-create.mjs` runs — 2 toggles (~20 seconds) · Phase 6 step `ga4-signals`, `ga4-userdata`
 
 Google API intentionally keeps these behind manual consent:
 
@@ -155,7 +173,7 @@ node ads-import-conversion.mjs --no-mcc \
   --event whatsapp_click
 ```
 
-**2 residual UI-only steps stay manual (genuinely API-impossible — verified v18→v24, do NOT re-attempt via API):**
+**2 residual UI-only steps (genuinely API-impossible — verified v18→v24, do NOT re-attempt via API). Both are now driven by Playwright in Phase 6 — `finalize-manual-toggles.mjs --only ads-counting,ads-metrics`. Do them by hand only as the fallback:**
 1. **REQUIRED — counting `EVERY` → `ONE_PER_CLICK`:** Ads → Goals → Conversions → the action → Edit settings → Count → "One". (counting_type is immutable on auto-imported `GOOGLE_ANALYTICS_4_CUSTOM` actions; UI is the only path. Canonical Utopia setting = cleaner Smart Bidding signal.)
 2. **Toggle ON "Import app and web metrics":** Tools → Data manager → Google Analytics (GA4) → Manage & link → toggle ON. (No API field exists on either side. The "audiences" toggle the script already sets is a different thing.)
 
@@ -202,12 +220,15 @@ These steps require ZERO clicks per new site once scripts are finished:
 
 ## 🗒️ Summary: total manual time per new site
 
-- 20 seconds: 2 GA4 toggles (Google Signals + User-provided data)
-- Google Ads conversion import: AUTOMATED (`ads-import-conversion.mjs`, no 24h wait) — leaves only 2 UI-only toggles (~30s): counting `Every`→`One`, and "Import app and web metrics" ON
-- 3 seconds (optional): GTM Consent Overview BETA toggle
+- 2 GA4 toggles (Google Signals + User-provided data): **AUTOMATED** — Phase 6
+- 2 Ads toggles (counting `Every`→`One`, "Import app and web metrics" ON): **AUTOMATED** — Phase 6
+- Google Ads conversion import: AUTOMATED (`ads-import-conversion.mjs`, no 24h wait)
+- 3 seconds (optional): GTM Consent Overview BETA toggle — the only click left
 - + your normal deploy step (Vercel CLI `vercel --prod` or git push)
 
-**Total clicking: ~3-4 minutes per site** (vs ~45-60 min fully manual before automation)
+**Total clicking: ~0 (was ~3–4 min, was ~45–60 min fully manual).** Phase 6 opens a
+browser and drives itself; budget ~1–2 min of wall-clock for it per site. The one-time
+`--login` is the only human sign-in, and it's per machine, not per site.
 
 ---
 

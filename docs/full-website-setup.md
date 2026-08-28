@@ -1257,23 +1257,34 @@ This sets up the site's **Google/Ads** layer — GA4 + GTM + Google Search Conso
 - [ ] Sitemap reachable at `https://www.<domain>/sitemap.xml`
 
 ### Run it
-Spawn **Gloo** with the contents of `agents/gloo.md` + the paid domain, project dir, and supported locales. Gloo reads `scripts/google-automation/`'s own `SKILL.md` / `MANUAL-STEPS.md` (source of truth for flags) and runs the 5 phases:
+Spawn **Gloo** with the contents of `agents/gloo.md` + the paid domain, project dir, and supported locales. Gloo reads `scripts/google-automation/`'s own `SKILL.md` / `MANUAL-STEPS.md` (source of truth for flags) and runs the 6 phases:
 
 1. **Phase 1 — GSC Domain property** (no deploy)
 2. **Phase 2 — GA4 property** (no deploy) → captures Measurement ID `G-XXXX` + numeric property id
 3. **Phase 3 — GTM container + inject snippet** → **DEPLOY** after
 4. **Phase 4 — GSC URL-prefix** (init → **DEPLOY** → finalize; **repeat per locale**)
-5. **Phase 5 — Ads conversion import** (no deploy, no 24h wait)
+5. **Phase 5 — Ads conversion import** (no deploy, no 24h wait) → writes the `"ads"` block into `configs/<domain>.json` for Phase 6
+6. **Phase 6 — the four no-API toggles** (no deploy) — `finalize-manual-toggles.mjs --domain <domain>`
 
 Deploy Phases 3 and 4 **separately** (own checkpoint each). For extracted per-site repos with no Vercel git integration, a `git push` does NOT deploy — run `vercel --prod` so the snippet/meta tag goes live before finalizing.
 
-### Residual manual clicks (~3–4 min — genuinely no API — hand back to the user)
-1. **REQUIRED — GA4** → Admin → Data collection → ON: Google Signals + User-provided data (after Phase 2)
-2. **REQUIRED — Ads** → conversion action → Count → "One" (after Phase 5)
-3. **REQUIRED — Ads** → Data manager → GA4 → ON: "Import app and web metrics" (after Phase 5)
-4. *(optional)* GTM → Container Settings → Consent Overview (BETA)
+### Phase 6 — what used to be the manual 3–4 min
+`finalize-manual-toggles.mjs` drives a real browser (Playwright, persistent Google session) and flips:
 
-Screenshots: https://websitebuilder.utopiaai.my/google (§04).
+1. **GA4** → Google Signals → ON
+2. **GA4** → User-provided data (+ auto-detect) → ON
+3. **Ads** → conversion counting **Every → One-per-click**
+4. **Ads** → Data manager → GA4 → **"Import app and web metrics"** → ON
+
+GA4's two try the Admin API as the *user* OAuth first and fall back to the browser; both Ads
+toggles are browser-only (no API field exists) and are read back through the Ads API where
+possible. Idempotent — re-running skips whatever is already set. It reads the `"ads"` block in
+`configs/<domain>.json` that Phase 5 wrote (if it's missing, re-run Phase 5 — also idempotent),
+and needs a one-time `node finalize-manual-toggles.mjs --login` per machine.
+
+**Still manual:** *(optional)* GTM → Container Settings → Consent Overview (BETA). If Phase 6
+can't run, fall back to `scripts/google-automation/MANUAL-STEPS.md` → "Per-new-site Manual Steps"
+and hand those toggles to the user. Screenshots: https://websitebuilder.utopiaai.my/google (§04).
 
 > 🔒 The files at `~/.google-credentials/` are LIVE Google keys — never commit, print, or forward them. If exposed, rotate immediately.
 

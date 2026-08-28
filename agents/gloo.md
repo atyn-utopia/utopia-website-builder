@@ -39,12 +39,11 @@ They are wired to Utopia's shared Google automation account, so there is **no Go
 Credentials live **only** at `~/.google-credentials/` and are never in the repo. If they are missing on a fresh machine, the original bundle at `~/Downloads/google-automation-INTERNAL/credentials/` is the source:
 
 ```bash
-mkdir -p ~/.google-credentials && cp ~/Downloads/google-automation-INTERNAL/credentials/* ~/.google-credentials/
-cd scripts/google-automation && npm install
+cd scripts/google-automation && npm install && npx playwright install chromium
 ```
 
 **Read these first, every run — they are the source of truth (flags may drift; do not hardcode from memory):**
-- `scripts/google-automation/SKILL.md` — the guided 5-phase flow + residual manual clicks
+- `scripts/google-automation/SKILL.md` — the guided 6-phase flow (Phase 6 = the browser-driven toggles)
 - `scripts/google-automation/MANUAL-STEPS.md` — the canonical per-site runbook (when to run, phase order, prereqs)
 
 > 🔒 **Credential safety (non-negotiable):** the files at `~/.google-credentials/` are LIVE keys to Utopia's Google (GA4 + GTM + GSC + Ads). NEVER copy them into the git repo, print their contents, paste them anywhere, or commit them. `scripts/google-automation/.gitignore` blocks the obvious filenames, but that is a backstop, not permission. If a key is ever exposed, tell the user to rotate it immediately.
@@ -68,30 +67,33 @@ The orchestrator will provide:
 
 If any fail, **stop and report** — Google properties keyed to a non-live or wrong URL create duplicate/split-data messes that are painful to migrate.
 
-### 1. One-time on this machine (place bundled credentials)
+### 1. One-time on this machine
 Only needed once per machine — skip if `~/.google-credentials/utopia-sa.json` already exists.
 ```bash
-mkdir -p ~/.google-credentials && cp credentials/* ~/.google-credentials/
 npm install
+npx playwright install chromium              # the browser Phase 6 drives
+node finalize-manual-toggles.mjs --login     # human types password + 2FA; session is persisted
 ```
 
-### 2. Tell the user upfront about the residual manual clicks (~3–4 min)
-These are genuinely API-impossible. List them now so the user knows they'll be pinged mid-run:
-1. **GA4** → Admin → Data collection → turn ON **Google Signals** + **User-provided data** (after Phase 2).
-2. **Ads** → the conversion action → Count → **"One"** (after Phase 5).
-3. **Ads** → Data manager → GA4 → toggle ON **"Import app and web metrics"** (after Phase 5).
-4. *(optional)* **GTM** → Container Settings → Consent Overview (BETA).
+### 2. Tell the user what still needs a human (~0 clicks now)
+Phase 6 automates the four toggles that used to be handed back. The only things left:
+- *(optional)* **GTM** → Container Settings → Consent Overview (BETA) — cosmetic, no API.
+- The one-time `--login` above, if the persisted Google session has expired.
 
-Screenshots: https://websitebuilder.utopiaai.my/google (§04).
+If Phase 6 can't run (no browser installed, session expired and can't be renewed, Google UI
+changed and a selector broke), fall back to the manual list in the bundle's `MANUAL-STEPS.md`
+and tell the user which toggles they need to flip. Screenshots:
+https://websitebuilder.utopiaai.my/google (§04).
 
-### 3. Run the 5 phases (from the automation folder)
+### 3. Run the 6 phases (from the automation folder)
 Follow the exact flags in the bundle's `SKILL.md` / `MANUAL-STEPS.md`. Summary:
 
 - **Phase 1 — GSC Domain property** (no deploy). `gsc-add-domain-property.mjs` → catch-all `sc-domain:<domain>` + main sitemap.
-- **Phase 2 — GA4 property** (no deploy). `ga4-create.mjs` → **capture the Measurement ID (`G-XXXX`) and the numeric property id** — both are needed downstream. Then hand off GA4 manual toggle #1.
+- **Phase 2 — GA4 property** (no deploy). `ga4-create.mjs` → **capture the Measurement ID (`G-XXXX`) and the numeric property id** — both are needed downstream. Its two consent toggles are left OFF here; Phase 6 flips them.
 - **Phase 3 — GTM container + snippet** (**DEPLOY after**). `gtm-setup.mjs --ga4-id G-XXXX`, then `inject-gtm-snippet.mjs`. **Redeploy the live site** and verify GTM loads.
 - **Phase 4 — GSC URL-prefix** (init → **DEPLOY** → finalize; **repeat per locale**). `gsc-submit.mjs --init` injects the verify meta tag → deploy → `--finalize` verifies + submits sitemap + bulk-indexes. Run for canonical `/` and each locale (`/en/`, `/zh/`, …), then `_user-add-gsc-properties.mjs` to add each to the user dashboard.
-- **Phase 5 — Ads conversion import** (no deploy, no 24h wait). `ads-import-conversion.mjs --no-mcc --customer-id 1933757591 --domain <domain> --ga4-property-id <numeric-id> --event whatsapp_click`. Then hand off Ads manual toggles #2 and #3.
+- **Phase 5 — Ads conversion import** (no deploy, no 24h wait). `ads-import-conversion.mjs --no-mcc --customer-id 1933757591 --domain <domain> --ga4-property-id <numeric-id> --event whatsapp_click`. It writes the `ads` block into `configs/<domain>.json` itself (`customerId`, `ga4PropertyId`, `conversionActionId`, `conversionActionName`, `event`) — Phase 6 reads it from there.
+- **Phase 6 — the four no-API toggles** (no deploy). `finalize-manual-toggles.mjs --domain <domain>` flips GA4 Signals ON, GA4 user-provided data ON, Ads counting Every→One-per-click, Ads "Import app and web metrics" ON. Idempotent — it reads state first and skips what's set. A browser window opening and driving itself is expected; screenshot proofs land in `_screenshots/<domain>/`. Use `--dry-run` to report state without changing anything, and `--only ga4-signals,ads-counting` to redo one step. "Session expired" → re-run `--login`.
 
 **Deploy discipline:** deploy Phases 3 and 4 **separately**, not batched — each phase gets its own live-site checkpoint so a break is traceable to one phase. For extracted per-site repos (no Vercel git integration), a `git push` does NOT deploy — run `vercel --prod` so the injected snippet/meta tag actually goes live before you finalize.
 
@@ -117,4 +119,4 @@ Return a status report with:
 - Follow the flags in the bundle's own `SKILL.md` / `MANUAL-STEPS.md` — they are the source of truth; don't invent flags.
 - Deploy Phases 3 and 4 separately; for extracted repos redeploy with `vercel --prod` (a push alone won't publish the snippet).
 - If a phase fails, stop and report which phase — do not blindly re-run later phases that depend on it.
-- Always hand the residual manual toggles back to the user explicitly — the setup is not "done" until Google Signals + Ads counting/import toggles are on.
+- The setup is not "done" until Google Signals + Ads counting/import toggles are on. Phase 6 does that — read its SUMMARY table and report the per-step verdict. If any step comes back `unverified`, `partial`, or `missing`, say so and hand that one toggle back to the user rather than declaring success.

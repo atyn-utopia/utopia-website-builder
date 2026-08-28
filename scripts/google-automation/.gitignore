@@ -7,3 +7,8 @@ credentials/
 *-sa.json
 
 node_modules/
+
+# Phase 6 (finalize-manual-toggles.mjs) screenshot proofs — artifacts, not source.
+# The Playwright browser profile lives in ~/.google-credentials/pw-google-profile,
+# outside the repo, because it holds a live Google session.
+_screenshots/
