@@ -453,19 +453,42 @@ async function stepAdsMetrics(ctx, cfg) {
     // and skip from the table. Find OUR property's row (by numeric property id).
     const propId = String(cfg.ga4?.propertyId || cfg.ads?.ga4PropertyId || '');
     const dom = cfg.domain;
-    // The table virtualizes (184 rows) — scroll until our row renders. A freshly
-    // linked property (new build) sorts to the top, so this usually resolves fast.
-    const rowFor = () => page.getByRole('row').filter({ hasText: propId }).or(page.getByRole('row').filter({ hasText: dom }));
+    // The Linked table is PAGINATED, not virtualized (measured 2026-08-28: "Show
+    // rows: 10", "1 - 10 of 213"). Scrolling the page loads no further rows, so the
+    // old scroll loop found nothing for any site outside the first ten.
+    //
+    // It also shares the page with a second table, "GA4 properties available to
+    // link", whose rows look almost identical but carry a "Link" action and no
+    // status text. Matching on domain alone hit THOSE rows and then clicked a
+    // non-existent "Manage" — the NOTOGGLE failure. Only a LINKED row renders
+    // "App and web metrics: On|Off", so require that string: it scopes the search
+    // to the right table without depending on any container selector.
+    const re = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const rowFor = () => page.getByRole('row')
+      .filter({ hasText: /App and web metrics:/i })
+      .filter({ hasText: new RegExp(`${re(propId)}|${re(dom)}`, 'i') });
+
+    // Raise the page size first so the walk is a handful of pages, not twenty-plus.
+    const sizer = page.getByRole('combobox', { name: /Show rows/i }).first();
+    if (await sizer.count().catch(() => 0)) {
+      await sizer.click({ timeout: 6_000 }).catch(() => {});
+      const opts = page.getByRole('option');
+      const n = await opts.count().catch(() => 0);
+      if (n) await opts.nth(n - 1).click({ timeout: 6_000 }).catch(() => {});   // last = largest
+      await page.waitForTimeout(1_500);
+    }
+
     let row = rowFor();
-    for (let i = 0; i < 40 && !(await row.count()); i++) {
-      const rows = page.getByRole('row');
-      const n = await rows.count();
-      if (n > 1) await rows.nth(n - 1).scrollIntoViewIfNeeded({ timeout: 4_000 }).catch(() => {});
-      await page.waitForTimeout(350);
+    for (let p = 0; p < 40 && !(await row.count()); p++) {
+      const next = page.getByRole('button', { name: /next page/i }).first();
+      if (!(await next.count().catch(() => 0))) break;
+      if (await next.isDisabled().catch(() => true)) break;
+      await next.click({ timeout: 8_000 }).catch(() => {});
+      await page.waitForTimeout(1_200);
       row = rowFor();
     }
     row = row.first();
-    if (!(await row.count())) { await shot(page, cfg._shotDir, 'ads-metrics-NOROW'); return record('ads-metrics', 'error', `row for ${dom}/${propId} not found after scrolling (see screenshot)`); }
+    if (!(await row.count())) { await shot(page, cfg._shotDir, 'ads-metrics-NOROW'); return record('ads-metrics', 'error', `row for ${dom}/${propId} not found after paging the Linked table (see screenshot)`); }
     await row.scrollIntoViewIfNeeded().catch(() => {});
     const statusText = (await row.innerText().catch(() => '')).replace(/\s+/g, ' ');
     if (/App and web metrics:\s*On/i.test(statusText)) { await shot(page, cfg._shotDir, 'ads-metrics'); return record('ads-metrics', 'skip', 'already ON (per linked-properties table)'); }
