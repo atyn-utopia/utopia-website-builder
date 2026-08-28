@@ -17,5 +17,17 @@
     "verified": true,
     "verificationMethod": "META",
     "verifiedAt": "2026-08-04T07:06:41.087Z"
+  },
+  "ga4": {
+    "propertyId": "548402181",
+    "measurementId": "G-YBCR40R2TR"
+  },
+  "ads": {
+    "customerId": "1933757591",
+    "ga4PropertyId": "548402181",
+    "conversionActionId": "7708137803",
+    "conversionActionName": "sewaexcavator.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "backfilledAt": "2026-08-28"
   }
 }

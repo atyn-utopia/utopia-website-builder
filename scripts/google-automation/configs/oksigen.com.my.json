@@ -27,5 +27,13 @@
     "streamName": "properties/548132069/dataStreams/15373534871",
     "siteUrl": "https://oksigen.com.my",
     "createdAt": "2026-08-03T15:05:40.016Z"
+  },
+  "ads": {
+    "customerId": "1933757591",
+    "ga4PropertyId": "548132069",
+    "conversionActionId": "7708279132",
+    "conversionActionName": "oksigen.com.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "backfilledAt": "2026-08-28"
   }
 }

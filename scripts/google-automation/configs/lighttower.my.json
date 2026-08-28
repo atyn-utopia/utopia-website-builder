@@ -17,5 +17,17 @@
     "verified": true,
     "verificationMethod": "META",
     "verifiedAt": "2026-08-11T02:00:43.937Z"
+  },
+  "ga4": {
+    "propertyId": "549469310",
+    "measurementId": "G-DCBP0TV1JP"
+  },
+  "ads": {
+    "customerId": "1933757591",
+    "ga4PropertyId": "549469310",
+    "conversionActionId": "7716370247",
+    "conversionActionName": "lighttower.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "backfilledAt": "2026-08-28"
   }
 }
