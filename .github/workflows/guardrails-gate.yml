@@ -29,16 +29,25 @@ jobs:
         with:
           fetch-depth: 0   # need the merge base to diff changed projects
 
+      - name: Mint a read-only token for the wizard repo
+        id: wizard-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.WIZARD_APP_ID }}
+          private-key: ${{ secrets.WIZARD_APP_PRIVATE_KEY }}
+          owner: utopiagrowth
+          repositories: utopia-wizard
+
       # The wizard is no longer vendored here — check it out at the same path so
       # `working-directory: utopia-wizard` and gate.ts's `../projects` lookup
-      # keep resolving. Read-only deploy key, see monitor-scan.yml.
+      # keep resolving. GitHub App installation token, see monitor-scan.yml.
       - name: Check out the wizard (single source of truth)
         uses: actions/checkout@v4
         with:
-          repository: atyn-utopia/utopia-wizard
+          repository: utopiagrowth/utopia-wizard
           ref: main
           path: utopia-wizard
-          ssh-key: ${{ secrets.WIZARD_DEPLOY_KEY }}
+          token: ${{ steps.wizard-token.outputs.token }}
           persist-credentials: false
 
       - uses: actions/setup-node@v4

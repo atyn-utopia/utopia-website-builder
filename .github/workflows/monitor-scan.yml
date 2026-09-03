@@ -4,14 +4,20 @@ name: monitor-scan
 # monitor_snapshots table. The deployed Utopia Fairy monitor reads from there.
 #
 # The wizard is NOT vendored in this repo any more. It lives in
-# atyn-utopia/utopia-wizard (the repo Vercel deploys) and is checked out here at
+# utopiagrowth/utopia-wizard (the repo Vercel deploys) and is checked out here at
 # the same `utopia-wizard/` path, so every path in this workflow keeps resolving
 # exactly as before. The copy that used to live here had drifted 30 files from
 # the deployed one in BOTH directions — the scanner graded with 106 checks while
 # the app shipped 115, and neither was complete. One checkout, one engine.
 #
-# Auth: WIZARD_DEPLOY_KEY is the private half of a READ-ONLY deploy key on
-# atyn-utopia/utopia-wizard — scoped to that one repo, and it never expires.
+# Auth: a GitHub App installation token, minted per run and valid for an hour.
+# The previous read-only deploy key died when the wizard moved from the
+# atyn-utopia org to utopiagrowth, which disables deploy keys for every repo it
+# owns — the key is still listed there, permanently greyed out, and checkout
+# failed with a misleading "Repository not found" for a week. An App is the one
+# credential the org policy allows that also has no expiry to lapse and belongs
+# to no single person: WIZARD_APP_ID + WIZARD_APP_PRIVATE_KEY, installed on
+# utopiagrowth/utopia-wizard alone with Contents: read.
 
 on:
   schedule:
@@ -34,15 +40,24 @@ jobs:
     permissions:
       contents: read
     steps:
+      - name: Mint a read-only token for the wizard repo
+        id: wizard-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.WIZARD_APP_ID }}
+          private-key: ${{ secrets.WIZARD_APP_PRIVATE_KEY }}
+          owner: utopiagrowth
+          repositories: utopia-wizard
+
       # The scanner clones every connected repo itself, so this job needs the
       # wizard and nothing else from this repository.
       - name: Check out the wizard (single source of truth)
         uses: actions/checkout@v4
         with:
-          repository: atyn-utopia/utopia-wizard
+          repository: utopiagrowth/utopia-wizard
           ref: main
           path: utopia-wizard
-          ssh-key: ${{ secrets.WIZARD_DEPLOY_KEY }}
+          token: ${{ steps.wizard-token.outputs.token }}
           persist-credentials: false
 
       - uses: actions/setup-node@v4
