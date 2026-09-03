@@ -78,6 +78,11 @@ jobs:
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           # Decrypts each user's stored GitHub token so their repo can be cloned.
           WIZARD_TOKEN_KEY: ${{ secrets.WIZARD_TOKEN_KEY }}
+          # Fallback for repos a user's token cannot see. The wizard signs users
+          # in through a classic OAuth App, and utopiagrowth refuses those — so
+          # without this the scanner loses every private repo that org holds.
+          WIZARD_APP_ID: ${{ secrets.WIZARD_APP_ID }}
+          WIZARD_APP_PRIVATE_KEY: ${{ secrets.WIZARD_APP_PRIVATE_KEY }}
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_TEAM_ID: ${{ secrets.VERCEL_TEAM_ID }}
         run: npm run scan-repos
