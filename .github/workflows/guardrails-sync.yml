@@ -1,0 +1,83 @@
+name: guardrails-sync
+
+# Keeps docs/guardrails.html in step with the wizard's check registry.
+#
+# The page is generated from lib/checkMeta.ts, which lives in a DIFFERENT repo
+# (utopiagrowth/utopia-wizard). Nothing here watches that repo, so a check added
+# or removed there leaves this page describing a checklist that no longer
+# exists — silently, because guardrails-gate only runs on PRs touching
+# projects/**. The first person to open an unrelated PR then inherits a red gate
+# for someone else's change, days later.
+#
+# So: regenerate on a schedule and commit the result. The page is generated
+# output with no review value of its own — the review happened in the wizard PR
+# that changed the registry — and leaving a bot to notice beats leaving a human
+# to trip over it.
+
+on:
+  schedule:
+    # Daily, offset off the hour to stay clear of the monitor scan.
+    - cron: '23 3 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: guardrails-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Mint a read-only token for the wizard repo
+        id: wizard-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.WIZARD_APP_ID }}
+          private-key: ${{ secrets.WIZARD_APP_PRIVATE_KEY }}
+          owner: utopiagrowth
+          repositories: utopia-wizard
+
+      # Same path as every other workflow here: the generator writes to
+      # ../docs/guardrails.html, so the wizard must sit one level down.
+      - name: Check out the wizard (single source of truth)
+        uses: actions/checkout@v4
+        with:
+          repository: utopiagrowth/utopia-wizard
+          ref: main
+          path: utopia-wizard
+          token: ${{ steps.wizard-token.outputs.token }}
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: utopia-wizard/package-lock.json
+
+      - name: Install utopia-wizard deps
+        working-directory: utopia-wizard
+        run: npm ci
+
+      - name: Regenerate the guardrails page
+        working-directory: utopia-wizard
+        run: npm run guardrails
+
+      - name: Commit if it moved
+        run: |
+          if git diff --quiet -- docs/guardrails.html; then
+            echo "guardrails page already matches the registry"
+            exit 0
+          fi
+          git --no-pager diff --stat -- docs/guardrails.html
+          git config user.name  'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/guardrails.html
+          git commit \
+            -m 'chore(guardrails): regenerate from the wizard registry' \
+            -m 'Generated output, synced automatically — the review that mattered happened in the wizard PR that changed the check registry.'
+          git push
