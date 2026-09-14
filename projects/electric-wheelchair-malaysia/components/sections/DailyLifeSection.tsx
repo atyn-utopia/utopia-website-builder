@@ -4,8 +4,8 @@ import { getTranslations } from 'next-intl/server';
 /**
  * Ten generated images of the chair in everyday Malaysian settings — never
  * captioned as customer photos, no logo on any of them (see image-prompts.md,
- * slots 9–18). Kept deliberately separate from GallerySection, which is the
- * client's own real job photos and is the only "proof" section on the page.
+ * slots 9–18). If a real-photo delivery gallery returns to the page, this
+ * stays separate from it — these are not testimonial/proof images.
  */
 export default async function DailyLifeSection({ locale }: { locale: string }) {
   const t = await getTranslations({ locale, namespace: 'dailyLife' });

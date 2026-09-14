@@ -16,7 +16,6 @@ import { WhatsAppIcon } from '@/components/sections/Icons';
 import UspBar from '@/components/sections/UspBar';
 import ProductSection, { getHeroPhoto } from '@/components/sections/ProductSection';
 import StepsSection from '@/components/sections/StepsSection';
-import GallerySection from '@/components/sections/GallerySection';
 import DailyLifeSection from '@/components/sections/DailyLifeSection';
 import LocationsSection from '@/components/sections/LocationsSection';
 import FaqSection from '@/components/sections/FaqSection';
@@ -138,7 +137,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <UspBar locale={locale} />
       <ProductSection locale={locale} waHref={waHref} />
       <StepsSection locale={locale} waHref={waHref} />
-      <GallerySection locale={locale} />
       <DailyLifeSection locale={locale} />
       <LocationsSection locale={locale} />
       <FaqSection locale={locale} faqs={faqs} />
