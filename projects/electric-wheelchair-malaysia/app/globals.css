@@ -1310,24 +1310,19 @@ p, li, blockquote,
 .ewc-fomo__cta { color: #0C1220 !important; border-radius: 12px !important; }
 
 /* ── Section eyebrows (DESIGN.md eyebrow-badge) ─────────────────────────── */
-/* One label above every section heading: pill on the pale accent, deep accent
-   text. On the orange steps ground the pill goes white with navy text; on the
-   navy final-CTA ground it goes translucent white. */
+/* One label above every section heading: outline pill, transparent fill, on
+   the pale/white section grounds. On the orange steps ground and the navy
+   final-CTA ground it inverts to a white outline so it stays visible against
+   a background close to its own accent colour. */
 .ew-eyebrow {
   display: inline-block; padding: 6px 12px; border-radius: 999px;
-  /* Requested as white-on-orange. Note: this is 2.9:1, below WCAG AA's 4.5:1
-     for text this size — navy-on-orange (5.5:1, used until this change)
-     passed; flagged, not blocking, since it's an explicit client choice. */
-  background: var(--brand-orange); color: #fff;
+  background: transparent; border: 1.5px solid var(--brand-orange); color: var(--brand-orange);
   font-family: var(--font-heading); font-size: 0.75rem; font-weight: 700;
   line-height: 1; letter-spacing: 0.08em; text-transform: uppercase;
 }
 .ew-hero__copy .ew-eyebrow { margin-bottom: 2px; }
 .ew-hero__trust { font-size: 13px; font-weight: 500; color: var(--ink-muted); }
-/* The steps section itself sits on brand orange, so its eyebrow inverts to
-   white-on-navy instead of orange-on-orange. */
-.ew-steps .ew-eyebrow { background: #fff; color: var(--brand-navy); }
-.ew-eyebrow--on-dark { background: rgba(255, 255, 255, 0.14); color: #fff; }
+.ew-eyebrow--on-dark { background: transparent; border-color: #fff; color: #fff; }
 
 /* Google mark in the reviews rating row: a white disc so the four colours sit
    clean on the pale-blue band, with a little more room before the 4.9. */
@@ -1366,7 +1361,7 @@ p, li, blockquote,
 .ew-steps .ew-head h3 { color: #fff; }
 .ew-steps .ew-head p { color: rgba(255, 255, 255, 0.9); }
 .ew-steps .ew-steps__cta p { color: rgba(255, 255, 255, 0.9); }
-.ew-steps .ew-eyebrow { background: rgba(255, 255, 255, 0.16); color: #fff; }
+.ew-steps .ew-eyebrow { background: transparent; border-color: #fff; color: #fff; }
 
 /* ============================================================
    LOCATION PAGES — their own treatment: a dark hero that leads with the town,
