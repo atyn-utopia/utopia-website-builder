@@ -984,11 +984,10 @@ p, li, blockquote,
 .blog-content p, .blog-content li, .blog-content blockquote { line-height: 1.4; }
 
 /* DESIGN.md, Shapes: one button shape across the whole site — only colour
-   separates the variants. These sites had pills, which disagreed with every
-   other surface. Radius is the Utopia CI structural token (--r-button, 8px) —
-   the same one the "Built by Utopia AI" footer credit uses — per the client's
-   request to have the CTA follow brand CI. */
-.wa-btn, .ghost-btn { border-radius: var(--r-button, 8px); }
+   separates the variants. Fully rounded (pill), per the client's request —
+   this replaces the brand-CI 8px radius from #164; the footer credit keeps
+   --r-button on its own element regardless. */
+.wa-btn, .ghost-btn { border-radius: var(--radius-full); }
 .wa-btn { padding: 0 28px; height: 52px; font-size: 15px; }
 .ghost-btn { padding: 0 28px; height: 52px; font-size: 15px; border-width: 1.5px; }
 .wa-btn:hover { transform: translateY(-1px); }
