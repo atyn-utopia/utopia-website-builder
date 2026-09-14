@@ -399,15 +399,15 @@
   "usp": {
     "items": [
       {
-        "eyebrow": "认证",
+        "eyebrow": "KKM 认证设备",
         "label": "通过 KKM 认证"
       },
       {
-        "eyebrow": "保修",
+        "eyebrow": "电机、电池与车架保修",
         "label": "六个月保修"
       },
       {
-        "eyebrow": "配送",
+        "eyebrow": "全马当日送达",
         "label": "下午 2 点前下单当天送达"
       }
     ]
