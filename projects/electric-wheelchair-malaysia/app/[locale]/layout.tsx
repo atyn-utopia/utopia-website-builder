@@ -4,6 +4,7 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { OrganizationSchema } from '@/components/schema/OrganizationSchema';
+import ScrollReveal from '@/components/ScrollReveal';
 import { siteConfig } from '@/config/site';
 
 const inter = Inter({
@@ -71,6 +72,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <NextIntlClientProvider messages={messages}>
           <OrganizationSchema />
           {children}
+          <ScrollReveal />
         </NextIntlClientProvider>
       </body>
     </html>

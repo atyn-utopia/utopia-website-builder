@@ -12,7 +12,7 @@ export default async function FaqSection({ locale, faqs }: { locale: string; faq
   return (
     <section className="ew-sec" id="faq">
       <div className="ew-wrap">
-        <div className="ew-head">
+        <div className="ew-head ew-reveal">
           <span className="ew-eyebrow">{t('eyebrow')}</span>
           <h3>{t('heading')}</h3>
         </div>

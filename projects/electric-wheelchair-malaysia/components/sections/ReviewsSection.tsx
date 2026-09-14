@@ -13,7 +13,7 @@ export default async function ReviewsSection({ locale }: { locale: string }) {
         <Image src="/brand/reviews-bg.webp" alt={t('bgAlt')} fill sizes="100vw" />
       </div>
       <div className="ew-wrap">
-        <figure className="ew-rev__quote">
+        <figure className="ew-rev__quote ew-reveal">
           <span className="ew-eyebrow">{t('eyebrow')}</span>
           <div className="ew-rating">
             <span className="ew-rating__g">
