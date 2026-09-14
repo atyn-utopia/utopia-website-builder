@@ -55,7 +55,9 @@ if (args['from-webcore']) {
     console.error('❌ --from-webcore needs --website <domain>');
     process.exit(1);
   }
-  const stored = await getKeywords(WEBSITE);
+  // Head terms are per language, so read back the ones for the language this
+  // run is about rather than whichever webcore answers with by default.
+  const stored = await getKeywords(WEBSITE, { language: toWebcoreLanguage(LANG) ?? undefined });
   keywords = (stored.keywords ?? []).map((k) => k.search_word).filter(Boolean);
   planMeta = {
     keywords,
@@ -366,10 +368,14 @@ if (args.push) {
     console.log(`\n📤 Pushing ${pushRows.length} rows to webcore for ${WEBSITE} (lang=${wcLang})…`);
     if (args['dry-run']) {
       console.log('   --dry-run: nothing sent. Payload preview:');
-      console.log('   ' + JSON.stringify({ website: WEBSITE, rows: pushRows.slice(0, 3), primary_keywords: primary, secondary_keywords: secondary }, null, 2).replace(/\n/g, '\n   '));
+      console.log('   ' + JSON.stringify({ website: WEBSITE, language: wcLang, rows: pushRows.slice(0, 3), primary_keywords: primary, secondary_keywords: secondary }, null, 2).replace(/\n/g, '\n   '));
     } else {
       const res = await pushKeywords(WEBSITE, {
         rows: pushRows,
+        // Head terms are stored per language. Naming it here is what keeps the
+        // `--lang ms` run's heads from being overwritten by the `--lang en`
+        // one, which is what used to happen when the lists were site-wide.
+        language: wcLang,
         primary_keywords: primary,
         secondary_keywords: secondary,
         mode: args.replace ? 'replace' : undefined,

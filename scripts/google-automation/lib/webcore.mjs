@@ -52,7 +52,15 @@ async function request(path, { method = 'GET', body, apiKey } = {}) {
 
 /**
  * The site's keyword research + webcore's last crawl of the live pages.
+ *
+ * Head terms are stored per language: `primary_keywords` answers for the
+ * `language` asked for (English when none is given), falling back to the
+ * site's older unlabelled list where that language has none of its own.
+ * `heads` carries both languages, each with an `inherited` flag marking a
+ * language still reading that older list.
+ *
  * @returns {{ primary_keywords: string[], secondary_keywords: string[],
+ *             heads: Record<'en'|'ms', {primary_keywords: string[], secondary_keywords: string[], inherited: boolean}>,
  *             keywords: Array, pages: Array, updated_at: string|null }}
  */
 export function getKeywords(website, { language, path } = {}) {
@@ -71,16 +79,25 @@ export function getKeywords(website, { language, path } = {}) {
  * from hand-entered ones in the store. Also, the public GET is CDN-cached for
  * 300s, so verifying a write needs a cache-busting query param.
  *
+ * Head terms belong to one language. Pass `language` whenever the push carries
+ * `primary_keywords` or `secondary_keywords`: webcore keeps a list per language
+ * now, and a heads push it cannot attribute to one is refused with a 400
+ * rather than filed under a guess. (It will read the language off the pushed
+ * rows when they are all one language, but saying it outright is what makes a
+ * rows-less push legal.)
+ *
  * @param {object} opts
  * @param {Array<{search_word,language,volume,source}>} opts.rows
+ * @param {'en'|'ms'} [opts.language] — whose head terms these are
  * @param {string[]} [opts.primary_keywords]
  * @param {string[]} [opts.secondary_keywords]
  * @param {'merge'|'replace'} [opts.mode] — 'replace' clears existing rows first
  */
-export function pushKeywords(website, { rows, primary_keywords, secondary_keywords, mode }, apiKey) {
+export function pushKeywords(website, { rows, language, primary_keywords, secondary_keywords, mode }, apiKey) {
   if (!apiKey) throw new Error('WEBCORE_API_KEY is not set — refusing to attempt a write.');
   const body = { website };
   if (rows?.length) body.rows = rows;
+  if (language) body.language = language;
   if (primary_keywords?.length) body.primary_keywords = primary_keywords;
   if (secondary_keywords?.length) body.secondary_keywords = secondary_keywords;
   if (mode) body.mode = mode;

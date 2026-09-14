@@ -212,18 +212,23 @@ off the live site. **Read this before writing page copy** so H1/H2/meta target
 researched keywords.
 
 ```
-GET    /api/public/keywords?website=<d>                # everything
-GET    /api/public/keywords?website=<d>&language=ms    # BM only
+GET    /api/public/keywords?website=<d>                # everything, EN head terms
+GET    /api/public/keywords?website=<d>&language=ms    # BM rows and BM head terms
 GET    /api/public/keywords?website=<d>&path=/products # one page's crawled copy
-POST   /api/public/keywords   { website, rows?, paste?, mode?, primary_keywords?, secondary_keywords? }
+POST   /api/public/keywords   { website, rows?, paste?, mode?, language?, primary_keywords?, secondary_keywords? }
 PATCH  /api/public/keywords   { id, search_word?, language?, keywords?, volume? }
 DELETE /api/public/keywords   { id }
 ```
 
 ```jsonc
 {
+  // The head terms for the language asked for — EN when none was named.
   "primary_keywords": ["sewa excavator"],
   "secondary_keywords": ["sewa excavator selangor"],
+  // Both languages. `inherited` marks one still reading the site's older
+  // single list, from before head terms were stored per language.
+  "heads": { "en": { "primary_keywords": [], "secondary_keywords": [], "inherited": false },
+             "ms": { "primary_keywords": ["sewa excavator"], "secondary_keywords": [], "inherited": false } },
   "keywords": [{ "search_word": "sewa excavator", "language": "ms", "volume": 1900, "source": "semrush" }],
   "pages": [{ "path": "/", "lang": "ms", "meta_title": "…", "h1": ["…"], "h2": ["…"],
               "images": [{ "src": "…", "alt": "…" }] }]
@@ -246,9 +251,10 @@ that is a gap to fill, not a reason to invent keywords.
 - **`primary_keywords` and `secondary_keywords` are capped at 32 each, and the
   overflow is dropped from the TAIL with no error or `truncated` count.**
   Measured on coldroomrental.my: 60 sent, 32 stored, both arrays. Order the
-  lists by priority before pushing, and interleave locales — an en-then-ms list
-  longer than 32 silently loses the entire Malay tail. The `rows` array has no
-  such cap (51 rows stored fine) and does report `truncated`.
+  lists by priority before pushing. (The cap is per language now, so the old
+  advice to interleave locales no longer applies — a single list never has to
+  hold both.) The `rows` array has no such cap (51 rows stored fine) and does
+  report `truncated`.
 
 - **`language` is `en` or `ms` ONLY, and anything else is silently coerced —
   not rejected.** Pushing `zh` rows for a trilingual site returns `200` with the
@@ -262,17 +268,22 @@ that is a gap to fill, not a reason to invent keywords.
   minutes after a successful write.** Append a cache-buster
   (`&_=$(date +%s)`) plus `Cache-Control: no-cache` when verifying a push, or
   you will conclude the write failed when it did not.
-- **`primary_keywords` and `secondary_keywords` are REPLACED on every POST;
-  only `rows` merge.** "Upsert" above is true for rows and false for the two
-  lists — whatever lists the last POST carried are the lists the site has.
-  `keyword-volume.mjs --push` sends the lists on every run, so the per-language
-  flow (`--lang ms`, then `--lang en`) ends with only the English lists.
-  Measured on acsonaircond.my (2026-09-11): `primary=[aircond acson]` after the
-  `ms` push, `primary=[acson aircond]` after the `en` push — the Malay term
-  gone, all five rows intact. **Order that works:** push `rows` per language
-  first, then make ONE final POST carrying the merged `primary_keywords` +
-  `secondary_keywords` for every language and no `rows`. Read back and count
-  the lists, not just `saved`.
+- **`primary_keywords` and `secondary_keywords` are REPLACED on every POST, and
+  they belong to ONE language.** "Upsert" above is true for rows and false for
+  the two lists — whatever lists the last POST carried are that language's
+  lists. Say which language with a top-level `language`; webcore will otherwise
+  read it off the pushed `rows` when they are all one language, and **refuses
+  the push with a `400` when it cannot tell** (no `language`, and either no rows
+  or rows in both languages). Pushing each language separately is the whole
+  point — do not merge the two languages' lists into one call.
+  *History (webcore, until 2026-09-14):* the lists were site-wide, so the
+  per-language flow (`--lang ms`, then `--lang en`) ended with only the English
+  lists. Measured on acsonaircond.my (2026-09-11): `primary=[aircond acson]`
+  after the `ms` push, `primary=[acson aircond]` after the `en` push — the Malay
+  term gone, all five rows intact. Sites researched before that date still hold
+  one unlabelled list, which answers for both languages (`heads.*.inherited` is
+  `true`) until the first per-language push replaces it. Read back and count the
+  lists, not just `saved`.
 - **The plan parser needs an enclosing H2, not only the H3.** The skill says
   head terms must sit under an H3 like `### 1.2 Primary money keywords`. That
   H3 is only read when it is nested under an H2 matching

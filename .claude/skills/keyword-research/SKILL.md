@@ -80,6 +80,12 @@ node keyword-volume.mjs --plan <path>/seo-plan.md --lang ms \
 
 - Head terms go to `primary_keywords`, the rest to `secondary_keywords`; only
   keywords at or above `--min` are promoted either way.
+- **Head terms are stored per language**, so each `--lang` run keeps its own
+  lists and a later run in the other language no longer replaces them. The
+  script names the language on every push. Sites researched before 2026-09-14
+  still hold one unlabelled list that answers for both languages until the
+  first push per language replaces it — so the first `--lang ms` run after that
+  date is what finally makes the BM heads BM.
 - Upserts on `(website, search_word, language)` — verified: a store with 1 row
   went to 8 after pushing 8 (the pre-existing row was updated, not duplicated).
 - **`source` is ignored on write.** The script sends `source: 'keyword-planner'`
