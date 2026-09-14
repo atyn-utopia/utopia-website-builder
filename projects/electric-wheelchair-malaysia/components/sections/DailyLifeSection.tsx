@@ -18,7 +18,7 @@ export default async function DailyLifeSection({ locale }: { locale: string }) {
   return (
     <section className="ew-sec ew-sec--paper">
       <div className="ew-wrap">
-        <div className="ew-head">
+        <div className="ew-head ew-reveal">
           <span className="ew-eyebrow">{t('eyebrow')}</span>
           <h3>{t('heading')}</h3>
           <p>{t('subheading')}</p>

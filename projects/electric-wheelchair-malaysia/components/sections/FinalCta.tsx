@@ -22,7 +22,7 @@ export default async function FinalCta({
       <div className="ew-fcta__bg">
         <Image src="/brand/final-cta.webp" alt={t('bgAlt')} fill sizes="100vw" />
       </div>
-      <div className="ew-wrap ew-fcta__body">
+      <div className="ew-wrap ew-fcta__body ew-reveal">
         <span className="ew-eyebrow ew-eyebrow--on-dark">{t('eyebrow')}</span>
         <h3>{heading ?? t('heading')}</h3>
         <p>{t('subheading')}</p>

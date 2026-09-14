@@ -21,7 +21,7 @@ export default async function LocationsSection({ locale }: { locale: string }) {
   return (
     <section className="ew-sec ew-sec--paper" id="locations">
       <div className="ew-wrap">
-        <div className="ew-head">
+        <div className="ew-head ew-reveal">
           <span className="ew-eyebrow">{t('eyebrow')}</span>
           <h3>{t('finderHeading')}</h3>
           <p>{t('finderSubheading', { n: towns.length })}</p>

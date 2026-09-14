@@ -67,7 +67,7 @@ export default async function ProductSection({ locale, waHref }: { locale: strin
   return (
     <section className="ew-sec" id="products">
       <div className="ew-wrap">
-        <div className="ew-head">
+        <div className="ew-head ew-reveal">
           <span className="ew-eyebrow">{t('eyebrow')}</span>
           <h3>{t('sectionHeading')}</h3>
           <p>{t('sectionSubheading')}</p>

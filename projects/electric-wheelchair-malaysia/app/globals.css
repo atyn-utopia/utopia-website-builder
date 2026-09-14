@@ -1473,3 +1473,14 @@ p, li, blockquote,
 @media (min-width: 900px) {
   .ew-life { grid-template-columns: repeat(5, 1fr); gap: 14px; }
 }
+
+/* ── Scroll reveal ────────────────────────────────────────────────────────
+   .will-reveal / .is-in are added by ScrollReveal.tsx at runtime and are
+   never present at rest here — an .ew-reveal element with neither class (no
+   JS, or the effect hasn't run yet) renders in its normal, fully visible
+   state. See ScrollReveal.tsx for why. */
+.ew-reveal.will-reveal {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity 560ms var(--ease-out), transform 560ms var(--ease-out);
+}
+.ew-reveal.will-reveal.is-in { opacity: 1; transform: translateY(0); }

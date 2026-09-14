@@ -26,7 +26,7 @@ export default async function StepsSection({ locale, waHref }: { locale: string;
         <Image src="/brand/step-3.webp" alt="" fill sizes="100vw" />
       </div>
       <div className="ew-wrap">
-        <div className="ew-head">
+        <div className="ew-head ew-reveal">
           <span className="ew-eyebrow">{t('eyebrow')}</span>
           <h3>{t('heading')}</h3>
           <p>{t('subheading')}</p>
