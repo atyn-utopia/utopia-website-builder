@@ -1095,7 +1095,12 @@ p, li, blockquote,
 .ew-usp__grid { display: grid; grid-template-columns: repeat(3, 1fr); }
 .ew-usp__item { padding: 18px 10px; display: grid; gap: 4px; justify-items: center; text-align: center; }
 .ew-usp__item + .ew-usp__item { border-left: 1px solid var(--hair); }
-.ew-usp__item span { font-size: 10.5px; color: var(--brand-orange-deep); }
+/* Targets .ew-mono specifically, not "span" — the icon badge is also a span,
+   and a bare "span" selector here (0,1,1) would beat .ew-usp__icon's white
+   color (0,1,0) and win, which is exactly the bug this replaced: the icon
+   glyph computed to orange-deep instead of white, nearly invisible on the
+   orange badge. */
+.ew-usp__item .ew-mono { font-size: 10.5px; color: var(--brand-orange-deep); }
 .ew-usp__item b { font-size: 14px; font-weight: 600; color: var(--brand-navy); }
 
 /* ── Product display ─────────────────────────────────────────────────────── */
