@@ -1052,7 +1052,7 @@ p, li, blockquote,
   justify-items: center; text-align: center;
 }
 .ew-hero__copy { display: grid; gap: 14px; justify-items: center; }
-.ew-hero__logo { width: auto; height: 46px; margin-bottom: 4px; }
+.ew-hero__logo { width: auto; height: 54px; margin-bottom: 4px; }
 .ew-hero h1 {
   font-size: clamp(30px, 4.6vw, 50px); font-weight: 800;
   letter-spacing: -0.03em; color: var(--brand-navy); margin: 0;
@@ -1112,10 +1112,16 @@ p, li, blockquote,
 .ew-spec-list i { width: 7px; height: 7px; border-radius: 50%; background: var(--brand-orange); margin-top: 6px; }
 
 /* ── USP bar ─────────────────────────────────────────────────────────────── */
-.ew-usp { border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair); background: #fff; }
-.ew-usp__grid { display: grid; grid-template-columns: repeat(3, 1fr); }
-.ew-usp__item { padding: 18px 10px; display: grid; gap: 4px; justify-items: center; text-align: center; }
-.ew-usp__item + .ew-usp__item { border-left: 1px solid var(--hair); }
+/* Three separate elevated cards on a pale ground, not one flat strip with
+   hairline dividers — the divided-strip version read dull/flat against the
+   rest of the page's layered-shadow surfaces. */
+.ew-usp { background: var(--brand-paper); padding: 40px 0; }
+.ew-usp__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.ew-usp__item {
+  padding: 26px 14px; display: grid; gap: 6px; justify-items: center; text-align: center;
+  background: #fff; border-radius: 18px; border: 1px solid var(--hair);
+  box-shadow: 0 1px 2px rgba(11, 32, 69, 0.04), 0 16px 30px -20px rgba(11, 32, 69, 0.22);
+}
 /* Targets .ew-mono specifically, not "span" — the icon badge is also a span,
    and a bare "span" selector here (0,1,1) would beat .ew-usp__icon's white
    color (0,1,0) and win, which is exactly the bug this replaced: the icon
@@ -1288,13 +1294,13 @@ p, li, blockquote,
     gap: 48px; padding: 56px 0 72px;
   }
   .ew-hero__copy { justify-items: start; }
-  .ew-hero__logo { height: 58px; margin-bottom: 6px; }
+  .ew-hero__logo { height: 66px; margin-bottom: 6px; }
   .ew-hero__ctas { justify-content: flex-start; }
   .ew-callout { display: flex; }
   .ew-spec-list { display: none; }
   .ew-diagram { padding: 30px 115px; }
   .ew-diagram__chair { width: 100%; }
-  .ew-usp__item { padding: 24px 16px; }
+  .ew-usp__item { padding: 28px 20px; }
   .ew-prod__grid { grid-template-columns: 1fr 1fr; gap: 60px; }
   .ew-prod__info { justify-items: start; text-align: left; }
   .ew-steps__list { grid-template-columns: repeat(3, 1fr); gap: 22px; }
