@@ -16,7 +16,7 @@ export default async function UspBar({ locale }: { locale: string }) {
     <div className="ew-usp">
       <div className="ew-wrap ew-usp__grid">
         {items.map((item) => (
-          <div className="ew-usp__item" key={item.label}>
+          <div className="ew-usp__item ew-reveal" key={item.label}>
             <span className="ew-usp__icon"><Icon name={item.icon} /></span>
             <span className="ew-mono">{item.eyebrow}</span>
             <b>{item.label}</b>

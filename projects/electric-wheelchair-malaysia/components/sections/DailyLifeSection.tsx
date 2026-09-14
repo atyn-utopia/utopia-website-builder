@@ -25,7 +25,7 @@ export default async function DailyLifeSection({ locale }: { locale: string }) {
         </div>
         <div className="ew-life">
           {items.map((item) => (
-            <figure key={item.src}>
+            <figure className="ew-reveal" key={item.src}>
               <Image src={item.src} alt={item.alt} width={800} height={600} sizes="(min-width: 900px) 20vw, 45vw" />
               <figcaption className="ew-mono">{item.caption}</figcaption>
             </figure>

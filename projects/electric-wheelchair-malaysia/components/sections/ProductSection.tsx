@@ -73,7 +73,7 @@ export default async function ProductSection({ locale, waHref }: { locale: strin
           <p>{t('sectionSubheading')}</p>
         </div>
 
-        <div className="ew-prod__grid">
+        <div className="ew-prod__grid ew-reveal">
           <ProductShowcase photos={photos} />
 
           <div className="ew-prod__info">
