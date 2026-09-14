@@ -48,6 +48,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const tMeta = await getTranslations({ locale, namespace: 'metadata' });
   const tHero = await getTranslations({ locale, namespace: 'hero' });
   const tFaq = await getTranslations({ locale, namespace: 'faq' });
+  const tNav = await getTranslations({ locale, namespace: 'nav' });
 
   const waHref = waRedirect(locale);
   const heroPhoto = await getHeroPhoto(locale);
@@ -71,6 +72,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section className="ew-hero">
         <div className="ew-wrap ew-hero__inner">
           <div className="ew-hero__copy">
+            <Image
+              src="/brand/logo-light.png"
+              alt={tNav('logoAlt')}
+              className="ew-hero__logo"
+              width={1200}
+              height={480}
+              priority
+            />
             <span className="ew-eyebrow">{tHero('badge')}</span>
             <h1>
               {tHero('h1')} {tHero('h1Highlight')} {tHero('h1Suffix')}
