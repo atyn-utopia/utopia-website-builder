@@ -76,13 +76,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               {tHero('h1')} {tHero('h1Highlight')} {tHero('h1Suffix')}
             </h1>
             <h2>{tHero('subheadline')}</h2>
+            <p className="ew-hero__trust">{tHero('trustBadge')}</p>
             <div className="ew-hero__ctas">
               <a href={waHref} target="_blank" rel="noopener noreferrer" className="wa-btn">
                 <WhatsAppIcon size={18} />
                 {tHero('ctaPrimary')}
-              </a>
-              <a href="#products" className="ghost-btn">
-                {tHero('ctaSecondary')}
               </a>
             </div>
           </div>

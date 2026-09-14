@@ -1320,14 +1320,15 @@ p, li, blockquote,
    navy final-CTA ground it goes translucent white. */
 .ew-eyebrow {
   display: inline-block; padding: 6px 12px; border-radius: 999px;
-  /* Solid orange, white text — brand-orange-deep (#B84D0A) rather than the
-     bright #FF6613: white on the bright orange is 2.9:1 and fails AA, white
-     on the deep orange is 5.1:1. */
-  background: var(--brand-orange-deep); color: #fff;
+  /* The striking logo orange, with navy text rather than white — white on
+     brand-orange is 2.9:1 and fails AA, navy on it is 5.5:1 and passes, so
+     this gets the punchier colour without needing a contrast exception. */
+  background: var(--brand-orange); color: var(--brand-navy);
   font-family: var(--font-heading); font-size: 0.75rem; font-weight: 700;
   line-height: 1; letter-spacing: 0.08em; text-transform: uppercase;
 }
 .ew-hero__copy .ew-eyebrow { margin-bottom: 2px; }
+.ew-hero__trust { font-size: 13px; font-weight: 500; color: var(--ink-muted); }
 /* The steps section itself sits on brand orange, so its eyebrow inverts to
    white-on-navy instead of orange-on-orange. */
 .ew-steps .ew-eyebrow { background: #fff; color: var(--brand-navy); }
