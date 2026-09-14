@@ -1047,25 +1047,37 @@ p, li, blockquote,
 }
 
 /* ── Hero: the annotated chair ───────────────────────────────────────────── */
-.ew-hero { background: #fff; }
+.ew-hero { position: relative; isolation: isolate; overflow: hidden; background: #fff; }
+/* Soft ambient wash behind the diagram side — the logo's sky blue, otherwise
+   unused on this page. Kept very low-opacity so navy-on-white copy stays
+   crisp; pure depth, never a legibility risk. */
+.ew-hero::before {
+  content: ""; position: absolute; inset: -12% -14% auto auto;
+  width: 62%; aspect-ratio: 1; z-index: -1; pointer-events: none;
+  background: radial-gradient(circle, rgba(116, 198, 246, 0.18), transparent 70%);
+}
 .ew-hero__inner {
   display: grid; gap: 28px; padding: 32px 0 44px;
   justify-items: center; text-align: center;
 }
-.ew-hero__copy { display: grid; gap: 16px; justify-items: center; }
+.ew-hero__copy { display: grid; gap: 14px; justify-items: center; }
 .ew-hero h1 {
   font-size: clamp(30px, 4.6vw, 50px); font-weight: 800;
   letter-spacing: -0.03em; color: var(--brand-navy); margin: 0;
 }
 .ew-hero h2 {
-  font-size: clamp(16px, 1.7vw, 19px); font-weight: 400; line-height: 1.5;
-  color: var(--ink-muted); max-width: 34em; margin: 0;
+  font-size: clamp(15px, 1.3vw, 16.5px); font-weight: 400; line-height: 1.6;
+  color: var(--ink-muted); max-width: 32em; margin: 0;
 }
-.ew-hero__ctas { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.ew-hero__ctas { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 4px; }
 .ew-diagram {
   position: relative; width: 100%;
   background: var(--brand-ice); border-radius: 24px; padding: 24px;
   display: grid; place-items: center;
+  border: 1px solid rgba(11, 32, 69, 0.06);
+  /* Layered, colour-tinted shadow — a flat panel with no lift read cheap
+     next to the rest of the page. */
+  box-shadow: 0 1px 2px rgba(11, 32, 69, 0.04), 0 28px 56px -20px rgba(11, 32, 69, 0.22);
 }
 /* The generated product shot is on a white studio ground, not alpha. Multiply
    drops that white into the ice panel without touching the source file. */
@@ -1075,7 +1087,23 @@ p, li, blockquote,
   font-size: 11px; line-height: 1.2; color: var(--ink-muted);
 }
 .ew-callout__line { height: 1px; width: 56px; background: var(--hair-strong); flex: none; }
-.ew-callout__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--brand-orange); flex: none; }
+.ew-callout__dot {
+  position: relative; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--brand-orange); flex: none;
+}
+/* A small live-indicator pulse — transform/opacity only, and only when the
+   visitor hasn't asked for reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .ew-callout__dot::after {
+    content: ""; position: absolute; inset: -5px; border-radius: 50%;
+    border: 1.5px solid var(--brand-orange);
+    animation: ew-dot-pulse 2.4s ease-out infinite;
+  }
+}
+@keyframes ew-dot-pulse {
+  from { transform: scale(0.6); opacity: 0.55; }
+  to { transform: scale(1.9); opacity: 0; }
+}
 .ew-callout--l { left: 18px; }
 .ew-callout--r { right: 18px; flex-direction: row-reverse; }
 .ew-callout--1 { top: 24%; }
