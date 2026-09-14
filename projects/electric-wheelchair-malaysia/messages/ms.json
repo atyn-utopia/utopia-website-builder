@@ -403,15 +403,15 @@
   "usp": {
     "items": [
       {
-        "eyebrow": "disahkan",
+        "eyebrow": "Peralatan disahkan KKM",
         "label": "Diluluskan KKM"
       },
       {
-        "eyebrow": "dilindungi",
+        "eyebrow": "Motor, bateri & rangka dilindungi",
         "label": "Waranti 6 bulan"
       },
       {
-        "eyebrow": "dihantar",
+        "eyebrow": "Penghantaran hari sama ke seluruh Malaysia",
         "label": "Hari sama, sebelum 2pm"
       }
     ]

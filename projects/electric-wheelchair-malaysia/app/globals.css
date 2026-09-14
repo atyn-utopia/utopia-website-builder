@@ -1118,7 +1118,7 @@ p, li, blockquote,
 .ew-usp { background: var(--brand-paper); padding: 40px 0; }
 .ew-usp__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .ew-usp__item {
-  padding: 26px 14px; display: grid; gap: 6px; justify-items: center; text-align: center;
+  padding: 26px 14px; display: grid; gap: 8px; justify-items: center; text-align: center;
   background: #fff; border-radius: 18px; border: 1px solid var(--hair);
   box-shadow: 0 1px 2px rgba(11, 32, 69, 0.04), 0 16px 30px -20px rgba(11, 32, 69, 0.22);
 }
@@ -1127,8 +1127,13 @@ p, li, blockquote,
    color (0,1,0) and win, which is exactly the bug this replaced: the icon
    glyph computed to orange-deep instead of white, nearly invisible on the
    orange badge. */
-.ew-usp__item .ew-mono { font-size: 10.5px; color: var(--brand-orange-deep); }
-.ew-usp__item b { font-size: 14px; font-weight: 600; color: var(--brand-navy); }
+.ew-usp__item .ew-mono { font-size: 10px; color: var(--brand-orange-deep); max-width: 18ch; }
+/* Smaller at rest — three stacked columns at mobile widths leave ~80px of
+   text room per card, and 17px bold wraps "Same day, by 2pm" to 3 lines
+   while its siblings wrap to 2, giving the row uneven card heights. 900px+
+   switches to one icon-left row per card with much more width, so it goes
+   back up there. */
+.ew-usp__item b { font-size: 14.5px; font-weight: 800; letter-spacing: -0.01em; color: var(--brand-navy); }
 
 /* ── Product display ─────────────────────────────────────────────────────── */
 .ew-prod__grid { display: grid; gap: 30px; align-items: center; }
@@ -1301,6 +1306,7 @@ p, li, blockquote,
   .ew-diagram { padding: 30px 115px; }
   .ew-diagram__chair { width: 100%; }
   .ew-usp__item { padding: 28px 20px; }
+  .ew-usp__item b { font-size: 17px; }
   .ew-prod__grid { grid-template-columns: 1fr 1fr; gap: 60px; }
   .ew-prod__info { justify-items: start; text-align: left; }
   .ew-steps__list { grid-template-columns: repeat(3, 1fr); gap: 22px; }
@@ -1351,7 +1357,7 @@ p, li, blockquote,
 .ew-specs dt { display: flex; align-items: center; gap: 8px; }
 .ew-specs__icon { display: inline-grid; place-items: center; color: var(--brand-orange-deep); flex: none; }
 @media (min-width: 900px) {
-  .ew-usp__item { grid-template-columns: auto 1fr; column-gap: 14px; row-gap: 2px; justify-items: start; text-align: left; align-items: center; }
+  .ew-usp__item { grid-template-columns: auto 1fr; column-gap: 14px; row-gap: 4px; justify-items: start; text-align: left; align-items: center; }
   .ew-usp__icon { grid-row: span 2; margin: 0; }
 }
 
