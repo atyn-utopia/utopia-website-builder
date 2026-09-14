@@ -34,7 +34,7 @@ export default async function StepsSection({ locale, waHref }: { locale: string;
 
         <ol className="ew-steps__list">
           {steps.map((step) => (
-            <li className="ew-step" key={step.src}>
+            <li className="ew-step ew-reveal" key={step.src}>
               <figure className="ew-step__figure">
                 <Image src={step.src} alt={step.imageAlt} width={1100} height={825} sizes="(min-width: 900px) 370px, 92vw" />
                 <figcaption className="ew-step__when ew-mono">{step.when}</figcaption>

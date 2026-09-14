@@ -18,7 +18,7 @@ export default async function FaqSection({ locale, faqs }: { locale: string; faq
         </div>
         <div className="ew-faq">
           {faqs.map((faq, i) => (
-            <details key={faq.question} open={i === 0}>
+            <details className="ew-reveal" key={faq.question} open={i === 0}>
               <summary>
                 <h4>{faq.question}</h4>
               </summary>

@@ -29,7 +29,7 @@ export default async function ReviewsSection({ locale }: { locale: string }) {
           </figcaption>
         </figure>
 
-        <div className="ew-rev__more">
+        <div className="ew-rev__more ew-reveal">
           {[1, 2].map((i) => (
             <div key={i}>
               <p>&ldquo;{t(`items.${i}.text`)}&rdquo;</p>

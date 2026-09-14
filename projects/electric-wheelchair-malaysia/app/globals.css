@@ -799,14 +799,14 @@ a {
 }
 .ewc-header__inner {
   /* No brand cell anymore (logo moved to the hero). justify-content:flex-end
-     with the nav on flex:1 means the nav eats all the leftover space and
-     centers its own links inside it — the actions/contact/lang/WA group
-     never has to compete with a forced-equal opposite track for room, so it
-     can't be squeezed into overlapping the nav (a real bug hit with a
-     three-column grid: the wide actions group didn't fit its "fair share"
-     track and spilled left over the nav links). flex-end also means a lone
-     visible child (the mobile burger, once nav/actions hide) still lands
-     on the right without a separate mobile override. */
+     with the nav on flex:1 means the nav eats all the leftover space, so the
+     actions/contact/lang/WA group never has to compete with a forced-equal
+     opposite track for room and can't be squeezed into overlapping the nav
+     (a real bug hit with a three-column grid: the wide actions group didn't
+     fit its "fair share" track and spilled left over the nav links).
+     flex-end also means a lone visible child (the mobile burger, once
+     nav/actions hide) still lands on the right without a separate mobile
+     override. The nav itself left-aligns within its own flex:1 track. */
   display: flex; align-items: center; justify-content: flex-end;
   gap: 14px;
   padding: 12px clamp(14px, 2.5vw, 28px);
@@ -816,7 +816,7 @@ a {
 .ewc-header__nav { display: none; }
 .ewc-header__nav--desktop {
   flex: 1;
-  justify-content: center; align-items: center; gap: 26px;
+  justify-content: flex-start; align-items: center; gap: 26px;
 }
 .ewc-header__nav--desktop a {
   color: #1B2D5B;
@@ -1052,7 +1052,7 @@ p, li, blockquote,
   justify-items: center; text-align: center;
 }
 .ew-hero__copy { display: grid; gap: 14px; justify-items: center; }
-.ew-hero__logo { width: auto; height: 30px; margin-bottom: 4px; }
+.ew-hero__logo { width: auto; height: 40px; margin-bottom: 4px; }
 .ew-hero h1 {
   font-size: clamp(30px, 4.6vw, 50px); font-weight: 800;
   letter-spacing: -0.03em; color: var(--brand-navy); margin: 0;
@@ -1063,16 +1063,18 @@ p, li, blockquote,
 }
 .ew-hero__ctas { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 4px; }
 .ew-diagram {
+  /* No card/panel here by request — the photo and its callout labels sit
+     directly on the page. Padding stays: it's the room the absolutely
+     positioned callouts (left/right: 18px, see below) need around the
+     photo, not a visual box inset. */
   position: relative; width: 100%;
-  background: var(--brand-ice); border-radius: 24px; padding: 24px;
+  background: transparent; padding: 24px;
   display: grid; place-items: center;
-  border: 1px solid rgba(11, 32, 69, 0.06);
-  /* Layered, colour-tinted shadow — a flat panel with no lift read cheap
-     next to the rest of the page. */
-  box-shadow: 0 1px 2px rgba(11, 32, 69, 0.04), 0 28px 56px -20px rgba(11, 32, 69, 0.22);
 }
 /* The generated product shot is on a white studio ground, not alpha. Multiply
-   drops that white into the ice panel without touching the source file. */
+   drops that white into the page background without touching the source
+   file — this only reads as "transparent" where the ground behind it is
+   itself light; it's a blend trick, not real alpha. */
 .ew-diagram__chair { width: min(88%, 400px); height: auto; mix-blend-mode: multiply; }
 .ew-callout {
   display: none; position: absolute; align-items: center;
@@ -1286,7 +1288,7 @@ p, li, blockquote,
     gap: 48px; padding: 56px 0 72px;
   }
   .ew-hero__copy { justify-items: start; }
-  .ew-hero__logo { height: 36px; margin-bottom: 6px; }
+  .ew-hero__logo { height: 48px; margin-bottom: 6px; }
   .ew-hero__ctas { justify-content: flex-start; }
   .ew-callout { display: flex; }
   .ew-spec-list { display: none; }
@@ -1313,10 +1315,10 @@ p, li, blockquote,
    navy final-CTA ground it goes translucent white. */
 .ew-eyebrow {
   display: inline-block; padding: 6px 12px; border-radius: 999px;
-  /* The striking logo orange, with navy text rather than white — white on
-     brand-orange is 2.9:1 and fails AA, navy on it is 5.5:1 and passes, so
-     this gets the punchier colour without needing a contrast exception. */
-  background: var(--brand-orange); color: var(--brand-navy);
+  /* Requested as white-on-orange. Note: this is 2.9:1, below WCAG AA's 4.5:1
+     for text this size — navy-on-orange (5.5:1, used until this change)
+     passed; flagged, not blocking, since it's an explicit client choice. */
+  background: var(--brand-orange); color: #fff;
   font-family: var(--font-heading); font-size: 0.75rem; font-weight: 700;
   line-height: 1; letter-spacing: 0.08em; text-transform: uppercase;
 }
