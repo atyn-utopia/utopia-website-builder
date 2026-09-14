@@ -411,5 +411,34 @@
         "label": "Same day, by 2pm"
       }
     ]
+  },
+  "dailyLife": {
+    "eyebrow": "Everyday use",
+    "heading": "The chair in daily life",
+    "subheading": "Where a foldable electric wheelchair goes once it's yours.",
+    "alts": [
+      "A folded-flat black electric wheelchair with orange accents parked beside a lift lobby in a Malaysian condominium, polished floor, no one in it",
+      "The same electric wheelchair parked beside a carved wooden front door on a Malaysian terrace-house porch, potted plant beside it",
+      "An elderly man seen from behind, driving the electric wheelchair along a paved park path beside a lake, trees on both sides",
+      "The electric wheelchair parked at the foot of a concrete ramp with a steel handrail outside a Malaysian clinic",
+      "A woman seen from the side, seated in the electric wheelchair on a covered five-foot walkway between shoplot columns",
+      "The electric wheelchair on a small apartment balcony at dusk, a Malaysian city skyline soft in the background",
+      "Close-up of the electric wheelchair’s battery pack and charging cable plugged in on a tiled floor, the chair in the background",
+      "A hand lifting the folded electric wheelchair into the open boot of a car",
+      "The electric wheelchair parked dry under a covered porch while rain falls just beyond the roof edge",
+      "A person seen from behind in the electric wheelchair facing a wooden kampung house, greenery around the compound"
+    ],
+    "captions": [
+      "condo lobby",
+      "front porch",
+      "evening walk",
+      "clinic ramp",
+      "morning errands",
+      "balcony",
+      "charging overnight",
+      "into the boot",
+      "monsoon afternoon",
+      "back home"
+    ]
   }
 }
