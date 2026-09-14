@@ -1052,7 +1052,7 @@ p, li, blockquote,
   justify-items: center; text-align: center;
 }
 .ew-hero__copy { display: grid; gap: 14px; justify-items: center; }
-.ew-hero__logo { width: auto; height: 40px; margin-bottom: 4px; }
+.ew-hero__logo { width: auto; height: 46px; margin-bottom: 4px; }
 .ew-hero h1 {
   font-size: clamp(30px, 4.6vw, 50px); font-weight: 800;
   letter-spacing: -0.03em; color: var(--brand-navy); margin: 0;
@@ -1075,7 +1075,7 @@ p, li, blockquote,
    drops that white into the page background without touching the source
    file — this only reads as "transparent" where the ground behind it is
    itself light; it's a blend trick, not real alpha. */
-.ew-diagram__chair { width: min(88%, 400px); height: auto; mix-blend-mode: multiply; }
+.ew-diagram__chair { width: min(94%, 440px); height: auto; mix-blend-mode: multiply; }
 .ew-callout {
   display: none; position: absolute; align-items: center;
   font-size: 11px; line-height: 1.2; color: var(--ink-muted);
@@ -1288,11 +1288,11 @@ p, li, blockquote,
     gap: 48px; padding: 56px 0 72px;
   }
   .ew-hero__copy { justify-items: start; }
-  .ew-hero__logo { height: 48px; margin-bottom: 6px; }
+  .ew-hero__logo { height: 58px; margin-bottom: 6px; }
   .ew-hero__ctas { justify-content: flex-start; }
   .ew-callout { display: flex; }
   .ew-spec-list { display: none; }
-  .ew-diagram { padding: 40px 150px; }
+  .ew-diagram { padding: 30px 115px; }
   .ew-diagram__chair { width: 100%; }
   .ew-usp__item { padding: 24px 16px; }
   .ew-prod__grid { grid-template-columns: 1fr 1fr; gap: 60px; }
