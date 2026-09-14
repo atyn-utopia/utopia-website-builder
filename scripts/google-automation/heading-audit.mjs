@@ -88,7 +88,16 @@ for (const website of websites) {
     continue;
   }
 
-  const primary = (data.primary_keywords ?? []).map((k) => k.toLowerCase());
+  // Head terms are stored per language. The audit asks whether an H1 carries a
+  // head term at all, and a bilingual site's pages are split between the two,
+  // so both languages' lists count — matching only one would fail every page
+  // written in the other. Older sites answer with one list under both.
+  const primary = [...new Set(
+    (data.heads
+      ? Object.values(data.heads).flatMap((h) => h.primary_keywords ?? [])
+      : (data.primary_keywords ?? [])
+    ).map((k) => k.toLowerCase()),
+  )];
   const issues = [];
   let articles = 0;
   let h1KeywordHits = 0;

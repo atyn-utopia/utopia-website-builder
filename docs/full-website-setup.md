@@ -229,9 +229,12 @@ curl -s "$WEBCORE_BASE_URL/api/public/keywords?website=<registered-domain>&_cb=$
 ```
 
 Head terms land in `primary_keywords`, the rest in `secondary_keywords`, and only
-terms at or above `--min` are pushed. Use the script, not a hand-written POST: a
-body that says `keywords` instead of `rows` returns `200` and stores nothing, and
-primary/secondary lists over 32 lose their tail silently (`docs/webcore-api.md`).
+terms at or above `--min` are pushed. Each language keeps its own head terms, so
+the two runs above no longer overwrite one another — the script names the
+language on every push. Use the script, not a hand-written POST: a body that says
+`keywords` instead of `rows` returns `200` and stores nothing, primary/secondary
+lists over 32 lose their tail silently, and a head-term push webcore cannot
+attribute to one language is refused outright (`docs/webcore-api.md`).
 webcore stores `en` and `ms` only.
 
 > Requires the head terms to sit under a heading Sora marks as primary (e.g.
