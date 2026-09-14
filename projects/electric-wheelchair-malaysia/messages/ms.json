@@ -415,5 +415,34 @@
         "label": "Hari sama, sebelum 2pm"
       }
     ]
+  },
+  "dailyLife": {
+    "eyebrow": "Kegunaan harian",
+    "heading": "Kerusi ini dalam kehidupan seharian",
+    "subheading": "Ke mana kerusi roda elektrik boleh lipat pergi sebaik ia milik anda.",
+    "alts": [
+      "Kerusi roda elektrik hitam berlipat dengan aksen oren diletakkan di sebelah lobi lif sebuah kondominium di Malaysia, lantai berkilat, tiada sesiapa di dalamnya",
+      "Kerusi roda elektrik yang sama diletakkan di sebelah pintu hadapan kayu berukir di anjung sebuah rumah teres di Malaysia, dengan pasu pokok di sebelahnya",
+      "Seorang lelaki warga emas dilihat dari belakang, memandu kerusi roda elektrik di sepanjang laluan taman bertar di tepi tasik, dikelilingi pokok",
+      "Kerusi roda elektrik diletakkan di kaki ramp konkrit berpagar besi di luar sebuah klinik di Malaysia",
+      "Seorang wanita dilihat dari sisi, duduk dalam kerusi roda elektrik di kaki lima berbumbung antara tiang kedai",
+      "Kerusi roda elektrik di sebuah balkoni apartmen pada waktu senja, dengan latar bandar Malaysia yang kabur",
+      "Gambar dekat bateri dan kabel pengecas kerusi roda elektrik yang disambung di lantai berjubin, kerusi kelihatan di latar belakang",
+      "Sebuah tangan mengangkat kerusi roda elektrik yang dilipat ke dalam but kereta yang terbuka",
+      "Kerusi roda elektrik diletakkan kering di bawah anjung berbumbung semasa hujan turun di luar bumbung",
+      "Seseorang dilihat dari belakang dalam kerusi roda elektrik menghadap sebuah rumah kampung kayu, dikelilingi kehijauan halaman"
+    ],
+    "captions": [
+      "lobi kondo",
+      "anjung rumah",
+      "jalan petang",
+      "ramp klinik",
+      "urusan pagi",
+      "balkoni",
+      "cas semalaman",
+      "masuk but",
+      "petang monsun",
+      "balik ke rumah"
+    ]
   }
 }
