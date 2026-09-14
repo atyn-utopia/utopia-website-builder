@@ -5,7 +5,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
@@ -48,17 +47,10 @@ export default function SiteHeader({ contact }: { locale?: Locale; contact?: Rea
   return (
     <header className="ewc-header">
       <div className="ewc-header__inner">
-        <Link href={`/${locale}`} className="ewc-header__brand" aria-label={t('brandName')}>
-          <Image
-            src="/brand/logo-light.png"
-            alt={t('logoAlt')}
-            className="ewc-header__logo"
-            width={1200}
-            height={480}
-            priority
-          />
-        </Link>
-
+        {/* No brand mark here by design — the logo now lives only in the
+            homepage hero (SiteHeader renders identically on every page, so
+            this affects location pages and blog too). "Home" is still
+            reachable via the nav link below and the mobile drawer. */}
         <nav className="ewc-header__nav ewc-header__nav--desktop" aria-label="Primary">
           {navItems.map((item) => (
             <Link key={item.href} href={item.href}>{item.label}</Link>
