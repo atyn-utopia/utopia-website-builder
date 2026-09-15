@@ -1369,6 +1369,10 @@ p, li, blockquote,
 .ew-eyebrow--on-dark { background: rgba(255, 255, 255, 0.12); color: #fff; }
 .ew-steps .ew-eyebrow { background: rgba(255, 255, 255, 0.16); color: #fff; }
 .ew-steps .ew-eyebrow::before { background: var(--brand-navy); }
+/* .ew-rev's own background is the same --brand-ice as the base eyebrow
+   fill, so the pill was disappearing into its own section — solid white
+   instead, same navy text/orange dot. */
+.ew-rev .ew-eyebrow { background: #fff; }
 
 /* Google mark in the reviews rating row: a white disc so the four colours sit
    clean on the pale-blue band, with a little more room before the 4.9. */
