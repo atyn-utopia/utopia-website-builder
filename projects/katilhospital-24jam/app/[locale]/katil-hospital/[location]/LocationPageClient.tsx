@@ -7,6 +7,7 @@ import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import HomeSections from '@/components/HomeSections';
 import HeroArc from '@/components/HeroArc';
+import Eyebrow from '@/components/Eyebrow';
 import { waRedirect } from '@/lib/waRedirect';
 import type { ProductCardData } from '@/components/ProductCard';
 import type { Location } from '@/config/locations';
@@ -77,11 +78,12 @@ export default function LocationPageClient({
       {/* SECTION 13 — Nearby Locations */}
       {nearby.length > 0 && (
         <section className="kh-section kh-section--white">
-          <div className="kh-head">
+          <div className="kh-head kh-reveal">
+            <Eyebrow>{locT('nearby.eyebrow')}</Eyebrow>
             <h3 className="kh-h3">{locT('nearby.h3')}</h3>
             <p className="kh-lead">{locT('nearby.intro')}</p>
           </div>
-          <div className="kh-nearby-grid">
+          <div className="kh-nearby-grid kh-reveal">
             {nearby.map((n) => (
               <a key={n.slug} href={`/${locale}/katil-hospital/${n.slug}`} className="kh-nearby-link">
                 {locT('nearby.anchor', { city: n.name })}

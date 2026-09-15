@@ -15,6 +15,8 @@ interface WhatsAppButtonProps {
   variant?: 'pill' | 'full' | 'compact' | 'floating';
   locationSlug?: string;
   ariaLabel?: string;
+  /** Extra class for chrome rules, e.g. `.nav-cta` hidden on mobile. */
+  className?: string;
 }
 
 export default function WhatsAppButton({
@@ -23,6 +25,7 @@ export default function WhatsAppButton({
   variant = 'pill',
   locationSlug,
   ariaLabel,
+  className,
 }: WhatsAppButtonProps) {
   const baseStyle: React.CSSProperties = {
     display: 'inline-flex',
@@ -64,7 +67,7 @@ export default function WhatsAppButton({
 
   return (
     <a
-      className="wa-button"
+      className={className ? `wa-button ${className}` : 'wa-button'}
       href={href}
       target="_blank"
       rel="noopener noreferrer"

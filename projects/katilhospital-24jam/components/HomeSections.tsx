@@ -5,6 +5,8 @@ import { useTranslations } from 'next-intl';
 import ProductCard, { ProductCardData } from '@/components/ProductCard';
 import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import Eyebrow from '@/components/Eyebrow';
+import ScrollReveal from '@/components/ScrollReveal';
 import { waRedirect } from '@/lib/waRedirect';
 import { regionOrder, locations as ALL_LOCATIONS } from '@/config/locations';
 
@@ -292,6 +294,7 @@ export default function HomeSections({ locale, products, location }: Props) {
   const grT = useTranslations('googleReview');
   const faqT = useTranslations('faq');
   const finalT = useTranslations('finalCta');
+  const locT = useTranslations('location');
 
   const waHref = waRedirect(locale, undefined, location?.slug);
   const reviews = G_REVIEWS[locale] || G_REVIEWS.ms;
@@ -338,13 +341,19 @@ export default function HomeSections({ locale, products, location }: Props) {
 
   const [open, setOpen] = useState<number | null>(0);
 
+  // Stagger index for grid children; capped so a long grid doesn't make the
+  // last card wait visibly.
+  const stagger = (i: number) => ({ '--i': Math.min(i, 6) }) as React.CSSProperties;
+
   return (
     <>
+      <ScrollReveal />
+
       {/* SECTION 4 — USP bar (navy band continuing the hero wave) */}
       <section className="kh-usp">
         <ul className="usp-panel kh-usp-grid">
-          {USP_ITEMS.map((u) => (
-            <li key={u.k} className="usp-cell kh-usp-item">
+          {USP_ITEMS.map((u, i) => (
+            <li key={u.k} className="usp-cell kh-usp-item kh-reveal" style={stagger(i)}>
               <span className="kh-usp-icon">
                 <Icon>{u.icon}</Icon>
               </span>
@@ -360,38 +369,34 @@ export default function HomeSections({ locale, products, location }: Props) {
       {/* SECTION 5 — Product grid */}
       <section id="products" className="kh-section kh-section--mist">
         <div className="kh-wrap">
-          <div className="kh-head">
-            <h3 className="kh-h3">{productsT('h3')}</h3>
-            <p className="kh-lead">{productsT('intro')}</p>
-          </div>
+          <SectionHead eyebrow={productsT('eyebrow')} title={productsT('h3')} sub={productsT('intro')} />
           <div className="kh-product-grid" style={{ '--cols': desktopCols } as React.CSSProperties}>
-            {renderProducts.map((p) => (
+            {renderProducts.map((p, i) => (
               <ProductImpressionTracker key={p.slug} slug={p.slug} style={{ height: '100%' }}>
-                <ProductCard
-                  product={p}
-                  ctaLabel={productsT('cardCta')}
-                  waHref={waHref}
-                  locale={locale}
-                  priceHintFallback={priceFallback}
-                />
+                <div className="kh-reveal" style={{ ...stagger(i), height: '100%' }}>
+                  <ProductCard
+                    product={p}
+                    ctaLabel={productsT('cardCta')}
+                    waHref={waHref}
+                    locale={locale}
+                    priceHintFallback={priceFallback}
+                  />
+                </div>
               </ProductImpressionTracker>
             ))}
           </div>
         </div>
       </section>
 
-      {/* SECTION 6 — Why choose */}
+      {/* SECTION 6 — Why choose (compact: icon + title + one line) */}
       <section id="why" className="kh-section kh-section--white">
         <div className="kh-wrap">
-          <div className="kh-head">
-            <h3 className="kh-h3">{valuesT('h3')}</h3>
-            <p className="kh-lead">{valuesT('intro')}</p>
-          </div>
+          <SectionHead eyebrow={valuesT('eyebrow')} title={valuesT('h3')} sub={valuesT('intro')} />
           <div className="kh-why-grid">
-            {VALUE_CARDS.map((card) => (
-              <div key={card.k} className="kh-why-card">
+            {VALUE_CARDS.map((card, i) => (
+              <div key={card.k} className="kh-why-card kh-reveal" style={stagger(i)}>
                 <span className="kh-why-icon">
-                  <Icon size={24}>{card.icon}</Icon>
+                  <Icon size={20}>{card.icon}</Icon>
                 </span>
                 <h4 className="kh-why-title">{valuesT(`${card.k}.title`)}</h4>
                 <p className="kh-why-body">{valuesT(`${card.k}.body`)}</p>
@@ -404,8 +409,11 @@ export default function HomeSections({ locale, products, location }: Props) {
       {/* Location intro after Why Choose */}
       {location && (
         <section className="kh-loc-intro">
-          <div className="kh-loc-intro-in">
-            <h3 className="kh-h3">{location.city}</h3>
+          <div className="kh-loc-intro-in kh-reveal">
+            <div className="kh-head kh-head--flush">
+              <Eyebrow>{locT('introEyebrow')}</Eyebrow>
+              <h3 className="kh-h3">{location.city}</h3>
+            </div>
             <p>{location.intro}</p>
           </div>
         </section>
@@ -414,12 +422,10 @@ export default function HomeSections({ locale, products, location }: Props) {
       {/* SECTION 7 — How it works (3 steps, closing WhatsApp CTA) */}
       <section id="how" className="kh-section kh-section--mist">
         <div className="kh-wrap">
-          <div className="kh-head">
-            <h3 className="kh-h3">{howT('h3')}</h3>
-          </div>
+          <SectionHead eyebrow={howT('eyebrow')} title={howT('h3')} sub={howT('intro')} />
           <ol className="kh-steps">
             {['s1', 's2', 's3'].map((s, i) => (
-              <li key={s} className="kh-step">
+              <li key={s} className="kh-step kh-reveal" style={stagger(i)}>
                 <span className="kh-step-num" aria-hidden="true">
                   {i + 1}
                 </span>
@@ -432,7 +438,7 @@ export default function HomeSections({ locale, products, location }: Props) {
               </li>
             ))}
           </ol>
-          <div className="kh-steps-close">
+          <div className="kh-steps-close kh-reveal">
             <p>{howT('closing')}</p>
             <WhatsAppButton href={waHref} label={howT('cta')} variant="pill" locationSlug={location?.slug} />
           </div>
@@ -442,13 +448,10 @@ export default function HomeSections({ locale, products, location }: Props) {
       {/* SECTION 8 — Customer gallery */}
       <section id="reviews" className="kh-section kh-section--white">
         <div className="kh-wrap">
-          <div className="kh-head">
-            <h3 className="kh-h3">{galleryT('h3')}</h3>
-            <p className="kh-lead">{galleryT('intro')}</p>
-          </div>
+          <SectionHead eyebrow={galleryT('eyebrow')} title={galleryT('h3')} sub={galleryT('intro')} />
           <div className="gallery-grid kh-gallery">
             {Array.from({ length: 16 }, (_, i) => i + 1).map((n) => (
-              <div key={n} className="kh-gallery-item">
+              <div key={n} className="kh-gallery-item kh-reveal" style={stagger((n - 1) % 4)}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={`/brand/reviews/review-${n}.jpg`}
@@ -464,21 +467,18 @@ export default function HomeSections({ locale, products, location }: Props) {
       {/* SECTION 9 — Google Reviews */}
       <section className="kh-section kh-section--mist">
         <div className="kh-wrap">
-          <div className="kh-head">
-            <h3 className="kh-h3">{grT('h3')}</h3>
-            <p className="kh-lead">{grT('intro')}</p>
-          </div>
+          <SectionHead eyebrow={grT('eyebrow')} title={grT('h3')} sub={grT('intro')} />
           <div className="kh-review-grid">
-            {reviews.map((r) => (
-              <article key={r.name} className="kh-review">
+            {reviews.map((r, i) => (
+              <article key={r.name} className="kh-review kh-reveal" style={stagger(i % 4)}>
                 <div className="kh-review-top">
                   <span className="kh-review-source">
                     {GOOGLE_G_SVG}
                     {locale === 'en' ? 'Google Review' : locale === 'zh' ? 'Google 评价' : 'Ulasan Google'}
                   </span>
                   <span className="kh-review-stars" aria-hidden="true">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <svg key={i} width="13" height="13" viewBox="0 0 24 24" fill="#FBBC04">
+                    {Array.from({ length: 5 }).map((_, j) => (
+                      <svg key={j} width="13" height="13" viewBox="0 0 24 24" fill="#FBBC04">
                         <path d={STAR_PATH} />
                       </svg>
                     ))}
@@ -501,10 +501,8 @@ export default function HomeSections({ locale, products, location }: Props) {
       {/* SECTION 10 — FAQ */}
       <section className="kh-section kh-section--white">
         <div className="kh-wrap">
-          <div className="kh-head">
-            <h3 className="kh-h3">{faqT('h3')}</h3>
-          </div>
-          <div className="kh-faq">
+          <SectionHead eyebrow={faqT('eyebrow')} title={faqT('h3')} sub={faqT('intro')} />
+          <div className="kh-faq kh-reveal">
             {faqList.map((item, idx) => (
               <button
                 key={idx}
@@ -524,23 +522,36 @@ export default function HomeSections({ locale, products, location }: Props) {
         </div>
       </section>
 
-      {/* SECTION 10b — Lokasi accordion (location listing) */}
+      {/* SECTION 10b — Coverage: state grid + towns of the selected state */}
       <LokasiSection locale={locale} />
 
       {/* SECTION 11 — Final CTA band */}
       <section className="kh-final">
-        <h3>{finalT('h3')}</h3>
-        <p>{finalT('subtitle')}</p>
-        <WhatsAppButton href={waHref} label={finalT('cta')} variant="pill" locationSlug={location?.slug} />
+        <div className="kh-reveal">
+          <Eyebrow onDark>{finalT('eyebrow')}</Eyebrow>
+          <h3>{finalT('h3')}</h3>
+          <p>{finalT('subtitle')}</p>
+          <WhatsAppButton href={waHref} label={finalT('cta')} variant="pill" locationSlug={location?.slug} />
+        </div>
       </section>
     </>
+  );
+}
+
+function SectionHead({ eyebrow, title, sub }: { eyebrow: string; title: string; sub: string }) {
+  return (
+    <div className="kh-head kh-reveal">
+      <Eyebrow>{eyebrow}</Eyebrow>
+      <h3 className="kh-h3">{title}</h3>
+      <p className="kh-lead">{sub}</p>
+    </div>
   );
 }
 
 function LokasiSection({ locale }: { locale: string }) {
   const t = useTranslations('lokasi');
   const productPath = 'katil-hospital';
-  const [openState, setOpenState] = useState<string | null>(regionOrder[0]);
+  const [active, setActive] = useState<string>(regionOrder[0]);
 
   const grouped = regionOrder.map((state) => ({
     state,
@@ -549,50 +560,63 @@ function LokasiSection({ locale }: { locale: string }) {
 
   return (
     <section id="lokasi" className="kh-section kh-section--mist">
-      <div className="kh-lokasi">
-        <div className="kh-head">
-          <h3 className="kh-h3">{t('h3')}</h3>
-          <p className="kh-lead">{t('intro')}</p>
-        </div>
+      <div className="kh-wrap">
+        <SectionHead eyebrow={t('eyebrow')} title={t('h3')} sub={t('intro')} />
 
-        <div className="kh-lokasi-list">
+        <div className="kh-states kh-reveal" role="tablist" aria-label={t('h3')}>
           {grouped.map(({ state, items }) => {
-            const isOpen = openState === state;
+            const isActive = active === state;
+            const id = `lokasi-${state.toLowerCase().replace(/\s+/g, '-')}`;
             return (
-              <div key={state} className={`kh-lokasi-item${isOpen ? ' is-open' : ''}`}>
-                <button
-                  type="button"
-                  className="kh-lokasi-btn"
-                  onClick={() => setOpenState(isOpen ? null : state)}
-                  aria-expanded={isOpen}
-                >
-                  <span className="kh-lokasi-state">
-                    <span className="kh-lokasi-pin" aria-hidden="true">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                        <circle cx="12" cy="10" r="3" />
-                      </svg>
-                    </span>
-                    <span>
-                      <span className="kh-lokasi-name">{state}</span>
-                      <span className="kh-lokasi-count">{t('count', { count: items.length })}</span>
-                    </span>
-                  </span>
-                  <span className="kh-lokasi-chev">{CHEVRON}</span>
-                </button>
-                {isOpen && (
-                  <div className="kh-lokasi-panel">
-                    {items.map((loc) => (
-                      <a key={loc.slug} href={`/${locale}/${productPath}/${loc.slug}`} className="city-pill">
-                        {loc.name}
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </div>
+              <button
+                key={state}
+                type="button"
+                role="tab"
+                id={`${id}-tab`}
+                aria-selected={isActive}
+                aria-controls={id}
+                className={`kh-state${isActive ? ' is-active' : ''}`}
+                onClick={() => setActive(state)}
+              >
+                <span className="kh-state-pin" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                </span>
+                <span className="kh-state-text">
+                  <span className="kh-state-name">{state}</span>
+                  <span className="kh-state-count">{t('count', { count: items.length })}</span>
+                </span>
+              </button>
             );
           })}
         </div>
+
+        {/* Every state's towns stay in the HTML (hidden, not unmounted) so all
+            159 location links remain crawlable. */}
+        {grouped.map(({ state, items }) => {
+          const id = `lokasi-${state.toLowerCase().replace(/\s+/g, '-')}`;
+          return (
+            <div
+              key={state}
+              id={id}
+              role="tabpanel"
+              aria-labelledby={`${id}-tab`}
+              className="kh-towns"
+              hidden={active !== state}
+            >
+              <p className="kh-towns-title">{state}</p>
+              <div className="kh-towns-list">
+                {items.map((loc) => (
+                  <a key={loc.slug} href={`/${locale}/${productPath}/${loc.slug}`} className="city-pill">
+                    {loc.name}
+                  </a>
+                ))}
+              </div>
+            </div>
+          );
+        })}
 
         <p className="kh-lokasi-empty">
           {t('empty')}{' '}

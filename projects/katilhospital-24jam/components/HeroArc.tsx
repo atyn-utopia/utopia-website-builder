@@ -28,6 +28,7 @@ interface Props {
 
 export default function HeroArc({ title, subtitle, badge, products, waHref, locationSlug }: Props) {
   const t = useTranslations('hero');
+  const tRoot = useTranslations();
 
   // Facts come from the live catalogue, so a price change in webcore moves
   // the hero with it. Beds only: a RM60 mattress is not "sewa katil dari".
@@ -40,6 +41,17 @@ export default function HeroArc({ title, subtitle, badge, products, waHref, loca
     <section className="kh-hero">
       <div className="kh-hero-in">
         <div className="kh-hero-copy">
+          {/* The header carries no logo (canonical fleet chrome) — the round
+              badge is the brand's first appearance on the page. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/brand/logo/logo-badge.png"
+            alt={tRoot('logoAlt')}
+            className="kh-hero-logo"
+            width={512}
+            height={512}
+            fetchPriority="high"
+          />
           <p className="kh-hero-badge">
             <span className="kh-hero-badge-icon" aria-hidden="true">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.6} strokeLinecap="round" strokeLinejoin="round">

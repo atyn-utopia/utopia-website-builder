@@ -10,6 +10,7 @@ import { BlogPostingSchema } from '@/components/schema/BlogPostingSchema';
 import FomoBanner from '@/components/FomoBanner';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import ContactNumber from '@/components/ContactNumber';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import { ogImages } from '@/lib/ogImage';
 
@@ -74,7 +75,7 @@ export default async function BlogPostPage({
         locale={locale}
       />
       <FomoBanner />
-      <SiteHeader />
+      <SiteHeader contact={<ContactNumber locale={locale} page={`/blog/${slug}`} />} />
       {/* Canonical heading + breadcrumb + .blog-content wrapper in server source
           so the checklist regexes match. Richer rendering is in BlogPostClient. */}
       <nav className="breadcrumb" aria-label="Breadcrumb" style={{ maxWidth: 920, margin: '20px auto 0', padding: '0 16px', fontSize: 13, opacity: 0.7 }}>
@@ -109,7 +110,7 @@ export default async function BlogPostPage({
         {/* Shared WhatsApp button: official glyph icon + official green (#25D366). */}
         <WhatsAppButton href={waHref} label={t('ctaBannerCta')} variant="pill" />
       </aside>
-      <SiteFooter />
+      <SiteFooter locale={locale} page={`/blog/${slug}`} />
     </>
   );
 }

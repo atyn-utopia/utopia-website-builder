@@ -52,22 +52,22 @@
   },
   "values": {
     "h3": "Kenapa Pilih Katil Hospital Murah",
-    "intro": "Kami faham penjagaan di rumah tidak boleh tunggu. Inilah sebabnya ratusan keluarga Malaysia percayakan kami.",
+    "intro": "Apa yang anda dapat bila sewa atau beli dengan kami.",
     "c1": {
-      "title": "Penghantaran 24 Jam",
-      "body": "Tempah pagi, sampai petang — atau dalam masa 24 jam di mana-mana lokasi di Malaysia. Tidak perlu tunggu berhari-hari."
+      "title": "Hantar dalam 24 jam",
+      "body": "Sampai dalam 24 jam selepas tempahan disahkan."
     },
     "c2": {
-      "title": "Harga Telus & Berpatutan",
-      "body": "Sebut harga jelas, tiada caj tersembunyi. Pilihan sewa bulanan untuk keluarga yang masih menentukan tempoh penjagaan."
+      "title": "Harga jelas",
+      "body": "Harga sewa dan beli tertera, tiada caj tersembunyi."
     },
     "c3": {
-      "title": "Hantar & Pasang Lengkap",
-      "body": "Pasukan kami hantar, pasang, dan tunjuk cara guna di tempat — supaya keluarga anda boleh fokus pada pesakit, bukan pada mesin."
+      "title": "Hantar & pasang",
+      "body": "Kami pasang di bilik dan ajar cara guna."
     },
     "c4": {
-      "title": "Sokongan Selepas Hantar",
-      "body": "Ada soalan pada pukul 10 malam? WhatsApp kami — pasukan sokongan sedia bantu sepanjang tempoh sewa atau waranti."
+      "title": "Sokongan WhatsApp",
+      "body": "Ada soalan semasa sewa? WhatsApp kami."
     },
     "eyebrow": "Kelebihan Kami"
   },
@@ -87,7 +87,8 @@
     },
     "eyebrow": "Proses 3-Langkah",
     "closing": "Beritahu kami bandar dan tarikh pesakit keluar wad. Kami balas dengan harga.",
-    "cta": "WhatsApp Kami Sekarang"
+    "cta": "WhatsApp Kami Sekarang",
+    "intro": "Dari mesej pertama hingga katil siap dipasang di rumah."
   },
   "gallery": {
     "h3": "Gambar Pelanggan",
@@ -156,7 +157,8 @@
       "q": "Ada sokongan selepas beli atau sewa?",
       "a": "Ya. Hubungi kami di WhatsApp bila-bila masa untuk bantuan teknikal, tukar alat, atau penjagaan alat. Pasukan kami layan pertanyaan sepanjang tempoh sewa atau waranti."
     },
-    "eyebrow": "Bantuan Pantas"
+    "eyebrow": "Bantuan Pantas",
+    "intro": "Jawapan ringkas untuk soalan yang keluarga selalu tanya."
   },
   "finalCta": {
     "h3": "Pesakit keluar wad esok? Katil boleh sampai dulu.",
@@ -192,9 +194,11 @@
     "nearby": {
       "h3": "Kawasan Berdekatan",
       "intro": "Kami juga berkhidmat di kawasan berikut.",
-      "anchor": "Lihat katil hospital di {city}"
+      "anchor": "Lihat katil hospital di {city}",
+      "eyebrow": "Liputan sekitar"
     },
-    "badge": "Hantar ke {city} dalam 24 jam"
+    "badge": "Hantar ke {city} dalam 24 jam",
+    "introEyebrow": "Kawasan liputan"
   },
   "blog": {
     "title": "Blog",
@@ -241,5 +245,8 @@
     "heading": "Membuka WhatsApp…",
     "subtext": "Menghubungkan anda dengan pasukan Katil Hospital Murah.",
     "fallback": "Klik di sini jika tidak dialihkan"
+  },
+  "contact": {
+    "availability": "Talian 24 jam"
   }
 }

@@ -6,6 +6,7 @@ import BlogListClient from './BlogListClient';
 import FomoBanner from '@/components/FomoBanner';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import ContactNumber from '@/components/ContactNumber';
 import { ogImages } from '@/lib/ogImage';
 
 export async function generateMetadata({
@@ -44,7 +45,7 @@ export default async function BlogIndexPage({
   return (
     <>
       <FomoBanner />
-      <SiteHeader />
+      <SiteHeader contact={<ContactNumber locale={locale} page="/blog" />} />
       {/* Canonical H1 + H2 (page title). The single visible, styled card grid
           — all posts, equal-height covers — is rendered by BlogListClient below. */}
       <section style={{ padding: '44px 16px 8px', textAlign: 'center' }}>
@@ -65,7 +66,7 @@ export default async function BlogIndexPage({
         <p>{posts[0]?.excerpt}</p>
       </div>
       <BlogListClient posts={posts} chromeProvided />
-      <SiteFooter />
+      <SiteFooter locale={locale} page="/blog" />
     </>
   );
 }

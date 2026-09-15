@@ -624,6 +624,16 @@ h1, h2, h3, h4, h5, h6 {
   --mist: #F5F8FC;
   --line: #E1E8F1;
   --r-btn: 12px;
+
+  /* Aliases for the canonical fleet chrome (templates/site-chrome), which
+     speaks in water-tank's token names. --brand-orange is the fleet's name for
+     "primary accent" whatever its hue — navy here. */
+  --gut: 16px;
+  --line-strong: #C6D3E5;
+  --brand-charcoal: #0F1D33;
+  --brand-orange: #1c3a6a;
+  --brand-orange-deep: #e63030;
+  --dur: 220ms;
 }
 
 .wa-button:focus-visible {
@@ -1056,53 +1066,56 @@ h1, h2, h3, h4, h5, h6 {
   .kh-card-cta { margin-top: auto; }
 }
 
-/* ── Why choose ── */
+/* ── Why choose — compact: icon, title, one line ── */
 .kh-why-grid {
   display: grid;
-  gap: 12px;
-  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 1080px;
+  margin: 0 auto;
 }
-@media (min-width: 640px) {
-  .kh-why-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-}
-@media (min-width: 1024px) {
-  .kh-why-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+@media (min-width: 900px) {
+  .kh-why-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
 }
 .kh-why-card {
   height: 100%;
-  padding: 22px 20px;
-  background: #FFFFFF;
+  padding: 16px 14px;
+  background: var(--mist);
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 10px;
+  gap: 6px;
 }
 .kh-why-icon {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 4px;
   border-radius: 50%;
-  background: var(--accent-pale);
+  background: #FFFFFF;
+  border: 1px solid var(--line);
   color: var(--accent);
   display: grid;
   place-items: center;
 }
 .kh-why-title {
   font-family: var(--font-display);
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 700;
   line-height: 1.25;
   color: var(--ink);
 }
 .kh-why-body {
-  font-size: 14px;
-  line-height: 1.55;
+  font-size: 13px;
+  line-height: 1.45;
   color: var(--ink-muted);
 }
-@media (min-width: 1024px) {
-  .kh-why-card { align-items: flex-start; text-align: left; }
+@media (min-width: 900px) {
+  .kh-why-card { padding: 20px 18px; }
+  .kh-why-title { font-size: 16px; }
+  .kh-why-body { font-size: 13.5px; }
 }
 
 /* ── Location intro ── */
@@ -1344,74 +1357,80 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--ink-muted);
 }
 
-/* ── Lokasi accordion ── */
-.kh-lokasi { max-width: 880px; margin: 0 auto; }
-.kh-lokasi-list { display: grid; gap: 10px; }
-.kh-lokasi-item {
-  background: #FFFFFF;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  overflow: hidden;
+/* ── Coverage: state grid + towns of the selected state ── */
+.kh-states {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 1080px;
+  margin: 0 auto;
 }
-.kh-lokasi-item.is-open {
-  border-color: #C6D3E5;
-  box-shadow: 0 8px 24px -8px rgba(28, 58, 106, 0.16);
+@media (min-width: 640px) {
+  .kh-states { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
-.kh-lokasi-btn {
-  width: 100%;
+@media (min-width: 1024px) {
+  .kh-states { grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 10px; }
+}
+.kh-state {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 14px 18px;
+  gap: 10px;
+  min-width: 0;
+  padding: 10px 12px;
   font: inherit;
-  color: inherit;
   text-align: left;
-  background: transparent;
-  border: 0;
+  color: var(--ink);
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  border-radius: 12px;
   cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out);
 }
-.kh-lokasi-btn:focus-visible {
-  outline: 3px solid rgba(28, 58, 106, 0.35);
-  outline-offset: -3px;
+.kh-state:hover { transform: translateY(-1px); border-color: #C6D3E5; }
+.kh-state:active { transform: scale(0.98); }
+.kh-state:focus-visible { outline: 3px solid rgba(28, 58, 106, 0.35); outline-offset: 2px; }
+.kh-state.is-active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #FFFFFF;
 }
-.kh-lokasi-state { display: inline-flex; align-items: center; gap: 12px; }
-.kh-lokasi-pin {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
+.kh-state-pin {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
   background: var(--accent-pale);
   color: var(--accent);
-  display: inline-grid;
-  place-items: center;
-  flex: none;
 }
-.kh-lokasi-name {
-  display: block;
+.kh-state.is-active .kh-state-pin { background: rgba(255, 255, 255, 0.14); color: #FFFFFF; }
+.kh-state-text { min-width: 0; display: flex; flex-direction: column; }
+.kh-state-name {
   font-family: var(--font-display);
-  font-size: 16px;
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.kh-state-count { font-size: 11.5px; line-height: 1.3; color: var(--ink-muted); }
+.kh-state.is-active .kh-state-count { color: rgba(255, 255, 255, 0.75); }
+.kh-towns {
+  max-width: 1080px;
+  margin: 14px auto 0;
+  padding: 16px 18px 18px;
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+.kh-towns-title {
+  margin-bottom: 12px;
+  font-family: var(--font-display);
+  font-size: 15px;
   font-weight: 700;
   color: var(--ink);
 }
-.kh-lokasi-count {
-  display: block;
-  margin-top: 2px;
-  font-size: 12px;
-  color: var(--ink-muted);
-}
-.kh-lokasi-chev {
-  display: inline-grid;
-  color: var(--ink-muted);
-  transition: transform var(--duration-normal) var(--ease-out);
-}
-.kh-lokasi-item.is-open .kh-lokasi-chev { transform: rotate(180deg); }
-.kh-lokasi-panel {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding: 14px 18px 18px;
-  border-top: 1px solid var(--line);
-}
+.kh-towns-list { display: flex; flex-wrap: wrap; gap: 8px; }
 .kh-lokasi-empty {
   margin-top: 24px;
   text-align: center;
@@ -1507,4 +1526,142 @@ h1, h2, h3, h4, h5, h6 {
   .kh-faq-chev,
   .kh-lokasi-chev,
   .kh-nearby-link { transition: none; }
+}
+
+/* ── Hero logo (the header carries none) ── */
+.kh-hero-logo {
+  width: 84px;
+  height: 84px;
+  margin-bottom: -2px;
+  filter: drop-shadow(0 8px 16px rgba(14, 32, 64, 0.16));
+}
+@media (min-width: 900px) {
+  .kh-hero-logo { width: 116px; height: 116px; }
+}
+
+/* ── Section eyebrow: logo cross + navy label ── */
+.kh-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding: 5px 12px 5px 8px;
+  border-radius: 999px;
+  background: #FFFFFF;
+  border: 1px solid #F3D3D3;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+  color: var(--navy);
+}
+.kh-section--white .kh-eyebrow { background: var(--accent-pale); border-color: transparent; }
+.kh-eyebrow-cross {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  background:
+    linear-gradient(var(--accent), var(--accent)) center / 34% 100% no-repeat,
+    linear-gradient(var(--accent), var(--accent)) center / 100% 34% no-repeat;
+}
+.kh-eyebrow--dark {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.22);
+  color: #FFFFFF;
+}
+.kh-head--flush { margin-bottom: 0; }
+.kh-final .kh-eyebrow { margin-bottom: 16px; }
+
+/* ── Scroll reveal ──
+   Hidden state applies only once ScrollReveal has run (html.reveal-ready), so
+   the page is complete without JS and the first viewport never blinks. */
+.reveal-ready .kh-reveal:not(.is-in) {
+  opacity: 0;
+  transform: translateY(18px);
+}
+.kh-reveal {
+  transition:
+    opacity 560ms var(--ease-out),
+    transform 560ms var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 70ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .kh-reveal { transition: none; }
+  .reveal-ready .kh-reveal:not(.is-in) { opacity: 1; transform: none; }
+}
+
+/* ── Contact number (header + footer) ──────────────────────────────────────
+   Paste this block into the project's app/globals.css.
+
+   It does NOT live in a styled-jsx block inside ContactNumber: the element is
+   passed into the client SiteHeader as a `contact` prop, so that component's
+   scoped styles never reach it.
+
+   Type is deliberately token-driven, not fixed. `--font-heading` /
+   `--font-display` are the two names in use across the fleet; whichever the
+   site defines wins, and a site that defines neither inherits its own body
+   font. Never hardcode a family here — the font is the site's, not the
+   chrome's. Colours work the same way: the fallbacks are only there so the
+   block is never invisible on a project that hasn't defined a token yet. */
+
+.contact-number {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+  line-height: 1.15;
+  text-decoration: none;
+  transition: opacity var(--dur-hover, 220ms) var(--ease, ease);
+}
+.contact-number:hover { opacity: 0.78; }
+.contact-number:focus-visible {
+  outline: 2px solid var(--brand-orange, currentColor);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.contact-number-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--ink-muted, #4B5563);
+  white-space: nowrap;
+}
+.contact-number-value {
+  font-family: var(--font-heading, var(--font-display, inherit));
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--brand-charcoal, var(--ink, #111));
+  white-space: nowrap;
+}
+
+/* Header: the desktop instance hides on mobile — the drawer carries its own
+   copy, so showing both would duplicate the number on small screens. */
+/* Extra separation from the language pills — the .site-actions gap alone left
+   the number reading as part of the switcher group. */
+.site-actions .contact-number { margin-right: 14px; }
+@media (max-width: 879px) {
+  .site-actions .contact-number { display: none; }
+}
+/* Right-aligned, sitting beside the language switcher on one row. Set here
+   rather than in SiteHeader's styled-jsx: the element is passed into that
+   client component as a prop, so its scoped styles never reach it. */
+.site-mobile-actions .contact-number { align-items: flex-end; text-align: right; }
+@media (min-width: 880px) {
+  .site-mobile-actions .contact-number { display: none; }
+}
+
+/* Footer instance takes the FOOTER's ink tokens, not the header's, so a project
+   that sets --footer-bg to something dark can set --footer-ink to match and the
+   number follows without touching this file. Falls through to the same defaults
+   as the header when a project defines neither. */
+.contact-number--footer .contact-number-value {
+  font-size: 19px;
+  color: var(--footer-ink, var(--brand-charcoal, var(--ink, #111)));
+}
+.contact-number--footer .contact-number-label {
+  color: var(--footer-ink-muted, var(--ink-muted, #4B5563));
+}
+@media (max-width: 879px) {
+  .contact-number--footer { align-items: center; }
 }

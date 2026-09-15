@@ -52,22 +52,22 @@
   },
   "values": {
     "h3": "Why Choose Katil Hospital Murah",
-    "intro": "We understand home care cannot wait. Here is why hundreds of Malaysian families trust us.",
+    "intro": "What you get when you rent or buy with us.",
     "c1": {
-      "title": "24-Hour Delivery",
-      "body": "Order in the morning, receive by evening — or within 24 hours anywhere in Malaysia. No waiting days on end."
+      "title": "Delivered in 24 hours",
+      "body": "Arrives within 24 hours of confirmation."
     },
     "c2": {
-      "title": "Transparent, Fair Pricing",
-      "body": "Clear quotes, no hidden fees. Monthly rental options for families still figuring out the length of care needed."
+      "title": "Clear prices",
+      "body": "Rental and purchase prices shown, no hidden fees."
     },
     "c3": {
-      "title": "Full Delivery & Setup",
-      "body": "Our team delivers, assembles, and walks you through every function on site — so your family can focus on the patient, not the equipment."
+      "title": "Delivery & setup",
+      "body": "We set it up in the room and show you how."
     },
     "c4": {
-      "title": "After-Delivery Support",
-      "body": "Question at 10pm? WhatsApp us — our support team is available throughout your rental or warranty period."
+      "title": "WhatsApp support",
+      "body": "Questions during your rental? WhatsApp us."
     },
     "eyebrow": "Why Choose Us"
   },
@@ -87,7 +87,8 @@
     },
     "eyebrow": "3-Step Process",
     "closing": "Tell us your town and the patient's discharge date. We reply with a price.",
-    "cta": "Chat WhatsApp Now"
+    "cta": "Chat WhatsApp Now",
+    "intro": "From your first message to a bed set up at home."
   },
   "gallery": {
     "h3": "Customer Gallery",
@@ -156,7 +157,8 @@
       "q": "Is there after-sales support?",
       "a": "Yes. Message us on WhatsApp anytime for technical help, replacement parts, or equipment care tips. Our team handles requests throughout your rental or warranty period."
     },
-    "eyebrow": "Quick Help"
+    "eyebrow": "Quick Help",
+    "intro": "Short answers to what families ask us most."
   },
   "finalCta": {
     "h3": "Patient coming home tomorrow? The bed can get there first.",
@@ -192,9 +194,11 @@
     "nearby": {
       "h3": "Nearby Areas",
       "intro": "We also serve the following areas.",
-      "anchor": "See hospital beds in {city}"
+      "anchor": "See hospital beds in {city}",
+      "eyebrow": "Around you"
     },
-    "badge": "Delivered to {city} within 24 hours"
+    "badge": "Delivered to {city} within 24 hours",
+    "introEyebrow": "Coverage area"
   },
   "blog": {
     "title": "Blog",
@@ -241,5 +245,8 @@
     "heading": "Opening WhatsApp…",
     "subtext": "Connecting you to the Katil Hospital Murah team.",
     "fallback": "Click here if it doesn't redirect"
+  },
+  "contact": {
+    "availability": "24-hour line"
   }
 }
