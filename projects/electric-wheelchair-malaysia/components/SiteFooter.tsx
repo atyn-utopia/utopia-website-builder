@@ -31,8 +31,8 @@ export default async function SiteFooter({
               src="/brand/logo-light.png"
               alt={tNav('logoAlt')}
               className="footer-logo"
-              width={1200}
-              height={480}
+              width={1400}
+              height={1175}
             />
           </div>
 
@@ -94,7 +94,7 @@ export default async function SiteFooter({
           flex-wrap: wrap; gap: 20px 32px;
         }
         .footer-brand { display: inline-flex; align-items: center; }
-        .footer-logo { width: auto; height: 46px; }
+        .footer-logo { width: auto; height: 58px; }
         .footer-nav { display: flex; flex-wrap: wrap; gap: 12px 26px; }
         .footer-nav a {
           color: var(--text); font-weight: 600; font-size: 14.5px;
