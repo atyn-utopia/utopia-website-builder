@@ -1246,11 +1246,13 @@ h1, h2, h3, h4, h5, h6 {
   gap: 12px;
   text-align: center;
 }
-.kh-steps-close p { font-size: 15px; line-height: 1.5; color: var(--ink); max-width: 44ch; }
+/* Supporting line, not a heading: muted and a step smaller than the step
+   titles so the WhatsApp button below stays the focus. */
+.kh-steps-close p { font-size: 13.5px; line-height: 1.5; color: var(--ink-muted); max-width: 44ch; }
 @media (min-width: 900px) {
   .kh-step { padding: 18px; }
   .kh-steps-close { justify-items: start; text-align: left; }
-  .kh-steps-close p { font-size: 16px; }
+  .kh-steps-close p { font-size: 14px; }
 }
 
 /* ── Customer gallery ── */
