@@ -341,6 +341,13 @@ export default function HomeSections({ locale, products, location }: Props) {
 
   const [open, setOpen] = useState<number | null>(0);
 
+  // Example chat in the steps section: a real bed from the catalogue (Flexi II
+  // when present) and, on a location page, that page's town.
+  const chatBed =
+    renderProducts.find((p) => p.slug === 'katil-hospital-elektrik-3-fungsi') ??
+    renderProducts.find((p) => p.slug.startsWith('katil-hospital') && p.rental_price);
+  const chatCity = location?.city ?? 'Shah Alam';
+
   // Stagger index for grid children; capped so a long grid doesn't make the
   // last card wait visibly.
   const stagger = (i: number) => ({ '--i': Math.min(i, 6) }) as React.CSSProperties;
@@ -419,28 +426,67 @@ export default function HomeSections({ locale, products, location }: Props) {
         </section>
       )}
 
-      {/* SECTION 7 — How it works (3 steps, closing WhatsApp CTA) */}
+      {/* SECTION 7 — How it works: example WhatsApp chat beside the 3 steps,
+          closing with the WhatsApp CTA. The chat is illustrative and labelled
+          as an example; its product and price come from the live catalogue. */}
       <section id="how" className="kh-section kh-section--mist">
         <div className="kh-wrap">
           <SectionHead eyebrow={howT('eyebrow')} title={howT('h3')} sub={howT('intro')} />
-          <ol className="kh-steps">
-            {['s1', 's2', 's3'].map((s, i) => (
-              <li key={s} className="kh-step kh-reveal" style={stagger(i)}>
-                <span className="kh-step-num" aria-hidden="true">
-                  {i + 1}
-                </span>
-                <div>
-                  {/* Strip any leading "1." / "1、" prefix — the number circle
-                      is the single source of the step number. */}
-                  <h4 className="kh-step-title">{howT(`${s}.title`).replace(/^\s*\d+\s*[.、:)-]\s*/, '')}</h4>
-                  <p className="kh-step-body">{howT(`${s}.body`)}</p>
+          <div className="kh-how">
+            <figure className="kh-chat kh-reveal">
+              <div className="kh-chat-phone" aria-hidden="true">
+                <div className="kh-chat-screen">
+                  <div className="kh-chat-bar">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="/brand/logo/logo-badge.png" alt="Katil Hospital Murah" width={36} height={36} />
+                    <div>
+                      <b>Katil Hospital Murah</b>
+                      <small>{howT('chat.status')}</small>
+                    </div>
+                  </div>
+                  <div className="kh-chat-msgs">
+                    <span className="kh-chat-day">{howT('chat.today')}</span>
+                    <p className="kh-chat-b kh-chat-out">
+                      {howT('chat.m1', { city: chatCity })}
+                      <small>9:12</small>
+                    </p>
+                    <p className="kh-chat-b kh-chat-in">
+                      {chatBed?.rental_price
+                        ? howT('chat.m2', { product: chatBed.name, price: chatBed.rental_price })
+                        : howT('chat.m2NoPrice')}
+                      <small>9:14</small>
+                    </p>
+                    <p className="kh-chat-b kh-chat-out">
+                      {howT('chat.m3')}
+                      <small>9:15</small>
+                    </p>
+                  </div>
                 </div>
-              </li>
-            ))}
-          </ol>
-          <div className="kh-steps-close kh-reveal">
-            <p>{howT('closing')}</p>
-            <WhatsAppButton href={waHref} label={howT('cta')} variant="pill" locationSlug={location?.slug} />
+              </div>
+              <figcaption className="kh-chat-cap">{howT('chat.caption')}</figcaption>
+            </figure>
+
+            <div className="kh-how-steps">
+              <ol className="kh-steps">
+                {['s1', 's2', 's3'].map((s, i) => (
+                  <li key={s} className={`kh-step kh-reveal${i === 0 ? ' kh-step--wa' : ''}`} style={stagger(i)}>
+                    <span className="kh-step-num" aria-hidden="true">
+                      {i + 1}
+                    </span>
+                    <div>
+                      {/* Strip any leading "1." / "1、" prefix — the number tile
+                          is the single source of the step number. */}
+                      <h4 className="kh-step-title">{howT(`${s}.title`).replace(/^\s*\d+\s*[.、:)-]\s*/, '')}</h4>
+                      <p className="kh-step-body">{howT(`${s}.body`)}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+              <div className="kh-steps-close kh-reveal">
+                <p>{howT('closing')}</p>
+                <WhatsAppButton href={waHref} label={howT('cta')} variant="pill" locationSlug={location?.slug} />
+              </div>
+            </div>
           </div>
         </div>
       </section>

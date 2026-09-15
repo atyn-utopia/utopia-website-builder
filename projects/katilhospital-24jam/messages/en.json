@@ -88,7 +88,16 @@
     "eyebrow": "3-Step Process",
     "closing": "Tell us your town and the patient's discharge date. We reply with a price.",
     "cta": "Chat WhatsApp Now",
-    "intro": "From your first message to a bed set up at home."
+    "intro": "From your first message to a bed set up at home.",
+    "chat": {
+      "status": "online",
+      "today": "Today",
+      "caption": "Example conversation",
+      "m1": "Hi, I need a 3-function bed for my father in {city}. He's discharged tomorrow.",
+      "m2": "Hi! The {product} is RM{price}/month, and we can deliver and set it up tomorrow. Shall we confirm?",
+      "m2NoPrice": "Hi! We can deliver and set it up tomorrow. We'll send you a quote now.",
+      "m3": "Yes, please confirm."
+    }
   },
   "gallery": {
     "h3": "Customer Gallery",
@@ -165,7 +174,7 @@
     "subtitle": "Our team is on standby 24 hours to deliver and set up before the patient arrives home.",
     "cta": "Chat WhatsApp Now",
     "eyebrow": "Act Now",
-    "bgAlt": "Katil Hospital Murah 24-hour delivery and setup of a hospital bed at a Malaysian home"
+    "bgAlt": "A room at home prepared with a hospital bed and wheelchair before the patient returns"
   },
   "footer": {
     "brand": {

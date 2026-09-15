@@ -88,7 +88,16 @@
     "eyebrow": "Proses 3-Langkah",
     "closing": "Beritahu kami bandar dan tarikh pesakit keluar wad. Kami balas dengan harga.",
     "cta": "WhatsApp Kami Sekarang",
-    "intro": "Dari mesej pertama hingga katil siap dipasang di rumah."
+    "intro": "Dari mesej pertama hingga katil siap dipasang di rumah.",
+    "chat": {
+      "status": "dalam talian",
+      "today": "Hari ini",
+      "caption": "Contoh perbualan",
+      "m1": "Salam. Nak sewa katil 3 fungsi untuk ayah di {city}. Keluar wad esok.",
+      "m2": "Waalaikumsalam. {product} RM{price}/bulan, boleh hantar & pasang esok. Nak kami sahkan?",
+      "m2NoPrice": "Waalaikumsalam. Boleh hantar & pasang esok. Kami hantar sebut harga sekarang.",
+      "m3": "Ok, sahkan."
+    }
   },
   "gallery": {
     "h3": "Gambar Pelanggan",
@@ -165,7 +174,7 @@
     "subtitle": "Pasukan kami standby 24 jam untuk hantar dan pasang sebelum pesakit sampai di rumah.",
     "cta": "WhatsApp Kami Sekarang",
     "eyebrow": "Bertindak Sekarang",
-    "bgAlt": "Penghantaran dan pemasangan katil hospital 24 jam Katil Hospital Murah di rumah di Malaysia"
+    "bgAlt": "Bilik di rumah yang disediakan dengan katil hospital dan kerusi roda sebelum pesakit pulang"
   },
   "footer": {
     "brand": {
