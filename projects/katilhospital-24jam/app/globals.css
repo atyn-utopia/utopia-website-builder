@@ -694,7 +694,8 @@ h1, h2, h3, h4, h5, h6 {
   font-size: clamp(30px, 7.6vw, 54px);
   line-height: 1.12;
   letter-spacing: -0.03em;
-  color: var(--ink);
+  /* Navy rather than the near-black ink, to sit with the logo and the wave. */
+  color: var(--navy);
   text-wrap: balance;
 }
 /* Product name in the H1. Red at display size clears the 3:1 large-text
@@ -944,11 +945,15 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--ink);
   text-wrap: balance;
 }
+/* Section subtext. The copy is kept short enough to sit on one line from
+   900px up; below that `balance` splits the wrap evenly instead of leaving a
+   two-word orphan on the second line. */
 .kh-lead {
   margin-top: 10px;
   font-size: 15px;
   line-height: 1.55;
   color: var(--ink-muted);
+  text-wrap: balance;
 }
 @media (min-width: 900px) {
   .kh-section { padding: 88px 40px; }

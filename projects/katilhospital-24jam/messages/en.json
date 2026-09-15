@@ -46,7 +46,7 @@
   },
   "products": {
     "h3": "Clear rental and purchase prices",
-    "intro": "Hospital beds, mattresses, wheelchairs, oxygen concentrators and CPAP machines — rent monthly or buy outright.",
+    "intro": "Rent monthly or buy outright — delivery included.",
     "cardCta": "Book on WhatsApp",
     "eyebrow": "Rent & Buy Catalogue",
     "imageAltTemplate": "{model} hospital bed from Katil Hospital Murah — rent or buy across Malaysia"
@@ -102,7 +102,7 @@
   },
   "gallery": {
     "h3": "Customer Gallery",
-    "intro": "Deliveries and setups at customer homes across Malaysia.",
+    "intro": "Deliveries and setups at customer homes.",
     "eyebrow": "Real Proof",
     "alts": [
       "Manual hospital bed delivered to a customer home in Kuala Lumpur",
@@ -245,7 +245,7 @@
   "lokasi": {
     "eyebrow": "Coverage Areas",
     "h3": "Coverage Across 159 Areas in Malaysia",
-    "intro": "Free delivery to every state in Peninsular Malaysia, Sabah, and Sarawak. Click your state to see the full list of areas.",
+    "intro": "Free delivery nationwide. Click your state.",
     "empty": "Your area not listed?",
     "emptyCta": "Confirm Coverage",
     "count": "{count} areas"
