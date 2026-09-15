@@ -27,7 +27,8 @@
     "factCoverage": "Liputan",
     "unitMonth": "/bulan",
     "unitTowns": "bandar",
-    "bedAlt": "Katil Hospital Auto 3 Fungsi dengan alat kawalan"
+    "bedAlt": "Katil Hospital Auto 3 Fungsi dengan alat kawalan",
+    "h1Highlight": "Katil Hospital"
   },
   "usp": {
     "p1": {
@@ -207,7 +208,8 @@
       "eyebrow": "Liputan sekitar"
     },
     "badge": "Hantar ke {city} dalam 24 jam",
-    "introEyebrow": "Kawasan liputan"
+    "introEyebrow": "Kawasan liputan",
+    "h1Highlight": "Katil Hospital"
   },
   "blog": {
     "title": "Blog",

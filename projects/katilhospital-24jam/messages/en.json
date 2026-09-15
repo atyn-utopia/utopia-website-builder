@@ -27,7 +27,8 @@
     "factCoverage": "Coverage",
     "unitMonth": "/month",
     "unitTowns": "towns",
-    "bedAlt": "Auto 3-function hospital bed with handset controller"
+    "bedAlt": "Auto 3-function hospital bed with handset controller",
+    "h1Highlight": "Hospital Bed"
   },
   "usp": {
     "p1": {
@@ -207,7 +208,8 @@
       "eyebrow": "Around you"
     },
     "badge": "Delivered to {city} within 24 hours",
-    "introEyebrow": "Coverage area"
+    "introEyebrow": "Coverage area",
+    "h1Highlight": "Hospital Bed"
   },
   "blog": {
     "title": "Blog",

@@ -6,7 +6,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import HomeSections from '@/components/HomeSections';
-import HeroArc from '@/components/HeroArc';
+import HeroArc, { markPhrase } from '@/components/HeroArc';
 import Eyebrow from '@/components/Eyebrow';
 import { waRedirect } from '@/lib/waRedirect';
 import type { ProductCardData } from '@/components/ProductCard';
@@ -56,7 +56,7 @@ export default function LocationPageClient({
 
       {/* SECTION 3 — HERO */}
       <HeroArc
-        title={<h1 className="kh-hero-title">{h1}</h1>}
+        title={<h1 className="kh-hero-title">{markPhrase(h1, locT('h1Highlight'))}</h1>}
         subtitle={<h2 className="kh-hero-sub">{h2}</h2>}
         badge={locT('badge', { city: location.name })}
         products={products}

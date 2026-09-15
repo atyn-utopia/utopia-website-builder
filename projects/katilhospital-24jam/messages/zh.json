@@ -27,7 +27,8 @@
     "factCoverage": "覆盖",
     "unitMonth": "/月",
     "unitTowns": "个城镇",
-    "bedAlt": "配手控器的 Auto 三功能医院病床"
+    "bedAlt": "配手控器的 Auto 三功能医院病床",
+    "h1Highlight": "医院病床"
   },
   "usp": {
     "p1": {
@@ -207,7 +208,8 @@
       "eyebrow": "周边服务"
     },
     "badge": "24小时内送达{city}",
-    "introEyebrow": "服务地区"
+    "introEyebrow": "服务地区",
+    "h1Highlight": "病床"
   },
   "blog": {
     "title": "博客",
