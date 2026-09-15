@@ -8,9 +8,9 @@ import WhatsAppButton from '@/components/WhatsAppButton';
 import { waRedirect } from '@/lib/waRedirect';
 
 const PRODUCT_IMAGE_FALLBACK: Record<string, string> = {
-  'katil-hospital-manual-1-fungsi': '/brand/products/katil-hospital-manual-1-fungsi.png',
   'katil-hospital-manual-2-fungsi': '/brand/products/katil-hospital-manual-2-fungsi.png',
   'katil-hospital-elektrik-3-fungsi': '/brand/products/katil-hospital-manual-2-fungsi.png',
+  'katil-hospital-auto-3-fungsi': '/brand/products/katil-hospital-auto-3-fungsi.png',
   'tilam-hospital-foam': '/brand/products/tilam-hospital-foam.png',
   'tilam-angin-anti-decubitus': '/brand/products/tilam-angin-anti-decubitus.png',
   'mesin-oksigen': '/brand/products/mesin-oksigen.png',
@@ -19,9 +19,9 @@ const PRODUCT_IMAGE_FALLBACK: Record<string, string> = {
 };
 
 const FALLBACK_PRODUCTS: { slug: string; key: string }[] = [
-  { slug: 'katil-hospital-manual-1-fungsi', key: '1-fungsi' },
   { slug: 'katil-hospital-manual-2-fungsi', key: '2-fungsi' },
-  { slug: 'katil-hospital-elektrik-3-fungsi', key: 'elektrik' },
+  { slug: 'katil-hospital-elektrik-3-fungsi', key: 'flexi-ii' },
+  { slug: 'katil-hospital-auto-3-fungsi', key: 'auto' },
   { slug: 'tilam-hospital-foam', key: 'foam' },
   { slug: 'tilam-angin-anti-decubitus', key: 'anti-decubitus' },
   { slug: 'mesin-oksigen', key: 'oksigen' },
@@ -31,9 +31,9 @@ const FALLBACK_PRODUCTS: { slug: string; key: string }[] = [
 
 const FALLBACK_PRODUCT_NAMES: Record<string, Record<string, string>> = {
   ms: {
-    'katil-hospital-manual-1-fungsi': 'Katil Hospital Manual 1-Fungsi',
     'katil-hospital-manual-2-fungsi': 'Katil Hospital Manual 2-Fungsi',
-    'katil-hospital-elektrik-3-fungsi': 'Katil Hospital Elektrik 3-Fungsi',
+    'katil-hospital-elektrik-3-fungsi': 'Katil Hospital Flexi II - 3 Fungsi',
+    'katil-hospital-auto-3-fungsi': 'Katil Hospital Auto - 3 Fungsi',
     'tilam-hospital-foam': 'Tilam Hospital Foam',
     'tilam-angin-anti-decubitus': 'Tilam Angin Anti-Decubitus',
     'mesin-oksigen': 'Mesin Oksigen',
@@ -41,9 +41,9 @@ const FALLBACK_PRODUCT_NAMES: Record<string, Record<string, string>> = {
     'mesin-cpap': 'Mesin CPAP',
   },
   en: {
-    'katil-hospital-manual-1-fungsi': 'Manual 1-Function Hospital Bed',
     'katil-hospital-manual-2-fungsi': 'Manual 2-Function Hospital Bed',
-    'katil-hospital-elektrik-3-fungsi': 'Electric 3-Function Hospital Bed',
+    'katil-hospital-elektrik-3-fungsi': 'Flexi II 3-Function Hospital Bed',
+    'katil-hospital-auto-3-fungsi': 'Auto 3-Function Hospital Bed',
     'tilam-hospital-foam': 'Hospital Foam Mattress',
     'tilam-angin-anti-decubitus': 'Anti-Decubitus Air Mattress',
     'mesin-oksigen': 'Oxygen Concentrator',
@@ -51,9 +51,9 @@ const FALLBACK_PRODUCT_NAMES: Record<string, Record<string, string>> = {
     'mesin-cpap': 'CPAP Machine',
   },
   zh: {
-    'katil-hospital-manual-1-fungsi': '单功能手动病床',
     'katil-hospital-manual-2-fungsi': '双功能手动病床',
-    'katil-hospital-elektrik-3-fungsi': '三功能电动病床',
+    'katil-hospital-elektrik-3-fungsi': 'Flexi II 三功能病床',
+    'katil-hospital-auto-3-fungsi': 'Auto 三功能电动病床',
     'tilam-hospital-foam': '医用泡沫床垫',
     'tilam-angin-anti-decubitus': '防褥疮气垫床',
     'mesin-oksigen': '家用制氧机',
@@ -64,12 +64,12 @@ const FALLBACK_PRODUCT_NAMES: Record<string, Record<string, string>> = {
 
 const FALLBACK_DESCRIPTIONS: Record<string, Record<string, string>> = {
   ms: {
-    'katil-hospital-manual-1-fungsi':
-      'Katil hospital manual mudah dengan pelarasan kepala — pilihan jimat untuk penjagaan di rumah.',
     'katil-hospital-manual-2-fungsi':
       'Katil manual dengan pelarasan kepala dan lutut — selesa untuk pesakit terlantar jangka panjang.',
     'katil-hospital-elektrik-3-fungsi':
       'Katil elektrik dengan kawalan jauh — pelarasan kepala, lutut dan tinggi, sesuai untuk penjagaan intensif.',
+    'katil-hospital-auto-3-fungsi':
+      'Katil bermotor dengan alat kawalan — laraskan kepala, lutut dan tinggi dengan sekali tekan.',
     'tilam-hospital-foam':
       'Tilam foam gred hospital, tahan tekanan dan mudah dibersihkan — sepadan dengan katil manual atau elektrik.',
     'tilam-angin-anti-decubitus':
@@ -82,12 +82,12 @@ const FALLBACK_DESCRIPTIONS: Record<string, Record<string, string>> = {
       'Mesin CPAP untuk pesakit sleep apnea — bantu pernafasan malam yang lebih lena dan selamat.',
   },
   en: {
-    'katil-hospital-manual-1-fungsi':
-      'A simple manual hospital bed with single head adjustment — the budget-friendly choice for home care.',
     'katil-hospital-manual-2-fungsi':
       'Manual bed with head and knee adjustment — comfortable support for long-term bedridden patients.',
     'katil-hospital-elektrik-3-fungsi':
       'Electric bed with remote — head, knee, and height adjustment, ideal for intensive home care.',
+    'katil-hospital-auto-3-fungsi':
+      'Motorised bed with a handset — adjust head, knee and height at the push of a button.',
     'tilam-hospital-foam':
       'Hospital-grade foam mattress, pressure-resistant and easy to clean — compatible with manual or electric beds.',
     'tilam-angin-anti-decubitus':
@@ -100,12 +100,12 @@ const FALLBACK_DESCRIPTIONS: Record<string, Record<string, string>> = {
       'CPAP machine for sleep-apnea patients — supports safer, more restful breathing through the night.',
   },
   zh: {
-    'katil-hospital-manual-1-fungsi':
-      '基础单功能手动病床，头部可调节 — 适合居家照护的经济选择。',
     'katil-hospital-manual-2-fungsi':
       '可调节头部与膝部的手动病床 — 为长期卧床患者提供舒适支持。',
     'katil-hospital-elektrik-3-fungsi':
       '配备遥控器的电动病床 — 头部、膝部与高度均可调节，适合重症居家照护。',
+    'katil-hospital-auto-3-fungsi':
+      '配备手控器的电动病床 — 一键调节头部、膝部与高度。',
     'tilam-hospital-foam':
       '医院级泡沫床垫，抗压耐用、易于清洁 — 可搭配手动或电动病床。',
     'tilam-angin-anti-decubitus':
