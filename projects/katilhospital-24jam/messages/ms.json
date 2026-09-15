@@ -46,7 +46,7 @@
   },
   "products": {
     "h3": "Harga sewa & beli yang jelas",
-    "intro": "Katil hospital, tilam, kerusi roda, mesin oksigen dan mesin CPAP — sewa bulanan atau beli terus.",
+    "intro": "Sewa bulanan atau beli terus — harga termasuk hantar.",
     "cardCta": "Tempah di WhatsApp",
     "eyebrow": "Katalog Sewa & Beli",
     "imageAltTemplate": "Katil hospital {model} daripada Katil Hospital Murah — sewa atau beli seluruh Malaysia"
@@ -102,7 +102,7 @@
   },
   "gallery": {
     "h3": "Gambar Pelanggan",
-    "intro": "Penghantaran dan pemasangan di rumah pelanggan di seluruh Malaysia.",
+    "intro": "Penghantaran dan pemasangan di rumah pelanggan.",
     "eyebrow": "Bukti Sebenar",
     "alts": [
       "Katil hospital manual dihantar ke rumah pelanggan di Kuala Lumpur",
@@ -245,7 +245,7 @@
   "lokasi": {
     "eyebrow": "Liputan Penghantaran",
     "h3": "Liputan 159 Kawasan di Seluruh Malaysia",
-    "intro": "Penghantaran percuma ke setiap negeri di Semenanjung, Sabah, dan Sarawak. Klik negeri anda untuk lihat senarai penuh kawasan.",
+    "intro": "Hantar percuma ke seluruh Malaysia. Klik negeri anda.",
     "empty": "Kawasan anda tidak tersenarai?",
     "emptyCta": "Sahkan Liputan",
     "count": "{count} kawasan"

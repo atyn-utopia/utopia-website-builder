@@ -46,7 +46,7 @@
   },
   "products": {
     "h3": "租购价格一目了然",
-    "intro": "医院病床、床垫、轮椅、制氧机及CPAP呼吸机 — 可按月租用或直接购买。",
+    "intro": "可按月租用或直接购买 — 价格含送货。",
     "cardCta": "WhatsApp 预订",
     "eyebrow": "租赁与购买目录",
     "imageAltTemplate": "{model} 医院病床 — Katil Hospital Murah 全马来西亚租赁/销售"
@@ -245,7 +245,7 @@
   "lokasi": {
     "eyebrow": "服务覆盖",
     "h3": "马来西亚 159 个地区全覆盖",
-    "intro": "免费送货至西马、沙巴和砂拉越每个州。点击您的州查看完整区域列表。",
+    "intro": "全马免费送货。点击您的州查看区域。",
     "empty": "您的地区未列出?",
     "emptyCta": "WhatsApp 确认覆盖范围",
     "count": "{count} 个地区"
