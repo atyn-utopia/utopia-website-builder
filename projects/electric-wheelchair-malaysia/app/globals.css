@@ -1070,19 +1070,12 @@ p, li, blockquote,
 .ew-hero__ctas { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 4px; }
 .ew-hero__badge { height: 36px; width: auto; margin-top: 10px; }
 .ew-diagram {
-  /* Editorial Cut direction: a diagonal-cut panel behind the photo, not the
-     flat page background from the previous round. clip-path is desktop-only
-     (see the 900px block) — a diagonal cut on a stacked mobile layout has no
-     second column to cut against, so it just stays a plain rounded panel. */
+  /* No panel/card behind the photo — the diagonal-cut gradient panel tried
+     in the Editorial Cut round was dropped by request; the photo and its
+     callout tags sit directly on the page again. */
   position: relative; width: 100%;
   background: transparent; padding: 24px;
   display: grid; place-items: center;
-}
-@media (min-width: 900px) {
-  .ew-diagram {
-    background: linear-gradient(165deg, var(--brand-ice) 0%, #fff 60%);
-    border-radius: 20px;
-  }
 }
 /* The generated product shot is on a white studio ground, not alpha. Multiply
    drops that white into the page background without touching the source
@@ -1106,11 +1099,7 @@ p, li, blockquote,
   padding: 5px 10px; border-radius: 6px; white-space: nowrap; transform: rotate(-1.5deg);
 }
 .ew-callout--r .ew-callout__tag { transform: rotate(1.5deg); }
-/* left/right are measured from .ew-diagram's own edge, not its padding box —
-   the diagram's padding doesn't protect these from the diagonal clip-path,
-   so the left offset has to clear the cut itself (worst case ~25px at the
-   top-most callout) with real margin. */
-.ew-callout--l { left: 42px; }
+.ew-callout--l { left: 18px; }
 .ew-callout--r { right: 18px; }
 .ew-callout--1 { top: 24%; }
 .ew-callout--2 { top: 58%; }
@@ -1139,14 +1128,11 @@ p, li, blockquote,
 @media (min-width: 640px) {
   .ew-usp__grid {
     grid-template-columns: repeat(3, 1fr); gap: 1px;
-    background: rgba(255, 255, 255, 0.14); border-radius: 18px; overflow: hidden;
+    background: rgba(255, 255, 255, 0.14);
   }
   .ew-usp__item { background: var(--brand-navy); padding: 30px 26px; border-top: none; }
 }
-.ew-usp__num {
-  font-family: var(--font-heading); font-weight: 800; font-size: 34px;
-  color: rgba(255, 255, 255, 0.2); line-height: 1;
-}
+.ew-usp__icon { color: var(--brand-orange); width: 30px; height: 30px; }
 .ew-usp__item b { font-size: 16px; font-weight: 700; color: #fff; }
 /* Plain body copy, not the site's small monospace tag style — the reference
    reads as an ordinary descriptive sentence under the title. */
@@ -1327,9 +1313,9 @@ p, li, blockquote,
   /* Extra room on the left: the diagonal cut takes a bite out of the
      top-left corner, and the left-side callouts sit in that same corner —
      the wider inset keeps their pin+tag clear of the cut edge. */
-  .ew-diagram { padding: 30px 90px 30px 130px; clip-path: polygon(5% 0, 100% 0, 100% 100%, 0 100%); }
+  .ew-diagram { padding: 30px 115px; }
   .ew-diagram__chair { width: 100%; }
-  .ew-usp__num { font-size: 40px; }
+  .ew-usp__icon { width: 36px; height: 36px; }
   .ew-prod__grid { grid-template-columns: 1fr 1fr; gap: 60px; }
   .ew-prod__info { justify-items: start; text-align: left; }
   .ew-steps__list { grid-template-columns: repeat(3, 1fr); gap: 22px; }
