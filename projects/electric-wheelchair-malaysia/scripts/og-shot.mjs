@@ -47,13 +47,12 @@ const LOCALES = [
   ['zh', '/zh'],
 ];
 const PORT = 3000;   // package.json `start` is a bare `next start`
-// The hero is a class-less <section> styled inline, so the template's default
-// selector matches nothing here. It does uniquely contain .hero-split-grid.
-const HERO = 'section:has(.hero-split-grid)';
-const HIDE = [
-  '.fomo-bar', '.site-header', 'header',   // canonical chrome
-  '.hero-stats', '.ops-ticker',            // hero-foot elements a crop would slice
-];
+// This project's actual hero section + chrome classes (app/[locale]/page.tsx,
+// components/FomoBanner.tsx, components/SiteHeader.tsx) — the template's
+// generic .hero-split-grid / .fomo-bar / .site-header defaults match nothing
+// here and silently produced a broken card until this was fixed.
+const HERO = '.ew-hero';
+const HIDE = ['.ewc-fomo', '.ewc-header'];
 // ─────────────────────────────────────────────────────────────────────────
 
 const W = 1200;

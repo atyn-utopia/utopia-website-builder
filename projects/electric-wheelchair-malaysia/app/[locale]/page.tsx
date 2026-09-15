@@ -82,7 +82,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             />
             <span className="ew-eyebrow">{tHero('badge')}</span>
             <h1>
-              {tHero('h1')} {tHero('h1Highlight')} {tHero('h1Suffix')}
+              {tHero('h1')} <span className="ew-hero__highlight">{tHero('h1Highlight')}</span> {tHero('h1Suffix')}
             </h1>
             <h2>{tHero('subheadline')}</h2>
             <p className="ew-hero__trust">{tHero('trustBadge')}</p>
