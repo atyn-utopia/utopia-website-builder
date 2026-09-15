@@ -12,6 +12,24 @@ import { locations } from '@/config/locations';
 const FEATURED_SLUG = 'katil-hospital-auto-3-fungsi';
 const BED_PREFIX = 'katil-hospital';
 
+/**
+ * Wraps the first occurrence of `phrase` in `text` with the red H1 mark, so
+ * the product name ("Katil Hospital") stands out in the hero title. The phrase
+ * lives in the translation files; if a locale's title doesn't contain it, the
+ * title renders unmarked rather than failing.
+ */
+export function markPhrase(text: string, phrase: string): ReactNode {
+  const i = phrase ? text.indexOf(phrase) : -1;
+  if (i === -1) return text;
+  return (
+    <>
+      {text.slice(0, i)}
+      <span className="kh-hero-title-mark">{phrase}</span>
+      {text.slice(i + phrase.length)}
+    </>
+  );
+}
+
 function lowest(values: (number | null | undefined)[]): number | null {
   const real = values.filter((v): v is number => typeof v === 'number' && v > 0);
   return real.length > 0 ? Math.min(...real) : null;
