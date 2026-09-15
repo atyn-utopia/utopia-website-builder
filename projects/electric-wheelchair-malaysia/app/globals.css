@@ -1062,6 +1062,7 @@ p, li, blockquote,
   color: var(--ink-muted); max-width: 32em; margin: 0;
 }
 .ew-hero__ctas { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 4px; }
+.ew-hero__badge { height: 36px; width: auto; margin-top: 10px; }
 .ew-diagram {
   /* No card/panel here by request — the photo and its callout labels sit
      directly on the page. Padding stays: it's the room the absolutely
@@ -1296,6 +1297,7 @@ p, li, blockquote,
   .ew-hero__copy { justify-items: start; }
   .ew-hero__logo { height: 66px; margin-bottom: 6px; }
   .ew-hero__ctas { justify-content: flex-start; }
+  .ew-hero__badge { height: 42px; }
   .ew-callout { display: flex; }
   .ew-spec-list { display: none; }
   .ew-diagram { padding: 30px 115px; }
