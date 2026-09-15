@@ -31,8 +31,8 @@ export default async function SiteFooter({
               src="/brand/logo-light.png"
               alt={tNav('logoAlt')}
               className="footer-logo"
-              width={1400}
-              height={1175}
+              width={1236}
+              height={1273}
             />
           </div>
 

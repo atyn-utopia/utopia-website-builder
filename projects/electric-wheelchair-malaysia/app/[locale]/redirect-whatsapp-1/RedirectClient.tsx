@@ -43,7 +43,7 @@ export default function RedirectClient({ url }: { url: string }) {
           animation: redir-spin 0.8s linear infinite;
         }
         @keyframes redir-spin { to { transform: rotate(360deg); } }
-        .redir-heading { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em; color: #1B2D5B; margin: 0 0 0.5rem; line-height: 1.2; }
+        .redir-heading { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em; color: #003040; margin: 0 0 0.5rem; line-height: 1.2; }
         .redir-subtext { font-size: 0.9rem; color: #6b7280; margin: 0 0 1.5rem; line-height: 1.4; }
         .redir-fallback { font-size: 0.85rem; color: #25D366; font-weight: 600; text-decoration: none; }
         .redir-fallback:hover { text-decoration: underline; }

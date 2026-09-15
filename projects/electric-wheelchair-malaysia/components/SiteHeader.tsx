@@ -1,7 +1,7 @@
-// Sticky white header that mirrors sewa-excavator's chrome 1:1: brand logo +
-// horizontal nav in the centre, language switcher + WhatsApp CTA on the right,
-// burger menu on mobile. Uses electric-wheelchair's nav.* keys and brand
-// colours (#1B2D5B navy ink, #F47B20 orange accent, #25D366 WA green).
+// Sticky white header — no brand mark (logo lives in the hero only); nav in
+// the centre, language switcher + WhatsApp CTA on the right, burger menu on
+// mobile. Uses electric-wheelchair's nav.* keys and brand colours
+// (var(--brand-navy) ink, var(--brand-orange) accent, #25D366 WA green).
 'use client';
 
 import Link from 'next/link';
