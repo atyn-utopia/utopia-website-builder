@@ -1122,7 +1122,13 @@ p, li, blockquote,
    the earlier tinted-background version was replaced at the client's
    request to match this look. Same centred layout at every breakpoint. */
 .ew-usp { background: var(--brand-paper); padding: 40px 0; }
-.ew-usp__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+/* One column below 640px — the description is now a full sentence (not a
+   short tag), and three narrow columns at phone widths wrapped it down to
+   a word or two per line with mismatched card heights. */
+.ew-usp__grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+@media (min-width: 640px) {
+  .ew-usp__grid { grid-template-columns: repeat(3, 1fr); }
+}
 .ew-usp__item {
   padding: 28px 18px; display: grid; gap: 8px; justify-items: center; text-align: center;
   background: #fff; border-radius: 16px; border: 2px solid var(--brand-orange);
@@ -1132,7 +1138,10 @@ p, li, blockquote,
    reads as an ordinary descriptive sentence under the title. */
 .ew-usp__desc {
   font-family: var(--font-inter), Inter, sans-serif; font-size: 12.5px; font-weight: 500;
-  line-height: 1.4; color: var(--ink-muted); max-width: 22ch;
+  line-height: 1.4; color: var(--ink-muted); max-width: 34ch;
+}
+@media (min-width: 640px) {
+  .ew-usp__desc { max-width: 24ch; }
 }
 
 /* ── Product display ─────────────────────────────────────────────────────── */
@@ -1347,13 +1356,16 @@ p, li, blockquote,
 }
 
 /* ── Icons in the USP bar and the spec list ─────────────────────────────── */
-/* USP icons sit in an outline circle (white fill, orange ring, orange
-   stroke), matching the reference's icon-circle-then-title-then-description
-   card; the spec-list icons stay plain (they're inline with dense rows, a
-   badge there would be too heavy). */
+/* USP icons sit in an outline circle, matching the reference's
+   icon-circle-then-title-then-description card. The reference's circles
+   aren't flat white — a soft light-to-tint radial gradient plus a gentle
+   shadow gives them embossed depth, so this recolours that same treatment
+   to brand orange instead of the reference's green. */
 .ew-usp__icon {
   width: 56px; height: 56px; border-radius: 50%;
-  background: #fff; border: 2px solid var(--brand-orange); color: var(--brand-orange);
+  background: radial-gradient(circle at 32% 28%, #fff 0%, #FFEEE3 70%, #FFE3D1 100%);
+  border: 2px solid var(--brand-orange); color: var(--brand-orange);
+  box-shadow: inset 0 -2px 4px rgba(184, 77, 10, 0.12), 0 4px 10px rgba(255, 102, 19, 0.18);
   display: grid; place-items: center; margin-bottom: 2px;
 }
 .ew-specs > div { grid-template-columns: 128px 1fr; }
