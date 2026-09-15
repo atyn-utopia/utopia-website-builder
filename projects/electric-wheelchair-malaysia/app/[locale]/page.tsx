@@ -92,6 +92,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 {tHero('ctaPrimary')}
               </a>
             </div>
+            <Image
+              src="/brand/mda-kkm-badge.avif"
+              alt={tHero('mdaKkmBadgeAlt')}
+              className="ew-hero__badge"
+              width={250}
+              height={114}
+            />
           </div>
 
           <div className="ew-diagram">
