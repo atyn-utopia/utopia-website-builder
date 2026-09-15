@@ -18,8 +18,8 @@ export default async function UspBar({ locale }: { locale: string }) {
         {items.map((item) => (
           <div className="ew-usp__item ew-reveal" key={item.label}>
             <span className="ew-usp__icon"><Icon name={item.icon} /></span>
-            <span className="ew-mono">{item.eyebrow}</span>
             <b>{item.label}</b>
+            <span className="ew-usp__desc">{item.eyebrow}</span>
           </div>
         ))}
       </div>
