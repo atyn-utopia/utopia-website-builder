@@ -1070,43 +1070,48 @@ p, li, blockquote,
 .ew-hero__ctas { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 4px; }
 .ew-hero__badge { height: 36px; width: auto; margin-top: 10px; }
 .ew-diagram {
-  /* No card/panel here by request — the photo and its callout labels sit
-     directly on the page. Padding stays: it's the room the absolutely
-     positioned callouts (left/right: 18px, see below) need around the
-     photo, not a visual box inset. */
+  /* Editorial Cut direction: a diagonal-cut panel behind the photo, not the
+     flat page background from the previous round. clip-path is desktop-only
+     (see the 900px block) — a diagonal cut on a stacked mobile layout has no
+     second column to cut against, so it just stays a plain rounded panel. */
   position: relative; width: 100%;
   background: transparent; padding: 24px;
   display: grid; place-items: center;
+}
+@media (min-width: 900px) {
+  .ew-diagram {
+    background: linear-gradient(165deg, var(--brand-ice) 0%, #fff 60%);
+    border-radius: 20px;
+  }
 }
 /* The generated product shot is on a white studio ground, not alpha. Multiply
    drops that white into the page background without touching the source
    file — this only reads as "transparent" where the ground behind it is
    itself light; it's a blend trick, not real alpha. */
 .ew-diagram__chair { width: min(94%, 440px); height: auto; mix-blend-mode: multiply; }
+/* Pin + rotated sticker tag, replacing the earlier line-to-dot style — no
+   connecting line, just a small ring next to a slightly rotated label, per
+   the approved reference. Unconditional pin-then-tag order (no row-reverse
+   for the right side): the pin ends up nearer the photo either way once
+   left/right anchoring is applied, verified against the approved mockup. */
 .ew-callout {
-  display: none; position: absolute; align-items: center;
-  font-size: 11px; line-height: 1.2; color: var(--ink-muted);
+  display: none; position: absolute; align-items: center; gap: 8px;
 }
-.ew-callout__line { height: 1px; width: 56px; background: var(--hair-strong); flex: none; }
-.ew-callout__dot {
-  position: relative; width: 7px; height: 7px; border-radius: 50%;
-  background: var(--brand-orange); flex: none;
+.ew-callout__pin {
+  width: 12px; height: 12px; border-radius: 50%; flex: none;
+  border: 2px solid var(--brand-orange); background: #fff;
 }
-/* A small live-indicator pulse — transform/opacity only, and only when the
-   visitor hasn't asked for reduced motion. */
-@media (prefers-reduced-motion: no-preference) {
-  .ew-callout__dot::after {
-    content: ""; position: absolute; inset: -5px; border-radius: 50%;
-    border: 1.5px solid var(--brand-orange);
-    animation: ew-dot-pulse 2.4s ease-out infinite;
-  }
+.ew-callout__tag {
+  background: var(--brand-navy); color: #fff; font-size: 11px; font-weight: 600;
+  padding: 5px 10px; border-radius: 6px; white-space: nowrap; transform: rotate(-1.5deg);
 }
-@keyframes ew-dot-pulse {
-  from { transform: scale(0.6); opacity: 0.55; }
-  to { transform: scale(1.9); opacity: 0; }
-}
-.ew-callout--l { left: 18px; }
-.ew-callout--r { right: 18px; flex-direction: row-reverse; }
+.ew-callout--r .ew-callout__tag { transform: rotate(1.5deg); }
+/* left/right are measured from .ew-diagram's own edge, not its padding box —
+   the diagram's padding doesn't protect these from the diagonal clip-path,
+   so the left offset has to clear the cut itself (worst case ~25px at the
+   top-most callout) with real margin. */
+.ew-callout--l { left: 42px; }
+.ew-callout--r { right: 18px; }
 .ew-callout--1 { top: 24%; }
 .ew-callout--2 { top: 58%; }
 .ew-callout--3 { top: 30%; }
@@ -1119,31 +1124,35 @@ p, li, blockquote,
 .ew-spec-list i { width: 7px; height: 7px; border-radius: 50%; background: var(--brand-orange); margin-top: 6px; }
 
 /* ── USP bar ─────────────────────────────────────────────────────────────── */
-/* Outline cards, recoloured from a reference (white bg, 2px accent border,
-   an outline-circle icon, bold title, then a plain description sentence) —
-   the earlier tinted-background version was replaced at the client's
-   request to match this look. Same centred layout at every breakpoint. */
-.ew-usp { background: var(--brand-paper); padding: 40px 0; }
-/* One column below 640px — the description is now a full sentence (not a
-   short tag), and three narrow columns at phone widths wrapped it down to
-   a word or two per line with mismatched card heights. */
-.ew-usp__grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
-@media (min-width: 640px) {
-  .ew-usp__grid { grid-template-columns: repeat(3, 1fr); }
-}
+/* Big-number cards on navy, per the approved "Editorial Cut" direction —
+   replaces the earlier white outline-card version. Stacked with hairline
+   dividers below 640px (no room for 3 columns without the numbers/text
+   wrapping down to almost nothing); a 3-column grid with 1px hairline
+   gutters (the grid-gap-as-divider trick) above that. */
+.ew-usp { background: var(--brand-navy); padding: 44px 0 52px; }
+.ew-usp__grid { display: grid; grid-template-columns: 1fr; gap: 0; }
 .ew-usp__item {
-  padding: 28px 18px; display: grid; gap: 8px; justify-items: center; text-align: center;
-  background: #fff; border-radius: 16px; border: 2px solid var(--brand-orange);
+  padding: 22px 0; display: grid; gap: 6px; text-align: left;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
 }
-.ew-usp__item b { font-size: 15px; font-weight: 800; letter-spacing: -0.01em; color: var(--brand-navy); }
+.ew-usp__item:first-child { border-top: none; }
+@media (min-width: 640px) {
+  .ew-usp__grid {
+    grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: rgba(255, 255, 255, 0.14); border-radius: 18px; overflow: hidden;
+  }
+  .ew-usp__item { background: var(--brand-navy); padding: 30px 26px; border-top: none; }
+}
+.ew-usp__num {
+  font-family: var(--font-heading); font-weight: 800; font-size: 34px;
+  color: rgba(255, 255, 255, 0.2); line-height: 1;
+}
+.ew-usp__item b { font-size: 16px; font-weight: 700; color: #fff; }
 /* Plain body copy, not the site's small monospace tag style — the reference
    reads as an ordinary descriptive sentence under the title. */
 .ew-usp__desc {
-  font-family: var(--font-inter), Inter, sans-serif; font-size: 12.5px; font-weight: 500;
-  line-height: 1.4; color: var(--ink-muted); max-width: 34ch;
-}
-@media (min-width: 640px) {
-  .ew-usp__desc { max-width: 24ch; }
+  font-family: var(--font-inter), Inter, sans-serif; font-size: 13px; font-weight: 500;
+  line-height: 1.5; color: rgba(255, 255, 255, 0.68); max-width: 32ch;
 }
 
 /* ── Product display ─────────────────────────────────────────────────────── */
@@ -1315,11 +1324,12 @@ p, li, blockquote,
   .ew-hero__badge { height: 42px; }
   .ew-callout { display: flex; }
   .ew-spec-list { display: none; }
-  .ew-diagram { padding: 30px 115px; }
+  /* Extra room on the left: the diagonal cut takes a bite out of the
+     top-left corner, and the left-side callouts sit in that same corner —
+     the wider inset keeps their pin+tag clear of the cut edge. */
+  .ew-diagram { padding: 30px 90px 30px 130px; clip-path: polygon(5% 0, 100% 0, 100% 100%, 0 100%); }
   .ew-diagram__chair { width: 100%; }
-  .ew-usp__item { padding: 32px 24px; }
-  .ew-usp__item b { font-size: 17px; }
-  .ew-usp__desc { max-width: 26ch; }
+  .ew-usp__num { font-size: 40px; }
   .ew-prod__grid { grid-template-columns: 1fr 1fr; gap: 60px; }
   .ew-prod__info { justify-items: start; text-align: left; }
   .ew-steps__list { grid-template-columns: repeat(3, 1fr); gap: 22px; }
@@ -1335,19 +1345,25 @@ p, li, blockquote,
 .ewc-fomo__cta { color: #0C1220 !important; border-radius: 12px !important; }
 
 /* ── Section eyebrows (DESIGN.md eyebrow-badge) ─────────────────────────── */
-/* One label above every section heading: outline pill, transparent fill, on
-   the pale/white section grounds. On the orange steps ground and the navy
-   final-CTA ground it inverts to a white outline so it stays visible against
-   a background close to its own accent colour. */
+/* Soft filled pill + a small dot bullet, per the client's reference. On the
+   orange steps ground and the navy final-CTA/location-hero ground it goes
+   translucent-white so it stays legible; the dot switches to navy there so
+   it doesn't disappear into an orange pill on an orange ground. */
 .ew-eyebrow {
-  display: inline-block; padding: 6px 12px; border-radius: 999px;
-  background: transparent; border: 1.5px solid var(--brand-orange); color: var(--brand-orange);
+  display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px;
+  background: var(--brand-ice); color: var(--brand-navy);
   font-family: var(--font-heading); font-size: 0.75rem; font-weight: 700;
-  line-height: 1; letter-spacing: 0.08em; text-transform: uppercase;
+  line-height: 1; letter-spacing: 0.06em; text-transform: uppercase;
+}
+.ew-eyebrow::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--brand-orange); flex: none;
 }
 .ew-hero__copy .ew-eyebrow { margin-bottom: 2px; }
 .ew-hero__trust { font-size: 13px; font-weight: 500; color: var(--ink-muted); }
-.ew-eyebrow--on-dark { background: transparent; border-color: #fff; color: #fff; }
+.ew-eyebrow--on-dark { background: rgba(255, 255, 255, 0.12); color: #fff; }
+.ew-steps .ew-eyebrow { background: rgba(255, 255, 255, 0.16); color: #fff; }
+.ew-steps .ew-eyebrow::before { background: var(--brand-navy); }
 
 /* Google mark in the reviews rating row: a white disc so the four colours sit
    clean on the pale-blue band, with a little more room before the 4.9. */
@@ -1357,25 +1373,10 @@ p, li, blockquote,
   box-shadow: 0 1px 2px rgba(15, 15, 15, 0.08);
 }
 
-/* ── Icons in the USP bar and the spec list ─────────────────────────────── */
-/* USP icons sit in an outline circle, matching the reference's
-   icon-circle-then-title-then-description card. The reference's circles
-   aren't flat white — a soft light-to-tint radial gradient plus a gentle
-   shadow gives them embossed depth, so this recolours that same treatment
-   to brand orange instead of the reference's green. */
-.ew-usp__icon {
-  width: 56px; height: 56px; border-radius: 50%;
-  background: radial-gradient(circle at 32% 28%, #fff 0%, #FFEEE3 70%, #FFE3D1 100%);
-  border: 2px solid var(--brand-orange); color: var(--brand-orange);
-  box-shadow: inset 0 -2px 4px rgba(184, 77, 10, 0.12), 0 4px 10px rgba(255, 102, 19, 0.18);
-  display: grid; place-items: center; margin-bottom: 2px;
-}
+/* ── Icons in the spec list ──────────────────────────────────────────────── */
 .ew-specs > div { grid-template-columns: 128px 1fr; }
 .ew-specs dt { display: flex; align-items: center; gap: 8px; }
 .ew-specs__icon { display: inline-grid; place-items: center; color: var(--brand-orange-deep); flex: none; }
-@media (min-width: 900px) {
-  .ew-usp__icon { width: 64px; height: 64px; }
-}
 
 /* ── Steps: photo under the orange, white copy ─────────────────────────── */
 /* The photo is desaturated and sits at low opacity under the orange so it
@@ -1389,7 +1390,6 @@ p, li, blockquote,
 .ew-steps .ew-head h3 { color: #fff; }
 .ew-steps .ew-head p { color: rgba(255, 255, 255, 0.9); }
 .ew-steps .ew-steps__cta p { color: rgba(255, 255, 255, 0.9); }
-.ew-steps .ew-eyebrow { background: transparent; border-color: #fff; color: #fff; }
 
 /* ============================================================
    LOCATION PAGES — their own treatment: a dark hero that leads with the town,
