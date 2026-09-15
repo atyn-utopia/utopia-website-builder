@@ -1052,7 +1052,11 @@ p, li, blockquote,
   justify-items: center; text-align: center;
 }
 .ew-hero__copy { display: grid; gap: 14px; justify-items: center; }
-.ew-hero__logo { width: auto; height: 54px; margin-bottom: 4px; }
+/* The new mascot-badge logo is a near-square stacked lockup (icon on top,
+   wordmark below) rather than the old wide side-by-side banner — it needs
+   noticeably more height at the same width for the wordmark to stay
+   legible. */
+.ew-hero__logo { width: auto; height: 72px; margin-bottom: 4px; }
 .ew-hero h1 {
   font-size: clamp(30px, 4.6vw, 50px); font-weight: 800;
   letter-spacing: -0.03em; color: var(--brand-navy); margin: 0;
@@ -1295,7 +1299,7 @@ p, li, blockquote,
     gap: 48px; padding: 56px 0 72px;
   }
   .ew-hero__copy { justify-items: start; }
-  .ew-hero__logo { height: 66px; margin-bottom: 6px; }
+  .ew-hero__logo { height: 100px; margin-bottom: 6px; }
   .ew-hero__ctas { justify-content: flex-start; }
   .ew-hero__badge { height: 42px; }
   .ew-callout { display: flex; }
