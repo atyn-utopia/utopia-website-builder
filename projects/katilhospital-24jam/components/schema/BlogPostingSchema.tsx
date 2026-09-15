@@ -33,7 +33,7 @@ export function BlogPostingSchema({
       name: siteConfig.brandName,
       logo: {
         '@type': 'ImageObject',
-        url: `${siteConfig.siteUrl}/brand/logo/logo-dark.png`,
+        url: `${siteConfig.siteUrl}/brand/logo/logo-badge.png`,
       },
     },
     mainEntityOfPage: `${siteConfig.siteUrl}/${locale}/blog/${slug}`,

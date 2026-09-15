@@ -22,6 +22,7 @@ import type { ProductCardData } from '@/components/ProductCard';
 import FomoBanner from '@/components/FomoBanner';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import ContactNumber from '@/components/ContactNumber';
 import PageStyles from '@/components/PageStyles';
 import { ogImages } from '@/lib/ogImage';
 
@@ -122,7 +123,7 @@ export default async function LocationPage({
       <FomoBanner />
       {/* Relative wrapper so the absolute Navbar floats over the hero. */}
       <div style={{ position: 'relative' }}>
-        <SiteHeader />
+        <SiteHeader contact={<ContactNumber locale={locale} page={`/katil-hospital/${location}`} />} />
         <LocationPageClient
           locale={locale}
           products={cardProducts}
@@ -135,7 +136,7 @@ export default async function LocationPage({
           chromeProvided
         />
       </div>
-      <SiteFooter />
+      <SiteFooter locale={locale} page={`/katil-hospital/${location}`} />
     </>
   );
 }

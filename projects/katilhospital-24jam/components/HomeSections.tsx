@@ -1,11 +1,14 @@
 'use client';
 
-import { Fragment, useState } from 'react';
-import { useTranslations, useLocale } from 'next-intl';
+import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import ProductCard, { ProductCardData } from '@/components/ProductCard';
 import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import Eyebrow from '@/components/Eyebrow';
+import ScrollReveal from '@/components/ScrollReveal';
 import { waRedirect } from '@/lib/waRedirect';
+import { regionOrder, locations as ALL_LOCATIONS } from '@/config/locations';
 
 const PRODUCT_IMAGE_FALLBACK: Record<string, string> = {
   'katil-hospital-manual-2-fungsi': '/brand/products/katil-hospital-manual-2-fungsi.png',
@@ -158,7 +161,7 @@ const G_REVIEWS: Record<string, GReview[]> = {
 };
 
 const GOOGLE_G_SVG = (
-  <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+  <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
     <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
     <path fill="#FBBC05" d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.83z" />
@@ -166,55 +169,103 @@ const GOOGLE_G_SVG = (
   </svg>
 );
 
-const RED_STRIPE = (
-  <div
-    aria-hidden="true"
-    style={{ height: 1, width: '100%', background: 'linear-gradient(90deg, transparent 0%, rgba(28,58,106,0.10) 50%, transparent 100%)' }}
-  />
-);
+const STAR_PATH =
+  'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z';
 
-// Why-choose value props — each paired with a tasteful trust icon.
+function Icon({ children, size = 20 }: { children: React.ReactNode; size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      {children}
+    </svg>
+  );
+}
+
+// p1 = 24h delivery, p2 = monthly rental term, p3 = coverage.
+const USP_ITEMS: { k: string; icon: React.ReactNode }[] = [
+  {
+    k: 'p1',
+    icon: (
+      <>
+        <path d="M3 6h11v10H3z" />
+        <path d="M14 10h4l3 3v3h-7" />
+        <circle cx="7" cy="18" r="2" />
+        <circle cx="17" cy="18" r="2" />
+      </>
+    ),
+  },
+  {
+    k: 'p2',
+    icon: (
+      <>
+        <rect x="3" y="5" width="18" height="16" rx="2" />
+        <path d="M3 10h18M8 3v4M16 3v4" />
+      </>
+    ),
+  },
+  {
+    k: 'p3',
+    icon: (
+      <>
+        <path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z" />
+        <circle cx="12" cy="10" r="2.5" />
+      </>
+    ),
+  },
+];
+
 // c1 = 24h delivery, c2 = transparent/fair pricing, c3 = deliver + install,
 // c4 = after-delivery support. Keys map to the `values` translation namespace.
 const VALUE_CARDS: { k: string; icon: React.ReactNode }[] = [
   {
     k: 'c1',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.9} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <>
         <path d="M3 6h10v9H3z" />
         <path d="M13 9h4l4 4v2h-8" />
         <circle cx="7" cy="18" r="1.8" />
         <circle cx="17.5" cy="18" r="1.8" />
-      </svg>
+      </>
     ),
   },
   {
     k: 'c2',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.9} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <>
         <path d="M20.6 12.5 12.5 20.6a1.6 1.6 0 0 1-2.3 0L3.4 13.8a1.6 1.6 0 0 1-.4-1V4.6A1.6 1.6 0 0 1 4.6 3h8.2c.37 0 .74.14 1 .4l6.8 6.8a1.6 1.6 0 0 1 0 2.3z" />
         <circle cx="8" cy="8" r="1.4" />
-      </svg>
+      </>
     ),
   },
   {
     k: 'c3',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.9} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M14.7 6.3a3.6 3.6 0 0 0-4.9 4.9L3 18l3 3 6.8-6.8a3.6 3.6 0 0 0 4.9-4.9l-2.5 2.5-2.1-2.1z" />
-      </svg>
-    ),
+    icon: <path d="M14.7 6.3a3.6 3.6 0 0 0-4.9 4.9L3 18l3 3 6.8-6.8a3.6 3.6 0 0 0 4.9-4.9l-2.5 2.5-2.1-2.1z" />,
   },
   {
     k: 'c4',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.9} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <>
         <path d="M21 11.5a7.5 7.5 0 0 1-10.8 6.7L4 20l1.3-4.1A7.5 7.5 0 1 1 21 11.5z" />
         <path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01" />
-      </svg>
+      </>
     ),
   },
 ];
+
+const CHEVRON = (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <polyline points="6 9 12 15 18 9" />
+  </svg>
+);
 
 interface Props {
   locale: string;
@@ -231,7 +282,8 @@ interface Props {
 /**
  * Renders sections 4–12 of the canonical section order.
  * (Sections 1=Fomo and 2=Nav are rendered by the page wrapper; section 3=Hero is specific per page.)
- * This component is the homepage/location parity body.
+ * This component is the homepage/location parity body. Styles live in
+ * globals.css under "DIRECTION A".
  */
 export default function HomeSections({ locale, products, location }: Props) {
   const uspT = useTranslations('usp');
@@ -242,6 +294,7 @@ export default function HomeSections({ locale, products, location }: Props) {
   const grT = useTranslations('googleReview');
   const faqT = useTranslations('faq');
   const finalT = useTranslations('finalCta');
+  const locT = useTranslations('location');
 
   const waHref = waRedirect(locale, undefined, location?.slug);
   const reviews = G_REVIEWS[locale] || G_REVIEWS.ms;
@@ -282,847 +335,269 @@ export default function HomeSections({ locale, products, location }: Props) {
       ? 'WhatsApp 询问报价'
       : 'Sebut harga di WhatsApp';
 
-  // Columns by product count (desktop).
+  // Columns by product count (desktop) — never strand a half-empty last row.
   const count = renderProducts.length;
   const desktopCols = count === 1 ? 1 : count === 2 ? 2 : count === 3 ? 3 : count % 4 === 0 ? 4 : count % 3 === 0 ? 3 : 4;
-  const gridTemplate = `repeat(var(--cols), minmax(0, 1fr))`;
 
-  // FAQ accordion state
   const [open, setOpen] = useState<number | null>(0);
+
+  // Example chat in the steps section: a real bed from the catalogue (Flexi II
+  // when present) and, on a location page, that page's town.
+  const chatBed =
+    renderProducts.find((p) => p.slug === 'katil-hospital-elektrik-3-fungsi') ??
+    renderProducts.find((p) => p.slug.startsWith('katil-hospital') && p.rental_price);
+  const chatCity = location?.city ?? 'Shah Alam';
+
+  // Stagger index for grid children; capped so a long grid doesn't make the
+  // last card wait visibly.
+  const stagger = (i: number) => ({ '--i': Math.min(i, 6) }) as React.CSSProperties;
 
   return (
     <>
-      {/* SECTION 4 — USP bar */}
-      {RED_STRIPE}
-      <section
-        style={{
-          background: 'linear-gradient(180deg, rgba(143,184,224,0.14), rgba(143,184,224,0.06))',
-          borderBottom: '1px solid #E2E8F0',
-        }}
-      >
-        <div className="kh-usp-grid usp-panel">
-          {[
-            {
-              k: 'p1',
-              icon: (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M3 7h11v9H3z" />
-                  <path d="M14 10h4l3 3v3h-7" />
-                  <circle cx="7" cy="18" r="2" />
-                  <circle cx="17" cy="18" r="2" />
-                </svg>
-              ),
-            },
-            {
-              k: 'p2',
-              icon: (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <rect x="3" y="6" width="18" height="13" rx="2" />
-                  <path d="M3 10h18" />
-                  <path d="M7 15h4" />
-                </svg>
-              ),
-            },
-            {
-              k: 'p3',
-              icon: (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z" />
-                  <circle cx="12" cy="10" r="2.5" />
-                </svg>
-              ),
-            },
-          ].map((u) => (
-            <div key={u.k} className="kh-usp-card usp-cell">
-              <div aria-hidden="true" className="kh-usp-icon">
-                {u.icon}
-              </div>
-              <div className="kh-usp-text">
+      <ScrollReveal />
+
+      {/* SECTION 4 — USP bar (navy band continuing the hero wave) */}
+      <section className="kh-usp">
+        <ul className="usp-panel kh-usp-grid">
+          {USP_ITEMS.map((u, i) => (
+            <li key={u.k} className="usp-cell kh-usp-item kh-reveal" style={stagger(i)}>
+              <span className="kh-usp-icon">
+                <Icon>{u.icon}</Icon>
+              </span>
+              <div>
                 <h5 className="kh-usp-label">{uspT(`${u.k}.label`)}</h5>
                 <h6 className="kh-usp-sub">{uspT(`${u.k}.sub`)}</h6>
               </div>
-            </div>
+            </li>
           ))}
-        </div>
-        <style>{`
-          .kh-usp-grid {
-            max-width: 1240px;
-            margin: 0 auto;
-            padding: 24px 16px;
-            display: grid;
-            gap: 16px;
-            grid-template-columns: 1fr;
-          }
-          .kh-usp-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 10px;
-            padding: 4px 8px;
-          }
-          .kh-usp-icon {
-            width: 52px;
-            height: 52px;
-            border-radius: 9999px;
-            background: #ffffff;
-            border: 1px solid #1c3a6a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #e63030;
-            flex: 0 0 52px;
-            box-shadow: 0 2px 8px rgba(15, 31, 80, 0.08);
-          }
-          .kh-usp-icon svg {
-            width: 24px;
-            height: 24px;
-          }
-          .kh-usp-text {
-            min-width: 0;
-          }
-          .kh-usp-label {
-            font-size: 15px;
-            font-weight: 700;
-            color: #1c3a6a;
-            line-height: 1.3;
-          }
-          .kh-usp-sub {
-            font-size: 13px;
-            color: rgba(28, 58, 106, 0.65);
-            line-height: 1.5;
-            margin-top: 2px;
-          }
-          @media (min-width: 720px) {
-            .kh-usp-grid {
-              padding: 28px 16px;
-              gap: 20px;
-              grid-template-columns: repeat(3, 1fr);
-            }
-            .kh-usp-card {
-              flex-direction: row;
-              align-items: center;
-              text-align: left;
-              gap: 14px;
-            }
-            .kh-usp-icon {
-              width: 56px;
-              height: 56px;
-              flex: 0 0 56px;
-              font-size: 24px;
-            }
-          }
-        `}</style>
+        </ul>
       </section>
 
       {/* SECTION 5 — Product grid */}
-      {RED_STRIPE}
-      <section
-        id="products"
-        style={{
-          background: '#FFFFFF',
-          padding: '72px 16px',
-        }}
-      >
-        <div style={{ maxWidth: 1240, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 32 }}>
-            <SectionEyebrow>{productsT('eyebrow')}</SectionEyebrow>
-            <H3 centered>{productsT('h3')}</H3>
-            <p
-              style={{
-                marginTop: 12,
-                color: 'rgba(28,58,106,0.65)',
-                fontSize: 15,
-                lineHeight: 1.65,
-                maxWidth: 720,
-                marginLeft: 'auto',
-                marginRight: 'auto',
-              }}
-            >
-              {productsT('intro')}
-            </p>
-          </div>
-
-          <div
-            style={{
-              display: 'grid',
-              gap: 20,
-              gridTemplateColumns: gridTemplate,
-            }}
-            className="kh-product-grid"
-            data-cols-desktop={desktopCols}
-          >
-            {renderProducts.map((p) => (
+      <section id="products" className="kh-section kh-section--mist">
+        <div className="kh-wrap">
+          <SectionHead eyebrow={productsT('eyebrow')} title={productsT('h3')} sub={productsT('intro')} />
+          <div className="kh-product-grid" style={{ '--cols': desktopCols } as React.CSSProperties}>
+            {renderProducts.map((p, i) => (
               <ProductImpressionTracker key={p.slug} slug={p.slug} style={{ height: '100%' }}>
-                <ProductCard
-                  product={p}
-                  ctaLabel={productsT('cardCta')}
-                  waHref={waHref}
-                  locale={locale}
-                  priceHintFallback={priceFallback}
-                />
+                <div className="kh-reveal" style={{ ...stagger(i), height: '100%' }}>
+                  <ProductCard
+                    product={p}
+                    ctaLabel={productsT('cardCta')}
+                    waHref={waHref}
+                    locale={locale}
+                    priceHintFallback={priceFallback}
+                  />
+                </div>
               </ProductImpressionTracker>
             ))}
           </div>
-          <style>{`
-            .kh-product-grid {
-              --cols: 1;
-            }
-            @media (min-width: 640px) {
-              .kh-product-grid {
-                --cols: 2;
-              }
-            }
-            @media (min-width: 1024px) {
-              .kh-product-grid {
-                --cols: ${desktopCols};
-              }
-            }
-          `}</style>
         </div>
       </section>
 
-      {/* SECTION 6 — Why Choose 24 Jam */}
-      {RED_STRIPE}
-      <section
-        id="why"
-        style={{
-          background: '#F0F4FA',
-          padding: '72px 16px',
-          borderTop: '1px solid #E2E8F0',
-        }}
-      >
-        <div style={{ maxWidth: 1120, margin: '0 auto' }}>
-          {/* Centered header — eyebrow pill + H3 + intro (mascot image removed) */}
-          <div style={{ textAlign: 'center', maxWidth: 640, margin: '0 auto 40px' }}>
-            <SectionEyebrow>{valuesT('eyebrow')}</SectionEyebrow>
-            <H3 centered>{valuesT('h3')}</H3>
-            <p
-              style={{
-                marginTop: 12,
-                color: 'rgba(28,58,106,0.65)',
-                fontSize: 15,
-                lineHeight: 1.65,
-              }}
-            >
-              {valuesT('intro')}
-            </p>
-          </div>
-
-          {/* Full-width trust-card grid — tasteful icons, equal-height, centered */}
+      {/* SECTION 6 — Why choose (compact: icon + title + one line) */}
+      <section id="why" className="kh-section kh-section--white">
+        <div className="kh-wrap">
+          <SectionHead eyebrow={valuesT('eyebrow')} title={valuesT('h3')} sub={valuesT('intro')} />
           <div className="kh-why-grid">
-            {VALUE_CARDS.map((card) => (
-              <div key={card.k} className="kh-why-card hover-lift">
-                <div aria-hidden="true" className="kh-why-icon">
-                  {card.icon}
-                </div>
-                <h4
-                  style={{
-                    fontSize: 17,
-                    fontWeight: 700,
-                    color: '#1c3a6a',
-                    lineHeight: 1.3,
-                    margin: 0,
-                  }}
-                >
-                  {valuesT(`${card.k}.title`)}
-                </h4>
-                <p
-                  style={{
-                    fontSize: 14,
-                    color: 'rgba(28,58,106,0.65)',
-                    lineHeight: 1.6,
-                    margin: 0,
-                  }}
-                >
-                  {valuesT(`${card.k}.body`)}
-                </p>
+            {VALUE_CARDS.map((card, i) => (
+              <div key={card.k} className="kh-why-card kh-reveal" style={stagger(i)}>
+                <span className="kh-why-icon">
+                  <Icon size={20}>{card.icon}</Icon>
+                </span>
+                <h4 className="kh-why-title">{valuesT(`${card.k}.title`)}</h4>
+                <p className="kh-why-body">{valuesT(`${card.k}.body`)}</p>
               </div>
             ))}
           </div>
-          <style>{`
-            .kh-why-grid {
-              display: grid;
-              gap: 18px;
-              grid-template-columns: 1fr;
-            }
-            @media (min-width: 560px) {
-              .kh-why-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-              }
-            }
-            @media (min-width: 960px) {
-              .kh-why-grid {
-                grid-template-columns: repeat(4, minmax(0, 1fr));
-              }
-            }
-            .kh-why-card {
-              background: #ffffff;
-              border: 1px solid #e6edf6;
-              border-radius: 16px;
-              padding: 26px 22px;
-              box-shadow: 0 4px 10px rgba(15, 31, 80, 0.06),
-                0 18px 40px rgba(15, 31, 80, 0.05);
-              /* Equal height across each row of the grid. */
-              height: 100%;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              text-align: center;
-              gap: 12px;
-            }
-            .kh-why-icon {
-              width: 52px;
-              height: 52px;
-              border-radius: 14px;
-              background: linear-gradient(135deg, #fdecec 0%, #fbdada 100%);
-              border: 1px solid rgba(230, 48, 48, 0.18);
-              color: #e63030;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              flex: 0 0 52px;
-              box-shadow: 0 2px 8px rgba(230, 48, 48, 0.12);
-            }
-            .kh-why-icon svg {
-              width: 26px;
-              height: 26px;
-            }
-          `}</style>
         </div>
       </section>
 
       {/* Location intro after Why Choose */}
       {location && (
-        <section
-          style={{
-            background: '#FFFFFF',
-            padding: '48px 16px',
-            borderTop: '1px solid #E2E8F0',
-          }}
-        >
-          <div style={{ maxWidth: 860, margin: '0 auto', textAlign: 'center' }}>
-            <SectionEyebrow>{location.city}</SectionEyebrow>
-            <h3
-              style={{
-                fontSize: 'clamp(1.6rem, 3vw, 2.4rem)',
-                fontWeight: 700,
-                color: '#1c3a6a',
-                letterSpacing: '-0.025em',
-                lineHeight: 1.2,
-                margin: '8px 0 14px',
-              }}
-            >
-              {location.city}
-            </h3>
-            <p
-              style={{
-                fontSize: 16,
-                color: '#334155',
-                lineHeight: 1.75,
-                textAlign: 'left',
-              }}
-            >
-              {location.intro}
-            </p>
+        <section className="kh-loc-intro">
+          <div className="kh-loc-intro-in kh-reveal">
+            <div className="kh-head kh-head--flush">
+              <Eyebrow>{locT('introEyebrow')}</Eyebrow>
+              <h3 className="kh-h3">{location.city}</h3>
+            </div>
+            <p>{location.intro}</p>
           </div>
         </section>
       )}
 
-      {/* SECTION 7 — How it works (3 steps) */}
-      {RED_STRIPE}
-      <section
-        id="how"
-        style={{
-          background: '#FFFFFF',
-          padding: '72px 16px',
-        }}
-      >
-        <div style={{ maxWidth: 1040, margin: '0 auto', textAlign: 'center' }}>
-          <SectionEyebrow>{howT('eyebrow')}</SectionEyebrow>
-          <H3 centered>{howT('h3')}</H3>
-          {/* Connected step flow — cards linked by arrows: → left-to-right on
-              desktop, ↓ stacked on mobile (arrow rotates, never overflows). */}
-          <div className="kh-flow">
-            {['s1', 's2', 's3'].map((s, i) => (
-              <Fragment key={s}>
-                <div className="kh-flow-card">
-                  <div aria-hidden="true" className="kh-flow-num">
-                    {i + 1}
+      {/* SECTION 7 — How it works: example WhatsApp chat beside the 3 steps,
+          closing with the WhatsApp CTA. The chat is illustrative and labelled
+          as an example; its product and price come from the live catalogue. */}
+      <section id="how" className="kh-section kh-section--mist">
+        <div className="kh-wrap">
+          <SectionHead eyebrow={howT('eyebrow')} title={howT('h3')} sub={howT('intro')} />
+          <div className="kh-how">
+            <figure className="kh-chat kh-reveal">
+              <div className="kh-chat-phone" aria-hidden="true">
+                <div className="kh-chat-screen">
+                  <div className="kh-chat-bar">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="/brand/logo/logo-badge.png" alt="Katil Hospital Murah" width={36} height={36} />
+                    <div>
+                      <b>Katil Hospital Murah</b>
+                      <small>{howT('chat.status')}</small>
+                    </div>
                   </div>
-                  <h4
-                    style={{
-                      fontSize: 18,
-                      fontWeight: 700,
-                      color: '#1c3a6a',
-                      margin: 0,
-                      lineHeight: 1.3,
-                    }}
-                  >
-                    {/* Strip any leading "1." / "1、" / "1)" prefix — the red
-                        number circle is the single source of the step number. */}
-                    {howT(`${s}.title`).replace(/^\s*\d+\s*[.、:)-]\s*/, '')}
-                  </h4>
-                  <p
-                    style={{
-                      fontSize: 14,
-                      color: 'rgba(28,58,106,0.65)',
-                      lineHeight: 1.65,
-                      margin: 0,
-                    }}
-                  >
-                    {howT(`${s}.body`)}
-                  </p>
+                  <div className="kh-chat-msgs">
+                    <span className="kh-chat-day">{howT('chat.today')}</span>
+                    <p className="kh-chat-b kh-chat-out">
+                      {howT('chat.m1', { city: chatCity })}
+                      <small>9:12</small>
+                    </p>
+                    <p className="kh-chat-b kh-chat-in">
+                      {chatBed?.rental_price
+                        ? howT('chat.m2', { product: chatBed.name, price: chatBed.rental_price })
+                        : howT('chat.m2NoPrice')}
+                      <small>9:14</small>
+                    </p>
+                    <p className="kh-chat-b kh-chat-out">
+                      {howT('chat.m3')}
+                      <small>9:15</small>
+                    </p>
+                  </div>
                 </div>
-                {i < 2 && (
-                  <div className="kh-flow-arrow" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="4" y1="12" x2="20" y2="12" />
-                      <polyline points="14 6 20 12 14 18" />
-                    </svg>
-                  </div>
-                )}
-              </Fragment>
-            ))}
+              </div>
+              <figcaption className="kh-chat-cap">{howT('chat.caption')}</figcaption>
+            </figure>
+
+            <div className="kh-how-steps">
+              <ol className="kh-steps">
+                {['s1', 's2', 's3'].map((s, i) => (
+                  <li key={s} className={`kh-step kh-reveal${i === 0 ? ' kh-step--wa' : ''}`} style={stagger(i)}>
+                    <span className="kh-step-num" aria-hidden="true">
+                      {i + 1}
+                    </span>
+                    <div>
+                      {/* Strip any leading "1." / "1、" prefix — the number tile
+                          is the single source of the step number. */}
+                      <h4 className="kh-step-title">{howT(`${s}.title`).replace(/^\s*\d+\s*[.、:)-]\s*/, '')}</h4>
+                      <p className="kh-step-body">{howT(`${s}.body`)}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+              <div className="kh-steps-close kh-reveal">
+                <p>{howT('closing')}</p>
+                <WhatsAppButton href={waHref} label={howT('cta')} variant="pill" locationSlug={location?.slug} />
+              </div>
+            </div>
           </div>
-          <style>{`
-            .kh-flow {
-              margin-top: 40px;
-              display: flex;
-              flex-direction: column;
-              align-items: stretch;
-              gap: 12px;
-            }
-            .kh-flow-card {
-              flex: 1 1 0;
-              background: #ffffff;
-              border: 1px solid #e2e8f0;
-              border-radius: 16px;
-              padding: 28px 22px;
-              box-shadow: 0 4px 10px rgba(15, 31, 80, 0.06),
-                0 18px 40px rgba(15, 31, 80, 0.05);
-              text-align: center;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              gap: 10px;
-            }
-            .kh-flow-num {
-              width: 56px;
-              height: 56px;
-              border-radius: 50%;
-              background: #e63030;
-              color: #ffffff;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              font-weight: 800;
-              font-size: 24px;
-              box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.35),
-                0 6px 16px rgba(230, 48, 48, 0.28);
-            }
-            .kh-flow-arrow {
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              color: #e63030;
-              flex: 0 0 auto;
-            }
-            .kh-flow-arrow svg {
-              width: 26px;
-              height: 26px;
-              transform: rotate(90deg); /* mobile: points down between stacked cards */
-            }
-            @media (min-width: 820px) {
-              .kh-flow {
-                flex-direction: row;
-                align-items: stretch;
-                gap: 8px;
-              }
-              .kh-flow-arrow {
-                padding: 0 4px;
-              }
-              .kh-flow-arrow svg {
-                width: 30px;
-                height: 30px;
-                transform: rotate(0deg); /* desktop: points right between cards */
-              }
-            }
-          `}</style>
         </div>
       </section>
 
       {/* SECTION 8 — Customer gallery */}
-      {RED_STRIPE}
-      <section
-        id="reviews"
-        style={{
-          padding: '72px 16px',
-          background:
-            'linear-gradient(180deg, rgba(143,184,224,0.08), #FFFFFF)',
-          borderTop: '1px solid #E2E8F0',
-        }}
-      >
-        <div style={{ maxWidth: 1240, margin: '0 auto', textAlign: 'center' }}>
-          <SectionEyebrow>{galleryT('eyebrow')}</SectionEyebrow>
-          <H3 centered>{galleryT('h3')}</H3>
-          <p
-            style={{
-              marginTop: 10,
-              color: 'rgba(28,58,106,0.65)',
-              fontSize: 15,
-              lineHeight: 1.65,
-              maxWidth: 680,
-              marginLeft: 'auto',
-              marginRight: 'auto',
-            }}
-          >
-            {galleryT('intro')}
-          </p>
-          <div
-            style={{
-              marginTop: 32,
-              display: 'grid',
-              gap: 12,
-              gridTemplateColumns: 'repeat(2, 1fr)',
-            }}
-            className="kh-gallery"
-          >
+      <section id="reviews" className="kh-section kh-section--white">
+        <div className="kh-wrap">
+          <SectionHead eyebrow={galleryT('eyebrow')} title={galleryT('h3')} sub={galleryT('intro')} />
+          <div className="gallery-grid kh-gallery">
             {Array.from({ length: 16 }, (_, i) => i + 1).map((n) => (
-              <div
-                key={n}
-                style={{
-                  borderRadius: 10,
-                  overflow: 'hidden',
-                  aspectRatio: '1 / 1',
-                  border: '1px solid #E2E8F0',
-                  background: '#F0F4FA',
-                  boxShadow: '0 2px 6px rgba(15,31,80,0.05)',
-                }}
-              >
+              <div key={n} className="kh-gallery-item kh-reveal" style={stagger((n - 1) % 4)}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={`/brand/reviews/review-${n}.jpg`}
                   alt={`Ulasan pelanggan Katil Hospital Murah ${n}`}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   loading="lazy"
                 />
               </div>
             ))}
           </div>
-          <style>{`
-            @media (min-width: 700px) {
-              .kh-gallery {
-                grid-template-columns: repeat(4, 1fr) !important;
-              }
-            }
-          `}</style>
         </div>
       </section>
 
       {/* SECTION 9 — Google Reviews */}
-      {RED_STRIPE}
-      <section
-        style={{
-          background: '#FFFFFF',
-          padding: '72px 16px',
-        }}
-      >
-        <div style={{ maxWidth: 1240, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 28 }}>
-            <SectionEyebrow>{grT('eyebrow')}</SectionEyebrow>
-            <H3 centered>{grT('h3')}</H3>
-            <p
-              style={{
-                marginTop: 10,
-                color: 'rgba(28,58,106,0.65)',
-                fontSize: 15,
-                maxWidth: 680,
-                marginLeft: 'auto',
-                marginRight: 'auto',
-                lineHeight: 1.65,
-              }}
-            >
-              {grT('intro')}
-            </p>
-          </div>
-          <div
-            style={{
-              display: 'grid',
-              gap: 18,
-              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-            }}
-          >
-            {reviews.map((r) => (
-              <div
-                key={r.name}
-                style={{
-                  background: '#FFFFFF',
-                  border: '1px solid #E2E8F0',
-                  borderRadius: 14,
-                  padding: 20,
-                  boxShadow:
-                    '0 2px 4px rgba(15,31,80,0.04), 0 8px 20px rgba(15,31,80,0.05)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 10,
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  {GOOGLE_G_SVG}
-                  <span
-                    style={{
-                      fontSize: 12,
-                      fontWeight: 600,
-                      color: 'rgba(28,58,106,0.65)',
-                    }}
-                  >
+      <section className="kh-section kh-section--mist">
+        <div className="kh-wrap">
+          <SectionHead eyebrow={grT('eyebrow')} title={grT('h3')} sub={grT('intro')} />
+          <div className="kh-review-grid">
+            {reviews.map((r, i) => (
+              <article key={r.name} className="kh-review kh-reveal" style={stagger(i % 4)}>
+                <div className="kh-review-top">
+                  <span className="kh-review-source">
+                    {GOOGLE_G_SVG}
                     {locale === 'en' ? 'Google Review' : locale === 'zh' ? 'Google 评价' : 'Ulasan Google'}
                   </span>
+                  <span className="kh-review-stars" aria-hidden="true">
+                    {Array.from({ length: 5 }).map((_, j) => (
+                      <svg key={j} width="13" height="13" viewBox="0 0 24 24" fill="#FBBC04">
+                        <path d={STAR_PATH} />
+                      </svg>
+                    ))}
+                  </span>
                 </div>
-                <div style={{ display: 'flex', gap: 2 }} aria-hidden="true">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#FBBC04">
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                  ))}
-                </div>
-                <p
-                  style={{
-                    fontSize: 14,
-                    color: '#1c3a6a',
-                    lineHeight: 1.65,
-                    margin: 0,
-                  }}
-                >
-                  {r.body}
-                </p>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'flex-end',
-                    marginTop: 4,
-                  }}
-                >
+                <p className="kh-review-body">{r.body}</p>
+                <div className="kh-review-meta">
                   <div>
-                    <div style={{ fontSize: 13, fontWeight: 700, color: '#1c3a6a' }}>
-                      {r.name}
-                    </div>
-                    <div style={{ fontSize: 12, color: 'rgba(28,58,106,0.65)' }}>{r.city}</div>
+                    <div className="kh-review-name">{r.name}</div>
+                    <div className="kh-review-city">{r.city}</div>
                   </div>
-                  <div style={{ fontSize: 12, color: 'rgba(28,58,106,0.65)' }}>{r.date}</div>
+                  <div className="kh-review-date">{r.date}</div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
       {/* SECTION 10 — FAQ */}
-      {RED_STRIPE}
-      <section
-        style={{
-          background: '#F0F4FA',
-          padding: '72px 16px',
-          borderTop: '1px solid #E2E8F0',
-        }}
-      >
-        <div style={{ maxWidth: 920, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 28 }}>
-            <SectionEyebrow>{faqT('eyebrow')}</SectionEyebrow>
-            <H3 centered>{faqT('h3')}</H3>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <section className="kh-section kh-section--white">
+        <div className="kh-wrap">
+          <SectionHead eyebrow={faqT('eyebrow')} title={faqT('h3')} sub={faqT('intro')} />
+          <div className="kh-faq kh-reveal">
             {faqList.map((item, idx) => (
               <button
                 key={idx}
                 type="button"
+                className="kh-faq-item"
                 onClick={() => setOpen(open === idx ? null : idx)}
-                style={{
-                  textAlign: 'left',
-                  background: '#FFFFFF',
-                  border: '1px solid #E2E8F0',
-                  borderLeft:
-                    open === idx ? '4px solid #e63030' : '1px solid #E2E8F0',
-                  borderRadius: 12,
-                  padding: '16px 18px',
-                  cursor: 'pointer',
-                  fontFamily: 'Inter, sans-serif',
-                  boxShadow:
-                    '0 2px 6px rgba(15,31,80,0.04)',
-                  transition:
-                    'box-shadow 150ms cubic-bezier(0.16,1,0.3,1), border-color 150ms cubic-bezier(0.16,1,0.3,1)',
-                }}
                 aria-expanded={open === idx}
               >
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    gap: 14,
-                  }}
-                >
-                  <span
-                    style={{
-                      fontSize: 15,
-                      fontWeight: 600,
-                      color: '#1c3a6a',
-                      lineHeight: 1.4,
-                    }}
-                  >
-                    {item.q}
-                  </span>
-                  <span
-                    aria-hidden="true"
-                    style={{
-                      transform: open === idx ? 'rotate(180deg)' : 'rotate(0deg)',
-                      transition: 'transform 180ms cubic-bezier(0.16,1,0.3,1)',
-                      color: '#1c3a6a',
-                      fontSize: 18,
-                      flex: '0 0 auto',
-                    }}
-                  >
-                    ▾
-                  </span>
-                </div>
-                {open === idx && (
-                  <p
-                    style={{
-                      margin: '12px 0 0',
-                      fontSize: 14.5,
-                      color: 'rgba(28,58,106,0.65)',
-                      lineHeight: 1.7,
-                    }}
-                  >
-                    {item.a}
-                  </p>
-                )}
+                <span className="kh-faq-q">
+                  <span>{item.q}</span>
+                  <span className="kh-faq-chev">{CHEVRON}</span>
+                </span>
+                {open === idx && <span className="kh-faq-a">{item.a}</span>}
               </button>
             ))}
           </div>
         </div>
       </section>
 
-      {/* SECTION 10b — Lokasi accordion (location listing) */}
-      {RED_STRIPE}
+      {/* SECTION 10b — Coverage: state grid + towns of the selected state */}
       <LokasiSection locale={locale} />
 
       {/* SECTION 11 — Final CTA band */}
-      {RED_STRIPE}
-      <section
-        style={{
-          position: 'relative',
-          padding: '96px 16px',
-          color: '#FFFFFF',
-          backgroundImage: `linear-gradient(135deg, rgba(10,10,10,0.78) 0%, rgba(28,58,106,0.82) 100%), url('/brand/gallery/cta-bg.jpg')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          textAlign: 'center',
-        }}
-      >
-        <div style={{ maxWidth: 820, margin: '0 auto' }}>
-          <p
-            style={{
-              fontSize: 12,
-              fontWeight: 700,
-              color: 'rgba(255,255,255,0.70)',
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              margin: '0 0 14px',
-            }}
-          >
-            Jangan Tunggu Lagi
-          </p>
-          <h3
-            style={{
-              fontSize: 'clamp(1.6rem, 3vw, 2.4rem)',
-              fontWeight: 700,
-              color: '#FFFFFF',
-              letterSpacing: '-0.025em',
-              lineHeight: 1.2,
-              margin: '0 0 14px',
-            }}
-          >
-            {finalT('h3')}
-          </h3>
-          <p
-            style={{
-              fontSize: 17,
-              color: 'rgba(255,255,255,0.88)',
-              lineHeight: 1.65,
-              margin: '0 0 24px',
-            }}
-          >
-            {finalT('subtitle')}
-          </p>
-          <div style={{ display: 'inline-flex', justifyContent: 'center' }}>
-            <WhatsAppButton
-              href={waHref}
-              label={finalT('cta')}
-              variant="pill"
-              locationSlug={location?.slug}
-            />
-          </div>
+      <section className="kh-final">
+        <div className="kh-reveal">
+          <Eyebrow onDark>{finalT('eyebrow')}</Eyebrow>
+          <h3>{finalT('h3')}</h3>
+          <p>{finalT('subtitle')}</p>
+          <WhatsAppButton href={waHref} label={finalT('cta')} variant="pill" locationSlug={location?.slug} />
         </div>
       </section>
     </>
   );
 }
 
-function H3({ children, centered }: { children: React.ReactNode; centered?: boolean }) {
+function SectionHead({ eyebrow, title, sub }: { eyebrow: string; title: string; sub: string }) {
   return (
-    <h3
-      style={{
-        fontSize: 'clamp(1.6rem, 3vw, 2.4rem)',
-        fontWeight: 700,
-        color: '#1c3a6a',
-        letterSpacing: '-0.025em',
-        lineHeight: 1.2,
-        margin: '6px 0 0',
-        textAlign: centered ? 'center' : 'left',
-      }}
-    >
-      {children}
-    </h3>
+    <div className="kh-head kh-reveal">
+      <Eyebrow>{eyebrow}</Eyebrow>
+      <h3 className="kh-h3">{title}</h3>
+      <p className="kh-lead">{sub}</p>
+    </div>
   );
 }
-
-// Single source of truth for the section eyebrow — a tinted red pill with a
-// red dot + uppercase red label. Used by every section (and the hero aligns to
-// the same tokens) so all eyebrows read as one consistent component.
-function SectionEyebrow({ children }: { children: React.ReactNode }) {
-  return (
-    <span
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: 8,
-        padding: '6px 14px',
-        borderRadius: 9999,
-        background: 'rgba(230,48,48,0.10)',
-        fontSize: 12,
-        letterSpacing: 1.2,
-        textTransform: 'uppercase',
-        color: '#e63030',
-        fontWeight: 700,
-      }}
-    >
-      <span
-        aria-hidden="true"
-        style={{ width: 7, height: 7, background: '#e63030', borderRadius: '50%', flex: '0 0 auto' }}
-      />
-      <span>{typeof children === 'string' ? children : ''}</span>
-    </span>
-  );
-}
-
-import { regionOrder, locations as ALL_LOCATIONS } from '@/config/locations';
 
 function LokasiSection({ locale }: { locale: string }) {
   const t = useTranslations('lokasi');
   const productPath = 'katil-hospital';
-  const [openState, setOpenState] = useState<string | null>(regionOrder[0]);
+  const [active, setActive] = useState<string>(regionOrder[0]);
 
   const grouped = regionOrder.map((state) => ({
     state,
@@ -1130,115 +605,68 @@ function LokasiSection({ locale }: { locale: string }) {
   }));
 
   return (
-    <section
-      id="lokasi"
-      style={{
-        padding: '80px 16px',
-        background: 'linear-gradient(180deg, #F0F4FA 0%, #ffffff 100%)',
-      }}
-    >
-      <div style={{ maxWidth: 880, margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', marginBottom: 36 }}>
-          <SectionEyebrow>{t('eyebrow')}</SectionEyebrow>
-          <H3 centered>{t('h3')}</H3>
-          <p style={{ fontSize: 16, color: 'rgba(28,58,106,0.65)', lineHeight: 1.6, margin: '14px auto 0', maxWidth: 600 }}>
-            {t('intro')}
-          </p>
-        </div>
+    <section id="lokasi" className="kh-section kh-section--mist">
+      <div className="kh-wrap">
+        <SectionHead eyebrow={t('eyebrow')} title={t('h3')} sub={t('intro')} />
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <div className="kh-states kh-reveal" role="tablist" aria-label={t('h3')}>
           {grouped.map(({ state, items }) => {
-            const isOpen = openState === state;
+            const isActive = active === state;
+            const id = `lokasi-${state.toLowerCase().replace(/\s+/g, '-')}`;
             return (
-              <div
+              <button
                 key={state}
-                style={{
-                  background: '#ffffff',
-                  border: '1px solid rgba(28,58,106,0.10)',
-                  borderRadius: 14,
-                  overflow: 'hidden',
-                  transition: 'border-color 200ms ease, box-shadow 200ms ease',
-                  boxShadow: isOpen ? '0 8px 24px -8px rgba(28,58,106,0.16)' : 'none',
-                  borderColor: isOpen ? 'rgba(24,119,183,0.30)' : 'rgba(28,58,106,0.10)',
-                }}
+                type="button"
+                role="tab"
+                id={`${id}-tab`}
+                aria-selected={isActive}
+                aria-controls={id}
+                className={`kh-state${isActive ? ' is-active' : ''}`}
+                onClick={() => setActive(state)}
               >
-                <button
-                  type="button"
-                  onClick={() => setOpenState(isOpen ? null : state)}
-                  aria-expanded={isOpen}
-                  style={{
-                    width: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: '16px 20px',
-                    background: 'transparent',
-                    border: 'none',
-                    cursor: 'pointer',
-                    textAlign: 'left',
-                    fontFamily: 'Inter, sans-serif',
-                  }}
-                >
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 12 }}>
-                    <span
-                      aria-hidden="true"
-                      style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(24,119,183,0.10)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
-                    >
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1877b7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                        <circle cx="12" cy="10" r="3" />
-                      </svg>
-                    </span>
-                    <span>
-                      <span style={{ display: 'block', fontSize: 16, fontWeight: 700, color: '#1c3a6a' }}>{state}</span>
-                      <span style={{ display: 'block', fontSize: 12, color: 'rgba(28,58,106,0.55)', marginTop: 2 }}>
-                        {items.length} kawasan
-                      </span>
-                    </span>
-                  </span>
-                  <svg
-                    aria-hidden="true"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="rgba(28,58,106,0.55)"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    style={{ transition: 'transform 280ms cubic-bezier(.34,1.56,.64,1)', transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
-                  >
-                    <polyline points="6 9 12 15 18 9" />
+                <span className="kh-state-pin" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
                   </svg>
-                </button>
-                {isOpen && (
-                  <div style={{ padding: '0 20px 20px', borderTop: '1px solid rgba(28,58,106,0.08)' }}>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, paddingTop: 16 }}>
-                      {items.map((loc) => (
-                        <a
-                          key={loc.slug}
-                          href={`/${locale}/${productPath}/${loc.slug}`}
-                          className="city-pill"
-                        >
-                          {loc.name}
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
+                </span>
+                <span className="kh-state-text">
+                  <span className="kh-state-name">{state}</span>
+                  <span className="kh-state-count">{t('count', { count: items.length })}</span>
+                </span>
+              </button>
             );
           })}
         </div>
 
-        <p style={{ textAlign: 'center', fontSize: 13, color: 'rgba(28,58,106,0.55)', marginTop: 28 }}>
+        {/* Every state's towns stay in the HTML (hidden, not unmounted) so all
+            159 location links remain crawlable. */}
+        {grouped.map(({ state, items }) => {
+          const id = `lokasi-${state.toLowerCase().replace(/\s+/g, '-')}`;
+          return (
+            <div
+              key={state}
+              id={id}
+              role="tabpanel"
+              aria-labelledby={`${id}-tab`}
+              className="kh-towns"
+              hidden={active !== state}
+            >
+              <p className="kh-towns-title">{state}</p>
+              <div className="kh-towns-list">
+                {items.map((loc) => (
+                  <a key={loc.slug} href={`/${locale}/${productPath}/${loc.slug}`} className="city-pill">
+                    {loc.name}
+                  </a>
+                ))}
+              </div>
+            </div>
+          );
+        })}
+
+        <p className="kh-lokasi-empty">
           {t('empty')}{' '}
-          <a
-            href={waRedirect(locale)}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: '#1877b7', fontWeight: 600 }}
-          >
+          <a href={waRedirect(locale)} target="_blank" rel="noopener noreferrer">
             {t('emptyCta')}
           </a>
         </p>

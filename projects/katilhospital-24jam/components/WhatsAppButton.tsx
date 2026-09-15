@@ -15,6 +15,8 @@ interface WhatsAppButtonProps {
   variant?: 'pill' | 'full' | 'compact' | 'floating';
   locationSlug?: string;
   ariaLabel?: string;
+  /** Extra class for chrome rules, e.g. `.nav-cta` hidden on mobile. */
+  className?: string;
 }
 
 export default function WhatsAppButton({
@@ -23,6 +25,7 @@ export default function WhatsAppButton({
   variant = 'pill',
   locationSlug,
   ariaLabel,
+  className,
 }: WhatsAppButtonProps) {
   const baseStyle: React.CSSProperties = {
     display: 'inline-flex',
@@ -34,20 +37,21 @@ export default function WhatsAppButton({
     fontWeight: 700,
     fontSize: 14,
     fontFamily: 'Inter, sans-serif',
-    borderRadius: 9999,
+    // One button shape site-wide: 12px corners (direction A). Only colour varies.
+    borderRadius: 12,
     border: 'none',
     cursor: 'pointer',
     textDecoration: 'none',
     lineHeight: 1,
     whiteSpace: 'nowrap',
-    boxShadow: '0 4px 14px rgba(37,211,102,0.35)',
+    boxShadow: '0 10px 24px rgba(37,211,102,0.30)',
     transition: 'transform 150ms cubic-bezier(0.16,1,0.3,1), opacity 150ms cubic-bezier(0.16,1,0.3,1)',
   };
 
   const variantStyles: Record<string, React.CSSProperties> = {
-    pill: { padding: '11px 22px' },
-    compact: { padding: '9px 16px', fontSize: 13 },
-    full: { padding: '14px 24px', width: '100%', fontSize: 15 },
+    pill: { height: 52, padding: '0 24px', fontSize: 15 },
+    compact: { height: 40, padding: '0 16px', fontSize: 13.5 },
+    full: { height: 46, padding: '0 16px', width: '100%', fontSize: 14.5 },
     floating: {
       padding: 0,
       width: 56,
@@ -63,6 +67,7 @@ export default function WhatsAppButton({
 
   return (
     <a
+      className={className ? `wa-button ${className}` : 'wa-button'}
       href={href}
       target="_blank"
       rel="noopener noreferrer"

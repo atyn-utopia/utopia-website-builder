@@ -11,6 +11,7 @@ import type { ProductCardData } from '@/components/ProductCard';
 import FomoBanner from '@/components/FomoBanner';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import ContactNumber from '@/components/ContactNumber';
 import PageStyles from '@/components/PageStyles';
 import { ogImages } from '@/lib/ogImage';
 
@@ -89,7 +90,7 @@ export default async function HomePage({
           header strip above. The relative wrapper makes the hero its
           positioning context. */}
       <div style={{ position: 'relative' }}>
-        <SiteHeader />
+        <SiteHeader contact={<ContactNumber locale={locale} page="/" />} />
         {/* Decorative hero background labelled for screen readers + the
             checklist role=img check. The visible hero is inside HomePageClient. */}
         <div
@@ -99,7 +100,7 @@ export default async function HomePage({
         />
         <HomePageClient locale={locale} products={cardProducts} chromeProvided />
       </div>
-      <SiteFooter />
+      <SiteFooter locale={locale} page="/" />
     </>
   );
 }

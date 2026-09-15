@@ -1,17 +1,22 @@
-'use client';
-
 import Link from 'next/link';
-import { useLocale, useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
+import ContactNumber from '@/components/ContactNumber';
 
-// Flat, minimal site footer — mirrors projects/water-tank-malaysia SiteFooter:
-// logo + horizontal nav + divider + copyright and the mandatory "Built by
-// Utopia AI" credit. Client component (reads locale via hook) so the prop-less
-// <SiteFooter /> calls across every page keep working. Only brand/logo/labels
+// Flat, minimal site footer — mirrors templates/site-chrome/SiteFooter.tsx:
+// logo + horizontal nav + contact number + divider + copyright and the
+// mandatory "Built by Utopia AI" credit. A server component because the
+// contact number is resolved server-side from webcore. Only brand/logo/labels
 // differ from the reference; palette is katil navy on a light tint.
-export default function SiteFooter() {
-  const t = useTranslations('footer');
-  const navT = useTranslations('nav');
-  const locale = useLocale();
+export default async function SiteFooter({
+  locale,
+  page,
+}: {
+  locale: string;
+  /** Locale-stripped path, forwarded to ContactNumber — see that component. */
+  page?: string;
+}) {
+  const t = await getTranslations({ locale, namespace: 'footer' });
+  const navT = await getTranslations({ locale, namespace: 'nav' });
 
   const links = [
     { href: `/${locale}`, label: navT('home') },
@@ -27,7 +32,7 @@ export default function SiteFooter() {
       <div className="site-footer-inner">
         <div className="footer-top">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/logo/logo-dark.png" alt="Katil Hospital Murah" className="footer-logo" />
+          <img src="/brand/logo/logo-badge.png" alt="Katil Hospital Murah" className="footer-logo" />
           <nav className="footer-nav" aria-label="Footer">
             {links.map((l) => (
               <Link key={l.href} href={l.href}>
@@ -35,6 +40,7 @@ export default function SiteFooter() {
               </Link>
             ))}
           </nav>
+          <ContactNumber locale={locale} page={page} className="contact-number--footer" />
         </div>
 
         <div className="footer-line" aria-hidden="true" />
@@ -84,8 +90,8 @@ export default function SiteFooter() {
           gap: 20px 32px;
         }
         .footer-logo {
-          height: 54px;
-          width: auto;
+          height: 88px;
+          width: 88px;
           object-fit: contain;
         }
         .footer-nav {

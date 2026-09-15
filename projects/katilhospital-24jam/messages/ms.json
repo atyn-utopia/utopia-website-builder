@@ -13,77 +13,95 @@
   },
   "fomo": {
     "eyebrow": "TAWARAN {monthUpper}",
-    "body": "Penghantaran & pemasangan percuma untuk setiap sewaan katil hospital pada {month} ini.",
+    "body": "Hantar & pasang percuma untuk setiap sewaan katil pada {month} ini.",
     "ctaLabel": "Tuntut Tawaran"
   },
   "hero": {
-    "h1": "Sewa & Jual Katil Hospital 24 Jam di Seluruh Malaysia",
-    "h2": "Penghantaran hari sama ke 159 bandar — manual, elektrik & tilam anti-decubitus untuk warga emas dan pesakit di rumah.",
+    "h1": "Sewa & Beli Katil Hospital, Siap Dipasang Dalam 24 Jam",
+    "h2": "Katil manual dan elektrik, tilam anti-kudis dan kerusi roda untuk penjagaan di rumah. Hantar ke 159 bandar seluruh Malaysia.",
     "ctaPrimary": "WhatsApp Kami Sekarang",
-    "ctaSecondary": "Lihat Produk",
-    "trustMicro": "Dipercayai ratusan keluarga di seluruh Malaysia · Hantar & pasang dalam 24 jam"
+    "ctaSecondary": "Lihat Harga",
+    "badge": "Hantar & pasang dalam 24 jam",
+    "factRent": "Sewa katil dari",
+    "factBuy": "Beli dari",
+    "factCoverage": "Liputan",
+    "unitMonth": "/bulan",
+    "unitTowns": "bandar",
+    "bedAlt": "Katil Hospital Auto 3 Fungsi dengan alat kawalan"
   },
   "usp": {
     "p1": {
-      "label": "Penghantaran 24 Jam",
-      "sub": "Hantar & pasang hari sama di seluruh Malaysia"
+      "label": "Hantar dalam 24 jam",
+      "sub": "Kami pasang & ajar cara guna"
     },
     "p2": {
-      "label": "Sewa Bulanan Fleksibel",
-      "sub": "Pakej sewa atau beli — ikut belanjawan keluarga"
+      "label": "Sewa minimum sebulan",
+      "sub": "Sambung bila perlu"
     },
     "p3": {
-      "label": "Liputan Seluruh Malaysia",
-      "sub": "159 bandar dari Perlis ke Sabah & Sarawak"
+      "label": "159 bandar",
+      "sub": "Perlis hingga Sabah & Sarawak"
     }
   },
   "products": {
-    "h3": "Produk Kami",
-    "intro": "Katil hospital manual dan elektrik, tilam hospital, tilam angin anti-decubitus, mesin oksigen, kerusi roda, dan mesin CPAP — semua boleh disewa atau dibeli dengan penghantaran 24 jam.",
-    "cardCta": "Lihat di WhatsApp",
+    "h3": "Harga sewa & beli yang jelas",
+    "intro": "Katil hospital, tilam, kerusi roda, mesin oksigen dan mesin CPAP — sewa bulanan atau beli terus.",
+    "cardCta": "Tempah di WhatsApp",
     "eyebrow": "Katalog Sewa & Beli",
     "imageAltTemplate": "Katil hospital {model} daripada Katil Hospital Murah — sewa atau beli seluruh Malaysia"
   },
   "values": {
     "h3": "Kenapa Pilih Katil Hospital Murah",
-    "intro": "Kami faham penjagaan di rumah tidak boleh tunggu. Inilah sebabnya ratusan keluarga Malaysia percayakan kami.",
+    "intro": "Apa yang anda dapat bila sewa atau beli dengan kami.",
     "c1": {
-      "title": "Penghantaran 24 Jam",
-      "body": "Tempah pagi, sampai petang — atau dalam masa 24 jam di mana-mana lokasi di Malaysia. Tidak perlu tunggu berhari-hari."
+      "title": "Hantar dalam 24 jam",
+      "body": "Sampai dalam 24 jam selepas tempahan disahkan."
     },
     "c2": {
-      "title": "Harga Telus & Berpatutan",
-      "body": "Sebut harga jelas, tiada caj tersembunyi. Pilihan sewa bulanan untuk keluarga yang masih menentukan tempoh penjagaan."
+      "title": "Harga jelas",
+      "body": "Harga sewa dan beli tertera, tiada caj tersembunyi."
     },
     "c3": {
-      "title": "Hantar & Pasang Lengkap",
-      "body": "Pasukan kami hantar, pasang, dan tunjuk cara guna di tempat — supaya keluarga anda boleh fokus pada pesakit, bukan pada mesin."
+      "title": "Hantar & pasang",
+      "body": "Kami pasang di bilik dan ajar cara guna."
     },
     "c4": {
-      "title": "Sokongan Selepas Hantar",
-      "body": "Ada soalan pada pukul 10 malam? WhatsApp kami — pasukan sokongan sedia bantu sepanjang tempoh sewa atau waranti."
+      "title": "Sokongan WhatsApp",
+      "body": "Ada soalan semasa sewa? WhatsApp kami."
     },
     "eyebrow": "Kelebihan Kami"
   },
   "howItWorks": {
-    "h3": "3 Langkah Mudah",
+    "h3": "Tempah dalam 3 langkah",
     "s1": {
-      "title": "1. WhatsApp Kami",
-      "body": "Hubungi kami di WhatsApp dan beritahu keperluan anda — katil mana, berapa lama, di bandar mana. Kami balas dengan sebut harga segera."
+      "title": "WhatsApp keperluan anda",
+      "body": "Beritahu kami katil mana, berapa lama dan di bandar mana. Kami balas dengan sebut harga."
     },
     "s2": {
-      "title": "2. Sahkan & Bayar",
-      "body": "Pilih sewa atau beli, sahkan tempoh, dan buat pembayaran secara dalam talian. Kami jadualkan penghantaran 24 jam."
+      "title": "Sahkan tempoh & bayar",
+      "body": "Pilih sewa atau beli, sahkan tempoh dan buat bayaran dalam talian. Kami jadualkan penghantaran."
     },
     "s3": {
-      "title": "3. Hantar, Pasang, Selesai",
-      "body": "Pasukan kami sampai, pasang katil dan peralatan di bilik, dan tunjuk cara guna. Anda hanya tumpukan pada penjagaan."
+      "title": "Kami hantar & pasang",
+      "body": "Pasukan kami pasang katil di bilik pesakit dan tunjuk cara guna. Anda fokus pada penjagaan."
     },
-    "eyebrow": "Proses 3-Langkah"
+    "eyebrow": "Proses 3-Langkah",
+    "closing": "Beritahu kami bandar dan tarikh pesakit keluar wad. Kami balas dengan harga.",
+    "cta": "WhatsApp Kami Sekarang",
+    "intro": "Dari mesej pertama hingga katil siap dipasang di rumah.",
+    "chat": {
+      "status": "dalam talian",
+      "today": "Hari ini",
+      "caption": "Contoh perbualan",
+      "m1": "Salam. Nak sewa katil 3 fungsi untuk ayah di {city}. Keluar wad esok.",
+      "m2": "Waalaikumsalam. {product} RM{price}/bulan, boleh hantar & pasang esok. Nak kami sahkan?",
+      "m2NoPrice": "Waalaikumsalam. Boleh hantar & pasang esok. Kami hantar sebut harga sekarang.",
+      "m3": "Ok, sahkan."
+    }
   },
   "gallery": {
     "h3": "Gambar Pelanggan",
-    "intro": "Penghantaran dan pemasangan sebenar di rumah pelanggan di seluruh Malaysia — tiada lakonan, tiada stok foto.",
+    "intro": "Penghantaran dan pemasangan di rumah pelanggan di seluruh Malaysia.",
     "eyebrow": "Bukti Sebenar",
     "alts": [
       "Katil hospital manual dihantar ke rumah pelanggan di Kuala Lumpur",
@@ -102,7 +120,7 @@
   },
   "googleReview": {
     "h3": "Ulasan Pelanggan di Google",
-    "intro": "Ulasan sebenar dari keluarga yang kami bantu — dengan logo Google Review rasmi, bukan bintang generik.",
+    "intro": "Maklum balas daripada keluarga yang kami bantu.",
     "cta": "Chat WhatsApp",
     "eyebrow": "Suara Pelanggan"
   },
@@ -148,14 +166,15 @@
       "q": "Ada sokongan selepas beli atau sewa?",
       "a": "Ya. Hubungi kami di WhatsApp bila-bila masa untuk bantuan teknikal, tukar alat, atau penjagaan alat. Pasukan kami layan pertanyaan sepanjang tempoh sewa atau waranti."
     },
-    "eyebrow": "Bantuan Pantas"
+    "eyebrow": "Bantuan Pantas",
+    "intro": "Jawapan ringkas untuk soalan yang keluarga selalu tanya."
   },
   "finalCta": {
-    "h3": "Perlukan Katil Hospital Hari Ini? WhatsApp Sekarang.",
-    "subtitle": "Pasukan kami standby 24 jam — hantar, pasang, dan selesai sebelum hari berikutnya.",
+    "h3": "Pesakit keluar wad esok? Katil boleh sampai dulu.",
+    "subtitle": "Pasukan kami standby 24 jam untuk hantar dan pasang sebelum pesakit sampai di rumah.",
     "cta": "WhatsApp Kami Sekarang",
     "eyebrow": "Bertindak Sekarang",
-    "bgAlt": "Penghantaran dan pemasangan katil hospital 24 jam Katil Hospital Murah di rumah di Malaysia"
+    "bgAlt": "Bilik di rumah yang disediakan dengan katil hospital dan kerusi roda sebelum pesakit pulang"
   },
   "footer": {
     "brand": {
@@ -184,8 +203,11 @@
     "nearby": {
       "h3": "Kawasan Berdekatan",
       "intro": "Kami juga berkhidmat di kawasan berikut.",
-      "anchor": "Lihat katil hospital di {city}"
-    }
+      "anchor": "Lihat katil hospital di {city}",
+      "eyebrow": "Liputan sekitar"
+    },
+    "badge": "Hantar ke {city} dalam 24 jam",
+    "introEyebrow": "Kawasan liputan"
   },
   "blog": {
     "title": "Blog",
@@ -223,7 +245,8 @@
     "h3": "Liputan 159 Kawasan di Seluruh Malaysia",
     "intro": "Penghantaran percuma ke setiap negeri di Semenanjung, Sabah, dan Sarawak. Klik negeri anda untuk lihat senarai penuh kawasan.",
     "empty": "Kawasan anda tidak tersenarai?",
-    "emptyCta": "Sahkan Liputan"
+    "emptyCta": "Sahkan Liputan",
+    "count": "{count} kawasan"
   },
   "logoAlt": "Katil Hospital Murah — Sewa & Jual Katil Hospital Seluruh Malaysia",
   "imageAlt": "Pasukan Katil Hospital Murah menghantar dan memasang katil hospital di rumah pelanggan",
@@ -231,5 +254,8 @@
     "heading": "Membuka WhatsApp…",
     "subtext": "Menghubungkan anda dengan pasukan Katil Hospital Murah.",
     "fallback": "Klik di sini jika tidak dialihkan"
+  },
+  "contact": {
+    "availability": "Talian 24 jam"
   }
 }

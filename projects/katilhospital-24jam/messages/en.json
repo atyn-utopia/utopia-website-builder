@@ -13,77 +13,95 @@
   },
   "fomo": {
     "eyebrow": "{monthUpper} OFFER",
-    "body": "Free delivery & setup on every hospital bed rental this {month}.",
+    "body": "Free delivery & setup on every bed rental this {month}.",
     "ctaLabel": "Claim Offer"
   },
   "hero": {
-    "h1": "Rent & Buy Hospital Beds — 24-Hour Delivery in Malaysia",
-    "h2": "Same-day delivery to 159 towns — manual, electric and anti-decubitus beds for elderly and home-care patients.",
+    "h1": "Rent or Buy a Hospital Bed, Set Up Within 24 Hours",
+    "h2": "Manual and electric beds, anti-bedsore mattresses and wheelchairs for care at home. Delivered to 159 towns across Malaysia.",
     "ctaPrimary": "Chat WhatsApp Now",
-    "ctaSecondary": "View Products",
-    "trustMicro": "Trusted by hundreds of Malaysian families · Delivered & set up within 24 hours"
+    "ctaSecondary": "See Prices",
+    "badge": "Delivered & set up within 24 hours",
+    "factRent": "Bed rental from",
+    "factBuy": "Buy from",
+    "factCoverage": "Coverage",
+    "unitMonth": "/month",
+    "unitTowns": "towns",
+    "bedAlt": "Auto 3-function hospital bed with handset controller"
   },
   "usp": {
     "p1": {
-      "label": "24-Hour Delivery",
-      "sub": "Same-day delivery & setup nationwide"
+      "label": "Delivered in 24 hours",
+      "sub": "We set it up and show you how"
     },
     "p2": {
-      "label": "Flexible Monthly Rental",
-      "sub": "Rent or buy — packages to fit your budget"
+      "label": "One-month minimum",
+      "sub": "Extend whenever you need"
     },
     "p3": {
-      "label": "Nationwide Coverage",
-      "sub": "159 towns from Perlis to Sabah & Sarawak"
+      "label": "159 towns",
+      "sub": "Perlis to Sabah & Sarawak"
     }
   },
   "products": {
-    "h3": "Our Products",
-    "intro": "Manual and electric hospital beds, foam mattresses, anti-decubitus air mattresses, oxygen concentrators, wheelchairs, and CPAP machines — all available for rent or purchase with 24-hour delivery.",
-    "cardCta": "Ask on WhatsApp",
+    "h3": "Clear rental and purchase prices",
+    "intro": "Hospital beds, mattresses, wheelchairs, oxygen concentrators and CPAP machines — rent monthly or buy outright.",
+    "cardCta": "Book on WhatsApp",
     "eyebrow": "Rent & Buy Catalogue",
     "imageAltTemplate": "{model} hospital bed from Katil Hospital Murah — rent or buy across Malaysia"
   },
   "values": {
     "h3": "Why Choose Katil Hospital Murah",
-    "intro": "We understand home care cannot wait. Here is why hundreds of Malaysian families trust us.",
+    "intro": "What you get when you rent or buy with us.",
     "c1": {
-      "title": "24-Hour Delivery",
-      "body": "Order in the morning, receive by evening — or within 24 hours anywhere in Malaysia. No waiting days on end."
+      "title": "Delivered in 24 hours",
+      "body": "Arrives within 24 hours of confirmation."
     },
     "c2": {
-      "title": "Transparent, Fair Pricing",
-      "body": "Clear quotes, no hidden fees. Monthly rental options for families still figuring out the length of care needed."
+      "title": "Clear prices",
+      "body": "Rental and purchase prices shown, no hidden fees."
     },
     "c3": {
-      "title": "Full Delivery & Setup",
-      "body": "Our team delivers, assembles, and walks you through every function on site — so your family can focus on the patient, not the equipment."
+      "title": "Delivery & setup",
+      "body": "We set it up in the room and show you how."
     },
     "c4": {
-      "title": "After-Delivery Support",
-      "body": "Question at 10pm? WhatsApp us — our support team is available throughout your rental or warranty period."
+      "title": "WhatsApp support",
+      "body": "Questions during your rental? WhatsApp us."
     },
     "eyebrow": "Why Choose Us"
   },
   "howItWorks": {
-    "h3": "3 Easy Steps",
+    "h3": "Book in 3 steps",
     "s1": {
-      "title": "1. WhatsApp Us",
-      "body": "Message us on WhatsApp with what you need — which bed, for how long, in which city. We reply with an instant quote."
+      "title": "WhatsApp us what you need",
+      "body": "Tell us which bed, for how long, and in which town. We reply with a quote."
     },
     "s2": {
-      "title": "2. Confirm & Pay",
-      "body": "Pick rent or buy, confirm the duration, and pay online. We schedule delivery within 24 hours."
+      "title": "Confirm & pay",
+      "body": "Choose rent or buy, confirm the duration and pay online. We schedule the delivery."
     },
     "s3": {
-      "title": "3. Delivered, Set Up, Done",
-      "body": "Our team arrives, assembles the bed and equipment in the room, and walks you through how to use it. You focus only on care."
+      "title": "We deliver & set up",
+      "body": "Our team sets up the bed in the patient's room and shows you how to use it. You focus on care."
     },
-    "eyebrow": "3-Step Process"
+    "eyebrow": "3-Step Process",
+    "closing": "Tell us your town and the patient's discharge date. We reply with a price.",
+    "cta": "Chat WhatsApp Now",
+    "intro": "From your first message to a bed set up at home.",
+    "chat": {
+      "status": "online",
+      "today": "Today",
+      "caption": "Example conversation",
+      "m1": "Hi, I need a 3-function bed for my father in {city}. He's discharged tomorrow.",
+      "m2": "Hi! The {product} is RM{price}/month, and we can deliver and set it up tomorrow. Shall we confirm?",
+      "m2NoPrice": "Hi! We can deliver and set it up tomorrow. We'll send you a quote now.",
+      "m3": "Yes, please confirm."
+    }
   },
   "gallery": {
     "h3": "Customer Gallery",
-    "intro": "Real deliveries and setups at customer homes across Malaysia — no staged shots, no stock photos.",
+    "intro": "Deliveries and setups at customer homes across Malaysia.",
     "eyebrow": "Real Proof",
     "alts": [
       "Manual hospital bed delivered to a customer home in Kuala Lumpur",
@@ -102,7 +120,7 @@
   },
   "googleReview": {
     "h3": "Customer Reviews on Google",
-    "intro": "Real reviews from families we have helped — shown with the official Google Review branding, not generic star icons.",
+    "intro": "Feedback from families we have helped.",
     "cta": "Chat WhatsApp",
     "eyebrow": "Customer Voices"
   },
@@ -148,14 +166,15 @@
       "q": "Is there after-sales support?",
       "a": "Yes. Message us on WhatsApp anytime for technical help, replacement parts, or equipment care tips. Our team handles requests throughout your rental or warranty period."
     },
-    "eyebrow": "Quick Help"
+    "eyebrow": "Quick Help",
+    "intro": "Short answers to what families ask us most."
   },
   "finalCta": {
-    "h3": "Need a Hospital Bed Today? WhatsApp Us Now.",
-    "subtitle": "Our team is on standby 24 hours a day — delivered, set up, and done before the next day.",
+    "h3": "Patient coming home tomorrow? The bed can get there first.",
+    "subtitle": "Our team is on standby 24 hours to deliver and set up before the patient arrives home.",
     "cta": "Chat WhatsApp Now",
     "eyebrow": "Act Now",
-    "bgAlt": "Katil Hospital Murah 24-hour delivery and setup of a hospital bed at a Malaysian home"
+    "bgAlt": "A room at home prepared with a hospital bed and wheelchair before the patient returns"
   },
   "footer": {
     "brand": {
@@ -184,8 +203,11 @@
     "nearby": {
       "h3": "Nearby Areas",
       "intro": "We also serve the following areas.",
-      "anchor": "See hospital beds in {city}"
-    }
+      "anchor": "See hospital beds in {city}",
+      "eyebrow": "Around you"
+    },
+    "badge": "Delivered to {city} within 24 hours",
+    "introEyebrow": "Coverage area"
   },
   "blog": {
     "title": "Blog",
@@ -223,7 +245,8 @@
     "h3": "Coverage Across 159 Areas in Malaysia",
     "intro": "Free delivery to every state in Peninsular Malaysia, Sabah, and Sarawak. Click your state to see the full list of areas.",
     "empty": "Your area not listed?",
-    "emptyCta": "Confirm Coverage"
+    "emptyCta": "Confirm Coverage",
+    "count": "{count} areas"
   },
   "logoAlt": "Katil Hospital Murah — Hospital Bed Rental & Sale Across Malaysia",
   "imageAlt": "Katil Hospital Murah team delivering and installing a hospital bed in a Malaysian home",
@@ -231,5 +254,8 @@
     "heading": "Opening WhatsApp…",
     "subtext": "Connecting you to the Katil Hospital Murah team.",
     "fallback": "Click here if it doesn't redirect"
+  },
+  "contact": {
+    "availability": "24-hour line"
   }
 }

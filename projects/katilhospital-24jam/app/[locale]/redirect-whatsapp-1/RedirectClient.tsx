@@ -35,7 +35,7 @@ export default function RedirectClient({
     <div className="redir-overlay">
       <div className="redir-inner">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/brand/logo/logo-dark.png" alt="Katil Hospital Murah" className="redir-logo" />
+        <img src="/brand/logo/logo-badge.png" alt="Katil Hospital Murah" className="redir-logo" />
         <div className="redir-spinner" aria-hidden="true" />
         <h1 className="redir-heading">{t('heading')}</h1>
         <p className="redir-subtext">{t('subtext')}</p>
@@ -51,7 +51,7 @@ export default function RedirectClient({
           font-family: var(--font-inter), Inter, system-ui, sans-serif;
         }
         .redir-inner { text-align: center; max-width: 400px; }
-        .redir-logo { width: auto; height: 64px; margin: 0 auto 1.5rem; display: block; }
+        .redir-logo { width: 96px; height: 96px; margin: 0 auto 1.5rem; display: block; }
         .redir-mark { margin: 0 auto 1.5rem; display: block; }
         .redir-spinner { width: 48px; height: 48px; margin: 0 auto 1.5rem; position: relative; }
         .redir-spinner::before {
