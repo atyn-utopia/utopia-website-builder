@@ -76,8 +76,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               src="/brand/logo-light.png"
               alt={tNav('logoAlt')}
               className="ew-hero__logo"
-              width={1236}
-              height={1273}
+              width={1239}
+              height={1253}
               priority
             />
             <span className="ew-eyebrow">{tHero('badge')}</span>
