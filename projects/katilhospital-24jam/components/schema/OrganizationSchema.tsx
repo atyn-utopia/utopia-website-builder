@@ -7,7 +7,7 @@ export function OrganizationSchema() {
     name: siteConfig.brandName,
     legalName: siteConfig.legalName,
     url: siteConfig.siteUrl,
-    logo: `${siteConfig.siteUrl}/brand/logo/logo-dark.png`,
+    logo: `${siteConfig.siteUrl}/brand/logo/logo-badge.png`,
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'customer service',

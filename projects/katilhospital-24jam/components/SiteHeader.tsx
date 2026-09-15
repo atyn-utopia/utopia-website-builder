@@ -32,7 +32,7 @@ export default function SiteHeader() {
         {/* Logo */}
         <Link href={`/${locale}`} className="site-brand" aria-label={t('home')}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/logo/logo-dark.png" alt="Katil Hospital Murah" className="site-logo" />
+          <img src="/brand/logo/logo-badge.png" alt="Katil Hospital Murah" className="site-logo" />
         </Link>
 
         {/* Desktop nav */}
@@ -94,7 +94,7 @@ export default function SiteHeader() {
           align-items: center;
           justify-content: space-between;
           gap: 12px;
-          padding: 12px 16px;
+          padding: 8px 16px;
           min-height: 60px;
         }
         .site-brand {
@@ -102,10 +102,17 @@ export default function SiteHeader() {
           align-items: center;
           flex: 0 0 auto;
         }
+        /* Round badge logo — square, so size both axes. */
         .site-logo {
-          height: 54px;
-          width: auto;
+          height: 58px;
+          width: 58px;
           display: block;
+        }
+        @media (min-width: 880px) {
+          .site-logo {
+            height: 68px;
+            width: 68px;
+          }
         }
         .site-nav {
           display: inline-flex;

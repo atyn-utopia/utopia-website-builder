@@ -27,7 +27,7 @@ export default function SiteFooter() {
       <div className="site-footer-inner">
         <div className="footer-top">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/logo/logo-dark.png" alt="Katil Hospital Murah" className="footer-logo" />
+          <img src="/brand/logo/logo-badge.png" alt="Katil Hospital Murah" className="footer-logo" />
           <nav className="footer-nav" aria-label="Footer">
             {links.map((l) => (
               <Link key={l.href} href={l.href}>
@@ -84,8 +84,8 @@ export default function SiteFooter() {
           gap: 20px 32px;
         }
         .footer-logo {
-          height: 54px;
-          width: auto;
+          height: 88px;
+          width: 88px;
           object-fit: contain;
         }
         .footer-nav {
