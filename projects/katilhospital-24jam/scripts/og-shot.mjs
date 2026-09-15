@@ -52,6 +52,11 @@ const HERO = 'section:has(.kh-hero-copy)';
 const HIDE = [
   '.fomo-bar', '.site-header', 'header', '.kh-nav',   // canonical chrome (header floats over the hero here)
   '.hero-stats', '.ops-ticker',            // hero-foot elements a crop would slice
+  // The direction-A hero runs 590-710px at 1200 wide depending on locale, so a
+  // top-anchored crop cut the Malay card through the price row. Dropping the
+  // H2 and the navy wave brings every locale under 630 and into the padded
+  // path, which keeps the logo, H1, CTAs and prices whole.
+  '.kh-hero-sub', '.kh-hero-wave',
   // Floating WhatsApp FAB. WhatsAppButton renders the `floating` variant with
   // inline styles and no class, so match its serialized style attribute — it
   // is position:fixed, so it lands in the corner of the card as a UI artifact.
