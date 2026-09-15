@@ -1063,6 +1063,7 @@ p, li, blockquote,
   font-size: clamp(30px, 4.6vw, 50px); font-weight: 800;
   letter-spacing: -0.03em; color: var(--brand-navy); margin: 0;
 }
+.ew-hero__highlight { color: var(--brand-orange); }
 .ew-hero h2 {
   font-size: clamp(15px, 1.3vw, 16.5px); font-weight: 400; line-height: 1.6;
   color: var(--ink-muted); max-width: 32em; margin: 0;
@@ -1077,11 +1078,29 @@ p, li, blockquote,
   background: transparent; padding: 24px;
   display: grid; place-items: center;
 }
+/* A soft glow pulses behind the photo to draw the eye — transform/opacity
+   only, and skipped entirely under prefers-reduced-motion, same pattern as
+   the callout dot pulse below. Sits behind the photo via z-index, since
+   .ew-diagram already establishes a stacking context (position: relative). */
+.ew-diagram::after {
+  content: ""; position: absolute; top: 50%; left: 50%; z-index: 0;
+  width: min(75%, 340px); aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 216, 224, 0.4), transparent 70%);
+  transform: translate(-50%, -50%) scale(0.85);
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .ew-diagram::after { animation: ew-photo-pulse 3.2s ease-in-out infinite; }
+}
+@keyframes ew-photo-pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(0.85); opacity: 0.6; }
+  50% { transform: translate(-50%, -50%) scale(1.08); opacity: 0.9; }
+}
 /* The generated product shot is on a white studio ground, not alpha. Multiply
    drops that white into the page background without touching the source
    file — this only reads as "transparent" where the ground behind it is
    itself light; it's a blend trick, not real alpha. */
-.ew-diagram__chair { width: min(94%, 440px); height: auto; mix-blend-mode: multiply; }
+.ew-diagram__chair { position: relative; z-index: 1; width: min(94%, 440px); height: auto; mix-blend-mode: multiply; }
 /* Pin + rotated sticker tag, replacing the earlier line-to-dot style — no
    connecting line, just a small ring next to a slightly rotated label, per
    the approved reference. Unconditional pin-then-tag order (no row-reverse
