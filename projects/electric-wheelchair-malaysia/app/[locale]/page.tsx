@@ -117,24 +117,20 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 the front, so its right armrest — where the joystick sits — is
                 on the viewer's LEFT; the joystick callout goes on that side. */}
             <span className="ew-callout ew-callout--l ew-callout--1">
-              <span>{callouts[2]}</span>
-              <span className="ew-callout__line" />
-              <span className="ew-callout__dot" />
+              <span className="ew-callout__pin" />
+              <span className="ew-callout__tag">{callouts[2]}</span>
             </span>
             <span className="ew-callout ew-callout--l ew-callout--2">
-              <span>{callouts[1]}</span>
-              <span className="ew-callout__line" />
-              <span className="ew-callout__dot" />
+              <span className="ew-callout__pin" />
+              <span className="ew-callout__tag">{callouts[1]}</span>
             </span>
             <span className="ew-callout ew-callout--r ew-callout--3">
-              <span>{callouts[0]}</span>
-              <span className="ew-callout__line" />
-              <span className="ew-callout__dot" />
+              <span className="ew-callout__pin" />
+              <span className="ew-callout__tag">{callouts[0]}</span>
             </span>
             <span className="ew-callout ew-callout--r ew-callout--4">
-              <span>{callouts[3]}</span>
-              <span className="ew-callout__line" />
-              <span className="ew-callout__dot" />
+              <span className="ew-callout__pin" />
+              <span className="ew-callout__tag">{callouts[3]}</span>
             </span>
             <ul className="ew-spec-list">
               {callouts.map((line) => (
