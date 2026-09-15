@@ -1037,8 +1037,7 @@ h1, h2, h3, h4, h5, h6 {
     padding: 14px;
     gap: 12px;
   }
-  .kh-card-media { aspect-ratio: 4 / 3; }
-  .kh-card-media img { padding: 14px; }
+  .kh-card-media img { padding: 10px; }
   .kh-card-body { justify-content: flex-start; }
   .kh-card-name { font-size: 16.5px; }
   .kh-card-desc {
