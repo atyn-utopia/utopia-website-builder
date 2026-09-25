@@ -469,29 +469,34 @@ async function stepAdsMetrics(ctx, cfg) {
       .filter({ hasText: new RegExp(`${re(propId)}|${re(dom)}`, 'i') });
 
     // Raise the page size first so the walk is a handful of pages, not twenty-plus.
-    const sizer = page.getByRole('combobox', { name: /Show rows/i }).first();
-    if (await sizer.count().catch(() => 0)) {
-      await sizer.click({ timeout: 6_000 }).catch(() => {});
-      const opts = page.getByRole('option');
-      const n = await opts.count().catch(() => 0);
-      if (n) await opts.nth(n - 1).click({ timeout: 6_000 }).catch(() => {});   // last = largest
-      await page.waitForTimeout(1_500);
-    }
+    // Walks the paginated Linked table until OUR row shows up; used again after
+    // saving, because the only proof a save landed is the row's Status column.
+    const findRow = async () => {
+      const sizer = page.getByRole('combobox', { name: /Show rows/i }).first();
+      if (await sizer.count().catch(() => 0)) {
+        await sizer.click({ timeout: 6_000 }).catch(() => {});
+        const opts = page.getByRole('option');
+        const n = await opts.count().catch(() => 0);
+        if (n) await opts.nth(n - 1).click({ timeout: 6_000 }).catch(() => {});   // last = largest
+        await page.waitForTimeout(1_500);
+      }
+      let row = rowFor();
+      for (let p = 0; p < 40 && !(await row.count()); p++) {
+        const next = page.getByRole('button', { name: /next page/i }).first();
+        if (!(await next.count().catch(() => 0))) break;
+        if (await next.isDisabled().catch(() => true)) break;
+        await next.click({ timeout: 8_000 }).catch(() => {});
+        await page.waitForTimeout(1_200);
+        row = rowFor();
+      }
+      return row.first();
+    };
+    const statusOf = async (row) => (await row.innerText().catch(() => '')).replace(/\s+/g, ' ');
 
-    let row = rowFor();
-    for (let p = 0; p < 40 && !(await row.count()); p++) {
-      const next = page.getByRole('button', { name: /next page/i }).first();
-      if (!(await next.count().catch(() => 0))) break;
-      if (await next.isDisabled().catch(() => true)) break;
-      await next.click({ timeout: 8_000 }).catch(() => {});
-      await page.waitForTimeout(1_200);
-      row = rowFor();
-    }
-    row = row.first();
+    let row = await findRow();
     if (!(await row.count())) { await shot(page, cfg._shotDir, 'ads-metrics-NOROW'); return record('ads-metrics', 'error', `row for ${dom}/${propId} not found after paging the Linked table (see screenshot)`); }
     await row.scrollIntoViewIfNeeded().catch(() => {});
-    const statusText = (await row.innerText().catch(() => '')).replace(/\s+/g, ' ');
-    if (/App and web metrics:\s*On/i.test(statusText)) { await shot(page, cfg._shotDir, 'ads-metrics'); return record('ads-metrics', 'skip', 'already ON (per linked-properties table)'); }
+    if (/App and web metrics:\s*On/i.test(await statusOf(row))) { await shot(page, cfg._shotDir, 'ads-metrics'); return record('ads-metrics', 'skip', 'already ON (per linked-properties table)'); }
 
     // Off → open that row's "Manage", flip the toggle, save.
     await row.getByRole('link', { name: /Manage/ }).first().click({ timeout: 10_000 }).catch(async () => {
@@ -501,9 +506,33 @@ async function stepAdsMetrics(ctx, cfg) {
     await page.waitForTimeout(2_000);
     const outcome = await ensureSwitch(page, /Import app and web metrics/i, { desired: true });
     if (outcome === 'missing') { await shot(page, cfg._shotDir, 'ads-metrics-NOTOGGLE'); return record('ads-metrics', 'error', 'toggle not found after opening row Manage (see screenshot)'); }
-    if (outcome === 'changed') await page.getByRole('button', { name: /Save/ }).first().click({ timeout: 8_000 }).catch(() => {});
+
+    // The panel's button is "Save changes". A bare /Save/ + .first() matched an
+    // element behind the panel and the swallowed miss was reported as done
+    // (lantaivinyl.my, 2026-09-25). Click the VISIBLE one and let a miss throw.
+    const save = page.getByRole('button', { name: /^\s*Save( changes)?\s*$/i }).filter({ visible: true }).last();
+    try {
+      await save.click({ timeout: 10_000 });
+    } catch (e) {
+      await shot(page, cfg._shotDir, 'ads-metrics-NOSAVE');
+      return record('ads-metrics', 'error', `switch flipped but the Save click failed: ${e.message.split('\n')[0]}`);
+    }
+    await save.waitFor({ state: 'hidden', timeout: 20_000 }).catch(() => {});
+    await page.waitForLoadState('networkidle', { timeout: 15_000 }).catch(() => {});
     await shot(page, cfg._shotDir, 'ads-metrics');
-    record('ads-metrics', outcome === 'already' ? 'skip' : 'done-ui', outcome === 'already' ? 'already ON' : 'toggled ON (aria-checked verified)');
+
+    // Verify from the table after a reload: aria-checked before the save proves
+    // nothing about what Google stored.
+    await page.reload({ waitUntil: 'networkidle' }).catch(() => {});
+    await page.waitForTimeout(2_500);
+    row = await findRow();
+    const after = (await row.count()) ? await statusOf(row) : '';
+    if (/App and web metrics:\s*On/i.test(after)) {
+      await shot(page, cfg._shotDir, 'ads-metrics-verified');
+      return record('ads-metrics', 'done-ui', 'toggled ON + saved (linked-properties table reads On after reload)');
+    }
+    await shot(page, cfg._shotDir, 'ads-metrics-UNVERIFIED');
+    record('ads-metrics', 'unverified', after ? `saved, but the table still reads "${(after.match(/App and web metrics:\s*\w+/i) || [after.slice(0, 60)])[0]}" after reload` : 'saved, but our row was not found again after reload');
   } finally { await page.close(); }
 }
 
@@ -663,6 +692,14 @@ async function main() {
   console.log('SUMMARY');
   console.log('─'.repeat(64));
   for (const r of results) console.log(`  ${r.step.padEnd(14)} ${r.status.padEnd(12)} ${r.detail}`);
+  // A crash mid-run (browser closed, thrown selector) leaves steps with no row
+  // at all; that used to print an empty SUMMARY and "✅ All … desired state".
+  for (const step of steps) {
+    if (!results.some((r) => r.step === step)) {
+      results.push({ step, status: 'error', detail: 'did not run (the run aborted before this step finished)' });
+      console.log(`  ${step.padEnd(14)} ${'error'.padEnd(12)} did not run (the run aborted before this step finished)`);
+    }
+  }
   const bad = results.filter((r) => ['error', 'unverified'].includes(r.status));
   if (bad.length) {
     console.log(`\n⚠️  ${bad.length} step(s) need a look. If a browser step failed, re-run that step with --pause to`);
