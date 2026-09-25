@@ -5,7 +5,14 @@ import { useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import LanguageSwitcher from './LanguageSwitcher';
 
-export default function SiteHeader() {
+/**
+ * `contact` is a ReactNode, not a phone string, because the number is resolved
+ * on the server (`getDisplayPhone`) and this is a client component. Every page
+ * renders it as
+ * `<SiteHeader contact={<ContactNumber locale={locale} page="…" />} />`,
+ * passing its own path — `is_display` is keyed per (website, page_slug).
+ */
+export default function SiteHeader({ contact }: { contact?: React.ReactNode }) {
   const t = useTranslations('nav');
   const tShared = useTranslations('shared');
   const locale = useLocale();
@@ -36,6 +43,7 @@ export default function SiteHeader() {
         </nav>
 
         <div className="site-actions">
+          {contact}
           <LanguageSwitcher />
           <Link
             href={`/${locale}/redirect-whatsapp-1`}
@@ -77,7 +85,9 @@ export default function SiteHeader() {
       </div>
 
       <div id="site-nav-mobile" className={`site-mobile-drawer ${open ? 'is-open' : ''}`} aria-hidden={!open}>
+        <div className="site-mobile-actions flex justify-end pb-2">{contact}</div>
         <nav className="site-mobile-nav" aria-label="Mobile primary">
+
           <Link href={`/${locale}`} onClick={close}>{t('home')}</Link>
           <Link href={`/${locale}#products`} onClick={close}>{t('products')}</Link>
           <Link href={`/${locale}#locations`} onClick={close}>{t('locations')}</Link>

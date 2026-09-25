@@ -11,6 +11,7 @@ import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema'
 import { ProductSchema } from '@/components/schema/ProductSchema'
 import { FAQSchema } from '@/components/schema/FAQSchema'
 import FomoBanner from '@/components/FomoBanner'
+import ContactNumber from '@/components/ContactNumber';
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import PageStyles from '@/components/PageStyles'
@@ -117,7 +118,7 @@ export default async function LocationPage({ params }: Props) {
   return (
     <>
       <FomoBanner />
-      <SiteHeader />
+      <SiteHeader contact={<ContactNumber locale={locale} page={`/sewa-motor/${location}`} />} />
       <LocalBusinessSchema
         locationName={displayName}
         locationSlug={loc.slug}
@@ -150,7 +151,7 @@ export default async function LocationPage({ params }: Props) {
           state: n.state,
         }))}
       />
-      <SiteFooter />
+      <SiteFooter contact={<ContactNumber locale={locale} page={`/sewa-motor/${location}`} className="contact-number--footer" />} />
       <PageStyles />
     </>
   )

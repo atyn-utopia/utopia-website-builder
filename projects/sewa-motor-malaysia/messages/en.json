@@ -275,5 +275,8 @@
     "heading": "Opening WhatsApp…",
     "subtext": "Connecting you to the Sewa Motor Malaysia team.",
     "fallback": "Click here if it doesn't redirect"
+  },
+  "contact": {
+    "availability": "Available 24/7"
   }
 }
