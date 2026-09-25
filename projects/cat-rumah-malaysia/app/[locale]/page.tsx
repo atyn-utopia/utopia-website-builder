@@ -8,6 +8,7 @@ import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema'
 import { ProductSchema } from '@/components/schema/ProductSchema'
 import { FAQSchema } from '@/components/schema/FAQSchema'
 import FomoBanner from '@/components/FomoBanner'
+import ContactNumber from '@/components/ContactNumber';
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import PageStyles from '@/components/PageStyles'
@@ -73,7 +74,7 @@ export default async function HomePage({ params }: Props) {
       <FAQSchema faqs={faqs} />
 
       <FomoBanner locale={locale as Locale} />
-      <SiteHeader />
+      <SiteHeader contact={<ContactNumber locale={locale} page="/" />} />
 
       {/* HERO — clean, one accent. The h1 is capped at 38px deliberately:
           presence comes from proportion, the blue rail on the price and a
@@ -169,7 +170,7 @@ export default async function HomePage({ params }: Props) {
 
       <HomePageClient phoneNumber={phone} products={products} />
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} page="/" />
     </>
   )
 }

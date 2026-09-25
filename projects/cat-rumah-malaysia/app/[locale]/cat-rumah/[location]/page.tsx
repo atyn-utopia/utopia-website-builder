@@ -10,6 +10,7 @@ import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema'
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema'
 import { ProductSchema } from '@/components/schema/ProductSchema'
 import FomoBanner from '@/components/FomoBanner'
+import ContactNumber from '@/components/ContactNumber';
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import PageStyles from '@/components/PageStyles'
@@ -91,7 +92,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
       />
 
       <FomoBanner locale={locale as Locale} />
-      <SiteHeader />
+      <SiteHeader contact={<ContactNumber locale={locale} page={`/cat-rumah/${location}`} />} />
 
       {/* HERO — same clean composition as the homepage, so the two page
           types read as one site. */}
@@ -152,7 +153,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
         products={products}
       />
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} page={`/cat-rumah/${location}`} />
     </>
   )
 }

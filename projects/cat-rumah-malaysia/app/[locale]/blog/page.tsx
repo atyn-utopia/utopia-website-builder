@@ -6,6 +6,7 @@ import { siteConfig } from '@/config/site'
 import { getBlogPosts } from '@/lib/webcore'
 import BlogLinkTracker from '@/components/tracking/BlogLinkTracker'
 import FomoBanner from '@/components/FomoBanner'
+import ContactNumber from '@/components/ContactNumber';
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import type { Locale } from '@/i18n/routing'
@@ -40,7 +41,7 @@ export default async function BlogListingPage({
   return (
     <main style={{ minHeight: '100vh', background: '#ffffff' }}>
       <FomoBanner locale={locale as Locale} />
-      <SiteHeader />
+      <SiteHeader contact={<ContactNumber locale={locale} page="/blog" />} />
 
       <section style={{ background: 'linear-gradient(135deg, #0F1626 0%, #142C50 100%)', padding: '64px 24px', color: '#fff', textAlign: 'center' }}>
         <div style={{ maxWidth: 880, margin: '0 auto' }}>
@@ -92,7 +93,7 @@ export default async function BlogListingPage({
         </Link>
       </section>
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} page="/blog" />
     </main>
   )
 }
