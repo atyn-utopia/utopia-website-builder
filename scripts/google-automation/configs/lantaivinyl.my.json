@@ -1,0 +1,39 @@
+{
+  "domain": "lantaivinyl.my",
+  "ga4": {
+    "accountId": "153453478",
+    "accountName": "Utopia 1st Analytics",
+    "propertyId": "555979571",
+    "propertyName": "properties/555979571",
+    "measurementId": "G-GEKZ5T0DF6",
+    "streamName": "lantaivinyl.my",
+    "siteUrl": "https://www.lantaivinyl.my",
+    "createdAt": "2026-09-25T02:29:59.464Z"
+  },
+  "containerId": "GTM-5FFK4SCB",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-GEKZ5T0DF6",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-09-25T02:30:52.856Z",
+  "gsc": {
+    "siteUrl": "https://lantaivinyl.my/",
+    "token": "<meta name=\"google-site-verification\" content=\"ksvca5AgOA4_lgGvLOX_nFr7TWEg6Hs5Eug02nXkxzI\" />",
+    "initAt": "2026-09-25T02:32:55.545Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-09-25T02:34:37.826Z"
+  },
+  "ads": {
+    "customerId": "1933757591",
+    "ga4PropertyId": "555979571",
+    "conversionActionId": "7793770994",
+    "conversionActionName": "lantaivinyl.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "importedAt": "2026-09-25T02:35:01.901Z"
+  }
+}
