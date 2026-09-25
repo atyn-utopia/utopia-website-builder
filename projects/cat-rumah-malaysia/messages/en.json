@@ -363,5 +363,8 @@
     "heading": "Opening WhatsApp…",
     "subtext": "Connecting you to the Cat Rumah Malaysia team.",
     "fallback": "Click here if it doesn't redirect"
+  },
+  "contact": {
+    "availability": "Available 24/7"
   }
 }

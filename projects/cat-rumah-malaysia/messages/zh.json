@@ -363,5 +363,8 @@
     "heading": "正在打开 WhatsApp…",
     "subtext": "正在为您连接 Cat Rumah Malaysia 团队。",
     "fallback": "如果没有自动跳转，请点击这里"
+  },
+  "contact": {
+    "availability": "24/7 全天候"
   }
 }

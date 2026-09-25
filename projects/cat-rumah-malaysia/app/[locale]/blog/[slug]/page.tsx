@@ -8,6 +8,7 @@ import { getBlogPosts, getBlogPostBySlug } from '@/lib/webcore'
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema'
 import BlogLinkTracker from '@/components/tracking/BlogLinkTracker'
 import FomoBanner from '@/components/FomoBanner'
+import ContactNumber from '@/components/ContactNumber';
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import type { Locale } from '@/i18n/routing'
@@ -63,7 +64,7 @@ export default async function BlogPostPage({
   return (
     <main style={{ background: '#fff', minHeight: '100vh' }}>
       <FomoBanner locale={locale as Locale} />
-      <SiteHeader />
+      <SiteHeader contact={<ContactNumber locale={locale} page={`/blog/${slug}`} />} />
       <BreadcrumbSchema
         items={[
           { name: tBread('home'), url: `/${locale}` },
@@ -159,7 +160,7 @@ export default async function BlogPostPage({
         </Link>
       </section>
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} page={`/blog/${slug}`} />
     </main>
   )
 }

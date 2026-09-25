@@ -10,9 +10,17 @@
 // element only, not a reskin. Uses existing nav.* / footer.* keys, so no new
 // translation keys are needed.
 import Link from 'next/link';
+import ContactNumber from './ContactNumber';
 import { getTranslations } from 'next-intl/server';
 
-export default async function SiteFooter({ locale }: { locale: string }) {
+export default async function SiteFooter({
+  locale,
+  page,
+}: {
+  locale: string;
+  /** Locale-stripped path, forwarded to ContactNumber — see that component. */
+  page?: string;
+}) {
   const t = await getTranslations({ locale, namespace: 'footer' });
   const navT = await getTranslations({ locale, namespace: 'nav' });
 
@@ -30,9 +38,12 @@ export default async function SiteFooter({ locale }: { locale: string }) {
             <Link href={`/${locale}/blog`}>{navT('blog')}</Link>
             <Link href={`/${locale}#faq`}>{t('faqLabel')}</Link>
           </nav>
+
+          <ContactNumber locale={locale} page={page} className="contact-number--footer" />
         </div>
 
         <div className="footer-line" aria-hidden="true" />
+
 
         <div className="footer-bottom">
           <h6 className="footer-copy">{t('copyright', { year: new Date().getFullYear() })}</h6>
