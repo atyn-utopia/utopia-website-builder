@@ -2,7 +2,7 @@
 import { google } from 'googleapis';
 import readline from 'node:readline/promises';
 import { stdin as input, stdout as output } from 'node:process';
-import { writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { writeFileSync, mkdirSync, existsSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { getAuth } from './lib/auth.mjs';
@@ -201,15 +201,19 @@ async function main() {
 
   // 11. Save config + output snippet
   mkdirSync(CONFIGS_DIR, { recursive: true });
+  // Merge into what earlier phases saved: ga4-create.mjs (Phase 2) writes the
+  // ga4 block to this same file, and replacing it wholesale dropped it.
+  const configPath = join(CONFIGS_DIR, `${domain}.json`);
+  const existing = existsSync(configPath) ? JSON.parse(readFileSync(configPath, 'utf8')) : {};
   const config = {
+    ...existing,
     domain,
     containerId,
     gtmAccountId: GTM_ACCOUNT_ID,
     ga4MeasurementId: ga4Id,
     events,
-    createdAt: new Date().toISOString(),
+    createdAt: existing.createdAt ?? new Date().toISOString(),
   };
-  const configPath = join(CONFIGS_DIR, `${domain}.json`);
   writeFileSync(configPath, JSON.stringify(config, null, 2));
 
   console.log('\n' + '='.repeat(64));
