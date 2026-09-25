@@ -1,0 +1,39 @@
+{
+  "domain": "balconygrill.my",
+  "ga4": {
+    "accountId": "153453478",
+    "accountName": "Utopia 1st Analytics",
+    "propertyId": "555955041",
+    "propertyName": "properties/555955041",
+    "measurementId": "G-VPMNH5M9SG",
+    "streamName": "balconygrill.my",
+    "siteUrl": "https://www.balconygrill.my",
+    "createdAt": "2026-09-25T08:04:14.404Z"
+  },
+  "containerId": "GTM-P6PXRZLN",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-VPMNH5M9SG",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-09-25T08:05:18.860Z",
+  "gsc": {
+    "siteUrl": "https://balconygrill.my/",
+    "token": "<meta name=\"google-site-verification\" content=\"gdWZQenpX84aRcYpGyWn6bRPpcDvW9J0AZXwea3SW4s\" />",
+    "initAt": "2026-09-25T09:23:28.307Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-09-25T09:28:24.419Z"
+  },
+  "ads": {
+    "customerId": "1933757591",
+    "ga4PropertyId": "555955041",
+    "conversionActionId": "7794706546",
+    "conversionActionName": "balconygrill.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "importedAt": "2026-09-25T09:29:20.923Z"
+  }
+}
