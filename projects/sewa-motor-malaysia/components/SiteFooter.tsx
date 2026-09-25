@@ -14,7 +14,12 @@
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 
-export default function SiteFooter() {
+/**
+ * `contact` is a ReactNode because this footer is a client component and the
+ * number is resolved on the server (`getDisplayPhone`). Each page passes
+ * `contact={<ContactNumber locale={locale} page="…" />}`, same as the header.
+ */
+export default function SiteFooter({ contact }: { contact?: React.ReactNode }) {
   const t = useTranslations('footer');
   const nav = useTranslations('nav');
   const locale = useLocale();
@@ -44,9 +49,12 @@ export default function SiteFooter() {
             <Link href={`/${locale}#locations`}>{nav('locations')}</Link>
             <Link href={`/${locale}/blog`}>{nav('blog')}</Link>
           </nav>
+
+          {contact}
         </div>
 
         <div className="footer-line" aria-hidden="true" />
+
 
         <div className="footer-bottom">
           <h6 className="footer-copy">{t('copyright', { year })}</h6>

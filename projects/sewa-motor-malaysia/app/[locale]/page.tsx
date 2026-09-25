@@ -5,6 +5,7 @@ import { getTranslations } from 'next-intl/server'
 import { siteConfig } from '@/config/site'
 import { OrganizationSchema } from '@/components/schema/OrganizationSchema'
 import FomoBanner from '@/components/FomoBanner'
+import ContactNumber from '@/components/ContactNumber';
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import MarketingMarquee from '@/components/MarketingMarquee'
@@ -50,7 +51,7 @@ export default async function HomePage({
     <>
       <OrganizationSchema />
       <FomoBanner />
-      <SiteHeader />
+      <SiteHeader contact={<ContactNumber locale={locale} page="/" />} />
 
       <section className="home-hero">
         <div
@@ -118,7 +119,7 @@ export default async function HomePage({
       <HomePageClient />
 
       <MarketingMarquee variant="dark" />
-      <SiteFooter />
+      <SiteFooter contact={<ContactNumber locale={locale} page="/" className="contact-number--footer" />} />
       <PageStyles />
     </>
   )

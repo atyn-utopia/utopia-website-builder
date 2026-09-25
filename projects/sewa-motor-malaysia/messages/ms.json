@@ -275,5 +275,8 @@
     "heading": "Membuka WhatsApp…",
     "subtext": "Anda sedang dihubungkan ke pasukan Sewa Motor Malaysia.",
     "fallback": "Klik di sini jika tidak berpindah"
+  },
+  "contact": {
+    "availability": "Tersedia 24/7"
   }
 }

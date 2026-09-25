@@ -5,6 +5,7 @@ import { siteConfig } from '@/config/site'
 import { getBlogPosts } from '@/lib/webcore'
 import BlogLinkTracker from '@/components/tracking/BlogLinkTracker'
 import FomoBanner from '@/components/FomoBanner'
+import ContactNumber from '@/components/ContactNumber';
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import { ogImages } from '@/lib/ogImage'
@@ -81,7 +82,7 @@ export default async function BlogListingPage({
   return (
     <>
       <FomoBanner />
-      <SiteHeader />
+      <SiteHeader contact={<ContactNumber locale={locale} page="/blog" />} />
       <main style={{ minHeight: '100vh', background: '#ffffff' }}>
       <section
         style={{
@@ -217,7 +218,7 @@ export default async function BlogListingPage({
         </Link>
       </section>
       </main>
-      <SiteFooter />
+      <SiteFooter contact={<ContactNumber locale={locale} page="/blog" className="contact-number--footer" />} />
     </>
   )
 }
