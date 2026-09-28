@@ -11,6 +11,7 @@ import PageStyles from '@/components/PageStyles'
 import FomoBanner from '@/components/FomoBanner'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
+import ContactNumber from '@/components/ContactNumber'
 import { ogImages } from '@/lib/ogImage'
 
 type Params = { locale: string; location: string }
@@ -68,7 +69,10 @@ export default async function LocationPage({ params }: { params: Promise<Params>
     <>
       <PageStyles />
       <FomoBanner locale={locale as Locale} />
-      <SiteHeader locale={locale as Locale} />
+      <SiteHeader
+        locale={locale as Locale}
+        contact={<ContactNumber locale={locale as Locale} page={`/service-aircond/${location}`} />}
+      />
       <LocationPageClient
         locale={locale}
         locationSlug={location}
@@ -79,7 +83,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
           name: n.names[locale as 'en' | 'ms' | 'zh'] ?? n.displayName,
         }))}
       />
-      <SiteFooter locale={locale as Locale} />
+      <SiteFooter locale={locale as Locale} page={`/service-aircond/${location}`} />
     </>
   )
 }

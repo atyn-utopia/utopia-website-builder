@@ -7,6 +7,7 @@ import BlogLinkTracker from '@/components/tracking/BlogLinkTracker'
 import FomoBanner from '@/components/FomoBanner'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
+import ContactNumber from '@/components/ContactNumber'
 import type { Locale as AppLocale } from '@/i18n/routing'
 import { ogImages } from '@/lib/ogImage'
 
@@ -81,7 +82,10 @@ export default async function BlogListingPage({
   return (
     <main style={{ minHeight: '100vh', background: '#ffffff' }}>
       <FomoBanner locale={locale as AppLocale} />
-      <SiteHeader locale={locale as AppLocale} />
+      <SiteHeader
+        locale={locale as AppLocale}
+        contact={<ContactNumber locale={locale as AppLocale} page="/blog" />}
+      />
       <section
         style={{
           background: 'linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%)',
@@ -228,7 +232,7 @@ export default async function BlogListingPage({
         </Link>
       </section>
 
-      <SiteFooter locale={locale as AppLocale} />
+      <SiteFooter locale={locale as AppLocale} page="/blog" />
     </main>
   )
 }

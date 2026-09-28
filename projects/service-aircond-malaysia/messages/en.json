@@ -280,5 +280,8 @@
     "heading": "Opening WhatsApp…",
     "subtext": "Connecting you to the Encik Beku team.",
     "fallback": "Click here if it doesn't redirect"
+  },
+  "contact": {
+    "availability": "Open daily, 9am – 9pm"
   }
 }

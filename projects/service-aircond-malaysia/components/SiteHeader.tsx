@@ -2,6 +2,9 @@
 // The WhatsApp CTA carries `nav-cta` so globals.css can hide it on mobile
 // AND a styled-jsx :global(.nav-cta) shim (NavCtaGlobalStyle) keeps the
 // sizing intact when other components render an element with that class.
+// `contact` is the page's <ContactNumber />, passed in per page because the
+// display number is keyed per (website, page_slug).
+import type { ReactNode } from 'react'
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
@@ -12,7 +15,13 @@ function waRedirect(locale: string) {
   return `/${locale}/redirect-whatsapp-1`
 }
 
-export default async function SiteHeader({ locale }: { locale: Locale }) {
+export default async function SiteHeader({
+  locale,
+  contact,
+}: {
+  locale: Locale
+  contact?: ReactNode
+}) {
   const tNav = await getTranslations({ locale, namespace: 'nav' })
   const waHref = waRedirect(locale)
 
@@ -46,7 +55,8 @@ export default async function SiteHeader({ locale }: { locale: Locale }) {
           <Link href={`/${locale}/blog`} className="hover:text-white">{tNav('blog')}</Link>
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="site-actions flex items-center gap-3 whitespace-nowrap">
+          {contact}
           <LanguageSwitcher />
           <a
             href={waHref}

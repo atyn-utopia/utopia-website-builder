@@ -9,6 +9,7 @@ import BlogLinkTracker from '@/components/tracking/BlogLinkTracker'
 import FomoBanner from '@/components/FomoBanner'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
+import ContactNumber from '@/components/ContactNumber'
 import type { Locale as AppLocale } from '@/i18n/routing'
 import { ogImages } from '@/lib/ogImage'
 
@@ -104,7 +105,10 @@ export default async function BlogPostPage({
   return (
     <main style={{ background: '#ffffff', minHeight: '100vh' }}>
       <FomoBanner locale={locale as AppLocale} />
-      <SiteHeader locale={locale as AppLocale} />
+      <SiteHeader
+        locale={locale as AppLocale}
+        contact={<ContactNumber locale={locale as AppLocale} page={`/blog/${slug}`} />}
+      />
       <BreadcrumbSchema
         items={[
           { name: c.home, url: `/${locale}` },
@@ -341,7 +345,7 @@ export default async function BlogPostPage({
         </Link>
       </section>
 
-      <SiteFooter locale={locale as AppLocale} />
+      <SiteFooter locale={locale as AppLocale} page={`/blog/${slug}`} />
     </main>
   )
 }
