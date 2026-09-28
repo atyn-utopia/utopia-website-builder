@@ -17,6 +17,7 @@ import PageStyles from '@/components/PageStyles'
 import WhatsAppClickTracker from '@/components/tracking/WhatsAppClickTracker'
 import LocationPageClient from './LocationPageClient'
 import { ogImages } from '@/lib/ogImage'
+import { withSeoOverride } from '@/lib/webcoreSeo'
 
 type Params = { locale: string; location: string }
 
@@ -34,7 +35,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   if (!loc) return { title: siteConfig.brandName }
   const t = await getTranslations({ locale, namespace: 'location.meta' })
   const city = cityDisplay(location, locale)
-  return {
+  return withSeoOverride(locale, `/${siteConfig.productSlug}/${location}`, {
     title: t('title', { city }),
     description: t('description', { city }),
     metadataBase: new URL(siteConfig.baseUrl),
@@ -49,7 +50,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       images: ogImages(locale),
     },
     robots: { index: true, follow: true },
-  }
+  })
 }
 
 export default async function LocationPage({ params }: { params: Promise<Params> }) {

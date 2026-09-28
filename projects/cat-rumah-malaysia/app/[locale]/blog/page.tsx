@@ -11,6 +11,7 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import type { Locale } from '@/i18n/routing'
 import { ogImages } from '@/lib/ogImage'
+import { withSeoOverride } from '@/lib/webcoreSeo'
 
 export async function generateMetadata({
   params,
@@ -20,12 +21,12 @@ export async function generateMetadata({
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'blog.meta' })
   const url = `${siteConfig.siteUrl}/${locale}/blog`
-  return {
+  return withSeoOverride(locale, '/blog', {
     title: t('title'),
     description: t('description'),
     alternates: seoAlternates(locale, '/blog'),
     openGraph: { title: t('title'), description: t('description'), url, siteName: siteConfig.brandName, type: 'website', images: ogImages(locale) },
-  }
+  })
 }
 
 export default async function BlogListingPage({
