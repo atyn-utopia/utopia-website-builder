@@ -19,6 +19,7 @@ import {
 } from '@/lib/schema'
 import { siteConfig, type Locale } from '@/config/site'
 import { ogImages } from '@/lib/ogImage'
+import { withSeoOverride } from '@/lib/webcoreSeo'
 
 
 const SITE_URL = siteConfig.url
@@ -54,7 +55,7 @@ export async function generateMetadata(
 
   const canonical = `${SITE_URL}/${locale}/${PRODUCT_SLUG}/${location}`
 
-  return {
+  return withSeoOverride(locale, `/${PRODUCT_SLUG}/${location}`, {
     metadataBase: new URL(SITE_URL),
     title: t('meta.title', { city }),
     description: t('meta.description', { city }),
@@ -69,7 +70,7 @@ export async function generateMetadata(
       images: ogImages(locale),
     },
     robots: { index: true, follow: true },
-  }
+  })
 }
 
 export default async function LocationPage({

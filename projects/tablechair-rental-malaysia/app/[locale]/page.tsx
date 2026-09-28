@@ -20,6 +20,7 @@ import { HERO_IMAGE } from '@/config/products'
 import { siteConfig, type Locale } from '@/config/site'
 import { waRedirect } from '@/lib/waRedirect'
 import { ogImages } from '@/lib/ogImage'
+import { withSeoOverride } from '@/lib/webcoreSeo'
 
 const SITE_URL = siteConfig.url
 
@@ -39,7 +40,7 @@ export async function generateMetadata(
   for (const l of routing.locales) languages[l] = `${SITE_URL}/${l}`
   languages['x-default'] = `${SITE_URL}/en`
 
-  return {
+  return withSeoOverride(locale, '', {
     metadataBase: new URL(SITE_URL),
     title: t('title'),
     description: t('description'),
@@ -54,7 +55,7 @@ export async function generateMetadata(
       images: ogImages(locale),
     },
     robots: { index: true, follow: true },
-  }
+  })
 }
 
 export default async function HomePage({
