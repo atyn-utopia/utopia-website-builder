@@ -9,6 +9,7 @@ import BlogLinkTracker from '@/components/tracking/BlogLinkTracker'
 import FomoBanner from '@/components/FomoBanner'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
+import ContactNumber from '@/components/ContactNumber'
 import { siteConfig, type Locale } from '@/config/site'
 import { waRedirect } from '@/lib/waRedirect'
 import { ogImages } from '@/lib/ogImage'
@@ -159,7 +160,10 @@ export default async function BlogPostPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
       <FomoBanner locale={locale} />
-      <SiteHeader locale={locale} />
+      <SiteHeader
+        locale={locale}
+        contact={<ContactNumber locale={locale} page={`/blog/${slug}`} />}
+      />
 
       <main className="mx-auto max-w-3xl px-4 pb-20 pt-8 sm:px-6">
         <nav className="mb-6 text-sm text-[#111111]/60">
@@ -264,7 +268,7 @@ export default async function BlogPostPage({
         </section>
       )}
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} page={`/blog/${slug}`} />
     </div>
   )
 }

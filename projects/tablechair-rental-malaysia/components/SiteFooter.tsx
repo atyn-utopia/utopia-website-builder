@@ -12,10 +12,18 @@
 // Uses existing nav.* / footer.* keys, so no new translation keys are needed.
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
+import ContactNumber from '@/components/ContactNumber'
 import { KKMark } from '@/components/Ornaments'
 import { type Locale } from '@/config/site'
 
-export default async function SiteFooter({ locale }: { locale: Locale }) {
+export default async function SiteFooter({
+  locale,
+  page,
+}: {
+  locale: Locale
+  // Locale-stripped path, forwarded to ContactNumber — see that component.
+  page?: string
+}) {
   const tNav = await getTranslations({ locale, namespace: 'nav' })
   const tFoot = await getTranslations({ locale, namespace: 'footer' })
 
@@ -39,6 +47,8 @@ export default async function SiteFooter({ locale }: { locale: Locale }) {
             <a href={`/${locale}#locations`} className="footer-nav-link">{tNav('locations')}</a>
             <Link href={`/${locale}/blog`} className="footer-nav-link">{tNav('blog')}</Link>
           </nav>
+
+          <ContactNumber locale={locale} page={page} className="contact-number--footer" />
         </div>
 
         <div className="mt-7 h-px w-full bg-[#FFFEF8]/15" aria-hidden="true" />

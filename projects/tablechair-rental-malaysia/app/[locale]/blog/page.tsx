@@ -8,6 +8,7 @@ import BlogLinkTracker from '@/components/tracking/BlogLinkTracker'
 import FomoBanner from '@/components/FomoBanner'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
+import ContactNumber from '@/components/ContactNumber'
 import { siteConfig, type Locale } from '@/config/site'
 
 type Params = { locale: Locale }
@@ -72,7 +73,10 @@ export default async function BlogListingPage({
   return (
     <div className="min-h-screen bg-[#FFFEF8]">
       <FomoBanner locale={locale} />
-      <SiteHeader locale={locale} />
+      <SiteHeader
+        locale={locale}
+        contact={<ContactNumber locale={locale} page="/blog" />}
+      />
 
       <main className="mx-auto max-w-6xl px-4 pb-20 pt-10 sm:px-6">
         <nav className="mb-6 text-sm text-[#111111]/60">
@@ -141,7 +145,7 @@ export default async function BlogListingPage({
         )}
       </main>
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} page="/blog" />
     </div>
   )
 }

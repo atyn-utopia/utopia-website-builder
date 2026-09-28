@@ -68,6 +68,9 @@ interface PhoneRow {
   label: string | null
   location_slug: string | null
   page_slug: string | null
+  // Nominates the number the site PRINTS. Unique per (website, page_slug),
+  // not per site — see getDisplayPhone.
+  is_display: boolean | null
 }
 
 // A row is "site-wide" when it isn't pinned to a specific page. Rows that
@@ -119,7 +122,7 @@ async function getLeadsMode(domain: string): Promise<LeadsMode> {
 async function getPhoneRows(domain: string): Promise<PhoneRow[]> {
   if (!domain) return []
   const rows = await webcoreFetch<PhoneRow[]>(
-    `phone_numbers?select=phone_number,whatsapp_text,percentage,label,location_slug,page_slug` +
+    `phone_numbers?select=phone_number,whatsapp_text,percentage,label,location_slug,page_slug,is_display` +
       `&website=eq.${encodeURIComponent(domain)}` +
       `&is_active=eq.true`,
     'webcore-phones',
@@ -215,6 +218,85 @@ export async function getWhatsAppLink(
 ): Promise<string> {
   const { phone, whatsappText } = await getPhoneNumber(locationSlug)
   return waLink(phone, messageOverride || whatsappText)
+}
+
+/* ============================================================
+ * Display number (header + footer)
+ *
+ *   where a CTA SENDS the visitor -> getPhoneNumber() (rotates per leads_mode)
+ *   what this page SHOWS          -> getDisplayPhone() (deterministic)
+ *
+ * Printing a rotating number would change the digits between page loads.
+ * ============================================================ */
+
+const WEBCORE_PUBLIC_BASE = 'https://webcore.utopiaai.my'
+const WEBCORE_FETCH_TIMEOUT_MS = 6000
+
+// Which number this PAGE prints, via webcore's dedicated /display endpoint.
+// /display is deterministic — page display number -> site-wide display number
+// -> admin default. `is_display` is unique per (website, page_slug), NOT per
+// site, so the page has to be part of the question. No page = site-wide tier.
+async function fetchDisplayPhone(page?: string): Promise<string | null> {
+  const url =
+    `${WEBCORE_PUBLIC_BASE}/api/public/phone-numbers/display` +
+    `?website=${encodeURIComponent(siteConfig.domain)}` +
+    (page ? `&page=${encodeURIComponent(page)}` : '')
+
+  // Cacheable + tagged so a webcore-phones purge refreshes it, and raced
+  // against a timeout rather than an AbortSignal (a signal opts the response
+  // out of the Data Cache and breaks tag purging).
+  const request = fetch(url, {
+    headers: { Accept: 'application/json' },
+    cache: 'force-cache',
+    next: { tags: ['webcore-phones'] },
+  }).catch(() => null)
+
+  const res = await Promise.race([
+    request,
+    new Promise<null>((resolve) => setTimeout(() => resolve(null), WEBCORE_FETCH_TIMEOUT_MS)),
+  ])
+  if (!res || !res.ok) return null
+
+  const data = (await res.json().catch(() => null)) as { phone_number?: string } | null
+  return data?.phone_number || null
+}
+
+export async function getDisplayPhone(page?: string): Promise<string> {
+  const viaApi = await fetchDisplayPhone(page)
+  if (viaApi) return viaApi
+
+  // Fallback if the public API is unreachable: read the rows directly and
+  // reproduce its precedence. Page-scoped display row -> site-wide display row
+  // -> the 'default' label -> any site-wide row.
+  try {
+    const rows = await getPhoneRows(siteConfig.domain)
+    if (rows.length === 0) return FALLBACK_PHONE
+    const pageSlug = page ? page.replace(/^\/+|\/+$/g, '') : ''
+    const row =
+      (pageSlug
+        ? rows.find((r) => r.is_display === true && (r.page_slug ?? 'all') === pageSlug)
+        : undefined) ??
+      rows.find((r) => r.is_display === true && (r.page_slug ?? 'all') === 'all') ??
+      rows.find((r) => r.label === 'default') ??
+      rows.find((r) => (r.location_slug ?? 'all') === 'all') ??
+      rows[0]
+    return row.phone_number || FALLBACK_PHONE
+  } catch {
+    return FALLBACK_PHONE
+  }
+}
+
+// 60123456789 -> 012-345 6789 (Malaysian mobile / fixed-line grouping).
+export function formatPhoneDisplay(raw: string): string {
+  const digits = (raw || '').replace(/\D/g, '')
+  const local = digits.startsWith('60') ? '0' + digits.slice(2) : digits
+  const m = local.match(/^(01\d)(\d{3})(\d{4})$/) // 10-digit mobile
+  if (m) return `${m[1]}-${m[2]} ${m[3]}`
+  const m11 = local.match(/^(01\d)(\d{4})(\d{4})$/) // 11-digit mobile
+  if (m11) return `${m11[1]}-${m11[2]} ${m11[3]}`
+  const fixed = local.match(/^(0\d)(\d{4})(\d{4})$/) // fixed line
+  if (fixed) return `${fixed[1]}-${fixed[2]} ${fixed[3]}`
+  return local || raw
 }
 
 /* ============================================================

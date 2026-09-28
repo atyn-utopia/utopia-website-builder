@@ -274,5 +274,8 @@
     "heading": "正在开启 WhatsApp…",
     "subtext": "正在为您连接 Kak Kenduri 团队。",
     "fallback": "如果没有自动跳转，请点击这里"
+  },
+  "contact": {
+    "availability": "每天上午8点 – 晚上10点"
   }
 }
