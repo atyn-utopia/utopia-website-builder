@@ -7,6 +7,7 @@ import Link from 'next/link';
 import SiteHeader from '@/components/SiteHeader';
 import FomoBanner from '@/components/FomoBanner';
 import SiteFooter from '@/components/SiteFooter';
+import ContactNumber from '@/components/ContactNumber';
 import { ogImages } from '@/lib/ogImage';
 
 export async function generateMetadata({
@@ -46,7 +47,7 @@ export default async function BlogListingPage({
 
   return (
     <>
-      <FomoBanner locale={locale as 'en' | 'ms' | 'zh'} /><SiteHeader locale={locale as 'en' | 'ms' | 'zh'} />
+      <FomoBanner locale={locale as 'en' | 'ms' | 'zh'} /><SiteHeader contact={<ContactNumber locale={locale} page="/blog" />} />
 
       {/* BLOG HEADER */}
       <section
@@ -183,7 +184,7 @@ export default async function BlogListingPage({
         </div>
       </section>
 
-      <SiteFooter locale={locale as 'en' | 'ms' | 'zh'} />
+      <SiteFooter locale={locale as 'en' | 'ms' | 'zh'} page="/blog" />
     </>
   );
 }
