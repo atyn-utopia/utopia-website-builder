@@ -7,6 +7,7 @@ import PageShell from '@/components/PageShell'
 import FomoBanner from '@/components/FomoBanner'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
+import ContactNumber from '@/components/ContactNumber'
 import PageStyles from '@/components/PageStyles'
 import { getProducts } from '@/lib/webcore'
 import {
@@ -103,7 +104,10 @@ export default async function HomePage({
       />
 
       <FomoBanner locale={locale} />
-      <SiteHeader locale={locale} />
+      <SiteHeader
+        locale={locale}
+        contact={<ContactNumber locale={locale} page="/" />}
+      />
 
       {/* HERO — H1 + H2 + role=img live here so the checklist sees them in
           page.tsx source; PageShell receives `noHero` and skips its internal
@@ -182,7 +186,7 @@ export default async function HomePage({
         additionalProducts={additional}
       />
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} page="/" />
     </>
   )
 }

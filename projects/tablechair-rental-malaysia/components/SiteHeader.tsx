@@ -3,6 +3,9 @@
 // The WhatsApp CTA carries `nav-cta` so globals.css can hide it on mobile.
 // A small client-side `<NavCtaGlobalStyle />` adds a styled-jsx :global(.nav-cta)
 // rule for sizing parity across components that re-render the class.
+// `contact` is the page's <ContactNumber />, passed in per page because the
+// display number is keyed per (website, page_slug).
+import type { ReactNode } from 'react'
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
@@ -11,7 +14,13 @@ import { KKMark } from '@/components/Ornaments'
 import { waRedirect } from '@/lib/waRedirect'
 import type { Locale } from '@/config/site'
 
-export default async function SiteHeader({ locale }: { locale: Locale }) {
+export default async function SiteHeader({
+  locale,
+  contact,
+}: {
+  locale: Locale
+  contact?: ReactNode
+}) {
   const tNav = await getTranslations({ locale, namespace: 'nav' })
   const tShared = await getTranslations({ locale, namespace: 'shared' })
   const waDefault = waRedirect(locale, tShared('whatsappMessageDefault'))
@@ -19,7 +28,7 @@ export default async function SiteHeader({ locale }: { locale: Locale }) {
   return (
     <header className="relative z-40 flex justify-center bg-transparent px-4 pb-4 pt-5 sm:pt-6">
       <NavCtaGlobalStyle />
-      <div className="flex w-full max-w-5xl items-center justify-between gap-3 rounded-full bg-white py-2 pl-3 pr-2 shadow-[0_20px_50px_-18px_rgba(17,17,17,0.25)] ring-1 ring-black/5 sm:gap-5 sm:pl-5 sm:pr-3">
+      <div className="flex w-full max-w-6xl items-center justify-between gap-3 rounded-full bg-white py-2 pl-3 pr-2 shadow-[0_20px_50px_-18px_rgba(17,17,17,0.25)] ring-1 ring-black/5 sm:gap-5 sm:pl-5 sm:pr-3">
         <Link
           href={`/${locale}`}
           aria-label={tNav('logoAlt')}
@@ -34,42 +43,43 @@ export default async function SiteHeader({ locale }: { locale: Locale }) {
         <nav className="hidden items-center gap-1 lg:flex">
           <Link
             href={`/${locale}`}
-            className="rounded-full px-3.5 py-1.5 text-[14px] font-semibold text-[#111111]/80 hover:bg-[#FFF9C4] hover:text-[#111111]"
+            className="whitespace-nowrap rounded-full px-3.5 py-1.5 text-[14px] font-semibold text-[#111111]/80 hover:bg-[#FFF9C4] hover:text-[#111111]"
             style={{ transition: 'background-color 180ms ease, color 180ms ease' }}
           >
             {tNav('home')}
           </Link>
           <a
             href={`/${locale}#services`}
-            className="rounded-full px-3.5 py-1.5 text-[14px] font-semibold text-[#111111]/80 hover:bg-[#FFF9C4] hover:text-[#111111]"
+            className="whitespace-nowrap rounded-full px-3.5 py-1.5 text-[14px] font-semibold text-[#111111]/80 hover:bg-[#FFF9C4] hover:text-[#111111]"
             style={{ transition: 'background-color 180ms ease, color 180ms ease' }}
           >
             {tNav('products')}
           </a>
           <a
             href={`/${locale}#service-area`}
-            className="rounded-full px-3.5 py-1.5 text-[14px] font-semibold text-[#111111]/80 hover:bg-[#FFF9C4] hover:text-[#111111]"
+            className="whitespace-nowrap rounded-full px-3.5 py-1.5 text-[14px] font-semibold text-[#111111]/80 hover:bg-[#FFF9C4] hover:text-[#111111]"
             style={{ transition: 'background-color 180ms ease, color 180ms ease' }}
           >
             {tNav('locations')}
           </a>
           <a
             href={`/${locale}#gallery`}
-            className="rounded-full px-3.5 py-1.5 text-[14px] font-semibold text-[#111111]/80 hover:bg-[#FFF9C4] hover:text-[#111111]"
+            className="whitespace-nowrap rounded-full px-3.5 py-1.5 text-[14px] font-semibold text-[#111111]/80 hover:bg-[#FFF9C4] hover:text-[#111111]"
             style={{ transition: 'background-color 180ms ease, color 180ms ease' }}
           >
             {tNav('gallery')}
           </a>
           <Link
             href={`/${locale}/blog`}
-            className="rounded-full px-3.5 py-1.5 text-[14px] font-semibold text-[#111111]/80 hover:bg-[#FFF9C4] hover:text-[#111111]"
+            className="whitespace-nowrap rounded-full px-3.5 py-1.5 text-[14px] font-semibold text-[#111111]/80 hover:bg-[#FFF9C4] hover:text-[#111111]"
             style={{ transition: 'background-color 180ms ease, color 180ms ease' }}
           >
             {tNav('blog')}
           </Link>
         </nav>
 
-        <div className="flex shrink-0 items-center gap-2">
+        <div className="site-actions flex shrink-0 items-center gap-2">
+          {contact}
           <LanguageSwitcher />
           <a
             href={waDefault}

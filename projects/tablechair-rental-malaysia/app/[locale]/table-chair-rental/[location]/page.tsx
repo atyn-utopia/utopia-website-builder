@@ -7,6 +7,7 @@ import PageStyles from '@/components/PageStyles'
 import FomoBanner from '@/components/FomoBanner'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
+import ContactNumber from '@/components/ContactNumber'
 import { findLocation, LOCATIONS } from '@/config/locations'
 import { getLocationCopy } from '@/lib/locationCopy'
 import { getProducts } from '@/lib/webcore'
@@ -137,7 +138,10 @@ export default async function LocationPage({
         />
       ))}
       <FomoBanner locale={locale} />
-      <SiteHeader locale={locale} />
+      <SiteHeader
+        locale={locale}
+        contact={<ContactNumber locale={locale} page={`/${siteConfig.productSlug}/${loc.slug}`} />}
+      />
       <PageShell
         locale={locale}
         variant="location"
@@ -147,7 +151,7 @@ export default async function LocationPage({
         coreProducts={core}
         additionalProducts={additional}
       />
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} page={`/${siteConfig.productSlug}/${loc.slug}`} />
     </>
   )
 }

@@ -274,5 +274,8 @@
     "heading": "Opening WhatsApp…",
     "subtext": "Connecting you to the Kak Kenduri team.",
     "fallback": "Click here if it doesn't redirect"
+  },
+  "contact": {
+    "availability": "Open 8am – 10pm daily"
   }
 }
