@@ -7,6 +7,7 @@
 // A page with no override keeps the metadata it builds itself.
 
 import type { Metadata } from 'next'
+import { unstable_cache } from 'next/cache'
 import { routing } from '@/i18n/routing'
 import { siteConfig } from '@/config/site'
 
@@ -27,31 +28,31 @@ function publicPath(locale: string, path: string): string {
   return ((locale === routing.defaultLocale ? '' : `/${locale}`) + path) || '/'
 }
 
+// Asks webcore for one page's override. Throws when webcore cannot answer, so
+// a timeout is never cached as "no override".
 async function fetchOverride(locale: string, path: string): Promise<Override | null> {
   const url = new URL(`${WEBCORE_BASE}/api/public/seo`)
   url.searchParams.set('website', siteConfig.domain)
   url.searchParams.set('path', publicPath(locale, path))
   url.searchParams.set('lang', locale)
-  // webcore's CDN keeps this GET for 5 minutes, so the render that follows a
-  // purge ping could read the pre-edit override. A 5-minute bucket in the URL
-  // bounds that, without the per-request unique URL that would send every view
-  // of the (server-rendered) location pages to webcore and grow the data cache
-  // without limit. The tag still binds the page to `webcore-seo`, which
-  // /api/revalidate flushes.
-  url.searchParams.set('_', Math.floor(Date.now() / 300_000).toString(36))
-  try {
-    const res = await Promise.race([
-      fetch(url, { cache: 'force-cache', next: { tags: ['webcore-seo'] } }),
-      new Promise<never>((_, reject) => setTimeout(() => reject(new Error('webcore timeout')), TIMEOUT_MS)),
-    ])
-    if (!res.ok) return null
-    const o = (await res.json()) as Override
-    // webcore falls back to the English row; a Malay page must never take it.
-    return o.language === locale ? o : null
-  } catch {
-    return null
-  }
+  // webcore's CDN keeps this GET for 5 minutes. A unique URL goes past it, so
+  // the refill that follows a purge reads the edit, not the copy the CDN kept.
+  url.searchParams.set('_', Date.now().toString(36))
+  const res = await Promise.race([
+    fetch(url, { cache: 'no-store' }),
+    new Promise<never>((_, reject) => setTimeout(() => reject(new Error('webcore timeout')), TIMEOUT_MS)),
+  ])
+  if (res.status === 404) return null
+  if (!res.ok) throw new Error(`webcore seo ${res.status}`)
+  const o = (await res.json()) as Override
+  // webcore falls back to the English row; a Malay page must never take it.
+  return o.language === locale ? o : null
 }
+
+// One cache entry per page, held until webcore sends `webcore-seo` to
+// /api/revalidate. The location pages render per request, so without this
+// every view would ask webcore again.
+const getOverride = unstable_cache(fetchOverride, ['webcore-seo-override'], { tags: ['webcore-seo'] })
 
 /**
  * Layer the webcore override for this page over the metadata it built. Only
@@ -59,7 +60,12 @@ async function fetchOverride(locale: string, path: string): Promise<Override | n
  * link says the same thing as the search result.
  */
 export async function withSeoOverride(locale: string, path: string, meta: Metadata): Promise<Metadata> {
-  const o = await fetchOverride(locale, path)
+  let o: Override | null = null
+  try {
+    o = await getOverride(locale, path)
+  } catch {
+    // webcore unreachable: keep the page's own metadata.
+  }
   if (!o) return meta
 
   const merged: Metadata = { ...meta }
