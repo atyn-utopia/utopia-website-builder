@@ -11,8 +11,16 @@
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { BrandMark } from '@/components/BrandMark';
+import ContactNumber from '@/components/ContactNumber';
 
-export async function SiteFooter({ locale }: { locale: string }) {
+export async function SiteFooter({
+  locale,
+  page,
+}: {
+  locale: string;
+  // Locale-stripped path, forwarded to ContactNumber — see that component.
+  page?: string;
+}) {
   const t = await getTranslations({ locale });
 
   return (
@@ -32,6 +40,8 @@ export async function SiteFooter({ locale }: { locale: string }) {
             <Link href={`/${locale}/blog`}>{t('nav.blog')}</Link>
             <Link href={`/${locale}#faq`}>{t('nav.faq')}</Link>
           </nav>
+
+          <ContactNumber locale={locale} page={page} className="contact-number--footer" />
         </div>
 
         <div className="footer-line" aria-hidden="true" />

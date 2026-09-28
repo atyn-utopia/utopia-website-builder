@@ -6,6 +6,7 @@ import { BlogCard } from './BlogCard';
 import FomoBanner from '@/components/FomoBanner';
 import SiteHeader from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
+import ContactNumber from '@/components/ContactNumber';
 import PageStyles from '@/components/PageStyles';
 import { ogImages } from '@/lib/ogImage';
 
@@ -45,7 +46,7 @@ export default async function BlogListingPage({
     <>
       <PageStyles />
       <FomoBanner />
-      <SiteHeader activeBlog />
+      <SiteHeader activeBlog contact={<ContactNumber locale={locale} page="/blog" />} />
 
       <section className="blog-header">
         <div className="section-container">
@@ -85,7 +86,7 @@ export default async function BlogListingPage({
         </div>
       </section>
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} page="/blog" />
     </>
   );
 }
