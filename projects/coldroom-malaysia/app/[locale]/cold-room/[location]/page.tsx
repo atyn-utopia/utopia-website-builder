@@ -12,6 +12,7 @@ import { TrackedWhatsAppLink } from '@/components/TrackedWhatsAppLink';
 import FomoBanner from '@/components/FomoBanner';
 import SiteHeader from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
+import ContactNumber from '@/components/ContactNumber';
 import PageStyles from '@/components/PageStyles';
 import HomePageClient from '@/components/HomePageClient';
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
@@ -146,7 +147,7 @@ export default async function LocationPage({
       ))}
 
       <FomoBanner />
-      <SiteHeader />
+      <SiteHeader contact={<ContactNumber locale={locale} page={`/cold-room/${location}`} />} />
 
       {/* HERO — city-aware H1 + H2 + the image-role background live in the route
           file (mirrors the homepage hero). Below is <HomePageClient />. */}
@@ -226,7 +227,7 @@ export default async function LocationPage({
           nearbyLocations: nearby,
         }}
       />
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} page={`/cold-room/${location}`} />
     </>
   );
 }

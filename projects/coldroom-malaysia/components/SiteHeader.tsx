@@ -2,7 +2,9 @@
 
 // Canonical shared site header (nav + language switcher + WhatsApp CTA).
 // Rendered on every public page (home, location, blog listing, blog post).
-import { useEffect, useState } from 'react';
+// `contact` is the page's <ContactNumber />, rendered on the server and passed
+// in per page because the display number is keyed per (website, page_slug).
+import { useEffect, useState, type ReactNode } from 'react';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
@@ -11,7 +13,13 @@ import { siteConfig } from '@/config/site';
 import { waRedirect } from '@/lib/waRedirect';
 import { trackWhatsApp } from '@/lib/track';
 
-export default function SiteHeader({ activeBlog = false }: { activeBlog?: boolean }) {
+export default function SiteHeader({
+  activeBlog = false,
+  contact,
+}: {
+  activeBlog?: boolean;
+  contact?: ReactNode;
+}) {
   const locale = useLocale();
   const t = useTranslations('nav');
   const waHref = waRedirect(locale);
@@ -69,7 +77,8 @@ export default function SiteHeader({ activeBlog = false }: { activeBlog?: boolea
               </Link>
             ))}
           </div>
-          <div className="nav-actions" style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
+          <div className="nav-actions site-actions" style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
+            {contact}
             <div className="nav-lang"><LanguageSwitcher /></div>
             <a
               href={waHref}
@@ -102,7 +111,10 @@ export default function SiteHeader({ activeBlog = false }: { activeBlog?: boolea
                 {l.label}
               </Link>
             ))}
-            <div style={{ padding: 8 }}><LanguageSwitcher /></div>
+            <div className="site-mobile-actions" style={{ padding: 8, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 14 }}>
+              <LanguageSwitcher />
+              {contact}
+            </div>
           </div>
         )}
       </nav>

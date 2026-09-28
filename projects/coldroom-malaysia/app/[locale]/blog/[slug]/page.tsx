@@ -8,6 +8,7 @@ import { waRedirect } from '@/lib/waRedirect';
 import FomoBanner from '@/components/FomoBanner';
 import SiteHeader from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
+import ContactNumber from '@/components/ContactNumber';
 import PageStyles from '@/components/PageStyles';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 import { TrackedWhatsAppLink } from '@/components/TrackedWhatsAppLink';
@@ -123,7 +124,7 @@ export default async function BlogPostPage({
       />
       <PageStyles />
       <FomoBanner />
-      <SiteHeader activeBlog />
+      <SiteHeader activeBlog contact={<ContactNumber locale={locale} page={`/blog/${slug}`} />} />
 
       <article className="section-spacing-blog">
         <div className="blog-article">
@@ -199,7 +200,7 @@ export default async function BlogPostPage({
         </section>
       )}
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} page={`/blog/${slug}`} />
     </>
   );
 }

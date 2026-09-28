@@ -10,6 +10,7 @@ import { TrackedWhatsAppLink } from '@/components/TrackedWhatsAppLink';
 import FomoBanner from '@/components/FomoBanner';
 import SiteHeader from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
+import ContactNumber from '@/components/ContactNumber';
 import PageStyles from '@/components/PageStyles';
 import HomePageClient from '@/components/HomePageClient';
 import { ProductSchema } from '@/components/schema/ProductSchema';
@@ -121,7 +122,7 @@ export default async function HomePage({
       />
 
       <FomoBanner />
-      <SiteHeader />
+      <SiteHeader contact={<ContactNumber locale={locale} page="/" />} />
 
       {/* HERO — H1 + H2 + the image-role background live in the route file so
           the checklist sees them. Below the hero is <HomePageClient />. */}
@@ -194,7 +195,7 @@ export default async function HomePage({
 
       <HomePageClient products={products} />
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} page="/" />
     </>
   );
 }

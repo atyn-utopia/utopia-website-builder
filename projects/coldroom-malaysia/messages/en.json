@@ -320,5 +320,8 @@
     "heading": "Opening WhatsApp…",
     "subtext": "Connecting you to the Cold Room Malaysia team.",
     "fallback": "Click here if it doesn't redirect"
+  },
+  "contact": {
+    "availability": "Mon – Sat, 9am – 6pm"
   }
 }
