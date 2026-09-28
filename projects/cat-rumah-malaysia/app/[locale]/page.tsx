@@ -16,13 +16,14 @@ import WhatsAppClickTracker from '@/components/tracking/WhatsAppClickTracker'
 import HomePageClient from './HomePageClient'
 import type { Locale } from '@/i18n/routing'
 import { ogImages } from '@/lib/ogImage'
+import { withSeoOverride } from '@/lib/webcoreSeo'
 
 type Props = { params: Promise<{ locale: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'home.meta' })
-  return {
+  return withSeoOverride(locale, '', {
     title: t('title'),
     description: t('description'),
     alternates: seoAlternates(locale),
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'website',
       images: ogImages(locale),
     },
-  }
+  })
 }
 
 export default async function HomePage({ params }: Props) {
