@@ -9,6 +9,7 @@ import { OrganizationSchema } from '@/components/schema/OrganizationSchema'
 import FomoBanner from '@/components/FomoBanner'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
+import ContactNumber from '@/components/ContactNumber'
 import PageStyles from '@/components/PageStyles'
 import WhatsAppClickTracker from '@/components/tracking/WhatsAppClickTracker'
 import HomePageClient from './HomePageClient'
@@ -74,7 +75,10 @@ export default async function HomePage({
       />
 
       <FomoBanner locale={locale} />
-      <SiteHeader locale={locale} />
+      <SiteHeader
+        locale={locale}
+        contact={<ContactNumber locale={locale} page="/" />}
+      />
 
       {/* HERO — the page's single H1 + H2 + role=img bg live here so the
           checklist sees them in page.tsx source. FOMO/header/footer are the
@@ -191,7 +195,7 @@ export default async function HomePage({
 
       <HomePageClient phoneNumber={phone} />
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} page="/" />
     </>
   )
 }

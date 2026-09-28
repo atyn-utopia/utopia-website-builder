@@ -280,5 +280,8 @@
     "heading": "Membuka WhatsApp…",
     "subtext": "Anda sedang dihubungkan ke pasukan Encik Beku.",
     "fallback": "Klik di sini jika tidak berpindah"
+  },
+  "contact": {
+    "availability": "Buka 9 pagi – 9 malam"
   }
 }
