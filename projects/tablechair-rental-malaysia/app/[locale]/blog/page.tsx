@@ -10,6 +10,7 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import ContactNumber from '@/components/ContactNumber'
 import { siteConfig, type Locale } from '@/config/site'
+import { withSeoOverride } from '@/lib/webcoreSeo'
 
 type Params = { locale: Locale }
 
@@ -24,11 +25,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'blog' })
-  return {
+  return withSeoOverride(locale, '/blog', {
     title: t('meta.title'),
     description: t('meta.description'),
     alternates: seoAlternates(locale, `/blog`),
-  }
+  })
 }
 
 interface BlogPost {

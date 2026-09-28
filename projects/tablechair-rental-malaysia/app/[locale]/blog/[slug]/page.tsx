@@ -13,6 +13,7 @@ import ContactNumber from '@/components/ContactNumber'
 import { siteConfig, type Locale } from '@/config/site'
 import { waRedirect } from '@/lib/waRedirect'
 import { ogImages } from '@/lib/ogImage'
+import { withSeoOverride } from '@/lib/webcoreSeo'
 
 type Params = { locale: Locale; slug: string }
 
@@ -54,7 +55,7 @@ export async function generateMetadata({
   const post = await getPost(slug, locale)
   if (!post || !post.blog_translations[0]) return {}
   const tr = post.blog_translations[0]
-  return {
+  return withSeoOverride(locale, `/blog/${slug}`, {
     title: tr.meta_title,
     description: tr.meta_description,
     alternates: seoAlternates(locale, `/blog/${slug}`),
@@ -65,7 +66,7 @@ export async function generateMetadata({
       // card; fall back to the locale card when it has none.
       images: post.cover_image_url ? [{ url: post.cover_image_url }] : ogImages(locale),
     },
-  }
+  })
 }
 
 export default async function BlogPostPage({
