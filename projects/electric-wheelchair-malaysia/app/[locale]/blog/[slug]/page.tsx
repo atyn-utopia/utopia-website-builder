@@ -7,6 +7,7 @@ import { waRedirect } from '@/lib/waRedirect';
 import SiteHeader from '@/components/SiteHeader';
 import FomoBanner from '@/components/FomoBanner';
 import SiteFooter from '@/components/SiteFooter';
+import ContactNumber from '@/components/ContactNumber';
 import { ogImages } from '@/lib/ogImage';
 
 export async function generateMetadata({
@@ -94,7 +95,7 @@ export default async function BlogPostPage({
         }}
       />
 
-      <FomoBanner locale={locale as 'en' | 'ms' | 'zh'} /><SiteHeader locale={locale as 'en' | 'ms' | 'zh'} />
+      <FomoBanner locale={locale as 'en' | 'ms' | 'zh'} /><SiteHeader contact={<ContactNumber locale={locale} page={`/blog/${slug}`} />} />
 
       {/* BREADCRUMBS */}
       <div style={{ background: 'var(--surface)', padding: 'var(--space-md) 0' }}>
@@ -291,7 +292,7 @@ export default async function BlogPostPage({
         </div>
       </section>
 
-      <SiteFooter locale={locale as 'en' | 'ms' | 'zh'} />
+      <SiteFooter locale={locale as 'en' | 'ms' | 'zh'} page={`/blog/${slug}`} />
     </>
   );
 }
