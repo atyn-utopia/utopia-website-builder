@@ -16,6 +16,7 @@ import HomePageClient from '@/components/HomePageClient';
 import { ProductSchema } from '@/components/schema/ProductSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
 import { ogImages } from '@/lib/ogImage';
+import { withSeoOverride } from '@/lib/webcoreSeo';
 
 const HERO_IMAGE = '/brand/hero.png';
 // Full-bleed cold-room scene behind the hero copy (sewa-excavator uses the same
@@ -59,7 +60,7 @@ export async function generateMetadata({
   for (const l of locales) languages[l] = `${siteConfig.siteUrl}/${l}`;
   languages['x-default'] = `${siteConfig.siteUrl}/en`;
 
-  return {
+  return withSeoOverride(locale, '', {
     title: meta.title,
     description: meta.description,
     alternates: seoAlternates(locale),
@@ -81,7 +82,7 @@ export async function generateMetadata({
       images: [`${siteConfig.siteUrl}/og-${locale}.png`],
     },
     robots: { index: true, follow: true },
-  };
+  });
 }
 
 export async function generateStaticParams() {

@@ -14,6 +14,7 @@ import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 import { TrackedWhatsAppLink } from '@/components/TrackedWhatsAppLink';
 import { BlogCard } from '../BlogCard';
 import { ogImages } from '@/lib/ogImage';
+import { withSeoOverride } from '@/lib/webcoreSeo';
 
 export async function generateMetadata({
   params,
@@ -27,7 +28,7 @@ export async function generateMetadata({
     return { title: 'Post Not Found' };
   }
 
-  return {
+  return withSeoOverride(locale, `/blog/${slug}`, {
     title: post.meta_title || post.title,
     description: post.meta_description || post.excerpt,
     alternates: seoAlternates(locale, `/blog/${slug}`),
@@ -41,7 +42,7 @@ export async function generateMetadata({
       // card; fall back to the locale card when it has none.
       images: post.cover_image_url ? [post.cover_image_url] : ogImages(locale),
     },
-  };
+  });
 }
 
 function estimateReadingTime(html: string): number {
