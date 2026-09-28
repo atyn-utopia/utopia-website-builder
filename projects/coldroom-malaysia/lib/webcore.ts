@@ -18,15 +18,24 @@ if (!SUPABASE_URL || !SUPABASE_KEY) {
   )
 }
 
-export type WebcoreTag = 'webcore-products' | 'webcore-phones' | 'webcore-blog'
+export type WebcoreTag = 'webcore-products' | 'webcore-phones' | 'webcore-blog' | 'webcore-seo'
 
-async function webcoreFetch<T>(path: string, tag: WebcoreTag): Promise<T | null> {
-  if (!SUPABASE_URL || !SUPABASE_KEY) return null
+// Server-only. seo_overrides has no anon read policy, so that one table is read
+// with the service-role key; everything else stays on the anon key.
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY ?? ''
+
+export async function webcoreFetch<T>(
+  path: string,
+  tag: WebcoreTag,
+  opts: { service?: boolean } = {},
+): Promise<T | null> {
+  const key = opts.service ? SUPABASE_SERVICE_KEY : SUPABASE_KEY
+  if (!SUPABASE_URL || !key) return null
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
       headers: {
-        apikey: SUPABASE_KEY,
-        Authorization: `Bearer ${SUPABASE_KEY}`,
+        apikey: key,
+        Authorization: `Bearer ${key}`,
         Accept: 'application/json',
         'Accept-Profile': 'webcore',
       },

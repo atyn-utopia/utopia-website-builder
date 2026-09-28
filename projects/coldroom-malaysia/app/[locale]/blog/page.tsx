@@ -9,6 +9,7 @@ import { SiteFooter } from '@/components/SiteFooter';
 import ContactNumber from '@/components/ContactNumber';
 import PageStyles from '@/components/PageStyles';
 import { ogImages } from '@/lib/ogImage';
+import { withSeoOverride } from '@/lib/webcoreSeo';
 
 export async function generateMetadata({
   params,
@@ -18,7 +19,7 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'blog' });
 
-  return {
+  return withSeoOverride(locale, '/blog', {
     title: t('metaTitle'),
     description: t('metaDescription'),
     alternates: seoAlternates(locale, `/blog`),
@@ -30,7 +31,7 @@ export async function generateMetadata({
       type: 'website',
       images: ogImages(locale),
     },
-  };
+  });
 }
 
 export default async function BlogListingPage({

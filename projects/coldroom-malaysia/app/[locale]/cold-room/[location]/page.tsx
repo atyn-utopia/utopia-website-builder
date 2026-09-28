@@ -20,6 +20,7 @@ import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
 import { ProductSchema } from '@/components/schema/ProductSchema';
 import { ogImages } from '@/lib/ogImage';
+import { withSeoOverride } from '@/lib/webcoreSeo';
 
 const HERO_IMAGE = '/brand/hero.png';
 
@@ -75,7 +76,7 @@ export async function generateMetadata({
   for (const l of locales) languages[l] = `${siteConfig.siteUrl}/${l}/${siteConfig.productSlug}/${loc.slug}`;
   languages['x-default'] = `${siteConfig.siteUrl}/en/${siteConfig.productSlug}/${loc.slug}`;
 
-  return {
+  return withSeoOverride(locale, `/${siteConfig.productSlug}/${loc.slug}`, {
     title,
     description,
     alternates: seoAlternates(locale, `/${siteConfig.productSlug}/${loc.slug}`),
@@ -89,7 +90,7 @@ export async function generateMetadata({
     },
     twitter: { card: 'summary_large_image', title, description },
     robots: { index: true, follow: true },
-  };
+  });
 }
 
 export default async function LocationPage({

@@ -8,7 +8,7 @@ if (!SERVICE_KEY) {
   console.error('Set SUPABASE_SERVICE_ROLE_KEY env var.');
   process.exit(1);
 }
-const WEBSITE = 'coldroom-malaysia.vercel.app';
+const WEBSITE = 'coldroomrental.my';
 
 const headers = {
   apikey: SERVICE_KEY,

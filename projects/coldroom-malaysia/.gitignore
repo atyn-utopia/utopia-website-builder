@@ -7,3 +7,4 @@ node_modules/
 temporary screenshots/
 brand_assets/
 .vercel
+.env*.local
