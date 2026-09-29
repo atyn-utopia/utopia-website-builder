@@ -13,6 +13,7 @@ import ContactNumber from '@/components/ContactNumber';
 import SiteFooter from '@/components/SiteFooter';
 import FomoBanner from '@/components/FomoBanner';
 import BlogLinkTracker from '@/components/tracking/BlogLinkTracker';
+import { withSeoOverride } from '@/lib/webcoreSeo';
 
 export async function generateMetadata({
   params,
@@ -25,11 +26,11 @@ export async function generateMetadata({
     routing.locales.map((l) => [l, `${localeHref(l)}/blog`]),
   );
   languages['x-default'] = `${localeHref(routing.defaultLocale)}/blog`;
-  return {
+  return withSeoOverride(locale, '/blog', {
     title: t('title'),
     description: t('description'),
     alternates: { canonical: `${localeHref(locale)}/blog`, languages },
-  };
+  });
 }
 
 export default async function BlogListing({

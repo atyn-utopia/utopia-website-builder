@@ -21,6 +21,7 @@ asset conventions are `/brand/logo-dark.png` (footer) and `/brand/bg-hero.jpg`
 | `WhatsAppButton.tsx` | official-green CTA routing through the redirect page |
 | `ogImage.ts` | → `lib/ogImage.ts` — social share card URLs, per locale |
 | `og-shot.mjs` | → `scripts/og-shot.mjs` — generates the cards from the hero |
+| `webcoreSeo.ts` | → `lib/webcoreSeo.ts` — per-page title/description overrides from webcore's SEO page |
 
 ## Contact number (`ContactNumber.tsx` + `contact-number.css`)
 
@@ -105,3 +106,31 @@ tool:
 bulk-migrate: sites already scoring 90+ are usually customised on purpose and
 work — leave them. Sync is for new sites (via `scaffold`) and for a site you are
 already actively reworking.
+
+## SEO overrides (`webcoreSeo.ts`)
+
+Webcore's SEO page and its checklist's **Pages** group key a title/description
+row by each page's public path (`/`, `/en/water-tank/klang`, `/zh/blog/x`) and
+language. A site only honours those rows if its metadata goes through this
+helper — without it, edits in webcore do nothing live and the checklist has
+nothing to grade. **Every new site starts with it.**
+
+1. Copy to `lib/webcoreSeo.ts`.
+2. In `generateMetadata` of home, location, blog listing and blog article, wrap
+   the returned object: `return withSeoOverride(locale, '/blog', { … })`. The
+   path is locale-stripped; the helper adds the prefix for non-default locales.
+3. Add `'webcore-seo'` to `ALLOWED_TAGS` in `app/api/revalidate/route.ts`.
+
+Load-bearing details (each one broke a live site in the 2026-09-28/29 fleet pass):
+- Reads webcore's public list API, not Supabase REST — the anon key gets `[]`
+  from `seo_overrides`. The GET is CDN-cached 5 min, so it carries a buster and
+  Next's cache (tag `webcore-seo`) provides freshness.
+- One request in flight shared by all callers, errors never cached — a build
+  prerendering hundreds of pages otherwise times out and bakes fallback copy.
+- Only writes `openGraph` when the page built its own card (or the override sets
+  an image). Returning a partial card replaces the layout's wholesale and drops
+  `og:image`.
+- Title is applied as `{ absolute }` — the row holds the whole title.
+
+After deploy, push one row per sitemap URL copied from the live page, so wiring
+changes nothing visible until an editor edits a row.

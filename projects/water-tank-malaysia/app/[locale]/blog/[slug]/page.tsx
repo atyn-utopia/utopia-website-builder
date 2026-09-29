@@ -16,6 +16,7 @@ import SiteHeader from '@/components/SiteHeader';
 import ContactNumber from '@/components/ContactNumber';
 import SiteFooter from '@/components/SiteFooter';
 import FomoBanner from '@/components/FomoBanner';
+import { withSeoOverride } from '@/lib/webcoreSeo';
 
 export async function generateStaticParams() {
   const slugs = await getBlogPostSlugs();
@@ -38,7 +39,7 @@ export async function generateMetadata({
     routing.locales.map((l) => [l, `${localeHref(l)}${path}`]),
   );
   languages['x-default'] = `${localeHref(routing.defaultLocale)}${path}`;
-  return {
+  return withSeoOverride(locale, `/blog/${slug}`, {
     title: tr.meta_title || `${tr.title} | ${siteConfig.brandName}`,
     description: tr.meta_description || tr.excerpt,
     alternates: { canonical: `${localeHref(locale)}${path}`, languages },
@@ -58,7 +59,7 @@ export async function generateMetadata({
         ? [{ url: post.cover_image_url, width: 1200, height: 630 }]
         : ogImages(locale),
     },
-  };
+  });
 }
 
 export default async function BlogPostPage({
