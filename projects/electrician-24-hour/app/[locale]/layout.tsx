@@ -31,7 +31,7 @@ export async function generateMetadata({
       type: 'website',
       url: siteConfig.siteUrl,
       siteName: siteConfig.brandName,
-      images: ogImages(locale),
+          images: ogImages(locale),
     },
     twitter: {
       card: 'summary_large_image',

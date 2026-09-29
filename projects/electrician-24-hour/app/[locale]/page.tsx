@@ -6,11 +6,13 @@ import { waRedirect } from '@/lib/waRedirect';
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
 import FomoBanner from '@/components/FomoBanner';
+import ContactNumber from '@/components/ContactNumber';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import PageStyles from '@/components/PageStyles';
 import HomePageClient from '@/components/HomePageClient';
 import { ogImages } from '@/lib/ogImage';
+import { withSeoOverride } from '@/lib/webcoreSeo';
 
 export async function generateMetadata({
   params,
@@ -20,7 +22,7 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'metadata' });
   const url = `${siteConfig.siteUrl}/${locale}`;
-  return {
+  return withSeoOverride(locale, '', {
     title: t('title'),
     description: t('description'),
     alternates: seoAlternates(locale),
@@ -31,9 +33,9 @@ export async function generateMetadata({
       siteName: siteConfig.brandName,
       type: 'website',
       locale: locale === 'ms' ? 'ms_MY' : locale === 'zh' ? 'zh_CN' : 'en_MY',
-      images: ogImages(locale),
+          images: ogImages(locale),
     },
-  };
+  });
 }
 
 export default async function HomePage({
@@ -69,7 +71,7 @@ export default async function HomePage({
       <FAQSchema faqs={faqs} />
 
       <FomoBanner text={fomoText} />
-      <SiteHeader />
+      <SiteHeader contact={<ContactNumber locale={locale} page="/" />} />
 
       {/* HERO — same treatment as the location page (.hero dark band, badge →
           H1 → H2 → WhatsApp CTA) with the technician photo restored. */}
@@ -117,7 +119,7 @@ export default async function HomePage({
         recentPosts={blogPosts.slice(0, 3)}
       />
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} page="/" />
     </>
   );
 }

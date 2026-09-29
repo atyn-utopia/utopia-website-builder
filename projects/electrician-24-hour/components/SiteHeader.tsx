@@ -11,7 +11,14 @@ function trackClick(label: string) {
   }
 }
 
-export default function SiteHeader() {
+/**
+ * `contact` is a ReactNode, not a phone string, because the number is resolved
+ * on the server (`getDisplayPhone`) and this is a client component. Every page
+ * renders it as
+ * `<SiteHeader contact={<ContactNumber locale={locale} page="…" />} />`,
+ * passing its own path — `is_display` is keyed per (website, page_slug).
+ */
+export default function SiteHeader({ contact }: { contact?: React.ReactNode }) {
   const nav = useTranslations('nav');
   const locale = useLocale();
   const waHref = waRedirect(locale);
@@ -30,8 +37,10 @@ export default function SiteHeader() {
           <Link href={`/${locale}#locations`}>{nav('locations')}</Link>
           <Link href={`/${locale}/blog`}>{nav('blog')}</Link>
         </div>
-        <div className="nav-actions">
+        <div className="nav-actions site-actions">
+          {contact}
           <LanguageSwitcher />
+
           <a
             href={waHref}
             target="_blank"

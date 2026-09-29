@@ -5,12 +5,14 @@ import { getBlogPostBySlug, getBlogPosts } from '@/lib/webcore';
 import { waRedirect } from '@/lib/waRedirect';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import ContactNumber from '@/components/ContactNumber';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import FomoBanner from '@/components/FomoBanner';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 import BlogLinkTracker from '@/components/tracking/BlogLinkTracker';
 import { ogImages } from '@/lib/ogImage';
+import { withSeoOverride } from '@/lib/webcoreSeo';
 
 export async function generateMetadata({
   params,
@@ -20,7 +22,7 @@ export async function generateMetadata({
   const { locale, slug } = await params;
   const post = await getBlogPostBySlug(slug, locale);
   if (!post) return { title: 'Not Found' };
-  return {
+  return withSeoOverride(locale, `/blog/${slug}`, {
     title: post.meta_title || post.title,
     description: post.meta_description || post.excerpt,
     alternates: seoAlternates(locale, `/blog/${slug}`),
@@ -30,11 +32,9 @@ export async function generateMetadata({
       url: `${siteConfig.siteUrl}/${locale}/blog/${slug}`,
       siteName: siteConfig.brandName,
       type: 'article',
-      // An article with its own cover art shares better than the generic hero
-      // card; fall back to the locale card when it has none.
       images: post.cover_image_url ? [post.cover_image_url] : ogImages(locale),
     },
-  };
+  });
 }
 
 function estimateReadingTime(html: string): number {
@@ -102,7 +102,7 @@ export default async function BlogPostPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
       <FomoBanner text={fomoTexts[0]} />
-      <SiteHeader />
+      <SiteHeader contact={<ContactNumber locale={locale} page={`/blog/${slug}`} />} />
 
       <article className="section">
         <div className="blog-article">
@@ -187,7 +187,7 @@ export default async function BlogPostPage({
         </section>
       )}
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} page={`/blog/${slug}`} />
     </>
   );
 }

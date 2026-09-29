@@ -24,8 +24,8 @@ if (!url || !key) { console.error('Missing Supabase env'); process.exit(1); }
 console.log('Using', process.env.SUPABASE_SERVICE_ROLE_KEY ? 'SERVICE_ROLE key' : 'ANON key');
 
 const supabase = createClient(url, key);
-const WEBSITE = 'electrician-24-hour.vercel.app';
-const GALLERY = (n) => `https://electrician-24-hour.vercel.app/gallery/gallery-${n}.png`;
+const WEBSITE = '24hourelectrician.my';
+const GALLERY = (n) => `https://24hourelectrician.my/gallery/gallery-${n}.png`;
 
 const products = [
   {

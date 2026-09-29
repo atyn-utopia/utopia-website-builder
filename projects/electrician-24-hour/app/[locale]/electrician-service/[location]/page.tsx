@@ -10,10 +10,12 @@ import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
 import PageStyles from '@/components/PageStyles';
 import FomoBanner from '@/components/FomoBanner';
+import ContactNumber from '@/components/ContactNumber';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import LocationPageClient from './LocationPageClient';
 import { ogImages } from '@/lib/ogImage';
+import { withSeoOverride } from '@/lib/webcoreSeo';
 
 export function generateStaticParams() {
   const params: { locale: string; location: string }[] = [];
@@ -39,7 +41,7 @@ export async function generateMetadata({
   const description = `${t('metaDescPrefix')} ${loc.name}${t('metaDescSuffix')}`;
   const url = `${siteConfig.siteUrl}/${locale}/${siteConfig.productSlug}/${locationSlug}`;
 
-  return {
+  return withSeoOverride(locale, `/${siteConfig.productSlug}/${locationSlug}`, {
     title,
     description,
     alternates: seoAlternates(locale, `/${siteConfig.productSlug}/${locationSlug}`),
@@ -50,9 +52,9 @@ export async function generateMetadata({
       siteName: siteConfig.brandName,
       type: 'website',
       locale: locale === 'ms' ? 'ms_MY' : locale === 'zh' ? 'zh_CN' : 'en_MY',
-      images: ogImages(locale),
+          images: ogImages(locale),
     },
-  };
+  });
 }
 
 export default async function LocationPage({
@@ -95,7 +97,7 @@ export default async function LocationPage({
       <FAQSchema faqs={faqs} />
 
       <FomoBanner text={fomoTexts[0]} />
-      <SiteHeader />
+      <SiteHeader contact={<ContactNumber locale={locale} page={`/electrician-service/${locationSlug}`} />} />
 
       <LocationPageClient
         locale={locale}
@@ -105,7 +107,7 @@ export default async function LocationPage({
         products={products}
       />
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} page={`/electrician-service/${locationSlug}`} />
     </>
   );
 }

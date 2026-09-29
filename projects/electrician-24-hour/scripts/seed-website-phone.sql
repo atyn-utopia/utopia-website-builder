@@ -4,18 +4,18 @@
 BEGIN;
 
 -- 1. Register website under Encik Beku Aircond Sdn. Bhd.
-DELETE FROM company_websites WHERE domain = 'electrician-24-hour.vercel.app';
+DELETE FROM company_websites WHERE domain = '24hourelectrician.my';
 INSERT INTO company_websites (company_id, domain, leads_mode)
 VALUES ('16e62068-365d-4907-b7f0-763a173d8afa',
-        'electrician-24-hour.vercel.app',
+        '24hourelectrician.my',
         'single');
 
 -- 2. Seed default phone number
-DELETE FROM phone_numbers WHERE website = 'electrician-24-hour.vercel.app';
+DELETE FROM phone_numbers WHERE website = '24hourelectrician.my';
 INSERT INTO phone_numbers
   (website, location_slug, phone_number, label, type, is_active, whatsapp_text, percentage)
 VALUES
-  ('electrician-24-hour.vercel.app', 'all', '60174287801', 'default', 'default',
+  ('24hourelectrician.my', 'all', '60174287801', 'default', 'default',
    true,
    'Hi, saya perlukan juruelektrik 24 jam di Malaysia. Boleh bantu saya sekarang?',
    100);
@@ -27,4 +27,4 @@ SELECT cw.domain, cw.leads_mode, c.name AS company, pn.phone_number, pn.whatsapp
 FROM company_websites cw
 JOIN companies c ON c.id = cw.company_id
 JOIN phone_numbers pn ON pn.website = cw.domain
-WHERE cw.domain = 'electrician-24-hour.vercel.app';
+WHERE cw.domain = '24hourelectrician.my';

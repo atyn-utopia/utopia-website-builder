@@ -4,3 +4,6 @@ tsconfig.tsbuildinfo
 brand_assets/
 temporary screenshots/
 .vercel
+
+# local env files — never commit
+.env*.local

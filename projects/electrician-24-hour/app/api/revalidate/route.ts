@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 const SECRET = process.env.WEBCORE_REVALIDATE_SECRET ?? ''
 
-const ALLOWED_TAGS = new Set(['webcore-products', 'webcore-phones', 'webcore-blog'])
+const ALLOWED_TAGS = new Set(['webcore-products', 'webcore-phones', 'webcore-blog', 'webcore-seo'])
 
 export async function POST(request: NextRequest) {
   if (!SECRET) {
