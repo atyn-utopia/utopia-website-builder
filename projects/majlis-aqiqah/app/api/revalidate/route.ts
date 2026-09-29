@@ -1,7 +1,7 @@
 import { revalidateTag } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
-const ALLOWED_TAGS = new Set(['webcore-products', 'webcore-phones', 'webcore-blog']);
+const ALLOWED_TAGS = new Set(['webcore-products', 'webcore-phones', 'webcore-blog', 'webcore-seo']);
 
 export async function POST(req: NextRequest) {
   const secret = req.headers.get('x-webcore-secret');

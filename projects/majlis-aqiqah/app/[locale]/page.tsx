@@ -10,6 +10,7 @@ import { getProducts } from '@/lib/webcore';
 import { waRedirect } from '@/lib/waRedirect';
 import { ProductSchema } from '@/components/schema/ProductSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
+import ContactNumber from '@/components/ContactNumber';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import FomoBanner from '@/components/FomoBanner';
@@ -18,6 +19,7 @@ import MarketingMarquee from '@/components/MarketingMarquee';
 import PageStyles from '@/components/PageStyles';
 import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker';
 import { WhatsAppButton, WaIcon } from '@/components/WhatsAppButton';
+import { withSeoOverride } from '@/lib/webcoreSeo';
 
 export async function generateMetadata({
   params,
@@ -30,14 +32,14 @@ export async function generateMetadata({
     routing.locales.map((l) => [l, `${localeAbs(l)}`]),
   );
   languages['x-default'] = `${localeAbs(routing.defaultLocale)}`;
-  return {
+  return withSeoOverride(locale, '', {
     title: t('title'),
     description: t('description'),
     alternates: {
       canonical: `${localeAbs(locale)}`,
       languages,
     },
-  };
+  });
 }
 
 // 12 images — a 2/3/4-column grid all divide evenly, so the last row is never
@@ -166,7 +168,7 @@ export default async function HomePage({
   return (
     <>
       <FomoBanner />
-      <SiteHeader />
+      <SiteHeader contact={<ContactNumber locale={locale} page="/" />} />
 
       {productCards.map((p) => (
         <ProductSchema
@@ -538,7 +540,7 @@ export default async function HomePage({
         </div>
       </section>
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} page="/" />
 
       <PageStyles />
     </>

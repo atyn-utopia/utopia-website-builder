@@ -9,10 +9,12 @@ import { ogImages } from '@/lib/ogImage';
 import { getBlogPosts } from '@/lib/webcore';
 import { waRedirect } from '@/lib/waRedirect';
 import { WhatsAppButton, WaIcon } from '@/components/WhatsAppButton';
+import ContactNumber from '@/components/ContactNumber';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import FomoBanner from '@/components/FomoBanner';
 import BlogLinkTracker from '@/components/tracking/BlogLinkTracker';
+import { withSeoOverride } from '@/lib/webcoreSeo';
 
 export async function generateMetadata({
   params,
@@ -25,7 +27,7 @@ export async function generateMetadata({
     routing.locales.map((l) => [l, `${localeAbs(l)}/blog`]),
   );
   languages['x-default'] = `${localeAbs(routing.defaultLocale)}/blog`;
-  return {
+  return withSeoOverride(locale, '/blog', {
     title: t('title'),
     description: t('description'),
     alternates: { canonical: `${localeAbs(locale)}/blog`, languages },
@@ -37,7 +39,7 @@ export async function generateMetadata({
       siteName: siteConfig.brandName,
       images: ogImages(locale, t('title')),
     },
-  };
+  });
 }
 
 export default async function BlogListing({
@@ -52,7 +54,7 @@ export default async function BlogListing({
   return (
     <>
       <FomoBanner />
-      <SiteHeader />
+      <SiteHeader contact={<ContactNumber locale={locale} page="/blog" />} />
 
       <section className="blog-hero">
         <div className="blog-hero-bg" aria-hidden="true" />
@@ -109,7 +111,7 @@ export default async function BlogListing({
         </div>
       </section>
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} page="/blog" />
 
       <style>{`
         .blog-hero { position: relative; color: #fff; padding: 56px 0 64px; overflow: hidden; }
