@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { OrganizationSchema } from '@/components/schema/OrganizationSchema';
 import { siteConfig } from '@/config/site';
+import StyledJsxRegistry from '@/components/StyledJsxRegistry';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -37,7 +38,6 @@ export default async function LocaleLayout({
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TX7ZBHT6');`,
           }}
         />
-        {/* End Google Tag Manager */}
       </head>
       <body style={{ fontFamily: 'var(--font-inter), Inter, sans-serif' }}>
         {/* Google Tag Manager (noscript) */}
@@ -49,11 +49,12 @@ export default async function LocaleLayout({
             style={{ display: 'none', visibility: 'hidden' }}
           />
         </noscript>
-        {/* End Google Tag Manager (noscript) */}
+        <StyledJsxRegistry>
         <NextIntlClientProvider messages={messages}>
           <OrganizationSchema />
           {children}
         </NextIntlClientProvider>
+        </StyledJsxRegistry>
       </body>
     </html>
   );

@@ -30,7 +30,6 @@ async function webcoreFetch<T>(path: string, tag: WebcoreTag): Promise<T | null>
         Accept: 'application/json',
         'Accept-Profile': 'webcore',
       },
-      cache: 'force-cache',
       next: { tags: [tag] },
     })
     if (!res.ok) {
@@ -50,15 +49,19 @@ async function webcoreFetch<T>(path: string, tag: WebcoreTag): Promise<T | null>
  * Phone numbers / leads routing
  * ============================================================ */
 
+// 6s hard timeout so a slow Supabase edge cannot hang `next build`,
+// and the caller falls back instead of waiting out undici's 5min default.
+const WEBCORE_FETCH_TIMEOUT_MS = 6000
+
 const FALLBACK_PHONE = process.env.PHONE_FALLBACK ?? siteConfig.fallbackPhone
+
+// webcore's own public API (no key needed). Used for the /display endpoint, the
+// only phone question with a deterministic answer. The host 307s to
+// webcore.utopiagroup.com.my and fetch follows it; the fleet still names the old
+// host, so this matches the rest of the sites rather than migrating alone.
+const WEBCORE_PUBLIC_BASE = 'https://webcore.utopiaai.my'
 const FALLBACK_WA_TEXT =
   'Hai, saya berminat dengan perkhidmatan roller shutter. Boleh saya dapatkan sebut harga?'
-// Mirrors the `Hi <domain>, ` prefix that toResult() puts on the Supabase
-// path. Without it a failed webcore read produced an unattributable
-// message — several sites share one WhatsApp number, so the domain is the
-// operator's only signal for which site the lead came from.
-const FALLBACK_WA_TEXT_ATTRIBUTED = `Hi ${siteConfig.domain}, ${FALLBACK_WA_TEXT.replace(/^\s*(hi|hello|hai|salam|assalamualaikum)\b[^,]{0,40},\s*/i, '')}`
-
 
 type LeadsMode = 'single' | 'rotation' | 'location' | 'hybrid'
 
@@ -68,13 +71,12 @@ interface PhoneRow {
   percentage: number | null
   label: string | null
   location_slug: string | null
+  // Pins a number to one page. Rows predating the column are null, which
+  // means site-wide. Only getDisplayPhone reads it here.
   page_slug: string | null
-}
-
-// A row is "site-wide" when it isn't pinned to a specific page. Rows that
-// predate the page_slug column (null) are treated as site-wide too.
-function isSiteWide(row: PhoneRow): boolean {
-  return !row.page_slug || row.page_slug === 'all'
+  // Nominates the number this site PRINTS. Unique per (website, page_slug)
+  // — not per site — see getDisplayPhone.
+  is_display: boolean | null
 }
 
 export interface PhoneResult {
@@ -104,6 +106,11 @@ async function getHostDomain(): Promise<string> {
   try {
     const h = await headers()
     const host = h.get('host') || h.get('x-forwarded-host') || ''
+    // Strip port AND a leading `www.` — the site canonicalises to the www host
+    // (rollershutterdoors.my → www.rollershutterdoors.my), but the webcore
+    // phone_numbers / company_websites rows are keyed to the bare apex domain.
+    // Without this, the www host misses the DB lookup and falls back to the
+    // config placeholder number.
     return host.replace(/:\d+$/, '').replace(/^www\./, '')
   } catch {
     return ''
@@ -123,7 +130,7 @@ async function getLeadsMode(domain: string): Promise<LeadsMode> {
 async function getPhoneRows(domain: string): Promise<PhoneRow[]> {
   if (!domain) return []
   const path =
-    `phone_numbers?select=phone_number,whatsapp_text,percentage,label,location_slug,page_slug` +
+    `phone_numbers?select=phone_number,whatsapp_text,percentage,label,location_slug,page_slug,is_display` +
     `&website=eq.${encodeURIComponent(domain)}` +
     `&is_active=eq.true`
   const data = await webcoreFetch<PhoneRow[]>(path, 'webcore-phones')
@@ -133,7 +140,7 @@ async function getPhoneRows(domain: string): Promise<PhoneRow[]> {
 function fallbackResult(): PhoneResult {
   return {
     phone: FALLBACK_PHONE,
-    whatsappText: FALLBACK_WA_TEXT_ATTRIBUTED,
+    whatsappText: FALLBACK_WA_TEXT,
     source: 'fallback',
     mode: 'fallback',
   }
@@ -155,27 +162,10 @@ function toResult(row: PhoneRow | undefined, mode: LeadsMode, host: string): Pho
   }
 }
 
-export async function getPhoneNumber(
-  locationSlug?: string,
-  pageSlug?: string,
-): Promise<PhoneResult> {
+export async function getPhoneNumber(locationSlug?: string): Promise<PhoneResult> {
   try {
     const domain = await getHostDomain()
-    const [mode, allRows] = await Promise.all([getLeadsMode(domain), getPhoneRows(domain)])
-    if (allRows.length === 0) return fallbackResult()
-
-    // Resolution order (mirrors webcore /phone-numbers/resolve):
-    //   page  →  location  →  all  →  default.
-    // A page-pinned number wins first when we know the originating page, and
-    // never leaks into the site-wide leads_mode pool below.
-    if (pageSlug && pageSlug !== 'all') {
-      const pageRows = allRows.filter((r) => r.page_slug === pageSlug)
-      if (pageRows.length > 0) return toResult(pickWeighted(pageRows), mode, domain)
-    }
-
-    // leads_mode logic runs only over site-wide rows so per-page numbers
-    // don't dilute the homepage rotation.
-    const rows = allRows.filter(isSiteWide)
+    const [mode, rows] = await Promise.all([getLeadsMode(domain), getPhoneRows(domain)])
     if (rows.length === 0) return fallbackResult()
 
     const defaultRow = findDefaultRow(rows)
@@ -221,9 +211,8 @@ export function waLink(phone: string, message?: string): string {
 export async function getWhatsAppLink(
   locationSlug?: string,
   messageOverride?: string,
-  pageSlug?: string,
 ): Promise<string> {
-  const { phone, whatsappText } = await getPhoneNumber(locationSlug, pageSlug)
+  const { phone, whatsappText } = await getPhoneNumber(locationSlug)
   return waLink(phone, messageOverride || whatsappText)
 }
 
@@ -310,4 +299,89 @@ export async function getBlogPostBySlug(
   const data = await webcoreFetch<BlogPostRow[]>(path, 'webcore-blog')
   if (!data || data.length === 0) return null
   return flattenBlogRow(data[0])
+}
+
+/* Printed number — a different question from lead routing
+ *
+ *   where a WhatsApp CTA SENDS you -> /redirect-whatsapp-1 -> getPhoneNumber()
+ *                                     (rotates per click, honours leads_mode)
+ *   what a page SHOWS as text       -> getDisplayPhone()   (deterministic)
+ *
+ * Printing a rotating number would change the digits between page loads, and
+ * would disagree with whatever the redirect actually dials.
+ */
+
+/**
+ * Which number this PAGE prints, via webcore's dedicated /display endpoint.
+ *
+ * /display is deterministic — page display number -> site-wide display number
+ * -> admin default. `is_display` is unique per (website, page_slug), NOT per
+ * site, so the page has to be part of the question. No page = site-wide tier.
+ */
+async function fetchDisplayPhone(page?: string): Promise<string | null> {
+  const url =
+    `${WEBCORE_PUBLIC_BASE}/api/public/phone-numbers/display` +
+    `?website=${encodeURIComponent(siteConfig.domain)}` +
+    (page ? `&page=${encodeURIComponent(page)}` : '');
+
+  // Same discipline as webcoreFetch: cacheable + tagged so a webcore-phones
+  // purge refreshes it, and raced against a timeout rather than an AbortSignal
+  // (a signal opts the response out of the Data Cache and breaks tag purging).
+  const request = fetch(url, {
+    headers: { Accept: 'application/json' },
+    cache: 'force-cache',
+    next: { tags: ['webcore-phones'] },
+  }).catch(() => null);
+
+  const res = await Promise.race([
+    request,
+    new Promise<null>((resolve) => setTimeout(() => resolve(null), WEBCORE_FETCH_TIMEOUT_MS)),
+  ]);
+  if (!res || !res.ok) return null;
+
+  const data = (await res.json().catch(() => null)) as { phone_number?: string } | null;
+  return data?.phone_number || null;
+}
+
+export async function getDisplayPhone(page?: string): Promise<string> {
+  const viaApi = await fetchDisplayPhone(page);
+  if (viaApi) return viaApi;
+
+  // Fallback if the public API is unreachable: read the rows directly and
+  // reproduce its precedence. Page-scoped display row -> site-wide display row
+  // -> the 'default' label -> any site-wide row.
+  try {
+    const rows = await getPhoneRows(siteConfig.domain);
+    if (rows.length === 0) return FALLBACK_PHONE;
+    const pageSlug = page ? page.replace(/^\/+|\/+$/g, '') : '';
+    const row =
+      (pageSlug
+        ? rows.find((r) => r.is_display === true && (r.page_slug ?? 'all') === pageSlug)
+        : undefined) ??
+      rows.find((r) => r.is_display === true && (r.page_slug ?? 'all') === 'all') ??
+      findDefaultRow(rows) ??
+      rows.find((r) => !r.page_slug || r.page_slug === 'all') ??
+      rows[0];
+    return row.phone_number || FALLBACK_PHONE;
+  } catch {
+    return FALLBACK_PHONE;
+  }
+}
+
+/**
+ * `60109633551` -> `010-963 3551`. Malaysian display convention: drop the 60
+ * country code, restore the leading 0, then split the subscriber part.
+ * Anything that does not match falls back to the raw digits rather than
+ * mangling an unexpected format.
+ */
+export function formatPhoneDisplay(raw: string): string {
+  const digits = (raw || '').replace(/\D/g, '');
+  const local = digits.startsWith('60') ? '0' + digits.slice(2) : digits;
+  const m = local.match(/^(01\d)(\d{3})(\d{4})$/); // 10-digit mobile
+  if (m) return `${m[1]}-${m[2]} ${m[3]}`;
+  const m11 = local.match(/^(01\d)(\d{4})(\d{4})$/); // 11-digit mobile
+  if (m11) return `${m11[1]}-${m11[2]} ${m11[3]}`;
+  const fixed = local.match(/^(0\d)(\d{4})(\d{4})$/); // fixed line
+  if (fixed) return `${fixed[1]}-${fixed[2]} ${fixed[3]}`;
+  return local || raw;
 }

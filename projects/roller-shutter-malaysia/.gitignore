@@ -5,3 +5,4 @@ brand_assets/
 .env
 .env.local
 .vercel
+.env*.local

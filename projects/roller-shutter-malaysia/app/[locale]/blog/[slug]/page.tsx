@@ -5,10 +5,12 @@ import { siteConfig } from '@/config/site';
 import { getBlogPosts, getBlogPostBySlug } from '@/lib/webcore';
 import { waRedirect } from '@/lib/waRedirect';
 import FomoBanner from '@/components/FomoBanner';
+import ContactNumber from '@/components/ContactNumber';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import BlogLinkTracker from '@/components/tracking/BlogLinkTracker';
 import { ogImages } from '@/lib/ogImage';
+import { withSeoOverride } from '@/lib/webcoreSeo';
 
 export async function generateMetadata({
   params,
@@ -23,7 +25,7 @@ export async function generateMetadata({
     return { title: 'Post Not Found' };
   }
 
-  return {
+  return withSeoOverride(locale, `/blog/${slug}`, {
     title: post.meta_title || post.title,
     description: post.meta_description || post.excerpt,
     alternates: seoAlternates(locale, `/blog/${slug}`),
@@ -33,11 +35,9 @@ export async function generateMetadata({
       url: `${baseUrl}/${locale}/blog/${slug}`,
       siteName: siteConfig.brandName,
       type: 'article',
-      // An article with its own cover art shares better than the generic hero
-      // card; fall back to the locale card when it has none.
       images: post.cover_image_url ? [post.cover_image_url] : ogImages(locale),
     },
-  };
+  });
 }
 
 export default async function BlogPostPage({
@@ -97,7 +97,7 @@ export default async function BlogPostPage({
       />
 
       <FomoBanner />
-      <SiteHeader />
+      <SiteHeader contact={<ContactNumber locale={locale} page={`/blog/${slug}`} />} />
 
       {/* BREADCRUMBS */}
       <div style={{ background: 'var(--brand-surface)', padding: '12px 24px' }}>
@@ -254,7 +254,7 @@ export default async function BlogPostPage({
         </div>
       </section>
 
-      <SiteFooter />
+      <SiteFooter contact={<ContactNumber locale={locale} page={`/blog/${slug}`} className="contact-number--footer" />} />
     </>
   );
 }
