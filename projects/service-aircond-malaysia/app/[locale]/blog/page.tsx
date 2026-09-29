@@ -10,6 +10,7 @@ import SiteFooter from '@/components/SiteFooter'
 import ContactNumber from '@/components/ContactNumber'
 import type { Locale as AppLocale } from '@/i18n/routing'
 import { ogImages } from '@/lib/ogImage'
+import { withSeoOverride } from '@/lib/webcoreSeo'
 
 const BLOG_COPY = {
   en: {
@@ -53,7 +54,7 @@ export async function generateMetadata({
   const c = copyFor(locale)
   const url = `${siteConfig.siteUrl}/${locale}/blog`
 
-  return {
+  return withSeoOverride(locale, '/blog', {
     title: c.metaTitle,
     description: c.metaDescription,
     alternates: seoAlternates(locale, `/blog`),
@@ -65,7 +66,7 @@ export async function generateMetadata({
       type: 'website',
       images: ogImages(locale),
     },
-  }
+  })
 }
 
 export default async function BlogListingPage({

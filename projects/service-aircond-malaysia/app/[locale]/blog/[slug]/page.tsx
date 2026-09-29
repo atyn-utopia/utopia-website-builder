@@ -12,6 +12,7 @@ import SiteFooter from '@/components/SiteFooter'
 import ContactNumber from '@/components/ContactNumber'
 import type { Locale as AppLocale } from '@/i18n/routing'
 import { ogImages } from '@/lib/ogImage'
+import { withSeoOverride } from '@/lib/webcoreSeo'
 
 const POST_COPY = {
   en: {
@@ -61,7 +62,7 @@ export async function generateMetadata({
   const post = await getBlogPostBySlug(slug, locale)
   if (!post) return { title: 'Post Not Found' }
 
-  return {
+  return withSeoOverride(locale, `/blog/${slug}`, {
     title: post.meta_title || post.title,
     description: post.meta_description || post.excerpt,
     alternates: seoAlternates(locale, `/blog/${slug}`),
@@ -75,7 +76,7 @@ export async function generateMetadata({
       // card; fall back to the locale card when it has none.
       images: post.cover_image_url ? [post.cover_image_url] : ogImages(locale),
     },
-  }
+  })
 }
 
 export default async function BlogPostPage({

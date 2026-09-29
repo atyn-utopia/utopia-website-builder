@@ -13,6 +13,7 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import ContactNumber from '@/components/ContactNumber'
 import { ogImages } from '@/lib/ogImage'
+import { withSeoOverride } from '@/lib/webcoreSeo'
 
 type Params = { locale: string; location: string }
 
@@ -37,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const title = t('title', { city })
   const description = t('description', { city })
 
-  return {
+  return withSeoOverride(locale, `/service-aircond/${location}`, {
     title,
     description,
     metadataBase: new URL(siteConfig.baseUrl),
@@ -52,7 +53,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       images: ogImages(locale),
     },
     robots: { index: true, follow: true },
-  }
+  })
 }
 
 export default async function LocationPage({ params }: { params: Promise<Params> }) {

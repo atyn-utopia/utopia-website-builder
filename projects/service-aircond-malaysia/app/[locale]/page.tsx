@@ -15,6 +15,7 @@ import WhatsAppClickTracker from '@/components/tracking/WhatsAppClickTracker'
 import HomePageClient from './HomePageClient'
 import type { Locale } from '@/i18n/routing'
 import { ogImages } from '@/lib/ogImage'
+import { withSeoOverride } from '@/lib/webcoreSeo'
 
 export async function generateMetadata({
   params,
@@ -26,7 +27,7 @@ export async function generateMetadata({
 
   const url = `${siteConfig.siteUrl}/${locale}`
 
-  return {
+  return withSeoOverride(locale, '', {
     title: t('title'),
     description: t('description'),
     alternates: seoAlternates(locale),
@@ -39,7 +40,7 @@ export async function generateMetadata({
       locale: locale === 'ms' ? 'ms_MY' : locale === 'zh' ? 'zh_CN' : 'en_MY',
       images: ogImages(locale),
     },
-  }
+  })
 }
 
 export default async function HomePage({
