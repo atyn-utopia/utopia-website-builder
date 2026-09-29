@@ -30,6 +30,7 @@ import {
 import { siteConfig, type Locale } from '@/config/site'
 import { waRedirect } from '@/lib/waRedirect'
 import type { LocationCopy } from '@/lib/locationCopy'
+import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker'
 
 export interface PageShellProps {
   locale: Locale
@@ -374,87 +375,88 @@ export default async function PageShell({
             const rentalDisplay = p.rental_price != null ? `RM${p.rental_price.toFixed(2)}` : '—'
             const saleDisplay = p.sale_price != null ? `RM${p.sale_price.toFixed(2)}` : '—'
             return (
-              <article
-                key={p.id}
-                className="flex h-full flex-col overflow-hidden rounded-[24px] border border-[#FDD835]/35 bg-[#FFFFFF] kk-card-shadow hover:-translate-y-0.5 hover:kk-card-shadow-hover"
-                style={{ transition: 'transform 220ms ease, box-shadow 220ms ease' }}
-              >
-                {imageUrl && (
-                  <div
-                    className="relative flex h-52 items-center justify-center overflow-hidden bg-gradient-to-b from-[#FFFFFF]/60 to-[#FFFEF8]"
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={imageUrl}
-                      alt={p.name}
-                      className="max-h-full max-w-full object-contain"
-                    />
-                  </div>
-                )}
-                <div className="flex flex-1 flex-col p-6 sm:p-7">
-                  <h5 className="text-[22px] font-bold tracking-tight text-[#111111]">
-                    {p.name}
-                  </h5>
-                  {p.description && (
-                    <p
-                      className="mt-4 text-[15px] leading-[1.7] text-[#111111]/75"
-                      style={{
-                        display: '-webkit-box',
-                        WebkitLineClamp: 3,
-                        WebkitBoxOrient: 'vertical',
-                        overflow: 'hidden',
-                        height: 'calc(1.7em * 3)',
-                      }}
+              <ProductImpressionTracker key={p.id} slug={p.slug} className="h-full">
+                <article
+                  className="flex h-full flex-col overflow-hidden rounded-[24px] border border-[#FDD835]/35 bg-[#FFFFFF] kk-card-shadow hover:-translate-y-0.5 hover:kk-card-shadow-hover"
+                  style={{ transition: 'transform 220ms ease, box-shadow 220ms ease' }}
+                >
+                  {imageUrl && (
+                    <div
+                      className="relative flex h-52 items-center justify-center overflow-hidden bg-gradient-to-b from-[#FFFFFF]/60 to-[#FFFEF8]"
                     >
-                      {p.description}
-                    </p>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={imageUrl}
+                        alt={p.name}
+                        className="max-h-full max-w-full object-contain"
+                      />
+                    </div>
                   )}
+                  <div className="flex flex-1 flex-col p-6 sm:p-7">
+                    <h5 className="text-[22px] font-bold tracking-tight text-[#111111]">
+                      {p.name}
+                    </h5>
+                    {p.description && (
+                      <p
+                        className="mt-4 text-[15px] leading-[1.7] text-[#111111]/75"
+                        style={{
+                          display: '-webkit-box',
+                          WebkitLineClamp: 3,
+                          WebkitBoxOrient: 'vertical',
+                          overflow: 'hidden',
+                          height: 'calc(1.7em * 3)',
+                        }}
+                      >
+                        {p.description}
+                      </p>
+                    )}
 
-                  {p.prices.length > 0 ? (
-                    <div className="mt-5 overflow-hidden rounded-2xl border border-[#FDD835]/25 bg-[#FFF9C4]/60">
-                      <div className="product-prices price-list">
-                        {p.prices.map((line, i) => (
-                          <div className="price-line" key={i}>
-                            {line.label}: RM {Number(line.amount).toLocaleString()}
-                            {line.unit ? ' / ' + line.unit : ''}
-                            {line.note ? <span className="price-note">{line.note}</span> : null}
-                          </div>
-                        ))}
+                    {p.prices.length > 0 ? (
+                      <div className="mt-5 overflow-hidden rounded-2xl border border-[#FDD835]/25 bg-[#FFF9C4]/60">
+                        <div className="product-prices price-list">
+                          {p.prices.map((line, i) => (
+                            <div className="price-line" key={i}>
+                              {line.label}: RM {Number(line.amount).toLocaleString()}
+                              {line.unit ? ' / ' + line.unit : ''}
+                              {line.note ? <span className="price-note">{line.note}</span> : null}
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  ) : (p.rental_price != null || p.sale_price != null) ? (
-                    <div className="mt-5 overflow-hidden rounded-2xl border border-[#FDD835]/25 bg-[#FFF9C4]/60 text-sm">
-                      {p.rental_price != null && (
-                        <p className="flex items-center justify-between px-4 py-2.5">
-                          <span className="text-[#111111]/60">
-                            {tHome('products.plainLabel')}
-                          </span>
-                          <span className="font-semibold text-[#111111]">{rentalDisplay}</span>
-                        </p>
-                      )}
-                      {p.rental_price != null && p.sale_price != null && (
-                        <div className="h-px bg-[#FDD835]/35" />
-                      )}
-                      {p.sale_price != null && (
-                        <p className="flex items-center justify-between px-4 py-2.5">
-                          <span className="text-[#111111]/60">
-                            {tHome('products.withCoverLabel')}
-                          </span>
-                          <span className="font-semibold text-[#111111]">{saleDisplay}</span>
-                        </p>
-                      )}
-                    </div>
-                  ) : null}
+                    ) : (p.rental_price != null || p.sale_price != null) ? (
+                      <div className="mt-5 overflow-hidden rounded-2xl border border-[#FDD835]/25 bg-[#FFF9C4]/60 text-sm">
+                        {p.rental_price != null && (
+                          <p className="flex items-center justify-between px-4 py-2.5">
+                            <span className="text-[#111111]/60">
+                              {tHome('products.plainLabel')}
+                            </span>
+                            <span className="font-semibold text-[#111111]">{rentalDisplay}</span>
+                          </p>
+                        )}
+                        {p.rental_price != null && p.sale_price != null && (
+                          <div className="h-px bg-[#FDD835]/35" />
+                        )}
+                        {p.sale_price != null && (
+                          <p className="flex items-center justify-between px-4 py-2.5">
+                            <span className="text-[#111111]/60">
+                              {tHome('products.withCoverLabel')}
+                            </span>
+                            <span className="font-semibold text-[#111111]">{saleDisplay}</span>
+                          </p>
+                        )}
+                      </div>
+                    ) : null}
 
-                  <div className="mt-auto pt-5">
-                    <WAButton
-                      href={waHref}
-                      label={tShared('whatsappCta')}
-                      className="w-full"
-                    />
+                    <div className="mt-auto pt-5">
+                      <WAButton
+                        href={waHref}
+                        label={tShared('whatsappCta')}
+                        className="w-full"
+                      />
+                    </div>
                   </div>
-                </div>
-              </article>
+                </article>
+              </ProductImpressionTracker>
             )
           })}
         </div>
@@ -484,51 +486,52 @@ export default async function PageShell({
             )
             const imageUrl = a.photos[0]?.url
             return (
-              <article
-                key={a.id}
-                className="flex h-full flex-col overflow-hidden rounded-[20px] border border-[#FDD835]/30 bg-[#FFFFFF] kk-card-shadow hover:-translate-y-0.5"
-                style={{ transition: 'transform 220ms ease, box-shadow 220ms ease' }}
-              >
-                {imageUrl && (
-                  <div className="flex h-40 items-center justify-center bg-[#FFFEF8] p-3">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={imageUrl}
-                      alt={a.name}
-                      className="max-h-full max-w-full object-contain"
-                    />
-                  </div>
-                )}
-                <div className="flex flex-1 flex-col p-6">
-                  <h5 className="text-[17px] font-bold tracking-tight text-[#111111]">
-                    {a.name}
-                  </h5>
-                  {a.description && (
-                    <p
-                      className="mt-3 text-[15px] leading-[1.7] text-[#111111]/75"
-                      style={{
-                        display: '-webkit-box',
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: 'vertical',
-                        overflow: 'hidden',
-                        height: 'calc(1.7em * 2)',
-                      }}
-                    >
-                      {a.description}
-                    </p>
+              <ProductImpressionTracker key={a.id} slug={a.slug} className="h-full">
+                <article
+                  className="flex h-full flex-col overflow-hidden rounded-[20px] border border-[#FDD835]/30 bg-[#FFFFFF] kk-card-shadow hover:-translate-y-0.5"
+                  style={{ transition: 'transform 220ms ease, box-shadow 220ms ease' }}
+                >
+                  {imageUrl && (
+                    <div className="flex h-40 items-center justify-center bg-[#FFFEF8] p-3">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={imageUrl}
+                        alt={a.name}
+                        className="max-h-full max-w-full object-contain"
+                      />
+                    </div>
                   )}
-                  <div className="flex-1" />
-                  <a
-                    href={waHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-4 inline-flex items-center text-[15px] font-semibold text-[#1EB85A] hover:text-[#25D366]"
-                    style={{ transition: 'color 180ms ease' }}
-                  >
-                    {tShared('whatsappCtaShort')} →
-                  </a>
-                </div>
-              </article>
+                  <div className="flex flex-1 flex-col p-6">
+                    <h5 className="text-[17px] font-bold tracking-tight text-[#111111]">
+                      {a.name}
+                    </h5>
+                    {a.description && (
+                      <p
+                        className="mt-3 text-[15px] leading-[1.7] text-[#111111]/75"
+                        style={{
+                          display: '-webkit-box',
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: 'vertical',
+                          overflow: 'hidden',
+                          height: 'calc(1.7em * 2)',
+                        }}
+                      >
+                        {a.description}
+                      </p>
+                    )}
+                    <div className="flex-1" />
+                    <a
+                      href={waHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-4 inline-flex items-center text-[15px] font-semibold text-[#1EB85A] hover:text-[#25D366]"
+                      style={{ transition: 'color 180ms ease' }}
+                    >
+                      {tShared('whatsappCtaShort')} →
+                    </a>
+                  </div>
+                </article>
+              </ProductImpressionTracker>
             )
           })}
         </div>

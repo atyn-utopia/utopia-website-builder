@@ -7,6 +7,7 @@ import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server
 import { routing } from '@/i18n/routing'
 import { OrganizationSchema } from '@/components/schema/OrganizationSchema'
 import { siteConfig } from '@/config/site'
+import WhatsAppClickListener from '@/components/tracking/WhatsAppClickListener'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -98,6 +99,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         {/* End Google Tag Manager (noscript) */}
         <NextIntlClientProvider locale={locale} messages={messages}>
           <OrganizationSchema />
+          <WhatsAppClickListener />
           {children}
         </NextIntlClientProvider>
       </body>
