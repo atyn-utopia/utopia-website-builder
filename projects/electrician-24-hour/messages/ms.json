@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Juruelektrik 24 Jam Malaysia | Wiring & Baikpulih Kecemasan | Electrician 24 Hours",
-    "description": "Juruelektrik kecemasan 24 jam di seluruh Malaysia. Baikpulih plug point, rewiring, naik taraf DB, water heater — pada hari yang sama. Sampai dalam 4 jam. Hubungi kami di WhatsApp."
+    "title": "Juruelektrik 24 Jam Malaysia | Wiring & Baikpulih Kecemasan",
+    "description": "Juruelektrik kecemasan 24 jam di seluruh Malaysia. Baikpulih plug point, rewiring, naik taraf DB dan water heater pada hari sama. Sampai dalam 4 jam."
   },
   "nav": {
     "brandName": "Electrician 24 Hours",
@@ -245,5 +245,8 @@
     "heading": "Membuka WhatsApp…",
     "subtext": "Anda sedang dihubungkan ke pasukan Electrician 24 Hours.",
     "fallback": "Klik di sini jika tidak berpindah"
+  },
+  "contact": {
+    "availability": "Tersedia 24/7"
   }
 }

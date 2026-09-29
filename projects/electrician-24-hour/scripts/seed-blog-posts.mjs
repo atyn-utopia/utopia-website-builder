@@ -19,7 +19,7 @@ const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUP
 if (!url || !key) { console.error('Missing Supabase env'); process.exit(1); }
 
 const sb = createClient(url, key);
-const WEBSITE = 'electrician-24-hour.vercel.app';
+const WEBSITE = '24hourelectrician.my';
 
 const jsonPath = new URL('./seed-blog-posts.json', import.meta.url);
 const { posts } = JSON.parse(readFileSync(jsonPath, 'utf8'));

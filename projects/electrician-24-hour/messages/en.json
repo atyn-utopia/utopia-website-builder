@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "title": "24 Hour Electrician Malaysia | Emergency Wiring & Repair | Electrician 24 Hours",
+    "title": "24 Hour Electrician Malaysia | Emergency Wiring & Repair",
     "description": "Emergency 24-hour electrician across Malaysia. Same-day plug point, full rewiring, DB upgrade, water heater. Arrives in 4 hours. Chat on WhatsApp now."
   },
   "nav": {
@@ -245,5 +245,8 @@
     "heading": "Opening WhatsApp…",
     "subtext": "Connecting you to the Electrician 24 Hours team.",
     "fallback": "Click here if it doesn't redirect"
+  },
+  "contact": {
+    "availability": "Available 24/7"
   }
 }

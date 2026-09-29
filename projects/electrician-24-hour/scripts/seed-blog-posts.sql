@@ -1,5 +1,5 @@
 -- ============================================================================
--- Blog seed: Electrician 24 Hours (electrician-24-hour.vercel.app)
+-- Blog seed: Electrician 24 Hours (24hourelectrician.my)
 -- 10 posts x 3 languages (en, ms, zh) = 30 translation rows
 -- Run in Supabase SQL Editor (project: xzydvhzcngpxdbyniliy)
 -- ============================================================================
@@ -9,25 +9,25 @@ BEGIN;
 -- Clean re-seed
 DELETE FROM blog_translations
 WHERE post_id IN (
-  SELECT id FROM blog_posts WHERE website = 'electrician-24-hour.vercel.app'
+  SELECT id FROM blog_posts WHERE website = '24hourelectrician.my'
 );
-DELETE FROM blog_posts WHERE website = 'electrician-24-hour.vercel.app';
+DELETE FROM blog_posts WHERE website = '24hourelectrician.my';
 
 -- ============================================================================
 -- Insert 10 blog_posts + 30 blog_translations in one CTE
 -- ============================================================================
 WITH p AS (
   INSERT INTO blog_posts (slug, website, status, cover_image_url) VALUES
-    ('spot-burning-plug-point-warning-signs', 'electrician-24-hour.vercel.app', 'published', 'https://images.pexels.com/photos/5691660/pexels-photo-5691660.jpeg?auto=compress&cs=tinysrgb&w=1600'),
-    ('db-box-buzzing-fix-malaysia', 'electrician-24-hour.vercel.app', 'published', 'https://images.pexels.com/photos/5691656/pexels-photo-5691656.jpeg?auto=compress&cs=tinysrgb&w=1600'),
-    ('full-house-rewiring-malaysia-cost-timeline', 'electrician-24-hour.vercel.app', 'published', 'https://images.pexels.com/photos/8853502/pexels-photo-8853502.jpeg?auto=compress&cs=tinysrgb&w=1600'),
-    ('mcb-keeps-tripping-7-reasons', 'electrician-24-hour.vercel.app', 'published', 'https://images.pexels.com/photos/5691659/pexels-photo-5691659.jpeg?auto=compress&cs=tinysrgb&w=1600'),
-    ('24-hour-electrician-cost-malaysia-2026', 'electrician-24-hour.vercel.app', 'published', 'https://images.pexels.com/photos/8961065/pexels-photo-8961065.jpeg?auto=compress&cs=tinysrgb&w=1600'),
-    ('water-heater-electrical-safety-rccb-earth', 'electrician-24-hour.vercel.app', 'published', 'https://images.pexels.com/photos/6444/pencil-typography-black-design.jpg?auto=compress&cs=tinysrgb&w=1600'),
-    ('inverter-aircond-dedicated-mcb-wiring', 'electrician-24-hour.vercel.app', 'published', 'https://images.pexels.com/photos/4108715/pexels-photo-4108715.jpeg?auto=compress&cs=tinysrgb&w=1600'),
-    ('ceiling-fan-humming-wobbling-diagnose', 'electrician-24-hour.vercel.app', 'published', 'https://images.pexels.com/photos/5824883/pexels-photo-5824883.jpeg?auto=compress&cs=tinysrgb&w=1600'),
-    ('st-registered-vs-handyman-licensed-electrician-kl', 'electrician-24-hour.vercel.app', 'published', 'https://images.pexels.com/photos/8853510/pexels-photo-8853510.jpeg?auto=compress&cs=tinysrgb&w=1600'),
-    ('emergency-power-outage-midnight-checklist', 'electrician-24-hour.vercel.app', 'published', 'https://images.pexels.com/photos/6169056/pexels-photo-6169056.jpeg?auto=compress&cs=tinysrgb&w=1600')
+    ('spot-burning-plug-point-warning-signs', '24hourelectrician.my', 'published', 'https://images.pexels.com/photos/5691660/pexels-photo-5691660.jpeg?auto=compress&cs=tinysrgb&w=1600'),
+    ('db-box-buzzing-fix-malaysia', '24hourelectrician.my', 'published', 'https://images.pexels.com/photos/5691656/pexels-photo-5691656.jpeg?auto=compress&cs=tinysrgb&w=1600'),
+    ('full-house-rewiring-malaysia-cost-timeline', '24hourelectrician.my', 'published', 'https://images.pexels.com/photos/8853502/pexels-photo-8853502.jpeg?auto=compress&cs=tinysrgb&w=1600'),
+    ('mcb-keeps-tripping-7-reasons', '24hourelectrician.my', 'published', 'https://images.pexels.com/photos/5691659/pexels-photo-5691659.jpeg?auto=compress&cs=tinysrgb&w=1600'),
+    ('24-hour-electrician-cost-malaysia-2026', '24hourelectrician.my', 'published', 'https://images.pexels.com/photos/8961065/pexels-photo-8961065.jpeg?auto=compress&cs=tinysrgb&w=1600'),
+    ('water-heater-electrical-safety-rccb-earth', '24hourelectrician.my', 'published', 'https://images.pexels.com/photos/6444/pencil-typography-black-design.jpg?auto=compress&cs=tinysrgb&w=1600'),
+    ('inverter-aircond-dedicated-mcb-wiring', '24hourelectrician.my', 'published', 'https://images.pexels.com/photos/4108715/pexels-photo-4108715.jpeg?auto=compress&cs=tinysrgb&w=1600'),
+    ('ceiling-fan-humming-wobbling-diagnose', '24hourelectrician.my', 'published', 'https://images.pexels.com/photos/5824883/pexels-photo-5824883.jpeg?auto=compress&cs=tinysrgb&w=1600'),
+    ('st-registered-vs-handyman-licensed-electrician-kl', '24hourelectrician.my', 'published', 'https://images.pexels.com/photos/8853510/pexels-photo-8853510.jpeg?auto=compress&cs=tinysrgb&w=1600'),
+    ('emergency-power-outage-midnight-checklist', '24hourelectrician.my', 'published', 'https://images.pexels.com/photos/6169056/pexels-photo-6169056.jpeg?auto=compress&cs=tinysrgb&w=1600')
   RETURNING id, slug
 )
 INSERT INTO blog_translations (post_id, language, title, content, excerpt, meta_title, meta_description)
@@ -283,5 +283,5 @@ COMMIT;
 SELECT bp.slug, bt.language, bt.title
 FROM blog_posts bp
 JOIN blog_translations bt ON bt.post_id = bp.id
-WHERE bp.website = 'electrician-24-hour.vercel.app'
+WHERE bp.website = '24hourelectrician.my'
 ORDER BY bp.created_at DESC, bp.slug, bt.language;

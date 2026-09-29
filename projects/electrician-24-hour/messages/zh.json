@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "马来西亚24小时电工 | 紧急电线维修 | Electrician 24 Hours",
-    "description": "马来西亚24小时紧急电工服务 — 插座、重新布线、DB升级、热水器当天完成。4小时到场,WhatsApp直接联系。"
+    "description": "马来西亚24小时紧急电工服务 — 插座维修、重新布线、DB配电箱升级、热水器安装,当天完成。4小时内到场,价格透明,WhatsApp直接联系我们。"
   },
   "nav": {
     "brandName": "Electrician 24 Hours",
@@ -245,5 +245,8 @@
     "heading": "正在打开 WhatsApp…",
     "subtext": "正在为您连接 Electrician 24 Hours 团队。",
     "fallback": "如果没有自动跳转，请点击这里"
+  },
+  "contact": {
+    "availability": "24/7 全天候"
   }
 }
