@@ -18,6 +18,7 @@ import MarketingMarquee from '@/components/MarketingMarquee';
 import PageStyles from '@/components/PageStyles';
 import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker';
 import { WhatsAppButton, WaIcon } from '@/components/WhatsAppButton';
+import { withSeoOverride } from '@/lib/webcoreSeo';
 
 export async function generateMetadata({
   params,
@@ -30,14 +31,14 @@ export async function generateMetadata({
     routing.locales.map((l) => [l, `${localeHref(l)}`]),
   );
   languages['x-default'] = `${localeHref(routing.defaultLocale)}`;
-  return {
+  return withSeoOverride(locale, '', {
     title: t('title'),
     description: t('description'),
     alternates: {
       canonical: `${localeHref(locale)}`,
       languages,
     },
-  };
+  });
 }
 
 // Real TANKPRO customer/install photos (12 distinct scenes — no repeats).
