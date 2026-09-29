@@ -5,6 +5,7 @@ import { locales } from '@/i18n/routing';
 import { siteConfig } from '@/config/site';
 import HomePageClient from './HomePageClient';
 import FomoBanner from '@/components/FomoBanner';
+import ContactNumber from '@/components/ContactNumber';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import NavCtaGlobalStyle from '@/components/NavCtaGlobalStyle';
@@ -12,6 +13,7 @@ import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
 import { ProductSchema } from '@/components/schema/ProductSchema';
 import { ogImages } from '@/lib/ogImage';
+import { withSeoOverride } from '@/lib/webcoreSeo';
 
 export async function generateMetadata({
   params,
@@ -27,7 +29,7 @@ export async function generateMetadata({
     alternates[loc] = `${baseUrl}/${loc}`;
   }
 
-  return {
+  return withSeoOverride(locale, '', {
     title: t('title'),
     description: t('description'),
     alternates: seoAlternates(locale),
@@ -38,13 +40,13 @@ export async function generateMetadata({
       siteName: siteConfig.brandName,
       locale: locale,
       type: 'website',
-      images: ogImages(locale),
+          images: ogImages(locale),
     },
     robots: {
       index: true,
       follow: true,
     },
-  };
+  });
 }
 
 export default async function HomePage({
@@ -75,9 +77,9 @@ export default async function HomePage({
       {faqs.length > 0 && <FAQSchema faqs={faqs} />}
       <NavCtaGlobalStyle />
       <FomoBanner />
-      <SiteHeader />
+      <SiteHeader contact={<ContactNumber locale={locale} page="/" />} />
       <HomePageClient />
-      <SiteFooter />
+      <SiteFooter contact={<ContactNumber locale={locale} page="/" className="contact-number--footer" />} />
     </div>
   );
 }

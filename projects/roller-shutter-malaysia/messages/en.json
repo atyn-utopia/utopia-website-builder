@@ -801,8 +801,11 @@
     }
   },
   "redirect": {
-    "heading": "Opening WhatsApp…",
-    "subtext": "Connecting you to the Encik Roller Shutter team.",
-    "fallback": "Click here if it doesn't redirect"
+    "heading": "Connecting to WhatsApp…",
+    "subtext": "You'll be connected with our team shortly.",
+    "fallback": "Click here if it doesn't open"
+  },
+  "contact": {
+    "availability": "Available 24/7"
   }
 }

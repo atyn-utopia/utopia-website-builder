@@ -3,10 +3,12 @@ import { seoAlternates } from '@/lib/seoAlternates'
 import { siteConfig } from '@/config/site';
 import { getBlogPosts } from '@/lib/webcore';
 import FomoBanner from '@/components/FomoBanner';
+import ContactNumber from '@/components/ContactNumber';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import BlogLinkTracker from '@/components/tracking/BlogLinkTracker';
 import { ogImages } from '@/lib/ogImage';
+import { withSeoOverride } from '@/lib/webcoreSeo';
 
 export async function generateMetadata({
   params,
@@ -17,7 +19,7 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: 'blog' });
   const baseUrl = `https://${siteConfig.domain}`;
 
-  return {
+  return withSeoOverride(locale, '/blog', {
     title: t('metaTitle'),
     description: t('metaDescription'),
     alternates: seoAlternates(locale, `/blog`),
@@ -27,9 +29,9 @@ export async function generateMetadata({
       url: `${baseUrl}/${locale}/blog`,
       siteName: siteConfig.brandName,
       type: 'website',
-      images: ogImages(locale),
+          images: ogImages(locale),
     },
-  };
+  });
 }
 
 export default async function BlogListingPage({
@@ -44,7 +46,7 @@ export default async function BlogListingPage({
   return (
     <>
       <FomoBanner />
-      <SiteHeader />
+      <SiteHeader contact={<ContactNumber locale={locale} page="/blog" />} />
 
       {/* BLOG HEADER */}
       <section style={{ background: 'var(--gradient-hero)', padding: '64px 24px' }}>
@@ -161,7 +163,7 @@ export default async function BlogListingPage({
         </div>
       </section>
 
-      <SiteFooter />
+      <SiteFooter contact={<ContactNumber locale={locale} page="/blog" className="contact-number--footer" />} />
     </>
   );
 }

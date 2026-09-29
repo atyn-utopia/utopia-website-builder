@@ -7,6 +7,7 @@ import { siteConfig } from '@/config/site';
 import { locations } from '@/config/locations';
 import LocationPageClient from './LocationPageClient';
 import FomoBanner from '@/components/FomoBanner';
+import ContactNumber from '@/components/ContactNumber';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import PageStyles from '@/components/PageStyles';
@@ -14,6 +15,7 @@ import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
 import { ogImages } from '@/lib/ogImage';
+import { withSeoOverride } from '@/lib/webcoreSeo';
 
 type Params = { locale: string; location: string };
 
@@ -57,7 +59,7 @@ export async function generateMetadata({
     alternates[loc] = `${baseUrl}/${loc}/roller-shutter/${location}`;
   }
 
-  return {
+  return withSeoOverride(locale, `/roller-shutter/${location}`, {
     title: metaTitle,
     description: metaDescription,
     alternates: seoAlternates(locale, `/roller-shutter/${location}`),
@@ -68,13 +70,13 @@ export async function generateMetadata({
       siteName: siteConfig.brandName,
       locale: locale,
       type: 'website',
-      images: ogImages(locale),
+          images: ogImages(locale),
     },
     robots: {
       index: true,
       follow: true,
     },
-  };
+  });
 }
 
 // No time-based ISR — caching is now tag-based via lib/webcore + /api/revalidate.
@@ -108,9 +110,9 @@ export default async function LocationPage({
       {faqs.length > 0 && <FAQSchema faqs={faqs} />}
       <PageStyles />
       <FomoBanner />
-      <SiteHeader />
+      <SiteHeader contact={<ContactNumber locale={locale} page={`/${siteConfig.productSlug}/${location}`} />} />
       <LocationPageClient />
-      <SiteFooter />
+      <SiteFooter contact={<ContactNumber locale={locale} page={`/${siteConfig.productSlug}/${location}`} className="contact-number--footer" />} />
     </>
   );
 }

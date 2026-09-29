@@ -801,8 +801,11 @@
     }
   },
   "redirect": {
-    "heading": "Membuka WhatsApp…",
-    "subtext": "Anda sedang dihubungkan ke pasukan Encik Roller Shutter.",
-    "fallback": "Klik di sini jika tidak berpindah"
+    "heading": "Menghubungkan ke WhatsApp…",
+    "subtext": "Anda akan dihubungkan dengan pasukan kami sebentar lagi.",
+    "fallback": "Klik di sini jika tidak terbuka"
+  },
+  "contact": {
+    "availability": "Tersedia 24/7"
   }
 }

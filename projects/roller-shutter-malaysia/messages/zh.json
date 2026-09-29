@@ -801,8 +801,11 @@
     }
   },
   "redirect": {
-    "heading": "正在打开 WhatsApp…",
-    "subtext": "正在为您连接 Encik Roller Shutter 团队。",
-    "fallback": "如果没有自动跳转，请点击这里"
+    "heading": "正在连接 WhatsApp…",
+    "subtext": "我们的团队稍后将与您联系。",
+    "fallback": "如果未自动打开，请点击这里"
+  },
+  "contact": {
+    "availability": "24/7 全天候"
   }
 }

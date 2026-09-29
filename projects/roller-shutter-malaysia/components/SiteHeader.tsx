@@ -14,7 +14,14 @@ function WaIcon({ size = 16 }: { size?: number }) {
   )
 }
 
-export default function SiteHeader() {
+/**
+ * `contact` is a ReactNode, not a phone string, because the number is resolved
+ * on the server (`getDisplayPhone`) and this is a client component. Every page
+ * renders it as
+ * `<SiteHeader contact={<ContactNumber locale={locale} page="…" />} />`,
+ * passing its own path — `is_display` is keyed per (website, page_slug).
+ */
+export default function SiteHeader({ contact }: { contact?: React.ReactNode }) {
   const t = useTranslations('nav')
   const locale = useLocale()
   const [open, setOpen] = useState(false)
@@ -56,6 +63,7 @@ export default function SiteHeader() {
         </button>
 
         <div className="site-actions">
+          {contact}
           <div className="site-actions__lang"><LanguageSwitcher /></div>
           <a
             href={waHref}
@@ -79,6 +87,7 @@ export default function SiteHeader() {
           <Link href={`/${locale}/blog`} onClick={close}>{t('blog')}</Link>
         </nav>
         <div className="site-mobile-actions">
+          {contact}
           <LanguageSwitcher />
           <a
             href={waHref}
