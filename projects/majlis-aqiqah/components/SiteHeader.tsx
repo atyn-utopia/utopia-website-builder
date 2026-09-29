@@ -8,7 +8,14 @@ import { WhatsAppButton, WaIcon } from './WhatsAppButton';
 import { waRedirect } from '@/lib/waRedirect';
 import { localePath } from '@/lib/localeHref';
 
-export default function SiteHeader() {
+/**
+ * `contact` is a ReactNode, not a phone string, because the number is resolved
+ * on the server (`getDisplayPhone`) and this is a client component. Every page
+ * renders it as
+ * `<SiteHeader contact={<ContactNumber locale={locale} page="…" />} />`,
+ * passing its own path — `is_display` is keyed per (website, page_slug).
+ */
+export default function SiteHeader({ contact }: { contact?: React.ReactNode }) {
   const t = useTranslations('nav');
   const locale = useLocale();
   const [open, setOpen] = useState(false);
@@ -39,6 +46,7 @@ export default function SiteHeader() {
         </button>
 
         <div className="site-actions">
+          {contact}
           <div className="site-actions__lang"><LanguageSwitcher /></div>
           <WhatsAppButton href={waRedirect(locale)} label="nav" className="btn btn-wa nav-cta">
             <WaIcon size={16} />
@@ -56,6 +64,7 @@ export default function SiteHeader() {
           <Link href={localePath(locale, '/blog')} onClick={close}>{t('blog')}</Link>
         </nav>
         <div className="site-mobile-actions">
+          {contact}
           <LanguageSwitcher />
           <WhatsAppButton href={waRedirect(locale)} label="nav-mobile" className="btn btn-wa">
             <WaIcon size={16} />

@@ -21,6 +21,7 @@ import { ProductSchema } from '@/components/schema/ProductSchema';
 import { LocalBusinessSchema } from '@/components/schema/LocalBusinessSchema';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 import { FAQSchema } from '@/components/schema/FAQSchema';
+import ContactNumber from '@/components/ContactNumber';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import FomoBanner from '@/components/FomoBanner';
@@ -29,6 +30,7 @@ import MarketingMarquee from '@/components/MarketingMarquee';
 import PageStyles from '@/components/PageStyles';
 import ProductImpressionTracker from '@/components/tracking/ProductImpressionTracker';
 import { WhatsAppButton, WaIcon } from '@/components/WhatsAppButton';
+import { withSeoOverride } from '@/lib/webcoreSeo';
 
 const GALLERY_IMAGES = [
   '/gallery/1.jpg', '/gallery/2.jpg', '/gallery/3.jpg', '/gallery/4.jpg',
@@ -66,7 +68,7 @@ export async function generateMetadata({
     routing.locales.map((l) => [l, `${localeAbs(l)}${path}`]),
   );
   languages['x-default'] = `${localeAbs(routing.defaultLocale)}${path}`;
-  return {
+  return withSeoOverride(locale, path, {
     title,
     description,
     alternates: { canonical: `${localeAbs(locale)}${path}`, languages },
@@ -78,7 +80,7 @@ export async function generateMetadata({
       siteName: siteConfig.brandName,
       images: ogImages(locale, title),
     },
-  };
+  });
 }
 
 function GoogleG({ size = 22 }: { size?: number }) {
@@ -190,7 +192,7 @@ export default async function LocationPage({
   return (
     <>
       <FomoBanner />
-      <SiteHeader />
+      <SiteHeader contact={<ContactNumber locale={locale} page={`/pakej-aqiqah/${location}`} />} />
 
       <LocalBusinessSchema locale={locale} locationName={loc.name} locationSlug={loc.slug} state={loc.state} />
       <BreadcrumbSchema
@@ -563,7 +565,7 @@ export default async function LocationPage({
         </div>
       </section>
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} page={`/pakej-aqiqah/${location}`} />
 
       <PageStyles />
       <style>{`

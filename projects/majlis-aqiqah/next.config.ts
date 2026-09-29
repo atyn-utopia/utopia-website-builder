@@ -7,6 +7,11 @@ loadEnvConfig(process.cwd() + '/../..');
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
 const nextConfig: NextConfig = {
+  // Block on metadata for every user agent, so <title> and the description
+  // always land in <head>. Next streams them into <body> for any agent not on
+  // its short HTML-limited list, and Googlebot and webcore's SEO audit are not
+  // on it — the audit reads head > title and reported no title at all.
+  htmlLimitedBots: /.*/,
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'placehold.co' },

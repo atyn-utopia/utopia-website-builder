@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import BlogLinkTracker from '@/components/tracking/BlogLinkTracker';
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
@@ -13,9 +14,11 @@ import { waRedirect } from '@/lib/waRedirect';
 import { ArticleSchema } from '@/components/schema/ArticleSchema';
 import { BreadcrumbSchema } from '@/components/schema/BreadcrumbSchema';
 import { WhatsAppButton, WaIcon } from '@/components/WhatsAppButton';
+import ContactNumber from '@/components/ContactNumber';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import FomoBanner from '@/components/FomoBanner';
+import { withSeoOverride } from '@/lib/webcoreSeo';
 
 export async function generateStaticParams() {
   const slugs = await getBlogPostSlugs();
@@ -38,7 +41,7 @@ export async function generateMetadata({
     routing.locales.map((l) => [l, `${localeAbs(l)}${path}`]),
   );
   languages['x-default'] = `${localeAbs(routing.defaultLocale)}${path}`;
-  return {
+  return withSeoOverride(locale, path, {
     title: tr.meta_title || `${tr.title} | ${siteConfig.brandName}`,
     description: tr.meta_description || tr.excerpt,
     alternates: { canonical: `${localeAbs(locale)}${path}`, languages },
@@ -53,7 +56,7 @@ export async function generateMetadata({
         : ogImages(locale, tr.title),
       publishedTime: post.published_at,
     },
-  };
+  });
 }
 
 export default async function BlogPostPage({
@@ -73,7 +76,7 @@ export default async function BlogPostPage({
   return (
     <>
       <FomoBanner />
-      <SiteHeader />
+      <SiteHeader contact={<ContactNumber locale={locale} page={`/blog/${slug}`} />} />
       <ArticleSchema
         locale={locale}
         slug={slug}
@@ -136,7 +139,7 @@ export default async function BlogPostPage({
               <ul>
                 {recent.map((r) => (
                   <li key={r.slug}>
-                    <Link href={localePath(locale, `/blog/${r.slug}`)}>{r.blog_translations[0]?.title}</Link>
+                    <BlogLinkTracker slug={r.slug} href={localePath(locale, `/blog/${r.slug}`)}>{r.blog_translations[0]?.title}</BlogLinkTracker>
                   </li>
                 ))}
               </ul>
@@ -145,7 +148,7 @@ export default async function BlogPostPage({
         </div>
       </article>
 
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} page={`/blog/${slug}`} />
 
       <style>{`
         .post-header { padding: 56px 0 32px; background: #FFFFFF; border-bottom: 1px solid var(--line); }

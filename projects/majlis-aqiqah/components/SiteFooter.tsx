@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import ContactNumber from './ContactNumber';
 import { getTranslations } from 'next-intl/server';
 import { localePath } from '@/lib/localeHref';
 
@@ -11,7 +12,14 @@ import { localePath } from '@/lib/localeHref';
  * Only the palette and the logo file are per-project. This site runs the band in
  * brand emerald, so it uses the DARK-background logo variant (white + gold wordmark).
  */
-export default async function SiteFooter({ locale }: { locale: string }) {
+export default async function SiteFooter({
+  locale,
+  page,
+}: {
+  locale: string;
+  /** Locale-stripped path, forwarded to ContactNumber — see that component. */
+  page?: string;
+}) {
   const t = await getTranslations({ locale, namespace: 'footer' });
   const navT = await getTranslations({ locale, namespace: 'nav' });
 
@@ -29,9 +37,12 @@ export default async function SiteFooter({ locale }: { locale: string }) {
             <Link href={localePath(locale, '/blog')}>{navT('blog')}</Link>
             <Link href={`${localePath(locale)}#faq`}>{t('faqLabel')}</Link>
           </nav>
+
+          <ContactNumber locale={locale} page={page} className="contact-number--footer" />
         </div>
 
         <div className="footer-line" aria-hidden="true" />
+
 
         <div className="footer-bottom">
           <p className="footer-copy">{t('copyright')}</p>
