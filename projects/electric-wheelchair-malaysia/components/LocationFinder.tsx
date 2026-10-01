@@ -1,25 +1,13 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 export interface FinderTown {
   slug: string;
   name: string;
   state: string;
   href: string;
-}
-
-export interface FinderLabels {
-  placeholder: string;
-  all: string;
-  /** "{n} towns" — the count next to the search box. */
-  count: string;
-  /** "Showing {shown} of {n} — …" under the list when it is collapsed. */
-  more: string;
-  /** "Show all {n}" — the button that expands the collapsed list. */
-  showAll: string;
-  /** "No town called “{q}” yet — …" */
-  empty: string;
 }
 
 const INITIAL = 12;
@@ -29,16 +17,19 @@ const INITIAL = 12;
  * and stays in the DOM — filtering only toggles `hidden` — so crawlers see all
  * 84 internal links while a phone user sees twelve until they type or pick a
  * state.
+ *
+ * Labels come from the `locations.finder*` messages with ICU substitution —
+ * the count, "Showing {shown} of {n}", "Show all {n}" and the empty-state
+ * "{q}" are filled by next-intl, never by string `.replace()`.
  */
 export default function LocationFinder({
   towns,
   states,
-  labels,
 }: {
   towns: FinderTown[];
   states: string[];
-  labels: FinderLabels;
 }) {
+  const t = useTranslations('locations');
   const [query, setQuery] = useState('');
   const [state, setState] = useState('');
   const [expanded, setExpanded] = useState(false);
@@ -51,7 +42,7 @@ export default function LocationFinder({
     [towns, state, q],
   );
   const visible = new Set((filtering || expanded ? matches : matches.slice(0, INITIAL)).map((t) => t.slug));
-  const fill = (s: string) => s.replace('{n}', String(matches.length)).replace('{shown}', String(INITIAL)).replace('{q}', query.trim());
+  const n = matches.length;
 
   return (
     <div className="ew-find">
@@ -61,16 +52,16 @@ export default function LocationFinder({
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder={labels.placeholder}
+          placeholder={t('finderPlaceholder')}
           autoComplete="off"
-          aria-label={labels.placeholder}
+          aria-label={t('finderPlaceholder')}
         />
-        <span aria-live="polite">{fill(labels.count)}</span>
+        <span aria-live="polite">{t('finderCount', { n })}</span>
       </label>
 
       <div className="ew-find__filters" role="group">
         <button type="button" aria-pressed={state === ''} onClick={() => setState('')}>
-          {labels.all}
+          {t('finderAll')}
         </button>
         {states.map((s) => (
           <button key={s} type="button" aria-pressed={state === s} onClick={() => setState(state === s ? '' : s)}>
@@ -88,13 +79,13 @@ export default function LocationFinder({
         ))}
       </div>
 
-      {matches.length === 0 && <p className="ew-find__empty">{fill(labels.empty)}</p>}
+      {matches.length === 0 && <p className="ew-find__empty">{t('finderEmpty', { q: query.trim() })}</p>}
 
       {!filtering && !expanded && matches.length > INITIAL && (
         <p className="ew-find__more">
-          {fill(labels.more)}{' '}
+          {t('finderMore', { shown: INITIAL, n })}{' '}
           <button type="button" onClick={() => setExpanded(true)}>
-            {fill(labels.showAll)}
+            {t('finderShowAll', { n })}
           </button>
         </p>
       )}
