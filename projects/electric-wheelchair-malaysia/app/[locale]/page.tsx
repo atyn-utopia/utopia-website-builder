@@ -145,13 +145,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </section>
 
       <UspBar locale={locale} />
-      <ProductSection locale={locale} waHref={waHref} />
-      <StepsSection locale={locale} waHref={waHref} />
+      <ProductSection locale={locale} />
+      <StepsSection locale={locale} />
       <DailyLifeSection locale={locale} />
       <LocationsSection locale={locale} />
       <FaqSection locale={locale} faqs={faqs} />
       <ReviewsSection locale={locale} />
-      <FinalCta locale={locale} waHref={waHref} />
+      <FinalCta locale={locale} />
 
       <SiteFooter locale={locale as 'en' | 'ms' | 'zh'} page="/" />
     </>

@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/config/site';
 import { getProducts } from '@/lib/webcore';
+import { waRedirect } from '@/lib/waRedirect';
 import ProductShowcase, { type ShowcasePhoto } from '@/components/ProductShowcase';
 import { Icon, WhatsAppIcon } from './Icons';
 
@@ -33,8 +34,11 @@ function formatRM(amount: number): string {
 
 const SPEC_ICONS = ['fold', 'recline', 'joystick', 'award', 'wrench'] as const;
 
-/** The chair: webcore name, blurb and prices, two photos, spec list, CTA. */
-export default async function ProductSection({ locale, waHref }: { locale: string; waHref: string }) {
+/**
+ * The chair: webcore name, blurb and prices, two photos, spec list, CTA.
+ * `location` is the town slug on a location page, so the lead is attributed to it.
+ */
+export default async function ProductSection({ locale, location }: { locale: string; location?: string }) {
   const t = await getTranslations({ locale, namespace: 'products' });
   const products = await getProducts();
   const product = products[0] ?? null;
@@ -107,7 +111,7 @@ export default async function ProductSection({ locale, waHref }: { locale: strin
               ))}
             </dl>
 
-            <a href={waHref} target="_blank" rel="noopener noreferrer" className="wa-btn">
+            <a href={waRedirect(locale, undefined, location)} target="_blank" rel="noopener noreferrer" className="wa-btn">
               <WhatsAppIcon size={18} />
               {t('cta')}
             </a>

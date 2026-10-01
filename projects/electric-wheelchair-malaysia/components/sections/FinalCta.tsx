@@ -1,18 +1,20 @@
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
+import { waRedirect } from '@/lib/waRedirect';
 import { WhatsAppIcon } from './Icons';
 
 /**
  * The closing band: dusk photo full-bleed under a navy overlay, white copy.
- * `heading` lets a location page put the city in the line.
+ * `heading` lets a location page put the city in the line; `location` passes
+ * its slug through to the redirect.
  */
 export default async function FinalCta({
   locale,
-  waHref,
+  location,
   heading,
 }: {
   locale: string;
-  waHref: string;
+  location?: string;
   heading?: string;
 }) {
   const t = await getTranslations({ locale, namespace: 'finalCta' });
@@ -26,7 +28,7 @@ export default async function FinalCta({
         <span className="ew-eyebrow ew-eyebrow--on-dark">{t('eyebrow')}</span>
         <h3>{heading ?? t('heading')}</h3>
         <p>{t('subheading')}</p>
-        <a href={waHref} target="_blank" rel="noopener noreferrer" className="wa-btn">
+        <a href={waRedirect(locale, undefined, location)} target="_blank" rel="noopener noreferrer" className="wa-btn">
           <WhatsAppIcon size={18} />
           {t('cta')}
         </a>

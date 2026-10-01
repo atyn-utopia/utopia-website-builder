@@ -27,18 +27,7 @@ export default async function LocationsSection({ locale }: { locale: string }) {
           <p>{t('finderSubheading', { n: towns.length })}</p>
         </div>
         <div className="ew-reveal">
-          <LocationFinder
-            towns={towns}
-            states={states}
-            labels={{
-              placeholder: t('finderPlaceholder'),
-              all: t('finderAll'),
-              count: t('finderCount'),
-              more: t('finderMore'),
-              showAll: t('finderShowAll'),
-              empty: t('finderEmpty'),
-            }}
-          />
+          <LocationFinder towns={towns} states={states} />
         </div>
       </div>
     </section>

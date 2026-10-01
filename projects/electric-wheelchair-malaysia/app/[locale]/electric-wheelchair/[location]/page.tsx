@@ -171,8 +171,8 @@ export default async function LocationPage({ params }: { params: Promise<{ local
         </div>
       )}
 
-      <ProductSection locale={locale} waHref={waHref} />
-      <StepsSection locale={locale} waHref={waHref} />
+      <ProductSection locale={locale} location={locationSlug} />
+      <StepsSection locale={locale} location={locationSlug} />
 
       {/* ── Local introduction: one per region, so no two states read alike ── */}
       <section className="ew-sec ew-sec--paper ew-intro">
@@ -188,7 +188,7 @@ export default async function LocationPage({ params }: { params: Promise<{ local
 
       <FaqSection locale={locale} faqs={faqs} />
       <ReviewsSection locale={locale} />
-      <FinalCta locale={locale} waHref={waHref} heading={t('finalHeading', { city })} />
+      <FinalCta locale={locale} location={locationSlug} heading={t('finalHeading', { city })} />
 
       <SiteFooter locale={locale as 'en' | 'ms' | 'zh'} page={pagePath} />
     </>

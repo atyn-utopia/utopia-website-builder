@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
+import { waRedirect } from '@/lib/waRedirect';
 import { WhatsAppIcon } from './Icons';
 
 /**
@@ -7,7 +8,7 @@ import { WhatsAppIcon } from './Icons';
  * WhatsApp CTA (CLAUDE.md: step one is "WhatsApp us", so this is the
  * highest-intent moment on the page).
  */
-export default async function StepsSection({ locale, waHref }: { locale: string; waHref: string }) {
+export default async function StepsSection({ locale, location }: { locale: string; location?: string }) {
   const t = await getTranslations({ locale, namespace: 'howItWorks' });
   const tProducts = await getTranslations({ locale, namespace: 'products' });
 
@@ -48,7 +49,7 @@ export default async function StepsSection({ locale, waHref }: { locale: string;
         </ol>
 
         <div className="ew-steps__cta">
-          <a href={waHref} target="_blank" rel="noopener noreferrer" className="wa-btn">
+          <a href={waRedirect(locale, undefined, location)} target="_blank" rel="noopener noreferrer" className="wa-btn">
             <WhatsAppIcon size={18} />
             {tProducts('cta')}
           </a>
