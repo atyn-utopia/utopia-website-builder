@@ -1,0 +1,23 @@
+{
+  "domain": "langsirtingkap.my",
+  "ga4": {
+    "accountId": "153453478",
+    "accountName": "Utopia 1st Analytics",
+    "propertyId": "556996538",
+    "propertyName": "properties/556996538",
+    "measurementId": "G-BP5DMB37FN",
+    "streamName": "properties/556996538/dataStreams/15910378610",
+    "siteUrl": "https://langsirtingkap.my",
+    "createdAt": "2026-10-01T06:12:25.761Z"
+  },
+  "containerId": "GTM-MJ8KBDCL",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-BP5DMB37FN",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-10-01T06:13:02.741Z"
+}
