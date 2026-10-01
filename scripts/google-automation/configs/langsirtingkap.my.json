@@ -19,5 +19,21 @@
       "eventName": "whatsapp_click"
     }
   ],
-  "createdAt": "2026-10-01T06:13:02.741Z"
+  "createdAt": "2026-10-01T06:13:02.741Z",
+  "gsc": {
+    "siteUrl": "https://langsirtingkap.my/",
+    "token": "<meta name=\"google-site-verification\" content=\"nIsAsq5pYj5cxO_xYkbyeXNgiyjsnVzRQE0FL_DJtwc\" />",
+    "initAt": "2026-10-01T06:50:51.164Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-10-01T06:53:20.710Z"
+  },
+  "ads": {
+    "customerId": "1933757591",
+    "ga4PropertyId": "556996538",
+    "conversionActionId": "7811013597",
+    "conversionActionName": "langsirtingkap.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "importedAt": "2026-10-01T06:53:42.102Z"
+  }
 }
