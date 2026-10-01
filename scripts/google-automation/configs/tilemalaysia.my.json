@@ -1,0 +1,39 @@
+{
+  "domain": "tilemalaysia.my",
+  "ga4": {
+    "accountId": "153453478",
+    "accountName": "Utopia 1st Analytics",
+    "propertyId": "556936478",
+    "propertyName": "properties/556936478",
+    "measurementId": "G-LBVTYML5HT",
+    "streamName": "properties/556936478/dataStreams/15913262675",
+    "siteUrl": "https://tilemalaysia.my",
+    "createdAt": "2026-10-01T07:17:43.412Z"
+  },
+  "containerId": "GTM-P2GMZ5MP",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-LBVTYML5HT",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-10-01T07:18:23.679Z",
+  "gsc": {
+    "siteUrl": "https://tilemalaysia.my/",
+    "token": "<meta name=\"google-site-verification\" content=\"w3-lQlqWpRdx86hEYodnHLNnpTFPW9GMlCvEJvZBFyo\" />",
+    "initAt": "2026-10-01T07:19:13.365Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-10-01T07:22:40.093Z"
+  },
+  "ads": {
+    "customerId": "1933757591",
+    "ga4PropertyId": "556936478",
+    "conversionActionId": "7810951115",
+    "conversionActionName": "tilemalaysia.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "importedAt": "2026-10-01T07:23:00.717Z"
+  }
+}
