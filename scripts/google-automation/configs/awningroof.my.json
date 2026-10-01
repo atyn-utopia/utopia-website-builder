@@ -1,0 +1,39 @@
+{
+  "domain": "awningroof.my",
+  "ga4": {
+    "accountId": "153453478",
+    "accountName": "Utopia 1st Analytics",
+    "propertyId": "556935279",
+    "propertyName": "properties/556935279",
+    "measurementId": "G-FS25M0QCKV",
+    "streamName": "properties/556935279/dataStreams/15913373787",
+    "siteUrl": "https://www.awningroof.my",
+    "createdAt": "2026-10-01T07:21:14.880Z"
+  },
+  "containerId": "GTM-NT4D4PK9",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-FS25M0QCKV",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-10-01T07:22:06.184Z",
+  "gsc": {
+    "siteUrl": "https://awningroof.my/",
+    "token": "<meta name=\"google-site-verification\" content=\"vMpsM01kl9vys_dN5BO47Ge69YLNHS8gV9yz3tvjvwM\" />",
+    "initAt": "2026-10-01T07:23:47.504Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-10-01T07:32:00.942Z"
+  },
+  "ads": {
+    "customerId": "1933757591",
+    "ga4PropertyId": "556935279",
+    "conversionActionId": "7811116222",
+    "conversionActionName": "awningroof.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "importedAt": "2026-10-01T07:32:24.580Z"
+  }
+}
