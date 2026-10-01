@@ -120,6 +120,9 @@ See `docs/full-website-setup.md` for the complete setup reference (MANDATORY —
 ## IMPORTANT: New Website Flow Enforcement
 When the user asks to create a new website, you MUST follow `docs/full-website-setup.md` exactly. Do NOT skip steps, reorder steps, or improvise your own flow. Read the doc first, then execute step by step. Every checklist item must be completed before moving to the next step. Both user approval gates (Gate 1: design, Gate 2: content) are blocking — do not proceed without explicit user confirmation.
 
+## IMPORTANT: Fixing an Existing Site
+When the user asks to fix an existing site (e.g. a CY / `utopia-starter` site that fails the fleet checklist — hardcoded `wa.me`, no webcore, BM/EN toggle), follow `docs/fix-existing-site.md`, not the new-website flow. First ask the user for the company, WhatsApp number and domain; keep the site's `src/` layout and design; one issue + PR per concern in the order the doc gives.
+
 ## Execution order
 
 1. Alpha — design system architecture (confirms languages with user)
