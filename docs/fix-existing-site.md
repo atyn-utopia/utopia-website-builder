@@ -1,7 +1,7 @@
 # Fixing an existing site (CY / `utopia-starter` sites)
 
 Use this flow when the job is to **bring an existing site up to the fleet
-checklist**, not to build a new one. Typical case: a site CY (`chokchunynh`)
+checklist** *and the site was not built by us*. Decide that first (below). Typical case: a site CY (`chokchunynh`)
 built from `utopia-starter` — `src/app` layout, a client-side BM/EN toggle,
 `wa.me/<number>` hardcoded in `src/lib/constants.ts`, no webcore, deployed by CLI.
 
@@ -14,6 +14,35 @@ PRs #3–#23, wizard 100/100) and **lantaivinyl.my** (`site-lantaivinyl.my`).
 When in doubt, read how the matching PR there did it.
 
 ---
+
+## Was this site built by us? (decide before anything else)
+
+**Built by us** = generated through this repo's new-website flow
+(`docs/full-website-setup.md`). Fix it with **our docs**: `CLAUDE.md` fleet
+rules, `docs/full-website-setup.md`, the `*-build.md` docs and the
+`water-tank-malaysia` template. Do **not** use this file.
+
+**Not built by us** (CY's `utopia-starter` sites, a teammate's other template,
+a client repo) = use **this file**.
+
+Check, in order — the first decisive hit wins:
+
+| Check | Built by us | Not built by us |
+|---|---|---|
+| `inputs.md` in the project root (Step 1 output of our flow) | present | absent |
+| First commit (`git log --reverse --format='%an %s' \| head -1`) | builder flow / `atyn-utopia` | `Initial commit: Utopia Starter Template`, `init from utopia-starter`, author `CY` / `chokchunynh` (in a standalone repo; inside this monorepo the first commit of a path is not meaningful) |
+| `.claude/CLAUDE.md` in the project | absent, or a project brief | starts `# Utopia Starter Template` |
+| Layout | `app/[locale]/`, `config/site.ts`, `components/SiteHeader.tsx` at the root | `src/app/` with no `[locale]`, `src/lib/language.tsx` BM/EN toggle, or a JSX template (`app/*.jsx`) |
+| WhatsApp | CTAs go to `/redirect-whatsapp-1` | `wa.me/<number>` hardcoded in `constants` |
+
+`package.json` `"name": "utopia-starter"` is **not** decisive — several of our
+own sites kept that name. A site that was already fixed with this file
+(reno.my, sewascissorlift.my, lantaivinyl.my) stays on this file's conventions
+for later fixes: keep its `src/` layout, don't re-template it. The fleet rules
+in `CLAUDE.md` (headings, WhatsApp green, phone from the DB, …) apply to both
+kinds.
+
+If the checks disagree, say what you found and ask the user.
 
 ## 0. Before touching code
 
