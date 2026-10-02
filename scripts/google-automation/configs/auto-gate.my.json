@@ -1,0 +1,39 @@
+{
+  "domain": "auto-gate.my",
+  "ga4": {
+    "accountId": "153453478",
+    "accountName": "Utopia 1st Analytics",
+    "propertyId": "557086683",
+    "propertyName": "properties/557086683",
+    "measurementId": "G-74E162XZVL",
+    "streamName": "properties/557086683/dataStreams/15941028831",
+    "siteUrl": "https://auto-gate.my",
+    "createdAt": "2026-10-02T05:01:45.621Z"
+  },
+  "containerId": "GTM-NL4PJFSR",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-74E162XZVL",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-10-02T05:01:58.021Z",
+  "gsc": {
+    "siteUrl": "https://auto-gate.my/",
+    "token": "<meta name=\"google-site-verification\" content=\"MBOGG3poBg17SgkN24CwNs_FndCf3K3tcU4KtIQ3bJM\" />",
+    "initAt": "2026-10-02T09:17:23.013Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-10-02T09:20:02.907Z"
+  },
+  "ads": {
+    "customerId": "1933757591",
+    "ga4PropertyId": "557086683",
+    "conversionActionId": "7813466333",
+    "conversionActionName": "auto-gate.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "importedAt": "2026-10-02T09:21:30.038Z"
+  }
+}
