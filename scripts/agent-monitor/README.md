@@ -54,10 +54,10 @@ counts — sessions in other workspace repos are left off.
 Built on the Utopia Brand CI v2.0.1 (utopiagroup.com.my/brand-ci): Plus Jakarta
 Sans 800 for display, Inter for body, CI neutrals, 8px buttons / 12px cards, and
 the CI status colours — warning amber for websites still building, live green for
-shipped ones. The logo (`public/brand/logo-*.svg`, made by `logo/build.py`) is "website
-factory" outlined from Plus Jakarta Sans ExtraBold, with the o of factory
-replaced by a Utopia Blue gear that fits the o's slot exactly and a Utopia Red
-triangle in its counter; the footer carries the locked `utopia▲ AI Team`
+shipped ones. The logo (`public/brand/logo-*.svg`, made by `logo/build.py`) follows the
+Utopia product logos' two weights: a small ExtraLight "website" set flush right
+above a large ExtraBold "factory", whose o is a Utopia Blue gear with a Utopia
+Red triangle in its counter; the footer carries the locked `utopia▲ AI Team`
 mark (supplied SVGs, not redrawn).
 
 On a screen at least 900×620 the page fits without scrolling: the card and
