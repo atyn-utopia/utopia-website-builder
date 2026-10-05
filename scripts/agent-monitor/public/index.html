@@ -25,7 +25,7 @@
   --r-button:8px; --r-card:12px; --r-lg:16px; --r-pill:999px;
   --ease:cubic-bezier(.22,1,.36,1); --dur-hover:220ms; --dur-layout:320ms;
   --logo-light:block; --logo-dark:none;
-  --card-h:152px; --crate-h:44px;
+  --card-h:152px; --crate-h:32px;
   --ct-mix:100%;
 }
 /* dark: follows the system, or the header toggle (data-theme) either way */
@@ -183,7 +183,7 @@ button{font:inherit}
   /* both panels sit in the same tray, which fills the row, so the two always end level */
   background:var(--bone);border-radius:var(--r-lg);box-shadow:inset 0 0 0 1px var(--line)}
 .cards{grid-template-columns:repeat(var(--cols,1),minmax(0,1fr));grid-auto-rows:var(--card-h)}
-.bay{grid-auto-rows:var(--crate-h);gap:6px}
+.bay{grid-auto-rows:var(--crate-h);gap:4px}
 
 .product{background:var(--panel);border-radius:var(--r-card);box-shadow:var(--shadow);overflow:hidden;border:2px solid var(--build);min-width:0;display:flex;flex-direction:column}
 .product .bar{display:flex;gap:5px;align-items:center;height:24px;padding:0 10px;background:var(--build);flex:none}
@@ -211,13 +211,14 @@ button{font:inherit}
 .product.arrive{animation:arrive .7s var(--ease)}
 @keyframes arrive{from{transform:translateY(-12px);opacity:0}}
 
-.crate{background:var(--live-soft);border:1.5px solid var(--live);border-radius:var(--r-button);padding:5px 10px;display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:10px;align-items:center;min-width:0}
-.crate .tick{grid-row:span 2;width:24px;height:24px;border-radius:var(--r-button);background:var(--live);color:var(--on-live);display:grid;place-items:center}
-.crate .tick svg{width:16px;height:16px}
-.crate a{font:800 14px/1.2 var(--display);color:var(--live-ink);text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-radius:4px}
+/* one line per shipped site, so ten fit on a page */
+.crate{background:var(--live-soft);border:1.5px solid var(--live);border-radius:var(--r-button);padding:0 10px 0 6px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:8px;align-items:center;min-width:0}
+.crate .tick{width:20px;height:20px;border-radius:5px;border-radius:var(--r-button);background:var(--live);color:var(--on-live);display:grid;place-items:center}
+.crate .tick svg{width:13px;height:13px}
+.crate a{font:700 13.5px/1.2 var(--display);color:var(--live-ink);text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-radius:4px}
 .crate a:hover{text-decoration:underline}
 .crate a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-.crate small{color:var(--muted);font-size:11.5px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crate small{color:var(--muted);font-size:12px;line-height:1.2;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .empty{color:var(--muted);background:var(--panel);border-radius:var(--r-card);padding:16px;text-align:center;grid-column:1/-1;align-self:start}
 
 /* pager — flips on its own every few seconds, pauses while you hover or use it */
@@ -307,7 +308,9 @@ button{font:inherit}
 .pop .mono{font:500 12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}
 .pop hr{border:0;border-top:1px solid var(--line);margin:0}
 .pkg[data-site]{cursor:default}
-.pkg[data-site]:hover .box,.pkg[data-site]:focus-visible .box{outline:2px solid var(--ink);outline-offset:2px}
+/* hover: the box's own border turns ink, so nothing spills onto the package above */
+.pkg[data-site]:hover,.pkg[data-site]:focus-visible{z-index:2}
+.pkg[data-site]:hover .box,.pkg[data-site]:focus-visible .box{border-color:var(--ink);box-shadow:0 2px 8px rgba(11,11,13,.18)}
 .pkg[data-site]:focus-visible{outline:none}
 @media (prefers-reduced-motion:reduce){.pop{transition:none}}
 
@@ -709,7 +712,7 @@ function product(s, agents){
 function crate(s){
   return `<li class="crate"><span class="tick" aria-hidden="true"><svg><use href="#shipped"/></svg></span>
     <a href="https://${esc(s.domain)}" target="_blank" rel="noopener" title="${esc(s.name)}">${esc(s.domain)}</a>
-    <small>Live · shipped ${agoEl(s.lastAt)}</small></li>`;
+    <small title="Live · shipped">${agoEl(s.lastAt)}</small></li>`;
 }
 
 // How many items fit without scrolling. On a phone the page scrolls, so a
