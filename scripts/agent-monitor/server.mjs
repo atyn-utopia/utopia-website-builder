@@ -29,7 +29,7 @@ const RECENT_ACTIONS = 8;
 // The agent team, as on the office-screen page (website-workflow/index.html).
 const AGENTS = {
   alpha:   { name: 'Alpha',   role: 'System architect',      color: '#2774AE' },
-  lylia:   { name: 'Lylia',   role: 'Brand & logo designer', color: '#6E4FC9' },
+  lylia:   { name: 'Lylia',   role: 'Branding designer', color: '#6E4FC9' },
   sora:    { name: 'Sora',    role: 'SEO strategist',        color: '#0E6E5C' },
   nana:    { name: 'Nana',    role: 'Copywriter',            color: '#C2410C' },
   kagura:  { name: 'Kagura',  role: 'UI designer',           color: '#1B5687' },

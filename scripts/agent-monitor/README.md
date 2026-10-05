@@ -49,6 +49,20 @@ counts — sessions in other workspace repos are left off.
   *Your turn* (main session finished its reply), *Finished* (subagent handed
   back), *Idle*.
 
-The factory icon (`public/icon.png`) was generated with `scripts/codex-image.sh`
+## Look
+
+Built on the Utopia Brand CI v2.0.1 (utopiagroup.com.my/brand-ci): Plus Jakarta
+Sans 800 for display, Inter for body, CI neutrals, 8px buttons / 12px cards, and
+the CI status colours — warning amber for websites still building, live green for
+shipped ones. The logo (`public/brand/a-*.svg`) is the "website factory" wordmark
+outlined from Plus Jakarta Sans ExtraBold with a sawtooth factory roof built from
+the CI triangle and blue ramp; the footer carries the locked `utopia▲ AI Team`
+mark (supplied SVGs, not redrawn).
+
+On a screen at least 900×620 the page fits without scrolling: the card and
+shipped lists paginate to whatever fits and flip pages every 8 seconds (paused
+while you hover or use the arrows). Phones scroll as normal.
+
+The robot icon (`public/icon.png`) was generated with `scripts/codex-image.sh`
 from the agent art as reference. Character art in `public/agents/` is copied from the office-screen page
 (`website-workflow/agents/`); keep the two in step if an agent is added.
