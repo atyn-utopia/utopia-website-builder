@@ -36,14 +36,15 @@ def gear(cx, cy, r_body, teeth=8):
         for ang, r in ((a - step * 0.27, r_root), (a - step * 0.16, r_tip), (a + step * 0.16, r_tip), (a + step * 0.27, r_root)):
             pts.append((cx + r * math.cos(ang), cy + r * math.sin(ang)))
     d = 'M' + ' L'.join(f'{x:.2f} {y:.2f}' for x, y in pts) + ' Z'
-    r_hole = r_tip * 0.40
+    r_hole = r_tip * 0.47
     d += f' M{cx + r_hole:.2f} {cy:.2f} A{r_hole:.2f} {r_hole:.2f} 0 1 0 {cx - r_hole:.2f} {cy:.2f} A{r_hole:.2f} {r_hole:.2f} 0 1 0 {cx + r_hole:.2f} {cy:.2f} Z'
     return d, r_hole
 
 
 def triangle(cx, cy, r):
-    # equilateral, centred on the counter's optical centre
-    h = r * 1.1
+    # equilateral, centred on the counter's optical centre, with a ring of
+    # clear space between it and the gear
+    h = r * 0.82
     w = h * 1.15
     top = cy - h * 0.58
     return f'<polygon points="{cx:.2f},{top:.2f} {cx + w / 2:.2f},{top + h:.2f} {cx - w / 2:.2f},{top + h:.2f}" fill="{RED}"/>'
