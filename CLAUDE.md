@@ -259,6 +259,7 @@ These rules apply to EVERY website. No exceptions.
 - **Locked (copy from water-tank):** the component set below, page/section order, DOM structure, props, data flow (`getDisplayPhone`, the redirect page's server-side resolve), and the rules that ride on them — FOMO banner, USP bar, steps-section CTA, one H1 + one H2, WhatsApp green, header/footer-only phone number. No per-page variants (no `BlogNav`), no extra or missing chrome components.
 - **Per site (Lylia's brand kit + Kagura's direction):** the visual design — typography, button shape (one shape per site, but which shape is the site's call), card and surface treatment, header and footer *styling* (solid / transparent / floating, light / dark, borders, spacing), hero composition, motifs, imagery treatment, section rhythm. Restyle the chrome through its `<style>` block, `PageStyles` and `globals.css` tokens; keep the JSX structure and data flow intact.
 - The scaffold brings water-tank's styling along only so the site builds on day one. Treat it as a placeholder to be replaced before Gate 1, not a default to tweak.
+- **Header look: pick one of the five approved styles** in `templates/site-chrome/header-styles/` (Floating Glass, Clear to Solid, Brand Bar, Segmented Track, Quiet Dark) and paste it into `globals.css`. Kagura chooses; the README there lists which suits what. A sixth style needs the user's approval first.
 
 Copy these six surfaces from it — keep their structure and behaviour, restyle their look:
 

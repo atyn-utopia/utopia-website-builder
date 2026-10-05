@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import LanguageSwitcher from './LanguageSwitcher';
 import { WhatsAppButton, WaIcon } from './WhatsAppButton';
@@ -21,8 +21,19 @@ export default function SiteHeader({ contact }: { contact?: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
 
+  // `is-scrolled` is a styling hook only — the "Clear to Solid" header style
+  // (header-styles/clear-solid.css) turns the bar solid with it. Other styles
+  // ignore it, so the markup stays identical for every site.
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
-    <header className="site-header">
+    <header className={`site-header${scrolled ? ' is-scrolled' : ''}`}>
       <div className="container site-header-inner">
         <nav className="site-nav site-nav--desktop" aria-label="Primary">
           <Link href={`/${locale}`}>{t('home')}</Link>

@@ -1,0 +1,49 @@
+/* ── Header style: Quiet Dark ──────────────────────────────────────────────
+   A clean dark bar: no borders, soft grey nav, white on hover with a thin
+   accent underline. Strong without clutter.
+   Suits: heavy machinery (excavator, forklift, genset, scissor lift) or any
+   brand that wants to feel premium.
+
+   Install: paste into app/globals.css (after the contact-number block).
+   Pair with a dark footer: set --footer-bg plus --footer-ink and
+   --footer-ink-muted. Bar colour defaults to near-black; set --header-bg to
+   override, --header-accent for the underline (defaults to --brand-orange).
+
+   Every selector starts with `body` so it outranks the plain <style> inside
+   SiteHeader.tsx, which is emitted after globals.css. */
+
+body .site-header {
+  --hb: var(--header-bg, #16191D);
+  background: var(--hb);
+  border-bottom: 0;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+body .site-header .site-header-inner { min-height: 64px; }
+body .site-header .site-nav { gap: 28px; }
+body .site-header .site-nav a { position: relative; padding: 6px 0; color: #A3A9B1; font-weight: 500; transition: color var(--dur, 200ms) ease; }
+body .site-header .site-nav a::after {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: -2px;
+  height: 2px; border-radius: 2px;
+  background: var(--header-accent, var(--brand-orange));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 220ms ease;
+}
+body .site-header .site-nav a:hover { color: #fff; }
+body .site-header .site-nav a:hover::after { transform: scaleX(1); }
+body .site-header .contact-number-label { color: #8B919A; }
+body .site-header .contact-number-value { color: #fff; }
+
+body .site-header .lsw-item { background: transparent; border-color: transparent; color: #A3A9B1; box-shadow: none; }
+body .site-header .lsw-item:hover { background: rgba(255, 255, 255, 0.06); border-color: transparent; color: #fff; }
+body .site-header .lsw-item.is-active,
+body .site-header .lsw-item.is-active:hover { background: rgba(255, 255, 255, 0.1); border-color: transparent; color: #fff; box-shadow: none; }
+body .site-header .lsw-trigger { background: rgba(255, 255, 255, 0.08); border-color: transparent; color: #fff; }
+
+body .site-header .site-burger { background: rgba(255, 255, 255, 0.08); border-color: transparent; }
+body .site-header .site-burger span { background: #fff; }
+
+body .site-header .site-mobile-drawer { background: var(--hb); border-top-color: rgba(255, 255, 255, 0.06); }
+body .site-header .site-mobile-nav a { color: #E9EAEC; border-bottom-color: rgba(255, 255, 255, 0.06); }
+body .site-header .site-mobile-actions { border-top-color: rgba(255, 255, 255, 0.08); }

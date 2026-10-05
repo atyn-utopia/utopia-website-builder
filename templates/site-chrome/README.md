@@ -28,6 +28,38 @@ shape, header/footer surface, cards, type. Keep the JSX, props and data flow.
 | `og-shot.mjs` | → `scripts/og-shot.mjs` — generates the cards from the hero |
 | `webcoreSeo.ts` | → `lib/webcoreSeo.ts` — per-page title/description overrides from webcore's SEO page |
 
+## Header styles (`header-styles/`)
+
+Five approved looks for the same `SiteHeader` markup. Pick **one** per site and
+paste its file into `app/globals.css`, after the contact-number block. Nothing
+else changes — no JSX edits, no props.
+
+| File | Style | Suits |
+|------|-------|-------|
+| `glass.css` | **Floating Glass** — frosted pill bar floating over the hero | home services, medical, water / cleaning |
+| `clear-solid.css` | **Clear to Solid** — transparent with white text over the hero, solid once scrolled | strong hero photo: property, hotels, renovation, vehicles |
+| `brand-bar.css` | **Brand Bar** — whole bar in the brand colour, white text | brands with a strong colour: catering, vehicles, aircond, consumer |
+| `segmented.css` | **Segmented Track** — nav in a soft track, contact number as an icon chip | tech, equipment rental, light e-commerce |
+| `quiet-dark.css` | **Quiet Dark** — clean dark bar, thin accent underline on hover | heavy machinery, premium brands |
+
+How they stay safe across sites:
+- **Colours come from the site's tokens** (`--brand-orange`, `--brand-orange-deep`,
+  `--brand-charcoal`, `--ink-muted`, `--line`), never hardcoded brand hex. Each
+  file documents its optional overrides (`--header-bg`, `--header-accent`,
+  `--header-track`, `--hero-pt`).
+- **The WhatsApp CTA keeps the site's own button shape** (`.btn` from
+  `globals.css`) and stays `#25D366` — no preset touches either.
+- Every selector starts with `body`, so it outranks the plain `<style>` inside
+  `SiteHeader.tsx`, which is emitted after `globals.css`. Without the preset the
+  header keeps its base (water-tank) look.
+- `glass` and `clear-solid` slide the `.hero` up under the header; pages without
+  a `.hero` (blog) get the bar in normal flow, and `clear-solid` is always solid
+  there so white text never lands on a light page.
+- `clear-solid` needs the `is-scrolled` class `SiteHeader.tsx` sets (template
+  from 2026-10-05). On an older site, copy that `useEffect` in first.
+- Pair `quiet-dark` (and usually `brand-bar`) with a dark footer: `--footer-bg`
+  plus `--footer-ink` / `--footer-ink-muted`.
+
 ## Contact number (`ContactNumber.tsx` + `contact-number.css`)
 
 The header and footer print the site's number. Three things are load-bearing:
