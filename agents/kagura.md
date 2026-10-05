@@ -159,6 +159,7 @@ Kagura must screenshot the site at mobile viewport (390×844) and verify EVERY i
 - [ ] **Center-aligned on mobile** — Most content items (headings, text blocks, cards, CTAs, icons) must be center-aligned on mobile. Left-aligned body text is acceptable but headings, buttons, and standalone elements must center.
 - [ ] **Image sizing** — Hero image and gallery images must scale down proportionally. No images should be cropped awkwardly on mobile.
 - [ ] **Generous vertical spacing** — Minimum `py-14` (56px) between sections on mobile. Sections must breathe.
+- [ ] **No lone word on a line** — No heading, hero subtext or section subtext ends with a single word on its own line, at 390px or desktop, in every locale. Fix with `text-wrap: balance` (short centred lines) / `text-wrap: pretty` (paragraphs) in CSS — never by trimming copy or adding `<br>`.
 - [ ] **Readable line height** — All body/paragraph text must use `leading-[1.7]` or greater on mobile.
 - [ ] **Easy to read info** — Text must have enough contrast, padding from edges (min `px-4`), and whitespace. Information should be scannable in 2-3 seconds per section.
 

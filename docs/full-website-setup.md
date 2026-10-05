@@ -971,6 +971,7 @@ Every item below MUST be verified on the running site. These rules come from rea
 - [ ] **Utopia Brand CI elements inserted** — "Built by Utopia AI" credit in `SiteFooter` + `--r-*`/`--ease`/`--dur-*` tokens in `globals.css` (Step 5 → "Utopia Brand CI"). Elements only — site keeps its own palette, fonts, and button shape; do not force `--r-button` onto existing pill CTAs.
 
 #### Typography
+- [ ] **No lone word on its own line** in any heading, hero subtext or section intro — at 390px and desktop, every locale. `text-wrap: balance` / `pretty` defaults are in `PageStyles` + `globals.css`; fix in CSS, never with `<br>` or by cutting copy.
 - [ ] Body font is **Inter** site-wide. Not Plus Jakarta Sans, not the default Tailwind stack.
 - [ ] **Every visible text element must sit inside a heading tag (h1–h6).** This is non-negotiable per user rule, even if it appears to break "proper" semantic HTML.
 - [ ] **Heading level is keyword-driven**, not structural:

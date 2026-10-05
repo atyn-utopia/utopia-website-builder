@@ -297,11 +297,14 @@ Copy these six surfaces from it — keep their structure and behaviour, restyle 
 - **Body text (p, h5/h6 styled as body copy, list items, blockquote, blog content): `line-height: 1.4`** — comfortable reading without becoming airy.
 - Set these as defaults in the project's `globals.css` so every component inherits them. Component-level overrides are allowed only when there's a specific design reason (e.g. an oversized hero subtitle).
 - Apply identically to `.blog-content` headings + paragraphs so article body matches site type.
+- **No lone word on its own line.** Titles (h1–h3) and short centred lines (hero subtext, section-head intros) use `text-wrap: balance`; body copy — paragraphs, list items, and the h4–h6 that carry body text per the keyword heading rule — uses `text-wrap: pretty` (balance on long copy narrows every line). Fix a dangling word in CSS — never by cutting or padding the copy, and never with a hard `<br>` (it breaks at other widths and in other languages).
 
 ```css
 /* globals.css — paste this near :root */
 h1, h2, h3, h4, h5, h6 { line-height: 1.2; }
 p, li, blockquote, .blog-content p, .blog-content li, .blog-content blockquote { line-height: 1.4; }
+h1, h2, h3, .hero-support, .section-head h4, .section-head h5, .section-head p { text-wrap: balance; }
+p, li, h4, h5, h6, .blog-content p, .blog-content li { text-wrap: pretty; }
 ```
 
 
