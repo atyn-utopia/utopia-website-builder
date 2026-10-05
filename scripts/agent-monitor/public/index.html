@@ -10,7 +10,7 @@
 <meta name="theme-color" content="#F4F4F2" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0B0B0D" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap">
 <style>
 /* Utopia Brand CI v2.0.1 tokens (utopiagroup.com.my/brand-ci) */
 :root{
@@ -21,7 +21,7 @@
   --build:#F5C13D; --build-soft:#F8EBC6; --build-ink:#5A4100; --on-build:#17181C;
   --live:#3DDC97;  --live-soft:#E3F4EA;  --live-ink:#0E6E5C;  --on-live:#0B0B0D;
   --shadow:0 4px 14px rgba(0,84,166,.08),0 1px 3px rgba(11,11,13,.06);
-  --display:"Plus Jakarta Sans",system-ui,sans-serif; --body:"Inter",system-ui,sans-serif;
+  --display:"Plus Jakarta Sans",system-ui,sans-serif; --body:"Source Sans 3",system-ui,sans-serif;
   --r-button:8px; --r-card:12px; --r-lg:16px; --r-pill:999px;
   --ease:cubic-bezier(.22,1,.36,1); --dur-hover:220ms; --dur-layout:320ms;
   --logo-light:block; --logo-dark:none;
@@ -198,57 +198,110 @@ button{font:inherit}
   .pkg,.packages,.pager button{transition:none}
 }
 
+/* what the card colours mean, beside the panel title */
+.legend{display:flex;gap:12px;font-size:12px;color:var(--muted);flex-wrap:wrap}
+.legend span{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.sw{width:14px;height:10px;border-radius:3px;border:2px solid var(--build);background:var(--build-soft)}
+.sw.wait{border-style:dashed}
+.sw.paused{border-color:var(--ash);background:var(--linen)}
+@media (max-width:1180px){.legend{display:none}}
+
 /* ---- new website (dialog) */
 [hidden]{display:none!important}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border-radius:var(--r-button);border:1px solid transparent;font:700 14px/1 var(--display);cursor:pointer;white-space:nowrap;transition:transform var(--dur-hover) var(--ease),box-shadow var(--dur-hover) var(--ease)}
-.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
-.btn:active{transform:translateY(0)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:36px;padding:0 14px;border-radius:var(--r-button);border:1px solid transparent;font:600 13.5px/1 var(--body);cursor:pointer;white-space:nowrap;transition:background-color var(--dur-hover) var(--ease),border-color var(--dur-hover) var(--ease),box-shadow var(--dur-hover) var(--ease)}
+.btn svg{width:16px;height:16px;flex:none}
 .btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-.btn[disabled]{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
 .btn.primary{background:var(--ink);color:var(--paper)}
-.btn.ghost{background:var(--panel);color:var(--ink);border-color:var(--line)}
-.btn .n{background:var(--build);color:var(--on-build);border-radius:var(--r-pill);font-size:11px;padding:2px 7px}
-dialog.new{width:min(760px,calc(100vw - 32px));max-height:calc(100dvh - 48px);padding:0;border:0;border-radius:var(--r-lg);background:var(--panel);color:var(--ink);box-shadow:0 24px 60px rgba(11,11,13,.35)}
-dialog.new::backdrop{background:rgba(11,11,13,.45)}
-.new-in{display:flex;flex-direction:column;max-height:calc(100dvh - 48px)}
-.new-h{display:flex;align-items:center;gap:12px;padding:16px 20px 0}
-.new-h h2{font-size:20px;flex:1}
-.x{width:36px;height:36px;border-radius:var(--r-button);border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;font-size:18px}
-.x:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-.tabs{display:flex;gap:4px;padding:12px 20px 0;border-bottom:1px solid var(--line)}
-.tabs button{border:0;background:none;color:var(--muted);font:700 14px/1 var(--display);padding:10px 12px;border-bottom:2px solid transparent;cursor:pointer}
-.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
-.tabs button:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
-.new-body{padding:16px 20px;overflow:auto;display:flex;flex-direction:column;gap:14px;min-height:0}
-.new-foot{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:14px 20px;border-top:1px solid var(--line)}
-.new-foot .grow{flex:1;min-width:0;font-size:12.5px;color:var(--muted)}
-.field{display:flex;flex-direction:column;gap:6px}
-.field>span{font-weight:600;font-size:13px}
-.field small{color:var(--muted);font-size:12px}
-.field input[type=text],.field textarea{font:inherit;color:var(--ink);background:var(--linen);border:1px solid var(--line);border-radius:var(--r-button);padding:10px 12px;width:100%}
-.field textarea{min-height:140px;resize:vertical;line-height:1.45}
-.field input:focus-visible,.field textarea:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
-.seg{display:inline-flex;border:1px solid var(--line);border-radius:var(--r-button);overflow:hidden;width:fit-content}
-.seg label{padding:8px 12px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted)}
+.btn.primary:not([disabled]):hover{box-shadow:0 0 0 3px color-mix(in srgb,var(--ink) 14%,transparent)}
+.btn.secondary{background:var(--panel);color:var(--ink);border-color:var(--line);box-shadow:0 1px 2px rgba(11,11,13,.05)}
+.btn.secondary:not([disabled]):hover{border-color:color-mix(in srgb,var(--ink) 30%,transparent)}
+.btn .n{font-weight:500;color:var(--muted)}
+/* header trigger: quiet, same height as the status chips beside it */
+#new-open{height:36px}
+
+dialog.new{width:min(640px,calc(100vw - 32px));max-height:min(760px,calc(100dvh - 48px));overflow:hidden;padding:0;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--panel);color:var(--ink);box-shadow:0 1px 2px rgba(11,11,13,.06),0 24px 64px -12px rgba(11,11,13,.35)}
+dialog.new::backdrop{background:rgba(11,11,13,.38);backdrop-filter:blur(10px) saturate(.9);-webkit-backdrop-filter:blur(10px) saturate(.9)}
+/* the form still scrolls on a short screen, without a visible bar */
+.new-body,.field textarea{scrollbar-width:none}
+.new-body::-webkit-scrollbar,.field textarea::-webkit-scrollbar{display:none}
+.new-in{display:flex;flex-direction:column;max-height:min(760px,calc(100dvh - 48px))}
+.new-body>*{flex:none}
+.new-h{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;padding:22px 24px 16px}
+.new-h h2{font-size:19px;letter-spacing:-.01em}
+.new-h p{grid-column:1;margin:0;color:var(--muted);font-size:13.5px}
+.x{grid-row:1/3;grid-column:2;width:32px;height:32px;display:grid;place-items:center;border-radius:var(--r-button);border:0;background:none;color:var(--muted);cursor:pointer}
+.x:hover{background:var(--linen);color:var(--ink)}
+.x svg{width:18px;height:18px}
+.x:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.tabs{display:flex;gap:2px;margin:0 24px;padding:3px;border-radius:10px;background:var(--linen);border:1px solid var(--line);width:fit-content}
+.tabs button{display:inline-flex;align-items:center;gap:6px;border:0;background:none;color:var(--muted);font:600 13px/1 var(--body);height:30px;padding:0 12px;border-radius:7px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--panel);color:var(--ink);box-shadow:0 1px 2px rgba(11,11,13,.08),0 0 0 1px var(--line)}
+.tabs button:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.tabs .n{font-size:11px;color:var(--muted)}
+.new-body{padding:20px 24px 8px;overflow:auto;display:flex;flex-direction:column;gap:18px;min-height:0}
+.new-foot{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:14px 24px;border-top:1px solid var(--line);background:var(--linen);border-radius:0 0 var(--r-lg) var(--r-lg)}
+.who{display:inline-flex;align-items:center;gap:7px;flex:1;min-width:0;font-size:12.5px;color:var(--muted)}
+.who svg{width:15px;height:15px;flex:none}
+.who b{color:var(--ink);font-weight:600}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field>.lbl{font-weight:600;font-size:13px}
+.field>.lbl em{font-style:normal;font-weight:400;color:var(--muted)}
+.field small{color:var(--muted);font-size:12px;line-height:1.4}
+.field input[type=text],.field textarea{font:inherit;font-size:14px;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:var(--r-button);padding:9px 12px;width:100%;box-shadow:0 1px 2px rgba(11,11,13,.04);transition:border-color var(--dur-hover) var(--ease),box-shadow var(--dur-hover) var(--ease)}
+.field input[type=text]{height:40px}
+.field textarea{min-height:132px;resize:vertical;line-height:1.5}
+.field input::placeholder,.field textarea::placeholder{color:color-mix(in srgb,var(--muted) 75%,transparent)}
+.field input[type=text]:focus,.field textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px color-mix(in srgb,var(--blue) 18%,transparent)}
+.repo{font:500 12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted)}
+.drop{display:flex;align-items:center;gap:12px;padding:14px;border:1px dashed color-mix(in srgb,var(--ink) 22%,transparent);border-radius:var(--r-card);cursor:pointer;transition:border-color var(--dur-hover) var(--ease),background-color var(--dur-hover) var(--ease)}
+.drop:hover,.drop.over{border-color:var(--blue);background:color-mix(in srgb,var(--blue) 5%,transparent)}
+.drop:focus-within{outline:2px solid var(--blue);outline-offset:2px}
+.drop input{position:absolute;width:1px;height:1px;opacity:0}
+.drop .ic{width:36px;height:36px;border-radius:var(--r-button);display:grid;place-items:center;background:var(--linen);color:var(--muted);flex:none}
+.drop .ic svg{width:18px;height:18px}
+.drop b{font-weight:600;font-size:13.5px}
+.drop b u{color:var(--blue);text-decoration:none}
+.drop small{display:block}
+.files{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}
+.files li{display:inline-flex;gap:6px;align-items:center;font-size:12px;padding:4px 8px;border-radius:6px;background:var(--linen);border:1px solid var(--line);max-width:100%}
+.files li span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.files li i{font-style:normal;color:var(--muted)}
+.row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+@media (max-width:560px){.row2{grid-template-columns:minmax(0,1fr)}}
+.seg{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:var(--linen);border:1px solid var(--line);width:fit-content;max-width:100%;flex-wrap:wrap}
+.seg label{display:inline-flex;align-items:center;height:30px;padding:0 12px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted)}
 .seg input{position:absolute;opacity:0;pointer-events:none}
-.seg input:checked+span{color:var(--ink)}
-.seg label:has(input:checked){background:var(--linen);color:var(--ink)}
-.seg label:has(input:focus-visible){outline:2px solid var(--blue);outline-offset:-2px}
-.check{display:flex;gap:8px;align-items:flex-start;font-size:13.5px}
-.check input{margin-top:3px}
-.rows{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none}
-.rows li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;padding:8px 10px;border-radius:var(--r-button);background:var(--linen);font-size:13px}
-.rows li b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.rows li small{grid-column:1/-1;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.rows li .bad{color:#C2410C;font-weight:600}
-.rows li .acts{display:flex;gap:6px}
-.rows li .acts button{height:28px;padding:0 10px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:12.5px;font-weight:600;cursor:pointer}
+.seg label:has(input:checked){background:var(--panel);color:var(--ink);box-shadow:0 1px 2px rgba(11,11,13,.08),0 0 0 1px var(--line)}
+.seg label:has(input:focus-visible){outline:2px solid var(--blue);outline-offset:1px}
+.switch{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 12px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:var(--r-card);cursor:pointer}
+.switch input{position:absolute;opacity:0;pointer-events:none}
+.switch .t{grid-row:1/3;width:34px;height:20px;border-radius:999px;background:var(--ash);position:relative;transition:background-color var(--dur-hover) var(--ease)}
+.switch .t::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform var(--dur-hover) var(--ease)}
+.switch input:checked+.t{background:var(--blue)}
+.switch input:checked+.t::after{transform:translateX(14px)}
+.switch input:focus-visible+.t{outline:2px solid var(--blue);outline-offset:2px}
+.switch b{font-size:13.5px;font-weight:600}
+.switch small{color:var(--muted);font-size:12px}
+.rows{display:flex;flex-direction:column;margin:0;padding:0;list-style:none;border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden}
+.rows:empty{display:none}
+.rows li{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:2px 12px;padding:10px 14px;font-size:13px}
+.rows li+li{border-top:1px solid var(--line)}
+.rows li b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rows li small{grid-column:1;color:var(--muted);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rows li .pill{grid-row:1/3;grid-column:2;font-size:11.5px;font-weight:600;padding:3px 8px;border-radius:999px;background:var(--linen);color:var(--muted);white-space:nowrap}
+.rows li .pill.bad{background:#FBE9EB;color:#9F1D2C}
+.rows li .pill.ok{background:var(--live-soft);color:var(--live-ink)}
+.rows li .acts{grid-row:1/3;grid-column:2;display:flex;gap:6px}
+.rows li .acts button{height:30px;padding:0 10px;border-radius:7px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:12.5px;font-weight:600;cursor:pointer}
+.rows li .acts button.danger{color:#9F1D2C}
 .rows li .acts button:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
-.msg{font-size:13.5px;border-radius:var(--r-button);padding:10px 12px;background:var(--linen)}
-.msg.err{background:#FBE9EB;color:#9F1D2C}
-.result li.ok b{color:var(--live-ink)}
-.result li.fail b{color:#9F1D2C}
-.result a{color:var(--blue)}
+.rows li.empty-row{display:block;color:var(--muted);text-align:center;padding:20px}
+.rows li a{color:var(--blue);font-weight:600;text-decoration:none;font-size:12.5px}
+.msg{font-size:13px;line-height:1.5;border-radius:var(--r-button);padding:10px 12px;background:var(--linen);border:1px solid var(--line)}
+.msg.err{background:#FBE9EB;color:#9F1D2C;border-color:#F3C9CE}
+.msg p{margin:8px 0 0}
+.msg .rows{margin-top:8px;background:var(--panel)}
 
 /* ---- robots (RobotKit, public/robots.js): idle blink + breathing, working = prop moves */
 .rb .r-head{transform-box:view-box;animation:rb-breathe 3.6s ease-in-out infinite alternate;animation-delay:var(--d,0s)}
@@ -316,7 +369,7 @@ dialog.new::backdrop{background:rgba(11,11,13,.45)}
     <h1><img class="light" src="/brand/logo-lockup-light.svg" alt="Website Factory"><img class="dark" src="/brand/logo-lockup-dark.svg" alt="Website Factory"></h1>
     <span class="conn" id="conn">Connecting…</span>
     <div class="tally" id="tally"></div>
-    <button type="button" class="btn primary" id="new-open">New website <span class="n" id="draft-n" hidden></span></button>
+    <button type="button" class="btn primary" id="new-open"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>New website</button>
   </header>
 
   <section class="floor" aria-label="Production line">
@@ -328,7 +381,8 @@ dialog.new::backdrop{background:rgba(11,11,13,.45)}
 
   <div class="bottom">
     <section class="panel" id="run-panel" aria-labelledby="run-h">
-      <div class="panel-h"><span class="hicon build" aria-hidden="true"><svg><use href="#gear"/></svg></span><h2 id="run-h">On the line now</h2><div class="pager" id="run-pager" hidden></div></div>
+      <div class="panel-h"><span class="hicon build" aria-hidden="true"><svg><use href="#gear"/></svg></span><h2 id="run-h">On the line now</h2>
+        <span class="legend" aria-label="Card colours"><span><i class="sw build"></i>Building</span><span><i class="sw wait"></i>Needs you</span><span><i class="sw paused"></i>Paused</span></span><div class="pager" id="run-pager" hidden></div></div>
       <div class="timer" id="run-timer" hidden><i></i></div>
       <ul class="cards" id="running"></ul>
     </section>
@@ -342,45 +396,55 @@ dialog.new::backdrop{background:rgba(11,11,13,.45)}
 
 <dialog class="new" id="new" aria-labelledby="new-title">
   <div class="new-in">
-    <div class="new-h"><h2 id="new-title">New website</h2><button type="button" class="x" id="new-close" aria-label="Close">×</button></div>
-    <div class="tabs" role="tablist">
+    <div class="new-h">
+      <h2 id="new-title">New website</h2>
+      <p>Creates a site repo in utopiagrowth, adds it to the wizard and starts the build.</p>
+      <button type="button" class="x" id="new-close" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    </div>
+    <div class="tabs" role="tablist" aria-label="What to create">
       <button type="button" role="tab" id="tab-one" aria-selected="true" data-tab="one">One website</button>
       <button type="button" role="tab" id="tab-bulk" aria-selected="false" data-tab="bulk">Bulk</button>
-      <button type="button" role="tab" id="tab-drafts" aria-selected="false" data-tab="drafts">Drafts</button>
+      <button type="button" role="tab" id="tab-drafts" aria-selected="false" data-tab="drafts">Drafts <span class="n" id="draft-n" hidden></span></button>
     </div>
 
     <form class="new-body" id="pane-one" data-pane="one">
-      <label class="field"><span>Website name</span><input type="text" id="one-name" placeholder="Aircond Service Penang" autocomplete="off"><small id="one-slug">Repo: utopiagrowth/site-…</small></label>
-      <label class="field"><span>Brief</span><textarea id="one-brief" placeholder="What the business does, the areas it serves, the phone number, anything the builders should know. Mention a brand file with @filename."></textarea></label>
-      <div class="field"><span>Brand files</span><input type="file" id="one-files" multiple><small id="one-files-note">Logos, photos, price lists. Each up to 30 MB. They go into brand_assets/.</small></div>
-      <div class="field"><span>Visibility</span>
-        <div class="seg"><label><input type="radio" name="one-vis" value="private" checked><span>Private</span></label><label><input type="radio" name="one-vis" value="public"><span>Public</span></label></div></div>
-      <label class="check"><input type="checkbox" id="one-start" checked><span>Start the build in a new terminal once the repo is ready</span></label>
+      <label class="field"><span class="lbl">Website name</span><input type="text" id="one-name" placeholder="e.g. Aircond Service Penang" autocomplete="off"><span class="repo" id="one-slug">utopiagrowth/site-…</span></label>
+      <label class="field"><span class="lbl">Brief</span><textarea id="one-brief" placeholder="What the business does, the areas it serves, the phone number and anything the builders should know. Point at a brand file with @filename."></textarea></label>
+      <div class="field"><span class="lbl">Brand files <em>optional</em></span>
+        <label class="drop" id="one-drop"><input type="file" id="one-files" multiple>
+          <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0l-4 4m4-4l4 4M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span><b>Drop files here or <u>browse</u></b><small>Logos, photos, price lists · up to 30 MB each · saved to brand_assets/</small></span></label>
+        <ul class="files" id="one-file-list"></ul></div>
+      <div class="field"><span class="lbl">Visibility</span>
+        <div class="seg"><label><input type="radio" name="one-vis" value="private" checked>Private</label><label><input type="radio" name="one-vis" value="public">Public</label></div></div>
+      <label class="switch"><input type="checkbox" id="one-start" checked><span class="t"></span><b>Start the build right away</b><small>Clones the repo into projects/ and opens a terminal running Claude.</small></label>
       <div id="one-msg"></div>
     </form>
 
     <form class="new-body" id="pane-bulk" data-pane="bulk" hidden>
-      <label class="field"><span>Websites</span><textarea id="bulk-text" placeholder="Aircond Service Penang&#10;Servicing and installation in Penang. Target Georgetown, Bayan Lepas…&#10;---&#10;Sewa Genset Johor&#10;Generator rental across Johor…"></textarea>
-        <small>One website per block, blocks split by a line of ---. First line is the name, the rest is the brief. Up to 20.</small></label>
+      <label class="field"><span class="lbl">Websites</span><textarea id="bulk-text" placeholder="Aircond Service Penang&#10;Servicing and installation in Penang, Georgetown and Bayan Lepas…&#10;---&#10;Sewa Genset Johor&#10;Generator rental across Johor…"></textarea>
+        <small>One website per block, split by a line with ---. The first line is the name, the rest is the brief. Up to 20.</small></label>
       <ul class="rows" id="bulk-rows"></ul>
-      <div class="field"><span>How to build them</span>
-        <div class="seg"><label><input type="radio" name="bulk-mode" value="orchestrator" checked><span>One session builds all</span></label><label><input type="radio" name="bulk-mode" value="per-site"><span>One terminal per site</span></label></div>
-        <small>One session cross-checks same-niche sites and batches Gate 1 and Gate 2. Separate terminals run fully on their own.</small></div>
-      <div class="field"><span>Visibility</span>
-        <div class="seg"><label><input type="radio" name="bulk-vis" value="private" checked><span>Private</span></label><label><input type="radio" name="bulk-vis" value="public"><span>Public</span></label></div></div>
-      <label class="check"><input type="checkbox" id="bulk-start" checked><span>Start building once the repos are ready</span></label>
+      <div class="row2">
+        <div class="field"><span class="lbl">Build with</span>
+          <div class="seg"><label><input type="radio" name="bulk-mode" value="orchestrator" checked>One session</label><label><input type="radio" name="bulk-mode" value="per-site">A terminal each</label></div>
+          <small>One session cross-checks sites in the same niche and batches the gates.</small></div>
+        <div class="field"><span class="lbl">Visibility</span>
+          <div class="seg"><label><input type="radio" name="bulk-vis" value="private" checked>Private</label><label><input type="radio" name="bulk-vis" value="public">Public</label></div></div>
+      </div>
+      <label class="switch"><input type="checkbox" id="bulk-start" checked><span class="t"></span><b>Start building right away</b><small>Clones every repo into projects/ and opens the terminal(s).</small></label>
       <div id="bulk-msg"></div>
     </form>
 
     <div class="new-body" id="pane-drafts" data-pane="drafts" hidden>
-      <p class="field"><small>Drafts are shared with the Utopia Wizard: one started there shows here, and the other way round.</small></p>
       <ul class="rows" id="draft-rows"></ul>
+      <small class="field" style="color:var(--muted);font-size:12px">Drafts are shared with the Utopia Wizard. One started there shows here, and the other way round.</small>
       <div id="drafts-msg"></div>
     </div>
 
     <div class="new-foot">
-      <span class="grow" id="new-who"></span>
-      <button type="button" class="btn ghost" id="new-draft">Save draft</button>
+      <span class="who"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg><span id="new-who">Checking GitHub…</span></span>
+      <button type="button" class="btn secondary" id="new-draft">Save draft</button>
       <button type="button" class="btn primary" id="new-go">Create website</button>
     </div>
   </div>
@@ -655,15 +719,15 @@ function bulkProblems(sites){
 }
 function refreshGo(){
   if (tab === "one") {
-    $("one-slug").textContent = `Repo: ${repoOf($("one-name").value)}${draftId ? " · from a draft" : ""}`;
+    $("one-slug").textContent = `${repoOf($("one-name").value)}${draftId ? " · from a draft" : ""}`;
     $("new-go").textContent = "Create website";
     $("new-go").disabled = busy || !toSlug($("one-name").value) || !$("one-brief").value.trim();
     $("new-draft").textContent = draftId ? "Update draft" : "Save draft";
     $("new-draft").disabled = busy || !($("one-name").value.trim() || $("one-brief").value.trim());
   } else if (tab === "bulk") {
     const sites = bulkSites(), bad = bulkProblems(sites);
-    $("bulk-rows").innerHTML = sites.slice(0, 20).map((x, i) => `<li><b>${esc(x.name || "(no name)")}</b><span class="${bad[i] ? "bad" : ""}">${esc(bad[i] || repoOf(x.name))}</span><small>${esc(x.brief.split("\n")[0] || "")}</small></li>`).join("")
-      + (sites.length > 20 ? `<li><span class="bad">Only the first 20 can be created at once.</span></li>` : "");
+    $("bulk-rows").innerHTML = sites.slice(0, 20).map((x, i) => `<li><b>${esc(x.name || "(no name)")}</b><span class="pill${bad[i] ? " bad" : ""}">${esc(bad[i] || "Ready")}</span><small>${esc(repoOf(x.name))}${x.brief ? " · " + esc(x.brief.split("\n")[0]) : ""}</small></li>`).join("")
+      + (sites.length > 20 ? `<li><b>Too many</b><span class="pill bad">Max 20</span><small>Only 20 websites can be created at once.</small></li>` : "");
     $("new-go").textContent = sites.length ? `Create ${Math.min(sites.length, 20)} website${sites.length === 1 ? "" : "s"}` : "Create websites";
     $("new-go").disabled = busy || !sites.length || sites.length > 20 || bad.some(Boolean);
     $("new-draft").textContent = sites.length > 1 ? `Save ${sites.length} drafts` : "Save draft";
@@ -675,17 +739,17 @@ async function loadDrafts(){
   try {
     drafts = (await api("GET", "/api/drafts")).drafts;
     $("draft-n").hidden = !drafts.length; $("draft-n").textContent = drafts.length;
-    $("draft-rows").innerHTML = drafts.length ? drafts.map((d) => `<li><b>${esc(d.name || "(untitled)")}</b><span class="acts"><button type="button" data-open="${esc(d.id)}">Open</button><button type="button" data-del="${esc(d.id)}">Delete</button></span>
+    $("draft-rows").innerHTML = drafts.length ? drafts.map((d) => `<li><b>${esc(d.name || "(untitled)")}</b><span class="acts"><button type="button" data-open="${esc(d.id)}">Open</button><button type="button" class="danger" data-del="${esc(d.id)}">Delete</button></span>
       <small>${esc(repoOf(d.name || ""))} · ${(d.assets || []).length} file${(d.assets || []).length === 1 ? "" : "s"} · saved ${ago(Date.parse(d.updated_at))} · ${esc((d.brief || "").split("\n")[0])}</small></li>`).join("")
-      : `<li><small>No drafts yet. Save one from One website or Bulk.</small></li>`;
+      : `<li class="empty-row">No drafts yet. Save one from One website or Bulk.</li>`;
   } catch (e) { note("drafts-msg", esc(e.message), true); }
 }
 const fileToB64 = (f) => new Promise((ok, no) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(",")[1] || ""); r.onerror = () => no(r.error); r.readAsDataURL(f); });
 
 function showResult(paneMsg, out){
   const rows = out.results.map((r) => r.ok
-    ? `<li class="ok"><b>${esc(r.repoFullName)}</b><span><a href="${esc(r.htmlUrl)}" target="_blank" rel="noopener">Open repo</a></span><small>${r.assets} brand file${r.assets === 1 ? "" : "s"} · ${r.registered ? "in the wizard" : "not added to the wizard"}</small></li>`
-    : `<li class="fail"><b>${esc(r.name || "(no name)")}</b><span>Not created</span><small>${esc(r.error)}</small></li>`).join("");
+    ? `<li><b>${esc(r.repoFullName)}</b><span class="acts"><a href="${esc(r.htmlUrl)}" target="_blank" rel="noopener">Open repo</a></span><small>${r.assets} brand file${r.assets === 1 ? "" : "s"} · ${r.registered ? "added to the wizard" : "not added to the wizard"}</small></li>`
+    : `<li><b>${esc(r.name || "(no name)")}</b><span class="pill bad">Not created</span><small>${esc(r.error)}</small></li>`).join("");
   const made = out.results.filter((r) => r.ok).length;
   const tail = [
     made ? `Scan ${out.scan === "only" || out.scan === "all" ? "started" : esc(out.scan || "not started")}.` : "",
@@ -719,7 +783,7 @@ async function create(){
     const out = await api("POST", "/api/create", { sites, start });
     showResult(msg, out);
     if (out.results.every((r) => r.ok)) {
-      if (tab === "one") { $("one-name").value = ""; $("one-brief").value = ""; $("one-files").value = ""; draftId = null; }
+      if (tab === "one") { $("one-name").value = ""; $("one-brief").value = ""; $("one-files").value = ""; listFiles(); draftId = null; }
       else $("bulk-text").value = "";
     }
     loadDrafts();
@@ -746,7 +810,15 @@ async function saveDrafts(){
   busy = false; refreshGo();
 }
 
-$("new-open").addEventListener("click", () => { dlg.showModal(); setTab(tab); api("GET", "/api/me").then((j) => { $("new-who").textContent = `Creates repos in utopiagrowth as @${j.login}`; }).catch((e) => { $("new-who").textContent = e.message; }); });
+$("new-open").addEventListener("click", () => { dlg.showModal(); setTab(tab); api("GET", "/api/me").then((j) => { $("new-who").innerHTML = `Signed in as <b>@${esc(j.login)}</b>`; }).catch((e) => { $("new-who").textContent = e.message; }); });
+// brand files: show what was picked, and accept a drop on the zone
+const fmtSize = (n) => n > 1048576 ? (n / 1048576).toFixed(1) + " MB" : Math.max(1, Math.round(n / 1024)) + " KB";
+function listFiles(){ $("one-file-list").innerHTML = [...$("one-files").files].map((f) => `<li><span>${esc(f.name)}</span><i>${fmtSize(f.size)}</i></li>`).join(""); }
+$("one-files").addEventListener("change", listFiles);
+const drop = $("one-drop");
+drop.addEventListener("dragover", (e) => { e.preventDefault(); drop.classList.add("over"); });
+drop.addEventListener("dragleave", () => drop.classList.remove("over"));
+drop.addEventListener("drop", (e) => { e.preventDefault(); drop.classList.remove("over"); $("one-files").files = e.dataTransfer.files; listFiles(); });
 $("new-close").addEventListener("click", () => dlg.close());
 dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
 for (const b of document.querySelectorAll(".tabs button")) b.addEventListener("click", () => setTab(b.dataset.tab));

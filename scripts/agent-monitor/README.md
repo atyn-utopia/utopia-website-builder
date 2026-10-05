@@ -62,7 +62,7 @@ counts — sessions in other workspace repos are left off.
 ## Look
 
 Built on the Utopia Brand CI v2.0.1 (utopiagroup.com.my/brand-ci): Plus Jakarta
-Sans 800 for display, Inter for body, CI neutrals, 8px buttons / 12px cards, and
+Sans 800 for display, Source Sans 3 for body (as on the office-screen page), CI neutrals, 8px buttons / 12px cards, and
 the CI status colours — warning amber for websites still building, live green for
 shipped ones. The logo (`public/brand/logo-*.svg`, made by `logo/build.py`) follows the
 Utopia product logos' two weights: a small Light "website" set flush right
