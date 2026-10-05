@@ -94,7 +94,10 @@ button{font:inherit}
 .markers img{width:24px;height:24px;margin:0 auto;object-fit:contain}
 @media (min-width:900px){.markers{display:none}}
 .packages{position:relative;height:var(--h,40px);transition:height var(--dur-layout) var(--ease)}
-.pkg{--w:min(132px,calc(10% - 6px));position:absolute;bottom:calc(var(--row) * 30px + 4px);left:var(--x);width:var(--w);margin-left:calc(var(--w) / -2);transition:left 1.2s var(--ease),bottom var(--dur-layout) var(--ease)}
+/* each package is exactly as wide as the station tile above it (same padding and gap as .stations) */
+.packages{--pad:10px;--gap:8px}
+@media (max-width:899px){.packages{--pad:0px;--gap:0px}}
+.pkg{--tile:calc((100% - 2 * var(--pad) - 9 * var(--gap)) / 10);position:absolute;bottom:calc(var(--row) * 30px + 4px);left:calc(var(--pad) + var(--i) * (var(--tile) + var(--gap)));width:var(--tile);transition:left 1.2s var(--ease),bottom var(--dur-layout) var(--ease)}
 .pkg .box{display:block;background:var(--panel);border:2px solid var(--build);border-radius:6px;box-shadow:var(--shadow);overflow:hidden;font:700 11px/1 var(--display);color:var(--ink)}
 .pkg .box::before{content:"";display:block;height:5px;background:var(--build)}
 .pkg .box span{display:block;padding:4px 6px 5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -104,7 +107,7 @@ button{font:inherit}
 @keyframes ride{from{transform:translateY(0)}to{transform:translateY(-3px)}}
 .pkg.new .box{animation:drop .6s var(--ease)}
 @keyframes drop{from{transform:translateY(-30px);opacity:0}}
-@media (max-width:899px){.pkg .box span{display:none}.pkg .box{height:18px}}
+@media (max-width:899px){.pkg{padding:0 3px}.pkg .box span{display:none}.pkg .box{height:18px}}
 .belt{height:20px;position:relative;overflow:hidden;background:var(--slate);border-top:3px solid var(--concrete);border-bottom:3px solid var(--concrete)}
 .belt::before{content:"";position:absolute;inset:0 -40px;background:repeating-linear-gradient(90deg,transparent 0 28px,var(--ash) 28px 32px);opacity:.5;animation:roll 1.4s linear infinite}
 @keyframes roll{to{transform:translateX(32px)}}
@@ -288,8 +291,8 @@ function renderBelt(building){
     el.classList.toggle("waiting", !!it.s && it.s.waitingOnYou);
     el.title = it.s ? `${it.s.name}: ${it.s.station ? "at " + snap.agents[it.s.station].name : "intake"}` : `${it.more} more websites here`;
     el.querySelector(".box span").textContent = it.s ? it.s.name : `+${it.more} more`;
-    // Intake sits at the very start of the belt, before Alpha.
-    el.style.setProperty("--x", it.idx < 0 ? "70px" : `${(it.idx + 0.5) * 10}%`);
+    // Intake (no station yet) waits at the start of the belt, under Alpha.
+    el.style.setProperty("--i", Math.max(it.idx, 0));
     el.style.setProperty("--row", it.row);
   }
   for (const el of [...box.children]) if (!seen.has(el.dataset.key)) el.remove();
