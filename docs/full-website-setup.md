@@ -268,7 +268,7 @@ See `.claude/skills/keyword-research/SKILL.md` for full flag reference.
 | **Alpha** | System architecture, confirms languages | All inputs from Step 0 | `architecture.md` |
 | **Cyclops** | Supabase schema design | Alpha's output + locations list | `database.md` |
 | **Sora** | SEO keyword plan, page hierarchy, internal linking | Alpha's output + product + locations + languages | `seo-plan.md` |
-| **Lylia** | Logo (Codex concepts → user picks), icon rebuilt as `app/icon.svg`, palette + type pairing. Skips generation only if the client supplied finished logo artwork; logo wishes in the brief (colours, motif, a logo they like) are passed to her as inspiration | Alpha's output + brand name/tone + client brand assets + existing sites | `brand-kit.md`, `public/brand/*`, `app/icon.svg` |
+| **Lylia** | Logo (Codex concepts → user picks) → three PNGs used as-is: logo for light bg, logo for dark bg, favicon (installed as `app/icon.svg` + `app/apple-icon.png` by `scripts/png-favicon.sh`); palette + type pairing. Skips generation only if the client supplied finished logo artwork; logo wishes in the brief (colours, motif, a logo they like) are passed to her as inspiration | Alpha's output + brand name/tone + client brand assets + existing sites | `brand-kit.md`, `public/brand/{slug}-logo-dark.png` + `-logo-light.png`, `app/icon.svg`, `app/apple-icon.png` |
 | **Nana** | Homepage copy + all location page copy | Alpha + Sora's output + brand tone + locations + locales | `copy-homepage.md`, `copy-locations.md` |
 | **Kagura** | Unique UI design direction (reviews existing sites to avoid duplication) | Alpha + Nana's output + Lylia's `brand-kit.md` + reference images | `design-direction.md` |
 | **Kimmy** | Technical SEO, i18n, WhatsApp redirect | Alpha + Sora + Nana's output + languages + domain | `technical-seo-i18n.md` |
@@ -347,7 +347,8 @@ projects/{project-slug}/
 │   │       └── route.ts            ← phone number API
 │   ├── globals.css                 ← global styles + blog-content styles
 │   ├── layout.tsx                  ← root layout (minimal)
-│   ├── icon.svg                    ← favicon (MUST use the same icon from the logo)
+│   ├── icon.svg                    ← favicon (MUST use the same icon from the logo) — Lylia's PNG embedded, via scripts/png-favicon.sh
+│   ├── apple-icon.png              ← same favicon, 180px, for Safari/iOS
 │   ├── robots.ts                   ← robots.txt generator
 │   └── sitemap.ts                  ← sitemap generator
 ├── components/
