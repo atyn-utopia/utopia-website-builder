@@ -1,6 +1,6 @@
 # Website Factory logo, built from the Utopia Brand CI and drawn like the Utopia
 # product logos (autopayroll, slipmatch): two weights of Plus Jakarta Sans.
-# "website" small and ExtraLight, set flush right above a large ExtraBold
+# "website" small and Light, set flush right above a large ExtraBold
 # "factory" whose o is a gear the size of that o, a red triangle in its counter.
 #   cd scripts/agent-monitor/logo
 #   curl -fsSL -o jakarta.ttf "https://github.com/google/fonts/raw/main/ofl/plusjakartasans/PlusJakartaSans%5Bwght%5D.ttf"
@@ -10,7 +10,7 @@ from wordmark import outline, glyph_box
 
 OUT = '../public/brand'
 INK = {'light': '#17181C', 'dark': '#F4F4F2'}
-THIN = {'light': '#7A7D82', 'dark': '#B5B7BC'}   # CI Concrete / Ash
+THIN = {'light': '#4A4D53', 'dark': '#D6D7DA'}   # between Slate and Concrete / Ash and Paper: light weight needs the extra contrast
 GEAR = {'light': '#2774AE', 'dark': '#4A9DD0'}   # Utopia Blue; Blue Light reads better on Obsidian
 RED = '#D72638'                                  # Utopia Red
 SIZE = 64
@@ -37,7 +37,7 @@ def gear(cx, cy, r_body, teeth=8):
 def triangle(cx, cy, r):
     # equilateral, centred on the counter's optical centre, with a ring of
     # clear space between it and the gear
-    h = r * 0.82
+    h = r * 0.95
     w = h * 1.15
     top = cy - h * 0.58
     return f'<polygon points="{cx:.2f},{top:.2f} {cx + w / 2:.2f},{top + h:.2f} {cx - w / 2:.2f},{top + h:.2f}" fill="{RED}"/>'
@@ -54,13 +54,14 @@ def svg(w, h, body):
 
 SMALL = SIZE * 0.36          # "website" size, as in the round-2 drafts
 SMALL_TRACK = 0.005
+THIN_WEIGHT = 300           # Light; ExtraLight (200) disappeared at header size
 GAP = SIZE * 0.05            # clear space between "website" and the letters right under it
 PAD = 3
 
 oxmin, oymin, oxmax, oymax, oadv = glyph_box('o')
 y_rsb = (glyph_box('y')[4] - glyph_box('y')[2]) * SIZE
-e_rsb = (glyph_box('e', 200)[4] - glyph_box('e', 200)[2]) * SMALL
-w_top = max(glyph_box(c, 200)[3] for c in 'websit') * SMALL
+e_rsb = (glyph_box('e', THIN_WEIGHT)[4] - glyph_box('e', THIN_WEIGHT)[2]) * SMALL
+w_top = max(glyph_box(c, THIN_WEIGHT)[3] for c in 'websit') * SMALL
 y_bottom = -glyph_box('y')[1] * SIZE
 r_body = (oymax - oymin) / 2 * SIZE
 gear_top = (oymin + oymax) / 2 * SIZE + r_body * 1.04   # tooth tips stand just above the o
@@ -79,7 +80,7 @@ def factory_layout(x0):
 
 pieces, end = factory_layout(PAD)
 right = end - y_rsb                                      # ink edge of the y
-_, w_end = outline('website', SMALL, x0=0, base=0, track=SMALL_TRACK, weight=200)
+_, w_end = outline('website', SMALL, x0=0, base=0, track=SMALL_TRACK, weight=THIN_WEIGHT)
 w_left = right - (w_end - e_rsb)
 # "website" drops down until it just clears whatever part of factory sits under it
 under = max(top for _, _, l, r, top in pieces if r > w_left - GAP)
@@ -93,7 +94,7 @@ for theme in ('light', 'dark'):
     cy = base - (oymin + oymax) / 2 * SIZE
     g = gear_mark(cx, cy, r_body, theme)
     d2, _ = outline('ry', SIZE, x0=xs['r'], base=base, track=TRACK)
-    d3, _ = outline('website', SMALL, x0=w_left, base=small_base, track=SMALL_TRACK, weight=200)
+    d3, _ = outline('website', SMALL, x0=w_left, base=small_base, track=SMALL_TRACK, weight=THIN_WEIGHT)
     # the f rises above "website"'s baseline, so the canvas top is whichever is higher
     top_f = base - glyph_box('f')[3] * SIZE
     lift = max(0, PAD - top_f)
