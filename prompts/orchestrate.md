@@ -68,7 +68,7 @@ Both GATE 1 and GATE 2 must pass before Layla deploys.
 | Alpha   | 2 | Company, product name/slug, domain, target country, locations list, languages, special requirements |
 | Cyclops | 3 | Alpha's architecture doc, locations list |
 | Sora    | 3 | Alpha's architecture doc, product name, locations list, languages |
-| Lylia   | 3 | Brand name, product name/slug, domain, product category + target audience, brand tone, client brand assets (logo/colours/fonts) if any, list of existing fleet sites |
+| Lylia   | 3 | Brand name, product name/slug, domain, product category + target audience, brand tone, client brand assets (logo/colours/fonts) if any, the brief's logo wishes verbatim (colours, motif, reference logos — inspiration for her, never a reason to skip her), list of existing fleet sites |
 | Nana    | 4 | Alpha's doc, Sora's SEO plan, product description, brand tone, full locations list, supported locales |
 | Kagura  | 5 | Alpha's doc, Nana's homepage copy, Lylia's `brand-kit.md`, brand assets, existing site screenshots, product type, target audience, reference images (if any) |
 | Kimmy   | 5 | Alpha's doc, Sora's plan, Nana's homepage copy, Nana's location copy, confirmed languages, domain, existing codebase state |

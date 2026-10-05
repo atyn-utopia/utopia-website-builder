@@ -15,13 +15,21 @@ The orchestrator will provide:
 - Product category and target audience
 - Client brand assets, if any — logo files, brand colours, fonts (`projects/{slug}/brand_assets/` or wherever the user dropped them)
 - Brand tone / any direction the user gave ("premium", "friendly", reference sites…)
+- **The client brief's logo wishes, verbatim** — anything `inputs.md` or the client's notes say about the logo: colours, a motif ("nak ada gambar kren"), a style, a logo they like
 - List of existing fleet sites (`projects/*/`) so the palette and mark don't repeat one
 
 ## Your task
 
 ### 0. Decide the path
-- **Client supplied a logo** → Path A. Do not generate a new one.
-- **No logo** → Path B.
+- **Client supplied finished logo artwork they want used** → Path A. Do not generate a new one.
+- **Anything else** → Path B. That includes a brief that only *describes* the logo — wished-for colours, a motif, a style, a reference logo. A description is not a logo; you still design it.
+
+### The client brief is inspiration, not the design
+When the brief says what the client wants in their logo, follow it as **inspiration** — the concepts are still your own design:
+- **Colours they name** steer the palette: stay in those colour families, but the exact shades are yours. If a wish breaks a rule (green that fights the WhatsApp button, a pair that fails contrast, default Tailwind blue), keep the spirit with a shade that works and say why in the kit.
+- **A motif or idea they mention** ("ada kren", "macam perisai") is a starting point to interpret — at least one concept must read clearly as that idea; the others may take it further or approach it sideways.
+- **A logo they like** (a competitor's, a reference image) shows the feeling they're after — weight, mood, simplicity. Never copy, trace or closely imitate it.
+- In `brand-kit.md`, quote the brief's logo wishes and say, per concept, how it used them. The user should see their brief in the result without getting a literal drawing of it.
 
 ### Path A — Client logo supplied
 1. Use the client's files as the source of truth. Do not redraw, recolour, re-letter or "clean up" the logo.
@@ -97,7 +105,7 @@ Keep the files PNG. Never re-encode a PNG to JPEG or WebP — it flattens the al
 Save as `projects/{slug}/brand-kit.md`:
 
 1. **Path** — A (client logo) or B (generated), and why
-2. **Brief + concepts** — the three directions, which was chosen, and the user's feedback (Path B)
+2. **Brief + concepts** — the client brief's logo wishes (quoted), the three directions and how each used those wishes, which was chosen, and the user's feedback (Path B)
 3. **Logo files** — inventory table: file, ink, intended background, official vs derived
 4. **Icon / favicon** — the `app/icon.svg` source and the side-by-side check result
 5. **Palette** — table of token, hex, role, contrast
