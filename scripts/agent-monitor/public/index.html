@@ -196,6 +196,58 @@ button{font:inherit}
   .station.busy .robot img,.gear,.belt::before,.dot.build,.product.arrive,.pkg .box,.timer i{animation:none}
   .pkg,.packages,.pager button{transition:none}
 }
+
+/* ---- new website (dialog) */
+[hidden]{display:none!important}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border-radius:var(--r-button);border:1px solid transparent;font:700 14px/1 var(--display);cursor:pointer;white-space:nowrap;transition:transform var(--dur-hover) var(--ease),box-shadow var(--dur-hover) var(--ease)}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn:active{transform:translateY(0)}
+.btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.btn[disabled]{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.btn.ghost{background:var(--panel);color:var(--ink);border-color:var(--line)}
+.btn .n{background:var(--build);color:var(--on-build);border-radius:var(--r-pill);font-size:11px;padding:2px 7px}
+dialog.new{width:min(760px,calc(100vw - 32px));max-height:calc(100dvh - 48px);padding:0;border:0;border-radius:var(--r-lg);background:var(--panel);color:var(--ink);box-shadow:0 24px 60px rgba(11,11,13,.35)}
+dialog.new::backdrop{background:rgba(11,11,13,.45)}
+.new-in{display:flex;flex-direction:column;max-height:calc(100dvh - 48px)}
+.new-h{display:flex;align-items:center;gap:12px;padding:16px 20px 0}
+.new-h h2{font-size:20px;flex:1}
+.x{width:36px;height:36px;border-radius:var(--r-button);border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;font-size:18px}
+.x:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.tabs{display:flex;gap:4px;padding:12px 20px 0;border-bottom:1px solid var(--line)}
+.tabs button{border:0;background:none;color:var(--muted);font:700 14px/1 var(--display);padding:10px 12px;border-bottom:2px solid transparent;cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+.tabs button:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+.new-body{padding:16px 20px;overflow:auto;display:flex;flex-direction:column;gap:14px;min-height:0}
+.new-foot{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:14px 20px;border-top:1px solid var(--line)}
+.new-foot .grow{flex:1;min-width:0;font-size:12.5px;color:var(--muted)}
+.field{display:flex;flex-direction:column;gap:6px}
+.field>span{font-weight:600;font-size:13px}
+.field small{color:var(--muted);font-size:12px}
+.field input[type=text],.field textarea{font:inherit;color:var(--ink);background:var(--linen);border:1px solid var(--line);border-radius:var(--r-button);padding:10px 12px;width:100%}
+.field textarea{min-height:140px;resize:vertical;line-height:1.45}
+.field input:focus-visible,.field textarea:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:var(--r-button);overflow:hidden;width:fit-content}
+.seg label{padding:8px 12px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted)}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg input:checked+span{color:var(--ink)}
+.seg label:has(input:checked){background:var(--linen);color:var(--ink)}
+.seg label:has(input:focus-visible){outline:2px solid var(--blue);outline-offset:-2px}
+.check{display:flex;gap:8px;align-items:flex-start;font-size:13.5px}
+.check input{margin-top:3px}
+.rows{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none}
+.rows li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;padding:8px 10px;border-radius:var(--r-button);background:var(--linen);font-size:13px}
+.rows li b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rows li small{grid-column:1/-1;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rows li .bad{color:#C2410C;font-weight:600}
+.rows li .acts{display:flex;gap:6px}
+.rows li .acts button{height:28px;padding:0 10px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:12.5px;font-weight:600;cursor:pointer}
+.rows li .acts button:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.msg{font-size:13.5px;border-radius:var(--r-button);padding:10px 12px;background:var(--linen)}
+.msg.err{background:#FBE9EB;color:#9F1D2C}
+.result li.ok b{color:var(--live-ink)}
+.result li.fail b{color:#9F1D2C}
+.result a{color:var(--blue)}
 </style>
 </head>
 <body>
@@ -204,6 +256,7 @@ button{font:inherit}
     <h1><img class="light" src="/brand/logo-lockup-light.svg" alt="Website Factory"><img class="dark" src="/brand/logo-lockup-dark.svg" alt="Website Factory"></h1>
     <span class="conn" id="conn">Connecting…</span>
     <div class="tally" id="tally"></div>
+    <button type="button" class="btn primary" id="new-open">New website <span class="n" id="draft-n" hidden></span></button>
   </header>
 
   <section class="floor" aria-label="Production line">
@@ -226,6 +279,52 @@ button{font:inherit}
     </section>
   </div>
 
+
+<dialog class="new" id="new" aria-labelledby="new-title">
+  <div class="new-in">
+    <div class="new-h"><h2 id="new-title">New website</h2><button type="button" class="x" id="new-close" aria-label="Close">×</button></div>
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" id="tab-one" aria-selected="true" data-tab="one">One website</button>
+      <button type="button" role="tab" id="tab-bulk" aria-selected="false" data-tab="bulk">Bulk</button>
+      <button type="button" role="tab" id="tab-drafts" aria-selected="false" data-tab="drafts">Drafts</button>
+    </div>
+
+    <form class="new-body" id="pane-one" data-pane="one">
+      <label class="field"><span>Website name</span><input type="text" id="one-name" placeholder="Aircond Service Penang" autocomplete="off"><small id="one-slug">Repo: utopiagrowth/site-…</small></label>
+      <label class="field"><span>Brief</span><textarea id="one-brief" placeholder="What the business does, the areas it serves, the phone number, anything the builders should know. Mention a brand file with @filename."></textarea></label>
+      <div class="field"><span>Brand files</span><input type="file" id="one-files" multiple><small id="one-files-note">Logos, photos, price lists. Each up to 30 MB. They go into brand_assets/.</small></div>
+      <div class="field"><span>Visibility</span>
+        <div class="seg"><label><input type="radio" name="one-vis" value="private" checked><span>Private</span></label><label><input type="radio" name="one-vis" value="public"><span>Public</span></label></div></div>
+      <label class="check"><input type="checkbox" id="one-start" checked><span>Start the build in a new terminal once the repo is ready</span></label>
+      <div id="one-msg"></div>
+    </form>
+
+    <form class="new-body" id="pane-bulk" data-pane="bulk" hidden>
+      <label class="field"><span>Websites</span><textarea id="bulk-text" placeholder="Aircond Service Penang&#10;Servicing and installation in Penang. Target Georgetown, Bayan Lepas…&#10;---&#10;Sewa Genset Johor&#10;Generator rental across Johor…"></textarea>
+        <small>One website per block, blocks split by a line of ---. First line is the name, the rest is the brief. Up to 20.</small></label>
+      <ul class="rows" id="bulk-rows"></ul>
+      <div class="field"><span>How to build them</span>
+        <div class="seg"><label><input type="radio" name="bulk-mode" value="orchestrator" checked><span>One session builds all</span></label><label><input type="radio" name="bulk-mode" value="per-site"><span>One terminal per site</span></label></div>
+        <small>One session cross-checks same-niche sites and batches Gate 1 and Gate 2. Separate terminals run fully on their own.</small></div>
+      <div class="field"><span>Visibility</span>
+        <div class="seg"><label><input type="radio" name="bulk-vis" value="private" checked><span>Private</span></label><label><input type="radio" name="bulk-vis" value="public"><span>Public</span></label></div></div>
+      <label class="check"><input type="checkbox" id="bulk-start" checked><span>Start building once the repos are ready</span></label>
+      <div id="bulk-msg"></div>
+    </form>
+
+    <div class="new-body" id="pane-drafts" data-pane="drafts" hidden>
+      <p class="field"><small>Drafts are shared with the Utopia Wizard: one started there shows here, and the other way round.</small></p>
+      <ul class="rows" id="draft-rows"></ul>
+      <div id="drafts-msg"></div>
+    </div>
+
+    <div class="new-foot">
+      <span class="grow" id="new-who"></span>
+      <button type="button" class="btn ghost" id="new-draft">Save draft</button>
+      <button type="button" class="btn primary" id="new-go">Create website</button>
+    </div>
+  </div>
+</dialog>
   <footer class="credit">
     <a href="https://www.utopiagroup.com.my" target="_blank" rel="noopener"><img class="light" src="/brand/utopia-locked-light.svg" alt="utopia"><img class="dark" src="/brand/utopia-locked-dark.svg" alt="utopia"> AI Team</a>
   </footer>
@@ -444,6 +543,157 @@ function connect(){
   es.onerror = () => { conn.textContent = "Lost the factory server. Retrying… (is server.mjs still running?)"; };
 }
 connect();
+
+// ---- New website: one, bulk, drafts (server: create.mjs)
+const $ = (id) => document.getElementById(id);
+const api = async (method, path, body) => {
+  const r = await fetch(path, { method, headers: { "x-factory": "1", "Content-Type": "application/json" }, body: body ? JSON.stringify(body) : undefined });
+  const j = await r.json().catch(() => ({ ok: false, error: `The factory server answered ${r.status}.` }));
+  if (!j.ok) throw new Error(j.error || "Something went wrong.");
+  return j;
+};
+const toSlug = (s) => String(s).toLowerCase().replace(/[^a-z0-9-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60);
+const repoOf = (name) => { const s = toSlug(name); return s ? `utopiagrowth/${s.startsWith("site-") ? s : "site-" + s}` : "utopiagrowth/site-…"; };
+const radio = (name) => document.querySelector(`input[name="${name}"]:checked`).value;
+const parseBulk = (text) => text.split(/^\s*-{3,}\s*$/m).map((b) => { const l = b.split("\n"); const at = l.findIndex((x) => x.trim()); return at < 0 ? null : { name: l[at].trim(), brief: l.slice(at + 1).join("\n").trim() }; }).filter(Boolean);
+const note = (id, html, err) => { $(id).innerHTML = html ? `<div class="msg${err ? " err" : ""}">${html}</div>` : ""; };
+
+let tab = "one", draftId = null, drafts = [], busy = false;
+const dlg = $("new");
+
+function setTab(t){
+  tab = t;
+  for (const b of document.querySelectorAll(".tabs button")) b.setAttribute("aria-selected", String(b.dataset.tab === t));
+  for (const p of document.querySelectorAll("[data-pane]")) p.hidden = p.dataset.pane !== t;
+  $("new-draft").hidden = t === "drafts";
+  $("new-go").hidden = t === "drafts";
+  if (t === "drafts") loadDrafts();
+  refreshGo();
+}
+function bulkSites(){ return parseBulk($("bulk-text").value); }
+function bulkProblems(sites){
+  const seen = new Set();
+  return sites.map((x) => { const sl = toSlug(x.name); const p = !sl ? "needs a name" : !x.brief ? "needs a brief" : seen.has(sl) ? "same repo as another row" : ""; seen.add(sl); return p; });
+}
+function refreshGo(){
+  if (tab === "one") {
+    $("one-slug").textContent = `Repo: ${repoOf($("one-name").value)}${draftId ? " · from a draft" : ""}`;
+    $("new-go").textContent = "Create website";
+    $("new-go").disabled = busy || !toSlug($("one-name").value) || !$("one-brief").value.trim();
+    $("new-draft").textContent = draftId ? "Update draft" : "Save draft";
+    $("new-draft").disabled = busy || !($("one-name").value.trim() || $("one-brief").value.trim());
+  } else if (tab === "bulk") {
+    const sites = bulkSites(), bad = bulkProblems(sites);
+    $("bulk-rows").innerHTML = sites.slice(0, 20).map((x, i) => `<li><b>${esc(x.name || "(no name)")}</b><span class="${bad[i] ? "bad" : ""}">${esc(bad[i] || repoOf(x.name))}</span><small>${esc(x.brief.split("\n")[0] || "")}</small></li>`).join("")
+      + (sites.length > 20 ? `<li><span class="bad">Only the first 20 can be created at once.</span></li>` : "");
+    $("new-go").textContent = sites.length ? `Create ${Math.min(sites.length, 20)} website${sites.length === 1 ? "" : "s"}` : "Create websites";
+    $("new-go").disabled = busy || !sites.length || sites.length > 20 || bad.some(Boolean);
+    $("new-draft").textContent = sites.length > 1 ? `Save ${sites.length} drafts` : "Save draft";
+    $("new-draft").disabled = busy || !sites.length || sites.length > 20;
+  }
+}
+async function loadDrafts(){
+  note("drafts-msg", "");
+  try {
+    drafts = (await api("GET", "/api/drafts")).drafts;
+    $("draft-n").hidden = !drafts.length; $("draft-n").textContent = drafts.length;
+    $("draft-rows").innerHTML = drafts.length ? drafts.map((d) => `<li><b>${esc(d.name || "(untitled)")}</b><span class="acts"><button type="button" data-open="${esc(d.id)}">Open</button><button type="button" data-del="${esc(d.id)}">Delete</button></span>
+      <small>${esc(repoOf(d.name || ""))} · ${(d.assets || []).length} file${(d.assets || []).length === 1 ? "" : "s"} · saved ${ago(Date.parse(d.updated_at))} · ${esc((d.brief || "").split("\n")[0])}</small></li>`).join("")
+      : `<li><small>No drafts yet. Save one from One website or Bulk.</small></li>`;
+  } catch (e) { note("drafts-msg", esc(e.message), true); }
+}
+const fileToB64 = (f) => new Promise((ok, no) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(",")[1] || ""); r.onerror = () => no(r.error); r.readAsDataURL(f); });
+
+function showResult(paneMsg, out){
+  const rows = out.results.map((r) => r.ok
+    ? `<li class="ok"><b>${esc(r.repoFullName)}</b><span><a href="${esc(r.htmlUrl)}" target="_blank" rel="noopener">Open repo</a></span><small>${r.assets} brand file${r.assets === 1 ? "" : "s"} · ${r.registered ? "in the wizard" : "not added to the wizard"}</small></li>`
+    : `<li class="fail"><b>${esc(r.name || "(no name)")}</b><span>Not created</span><small>${esc(r.error)}</small></li>`).join("");
+  const made = out.results.filter((r) => r.ok).length;
+  const tail = [
+    made ? `Scan ${out.scan === "only" || out.scan === "all" ? "started" : esc(out.scan || "not started")}.` : "",
+    out.terminals ? `Build started in ${out.terminals} terminal window${out.terminals === 1 ? "" : "s"}; it shows on the line within a minute.` : "",
+    out.startError ? `The build didn't start: ${esc(out.startError)}` : "",
+    made && !out.seededClaude ? "CLAUDE.md couldn't be fetched from the builder repo, so it wasn't added." : "",
+  ].filter(Boolean).join(" ");
+  note(paneMsg, `<ul class="rows result">${rows}</ul>${tail ? `<p style="margin:8px 0 0">${tail}</p>` : ""}`, made === 0);
+}
+
+async function create(){
+  if (busy) return;
+  busy = true; refreshGo();
+  const vis = radio(tab === "one" ? "one-vis" : "bulk-vis");
+  const msg = tab === "one" ? "one-msg" : "bulk-msg";
+  try {
+    let sites, start;
+    if (tab === "one") {
+      const files = [...$("one-files").files];
+      const big = files.find((f) => f.size > 30 * 1024 * 1024);
+      if (big) throw new Error(`${big.name} is over 30 MB.`);
+      note(msg, files.length ? `Reading ${files.length} file${files.length === 1 ? "" : "s"}…` : "Creating the repo…");
+      const assets = await Promise.all(files.map(async (f) => ({ name: f.name, base64: await fileToB64(f) })));
+      sites = [{ name: $("one-name").value.trim(), brief: $("one-brief").value.trim(), visibility: vis, assets, draftId }];
+      start = $("one-start").checked ? "per-site" : "none";
+    } else {
+      sites = bulkSites().map((x) => ({ ...x, visibility: vis }));
+      start = $("bulk-start").checked ? radio("bulk-mode") : "none";
+    }
+    note(msg, `Creating ${sites.length === 1 ? "the repo" : sites.length + " repos"}… this takes a few seconds each.`);
+    const out = await api("POST", "/api/create", { sites, start });
+    showResult(msg, out);
+    if (out.results.every((r) => r.ok)) {
+      if (tab === "one") { $("one-name").value = ""; $("one-brief").value = ""; $("one-files").value = ""; draftId = null; }
+      else $("bulk-text").value = "";
+    }
+    loadDrafts();
+  } catch (e) { note(msg, esc(e.message), true); }
+  busy = false; refreshGo();
+}
+
+async function saveDrafts(){
+  if (busy) return;
+  busy = true; refreshGo();
+  const msg = tab === "one" ? "one-msg" : "bulk-msg";
+  try {
+    if (tab === "one") {
+      const d = (await api("POST", "/api/drafts", { id: draftId, name: $("one-name").value.trim(), brief: $("one-brief").value.trim(), visibility: radio("one-vis") })).draft;
+      draftId = d.id;
+      note(msg, `Draft saved. It's in Drafts here and in the wizard.${$("one-files").files.length ? " Brand files aren't saved with a draft from here; add them when you create." : ""}`);
+    } else {
+      const sites = bulkSites();
+      for (const x of sites) await api("POST", "/api/drafts", { name: x.name, brief: x.brief, visibility: radio("bulk-vis") });
+      note(msg, `${sites.length} draft${sites.length === 1 ? "" : "s"} saved.`);
+    }
+    loadDrafts();
+  } catch (e) { note(msg, esc(e.message), true); }
+  busy = false; refreshGo();
+}
+
+$("new-open").addEventListener("click", () => { dlg.showModal(); setTab(tab); api("GET", "/api/me").then((j) => { $("new-who").textContent = `Creates repos in utopiagrowth as @${j.login}`; }).catch((e) => { $("new-who").textContent = e.message; }); });
+$("new-close").addEventListener("click", () => dlg.close());
+dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
+for (const b of document.querySelectorAll(".tabs button")) b.addEventListener("click", () => setTab(b.dataset.tab));
+for (const id of ["one-name", "one-brief", "bulk-text"]) $(id).addEventListener("input", refreshGo);
+for (const f of ["pane-one", "pane-bulk"]) $(f).addEventListener("submit", (e) => { e.preventDefault(); create(); });
+$("new-go").addEventListener("click", create);
+$("new-draft").addEventListener("click", saveDrafts);
+$("draft-rows").addEventListener("click", async (e) => {
+  const open = e.target.closest("[data-open]"), del = e.target.closest("[data-del]");
+  if (open) {
+    const d = drafts.find((x) => x.id === open.dataset.open);
+    if (!d) return;
+    draftId = d.id; $("one-name").value = d.name || ""; $("one-brief").value = d.brief || "";
+    document.querySelector(`input[name="one-vis"][value="${d.visibility === "public" ? "public" : "private"}"]`).checked = true;
+    setTab("one");
+    note("one-msg", (d.assets || []).length ? `This draft has ${(d.assets || []).length} brand file${(d.assets || []).length === 1 ? "" : "s"} saved in the wizard; they go into the repo when you create it.` : "");
+  }
+  if (del) {
+    if (del.dataset.confirm !== "1") { del.dataset.confirm = "1"; del.textContent = "Delete for good?"; return; }
+    try { await api("DELETE", `/api/drafts?id=${encodeURIComponent(del.dataset.del)}`); if (draftId === del.dataset.del) draftId = null; loadDrafts(); }
+    catch (er) { note("drafts-msg", esc(er.message), true); }
+  }
+});
+// draft count on the button
+api("GET", "/api/drafts").then((j) => { $("draft-n").hidden = !j.drafts.length; $("draft-n").textContent = j.drafts.length; }).catch(() => {});
 // Installable as an app (PWA); the worker only caches the shell, never live data.
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(() => {});
 // Tick the "Xs ago" labels without a re-render.

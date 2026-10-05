@@ -14,6 +14,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createSites, listDrafts, saveDraft, deleteDraft, useEnvFiles, whoAmI } from './create.mjs';
 
 const PORT = Number(process.env.PORT || 4545);
 const HOURS = Number(process.env.HOURS || 24);
@@ -100,11 +101,17 @@ function answers(host) {
 // The domain each site is registered under in webcore (what webcore displays).
 // Read server-side with the webcore API key from the repo's .env.local; the key
 // never reaches the page.
+const ENV_FILES = [
+  path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../.env.local'),
+  path.join(WORKSPACE, 'utopia-website-builder', '.env.local'),
+];
+useEnvFiles(ENV_FILES);
+
 function webcoreEnv() {
   const out = { base: process.env.WEBCORE_BASE_URL, key: process.env.WEBCORE_API_KEY };
   if (out.base && out.key) return out;
   const here = path.dirname(fileURLToPath(import.meta.url));
-  for (const f of [path.resolve(here, '../../.env.local'), path.join(WORKSPACE, 'utopia-website-builder', '.env.local')]) {
+  for (const f of ENV_FILES) {
     try {
       for (const line of fs.readFileSync(f, 'utf8').split('\n')) {
         const m = line.match(/^(WEBCORE_BASE_URL|WEBCORE_API_KEY)=(.*)$/);
@@ -526,8 +533,44 @@ function broadcast(force = false) {
 
 const TYPES = { '.html': 'text/html; charset=utf-8', '.webmanifest': 'application/manifest+json', '.png': 'image/png', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml' };
 
+// ---- actions: new websites and drafts (create.mjs)
+// These create real GitHub repos, so only this page may call them: a custom
+// header forces a CORS preflight that this server never answers, and any
+// Origin must be this server's own.
+function trusted(req) {
+  if (req.headers['x-factory'] !== '1') return false;
+  const origin = req.headers.origin;
+  return !origin || /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
+}
+function readJson(req, limit = 200 * 1024 * 1024) {
+  return new Promise((resolve, reject) => {
+    let size = 0; const chunks = [];
+    req.on('data', (c) => { size += c.length; if (size > limit) { reject(new Error('Upload too large.')); req.destroy(); } else chunks.push(c); });
+    req.on('end', () => { try { resolve(JSON.parse(Buffer.concat(chunks).toString('utf8') || '{}')); } catch { reject(new Error('Invalid JSON.')); } });
+    req.on('error', reject);
+  });
+}
+async function action(req, res, url) {
+  const send = (code, body) => { res.writeHead(code, { 'Content-Type': 'application/json' }); res.end(JSON.stringify(body)); };
+  if (!trusted(req)) return send(403, { ok: false, error: 'Only the Website Factory page can do this.' });
+  try {
+    if (url.pathname === '/api/me' && req.method === 'GET') return send(200, { ok: true, login: await whoAmI() });
+    if (url.pathname === '/api/drafts' && req.method === 'GET') return send(200, { ok: true, drafts: await listDrafts() });
+    if (url.pathname === '/api/drafts' && req.method === 'POST') return send(200, { ok: true, draft: await saveDraft(await readJson(req)) });
+    if (url.pathname === '/api/drafts' && req.method === 'DELETE') { await deleteDraft(url.searchParams.get('id') || ''); return send(200, { ok: true }); }
+    if (url.pathname === '/api/create' && req.method === 'POST') {
+      const body = await readJson(req);
+      return send(200, { ok: true, ...(await createSites(body.sites, body.start)) });
+    }
+    return send(404, { ok: false, error: 'Unknown action.' });
+  } catch (e) {
+    return send(400, { ok: false, error: e.message });
+  }
+}
+
 const server = http.createServer((req, res) => {
   const url = new URL(req.url, 'http://localhost');
+  if (['/api/me', '/api/drafts', '/api/create'].includes(url.pathname)) { action(req, res, url); return; }
   if (url.pathname === '/events') {
     res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache', Connection: 'keep-alive' });
     res.write(`data: ${JSON.stringify(snapshot())}\n\n`);
