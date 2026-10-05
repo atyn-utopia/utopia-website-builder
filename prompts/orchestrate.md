@@ -28,10 +28,12 @@ Step 2:   Alpha   — System architecture (confirms languages with user)
 
 Step 3:   Cyclops — Supabase schema        (needs: Alpha's output)
           ∥ Sora  — SEO plan               (needs: Alpha's output)
+          ∥ Lylia — Logo + brand kit       (needs: Alpha's output, client brand assets)
+                    → user picks a logo concept (visual gate, blocking before Step 5)
 
 Step 4:   Nana    — Homepage + location copy (needs: Alpha + Sora's output)
 
-Step 5:   Kagura  — UI design direction     (needs: Alpha + Nana's output)
+Step 5:   Kagura  — UI design direction     (needs: Alpha + Nana's output + Lylia's brand kit)
           ∥ Kimmy — Technical SEO + i18n + tracking + WhatsApp redirect (needs: Alpha + Sora + Nana's output)
 
 Step 6:   Apply outputs to codebase + add tracking (see docs/full-website-setup.md)
@@ -54,7 +56,7 @@ Step 14:  Gloo    — Google integration: GA4 + GTM + GSC + Ads conversion impor
                     (needs: paid domain live, project dir, supported locales)
 ```
 
-Steps 3 agents (Cyclops + Sora) run in parallel after Alpha.
+Step 3 agents (Cyclops + Sora + Lylia) run in parallel after Alpha. Lylia returns three logo concepts — publish a comparison page (logo on light, on dark, mark at 32px/16px) and let the user pick before Lylia finalises.
 Step 5 agents (Kagura + Kimmy) run in parallel after Nana.
 Steps 9 (products) and 10 (blog) are MANDATORY before deploy — never skip or defer.
 Both GATE 1 and GATE 2 must pass before Layla deploys.
@@ -66,8 +68,9 @@ Both GATE 1 and GATE 2 must pass before Layla deploys.
 | Alpha   | 2 | Company, product name/slug, domain, target country, locations list, languages, special requirements |
 | Cyclops | 3 | Alpha's architecture doc, locations list |
 | Sora    | 3 | Alpha's architecture doc, product name, locations list, languages |
+| Lylia   | 3 | Brand name, product name/slug, domain, product category + target audience, brand tone, client brand assets (logo/colours/fonts) if any, list of existing fleet sites |
 | Nana    | 4 | Alpha's doc, Sora's SEO plan, product description, brand tone, full locations list, supported locales |
-| Kagura  | 5 | Alpha's doc, Nana's homepage copy, brand assets, existing site screenshots, product type, target audience, reference images (if any) |
+| Kagura  | 5 | Alpha's doc, Nana's homepage copy, Lylia's `brand-kit.md`, brand assets, existing site screenshots, product type, target audience, reference images (if any) |
 | Kimmy   | 5 | Alpha's doc, Sora's plan, Nana's homepage copy, Nana's location copy, confirmed languages, domain, existing codebase state |
 | Cyclops (Part 2) | 9 | Product list from config/products.ts or reference-research.md, Vercel domain, Supabase service role key |
 | Hanabi  | 10 | Website domain, brand name, product niche, target languages, keyword list (optional), Supabase service role key |
@@ -83,6 +86,7 @@ projects/{project-name}/
   architecture.md          ← Alpha's output
   database.md              ← Cyclops's output
   seo-plan.md              ← Sora's output
+  brand-kit.md             ← Lylia's output (logo, icon, palette, type)
   copy-homepage.md         ← Nana's output (homepage)
   copy-locations.md        ← Nana's output (location pages)
   design-direction.md      ← Kagura's output (UI design)

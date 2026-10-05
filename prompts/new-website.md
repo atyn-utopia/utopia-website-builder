@@ -59,9 +59,9 @@ Wait for Alpha's architecture document before proceeding.
 
 Save output to: `projects/{project-slug}/architecture.md`
 
-## Step 3 — Spawn Cyclops + Sora in parallel
+## Step 3 — Spawn Cyclops + Sora + Lylia in parallel
 
-Both need Alpha's output. Spawn simultaneously.
+All three need Alpha's output. Spawn simultaneously.
 
 **Cyclops** (Database Engineer):
 - Prompt: `agents/cyclops.md` + Alpha's architecture + locations list
@@ -69,9 +69,14 @@ Both need Alpha's output. Spawn simultaneously.
 **Sora** (SEO Strategist):
 - Prompt: `agents/sora.md` + Alpha's architecture + product info + locations + languages
 
+**Lylia** (Brand & Logo Designer):
+- Prompt: `agents/lylia.md` + brand name + product + domain + category/audience + brand tone + client brand assets (if any) + existing fleet sites
+- Returns three logo concepts (generated via `scripts/codex-image.sh`). Publish them side by side and **wait for the user to pick** — then Lylia writes the final logo files, `app/icon.svg` and the brand kit. Skipped generation if the client supplied a logo.
+
 Save outputs to:
 - `projects/{project-slug}/database.md`
 - `projects/{project-slug}/seo-plan.md`
+- `projects/{project-slug}/brand-kit.md`
 
 ## Step 4 — Spawn Nana (Copywriter)
 
@@ -90,7 +95,7 @@ Save outputs to:
 Both need Nana's output. Spawn simultaneously.
 
 **Kagura** (UI Design Specialist):
-- Prompt: `agents/kagura.md` + Alpha's doc + Nana's homepage copy + brand assets + existing site screenshots + product type + target audience + reference images (if any)
+- Prompt: `agents/kagura.md` + Alpha's doc + Nana's homepage copy + Lylia's `brand-kit.md` + brand assets + existing site screenshots + product type + target audience + reference images (if any)
 
 **Kimmy** (Technical Implementation):
 - Prompt: `agents/kimmy.md` + Alpha's doc + Sora's plan + Nana's homepage copy + Nana's location copy + confirmed languages + domain + existing codebase state
