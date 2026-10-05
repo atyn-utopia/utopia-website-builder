@@ -34,8 +34,9 @@ counts — sessions in other workspace repos are left off.
   station any run on it has clearly reached (its own agent, the job its task
   names, or a job seen in at least two of its actions) and never moves back.
   When a robot earlier in the line works on it again, that robot lights up and
-  the card says "fix by …"; the website stays where it is. *Intake* if no
-  station has been reached yet.
+  the card says "fix by …"; the website stays where it is. A site that hasn't
+  reached any station waits at the **IN** gate (click it to start a new
+  website); the **OUT** gate counts what shipped today.
 - **Done** — nothing is running on the site and its domain actually answers
   (HTTP below 400, or 401/403). The domain is the one webcore displays for the
   site (`/api/public/companies`, read server-side with `WEBCORE_API_KEY` from
