@@ -71,3 +71,17 @@ while you hover or use the arrows). Phones scroll as normal.
 The robot icon (`public/icon.png`) was generated with `scripts/codex-image.sh`
 from the agent art as reference. Character art in `public/agents/` is copied from the office-screen page
 (`website-workflow/agents/`); keep the two in step if an agent is added.
+
+## Install as an app
+
+The page is a PWA. With `server.mjs` running, open http://localhost:4545 in
+Chrome and choose **Install Website Factory** (the install icon at the right of
+the address bar, or ⋮ → Cast, save and share → Install page as app). It then
+opens in its own window and sits in the Dock. It is still local: the app only
+has live data while `server.mjs` is running on this machine. The service worker
+(`public/sw.js`) caches the page shell so the window still opens during a server
+restart; it never caches `/events` or `/api`.
+
+App icons: `logo/build.py` writes `public/brand/logo-app.svg`, and
+`logo/icons.sh` rasterises it to `app-512.png`, `app-192.png` and `app-180.png`
+(macOS Quick Look + sips).
