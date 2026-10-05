@@ -70,7 +70,8 @@ All three need Alpha's output. Spawn simultaneously.
 - Prompt: `agents/sora.md` + Alpha's architecture + product info + locations + languages
 
 **Lylia** (Brand & Logo Designer):
-- Prompt: `agents/lylia.md` + brand name + product + domain + category/audience + brand tone + client brand assets (if any) + existing fleet sites
+- Prompt: `agents/lylia.md` + brand name + product + domain + category/audience + brand tone + client brand assets (if any) + **the brief's logo wishes, verbatim** + existing fleet sites
+- If the brief mentions anything about the logo (colours, motif, a logo they like), **still run Lylia** — those wishes are her inspiration, not a finished design. Only real logo artwork the client wants used skips generation.
 - Returns three logo concepts (generated via `scripts/codex-image.sh`). Publish them side by side and **wait for the user to pick** — then Lylia writes the final logo files, `app/icon.svg` and the brand kit. Skipped generation if the client supplied a logo.
 
 Save outputs to:

@@ -131,6 +131,7 @@ When the user asks to fix an existing site, first decide whether **we built it**
 1. Alpha — design system architecture (confirms languages with user)
 2. Cyclops + Sora + Lylia — run in parallel (all need Alpha's output)
    Lylia — logo concepts via Codex → **user picks a logo (visual gate, blocking)** → `brand-kit.md`
+   If the brief says anything about the logo (colours, motif, a logo they like), still run Lylia and pass those wishes verbatim — inspiration for her, the design stays hers. Only finished client artwork skips generation.
 2b. **Keyword volume gate (MANDATORY, blocking)** — verify Sora's head terms against
    real Google search volume before any copy is written. `keyword-volume.mjs --plan
    <seo-plan.md>`; a head term with no volume propagates into every H1, meta title
