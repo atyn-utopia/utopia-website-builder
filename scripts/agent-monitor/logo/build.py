@@ -55,7 +55,7 @@ def svg(w, h, body):
 SMALL = SIZE * 0.36          # "website" size, as in the round-2 drafts
 SMALL_TRACK = 0.005
 THIN_WEIGHT = 300           # Light; ExtraLight (200) disappeared at header size
-GAP = SIZE * 0.05            # clear space between "website" and the letters right under it
+GAP = SIZE * 0.05 + 1.5      # clear space between "website" and the letters right under it (+1px at header size)
 PAD = 3
 
 oxmin, oymin, oxmax, oymax, oadv = glyph_box('o')

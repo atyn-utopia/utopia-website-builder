@@ -81,6 +81,52 @@ function liveHostsIn(text = '') {
   }
   return hosts;
 }
+// Saying "live" isn't proof (a message can say a domain is *not* live yet), so a
+// host only counts once it actually answers. Probed in the background, cached.
+const PROBE_TTL = 10 * 60e3;
+const probes = new Map(); // host → { ok, at, busy }
+function answers(host) {
+  const p = probes.get(host);
+  if (!p || (!p.busy && Date.now() - p.at > PROBE_TTL)) {
+    probes.set(host, { ok: p?.ok ?? false, at: Date.now(), busy: true });
+    fetch(`https://${host}/`, { method: 'HEAD', redirect: 'manual', signal: AbortSignal.timeout(6000) })
+      .then((r) => r.status < 400 || r.status === 401 || r.status === 403) // 401/403: up, just protected
+      .catch(() => false)
+      .then((ok) => { probes.set(host, { ok, at: Date.now(), busy: false }); if (ok !== p?.ok) broadcast(); });
+  }
+  return probes.get(host).ok;
+}
+
+// The domain each site is registered under in webcore (what webcore displays).
+// Read server-side with the webcore API key from the repo's .env.local; the key
+// never reaches the page.
+function webcoreEnv() {
+  const out = { base: process.env.WEBCORE_BASE_URL, key: process.env.WEBCORE_API_KEY };
+  if (out.base && out.key) return out;
+  const here = path.dirname(fileURLToPath(import.meta.url));
+  for (const f of [path.resolve(here, '../../.env.local'), path.join(WORKSPACE, 'utopia-website-builder', '.env.local')]) {
+    try {
+      for (const line of fs.readFileSync(f, 'utf8').split('\n')) {
+        const m = line.match(/^(WEBCORE_BASE_URL|WEBCORE_API_KEY)=(.*)$/);
+        if (m) out[m[1] === 'WEBCORE_BASE_URL' ? 'base' : 'key'] ||= m[2].trim().replace(/^["']|["']$/g, '');
+      }
+    } catch {}
+    if (out.base && out.key) break;
+  }
+  return out;
+}
+let webcoreDomains = [];
+async function loadWebcoreDomains() {
+  const { base, key } = webcoreEnv();
+  if (!base || !key) return;
+  try {
+    const r = await fetch(`${base}/api/public/companies`, { headers: { 'x-api-key': key }, signal: AbortSignal.timeout(10000) });
+    const j = await r.json();
+    webcoreDomains = (j.companies || []).flatMap((c) => c.domains || []).map((d) => d.toLowerCase());
+    broadcast();
+  } catch {}
+}
+
 const alnum = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
 // The live host for a site: one whose name starts with the site's name.
 // A real domain wins over the *.utopiaai.my staging host.
@@ -333,7 +379,7 @@ function snapshot() {
   // every host any builder session announced as live, so a team lead's
   // "these seven are live" message ships all seven sites
   const live = new Set();
-  for (const a of actors.values()) if (a.builder) for (const h of a.liveHosts) live.add(h);
+  for (const a of actors.values()) if (a.builder) for (const h of a.liveHosts) if (answers(h)) live.add(h);
   list.sort((x, y) => (y.lastAt || 0) - (x.lastAt || 0));
   return { now, hours: HOURS, agents: AGENTS, actors: list, sites: sites(list, now, live) };
 }
@@ -354,7 +400,10 @@ function sites(list, now, live) {
     const working = runs.filter((r) => r.status === 'working');
     const waiting = runs.filter((r) => r.kind === 'main' && r.status === 'waiting' && now - r.lastAt < ACTIVE_MS);
     const named = runs.map((r) => r.site).find((n) => n.includes('.'));
-    const domain = liveHostFor(key, live) || named || null;
+    // the domain webcore displays for this site, if it's registered there
+    const registered = liveHostFor(key, new Set(webcoreDomains));
+    const shipped = (registered && answers(registered)) || liveHostFor(key, live);
+    const domain = shipped ? (registered || shipped) : (named && answers(named) ? named : null);
     const lastAt = Math.max(...runs.map((r) => r.lastAt || 0));
     const top = working[0] || runs[0];
     // The line only runs one way: a site sits at the furthest station any run
@@ -371,6 +420,7 @@ function sites(list, now, live) {
       key, name: named || runs[0].site, domain, state,
       waitingOnYou: !working.length && waiting.length > 0,
       paused: !working.length && !waiting.length && !domain,
+      registered,
       robots: busy, station,
       working: working.length, lastAt,
       now: state === 'building' ? (top.current?.text || top.task || '') : '',
@@ -498,6 +548,8 @@ const server = http.createServer((req, res) => {
 });
 
 discover();
+loadWebcoreDomains();
+setInterval(loadWebcoreDomains, 10 * 60e3);
 setInterval(() => {
   let changed = false;
   for (const a of actors.values()) changed = ingest(a) || changed;

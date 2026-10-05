@@ -36,11 +36,12 @@ counts — sessions in other workspace repos are left off.
   When a robot earlier in the line works on it again, that robot lights up and
   the card says "fix by …"; the website stays where it is. *Intake* if no
   station has been reached yet.
-- **Done** — nothing is running on the site any more and some builder session
-  announced it live (any link or bare `.my` domain in a message that says
-  live / deployed / production, so one "these seven are live" message ships
-  all seven), or the session title is the domain. A real domain wins over the
-  `*.utopiaai.my` staging host.
+- **Done** — nothing is running on the site and its domain actually answers
+  (HTTP below 400, or 401/403). The domain is the one webcore displays for the
+  site (`/api/public/companies`, read server-side with `WEBCORE_API_KEY` from
+  `.env.local`; the key never reaches the page). Sites not in webcore fall back
+  to a host some builder session announced as live. Hosts are re-checked every
+  10 minutes; a message saying "live" is never enough on its own.
 - **Paused** — nothing running, not waiting on you, and never announced live:
   the site stays on the line in grey instead of disappearing.
 
