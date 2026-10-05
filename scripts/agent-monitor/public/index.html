@@ -86,10 +86,8 @@ button{font:inherit}
 @media (prefers-color-scheme:dark){.station{--ct:color-mix(in srgb,var(--c) 55%,#fff)}}
 .station.busy{background:var(--panel);box-shadow:var(--shadow);outline:2px solid color-mix(in srgb,var(--ct) 60%,transparent)}
 .robot{position:relative;width:64px;height:64px;flex:none}
-.robot img{width:64px;height:64px;object-fit:contain}
-.station.idle .robot img{filter:grayscale(1);opacity:.4}
-.station.busy .robot img{animation:work .9s var(--ease) infinite alternate}
-@keyframes work{from{transform:translateY(0) rotate(-2deg)}to{transform:translateY(-4px) rotate(2deg)}}
+.robot svg.rb-svg{width:64px;height:64px;display:block}
+.station.idle .robot svg.rb-svg{filter:grayscale(1);opacity:.4}
 .gear{position:absolute;right:-8px;top:-4px;width:22px;height:22px;color:var(--ct);animation:spin 2.4s linear infinite}
 .station.idle .gear{display:none}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -104,7 +102,8 @@ button{font:inherit}
 
 /* websites riding the belt over their station */
 .markers{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));padding:2px 0 0}
-.markers img{width:24px;height:24px;margin:0 auto;object-fit:contain}
+.markers span{display:block;width:24px;height:24px;margin:0 auto}
+.markers svg{width:100%;height:100%;display:block}
 @media (min-width:900px){.markers{display:none}}
 .packages{position:relative;height:var(--h,40px);transition:height var(--dur-layout) var(--ease)}
 /* each package is exactly as wide as the station tile above it (same padding and gap as .stations) */
@@ -144,6 +143,8 @@ button{font:inherit}
 .product h3{font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .at{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--muted);min-width:0}
 .at img{width:26px;height:26px;object-fit:contain;flex:none}
+.at .face{width:28px;height:28px;flex:none}
+.at .face svg{width:100%;height:100%;display:block}
 .at span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .at b{color:var(--ink);font-weight:600}
 .product p{margin:0;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -193,7 +194,7 @@ button{font:inherit}
 .credit a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 
 @media (prefers-reduced-motion:reduce){
-  .station.busy .robot img,.gear,.belt::before,.dot.build,.product.arrive,.pkg .box,.timer i{animation:none}
+  .gear,.belt::before,.dot.build,.product.arrive,.pkg .box,.timer i{animation:none}
   .pkg,.packages,.pager button{transition:none}
 }
 
@@ -248,6 +249,65 @@ dialog.new::backdrop{background:rgba(11,11,13,.45)}
 .result li.ok b{color:var(--live-ink)}
 .result li.fail b{color:#9F1D2C}
 .result a{color:var(--blue)}
+
+/* ---- robots (RobotKit, public/robots.js): idle blink + breathing, working = prop moves */
+.rb .r-head{transform-box:view-box;animation:rb-breathe 3.6s ease-in-out infinite alternate;animation-delay:var(--d,0s)}
+.rb .r-eyes{transform-box:fill-box;transform-origin:center;animation:rb-blink 5.4s infinite;animation-delay:var(--d,0s)}
+.rb .r-prop{transform-box:view-box;transform-origin:49px 52.5px}
+@keyframes rb-breathe{from{transform:translateY(0)}to{transform:translateY(.9px)}}
+@keyframes rb-blink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.12)}}
+
+.working .r-head{animation-duration:1.1s}
+.working .r-core{animation:rb-pulse .9s ease-in-out infinite alternate}
+@keyframes rb-pulse{from{opacity:1}to{opacity:.35}}
+
+.working .w-tap .r-prop{animation:w-tap 1s var(--ease) infinite}
+@keyframes w-tap{0%,100%{transform:rotate(0)}35%{transform:rotate(-14deg)}55%{transform:rotate(2deg)}}
+
+.working .w-sweep .r-prop{animation:w-sweep .8s ease-in-out infinite alternate}
+@keyframes w-sweep{from{transform:rotate(-14deg)}to{transform:rotate(10deg)}}
+
+.working .w-scan .r-prop{animation:w-scan 1.3s ease-in-out infinite alternate}
+@keyframes w-scan{from{transform:translate(-3px,0) rotate(-6deg)}to{transform:translate(2px,-1px) rotate(4deg)}}
+
+.working .w-write .r-prop{animation:w-write .7s linear infinite}
+@keyframes w-write{0%,100%{transform:translate(0,0)}25%{transform:translate(1.2px,-1px)}50%{transform:translate(2.4px,0)}75%{transform:translate(1.2px,1px)}}
+.working .w-write .r-dot{animation:w-type 1.2s infinite}
+.working .w-write .r-dot2{animation-delay:.2s}
+.working .w-write .r-dot3{animation-delay:.4s}
+@keyframes w-type{0%,60%,100%{opacity:.3}30%{opacity:1}}
+
+.working .w-layout .r-prop{animation:w-tilt 1.6s ease-in-out infinite alternate}
+@keyframes w-tilt{from{transform:rotate(-5deg)}to{transform:rotate(4deg)}}
+.working .w-layout .k1{animation:w-swap 1.6s infinite}
+.working .w-layout .k2{animation:w-swap 1.6s infinite reverse}
+@keyframes w-swap{0%,40%{opacity:1}50%,90%{opacity:.25}100%{opacity:1}}
+
+.working .w-turn .r-prop{animation:w-turn .75s var(--ease) infinite alternate}
+@keyframes w-turn{from{transform:rotate(0)}to{transform:rotate(-26deg)}}
+
+.working .w-db .r-pupil{transform-box:view-box;animation:w-look 1.4s ease-in-out infinite alternate}
+@keyframes w-look{from{transform:translateX(-1.8px)}to{transform:translateX(1.8px)}}
+.working .w-db .db{animation:w-led 1.2s infinite}
+.working .w-db .db2{animation-delay:.2s}
+.working .w-db .db3{animation-delay:.4s}
+@keyframes w-led{0%,100%{opacity:.2}30%{opacity:1}}
+
+.working .w-flip .r-page{transform-box:view-box;transform-origin:53.5px 49px;animation:w-flip 1.6s var(--ease) infinite}
+@keyframes w-flip{0%,20%{transform:scaleX(1)}60%,100%{transform:scaleX(-1)}}
+.working .w-flip .r-spark{transform-box:fill-box;transform-origin:center;animation:w-spark 1.6s ease-in-out infinite}
+@keyframes w-spark{0%,100%{transform:scale(.5) rotate(0);opacity:.3}50%{transform:scale(1.15) rotate(45deg);opacity:1}}
+
+.working .w-check .ck{animation:w-check 2.4s infinite}
+.working .w-check .ck2{animation-delay:.4s}
+.working .w-check .ck3{animation-delay:.8s}
+@keyframes w-check{0%,10%{opacity:0}25%,85%{opacity:1}100%{opacity:0}}
+
+.working .w-bars .bar1,.working .w-bars .bar2,.working .w-bars .bar3{transform-box:fill-box;transform-origin:50% 100%;animation:w-bar 1.1s var(--ease) infinite alternate}
+.working .w-bars .bar2{animation-delay:.15s}
+.working .w-bars .bar3{animation-delay:.3s}
+@keyframes w-bar{from{transform:scaleY(.35)}to{transform:scaleY(1)}}
+
 </style>
 </head>
 <body>
@@ -336,6 +396,7 @@ dialog.new::backdrop{background:rgba(11,11,13,.45)}
   <symbol id="shipped" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><path d="M3.3 7 12 12l8.7-5"/><path d="m7.5 4.27 9 5.15"/></g></symbol>
 </svg>
 
+<script src="/robots.js"></script>
 <script>
 // Stations in the order a website moves down the line (agents/*.md).
 const ORDER = ["alpha","lylia","sora","nana","kagura","kimmy","cyclops","hanabi","layla","gloo"];
@@ -360,26 +421,43 @@ function ago(t){
 const agoEl = (t) => `<time data-t="${t || ""}">${ago(t)}</time>`;
 const cssNum = (name) => parseFloat(getComputedStyle(document.documentElement).getPropertyValue(name));
 
+// Line robots draw in the page's own ink, so they follow light and dark.
+const robot = (key) => window.RobotKit ? RobotKit.svg(key, "line", { ink: "var(--ink)", shell: "var(--panel)" }) : "";
+
 function renderStations(agents, building){
-  // A robot lights up while it is working on a website — which can be a site
-  // further down the line coming back to it for a fix.
-  document.getElementById("stations").innerHTML = ORDER.map((key) => {
-    const a = agents[key];
+  // Tiles are built once and then only updated, so each robot's blink and
+  // working loop keep running instead of restarting on every live update.
+  const list = document.getElementById("stations");
+  if (!list.childElementCount) {
+    list.innerHTML = ORDER.map((key, i) => `<li class="station idle" data-key="${key}" style="--c:${agents[key].color}">
+      <div class="robot rb" style="--d:-${(i * 0.53).toFixed(2)}s">${robot(key)}<span class="count" hidden></span><svg class="gear"><use href="#gear"/></svg></div>
+      <b>${agents[key].name}</b><small>${esc(agents[key].role)}</small><div class="task">Free</div></li>`).join("");
+  }
+  for (const li of list.children) {
+    const key = li.dataset.key;
+    // A robot lights up while it is working on a website, which can be a site
+    // further down the line coming back to it for a fix.
     const here = building.filter((s) => s.working > 0 && s.robots.includes(key));
     const top = here[0];
+    li.classList.toggle("busy", !!top);
+    li.classList.toggle("idle", !top);
+    li.querySelector(".robot").classList.toggle("working", !!top);
+    const count = li.querySelector(".count");
+    count.hidden = here.length < 2;
+    count.textContent = `×${here.length}`;
     const task = top
-      ? `<div class="task"><strong>${esc(here.map((s) => s.name).join(", "))}</strong><span>${esc(top.now)}</span></div>`
-      : `<div class="task">Free</div>`;
-    return `<li class="station ${top ? "busy" : "idle"}" style="--c:${a.color}">
-      <div class="robot"><img src="/agents/${key}.png" alt="" width="64" height="64">${here.length > 1 ? `<span class="count">×${here.length}</span>` : ""}<svg class="gear"><use href="#gear"/></svg></div>
-      <b>${a.name}</b><small>${esc(a.role)}</small>${task}</li>`;
-  }).join("");
+      ? `<strong>${esc(here.map((s) => s.name).join(", "))}</strong><span>${esc(top.now)}</span>`
+      : "Free";
+    const box = li.querySelector(".task");
+    if (box.innerHTML !== task) box.innerHTML = task;
+  }
 }
 
 // Packages are kept between renders (keyed by site) so a station change
 // animates as a slide along the belt instead of a jump.
 function renderBelt(building){
-  document.getElementById("markers").innerHTML = ORDER.map((k) => `<img src="/agents/${k}.png" alt="">`).join("");
+  const markers = document.getElementById("markers");
+  if (!markers.childElementCount) markers.innerHTML = ORDER.map((k) => `<span>${robot(k)}</span>`).join("");
   const box = document.getElementById("packages");
   const byStation = new Map();
   for (const s of building) {
@@ -428,7 +506,7 @@ function product(s, agents){
   // robots behind the site's station working on it now are doing a fix, not moving it back
   const back = s.robots.filter((k) => k !== s.station);
   const at = a
-    ? `<div class="at"><img src="/agents/${s.station}.png" alt=""><span>At <b>${esc(a.name)}</b> · ${esc(back.length ? "fix by " + back.map((k) => agents[k].name).join(", ") : a.role)}</span></div>`
+    ? `<div class="at"><span class="face">${robot(s.station)}</span><span>At <b>${esc(a.name)}</b> · ${esc(back.length ? "fix by " + back.map((k) => agents[k].name).join(", ") : a.role)}</span></div>`
     : `<div class="at"><img src="/brand/logo-mark-light.svg" alt=""><span>Started, no station yet</span></div>`;
   const steps = ORDER.map((_, i) => `<i class="${i < idx ? "past" : i === idx ? "here" : ""}"></i>`).join("");
   return `<li class="product${s.waitingOnYou ? " waiting" : ""}${s.paused ? " paused" : ""}${moved ? " arrive" : ""}" title="${esc(s.now)}">

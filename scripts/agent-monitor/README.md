@@ -74,9 +74,13 @@ On a screen at least 900×620 the page fits without scrolling: the card and
 shipped lists paginate to whatever fits and flip pages every 8 seconds (paused
 while you hover or use the arrows). Phones scroll as normal.
 
-The robot icon (`public/icon.png`) was generated with `scripts/codex-image.sh`
-from the agent art as reference. Character art in `public/agents/` is copied from the office-screen page
-(`website-workflow/agents/`); keep the two in step if an agent is added.
+The robots are line icons drawn in code (`public/robots.js`, `RobotKit`): one
+shared robot base, each agent told apart by one prop or hat from its original
+character art (`website-workflow/agents/`) and its accent colour. They draw in
+the page's ink, so they follow light and dark. Idle robots blink and breathe;
+a robot at work moves its prop (CSS transform/opacity only, off under reduced
+motion). To add an agent, add it to `ROBOTS` in `robots.js` and to `AGENTS` in
+`server.mjs`.
 
 ## Install as an app
 
