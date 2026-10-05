@@ -1,7 +1,8 @@
-# Agent Monitor
+# Website Factory
 
-A live page showing every Claude Code session on this machine: which agent is
-working, on which website, and what it is doing right now.
+A live production line of the website builder: the ten robot agents at their
+stations, each website moving down the line as the robots work on it (orange),
+and the websites that are done in the shipped bay with their live link (green).
 
 ```bash
 node scripts/agent-monitor/server.mjs     # → http://localhost:4545
@@ -18,6 +19,22 @@ and every subagent to `<session>/subagents/agent-*.jsonl` (+ `.meta.json`).
 over Server-Sent Events. It binds to `127.0.0.1` only, so nothing leaves the
 machine. `/api/state` returns the same snapshot as JSON.
 
+## How it reads the line
+
+Only work on a site under `projects/` (or a session titled `FIX`/`NEW <site>`)
+counts — sessions in other workspace repos are left off.
+
+- **Robot** — a run named after an agent uses that robot. Anything else
+  (`g2-aircond-mesra`, forks, the main session working on its own) is matched to
+  a robot by what it is doing: blog → Hanabi, logo/favicon → Lylia, keywords →
+  Sora, deploy/Vercel → Layla, products/webcore → Cyclops, schema/i18n → Kimmy,
+  copy → Nana, design/CSS → Kagura, GA4/GTM/GSC → Gloo (`JOBS` in `server.mjs`).
+  This is a best guess from the last few actions, not a label.
+- **Station** — a website sits at the furthest-along robot working on it now,
+  else at the last robot that touched it; *Intake* if none matched.
+- **Done** — nothing is running on the site any more and Claude reported a live
+  link (`… dah live: https://…`), or the session title is the domain.
+
 ## How it names things
 
 - **Agent** — a subagent counts as Alpha, Lylia, Sora, … when its prompt starts
@@ -32,5 +49,6 @@ machine. `/api/state` returns the same snapshot as JSON.
   *Your turn* (main session finished its reply), *Finished* (subagent handed
   back), *Idle*.
 
-Character art in `public/agents/` is copied from the office-screen page
+The factory icon (`public/icon.png`) was generated with `scripts/codex-image.sh`
+from the agent art as reference. Character art in `public/agents/` is copied from the office-screen page
 (`website-workflow/agents/`); keep the two in step if an agent is added.

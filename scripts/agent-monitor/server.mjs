@@ -18,6 +18,7 @@ import { fileURLToPath } from 'node:url';
 const PORT = Number(process.env.PORT || 4545);
 const HOURS = Number(process.env.HOURS || 24);
 const ROOT = process.env.CLAUDE_PROJECTS_DIR || path.join(os.homedir(), '.claude', 'projects');
+const WORKSPACE = path.join(os.homedir(), 'Documents', 'GitHub', 'atyn-workspace');
 const PUBLIC = path.join(path.dirname(fileURLToPath(import.meta.url)), 'public');
 
 // Initial read of a long main-session transcript starts this far from the end;
@@ -41,6 +42,44 @@ const AGENTS = {
 const AGENT_NAMES = Object.values(AGENTS).map((a) => a.name).join('|');
 
 // ---------------------------------------------------------------- detection
+
+// Which robot a run is doing the work of, when it isn't named after one
+// ("g2-aircond-mesra", a fork, or the main session working on its own).
+// First match wins, so the narrow, unambiguous jobs come first.
+const JOBS = [
+  ['gloo',    /\b(ga4|gtm|tag manager|search console|gsc|google ads|ads-readiness|google-automation|google-integration)\b/i],
+  ['lylia',   /\b(logos?|favicon|icons?|brand ?kit|branding)\b/i],
+  ['hanabi',  /\b(blog|articles?|artikel)\b|\/posts\//i],
+  ['sora',    /\b(keywords?|seo-plan|seo plan|search volume)\b/i],
+  ['layla',   /\b(deploy\w*|vercel|integration test|smoke test|go live)\b/i],
+  ['cyclops', /\b(products?|supabase|webcore|phone numbers?|database|migration)\b/i],
+  ['kimmy',   /\b(schema|metadata|hreflang|i18n|translations?|sitemap|redirect-whatsapp|alt text)\b/i],
+  ['nana',    /\b(copy|copywrit\w*|messages\/\w+\.json)\b/i],
+  ['kagura',  /\b(design|layout|header|hero|css|palette|fonts?|SiteHeader|SiteFooter)\b/i],
+  ['alpha',   /\b(architecture|scaffold\w*|build-site|new site|site plan)\b/i],
+];
+function inferAgent(...texts) {
+  for (const t of texts) {
+    if (!t) continue;
+    for (const [key, re] of JOBS) if (re.test(t)) return key;
+  }
+  return null;
+}
+
+// A link Claude reported as the live site. Dashboards, repos and previews don't count.
+const NOT_LIVE = /(^|\.)(github\.com|vercel\.com|claude\.ai|anthropic\.com|google\.com|googleapis\.com|localhost|supabase\.co|utopiagroup\.com\.my|wizard\.utopiaai\.my|websitebuilder\.utopiaai\.my|wa\.me|placehold\.co)$/i;
+function liveUrlIn(text = '') {
+  let found = null;
+  for (const m of text.matchAll(/https:\/\/([a-z0-9.-]+\.[a-z]{2,})(?=[\/\s)*`\]>,]|$)/gi)) {
+    const host = m[1].toLowerCase().replace(/\.$/, '');
+    if (NOT_LIVE.test(host) || /-[a-z0-9]{9}-[a-z0-9-]+\.vercel\.app$/.test(host)) continue; // per-deploy preview URLs
+    found = host;
+  }
+  return found;
+}
+
+// Site keys from titles ("auto-gate.my") and folders ("site-auto-gate-my") must meet.
+const siteKey = (s) => s.toLowerCase().replace(/^site-/, '').replace(/\./g, '-');
 
 function detectAgent(description = '', brief = '', name = '') {
   // "You are **Hanabi — Blog Writer**" is how agents/*.md get passed in.
@@ -86,11 +125,12 @@ function clip(s = '', n = 90) {
   return t.length > n ? t.slice(0, n - 1) + '…' : t;
 }
 
-// "cd /long/path && FOO=bar node x.mjs" → "node x.mjs"
+// "cd /long/path && set -a; . ./.env.local; set +a; FOO=bar node x.mjs" → "node x.mjs"
 function bareCommand(cmd = '') {
-  return String(cmd).split('\n')[0]
-    .replace(/^(?:\s*cd\s+\S+\s*(?:&&|;)\s*)+/, '')
-    .replace(/^(?:\s*[A-Z_][A-Z0-9_]*=\S*\s*;?\s*)+/, '');
+  const parts = String(cmd).split('\n')[0].split(/\s*(?:&&|;)\s*/);
+  const setup = /^(cd|export|set|source|\.)(\s|$)|^[A-Z_][A-Z0-9_]*=\S*$/;
+  const real = parts.filter((p) => p && !setup.test(p));
+  return (real.join(' && ') || parts.join('; ')).replace(/^(?:[A-Z_][A-Z0-9_]*=\S*\s+)+/, '');
 }
 
 // A tool call in plain words, plus a coarse kind the page uses for its icon.
@@ -141,6 +181,7 @@ function newActor(file, kind) {
     id: file, kind, file,
     sessionId: null, parentId: null,
     agentKey: null, agentType: null, name: '', description: '',
+    builder: file.includes('utopia-website-builder'), liveUrl: null,
     brief: '', title: '', customTitle: '', lastPrompt: '',
     cwd: '', branch: '', site: null, pathSite: null,
     startedAt: null, lastAt: null,
@@ -185,6 +226,7 @@ function applyLine(a, line) {
         pushAction(a, ts, d);
       } else if (c.type === 'text' && c.text?.trim()) {
         pushAction(a, ts, { kind: 'say', text: clip(c.text, 110) });
+        if (/\blive\b|dah live|deployed|production/i.test(c.text)) a.liveUrl = liveUrlIn(c.text) || a.liveUrl;
       } else if (c.type === 'thinking') {
         a.current = { kind: 'think', text: 'Thinking…', at: ts };
       }
@@ -242,9 +284,11 @@ function view(a, now) {
     || (parent && (siteFromTitle(parent.customTitle) || parent.pathSite)) || null;
   const repo = (a.cwd.match(WORKSPACE_REPO) || [])[1] || path.basename(a.cwd || '') || null;
   const agent = a.agentKey ? { key: a.agentKey, ...AGENTS[a.agentKey] } : null;
+  const doing = a.agentKey || inferAgent(a.kind === 'sub' ? a.description : '', ...a.recent.slice(0, 3).map((r) => r.text));
   return {
     id: a.id, kind: a.kind, sessionId: a.sessionId, parentId: a.parentId,
-    agent, agentType: a.agentType,
+    agent, agentType: a.agentType, doing, builder: a.builder,
+    siteKey: site ? siteKey(site) : null, liveUrl: a.liveUrl,
     label: agent ? agent.name : a.kind === 'main' ? (a.customTitle || a.title || 'Claude session') : (a.name || a.agentType || 'Subagent'),
     task: a.kind === 'sub' ? a.description : (a.customTitle ? a.title : ''),
     lastPrompt: a.kind === 'main' ? clip(a.lastPrompt, 160) : '',
@@ -259,7 +303,51 @@ function snapshot() {
   const now = Date.now();
   const list = [...actors.values()].filter((a) => a.lastAt).map((a) => view(a, now));
   list.sort((x, y) => (y.lastAt || 0) - (x.lastAt || 0));
-  return { now, hours: HOURS, agents: AGENTS, actors: list };
+  return { now, hours: HOURS, agents: AGENTS, actors: list, sites: sites(list, now) };
+}
+
+// One row per website the builder touched in the window: still being built,
+// or done (nothing running on it any more and a live link was reported).
+const ACTIVE_MS = 3 * 3600e3;
+function sites(list, now) {
+  const by = new Map();
+  for (const a of list) {
+    // Workspace repos (website-workflow, creative-dashboard…) aren't factory websites.
+    if (!a.builder || !a.siteKey || fs.existsSync(path.join(WORKSPACE, a.site))) continue;
+    if (!by.has(a.siteKey)) by.set(a.siteKey, []);
+    by.get(a.siteKey).push(a);
+  }
+  const out = [];
+  for (const [key, runs] of by) {
+    const working = runs.filter((r) => r.status === 'working');
+    const waiting = runs.filter((r) => r.kind === 'main' && r.status === 'waiting' && now - r.lastAt < ACTIVE_MS);
+    const named = runs.map((r) => r.site).find((n) => n.includes('.'));
+    const liveUrl = runs.map((r) => r.liveUrl).find((u) => u && siteKey(u).includes(key.replace(/-(my|com-my|com)$/, ''))) || null;
+    const domain = liveUrl || named || null;
+    const lastAt = Math.max(...runs.map((r) => r.lastAt || 0));
+    const top = working[0] || runs[0];
+    // The station the site sits at on the line: the furthest robot working on it
+    // now, else the last robot that touched it.
+    const order = Object.keys(AGENTS);
+    const busy = working.map((r) => r.doing).filter(Boolean);
+    const station = busy.length
+      ? busy.sort((x, y) => order.indexOf(y) - order.indexOf(x))[0]
+      : (runs.find((r) => r.doing)?.doing ?? null);
+    let state;
+    if (working.length) state = 'building';
+    else if (domain) state = 'done';
+    else if (waiting.length) state = 'building';
+    else continue; // went quiet without going live — not on the floor any more
+    out.push({
+      key, name: named || runs[0].site, domain, state,
+      waitingOnYou: !working.length && waiting.length > 0,
+      robots: [...new Set(busy)], station,
+      working: working.length, lastAt,
+      now: state === 'building' ? (top.current?.text || top.task || '') : '',
+    });
+  }
+  const rank = { building: 0, done: 1 };
+  return out.sort((x, y) => rank[x.state] - rank[y.state] || y.lastAt - x.lastAt);
 }
 
 // ---------------------------------------------------------------- files
