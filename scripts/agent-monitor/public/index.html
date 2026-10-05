@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent Monitor</title>
+<link rel="icon" href="/agents/alpha.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+:root{
+  --bg:#EAF0F5; --panel:#FFFFFF; --sunk:#F3F6F9; --ink:#14202B; --muted:#5B6874; --line:rgba(20,32,43,.10);
+  --accent:#2774AE; --working:#16A34A; --waiting:#E0A100; --done:#2774AE; --idle:#A3ADB7;
+  --shadow:0 1px 2px rgba(20,48,80,.06),0 6px 18px rgba(20,48,80,.07);
+  --display:"Fredoka","Source Sans 3",system-ui,sans-serif; --body:"Source Sans 3",system-ui,sans-serif;
+  --r-card:14px; --r-pill:999px; --ease:cubic-bezier(.22,1,.36,1);
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0D151D; --panel:#16212C; --sunk:#111B24; --ink:#E9EFF4; --muted:#93A1AE; --line:rgba(233,239,244,.10);
+  --accent:#5AA9DE; --working:#34D27A; --waiting:#F5C13D; --done:#5AA9DE; --idle:#5F6B77;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px rgba(0,0,0,.25);
+}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 var(--body)}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.2;margin:0;letter-spacing:-.01em}
+img{display:block}
+.wrap{max-width:1320px;margin:0 auto;padding:20px 16px 48px}
+@media (min-width:760px){.wrap{padding:28px 28px 64px}}
+
+/* top bar */
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-bottom:22px}
+.top h1{font-size:28px}
+.tally{display:flex;flex-wrap:wrap;gap:8px;margin-left:auto}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:var(--r-pill);background:var(--panel);box-shadow:var(--shadow);font-weight:600;font-size:14px;white-space:nowrap}
+.conn{color:var(--muted);font-size:13px;width:100%}
+@media (min-width:760px){.conn{width:auto}}
+
+.dot{width:9px;height:9px;border-radius:50%;background:var(--idle);flex:none}
+.dot.working{background:var(--working);box-shadow:0 0 0 0 var(--working);animation:pulse 1.6s infinite}
+.dot.waiting{background:var(--waiting)}
+.dot.done{background:var(--done)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--working) 55%,transparent)}100%{box-shadow:0 0 0 9px transparent}}
+@media (prefers-reduced-motion:reduce){.dot.working{animation:none}}
+
+section{margin-top:34px}
+section>h2{font-size:21px;margin-bottom:4px}
+section>p.sub{margin:0 0 14px;color:var(--muted);font-size:15px}
+
+/* crew bay — the robots */
+.crew{list-style:none;margin:0;padding:0;display:grid;gap:12px;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:760px){.crew{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.bot{position:relative;background:var(--panel);border-radius:var(--r-card);box-shadow:var(--shadow);padding:12px 12px 14px;text-align:center;border-top:4px solid var(--c);overflow:hidden}
+.bot .char{width:96px;height:96px;margin:0 auto;object-fit:contain;transition:transform .5s var(--ease),opacity .4s}
+.bot.off .char{filter:grayscale(1);opacity:.45}
+.bot.off{border-top-color:var(--line)}
+.bot.on .char{animation:bob 2.4s var(--ease) infinite}
+@keyframes bob{50%{transform:translateY(-4px)}}
+@media (prefers-reduced-motion:reduce){.bot.on .char{animation:none}}
+.bot b{display:block;font-family:var(--display);font-weight:600;font-size:18px;margin-top:4px}
+.bot small{display:block;color:var(--muted);font-size:13px}
+.bot .count{position:absolute;top:10px;right:10px;background:var(--c);color:#fff;border-radius:var(--r-pill);font-size:12px;font-weight:700;padding:1px 8px}
+.bubble{margin-top:10px;background:var(--sunk);border-radius:10px;padding:8px 10px;font-size:13.5px;text-align:left}
+.bubble .site{display:block;font-weight:700;color:var(--c);overflow-wrap:anywhere}
+.bubble .what{display:block;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.bubble .when{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:12px;margin-top:4px}
+.bot.off .bubble{background:none;color:var(--muted);text-align:center;padding:8px 0 0}
+
+/* terminals */
+.terms{display:grid;gap:14px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:980px){.terms{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.term{background:var(--panel);border-radius:var(--r-card);box-shadow:var(--shadow);padding:16px;min-width:0}
+.term-head{display:flex;gap:12px;align-items:flex-start}
+.term-head img{width:40px;height:40px;border-radius:10px;flex:none}
+.term-head h3{font-size:18px;overflow-wrap:anywhere}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.tag{font-size:12.5px;font-weight:600;padding:2px 9px;border-radius:var(--r-pill);background:var(--sunk);color:var(--muted);overflow-wrap:anywhere}
+.tag.site{background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent)}
+.state{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;white-space:nowrap;color:var(--muted)}
+.state.working{color:var(--working)} .state.waiting{color:var(--waiting)}
+.prompt{margin:12px 0 0;padding:8px 10px;border-left:3px solid var(--accent);background:var(--sunk);border-radius:0 8px 8px 0;font-size:14px;color:var(--muted)}
+.now{margin:10px 0 0;font-size:15px;font-weight:600}
+.trail{list-style:none;margin:8px 0 0;padding:0;font-size:13.5px;color:var(--muted)}
+.trail li{display:flex;gap:8px;padding:2px 0;min-width:0}
+.trail li span:first-child{flex:none;width:52px;text-align:right;font-variant-numeric:tabular-nums}
+.trail li span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+details.trailbox summary{cursor:pointer;color:var(--accent);font-size:13px;font-weight:600;margin-top:8px;width:fit-content}
+details.trailbox summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+
+.subs{margin:14px 0 0;padding:12px 0 0;border-top:1px solid var(--line);display:grid;gap:14px}
+.sitegroup ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.sitegroup details ul{margin-top:10px}
+h4.group{margin:0 0 8px;font:600 13px/1.2 var(--body);color:var(--muted);display:flex;align-items:center;gap:8px}
+.subrow{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:10px;align-items:center}
+.subrow img,.subrow .ph{width:36px;height:36px;border-radius:9px;object-fit:contain}
+.subrow .ph{display:grid;place-items:center;background:var(--sunk);font-family:var(--display);font-weight:600;color:var(--muted)}
+.subrow b{font-size:14.5px}
+.subrow .line{font-size:13.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.subrow.done,.subrow.idle{opacity:.6}
+
+.earlier{background:var(--panel);border-radius:var(--r-card);box-shadow:var(--shadow);padding:6px 16px}
+.earlier summary{cursor:pointer;padding:10px 0;font-weight:600}
+.earlier summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.erow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:9px 0;border-top:1px solid var(--line);font-size:14px}
+.erow .t{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.erow .w{color:var(--muted);font-size:13px;text-align:right;white-space:nowrap}
+.erow .d{grid-column:1/-1;color:var(--muted);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.empty{background:var(--panel);border-radius:var(--r-card);padding:22px;color:var(--muted);text-align:center;box-shadow:var(--shadow)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>Agent Monitor</h1>
+    <div class="tally" id="tally"></div>
+    <div class="conn" id="conn">Connecting…</div>
+  </header>
+
+  <section aria-labelledby="crew-h">
+    <h2 id="crew-h">The team right now</h2>
+    <p class="sub">A robot lights up while one of its runs is active. Grey means it isn’t running anywhere.</p>
+    <ul class="crew" id="crew"></ul>
+  </section>
+
+  <section aria-labelledby="terms-h">
+    <h2 id="terms-h">Open sessions</h2>
+    <p class="sub">Each Claude terminal, the website it’s on, and the agents it has sent out.</p>
+    <div class="terms" id="terms"></div>
+  </section>
+
+  <section aria-labelledby="earlier-h">
+    <h2 id="earlier-h" hidden>Earlier</h2>
+    <details class="earlier" id="earlier"><summary></summary><div id="earlier-list"></div></details>
+  </section>
+</div>
+
+<script>
+const ORDER = ["alpha","lylia","sora","nana","kagura","kimmy","cyclops","hanabi","layla","gloo"];
+const STATE_LABEL = {working:"Working", waiting:"Your turn", done:"Finished", idle:"Idle"};
+// A session counts as "open" while it moved in the last 3 hours or is mid-tool.
+const OPEN_MS = 3 * 3600e3;
+let snap = null, serverSkew = 0;
+
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const now = () => Date.now() + serverSkew;
+function ago(t){
+  if (!t) return "";
+  const s = Math.max(0, Math.round((now() - t) / 1000));
+  if (s < 60) return s + "s ago";
+  const m = Math.round(s / 60);
+  if (m < 60) return m + "m ago";
+  const h = Math.floor(m / 60);
+  return h + "h " + (m % 60) + "m ago";
+}
+const agoEl = (t) => `<time data-t="${t || ""}">${ago(t)}</time>`;
+const img = (a) => a.agent ? `/agents/${a.agent.key}.png` : "/agents/main.png";
+const isLive = (a) => a.status === "working" || a.status === "waiting";
+
+function renderTally(actors){
+  const n = (s) => actors.filter((a) => a.status === s).length;
+  const sites = new Set(actors.filter(isLive).map((a) => a.site).filter(Boolean));
+  document.getElementById("tally").innerHTML =
+    `<span class="chip"><span class="dot working"></span>${n("working")} working</span>` +
+    `<span class="chip"><span class="dot waiting"></span>${actors.filter((a) => a.kind === "main" && a.status === "waiting" && now() - a.lastAt < OPEN_MS).length} waiting for you</span>` +
+    `<span class="chip">${sites.size} ${sites.size === 1 ? "website" : "websites"} in progress</span>`;
+}
+
+function renderCrew(actors, agents){
+  document.getElementById("crew").innerHTML = ORDER.map((key) => {
+    const a = agents[key];
+    const runs = actors.filter((x) => x.agent?.key === key && x.status === "working");
+    const last = actors.find((x) => x.agent?.key === key);
+    const on = runs.length > 0;
+    const top = runs[0];
+    const sites = [...new Set(runs.map((r) => r.site).filter(Boolean))];
+    const bubble = on
+      ? `<div class="bubble"><span class="site">${esc(sites.join(", ") || "—")}</span><span class="what">${esc(top.current?.text || top.task)}</span><span class="when"><span class="dot working"></span>${agoEl(top.lastAt)}</span></div>`
+      : `<div class="bubble">${last ? `Last: ${esc(last.site || "—")}, ${agoEl(last.lastAt)}` : "Not run today"}</div>`;
+    return `<li class="bot ${on ? "on" : "off"}" style="--c:${a.color}">
+      ${runs.length > 1 ? `<span class="count">×${runs.length}</span>` : ""}
+      <img class="char" src="/agents/${key}.png" alt="" width="96" height="96">
+      <b>${a.name}</b><small>${esc(a.role)}</small>${bubble}</li>`;
+  }).join("");
+}
+
+function subRow(s, grouped){
+  const face = s.agent ? `<img src="${img(s)}" alt="">` : `<span class="ph" aria-hidden="true">${esc((s.label || "?")[0].toUpperCase())}</span>`;
+  const line = s.status === "working" ? (s.current?.text || s.task) : (s.task || s.current?.text);
+  return `<li class="subrow ${s.status}">${face}
+    <div style="min-width:0"><b>${esc(s.label === "fork" ? "Helper" : s.label)}</b>${s.site && !grouped ? ` <span class="tag site">${esc(s.site)}</span>` : ""}<div class="line">${esc(line)}</div></div>
+    <span class="state ${s.status}"><span class="dot ${s.status}"></span>${STATE_LABEL[s.status]} · ${agoEl(s.lastAt)}</span></li>`;
+}
+
+// A terminal can run dozens of helpers at once; group them by website and show
+// the busiest few, with the rest behind a toggle.
+const SHOWN_PER_SITE = 3;
+function siteGroups(m, subs){
+  const groups = new Map();
+  for (const s of subs) { const k = s.site || "Other"; if (!groups.has(k)) groups.set(k, []); groups.get(k).push(s); }
+  const many = groups.size > 1;
+  return `<div class="subs">${[...groups].map(([site, rows]) => {
+    const working = rows.filter((r) => r.status === "working").length;
+    const head = many ? `<h4 class="group"><span class="tag site">${esc(site)}</span> ${working ? `${working} working` : "all finished"}</h4>` : "";
+    const shown = rows.slice(0, SHOWN_PER_SITE), more = rows.slice(SHOWN_PER_SITE);
+    return `<div class="sitegroup">${head}<ul>${shown.map((r) => subRow(r, many)).join("")}</ul>${more.length
+      ? `<details class="trailbox" data-id="${esc(m.id + "|" + site)}"><summary>${more.length} more</summary><ul>${more.map((r) => subRow(r, many)).join("")}</ul></details>` : ""}</div>`;
+  }).join("")}</div>`;
+}
+
+function renderTerms(actors){
+  const mains = actors.filter((a) => a.kind === "main");
+  const subsOf = (m) => actors.filter((s) => s.kind === "sub" && s.parentId === m.id);
+  const open = mains.filter((m) => now() - m.lastAt < OPEN_MS || m.status === "working" || subsOf(m).some((s) => s.status === "working"));
+  const el = document.getElementById("terms");
+  if (!open.length) { el.innerHTML = `<div class="empty">No Claude session has moved in the last 3 hours. Start one and it shows up here within a few seconds.</div>`; return open; }
+  const rank = {working:0, waiting:1, idle:2, done:3};
+  open.sort((a, b) => rank[a.status] - rank[b.status] || b.lastAt - a.lastAt);
+  el.innerHTML = open.map((m) => {
+    const subs = subsOf(m).sort((a, b) => rank[a.status] - rank[b.status] || b.lastAt - a.lastAt);
+    const liveSubs = subs.filter((s) => s.status === "working" || now() - s.lastAt < 20 * 60e3);
+    const trail = m.recent.slice(1, 6);
+    return `<article class="term">
+      <div class="term-head"><img src="/agents/main.png" alt="">
+        <div style="min-width:0;flex:1"><h3>${esc(m.label)}</h3>
+          <div class="meta">${m.site ? `<span class="tag site">${esc(m.site)}</span>` : ""}${m.repo ? `<span class="tag">${esc(m.repo)}</span>` : ""}${m.branch && m.branch !== "HEAD" ? `<span class="tag">${esc(m.branch)}</span>` : ""}</div></div>
+        <span class="state ${m.status}"><span class="dot ${m.status}"></span>${STATE_LABEL[m.status]}</span></div>
+      ${m.lastPrompt ? `<p class="prompt">You asked: ${esc(m.lastPrompt)}</p>` : ""}
+      <p class="now">${esc(m.current?.text || "")} <span style="color:var(--muted);font-weight:400;font-size:13px">${agoEl(m.current?.at || m.lastAt)}</span></p>
+      ${trail.length ? `<details class="trailbox" data-id="${esc(m.id)}"><summary>Earlier steps</summary><ul class="trail">${trail.map((r) => `<li><span>${agoEl(r.at)}</span><span>${esc(r.text)}</span></li>`).join("")}</ul></details>` : ""}
+      ${liveSubs.length ? siteGroups(m, liveSubs) : ""}
+      ${subs.length > liveSubs.length ? `<p class="sub" style="margin:8px 0 0;font-size:13px;color:var(--muted)">+ ${subs.length - liveSubs.length} earlier agent runs</p>` : ""}
+    </article>`;
+  }).join("");
+  return open;
+}
+
+function renderEarlier(actors, open){
+  const openIds = new Set(open.map((m) => m.id));
+  const rest = actors.filter((a) => a.kind === "main" && !openIds.has(a.id));
+  const box = document.getElementById("earlier");
+  box.hidden = !rest.length;
+  box.querySelector("summary").textContent = `Earlier today · ${rest.length} sessions`;
+  document.getElementById("earlier-list").innerHTML = rest.map((m) => `<div class="erow">
+    <span class="t">${esc(m.label)}${m.site ? ` <span class="tag site">${esc(m.site)}</span>` : ""}</span><span class="w">${agoEl(m.lastAt)}</span>
+    <span class="d">${esc(m.current?.text || "")}</span></div>`).join("");
+}
+
+function render(){
+  if (!snap) return;
+  const { actors, agents } = snap;
+  // Keep any "Earlier steps" the viewer opened across live re-renders.
+  const opened = new Set([...document.querySelectorAll("details.trailbox[open]")].map((d) => d.dataset.id));
+  renderTally(actors);
+  renderCrew(actors, agents);
+  renderEarlier(actors, renderTerms(actors));
+  document.querySelectorAll("details.trailbox").forEach((d) => { if (opened.has(d.dataset.id)) d.open = true; });
+}
+
+function connect(){
+  const conn = document.getElementById("conn");
+  const es = new EventSource("/events");
+  es.onmessage = (ev) => {
+    snap = JSON.parse(ev.data);
+    serverSkew = snap.now - Date.now();
+    conn.textContent = "Live · reading Claude Code transcripts on this machine";
+    render();
+  };
+  es.onerror = () => { conn.textContent = "Lost the monitor server. Retrying… (is server.mjs still running?)"; };
+}
+connect();
+// Tick the "Xs ago" labels without a re-render.
+setInterval(() => document.querySelectorAll("time[data-t]").forEach((t) => { if (t.dataset.t) t.textContent = ago(+t.dataset.t); }), 1000);
+</script>
+</body>
+</html>
