@@ -18,18 +18,18 @@ TRACK = -0.02
 
 
 def gear(cx, cy, r_body, teeth=8):
-    """Gear that fits the o's box: tooth tips on the o's edge, a heavy ring
-    to match ExtraBold, and a round counter (even-odd), as SVG path data."""
+    """Gear that fits the o's box: tooth tips on the o's edge, a ring a little
+    lighter than the ExtraBold strokes, and a round counter (even-odd), as SVG path data."""
     r_tip = r_body * 1.04
-    r_root = r_tip * 0.84
+    r_root = r_tip * 0.86
     pts = []
     step = 2 * math.pi / teeth
     for i in range(teeth):
         a = i * step - math.pi / 2
-        for ang, r in ((a - step * 0.27, r_root), (a - step * 0.16, r_tip), (a + step * 0.16, r_tip), (a + step * 0.27, r_root)):
+        for ang, r in ((a - step * 0.24, r_root), (a - step * 0.14, r_tip), (a + step * 0.14, r_tip), (a + step * 0.24, r_root)):
             pts.append((cx + r * math.cos(ang), cy + r * math.sin(ang)))
     d = 'M' + ' L'.join(f'{x:.2f} {y:.2f}' for x, y in pts) + ' Z'
-    r_hole = r_tip * 0.47
+    r_hole = r_tip * 0.58
     d += f' M{cx + r_hole:.2f} {cy:.2f} A{r_hole:.2f} {r_hole:.2f} 0 1 0 {cx - r_hole:.2f} {cy:.2f} A{r_hole:.2f} {r_hole:.2f} 0 1 0 {cx + r_hole:.2f} {cy:.2f} Z'
     return d, r_hole
 
@@ -54,33 +54,51 @@ def svg(w, h, body):
 
 SMALL = SIZE * 0.36          # "website" size, as in the round-2 drafts
 SMALL_TRACK = 0.005
-GAP = SIZE * 0.08            # between website's baseline and factory's top
+GAP = SIZE * 0.05            # clear space between "website" and the letters right under it
 PAD = 3
 
 oxmin, oymin, oxmax, oymax, oadv = glyph_box('o')
-f_top = glyph_box('f')[3] * SIZE                 # tallest letter in factory
 y_rsb = (glyph_box('y')[4] - glyph_box('y')[2]) * SIZE
 e_rsb = (glyph_box('e', 200)[4] - glyph_box('e', 200)[2]) * SMALL
 w_top = max(glyph_box(c, 200)[3] for c in 'websit') * SMALL
 y_bottom = -glyph_box('y')[1] * SIZE
+r_body = (oymax - oymin) / 2 * SIZE
+gear_top = (oymin + oymax) / 2 * SIZE + r_body * 1.04   # tooth tips stand just above the o
 
+
+def factory_layout(x0):
+    """x positions and heights (above baseline) of each piece of "factory"."""
+    pieces, x = [], x0
+    for ch in 'factory':
+        xmin, _, xmax, ymax, adv = glyph_box(ch)
+        top = gear_top if ch == 'o' else ymax * SIZE
+        pieces.append((ch, x, x + xmin * SIZE, x + xmax * SIZE, top))
+        x += adv * SIZE + TRACK * SIZE
+    return pieces, x - TRACK * SIZE
+
+
+pieces, end = factory_layout(PAD)
+right = end - y_rsb                                      # ink edge of the y
+_, w_end = outline('website', SMALL, x0=0, base=0, track=SMALL_TRACK, weight=200)
+w_left = right - (w_end - e_rsb)
+# "website" drops down until it just clears whatever part of factory sits under it
+under = max(top for _, _, l, r, top in pieces if r > w_left - GAP)
 small_base = PAD + w_top
-base = small_base + GAP + f_top
+base = small_base + GAP + under
 for theme in ('light', 'dark'):
-    d1, x = outline('fact', SIZE, x0=PAD, base=base, track=TRACK)
-    x += TRACK * SIZE
+    xs = {ch: x for ch, x, *_ in pieces}
+    d1, _ = outline('fact', SIZE, x0=PAD, base=base, track=TRACK)
     # the gear takes the o's slot exactly: same centre, same width
-    r_body = (oymax - oymin) / 2 * SIZE
-    cx = x + (oxmin + oxmax) / 2 * SIZE
+    cx = xs['o'] + (oxmin + oxmax) / 2 * SIZE
     cy = base - (oymin + oymax) / 2 * SIZE
     g = gear_mark(cx, cy, r_body, theme)
-    d2, end = outline('ry', SIZE, x0=x + oadv * SIZE + TRACK * SIZE, base=base, track=TRACK)
-    right = end - y_rsb                          # ink edge of the y
-    # set "website" once to measure it, then again flush with that edge
-    _, w_end = outline('website', SMALL, x0=0, base=small_base, track=SMALL_TRACK, weight=200)
-    d3, _ = outline('website', SMALL, x0=right - (w_end - e_rsb), base=small_base, track=SMALL_TRACK, weight=200)
-    w, h = right + PAD, base + y_bottom + PAD
-    body = f'<path d="{d3}" fill="{THIN[theme]}"/><path d="{d1} {d2}" fill="{INK[theme]}"/>' + g
+    d2, _ = outline('ry', SIZE, x0=xs['r'], base=base, track=TRACK)
+    d3, _ = outline('website', SMALL, x0=w_left, base=small_base, track=SMALL_TRACK, weight=200)
+    # the f rises above "website"'s baseline, so the canvas top is whichever is higher
+    top_f = base - glyph_box('f')[3] * SIZE
+    lift = max(0, PAD - top_f)
+    w, h = right + PAD, base + y_bottom + PAD + lift
+    body = f'<g transform="translate(0 {lift:.2f})"><path d="{d3}" fill="{THIN[theme]}"/><path d="{d1} {d2}" fill="{INK[theme]}"/>{g}</g>'
     open(f'{OUT}/logo-lockup-{theme}.svg', 'w').write(svg(w, h, body))
     open(f'{OUT}/logo-mark-{theme}.svg', 'w').write(svg(64, 64, gear_mark(32, 32, 29, theme)))
-print('ok')
+print('ok', round(under, 1), round(w_left, 1))
