@@ -51,6 +51,7 @@ scripts/codex-image.sh projects/{slug}/brand_assets/logo-concepts/concept-a.png 
 
 Brief-writing rules for Codex:
 - Always say **flat vector style, transparent background, no mockup** — otherwise you get a logo printed on a business card on a desk.
+- Transparency still slips: Codex has returned a painted grey checkerboard (RGB, not RGBA) and a soft alpha halo around the artwork. The script rejects non-RGBA output and asks for real alpha, but check the edges yourself on a dark background before keeping an image.
 - Spell the brand name exactly and in quotes. Then **check the spelling in the output** — image models misspell; a misspelt concept is rejected, not shown.
 - Ask for the icon to be simple enough to read at 16×16: one shape, few details, no thin strokes.
 - `brand_assets/` is gitignored — concepts never enter git.
