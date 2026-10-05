@@ -125,6 +125,9 @@ cd utopia-wizard && npm run scaffold -- \
 > `vercel project ls` ("Latest Production URL").
 
 This writes `projects/{project-slug}/` with a correct structure + an `inputs.md` stub.
+The structure is what you keep. The **styling** it carries (`PageStyles`, the
+`<style>` blocks in `SiteHeader`/`SiteFooter`, `globals.css`) is water-tank's look
+and is a placeholder — replace it with Kagura's direction before Gate 1.
 It deliberately leaves **copy, brand assets, the real locations list, and the
 project-unique special section** as TODO — those are the agent pipeline's job
 (Steps 2–6). Update the generated `inputs.md` with the full Step 0 inputs.
@@ -942,6 +945,10 @@ Check:
 ### Layout & Design Checklist (MANDATORY before Gate 1)
 
 Every item below MUST be verified on the running site. These rules come from real user feedback on prior projects — every line is here because something broke or had to be iterated on. Treat them as blocking acceptance criteria.
+
+#### Visual identity (not a water-tank recolour)
+- [ ] Screenshot the homepage next to `water-tank-malaysia` at desktop and 390px. Layout and section order may match; header styling, button shape/treatment, cards, hero composition and section surfaces must not. If it reads as water-tank in another colour, it is not ready for Gate 1.
+- [ ] Kagura's "Visual delta vs water-tank" list is implemented, item by item.
 
 #### Alt text (every image, no exceptions)
 - [ ] Every `<img>` has a descriptive alt — never `alt=""` for content images. Decorative images that genuinely carry no information may use `alt=""` but only as a last resort.
