@@ -102,4 +102,6 @@ for theme in ('light', 'dark'):
     body = f'<g transform="translate(0 {lift:.2f})"><path d="{d3}" fill="{THIN[theme]}"/><path d="{d1} {d2}" fill="{INK[theme]}"/>{g}</g>'
     open(f'{OUT}/logo-lockup-{theme}.svg', 'w').write(svg(w, h, body))
     open(f'{OUT}/logo-mark-{theme}.svg', 'w').write(svg(64, 64, gear_mark(32, 32, 29, theme)))
+# App icon for the PWA: full-bleed paper square, gear inside the maskable safe zone (centre 80%).
+open(f'{OUT}/logo-app.svg', 'w').write(svg(512, 512, '<rect width="512" height="512" fill="#F4F4F2"/>' + gear_mark(256, 256, 150, 'light')))
 print('ok', round(under, 1), round(w_left, 1))

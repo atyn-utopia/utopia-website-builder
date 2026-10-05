@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Website Factory</title>
 <link rel="icon" href="/brand/logo-mark-light.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/brand/app-180.png">
+<meta name="theme-color" content="#F4F4F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B0B0D" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap">
 <style>
@@ -424,6 +428,8 @@ function connect(){
   es.onerror = () => { conn.textContent = "Lost the factory server. Retrying… (is server.mjs still running?)"; };
 }
 connect();
+// Installable as an app (PWA); the worker only caches the shell, never live data.
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(() => {});
 // Tick the "Xs ago" labels without a re-render.
 setInterval(() => document.querySelectorAll("time[data-t]").forEach((t) => { if (t.dataset.t) t.textContent = ago(+t.dataset.t); }), 1000);
 </script>

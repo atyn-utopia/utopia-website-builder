@@ -458,7 +458,7 @@ function broadcast(force = false) {
   for (const res of clients) res.write(`data: ${body}\n\n`);
 }
 
-const TYPES = { '.html': 'text/html; charset=utf-8', '.png': 'image/png', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml' };
+const TYPES = { '.html': 'text/html; charset=utf-8', '.webmanifest': 'application/manifest+json', '.png': 'image/png', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml' };
 
 const server = http.createServer((req, res) => {
   const url = new URL(req.url, 'http://localhost');
