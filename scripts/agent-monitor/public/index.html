@@ -25,7 +25,7 @@
   --r-button:8px; --r-card:12px; --r-lg:16px; --r-pill:999px;
   --ease:cubic-bezier(.22,1,.36,1); --dur-hover:220ms; --dur-layout:320ms;
   --logo-light:block; --logo-dark:none;
-  --card-h:152px; --crate-h:48px;
+  --card-h:152px; --crate-h:44px;
   --ct-mix:100%;
 }
 /* dark: follows the system, or the header toggle (data-theme) either way */
@@ -163,7 +163,7 @@ button{font:inherit}
   /* both panels sit in the same tray, which fills the row, so the two always end level */
   background:var(--bone);border-radius:var(--r-lg);box-shadow:inset 0 0 0 1px var(--line)}
 .cards{grid-template-columns:repeat(var(--cols,1),minmax(0,1fr));grid-auto-rows:var(--card-h)}
-.bay{grid-auto-rows:var(--crate-h);gap:8px}
+.bay{grid-auto-rows:var(--crate-h);gap:6px}
 
 .product{background:var(--panel);border-radius:var(--r-card);box-shadow:var(--shadow);overflow:hidden;border:2px solid var(--build);min-width:0;display:flex;flex-direction:column}
 .product .bar{display:flex;gap:5px;align-items:center;height:24px;padding:0 10px;background:var(--build);flex:none}
@@ -192,7 +192,7 @@ button{font:inherit}
 @keyframes arrive{from{transform:translateY(-12px);opacity:0}}
 
 .crate{background:var(--live-soft);border:1.5px solid var(--live);border-radius:var(--r-button);padding:5px 10px;display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:10px;align-items:center;min-width:0}
-.crate .tick{grid-row:span 2;width:26px;height:26px;border-radius:var(--r-button);background:var(--live);color:var(--on-live);display:grid;place-items:center}
+.crate .tick{grid-row:span 2;width:24px;height:24px;border-radius:var(--r-button);background:var(--live);color:var(--on-live);display:grid;place-items:center}
 .crate .tick svg{width:16px;height:16px}
 .crate a{font:800 14px/1.2 var(--display);color:var(--live-ink);text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-radius:4px}
 .crate a:hover{text-decoration:underline}
@@ -277,12 +277,14 @@ button{font:inherit}
 /* header trigger: quiet, same height as the status chips beside it */
 #new-open{height:36px}
 
-dialog.new{width:min(640px,calc(100vw - 32px));max-height:min(760px,calc(100dvh - 48px));overflow:hidden;padding:0;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--panel);color:var(--ink);box-shadow:0 1px 2px rgba(11,11,13,.06),0 24px 64px -12px rgba(11,11,13,.35)}
+/* one fixed height for all three tabs, so switching tabs never resizes the dialog */
+dialog.new{width:min(640px,calc(100vw - 32px));height:min(720px,calc(100dvh - 48px));max-height:none;overflow:hidden;padding:0;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--panel);color:var(--ink);box-shadow:0 1px 2px rgba(11,11,13,.06),0 24px 64px -12px rgba(11,11,13,.35)}
 dialog.new::backdrop{background:rgba(11,11,13,.38);backdrop-filter:blur(10px) saturate(.9);-webkit-backdrop-filter:blur(10px) saturate(.9)}
 /* the form still scrolls on a short screen, without a visible bar */
 .new-body,.field textarea{scrollbar-width:none}
 .new-body::-webkit-scrollbar,.field textarea::-webkit-scrollbar{display:none}
-.new-in{display:flex;flex-direction:column;max-height:min(760px,calc(100dvh - 48px))}
+.new-in{display:flex;flex-direction:column;height:100%}
+.new-in>.new-body{flex:1}
 .new-body>*{flex:none}
 .new-h{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;padding:22px 24px 16px}
 .new-h h2{font-size:19px;letter-spacing:-.01em}
