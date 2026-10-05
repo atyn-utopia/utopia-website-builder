@@ -28,10 +28,23 @@ on:
     paths:
       - '.github/workflows/monitor-scan.yml'
   workflow_dispatch:
+    inputs:
+      # Set by the wizard (/api/scan, and the push webhook) to scan only the
+      # repos that changed. Empty = the whole fleet, as before.
+      only:
+        description: 'Comma-separated project slugs to scan (empty = every connected repo)'
+        required: false
+        default: ''
+        type: string
 
+run-name: ${{ inputs.only && format('monitor-scan · {0}', inputs.only) || 'monitor-scan' }}
+
+# Full scans share one group and never cancel each other. A targeted scan gets
+# a group of its own per target, so a burst of pushes to one repo collapses
+# into its latest run and never queues behind (or blocks) the full scan.
 concurrency:
-  group: monitor-scan
-  cancel-in-progress: false
+  group: monitor-scan-${{ inputs.only || 'all' }}
+  cancel-in-progress: ${{ github.event_name == 'workflow_dispatch' && inputs.only != '' }}
 
 jobs:
   scan:
@@ -85,4 +98,7 @@ jobs:
           WIZARD_APP_PRIVATE_KEY: ${{ secrets.WIZARD_APP_PRIVATE_KEY }}
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_TEAM_ID: ${{ secrets.VERCEL_TEAM_ID }}
-        run: npm run scan-repos
+          # Through env, never interpolated into the script. An --only run
+          # skips pruning and owner updates — those need the whole fleet.
+          ONLY: ${{ inputs.only }}
+        run: npm run scan-repos -- ${ONLY:+"--only=$ONLY"}
