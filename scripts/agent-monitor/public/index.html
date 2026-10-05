@@ -25,7 +25,7 @@
   --r-button:8px; --r-card:12px; --r-lg:16px; --r-pill:999px;
   --ease:cubic-bezier(.22,1,.36,1); --dur-hover:220ms; --dur-layout:320ms;
   --logo-light:block; --logo-dark:none;
-  --card-h:152px; --crate-h:64px;
+  --card-h:152px; --crate-h:48px;
 }
 @media (prefers-color-scheme:dark){:root{
   --paper:#0B0B0D; --bone:#111215; --linen:#1C1D22; --panel:#15161A;
@@ -69,10 +69,11 @@ button{font:inherit}
 .panel-h{display:flex;align-items:center;gap:12px;margin-bottom:10px;min-height:32px}
 .panel-h h2{font-size:18px}
 .panel-h{gap:10px}
-.hicon{width:30px;height:30px;border-radius:var(--r-button);display:grid;place-items:center;flex:none}
-.hicon svg{width:18px;height:18px}
-.hicon.build{background:var(--build);color:var(--on-build)}
-.hicon.live{background:var(--live);color:var(--on-live)}
+.hicon{display:grid;place-items:center;flex:none;color:var(--ink)}
+.hicon svg{width:22px;height:22px}
+.panel-h h2{white-space:nowrap}
+/* the shipped column is narrow: page count only, no dots */
+#bay-pager .dots{display:none}
 
 /* ---- the line */
 .floor{background:var(--bone);border-radius:var(--r-lg);box-shadow:inset 0 0 0 1px var(--line);overflow:hidden;flex:none}
@@ -133,7 +134,7 @@ button{font:inherit}
 .panel{display:flex;flex-direction:column;min-height:0;min-width:0}
 .cards,.bay{list-style:none;margin:0;padding:0;display:grid;gap:12px;flex:1;min-height:0;align-content:start}
 .cards{grid-template-columns:repeat(var(--cols,1),minmax(0,1fr));grid-auto-rows:var(--card-h)}
-.bay{grid-auto-rows:var(--crate-h)}
+.bay{grid-auto-rows:var(--crate-h);gap:8px}
 
 .product{background:var(--panel);border-radius:var(--r-card);box-shadow:var(--shadow);overflow:hidden;border:2px solid var(--build);min-width:0;display:flex;flex-direction:column}
 .product .bar{display:flex;gap:5px;align-items:center;height:24px;padding:0 10px;background:var(--build);flex:none}
@@ -159,13 +160,13 @@ button{font:inherit}
 .product.arrive{animation:arrive .7s var(--ease)}
 @keyframes arrive{from{transform:translateY(-12px);opacity:0}}
 
-.crate{background:var(--live-soft);border:2px solid var(--live);border-radius:var(--r-card);padding:8px 12px;display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:10px;align-items:center;min-width:0}
-.crate .tick{grid-row:span 2;width:30px;height:30px;border-radius:var(--r-button);background:var(--live);color:var(--on-live);display:grid;place-items:center}
-.crate .tick svg{width:18px;height:18px}
-.crate a{font:800 15px/1.2 var(--display);color:var(--live-ink);text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-radius:4px}
+.crate{background:var(--live-soft);border:1.5px solid var(--live);border-radius:var(--r-button);padding:5px 10px;display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:10px;align-items:center;min-width:0}
+.crate .tick{grid-row:span 2;width:26px;height:26px;border-radius:var(--r-button);background:var(--live);color:var(--on-live);display:grid;place-items:center}
+.crate .tick svg{width:16px;height:16px}
+.crate a{font:800 14px/1.2 var(--display);color:var(--live-ink);text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-radius:4px}
 .crate a:hover{text-decoration:underline}
 .crate a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-.crate small{color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crate small{color:var(--muted);font-size:11.5px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .empty{color:var(--muted);background:var(--panel);border-radius:var(--r-card);padding:16px;text-align:center;grid-column:1/-1;align-self:start}
 
 /* pager — flips on its own every few seconds, pauses while you hover or use it */
