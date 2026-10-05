@@ -187,11 +187,14 @@ function newActor(file, kind) {
     startedAt: null, lastAt: null,
     current: null, recent: [], toolCount: 0,
     pending: new Map(), turnEnded: false, handedBack: false,
+    jobHits: {}, // robot → how many of this run's actions looked like its job
     offset: 0, partial: '',
   };
 }
 
 function pushAction(a, ts, action) {
+  const job = inferAgent(action.text);
+  if (job) a.jobHits[job] = (a.jobHits[job] || 0) + 1;
   a.current = { ...action, at: ts };
   a.recent.unshift(a.current);
   if (a.recent.length > RECENT_ACTIONS) a.recent.length = RECENT_ACTIONS;
@@ -277,6 +280,18 @@ function statusOf(a, now) {
   return 'idle';
 }
 
+// The furthest station a run has clearly worked at: its own agent, the job its
+// description names, or a job seen in at least two of its actions (one stray
+// match such as a passing "deploy" mustn't jump a site to the end of the line).
+const ORDER_KEYS = Object.keys(AGENTS);
+function reachedOf(a) {
+  const jobs = Object.entries(a.jobHits).filter(([, n]) => n >= 2).map(([k]) => k);
+  if (a.agentKey) jobs.push(a.agentKey);
+  const fromTask = a.kind === 'sub' && inferAgent(a.description);
+  if (fromTask) jobs.push(fromTask);
+  return jobs.sort((x, y) => ORDER_KEYS.indexOf(y) - ORDER_KEYS.indexOf(x))[0] || null;
+}
+
 function view(a, now) {
   const parent = a.parentId ? actors.get(a.parentId) : null;
   const titleSite = siteFromTitle(a.customTitle);
@@ -287,7 +302,7 @@ function view(a, now) {
   const doing = a.agentKey || inferAgent(a.kind === 'sub' ? a.description : '', ...a.recent.slice(0, 3).map((r) => r.text));
   return {
     id: a.id, kind: a.kind, sessionId: a.sessionId, parentId: a.parentId,
-    agent, agentType: a.agentType, doing, builder: a.builder,
+    agent, agentType: a.agentType, doing, builder: a.builder, reached: reachedOf(a),
     siteKey: site ? siteKey(site) : null, liveUrl: a.liveUrl,
     label: agent ? agent.name : a.kind === 'main' ? (a.customTitle || a.title || 'Claude session') : (a.name || a.agentType || 'Subagent'),
     task: a.kind === 'sub' ? a.description : (a.customTitle ? a.title : ''),
@@ -326,13 +341,12 @@ function sites(list, now) {
     const domain = liveUrl || named || null;
     const lastAt = Math.max(...runs.map((r) => r.lastAt || 0));
     const top = working[0] || runs[0];
-    // The station the site sits at on the line: the furthest robot working on it
-    // now, else the last robot that touched it.
-    const order = Object.keys(AGENTS);
-    const busy = working.map((r) => r.doing).filter(Boolean);
-    const station = busy.length
-      ? busy.sort((x, y) => order.indexOf(y) - order.indexOf(x))[0]
-      : (runs.find((r) => r.doing)?.doing ?? null);
+    // The line only runs one way: a site sits at the furthest station any run
+    // on it has reached, and stays there when a robot further back does a fix.
+    // Who is working on it right now is reported separately (robots).
+    const busy = [...new Set(working.map((r) => r.doing).filter(Boolean))];
+    const reached = [...runs.map((r) => r.reached), ...busy].filter(Boolean);
+    const station = reached.sort((x, y) => ORDER_KEYS.indexOf(y) - ORDER_KEYS.indexOf(x))[0] ?? null;
     let state;
     if (working.length) state = 'building';
     else if (domain) state = 'done';
@@ -341,7 +355,7 @@ function sites(list, now) {
     out.push({
       key, name: named || runs[0].site, domain, state,
       waitingOnYou: !working.length && waiting.length > 0,
-      robots: [...new Set(busy)], station,
+      robots: busy, station,
       working: working.length, lastAt,
       now: state === 'building' ? (top.current?.text || top.task || '') : '',
     });

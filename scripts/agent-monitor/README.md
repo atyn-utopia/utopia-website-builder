@@ -30,8 +30,12 @@ counts — sessions in other workspace repos are left off.
   Sora, deploy/Vercel → Layla, products/webcore → Cyclops, schema/i18n → Kimmy,
   copy → Nana, design/CSS → Kagura, GA4/GTM/GSC → Gloo (`JOBS` in `server.mjs`).
   This is a best guess from the last few actions, not a label.
-- **Station** — a website sits at the furthest-along robot working on it now,
-  else at the last robot that touched it; *Intake* if none matched.
+- **Station** — the line only runs one way. A website sits at the furthest
+  station any run on it has clearly reached (its own agent, the job its task
+  names, or a job seen in at least two of its actions) and never moves back.
+  When a robot earlier in the line works on it again, that robot lights up and
+  the card says "fix by …"; the website stays where it is. *Intake* if no
+  station has been reached yet.
 - **Done** — nothing is running on the site any more and Claude reported a live
   link (`… dah live: https://…`), or the session title is the domain.
 
