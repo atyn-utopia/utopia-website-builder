@@ -254,6 +254,7 @@ button{font:inherit}
 .sw{width:14px;height:10px;border-radius:3px;border:2px solid var(--build);background:var(--build-soft)}
 .sw.wait{border-style:dashed}
 .sw.paused{border-color:var(--ash);background:var(--linen)}
+.sw.live{border-color:var(--live);background:var(--live-soft)}
 @media (max-width:1180px){.legend{display:none}}
 @media (min-width:1181px){.panel-h{position:relative}.legend{position:absolute;left:50%;transform:translateX(-50%)}}
 
@@ -282,6 +283,31 @@ button{font:inherit}
 .new-acct .avatar{width:20px;height:20px}
 .new-acct b{color:var(--ink);font-weight:600;margin-left:-4px}
 .new-acct button{border:0;background:none;color:var(--blue);font:600 13px/1 var(--body);cursor:pointer;padding:0}
+
+
+/* ---- hover card for a website on the line */
+.pop{position:fixed;z-index:40;width:340px;max-width:calc(100vw - 24px);padding:14px 16px;border-radius:var(--r-card);background:var(--panel);border:1px solid var(--line);box-shadow:0 1px 2px rgba(11,11,13,.06),0 18px 44px -10px rgba(11,11,13,.35);pointer-events:none;font-size:13px;line-height:1.4;display:flex;flex-direction:column;gap:10px;opacity:0;transform:translateY(4px);transition:opacity 160ms var(--ease),transform 160ms var(--ease)}
+.pop.on{opacity:1;transform:none}
+.pop h4{margin:0;font:800 17px/1.25 var(--display);overflow-wrap:anywhere}
+.pop .tag{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:999px;width:fit-content}
+.pop .tag.b{background:var(--build-soft);color:var(--build-ink)}
+.pop .tag.w{background:var(--build-soft);color:var(--build-ink);outline:1.5px dashed var(--build);outline-offset:-1.5px}
+.pop .tag.p{background:var(--linen);color:var(--muted)}
+.pop .row{display:flex;align-items:center;gap:8px;min-width:0}
+.pop .row .face{width:30px;height:30px;flex:none}
+.pop .row .face svg{width:100%;height:100%;display:block}
+.pop .k{color:var(--muted);font-size:11.5px;font-weight:600;text-transform:none;margin-bottom:2px}
+.pop .now{overflow-wrap:anywhere}
+.pop ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
+.pop li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;font-size:12.5px}
+.pop li span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pop li b{font-weight:600}
+.pop li time,.pop .meta{color:var(--muted);font-size:12px}
+.pop .ask{color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pop .mono{font:500 12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}
+.pop hr{border:0;border-top:1px solid var(--line);margin:0}
+.product:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.pop{transition:none}}
 
 /* ---- new website (dialog) */
 [hidden]{display:none!important}
@@ -467,7 +493,7 @@ dialog.new::backdrop{background:rgba(11,11,13,.38);backdrop-filter:blur(10px) sa
   <div class="bottom">
     <section class="panel" id="run-panel" aria-labelledby="run-h">
       <div class="panel-h"><span class="hicon build" aria-hidden="true"><svg><use href="#gear"/></svg></span><h2 id="run-h">On the line now</h2>
-        <span class="legend" aria-label="Card colours"><span><i class="sw build"></i>Building</span><span><i class="sw wait"></i>Needs you</span><span><i class="sw paused"></i>Paused</span></span><div class="pager" id="run-pager" hidden></div></div>
+        <span class="legend" aria-label="Card colours"><span><i class="sw build"></i>Building</span><span><i class="sw wait"></i>Needs you</span><span><i class="sw paused"></i>Paused</span><span><i class="sw live"></i>Live</span></span><div class="pager" id="run-pager" hidden></div></div>
       <div class="timer" id="run-timer" hidden><i></i></div>
       <ul class="cards" id="running"></ul>
     </section>
@@ -535,6 +561,7 @@ dialog.new::backdrop{background:rgba(11,11,13,.38);backdrop-filter:blur(10px) sa
     </div>
   </div>
 </dialog>
+  <div class="pop" id="pop" role="tooltip" hidden></div>
   <footer class="credit">
     <a href="https://www.utopiagroup.com.my" target="_blank" rel="noopener"><img class="light" src="/brand/utopia-locked-light.svg" alt="utopia"><img class="dark" src="/brand/utopia-locked-dark.svg" alt="utopia"> AI Team</a>
   </footer>
@@ -639,6 +666,7 @@ function renderBelt(building){
       el = document.createElement("div");
       el.dataset.key = it.key;
       el.className = "pkg new";
+      if (!it.key.startsWith("more:")) el.dataset.site = it.key;
       el.innerHTML = `<span class="box"><span></span></span>`;
       box.appendChild(el);
       setTimeout(() => el.classList.remove("new"), 700);
@@ -647,7 +675,7 @@ function renderBelt(building){
     el.classList.toggle("working", !!it.s && it.s.working > 0);
     el.classList.toggle("waiting", !!it.s && it.s.waitingOnYou);
     el.classList.toggle("paused", !!it.s && it.s.paused);
-    el.title = it.s ? `${it.s.name}: ${it.s.station ? "at " + snap.agents[it.s.station].name : "intake"}` : `${it.more} more websites here`;
+    el.title = it.s ? "" : `${it.more} more websites here`;
     el.querySelector(".box span").textContent = it.s ? it.s.name : `+${it.more} more`;
     el.style.setProperty("--i", Math.max(it.idx, 0));
     el.classList.toggle("at-gate", it.idx < 0); // no station yet: waits at the in gate
@@ -669,7 +697,7 @@ function product(s, agents){
     ? `<div class="at"><span class="face">${robot(s.station)}</span><span>At <b>${esc(a.name)}</b> · ${esc(back.length ? "fix by " + back.map((k) => agents[k].name).join(", ") : a.role)}</span></div>`
     : `<div class="at"><img src="/brand/logo-mark-light.svg" alt=""><span>Started, no station yet</span></div>`;
   const steps = ORDER.map((_, i) => `<i class="${i < idx ? "past" : i === idx ? "here" : ""}"></i>`).join("");
-  return `<li class="product${s.waitingOnYou ? " waiting" : ""}${s.paused ? " paused" : ""}${moved ? " arrive" : ""}" title="${esc(s.now)}">
+  return `<li class="product${s.waitingOnYou ? " waiting" : ""}${s.paused ? " paused" : ""}${moved ? " arrive" : ""}" data-site="${esc(s.key)}" tabindex="0">
     <div class="bar"><i></i><i></i><i></i><span>${s.waitingOnYou ? "Needs you" : s.paused ? "Paused" : "Building"}</span></div>
     <div class="body"><h3>${esc(s.name)}</h3>${at}<p>${esc(s.now || "Waiting for the next step")}</p>
       <div class="steps" title="Station ${idx + 1} of ${ORDER.length}">${steps}</div>
@@ -735,6 +763,7 @@ function render(){
   bay.innerHTML = done.length
     ? bayPage.map(crate).join("")
     : `<li class="empty">Nothing shipped yet today. Finished websites land here with their live link.</li>`;
+  refreshPop();
 }
 
 // Restart the countdown bar so it lines up with the next flip.
@@ -784,6 +813,55 @@ function connect(){
   es.onerror = () => { conn.textContent = "Lost the factory server. Retrying… (is server.mjs still running?)"; };
 }
 connect();
+
+// ---- hover card: everything known about a website on the line
+const pop = document.getElementById("pop");
+let popKey = null, popAnchor = null;
+function popHtml(s){
+  const a = s.station ? snap.agents[s.station] : null;
+  const idx = s.station ? ORDER.indexOf(s.station) + 1 : 0;
+  const tag = s.waitingOnYou ? `<span class="tag w">Needs you</span>` : s.paused ? `<span class="tag p">Paused</span>` : `<span class="tag b"><span class="dot build"></span>Building</span>`;
+  const runs = (s.runs || []).map((r) => `<li><span><b>${esc(r.label)}</b> · ${esc(r.text || (r.status === "waiting" ? "waiting for you" : ""))}</span>${agoEl(r.at)}</li>`).join("");
+  const recent = !runs && (s.recent || []).length ? (s.recent || []).map((r) => `<li><span>${esc(r.text)}</span>${agoEl(r.at)}</li>`).join("") : "";
+  return `${tag}<h4>${esc(s.name)}</h4>
+    <div class="row">${a ? `<span class="face">${robot(s.station)}</span><div><b>At ${esc(a.name)}</b> · ${esc(a.role)}<div class="meta">Station ${idx} of ${ORDER.length}${s.robots.filter((k) => k !== s.station).length ? " · fix by " + s.robots.filter((k) => k !== s.station).map((k) => esc(snap.agents[k].name)).join(", ") : ""}</div></div>` : `<div><b>At the in gate</b><div class="meta">No station reached yet</div></div>`}</div>
+    ${s.now ? `<div><div class="k">Doing now</div><div class="now">${esc(s.now)}</div></div>` : ""}
+    ${runs ? `<div><div class="k">${s.runs.length} active run${s.runs.length === 1 ? "" : "s"}</div><ul>${runs}</ul></div>` : ""}
+    ${recent ? `<div><div class="k">Last steps</div><ul>${recent}</ul></div>` : ""}
+    ${s.lastPrompt ? `<div><div class="k">You last asked</div><div class="ask">${esc(s.lastPrompt)}</div></div>` : ""}
+    <hr>
+    <div class="meta">${s.registered ? `Webcore: <span class="mono">${esc(s.registered)}</span>` : "Not in webcore yet"}${s.branch ? ` · branch <span class="mono">${esc(s.branch)}</span>` : ""}</div>
+    <div class="meta">${s.session ? `Session “${esc(s.session)}” · ` : ""}started ${agoEl(isFinite(s.startedAt) ? s.startedAt : s.lastAt)} · last move ${agoEl(s.lastAt)} · ${s.runCount} run${s.runCount === 1 ? "" : "s"}</div>`;
+}
+function placePop(){
+  if (!popAnchor || !popAnchor.isConnected) return hidePop();
+  const r = popAnchor.getBoundingClientRect(), w = pop.offsetWidth, h = pop.offsetHeight, m = 12;
+  let left = r.right + m <= innerWidth - w - m ? r.right + m : r.left - m - w;
+  if (left < m) left = Math.min(Math.max(m, r.left), innerWidth - w - m);
+  let top = Math.min(Math.max(m, r.top), innerHeight - h - m);
+  if (left === Math.min(Math.max(m, r.left), innerWidth - w - m) && r.bottom + m + h <= innerHeight) top = r.bottom + m; // no room beside: go below
+  pop.style.left = left + "px"; pop.style.top = top + "px";
+}
+function showPop(el){
+  const s = snap?.sites.find((x) => x.key === el.dataset.site);
+  if (!s) return;
+  popKey = s.key; popAnchor = el;
+  pop.innerHTML = popHtml(s); pop.hidden = false; placePop();
+  requestAnimationFrame(() => pop.classList.add("on"));
+}
+function hidePop(){ popKey = null; popAnchor = null; pop.classList.remove("on"); pop.hidden = true; }
+// refresh an open card when live data arrives (cards are re-rendered, so re-find the anchor)
+function refreshPop(){
+  if (!popKey) return;
+  const s = snap.sites.find((x) => x.key === popKey);
+  if (!s) return hidePop();
+  if (!popAnchor?.isConnected) popAnchor = document.querySelector(`[data-site="${CSS.escape(popKey)}"]`);
+  pop.innerHTML = popHtml(s); placePop();
+}
+document.addEventListener("pointerover", (e) => { const el = e.target.closest("[data-site]"); if (el && el.dataset.site !== popKey) showPop(el); else if (!el && popKey) hidePop(); });
+document.addEventListener("focusin", (e) => { const el = e.target.closest("[data-site]"); if (el) showPop(el); });
+document.addEventListener("focusout", (e) => { if (e.target.closest("[data-site]")) hidePop(); });
+addEventListener("scroll", hidePop, true);
 
 // ---- New website: one, bulk, drafts (server: create.mjs)
 const $ = (id) => document.getElementById(id);

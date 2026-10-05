@@ -431,6 +431,17 @@ function sites(list, now, live) {
       robots: busy, station,
       working: working.length, lastAt,
       now: state === 'building' ? (top.current?.text || top.task || '') : '',
+      // detail for the hover card
+      startedAt: Math.min(...runs.map((r) => r.startedAt || r.lastAt || Infinity)),
+      session: runs.find((r) => r.kind === 'main')?.label || null,
+      lastPrompt: runs.find((r) => r.kind === 'main' && r.lastPrompt)?.lastPrompt || '',
+      branch: runs.find((r) => r.branch && r.branch !== 'HEAD')?.branch || null,
+      runs: runs
+        .filter((r) => r.status === 'working' || r.status === 'waiting')
+        .slice(0, 6)
+        .map((r) => ({ label: r.label, kind: r.kind, status: r.status, doing: r.doing, text: r.current?.text || r.task || '', at: r.lastAt })),
+      recent: (top.recent || []).slice(0, 4).map((x) => ({ text: x.text, at: x.at })),
+      runCount: runs.length,
     });
   }
   const rank = (x) => (x.state === 'done' ? 2 : x.paused ? 1 : 0); // working, then paused, then shipped
