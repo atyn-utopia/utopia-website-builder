@@ -10,7 +10,7 @@
 <meta name="theme-color" content="#F4F4F2" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0B0B0D" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700;800&display=swap">
 <style>
 /* Utopia Brand CI v2.0.1 tokens (utopiagroup.com.my/brand-ci) */
 :root{
@@ -21,13 +21,15 @@
   --build:#F5C13D; --build-soft:#F8EBC6; --build-ink:#5A4100; --on-build:#17181C;
   --live:#3DDC97;  --live-soft:#E3F4EA;  --live-ink:#0E6E5C;  --on-live:#0B0B0D;
   --shadow:0 4px 14px rgba(0,84,166,.08),0 1px 3px rgba(11,11,13,.06);
-  --display:"Plus Jakarta Sans",system-ui,sans-serif; --body:"Source Sans 3",system-ui,sans-serif;
+  --display:"Source Sans 3",system-ui,sans-serif; --body:"Source Sans 3",system-ui,sans-serif;
   --r-button:8px; --r-card:12px; --r-lg:16px; --r-pill:999px;
   --ease:cubic-bezier(.22,1,.36,1); --dur-hover:220ms; --dur-layout:320ms;
   --logo-light:block; --logo-dark:none;
   --card-h:152px; --crate-h:48px;
+  --ct-mix:100%;
 }
-@media (prefers-color-scheme:dark){:root{
+/* dark: follows the system, or the header toggle (data-theme) either way */
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --paper:#0B0B0D; --bone:#111215; --linen:#1C1D22; --panel:#15161A;
   --ink:#F4F4F2; --muted:#B5B7BC; --line:rgba(244,244,242,.10);
   --blue:#4A9DD0; --slate:#2A2C32; --concrete:#3B3D44; --ash:#5D6068;
@@ -35,7 +37,18 @@
   --live:#3DDC97;  --live-soft:#0F2A1F; --live-ink:#3DDC97;  --on-live:#0B0B0D;
   --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 22px rgba(0,0,0,.35);
   --logo-light:none; --logo-dark:block;
+  --ct-mix:55%; color-scheme:dark;
 }}
+:root[data-theme="dark"]{
+  --paper:#0B0B0D; --bone:#111215; --linen:#1C1D22; --panel:#15161A;
+  --ink:#F4F4F2; --muted:#B5B7BC; --line:rgba(244,244,242,.10);
+  --blue:#4A9DD0; --slate:#2A2C32; --concrete:#3B3D44; --ash:#5D6068;
+  --build:#F5C13D; --build-soft:#2E2711; --build-ink:#F5D78A; --on-build:#17181C;
+  --live:#3DDC97;  --live-soft:#0F2A1F; --live-ink:#3DDC97;  --on-live:#0B0B0D;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 22px rgba(0,0,0,.35);
+  --logo-light:none; --logo-dark:block;
+  --ct-mix:55%; color-scheme:dark;
+}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.4 var(--body)}
@@ -52,13 +65,28 @@ button{font:inherit}
 }
 
 /* ---- header */
-.top{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}
-.top h1 img{height:60px;width:auto}
+/* header: brand | status | actions, like the wizard's top bar; every control 36px */
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+.top h1{margin:0;display:flex;align-items:center}
+.top h1 img{height:48px;width:auto}
+.divider{width:1px;align-self:stretch;min-height:28px;background:var(--line);flex:none}
+.status{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
+.actions{display:flex;align-items:center;gap:8px;flex:none}
+.icon-btn{width:36px;height:36px;display:inline-grid;place-items:center;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;flex:none}
+.icon-btn svg{width:17px;height:17px}
+.icon-btn:hover{border-color:color-mix(in srgb,var(--ink) 30%,transparent)}
+.icon-btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.theme-dark{display:none}
+:root[data-theme="dark"] .theme-dark{display:block}:root[data-theme="dark"] .theme-light{display:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .theme-dark{display:block}:root:not([data-theme="light"]) .theme-light{display:none}}
+#new-open{position:relative;border-radius:var(--r-pill);padding:0 16px 0 13px}
+#new-open .badge{position:absolute;top:-6px;right:-6px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--build);color:var(--on-build);font:700 10.5px/18px var(--body);text-align:center}
+@media (max-width:899px){.divider{display:none}.status{order:3;flex-basis:100%}}
 .top h1 .dark,.credit .dark{display:var(--logo-dark)}
 .top h1 .light,.credit .light{display:var(--logo-light)}
-.conn{color:var(--muted);font-size:13px}
-.tally{display:flex;flex-wrap:wrap;gap:8px;margin-left:auto}
-.chip{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;border-radius:var(--r-pill);font:700 15px/1 var(--display);white-space:nowrap}
+.conn{color:var(--muted);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.tally{display:flex;gap:8px;flex:none}
+.chip{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;border-radius:var(--r-pill);font:700 14px/1 var(--display);white-space:nowrap}
 .chip.build{background:var(--build-soft);color:var(--build-ink)}
 .chip.live{background:var(--live-soft);color:var(--live-ink)}
 .dot{width:9px;height:9px;border-radius:50%;flex:none}
@@ -83,7 +111,7 @@ button{font:inherit}
 .station{min-width:0;display:flex;flex-direction:column;align-items:center;text-align:center;padding:16px 6px 8px;border-radius:var(--r-card);background:color-mix(in srgb,var(--panel) 55%,transparent)}
 .station{--ct:var(--c)}
 /* agent colours are tuned for light; on dark, lift them so navy/grey agents don't sink */
-@media (prefers-color-scheme:dark){.station{--ct:color-mix(in srgb,var(--c) 55%,#fff)}}
+.station{--ct:color-mix(in srgb,var(--c) var(--ct-mix),#fff)}
 .station.busy{background:var(--panel);box-shadow:var(--shadow);outline:2px solid color-mix(in srgb,var(--ct) 60%,transparent)}
 .robot{position:relative;width:64px;height:64px;flex:none}
 .robot svg.rb-svg{width:64px;height:64px;display:block}
@@ -205,6 +233,33 @@ button{font:inherit}
 .sw.wait{border-style:dashed}
 .sw.paused{border-color:var(--ash);background:var(--linen)}
 @media (max-width:1180px){.legend{display:none}}
+@media (min-width:1181px){.legend{margin-left:auto}.legend+.pager{margin-left:16px}}
+
+
+/* ---- GitHub account (header) */
+.acct{position:relative}
+.acct-btn{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 10px 0 4px;border-radius:var(--r-pill);border:1px solid var(--line);background:var(--panel);color:var(--ink);font:600 13.5px/1 var(--body);cursor:pointer}
+.acct-btn.out{padding:0 14px 0 12px;border-radius:var(--r-button)}
+.acct-btn svg{width:16px;height:16px;flex:none}
+.acct-btn .chev{width:12px;height:12px;color:var(--muted)}
+.acct-btn:hover{border-color:color-mix(in srgb,var(--ink) 30%,transparent)}
+.acct-btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.avatar{width:28px;height:28px;border-radius:50%;background:var(--linen);flex:none;object-fit:cover}
+.menu{position:absolute;right:0;top:calc(100% + 8px);z-index:30;min-width:240px;padding:6px;border-radius:var(--r-card);border:1px solid var(--line);background:var(--panel);box-shadow:0 1px 2px rgba(11,11,13,.06),0 16px 40px -8px rgba(11,11,13,.3)}
+.menu .who-h{padding:8px 10px 10px;border-bottom:1px solid var(--line);margin-bottom:4px;font-size:12px;color:var(--muted)}
+.menu .who-h b{display:flex;align-items:center;gap:6px;color:var(--ink);font-size:14px;margin-top:4px}
+.menu .who-h b svg{width:16px;height:16px;flex:none}
+.menu button{display:flex;align-items:center;gap:8px;width:100%;text-align:left;border:0;background:none;color:var(--ink);font:500 13.5px/1.2 var(--body);padding:8px 10px;border-radius:7px;cursor:pointer}
+.menu button:hover,.menu button:focus-visible{background:var(--linen);outline:none}
+.menu button .avatar{width:20px;height:20px}
+.menu button svg{width:18px;height:18px;flex:none}
+.menu button.danger{color:#9F1D2C}
+.menu hr{border:0;border-top:1px solid var(--line);margin:4px 0}
+.menu small{display:block;padding:4px 10px 6px;color:var(--muted);font-size:12px}
+.new-acct{display:inline-flex;align-items:center;gap:8px;margin-top:2px;font-size:13px;color:var(--muted)}
+.new-acct .avatar{width:20px;height:20px}
+.new-acct b{color:var(--ink);font-weight:600;margin-left:-4px}
+.new-acct button{border:0;background:none;color:var(--blue);font:600 13px/1 var(--body);cursor:pointer;padding:0}
 
 /* ---- new website (dialog) */
 [hidden]{display:none!important}
@@ -229,8 +284,9 @@ dialog.new::backdrop{background:rgba(11,11,13,.38);backdrop-filter:blur(10px) sa
 .new-body>*{flex:none}
 .new-h{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;padding:22px 24px 16px}
 .new-h h2{font-size:19px;letter-spacing:-.01em}
+.new-acct{grid-column:1}
 .new-h p{grid-column:1;margin:0;color:var(--muted);font-size:13.5px}
-.x{grid-row:1/3;grid-column:2;width:32px;height:32px;display:grid;place-items:center;border-radius:var(--r-button);border:0;background:none;color:var(--muted);cursor:pointer}
+.x{grid-row:1/4;grid-column:2;align-self:start;width:32px;height:32px;display:grid;place-items:center;border-radius:var(--r-button);border:0;background:none;color:var(--muted);cursor:pointer}
 .x:hover{background:var(--linen);color:var(--ink)}
 .x svg{width:18px;height:18px}
 .x:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
@@ -367,9 +423,14 @@ dialog.new::backdrop{background:rgba(11,11,13,.38);backdrop-filter:blur(10px) sa
 <div class="app">
   <header class="top">
     <h1><img class="light" src="/brand/logo-lockup-light.svg" alt="Website Factory"><img class="dark" src="/brand/logo-lockup-dark.svg" alt="Website Factory"></h1>
-    <span class="conn" id="conn">Connecting…</span>
-    <div class="tally" id="tally"></div>
-    <button type="button" class="btn primary" id="new-open"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>New website</button>
+    <span class="divider" aria-hidden="true"></span>
+    <div class="status"><div class="tally" id="tally"></div><span class="conn" id="conn">Connecting…</span></div>
+    <span class="divider" aria-hidden="true"></span>
+    <div class="actions">
+      <button type="button" class="btn primary" id="new-open"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>New website<span class="badge" id="draft-badge" hidden></span></button>
+      <div class="acct" id="acct"></div>
+      <button type="button" class="icon-btn" id="theme" aria-label="Switch theme" title="Switch theme"><svg class="theme-light" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><svg class="theme-dark" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+    </div>
   </header>
 
   <section class="floor" aria-label="Production line">
@@ -399,6 +460,7 @@ dialog.new::backdrop{background:rgba(11,11,13,.38);backdrop-filter:blur(10px) sa
     <div class="new-h">
       <h2 id="new-title">New website</h2>
       <p>Creates a site repo in utopiagrowth, adds it to the wizard and starts the build.</p>
+      <span class="new-acct" id="new-who"></span>
       <button type="button" class="x" id="new-close" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     </div>
     <div class="tabs" role="tablist" aria-label="What to create">
@@ -443,7 +505,7 @@ dialog.new::backdrop{background:rgba(11,11,13,.38);backdrop-filter:blur(10px) sa
     </div>
 
     <div class="new-foot">
-      <span class="who"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg><span id="new-who">Checking GitHub…</span></span>
+      <span class="who"></span>
       <button type="button" class="btn secondary" id="new-draft">Save draft</button>
       <button type="button" class="btn primary" id="new-go">Create website</button>
     </div>
@@ -558,8 +620,8 @@ function renderBelt(building){
     el.style.setProperty("--row", it.row);
   }
   for (const el of [...box.children]) if (!seen.has(el.dataset.key)) el.remove();
-  const rows = Math.max(1, ...items.map((i) => i.row + 1));
-  box.style.setProperty("--h", `${rows * 30 + 8}px`);
+  // Always room for BELT_ROWS packages, so the page below never jumps as sites come and go.
+  box.style.setProperty("--h", `${BELT_ROWS * 30 + 8}px`);
 }
 
 function product(s, agents){
@@ -721,17 +783,17 @@ function refreshGo(){
   if (tab === "one") {
     $("one-slug").textContent = `${repoOf($("one-name").value)}${draftId ? " · from a draft" : ""}`;
     $("new-go").textContent = "Create website";
-    $("new-go").disabled = busy || !toSlug($("one-name").value) || !$("one-brief").value.trim();
+    $("new-go").disabled = busy || !me.login || !toSlug($("one-name").value) || !$("one-brief").value.trim();
     $("new-draft").textContent = draftId ? "Update draft" : "Save draft";
-    $("new-draft").disabled = busy || !($("one-name").value.trim() || $("one-brief").value.trim());
+    $("new-draft").disabled = busy || !me.login || !($("one-name").value.trim() || $("one-brief").value.trim());
   } else if (tab === "bulk") {
     const sites = bulkSites(), bad = bulkProblems(sites);
     $("bulk-rows").innerHTML = sites.slice(0, 20).map((x, i) => `<li><b>${esc(x.name || "(no name)")}</b><span class="pill${bad[i] ? " bad" : ""}">${esc(bad[i] || "Ready")}</span><small>${esc(repoOf(x.name))}${x.brief ? " · " + esc(x.brief.split("\n")[0]) : ""}</small></li>`).join("")
       + (sites.length > 20 ? `<li><b>Too many</b><span class="pill bad">Max 20</span><small>Only 20 websites can be created at once.</small></li>` : "");
     $("new-go").textContent = sites.length ? `Create ${Math.min(sites.length, 20)} website${sites.length === 1 ? "" : "s"}` : "Create websites";
-    $("new-go").disabled = busy || !sites.length || sites.length > 20 || bad.some(Boolean);
+    $("new-go").disabled = busy || !me.login || !sites.length || sites.length > 20 || bad.some(Boolean);
     $("new-draft").textContent = sites.length > 1 ? `Save ${sites.length} drafts` : "Save draft";
-    $("new-draft").disabled = busy || !sites.length || sites.length > 20;
+    $("new-draft").disabled = busy || !me.login || !sites.length || sites.length > 20;
   }
 }
 async function loadDrafts(){
@@ -739,6 +801,7 @@ async function loadDrafts(){
   try {
     drafts = (await api("GET", "/api/drafts")).drafts;
     $("draft-n").hidden = !drafts.length; $("draft-n").textContent = drafts.length;
+    $("draft-badge").hidden = !drafts.length; $("draft-badge").textContent = drafts.length;
     $("draft-rows").innerHTML = drafts.length ? drafts.map((d) => `<li><b>${esc(d.name || "(untitled)")}</b><span class="acts"><button type="button" data-open="${esc(d.id)}">Open</button><button type="button" class="danger" data-del="${esc(d.id)}">Delete</button></span>
       <small>${esc(repoOf(d.name || ""))} · ${(d.assets || []).length} file${(d.assets || []).length === 1 ? "" : "s"} · saved ${ago(Date.parse(d.updated_at))} · ${esc((d.brief || "").split("\n")[0])}</small></li>`).join("")
       : `<li class="empty-row">No drafts yet. Save one from One website or Bulk.</li>`;
@@ -810,7 +873,53 @@ async function saveDrafts(){
   busy = false; refreshGo();
 }
 
-$("new-open").addEventListener("click", () => { dlg.showModal(); setTab(tab); api("GET", "/api/me").then((j) => { $("new-who").innerHTML = `Signed in as <b>@${esc(j.login)}</b>`; }).catch((e) => { $("new-who").textContent = e.message; }); });
+$("new-open").addEventListener("click", () => { dlg.showModal(); setTab(tab); loadAccount(); });
+
+// ---- GitHub account: which of this machine's gh accounts the Factory acts as
+const GH_ICON = `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>`;
+const avatar = (login, cls = "avatar") => `<img class="${cls}" src="https://github.com/${encodeURIComponent(login)}.png?size=64" alt="" width="28" height="28">`;
+let me = { login: null, accounts: [] };
+async function loadAccount(){
+  try { me = await api("GET", "/api/me"); } catch (e) { me = { login: null, accounts: [], error: e.message }; }
+  renderAccount();
+}
+function renderAccount(){
+  const box = $("acct");
+  box.innerHTML = me.login
+    ? `<button type="button" class="acct-btn" id="acct-btn" aria-haspopup="menu" aria-expanded="false">${avatar(me.login)}@${esc(me.login)}<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`
+    : `<button type="button" class="acct-btn out" id="acct-btn" aria-haspopup="menu" aria-expanded="false">${GH_ICON}Sign in with GitHub</button>`;
+  const others = me.accounts.filter((a) => a.login !== me.login);
+  const menu = document.createElement("div");
+  menu.className = "menu"; menu.id = "acct-menu"; menu.setAttribute("role", "menu"); menu.hidden = true;
+  menu.innerHTML = (me.login ? `<div class="who-h">Signed in as<b>${GH_ICON}@${esc(me.login)}</b></div>` : `<small>Sign in with a GitHub account that's signed in to gh on this machine.</small>`)
+    + others.map((a) => `<button type="button" role="menuitem" data-as="${esc(a.login)}">${avatar(a.login)}${me.login ? "Switch to" : "Continue as"} @${esc(a.login)}</button>`).join("")
+    + (me.login ? `<button type="button" role="menuitem" class="danger" data-out><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l5-5-5-5M15 12H4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Sign out</button>` : "");
+  box.appendChild(menu);
+  // modal header + create buttons follow the account
+  $("new-who").innerHTML = me.login ? `${avatar(me.login)}Creating as <b>@${esc(me.login)}</b>` : `Not signed in. <button type="button" id="new-signin">Sign in with GitHub</button>`;
+  refreshGo();
+}
+const closeMenu = () => { const m = $("acct-menu"); if (m) { m.hidden = true; $("acct-btn").setAttribute("aria-expanded", "false"); } };
+$("acct").addEventListener("click", async (e) => {
+  if (e.target.closest("#acct-btn")) {
+    const m = $("acct-menu"); m.hidden = !m.hidden; $("acct-btn").setAttribute("aria-expanded", String(!m.hidden));
+    if (!m.hidden) m.querySelector("button")?.focus();
+    return;
+  }
+  const as = e.target.closest("[data-as]"), out = e.target.closest("[data-out]");
+  try {
+    if (as) { await api("POST", "/api/signin", { login: as.dataset.as }); }
+    if (out) { await api("POST", "/api/signout"); }
+  } catch (er) { alertless(er.message); }
+  closeMenu();
+  if (as || out) { await loadAccount(); loadDrafts().catch(() => {}); }
+});
+document.addEventListener("click", (e) => { if (!e.target.closest("#acct")) closeMenu(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenu(); });
+$("new-who").addEventListener("click", (e) => { if (e.target.closest("#new-signin")) { dlg.close(); $("acct-btn").click(); } });
+// a short status line under the header instead of a browser dialog
+function alertless(text){ $("conn").textContent = text; setTimeout(() => { $("conn").textContent = "Live from the Claude sessions on this machine"; }, 8000); }
+loadAccount();
 // brand files: show what was picked, and accept a drop on the zone
 const fmtSize = (n) => n > 1048576 ? (n / 1048576).toFixed(1) + " MB" : Math.max(1, Math.round(n / 1024)) + " KB";
 function listFiles(){ $("one-file-list").innerHTML = [...$("one-files").files].map((f) => `<li><span>${esc(f.name)}</span><i>${fmtSize(f.size)}</i></li>`).join(""); }
@@ -843,7 +952,15 @@ $("draft-rows").addEventListener("click", async (e) => {
   }
 });
 // draft count on the button
-api("GET", "/api/drafts").then((j) => { $("draft-n").hidden = !j.drafts.length; $("draft-n").textContent = j.drafts.length; }).catch(() => {});
+api("GET", "/api/drafts").then((j) => { for (const id of ["draft-n", "draft-badge"]) { $(id).hidden = !j.drafts.length; $(id).textContent = j.drafts.length; } }).catch(() => {});
+// theme toggle: remembered per browser; the page follows the system until used
+try { const t = localStorage.getItem("factory-theme"); if (t) document.documentElement.dataset.theme = t; } catch {}
+$("theme").addEventListener("click", () => {
+  const dark = document.documentElement.dataset.theme ? document.documentElement.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  const next = dark ? "light" : "dark";
+  document.documentElement.dataset.theme = next;
+  try { localStorage.setItem("factory-theme", next); } catch {}
+});
 // Installable as an app (PWA); the worker only caches the shell, never live data.
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(() => {});
 // Tick the "Xs ago" labels without a re-render.
