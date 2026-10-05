@@ -91,7 +91,7 @@ Nana — Copywriter
 Writes all website copy — homepage sections, location page copy for every target city, and meta copy.
 
 Lylia — Brand & Logo Designer
-Locks the visual identity before any layout exists: generates logo concepts through Codex (`scripts/codex-image.sh`), lets the user pick, rebuilds the chosen icon as `app/icon.svg` (logo icon = favicon), and sets the palette + type pairing in `brand-kit.md`. Skips generation when the client supplies a logo.
+Locks the visual identity before any layout exists: generates logo concepts through Codex (`scripts/codex-image.sh`), lets the user pick, then delivers three PNGs used as-is — logo for light backgrounds, logo for dark backgrounds, favicon (installed by `scripts/png-favicon.sh`) — and sets the palette + type pairing in `brand-kit.md`. Skips generation when the client supplies a logo.
 
 Kagura — UI Design Specialist
 Reviews existing site layouts for duplicates, researches fresh design inspiration, and proposes a unique visual direction for each new project.
@@ -511,7 +511,7 @@ Do not replace real assets with placeholders.
 - The icon must be consistent — the same icon appears in the logo and the favicon
 - Extract or design the icon so it works standalone at small sizes (16x16, 32x32)
 - If the user provides a logo with an icon element, isolate that icon for the favicon
-- If designing from scratch, design the icon first, then build the logo around it
+- Every site gets **three logo files**: logo for light backgrounds (`{slug}-logo-dark.png`), logo for dark backgrounds (`{slug}-logo-light.png`), favicon. Lylia generates them with Codex and they are used **as-is** — PNG, never traced into SVG or redrawn. `scripts/png-favicon.sh` installs the favicon PNG as `app/icon.svg` (embedded PNG) + `app/apple-icon.png`.
 
 
 # Anti-Generic Design Guardrails
