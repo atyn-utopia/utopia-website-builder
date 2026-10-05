@@ -1,0 +1,75 @@
+/* ── Header style: Floating Glass ──────────────────────────────────────────
+   A frosted pill bar floating over the hero. Light and clean.
+   Suits: home services, medical, water / cleaning.
+
+   Install: paste into app/globals.css (after the contact-number block).
+   Needs: a dark-enough top edge on the hero image — the bar is translucent.
+   The hero slides up under the header; if PageStyles' .hero padding-top is not
+   44px, set --hero-pt to it. Pages without a .hero (blog) get the bar in flow.
+
+   Every selector starts with `body` so it outranks the plain <style> inside
+   SiteHeader.tsx, which is emitted after globals.css. */
+
+body .site-header {
+  --header-h: 72px;
+  padding: 12px var(--gut) 0;
+  background: transparent;
+  border-bottom: 0;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+body:has(.hero) .site-header { margin-bottom: calc(-1 * var(--header-h)); }
+body:has(.hero) .hero { padding-top: calc(var(--hero-pt, 44px) + var(--header-h)); }
+
+body .site-header .site-header-inner {
+  min-height: 56px;
+  padding: 8px 8px 8px 22px;
+  background: rgba(255, 255, 255, 0.74);
+  backdrop-filter: blur(14px) saturate(170%);
+  -webkit-backdrop-filter: blur(14px) saturate(170%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 999px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 10px 30px -12px color-mix(in srgb, var(--brand-orange-deep, var(--brand-orange)) 45%, transparent),
+    0 2px 6px -2px color-mix(in srgb, var(--brand-orange-deep, var(--brand-orange)) 20%, transparent);
+}
+body .site-header .site-nav { gap: 2px; }
+body .site-header .site-nav a {
+  padding: 6px 12px;
+  border-radius: 999px;
+  color: var(--brand-charcoal);
+  transition: background-color var(--dur, 200ms) ease, color var(--dur, 200ms) ease;
+}
+body .site-header .site-nav a:hover {
+  background: color-mix(in srgb, var(--brand-orange) 10%, transparent);
+  color: var(--brand-orange-deep, var(--brand-orange));
+}
+body .site-header .contact-number-value { color: var(--brand-orange-deep, var(--brand-orange)); }
+
+body .site-header .lsw-item,
+body .site-header .lsw-trigger { background: transparent; border-color: transparent; box-shadow: none; }
+body .site-header .lsw-item:hover { background: rgba(255, 255, 255, 0.6); border-color: transparent; }
+body .site-header .lsw-item.is-active,
+body .site-header .lsw-item.is-active:hover {
+  background: #fff;
+  border-color: color-mix(in srgb, var(--brand-orange) 25%, transparent);
+  color: var(--brand-charcoal);
+  box-shadow: none;
+}
+body .site-header .lsw-trigger { background: rgba(255, 255, 255, 0.6); }
+
+body .site-header .site-burger { border-color: color-mix(in srgb, var(--brand-charcoal) 18%, transparent); border-radius: 999px; }
+
+body .site-header .site-mobile-drawer {
+  margin-top: 8px;
+  border-top: 0;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 16px 36px -14px color-mix(in srgb, var(--brand-orange-deep, var(--brand-orange)) 45%, transparent);
+}
+@media (max-width: 879px) {
+  body .site-header .site-header-inner { padding: 6px; }
+}

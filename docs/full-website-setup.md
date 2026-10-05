@@ -949,6 +949,7 @@ Every item below MUST be verified on the running site. These rules come from rea
 #### Visual identity (not a water-tank recolour)
 - [ ] Screenshot the homepage next to `water-tank-malaysia` at desktop and 390px. Layout and section order may match; header styling, button shape/treatment, cards, hero composition and section surfaces must not. If it reads as water-tank in another colour, it is not ready for Gate 1.
 - [ ] Kagura's "Visual delta vs water-tank" list is implemented, item by item.
+- [ ] The chosen header style from `templates/site-chrome/header-styles/` is pasted into `globals.css` and checked over the hero, after scrolling, on a blog page (no hero), and with the mobile drawer open.
 
 #### Alt text (every image, no exceptions)
 - [ ] Every `<img>` has a descriptive alt — never `alt=""` for content images. Decorative images that genuinely carry no information may use `alt=""` but only as a last resort.

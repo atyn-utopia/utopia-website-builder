@@ -84,7 +84,9 @@ For the recommended design, provide:
 
 **Header & footer — structure locked, styling yours:**
 - Structure comes from `projects/water-tank-malaysia/components/`: the same `<SiteHeader />` + `<SiteFooter />` components, the same elements in them (nav, language switcher, contact number, WhatsApp CTA; footer logo + nav + contact number + divider + copyright + "Built by Utopia AI" credit), the same props and data flow. Do not add, drop or fork components, and no per-page variants.
-- The *styling* is designed per site: surface (solid / transparent over the hero / floating bar), light or dark, borders, spacing, nav type treatment, footer colour (via the `--footer-*` tokens). Specify it in this document.
+- The header *styling* is **one of the five approved header styles** in `templates/site-chrome/header-styles/` — `glass` (Floating Glass), `clear-solid` (Clear to Solid), `brand-bar` (Brand Bar), `segmented` (Segmented Track), `quiet-dark` (Quiet Dark). Name the one you pick, why it fits this brand and hero, and any override tokens it needs (`--header-bg`, `--header-accent`, `--header-track`). Don't invent a sixth — propose it to the user instead.
+- Avoid giving the same header style to sites in the same product category; say which nearby fleet sites use which style.
+- Footer colour follows the header (via the `--footer-*` tokens) — a `quiet-dark` or `brand-bar` header usually wants a dark footer.
 - The same split applies to the WhatsApp redirect page, the blog listing and the blog article: their logic and structure are copied from water-tank (the redirect page's server-side resolve is never simplified); their look follows this site's design.
 - Your design freedom covers the whole visual layer — chrome styling included — not just the body. Water-tank's visual style is a placeholder from the scaffold, not a starting point.
 
@@ -109,6 +111,7 @@ After proposing the design, verify against:
 - [ ] Logo, icon, palette and fonts match `brand-kit.md` unchanged
 - [ ] Card/component styles are visually distinct
 - [ ] Side-by-side with water-tank, this site does not read as a recolour — header, buttons, cards, hero treatment and section surfaces all differ
+- [ ] One header style chosen from `templates/site-chrome/header-styles/`, named in this document
 - [ ] Design fits the product category and target audience
 - [ ] Brand assets are incorporated (if provided)
 - [ ] Mobile-first responsive approach is considered

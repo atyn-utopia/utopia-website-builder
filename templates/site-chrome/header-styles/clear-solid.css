@@ -1,0 +1,65 @@
+/* ── Header style: Clear to Solid ──────────────────────────────────────────
+   Transparent with white text over the hero; turns into the solid white bar
+   once the page scrolls (SiteHeader adds .is-scrolled) or the drawer opens.
+   Suits: sites with a strong hero photo — property, hotels, renovation, vehicles.
+
+   Install: paste into app/globals.css (after the contact-number block).
+   Needs: SiteHeader.tsx with the `is-scrolled` effect (template ≥ 2026-10-05),
+   and a hero image dark enough at the top for white text.
+   The hero slides up under the header; if PageStyles' .hero padding-top is not
+   44px, set --hero-pt to it. Pages without a .hero (blog) always get the solid
+   bar, so white text never lands on a light page.
+
+   Every selector starts with `body` so it outranks the plain <style> inside
+   SiteHeader.tsx, which is emitted after globals.css. */
+
+body .site-header {
+  --header-h: 64px;
+  transition: background-color 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
+}
+body .site-header.is-scrolled { box-shadow: 0 8px 24px -16px color-mix(in srgb, var(--brand-charcoal) 45%, transparent); }
+body:has(.hero) .site-header { margin-bottom: calc(-1 * var(--header-h)); }
+body:has(.hero) .hero { padding-top: calc(var(--hero-pt, 44px) + var(--header-h)); }
+
+/* Accent underline on hover, both states. */
+body .site-header .site-nav a { position: relative; padding: 6px 0; }
+body .site-header .site-nav a::after {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 2px; border-radius: 2px;
+  background: var(--header-accent, var(--brand-orange));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 220ms ease;
+}
+body .site-header .site-nav a:hover::after { transform: scaleX(1); }
+
+/* Transparent state — only over a hero, before scrolling, drawer closed.
+   The solid state is the base SiteHeader look, so it needs no rules here. */
+body:has(.hero) .site-header:not(.is-scrolled):not(:has(.site-mobile-drawer.is-open)) {
+  background: transparent;
+  border-bottom-color: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+body:has(.hero) .site-header:not(.is-scrolled):not(:has(.site-mobile-drawer.is-open)) .site-nav a,
+body:has(.hero) .site-header:not(.is-scrolled):not(:has(.site-mobile-drawer.is-open)) .site-nav a:hover { color: #fff; }
+body:has(.hero) .site-header:not(.is-scrolled):not(:has(.site-mobile-drawer.is-open)) .contact-number-label { color: rgba(255, 255, 255, 0.75); }
+body:has(.hero) .site-header:not(.is-scrolled):not(:has(.site-mobile-drawer.is-open)) .contact-number-value { color: #fff; }
+body:has(.hero) .site-header:not(.is-scrolled):not(:has(.site-mobile-drawer.is-open)) .lsw-item,
+body:has(.hero) .site-header:not(.is-scrolled):not(:has(.site-mobile-drawer.is-open)) .lsw-trigger {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+  box-shadow: none;
+}
+body:has(.hero) .site-header:not(.is-scrolled):not(:has(.site-mobile-drawer.is-open)) .lsw-item:hover { background: rgba(255, 255, 255, 0.1); }
+body:has(.hero) .site-header:not(.is-scrolled):not(:has(.site-mobile-drawer.is-open)) .lsw-item.is-active,
+body:has(.hero) .site-header:not(.is-scrolled):not(:has(.site-mobile-drawer.is-open)) .lsw-item.is-active:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.45);
+  color: #fff;
+}
+body:has(.hero) .site-header:not(.is-scrolled):not(:has(.site-mobile-drawer.is-open)) .site-burger { border-color: rgba(255, 255, 255, 0.45); }
+body:has(.hero) .site-header:not(.is-scrolled):not(:has(.site-mobile-drawer.is-open)) .site-burger span { background: #fff; }
+
+body .site-header .site-mobile-drawer { border-top: 3px solid var(--header-accent, var(--brand-orange)); }
