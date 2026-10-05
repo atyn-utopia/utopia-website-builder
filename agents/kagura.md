@@ -28,22 +28,25 @@ projects/sewa-motor-malaysia/temporary screenshots/
 projects/cpapmachine/temporary screenshots/
 ```
 
+Include `projects/water-tank-malaysia` — it is the layout template every site shares, so it is the site most likely to be copied by accident.
+
 For each existing site, note:
-- Layout pattern (hero style, section order, grid structure)
+- Layout pattern (hero style, section order, grid structure) — shared by design, recorded only for context
 - Color palette used
 - Typography pairing
 - Component styles (cards, CTAs, navigation)
 - Visual motifs (gradients, overlays, shapes)
 
-### 2. Duplicate detection
-Compare the proposed new website against all existing sites. Flag as **duplicate** if any of these match too closely:
-- Same hero layout pattern (e.g. split hero with image right, text left)
-- Same section ordering on homepage
-- Same card grid layout for products
-- Same CTA placement and style
+### 2. Duplicate detection — visual design, not layout
+Every site shares water-tank's layout: the same chrome components, section order and page structure. **That reuse is intended — do not flag it.** What must not repeat is the *look*. Compare the proposed design against water-tank and every existing site, and flag as **duplicate** if any of these match too closely:
+- Same visual treatment of the hero (same split proportions *and* same overlay, image framing, type scale) — the hero's content slots are shared, its composition is not
+- Same button shape + card treatment combination (radius, border, shadow, fill)
+- Same header/footer styling (surface colour, transparency, borders, spacing) — water-tank's light flat header and pale-tint footer are a placeholder, not a default
+- Same typography pairing or type scale
 - Similar color scheme (even with different hues)
+- Same section surfaces (which sections are image-backed, flat, tinted, dark)
 
-If duplicates are detected, propose a completely different design direction.
+If duplicates are detected, change the visual direction — keep the layout.
 
 ### 3. Design research & inspiration
 For each new project, research fresh design approaches:
@@ -79,10 +82,11 @@ For the recommended design, provide:
 - Tracking and line-height recommendations
 - **Default line-heights (MANDATORY)** — `line-height: 1.2` for all headings (h1–h6) and `line-height: 1.4` for body text (p, li, blockquote, `.blog-content` p/li). Set in `globals.css`; only override per-component when there's a specific design reason.
 
-**Header & footer (MANDATORY default):**
-- Do NOT design a custom header/footer per project. Use the same `<SiteHeader />` + `<SiteFooter />` layout as `projects/water-tank-malaysia/components/` for every new site. Only the brand name, logo file, colour tokens, and locale-aware nav labels change.
-- The same applies to the WhatsApp redirect page (`app/[locale]/redirect-whatsapp-1/`), the blog listing (`app/[locale]/blog/page.tsx`) and the blog article page (`app/[locale]/blog/[slug]/page.tsx`) — all four are copied from water-tank-malaysia, never redesigned. The footer is the flat minimal style (logo + horizontal nav + divider + copyright), NOT the older dark sewa-excavator footer with the locations grid and social buttons.
-- Your design freedom is the page *body* — hero, product grid, the project-unique special section — not the shared chrome.
+**Header & footer — structure locked, styling yours:**
+- Structure comes from `projects/water-tank-malaysia/components/`: the same `<SiteHeader />` + `<SiteFooter />` components, the same elements in them (nav, language switcher, contact number, WhatsApp CTA; footer logo + nav + contact number + divider + copyright + "Built by Utopia AI" credit), the same props and data flow. Do not add, drop or fork components, and no per-page variants.
+- The *styling* is designed per site: surface (solid / transparent over the hero / floating bar), light or dark, borders, spacing, nav type treatment, footer colour (via the `--footer-*` tokens). Specify it in this document.
+- The same split applies to the WhatsApp redirect page, the blog listing and the blog article: their logic and structure are copied from water-tank (the redirect page's server-side resolve is never simplified); their look follows this site's design.
+- Your design freedom covers the whole visual layer — chrome styling included — not just the body. Water-tank's visual style is a placeholder from the scaffold, not a starting point.
 
 **Component styles:**
 - Card design (shadows, borders, radius)
@@ -104,7 +108,7 @@ After proposing the design, verify against:
 - [ ] Hero layout differs from all existing sites
 - [ ] Logo, icon, palette and fonts match `brand-kit.md` unchanged
 - [ ] Card/component styles are visually distinct
-- [ ] Section ordering differs from existing homepage layouts
+- [ ] Side-by-side with water-tank, this site does not read as a recolour — header, buttons, cards, hero treatment and section surfaces all differ
 - [ ] Design fits the product category and target audience
 - [ ] Brand assets are incorporated (if provided)
 - [ ] Mobile-first responsive approach is considered
@@ -172,6 +176,7 @@ Return a prioritized list (high/medium/low) of max 10 suggestions with:
 Return a design document with:
 1. **Existing sites audit** — summary of each deployed site's visual approach
 2. **Duplicate risk report** — what would look too similar if not changed
+   - **Visual delta vs water-tank** — list, per surface (header, hero, buttons, cards, section surfaces, footer), what this site does differently. "Different colour" alone does not count.
 3. **Research findings** — 2–3 design directions explored
 4. **Recommended direction** — full visual specification (layout, colors, typography, components)
 5. **Design review checklist** (completed)

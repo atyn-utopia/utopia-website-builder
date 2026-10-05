@@ -9,6 +9,11 @@ tagline come from `messages/*.json` (next-intl) and `config/site.ts`; the only
 asset conventions are `/brand/logo-dark.png` (footer) and `/brand/bg-hero.jpg`
 (hero bg). Swap those assets per project — do not edit the component structure.
 
+**Structure is canonical; the look is not.** The `<style>` blocks here carry
+water-tank's visual design only so a scaffold builds on day one. Each site
+restyles them (and `PageStyles`, `globals.css`) to its own design — button
+shape, header/footer surface, cards, type. Keep the JSX, props and data flow.
+
 | File | Role |
 |------|------|
 | `SiteHeader.tsx` | nav links + language switcher + contact number + WhatsApp CTA |

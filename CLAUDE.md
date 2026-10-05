@@ -254,7 +254,13 @@ These rules apply to EVERY website. No exceptions.
 
 ## Default Layout Template — `water-tank-malaysia`
 
-**`projects/water-tank-malaysia` is the canonical reference for every new site.** Copy these six surfaces from it and change only the brand name, logo file path, colour tokens, and locale-aware labels. Do NOT design per-project variants of any of them.
+**`projects/water-tank-malaysia` is the canonical *layout* reference for every new site — not a visual template.** Its structure and behaviour are copied; its look is not. A new site that reads as a recolour of water-tank is not finished.
+
+- **Locked (copy from water-tank):** the component set below, page/section order, DOM structure, props, data flow (`getDisplayPhone`, the redirect page's server-side resolve), and the rules that ride on them — FOMO banner, USP bar, steps-section CTA, one H1 + one H2, WhatsApp green, header/footer-only phone number. No per-page variants (no `BlogNav`), no extra or missing chrome components.
+- **Per site (Lylia's brand kit + Kagura's direction):** the visual design — typography, button shape (one shape per site, but which shape is the site's call), card and surface treatment, header and footer *styling* (solid / transparent / floating, light / dark, borders, spacing), hero composition, motifs, imagery treatment, section rhythm. Restyle the chrome through its `<style>` block, `PageStyles` and `globals.css` tokens; keep the JSX structure and data flow intact.
+- The scaffold brings water-tank's styling along only so the site builds on day one. Treat it as a placeholder to be replaced before Gate 1, not a default to tweak.
+
+Copy these six surfaces from it — keep their structure and behaviour, restyle their look:
 
 | Surface | Copy from | What it already gets right |
 |---|---|---|
@@ -275,7 +281,8 @@ These rules apply to EVERY website. No exceptions.
 - Per-page nav variants (e.g. `BlogNav`) are forbidden — every public page (home, location, blog listing, blog article) renders the same `<SiteHeader contact={<ContactNumber locale={locale} page="…" />} />` + `<SiteFooter locale={locale} page="…" />` + `<FomoBanner />`. Pass the real page path on both — `is_display` is keyed per page.
 - **`ContactNumber` takes the site's own type, not the chrome's.** Its styles live in `globals.css` (canonical copy: `templates/site-chrome/contact-number.css`) and set `font-family: var(--font-heading, var(--font-display, inherit))` — whichever font token the project defines wins, and a project defining neither inherits its own body font. Never hardcode a family there. Same for colour: `--brand-charcoal` / `--ink-muted` with plain fallbacks.
 - The CSS is in `globals.css`, **not** a styled-jsx block, because the element is rendered on the server and passed into the client `SiteHeader` as a `contact` prop — scoped styles in that component would never reach it. `SiteHeader` uses a plain `<style>` tag for the same family of reason (styled-jsx in a client component ships its CSS in the JS bundle and flashes unstyled).
-- Older projects still show the previous reference (`sewa-excavator`, dark footer with locations grid + social). When they disagree, **water-tank wins** — don't copy chrome out of an older site.
+- Older projects still show the previous reference (`sewa-excavator`, dark footer with locations grid + social). When they disagree on *structure*, **water-tank wins** — don't copy chrome out of an older site.
+- `utopia-wizard/scripts/chrome-check.ts` reports chrome drift from the template. It is advisory, not scored — restyling the `<style>` block lowers the similarity score and that is expected. What it should never show is a changed component structure.
 - The wizard checks this via `site-chrome-components`, `homepage-uses-site-header`, `location-page-chrome`, `blog-listing-chrome`, `blog-post-chrome`, `no-blognav-usage`.
 - **The footer's colour comes from the site's palette, never from the chrome.** `SiteFooter` hardcodes no colour: it tints itself from the site's primary accent (`--brand-orange` — the fleet's token name for the primary, kept even on sites whose accent is blue or green) via `color-mix`, so a project that defines nothing still gets a footer in its own colours. Measured: water-tank's blue yields `#ECF4FC`, a forest-green brand `#EDF2F0`, terracotta `#F9F1EE`, purple `#F1EEF5`.
   - Five override tokens in `globals.css` depart from the default: `--footer-bg`, `--footer-border`, `--footer-rule`, `--footer-ink`, `--footer-ink-muted` (plus `--footer-tint` to tint from something other than the accent, and `--footer-link-hover`).
