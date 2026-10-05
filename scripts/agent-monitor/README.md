@@ -91,3 +91,27 @@ restart; it never caches `/events` or `/api`.
 App icons: `logo/build.py` writes `public/brand/logo-app.svg`, and
 `logo/icons.sh` rasterises it to `app-512.png`, `app-192.png` and `app-180.png`
 (macOS Quick Look + sips).
+
+## New website (one, bulk, drafts)
+
+**New website** in the header does what the Utopia Wizard's `/new` and
+`/new/bulk` do, from this machine (`create.mjs`):
+
+1. creates `utopiagrowth/site-<slug>` (private by default), one commit with
+   `inputs.md` (name, brief, owner, brand files) and the builder's `CLAUDE.md`,
+   plus brand files in `brand_assets/`;
+2. registers it in the wizard (`webcore.user_repos`, `webcore.project_owners`)
+   and dispatches `monitor-scan.yml` for the new slugs;
+3. if asked, clones it into `utopia-website-builder/projects/` and opens a new
+   iTerm (or Terminal) window running Claude with the wizard's kickoff prompt —
+   one window per site, or one orchestrator session for a batch.
+
+Bulk takes the wizard's paste format: blocks split by a `---` line, first line
+the name, the rest the brief, up to 20. Drafts are the wizard's own
+`webcore.project_drafts` rows for your GitHub login, so they show in both apps;
+a wizard draft's brand files are copied into the repo when you create it.
+
+Credentials never reach the page: GitHub through the local `gh` login (`gh auth
+token`), the database through `SUPABASE_SERVICE_ROLE_KEY` from `.env.local`. The
+action routes refuse any request without the page's `x-factory` header or from
+another origin, so other websites can't trigger them.
