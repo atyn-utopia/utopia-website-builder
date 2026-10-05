@@ -107,7 +107,25 @@ button{font:inherit}
 .floor{background:var(--bone);border-radius:var(--r-lg);box-shadow:inset 0 0 0 1px var(--line);overflow:hidden;flex:none}
 .stations{list-style:none;margin:0;padding:12px 10px 8px;display:grid;gap:8px;grid-template-columns:repeat(2,minmax(0,1fr))}
 @media (min-width:560px){.stations{grid-template-columns:repeat(5,minmax(0,1fr))}}
-@media (min-width:900px){.stations{grid-template-columns:repeat(10,minmax(0,1fr))}}
+@media (min-width:900px){.stations{grid-template-columns:var(--gate) repeat(10,minmax(0,1fr)) var(--gate)}}
+/* in and out gates at the two ends of the line (wide screens) */
+.floor{--gate:0px;--ggap:0px}
+@media (min-width:900px){.floor{--gate:88px;--ggap:8px}}
+.gate{display:none}
+@media (min-width:900px){.gate{display:flex}}
+.gate{flex-direction:column;align-items:center;text-align:center;gap:6px;padding:0 6px 10px;border-radius:var(--r-card);background:var(--panel);box-shadow:inset 0 0 0 1px var(--line);overflow:hidden;min-width:0;cursor:default}
+.gate .stripe{align-self:stretch;height:10px;margin:0 -6px 6px;background:repeating-linear-gradient(-45deg,var(--build) 0 8px,var(--slate) 8px 16px)}
+.gate.out .stripe{background:repeating-linear-gradient(-45deg,var(--live) 0 8px,var(--slate) 8px 16px)}
+.gate .door{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;background:var(--linen);color:var(--ink)}
+.gate .door svg{width:24px;height:24px}
+.gate b{font:800 15px/1 var(--display);letter-spacing:.02em}
+.gate small{color:var(--muted);font-size:11.5px;line-height:1.25}
+.gate .num{font:800 20px/1 var(--display)}
+.gate.in .num{color:var(--build-ink)}
+.gate.out .num{color:var(--live-ink)}
+.gate.in{cursor:pointer}
+.gate.in:hover .door{background:var(--build-soft)}
+.gate.in:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 .station{min-width:0;display:flex;flex-direction:column;align-items:center;text-align:center;padding:16px 6px 8px;border-radius:var(--r-card);background:color-mix(in srgb,var(--panel) 55%,transparent)}
 .station{--ct:var(--c)}
 /* agent colours are tuned for light; on dark, lift them so navy/grey agents don't sink */
@@ -137,13 +155,15 @@ button{font:inherit}
 /* each package is exactly as wide as the station tile above it (same padding and gap as .stations) */
 .packages{--pad:10px;--gap:8px}
 @media (max-width:899px){.packages{--pad:0px;--gap:0px}}
-.pkg{--tile:calc((100% - 2 * var(--pad) - 9 * var(--gap)) / 10);position:absolute;bottom:calc(var(--row) * 30px + 4px);left:calc(var(--pad) + var(--i) * (var(--tile) + var(--gap)));width:var(--tile);transition:left 1.2s var(--ease),bottom var(--dur-layout) var(--ease)}
+.pkg{--tile:calc((100% - 2 * var(--pad) - 2 * var(--gate) - 2 * var(--ggap) - 9 * var(--gap)) / 10);position:absolute;bottom:calc(var(--row) * 30px + 4px);left:calc(var(--pad) + var(--gate) + var(--ggap) + var(--i) * (var(--tile) + var(--gap)));width:var(--tile);transition:left 1.2s var(--ease),bottom var(--dur-layout) var(--ease)}
 .pkg .box{display:block;background:var(--panel);border:2px solid var(--build);border-radius:6px;box-shadow:var(--shadow);overflow:hidden;font:700 11px/1 var(--display);color:var(--ink)}
 .pkg .box::before{content:"";display:block;height:5px;background:var(--build)}
 .pkg .box span{display:block;padding:4px 6px 5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pkg.more .box{text-align:center;color:var(--muted)}
 .pkg.working .box{animation:ride 1.1s var(--ease) infinite alternate}
 .pkg.waiting .box{border-style:dashed}
+.pkg.at-gate{left:var(--pad);width:var(--gate)}
+@media (max-width:899px){.pkg.at-gate{left:calc(var(--pad));width:var(--tile)}}
 .pkg.paused .box{border-color:var(--ash);color:var(--muted)}
 .pkg.paused .box::before{background:var(--ash)}
 @keyframes ride{from{transform:translateY(0)}to{transform:translateY(-3px)}}
@@ -235,7 +255,7 @@ button{font:inherit}
 .sw.wait{border-style:dashed}
 .sw.paused{border-color:var(--ash);background:var(--linen)}
 @media (max-width:1180px){.legend{display:none}}
-@media (min-width:1181px){.legend{margin-left:auto}.legend+.pager{margin-left:16px}}
+@media (min-width:1181px){.panel-h{position:relative}.legend{position:absolute;left:50%;transform:translateX(-50%)}}
 
 
 /* ---- GitHub account (header) */
@@ -559,11 +579,21 @@ function renderStations(agents, building){
   // working loop keep running instead of restarting on every live update.
   const list = document.getElementById("stations");
   if (!list.childElementCount) {
-    list.innerHTML = ORDER.map((key, i) => `<li class="station idle" data-key="${key}" style="--c:${agents[key].color}">
+    const gate = (dir, title, sub, icon) => `<li class="gate ${dir}"${dir === "in" ? ` tabindex="0" role="button" aria-label="In gate: start a new website"` : ""}>
+      <span class="stripe" aria-hidden="true"></span><span class="door" aria-hidden="true">${icon}</span>
+      <b>${title}</b><span class="num" id="gate-${dir}">0</span><small>${sub}</small></li>`;
+    const DOOR_IN = `<svg viewBox="0 0 24 24"><path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4M3 12h11M10 8l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    const DOOR_OUT = `<svg viewBox="0 0 24 24"><path d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4M10 12h11M17 8l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    list.innerHTML = gate("in", "IN", "waiting for a station", DOOR_IN) + ORDER.map((key, i) => `<li class="station idle" data-key="${key}" style="--c:${agents[key].color}">
       <div class="robot rb" style="--d:-${(i * 0.53).toFixed(2)}s">${robot(key)}<span class="count" hidden></span><svg class="gear"><use href="#gear"/></svg></div>
-      <b>${agents[key].name}</b><small>${esc(agents[key].role)}</small><div class="task">Free</div></li>`).join("");
+      <b>${agents[key].name}</b><small>${esc(agents[key].role)}</small><div class="task">Free</div></li>`).join("")
+      + gate("out", "OUT", "shipped today", DOOR_OUT);
+    list.querySelector(".gate.in").addEventListener("click", () => $("new-open").click());
+    list.querySelector(".gate.in").addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); $("new-open").click(); } });
   }
-  for (const li of list.children) {
+  document.getElementById("gate-in").textContent = building.filter((s) => !s.station).length;
+  document.getElementById("gate-out").textContent = snap.sites.filter((s) => s.state === "done").length;
+  for (const li of list.querySelectorAll(".station")) {
     const key = li.dataset.key;
     // A robot lights up while it is working on a website, which can be a site
     // further down the line coming back to it for a fix.
@@ -619,8 +649,8 @@ function renderBelt(building){
     el.classList.toggle("paused", !!it.s && it.s.paused);
     el.title = it.s ? `${it.s.name}: ${it.s.station ? "at " + snap.agents[it.s.station].name : "intake"}` : `${it.more} more websites here`;
     el.querySelector(".box span").textContent = it.s ? it.s.name : `+${it.more} more`;
-    // Intake (no station yet) waits at the start of the belt, under Alpha.
     el.style.setProperty("--i", Math.max(it.idx, 0));
+    el.classList.toggle("at-gate", it.idx < 0); // no station yet: waits at the in gate
     el.style.setProperty("--row", it.row);
   }
   for (const el of [...box.children]) if (!seen.has(el.dataset.key)) el.remove();
