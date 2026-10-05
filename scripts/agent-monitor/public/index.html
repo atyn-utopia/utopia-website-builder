@@ -286,15 +286,15 @@ button{font:inherit}
 
 
 /* ---- hover card for a website on the line */
-.pop{position:fixed;z-index:40;width:340px;max-width:calc(100vw - 24px);padding:14px 16px;border-radius:var(--r-card);background:var(--panel);border:1px solid var(--line);box-shadow:0 1px 2px rgba(11,11,13,.06),0 18px 44px -10px rgba(11,11,13,.35);pointer-events:none;font-size:13px;line-height:1.4;display:flex;flex-direction:column;gap:10px;opacity:0;transform:translateY(4px);transition:opacity 160ms var(--ease),transform 160ms var(--ease)}
+.pop{position:fixed;z-index:40;width:260px;max-width:calc(100vw - 24px);padding:10px 12px;border-radius:var(--r-card);background:var(--panel);border:1px solid var(--line);box-shadow:0 1px 2px rgba(11,11,13,.06),0 18px 44px -10px rgba(11,11,13,.35);pointer-events:none;font-size:12.5px;line-height:1.35;display:flex;flex-direction:column;gap:6px;opacity:0;transform:translateY(4px);transition:opacity 160ms var(--ease),transform 160ms var(--ease)}
 .pop.on{opacity:1;transform:none}
-.pop h4{margin:0;font:800 17px/1.25 var(--display);overflow-wrap:anywhere}
+.pop h4{margin:0;font:800 14.5px/1.25 var(--display);overflow-wrap:anywhere}
 .pop .tag{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:999px;width:fit-content}
 .pop .tag.b{background:var(--build-soft);color:var(--build-ink)}
 .pop .tag.w{background:var(--build-soft);color:var(--build-ink);outline:1.5px dashed var(--build);outline-offset:-1.5px}
 .pop .tag.p{background:var(--linen);color:var(--muted)}
 .pop .row{display:flex;align-items:center;gap:8px;min-width:0}
-.pop .row .face{width:30px;height:30px;flex:none}
+.pop .row .face{width:24px;height:24px;flex:none}
 .pop .row .face svg{width:100%;height:100%;display:block}
 .pop .k{color:var(--muted);font-size:11.5px;font-weight:600;text-transform:none;margin-bottom:2px}
 .pop .now{overflow-wrap:anywhere}
@@ -820,20 +820,15 @@ connect();
 const pop = document.getElementById("pop");
 let popKey = null, popAnchor = null;
 function popHtml(s){
+  // compact: what it is, where it is, what it's doing, when it last moved
   const a = s.station ? snap.agents[s.station] : null;
   const idx = s.station ? ORDER.indexOf(s.station) + 1 : 0;
   const tag = s.waitingOnYou ? `<span class="tag w">Needs you</span>` : s.paused ? `<span class="tag p">Paused</span>` : `<span class="tag b"><span class="dot build"></span>Building</span>`;
-  const runs = (s.runs || []).map((r) => `<li><span><b>${esc(r.label)}</b> · ${esc(r.text || (r.status === "waiting" ? "waiting for you" : ""))}</span>${agoEl(r.at)}</li>`).join("");
-  const recent = !runs && (s.recent || []).length ? (s.recent || []).map((r) => `<li><span>${esc(r.text)}</span>${agoEl(r.at)}</li>`).join("") : "";
+  const fix = s.robots.filter((k) => k !== s.station).map((k) => snap.agents[k].name);
   return `${tag}<h4>${esc(s.name)}</h4>
-    <div class="row">${a ? `<span class="face">${robot(s.station)}</span><div><b>At ${esc(a.name)}</b> · ${esc(a.role)}<div class="meta">Station ${idx} of ${ORDER.length}${s.robots.filter((k) => k !== s.station).length ? " · fix by " + s.robots.filter((k) => k !== s.station).map((k) => esc(snap.agents[k].name)).join(", ") : ""}</div></div>` : `<div><b>At the in gate</b><div class="meta">No station reached yet</div></div>`}</div>
-    ${s.now ? `<div><div class="k">Doing now</div><div class="now">${esc(s.now)}</div></div>` : ""}
-    ${runs ? `<div><div class="k">${s.runs.length} active run${s.runs.length === 1 ? "" : "s"}</div><ul>${runs}</ul></div>` : ""}
-    ${recent ? `<div><div class="k">Last steps</div><ul>${recent}</ul></div>` : ""}
-    ${s.lastPrompt ? `<div><div class="k">You last asked</div><div class="ask">${esc(s.lastPrompt)}</div></div>` : ""}
-    <hr>
-    <div class="meta">${s.registered ? `Webcore: <span class="mono">${esc(s.registered)}</span>` : "Not in webcore yet"}${s.branch ? ` · branch <span class="mono">${esc(s.branch)}</span>` : ""}</div>
-    <div class="meta">${s.session ? `Session “${esc(s.session)}” · ` : ""}started ${agoEl(isFinite(s.startedAt) ? s.startedAt : s.lastAt)} · last move ${agoEl(s.lastAt)} · ${s.runCount} run${s.runCount === 1 ? "" : "s"}</div>`;
+    <div class="row">${a ? `<span class="face">${robot(s.station)}</span><span><b>${esc(a.name)}</b> · station ${idx}/${ORDER.length}${fix.length ? ` · fix by ${esc(fix.join(", "))}` : ""}</span>` : `<span><b>In gate</b> · no station yet</span>`}</div>
+    ${s.now ? `<div class="now">${esc(s.now)}</div>` : ""}
+    <div class="meta">${s.working ? `${s.working} agent${s.working === 1 ? "" : "s"} working · ` : ""}last move ${agoEl(s.lastAt)}</div>`;
 }
 function placePop(){
   if (!popAnchor || !popAnchor.isConnected) return hidePop();
