@@ -90,6 +90,9 @@ Plans keyword structure, page hierarchy, and internal linking.
 Nana — Copywriter  
 Writes all website copy — homepage sections, location page copy for every target city, and meta copy.
 
+Lylia — Brand & Logo Designer
+Locks the visual identity before any layout exists: generates logo concepts through Codex (`scripts/codex-image.sh`), lets the user pick, rebuilds the chosen icon as `app/icon.svg` (logo icon = favicon), and sets the palette + type pairing in `brand-kit.md`. Skips generation when the client supplies a logo.
+
 Kagura — UI Design Specialist
 Reviews existing site layouts for duplicates, researches fresh design inspiration, and proposes a unique visual direction for each new project.
 
@@ -126,14 +129,15 @@ When the user asks to fix an existing site, first decide whether **we built it**
 ## Execution order
 
 1. Alpha — design system architecture (confirms languages with user)
-2. Cyclops + Sora — run in parallel (both need Alpha's output)
+2. Cyclops + Sora + Lylia — run in parallel (all need Alpha's output)
+   Lylia — logo concepts via Codex → **user picks a logo (visual gate, blocking)** → `brand-kit.md`
 2b. **Keyword volume gate (MANDATORY, blocking)** — verify Sora's head terms against
    real Google search volume before any copy is written. `keyword-volume.mjs --plan
    <seo-plan.md>`; a head term with no volume propagates into every H1, meta title
    and slug on the site. See the `keyword-research` skill.
 3. Nana — generate homepage + all location page copy (needs Alpha + Sora's output)
 4. Kagura + Kimmy — run in parallel (both need Nana's output)
-   Kagura — propose unique design direction (reviews existing sites, researches inspiration)
+   Kagura — propose unique design direction on top of Lylia's `brand-kit.md` (reviews existing sites, researches inspiration)
    Kimmy — implement technical SEO + i18n + WhatsApp redirect
    → run pre-review checklist (headings, mobile audit, orphaned text, images, colors)
 5. Cyclops — insert product details into Supabase (MANDATORY, before deploy)

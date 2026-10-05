@@ -153,14 +153,15 @@ the scanner can't make — image fit, layout craft, copy quality.
 
 ## 4. Step 2 — Run Agent Pipeline
 
-The system uses 8 AI agents that run in a specific order. Some run in parallel.
+The system uses 10 AI agents that run in a specific order. Some run in parallel.
 
 ### Agent Execution Order
 
 ```
 Step A:  Alpha (System Architect)
             ↓
-Step B:  Cyclops (Database) ∥ Sora (SEO)     ← parallel
+Step B:  Cyclops (Database) ∥ Sora (SEO) ∥ Lylia (Brand & Logo)  ← parallel
+            ↓                                  Lylia: user picks logo (visual gate)
             ↓
 Step B2: KEYWORD VOLUME GATE                 ← blocking, see below
             ↓
@@ -264,8 +265,9 @@ See `.claude/skills/keyword-research/SKILL.md` for full flag reference.
 | **Alpha** | System architecture, confirms languages | All inputs from Step 0 | `architecture.md` |
 | **Cyclops** | Supabase schema design | Alpha's output + locations list | `database.md` |
 | **Sora** | SEO keyword plan, page hierarchy, internal linking | Alpha's output + product + locations + languages | `seo-plan.md` |
+| **Lylia** | Logo (Codex concepts → user picks), icon rebuilt as `app/icon.svg`, palette + type pairing. Skips generation if the client supplied a logo | Alpha's output + brand name/tone + client brand assets + existing sites | `brand-kit.md`, `public/brand/*`, `app/icon.svg` |
 | **Nana** | Homepage copy + all location page copy | Alpha + Sora's output + brand tone + locations + locales | `copy-homepage.md`, `copy-locations.md` |
-| **Kagura** | Unique UI design direction (reviews existing sites to avoid duplication) | Alpha + Nana's output + brand assets + reference images | `design-direction.md` |
+| **Kagura** | Unique UI design direction (reviews existing sites to avoid duplication) | Alpha + Nana's output + Lylia's `brand-kit.md` + reference images | `design-direction.md` |
 | **Kimmy** | Technical SEO, i18n, WhatsApp redirect | Alpha + Sora + Nana's output + languages + domain | `technical-seo-i18n.md` |
 
 All outputs are saved to `projects/{project-slug}/`.
