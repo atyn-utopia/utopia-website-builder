@@ -45,19 +45,25 @@ instructions="Use your image generation tool to create exactly ONE image for thi
 
 $prompt
 
+The background must be a real alpha channel — no drawn checkerboard, no glow or halo around the artwork.
+
 Then copy the generated PNG, unmodified and still PNG, to ./$outname in the current directory. Do not convert, resize or re-encode it. Reply with only the final path."
 
 log=$(mktemp -t codex-image)
 # stdin from /dev/null: codex exec otherwise blocks reading extra input.
+# `--` before the prompt: -i/--image takes several values and would otherwise
+# swallow the prompt as one more image path.
 "$bin" exec --skip-git-repo-check --ephemeral -s workspace-write -m "$model" \
-  -C "$outdir" ${refs[@]+"${refs[@]}"} "$instructions" </dev/null >"$log" 2>&1 || {
+  -C "$outdir" ${refs[@]+"${refs[@]}"} -- "$instructions" </dev/null >"$log" 2>&1 || {
   grep -v -E 'codex_models_manager|rmcp::' "$log" | tail -20 >&2
   rm -f "$log"
   exit 1
 }
 
-if ! file "$outdir/$outname" 2>/dev/null | grep -q 'PNG image data'; then
-  echo "codex finished but $outdir/$outname is missing or not a PNG" >&2
+# RGBA, not just PNG: Codex sometimes returns an RGB image with a transparency
+# checkerboard painted into it, which looks transparent in a viewer and isn't.
+if ! file "$outdir/$outname" 2>/dev/null | grep -q 'PNG image data.*RGBA'; then
+  echo "codex finished but $outdir/$outname is missing, not a PNG, or has no alpha channel (RGBA) — regenerate" >&2
   grep -v -E 'codex_models_manager|rmcp::' "$log" | tail -20 >&2
   rm -f "$log"
   exit 1
