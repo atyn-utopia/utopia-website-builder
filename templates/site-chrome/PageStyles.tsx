@@ -11,6 +11,11 @@ export default function PageStyles() {
            Card TITLES (first h5 inside a card container) keep bold via the :first-of-type override below. */
         .usp-cell h5, .process-card h5, .why-card h5, .faq-item h4, .product-desc, .review-body, .review-suburb, .hero-support { font-weight: inherit; }
         .usp-cell h5:first-of-type, .process-card h5:first-of-type, .why-card h5:first-of-type { font-weight: 700; }
+        /* Line wrapping: balance short centred lines so none ends with a lone word
+           (hero subtext "… harga dan / tarikh." looked lopsided); pretty-wrap body copy
+           to avoid one-word last lines. Browsers without support fall back to normal wrapping. */
+        h1, h2, h3, .hero-support, .section-head h4, .section-head h5, .section-head p { text-wrap: balance; }
+        p, li, h4, h5, h6 { text-wrap: pretty; }
         /* HERO */
         .hero {
           position: relative;
