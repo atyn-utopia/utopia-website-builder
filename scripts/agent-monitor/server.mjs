@@ -34,7 +34,7 @@ const AGENTS = {
   nana:    { name: 'Nana',    role: 'Copywriter',            color: '#C2410C' },
   kagura:  { name: 'Kagura',  role: 'UI designer',           color: '#1B5687' },
   kimmy:   { name: 'Kimmy',   role: 'Technical SEO',         color: '#1D6FA0' },
-  cyclops: { name: 'Cyclops', role: 'Database engineer',     color: '#003B5C' },
+  cyclops: { name: 'Cyclops', role: 'Database engineer',     color: '#0054A6' },
   hanabi:  { name: 'Hanabi',  role: 'Blog writer',           color: '#8A5A00' },
   layla:   { name: 'Layla',   role: 'QA & deploy',           color: '#4F5257' },
   gloo:    { name: 'Gloo',    role: 'Google & ads setup',    color: '#157A45' },
