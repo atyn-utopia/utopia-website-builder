@@ -61,8 +61,8 @@ counts — sessions in other workspace repos are left off.
 
 ## Look
 
-Built on the Utopia Brand CI v2.0.1 (utopiagroup.com.my/brand-ci): Plus Jakarta
-Sans 800 for display, Source Sans 3 for body (as on the office-screen page), CI neutrals, 8px buttons / 12px cards, and
+Built on the Utopia Brand CI v2.0.1 (utopiagroup.com.my/brand-ci): Source Sans 3
+throughout (as on the office-screen page; the logo keeps its outlined Plus Jakarta Sans), CI neutrals, 8px buttons / 12px cards, and
 the CI status colours — warning amber for websites still building, live green for
 shipped ones. The logo (`public/brand/logo-*.svg`, made by `logo/build.py`) follows the
 Utopia product logos' two weights: a small Light "website" set flush right
@@ -115,7 +115,12 @@ the name, the rest the brief, up to 20. Drafts are the wizard's own
 `webcore.project_drafts` rows for your GitHub login, so they show in both apps;
 a wizard draft's brand files are copied into the repo when you create it.
 
-Credentials never reach the page: GitHub through the local `gh` login (`gh auth
-token`), the database through `SUPABASE_SERVICE_ROLE_KEY` from `.env.local`. The
+The header shows which GitHub account the Factory acts as, with Sign out and
+a switch to any other account `gh` is logged in to on this machine. The choice
+is the Factory's own (`~/.config/website-factory/session.json`, token fetched
+with `gh auth token --user <login>`), so it never changes gh's active account
+for other terminals, and signing out leaves gh logged in.
+
+Credentials never reach the page: GitHub through the local `gh` login, the database through `SUPABASE_SERVICE_ROLE_KEY` from `.env.local`. The
 action routes refuse any request without the page's `x-factory` header or from
 another origin, so other websites can't trigger them.

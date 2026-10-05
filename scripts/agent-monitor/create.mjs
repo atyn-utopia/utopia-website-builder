@@ -98,17 +98,58 @@ function supabase() {
   return { rest: `${url}/rest/v1`, storage: `${url}/storage/v1`, h };
 }
 
+// ---------------------------------------------------------------- GitHub account
+// The Factory signs in as one of the GitHub accounts the local `gh` CLI holds,
+// fetched per account (`gh auth token -u <login>`), so choosing one here never
+// switches gh's active account for other terminals. Signing out only makes the
+// Factory forget its choice; gh stays logged in.
+const SESSION_FILE = path.join(os.homedir(), '.config', 'website-factory', 'session.json');
+
+function readSession() {
+  try { return JSON.parse(fs.readFileSync(SESSION_FILE, 'utf8')); } catch { return null; }
+}
+function writeSession(login) {
+  fs.mkdirSync(path.dirname(SESSION_FILE), { recursive: true });
+  fs.writeFileSync(SESSION_FILE, JSON.stringify({ login, at: new Date().toISOString() }), { mode: 0o600 });
+  gh = null;
+}
+
+/** Accounts gh is logged in to on this machine. */
+export async function ghAccounts() {
+  try {
+    const { stdout } = await run('gh', ['auth', 'status', '--json', 'hosts']);
+    const list = JSON.parse(stdout).hosts?.['github.com'] || [];
+    return list.filter((a) => a.state === 'success').map((a) => ({ login: a.login, active: !!a.active }));
+  } catch { return []; }
+}
+
+/** Who the Factory acts as: the saved choice, or gh's active account the first time. */
+export async function currentLogin() {
+  const saved = readSession();
+  const accounts = await ghAccounts();
+  if (saved) return accounts.some((a) => a.login === saved.login) ? saved.login : null;
+  return accounts.find((a) => a.active)?.login ?? null;
+}
+
+export async function signIn(login) {
+  const accounts = await ghAccounts();
+  if (!accounts.some((a) => a.login === login)) throw new Error(`gh isn't logged in as @${login} on this machine. Run "gh auth login" in a terminal first.`);
+  writeSession(login);
+  return login;
+}
+export function signOut() { writeSession(null); }
+
 let gh = null; // { token, login }
 async function github() {
   if (gh) return gh;
+  const login = await currentLogin();
+  if (!login) throw new Error('Sign in with GitHub first (top right of the page).');
   try {
-    const { stdout: token } = await run('gh', ['auth', 'token']);
-    const me = await (await fetch('https://api.github.com/user', { headers: ghHeaders(token.trim()) })).json();
-    if (!me.login) throw new Error('token rejected');
-    gh = { token: token.trim(), login: me.login };
+    const { stdout: token } = await run('gh', ['auth', 'token', '--hostname', 'github.com', '--user', login]);
+    gh = { token: token.trim(), login };
     return gh;
   } catch (e) {
-    throw new Error(`GitHub isn't signed in on this machine (run \`gh auth login\`): ${e.message}`);
+    throw new Error(`Couldn't get a GitHub token for @${login}: ${e.message}`);
   }
 }
 const ghHeaders = (token) => ({ Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' });
@@ -327,6 +368,5 @@ export async function createSites(sites, start = 'per-site') {
 }
 
 export async function whoAmI() {
-  const { login } = await github();
-  return login;
+  return { login: await currentLogin(), accounts: await ghAccounts() };
 }
