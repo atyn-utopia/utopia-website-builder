@@ -66,16 +66,29 @@ function inferAgent(...texts) {
   return null;
 }
 
-// A link Claude reported as the live site. Dashboards, repos and previews don't count.
-const NOT_LIVE = /(^|\.)(github\.com|vercel\.com|claude\.ai|anthropic\.com|google\.com|googleapis\.com|localhost|supabase\.co|utopiagroup\.com\.my|wizard\.utopiaai\.my|websitebuilder\.utopiaai\.my|wa\.me|placehold\.co)$/i;
-function liveUrlIn(text = '') {
-  let found = null;
-  for (const m of text.matchAll(/https:\/\/([a-z0-9.-]+\.[a-z]{2,})(?=[\/\s)*`\]>,]|$)/gi)) {
-    const host = m[1].toLowerCase().replace(/\.$/, '');
-    if (NOT_LIVE.test(host) || /-[a-z0-9]{9}-[a-z0-9-]+\.vercel\.app$/.test(host)) continue; // per-deploy preview URLs
-    found = host;
+// Links Claude reported as live sites. Dashboards, repos, image hosts and
+// per-deploy previews don't count. One message can announce many sites
+// ("Tujuh site dah live: …"), so every host in it is kept.
+const NOT_LIVE = /(^|\.)(github\.com|vercel\.com|vercel\.app|claude\.ai|anthropic\.com|google\.com|googleapis\.com|gstatic\.com|localhost|supabase\.co|utopiagroup\.com\.my|webcore\.utopiaai\.my|wizard\.utopiaai\.my|websitebuilder\.utopiaai\.my|wa\.me|placehold\.co|domain\.com|example\.com|wixstatic\.com|pexels\.com|unsplash\.com|cloudflare\.com)$/i;
+const PREVIEW = /-[a-z0-9]{9}(-[a-z0-9-]+)?\.(vercel\.app|utopiaai\.my)$/i;
+function liveHostsIn(text = '') {
+  const hosts = new Set();
+  const urls = text.matchAll(/https?:\/\/([a-z0-9.-]+\.[a-z]{2,})/gi);
+  const bare = text.matchAll(/(?<![\w./@-])((?:[a-z0-9-]+\.)+(?:com\.my|my))(?![\w-])/gi); // "aircondmesra.my"
+  for (const m of [...urls, ...bare]) {
+    const host = m[1].toLowerCase().replace(/^www\./, '').replace(/\.$/, '');
+    if (!NOT_LIVE.test(host) && !PREVIEW.test(host)) hosts.add(host);
   }
-  return found;
+  return hosts;
+}
+const alnum = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
+// The live host for a site: one whose name starts with the site's name.
+// A real domain wins over the *.utopiaai.my staging host.
+function liveHostFor(key, hosts) {
+  const stem = alnum(key.replace(/-(com-my|my|com)$/, ''));
+  if (stem.length < 4) return null;
+  const hits = [...hosts].filter((h) => alnum(h).startsWith(stem));
+  return hits.sort((x, y) => /utopiaai\.my$/.test(x) - /utopiaai\.my$/.test(y) || x.length - y.length)[0] || null;
 }
 
 // Site keys from titles ("auto-gate.my") and folders ("site-auto-gate-my") must meet.
@@ -181,7 +194,7 @@ function newActor(file, kind) {
     id: file, kind, file,
     sessionId: null, parentId: null,
     agentKey: null, agentType: null, name: '', description: '',
-    builder: file.includes('utopia-website-builder'), liveUrl: null,
+    builder: file.includes('utopia-website-builder'), liveHosts: new Set(),
     brief: '', title: '', customTitle: '', lastPrompt: '',
     cwd: '', branch: '', site: null, pathSite: null,
     startedAt: null, lastAt: null,
@@ -229,7 +242,7 @@ function applyLine(a, line) {
         pushAction(a, ts, d);
       } else if (c.type === 'text' && c.text?.trim()) {
         pushAction(a, ts, { kind: 'say', text: clip(c.text, 110) });
-        if (/\blive\b|dah live|deployed|production/i.test(c.text)) a.liveUrl = liveUrlIn(c.text) || a.liveUrl;
+        if (/\blive\b|dah live|deployed|production|go-live/i.test(c.text)) for (const h of liveHostsIn(c.text)) a.liveHosts.add(h);
       } else if (c.type === 'thinking') {
         a.current = { kind: 'think', text: 'Thinking…', at: ts };
       }
@@ -303,7 +316,7 @@ function view(a, now) {
   return {
     id: a.id, kind: a.kind, sessionId: a.sessionId, parentId: a.parentId,
     agent, agentType: a.agentType, doing, builder: a.builder, reached: reachedOf(a),
-    siteKey: site ? siteKey(site) : null, liveUrl: a.liveUrl,
+    siteKey: site ? siteKey(site) : null,
     label: agent ? agent.name : a.kind === 'main' ? (a.customTitle || a.title || 'Claude session') : (a.name || a.agentType || 'Subagent'),
     task: a.kind === 'sub' ? a.description : (a.customTitle ? a.title : ''),
     lastPrompt: a.kind === 'main' ? clip(a.lastPrompt, 160) : '',
@@ -317,14 +330,18 @@ function view(a, now) {
 function snapshot() {
   const now = Date.now();
   const list = [...actors.values()].filter((a) => a.lastAt).map((a) => view(a, now));
+  // every host any builder session announced as live, so a team lead's
+  // "these seven are live" message ships all seven sites
+  const live = new Set();
+  for (const a of actors.values()) if (a.builder) for (const h of a.liveHosts) live.add(h);
   list.sort((x, y) => (y.lastAt || 0) - (x.lastAt || 0));
-  return { now, hours: HOURS, agents: AGENTS, actors: list, sites: sites(list, now) };
+  return { now, hours: HOURS, agents: AGENTS, actors: list, sites: sites(list, now, live) };
 }
 
 // One row per website the builder touched in the window: still being built,
 // or done (nothing running on it any more and a live link was reported).
 const ACTIVE_MS = 3 * 3600e3;
-function sites(list, now) {
+function sites(list, now, live) {
   const by = new Map();
   for (const a of list) {
     // Workspace repos (website-workflow, creative-dashboard…) aren't factory websites.
@@ -337,8 +354,7 @@ function sites(list, now) {
     const working = runs.filter((r) => r.status === 'working');
     const waiting = runs.filter((r) => r.kind === 'main' && r.status === 'waiting' && now - r.lastAt < ACTIVE_MS);
     const named = runs.map((r) => r.site).find((n) => n.includes('.'));
-    const liveUrl = runs.map((r) => r.liveUrl).find((u) => u && siteKey(u).includes(key.replace(/-(my|com-my|com)$/, ''))) || null;
-    const domain = liveUrl || named || null;
+    const domain = liveHostFor(key, live) || named || null;
     const lastAt = Math.max(...runs.map((r) => r.lastAt || 0));
     const top = working[0] || runs[0];
     // The line only runs one way: a site sits at the furthest station any run
@@ -350,18 +366,18 @@ function sites(list, now) {
     let state;
     if (working.length) state = 'building';
     else if (domain) state = 'done';
-    else if (waiting.length) state = 'building';
-    else continue; // went quiet without going live — not on the floor any more
+    else state = 'building'; // stopped before going live: stays on the line, marked paused
     out.push({
       key, name: named || runs[0].site, domain, state,
       waitingOnYou: !working.length && waiting.length > 0,
+      paused: !working.length && !waiting.length && !domain,
       robots: busy, station,
       working: working.length, lastAt,
       now: state === 'building' ? (top.current?.text || top.task || '') : '',
     });
   }
-  const rank = { building: 0, done: 1 };
-  return out.sort((x, y) => rank[x.state] - rank[y.state] || y.lastAt - x.lastAt);
+  const rank = (x) => (x.state === 'done' ? 2 : x.paused ? 1 : 0); // working, then paused, then shipped
+  return out.sort((x, y) => rank(x) - rank(y) || y.lastAt - x.lastAt);
 }
 
 // ---------------------------------------------------------------- files
