@@ -35,8 +35,8 @@ img{display:block}
 
 /* ---- top bar */
 .top{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px}
-.brand{display:flex;align-items:center;gap:12px}
-.brand img{width:60px;height:60px;object-fit:contain}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand img{width:60px;height:60px;object-fit:contain;flex:none}
 .top h1{font-size:32px;font-weight:800}
 .top p{margin:2px 0 0;color:var(--muted);font-size:14px}
 .tally{display:flex;flex-wrap:wrap;gap:8px;margin-left:auto}
@@ -49,83 +49,91 @@ img{display:block}
 @keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--build) 55%,transparent)}100%{box-shadow:0 0 0 9px transparent}}
 
 section{margin-top:26px}
-section>h2{font-size:20px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+section>h2{font-size:20px;margin-bottom:10px}
 
-/* ---- the factory floor */
-.floor{background:var(--wall);border-radius:18px;box-shadow:inset 0 0 0 1px var(--line);overflow-x:auto;overscroll-behavior-x:contain}
-.line{display:grid;grid-template-columns:repeat(var(--cols),minmax(124px,1fr));min-width:calc(var(--cols) * 124px);padding:16px 0 0}
-.station{display:grid;grid-template-rows:66px auto auto 1fr;justify-items:center;padding:0 6px;min-width:0;position:relative}
-.station + .station::before{content:"";position:absolute;left:0;top:70px;height:96px;border-left:1px dashed var(--line)}
-
-.say{align-self:end;max-width:100%;background:var(--panel);border-radius:10px;padding:6px 8px;font-size:12.5px;line-height:1.3;box-shadow:var(--shadow);margin-bottom:8px;text-align:left}
-.say b{display:block;color:var(--c);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.say span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.say:empty{visibility:hidden}
-
-.robot{position:relative;width:84px;height:84px}
-.robot img{width:84px;height:84px;object-fit:contain}
+/* ---- the line: robots at their stations over a moving belt.
+   Every station is a fixed-size tile that wraps, so nothing can spill into its neighbour. */
+.floor{background:var(--wall);border-radius:18px;box-shadow:inset 0 0 0 1px var(--line);overflow:hidden}
+.stations{list-style:none;margin:0;padding:14px 12px 10px;display:grid;gap:10px;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:560px){.stations{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:860px){.stations{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media (min-width:1360px){.stations{grid-template-columns:repeat(10,minmax(0,1fr))}}
+.station{min-width:0;display:flex;flex-direction:column;align-items:center;text-align:center;padding:10px 8px;border-radius:var(--r-card);background:color-mix(in srgb,var(--panel) 55%,transparent)}
+.station.busy{background:var(--panel);box-shadow:var(--shadow);outline:2px solid color-mix(in srgb,var(--c) 45%,transparent)}
+.robot{position:relative;width:80px;height:80px;flex:none}
+.robot img{width:80px;height:80px;object-fit:contain}
 .station.idle .robot img{filter:grayscale(1);opacity:.4}
 .station.busy .robot img{animation:work .9s var(--ease) infinite alternate}
 @keyframes work{from{transform:translateY(0) rotate(-2deg)}to{transform:translateY(-5px) rotate(2deg)}}
-.gear{position:absolute;right:-6px;top:-4px;width:26px;height:26px;color:var(--c);animation:spin 2.4s linear infinite}
+.gear{position:absolute;right:-8px;top:-4px;width:24px;height:24px;color:var(--c);animation:spin 2.4s linear infinite}
 .station.idle .gear{display:none}
 @keyframes spin{to{transform:rotate(360deg)}}
-.count{position:absolute;left:-6px;top:-4px;background:var(--c);color:#fff;border-radius:var(--r-pill);font-size:12px;font-weight:700;padding:1px 7px}
-.name{text-align:center;margin-top:4px}
-.name b{display:block;font-size:16px}
-.name small{display:block;color:var(--muted);font-size:12px;line-height:1.2}
-.station.busy .name b{color:var(--c)}
+.count{position:absolute;left:-8px;top:-4px;background:var(--c);color:#fff;border-radius:var(--r-pill);font-size:12px;font-weight:700;padding:1px 7px}
+.station b{display:block;font-size:16px;margin-top:4px}
+.station small{display:block;color:var(--muted);font-size:12px;line-height:1.2}
+.station.busy b{color:var(--c)}
+.task{width:100%;margin-top:8px;font-size:12.5px;line-height:1.3;text-align:left;background:var(--sunk);border-radius:8px;padding:6px 8px}
+.task strong{display:block;color:var(--c);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.task span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.station.idle .task{background:none;text-align:center;color:var(--muted)}
 
-/* products sit on the belt */
-.lane{align-self:stretch;width:100%;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:12px 0 8px;min-height:120px}
-.belt{grid-column:1/-1;height:22px;position:relative;overflow:hidden;background:var(--steel);border-top:3px solid var(--steel-2);border-bottom:3px solid var(--steel-2)}
-.belt::before{content:"";position:absolute;inset:0 -40px 0 -40px;background:repeating-linear-gradient(90deg,transparent 0 28px,var(--roller) 28px 32px);opacity:.55;animation:roll 1.4s linear infinite}
+.belt{height:22px;position:relative;overflow:hidden;background:var(--steel);border-top:3px solid var(--steel-2);border-bottom:3px solid var(--steel-2)}
+.belt::before{content:"";position:absolute;inset:0 -40px;background:repeating-linear-gradient(90deg,transparent 0 28px,var(--roller) 28px 32px);opacity:.55;animation:roll 1.4s linear infinite}
 @keyframes roll{to{transform:translateX(32px)}}
-.legs{grid-column:1/-1;height:16px;background:repeating-linear-gradient(90deg,transparent 0 60px,var(--steel-2) 60px 66px,transparent 66px 124px)}
+.legs{height:14px;background:repeating-linear-gradient(90deg,transparent 0 60px,var(--steel-2) 60px 66px,transparent 66px 124px)}
 
-.product{background:var(--panel);border-radius:9px;box-shadow:var(--shadow);overflow:hidden;font-size:13px;border:2px solid var(--build)}
-.product .bar{display:flex;gap:4px;align-items:center;padding:4px 6px;background:var(--build)}
-.product .bar i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.75)}
-.product .bar span{margin-left:auto;color:#fff;font-size:11px;font-weight:700;font-style:normal}
-.product .body{padding:6px 8px 8px}
-.product b{display:block;font-size:13.5px;overflow-wrap:anywhere;line-height:1.2}
-.product p{margin:3px 0 0;color:var(--muted);font-size:12px;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.progress{height:5px;border-radius:3px;background:var(--build-soft);margin-top:6px;overflow:hidden}
-.progress i{display:block;height:100%;background:var(--build);transform-origin:left;transform:scaleX(var(--p))}
+/* websites riding the belt: each sits over its station and slides on when it moves */
+.markers{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));padding:4px 0 0}
+.markers img{width:26px;height:26px;margin:0 auto;object-fit:contain}
+@media (min-width:1360px){.markers{display:none}}
+.packages{position:relative;height:var(--h,44px);transition:height .4s var(--ease)}
+.pkg{position:absolute;bottom:calc(var(--row) * 34px + 4px);left:var(--x);width:min(128px,calc(10% - 6px));margin-left:calc(min(128px,calc(10% - 6px)) / -2);
+  transition:left 1.2s var(--ease),bottom .4s var(--ease)}
+.pkg .box{display:block;background:var(--panel);border:2px solid var(--build);border-radius:7px;box-shadow:var(--shadow);overflow:hidden;font-size:11.5px;font-weight:700;line-height:1;color:var(--ink);text-decoration:none}
+.pkg .box::before{content:"";display:block;height:6px;background:var(--build)}
+.pkg .box span{display:block;padding:5px 6px 6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pkg.working .box{animation:ride 1.1s var(--ease) infinite alternate}
+.pkg.waiting .box{border-style:dashed}
+@keyframes ride{from{transform:translateY(0)}to{transform:translateY(-3px)}}
+.pkg.new .box{animation:drop .6s var(--ease)}
+@keyframes drop{from{transform:translateY(-30px);opacity:0}}
+@media (max-width:859px){.pkg .box span{display:none}.pkg .box{height:20px}}
+
+/* ---- every website on the line, all visible */
+.grid{list-style:none;margin:0;padding:0;display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr))}
+.product{background:var(--panel);border-radius:var(--r-card);box-shadow:var(--shadow);overflow:hidden;border:2px solid var(--build);min-width:0;display:flex;flex-direction:column}
+.product .bar{display:flex;gap:5px;align-items:center;padding:6px 10px;background:var(--build)}
+.product .bar i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.75)}
+.product .bar span{margin-left:auto;color:#fff;font-size:12px;font-weight:700}
+.product .body{padding:12px;display:flex;flex-direction:column;gap:8px;flex:1}
+.product h3{font-size:18px;overflow-wrap:anywhere}
+.at{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted)}
+.at img{width:34px;height:34px;object-fit:contain;flex:none}
+.at b{color:var(--ink)}
+.product p{margin:0;font-size:14px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.steps{display:grid;grid-template-columns:repeat(10,1fr);gap:3px;margin-top:auto}
+.steps i{height:6px;border-radius:3px;background:var(--build-soft)}
+.steps i.past{background:color-mix(in srgb,var(--build) 55%,transparent)}
+.steps i.here{background:var(--build)}
+.foot{font-size:12.5px;color:var(--muted)}
 .product.waiting{border-style:dashed}
 .product.arrive{animation:arrive .7s var(--ease)}
-@keyframes arrive{from{transform:translateX(-60px);opacity:0}}
+@keyframes arrive{from{transform:translateY(-14px);opacity:0}}
 
 /* ---- shipped bay */
-.bay{list-style:none;margin:0;padding:0;display:grid;gap:12px;grid-template-columns:minmax(0,1fr)}
-@media (min-width:640px){.bay{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (min-width:1000px){.bay{grid-template-columns:repeat(4,minmax(0,1fr))}}
-.crate{background:var(--live-soft);border:2px solid var(--live);border-radius:var(--r-card);padding:14px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;align-items:center;box-shadow:var(--shadow)}
-.crate svg{grid-row:span 3;width:34px;height:34px;color:var(--live)}
+.crate{background:var(--live-soft);border:2px solid var(--live);border-radius:var(--r-card);padding:14px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;align-items:center;box-shadow:var(--shadow);min-width:0}
+.crate .tick{grid-row:span 3;align-self:start;width:36px;height:36px;border-radius:10px;background:var(--live);color:#fff;display:grid;place-items:center}
+.crate .tick svg{width:22px;height:22px}
 .crate b{font-size:15px;overflow-wrap:anywhere}
 .crate a{font-size:18px;font-weight:700;color:var(--live-ink);text-decoration:none;overflow-wrap:anywhere;width:fit-content;border-radius:4px}
 .crate a:hover{text-decoration:underline}
 .crate a:focus-visible{outline:2px solid var(--live);outline-offset:3px}
 .crate small{color:var(--muted);font-size:13px}
-.empty{color:var(--muted);background:var(--panel);border-radius:var(--r-card);padding:18px;text-align:center}
+.empty{color:var(--muted);background:var(--panel);border-radius:var(--r-card);padding:18px;text-align:center;grid-column:1/-1}
 
-/* ---- phone: the line runs top to bottom */
-@media (max-width:759px){
-  .floor{overflow:visible;background:none;box-shadow:none}
-  .line{display:block;min-width:0;padding:0;position:relative}
-  .line::before{content:"";position:absolute;left:41px;top:20px;bottom:20px;width:8px;border-radius:4px;background:var(--steel)}
-  .belt,.legs{display:none}
-  .station{display:grid;grid-template-columns:84px minmax(0,1fr);grid-template-rows:auto auto;column-gap:12px;justify-items:stretch;padding:8px 0}
-  .station + .station::before{display:none}
-  .robot{grid-row:1/3;align-self:start;background:var(--bg);border-radius:50%}
-  .name{text-align:left;margin:0;grid-column:2}
-  .say{grid-column:2;grid-row:2;margin:6px 0 0;align-self:start}
-  .lane{grid-column:2;min-height:0;padding:6px 0 0}
-  /* the product card already says what's happening; one copy is enough on a phone */
-  .say,.station.idle .lane:empty{display:none}
-}
 @media (prefers-reduced-motion:reduce){
-  .station.busy .robot img,.gear,.belt::before,.dot.build,.product.arrive{animation:none}
+  .station.busy .robot img,.gear,.belt::before,.dot.build,.product.arrive,.pkg .box{animation:none}
+  .pkg,.packages{transition:none}
 }
 </style>
 </head>
@@ -139,18 +147,28 @@ section>h2{font-size:20px;margin-bottom:10px;display:flex;align-items:center;gap
 
   <section aria-labelledby="floor-h">
     <h2 id="floor-h">Production line</h2>
-    <div class="floor"><div class="line" id="line"></div></div>
+    <div class="floor">
+      <ul class="stations" id="stations"></ul>
+      <div class="markers" id="markers" aria-hidden="true"></div>
+      <div class="packages" id="packages" aria-label="Websites on the belt"></div>
+      <div class="belt" aria-hidden="true"></div><div class="legs" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="run-h">
+    <h2 id="run-h">On the line now</h2>
+    <ul class="grid" id="running"></ul>
   </section>
 
   <section aria-labelledby="bay-h">
     <h2 id="bay-h">Shipped today</h2>
-    <ul class="bay" id="bay"></ul>
+    <ul class="grid" id="bay"></ul>
   </section>
 </div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="gear" viewBox="0 0 24 24"><path fill="currentColor" d="M10.3 2h3.4l.5 2.6a7.6 7.6 0 0 1 1.9.8l2.2-1.5 2.4 2.4-1.5 2.2c.3.6.6 1.2.8 1.9l2.6.5v3.4l-2.6.5a7.6 7.6 0 0 1-.8 1.9l1.5 2.2-2.4 2.4-2.2-1.5c-.6.3-1.2.6-1.9.8l-.5 2.6h-3.4l-.5-2.6a7.6 7.6 0 0 1-1.9-.8l-2.2 1.5-2.4-2.4 1.5-2.2a7.6 7.6 0 0 1-.8-1.9L2 13.7v-3.4l2.6-.5c.2-.7.5-1.3.8-1.9L3.9 5.7l2.4-2.4 2.2 1.5c.6-.3 1.2-.6 1.9-.8zM12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/></symbol>
-  <symbol id="box" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5zM3 7.5l9 4.5 9-4.5M12 12v9"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m8.5 15.2 1.6 1.6 3-3.2"/></symbol>
+  <symbol id="shipped" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="m6.5 12.5 3.5 3.5 7.5-8"/></symbol>
 </svg>
 
 <script>
@@ -172,62 +190,88 @@ function ago(t){
 }
 const agoEl = (t) => `<time data-t="${t || ""}">${ago(t)}</time>`;
 
-function product(s, at){
-  const step = at === "intake" ? 0 : ORDER.indexOf(at) + 1;
-  const moved = lastStation.has(s.key) && lastStation.get(s.key) !== at;
-  lastStation.set(s.key, at);
-  return `<div class="product${s.waitingOnYou ? " waiting" : ""}${moved ? " arrive" : ""}">
-    <div class="bar"><i></i><i></i><i></i><span>${s.waitingOnYou ? "Needs you" : "Building"}</span></div>
-    <div class="body"><b>${esc(s.name)}</b>${s.now ? `<p>${esc(s.now)}</p>` : ""}
-      <div class="progress" title="Station ${step} of ${ORDER.length}"><i style="--p:${Math.max(step, 0.4) / ORDER.length}"></i></div></div></div>`;
-}
-
-function renderLine(actors, agents, sites){
-  const building = sites.filter((s) => s.state === "building");
-  const intake = building.filter((s) => !s.station);
-  const stations = intake.length ? ["intake", ...ORDER] : ORDER;
-  // Only work on a website on the line lights a robot.
-  const onLine = new Set(sites.map((s) => s.key));
-  const busy = actors.filter((a) => a.status === "working" && a.doing && onLine.has(a.siteKey));
-  const line = document.getElementById("line");
-  line.style.setProperty("--cols", stations.length);
-  line.innerHTML = stations.map((key) => {
-    const here = key === "intake" ? intake : building.filter((s) => s.station === key);
-    const lane = here.map((s) => product(s, key)).join("");
-    if (key === "intake") {
-      return `<div class="station idle" style="--c:var(--muted)"><div class="say"></div>
-        <div class="robot"><img src="/icon.png" alt=""></div>
-        <div class="name"><b>Intake</b><small>Started, no station yet</small></div><div class="lane">${lane}</div></div>`;
-    }
+function renderStations(agents, building){
+  // A robot is busy while a website at its station has an agent working on it,
+  // so the line and the cards below always agree.
+  document.getElementById("stations").innerHTML = ORDER.map((key) => {
     const a = agents[key];
-    const runs = busy.filter((x) => x.doing === key);
-    const top = runs[0];
-    const say = top ? `<b>${esc(top.site || "")}</b><span>${esc(top.current?.text || top.task || "")}</span>` : "";
-    return `<div class="station ${top ? "busy" : "idle"}" style="--c:${a.color}">
-      <div class="say">${say}</div>
-      <div class="robot"><img src="/agents/${key}.png" alt="">${runs.length > 1 ? `<span class="count">×${runs.length}</span>` : ""}<svg class="gear"><use href="#gear"/></svg></div>
-      <div class="name"><b>${a.name}</b><small>${esc(a.role)}</small></div>
-      <div class="lane">${lane}</div></div>`;
-  }).join("") + `<div class="belt" aria-hidden="true"></div><div class="legs" aria-hidden="true"></div>`;
+    const here = building.filter((s) => s.station === key && s.working > 0);
+    const top = here[0];
+    const task = top
+      ? `<div class="task"><strong>${esc(here.map((s) => s.name).join(", "))}</strong><span>${esc(top.now)}</span></div>`
+      : `<div class="task">Free</div>`;
+    return `<li class="station ${top ? "busy" : "idle"}" style="--c:${a.color}">
+      <div class="robot"><img src="/agents/${key}.png" alt="" width="80" height="80">${here.length > 1 ? `<span class="count">×${here.length}</span>` : ""}<svg class="gear"><use href="#gear"/></svg></div>
+      <b>${a.name}</b><small>${esc(a.role)}</small>${task}</li>`;
+  }).join("");
 }
 
-function renderBay(sites){
-  const done = sites.filter((s) => s.state === "done");
-  document.getElementById("bay").innerHTML = done.length
-    ? done.map((s) => `<li class="crate"><svg><use href="#box"/></svg>${s.name !== s.domain ? `<b>${esc(s.name)}</b>` : ""}
-        <a href="https://${esc(s.domain)}" target="_blank" rel="noopener">${esc(s.domain)}</a><small>Live · shipped ${agoEl(s.lastAt)}</small></li>`).join("")
-    : `<li class="empty">Nothing shipped yet today. Finished websites land here with their live link.</li>`;
+// Packages are kept between renders (keyed by site) so a station change
+// animates as a slide along the belt instead of a jump.
+function renderBelt(building){
+  document.getElementById("markers").innerHTML = ORDER.map((k) => `<img src="/agents/${k}.png" alt="">`).join("");
+  const box = document.getElementById("packages");
+  const rows = new Map();
+  const seen = new Set();
+  for (const s of building) {
+    const idx = s.station ? ORDER.indexOf(s.station) : -1;
+    const row = rows.get(idx) || 0;
+    rows.set(idx, row + 1);
+    seen.add(s.key);
+    let el = box.querySelector(`[data-key="${CSS.escape(s.key)}"]`);
+    if (!el) {
+      el = document.createElement("div");
+      el.dataset.key = s.key;
+      el.className = "pkg new";
+      el.innerHTML = `<span class="box"><span></span></span>`;
+      box.appendChild(el);
+      setTimeout(() => el.classList.remove("new"), 700);
+    }
+    el.classList.toggle("working", s.working > 0);
+    el.classList.toggle("waiting", s.waitingOnYou);
+    el.title = `${s.name}: ${s.station ? "at " + snap.agents[s.station].name : "intake"}`;
+    el.querySelector(".box span").textContent = s.name;
+    // Intake sits at the very start of the belt, before Alpha.
+    el.style.setProperty("--x", idx < 0 ? "64px" : `${(idx + 0.5) * 10}%`);
+    el.style.setProperty("--row", row);
+  }
+  for (const el of [...box.children]) if (!seen.has(el.dataset.key)) el.remove();
+  box.style.setProperty("--h", `${Math.max(1, ...rows.values()) * 34 + 10}px`);
+}
+
+function product(s, agents){
+  const idx = s.station ? ORDER.indexOf(s.station) : -1;
+  const moved = lastStation.has(s.key) && lastStation.get(s.key) !== s.station;
+  lastStation.set(s.key, s.station);
+  const a = s.station ? agents[s.station] : null;
+  const at = a
+    ? `<div class="at"><img src="/agents/${s.station}.png" alt=""><span>At <b>${esc(a.name)}</b> · ${esc(a.role)}</span></div>`
+    : `<div class="at"><img src="/icon.png" alt=""><span>Started, no station yet</span></div>`;
+  const steps = ORDER.map((_, i) => `<i class="${i < idx ? "past" : i === idx ? "here" : ""}"></i>`).join("");
+  return `<li class="product${s.waitingOnYou ? " waiting" : ""}${moved ? " arrive" : ""}">
+    <div class="bar"><i></i><i></i><i></i><span>${s.waitingOnYou ? "Needs you" : "Building"}</span></div>
+    <div class="body"><h3>${esc(s.name)}</h3>${at}${s.now ? `<p>${esc(s.now)}</p>` : ""}
+      <div class="steps" title="Station ${idx + 1} of ${ORDER.length}">${steps}</div>
+      <div class="foot">${s.working ? `${s.working} ${s.working === 1 ? "agent" : "agents"} working · ` : ""}${agoEl(s.lastAt)}</div></div></li>`;
 }
 
 function render(){
   if (!snap) return;
-  const { actors, agents, sites } = snap;
-  const b = sites.filter((s) => s.state === "building").length;
+  const { agents, sites } = snap;
+  const building = sites.filter((s) => s.state === "building");
+  const done = sites.filter((s) => s.state === "done");
   document.getElementById("tally").innerHTML =
-    `<span class="chip build"><span class="dot build"></span>${b} building</span>` +
-    `<span class="chip live"><span class="dot live"></span>${sites.length - b} live</span>`;
-  renderLine(actors, agents, sites);
-  renderBay(sites);
+    `<span class="chip build"><span class="dot build"></span>${building.length} building</span>` +
+    `<span class="chip live"><span class="dot live"></span>${done.length} live</span>`;
+  renderStations(agents, building);
+  renderBelt(building);
+  document.getElementById("running").innerHTML = building.length
+    ? building.map((s) => product(s, agents)).join("")
+    : `<li class="empty">No website on the line right now. Start a build and it shows up here within a few seconds.</li>`;
+  document.getElementById("bay").innerHTML = done.length
+    ? done.map((s) => `<li class="crate"><span class="tick" aria-hidden="true"><svg><use href="#shipped"/></svg></span>${s.name !== s.domain ? `<b>${esc(s.name)}</b>` : ""}
+        <a href="https://${esc(s.domain)}" target="_blank" rel="noopener">${esc(s.domain)}</a><small>Live · shipped ${agoEl(s.lastAt)}</small></li>`).join("")
+    : `<li class="empty">Nothing shipped yet today. Finished websites land here with their live link.</li>`;
 }
 
 function connect(){
