@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Website Factory</title>
-<link rel="icon" href="/brand/a-mark-light.svg" type="image/svg+xml">
+<link rel="icon" href="/brand/logo-mark-light.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap">
 <style>
@@ -182,7 +182,7 @@ button{font:inherit}
 <body>
 <div class="app">
   <header class="top">
-    <h1><img class="light" src="/brand/a-lockup-light.svg" alt="Website Factory"><img class="dark" src="/brand/a-lockup-dark.svg" alt="Website Factory"></h1>
+    <h1><img class="light" src="/brand/logo-lockup-light.svg" alt="Website Factory"><img class="dark" src="/brand/logo-lockup-dark.svg" alt="Website Factory"></h1>
     <span class="conn" id="conn">Connecting…</span>
     <div class="tally" id="tally"></div>
   </header>
@@ -307,7 +307,7 @@ function product(s, agents){
   const a = s.station ? agents[s.station] : null;
   const at = a
     ? `<div class="at"><img src="/agents/${s.station}.png" alt=""><span>At <b>${esc(a.name)}</b> · ${esc(a.role)}</span></div>`
-    : `<div class="at"><img src="/brand/a-mark-light.svg" alt=""><span>Started, no station yet</span></div>`;
+    : `<div class="at"><img src="/brand/logo-mark-light.svg" alt=""><span>Started, no station yet</span></div>`;
   const steps = ORDER.map((_, i) => `<i class="${i < idx ? "past" : i === idx ? "here" : ""}"></i>`).join("");
   return `<li class="product${s.waitingOnYou ? " waiting" : ""}${moved ? " arrive" : ""}" title="${esc(s.now)}">
     <div class="bar"><i></i><i></i><i></i><span>${s.waitingOnYou ? "Needs you" : "Building"}</span></div>
