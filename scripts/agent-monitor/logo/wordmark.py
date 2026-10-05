@@ -1,25 +1,37 @@
-# Outline "website factory" in Plus Jakarta Sans ExtraBold 800 → SVG path data (no font dependency, like the CI wordmark).
-import sys, json
+# Outline text in Plus Jakarta Sans at a given weight → SVG path data (no font dependency, like the CI wordmark).
+from functools import lru_cache
 from fontTools.ttLib import TTFont
 from fontTools.varLib.instancer import instantiateVariableFont
 from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.pens.transformPen import TransformPen
 from fontTools.pens.boundsPen import BoundsPen
 
-font = instantiateVariableFont(TTFont('jakarta.ttf'), {'wght': 800})
-gs = font.getGlyphSet(); cmap = font.getBestCmap(); upm = font['head'].unitsPerEm
+
+@lru_cache(maxsize=None)
+def face(weight):
+    font = instantiateVariableFont(TTFont('jakarta.ttf'), {'wght': weight})
+    return font.getGlyphSet(), font.getBestCmap(), font['head'].unitsPerEm
+
+
+def glyph_box(ch, weight=800):
+    """Ink box (xmin, ymin, xmax, ymax) and advance of one glyph, in em units (y up)."""
+    gs, cmap, upm = face(weight)
+    g = gs[cmap[ord(ch)]]
+    pen = BoundsPen(gs)
+    g.draw(pen)
+    return tuple(v / upm for v in pen.bounds) + (g.width / upm,)
+
+
 # pair kerning from GPOS is skipped; the face is evenly spaced at display sizes
-def outline(text, size, x0=0, base=0, track=-0.02):
-    s = size / upm; x = x0; paths = []
+def outline(text, size, x0=0, base=0, track=-0.02, weight=800):
+    """Path data for text set from x0 on baseline `base`; returns (d, x after the last advance)."""
+    gs, cmap, upm = face(weight)
+    s = size / upm
+    x = x0
+    paths = []
     for ch in text:
-        g = cmap[ord(ch)]
         pen = SVGPathPen(gs)
-        gs[g].draw(TransformPen(pen, (s, 0, 0, -s, x, base)))
+        gs[cmap[ord(ch)]].draw(TransformPen(pen, (s, 0, 0, -s, x, base)))
         paths.append(pen.getCommands())
-        x += gs[g].width * s + track * size
+        x += gs[cmap[ord(ch)]].width * s + track * size
     return ' '.join(p for p in paths if p), x - track * size
-def xheight(size):
-    return font['OS/2'].sxHeight * size / upm
-if __name__ == '__main__':
-    d, w = outline(sys.argv[1], float(sys.argv[2]))
-    print(json.dumps({'d': d, 'w': w, 'xh': xheight(float(sys.argv[2]))}))

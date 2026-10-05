@@ -1,27 +1,20 @@
-# Website Factory logo, built from the Utopia Brand CI: "website factory" in
-# Plus Jakarta Sans ExtraBold, with the o of factory replaced by a gear the
-# size of that o, a red triangle in its counter.
+# Website Factory logo, built from the Utopia Brand CI and drawn like the Utopia
+# product logos (autopayroll, slipmatch): two weights of Plus Jakarta Sans.
+# "website" small and ExtraLight, set flush right above a large ExtraBold
+# "factory" whose o is a gear the size of that o, a red triangle in its counter.
 #   cd scripts/agent-monitor/logo
 #   curl -fsSL -o jakarta.ttf "https://github.com/google/fonts/raw/main/ofl/plusjakartasans/PlusJakartaSans%5Bwght%5D.ttf"
 #   python3 build.py        # needs fontTools; writes ../public/brand/logo-*.svg
 import math
-from fontTools.pens.boundsPen import BoundsPen
-from wordmark import outline, gs, cmap, upm
+from wordmark import outline, glyph_box
 
 OUT = '../public/brand'
 INK = {'light': '#17181C', 'dark': '#F4F4F2'}
+THIN = {'light': '#7A7D82', 'dark': '#B5B7BC'}   # CI Concrete / Ash
 GEAR = {'light': '#2774AE', 'dark': '#4A9DD0'}   # Utopia Blue; Blue Light reads better on Obsidian
 RED = '#D72638'                                  # Utopia Red
 SIZE = 64
 TRACK = -0.02
-
-
-def o_box():
-    """The o's ink box and advance, in em units (y up)."""
-    pen = BoundsPen(gs)
-    gs[cmap[ord('o')]].draw(pen)
-    xmin, ymin, xmax, ymax = pen.bounds
-    return xmin / upm, ymin / upm, xmax / upm, ymax / upm, gs[cmap[ord('o')]].width / upm
 
 
 def gear(cx, cy, r_body, teeth=8):
@@ -59,20 +52,35 @@ def svg(w, h, body):
     return f'<svg xmlns="http://www.w3.org/2000/svg" width="{w:.0f}" height="{h:.0f}" viewBox="0 0 {w:.1f} {h:.1f}">{body}</svg>\n'
 
 
-xmin, ymin, xmax, ymax, adv = o_box()
-base = 64
+SMALL = SIZE * 0.36          # "website" size, as in the round-2 drafts
+SMALL_TRACK = 0.005
+GAP = SIZE * 0.08            # between website's baseline and factory's top
+PAD = 3
+
+oxmin, oymin, oxmax, oymax, oadv = glyph_box('o')
+f_top = glyph_box('f')[3] * SIZE                 # tallest letter in factory
+y_rsb = (glyph_box('y')[4] - glyph_box('y')[2]) * SIZE
+e_rsb = (glyph_box('e', 200)[4] - glyph_box('e', 200)[2]) * SMALL
+w_top = max(glyph_box(c, 200)[3] for c in 'websit') * SMALL
+y_bottom = -glyph_box('y')[1] * SIZE
+
+small_base = PAD + w_top
+base = small_base + GAP + f_top
 for theme in ('light', 'dark'):
-    ink = INK[theme]
-    d1, x = outline('website fact', SIZE, x0=2, base=base, track=TRACK)
+    d1, x = outline('fact', SIZE, x0=PAD, base=base, track=TRACK)
     x += TRACK * SIZE
-    # the gear's body is the o: same centre, same outer radius; only the teeth stick out
     # the gear takes the o's slot exactly: same centre, same width
-    r_body = (ymax - ymin) / 2 * SIZE
-    room = 0
-    cx = x + room + (xmin + xmax) / 2 * SIZE
-    cy = base - (ymin + ymax) / 2 * SIZE
+    r_body = (oymax - oymin) / 2 * SIZE
+    cx = x + (oxmin + oxmax) / 2 * SIZE
+    cy = base - (oymin + oymax) / 2 * SIZE
     g = gear_mark(cx, cy, r_body, theme)
-    d2, end = outline('ry', SIZE, x0=x + 2 * room + adv * SIZE + TRACK * SIZE, base=base, track=TRACK)
-    open(f'{OUT}/logo-lockup-{theme}.svg', 'w').write(svg(end + 4, 84, f'<path d="{d1} {d2}" fill="{ink}"/>' + g))
+    d2, end = outline('ry', SIZE, x0=x + oadv * SIZE + TRACK * SIZE, base=base, track=TRACK)
+    right = end - y_rsb                          # ink edge of the y
+    # set "website" once to measure it, then again flush with that edge
+    _, w_end = outline('website', SMALL, x0=0, base=small_base, track=SMALL_TRACK, weight=200)
+    d3, _ = outline('website', SMALL, x0=right - (w_end - e_rsb), base=small_base, track=SMALL_TRACK, weight=200)
+    w, h = right + PAD, base + y_bottom + PAD
+    body = f'<path d="{d3}" fill="{THIN[theme]}"/><path d="{d1} {d2}" fill="{INK[theme]}"/>' + g
+    open(f'{OUT}/logo-lockup-{theme}.svg', 'w').write(svg(w, h, body))
     open(f'{OUT}/logo-mark-{theme}.svg', 'w').write(svg(64, 64, gear_mark(32, 32, 29, theme)))
 print('ok')
