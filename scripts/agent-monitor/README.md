@@ -36,8 +36,13 @@ counts — sessions in other workspace repos are left off.
   When a robot earlier in the line works on it again, that robot lights up and
   the card says "fix by …"; the website stays where it is. *Intake* if no
   station has been reached yet.
-- **Done** — nothing is running on the site any more and Claude reported a live
-  link (`… dah live: https://…`), or the session title is the domain.
+- **Done** — nothing is running on the site any more and some builder session
+  announced it live (any link or bare `.my` domain in a message that says
+  live / deployed / production, so one "these seven are live" message ships
+  all seven), or the session title is the domain. A real domain wins over the
+  `*.utopiaai.my` staging host.
+- **Paused** — nothing running, not waiting on you, and never announced live:
+  the site stays on the line in grey instead of disappearing.
 
 ## How it names things
 

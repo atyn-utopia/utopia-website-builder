@@ -68,6 +68,11 @@ button{font:inherit}
 
 .panel-h{display:flex;align-items:center;gap:12px;margin-bottom:10px;min-height:32px}
 .panel-h h2{font-size:18px}
+.panel-h{gap:10px}
+.hicon{width:30px;height:30px;border-radius:var(--r-button);display:grid;place-items:center;flex:none}
+.hicon svg{width:18px;height:18px}
+.hicon.build{background:var(--build);color:var(--on-build)}
+.hicon.live{background:var(--live);color:var(--on-live)}
 
 /* ---- the line */
 .floor{background:var(--bone);border-radius:var(--r-lg);box-shadow:inset 0 0 0 1px var(--line);overflow:hidden;flex:none}
@@ -111,6 +116,8 @@ button{font:inherit}
 .pkg.more .box{text-align:center;color:var(--muted)}
 .pkg.working .box{animation:ride 1.1s var(--ease) infinite alternate}
 .pkg.waiting .box{border-style:dashed}
+.pkg.paused .box{border-color:var(--ash);color:var(--muted)}
+.pkg.paused .box::before{background:var(--ash)}
 @keyframes ride{from{transform:translateY(0)}to{transform:translateY(-3px)}}
 .pkg.new .box{animation:drop .6s var(--ease)}
 @keyframes drop{from{transform:translateY(-30px);opacity:0}}
@@ -145,6 +152,10 @@ button{font:inherit}
 .steps i.here{background:var(--build)}
 .foot{font-size:11.5px;color:var(--muted)}
 .product.waiting{border-style:dashed}
+/* stopped before going live, nobody on it: still on the line, but quiet */
+.product.paused{border-color:var(--ash)}
+.product.paused .bar{background:var(--ash)}
+.product.paused .steps i.here,.product.paused .steps i.past{background:var(--ash)}
 .product.arrive{animation:arrive .7s var(--ease)}
 @keyframes arrive{from{transform:translateY(-12px);opacity:0}}
 
@@ -203,12 +214,12 @@ button{font:inherit}
 
   <div class="bottom">
     <section class="panel" id="run-panel" aria-labelledby="run-h">
-      <div class="panel-h"><h2 id="run-h">On the line now</h2><div class="pager" id="run-pager" hidden></div></div>
+      <div class="panel-h"><span class="hicon build" aria-hidden="true"><svg><use href="#gear"/></svg></span><h2 id="run-h">On the line now</h2><div class="pager" id="run-pager" hidden></div></div>
       <div class="timer" id="run-timer" hidden><i></i></div>
       <ul class="cards" id="running"></ul>
     </section>
     <section class="panel" id="bay-panel" aria-labelledby="bay-h">
-      <div class="panel-h"><h2 id="bay-h">Shipped today</h2><div class="pager" id="bay-pager" hidden></div></div>
+      <div class="panel-h"><span class="hicon live" aria-hidden="true"><svg><use href="#shipped"/></svg></span><h2 id="bay-h">Shipped today</h2><div class="pager" id="bay-pager" hidden></div></div>
       <div class="timer" id="bay-timer" hidden><i></i></div>
       <ul class="bay" id="bay"></ul>
     </section>
@@ -297,6 +308,7 @@ function renderBelt(building){
     el.classList.toggle("more", !!it.more);
     el.classList.toggle("working", !!it.s && it.s.working > 0);
     el.classList.toggle("waiting", !!it.s && it.s.waitingOnYou);
+    el.classList.toggle("paused", !!it.s && it.s.paused);
     el.title = it.s ? `${it.s.name}: ${it.s.station ? "at " + snap.agents[it.s.station].name : "intake"}` : `${it.more} more websites here`;
     el.querySelector(".box span").textContent = it.s ? it.s.name : `+${it.more} more`;
     // Intake (no station yet) waits at the start of the belt, under Alpha.
@@ -319,8 +331,8 @@ function product(s, agents){
     ? `<div class="at"><img src="/agents/${s.station}.png" alt=""><span>At <b>${esc(a.name)}</b> · ${esc(back.length ? "fix by " + back.map((k) => agents[k].name).join(", ") : a.role)}</span></div>`
     : `<div class="at"><img src="/brand/logo-mark-light.svg" alt=""><span>Started, no station yet</span></div>`;
   const steps = ORDER.map((_, i) => `<i class="${i < idx ? "past" : i === idx ? "here" : ""}"></i>`).join("");
-  return `<li class="product${s.waitingOnYou ? " waiting" : ""}${moved ? " arrive" : ""}" title="${esc(s.now)}">
-    <div class="bar"><i></i><i></i><i></i><span>${s.waitingOnYou ? "Needs you" : "Building"}</span></div>
+  return `<li class="product${s.waitingOnYou ? " waiting" : ""}${s.paused ? " paused" : ""}${moved ? " arrive" : ""}" title="${esc(s.now)}">
+    <div class="bar"><i></i><i></i><i></i><span>${s.waitingOnYou ? "Needs you" : s.paused ? "Paused" : "Building"}</span></div>
     <div class="body"><h3>${esc(s.name)}</h3>${at}<p>${esc(s.now || "Waiting for the next step")}</p>
       <div class="steps" title="Station ${idx + 1} of ${ORDER.length}">${steps}</div>
       <div class="foot">${s.working ? `${s.working} ${s.working === 1 ? "agent" : "agents"} working · ` : ""}${agoEl(s.lastAt)}</div></div></li>`;
