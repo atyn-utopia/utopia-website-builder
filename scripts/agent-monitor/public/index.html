@@ -306,7 +306,9 @@ button{font:inherit}
 .pop .ask{color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .pop .mono{font:500 12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}
 .pop hr{border:0;border-top:1px solid var(--line);margin:0}
-.product:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.pkg[data-site]{cursor:default}
+.pkg[data-site]:hover .box,.pkg[data-site]:focus-visible .box{outline:2px solid var(--ink);outline-offset:2px}
+.pkg[data-site]:focus-visible{outline:none}
 @media (prefers-reduced-motion:reduce){.pop{transition:none}}
 
 /* ---- new website (dialog) */
@@ -666,7 +668,7 @@ function renderBelt(building){
       el = document.createElement("div");
       el.dataset.key = it.key;
       el.className = "pkg new";
-      if (!it.key.startsWith("more:")) el.dataset.site = it.key;
+      if (!it.key.startsWith("more:")) { el.dataset.site = it.key; el.tabIndex = 0; }
       el.innerHTML = `<span class="box"><span></span></span>`;
       box.appendChild(el);
       setTimeout(() => el.classList.remove("new"), 700);
@@ -697,7 +699,7 @@ function product(s, agents){
     ? `<div class="at"><span class="face">${robot(s.station)}</span><span>At <b>${esc(a.name)}</b> · ${esc(back.length ? "fix by " + back.map((k) => agents[k].name).join(", ") : a.role)}</span></div>`
     : `<div class="at"><img src="/brand/logo-mark-light.svg" alt=""><span>Started, no station yet</span></div>`;
   const steps = ORDER.map((_, i) => `<i class="${i < idx ? "past" : i === idx ? "here" : ""}"></i>`).join("");
-  return `<li class="product${s.waitingOnYou ? " waiting" : ""}${s.paused ? " paused" : ""}${moved ? " arrive" : ""}" data-site="${esc(s.key)}" tabindex="0">
+  return `<li class="product${s.waitingOnYou ? " waiting" : ""}${s.paused ? " paused" : ""}${moved ? " arrive" : ""}">
     <div class="bar"><i></i><i></i><i></i><span>${s.waitingOnYou ? "Needs you" : s.paused ? "Paused" : "Building"}</span></div>
     <div class="body"><h3>${esc(s.name)}</h3>${at}<p>${esc(s.now || "Waiting for the next step")}</p>
       <div class="steps" title="Station ${idx + 1} of ${ORDER.length}">${steps}</div>
@@ -814,7 +816,7 @@ function connect(){
 }
 connect();
 
-// ---- hover card: everything known about a website on the line
+// ---- hover card: everything known about a website, on its package on the belt
 const pop = document.getElementById("pop");
 let popKey = null, popAnchor = null;
 function popHtml(s){
