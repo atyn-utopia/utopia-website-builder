@@ -310,6 +310,12 @@ button{font:inherit}
 .pop .ask{color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .pop .mono{font:500 12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}
 .pop hr{border:0;border-top:1px solid var(--line);margin:0}
+.pop ul.more{gap:0}
+.pop ul.more li{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px;padding:6px 0;border-top:1px solid var(--line)}
+.pop ul.more li:first-child{border-top:0;padding-top:2px}
+.pop ul.more li span{display:block;min-width:0}
+.pop ul.more b{display:block;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pop ul.more small{display:block;color:var(--muted);font-size:11.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pkg[data-site]{cursor:default}
 /* hover: the box's own border turns ink, so nothing spills onto the package above */
 .pkg[data-site]:hover,.pkg[data-site]:focus-visible{z-index:2}
@@ -648,12 +654,16 @@ function renderStations(agents, building){
   }
 }
 
+// The sites folded into a "+n more" package, by its key, for its hover card.
+const moreLists = new Map();
+
 // Packages are kept between renders (keyed by site) so a station change
 // animates as a slide along the belt instead of a jump.
 function renderBelt(building){
   const markers = document.getElementById("markers");
   if (!markers.childElementCount) markers.innerHTML = ORDER.map((k) => `<span>${robot(k)}</span>`).join("");
   const box = document.getElementById("packages");
+  moreLists.clear();
   const byStation = new Map();
   for (const s of building) {
     const idx = s.station ? ORDER.indexOf(s.station) : -1;
@@ -664,7 +674,10 @@ function renderBelt(building){
   for (const [idx, list] of byStation) {
     const shown = list.length > BELT_ROWS ? list.slice(0, BELT_ROWS - 1) : list;
     shown.forEach((s, row) => items.push({ key: s.key, idx, row, s }));
-    if (list.length > shown.length) items.push({ key: `more:${idx}`, idx, row: shown.length, more: list.length - shown.length });
+    if (list.length > shown.length) {
+      items.push({ key: `more:${idx}`, idx, row: shown.length, more: list.length - shown.length });
+      moreLists.set(`more:${idx}`, { idx, sites: list.slice(shown.length) });
+    }
   }
   const seen = new Set();
   for (const it of items) {
@@ -674,7 +687,7 @@ function renderBelt(building){
       el = document.createElement("div");
       el.dataset.key = it.key;
       el.className = "pkg new";
-      if (!it.key.startsWith("more:")) { el.dataset.site = it.key; el.tabIndex = 0; }
+      el.dataset.site = it.key; el.tabIndex = 0; // "more:<station>" opens the list of the hidden sites
       el.innerHTML = `<span class="box"><span></span></span>`;
       box.appendChild(el);
       setTimeout(() => el.classList.remove("new"), 700);
@@ -683,7 +696,7 @@ function renderBelt(building){
     el.classList.toggle("working", !!it.s && it.s.working > 0);
     el.classList.toggle("waiting", !!it.s && it.s.waitingOnYou);
     el.classList.toggle("paused", !!it.s && it.s.paused);
-    el.title = it.s ? "" : `${it.more} more websites here`;
+    el.title = "";
     el.querySelector(".box span").textContent = it.s ? it.s.name : `+${it.more} more`;
     el.style.setProperty("--i", Math.max(it.idx, 0));
     el.classList.toggle("at-gate", it.idx < 0); // no station yet: waits at the in gate
@@ -845,21 +858,33 @@ function placePop(){
   if (left === Math.min(Math.max(m, r.left), innerWidth - w - m) && r.bottom + m + h <= innerHeight) top = r.bottom + m; // no room beside: go below
   pop.style.left = left + "px"; pop.style.top = top + "px";
 }
+// "+n more": the sites that didn't fit on that station's stack
+function moreHtml(m){
+  const at = m.idx < 0 ? "the in gate" : snap.agents[ORDER[m.idx]].name;
+  const tag = (x) => x.waitingOnYou ? `<span class="tag w">Needs you</span>` : x.paused ? `<span class="tag p">Paused</span>` : `<span class="tag b">Building</span>`;
+  return `<h4>${m.sites.length} more at ${esc(at)}</h4>
+    <ul class="more">${m.sites.map((x) => `<li><span><b>${esc(x.name)}</b><small>${esc(x.now || "")}</small></span>${tag(x)}</li>`).join("")}</ul>`;
+}
+const popContent = (key) => {
+  if (key.startsWith("more:")) { const m = moreLists.get(key); return m ? moreHtml(m) : null; }
+  const s = snap?.sites.find((x) => x.key === key);
+  return s ? popHtml(s) : null;
+};
 function showPop(el){
-  const s = snap?.sites.find((x) => x.key === el.dataset.site);
-  if (!s) return;
-  popKey = s.key; popAnchor = el;
-  pop.innerHTML = popHtml(s); pop.hidden = false; placePop();
+  const html = popContent(el.dataset.site);
+  if (!html) return;
+  popKey = el.dataset.site; popAnchor = el;
+  pop.innerHTML = html; pop.hidden = false; placePop();
   requestAnimationFrame(() => pop.classList.add("on"));
 }
 function hidePop(){ popKey = null; popAnchor = null; pop.classList.remove("on"); pop.hidden = true; }
 // refresh an open card when live data arrives (cards are re-rendered, so re-find the anchor)
 function refreshPop(){
   if (!popKey) return;
-  const s = snap.sites.find((x) => x.key === popKey);
-  if (!s) return hidePop();
+  const html = popContent(popKey);
+  if (!html) return hidePop();
   if (!popAnchor?.isConnected) popAnchor = document.querySelector(`[data-site="${CSS.escape(popKey)}"]`);
-  pop.innerHTML = popHtml(s); placePop();
+  pop.innerHTML = html; placePop();
 }
 document.addEventListener("pointerover", (e) => { const el = e.target.closest("[data-site]"); if (el && el.dataset.site !== popKey) showPop(el); else if (!el && popKey) hidePop(); });
 document.addEventListener("focusin", (e) => { const el = e.target.closest("[data-site]"); if (el) showPop(el); });
