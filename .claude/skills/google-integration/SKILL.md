@@ -60,6 +60,7 @@ node finalize-manual-toggles.mjs --domain <domain>
 set -a && . ../../.env.local && set +a          # WEBCORE_API_KEY, scope ads:write
 node ads-readiness.mjs --domain <domain> --tick all --yes   # only when Phase 6 exited 0
 ```
+After adding the TXT the script checks the host still resolves and adds `A 76.76.21.21` if not — a lone TXT on a `*.utopiaai.my` subdomain takes the site offline (8 aircond sites, 2026-10-06).
 
 ## Prerequisites (block until all true)
 - Paid domain live: `curl -I https://www.<domain>/` → 200, DNS on Vercel (`vercel domains ls`).

@@ -91,7 +91,7 @@ https://websitebuilder.utopiaai.my/google (§04).
 ### 3. Run the 6 phases (from the automation folder)
 Follow the exact flags in the bundle's `SKILL.md` / `MANUAL-STEPS.md`. Summary:
 
-- **Phase 1 — GSC Domain property** (no deploy). `gsc-add-domain-property.mjs` → catch-all `sc-domain:<domain>` + main sitemap.
+- **Phase 1 — GSC Domain property** (no deploy). `gsc-add-domain-property.mjs` → catch-all `sc-domain:<domain>` + main sitemap. On a `*.utopiaai.my` host the verification TXT would shadow Vercel's implicit record and take the site offline, so the script now checks the host still has an A record (public resolver) and adds `A 76.76.21.21` when it doesn't — keep that step if you edit the script.
 - **Phase 2 — GA4 property** (no deploy). `ga4-create.mjs` → **capture the Measurement ID (`G-XXXX`) and the numeric property id** — both are needed downstream. Its two consent toggles are left OFF here; Phase 6 flips them.
 - **Phase 3 — GTM container + snippet** (**DEPLOY after**). `gtm-setup.mjs --ga4-id G-XXXX`, then `inject-gtm-snippet.mjs`. **Redeploy the live site** and verify GTM loads.
 - **Phase 4 — GSC URL-prefix** (init → **DEPLOY** → finalize; **repeat per locale**). `gsc-submit.mjs --init` injects the verify meta tag → deploy → `--finalize` verifies + submits sitemap + bulk-indexes. Run for canonical `/` and each locale (`/en/`, `/zh/`, …), then `_user-add-gsc-properties.mjs` to add each to the user dashboard.
