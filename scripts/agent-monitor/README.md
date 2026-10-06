@@ -11,6 +11,12 @@ node scripts/agent-monitor/server.mjs     # → http://localhost:4545
 No install, no dependencies. Options: `PORT=4600`, `HOURS=48` (how far back to
 look, default 24).
 
+**Watch from another computer:** start it with `LAN=1` and it also listens on
+the local network; the startup line prints the address (e.g.
+`http://192.168.110.134:4545`). Anyone on the same network can then open the
+page, so use it on a trusted network only. Other computers get a **view-only**
+page: creating websites, drafts and GitHub sign-in answer only to this Mac.
+
 ## Where the data comes from
 
 Claude Code already writes every session to `~/.claude/projects/<folder>/<session>.jsonl`
