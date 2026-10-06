@@ -236,7 +236,8 @@ button{font:inherit}
 .pager .dots i.on{background:var(--ink)}
 .pager .label{font-size:12.5px;color:var(--muted);min-width:44px;text-align:center}
 .timer{height:3px;border-radius:2px;background:var(--line);overflow:hidden;margin:-6px 0 8px}
-.timer[hidden]{display:none}
+/* keeps its space when there's only one page, so both trays start level */
+.timer.idle{visibility:hidden}
 .timer i{display:block;height:100%;background:var(--blue);transform-origin:left;animation:countdown var(--rotate) linear infinite}
 .panel.paused .timer i{animation-play-state:paused}
 @keyframes countdown{from{transform:scaleX(0)}to{transform:scaleX(1)}}
@@ -509,12 +510,12 @@ dialog.new::backdrop{background:rgba(11,11,13,.38);backdrop-filter:blur(10px) sa
     <section class="panel" id="run-panel" aria-labelledby="run-h">
       <div class="panel-h"><span class="hicon build" aria-hidden="true"><svg><use href="#gear"/></svg></span><h2 id="run-h">On the line now</h2>
         <span class="legend" aria-label="Card colours"><span><i class="sw build"></i>Building</span><span><i class="sw wait"></i>Needs you</span><span><i class="sw paused"></i>Paused</span><span><i class="sw live"></i>Live</span></span><div class="pager" id="run-pager" hidden></div></div>
-      <div class="timer" id="run-timer" hidden><i></i></div>
+      <div class="timer idle" id="run-timer"><i></i></div>
       <ul class="cards" id="running"></ul>
     </section>
     <section class="panel" id="bay-panel" aria-labelledby="bay-h">
       <div class="panel-h"><span class="hicon live" aria-hidden="true"><svg><use href="#shipped"/></svg></span><h2 id="bay-h">Shipped today</h2><div class="pager" id="bay-pager" hidden></div></div>
-      <div class="timer" id="bay-timer" hidden><i></i></div>
+      <div class="timer idle" id="bay-timer"><i></i></div>
       <ul class="bay" id="bay"></ul>
     </section>
   </div>
@@ -751,7 +752,8 @@ function paged(id, list, per){
   st.page = Math.min(st.page, st.pages - 1);
   const pager = document.getElementById(`${id}-pager`);
   const timer = document.getElementById(`${id}-timer`);
-  pager.hidden = timer.hidden = st.pages < 2;
+  pager.hidden = st.pages < 2;
+  timer.classList.toggle("idle", st.pages < 2);
   if (st.pages > 1) {
     pager.innerHTML = `<button type="button" data-go="-1" aria-label="Previous page">‹</button>
       <span class="dots" aria-hidden="true">${Array.from({ length: st.pages }, (_, i) => `<i class="${i === st.page ? "on" : ""}"></i>`).join("")}</span>
