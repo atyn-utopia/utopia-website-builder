@@ -79,7 +79,10 @@ button{font:inherit}
 .theme-dark{display:none}
 :root[data-theme="dark"] .theme-dark{display:block}:root[data-theme="dark"] .theme-light{display:none}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .theme-dark{display:block}:root:not([data-theme="light"]) .theme-light{display:none}}
-#new-open{position:relative;border-radius:var(--r-pill);padding:0 16px 0 13px}
+/* header controls: one height (36px) and one visible edge, so none reads taller or shorter */
+.actions .btn,.actions .acct-btn,.actions .icon-btn{height:36px;box-sizing:border-box;border-width:1px;border-style:solid}
+.actions .acct-btn,.actions .icon-btn{border-color:color-mix(in srgb,var(--ink) 18%,transparent);box-shadow:0 1px 2px rgba(11,11,13,.06)}
+#new-open{position:relative;border-radius:var(--r-pill);padding:0 16px 0 13px;border-color:var(--ink)}
 #new-open .badge{position:absolute;top:-6px;right:-6px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--build);color:var(--on-build);font:700 10.5px/18px var(--body);text-align:center}
 @media (max-width:899px){.divider{display:none}.status{order:3;flex-basis:100%}}
 .top h1 .dark,.credit .dark{display:var(--logo-dark)}
@@ -268,7 +271,7 @@ button{font:inherit}
 .acct-btn .chev{width:12px;height:12px;color:var(--muted)}
 .acct-btn:hover{border-color:color-mix(in srgb,var(--ink) 30%,transparent)}
 .acct-btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-.avatar{width:28px;height:28px;border-radius:50%;background:var(--linen);flex:none;object-fit:cover}
+.avatar{width:28px;height:28px;display:block;border-radius:50%;background:var(--linen);flex:none;object-fit:cover}
 .menu{position:absolute;right:0;top:calc(100% + 8px);z-index:30;min-width:240px;padding:6px;border-radius:var(--r-card);border:1px solid var(--line);background:var(--panel);box-shadow:0 1px 2px rgba(11,11,13,.06),0 16px 40px -8px rgba(11,11,13,.3)}
 .menu .who-h{padding:8px 10px 10px;border-bottom:1px solid var(--line);margin-bottom:4px;font-size:12px;color:var(--muted)}
 .menu .who-h b{display:flex;align-items:center;gap:6px;color:var(--ink);font-size:14px;margin-top:4px}
