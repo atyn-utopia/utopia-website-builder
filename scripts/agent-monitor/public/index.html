@@ -245,7 +245,13 @@ button{font:inherit}
 @keyframes countdown{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 
 /* AI Team mark */
-.credit{display:flex;align-items:center;justify-content:flex-end;font-size:12px;color:var(--muted);flex:none}
+.credit{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12px;color:var(--muted);flex:none;flex-wrap:wrap}
+/* how to start the factory again, for when the server isn't running */
+.run{display:inline-flex;align-items:center;gap:8px;min-width:0}
+.run code{font:500 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:4px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.run button{height:24px;padding:0 9px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:600 11.5px/1 var(--body);cursor:pointer;flex:none}
+.run button:hover{border-color:color-mix(in srgb,var(--ink) 30%,transparent)}
+.run button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 .credit a{display:inline-flex;align-items:center;gap:8px;color:inherit;text-decoration:none;border-radius:var(--r-pill);padding:3px 10px;background:var(--panel);box-shadow:var(--shadow)}
 .credit img{height:16px;width:auto}
 .credit a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
@@ -581,6 +587,7 @@ dialog.new::backdrop{background:rgba(11,11,13,.38);backdrop-filter:blur(10px) sa
 </dialog>
   <div class="pop" id="pop" role="tooltip" hidden></div>
   <footer class="credit">
+    <span class="run">Run the factory:<code id="run-cmd">node scripts/agent-monitor/server.mjs</code><button type="button" id="run-copy">Copy</button></span>
     <a href="https://www.utopiagroup.com.my" target="_blank" rel="noopener"><img class="light" src="/brand/utopia-locked-light.svg" alt="utopia"><img class="dark" src="/brand/utopia-locked-dark.svg" alt="utopia"> AI Team</a>
   </footer>
 </div>
@@ -839,6 +846,13 @@ function connect(){
   es.onerror = () => { conn.textContent = "Lost the factory server. Retrying… (is server.mjs still running?)"; };
 }
 connect();
+// footer: copy the start command
+document.getElementById("run-copy").addEventListener("click", async () => {
+  const b = document.getElementById("run-copy"), cmd = document.getElementById("run-cmd");
+  try { await navigator.clipboard.writeText(cmd.textContent); b.textContent = "Copied"; }
+  catch { getSelection().selectAllChildren(cmd); b.textContent = "Press ⌘C"; }
+  setTimeout(() => { b.textContent = "Copy"; }, 1800);
+});
 
 // ---- hover card: everything known about a website, on its package on the belt
 const pop = document.getElementById("pop");
