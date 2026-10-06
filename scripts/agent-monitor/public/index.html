@@ -25,7 +25,7 @@
   --r-button:8px; --r-card:12px; --r-lg:16px; --r-pill:999px;
   --ease:cubic-bezier(.22,1,.36,1); --dur-hover:220ms; --dur-layout:320ms;
   --logo-light:block; --logo-dark:none;
-  --card-h:152px; --crate-h:32px;
+  --card-h:108px; --crate-h:32px;
   --ct-mix:100%;
 }
 /* dark: follows the system, or the header toggle (data-theme) either way */
@@ -185,24 +185,26 @@ button{font:inherit}
 .cards,.bay{list-style:none;margin:0;padding:12px;display:grid;gap:12px;flex:1;min-height:0;align-content:start;
   /* both panels sit in the same tray, which fills the row, so the two always end level */
   background:var(--bone);border-radius:var(--r-lg);box-shadow:inset 0 0 0 1px var(--line)}
-.cards{grid-template-columns:repeat(var(--cols,1),minmax(0,1fr));grid-auto-rows:var(--card-h)}
+.cards{grid-template-columns:repeat(var(--cols,1),minmax(0,1fr));grid-auto-rows:var(--card-h);gap:10px}
 .bay{grid-auto-rows:var(--crate-h);gap:4px}
 
 .product{background:var(--panel);border-radius:var(--r-card);box-shadow:var(--shadow);overflow:hidden;border:2px solid var(--build);min-width:0;display:flex;flex-direction:column}
-.product .bar{display:flex;gap:5px;align-items:center;height:24px;padding:0 10px;background:var(--build);flex:none}
-.product .bar i{width:7px;height:7px;border-radius:50%;background:rgba(23,24,28,.35)}
-.product .bar span{margin-left:auto;color:var(--on-build);font:700 12px/1 var(--display)}
-.product .body{padding:8px 12px 10px;display:flex;flex-direction:column;gap:5px;flex:1;min-height:0}
-.product h3{font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.product .bar{display:flex;gap:5px;align-items:center;height:20px;padding:0 10px;background:var(--build);flex:none}
+.product .bar i{width:6px;height:6px;border-radius:50%;background:rgba(23,24,28,.35)}
+.product .bar span{margin-left:auto;color:var(--on-build);font:700 11.5px/1 var(--display)}
+/* compact so three rows fit a 900px-tall screen */
+.product .body{padding:6px 10px 8px;display:flex;flex-direction:column;gap:4px;flex:1;min-height:0}
+.product h3{font-size:15px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .at{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--muted);min-width:0}
-.at img{width:26px;height:26px;object-fit:contain;flex:none}
-.at .face{width:28px;height:28px;flex:none}
+.at img{width:22px;height:22px;object-fit:contain;flex:none}
+.at .face{width:22px;height:22px;flex:none}
 .at .face svg{width:100%;height:100%;display:block}
-.at span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.at span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.at time{margin-left:auto;flex:none;font-size:11.5px;color:var(--muted)}
 .at b{color:var(--ink);font-weight:600}
-.product p{margin:0;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.product p{margin:0;font-size:12.5px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .steps{display:grid;grid-template-columns:repeat(10,1fr);gap:3px;margin-top:auto}
-.steps i{height:5px;border-radius:3px;background:var(--build-soft)}
+.steps i{height:4px;border-radius:3px;background:var(--build-soft)}
 .steps i.past{background:color-mix(in srgb,var(--build) 60%,transparent)}
 .steps i.here{background:var(--build)}
 .foot{font-size:11.5px;color:var(--muted)}
@@ -717,14 +719,14 @@ function product(s, agents){
   // robots behind the site's station working on it now are doing a fix, not moving it back
   const back = s.robots.filter((k) => k !== s.station);
   const at = a
-    ? `<div class="at"><span class="face">${robot(s.station)}</span><span>At <b>${esc(a.name)}</b> · ${esc(back.length ? "fix by " + back.map((k) => agents[k].name).join(", ") : a.role)}</span></div>`
-    : `<div class="at"><img src="/brand/logo-mark-light.svg" alt=""><span>Started, no station yet</span></div>`;
+    ? `<div class="at"><span class="face">${robot(s.station)}</span><span>At <b>${esc(a.name)}</b> · ${esc(back.length ? "fix by " + back.map((k) => agents[k].name).join(", ") : a.role)}</span>${agoEl(s.lastAt)}</div>`
+    : `<div class="at"><img src="/brand/logo-mark-light.svg" alt=""><span>Started, no station yet</span>${agoEl(s.lastAt)}</div>`;
   const steps = ORDER.map((_, i) => `<i class="${i < idx ? "past" : i === idx ? "here" : ""}"></i>`).join("");
   return `<li class="product${s.waitingOnYou ? " waiting" : ""}${s.paused ? " paused" : ""}${moved ? " arrive" : ""}">
     <div class="bar"><i></i><i></i><i></i><span>${s.waitingOnYou ? "Needs you" : s.paused ? "Paused" : "Building"}</span></div>
     <div class="body"><h3>${esc(s.name)}</h3>${at}<p>${esc(s.now || "Waiting for the next step")}</p>
       <div class="steps" title="Station ${idx + 1} of ${ORDER.length}">${steps}</div>
-      <div class="foot">${s.working ? `${s.working} ${s.working === 1 ? "agent" : "agents"} working · ` : ""}${agoEl(s.lastAt)}</div></div></li>`;
+      </div></li>`;
 }
 
 function crate(s){
