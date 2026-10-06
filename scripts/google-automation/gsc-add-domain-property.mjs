@@ -6,6 +6,10 @@
 //      (acting AS utopiacoliving@gmail.com so the property appears in their
 //      GSC dashboard sidebar with no extra "Add property" click)
 //   2. Add the TXT record to Vercel DNS via `vercel dns add`
+//      2b. Make sure the host still resolves: on Vercel DNS a project
+//          subdomain (<slug>.utopiaai.my) answers implicitly only while it
+//          has no records of its own, so a lone TXT takes the site offline.
+//          If the name has no A record afterwards, add A 76.76.21.21.
 //   3. Poll DNS until the TXT is visible (Vercel DNS propagates in seconds)
 //   4. Call Site Verification API to confirm ownership
 //   5. Submit the canonical sitemap to the new Domain property
@@ -24,6 +28,7 @@
 import { google } from 'googleapis';
 import { execSync, spawnSync } from 'node:child_process';
 import { promises as dns } from 'node:dns';
+import { Resolver } from 'node:dns/promises';
 import { getUserAuth } from './lib/auth.mjs';
 
 const args = Object.fromEntries(
@@ -90,6 +95,44 @@ if (alreadySet) {
     process.exit(1);
   }
   console.log(`   ✓ TXT record added to Vercel DNS`);
+}
+
+// ─── 2b. Keep the site resolving ──────────────────────────────────
+// Vercel serves <slug>.utopiaai.my implicitly — until the name gets any record
+// of its own. Then only that record set is served, so the TXT above leaves the
+// host with no A record and the live site goes dark (HTTP 000) while GSC
+// verifies happily. This took 8 aircond sites offline on 2026-10-06 and
+// waterproofing-my / safeline before that. Asked of Vercel's own nameserver,
+// not a caching resolver, which could still hand back the old answer and hide
+// the problem. A and TXT coexist; a CNAME would not.
+console.log(`\n🛡  Step 2b: Check ${domain} still resolves`);
+const VERCEL_A = '76.76.21.21';
+const authoritative = new Resolver();
+authoritative.setServers(await dns.resolve4('ns1.vercel-dns.com').catch(() => ['8.8.8.8']));
+const resolvesA = async () => { try { return (await authoritative.resolve4(domain)).length > 0; } catch { return false; } };
+let hasA = false;
+for (let i = 0; i < 6 && !hasA; i++) { hasA = await resolvesA(); if (!hasA) await sleep(5000); }
+if (hasA) {
+  console.log(`   ✓ ${domain} has an A record`);
+} else {
+  // The record goes in the zone (utopiaai.my) under the subdomain's name
+  // (aircond-mesra), the form the fix was made by hand; an apex gets '@'.
+  const labels = domain.split('.');
+  const zoneSize = /\.(com|net|org|edu|gov)\.my$/.test(domain) ? 3 : 2;
+  const zone = labels.slice(-zoneSize).join('.');
+  const name = labels.slice(0, -zoneSize).join('.') || '@';
+  const res = spawnSync(
+    'vercel',
+    ['dns', 'add', zone, name, 'A', VERCEL_A, '--scope', vercelScope, '--non-interactive'],
+    { encoding: 'utf8' },
+  );
+  if (res.status !== 0) {
+    console.error(`   ✗ ${domain} has no A record and adding one failed — the site will be offline until it has one:`);
+    console.error(res.stderr || res.stdout);
+    console.error(`     Fix by hand: vercel dns add ${zone} ${name} A ${VERCEL_A} --scope ${vercelScope}`);
+    process.exit(1);
+  }
+  console.log(`   ✓ No A record after the TXT — added A ${VERCEL_A} so the site stays up`);
 }
 
 // ─── 3. Poll DNS until TXT is visible ─────────────────────────────
