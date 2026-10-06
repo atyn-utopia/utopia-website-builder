@@ -1042,7 +1042,13 @@ const GH_ICON = `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="current
 const avatar = (login, cls = "avatar") => `<img class="${cls}" src="https://github.com/${encodeURIComponent(login)}.png?size=64" alt="" width="28" height="28">`;
 let me = { login: null, accounts: [] };
 async function loadAccount(){
-  try { me = await api("GET", "/api/me"); } catch (e) { me = { login: null, accounts: [], error: e.message }; }
+  try { me = await api("GET", "/api/me"); } catch (e) { me = { login: null, accounts: [], error: e.message, viewOnly: /^View only/.test(e.message) }; }
+  // watched from another computer on the network: nothing to sign in to or create
+  if (me.viewOnly) {
+    $("new-open").hidden = true;
+    $("acct").innerHTML = `<span class="chip" style="background:var(--linen);color:var(--muted)" title="${esc(me.error)}">View only</span>`;
+    return;
+  }
   renderAccount();
 }
 function renderAccount(){

@@ -548,7 +548,11 @@ const TYPES = { '.html': 'text/html; charset=utf-8', '.webmanifest': 'applicatio
 // These create real GitHub repos, so only this page may call them: a custom
 // header forces a CORS preflight that this server never answers, and any
 // Origin must be this server's own.
+// With LAN=1 other machines on the network can watch the page, but only this
+// Mac can act: creating repos, drafts and sign-in stay loopback-only.
+const isLocal = (req) => ['127.0.0.1', '::1', '::ffff:127.0.0.1'].includes(req.socket.remoteAddress);
 function trusted(req) {
+  if (!isLocal(req)) return false;
   if (req.headers['x-factory'] !== '1') return false;
   const origin = req.headers.origin;
   return !origin || /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
@@ -563,6 +567,7 @@ function readJson(req, limit = 200 * 1024 * 1024) {
 }
 async function action(req, res, url) {
   const send = (code, body) => { res.writeHead(code, { 'Content-Type': 'application/json' }); res.end(JSON.stringify(body)); };
+  if (!isLocal(req)) return send(403, { ok: false, viewOnly: true, error: 'View only from another computer. Create websites on the Mac running the factory.' });
   if (!trusted(req)) return send(403, { ok: false, error: 'Only the Website Factory page can do this.' });
   try {
     if (url.pathname === '/api/me' && req.method === 'GET') return send(200, { ok: true, ...(await whoAmI()) });
@@ -615,6 +620,11 @@ setInterval(() => { discover(); broadcast(); }, 5000);
 // Keeps proxies from closing the stream and lets statuses age (working → idle).
 setInterval(() => broadcast(true), 15000);
 
-server.listen(PORT, '127.0.0.1', () => {
+const LAN = process.env.LAN === '1';
+server.listen(PORT, LAN ? '0.0.0.0' : '127.0.0.1', () => {
   console.log(`Agent Monitor → http://localhost:${PORT}  (watching ${ROOT}, last ${HOURS}h, ${actors.size} transcripts)`);
+  if (LAN) {
+    const ips = Object.values(os.networkInterfaces()).flat().filter((i) => i && i.family === 'IPv4' && !i.internal).map((i) => i.address);
+    for (const ip of ips) console.log(`  on this network (view only): http://${ip}:${PORT}`);
+  }
 });
