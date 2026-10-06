@@ -255,7 +255,8 @@ button{font:inherit}
 /* what the card colours mean, beside the panel title */
 .legend{display:flex;gap:12px;font-size:12px;color:var(--muted);flex-wrap:wrap}
 .legend span{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
-.sw{width:14px;height:10px;border-radius:3px;border:2px solid var(--build);background:var(--build-soft)}
+/* lifted 1.5px: Source Sans sits low in its line box, so this centres the swatch on the words */
+.sw{width:14px;height:10px;border-radius:3px;border:2px solid var(--build);background:var(--build-soft);transform:translateY(-1.5px)}
 .sw.wait{border-style:dashed}
 .sw.paused{border-color:var(--ash);background:var(--linen)}
 .sw.live{border-color:var(--live);background:var(--live-soft)}
