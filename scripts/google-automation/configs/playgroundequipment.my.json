@@ -1,0 +1,39 @@
+{
+  "domain": "playgroundequipment.my",
+  "ga4": {
+    "accountId": "153453478",
+    "accountName": "Utopia 1st Analytics",
+    "propertyId": "557932161",
+    "propertyName": "properties/557932161",
+    "measurementId": "G-B3Y1QRPLTK",
+    "streamName": "properties/557932161/dataStreams/16059302876",
+    "siteUrl": "https://playgroundequipment.my",
+    "createdAt": "2026-10-07T09:32:05.918Z"
+  },
+  "containerId": "GTM-K7DTGKXF",
+  "gtmAccountId": "6000211475",
+  "ga4MeasurementId": "G-B3Y1QRPLTK",
+  "events": [
+    {
+      "redirectPath": "/redirect-whatsapp-1",
+      "eventName": "whatsapp_click"
+    }
+  ],
+  "createdAt": "2026-10-07T09:32:56.212Z",
+  "gsc": {
+    "siteUrl": "https://playgroundequipment.my/zh/",
+    "token": "<meta name=\"google-site-verification\" content=\"IXOw7T5Y1J_RbK05uuNQndWIMFDq5MiSB4X4ejKLsxA\" />",
+    "initAt": "2026-10-07T09:33:26.434Z",
+    "verified": true,
+    "verificationMethod": "META",
+    "verifiedAt": "2026-10-07T09:43:00.681Z"
+  },
+  "ads": {
+    "customerId": "1933757591",
+    "ga4PropertyId": "557932161",
+    "conversionActionId": "7827030893",
+    "conversionActionName": "playgroundequipment.my (web) whatsapp_click",
+    "event": "whatsapp_click",
+    "importedAt": "2026-10-07T09:34:44.622Z"
+  }
+}
