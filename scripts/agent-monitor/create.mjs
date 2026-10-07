@@ -350,27 +350,54 @@ const shq = (s) => `'${String(s).replace(/'/g, `'\\''`)}'`;
  * Terminal). The command goes into a small script file so no quoting has to
  * survive AppleScript; the window stays open in a shell afterwards.
  */
-async function openTerminal(command) {
+// Terminal apps the build can open in, found by bundle id so an app in
+// ~/Applications counts too (iTerm here lives there, not in /Applications).
+const TERMINALS = [
+  { id: 'iterm', name: 'iTerm', bundle: 'com.googlecode.iterm2' },
+  { id: 'terminal', name: 'Terminal', bundle: 'com.apple.Terminal' },
+];
+let terminalsCache = null;
+export async function terminals() {
+  if (terminalsCache) return terminalsCache;
+  const found = [];
+  for (const t of TERMINALS) {
+    try {
+      const { stdout } = await run('mdfind', [`kMDItemCFBundleIdentifier == '${t.bundle}'`]);
+      if (stdout.trim()) found.push({ id: t.id, name: t.name });
+    } catch {}
+  }
+  if (!found.some((t) => t.id === 'terminal')) found.push({ id: 'terminal', name: 'Terminal' }); // ships with macOS
+  return (terminalsCache = found);
+}
+
+/**
+ * Open a new window in the chosen terminal app running `command`. The command
+ * goes into a small script file so no quoting has to survive AppleScript; the
+ * window stays open in a shell afterwards.
+ */
+async function openTerminal(command, app = 'iterm') {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'factory-'));
   const file = path.join(dir, 'start.zsh');
   fs.writeFileSync(file, `${command}\nexec zsh -l\n`, { mode: 0o700 });
   const launch = `/bin/zsh -l ${file}`;
-  const script = fs.existsSync('/Applications/iTerm.app')
-    ? `tell application "iTerm"\nactivate\ncreate window with default profile command "${launch}"\nend tell`
+  const available = await terminals();
+  const use = available.some((t) => t.id === app) ? app : available[0].id;
+  const script = use === 'iterm'
+    ? `tell application id "com.googlecode.iterm2"\nactivate\ncreate window with default profile command "${launch}"\nend tell`
     : `tell application "Terminal"\nactivate\ndo script "${launch}"\nend tell`;
   await run('osascript', ['-e', script]);
 }
 
-async function startBuilds(created, mode) {
+async function startBuilds(created, mode, app) {
   fs.mkdirSync(CLONE_DIR, { recursive: true });
   const dirs = created.map((c) => c.repoFullName.split('/')[1]);
   const clone = created.map((c, i) => `(test -d ${shq(dirs[i])} || gh repo clone ${shq(c.repoFullName)})`).join(' && ');
   if (mode === 'orchestrator' && created.length > 1) {
-    await openTerminal(`cd ${shq(CLONE_DIR)} && ${clone} && claude ${shq(orchestratorPrompt(dirs))}`);
+    await openTerminal(`cd ${shq(CLONE_DIR)} && ${clone} && claude ${shq(orchestratorPrompt(dirs))}`, app);
     return 1;
   }
   for (let i = 0; i < created.length; i++) {
-    await openTerminal(`cd ${shq(CLONE_DIR)} && (test -d ${shq(dirs[i])} || gh repo clone ${shq(created[i].repoFullName)}) && cd ${shq(dirs[i])} && claude ${shq(BUILD_INSTRUCTION)}`);
+    await openTerminal(`cd ${shq(CLONE_DIR)} && (test -d ${shq(dirs[i])} || gh repo clone ${shq(created[i].repoFullName)}) && cd ${shq(dirs[i])} && claude ${shq(BUILD_INSTRUCTION)}`, app);
   }
   return created.length;
 }
@@ -379,7 +406,7 @@ async function startBuilds(created, mode) {
  * sites: [{ name, brief, visibility, draftId?, assets?: [{ name, base64 }] }]
  * start: 'per-site' | 'orchestrator' | 'none'
  */
-export async function createSites(sites, start = 'per-site') {
+export async function createSites(sites, start = 'per-site', app = 'iterm') {
   if (!Array.isArray(sites) || !sites.length) throw new Error('Nothing to create.');
   if (sites.length > MAX_SITES) throw new Error(`At most ${MAX_SITES} websites at once.`);
   const slugs = sites.map((s) => toSlug(s.slug || s.name || ''));
@@ -399,16 +426,16 @@ export async function createSites(sites, start = 'per-site') {
     catch (e) { results.push({ ok: false, name: site.name, error: e.message }); }
   }
   const created = results.filter((r) => r.ok);
-  let scan = null, terminals = 0, startError = null;
+  let scan = null, opened = 0, startError = null;
   if (created.length) {
     try { scan = await dispatchScan(created.map((c) => c.slug)); } catch (e) { scan = `failed: ${e.message.slice(0, 120)}`; }
     if (start !== 'none') {
-      try { terminals = await startBuilds(created, start); } catch (e) { startError = e.message.slice(0, 200); }
+      try { opened = await startBuilds(created, start, app); } catch (e) { startError = e.message.slice(0, 200); }
     }
   }
-  return { results, scan, terminals, startError, seededClaude: !!claudeMd };
+  return { results, scan, terminals: opened, app, startError, seededClaude: !!claudeMd };
 }
 
 export async function whoAmI() {
-  return { login: await currentLogin(), accounts: await ghAccounts() };
+  return { login: await currentLogin(), accounts: await ghAccounts(), terminals: await terminals() };
 }

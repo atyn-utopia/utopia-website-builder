@@ -604,6 +604,7 @@ dialog.new::backdrop{background:rgba(11,11,13,.38);backdrop-filter:blur(10px) sa
       <div class="field"><span class="lbl">Visibility</span>
         <div class="seg"><label><input type="radio" name="one-vis" value="private" checked>Private</label><label><input type="radio" name="one-vis" value="public">Public</label></div></div>
       <label class="switch"><input type="checkbox" id="one-start" checked><span class="t"></span><b>Start the build right away</b><small>Clones the repo into projects/ and opens a terminal running Claude.</small></label>
+      <div class="field app-field" data-for="one-start"><span class="lbl">Open in</span><div class="seg app-pick" data-name="one-app"></div></div>
       <div id="one-msg"></div>
     </form>
 
@@ -619,6 +620,7 @@ dialog.new::backdrop{background:rgba(11,11,13,.38);backdrop-filter:blur(10px) sa
           <div class="seg"><label><input type="radio" name="bulk-vis" value="private" checked>Private</label><label><input type="radio" name="bulk-vis" value="public">Public</label></div></div>
       </div>
       <label class="switch"><input type="checkbox" id="bulk-start" checked><span class="t"></span><b>Start building right away</b><small>Clones every repo into projects/ and opens the terminal(s).</small></label>
+      <div class="field app-field" data-for="bulk-start"><span class="lbl">Open in</span><div class="seg app-pick" data-name="bulk-app"></div></div>
       <div id="bulk-msg"></div>
     </form>
 
@@ -1089,7 +1091,8 @@ async function create(){
       start = $("bulk-start").checked ? radio("bulk-mode") : "none";
     }
     note(msg, `Creating ${sites.length === 1 ? "the repo" : sites.length + " repos"}… this takes a few seconds each.`);
-    const out = await api("POST", "/api/create", { sites, start });
+    const app = document.querySelector(`input[name="${tab === "one" ? "one" : "bulk"}-app"]:checked`)?.value || "iterm";
+    const out = await api("POST", "/api/create", { sites, start, app });
     note(msg, "");
     lastRun = { kind: tab, start, out, failed: sites.filter((x, i) => !out.results[i]?.ok) };
     if (tab === "one") { $("one-name").value = ""; $("one-brief").value = ""; $("one-files").value = ""; listFiles(); draftId = null; pickedRepo = ""; repos = null; $("repo-q").value = ""; }
@@ -1135,7 +1138,24 @@ async function loadAccount(){
   }
   renderAccount();
 }
+// "Open in": the terminal apps found on this Mac; the choice is remembered
+function renderApps(){
+  const list = me.terminals?.length ? me.terminals : [{ id: "terminal", name: "Terminal" }];
+  let pick = list[0].id;
+  try { const saved = localStorage.getItem("factory-terminal"); if (list.some((t) => t.id === saved)) pick = saved; } catch {}
+  for (const box of document.querySelectorAll(".app-pick")) {
+    box.innerHTML = list.map((t) => `<label><input type="radio" name="${box.dataset.name}" value="${t.id}"${t.id === pick ? " checked" : ""}>${esc(t.name)}</label>`).join("");
+  }
+}
+document.addEventListener("change", (e) => {
+  const r = e.target.closest(".app-pick input");
+  if (r) { try { localStorage.setItem("factory-terminal", r.value); } catch {} for (const x of document.querySelectorAll(`.app-pick input[value="${r.value}"]`)) x.checked = true; }
+  const sw = e.target.closest("#one-start,#bulk-start");
+  if (sw) document.querySelector(`.app-field[data-for="${sw.id}"]`).hidden = !sw.checked;
+});
+
 function renderAccount(){
+  renderApps();
   const box = $("acct");
   box.innerHTML = me.login
     ? `<button type="button" class="acct-btn" id="acct-btn" aria-haspopup="menu" aria-expanded="false">${avatar(me.login)}@${esc(me.login)}<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`
@@ -1248,7 +1268,8 @@ function renderDone(){
   const all = bad.length === 0, none = ok.length === 0;
   const head = (title, sub) => `<div class="done-h"><span class="big${none ? " bad" : all ? "" : " warn"}">${all ? ICON_OK : ICON_WARN}</span><h3>${title}</h3><p>${sub}</p></div>`;
   const scanOk = out.scan === "only" || out.scan === "all";
-  const how = start === "orchestrator" ? "one Claude session building them all" : start === "per-site" ? (ok.length > 1 ? "a terminal for each site" : "a new terminal") : "";
+  const appName = (me.terminals || []).find((t) => t.id === out.app)?.name || "a terminal";
+  const how = start === "orchestrator" ? `one Claude session in ${appName} building them all` : start === "per-site" ? (ok.length > 1 ? `a ${appName} window for each site` : `a new ${appName} window`) : "";
   let html;
   if (kind === "one" && out.results.length === 1) {
     const r = out.results[0];
