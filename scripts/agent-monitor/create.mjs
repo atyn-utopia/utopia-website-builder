@@ -378,7 +378,13 @@ export async function terminals() {
 async function openTerminal(command, app = 'iterm') {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'factory-'));
   const file = path.join(dir, 'start.zsh');
-  fs.writeFileSync(file, `${command}\nexec zsh -l\n`, { mode: 0o700 });
+  // A login shell that isn't interactive skips ~/.zshrc, which is where gh and
+  // claude get onto PATH here (~/.local/bin) — so the build failed with
+  // "command not found: gh". Hand the window this server's PATH, plus the usual
+  // per-user bin folders in case the server itself was started without them.
+  const home = os.homedir();
+  const PATH = [...new Set([`${home}/.local/bin`, `${home}/.npm-global/bin`, '/opt/homebrew/bin', '/usr/local/bin', ...String(process.env.PATH || '').split(':')].filter(Boolean))].join(':');
+  fs.writeFileSync(file, `export PATH=${shq(PATH)}\n${command}\nexec zsh -l\n`, { mode: 0o700 });
   const launch = `/bin/zsh -l ${file}`;
   const available = await terminals();
   const use = available.some((t) => t.id === app) ? app : available[0].id;
