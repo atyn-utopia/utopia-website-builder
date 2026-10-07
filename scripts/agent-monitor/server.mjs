@@ -579,7 +579,7 @@ async function action(req, res, url) {
     if (url.pathname === '/api/drafts' && req.method === 'DELETE') { await deleteDraft(url.searchParams.get('id') || ''); return send(200, { ok: true }); }
     if (url.pathname === '/api/create' && req.method === 'POST') {
       const body = await readJson(req);
-      return send(200, { ok: true, ...(await createSites(body.sites, body.start)) });
+      return send(200, { ok: true, ...(await createSites(body.sites, body.start, body.app)) });
     }
     return send(404, { ok: false, error: 'Unknown action.' });
   } catch (e) {

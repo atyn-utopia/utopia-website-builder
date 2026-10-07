@@ -114,7 +114,7 @@ App icons: `logo/build.py` writes `public/brand/logo-app.svg`, and
 2. registers it in the wizard (`webcore.user_repos`, `webcore.project_owners`)
    and dispatches `monitor-scan.yml` for the new slugs;
 3. if asked, clones it into `utopia-website-builder/projects/` and opens a new
-   iTerm (or Terminal) window running Claude with the wizard's kickoff prompt —
+   window in the app picked under **Open in** (iTerm or Terminal) running Claude with the wizard's kickoff prompt —
    one window per site, or one orchestrator session for a batch.
 
 **One website** can also use an **existing repo** instead of a new one: pick
