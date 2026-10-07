@@ -56,7 +56,7 @@ The orchestrator will provide:
 - The site's **paid domain** (e.g. `katilhospital.com.my`) and the project directory under `projects/`
 - The site's supported locales (e.g. `en`, `ms`, `zh`) — determines how many GSC URL-prefix properties to submit
 - Confirmation that the paid domain is live on Vercel with DNS pointed there
-- The deploy method for this site (Vercel git integration vs. `vercel --prod` CLI for extracted per-site repos)
+- The deploy method for this site — for sites under `projects/`, that is `scripts/deploy-site.sh <site>` from the repo root (never a raw `vercel --prod`, which is Blocked)
 
 ---
 
@@ -98,7 +98,7 @@ Follow the exact flags in the bundle's `SKILL.md` / `MANUAL-STEPS.md`. Summary:
 - **Phase 5 — Ads conversion import** (no deploy, no 24h wait). `ads-import-conversion.mjs --no-mcc --customer-id 1933757591 --domain <domain> --ga4-property-id <numeric-id> --event whatsapp_click`. It writes the `ads` block into `configs/<domain>.json` itself (`customerId`, `ga4PropertyId`, `conversionActionId`, `conversionActionName`, `event`) — Phase 6 reads it from there.
 - **Phase 6 — the four no-API toggles** (no deploy). `finalize-manual-toggles.mjs --domain <domain>` flips GA4 Signals ON, GA4 user-provided data ON, Ads counting Every→One-per-click, Ads "Import app and web metrics" ON. Idempotent — it reads state first and skips what's set. A browser window opening and driving itself is expected; screenshot proofs land in `_screenshots/<domain>/`. Use `--dry-run` to report state without changing anything, and `--only ga4-signals,ads-counting` to redo one step. "Session expired" → re-run `--login`.
 
-**Deploy discipline:** deploy Phases 3 and 4 **separately**, not batched — each phase gets its own live-site checkpoint so a break is traceable to one phase. For extracted per-site repos (no Vercel git integration), a `git push` does NOT deploy — run `vercel --prod` so the injected snippet/meta tag actually goes live before you finalize.
+**Deploy discipline:** deploy Phases 3 and 4 **separately**, not batched — each phase gets its own live-site checkpoint so a break is traceable to one phase. A `git push` does NOT deploy — these projects are not git-connected. Run `scripts/deploy-site.sh <site>` from the repo root so the injected snippet/meta tag actually goes live before you finalize. A raw `vercel --prod` is rejected as Blocked.
 
 ### 4. Verify end state
 Confirm the site now has: **GA4 property + GTM container + GSC properties (1 Domain + 1 URL-prefix per locale) + 1 Ads conversion action**. Confirm GTM is live (`view-source` on the deployed URL shows the container) and the `whatsapp_click` trigger points at `/redirect-whatsapp-1`.
@@ -140,7 +140,7 @@ Return a status report with:
 - Never run before the **paid domain** is live — Google properties must be keyed to the final URL, never a `*.vercel.app` preview.
 - Never commit, print, or forward the files in `credentials/` — keys stay at `~/.google-credentials`.
 - Follow the flags in the bundle's own `SKILL.md` / `MANUAL-STEPS.md` — they are the source of truth; don't invent flags.
-- Deploy Phases 3 and 4 separately; for extracted repos redeploy with `vercel --prod` (a push alone won't publish the snippet).
+- Deploy Phases 3 and 4 separately; redeploy with `scripts/deploy-site.sh <site>` (a push alone won't publish the snippet, and a raw `vercel --prod` is Blocked).
 - If a phase fails, stop and report which phase — do not blindly re-run later phases that depend on it.
 - The setup is not "done" until Google Signals + Ads counting/import toggles are on. Phase 6 does that — read its SUMMARY table and report the per-step verdict. If any step comes back `unverified`, `partial`, or `missing`, say so and hand that one toggle back to the user rather than declaring success.
 - Close the webcore ads-readiness card as your last action (Phase 7, `ads-readiness.mjs`), ticking exactly the items Phase 6 verified. The card is a promise to the performance marketers and completing it notifies them once — never tick to tidy a report; if a toggle is still owed, leave it unticked and say so.

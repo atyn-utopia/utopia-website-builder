@@ -55,7 +55,51 @@ Database:
 Supabase
 
 Deployment:
-Vercel
+Vercel — CLI only, via `scripts/deploy-site.sh` (see Deployment below)
+
+
+# Deployment (CRITICAL)
+
+**Vercel is not connected to GitHub.** Merging to `main` publishes nothing.
+A site goes live only when someone runs the deploy script.
+
+```bash
+scripts/deploy-site.sh <site>              # deploy projects/<site> to production
+scripts/deploy-site.sh <site> --preview    # preview deploy
+scripts/deploy-site.sh <site> --dry-run    # stage + preflight only, no deploy
+```
+
+## Never run a raw `vercel --prod`
+
+It is rejected as **Blocked** / "Not authorized" before the build runs. Vercel
+reads the git HEAD commit author on every CLI deploy, and only the CLI login
+`chokchokchok` (`utopiacoliving@gmail.com`) is a paid member of the
+`chokchunynh` team. No commit author in this repo is that identity — the repo
+root is `atyn.utopia@gmail.com`, and sites carrying their own `.git` are
+`atyn.utopia@`, `chokchunynh@` or `design.utco@`. All 42 sites are affected.
+
+Hiding a site's own `.git` does not help either: a site without one resolves up
+to the repo root, so the CLI still finds an author one level up.
+
+The script sidesteps this by staging the site's files into a temp directory that
+is not inside any git repo, then deploying from there — the CLI finds no commit
+author and falls back to the logged-in identity. **The repo's `.git` is never
+moved or modified**, which matters because it is shared by all 42 sites and by
+any other session working in this checkout.
+
+## Rules
+
+1. One site, one deploy. The script refuses two site arguments — each site goes
+   live on its own schedule.
+2. The site must be linked (`projects/<site>/.vercel/project.json`). If it is
+   not, the script stops rather than letting the CLI create a duplicate project
+   under the team. Link with `cd projects/<site> && vercel link`.
+3. **Do not connect a Vercel project to GitHub.** It re-enables the
+   commit-author block.
+4. `.env.local` is never uploaded. Production values belong in the Vercel
+   project — set them with `printf`, not `echo` (`echo` appends a newline).
+5. Verify against the **Ready URL the script prints**. Never guess a live URL
+   from the project name.
 
 
 # Dynamic Product Data (CRITICAL)
