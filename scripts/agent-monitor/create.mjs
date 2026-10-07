@@ -167,6 +167,27 @@ async function ghApi(method, p, body) {
   return text ? JSON.parse(text) : null;
 }
 
+/** owner/name from what someone pastes: the pair, an https URL or a clone URL. */
+function parseRepo(input) {
+  const t = String(input || '').trim().replace(/\.git$/i, '').replace(/\/+$/, '');
+  const m = t.match(/^(?:(?:https?:\/\/)?(?:www\.)?github\.com[/:]|git@github\.com:)?([A-Za-z0-9-]+)\/([A-Za-z0-9._-]+)$/);
+  return m ? `${m[1]}/${m[2]}` : null;
+}
+
+/** The org's site-* repos for the existing-repo picker: empty ones first, then newest. */
+export async function listSiteRepos() {
+  const out = [];
+  for (let page = 1; page <= 5; page++) {
+    const batch = await ghApi('GET', `/orgs/${ORG}/repos?per_page=100&sort=created&direction=desc&page=${page}`);
+    out.push(...batch);
+    if (batch.length < 100) break;
+  }
+  return out
+    .filter((r) => r.name.startsWith('site-') && !r.archived)
+    .map((r) => ({ full_name: r.full_name, name: r.name, private: r.private, empty: r.size === 0, created_at: r.created_at, pushed_at: r.pushed_at }))
+    .sort((a, b) => (b.empty - a.empty) || (Date.parse(b.created_at) - Date.parse(a.created_at)));
+}
+
 // ---------------------------------------------------------------- drafts (lib/drafts.ts)
 
 export async function listDrafts() {
@@ -177,13 +198,14 @@ export async function listDrafts() {
   return res.json();
 }
 
-export async function saveDraft({ id, name = '', brief = '', visibility = 'private' }) {
+export async function saveDraft({ id, name = '', brief = '', visibility = 'private', existingRepo = '' }) {
   const { login } = await github();
   const db = supabase();
-  const row = { name: String(name).slice(0, 200), brief: String(brief), visibility: visibility === 'public' ? 'public' : 'private', updated_at: new Date().toISOString() };
+  const repo = parseRepo(existingRepo) || '';
+  const row = { name: String(name).slice(0, 200), brief: String(brief), visibility: visibility === 'public' ? 'public' : 'private', mode: repo ? 'existing' : 'new', existing_repo: repo, updated_at: new Date().toISOString() };
   const res = id
     ? await fetch(`${db.rest}/project_drafts?id=eq.${encodeURIComponent(id)}&created_by=eq.${encodeURIComponent(login)}`, { method: 'PATCH', headers: db.h({ Prefer: 'return=representation' }), body: JSON.stringify(row) })
-    : await fetch(`${db.rest}/project_drafts`, { method: 'POST', headers: db.h({ Prefer: 'return=representation' }), body: JSON.stringify({ ...row, created_by: login, mode: 'new', existing_repo: '', assets: [] }) });
+    : await fetch(`${db.rest}/project_drafts`, { method: 'POST', headers: db.h({ Prefer: 'return=representation' }), body: JSON.stringify({ ...row, created_by: login, assets: [] }) });
   if (!res.ok) throw new Error(`Could not save the draft (${res.status}): ${(await res.text()).slice(0, 160)}`);
   return (await res.json())[0];
 }
@@ -215,9 +237,12 @@ async function draftAssets(id) {
 // ---------------------------------------------------------------- create (route.ts + createGithubProject.ts)
 
 async function createOne(site, login, claudeMd) {
-  const name = String(site.name || '').trim();
+  const existing = parseRepo(site.existingRepo);
+  if (site.existingRepo && !existing) throw new Error(`"${site.existingRepo}" isn't a GitHub repo. Use owner/name or the repo's URL.`);
+  // an existing site-<slug> repo keeps that slug, as in the wizard
+  const name = String(site.name || '').trim() || (existing ? existing.split('/')[1].replace(/^site-/, '') : '');
   const brief = String(site.brief || '').trim();
-  const slug = toSlug(site.slug || name);
+  const slug = toSlug(site.slug || (existing ? existing.split('/')[1].replace(/^site-/, '') : name));
   if (!slug) throw new Error('A name is required.');
   if (!brief) throw new Error('A brief is required.');
   const assets = [...(site.assets || [])];
@@ -242,17 +267,33 @@ ${assets.length ? '`@brand_assets/…` in the brief points at one of these files
   if (claudeMd) files.push({ path: 'CLAUDE.md', content: claudeMd, encoding: 'utf-8' });
   for (const a of assets) files.push({ path: `brand_assets/${safeAssetName(a.name)}`, content: a.base64, encoding: 'base64' });
 
+  let repo, full, branch, written = null, skipped = [];
+  if (existing) {
+    // Existing repo: Contents API, one commit per file, and never overwrite —
+    // a repo someone started may already carry its own CLAUDE.md or inputs.md.
+    repo = await ghApi('GET', `/repos/${existing}`);
+    full = repo.full_name; branch = repo.default_branch || 'main'; written = [];
+    for (const f of files) {
+      const p = f.path.split('/').map(encodeURIComponent).join('/');
+      const probe = await fetch(`https://api.github.com/repos/${full}/contents/${p}`, { headers: ghHeaders((await github()).token) });
+      if (probe.ok) { skipped.push(f.path); continue; }
+      await ghApi('PUT', `/repos/${full}/contents/${p}`, {
+        message: `chore: add ${f.path} (Website Factory)`,
+        content: f.encoding === 'base64' ? f.content : Buffer.from(f.content, 'utf8').toString('base64'),
+      });
+      written.push(f.path);
+    }
+  } else {
   // 1. repo with an initial commit (the Git Data API refuses an empty repo)
   const repoName = siteRepoName(slug);
-  let repo;
   try {
     repo = await ghApi('POST', `/orgs/${ORG}/repos`, { name: repoName, description: name || slug, private: site.visibility !== 'public', auto_init: true });
   } catch (e) {
     if (/name already exists/i.test(e.message)) throw new Error(`A repo named ${repoName} already exists in ${ORG}. Pick another name.`);
     throw e;
   }
-  const full = repo.full_name;
-  const branch = repo.default_branch || 'main';
+  full = repo.full_name;
+  branch = repo.default_branch || 'main';
   let parent = '';
   for (let i = 0; i < 8 && !parent; i++) {
     try { parent = (await ghApi('GET', `/repos/${full}/git/ref/heads/${branch}`)).object.sha; } catch { await new Promise((r) => setTimeout(r, 800)); }
@@ -267,6 +308,7 @@ ${assets.length ? '`@brand_assets/…` in the brief points at one of these files
   const t = await ghApi('POST', `/repos/${full}/git/trees`, { tree });
   const c = await ghApi('POST', `/repos/${full}/git/commits`, { message: 'chore: scaffold project (Website Factory)', tree: t.sha, parents: [parent] });
   await ghApi('PATCH', `/repos/${full}/git/refs/heads/${branch}`, { sha: c.sha, force: true });
+  }
 
   // 3. show it in the wizard (best effort, like the wizard itself)
   let registered = false;
@@ -284,7 +326,7 @@ ${assets.length ? '`@brand_assets/…` in the brief points at one of these files
   } catch {}
 
   if (site.draftId) await deleteDraft(site.draftId).catch(() => {});
-  return { slug, repoFullName: full, htmlUrl: repo.html_url, cloneUrl: repo.clone_url, assets: assets.length, registered };
+  return { slug, repoFullName: full, htmlUrl: repo.html_url, cloneUrl: repo.clone_url, assets: assets.length, registered, existing: !!existing, written, skipped };
 }
 
 async function dispatchScan(slugs) {

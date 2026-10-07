@@ -14,7 +14,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createSites, listDrafts, saveDraft, deleteDraft, useEnvFiles, whoAmI, signIn, signOut } from './create.mjs';
+import { createSites, listDrafts, saveDraft, deleteDraft, useEnvFiles, whoAmI, signIn, signOut, listSiteRepos } from './create.mjs';
 
 const PORT = Number(process.env.PORT || 4545);
 const HOURS = Number(process.env.HOURS || 24);
@@ -573,6 +573,7 @@ async function action(req, res, url) {
     if (url.pathname === '/api/me' && req.method === 'GET') return send(200, { ok: true, ...(await whoAmI()) });
     if (url.pathname === '/api/signin' && req.method === 'POST') return send(200, { ok: true, login: await signIn((await readJson(req)).login) });
     if (url.pathname === '/api/signout' && req.method === 'POST') { signOut(); return send(200, { ok: true }); }
+    if (url.pathname === '/api/repos' && req.method === 'GET') return send(200, { ok: true, repos: await listSiteRepos() });
     if (url.pathname === '/api/drafts' && req.method === 'GET') return send(200, { ok: true, drafts: await listDrafts() });
     if (url.pathname === '/api/drafts' && req.method === 'POST') return send(200, { ok: true, draft: await saveDraft(await readJson(req)) });
     if (url.pathname === '/api/drafts' && req.method === 'DELETE') { await deleteDraft(url.searchParams.get('id') || ''); return send(200, { ok: true }); }
@@ -588,7 +589,7 @@ async function action(req, res, url) {
 
 const server = http.createServer((req, res) => {
   const url = new URL(req.url, 'http://localhost');
-  if (['/api/me', '/api/signin', '/api/signout', '/api/drafts', '/api/create'].includes(url.pathname)) { action(req, res, url); return; }
+  if (['/api/me', '/api/signin', '/api/signout', '/api/repos', '/api/drafts', '/api/create'].includes(url.pathname)) { action(req, res, url); return; }
   if (url.pathname === '/events') {
     res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache', Connection: 'keep-alive' });
     res.write(`data: ${JSON.stringify(snapshot())}\n\n`);

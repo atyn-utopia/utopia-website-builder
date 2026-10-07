@@ -333,6 +333,17 @@ button{font:inherit}
 .pkg[data-site]:focus-visible{outline:none}
 @media (prefers-reduced-motion:reduce){.pop{transition:none}}
 
+
+/* existing-repo picker */
+.repo-list{list-style:none;margin:0;padding:4px;max-height:196px;overflow:auto;border:1px solid var(--line);border-radius:var(--r-button);background:var(--panel);scrollbar-width:thin}
+.repo-list li{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px;padding:7px 10px;border-radius:6px;cursor:pointer;font-size:13px}
+.repo-list li:hover,.repo-list li:focus-visible{background:var(--linen);outline:none}
+.repo-list li[aria-selected="true"]{background:color-mix(in srgb,var(--blue) 12%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--blue) 45%,transparent)}
+.repo-list li span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:500 12.5px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace}
+.repo-list li small{color:var(--muted);font-size:11.5px;white-space:nowrap}
+.repo-list li .pill{font-size:11px;font-weight:700;padding:2px 7px;border-radius:999px;background:var(--live-soft);color:var(--live-ink);margin-right:6px}
+.repo-list .none{display:block;color:var(--muted);cursor:default;text-align:center}
+
 /* ---- new website (dialog) */
 [hidden]{display:none!important}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:36px;padding:0 14px;border-radius:var(--r-button);border:1px solid transparent;font:600 13.5px/1 var(--body);cursor:pointer;white-space:nowrap;transition:background-color var(--dur-hover) var(--ease),border-color var(--dur-hover) var(--ease),box-shadow var(--dur-hover) var(--ease)}
@@ -544,6 +555,12 @@ dialog.new::backdrop{background:rgba(11,11,13,.38);backdrop-filter:blur(10px) sa
     </div>
 
     <form class="new-body" id="pane-one" data-pane="one">
+      <div class="field"><span class="lbl">Repo</span>
+        <div class="seg"><label><input type="radio" name="one-repo" value="new" checked>New repo</label><label><input type="radio" name="one-repo" value="existing">Existing repo</label></div></div>
+      <div class="field" id="repo-pick" hidden>
+        <input type="text" id="repo-q" placeholder="Search site- repos in utopiagrowth, or paste owner/name" autocomplete="off">
+        <ul class="repo-list" id="repo-list" role="listbox" aria-label="Repos"></ul>
+        <small>Empty repos are listed first. Files the repo already has (CLAUDE.md, inputs.md) are kept, never overwritten.</small></div>
       <label class="field"><span class="lbl">Website name</span><input type="text" id="one-name" placeholder="e.g. Aircond Service Penang" autocomplete="off"><span class="repo" id="one-slug">utopiagrowth/site-…</span></label>
       <label class="field"><span class="lbl">Brief</span><textarea id="one-brief" placeholder="What the business does, the areas it serves, the phone number and anything the builders should know. Point at a brand file with @filename."></textarea></label>
       <div class="field"><span class="lbl">Brand files <em>optional</em></span>
@@ -925,6 +942,25 @@ const parseBulk = (text) => text.split(/^\s*-{3,}\s*$/m).map((b) => { const l = 
 const note = (id, html, err) => { $(id).innerHTML = html ? `<div class="msg${err ? " err" : ""}">${html}</div>` : ""; };
 
 let tab = "one", draftId = null, drafts = [], busy = false;
+// existing-repo picker (One website only)
+let repos = null, pickedRepo = "";
+const repoMode = () => document.querySelector('input[name="one-repo"]:checked').value;
+const parseRepoInput = (t) => { const m = String(t).trim().replace(/\.git$/i, "").replace(/\/+$/, "").match(/^(?:(?:https?:\/\/)?(?:www\.)?github\.com[/:])?([A-Za-z0-9-]+)\/([A-Za-z0-9._-]+)$/); return m ? `${m[1]}/${m[2]}` : ""; };
+async function loadRepos(){
+  if (repos) return renderRepos();
+  $("repo-list").innerHTML = `<li class="none">Loading repos…</li>`;
+  try { repos = (await api("GET", "/api/repos")).repos; } catch (e) { $("repo-list").innerHTML = `<li class="none">${esc(e.message)}</li>`; return; }
+  renderRepos();
+}
+function renderRepos(){
+  const q = $("repo-q").value.trim().toLowerCase();
+  const pasted = parseRepoInput($("repo-q").value);
+  const list = (repos || []).filter((r) => !q || r.full_name.toLowerCase().includes(q)).slice(0, 60);
+  const extra = pasted && !(repos || []).some((r) => r.full_name.toLowerCase() === pasted.toLowerCase())
+    ? `<li role="option" tabindex="0" data-repo="${esc(pasted)}" aria-selected="${pickedRepo === pasted}"><span>${esc(pasted)}</span><small>pasted</small></li>` : "";
+  $("repo-list").innerHTML = extra + list.map((r) => `<li role="option" tabindex="0" data-repo="${esc(r.full_name)}" aria-selected="${pickedRepo === r.full_name}"><span>${esc(r.name)}</span><small>${r.empty ? `<b class="pill">Empty</b>` : ""}${new Date(r.created_at).toLocaleDateString("en-MY", { day: "numeric", month: "short", year: "numeric" })}</small></li>`).join("")
+    || `<li class="none">No site- repo matches. Paste owner/name to use another repo.</li>`;
+}
 const dlg = $("new");
 
 function setTab(t){
@@ -943,9 +979,12 @@ function bulkProblems(sites){
 }
 function refreshGo(){
   if (tab === "one") {
-    $("one-slug").textContent = `${repoOf($("one-name").value)}${draftId ? " · from a draft" : ""}`;
-    $("new-go").textContent = "Create website";
-    $("new-go").disabled = busy || !me.login || !toSlug($("one-name").value) || !$("one-brief").value.trim();
+    const ex = repoMode() === "existing";
+    $("repo-pick").hidden = !ex;
+    $("one-name").placeholder = ex ? "Optional — taken from the repo" : "e.g. Aircond Service Penang";
+    $("one-slug").textContent = `${ex ? (pickedRepo || "Pick a repo above") : repoOf($("one-name").value)}${draftId ? " · from a draft" : ""}`;
+    $("new-go").textContent = ex ? "Seed repo & build" : "Create website";
+    $("new-go").disabled = busy || !me.login || (ex ? !pickedRepo : !toSlug($("one-name").value)) || !$("one-brief").value.trim();
     $("new-draft").textContent = draftId ? "Update draft" : "Save draft";
     $("new-draft").disabled = busy || !me.login || !($("one-name").value.trim() || $("one-brief").value.trim());
   } else if (tab === "bulk") {
@@ -973,7 +1012,7 @@ const fileToB64 = (f) => new Promise((ok, no) => { const r = new FileReader(); r
 
 function showResult(paneMsg, out){
   const rows = out.results.map((r) => r.ok
-    ? `<li><b>${esc(r.repoFullName)}</b><span class="acts"><a href="${esc(r.htmlUrl)}" target="_blank" rel="noopener">Open repo</a></span><small>${r.assets} brand file${r.assets === 1 ? "" : "s"} · ${r.registered ? "added to the wizard" : "not added to the wizard"}</small></li>`
+    ? `<li><b>${esc(r.repoFullName)}</b><span class="acts"><a href="${esc(r.htmlUrl)}" target="_blank" rel="noopener">Open repo</a></span><small>${r.existing ? `seeded ${r.written.length} file${r.written.length === 1 ? "" : "s"}${r.skipped.length ? `, kept ${r.skipped.length} it already had` : ""}` : `${r.assets} brand file${r.assets === 1 ? "" : "s"}`} · ${r.registered ? "added to the wizard" : "not added to the wizard"}</small></li>`
     : `<li><b>${esc(r.name || "(no name)")}</b><span class="pill bad">Not created</span><small>${esc(r.error)}</small></li>`).join("");
   const made = out.results.filter((r) => r.ok).length;
   const tail = [
@@ -998,7 +1037,7 @@ async function create(){
       if (big) throw new Error(`${big.name} is over 30 MB.`);
       note(msg, files.length ? `Reading ${files.length} file${files.length === 1 ? "" : "s"}…` : "Creating the repo…");
       const assets = await Promise.all(files.map(async (f) => ({ name: f.name, base64: await fileToB64(f) })));
-      sites = [{ name: $("one-name").value.trim(), brief: $("one-brief").value.trim(), visibility: vis, assets, draftId }];
+      sites = [{ name: $("one-name").value.trim(), brief: $("one-brief").value.trim(), visibility: vis, assets, draftId, existingRepo: repoMode() === "existing" ? pickedRepo : "" }];
       start = $("one-start").checked ? "per-site" : "none";
     } else {
       sites = bulkSites().map((x) => ({ ...x, visibility: vis }));
@@ -1008,7 +1047,7 @@ async function create(){
     const out = await api("POST", "/api/create", { sites, start });
     showResult(msg, out);
     if (out.results.every((r) => r.ok)) {
-      if (tab === "one") { $("one-name").value = ""; $("one-brief").value = ""; $("one-files").value = ""; listFiles(); draftId = null; }
+      if (tab === "one") { $("one-name").value = ""; $("one-brief").value = ""; $("one-files").value = ""; listFiles(); draftId = null; pickedRepo = ""; repos = null; $("repo-q").value = ""; }
       else $("bulk-text").value = "";
     }
     loadDrafts();
@@ -1022,7 +1061,7 @@ async function saveDrafts(){
   const msg = tab === "one" ? "one-msg" : "bulk-msg";
   try {
     if (tab === "one") {
-      const d = (await api("POST", "/api/drafts", { id: draftId, name: $("one-name").value.trim(), brief: $("one-brief").value.trim(), visibility: radio("one-vis") })).draft;
+      const d = (await api("POST", "/api/drafts", { id: draftId, name: $("one-name").value.trim(), brief: $("one-brief").value.trim(), visibility: radio("one-vis"), existingRepo: repoMode() === "existing" ? pickedRepo : "" })).draft;
       draftId = d.id;
       note(msg, `Draft saved. It's in Drafts here and in the wizard.${$("one-files").files.length ? " Brand files aren't saved with a draft from here; add them when you create." : ""}`);
     } else {
@@ -1100,6 +1139,11 @@ $("new-close").addEventListener("click", () => dlg.close());
 dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
 for (const b of document.querySelectorAll(".tabs button")) b.addEventListener("click", () => setTab(b.dataset.tab));
 for (const id of ["one-name", "one-brief", "bulk-text"]) $(id).addEventListener("input", refreshGo);
+for (const r of document.querySelectorAll('input[name="one-repo"]')) r.addEventListener("change", () => { if (repoMode() === "existing") loadRepos(); refreshGo(); });
+$("repo-q").addEventListener("input", renderRepos);
+const pickRepo = (li) => { if (!li?.dataset.repo) return; pickedRepo = li.dataset.repo; renderRepos(); refreshGo(); };
+$("repo-list").addEventListener("click", (e) => pickRepo(e.target.closest("[data-repo]")));
+$("repo-list").addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pickRepo(e.target.closest("[data-repo]")); } });
 for (const f of ["pane-one", "pane-bulk"]) $(f).addEventListener("submit", (e) => { e.preventDefault(); create(); });
 $("new-go").addEventListener("click", create);
 $("new-draft").addEventListener("click", saveDrafts);
@@ -1109,6 +1153,9 @@ $("draft-rows").addEventListener("click", async (e) => {
     const d = drafts.find((x) => x.id === open.dataset.open);
     if (!d) return;
     draftId = d.id; $("one-name").value = d.name || ""; $("one-brief").value = d.brief || "";
+    pickedRepo = d.mode === "existing" ? (d.existing_repo || "") : "";
+    document.querySelector(`input[name="one-repo"][value="${pickedRepo ? "existing" : "new"}"]`).checked = true;
+    if (pickedRepo) { $("repo-q").value = pickedRepo; loadRepos(); }
     document.querySelector(`input[name="one-vis"][value="${d.visibility === "public" ? "public" : "private"}"]`).checked = true;
     setTab("one");
     note("one-msg", (d.assets || []).length ? `This draft has ${(d.assets || []).length} brand file${(d.assets || []).length === 1 ? "" : "s"} saved in the wizard; they go into the repo when you create it.` : "");
