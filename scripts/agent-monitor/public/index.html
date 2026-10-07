@@ -344,6 +344,34 @@ button{font:inherit}
 .repo-list li .pill{font-size:11px;font-weight:700;padding:2px 7px;border-radius:999px;background:var(--live-soft);color:var(--live-ink);margin-right:6px}
 .repo-list .none{display:block;color:var(--muted);cursor:default;text-align:center}
 
+
+/* ---- after create: what happened, and whether each site reached the line */
+#done{display:flex;flex-direction:column;gap:16px}
+.done-h{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;align-items:center}
+.done-h .big{grid-row:1/3;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--live-soft);color:var(--live-ink)}
+.done-h .big.warn{background:var(--build-soft);color:var(--build-ink)}
+.done-h .big.bad{background:#FBE9EB;color:#9F1D2C}
+.done-h .big svg{width:24px;height:24px}
+.done-h h3{font-size:18px}
+.done-h p{margin:0;color:var(--muted);font-size:13px}
+.checks{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden}
+.checks li{display:grid;grid-template-columns:22px minmax(0,1fr) auto;align-items:center;gap:10px;padding:10px 14px;font-size:13.5px}
+.checks li+li{border-top:1px solid var(--line)}
+.checks .ic{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:800}
+.checks .ic.ok{background:var(--live);color:var(--on-live)}
+.checks .ic.no{background:#F3C9CE;color:#9F1D2C}
+.checks .ic.wait{background:var(--build-soft);box-shadow:inset 0 0 0 2px var(--build)}
+.checks .ic.wait::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--build);animation:pulse 1.4s infinite}
+.checks small{display:block;color:var(--muted);font-size:12px;overflow-wrap:anywhere}
+.checks a{color:var(--blue);font-weight:600;text-decoration:none;font-size:12.5px;white-space:nowrap}
+.checks .mono{font:500 12.5px/1.35 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}
+.line-pill{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.line-pill.on{background:var(--live-soft);color:var(--live-ink)}
+.line-pill.wait{background:var(--build-soft);color:var(--build-ink)}
+.line-pill.off{background:var(--linen);color:var(--muted)}
+.line-pill.bad{background:#FBE9EB;color:#9F1D2C}
+.done-foot{color:var(--muted);font-size:12.5px;line-height:1.5}
+
 /* ---- new website (dialog) */
 [hidden]{display:none!important}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:36px;padding:0 14px;border-radius:var(--r-button);border:1px solid transparent;font:600 13.5px/1 var(--body);cursor:pointer;white-space:nowrap;transition:background-color var(--dur-hover) var(--ease),border-color var(--dur-hover) var(--ease),box-shadow var(--dur-hover) var(--ease)}
@@ -594,6 +622,8 @@ dialog.new::backdrop{background:rgba(11,11,13,.38);backdrop-filter:blur(10px) sa
       <div id="bulk-msg"></div>
     </form>
 
+    <div class="new-body" id="pane-done" data-pane="done" hidden><div id="done"></div></div>
+
     <div class="new-body" id="pane-drafts" data-pane="drafts" hidden>
       <ul class="rows" id="draft-rows"></ul>
       <small class="field" style="color:var(--muted);font-size:12px">Drafts are shared with the Utopia Wizard. One started there shows here, and the other way round.</small>
@@ -602,6 +632,9 @@ dialog.new::backdrop{background:rgba(11,11,13,.38);backdrop-filter:blur(10px) sa
 
     <div class="new-foot">
       <span class="who"></span>
+      <button type="button" class="btn secondary" id="new-retry" hidden>Retry failed</button>
+      <button type="button" class="btn secondary" id="new-again" hidden>Create another</button>
+      <button type="button" class="btn primary" id="new-done" hidden>Close</button>
       <button type="button" class="btn secondary" id="new-draft">Save draft</button>
       <button type="button" class="btn primary" id="new-go">Create website</button>
     </div>
@@ -819,6 +852,7 @@ function render(){
     ? bayPage.map(crate).join("")
     : `<li class="empty">Nothing shipped yet today. Finished websites land here with their live link.</li>`;
   refreshPop();
+  if (tab === "done") renderDone();
 }
 
 // Restart the countdown bar so it lines up with the next flip.
@@ -947,6 +981,7 @@ const parseBulk = (text) => text.split(/^\s*-{3,}\s*$/m).map((b) => { const l = 
 const note = (id, html, err) => { $(id).innerHTML = html ? `<div class="msg${err ? " err" : ""}">${html}</div>` : ""; };
 
 let tab = "one", draftId = null, drafts = [], busy = false;
+let lastRun = null; // after create: { kind, start, out, failed: [site inputs that weren't created] }
 // existing-repo picker (One website only)
 let repos = null, pickedRepo = "";
 const repoMode = () => document.querySelector('input[name="one-repo"]:checked').value;
@@ -972,8 +1007,13 @@ function setTab(t){
   tab = t;
   for (const b of document.querySelectorAll(".tabs button")) b.setAttribute("aria-selected", String(b.dataset.tab === t));
   for (const p of document.querySelectorAll("[data-pane]")) p.hidden = p.dataset.pane !== t;
-  $("new-draft").hidden = t === "drafts";
-  $("new-go").hidden = t === "drafts";
+  const done = t === "done";
+  document.querySelector(".tabs").hidden = done;
+  $("new-draft").hidden = t === "drafts" || done;
+  $("new-go").hidden = t === "drafts" || done;
+  $("new-again").hidden = $("new-done").hidden = !done;
+  $("new-retry").hidden = !done || !(lastRun?.failed.length);
+  if (done) { renderDone(); return; }
   if (t === "drafts") loadDrafts();
   refreshGo();
 }
@@ -1050,11 +1090,11 @@ async function create(){
     }
     note(msg, `Creating ${sites.length === 1 ? "the repo" : sites.length + " repos"}… this takes a few seconds each.`);
     const out = await api("POST", "/api/create", { sites, start });
-    showResult(msg, out);
-    if (out.results.every((r) => r.ok)) {
-      if (tab === "one") { $("one-name").value = ""; $("one-brief").value = ""; $("one-files").value = ""; listFiles(); draftId = null; pickedRepo = ""; repos = null; $("repo-q").value = ""; }
-      else $("bulk-text").value = "";
-    }
+    note(msg, "");
+    lastRun = { kind: tab, start, out, failed: sites.filter((x, i) => !out.results[i]?.ok) };
+    if (tab === "one") { $("one-name").value = ""; $("one-brief").value = ""; $("one-files").value = ""; listFiles(); draftId = null; pickedRepo = ""; repos = null; $("repo-q").value = ""; }
+    else $("bulk-text").value = "";
+    setTab("done");
     loadDrafts();
   } catch (e) { note(msg, esc(e.message), true); }
   busy = false; refreshGo();
@@ -1188,6 +1228,67 @@ $("theme").addEventListener("click", () => {
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(() => {});
 // Tick the "Xs ago" labels without a re-render.
 setInterval(() => document.querySelectorAll("time[data-t]").forEach((t) => { if (t.dataset.t) t.textContent = ago(+t.dataset.t); }), 1000);
+// ---- after create: one view for One website and Bulk
+const ICON_OK = `<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const ICON_WARN = `<svg viewBox="0 0 24 24"><path d="M12 8v5M12 16.5v.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/></svg>`;
+const siteKeyOf = (slug) => String(slug).toLowerCase().replace(/^site-/, "").replace(/\./g, "-");
+function lineState(r){
+  // has the build reached the production line yet? (live, from the transcripts)
+  const s = snap?.sites.find((x) => x.key === siteKeyOf(r.slug));
+  if (s) return { cls: "on", text: s.state === "done" ? "Live" : s.station ? `On the line · ${snap.agents[s.station].name}` : "On the line" };
+  if (lastRun.start === "none") return { cls: "off", text: "Build not started" };
+  if (lastRun.out.startError) return { cls: "bad", text: "Build didn't start" };
+  return { cls: "wait", text: "Waiting for the first agent…" };
+}
+const check = (state, title, sub = "", right = "") => `<li><span class="ic ${state}">${state === "ok" ? "✓" : state === "no" ? "!" : ""}</span><span>${title}${sub ? `<small>${sub}</small>` : ""}</span>${right}</li>`;
+function renderDone(){
+  if (!lastRun) return;
+  const { kind, start, out } = lastRun;
+  const ok = out.results.filter((r) => r.ok), bad = out.results.filter((r) => !r.ok);
+  const all = bad.length === 0, none = ok.length === 0;
+  const head = (title, sub) => `<div class="done-h"><span class="big${none ? " bad" : all ? "" : " warn"}">${all ? ICON_OK : ICON_WARN}</span><h3>${title}</h3><p>${sub}</p></div>`;
+  const scanOk = out.scan === "only" || out.scan === "all";
+  const how = start === "orchestrator" ? "one Claude session building them all" : start === "per-site" ? (ok.length > 1 ? "a terminal for each site" : "a new terminal") : "";
+  let html;
+  if (kind === "one" && out.results.length === 1) {
+    const r = out.results[0];
+    if (!r.ok) {
+      html = head("The website wasn't created", esc(r.error)) + `<p class="done-foot">Nothing was created on GitHub. Fix the problem and use <b>Retry</b>, which puts your name and brief back in the form.</p>`;
+    } else {
+      const ls = lineState(r);
+      html = head(`${esc(r.repoFullName.split("/")[1])} is in the factory`, start === "none" ? "Repo ready and added to the wizard. The build wasn't started." : `Repo ready, added to the wizard, and the build is running in ${how}.`)
+        + `<ul class="checks">`
+        + check("ok", r.existing ? "Seeded the existing repo" : "Created the repo", `<span class="mono">${esc(r.repoFullName)}</span>`, `<a href="${esc(r.htmlUrl)}" target="_blank" rel="noopener">Open on GitHub</a>`)
+        + check("ok", r.existing ? `Added ${r.written.length} file${r.written.length === 1 ? "" : "s"}${r.skipped.length ? `, kept ${r.skipped.length} it already had` : ""}` : `inputs.md, CLAUDE.md${r.assets ? ` and ${r.assets} brand file${r.assets === 1 ? "" : "s"}` : ""}`, r.existing ? esc([...r.written, ...r.skipped.map((x) => x + " (kept)")].join(", ")) : "One commit on the default branch")
+        + check(r.registered ? "ok" : "no", r.registered ? "Added to the Utopia Wizard" : "Not added to the wizard", r.registered ? "Shows on Progress after the scan" : "Connect it from the wizard later")
+        + check(scanOk ? "ok" : "no", scanOk ? "Monitor scan started" : "Monitor scan didn't start", scanOk ? "The wizard picks it up in a minute or two" : esc(out.scan || ""))
+        + (start === "none" ? check("no", "Build not started", "Clone the repo and run Claude in it when you're ready") : out.startError ? check("no", "The build didn't start", esc(out.startError)) : check("ok", `Build started in ${how}`, "Cloned into utopia-website-builder/projects/"))
+        + check(ls.cls === "on" ? "ok" : ls.cls === "wait" ? "wait" : "no", ls.cls === "on" ? "Reached the production line" : "Production line", ls.cls === "wait" ? "Shows here as soon as the first agent starts work" : "", `<span class="line-pill ${ls.cls}">${esc(ls.text)}</span>`)
+        + `</ul>`;
+    }
+  } else {
+    html = head(all ? `${ok.length} website${ok.length === 1 ? "" : "s"} in the factory` : `${ok.length} of ${out.results.length} websites created`,
+        none ? "Nothing was created on GitHub." : start === "none" ? "Repos ready and added to the wizard. Builds weren't started." : `Building with ${how}.`)
+      + `<ul class="checks">` + out.results.map((r) => {
+        if (!r.ok) return check("no", esc(r.name || "(no name)"), esc(r.error), `<span class="line-pill bad">Not created</span>`);
+        const ls = lineState(r);
+        return check(ls.cls === "on" ? "ok" : ls.cls === "wait" ? "wait" : ls.cls === "bad" ? "no" : "ok",
+          `<span class="mono">${esc(r.repoFullName.split("/")[1])}</span>`,
+          `${r.registered ? "In the wizard" : "Not in the wizard"} · <a href="${esc(r.htmlUrl)}" target="_blank" rel="noopener">GitHub</a>`,
+          `<span class="line-pill ${ls.cls}">${esc(ls.text)}</span>`);
+      }).join("") + `</ul>`
+      + (ok.length ? `<p class="done-foot">${scanOk ? "Monitor scan started, so they appear in the wizard in a minute or two." : `Monitor scan didn't start: ${esc(out.scan || "")}.`}${out.startError ? ` The build didn't start: ${esc(out.startError)}` : ""}${bad.length ? ` Use <b>Retry failed</b> to put the ${bad.length} that failed back in the form.` : ""}</p>` : "");
+  }
+  $("done").innerHTML = html;
+}
+$("new-done").addEventListener("click", () => { dlg.close(); });
+$("new-again").addEventListener("click", () => { const k = lastRun?.kind || "one"; lastRun = null; setTab(k === "bulk" ? "bulk" : "one"); });
+$("new-retry").addEventListener("click", () => {
+  const f = lastRun?.failed || [], k = lastRun?.kind;
+  lastRun = null;
+  if (k === "bulk") { $("bulk-text").value = f.map((x) => `${x.name}\n${x.brief}`).join("\n---\n"); setTab("bulk"); }
+  else { $("one-name").value = f[0]?.name || ""; $("one-brief").value = f[0]?.brief || ""; setTab("one"); }
+});
 </script>
 </body>
 </html>
