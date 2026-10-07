@@ -117,6 +117,11 @@ App icons: `logo/build.py` writes `public/brand/logo-app.svg`, and
    iTerm (or Terminal) window running Claude with the wizard's kickoff prompt —
    one window per site, or one orchestrator session for a batch.
 
+**One website** can also use an **existing repo** instead of a new one: pick
+from the org's `site-*` repos (empty ones first) or paste `owner/name`. The
+seed files go in one commit each through the Contents API and never overwrite a
+file the repo already has, as in the wizard; the slug comes from the repo name.
+
 Bulk takes the wizard's paste format: blocks split by a `---` line, first line
 the name, the rest the brief, up to 20. Drafts are the wizard's own
 `webcore.project_drafts` rows for your GitHub login, so they show in both apps;
