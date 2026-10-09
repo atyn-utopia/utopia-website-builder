@@ -898,13 +898,15 @@ function connect(){
   es.onmessage = (ev) => {
     snap = JSON.parse(ev.data);
     serverSkew = snap.now - Date.now();
+    if (snap.runCmd) { document.getElementById("run-cmd").textContent = snap.runCmd; try { localStorage.setItem("factory-run-cmd", snap.runCmd); } catch {} }
     conn.textContent = "Live from the Claude sessions on this machine";
     render();
   };
-  es.onerror = () => { conn.textContent = "Lost the factory server. Retrying… (is server.mjs still running?)"; };
+  es.onerror = () => { conn.textContent = "Lost the factory server. Retrying… (is the factory still running in Terminal?)"; };
 }
 connect();
-// footer: copy the start command
+// footer: copy the start command (the last one the server sent, so it still shows when the server is down)
+try { const c = localStorage.getItem("factory-run-cmd"); if (c) document.getElementById("run-cmd").textContent = c; } catch {}
 document.getElementById("run-copy").addEventListener("click", async () => {
   const b = document.getElementById("run-copy"), cmd = document.getElementById("run-cmd");
   try { await navigator.clipboard.writeText(cmd.textContent); b.textContent = "Copied"; }
