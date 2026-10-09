@@ -7,6 +7,7 @@
 // Binds to 127.0.0.1 only; nothing leaves the machine. No dependencies.
 //
 //   node scripts/agent-monitor/server.mjs            → http://localhost:4545
+//   factory                                          (same, from any folder — see README)
 //   PORT=4600 HOURS=48 node scripts/agent-monitor/server.mjs
 
 import http from 'node:http';
@@ -21,6 +22,19 @@ const HOURS = Number(process.env.HOURS || 24);
 const ROOT = process.env.CLAUDE_PROJECTS_DIR || path.join(os.homedir(), '.claude', 'projects');
 const WORKSPACE = path.join(os.homedir(), 'Documents', 'GitHub', 'atyn-workspace');
 const PUBLIC = path.join(path.dirname(fileURLToPath(import.meta.url)), 'public');
+
+// The start command the page shows: the `factory` shortcut when it is installed
+// (see README), else node with this file's full path — both work from any folder.
+const RUN_CMD = (() => {
+  const onPath = (process.env.PATH || '').split(path.delimiter).some((d) => {
+    try { fs.accessSync(path.join(d, 'factory'), fs.constants.X_OK); return true; } catch { return false; }
+  });
+  if (onPath) return 'factory';
+  const file = fileURLToPath(import.meta.url);
+  const home = os.homedir();
+  if (/\s/.test(file)) return `node "${file}"`;
+  return `node ${file.startsWith(home + path.sep) ? '~' + file.slice(home.length) : file}`;
+})();
 
 // Initial read of a long main-session transcript starts this far from the end;
 // everything the page needs (title, cwd, last actions) repeats near the tail.
@@ -388,7 +402,7 @@ function snapshot() {
   const live = new Set();
   for (const a of actors.values()) if (a.builder) for (const h of a.liveHosts) if (answers(h)) live.add(h);
   list.sort((x, y) => (y.lastAt || 0) - (x.lastAt || 0));
-  return { now, hours: HOURS, agents: AGENTS, actors: list, sites: sites(list, now, live) };
+  return { now, hours: HOURS, runCmd: RUN_CMD, agents: AGENTS, actors: list, sites: sites(list, now, live) };
 }
 
 // One row per website the builder touched in the window: still being built,
