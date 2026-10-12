@@ -359,6 +359,7 @@ button{font:inherit}
 .checks li+li{border-top:1px solid var(--line)}
 .checks .ic{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:800}
 .checks .ic.ok{background:var(--live);color:var(--on-live)}
+.checks .ic svg{width:12px;height:12px;display:block}
 .checks .ic.no{background:#F3C9CE;color:#9F1D2C}
 .checks .ic.wait{background:var(--build-soft);box-shadow:inset 0 0 0 2px var(--build)}
 .checks .ic.wait::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--build);animation:pulse 1.4s infinite}
@@ -1262,7 +1263,8 @@ function lineState(r){
   if (lastRun.out.startError) return { cls: "bad", text: "Build didn't start" };
   return { cls: "wait", text: "Waiting for the first agent…" };
 }
-const check = (state, title, sub = "", right = "") => `<li><span class="ic ${state}">${state === "ok" ? "✓" : state === "no" ? "!" : ""}</span><span>${title}${sub ? `<small>${sub}</small>` : ""}</span>${right}</li>`;
+const CHECK_ICON = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const check = (state, title, sub = "", right = "") => `<li><span class="ic ${state}">${state === "ok" ? CHECK_ICON : state === "no" ? "!" : ""}</span><span>${title}${sub ? `<small>${sub}</small>` : ""}</span>${right}</li>`;
 function renderDone(){
   if (!lastRun) return;
   const { kind, start, out } = lastRun;
