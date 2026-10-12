@@ -146,6 +146,7 @@ When the user asks to fix an existing site, first decide whether **we built it**
    → user confirms design + content
 7. Layla — integration test → GitHub push → Vercel deploy (blog + products already live)
 8. Gloo — Google integration (GA4 + GTM + GSC + Ads) — POST-DEPLOY, only after the PAID domain is live on Vercel. Uses the `google-integration` skill / `scripts/google-automation/` bundle.
+   **On hold while the site has no paid domain** — a `<slug>.utopiaai.my` or `*.vercel.app` host does not count. Don't run it, don't drop it: it runs when the client's paid domain is connected. The phase scripts refuse those hosts.
    → ends by ticking webcore's ads-readiness card (`ads-readiness.mjs --tick all --yes`),
    once the user confirms the residual Google toggles are actually on.
 9. **Keyword audit (T+60 days, recurring)** — `gsc-keyword-audit.mjs` compares the plan

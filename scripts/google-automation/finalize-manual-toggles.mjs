@@ -43,6 +43,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { getUserAuth } from './lib/auth.mjs';
 import { openContext, loginFlow, gotoChecked, resolveAppFrame, shot, ensureSwitch, PROFILE_DIR } from './lib/pw.mjs';
+import { assertPaidDomain } from './lib/paid-domain.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const CONFIGS_DIR = join(__dirname, 'configs');
@@ -581,6 +582,7 @@ async function main() {
     console.error('       node finalize-manual-toggles.mjs --login   (one-time)');
     process.exit(1);
   }
+  assertPaidDomain(domain);
 
   const configPath = join(CONFIGS_DIR, `${domain}.json`);
   if (!existsSync(configPath)) { console.error(`❌ No config at ${configPath}. Run ga4-create.mjs + ads-import-conversion.mjs first.`); process.exit(1); }

@@ -32,6 +32,7 @@ node finalize-manual-toggles.mjs --login        # one-time Google login (passwor
 ## Prerequisites (per site)
 
 - The site's paid domain is live on Vercel + DNS points there (`curl -I https://www.<domain>/` → 200).
+  A `<slug>.utopiaai.my` or `*.vercel.app` host is not a paid domain: setup is on hold for that site, and every phase script exits on it (`lib/paid-domain.mjs`).
 - **Every WhatsApp CTA routes through a `/redirect-whatsapp-1/` page** — the `whatsapp_click`
   conversion fires on that redirect, so tracking won't work without it. Direct `wa.me` links aren't tracked.
 

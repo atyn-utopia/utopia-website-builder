@@ -7,6 +7,7 @@ import { readdir } from 'node:fs/promises';
 import { join, resolve, dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { getAuth } from './lib/auth.mjs';
+import { assertPaidDomain } from './lib/paid-domain.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const CONFIGS_DIR = join(__dirname, 'configs');
@@ -96,6 +97,7 @@ async function main() {
     console.error('\n❌ domain, url, site are all required.');
     process.exit(1);
   }
+  assertPaidDomain(domain);
 
   if (!siteUrl.startsWith('https://') || !siteUrl.endsWith('/')) {
     console.error('\n❌ url must start with https:// and end with /');

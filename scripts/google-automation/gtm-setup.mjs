@@ -6,6 +6,7 @@ import { writeFileSync, mkdirSync, existsSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { getAuth } from './lib/auth.mjs';
+import { assertPaidDomain } from './lib/paid-domain.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -47,6 +48,7 @@ async function main() {
     console.error('\n❌ Both domain and GA4 Measurement ID are required.');
     process.exit(1);
   }
+  assertPaidDomain(domain);
 
   if (!/^G-[A-Z0-9]+$/.test(ga4Id)) {
     console.error(`\n❌ Invalid GA4 Measurement ID: ${ga4Id}. Expected format: G-XXXXXXXXXX`);

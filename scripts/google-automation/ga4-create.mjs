@@ -6,6 +6,7 @@ import { writeFileSync, mkdirSync, readFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { getAuth } from './lib/auth.mjs';
+import { assertPaidDomain } from './lib/paid-domain.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const CONFIGS_DIR = join(__dirname, 'configs');
@@ -45,6 +46,7 @@ async function main() {
     console.error('\n❌ Domain is required.');
     process.exit(1);
   }
+  assertPaidDomain(domain);
 
   const siteUrl = args.url || `https://www.${domain}`;
 

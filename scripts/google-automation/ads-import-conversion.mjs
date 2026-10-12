@@ -39,6 +39,7 @@ import { readFileSync, existsSync, writeFileSync, mkdirSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { assertPaidDomain } from './lib/paid-domain.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const CONFIGS_DIR = join(__dirname, 'configs');
@@ -68,6 +69,7 @@ if (!domain || !ga4PropertyId) {
   console.error('  --event              GA4 event name to import (default: whatsapp_click)');
   process.exit(1);
 }
+assertPaidDomain(domain);
 
 // ─── Load credentials ─────────────────────────────────────────────
 const TOKEN_FILE = join(homedir(), '.google-credentials', 'utopia-ads-token.txt');

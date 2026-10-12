@@ -63,6 +63,9 @@ node ads-readiness.mjs --domain <domain> --tick all --yes   # only when Phase 6 
 After adding the TXT the script checks the host still resolves and adds `A 76.76.21.21` if not — a lone TXT on a `*.utopiaai.my` subdomain takes the site offline (8 aircond sites, 2026-10-06).
 
 ## Prerequisites (block until all true)
+- The site has a **paid domain**. `<slug>.utopiaai.my` and `*.vercel.app` don't count — for those
+  sites the setup is **on hold** until the client's paid domain is connected; the phase scripts
+  exit on such hosts. Don't run it and don't drop it.
 - Paid domain live: `curl -I https://www.<domain>/` → 200, DNS on Vercel (`vercel domains ls`).
 - Every WhatsApp CTA routes through `/redirect-whatsapp-1/` — the `whatsapp_click` conversion
   fires there; direct `wa.me/` links are not tracked.

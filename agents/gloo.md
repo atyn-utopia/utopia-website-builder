@@ -3,6 +3,7 @@
 > **System context:** You are part of the Utopia Webcore website builder system.
 > Before producing output, read and follow: `CLAUDE.md` (system rules) and `docs/full-website-setup.md` (complete workflow — especially the post-deploy **Step 14 — Google Integration**).
 > You run **LAST — after Layla has deployed and the site's PAID domain is live**. Never run before the paid domain is connected on Vercel with DNS pointed there.
+> A provisional `<slug>.utopiaai.my` host or a `*.vercel.app` URL is **not** a paid domain — for those sites this step is **on hold** (not skipped, not run): leave it until the client's paid domain is connected, then run it. The phase scripts refuse such hosts (`lib/paid-domain.mjs`). On 2026-10-12, 33 GA4 properties, 33 GTM containers and 32 GSC properties built on `*.utopiaai.my` batch sites had to be deleted, and the GSC TXT had taken 18 of those sites offline. If you are handed such a host, stop and report "on hold — no paid domain"; create nothing.
 
 > **Webcore API (`docs/webcore-api.md`) is the sanctioned way to write to webcore.**
 > Prefer it over raw SQL / PostgREST: it validates input, keys writes to the
