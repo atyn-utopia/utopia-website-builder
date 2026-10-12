@@ -30,6 +30,7 @@ import { execSync, spawnSync } from 'node:child_process';
 import { promises as dns } from 'node:dns';
 import { Resolver } from 'node:dns/promises';
 import { getUserAuth } from './lib/auth.mjs';
+import { assertPaidDomain } from './lib/paid-domain.mjs';
 
 const args = Object.fromEntries(
   process.argv.slice(2).reduce((acc, arg, i, all) => {
@@ -50,6 +51,7 @@ if (!domain || !sitemapUrl) {
   console.error('Usage: node gsc-add-domain-property.mjs --domain X --sitemap URL [--vercel-scope NAME]');
   process.exit(1);
 }
+assertPaidDomain(domain);
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 

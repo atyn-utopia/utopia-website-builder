@@ -1311,12 +1311,15 @@ whenever the domain changes. Reference: `docs/webcore-api.md` → Live revalidat
 ## 16b. Step 15 — Google Integration (POST-DEPLOY, after paid domain is live)
 
 > **Runs LAST — only after the site's PAID domain is connected on Vercel with DNS pointed there.** Never against a `*.vercel.app` preview URL: Google properties are keyed to the URL you submit, and re-keying later means duplicate properties + split data.
+>
+> A provisional `<slug>.utopiaai.my` host or a `*.vercel.app` URL is **not** a paid domain — for those sites this step is **on hold** (not skipped, not run): leave it until the client's paid domain is connected, then run it. The phase scripts refuse such hosts (`lib/paid-domain.mjs`). On 2026-10-12, 33 GA4 properties, 33 GTM containers and 32 GSC properties built on `*.utopiaai.my` batch sites had to be deleted, and the GSC TXT had taken 18 of those sites offline.
 
 This sets up the site's **Google/Ads** layer — GA4 + GTM + Google Search Console + Google Ads conversion import. It is **separate** from the Utopia Webcore `t.js` tracking added in Step 7 (`docs/tracking-guide.md`); that's internal analytics, this is Google.
 
 **Owned by Gloo** (Analytics & Growth Specialist), driven by the **`google-integration` skill**, which drives the scripts at `scripts/google-automation/` (wired to Utopia's shared Google account; credentials are read at runtime from `~/.google-credentials`, never from the repo).
 
 ### Prerequisites (block until all true)
+- [ ] The site HAS a paid domain — not `<slug>.utopiaai.my`, not `*.vercel.app`. No paid domain yet → stop here; Step 8 is on hold for this site.
 - [ ] Paid domain live: `curl -I https://www.<domain>/` → 200
 - [ ] DNS nameservers on Vercel (`vercel domains ls`) — required for the GSC Domain property
 - [ ] Every WhatsApp CTA routes through a `/redirect-whatsapp-1/` page (the `whatsapp_click` conversion fires there; direct `wa.me/` links are NOT tracked)
