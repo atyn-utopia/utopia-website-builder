@@ -45,6 +45,8 @@
   .badge { font-size:10.5px; font-weight:700; letter-spacing:.04em; padding:3px 8px; border-radius:999px; white-space:nowrap; }
   .sev-block { background:var(--block-bg); color:var(--block); }
   .sev-adv { background:var(--adv-bg); color:var(--adv); }
+  .stack { margin-left:8px; font-size:10.5px; font-weight:600; letter-spacing:.04em; color:var(--muted);
+           border:1px solid var(--line); border-radius:999px; padding:1px 7px; white-space:nowrap; vertical-align:middle; }
   a { color:var(--accent); text-decoration:none; font-size:13px; }
   a:hover { text-decoration:underline; }
   .empty { display:none; color:var(--muted); padding:30px; text-align:center; }
@@ -61,10 +63,10 @@
 </header>
 <div class="wrap">
   <div class="stats">
-    <div class="stat"><div class="n">117</div><div class="l">Total rules</div></div>
+    <div class="stat"><div class="n">125</div><div class="l">Total rules</div></div>
     <div class="stat block"><div class="n">62</div><div class="l">Blocking</div></div>
-    <div class="stat adv"><div class="n">55</div><div class="l">Advisory</div></div>
-    <div class="stat"><div class="n">11</div><div class="l">Categories</div></div>
+    <div class="stat adv"><div class="n">63</div><div class="l">Advisory</div></div>
+    <div class="stat"><div class="n">12</div><div class="l">Categories</div></div>
   </div>
 
   <div class="controls">
@@ -92,6 +94,62 @@
         <td class="rule-name">GTM noscript fallback in layout</td>
         <td><code>gtm-noscript</code></td>
         <td><a href="google-integration.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="group" data-group="Playbook audit">
+      <h2>Playbook audit <span class="gcount">8 rules · 0 blocking</span></h2>
+      <table>
+        <thead><tr><th>Severity</th><th>Rule</th><th>Check id</th><th>Doc</th></tr></thead>
+        <tbody>
+      <tr class="rule" data-sev="advisory" data-text="playbook audit · alt text audit-alt-text">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Playbook audit · alt text</td>
+        <td><code>audit-alt-text</code></td>
+        <td><a href="../utopia-wizard/vendor/website-audit/README.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="playbook audit · copy + heading tags audit-copywriter">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Playbook audit · copy + heading tags</td>
+        <td><code>audit-copywriter</code></td>
+        <td><a href="../utopia-wizard/vendor/website-audit/README.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="playbook audit · seo meta audit-seo-meta">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Playbook audit · SEO meta</td>
+        <td><code>audit-seo-meta</code></td>
+        <td><a href="../utopia-wizard/vendor/website-audit/README.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="playbook audit · location pages audit-local-seo">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Playbook audit · location pages</td>
+        <td><code>audit-local-seo</code></td>
+        <td><a href="../utopia-wizard/vendor/website-audit/README.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="playbook audit · webcore wiring audit-webcore">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Playbook audit · Webcore wiring</td>
+        <td><code>audit-webcore</code></td>
+        <td><a href="../utopia-wizard/vendor/website-audit/README.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="playbook audit · design tokens audit-frontend-design">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Playbook audit · design tokens</td>
+        <td><code>audit-frontend-design</code></td>
+        <td><a href="../utopia-wizard/vendor/website-audit/README.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="playbook audit · blog structure audit-pseo">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Playbook audit · blog structure</td>
+        <td><code>audit-pseo</code></td>
+        <td><a href="../utopia-wizard/vendor/website-audit/README.md" target="_blank" rel="noopener">docs ↗</a></td>
+      </tr>
+      <tr class="rule" data-sev="advisory" data-text="playbook audit · google tags on-site audit-google-integration">
+        <td><span class="badge sev-adv">advisory</span></td>
+        <td class="rule-name">Playbook audit · Google tags on-site</td>
+        <td><code>audit-google-integration</code></td>
+        <td><a href="../utopia-wizard/vendor/website-audit/README.md" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
         </tbody>
       </table>
@@ -185,7 +243,7 @@
       </tr>
       <tr class="rule" data-sev="blocking" data-text="next-intl middleware middleware">
         <td><span class="badge sev-block">BLOCKING</span></td>
-        <td class="rule-name">next-intl middleware</td>
+        <td class="rule-name">next-intl middleware <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>middleware</code></td>
         <td><a href="full-website-setup.md#7-step-5--build-core-files" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
@@ -203,13 +261,13 @@
       </tr>
       <tr class="rule" data-sev="blocking" data-text="default locale always shown first default-locale-enforced">
         <td><span class="badge sev-block">BLOCKING</span></td>
-        <td class="rule-name">Default locale always shown first</td>
+        <td class="rule-name">Default locale always shown first <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>default-locale-enforced</code></td>
         <td><a href="full-website-setup.md#7-step-5--build-core-files" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
       <tr class="rule" data-sev="blocking" data-text="localeprefix is 'as-needed' localeprefix-as-needed">
         <td><span class="badge sev-block">BLOCKING</span></td>
-        <td class="rule-name">localePrefix is 'as-needed'</td>
+        <td class="rule-name">localePrefix is 'as-needed' <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>localeprefix-as-needed</code></td>
         <td><a href="full-website-setup.md#7-step-5--build-core-files" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
@@ -229,7 +287,7 @@
       </tr>
       <tr class="rule" data-sev="blocking" data-text="/api/revalidate route revalidate-route">
         <td><span class="badge sev-block">BLOCKING</span></td>
-        <td class="rule-name">/api/revalidate route</td>
+        <td class="rule-name">/api/revalidate route <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>revalidate-route</code></td>
         <td><a href="full-website-setup.md" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
@@ -273,7 +331,7 @@
       </tr>
       <tr class="rule" data-sev="blocking" data-text="window.uwc type declaration uwc-typedef">
         <td><span class="badge sev-block">BLOCKING</span></td>
-        <td class="rule-name">window.uwc type declaration</td>
+        <td class="rule-name">window.uwc type declaration <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>uwc-typedef</code></td>
         <td><a href="full-website-setup.md#9-step-7--add-tracking" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
@@ -335,13 +393,13 @@
       </tr>
       <tr class="rule" data-sev="blocking" data-text="pagestyles shared style component page-styles">
         <td><span class="badge sev-block">BLOCKING</span></td>
-        <td class="rule-name">PageStyles shared style component</td>
+        <td class="rule-name">PageStyles shared style component <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>page-styles</code></td>
         <td><a href="website-building-flow.md#layout-build-process" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
       <tr class="rule" data-sev="blocking" data-text="fomobanner component (+ live countdown) fomo-banner">
         <td><span class="badge sev-block">BLOCKING</span></td>
-        <td class="rule-name">FomoBanner component (+ live countdown)</td>
+        <td class="rule-name">FomoBanner component (+ live countdown) <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>fomo-banner</code></td>
         <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
@@ -371,7 +429,7 @@
       </tr>
       <tr class="rule" data-sev="blocking" data-text="location page imports pagestyles location-uses-pagestyles">
         <td><span class="badge sev-block">BLOCKING</span></td>
-        <td class="rule-name">Location page imports PageStyles</td>
+        <td class="rule-name">Location page imports PageStyles <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>location-uses-pagestyles</code></td>
         <td><a href="website-building-flow.md#layout-build-process" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
@@ -395,37 +453,37 @@
       </tr>
       <tr class="rule" data-sev="advisory" data-text="language switcher css lives in globals.css lsw-globals-css">
         <td><span class="badge sev-adv">advisory</span></td>
-        <td class="rule-name">Language switcher CSS lives in globals.css</td>
+        <td class="rule-name">Language switcher CSS lives in globals.css <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>lsw-globals-css</code></td>
         <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
       <tr class="rule" data-sev="advisory" data-text="circleflag uses useid() for clippath circle-flag-useid">
         <td><span class="badge sev-adv">advisory</span></td>
-        <td class="rule-name">CircleFlag uses useId() for clipPath</td>
+        <td class="rule-name">CircleFlag uses useId() for clipPath <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>circle-flag-useid</code></td>
         <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
       <tr class="rule" data-sev="advisory" data-text="alt-text keys present in en/ms/zh alt-keys-all-locales">
         <td><span class="badge sev-adv">advisory</span></td>
-        <td class="rule-name">Alt-text keys present in en/ms/zh</td>
+        <td class="rule-name">Alt-text keys present in en/ms/zh <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>alt-keys-all-locales</code></td>
         <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
       <tr class="rule" data-sev="advisory" data-text="products.imagealttemplate uses {model} image-alt-template-model">
         <td><span class="badge sev-adv">advisory</span></td>
-        <td class="rule-name">products.imageAltTemplate uses {model}</td>
+        <td class="rule-name">products.imageAltTemplate uses {model} <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>image-alt-template-model</code></td>
         <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
       <tr class="rule" data-sev="advisory" data-text="gallery.alts is a non-empty array per locale gallery-alts-array">
         <td><span class="badge sev-adv">advisory</span></td>
-        <td class="rule-name">gallery.alts is a non-empty array per locale</td>
+        <td class="rule-name">gallery.alts is a non-empty array per locale <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>gallery-alts-array</code></td>
         <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
       <tr class="rule" data-sev="advisory" data-text="finalcta.bgalt key exists (ms.json) final-cta-bg-alt">
         <td><span class="badge sev-adv">advisory</span></td>
-        <td class="rule-name">finalCta.bgAlt key exists (ms.json)</td>
+        <td class="rule-name">finalCta.bgAlt key exists (ms.json) <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>final-cta-bg-alt</code></td>
         <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
@@ -437,13 +495,13 @@
       </tr>
       <tr class="rule" data-sev="advisory" data-text="icu placeholder names are lowercase icu-placeholders-lowercase">
         <td><span class="badge sev-adv">advisory</span></td>
-        <td class="rule-name">ICU placeholder names are lowercase</td>
+        <td class="rule-name">ICU placeholder names are lowercase <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>icu-placeholders-lowercase</code></td>
         <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
       <tr class="rule" data-sev="advisory" data-text="pagestyles normalises font-weight: inherit pagestyles-font-weight-inherit">
         <td><span class="badge sev-adv">advisory</span></td>
-        <td class="rule-name">PageStyles normalises font-weight: inherit</td>
+        <td class="rule-name">PageStyles normalises font-weight: inherit <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>pagestyles-font-weight-inherit</code></td>
         <td><a href="website-building-flow.md#layout-build-process" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
@@ -455,7 +513,7 @@
       </tr>
       <tr class="rule" data-sev="blocking" data-text="nav.{home,products,calculator,locations,blog,whatsappcta} in ms.json nav-keys-complete">
         <td><span class="badge sev-block">BLOCKING</span></td>
-        <td class="rule-name">nav.{home,products,calculator,locations,blog,whatsappCta} in ms.json</td>
+        <td class="rule-name">nav.{home,products,calculator,locations,blog,whatsappCta} in ms.json <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>nav-keys-complete</code></td>
         <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
@@ -467,25 +525,25 @@
       </tr>
       <tr class="rule" data-sev="advisory" data-text="styled-jsx targets .nav-cta via :global(...) nav-cta-global-scope">
         <td><span class="badge sev-adv">advisory</span></td>
-        <td class="rule-name">Styled-jsx targets .nav-cta via :global(...)</td>
+        <td class="rule-name">Styled-jsx targets .nav-cta via :global(...) <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>nav-cta-global-scope</code></td>
         <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
       <tr class="rule" data-sev="advisory" data-text="mobile header hides .nav-cta header-mobile-wa-hidden">
         <td><span class="badge sev-adv">advisory</span></td>
-        <td class="rule-name">Mobile header hides .nav-cta</td>
+        <td class="rule-name">Mobile header hides .nav-cta <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>header-mobile-wa-hidden</code></td>
         <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
       <tr class="rule" data-sev="advisory" data-text="usp bar uses single .usp-panel container usp-panel-class-used">
         <td><span class="badge sev-adv">advisory</span></td>
-        <td class="rule-name">USP bar uses single .usp-panel container</td>
+        <td class="rule-name">USP bar uses single .usp-panel container <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>usp-panel-class-used</code></td>
         <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
       <tr class="rule" data-sev="advisory" data-text="project .gitignore excludes brand_assets/ + temporary screenshots/ project-gitignore">
         <td><span class="badge sev-adv">advisory</span></td>
-        <td class="rule-name">Project .gitignore excludes brand_assets/ + temporary screenshots/</td>
+        <td class="rule-name">Project .gitignore excludes brand_assets/ + temporary screenshots/ <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>project-gitignore</code></td>
         <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
@@ -497,7 +555,7 @@
       </tr>
       <tr class="rule" data-sev="blocking" data-text="siteconfig.domain matches deploy url + tracking data-website domain-consistency">
         <td><span class="badge sev-block">BLOCKING</span></td>
-        <td class="rule-name">siteConfig.domain matches deploy URL + tracking data-website</td>
+        <td class="rule-name">siteConfig.domain matches deploy URL + tracking data-website <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>domain-consistency</code></td>
         <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
@@ -515,13 +573,13 @@
       </tr>
       <tr class="rule" data-sev="blocking" data-text="no .replace('{…}', …) on icu strings no-replace-icu">
         <td><span class="badge sev-block">BLOCKING</span></td>
-        <td class="rule-name">No .replace('{…}', …) on ICU strings</td>
+        <td class="rule-name">No .replace('{…}', …) on ICU strings <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>no-replace-icu</code></td>
         <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
       <tr class="rule" data-sev="advisory" data-text="price strings use 'dari rm' prefix (ms.json) price-from-prefix">
         <td><span class="badge sev-adv">advisory</span></td>
-        <td class="rule-name">Price strings use 'Dari RM' prefix (ms.json)</td>
+        <td class="rule-name">Price strings use 'Dari RM' prefix (ms.json) <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>price-from-prefix</code></td>
         <td><a href="full-website-setup.md#layout--design-checklist-mandatory-before-gate-1" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
@@ -785,7 +843,7 @@
       </tr>
       <tr class="rule" data-sev="blocking" data-text="one main domain, and config/site.ts matches it single-main-domain">
         <td><span class="badge sev-block">BLOCKING</span></td>
-        <td class="rule-name">One main domain, and config/site.ts matches it</td>
+        <td class="rule-name">One main domain, and config/site.ts matches it <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>single-main-domain</code></td>
         <td><a href="full-website-setup.md#16-step-14--deploy" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
@@ -809,7 +867,7 @@
       </tr>
       <tr class="rule" data-sev="advisory" data-text="live /api/revalidate can receive a purge live-revalidate-reachable">
         <td><span class="badge sev-adv">advisory</span></td>
-        <td class="rule-name">Live /api/revalidate can receive a purge</td>
+        <td class="rule-name">Live /api/revalidate can receive a purge <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>live-revalidate-reachable</code></td>
         <td><a href="full-website-setup.md#16-step-14--deploy" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
@@ -835,19 +893,19 @@
       </tr>
       <tr class="rule" data-sev="blocking" data-text="webcore builds the whatsapp prefill with the domain wa-prefill-domain-in-source">
         <td><span class="badge sev-block">BLOCKING</span></td>
-        <td class="rule-name">webcore builds the WhatsApp prefill with the domain</td>
+        <td class="rule-name">webcore builds the WhatsApp prefill with the domain <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>wa-prefill-domain-in-source</code></td>
         <td><a href="../CLAUDE.md" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
       <tr class="rule" data-sev="blocking" data-text="fallbackphone is this client's own number fallback-phone-is-own">
         <td><span class="badge sev-block">BLOCKING</span></td>
-        <td class="rule-name">fallbackPhone is this client's own number</td>
+        <td class="rule-name">fallbackPhone is this client's own number <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>fallback-phone-is-own</code></td>
         <td><a href="../CLAUDE.md" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
       <tr class="rule" data-sev="advisory" data-text="contact number rendered in header + footer contact-number-rendered">
         <td><span class="badge sev-adv">advisory</span></td>
-        <td class="rule-name">Contact number rendered in header + footer</td>
+        <td class="rule-name">Contact number rendered in header + footer <span class="stack" title="Only the server-rendered reference stack has this — skipped as not applicable on a static-export site">server-only</span></td>
         <td><code>contact-number-rendered</code></td>
         <td><a href="../CLAUDE.md" target="_blank" rel="noopener">docs ↗</a></td>
       </tr>
