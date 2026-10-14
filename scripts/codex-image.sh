@@ -27,7 +27,14 @@ if [ -z "$bin" ]; then
   if command -v codex >/dev/null 2>&1; then
     bin=$(command -v codex)
   else
-    bin=/Applications/Codex.app/Contents/Resources/codex
+    # Codex.app 26.1007 moved the bundled CLI into codex-cli/bin/; older
+    # builds keep it directly under Resources/.
+    for candidate in \
+      /Applications/Codex.app/Contents/Resources/codex-cli/bin/codex \
+      /Applications/Codex.app/Contents/Resources/codex; do
+      if [ -x "$candidate" ]; then bin=$candidate; break; fi
+    done
+    bin=${bin:-/Applications/Codex.app/Contents/Resources/codex-cli/bin/codex}
   fi
 fi
 [ -x "$bin" ] || { echo "codex binary not found ($bin) — install Codex.app or set CODEX_BIN" >&2; exit 1; }
