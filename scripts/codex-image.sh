@@ -9,8 +9,9 @@
 #
 # Env overrides:
 #   CODEX_BIN    path to the codex binary (default: the one bundled in Codex.app)
-#   CODEX_MODEL  model slug (default: gpt-5.5 — the user config's default model
-#                is rejected by the bundled CLI as "requires a newer version")
+#   CODEX_MODEL  model slug (default: none — Codex uses the model in ~/.codex/config.toml.
+#                A pinned slug goes stale: gpt-5.5 was refused for ChatGPT accounts on
+#                2026-10-15. Set this only when the config default is rejected.)
 set -euo pipefail
 
 if [ $# -lt 2 ]; then
@@ -39,7 +40,8 @@ if [ -z "$bin" ]; then
 fi
 [ -x "$bin" ] || { echo "codex binary not found ($bin) — install Codex.app or set CODEX_BIN" >&2; exit 1; }
 
-model=${CODEX_MODEL:-gpt-5.5}
+model_args=()
+[ -n "${CODEX_MODEL:-}" ] && model_args=(-m "$CODEX_MODEL")
 mkdir -p "$(dirname "$out")"
 outdir=$(cd "$(dirname "$out")" && pwd)
 outname=$(basename "$out")
@@ -60,7 +62,7 @@ log=$(mktemp -t codex-image)
 # stdin from /dev/null: codex exec otherwise blocks reading extra input.
 # `--` before the prompt: -i/--image takes several values and would otherwise
 # swallow the prompt as one more image path.
-"$bin" exec --skip-git-repo-check --ephemeral -s workspace-write -m "$model" \
+"$bin" exec --skip-git-repo-check --ephemeral -s workspace-write ${model_args[@]+"${model_args[@]}"} \
   -C "$outdir" ${refs[@]+"${refs[@]}"} -- "$instructions" </dev/null >"$log" 2>&1 || {
   grep -v -E 'codex_models_manager|rmcp::' "$log" | tail -20 >&2
   rm -f "$log"
