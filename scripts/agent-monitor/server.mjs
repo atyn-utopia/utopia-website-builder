@@ -183,14 +183,53 @@ function siteFromTitle(title = '') {
 // A real path segment, not the dash-encoded transcript folder ("-atyn-workspace/<session>").
 const WORKSPACE_REPO = /\/GitHub\/atyn-workspace\/([A-Za-z0-9._-]+)/;
 // Only a site folder inside this repo (or a worktree of it) counts — not any "projects/".
-const SITE_PATH = /(?:utopia-website-builder|\/wt-[A-Za-z0-9._-]+)\/projects\/([A-Za-z0-9][A-Za-z0-9._-]*)/;
+const SITE_PATH = /(?:utopia-website-builder|\/wt-[A-Za-z0-9._-]+)\/projects\/([A-Za-z0-9][A-Za-z0-9._-]*)/g;
+// Folders under projects/ that sessions read but don't build: the webcore admin
+// copy, and water-tank — the layout template every batch brief, grep and agent
+// prompt names. A session titled "FIX water-tank-malaysia" still shows it.
+const NOT_A_SITE = new Set(['admin', 'water-tank-malaysia']);
+
+/** Every site the text names, in order. */
+function sitesIn(text = '') {
+  const sites = [...String(text).matchAll(SITE_PATH)].map((m) => m[1]).filter((s) => !NOT_A_SITE.has(s));
+  const r = String(text).match(WORKSPACE_REPO);
+  if (r && r[1] !== 'utopia-website-builder') sites.push(r[1]);
+  return sites;
+}
 
 function siteFromText(text = '') {
-  const p = text.match(SITE_PATH);
-  if (p && p[1] !== 'admin') return p[1];
-  const r = text.match(WORKSPACE_REPO);
-  if (r && r[1] !== 'utopia-website-builder') return r[1];
-  return null;
+  return sitesIn(text)[0] || null;
+}
+
+// A Bash command that changes files: moves, copies, deletes, installs, builds,
+// git operations that touch the tree, deploys, in-place edits, redirects into a
+// file. Anything else (ls, grep, cat, git status/log, curl) only reads.
+const BASH_WRITES = new RegExp([
+  String.raw`(?:^|[\s;&|(])(?:mv|cp|rm|rsync|mkdir|touch|tee|ln|unzip|tar|npm|npx|pnpm|yarn|node|python3?|vercel)\s`,
+  String.raw`\bsed\s+-i`,
+  String.raw`\bgit\s+(?:-C\s+\S+\s+)?(?:add|commit|checkout|switch|restore|reset|merge|pull|push|rebase|stash|apply|am|cherry-pick|rm|mv|worktree|init|clone)\b`,
+  String.raw`(?:^|[^<>&\d])>>?\s*(?!/dev/null)[^\s&|]`,
+].join('|'));
+
+/**
+ * The site a tool call changes, or null when it only looks. A session's site
+ * follows what it writes, so a brief or a grep that names another folder (the
+ * water-tank template, a sister site it reads from) doesn't move it.
+ */
+function siteWrittenBy(name, input = {}) {
+  switch (name) {
+    case 'Edit': case 'MultiEdit': case 'Write':
+      return siteFromText(input.file_path);
+    case 'NotebookEdit':
+      return siteFromText(input.notebook_path);
+    case 'Bash': {
+      const cmd = String(input.command || '');
+      // The last site named is the destination ("cp template/x site/x", "cd a && … && cd site").
+      return BASH_WRITES.test(cmd) ? sitesIn(cmd).at(-1) || null : null;
+    }
+    default:
+      return null;
+  }
 }
 
 function short(p = '') {
@@ -304,7 +343,7 @@ function applyLine(a, line) {
         a.pending.set(c.id, ts);
         a.toolCount++;
         if (c.name === 'SubagentHandback') a.handedBack = true;
-        const hit = siteFromText(JSON.stringify(c.input ?? {}));
+        const hit = siteWrittenBy(c.name, c.input ?? {});
         if (hit) a.pathSite = hit;
         pushAction(a, ts, d);
       } else if (c.type === 'text' && c.text?.trim()) {

@@ -70,8 +70,12 @@ counts — sessions in other workspace repos are left off.
   under its own name (`g2-aircond-mesra`, `Helper` for forks). Work the main
   session does itself, without spawning an agent, shows under the session.
 - **Website** — the session title first (`FIX revmove.my`, `NEW abang-tembikai`),
-  then the last `projects/<site>/` path a tool touched, then the working
-  directory or the other workspace repo.
+  then the last `projects/<site>/` path a tool **wrote to** (Edit/Write, or a
+  Bash command that changes files: mv/cp/rm, git checkout/commit, npm/node, a
+  `>` redirect), then the working directory or the other workspace repo. Reads,
+  greps and agent prompts that only name a folder don't count, and
+  `water-tank-malaysia` (the layout template every brief names) and `admin`
+  never come from a path — only from a session title.
 - **Status** — *Working* (moved in the last 90 s, or a tool is still running),
   *Your turn* (main session finished its reply), *Finished* (subagent handed
   back), *Idle*.
