@@ -125,15 +125,29 @@ After the user confirms the website is ready:
 ### 3. Deploy to Vercel
 After the code is pushed to GitHub:
 
-- Connect the GitHub repo to Vercel (if not already connected)
-- Set the required environment variables:
+- **Deploy with the wrapper, from the repo root:**
+
+  ```bash
+  scripts/deploy-site.sh <site>              # production
+  scripts/deploy-site.sh <site> --preview    # preview first, if unsure
+  ```
+
+  Never run a raw `vercel --prod`. Vercel reads the git HEAD commit author and
+  rejects the deploy as **Blocked** — no commit author in this repo is a paid
+  member of the team. The wrapper stages the site outside git so the CLI falls
+  back to the logged-in identity. See "Deployment" in `CLAUDE.md`.
+
+- **Do NOT connect the GitHub repo to Vercel.** These projects are deliberately
+  not git-connected; connecting one re-enables the commit-author block. Pushing
+  to `main` publishes nothing — this script is the only way a site goes live.
+- Set the required environment variables **in the Vercel project** (the wrapper
+  never uploads `.env.local`), using `printf`, not `echo`:
   - `NEXT_PUBLIC_SUPABASE_URL`
   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
   - `WEBCORE_REVALIDATE_SECRET` — from the `PUT /api/website-settings` response
   - Any other project-specific env vars
-- Trigger the deployment
-- Wait for the build to complete
-- Verify the deployed site loads correctly
+- Verify the deployed site loads correctly — use the **Ready URL the script
+  prints**, never a URL guessed from the project name
 - Check that the production WhatsApp button still connects to the correct phone numbers
 - **Wire live revalidation (MANDATORY)** — register `https://<d>/api/revalidate` with `PUT /api/website-settings`, set the secret in Production, redeploy, then POST the route with the secret and require `200 {"revalidated":[...]}`. Full steps: `docs/full-website-setup.md` → Step 14 → Live revalidation. A `404` means the site has no route — add one from the template before calling it done.
 
