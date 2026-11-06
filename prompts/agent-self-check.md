@@ -1,6 +1,6 @@
 # Agent Self-Check Contract (MANDATORY)
 
-Paste this block into every **builder** agent's task prompt (Kimmy, Kagura, Nana for copy keys, and any agent that writes files under `projects/{slug}/`). It turns "I followed the rules" (self-attestation) into "the deterministic checker says I passed" (verification).
+Paste this block into every **builder** agent's task prompt (Terizla, Uranus, Cici for copy keys, and any agent that writes files under `projects/{slug}/`). It turns "I followed the rules" (self-attestation) into "the deterministic checker says I passed" (verification).
 
 ---
 

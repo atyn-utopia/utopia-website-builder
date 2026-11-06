@@ -6,17 +6,16 @@
 const RobotKit = (() => {
   const ROBOTS = [
     { id:'alpha',   name:'Alpha',   role:'System architect',   accent:'#2774AE', hat:'hardhat', prop:'roll',      work:'tap' },
-    { id:'lylia',   name:'Lylia',   role:'Brand designer',     accent:'#6E4FC9', hat:'beret',   prop:'brush',     work:'sweep' },
+    { id:'luo-yi',  name:'Luo Yi',  role:'Brand designer',     accent:'#6E4FC9', hat:'beret',   prop:'brush',     work:'sweep' },
     { id:'sora',    name:'Sora',    role:'SEO strategist',     accent:'#0E6E5C', hat:'pin',     prop:'lens',      work:'scan' },
-    { id:'nana',    name:'Nana',    role:'Copywriter',         accent:'#C2410C', hat:'bubble',  prop:'pencil',    work:'write' },
-    { id:'kagura',  name:'Kagura',  role:'UI designer',        accent:'#A2238F',                prop:'tablet',    work:'layout' },
-    { id:'kimmy',   name:'Kimmy',   role:'Technical SEO',      accent:'#5C6A0E', face:'glasses',prop:'wrench',    work:'turn' },
-    { id:'cyclops', name:'Cyclops', role:'Database engineer',  accent:'#BE185D', face:'cyclops',prop:'db',        work:'db' },
-    { id:'hanabi',  name:'Hanabi',  role:'Blog writer',        accent:'#8A5A00',                prop:'book',      work:'flip' },
-    { id:'layla',   name:'Layla',   role:'QA & deploy',        accent:'#4F5257',                prop:'clipboard', work:'check' },
+    { id:'cici',    name:'Cici',    role:'Copywriter',         accent:'#C2410C', hat:'bubble',  prop:'pencil',    work:'write' },
+    { id:'uranus',  name:'Uranus',  role:'UI designer',        accent:'#A2238F',                prop:'tablet',    work:'layout' },
+    { id:'terizla', name:'Terizla', role:'Technical SEO',      accent:'#5C6A0E', face:'glasses',prop:'wrench',    work:'turn' },
+    { id:'diggie',  name:'Diggie',  role:'Database engineer',  accent:'#BE185D',                prop:'db',        work:'db' },
+    { id:'beatrix', name:'Beatrix', role:'Blog writer',        accent:'#8A5A00',                prop:'book',      work:'flip' },
+    { id:'dyrroth', name:'Dyrroth', role:'QA & deploy',        accent:'#4F5257',                prop:'clipboard', work:'check' },
     { id:'gloo',    name:'Gloo',    role:'Google & ads setup', accent:'#157A45', hat:'headset', prop:'chart',     work:'bars' },
   ];
-
   // style: 'line' | 'solid'. opt.ink / opt.shell may be CSS colours or var(--x).
   function svg(id, style = 'solid', opt = {}) {
     const r = ROBOTS.find(x => x.id === id);

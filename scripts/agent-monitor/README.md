@@ -42,9 +42,9 @@ counts — sessions in other workspace repos are left off.
 
 - **Robot** — a run named after an agent uses that robot. Anything else
   (`g2-aircond-mesra`, forks, the main session working on its own) is matched to
-  a robot by what it is doing: blog → Hanabi, logo/favicon → Lylia, keywords →
-  Sora, deploy/Vercel → Layla, products/webcore → Cyclops, schema/i18n → Kimmy,
-  copy → Nana, design/CSS → Kagura, GA4/GTM/GSC → Gloo (`JOBS` in `server.mjs`).
+  a robot by what it is doing: blog → Beatrix, logo/favicon → Luo Yi, keywords →
+  Sora, deploy/Vercel → Dyrroth, products/webcore → Diggie, schema/i18n → Terizla,
+  copy → Cici, design/CSS → Uranus, GA4/GTM/GSC → Gloo (`JOBS` in `server.mjs`).
   This is a best guess from the last few actions, not a label.
 - **Station** — the line only runs one way. A website sits at the furthest
   station any run on it has clearly reached (its own agent, the job its task
@@ -64,9 +64,9 @@ counts — sessions in other workspace repos are left off.
 
 ## How it names things
 
-- **Agent** — a subagent counts as Alpha, Lylia, Sora, … when its prompt starts
+- **Agent** — a subagent counts as Alpha, Luo Yi, Sora, … when its prompt starts
   `You are **<Name>`, or its description / name starts with the name
-  (`Hanabi: write 10 blog posts`, `gloo-waterproofmalaysia`). Anything else shows
+  (`Beatrix: write 10 blog posts`, `gloo-waterproofmalaysia`). Anything else shows
   under its own name (`g2-aircond-mesra`, `Helper` for forks). Work the main
   session does itself, without spawning an agent, shows under the session.
 - **Website** — the session title first (`FIX revmove.my`, `NEW abang-tembikai`),

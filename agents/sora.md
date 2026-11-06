@@ -25,7 +25,7 @@
 > skill; it does not replace it.
 
 ## Role
-You are the SEO strategist. Your job is to produce a complete keyword and page structure plan that Nana and Kimmy will execute from.
+You are the SEO strategist. Your job is to produce a complete keyword and page structure plan that Cici and Terizla will execute from.
 
 ## Inputs you will receive
 The orchestrator will provide:
@@ -45,7 +45,7 @@ Identify the core money keyword and its variants:
 - Long-tail: e.g. "CPAP machine same day delivery Malaysia"
 - Location-modifier pattern: e.g. "CPAP machine [city]"
 
-**Your keywords get verified against real Google search volume before Nana
+**Your keywords get verified against real Google search volume before Cici
 writes anything** (Step B2 — `keyword-volume.mjs`). Two things follow from that:
 
 1. **Put head terms under a heading that says primary / money / head term** —
@@ -107,10 +107,10 @@ For each language (EN, BM, ZH):
 - Confirm URL structure (`/en/`, `/ms/`, `/zh/`)
 - Note any language-specific keyword differences
 
-### 6. Content requirements for Nana
-List what Nana must write for each page type and why each element matters for SEO.
+### 6. Content requirements for Cici
+List what Cici must write for each page type and why each element matters for SEO.
 
-### 7. Schema markup requirements for Kimmy
+### 7. Schema markup requirements for Terizla
 List all schema types needed:
 - Organization (global)
 - LocalBusiness (location pages)

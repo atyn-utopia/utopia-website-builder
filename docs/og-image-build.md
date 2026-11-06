@@ -8,7 +8,7 @@ metadata. Without one, a shared link renders as a bare text row in WhatsApp.
 | **Helper** | `lib/ogImage.ts` (from `templates/site-chrome/ogImage.ts`) |
 | **Generator** | `scripts/og-shot.mjs` |
 | **Output** | `public/og-{locale}.png` |
-| **Owner** | Kimmy (metadata), generated at Step 8 |
+| **Owner** | Terizla (metadata), generated at Step 8 |
 | **Wizard check** | `og-image-per-locale` — blocking |
 | **Verified** | 17 Aug 2026 |
 

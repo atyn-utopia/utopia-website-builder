@@ -6,8 +6,8 @@ description: Verify a Sora seo-plan.md against real Google search volume before 
 # Keyword Research (pre-build gate + post-launch audit)
 
 Sora writes `seo-plan.md` from model knowledge — **no search-volume data enters the
-pipeline anywhere**. Nana writes every H1 from that plan, Kimmy builds every meta
-title and slug from it, Hanabi picks blog topics from it. So an invented head term
+pipeline anywhere**. Cici writes every H1 from that plan, Terizla builds every meta
+title and slug from it, Beatrix picks blog topics from it. So an invented head term
 propagates into the entire site, and nothing catches it until someone opens Search
 Console months later.
 
@@ -35,7 +35,7 @@ Credentials required (both already granted by `oauth-login.mjs`):
 
 ## 1. Pre-build gate — `keyword-volume.mjs`
 
-Runs at **Step B2**, between Sora and Nana. Blocking.
+Runs at **Step B2**, between Sora and Cici. Blocking.
 
 ```bash
 cd scripts/google-automation
@@ -70,7 +70,7 @@ node keyword-volume.mjs --ideas "pakej aqiqah" --lang ms
 
 Verified volumes are only useful if the other agents can reach them. `seo-plan.md`
 is a file; webcore's keyword store is a public read. Pushing puts the numbers
-where Nana, Kimmy and Hanabi can `GET` them before writing copy:
+where Cici, Terizla and Beatrix can `GET` them before writing copy:
 
 ```bash
 export WEBCORE_API_KEY=uwc_...   # server-only, never committed
@@ -164,7 +164,7 @@ useful for finding the exact `siteUrl` string.
    which before rewriting anything.
 3. **Unplanned queries with impressions** — the site ranks for these by accident.
    Cheapest wins on the whole list; fold them into headings and hand them to
-   Hanabi.
+   Beatrix.
 4. **Striking distance (position 5–20)** — already ranking, not yet clicking. One
    targeted blog post moves these fastest.
 
@@ -199,7 +199,7 @@ not passing.** Widening this needs the webcore admin to extend the crawl, not a
 change here.
 
 **The H2 rule contradicts itself in the docs.** `CLAUDE.md` demands exactly one
-H2 per page; Hanabi is specified to write articles as H1→H2→H3→H4, which needs
+H2 per page; Beatrix is specified to write articles as H1→H2→H3→H4, which needs
 several. This script exempts `/blog/<slug>` from the single-H2 rule and counts
 articles separately — but the contradiction should be settled in `CLAUDE.md`
 rather than re-guessed by every tool.
@@ -209,6 +209,6 @@ rather than re-guessed by every tool.
 ## Feeding results back
 
 The gate and the audit are only worth running if their output reaches the plan.
-After either one, edit `projects/{slug}/seo-plan.md` so Nana, Kimmy and Hanabi
+After either one, edit `projects/{slug}/seo-plan.md` so Cici, Terizla and Beatrix
 inherit verified terms — and so the next site in the same vertical starts from
 measured keywords instead of a fresh guess.

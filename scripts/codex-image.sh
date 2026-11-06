@@ -3,7 +3,7 @@
 #
 #   scripts/codex-image.sh <out.png> "<prompt>" [reference-image ...]
 #
-# Used by Lylia (agents/lylia.md) for logo concepts. One image per call — run
+# Used by Luo Yi (agents/luo-yi.md) for logo concepts. One image per call — run
 # several calls in parallel for several concepts. Exits non-zero unless
 # <out.png> exists and is a PNG when Codex finishes.
 #

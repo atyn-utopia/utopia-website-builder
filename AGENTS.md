@@ -103,25 +103,25 @@ Expected: `200 {"revalidated":["webcore-products"]}`. `401` = secret mismatch. `
 Alpha — System Architect  
 Designs the technical architecture.
 
-Cyclops — Database Engineer  
+Diggie — Database Engineer  
 Designs Supabase schema and database logic.
 
 Sora — SEO Strategist  
 Plans keyword structure, page hierarchy, and internal linking.
 
-Nana — Copywriter  
+Cici — Copywriter  
 Writes all website copy — homepage sections, location page copy for every target city, and meta copy.
 
-Kagura — UI Design Specialist
+Uranus — UI Design Specialist
 Reviews existing site layouts for duplicates, researches fresh design inspiration, and proposes a unique visual direction for each new project.
 
-Kimmy — Technical Implementation Specialist
+Terizla — Technical Implementation Specialist
 Implements metadata, schema markup, alt text, SEO optimization, full i18n (translations, routing, language switcher), and WhatsApp redirect lead tracking pages.
 
-Hanabi — Blog Writer
+Beatrix — Blog Writer
 Generates SEO-optimized blog articles with proper heading hierarchy (H1→H2→H3→H4→p), images with alt text, internal backlinks, meta descriptions, and excerpts. Inserts articles into Supabase (blog_posts + blog_translations tables). Can run independently at any time after the website is deployed.
 
-Layla — QA & Deployment Specialist
+Dyrroth — QA & Deployment Specialist
 Verifies phone number system integration with the shared database, pushes code to GitHub, and deploys to Vercel. Runs after user confirms the website design.
 
 
@@ -142,16 +142,16 @@ When the user asks to create a new website, you MUST follow `docs/full-website-s
 ## Execution order
 
 1. Alpha — design system architecture (confirms languages with user)
-2. Cyclops + Sora — run in parallel (both need Alpha's output)
-3. Nana — generate homepage + all location page copy (needs Alpha + Sora's output)
-4. Kagura + Kimmy — run in parallel (both need Nana's output)
-   Kagura — propose unique design direction (reviews existing sites, researches inspiration)
-   Kimmy — implement technical SEO + i18n + WhatsApp redirect
+2. Diggie + Sora — run in parallel (both need Alpha's output)
+3. Cici — generate homepage + all location page copy (needs Alpha + Sora's output)
+4. Uranus + Terizla — run in parallel (both need Cici's output)
+   Uranus — propose unique design direction (reviews existing sites, researches inspiration)
+   Terizla — implement technical SEO + i18n + WhatsApp redirect
    → run pre-review checklist (headings, mobile audit, orphaned text, images, colors)
-5. Cyclops — insert product details into Supabase (MANDATORY, before deploy)
-6. Hanabi — generate blog posts + insert into Supabase (MANDATORY, before deploy)
+5. Diggie — insert product details into Supabase (MANDATORY, before deploy)
+6. Beatrix — generate blog posts + insert into Supabase (MANDATORY, before deploy)
    → user confirms design + content
-7. Layla — integration test → GitHub push → Vercel deploy (blog + products already live)
+7. Dyrroth — integration test → GitHub push → Vercel deploy (blog + products already live)
 
 
 # SEO Rules

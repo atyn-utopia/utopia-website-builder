@@ -59,47 +59,47 @@ Wait for Alpha's architecture document before proceeding.
 
 Save output to: `projects/{project-slug}/architecture.md`
 
-## Step 3 — Spawn Cyclops + Sora + Lylia in parallel
+## Step 3 — Spawn Diggie + Sora + Luo Yi in parallel
 
 All three need Alpha's output. Spawn simultaneously.
 
-**Cyclops** (Database Engineer):
-- Prompt: `agents/cyclops.md` + Alpha's architecture + locations list
+**Diggie** (Database Engineer):
+- Prompt: `agents/diggie.md` + Alpha's architecture + locations list
 
 **Sora** (SEO Strategist):
 - Prompt: `agents/sora.md` + Alpha's architecture + product info + locations + languages
 
-**Lylia** (Brand & Logo Designer):
-- Prompt: `agents/lylia.md` + brand name + product + domain + category/audience + brand tone + client brand assets (if any) + **the brief's logo wishes, verbatim** + existing fleet sites
-- If the brief mentions anything about the logo (colours, motif, a logo they like), **still run Lylia** — those wishes are her inspiration, not a finished design. Only real logo artwork the client wants used skips generation.
-- Returns three logo concepts (generated via `scripts/codex-image.sh`). Publish them side by side and **wait for the user to pick** — then Lylia writes the final logo files, `app/icon.svg` and the brand kit. Skipped generation if the client supplied a logo.
+**Luo Yi** (Brand & Logo Designer):
+- Prompt: `agents/luo-yi.md` + brand name + product + domain + category/audience + brand tone + client brand assets (if any) + **the brief's logo wishes, verbatim** + existing fleet sites
+- If the brief mentions anything about the logo (colours, motif, a logo they like), **still run Luo Yi** — those wishes are her inspiration, not a finished design. Only real logo artwork the client wants used skips generation.
+- Returns three logo concepts (generated via `scripts/codex-image.sh`). Publish them side by side and **wait for the user to pick** — then Luo Yi writes the final logo files, `app/icon.svg` and the brand kit. Skipped generation if the client supplied a logo.
 
 Save outputs to:
 - `projects/{project-slug}/database.md`
 - `projects/{project-slug}/seo-plan.md`
 - `projects/{project-slug}/brand-kit.md`
 
-## Step 4 — Spawn Nana (Copywriter)
+## Step 4 — Spawn Cici (Copywriter)
 
 Needs: Alpha's architecture + Sora's SEO plan + product description + brand tone + full locations list + supported locales.
 
-Nana writes both homepage copy and all location page copy in one pass.
+Cici writes both homepage copy and all location page copy in one pass.
 
-Prompt: `agents/nana.md` + all inputs above.
+Prompt: `agents/cici.md` + all inputs above.
 
 Save outputs to:
 - `projects/{project-slug}/copy-homepage.md`
 - `projects/{project-slug}/copy-locations.md`
 
-## Step 5 — Spawn Kagura + Kimmy in parallel
+## Step 5 — Spawn Uranus + Terizla in parallel
 
-Both need Nana's output. Spawn simultaneously.
+Both need Cici's output. Spawn simultaneously.
 
-**Kagura** (UI Design Specialist):
-- Prompt: `agents/kagura.md` + Alpha's doc + Nana's homepage copy + Lylia's `brand-kit.md` + brand assets + existing site screenshots + product type + target audience + reference images (if any)
+**Uranus** (UI Design Specialist):
+- Prompt: `agents/uranus.md` + Alpha's doc + Cici's homepage copy + Luo Yi's `brand-kit.md` + brand assets + existing site screenshots + product type + target audience + reference images (if any)
 
-**Kimmy** (Technical Implementation):
-- Prompt: `agents/kimmy.md` + Alpha's doc + Sora's plan + Nana's homepage copy + Nana's location copy + confirmed languages + domain + existing codebase state
+**Terizla** (Technical Implementation):
+- Prompt: `agents/terizla.md` + Alpha's doc + Sora's plan + Cici's homepage copy + Cici's location copy + confirmed languages + domain + existing codebase state
 
 Save outputs to:
 - `projects/{project-slug}/design-direction.md`
@@ -109,14 +109,14 @@ Save outputs to:
 
 Work through each agent's output document and implement it:
 
-1. **Cyclops** → Run schema SQL in Supabase → seed with test data
+1. **Diggie** → Run schema SQL in Supabase → seed with test data
 2. **Alpha** → Scaffold Next.js folder structure
-3. **Kagura** → Follow design direction when building frontend components and pages
-4. **Nana** → Write homepage copy into `app/[locale]/page.tsx` and message files
-5. **Nana** → Populate `lib/locationCopy.ts` with location page copy
-6. **Kimmy** → Add `generateMetadata()`, schema JSON-LD, sitemap, robots.txt
-7. **Kimmy** → Write `i18n/routing.ts`, `i18n/request.ts`, `middleware.ts`, `messages/*.json`, `LanguageSwitcher.tsx`
-8. **Kimmy** → Write `app/[locale]/redirect-whatsapp-1/page.tsx` + `RedirectClient.tsx`
+3. **Uranus** → Follow design direction when building frontend components and pages
+4. **Cici** → Write homepage copy into `app/[locale]/page.tsx` and message files
+5. **Cici** → Populate `lib/locationCopy.ts` with location page copy
+6. **Terizla** → Add `generateMetadata()`, schema JSON-LD, sitemap, robots.txt
+7. **Terizla** → Write `i18n/routing.ts`, `i18n/request.ts`, `middleware.ts`, `messages/*.json`, `LanguageSwitcher.tsx`
+8. **Terizla** → Write `app/[locale]/redirect-whatsapp-1/page.tsx` + `RedirectClient.tsx`
 9. **Tracking** → Add Utopia Webcore analytics (MANDATORY — see `docs/tracking-guide.md`):
    - Add tracking script to root layout `<head>`: `<script defer src="https://utopia-webcore.vercel.app/t.js" data-website="{domain}" />`
    - Add TypeScript type declaration for `window.uwc` in `global.d.ts`
@@ -145,18 +145,18 @@ Present the website to the user. Do not proceed until the user confirms:
 
 ## Step 9 — Insert product details into database (MANDATORY — before deploy)
 
-Spawn **Cyclops** again for product insertion. Must complete BEFORE deployment so products are live on launch.
+Spawn **Diggie** again for product insertion. Must complete BEFORE deployment so products are live on launch.
 
-**Cyclops** (Database Engineer — Part 2: Product Insertion):
-- Prompt: `agents/cyclops.md` (Part 2 section) + product list from `config/products.ts` or `reference-research.md` + Vercel domain + Supabase service role key
+**Diggie** (Database Engineer — Part 2: Product Insertion):
+- Prompt: `agents/diggie.md` (Part 2 section) + product list from `config/products.ts` or `reference-research.md` + Vercel domain + Supabase service role key
 - If `docs/PRODUCT-API-GUIDE.md` exists, follow its exact schema
 
-Cyclops will:
+Diggie will:
 1. Query existing product table schema in Supabase
 2. Insert all core + additional products with names (per locale), descriptions, prices, image URLs, categories
 3. Verify all rows exist and images load
 
-## Step 10 — Spawn Hanabi (Blog Writer) (MANDATORY — before deploy)
+## Step 10 — Spawn Beatrix (Blog Writer) (MANDATORY — before deploy)
 
 Must complete BEFORE deployment so blog posts are live on launch.
 
@@ -173,10 +173,10 @@ Must complete BEFORE deployment so blog posts are live on launch.
 - Same breadcrumb navigation, reading time, and WhatsApp CTA banner
 - Reference: `projects/electric-wheelchair-malaysia/app/[locale]/blog/` and `globals.css` (blog-content section)
 
-**Hanabi** (Blog Writer):
-- Prompt: `agents/hanabi.md` + website domain + brand name + product niche + target languages + Supabase service role key
+**Beatrix** (Blog Writer):
+- Prompt: `agents/beatrix.md` + website domain + brand name + product niche + target languages + Supabase service role key
 
-Hanabi will:
+Beatrix will:
 1. Generate 10 SEO-optimized blog article titles relevant to the product niche (always 10, never less)
 2. Write full articles (800-1500 words each) with proper heading hierarchy (H1→H2→H3→H4→p)
 3. Include real images (Pexels/Unsplash, Asian/Malaysian subjects only), internal backlinks, WhatsApp CTAs
@@ -211,14 +211,14 @@ VALUES ('{company_uuid}', '{domain}', '{leads_mode}');
 
 See `docs/full-website-setup.md` Step 13 for the full company UUID list.
 
-## Step 13 — Spawn Layla (QA & Deploy)
+## Step 13 — Spawn Dyrroth (QA & Deploy)
 
 Only run after user confirms in Step 11 AND Step 12 is complete.
 
-**Layla** (QA & Deployment Specialist):
-- Prompt: `agents/layla.md` + completed project + Supabase credentials + GitHub repo URL + Vercel details
+**Dyrroth** (QA & Deployment Specialist):
+- Prompt: `agents/dyrroth.md` + completed project + Supabase credentials + GitHub repo URL + Vercel details
 
-Layla will:
+Dyrroth will:
 1. Verify phone number system is connected and working
 2. Verify products load from Supabase
 3. Verify blog posts load from Supabase
@@ -233,6 +233,6 @@ Layla will:
 To launch a second website (e.g. `wheelchairmalaysia.my`):
 1. Create `projects/wheelchair/` folder
 2. Follow Steps 0–13 with new inputs
-3. Cyclops reuses the same Supabase instance — add rows to `phone_numbers` with `website = 'wheelchairmalaysia.my'`
+3. Diggie reuses the same Supabase instance — add rows to `phone_numbers` with `website = 'wheelchairmalaysia.my'`
 4. All agent prompts are reusable as-is — just change the inputs
 5. Steps 9 (product details), 10 (blog posts), and 12 (phone + company) are mandatory BEFORE deploy — don't skip or defer them

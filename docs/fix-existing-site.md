@@ -6,7 +6,7 @@ built from `utopia-starter` — `src/app` layout, a client-side BM/EN toggle,
 `wa.me/<number>` hardcoded in `src/lib/constants.ts`, no webcore, deployed by CLI.
 
 New websites follow `docs/full-website-setup.md` instead. Its agent pipeline
-(Alpha → Sora → Nana → …), keyword gate and design gates do **not** apply here:
+(Alpha → Sora → Cici → …), keyword gate and design gates do **not** apply here:
 the site already exists and its design is kept.
 
 Reference fixes: **sewascissorlift.my** (`utopiagrowth/site-sewascissorlift.my`,
