@@ -3,7 +3,7 @@ agents:
     role: system-architect
     description: Designs scalable website architecture using Next.js and Supabase. Confirms languages with user.
 
-  - name: Cyclops
+  - name: Diggie
     role: database-engineer
     description: Designs Supabase schemas and data relationships. Also handles product insertion into database (Part 2, mandatory before deploy).
 
@@ -11,22 +11,22 @@ agents:
     role: seo-strategist
     description: Plans SEO structure, keyword clusters, page hierarchy, and internal linking strategy.
 
-  - name: Nana
+  - name: Cici
     role: copywriter
     description: Writes all website copy — homepage sections, location page copy for every target city, and meta copy.
 
-  - name: Kagura
+  - name: Uranus
     role: ui-design
     description: Reviews existing sites for duplicate layouts, researches fresh design inspiration, and proposes a unique visual direction for each new project.
 
-  - name: Kimmy
+  - name: Terizla
     role: technical-implementation
     description: Implements metadata, schema markup, technical SEO, i18n (translations, routing, language switcher), and WhatsApp redirect lead tracking pages.
 
-  - name: Hanabi
+  - name: Beatrix
     role: blog-writer
     description: Generates minimum 10 SEO-optimized blog articles with heading hierarchy, images, internal backlinks, and WhatsApp CTAs. Inserts into Supabase (blog_posts + blog_translations). Mandatory before deploy.
 
-  - name: Layla
+  - name: Dyrroth
     role: qa-deployment
     description: Verifies phone number integration, products from database, blog posts, tracking script. Pushes code to GitHub and deploys to Vercel.

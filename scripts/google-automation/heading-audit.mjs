@@ -53,7 +53,7 @@ if (!websites.length) {
   process.exit(1);
 }
 
-/** Blog articles legitimately carry several H2s (Hanabi writes H1→H2→H3→H4). */
+/** Blog articles legitimately carry several H2s (Beatrix writes H1→H2→H3→H4). */
 const isBlogArticle = (path) => /^\/(?:[a-z]{2}(?:-[A-Z]{2})?\/)?blog\/.+/.test(path);
 
 const md = [];
@@ -171,7 +171,7 @@ if (websites.length > 1) {
 say('---');
 say('');
 say('> **On the H2 rule.** `CLAUDE.md` requires exactly one H2 per page, but');
-say('> Hanabi is specified to write articles as H1→H2→H3→H4, which needs several.');
+say('> Beatrix is specified to write articles as H1→H2→H3→H4, which needs several.');
 say('> This audit exempts `/blog/<slug>` pages from the single-H2 rule and counts');
 say('> them separately. The two rules genuinely contradict — worth settling in');
 say('> `CLAUDE.md` rather than letting each script guess.');

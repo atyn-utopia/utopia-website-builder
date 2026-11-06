@@ -7,7 +7,7 @@
 //   1. Which planned keywords got ZERO impressions?      → the plan missed
 //   2. Which UNPLANNED queries are pulling impressions?  → free wins to adopt
 //   3. Which queries sit at position 5–20?               → striking distance,
-//                                                          hand to Hanabi
+//                                                          hand to Beatrix
 //
 // Usage:
 //   node gsc-keyword-audit.mjs --domain majlisaqiqah.my --days 60
@@ -192,7 +192,7 @@ const striking = queryRows
 say(`## ${args.plan ? '3' : '1'}. Striking distance (position 5–20)`);
 say('');
 say('Already ranking, not yet getting clicks. A dedicated blog post or a stronger');
-say('on-page heading moves these fastest — hand them to Hanabi.');
+say('on-page heading moves these fastest — hand them to Beatrix.');
 say('');
 if (striking.length) {
   say('| Query | Impressions | Clicks | Avg position |');

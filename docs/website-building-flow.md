@@ -48,7 +48,7 @@ Clones the canonical skeleton; chrome comes from **`templates/site-chrome/`** (s
 
 **Step 2 · Agents fill content** — the pipeline now only does what the scaffold can't:
 ```
-Alpha (architecture) → Cyclops ∥ Sora → Nana (copy) → Kagura (design) ∥ Kimmy (tech)
+Alpha (architecture) → Diggie ∥ Sora → Cici (copy) → Uranus (design) ∥ Terizla (tech)
 ```
 Brand colour tokens in `globals.css`, real `config/locations.ts` (150–180 towns, ≥10/state), brand assets, `messages/{ms,en,zh}.json`, the project-unique special section.
 
@@ -90,7 +90,7 @@ npm run gate -- --ratchet {slug}        # needs VERCEL_TOKEN
 **Step 9 · Push & deploy** —
 - `.githooks/pre-commit` gates the commit (source-only).
 - CI **`guardrails-gate`** re-runs the full gate + ratchet on changed projects and must pass before merge.
-- Deploy to Vercel; **Layla refuses to deploy** on any blocking failure (`npm run gate -- --ratchet {slug}`).
+- Deploy to Vercel; **Dyrroth refuses to deploy** on any blocking failure (`npm run gate -- --ratchet {slug}`).
 
 **Step 10 · Domain + revalidation** — confirm `vercel-domain-match` passes (config/site.ts + deploy-url.txt + data-website + DB rows all = the real served domain), then set the revalidate URL:
 ```
@@ -111,7 +111,7 @@ PUT /api/website-settings   { website, revalidate_url: "https://{domain}/api/rev
 PREVENT              DETECT                 ENFORCE                  OBSERVE
 scaffold +           npm run gate           pre-commit hook          npm run scan
 canonical chrome     chrome:check (drift)   CI ratchet gate          docs/guardrails.html
-(templates/site-     vercel-domain-match    deploy gate (Layla)      (101 checks scored 0–100)
+(templates/site-     vercel-domain-match    deploy gate (Dyrroth)      (101 checks scored 0–100)
  chrome)
 ```
 
@@ -125,7 +125,7 @@ canonical chrome     chrome:check (drift)   CI ratchet gate          docs/guardr
 
 The layout is assembled in **Step 2** (pages) and hardened in **Step 3** (review). Order of operations:
 
-1. **Design direction first.** Kagura's `design-direction.md` reviews existing sites to avoid duplicate layouts and fixes the visual direction: colour tokens, fonts, hero treatment, special section. Nothing visual is invented at page-build time that contradicts it.
+1. **Design direction first.** Uranus's `design-direction.md` reviews existing sites to avoid duplicate layouts and fixes the visual direction: colour tokens, fonts, hero treatment, special section. Nothing visual is invented at page-build time that contradicts it.
 
 2. **Token foundation in `globals.css`.** Define this project's own `--brand-*`, `--ink-*`, `--gut`, `--radius-*` CSS variables + default line-heights (headings `1.2`, body `1.4`). Every page references these tokens — **never** copy a page from another project without remapping its variables (undefined `var(--x)` silently collapses colours/spacing; the `no-undefined-css-vars` check catches it).
 

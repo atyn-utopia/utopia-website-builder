@@ -102,8 +102,8 @@ Project Inputs Checklist:
 
 **Preferred: scaffold from the canonical reference (every structural check passes on day one).**
 A fresh scaffold still has two blocking failures — `db-blog-posts` and `fallback-phone-is-own` —
-because no Supabase rows exist for the new domain yet; they clear once Cyclops seeds the phone
-and Hanabi seeds the blog. Structure is what the scaffold guarantees, not DB state.
+because no Supabase rows exist for the new domain yet; they clear once Diggie seeds the phone
+and Beatrix seeds the blog. Structure is what the scaffold guarantees, not DB state.
 Instead of an empty folder, clone the `water-tank-malaysia` skeleton — chrome, PageStyles,
 WhatsApp redirect page, blog listing + article,
 i18n, schema, and tracking come pre-correct, so whole guardrail failure classes
@@ -127,7 +127,7 @@ cd utopia-wizard && npm run scaffold -- \
 This writes `projects/{project-slug}/` with a correct structure + an `inputs.md` stub.
 The structure is what you keep. The **styling** it carries (`PageStyles`, the
 `<style>` blocks in `SiteHeader`/`SiteFooter`, `globals.css`) is water-tank's look
-and is a placeholder — replace it with Kagura's direction before Gate 1.
+and is a placeholder — replace it with Uranus's direction before Gate 1.
 It deliberately leaves **copy, brand assets, the real locations list, and the
 project-unique special section** as TODO — those are the agent pipeline's job
 (Steps 2–6). Update the generated `inputs.md` with the full Step 0 inputs.
@@ -146,7 +146,7 @@ Every builder agent and every commit is now gated by the wizard's 100 checks
   (see [prompts/agent-self-check.md](../prompts/agent-self-check.md)).
 - **Commits** touching a project run the same gate via `.githooks/pre-commit`.
 - **PRs** run the full gate + ratchet in CI (`guardrails-gate` workflow).
-- **Deploy** (Step 14, Layla) runs `npm run gate -- --ratchet {slug}` and refuses
+- **Deploy** (Step 14, Dyrroth) runs `npm run gate -- --ratchet {slug}` and refuses
   to deploy on any blocking failure or score regression.
 
 The two human gates (Gate 1 design, Gate 2 content) then focus purely on judgment
@@ -163,26 +163,26 @@ The system uses 10 AI agents that run in a specific order. Some run in parallel.
 ```
 Step A:  Alpha (System Architect)
             ↓
-Step B:  Cyclops (Database) ∥ Sora (SEO) ∥ Lylia (Brand & Logo)  ← parallel
-            ↓                                  Lylia: user picks logo (visual gate)
+Step B:  Diggie (Database) ∥ Sora (SEO) ∥ Luo Yi (Brand & Logo)  ← parallel
+            ↓                                  Luo Yi: user picks logo (visual gate)
             ↓
 Step B2: KEYWORD VOLUME GATE                 ← blocking, see below
             ↓
-Step C:  Nana (Copywriter)
+Step C:  Cici (Copywriter)
             ↓
-Step D:  Kagura (UI Design) ∥ Kimmy (Tech)   ← parallel
+Step D:  Uranus (UI Design) ∥ Terizla (Tech)   ← parallel
 ```
 
 ### Step B2 — Keyword Volume Gate (MANDATORY, blocking)
 
 Sora produces keywords from model knowledge, not from search data. Nothing
-downstream questions them: Nana writes every H1 from the plan, Kimmy builds
-every meta title and slug from it, Hanabi picks blog topics from it. A head
+downstream questions them: Cici writes every H1 from the plan, Terizla builds
+every meta title and slug from it, Beatrix picks blog topics from it. A head
 term nobody searches therefore propagates into the whole site, and by the time
 Search Console could reveal it (4–8 weeks post-launch) the fix costs a slug
 migration and a 301 map.
 
-Verify the plan against real Google search volume **before Nana writes a word**:
+Verify the plan against real Google search volume **before Cici writes a word**:
 
 ```bash
 cd scripts/google-automation
@@ -213,7 +213,7 @@ node keyword-volume.mjs --ideas "pakej aqiqah" --lang ms
 ```
 
 Then edit `seo-plan.md` and re-run until the gate passes. Record the numbers in
-the plan so Nana, Kimmy and Hanabi inherit verified terms.
+the plan so Cici, Terizla and Beatrix inherit verified terms.
 
 **Then push the verified terms to webcore (MANDATORY — Sora).** The plan file is
 invisible to webcore; its keyword store is what webcore's SEO tooling, the wizard
@@ -250,7 +250,7 @@ See `.claude/skills/keyword-research/SKILL.md` for full flag reference.
 
 > **If the paid domain is not decided yet, do not register the site in webcore
 > at Step 2.** Scaffold with the intended domain so the code is consistent, but
-> have Cyclops hold the `POST /api/public/sites` + phone/product seeding until
+> have Diggie hold the `POST /api/public/sites` + phone/product seeding until
 > the domain is settled or the first deploy reveals the real host. Registering
 > early keys every row to a name you then have to migrate — see
 > `projects/sticker-lori-malaysia/DOMAIN-MIGRATION.md` for what that costs
@@ -266,12 +266,12 @@ See `.claude/skills/keyword-research/SKILL.md` for full flag reference.
 | Agent | Role | Input | Output |
 |-------|------|-------|--------|
 | **Alpha** | System architecture, confirms languages | All inputs from Step 0 | `architecture.md` |
-| **Cyclops** | Supabase schema design | Alpha's output + locations list | `database.md` |
+| **Diggie** | Supabase schema design | Alpha's output + locations list | `database.md` |
 | **Sora** | SEO keyword plan, page hierarchy, internal linking | Alpha's output + product + locations + languages | `seo-plan.md` |
-| **Lylia** | Logo (Codex concepts → user picks) → three PNGs used as-is: logo for light bg, logo for dark bg, favicon (installed as `app/icon.svg` + `app/apple-icon.png` by `scripts/png-favicon.sh`); palette + type pairing. Skips generation only if the client supplied finished logo artwork; logo wishes in the brief (colours, motif, a logo they like) are passed to her as inspiration | Alpha's output + brand name/tone + client brand assets + existing sites | `brand-kit.md`, `public/brand/{slug}-logo-dark.png` + `-logo-light.png`, `app/icon.svg`, `app/apple-icon.png` |
-| **Nana** | Homepage copy + all location page copy | Alpha + Sora's output + brand tone + locations + locales | `copy-homepage.md`, `copy-locations.md` |
-| **Kagura** | Unique UI design direction (reviews existing sites to avoid duplication) | Alpha + Nana's output + Lylia's `brand-kit.md` + reference images | `design-direction.md` |
-| **Kimmy** | Technical SEO, i18n, WhatsApp redirect | Alpha + Sora + Nana's output + languages + domain | `technical-seo-i18n.md` |
+| **Luo Yi** | Logo (Codex concepts → user picks) → three PNGs used as-is: logo for light bg, logo for dark bg, favicon (installed as `app/icon.svg` + `app/apple-icon.png` by `scripts/png-favicon.sh`); palette + type pairing. Skips generation only if the client supplied finished logo artwork; logo wishes in the brief (colours, motif, a logo they like) are passed to her as inspiration | Alpha's output + brand name/tone + client brand assets + existing sites | `brand-kit.md`, `public/brand/{slug}-logo-dark.png` + `-logo-light.png`, `app/icon.svg`, `app/apple-icon.png` |
+| **Cici** | Homepage copy + all location page copy | Alpha + Sora's output + brand tone + locations + locales | `copy-homepage.md`, `copy-locations.md` |
+| **Uranus** | Unique UI design direction (reviews existing sites to avoid duplication) | Alpha + Cici's output + Luo Yi's `brand-kit.md` + reference images | `design-direction.md` |
+| **Terizla** | Technical SEO, i18n, WhatsApp redirect | Alpha + Sora + Cici's output + languages + domain | `technical-seo-i18n.md` |
 
 All outputs are saved to `projects/{project-slug}/`.
 
@@ -347,7 +347,7 @@ projects/{project-slug}/
 │   │       └── route.ts            ← phone number API
 │   ├── globals.css                 ← global styles + blog-content styles
 │   ├── layout.tsx                  ← root layout (minimal)
-│   ├── icon.svg                    ← favicon (MUST use the same icon from the logo) — Lylia's PNG embedded, via scripts/png-favicon.sh
+│   ├── icon.svg                    ← favicon (MUST use the same icon from the logo) — Luo Yi's PNG embedded, via scripts/png-favicon.sh
 │   ├── apple-icon.png              ← same favicon, 180px, for Safari/iOS
 │   ├── robots.ts                   ← robots.txt generator
 │   └── sitemap.ts                  ← sitemap generator
@@ -898,7 +898,7 @@ Screenshots saved to `temporary screenshots/`.
 2. Fix spacing, typography, color mismatches
 3. Screenshot again and verify fixes
 
-### 8b. Generate the social share cards (MANDATORY — owned by Kimmy)
+### 8b. Generate the social share cards (MANDATORY — owned by Terizla)
 
 A link with no `og:image` renders as a bare text card in WhatsApp, Facebook and
 X. Only 7 of 28 projects had one before this became a step, and the canonical
@@ -906,7 +906,7 @@ reference had none — so a site could pass every other check and still share as
 plain text.
 
 The card is a 1200x630 screenshot of the hero, one per locale. It runs **here**,
-not with Kimmy's other metadata work, because it needs a built site being served.
+not with Terizla's other metadata work, because it needs a built site being served.
 
 ```bash
 cd projects/{project-slug}
@@ -914,7 +914,7 @@ npm run build && npm run start      # one shell
 node scripts/og-shot.mjs            # another
 ```
 
-Prerequisites Kimmy should already have done (Step 5/6): `lib/ogImage.ts` and
+Prerequisites Terizla should already have done (Step 5/6): `lib/ogImage.ts` and
 `scripts/og-shot.mjs` copied from `templates/site-chrome/`, `metadataBase` set,
 and `ogImages(locale)` spread into **every** page that defines `openGraph` —
 layout, location, blog listing, blog article. Next replaces a parent's
@@ -949,7 +949,7 @@ Every item below MUST be verified on the running site. These rules come from rea
 
 #### Visual identity (not a water-tank recolour)
 - [ ] Screenshot the homepage next to `water-tank-malaysia` at desktop and 390px. Layout and section order may match; header styling, button shape/treatment, cards, hero composition and section surfaces must not. If it reads as water-tank in another colour, it is not ready for Gate 1.
-- [ ] Kagura's "Visual delta vs water-tank" list is implemented, item by item.
+- [ ] Uranus's "Visual delta vs water-tank" list is implemented, item by item.
 - [ ] The chosen header style from `templates/site-chrome/header-styles/` is pasted into `globals.css` and checked over the hero, after scrolling, on a blog page (no hero), and with the mobile drawer open.
 
 #### Alt text (every image, no exceptions)
@@ -1102,7 +1102,7 @@ Present the website to the user. **Do not proceed until confirmed:**
 
 **MANDATORY — must complete before deployment.**
 
-Spawn Cyclops (Part 2) to insert product data:
+Spawn Diggie (Part 2) to insert product data:
 
 ```sql
 -- Example product insertion
@@ -1157,9 +1157,9 @@ VALUES
 **Site chrome (both pages, every locale):**
 - [ ] `<FomoBanner />`, `<SiteHeader />`, `<SiteFooter />` — never a per-page `BlogNav` variant.
 
-### Spawn Hanabi (Blog Writer)
+### Spawn Beatrix (Blog Writer)
 
-Hanabi generates **minimum 10 blog articles**:
+Beatrix generates **minimum 10 blog articles**:
 
 1. 10 SEO-optimized article titles for the product niche
 2. Full articles (800–1500 words each) with heading hierarchy (H1 > H2 > H3 > H4 > p)
@@ -1256,9 +1256,9 @@ Company UUIDs (from `companies` table):
 
 ## 16. Step 14 — Deploy
 
-Spawn **Layla** (QA & Deployment Specialist) only after user confirms in Gate 2.
+Spawn **Dyrroth** (QA & Deployment Specialist) only after user confirms in Gate 2.
 
-### Layla's Checklist
+### Dyrroth's Checklist
 
 1. Verify phone number system is connected and working
 2. Verify products load from Supabase
@@ -1409,8 +1409,8 @@ The report has four sections, each with a different owner:
 |---|---|---|
 | Planned keywords with impressions | The plan worked | Leave alone |
 | **Planned keywords with ZERO impressions** | Plan missed, or page not indexed | Check GSC → Indexing → Pages first. Not-indexed is a crawl problem; indexed-with-zero is a keyword problem. |
-| **Unplanned queries with impressions** | Ranking by accident | Cheapest wins available — fold into headings + give to Hanabi as blog topics |
-| **Striking distance (position 5–20)** | Ranking, not clicking | One targeted blog post moves these fastest — hand to Hanabi |
+| **Unplanned queries with impressions** | Ranking by accident | Cheapest wins available — fold into headings + give to Beatrix as blog topics |
+| **Striking distance (position 5–20)** | Ranking, not clicking | One targeted blog post moves these fastest — hand to Beatrix |
 
 Re-run quarterly. Feed confirmed findings back into `seo-plan.md` so the next
 site in the same vertical starts from measured terms instead of guesses.

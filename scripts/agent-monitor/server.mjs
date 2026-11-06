@@ -43,18 +43,20 @@ const RECENT_ACTIONS = 8;
 
 // The agent team, as on the office-screen page (website-workflow/index.html).
 const AGENTS = {
-  alpha:   { name: 'Alpha',   role: 'System architect',      color: '#2774AE' },
-  lylia:   { name: 'Lylia',   role: 'Brand designer', color: '#6E4FC9' },
-  sora:    { name: 'Sora',    role: 'SEO strategist',        color: '#0E6E5C' },
-  nana:    { name: 'Nana',    role: 'Copywriter',            color: '#C2410C' },
-  kagura:  { name: 'Kagura',  role: 'UI designer',           color: '#A2238F' },
-  kimmy:   { name: 'Kimmy',   role: 'Technical SEO',         color: '#5C6A0E' },
-  cyclops: { name: 'Cyclops', role: 'Database engineer',     color: '#BE185D' },
-  hanabi:  { name: 'Hanabi',  role: 'Blog writer',           color: '#8A5A00' },
-  layla:   { name: 'Layla',   role: 'QA & deploy',           color: '#4F5257' },
-  gloo:    { name: 'Gloo',    role: 'Google & ads setup',    color: '#157A45' },
+  alpha:    { name: 'Alpha',   role: 'System architect',   color: '#2774AE' },
+  'luo-yi': { name: 'Luo Yi',  role: 'Brand designer',     color: '#6E4FC9' },
+  sora:     { name: 'Sora',    role: 'SEO strategist',     color: '#0E6E5C' },
+  cici:     { name: 'Cici',    role: 'Copywriter',         color: '#C2410C' },
+  uranus:   { name: 'Uranus',  role: 'UI designer',        color: '#A2238F' },
+  terizla:  { name: 'Terizla', role: 'Technical SEO',      color: '#5C6A0E' },
+  diggie:   { name: 'Diggie',  role: 'Database engineer',  color: '#BE185D' },
+  beatrix:  { name: 'Beatrix', role: 'Blog writer',        color: '#8A5A00' },
+  dyrroth:  { name: 'Dyrroth', role: 'QA & deploy',        color: '#4F5257' },
+  gloo:     { name: 'Gloo',    role: 'Google & ads setup', color: '#157A45' },
 };
-const AGENT_NAMES = Object.values(AGENTS).map((a) => a.name).join('|');
+// A two-word name ("Luo Yi") may arrive as "luo-yi" in a subagent name; its key is the hyphenated form.
+const AGENT_NAMES = Object.values(AGENTS).map((a) => a.name.replace(/ /g, '[ -]')).join('|');
+const agentKeyOf = (name) => name.toLowerCase().replace(/ /g, '-');
 
 // ---------------------------------------------------------------- detection
 
@@ -63,14 +65,14 @@ const AGENT_NAMES = Object.values(AGENTS).map((a) => a.name).join('|');
 // First match wins, so the narrow, unambiguous jobs come first.
 const JOBS = [
   ['gloo',    /\b(ga4|gtm|tag manager|search console|gsc|google ads|ads-readiness|google-automation|google-integration)\b/i],
-  ['lylia',   /\b(logos?|favicon|icons?|brand ?kit|branding)\b/i],
-  ['hanabi',  /\b(blog|articles?|artikel)\b|\/posts\//i],
+  ['luo-yi',   /\b(logos?|favicon|icons?|brand ?kit|branding)\b/i],
+  ['beatrix',  /\b(blog|articles?|artikel)\b|\/posts\//i],
   ['sora',    /\b(keywords?|seo-plan|seo plan|search volume)\b/i],
-  ['layla',   /\b(deploy\w*|vercel|integration test|smoke test|go live)\b/i],
-  ['cyclops', /\b(products?|supabase|webcore|phone numbers?|database|migration)\b/i],
-  ['kimmy',   /\b(schema|metadata|hreflang|i18n|translations?|sitemap|redirect-whatsapp|alt text)\b/i],
-  ['nana',    /\b(copy|copywrit\w*|messages\/\w+\.json)\b/i],
-  ['kagura',  /\b(design|layout|header|hero|css|palette|fonts?|SiteHeader|SiteFooter)\b/i],
+  ['dyrroth',   /\b(deploy\w*|vercel|integration test|smoke test|go live)\b/i],
+  ['diggie', /\b(products?|supabase|webcore|phone numbers?|database|migration)\b/i],
+  ['terizla',   /\b(schema|metadata|hreflang|i18n|translations?|sitemap|redirect-whatsapp|alt text)\b/i],
+  ['cici',    /\b(copy|copywrit\w*|messages\/\w+\.json)\b/i],
+  ['uranus',  /\b(design|layout|header|hero|css|palette|fonts?|SiteHeader|SiteFooter)\b/i],
   ['alpha',   /\b(architecture|scaffold\w*|build-site|new site|site plan)\b/i],
 ];
 function inferAgent(...texts) {
@@ -162,16 +164,16 @@ function liveHostFor(key, hosts) {
 const siteKey = (s) => s.toLowerCase().replace(/^site-/, '').replace(/\./g, '-');
 
 function detectAgent(description = '', brief = '', name = '') {
-  // "You are **Hanabi — Blog Writer**" is how agents/*.md get passed in.
+  // "You are **Beatrix — Blog Writer**" is how agents/*.md get passed in.
   const youAre = brief.match(new RegExp(`You are \\**(${AGENT_NAMES})\\b`, 'i'));
-  if (youAre) return youAre[1].toLowerCase();
-  // "Hanabi: write 10 blog posts", "Gloo waterproofmalaysia" — the name leads.
+  if (youAre) return agentKeyOf(youAre[1]);
+  // "Beatrix: write 10 blog posts", "Gloo waterproofmalaysia" — the name leads.
   const lead = description.match(new RegExp(`^(${AGENT_NAMES})\\b`, 'i'))
     || name.match(new RegExp(`^(${AGENT_NAMES})(?![a-z])`, 'i'));
-  if (lead) return lead[1].toLowerCase();
+  if (lead) return agentKeyOf(lead[1]);
   // Capitalised name anywhere ("Run Sora on …"); case-sensitive so "alpha check" stays out.
   const named = description.match(new RegExp(`\\b(${AGENT_NAMES})\\b`));
-  return named ? named[1].toLowerCase() : null;
+  return named ? agentKeyOf(named[1]) : null;
 }
 
 // Session titles follow "FIX revmove.my" / "NEW abang-tembikai".

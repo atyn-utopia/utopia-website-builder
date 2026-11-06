@@ -6,7 +6,7 @@ description: Set up a live Utopia site's Google footprint — GA4 + GTM + Google
 # Google Integration (post-deploy)
 
 Sets up **GA4 + GTM + GSC + Google Ads conversion import** for a Utopia site once its
-**paid domain is live**. This is the project's post-deploy **Step 14** — it runs after Layla
+**paid domain is live**. This is the project's post-deploy **Step 14** — it runs after Dyrroth
 deploys, never before. It is separate from the Utopia Webcore `t.js` analytics
 (`docs/tracking-guide.md`); this is the Google/Ads layer.
 

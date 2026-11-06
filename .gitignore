@@ -10,7 +10,9 @@ node_modules/
 .codex/
 # Per-project development screenshots — multi-MB binaries, not for git
 projects/*/temporary screenshots/
-# Per-project local insert scripts produced by agents (Cyclops/Hanabi)
+# Per-project local insert scripts produced by agents (Diggie/Beatrix)
+projects/*/.diggie-*/
+projects/*/.beatrix-*/
 projects/*/.cyclops-*/
 projects/*/.hanabi-*/
 

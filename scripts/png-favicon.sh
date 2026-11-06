@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install a favicon PNG (from Lylia / Codex) into a Next.js app dir, as-is.
+# Install a favicon PNG (from Luo Yi / Codex) into a Next.js app dir, as-is.
 #
 #   scripts/png-favicon.sh <favicon.png> <project>/app
 #

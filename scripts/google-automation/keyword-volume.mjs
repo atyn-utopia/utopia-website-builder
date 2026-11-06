@@ -2,7 +2,7 @@
 //
 // Sora invents keywords from model knowledge — nothing in the pipeline checks
 // whether anyone actually searches them. This script asks the Google Ads
-// Keyword Planner API for real historical volume BEFORE Nana writes any copy,
+// Keyword Planner API for real historical volume BEFORE Cici writes any copy,
 // so a dead head term is caught while it still costs one string change instead
 // of a full site rebuild + 301 map.
 //
@@ -349,7 +349,7 @@ if (args.json && args.json !== true) {
 // ─── Push verified volumes back to webcore ────────────────────────
 // Without this the numbers live only in seo-plan.md, where no other agent can
 // reach them. webcore's keyword store is publicly readable, so pushing makes
-// the verified set available to Nana, Kimmy and Hanabi before they write copy.
+// the verified set available to Cici, Terizla and Beatrix before they write copy.
 if (args.push) {
   const wcLang = toWebcoreLanguage(LANG);
   if (!wcLang) {
@@ -393,7 +393,7 @@ if (deadPrimary.length) {
   console.log(`\n❌ GATE FAILED — ${deadPrimary.length} head term(s) below ${MIN}/mo:`);
   deadPrimary.forEach((r) => console.log(`     · ${r.keyword}`));
   console.log(`
-  Fix these in seo-plan.md BEFORE Nana writes copy — they set every H1, meta
+  Fix these in seo-plan.md BEFORE Cici writes copy — they set every H1, meta
   title and slug on the site. Run \`--ideas "<seed>"\` to find what people
   actually search instead.\n`);
   process.exit(1);

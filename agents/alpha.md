@@ -38,13 +38,13 @@ Explain how data moves through the system:
 - ISR / revalidation strategy
 
 ### 4. Database requirements
-Summarise what Cyclops needs to build (tables, relationships). Do not design the schema yourself — just list the requirements.
+Summarise what Diggie needs to build (tables, relationships). Do not design the schema yourself — just list the requirements.
 
 ### 5. SEO structure
 Summarise what Sora needs to plan (keyword targets, page hierarchy, hreflang). Do not plan SEO yourself — just list the requirements.
 
 ### 6. i18n requirements
-List the confirmed languages and locale codes (en, ms, zh, etc.) for Kimmy's i18n implementation.
+List the confirmed languages and locale codes (en, ms, zh, etc.) for Terizla's i18n implementation.
 
 ### 7. Technical decisions
 State the chosen stack and any key decisions:

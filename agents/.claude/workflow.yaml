@@ -17,36 +17,36 @@ workflow:
     blocking: true
 
   - step: 3
-    agents: [Cyclops, Sora]
+    agents: [Diggie, Sora]
     parallel: true
     description: "Database schema + SEO plan (both need Alpha's output)"
     output: "projects/{slug}/database.md, projects/{slug}/seo-plan.md"
     blocking: true
 
   - step: 4
-    agents: [Nana]
+    agents: [Cici]
     description: "Homepage copy + all location page copy (needs Alpha + Sora)"
     output: "projects/{slug}/copy-homepage.md, projects/{slug}/copy-locations.md"
     blocking: true
 
   - step: 5
-    agents: [Kagura, Kimmy]
+    agents: [Uranus, Terizla]
     parallel: true
-    description: "UI design direction + technical SEO/i18n/WhatsApp redirect (both need Nana)"
+    description: "UI design direction + technical SEO/i18n/WhatsApp redirect (both need Cici)"
     output: "projects/{slug}/design-direction.md, projects/{slug}/technical-seo-i18n.md"
     blocking: true
 
   - step: 6
     description: "Apply all agent outputs to codebase"
     tasks:
-      - "Cyclops SQL → run in Supabase (schema + seed)"
+      - "Diggie SQL → run in Supabase (schema + seed)"
       - "Alpha → scaffold Next.js folder structure"
-      - "Kagura → build frontend following design direction"
-      - "Nana → write copy into pages + message files"
-      - "Nana → populate location page copy"
-      - "Kimmy → add generateMetadata(), schema JSON-LD, sitemap, robots.txt"
-      - "Kimmy → write i18n routing, middleware, messages, LanguageSwitcher"
-      - "Kimmy → write WhatsApp redirect pages"
+      - "Uranus → build frontend following design direction"
+      - "Cici → write copy into pages + message files"
+      - "Cici → populate location page copy"
+      - "Terizla → add generateMetadata(), schema JSON-LD, sitemap, robots.txt"
+      - "Terizla → write i18n routing, middleware, messages, LanguageSwitcher"
+      - "Terizla → write WhatsApp redirect pages"
       - "Tracking → add Utopia Webcore script + event tracking (see docs/tracking-guide.md)"
     blocking: true
 
@@ -59,12 +59,12 @@ workflow:
     description: "GATE 1 — User confirms design (structure, layout, styling, navigation, WhatsApp redirect)"
 
   - step: 9
-    agents: [Cyclops]
+    agents: [Diggie]
     description: "Insert products into Supabase (MANDATORY before deploy)"
     blocking: true
 
   - step: 10
-    agents: [Hanabi]
+    agents: [Beatrix]
     description: "Generate 10+ blog articles + insert into Supabase (MANDATORY before deploy). Blog layout MUST match electric-wheelchair-malaysia reference."
     blocking: true
 
@@ -77,7 +77,7 @@ workflow:
     blocking: true
 
   - step: 13
-    agents: [Layla]
+    agents: [Dyrroth]
     description: "QA verification → GitHub push → Vercel deploy → report live URL"
     blocking: true
 

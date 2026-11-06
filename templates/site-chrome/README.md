@@ -100,9 +100,9 @@ are part of the canonical chrome, not an optional extra.
 hero-foot element a 630 crop would slice). Its header comment explains why each
 line exists; read it before changing the capture logic.
 
-Owned by **Kimmy** (metadata). Generated at Step 8, when a built site is already
+Owned by **Terizla** (metadata). Generated at Step 8, when a built site is already
 being served for screenshot review. Verified by the wizard check
-`og-image-per-locale` and by Layla before deploy.
+`og-image-per-locale` and by Dyrroth before deploy.
 
 ## How it's used
 

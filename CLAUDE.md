@@ -81,32 +81,32 @@ Product data on every website MUST be fetched dynamically from the Supabase `pro
 Alpha — System Architect  
 Designs the technical architecture.
 
-Cyclops — Database Engineer  
+Diggie — Database Engineer  
 Designs Supabase schema and database logic.
 
 Sora — SEO Strategist  
 Plans keyword structure, page hierarchy, and internal linking.
 
-Nana — Copywriter  
+Cici — Copywriter  
 Writes all website copy — homepage sections, location page copy for every target city, and meta copy.
 
-Lylia — Brand & Logo Designer
+Luo Yi — Brand & Logo Designer
 Locks the visual identity before any layout exists: generates logo concepts through Codex (`scripts/codex-image.sh`), lets the user pick, then delivers three PNGs used as-is — logo for light backgrounds, logo for dark backgrounds, favicon (installed by `scripts/png-favicon.sh`) — and sets the palette + type pairing in `brand-kit.md`. Skips generation when the client supplies a logo.
 
-Kagura — UI Design Specialist
+Uranus — UI Design Specialist
 Reviews existing site layouts for duplicates, researches fresh design inspiration, and proposes a unique visual direction for each new project.
 
-Kimmy — Technical Implementation Specialist
+Terizla — Technical Implementation Specialist
 Implements metadata, schema markup, alt text, SEO optimization, full i18n (translations, routing, language switcher), and WhatsApp redirect lead tracking pages.
 
-Hanabi — Blog Writer
+Beatrix — Blog Writer
 Generates SEO-optimized blog articles with proper heading hierarchy (H1→H2→H3→H4→p), images with alt text, internal backlinks, meta descriptions, and excerpts. Inserts articles into Supabase (blog_posts + blog_translations tables). Can run independently at any time after the website is deployed.
 
-Layla — QA & Deployment Specialist
+Dyrroth — QA & Deployment Specialist
 Verifies phone number system integration with the shared database, pushes code to GitHub, and deploys to Vercel. Runs after user confirms the website design.
 
 Gloo — Analytics & Growth Specialist (Google Integration)
-Sets up the site's Google footprint — GA4 + GTM + Google Search Console + Google Ads conversion import — via the internal automation bundle (`scripts/google-automation/`). Runs LAST, after Layla deploys and the site's PAID domain is live. Finishes by ticking the site's ads-readiness card in webcore (`ads-readiness.mjs`) — the setup is not done until that card is closed. Separate from the Utopia Webcore `t.js` analytics; this is the Google/Ads layer. Driven by the `google-integration` skill.
+Sets up the site's Google footprint — GA4 + GTM + Google Search Console + Google Ads conversion import — via the internal automation bundle (`scripts/google-automation/`). Runs LAST, after Dyrroth deploys and the site's PAID domain is live. Finishes by ticking the site's ads-readiness card in webcore (`ads-readiness.mjs`) — the setup is not done until that card is closed. Separate from the Utopia Webcore `t.js` analytics; this is the Google/Ads layer. Driven by the `google-integration` skill.
 
 
 # Agent Workflow
@@ -129,22 +129,22 @@ When the user asks to fix an existing site, first decide whether **we built it**
 ## Execution order
 
 1. Alpha — design system architecture (confirms languages with user)
-2. Cyclops + Sora + Lylia — run in parallel (all need Alpha's output)
-   Lylia — logo concepts via Codex → **user picks a logo (visual gate, blocking)** → `brand-kit.md`
-   If the brief says anything about the logo (colours, motif, a logo they like), still run Lylia and pass those wishes verbatim — inspiration for her, the design stays hers. Only finished client artwork skips generation.
+2. Diggie + Sora + Luo Yi — run in parallel (all need Alpha's output)
+   Luo Yi — logo concepts via Codex → **user picks a logo (visual gate, blocking)** → `brand-kit.md`
+   If the brief says anything about the logo (colours, motif, a logo they like), still run Luo Yi and pass those wishes verbatim — inspiration for her, the design stays hers. Only finished client artwork skips generation.
 2b. **Keyword volume gate (MANDATORY, blocking)** — verify Sora's head terms against
    real Google search volume before any copy is written. `keyword-volume.mjs --plan
    <seo-plan.md>`; a head term with no volume propagates into every H1, meta title
    and slug on the site. See the `keyword-research` skill.
-3. Nana — generate homepage + all location page copy (needs Alpha + Sora's output)
-4. Kagura + Kimmy — run in parallel (both need Nana's output)
-   Kagura — propose unique design direction on top of Lylia's `brand-kit.md` (reviews existing sites, researches inspiration)
-   Kimmy — implement technical SEO + i18n + WhatsApp redirect
+3. Cici — generate homepage + all location page copy (needs Alpha + Sora's output)
+4. Uranus + Terizla — run in parallel (both need Cici's output)
+   Uranus — propose unique design direction on top of Luo Yi's `brand-kit.md` (reviews existing sites, researches inspiration)
+   Terizla — implement technical SEO + i18n + WhatsApp redirect
    → run pre-review checklist (headings, mobile audit, orphaned text, images, colors)
-5. Cyclops — insert product details into Supabase (MANDATORY, before deploy)
-6. Hanabi — generate blog posts + insert into Supabase (MANDATORY, before deploy)
+5. Diggie — insert product details into Supabase (MANDATORY, before deploy)
+6. Beatrix — generate blog posts + insert into Supabase (MANDATORY, before deploy)
    → user confirms design + content
-7. Layla — integration test → GitHub push → Vercel deploy (blog + products already live)
+7. Dyrroth — integration test → GitHub push → Vercel deploy (blog + products already live)
 8. Gloo — Google integration (GA4 + GTM + GSC + Ads) — POST-DEPLOY, only after the PAID domain is live on Vercel. Uses the `google-integration` skill / `scripts/google-automation/` bundle.
    **On hold while the site has no paid domain** — a `<slug>.utopiaai.my` or `*.vercel.app` host does not count. Don't run it, don't drop it: it runs when the client's paid domain is connected. The phase scripts refuse those hosts.
    → ends by ticking webcore's ads-readiness card (`ads-readiness.mjs --tick all --yes`),
@@ -259,9 +259,9 @@ These rules apply to EVERY website. No exceptions.
 **`projects/water-tank-malaysia` is the canonical *layout* reference for every new site — not a visual template.** Its structure and behaviour are copied; its look is not. A new site that reads as a recolour of water-tank is not finished.
 
 - **Locked (copy from water-tank):** the component set below, page/section order, DOM structure, props, data flow (`getDisplayPhone`, the redirect page's server-side resolve), and the rules that ride on them — FOMO banner, USP bar, steps-section CTA, one H1 + one H2, WhatsApp green, header/footer-only phone number. No per-page variants (no `BlogNav`), no extra or missing chrome components.
-- **Per site (Lylia's brand kit + Kagura's direction):** the visual design — typography, button shape (one shape per site, but which shape is the site's call), card and surface treatment, header and footer *styling* (solid / transparent / floating, light / dark, borders, spacing), hero composition, motifs, imagery treatment, section rhythm. Restyle the chrome through its `<style>` block, `PageStyles` and `globals.css` tokens; keep the JSX structure and data flow intact.
+- **Per site (Luo Yi's brand kit + Uranus's direction):** the visual design — typography, button shape (one shape per site, but which shape is the site's call), card and surface treatment, header and footer *styling* (solid / transparent / floating, light / dark, borders, spacing), hero composition, motifs, imagery treatment, section rhythm. Restyle the chrome through its `<style>` block, `PageStyles` and `globals.css` tokens; keep the JSX structure and data flow intact.
 - The scaffold brings water-tank's styling along only so the site builds on day one. Treat it as a placeholder to be replaced before Gate 1, not a default to tweak.
-- **Header look: pick one of the five approved styles** in `templates/site-chrome/header-styles/` (Floating Glass, Clear to Solid, Brand Bar, Segmented Track, Quiet Dark) and paste it into `globals.css`. Kagura chooses; the README there lists which suits what. A sixth style needs the user's approval first.
+- **Header look: pick one of the five approved styles** in `templates/site-chrome/header-styles/` (Floating Glass, Clear to Solid, Brand Bar, Segmented Track, Quiet Dark) and paste it into `globals.css`. Uranus chooses; the README there lists which suits what. A sixth style needs the user's approval first.
 
 Copy these six surfaces from it — keep their structure and behaviour, restyle their look:
 
@@ -515,7 +515,7 @@ Do not replace real assets with placeholders.
 - The icon must be consistent — the same icon appears in the logo and the favicon
 - Extract or design the icon so it works standalone at small sizes (16x16, 32x32)
 - If the user provides a logo with an icon element, isolate that icon for the favicon
-- Every site gets **three logo files**: logo for light backgrounds (`{slug}-logo-dark.png`), logo for dark backgrounds (`{slug}-logo-light.png`), favicon. Lylia generates them with Codex and they are used **as-is** — PNG, never traced into SVG or redrawn. `scripts/png-favicon.sh` installs the favicon PNG as `app/icon.svg` (embedded PNG) + `app/apple-icon.png`.
+- Every site gets **three logo files**: logo for light backgrounds (`{slug}-logo-dark.png`), logo for dark backgrounds (`{slug}-logo-light.png`), favicon. Luo Yi generates them with Codex and they are used **as-is** — PNG, never traced into SVG or redrawn. `scripts/png-favicon.sh` installs the favicon PNG as `app/icon.svg` (embedded PNG) + `app/apple-icon.png`.
 
 
 # Anti-Generic Design Guardrails
